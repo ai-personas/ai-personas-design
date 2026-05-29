@@ -1681,6 +1681,12 @@ A-FK-AGE-5   Idle-but-old (R-PERSONA-AGE-1): persona born 200d ago, dormant,
              experience_tasks=2 → upper ALPS band (default Layer 4) by age;
              low fitness keeps it from dominating selection; experience_tasks
              unchanged at 2.  Documents the accepted residual.
+A-FK-AGE-6   Reanimation retains born_at: a persona ARCHIVED then REANIMATED
+             (LIFECYCLE_REANIMATED) keeps its original born_at — age is
+             continuous (archived interval counts as elapsed age), ALPS layer
+             recomputed from the unchanged born_at (NOT reset to Layer 0);
+             experiential_floor / fitness carried, not reset.  born_at is not
+             part of identity_signature, so J7 body-swap equivalence holds.
 ```
 
 ### A-FK-CLONE — Clone fork skill library defaults

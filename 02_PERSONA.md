@@ -272,7 +272,10 @@ monotone, and never resets. `born_at` is **kernel-set at the birth ceremony**
 kernel-signed `soul.state.json`, and is **immutable** — a persona cannot write or backdate it (on
 migration it is backfilled only from the signed `LIFECYCLE_SEEDED` lineage event). Because the
 ALPS layer is a *safety* gate term (`generativity_min_alps_layer`), this immutability is what makes
-the age term unspoofable. ALPS layering (§7.3), the generativity gate
+the age term unspoofable. Note that `born_at` lives in the `soul.state.json` sidecar, not in the
+SOUL.md frozen identity blocks (§3.2), so — like all sidecar state — it is **not** part of
+`identity_signature` and does not affect J7 body-swap equivalence; "immutable" here means *never
+altered after birth*, not *part of identity*. ALPS layering (§7.3), the generativity gate
 (`16_POPULATION_DYNAMICS §4D`), and the newborn maturation ramp (`16_POPULATION_DYNAMICS §4E`) key
 off `age`. **Dormancy does not pause `age`** — a persona dormant for a year is one year older.
 Note that aging alone is **necessary but not sufficient** for any safety-relevant capability: the
@@ -1920,7 +1923,15 @@ LIFECYCLE_REANIMATED          ARCHIVED → ACTIVE via operator-only path
                               (fresh keys + SOUL re-sign per §7.5);
                               alias for the second LIFECYCLE_ACTIVATED
                               fired on reanimation (carries
-                              `reanimated_from_archive = True` field)
+                              `reanimated_from_archive = True` field).
+                              `born_at` is RETAINED (never reset): age is
+                              continuous and the archived interval counts as
+                              elapsed age, consistent with born_at's
+                              immutability (§7.2). The ALPS layer is therefore
+                              recomputed from the unchanged born_at — a
+                              reanimated persona is chronologically old, NOT
+                              reset to Layer 0. (experiential_floor / fitness
+                              are likewise carried, not reset.)
 LIFECYCLE_CONSULTED           v1.0.8 read-only access to a RETIRED
                               persona's frozen state via
                               PersonaConsultation (§7.5.2); does NOT
