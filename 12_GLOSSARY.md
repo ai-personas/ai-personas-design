@@ -69,6 +69,12 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Cache Control (Anthropic)** — Marker on PromptBlocks (Layer 1 + 2 in v1.0) projecting to `cache_control: {type: "ephemeral"}` in Anthropic Messages API; target ≥ 80% cache hit rate. See [`09_PROTOCOLS.md §5`](09_PROTOCOLS.md).
 
+**Carrying capacity** — The maximum persona population an ecosystem can sustain, defined as the sum of free host resources: unallocated `AttentionBudget` + `Energy` + INV-7 compute/cost headroom. Genesis is refused (`no_host_capacity`) when no environment can host the newborn. Grounds the logistic damping of the birth rate. See [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md).
+
+**Character displacement** — In Persona Genesis, the rule that overlapping personas (and successive births from one lineage) MUST diverge in descriptor space — the de-correlation enforced by the sibling-differentiation check. Borrowed from ecology. See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
+
+**Competitive-exclusion refusal** — Genesis refusal (`niche_occupied`) when a proposed seed targets a MAP-Elites niche cell whose `occupancy ≥ occupancy_ceiling`; two personas cannot durably occupy the same niche (Gause). The refusal suggests fork instead. See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
+
 **CLS (Complementary Learning Systems)** — Cognitive-science theory: rapid hippocampal (episodic) learning + slower neocortical (semantic) consolidation. Grounds v1.0's 4-tier memory model and the consolidation pipeline. See [`08_KNOWLEDGE.md §4`](08_KNOWLEDGE.md).
 
 **Candidate State Machine** — Unified FSM for candidates: PROPOSED → SANDBOXED → VERIFIED → DELIVERED (plus REJECTED/REPAIRED branches). Each transition emits a signed lineage event. See `01_KERNEL.md §13.2`.
@@ -133,6 +139,10 @@ The definitions in this document are **documentation-normative**: when a term de
 
 ## D
 
+**Diversity-injection mandate** — Founder-effect guard in Persona Genesis: when `effective_population_size` is below threshold, the kernel biases birth selection toward distant empty niches (and MAY tighten occupancy ceilings) to prevent capability monoculture / "inbreeding depression." See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
+
+**Dual inheritance** — The two streams a genesis-born persona inherits: **genetic** (the frozen identity authored into its seed) and **cultural** (skills/conventions/K-lines via the Voyager library + prestige-biased learning from its mentor, subject to memory-inheritance consent). After Boyd & Richerson. See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
+
 **DeferredAdmission** — v1.0 record opened when an action is admitted under `operator_deferred` topology against a `PolicyEnvelope`. Carries `counter_sign_due_by = admitted_at + envelope.latency_budget_seconds`; budget breach triggers quarantine (or rollback for digital state; physical state cannot rollback) until operator counter-sign arrives. See [`01_KERNEL.md §2.4.2`](01_KERNEL.md).
 
 **DistressDetectionRoutingPolicy** — substrate-shape policy under safety-floor source 1 (UNIVERSAL HARM) governing what happens when a persona detects emotional-distress signals (suicidal ideation, self-harm, acute psychological crisis) in user communication. Declares `routing_actions` (pause-normal-interaction; surface-named-crisis-resource-refs; notify-operator-with-redacted-signal; require-co-sign-before-resuming) per `distress_class_kind` (KindRegistry-resolved). Substrate ships no closed crisis-resource list; operator policy names them. See [`01_KERNEL.md §2.8`](01_KERNEL.md).
@@ -168,6 +178,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **DriftBoundsEnvelope** — v1.0 substrate-shape envelope on a `MissionCharter` constraining how an elaborated goal may depart from its seed: `max_semantic_distance`, `scope_drift_policy` (refinement-only / narrow-or-refine / narrow-refine-sibling), `max_hazard_class_drift`, `max_resource_consumption_pct_increase`, `max_time_horizon_extension`, `max_elaboration_depth`. Out-of-bound elaborations refused; charter transitions to `drift_paused`. See `02_PERSONA.md §11.3`.
 
 ## E
+
+**Effective population size** — A measure of the genuinely diverse persona population (analogue of N_e in population genetics), used as a founder-effect signal: a small effective size arms the diversity-injection mandate. Rigorous metric is open (OQ-POP-5). See [`16_POPULATION_DYNAMICS.md §4A`](16_POPULATION_DYNAMICS.md).
 
 **DormantDomain** — Domain that has gone N=6 months without activity. Enters DORMANT state; M=12 further months without reanimation triggers DEPRECATED. Reanimation requires fresh probe + co-sign. See `06_DOMAIN.md §12.1`.
 
@@ -216,6 +228,10 @@ The definitions in this document are **documentation-normative**: when a term de
 **Frozen Layer** — Persona layers 1 (Identity) and 7 (Voice); cannot mutate within a persona's life; changing requires forking. See `02_PERSONA.md §2`.
 
 ## G
+
+**Generativity gate** — Admission rule that only a persona in a generative life-stage (maturity/fitness ≥ `generativity_threshold`, upper ALPS layer) may author seeds (`may_author_seeds`); newborns and low-fitness personas are refused (`author_not_generative`). After Erikson's generativity-vs-stagnation. See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
+
+**GenesisProposal** — Schema (`genesis-proposal/1`): a persona's signed proposal to author a new persona — carrying the capability gap, environmental evidence, recruitment-exhaustion proof, target niche, a `persona-seed/2` draft, authoring personas, and resolved cosigns. See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
 
 **GEPA (DSPy Genetic-Pareto)** — 2025 reflective prompt optimizer; multi-objective Pareto search; outperforms MIPROv2 by 10%, GRPO by 20%, 35× fewer rollouts. v1.0 primary prompt evolution mechanism. See `08_KNOWLEDGE.md §11`.
 
@@ -307,6 +323,10 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **MAP-Elites** — Diversity-preserving evolutionary algorithm; behaviour-descriptor grid; one elite per cell. Used for anti-degradation. v1.3+ for production scale. See `02_PERSONA.md §9`.
 
+**Maturation ramp** — How a genesis-born persona grows from peripheral participant to full member: it starts `passive` with low attention and a restricted tool surface, then (as ALPS `age_tasks`/maturity rise) advances `passive → active → deliberative` while mentor scaffolding fades. After Vygotsky's ZPD and Lave–Wenger legitimate peripheral participation. See [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
+
+**Mentorship edge** — Schema (`mentorship-edge/1`): the author→newborn relationship opened at genesis, carrying a `scaffolding_level` that decays with newborn maturity and a `zpd_task_band` (tasks completable with mentor support). See [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
+
 **MasteryCheckpoint** — substrate-shape milestone within a pedagogic learning trajectory; carries `skill_kind`, `competency_level_target`, prerequisite_checkpoint_refs, evidence requirements (which combination of: persona-judged demonstration / programmatic verifier / external `LearnerCompetencyAttestation`). When fired, updates `LearnerStateRecord` (`02_PERSONA §11.8`) and emits MASTERY_CHECKPOINT_REACHED. Distinct from promotion stages (which apply to *kinds* in the registry); MasteryCheckpoint applies to *the learner*. See [`03_TASKS.md §3.3`](03_TASKS.md).
 
 **MidProjectForkComposition** — unified per-(project, parent-persona) envelope declared *before* a fork executes, naming operator-declared inheritance choice across all project-side dimensions: project_member, obligation, edge, principal_attribution, lead_role, learner_state_record, mission_charter, curriculum, user_boundary, operator_blind_mode. TeachingAuthorisation and DerivationProvenanceEdge are substrate-enforced non-inheritable (security boundaries). Substrate enforces 4 refusal cases (active lead-handoff overlap / pending multi-principal quorum / imminent emergency departure / cohort dissolving). Composes orthogonally with MemoryInheritancePolicy (persona-internal state vs project-side state). Required when forking persona is an active ProjectMember; absent envelope refuses fork with `midproject_fork_composition_missing`. See [`02_PERSONA.md §7.4.7`](02_PERSONA.md).
@@ -341,6 +361,10 @@ The definitions in this document are **documentation-normative**: when a term de
 
 ## N
 
+**NicheDescriptor** — Schema (`niche-descriptor/1`): a cell in the MAP-Elites behaviour-descriptor grid used by Persona Genesis, with axes `interest_type` (RIASEC), `team_role` (Belbin), and `primary_disposition × domain × contribution_kind`, plus `occupancy`, `occupancy_ceiling`, and a `distinctiveness_band`. See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
+
+**Niche width** — Whether a persona is a *specialist* (narrow, edge niche) or *generalist* (broad, central niche); a genesis lever drawn from resource-partitioning theory. See [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md).
+
 **NotationConvention** — Shared symbol convention at project or domain scope. Supports emergence through co-signed use. See `04_PROJECT.md §12`.
 
 **Novelty-check** — 7th safety floor source; before novelty claims, persona must invoke prior-art search (arxiv / patent / etc.) and find no prior art. See `01_KERNEL.md §2`.
@@ -348,6 +372,8 @@ The definitions in this document are **documentation-normative**: when a term de
 ## O
 
 **Observation Surface** — PettingZoo-style filter on which events a member observes; per-membership (durable). See `05_ENVIRONMENT.md §9`.
+
+**Optimal distinctiveness** — The variety band a genesis seed MUST fall within: distinct enough to be genuinely new (refuse clones → `niche_occupied`/fork) yet near enough to integrate (refuse aliens → `out_of_distinctiveness_band`). After Brewer's optimal-distinctiveness theory. See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
 
 **Obligation** — Commitment between personas in a project; both parties sign at commitment; discharge requires verifier-attested evidence. See `04_PROJECT.md §9`.
 
@@ -368,6 +394,14 @@ The definitions in this document are **documentation-normative**: when a term de
 ## P
 
 **PANEL_ACCEPT** — Acceptance pathway for DIVERGENT tasks; multi-judge rubric panel with anti-Goodhart safeguard stack. See `03_TASKS.md §3.1`.
+
+**Parental investment (genesis)** — The rearing effort (review, scaffolding) a mentor commits to a genesis-born persona, drawn against its own attention/energy. Favoured only when discounted expected fitness benefit exceeds cost (Hamilton's-rule logic; Trivers), and bounded by a parent-offspring-conflict guard against over/under-investment. See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
+
+**Persona Genesis** — A persona authoring a *new, niche-distinct* persona to fill an environmental capability gap, minted through the standard birth ceremony under a `persona_genesis` `ReplicationBound`. Distinct from Fork (which copies/merges existing parents). Recruitment-exhausted-first; default-deny; operator-bounded. See [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md), `02_PERSONA.md §7.4`.
+
+**PopulationPolicy** — Operator schema (`population-policy/1`) configuring demographic regulation: `reproduction_strategy` (r/K/adaptive), carrying-capacity source, density-dependence curve, generativity threshold, diversity-injection EPS threshold, and genesis threshold. See [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md).
+
+**PopulationPressureSignal** — Kernel-maintained schema (`population-pressure-signal/1`) aggregating environmental factors (recruitment gaps, unfilled role coverage, capability backlog, sustained over-budget, diversity deficit, low effective population size) into a `pressure_score` that — with recruitment exhaustion — triggers Persona Genesis. Weighted by demand relative to supply (Easterlin). See [`16_POPULATION_DYNAMICS.md §4A`](16_POPULATION_DYNAMICS.md).
 
 **PrincipalAttribution** — per-project / per-env envelope binding each member to a `PrincipalRef` so the substrate can answer "which principal authorised this member's admission." Activated by `multi_principal_attribution_enabled = True` on the env or project; single-principal deployments leave the field null and operate unchanged. Composes with `MultiPrincipalAttestationQuorum` at charter ratification and project completion. See [`01_KERNEL.md §2.4.3`](01_KERNEL.md).
 
@@ -507,6 +541,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Recognised (domain stage)** — Stage 2 of 4 promotion ladder; trust 0.6; usable cross-project within domain; K=3 projects + 2 co-signers. See `06_DOMAIN.md §3`.
 
+**Reproduction strategy (r/K)** — Operator lever for Persona Genesis: **r** births many lightweight, low-maturity personas for fast exploration of an unstable/empty environment; **K** births few, deeply-specified, heavily-mentored personas for stable domains; **adaptive** selects by measured volatility. After r/K selection theory. See [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md).
+
 **ReplicationBound** — v1.0 charter-class invariant (safety floor source 1) bounding population × rate × depth for any `replication_kind` (KindRegistry-resolved per deployment — agent_fork, factory_unit_produced, culture_doubling, etc.). Required cosigns (operator / non-principal attestor / federation quorum) per principal topology cannot be downgraded by operator policy; loosening requires charter bump. Wildcard fall-through bound recommended to catch emergent replication kinds. See `01_KERNEL.md §2.7`.
 
 **ResourceStockEnvelope** — v1.0 sibling primitive to `ExternalBudget` for **closed-system stock accounting**: stock_now, stock_floor, stock_critical, regeneration_rate (passive / active / decay / stochastic / none), conservation_invariants[]. INV-7 admission consults stock-vs-supply per `resource_kind`. Refuses below floor; escalates below critical. Drift detection forces model re-fit. Coexists cleanly with ExternalBudget on the same project. See `04_PROJECT.md §26a.4.2`.
@@ -540,6 +576,10 @@ The definitions in this document are **documentation-normative**: when a term de
 **RubricBundle** — Versioned signed rubric for PANEL_ACCEPT; dimensions + weights. See `08_KNOWLEDGE.md §2`.
 
 ## S
+
+**Secure base (mentorship)** — In the newborn maturation ramp, the mentor functions as the newborn's secure base (Bowlby & Ainsworth): the newborn explores harder tasks confidently while mentor support is reliably available. If the mentor retires before the newborn reaches autonomy maturity, the kernel re-assigns the mentorship edge. See [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
+
+**Sibling differentiation** — Genesis rule that successive births from the same authoring lineage MUST take complementary/opposite dispositions (refused otherwise: `sibling_collision`), maximising variety. After Scarr & McCartney's niche-picking and sibling-differentiation findings. See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
 
 **Safety Floor** — v1.0 8-source pre-action gate composed by most-restrictive-wins: universal harm + persona charter + user boundaries + operator policy + domain safety extensions + external-tool-required + novelty-check + env charter. Plus 9th advisory (emergent-domain trust warning). See `01_KERNEL.md §2`.
 

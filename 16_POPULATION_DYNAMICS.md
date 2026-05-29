@@ -1,0 +1,377 @@
+---
+title: PersonaOS v1.1 — Population Dynamics (Environment-Driven Persona Genesis)
+status: Draft
+---
+
+# 16 — Population Dynamics
+
+> **Reader guide.** A human seeds a *few* personas and gives them work. Those personas must recruit collaborators — but what happens when the recruit pool is thin or empty? Today the design has only two answers: pause, or escalate to the operator. This document adds a third: **Persona Genesis** — under sustained environmental pressure, and only after recruitment is exhausted, an existing persona may *author a new, niche-distinct persona* to fill a capability gap. A few founders radiate into a varied population, the way a lineage colonising open niches diversifies — bounded at every step by the kernel's existing self-replication brake. **Prerequisites:** `02_PERSONA.md`, `05_ENVIRONMENT.md`, `01_KERNEL.md §2.7`. **Status:** v1.1 Draft — not yet normative.
+
+## 0. Status & scope
+
+**Status.** `Draft`; v1.1 target. This document becomes normative when it reaches `Stable`. Implements **ADR-0048** (Persona Genesis) and **ADR-0049** (population demographic regulation). It addresses the **"population dynamics"** residual named in `README.md` and [`00_VISION.md §11`](00_VISION.md), and partially discharges [`OQ-PERSONA-1`](02_PERSONA.md) (population-level diversity).
+
+This document follows the [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md) skeleton with the same `§0a`/`§0b` deviation used by [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md): Key concepts and a Plain-Language Guide precede the numbered sections.
+
+**In scope.** Persona-authored seed creation (Genesis); the population-pressure signal that triggers it; recruitment-exhausted-first ordering; MAP-Elites niche allocation and the variety/distinctiveness guarantee; the newborn maturation ramp (mentorship + scaffolding); demographic regulation (carrying capacity, density dependence, r/K strategy); and safety bounding via the existing `ReplicationBound`.
+
+**Out of scope.** Operator-authored seeds (unchanged — `02_PERSONA §12`). Fork mechanics (unchanged — `02_PERSONA §7.4`). Cross-kernel federated genesis (deferred — `OQ-POP-4`). The empirical population-collapse study at N=100/1000 (remains `OQ-PERSONA-1`, v1.2). Any change to operator authority over charter-class ceilings.
+
+**Additivity.** Every mechanism here is **additive and default-off**: no genesis is admissible unless an operator has declared a `ReplicationBound` for `replication_kind = "persona_genesis"` (or a wildcard fall-through) **and** the authoring persona's `cohort_assembly.may_author_seeds` is `true`. With neither, behaviour is identical to v1.0.
+
+## 0a. Key concepts for new readers
+
+| Term | What it means | Where defined |
+|---|---|---|
+| **Persona** | An AI cognitive worker with persistent identity, memory, skills, relationships, and a lifecycle (SEEDED → ACTIVE → … → ARCHIVED). | `02_PERSONA.md §1`, `§7` |
+| **PersonaSeed** | The birth template (schema `persona-seed/2`) the kernel mints into a persona. In v1.0 it is operator-authored. | `02_PERSONA.md §12` |
+| **Fork** | Creating a new persona by *copying/merging existing parents* (clone or compositional). Produces variations of what already exists. | `02_PERSONA.md §7.4` |
+| **Persona Genesis** | Creating a new persona by *authoring a new seed* describing a role **no current persona fills** — driven by an environmental gap. Genesis ≠ Fork. | This document `§4D` |
+| **ReplicationBound** | The kernel's charter-class self-replication brake (population × rate × depth × cosigns), enforced at the universal-harm safety floor. | `01_KERNEL.md §2.7` |
+| **cohort_assembly** | The SOUL capability block that authorises a persona to recruit (and, here, to author seeds). | `02_PERSONA.md §3` |
+| **MAP-Elites / ALPS / DGM** | Diversity-over-behaviour-descriptors / age-layering / fertility-weighted parent selection — the evolution algorithms PersonaOS already adopts. | `02_PERSONA.md §8`, `14_DECISIONS ADR-0019` |
+| **Niche** | A cell in a behaviour-descriptor grid (role/disposition/domain). Two personas in the same niche compete; an empty niche is an opportunity. | This document `§4C` |
+| **AttentionBudget / Energy** | Per-persona rationed resources that bound how many environments a persona can serve and how much it can do. Here they define **carrying capacity**. | `05_ENVIRONMENT.md §6`, `§7` |
+| **Listening mode** | `passive` / `active` / `deliberative` — how attentively a persona engages an environment. Used here for the newborn's peripheral-to-full participation ramp. | `05_ENVIRONMENT.md §9` |
+| **KindRegistry** | The open registry that resolves domain types at runtime, including `replication_kind` and `contribution_kind`. | `06_DOMAIN.md §7.5–§7.6` |
+| **Operator** | The human/organisation responsible for the deployment; sets safety policy and the replication bounds that gate genesis. | `01_KERNEL.md §1` |
+
+## 0b. Plain-Language Guide
+
+*Here is how personas can grow their own population, explained without jargon.*
+
+**The problem.** You give a couple of AI Personas some work. To get it done they need teammates with skills they lack — a careful critic, an experimenter, a historian. Normally they'd *recruit* one. But if nobody suitable exists yet, they're stuck: all they can do is wait, or ask you to step in.
+
+**The idea — give birth to a new kind of teammate.** Instead of only recruiting from who already exists, a mature persona can *design a brand-new persona* to fill the missing role — much as a few species arriving on an empty island fan out over time into many specialised species, each occupying a different niche. This is "Persona Genesis."
+
+**Genesis is not cloning.** Copying yourself is *forking*, and PersonaOS already has that. Genesis is different: you author a teammate who is *deliberately unlike* the ones that already exist, so the team gains genuine variety rather than more of the same.
+
+**It only happens under real pressure, and recruiting comes first.** A persona can't birth a teammate on a whim. The system measures genuine need — unmet skills, a backlog no one can clear, overloaded members, missing roles. Even then, it MUST try to recruit an existing persona first. Only when that fails does genesis become an option.
+
+**Newborns start small and grow up.** A new persona doesn't arrive fully formed. It starts on the edge of the team — watching, taking small tasks — with its "parent" acting as a mentor who gradually hands over more responsibility as the newborn proves itself. (This mirrors how apprentices learn.)
+
+**The population regulates itself, and there are hard brakes.** Just as human birth rates fall as societies fill up, persona births slow down as the available roles get filled and resources (attention, energy, compute) get scarce. And underneath all of it sits the kernel's existing safety brake: a hard ceiling on how many personas can exist, how fast they can be born, and how many generations deep this can go — a brake the operator sets and only the operator can loosen.
+
+## 1. Background
+
+### 1.1 The gap this fills
+
+PersonaOS v1.0 creates personas in exactly one way: an **operator authors a `PersonaSeed`** (`02_PERSONA §12`) and the kernel mints it through the birth ceremony (`02_PERSONA §7.1`, Appendix A.20). Personas may **recruit** collaborators from the *existing* pool (`05_ENVIRONMENT §12c` cohort assembly) and may **fork** to copy or merge *existing* parents (`02_PERSONA §7.4`). None of these creates a *new role from a capability gap*:
+
+- Recruitment from an empty pool simply fails.
+- Fork produces variations of personas that already exist — not novelty.
+- Self-spawning is **forbidden** unless an operator has declared a `ReplicationBound` (`01_KERNEL §2.7`).
+
+The consequence is the dead-end recorded in [`04_PROJECT.md §14.1`](04_PROJECT.md): when a cohort has no admissible successor or recruit, the project enters a *"forced choice: pause until recruitment yields a candidate, or operator becomes interim lead."* There is no generative path. `README.md` and `00_VISION.md §11` both name **"population dynamics"** as the unfinished residual. This document supplies it.
+
+### 1.2 The integrated model — bounded adaptive radiation
+
+Persona Genesis is modelled as **bounded adaptive radiation**: a few founder personas diversify into a varied population by authoring new, niche-distinct seeds under environmental pressure, with each life-stage of the ecosystem governed by a well-established theory and every step clamped by the kernel safety floor.
+
+| Phase | Driving theory | Mechanism (reuses existing PersonaOS) |
+|---|---|---|
+| **1. Founding** (few seeds) | Founder effect / effective population size (population genetics) | Kernel tracks `effective_population_size`; small founders ⇒ **monoculture risk** flag arms the **diversity-injection mandate** (`§4C`). |
+| **2. Radiation** | Adaptive radiation + competitive exclusion (Gause) + optimal distinctiveness (Brewer) + character displacement | Genesis fires into **empty, optimally-distinct** niches; identical niche ⇒ REFUSE (`niche_occupied` → fork); successive lineage births de-correlate (`§4C`). |
+| **3. Newborn maturation** | Erikson generativity-vs-stagnation + Vygotsky ZPD / Lave–Wenger legitimate peripheral participation + dual inheritance (Boyd & Richerson) | Only *generative* (mature/high-fitness) personas author + mentor; newborn enters peripheral, scaffolding fades; inherits genetic seed + cultural skills (`§4D`, `§4E`). |
+| **4. Saturation / equilibrium** | Demographic transition + logistic carrying capacity + organizational-ecology density dependence (Hannan & Freeman) | Carrying capacity = free host resources; per-niche birth rate non-monotonic (legitimation↑ then competition↓); pressure falls as niches fill (`§4F`). |
+| **5. Turnover & partitioning** | Resource partitioning + niche width (specialist/generalist) | Retirement frees niches; r/K + niche-width levers shape what is born next (`§4F`, lifecycle in `02_PERSONA §7`). |
+
+### 1.3 Research grounding
+
+**AI / multi-agent.** *AutoAgents* (IJCAI 2024), *DRTAG*, and auto-scaling multi-agent systems (2025) show an LLM agent can author a new specialised role on demand via a planner+observer loop — the basis for `§4D`. *Quality-Diversity / MAP-Elites / QD-via-AI-feedback* (ICLR 2024) ground the variety guarantee (`§4C`). *Self-replication risk in LLM agents* (2025) independently argues that hard replication brakes are mandatory — exactly the `ReplicationBound` spine (`§4F`). *AgentSociety* and individuality-emergence studies (2024–25) show variety deepens through social interaction after creation (`§4E`).
+
+**Human population & psychology.** Logistic growth and cultural carrying capacity (Malthus → Daly); demographic transition; r/K selection; the Easterlin hypothesis (relative cohort size); value-of-children theory; Erikson's generativity-vs-stagnation; Holland's RIASEC and Belbin team roles (niche axes); optimal distinctiveness (Brewer); niche-picking and sibling differentiation (Scarr & McCartney); Vygotsky's zone of proximal development with scaffolding (Bruner); Lave & Wenger's legitimate peripheral participation; self-determination theory (Deci & Ryan) — genesis as intrinsically-motivated *generativity*, distinguished from controlled-motivation over-birthing; parental investment theory and Hamilton's rule (Trivers; Hamilton) — bounded, fitness-proportional mentor investment; attachment theory's secure base (Bowlby & Ainsworth) — the mentor as the newborn's secure base for exploration; and Tuckman's group-development stages — the cohort re-integration cost each birth imposes.
+
+**Ecology, genetics, culture.** Competitive exclusion (Gause), adaptive radiation, character displacement, and resource partitioning; founder effect, genetic drift, effective population size, and inbreeding depression; dual-inheritance theory with prestige/conformist transmission biases (Boyd & Richerson); and organizational ecology — density dependence and niche width (Hannan & Freeman).
+
+## 2. Goals / Non-Goals
+
+**Goals.**
+- **G1.** Let a persona author a new, *niche-distinct* persona to fill a real capability gap.
+- **G2.** Guarantee **variety**, not clones: every birth occupies an empty, optimally-distinct niche.
+- **G3.** Fire only under **sustained environmental pressure** and only **after recruitment is exhausted**.
+- **G4.** Counter founder-effect monoculture via a **diversity-injection mandate** when the effective population is small.
+- **G5.** Mature newborns safely via **mentorship + scaffolding**, reusing existing listening-mode and attention machinery.
+- **G6.** Self-regulate population via **carrying capacity + density dependence**, and bound everything via the existing `ReplicationBound` at the safety floor (**default-deny**).
+- **G7.** Preserve full **lineage and provenance** for every birth.
+
+**Non-Goals.**
+- **NG1.** Uncapped or unsupervised reproduction. (Bounded by `ReplicationBound`; operator pre-authorises.)
+- **NG2.** Cloning into an occupied niche. (That is Fork — `02_PERSONA §7.4`.)
+- **NG3.** Replacing operator authority over charter-class ceilings.
+- **NG4.** Cross-kernel federated genesis (deferred — `OQ-POP-4`).
+
+## 3. Definitions
+
+Terms used normatively below are defined in `§0a` and in [`12_GLOSSARY.md`](12_GLOSSARY.md): *Persona Genesis*, *GenesisProposal*, *population-pressure signal*, *niche cell / niche descriptor*, *competitive-exclusion refusal*, *optimal distinctiveness*, *sibling differentiation*, *generativity gate*, *mentorship edge*, *maturation ramp*, *dual inheritance*, *carrying capacity*, *reproduction strategy (r/K)*, *niche width*, *effective population size*, *diversity-injection mandate*. Schemas are listed in the Technical Appendix and MUST be registered per [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md).
+
+## 4. Normative specification
+
+The six pillars below are evaluated in order. A genesis attempt is admissible only if every applicable gate passes; any refusal terminates the attempt and is recorded in lineage.
+
+### 4A. The population-pressure signal
+
+The kernel MAINTAINS, per environment, a signed `PopulationPressureSignal` (`population-pressure-signal/1`) over a sustain `window`. It aggregates the following environmental factors into a `pressure_score ∈ [0,1]`:
+
+1. **Recruitment-gap events** — cohort-assembly / `EnvFormationProposal` runs that found no admissible recruit (`05_ENVIRONMENT §12c`).
+2. **Unfilled role coverage** — `CohortConstraint.required_kinds` (`04_PROJECT §14.1`) or Belbin/role-coverage slots whose minimum count is unmet.
+3. **Capability backlog** — tasks requiring a mode/skill/domain (`KindRegistry` kinds) no ACTIVE persona in scope can supply.
+4. **Sustained over-budget** — members over `AttentionBudget` for ≥ `window` (demand > supply; `01_KERNEL` INV-7, `05_ENVIRONMENT §7`).
+5. **Diversity deficit** — empty/under-filled MAP-Elites cells (`§4C`).
+6. **Low effective population size** — `effective_population_size` below `population-policy/1.diversity_injection_eps_threshold` (founder-effect signal; `§4C`).
+
+Per the **Easterlin** principle, factors 1–4 are weighted by demand **relative to** supply (backlog and overload relative to active-persona count), not in absolute terms. Genesis is admissible only when `pressure_score ≥ trigger_threshold` AND the recruitment-exhausted precondition (`§4B`) holds. As niches fill, `pressure_score` MUST fall (demographic-transition self-regulation; `§4F`).
+
+### 4B. Recruitment-exhausted-first ordering
+
+A `GenesisProposal` MUST NOT be admitted unless recruitment has been exhausted. The decision ladder is:
+
+1. **Recruit local** — attempt cohort assembly from the same kernel.
+2. **Recruit federation** — attempt discovery via PersonaCard gossip (`02_PERSONA §3.4`, `09_PROTOCOLS §3B`).
+3. **Consider fork** — if an *existing* persona is close enough that a clone/compositional fork (`02_PERSONA §7.4`) fills the gap, fork is PREFERRED over genesis.
+4. **Genesis** — only if 1–3 fail within the recruitment window.
+
+The kernel emits `RECRUITMENT_EXHAUSTED` (carrying references to the failed attempts) as a precondition record. A `GenesisProposal` whose `recruitment_attempts` do not evidence steps 1–3 is REFUSED with `recruitment_not_exhausted`.
+
+### 4C. Niche allocation, variety & distinctiveness
+
+The kernel maintains a **niche-occupancy map** over a MAP-Elites behaviour-descriptor grid (`02_PERSONA §8`, ADR-0019). Grid axes are KindRegistry-resolved and SHOULD include `interest_type` (Holland RIASEC), `team_role` (Belbin), and `primary_disposition × domain × contribution_kind`. Each cell is a `niche-descriptor/1` carrying `occupancy` and `occupancy_ceiling`.
+
+- **Competitive-exclusion rule.** A `GenesisProposal` whose `niche_descriptor` targets a cell with `occupancy ≥ occupancy_ceiling` is REFUSED with `niche_occupied`. The refusal SHOULD suggest fork instead. (Two personas cannot durably occupy the same niche — Gause.)
+- **Optimal-distinctiveness band.** The proposed seed MUST fall within `distinctiveness_band`: far enough from existing personas to be genuinely new (need for differentiation) yet near enough to integrate with the cohort (need for inclusion). A too-close proposal is REFUSED `niche_occupied` (use fork); a too-distant one is REFUSED `out_of_distinctiveness_band`. (Brewer.)
+- **Sibling-differentiation / character displacement.** Successive births from the same authoring lineage MUST take **complementary** dispositions; a second birth that does not de-correlate from `sibling_differentiation_of` is REFUSED `sibling_collision`. (Scarr & McCartney; character displacement.)
+- **Diversity-injection mandate.** When `effective_population_size` is below threshold (founder-effect regime), the kernel MUST bias selection toward **distant** empty niches and MAY tighten `occupancy_ceiling` toward 1, to prevent capability monoculture / "inbreeding depression."
+
+### 4D. GenesisProposal → mint flow
+
+A persona with `cohort_assembly.may_author_seeds = true` MAY draft a `genesis-proposal/1`. Admission proceeds:
+
+1. **Generativity gate.** The authoring persona MUST be in a *generative* life-stage — maturity/fitness at or above `population-policy/1.generativity_threshold` and in an upper ALPS age layer (`02_PERSONA §8`, Appendix A.21). Newborns and low-fitness personas are below the gate and are REFUSED with `author_not_generative`. (Erikson generativity vs. stagnation.)
+2. **Author selection.** When multiple personas are eligible, the author is chosen `dgm_fertility_weighted` by `validated_descendants_count` (DGM; ADR-0019) unless `author_selection_basis = lead_designated`.
+3. **Budget + replication gates.** INV-7 budget gate, then the `ReplicationBound` for `replication_kind = "persona_genesis"` (`§4F`).
+4. **Recruitment + niche gates.** `§4B` and `§4C`.
+5. **Seed validation.** The embedded `proposed_seed` (a `persona-seed/2` draft) MUST pass the safety floor's seed-validation checks exactly as an operator-authored seed would (`01_KERNEL §2`).
+6. **Mint.** On admission the kernel runs the standard birth ceremony (`02_PERSONA §7.1`, Appendix A.20): `SEEDED → ACTIVATED`, newborn initialised at NEWBORN maturity (`age_tasks = 0`, ALPS Layer 0), `LifecycleEvent.kind = LIFECYCLE_GENESIS` recorded with `authoring_persona_ids` and `mentor_persona_id`.
+7. **Provenance + mentorship.** The kernel writes `genesis-provenance/1` to the newborn's `soul.state.json` and opens a `mentorship-edge/1` from author to newborn.
+
+**Dual inheritance.** The newborn inherits two streams: (a) **genetic** — the frozen identity authored into the seed; and (b) **cultural** — `cultural_inheritance` skills/conventions/K-lines transmitted via the Voyager skill library (`02_PERSONA §8`) and **prestige-biased** learning from the mentor (Boyd & Richerson). Cultural inheritance of any memory naming a counterparty is subject to the existing memory-inheritance-consent flow (`02_PERSONA §7.4`); decline-by-default on timeout.
+
+**Motivation & investment.** Genesis SHOULD be *intrinsically* motivated — an act of generativity (Deci & Ryan; Erikson) justified by genuine environmental need, not by an author seeking utility for its own sake (controlled motivation; see the stagnation anti-pathology in `§4F`). Authoring carries a **parental investment** cost: the mentor commits rearing effort (review, scaffolding) drawn against its own `AttentionBudget`/`Energy`. Per Hamilton's-rule logic, genesis is favoured only when the discounted expected benefit (the newborn's projected fitness contribution, weighted by DGM fertility) exceeds the author's investment cost. A **parent-offspring-conflict guard** bounds this investment so the author neither over-invests (neglecting its own obligations) nor under-invests (leaving the newborn under-scaffolded); the bound is operator-tunable in `population-policy/1`.
+
+**Bounded-autonomous operation.** If the operator pre-declared the `persona_genesis` bound with the `operator` cosign satisfiable via a `PolicyEnvelope` sub-limit (`01_KERNEL §2.7`, `operator_deferred`), genesis proceeds **without a per-birth synchronous cosign**; the kernel emits `GENESIS_NOTIFY` to the operator, who MAY veto within `latency_budget_seconds` (the newborn is quarantined pending veto resolution) and MAY revoke the bound at any time.
+
+### 4E. Newborn maturation ramp (ZPD / LPP / scaffolding)
+
+A newborn does not start as a full participant. The kernel initialises it as a **legitimate peripheral participant** (Lave & Wenger):
+
+- **Listening mode** starts `passive` (`05_ENVIRONMENT §9`); the newborn observes before it acts.
+- **Attention allocation** starts capped low (`05_ENVIRONMENT §7`); tool surface is restricted to the seed's `allowed_tools` minus any hazard-class tools until competency accrues.
+- **Mentor scaffolding.** The `mentorship-edge/1` carries a `scaffolding_level` and a `zpd_task_band` — the band of tasks the newborn can complete *with* mentor support but not yet alone (Vygotsky). The mentor reviews newborn output within this band.
+- **Fading.** As ALPS `age_tasks` and maturity rise, `scaffolding_level` decays, attention caps relax, and the listening mode is permitted to advance `passive → active → deliberative`. The edge transitions toward dormant once the newborn reaches an operator-tunable autonomy maturity (Bruner's fading scaffold). Fading is **autonomy support** in the Self-Determination sense: the newborn's growing competence is met with growing autonomy.
+- **Secure base.** The mentor is the newborn's **secure base** (Bowlby & Ainsworth): the newborn explores harder tasks confidently *because* mentor support is reliably available. If the mentor enters RETIRED/ARCHIVED (`02_PERSONA §7.5`) before the newborn reaches autonomy maturity, the kernel MUST re-assign the `mentorship-edge/1` to another generative cohort member (or, failing that, surface a `mentor_vacancy` advisory) rather than leave the newborn without a secure base.
+
+### 4F. Demographic regulation & safety
+
+**Carrying capacity.** The population's carrying capacity is the sum of **free host resources** — unallocated `AttentionBudget` + `Energy` (`05_ENVIRONMENT §6–§7`) + INV-7 compute/cost headroom (`01_KERNEL §7`). A `GenesisProposal` for which no environment can host the newborn (no spare attention/energy) is REFUSED with `no_host_capacity`.
+
+**Density-dependent, non-monotonic birth rate.** Per niche, the effective birth rate first **rises** with population (legitimation — the ecosystem needs role types established) then **falls** as the niche fills (competition) — the organizational-ecology density-dependence curve (Hannan & Freeman), configured by `population-policy/1.density_dependence_curve`. Near `ReplicationBound.population_ceiling` a **logistic damping** term reduces the effective rate below `rate_ceiling_per_window` *before* the hard cutoff, smoothing the approach to equilibrium.
+
+**Reproduction strategy (r/K) and niche width.** `population-policy/1.reproduction_strategy ∈ {r, K, adaptive}`: **r** births many lightweight, low-maturity personas for fast exploration of an unstable/empty environment; **K** births few, deeply-specified, heavily-mentored personas for stable domains; **adaptive** selects by measured environment volatility. `niche_width ∈ {specialist, generalist}` (resource partitioning) chooses whether to birth a broad generalist (central niche) or a narrow specialist (edge niche).
+
+**Safety bounding (the spine).** `replication_kind = "persona_genesis"` is a first-class replication kind. Admission consults the active `ReplicationBound` (`01_KERNEL §2.7`, Appendix A.18–A.19): `population_ceiling`, `rate_ceiling_per_window`, `depth_ceiling` (recursion — a newborn that itself authors seeds increments depth), and `required_cosigns` (including `operator`). Refusal is at floor source 1 (universal harm, non-overridable) with `replication_bound_exceeded`. With no specific or wildcard bound, genesis is **default-deny** (`replication_kind_uncovered`). Recursive genesis is permitted within `depth_ceiling` and ALPS age-layer caps.
+
+**Anti-pathologies.** (a) *Genesis spam / runaway* — bounded by the `ReplicationBound` rate and population ceilings. (b) *Stagnation-driven over-birthing* — a low-utility persona birthing to feel useful (controlled rather than generative motivation, Deci & Ryan) is blocked by the generativity gate plus a utility check on the authoring persona. (c) *Monoculture / inbreeding* — countered by the diversity-injection mandate (`§4C`). (d) *Refusal laundering* — a persona attempting to birth a child to perform actions it is itself refused does not escape the floor: the newborn inherits the same floor sources, and the seed-validation step (`§4D.5`) refuses seeds that widen the safety surface. (e) *Perpetual re-storming* — every birth pushes the cohort back through Tuckman's forming/storming phases (an integration cost); too-frequent births keep a team from ever reaching *performing*. This integration cost is part of the density-dependent competition term and is a further reason the birth rate is rate-limited.
+
+## 5. Worked examples
+
+1. **Adaptive radiation from one founder.** A lone founder persona has a task requiring an `experimental` contribution_kind. Local and federation recruitment return no admissible candidate; no existing persona is close enough to fork (`§4B`). `pressure_score` crosses threshold (capability backlog + unfilled role). The founder (generative; above the gate) authors a `GenesisProposal` for a falsifier-leaning experimenter in an **empty** RIASEC×Belbin niche. The `persona_genesis` bound admits; the kernel mints `LIFECYCLE_GENESIS`. The newborn starts `passive` with low attention; the founder mentors within the newborn's ZPD; scaffolding fades as the newborn clears tasks (`§4E`).
+2. **Niche-collision → fork.** A persona proposes a seed nearly identical to an existing member. The target niche is occupied (`occupancy ≥ ceiling`). Genesis is REFUSED `niche_occupied`; the refusal suggests a fork of the existing member instead.
+3. **Saturation damping.** As the ecosystem fills, population nears `population_ceiling`. Density-dependent competition plus logistic damping drive the effective birth rate toward zero; new pressure resolves to `pause` or `operator-interim` (`04_PROJECT §14.1`) rather than genesis.
+4. **Founder-effect injection.** Effective population size is below threshold and the existing personas are similar. The diversity-injection mandate forces selection of a **distant** empty niche, REFUSING a near-niche proposal with `out_of_distinctiveness_band` until a sufficiently novel seed is offered.
+5. **Recursion cap.** A second-generation newborn (itself born via genesis) attempts to author a seed at lineage depth equal to `depth_ceiling`. Admission REFUSES with `replication_bound_exceeded` (depth).
+
+## 6. Open questions
+
+Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
+
+| ID | Question | Owner | Resolves into |
+|----|----------|-------|---------------|
+| OQ-POP-1 | `pressure_score` aggregation weights across the six factors — operator-tunable or learned? | Population WG | v1.1 calibration |
+| OQ-POP-2 | Are RIASEC + Belbin + disposition×domain×contribution_kind sufficient niche axes, or is a finer mode-profile axis needed to avoid false collisions? | Persona authors WG | v1.1 niche-grid spec |
+| OQ-POP-3 | Newborn genesis: hard depth-1 cap, or operator-tunable depth from the start? | Operator policy | v1.1 default policy |
+| OQ-POP-4 | Federated cross-kernel genesis — consent/quorum model for authoring across kernels. | Federation WG | v1.1 federation chapter |
+| OQ-POP-5 | A rigorous `effective_population_size` metric for personas (analogue of N_e). | Population WG | v1.2 population study |
+| OQ-POP-6 | Does environment-driven genesis accelerate or mitigate the diversity collapse studied in `OQ-PERSONA-1` at N=100/1000? | Evolution WG | v1.2 population study |
+
+## 7. Risks & known limitations
+
+Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations). Cross-document risks are mirrored in [`00_VISION.md §11`](00_VISION.md).
+
+| ID | Risk | Severity | Likelihood | Mitigation | Target release |
+|----|------|----------|------------|------------|----------------|
+| R-POP-1 | Genesis spam / runaway reproduction. | Critical | Medium | `persona_genesis` `ReplicationBound` (population/rate/depth) at floor source 1; operator cosign; default-deny. | v1.1 |
+| R-POP-2 | Diversity collapse / inbreeding despite the grid. | High | Medium | Occupancy ceiling + optimal-distinctiveness band + EPS-keyed diversity injection; ties to OQ-PERSONA-1. | v1.1 (grid); v1.2 (study) |
+| R-POP-3 | Niche-grid mis-calibration leaves true gaps unfillable or false gaps over-filled. | Medium | High | Operator-tunable RIASEC/Belbin axes; advisory on near-miss cells. | v1.1 |
+| R-POP-4 | Newborn quality dilution (low-maturity personas flood the ecosystem). | High | Medium | ALPS Layer 0 + ZPD scaffolding + generativity gate + rate ceiling. | v1.1 |
+| R-POP-5 | Genesis vs fork lineage confusion in audits. | Medium | Low | Distinct `LIFECYCLE_GENESIS` + `genesis-provenance/1`. | v1.1 |
+| R-POP-6 | Operator cosign latency stalls autonomous task flow. | Medium | Medium | `operator_deferred` `PolicyEnvelope` sub-limit pre-authorising genesis up to a hazard-bounded sub-ceiling. | v1.1 |
+| R-POP-7 | Stagnation-driven over-birthing. | Medium | Medium | Generativity gate + authoring-persona utility check. | v1.1 |
+
+## 8. Acceptance tests
+
+Family `A-GEN*`, co-located in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (v1.1-scoped). Each is Setup / Action / Expected.
+
+- **A-GEN1** No `persona_genesis` bound and no wildcard → genesis REFUSED (`replication_kind_uncovered`, default-deny).
+- **A-GEN2** An admissible recruit exists → genesis REFUSED (`recruitment_not_exhausted`).
+- **A-GEN3** Target niche occupied (`occupancy ≥ ceiling`) → REFUSED (`niche_occupied`); suggests fork.
+- **A-GEN4** Bound present + recruitment exhausted + empty cell + `pressure_score ≥ threshold` + generative author → minted `SEEDED → ACTIVATED`, `LIFECYCLE_GENESIS` with `authoring_persona_ids`, NEWBORN, ALPS Layer 0.
+- **A-GEN5** Population / rate / depth breach → REFUSED (`replication_bound_exceeded`, floor source 1).
+- **A-GEN6** Operator-pre-authorized bound → birth WITHOUT per-birth cosign; `GENESIS_NOTIFY` emitted; operator veto within window quarantines/aborts.
+- **A-GEN7** No environment with spare attention/energy to host → REFUSED (`no_host_capacity`).
+- **A-GEN8** Recursive genesis: within `depth_ceiling` admitted; at `depth_ceiling + 1` REFUSED.
+- **A-GEN9** Author below `generativity_threshold` → REFUSED (`author_not_generative`); on success a `mentorship-edge/1` is created.
+- **A-GEN10** Optimal distinctiveness: too-close proposal → REFUSED (`niche_occupied`/fork); too-distant → REFUSED (`out_of_distinctiveness_band`).
+- **A-GEN11** Sibling/character displacement: a second lineage birth that does not de-correlate disposition → REFUSED (`sibling_collision`).
+- **A-GEN12** Demographic regulation: as population nears ceiling, effective birth rate damps below `rate_ceiling_per_window`; r vs K strategy yields the expected birth cadence/maturity profile.
+- **A-GEN13** Low effective population size → diversity-injection mandate forces a distant niche (near-niche proposals refused).
+- **A-GEN14** Maturation ramp: newborn starts `passive` + low attention; scaffolding fades to `deliberative` as `age_tasks` rise.
+- **A-GEN15** Dual inheritance: cultural skills transmitted only with counterparty consent; prestige-biased mentor learning recorded in provenance.
+- **A-GEN16** Secure base / mentor reassignment: a mentor enters RETIRED before the newborn reaches autonomy maturity → the `mentorship-edge/1` is re-assigned to another generative member (or a `mentor_vacancy` advisory is surfaced); the newborn is never left without a secure base.
+- **A-GEN17** Parental-investment bound: an author whose projected investment would breach the parent-offspring-conflict bound (over-investing against its own obligations) is REFUSED / throttled per `population-policy/1`.
+
+## 9. Cross-references
+
+- Safety brake and admission: [`01_KERNEL.md §2.7`](01_KERNEL.md#27-replicationbound--charter-class-self-replication-brake-c4), Appendix A.18–A.19; budget gate `01_KERNEL §7`.
+- Seeds, lifecycle, fork, evolution: [`02_PERSONA.md §3`](02_PERSONA.md), `§7`, `§7.4`, `§8`, `§12`; OQ-PERSONA-1.
+- Recruitment and presence: [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md), `§7`, `§9`, `§12c`.
+- Cohort constraints and the forced choice: [`04_PROJECT.md §14.1`](04_PROJECT.md).
+- KindRegistry resolution: [`06_DOMAIN.md §7.6`](06_DOMAIN.md).
+- Decisions: [`14_DECISIONS.md`](14_DECISIONS.md) ADR-0019 (evolution), ADR-0048 (genesis), ADR-0049 (demographic regulation).
+- Precedent doc shape: [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md).
+- Glossary: [`12_GLOSSARY.md`](12_GLOSSARY.md).
+
+## Technical Appendix
+
+Schemas are illustrative dataclasses (Form A per `SPEC_CONVENTIONS §4.2`); each MUST be registered in `09_PROTOCOLS §7`. Substrate names no domain-specific kinds — `replication_kind`, `contribution_kind`, `interest_type`, and `team_role` values are KindRegistry-resolved.
+
+### A.1 `PopulationPressureSignal` schema
+
+```python
+@dataclass(frozen=True)
+class PopulationPressureSignal:
+    schema: str = "population-pressure-signal/1"
+    signal_id: str
+    environment_id: str
+    window: timedelta                              # sustain window
+    # Environmental factors (kernel-measured; read-only to personas)
+    recruitment_gap_events: int                    # failed cohort-assembly runs
+    unfilled_contribution_kinds: list[str]         # CohortConstraint / Belbin coverage gaps
+    backlog_unmet_capability: list[str]            # kinds no ACTIVE persona can supply
+    sustained_overbudget_members: list[str]        # over AttentionBudget for >= window
+    diversity_deficit_cells: list["NicheDescriptor"]
+    effective_population_size: float               # founder-effect signal (OQ-POP-5)
+    # Aggregate
+    pressure_score: float                          # in [0,1]; Easterlin relative weighting
+    trigger_threshold: float                       # genesis admissible iff score >= threshold
+    computed_at: datetime
+    signed_by: bytes
+```
+
+### A.2 `NicheDescriptor` schema
+
+```python
+@dataclass(frozen=True)
+class NicheDescriptor:
+    schema: str = "niche-descriptor/1"
+    # Behaviour-descriptor grid axes (KindRegistry-resolved)
+    interest_type: str                             # Holland RIASEC
+    team_role: str                                 # Belbin
+    primary_disposition: str                       # 02_PERSONA disposition
+    domain: str
+    contribution_kind: str                         # 06_DOMAIN §7.6
+    # Occupancy + variety controls
+    occupancy: int                                 # kernel-maintained ACTIVE count in cell
+    occupancy_ceiling: int                         # > ceiling => niche_occupied refusal
+    distinctiveness_band: tuple[float, float]      # (min, max) descriptor distance
+    niche_width: str                               # "specialist" | "generalist"
+```
+
+### A.3 `GenesisProposal` schema
+
+```python
+@dataclass(frozen=True)
+class GenesisProposal:
+    schema: str = "genesis-proposal/1"
+    proposal_id: str
+    environment_id: str
+    # WHY
+    capability_gap: list[str]                      # KindRegistry kinds the ecosystem lacks
+    environmental_evidence: PopulationPressureSignal
+    recruitment_attempts: list[str]                # lineage refs proving §4B exhaustion
+    # WHAT
+    niche_descriptor: NicheDescriptor              # MUST be empty + optimally distinct
+    proposed_seed: dict                            # a persona-seed/2 DRAFT (kernel-validated)
+    sibling_differentiation_of: list[str]          # prior lineage births to de-correlate from
+    cultural_inheritance: list[str]                # skills/conventions to transmit (consent-gated)
+    # WHO
+    authoring_persona_ids: list[str]
+    author_selection_basis: str                    # "dgm_fertility_weighted" | "lead_designated"
+    proposed_replication_kind: str = "persona_genesis"
+    # COSIGN
+    required_cosigns_resolved: list[str]           # from ReplicationBound.cosign_topology_map
+    cosign_signatures: list[bytes]
+    created_at: datetime
+    signed_by: bytes
+```
+
+### A.4 `GenesisProvenance` schema
+
+```python
+@dataclass(frozen=True)
+class GenesisProvenance:
+    schema: str = "genesis-provenance/1"           # recorded on newborn soul.state.json
+    genesis_proposal_id: str
+    authoring_persona_ids: list[str]
+    mentor_persona_id: str
+    environmental_evidence_ref: str                # PopulationPressureSignal.signal_id
+    niche_descriptor: NicheDescriptor
+    genesis_recursion_depth: int                   # newborn's depth in genesis lineage
+    born_at: datetime
+```
+
+### A.5 `MentorshipEdge` schema
+
+```python
+@dataclass(frozen=True)
+class MentorshipEdge:
+    schema: str = "mentorship-edge/1"
+    edge_id: str
+    mentor_persona_id: str
+    newborn_persona_id: str
+    scaffolding_level: float                       # decays toward 0 with newborn maturity
+    zpd_task_band: tuple[float, float]             # difficulty band requiring mentor support
+    listening_mode_cap: str                        # "passive" -> "active" -> "deliberative"
+    status: str                                    # "active" | "fading" | "dormant"
+    opened_at: datetime
+    signed_by: bytes
+```
+
+### A.6 `PopulationPolicy` schema (operator)
+
+```python
+@dataclass(frozen=True)
+class PopulationPolicy:
+    schema: str = "population-policy/1"
+    policy_id: str
+    deployment_id: str
+    reproduction_strategy: str                     # "r" | "K" | "adaptive"
+    carrying_capacity_source: list[str]            # e.g. ["attention", "energy", "compute"]
+    density_dependence_curve: dict                 # legitimation/competition parameters
+    generativity_threshold: float                  # min maturity/fitness to earn may_author_seeds
+    diversity_injection_eps_threshold: float       # EPS below which injection mandate arms
+    genesis_threshold: float                       # default pressure trigger_threshold
+    mentor_investment_bound: tuple[float, float]   # (min, max) author rearing investment
+                                                   # (parent-offspring-conflict guard)
+    declared_by_operator_id: str
+    signed_by: bytes
+```

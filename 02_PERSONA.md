@@ -283,6 +283,8 @@ Sketch round picks one variant per layer; prevents old high-fitness personas fro
 
 > **Schema/spec:** Clone and compositional fork mechanics. See [Appendix A.22](#appendix-a22).
 
+**Fork vs. Genesis.** Fork creates a new persona by *copying or merging existing parents* — it produces variations of personas that already exist. **Persona Genesis** (`16_POPULATION_DYNAMICS §4D`) instead *authors a new seed* for a role that no current persona fills, driven by an environmental capability gap. Use fork when a close-enough persona exists; use genesis only when recruitment and fork are exhausted and the target niche is empty.
+
 ### 7.4.1 MemoryInheritancePolicy
 
 The prior design specifies that experience-layer memory (episodic / semantic / reflective) is **not** inherited on fork by default (`§3 Layer 3`). v1.0 makes this explicit + tunable: the persona seed declares the memory inheritance shape, signed at fork-draft time.
@@ -875,6 +877,8 @@ Per `00_VISION §10` clarification, responsible-companionship constraints (no me
 
 > **Schema/spec:** Complete PersonaSeed example (schema persona-seed/2) for Sparky. See [Appendix A.71](#appendix-a71).
 
+**Authorship (v1.0 operator; v1.1 persona-authored).** In v1.0 a `PersonaSeed` is **operator-authored**. The v1.1 draft `16_POPULATION_DYNAMICS.md` adds **Persona Genesis**: a generative persona (with `cohort_assembly.may_author_seeds = true`) MAY author a seed to fill an environmental capability gap, minted through the same birth ceremony under a `persona_genesis` `ReplicationBound`. When a seed is persona-authored, its `provenance` records the `genesis_proposal_id` and authoring persona(s); the kernel emits `LIFECYCLE_GENESIS` rather than the operator-seed `LIFECYCLE_SEEDED`/`LIFECYCLE_ACTIVATED` path.
+
 ## 13. Risks & known limitations
 
 Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations). These risks describe inherent limits of the persona model; they are not implementation bugs.
@@ -896,7 +900,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 
 | ID | Question | Owner | Resolves into |
 |----|----------|-------|---------------|
-| OQ-PERSONA-1 | Population-level evolution dynamics: when N personas evolve in the same env, do MAP-Elites + ALPS layers produce healthy diversity or collapse? Empirical study needed at N=20, 100, 1000. | Evolution WG | v1.2 population study. |
+| OQ-PERSONA-1 | Population-level evolution dynamics: when N personas evolve in the same env, do MAP-Elites + ALPS layers produce healthy diversity or collapse? Empirical study needed at N=20, 100, 1000. Partially addressed by the genesis-time diversity guarantees in `16_POPULATION_DYNAMICS §4C` (competitive exclusion, optimal distinctiveness, diversity-injection); the empirical N-scale study remains open (see `OQ-POP-6`). | Evolution WG | v1.2 population study. |
 | OQ-PERSONA-2 | Relational survivorship after fork: should the parent persona's relationship records be readable by the child, or fully partitioned? v1.0 ships partition-by-default; some operators may want soft inheritance. | Persona authors WG | v1.1 relational policy. |
 | OQ-PERSONA-3 | Mood schema (`mood/1`) is VAD-based. Does the affect literature have a richer scheme (PAD, OCC) we should adopt? | Persona authors | v1.2 mood model review. |
 | OQ-PERSONA-4 | Character-vector binding optional everywhere — but should operator policy default to off for safety-critical deployments, or on for cohort tuning? | Operator policy | v1.1 default policy. |
@@ -1078,6 +1082,12 @@ cohort_assembly:
     joined_env: tenant_or_n_interactions
     long_running_collab: federation_with_tenant_attestation
   consent_terms_template: default
+  may_author_seeds: false           # genesis capability gate; default-deny
+                                     # (16_POPULATION_DYNAMICS §4D). Requires an
+                                     # active persona_genesis ReplicationBound.
+  genesis_recursion_cap: 0          # how deep this persona's genesis
+                                     # descendants may themselves author seeds;
+                                     # bounded by ReplicationBound.depth_ceiling
 default_env_memberships:           # OPTIONAL
   - environment_blueprint_id: companion_space
     role: companion
@@ -1812,6 +1822,13 @@ LIFECYCLE_FORK                ACTIVE → FORKED (sibling persona minted);
                               parent state preserved per
                               MemoryInheritancePolicy / CharterConflict
                               Resolution (§7.4.1, §7.4.3)
+LIFECYCLE_GENESIS             SEEDED → ACTIVE birth of a persona-AUTHORED
+                              seed (16_POPULATION_DYNAMICS §4D); carries
+                              authoring_persona_ids + mentor_persona_id.
+                              Distinct from LIFECYCLE_FORK: a NEW role from
+                              an environmental gap, NOT a copy/merge of
+                              existing parents. Newborn starts at NEWBORN
+                              maturity (ALPS Layer 0).
 LIFECYCLE_RETIRED             DORMANT → RETIRED (retirement predicates
                               cleared per §7.5; project pins and active
                               obligations released)

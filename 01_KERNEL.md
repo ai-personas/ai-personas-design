@@ -330,7 +330,9 @@ Some deployments authorise **fabrication that produces more of the deploying sys
 
 **Honest limit.** A factory that produces a *new kind* of replicating thing whose `replication_kind` has no active `ReplicationBound` would slip the brake. Mitigation: operator policy SHOULD declare a *default* `ReplicationBound` keyed to `replication_kind = "*"` (wildcard) so any emergent replication_kind triggers a fall-through bound. Kernel emits `replication_kind_uncovered` advisory when admission encounters a replication_kind with no specific or wildcard bound.
 
-**Acceptance tests.** A-RB1 (population ceiling refused on breach attempt), A-RB2 (rate window refused on breach), A-RB3 (depth ceiling refused on deep recursion), A-RB4 (charter bump invalidates bound), A-RB5 (operator-policy cannot loosen), A-RB6 (under operator_deferred, PolicyEnvelope sub-limits cap replication), A-RB7 (wildcard fall-through bound catches emergent replication_kinds).
+**Persona genesis.** `replication_kind = "persona_genesis"` (`16_POPULATION_DYNAMICS.md`) is a first-class replication kind: when a persona authors a new `PersonaSeed` to fill an environmental capability gap, the mint advances this bound's counters and is subject to the admission rule above. Genesis is **default-deny** without a specific or wildcard `persona_genesis` bound (`replication_kind_uncovered`), and its `required_cosigns` MUST include `operator`. Recursive genesis (a genesis-born persona authoring further seeds) increments `depth` and is bounded by `depth_ceiling`.
+
+**Acceptance tests.** A-RB1 (population ceiling refused on breach attempt), A-RB2 (rate window refused on breach), A-RB3 (depth ceiling refused on deep recursion), A-RB4 (charter bump invalidates bound), A-RB5 (operator-policy cannot loosen), A-RB6 (under operator_deferred, PolicyEnvelope sub-limits cap replication), A-RB7 (wildcard fall-through bound catches emergent replication_kinds). Genesis-specific cases: `16_POPULATION_DYNAMICS §8` (A-GEN*).
 
 ### 2.8 DistressDetectionRoutingPolicy — substrate-shape routing for emotional-distress signals
 

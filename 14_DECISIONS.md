@@ -1143,6 +1143,44 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 
 ---
 
+### ADR-0048 — Persona Genesis: bounded persona-authored seed creation under environmental pressure
+
+**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)).
+
+**Context.** v1.0 creates personas only via operator-authored `PersonaSeed`s (`02_PERSONA §12`). Personas may recruit from the existing pool (`05_ENVIRONMENT §12c`) or fork existing parents (`02_PERSONA §7.4`), but cannot author a *new role* when the recruit pool is empty. The result is the dead-end in `04_PROJECT §14.1` ("pause, or operator interim") — the unfilled "population dynamics" residual (`00_VISION §11`, R-v1.0-8). Recent research (AutoAgents, IJCAI 2024; auto-scaling MAS, 2025) shows agents can author specialized roles on demand; self-replication-risk work (2025) shows hard brakes are mandatory.
+
+**Decision.** Add **Persona Genesis**: a persona with `cohort_assembly.may_author_seeds = true` and maturity above a generativity threshold MAY author a new `PersonaSeed` via a signed `GenesisProposal`, minted through the existing birth ceremony. Genesis is admissible only (a) after recruitment is exhausted, (b) into an empty, optimally-distinct MAP-Elites niche (variety guarantee — competitive exclusion + optimal distinctiveness + sibling differentiation), and (c) under an active `ReplicationBound` for `replication_kind = "persona_genesis"` (default-deny; `required_cosigns` includes `operator`). Bounded-autonomous operation is permitted via an `operator_deferred` `PolicyEnvelope` sub-limit. Newborns start NEWBORN under a mentorship edge with fading scaffolding (Erikson generativity; Vygotsky ZPD; Lave–Wenger LPP; dual inheritance).
+
+**Consequences.**
+- (+) Resolves the recruitment-gap dead-end; enables autopopulation from a few founders.
+- (+) Reuses existing brakes (`ReplicationBound`), evolution machinery (ADR-0019: MAP-Elites/Voyager/DGM/ALPS), and lifecycle/attention/listening-mode mechanisms — additive and default-off.
+- (+) Variety is a structural guarantee (niche occupancy + distinctiveness), not a hope.
+- (−) New attack surface (genesis spam) — mitigated by the floor-source-1 bound + generativity gate.
+- (−) Niche-grid axis choice biases diversity (inherited limitation from ADR-0019); operator-tunable.
+- (−) Departs from operator-only seed authorship — justified by bounding + recruitment-first + operator pre-authorization/veto.
+
+**Alternatives considered.**
+- *Operator-only authorship forever (status quo).* Rejected: does not solve the residual; blocks autonomy.
+- *Auto-fork into the gap.* Rejected: fork copies existing parents — produces clones, not variety, and would violate the diversity guarantee.
+- *Per-birth synchronous operator cosign only.* Rejected as the sole mode: reintroduces a human in every loop, defeating autopopulation; offered as an option alongside pre-authorization.
+
+---
+
+### ADR-0049 — Population demographic regulation (carrying capacity, density dependence, r/K strategy)
+
+**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md)).
+
+**Context.** A generative birth mechanism (ADR-0048) needs a principled birth-rate model so the population grows when under-served and stabilises when saturated, rather than oscillating or exploding up to the hard ceiling. Human-population and organizational-ecology theory provide validated models.
+
+**Decision.** Regulate persona population via a `population-policy/1`: carrying capacity = free host resources (`AttentionBudget` + `Energy` + INV-7 compute/cost); a non-monotonic density-dependence curve (legitimation rises then competition falls — Hannan & Freeman) with logistic damping near `population_ceiling`; and an `r/K` reproduction-strategy lever (many lightweight vs few high-investment births) plus a specialist/generalist niche-width choice (resource partitioning). The population-pressure signal weights demand relative to supply (Easterlin) and falls as niches fill (demographic transition).
+
+**Consequences.**
+- (+) Smooth approach to equilibrium; self-regulating birth rate; operator-tunable strategy.
+- (+) Grounds birth dynamics in validated human/organizational models.
+- (−) Curve calibration is a design burden (OQ-POP-1); a rigorous `effective_population_size` metric is still open (OQ-POP-5).
+
+---
+
 ## 13. Cross-references
 
 - Normative invariants and commitments referenced above: [`00_VISION.md §3`](00_VISION.md#3-invariants-j1j9), [`00_VISION.md §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10).

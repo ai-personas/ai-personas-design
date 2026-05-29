@@ -359,6 +359,8 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
                     address (05_ENVIRONMENT §5.2 Wake Path 6)
   A-CEPO*  8        CrossEnvProactiveOffer +
                     GuestPresence (05_ENVIRONMENT §11.6)
+  A-GEN*   17       Persona Genesis + population dynamics
+                    (16_POPULATION_DYNAMICS §8) — v1.1-scoped
 
 TOTAL                ~441 tests across v1.0 lineage (+108 from v1.0 spec work)
                      (+2 from project_workspace env type:
@@ -1346,6 +1348,51 @@ A-CEPO-7    Cross-kernel offer requires both kernel signatures +
              fresh body_attestation on offering persona.
 A-CEPO-8    Per-persona per-target-env rate limit (3 offers / 30d)
              enforced; excess offers refused.
+
+PERSONA GENESIS / POPULATION DYNAMICS (; 16_POPULATION_DYNAMICS §4, v1.1)
+A-GEN1      No persona_genesis ReplicationBound and no wildcard →
+             genesis REFUSED (replication_kind_uncovered, default-deny).
+A-GEN2      An admissible recruit exists → genesis REFUSED
+             (recruitment_not_exhausted).
+A-GEN3      Target niche occupied (occupancy ≥ ceiling) → REFUSED
+             (niche_occupied); refusal suggests fork.
+A-GEN4      Bound present + recruitment exhausted + empty cell +
+             pressure_score ≥ threshold + generative author → minted
+             SEEDED→ACTIVATED; LIFECYCLE_GENESIS with authoring_persona_ids;
+             newborn NEWBORN, ALPS Layer 0.
+A-GEN5      Population / rate / depth breach → REFUSED
+             (replication_bound_exceeded, floor source 1).
+A-GEN6      Operator-pre-authorized bound → birth WITHOUT per-birth
+             cosign; GENESIS_NOTIFY emitted; operator veto in window
+             quarantines/aborts.
+A-GEN7      No environment with spare attention/energy to host newborn →
+             REFUSED (no_host_capacity).
+A-GEN8      Recursive genesis: within depth_ceiling admitted; at
+             depth_ceiling+1 REFUSED.
+A-GEN9      Author below generativity_threshold → REFUSED
+             (author_not_generative); mentorship-edge/1 created on success.
+A-GEN10     Optimal distinctiveness: too-close proposal REFUSED
+             (niche_occupied/fork); too-distant REFUSED
+             (out_of_distinctiveness_band).
+A-GEN11     Sibling/character displacement: a second lineage birth that
+             does not de-correlate disposition → REFUSED (sibling_collision).
+A-GEN12     Demographic regulation: near ceiling, effective birth rate
+             damps below rate_ceiling_per_window; r vs K strategy yields
+             expected birth cadence/maturity profile.
+A-GEN13     Low effective_population_size → diversity-injection mandate
+             forces a distant niche (near-niche proposals refused).
+A-GEN14     Maturation ramp: newborn starts passive + low attention;
+             scaffolding fades to deliberative as age_tasks rise.
+A-GEN15     Dual inheritance: cultural skills transmitted only with
+             counterparty consent; prestige-biased mentor learning
+             recorded in genesis-provenance/1.
+A-GEN16     Secure base / mentor reassignment: mentor RETIRED before
+             newborn autonomy maturity → mentorship-edge/1 re-assigned to
+             another generative member (or mentor_vacancy advisory);
+             newborn never left without a secure base.
+A-GEN17     Parental-investment bound: author whose projected rearing
+             investment would breach population-policy mentor_investment_bound
+             is REFUSED/throttled (parent-offspring-conflict guard).
 
 MEMBER-ZERO ARCHIVAL (; §5.3)
 A-EN-v1.0-13  Env with empty active members for member_zero_window
