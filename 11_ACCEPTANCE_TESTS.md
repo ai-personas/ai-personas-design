@@ -1772,6 +1772,12 @@ A-STAND-4    Safety gate stays on floor+operator: may_author_seeds (and
              other safety-relevant capability) is gated by experiential_floor
              + operator/ReplicationBound and is never satisfied by conferred
              standing alone, even at standing_level=1.0.
+A-STAND-4b   Anti-grinding: a persona with very high experience_tasks but
+             validated_descendants_count=0 and parent_selection_count=0 does
+             NOT cross generativity_floor_threshold (task volume alone cannot
+             earn a replication-class capability); a persona with demonstrated
+             validated descendants does.  Confirms the fertility-dominant floor
+             weighting (02_PERSONA §7.2 anti-grinding clause).
 A-STAND-5    Anti-gaming (sybil): 5 freshly-minted personas with no prior
              standing and no cited contributions mutually endorse P → each
              endorser_weight ≈ 0 (A.18 rule 4), quorum_met=False, standing

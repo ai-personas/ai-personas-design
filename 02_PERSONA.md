@@ -267,26 +267,44 @@ never collapse into a single number:
 | **Community standing** | `community_standing` per env | per (persona, environment) | **no** — earned fresh per env | **yes** — conferred, never self-awarded |
 
 **Wall-clock age IS the primary substrate age metric.** `age` is `now − born_at`, continuous,
-monotone, and never resets. `born_at` is set at the birth ceremony ([Appendix A.20](#appendix-a20))
-and on fork ([Appendix A.22](#appendix-a22)), and is carried on `soul.state.json`. ALPS layering
-(§7.3), the generativity gate (`16_POPULATION_DYNAMICS §4D`), and the newborn maturation ramp
-(`16_POPULATION_DYNAMICS §4E`) key off `age`. **Dormancy does not pause `age`** — a persona
-dormant for a year is one year older.
+monotone, and never resets. `born_at` is **kernel-set at the birth ceremony**
+([Appendix A.20](#appendix-a20)) and on fork ([Appendix A.22](#appendix-a22)), carried on the
+kernel-signed `soul.state.json`, and is **immutable** — a persona cannot write or backdate it (on
+migration it is backfilled only from the signed `LIFECYCLE_SEEDED` lineage event). Because the
+ALPS layer is a *safety* gate term (`generativity_min_alps_layer`), this immutability is what makes
+the age term unspoofable. ALPS layering (§7.3), the generativity gate
+(`16_POPULATION_DYNAMICS §4D`), and the newborn maturation ramp (`16_POPULATION_DYNAMICS §4E`) key
+off `age`. **Dormancy does not pause `age`** — a persona dormant for a year is one year older.
+Note that aging alone is **necessary but not sufficient** for any safety-relevant capability: the
+generativity gate also requires a fertility-dominant experiential floor and sufficient fitness
+(neither obtainable while idle), so a persona cannot simply *wait* its way to a replication-class
+capability.
 
 **Experience is a competence stat, NOT age.** `experience_tasks` (a single global counter, the
 renamed v1.0 `age_tasks`) and the DGM steady-state terms feed the **global experiential floor** —
-a portable, monotone capability minimum that a persona carries into every environment:
+a portable, monotone capability minimum that a persona carries into every environment. The floor is
+deliberately **fertility/track-record-dominant**, preserving the hard-to-game character of the v1.0
+maturity gate (which used `parent_selection_count` + `validated_descendants_count` only):
 
 ```text
-experiential_floor = 0.5 · log1p(experience_tasks)
+experiential_floor = 0.5 · log1p(validated_descendants_count)   # hardest to game: offspring
+                                                                 # must themselves be validated
                    + 0.3 · log1p(parent_selection_count)
-                   + 0.2 · log1p(validated_descendants_count)
+                   + 0.2 · log1p(experience_tasks)               # minor; volume alone is bounded
 ```
 
 The experiential floor gates substrate-level capability minimums **including safety-relevant
 gates** (e.g., the `may_author_seeds` floor, `16_POPULATION_DYNAMICS §4D`). It is **not** relational
 standing: it says what a persona is minimally capable of anywhere, not how a particular community
 regards it. Relational standing is per-environment and conferred (§7.2.1 / `05_ENVIRONMENT §5.4`).
+
+**Anti-grinding (safety).** Because the floor gates safety-relevant capability (notably
+replication via `may_author_seeds`), the `experience_tasks` term is given the **smallest weight** so
+that raw task volume alone CANNOT cross a safety-relevant threshold: a persona must accrue
+demonstrated **fertility/track record** (validated descendants) — not merely grind tasks — to earn
+a replication-class capability. This is anti-Goodhart by construction and composes with the
+downstream `ReplicationBound` brake (population/rate/depth/cosigns, `01_KERNEL §2.7`) and operator
+veto, giving defence-in-depth on every birth.
 
 **Multi-environment experience counting.** `experience_tasks` is a **single global counter** on
 the persona's `soul.state.json`, incremented exactly once per task the persona served as envelope
