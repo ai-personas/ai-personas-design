@@ -234,6 +234,62 @@ This closes the gap "a pair env where both members leave lingers in DORMANT inde
 
 **Composition with project_workspace.** For an env of type `project_workspace`, `project_bound_to` is itself; the rule checks the project's lifecycle status. If the project is `completed` or `abandoned`, archival proceeds normally; if `active`, the env MUST NOT archive on member-zero alone (an operator-signed `project_orphaned` event is REQUIRED to advance — the operator MUST explicitly resolve the orphaned-project situation, not silently archive it).
 
+### 5.4 Community standing — Legitimate Peripheral Participation (community-standing/1)
+
+A persona's social/role position in an environment is its **community standing**: a per
+`(persona, environment)` scalar grounded in Lave & Wenger's *Legitimate Peripheral Participation*.
+It replaces the v1.0 single, portable "maturity" stage with a relational model — *how a particular
+community regards a member* — kept strictly separate from the persona's global, portable
+experiential floor (`02_PERSONA §7.2`).
+
+**Technical detail:** See [Appendix A.8b](#appendix-a8b) for `community-standing/1` and
+`standing-endorsement/1`.
+
+The normative rules:
+
+1. **Per-environment and NON-PORTABLE.** A persona joins each environment at **peripheral
+   standing** (`standing_level = 0`), *regardless* of its global experiential floor or its standing
+   in any other environment. Standing is neither copied on env-join nor inherited on fork
+   (`02_PERSONA §7.4.2`). A persona that is fully established in env_A starts peripheral in env_B.
+
+2. **CONFERRED, never self-awarded.** A persona MUST NOT raise its own `standing_level`. Standing
+   rises only via `standing-endorsement/1` recognition events from a **peer quorum** of members who
+   themselves hold standing in *this* environment, plus cohort acknowledgement. Any self-directed
+   write to `standing_level` is REFUSED (`standing_self_award_forbidden`).
+
+3. **Layered over the global floor — relational privileges only.** For non-safety capabilities, a
+   persona's effective gate in an env is `max(global_floor_gate, conferred_standing_gate)`.
+   **Standing gates relational/collaborative privileges ONLY.** Safety-relevant capability (e.g.,
+   `may_author_seeds`, replication) is gated by the global experiential floor +
+   operator/`ReplicationBound` and is **never reachable by peer-conferred standing** — keeping the
+   safety floor out of peer-quorum reach.
+
+4. **Operator cosign where relevant.** Where a *relational* privilege an operator deems sensitive is
+   gated by standing, conferral additionally requires `operator_cosigned = True`. Operator cosign
+   does **not** extend standing into the safety path (rule 3 still holds).
+
+5. **Decay.** Standing decays with inactivity *in that environment* (reusing the 30-day restate
+   pattern of `09_PROTOCOLS §3D / Appendix A.18` rule 3). Restating requires fresh endorsements.
+
+6. **Anti-gaming (Goodhart/sybil resistance).** Conferral reuses the existing reputation anti-gaming
+   engine (`09_PROTOCOLS §3D / Appendix A.16–A.18`) verbatim:
+   - Endorsements MUST cite **kernel-held anchors** — dual-signed EnvironmentLineage contribution
+     events (`cited_contribution_refs`); a persona cannot manufacture standing without a verifiable
+     contribution trail.
+   - Endorser weighting applies the per-peer credit cap (rule 1), sybil-cluster near-zero weight for
+     mutual-co-signing clusters (rule 4), and reach×diversity weighting (rule 5).
+   - Endorsers must themselves hold standing in this env (founders/operator seed the bootstrap).
+     Self-endorsement is structurally impossible (`endorser ≠ endorsee`).
+
+**Relationship to portable reputation.** `community-standing/1` is orthogonal to the cross-kernel,
+role-relative `reputation/1` digest (`09_PROTOCOLS §3D`): reputation is portable and trust-keyed;
+community standing is environment-local and relational. Reputation MAY feed an endorser's weight,
+but it never auto-confers standing.
+
+**Conferral ceremony.** Standing transitions are signed and J9-tracked via a dedicated
+membership ceremony emitting `STANDING_CONFERRED` / `STANDING_REVOKED` EnvironmentLineage events
+(Appendix A.9).
+
 ## 6. PresenceState — transient per-membership
 
 These schemas define the transient presence state of a persona in an environment (attention level, availability, current focus, energy, timestamps, recent signals) and the focus object (focus kind, reference, duration, interruptibility).
@@ -629,6 +685,8 @@ This specification defines the five-step decision flow for self-proposals: draft
 
 Prior versions lacked a first-class primitive for a persona to *form a new environment*. Existing flows only covered (a) admission to a pre-existing env via `ENV_INVITATION` / `ENV_RECRUIT_PROPOSAL` (`§5.1`), (b) joined env cross-kernel formation via `PROPOSE_JOINED_ENV` (`09_PROTOCOLS §3C.1`), and (c) self-admission to an existing env via `EnvSelfProposalRequest` (`§12b`). None of these capture the common case: **"I want to start a new Lab / Pair / project_workspace env to investigate topic T, with recruits B, C, D, under charter Δ, with these initial roles and attention allocations."** `EnvFormationProposal` is that primitive.
 
+**Recruitment-gap fallback (v1.1).** When cohort assembly finds no admissible recruit (locally or via federation) and no existing persona is close enough to fork, a proposer whose `cohort_assembly.may_author_seeds = true` MAY escalate to **Persona Genesis** — authoring a new niche-distinct persona to fill the gap — instead of abandoning formation. Genesis is recruitment-exhausted-first, niche-bounded, and gated by a `persona_genesis` `ReplicationBound`; the newborn enters at **peripheral community standing** (§5.4) whose listening mode (`§9`) and attention allocation (`§7`) ramp up under mentorship as wall-clock age rises and standing is conferred. See [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md).
+
 It composes atomically with the existing machinery — `cohort_assembly` capability (`02_PERSONA §3`), `PersonaPersonaBoundary` (`02_PERSONA §11.6`), `PersonaRelationshipEdge` accelerator (`02_PERSONA §11.4`), `ReputationSummary` gating (`09_PROTOCOLS §3D`), the consent flow (`09_PROTOCOLS §3C.4`), and the env lifecycle FSM (`§4`). It does **not** replace any of them; it gives the persona a single signed object to draft, submit, negotiate, and consummate.
 
 ### 12c.1 Schema — EnvFormationProposal
@@ -794,7 +852,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-ENV-2 | EnvFormationProposal reputation weighting: a persona with many accepted proposals should have higher acceptance probability for new proposals — what's the formula? | Reputation WG | v1.1 reputation. |
 | OQ-ENV-3 | Joined-env federation CRDT partition recovery: when the network heals after partition, which conflicts auto-resolve vs require human review? Currently `CONFLICT_PARKED` defers all to operator. | Federation WG | v1.1 partition recovery policy. |
 | OQ-ENV-4 | Norm templates per env type (R-ENV-6): authored library, or learnt from member feedback over time? | Environment authors | v1.1 / v1.2. |
-| OQ-ENV-5 | Per-member AttentionBudget defaults: by persona maturity, by env type, or by relationship depth? | Persona authors | v1.1 calibration. |
+| OQ-ENV-5 | Per-member AttentionBudget defaults: by wall-clock age / community standing, by env type, or by relationship depth? | Persona authors | v1.1 calibration. |
 | OQ-ENV-6 | ScheduledTrigger composition with quiet hours: should triggers respect quiet hours by default, or burst-through? Per-trigger override? | Persona UX | v1.1 trigger policy. |
 | OQ-ENV-7 | Alert auto-resolve conditions (`§11a`): what's the canonical set of resolve-condition primitives? Explicit ack, time-based, signal-disappeared, all three? | Persona UX | v1.1 alert taxonomy. |
 
@@ -1404,7 +1462,7 @@ class EnvironmentMembership:
     # CONSENTS (env-specific)
     consents: list[Consent]
     boundaries: list[UserBoundary]
-    
+
     # META
     admitted_by: str
     admission_event_ref: str
@@ -1419,8 +1477,63 @@ class EnvironmentMembership:
     # unification: a project_workspace env's members reuse the env binding.
     principal_attribution_id: str | None = None
 
+    # COMMUNITY STANDING — per (persona, env) relational standing (§5.4 / A.8b).
+    # Additive optional field (like principal_attribution_id) — env-membership/1
+    # is retained per §7.13.  The ADMISSION ceremony (A.9) initialises it to a
+    # PERIPHERAL CommunityStanding (standing_level=0); legacy records and any
+    # null value are read as peripheral (forward-compat default, 01_KERNEL §5.3).
+    # NON-PORTABLE: starts peripheral regardless of the persona's global
+    # experiential_floor or its standing in any other env.  CONFERRED by the
+    # community, never self-awarded.
+    community_standing: CommunityStanding | None = None
+
     signed_by_persona_kernel: bytes
     signed_by_environment_kernel: bytes
+```
+
+
+<a id="appendix-a8b"></a>
+### A.8b. CommunityStanding + StandingEndorsement schemas
+
+Per `(persona, environment)` relational standing (§5.4). Non-portable; conferred, never
+self-awarded; anti-gaming reuses `09_PROTOCOLS §3D / Appendix A.16–A.18`.
+
+```python
+@dataclass
+class CommunityStanding:
+    schema: str = "community-standing/1"
+    persona_id: str
+    environment_id: str
+    standing_level: float                  # 0.0 peripheral .. 1.0 full; CONFERRED only.
+                                           # Persona-self writes REFUSED.
+    conferred_by: list[str]                # endorser persona_ids holding standing in THIS env
+    quorum_met: bool                       # weighted endorser set met the population quorum
+    operator_cosigned: bool                # True iff an operator-sensitive relational
+                                           # privilege is gated by this standing.
+                                           # NEVER unlocks safety-relevant capability.
+    endorsement_refs: list[str]            # standing-endorsement/1 ids
+    last_recognition_at: datetime
+    decays_after: timedelta = timedelta(days=30)   # reuse reputation decay (A.18 rule 3)
+    # NON-PORTABLE: never copied on env-join or fork; always starts at 0 per env.
+    signed_by_environment_kernel: bytes
+
+
+@dataclass(frozen=True)
+class StandingEndorsement:
+    schema: str = "standing-endorsement/1"
+    endorsement_id: str
+    environment_id: str
+    endorsee_persona_id: str
+    endorser_persona_id: str               # MUST itself hold standing in this env,
+                                           # or be operator/founder.  MUST ≠ endorsee.
+    cited_contribution_refs: list[str]     # kernel-held EnvironmentLineage event refs —
+                                           # the anti-Goodhart anchor (no contribution
+                                           # trail ⇒ no standing)
+    endorser_weight: float                 # computed via A.18 rules 1 (per-peer cap),
+                                           # 4 (sybil-cluster near-zero), 5 (reach×diversity)
+    is_operator_cosign: bool = False
+    issued_at: datetime
+    signed_by: bytes
 ```
 
 
@@ -1436,10 +1549,15 @@ ADMISSION CEREMONY
        window; persona deliberates → ACCEPT | DECLINE | COUNTER
     3. if ACCEPT: env kernel runs admission checks
        (max_member_count, attention_budget, operator_policy)
-    4. dual-sign EnvironmentMembership (persona kernel + env kernel)
+    4. dual-sign EnvironmentMembership (persona kernel + env kernel);
+       initialise community_standing to a PERIPHERAL CommunityStanding
+       (standing_level=0, quorum_met=False) regardless of the persona's
+       global experiential_floor or its standing in any other env (§5.4)
     5. emit ENV_MEMBER_ADMITTED to EnvironmentLineage
   consent:    persona deliberation step is mandatory; cannot be bypassed
   audit:      admission_event_ref preserved on membership record
+  standing:   re-admission (below) likewise starts peripheral — standing is
+              per-tenure and never carried across records or environments
 
 DEPARTURE CEREMONY
   trigger:    voluntary | env-admin-removed | retirement |
@@ -1489,6 +1607,30 @@ RE-ADMISSION CEREMONY
               contribution_count are PER-record, not cumulative across
               records (cross-tenure aggregation is a query, not a stored
               field)
+
+STANDING-CONFERRAL CEREMONY
+  trigger:    peer quorum of in-env members (each holding standing in THIS
+              env) submit standing-endorsement/1 events for an endorsee;
+              or operator/env-lead initiates a revocation
+  steps:
+    1. endorsers emit standing-endorsement/1, each citing kernel-held
+       EnvironmentLineage contribution refs (cited_contribution_refs)
+    2. env kernel weights endorsers (per-peer cap, sybil-cluster near-zero,
+       reach×diversity — 09_PROTOCOLS §3D / Appendix A.18 rules 1,4,5);
+       self-endorsement rejected (endorser ≠ endorsee)
+    3. if weighted endorser set meets the population quorum → quorum_met=True;
+       if the gated privilege is operator-sensitive, require operator_cosigned
+    4. update CommunityStanding.standing_level (CONFERRED — never self-written);
+       refuse any persona-self write (standing_self_award_forbidden)
+    5. emit STANDING_CONFERRED (or STANDING_REVOKED) to EnvironmentLineage
+  consent:    endorsee is NOT required to consent (recognition is conferred);
+              revocation requires operator OR quorum + reason
+  decay:      standing decays after CommunityStanding.decays_after of in-env
+              inactivity; restating requires fresh endorsements
+  audit:      endorsement_refs + cited_contribution_refs preserved; standing
+              is replayable from the conferral/revocation event stream
+  safety:     standing NEVER unlocks safety-relevant capability; those remain
+              gated by global experiential_floor + operator/ReplicationBound
 ```
 
 

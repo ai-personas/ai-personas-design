@@ -418,8 +418,9 @@ Encoding per [`SPEC_CONVENTIONS.md §4`](SPEC_CONVENTIONS.md#4-schemas). Where a
 | Schema | Version | Form | Defined in | Stability | Used by |
 |--------|---------|------|------------|-----------|---------|
 | `SOUL.md` | `soul/4` | markdown + frontmatter | [`02_PERSONA.md §3`](02_PERSONA.md) | Stable | Kernel identity; persona load; bootstrap. |
-| `soul.state.json` | `soul-state/5` | jsonschema | [`02_PERSONA.md §3`](02_PERSONA.md) | Stable | Evolving persona state; signed by kernel. |
+| `soul.state.json` | `soul-state/6` | jsonschema | [`02_PERSONA.md §3`](02_PERSONA.md) | Stable | Evolving persona state; signed by kernel. v6: `age_tasks`→`experience_tasks`, drop `maturity` string, add `born_at` + `experiential_floor` (migration §7.13). |
 | `PersonaSeed` | `persona-seed/2` | dataclass | [`02_PERSONA.md §2`](02_PERSONA.md) | Stable | Birth templates; seed library. |
+| `ALPSBandPolicy` | `alps-band-policy/1` | dataclass | [`02_PERSONA.md §7.3`](02_PERSONA.md) | Draft | Operator-tunable wall-clock ALPS age-band edges. |
 | `PersonaCard` | `persona-card/3` | dataclass | [`02_PERSONA.md §3`](02_PERSONA.md) | Stable | A2A federation card. |
 | `PersonaEnvelope` | `envelope/4` | dataclass | [`02_PERSONA.md §7`](02_PERSONA.md) | Stable | Round-active projection of persona. |
 
@@ -453,7 +454,9 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 |--------|---------|------|------------|-----------|---------|
 | `EnvironmentBlueprint` | `env-blueprint/1` | dataclass | [`05_ENVIRONMENT.md §2`](05_ENVIRONMENT.md) | Stable | Env-type template. |
 | `EnvironmentInstance` | `env-instance/1` | dataclass | [`05_ENVIRONMENT.md §1`](05_ENVIRONMENT.md) | Stable | Persistent env record (J9). |
-| `EnvironmentMembership` | `env-membership/1` | dataclass | [`05_ENVIRONMENT.md §5`](05_ENVIRONMENT.md) | Stable | Persona ↔ env binding with role + surface. |
+| `EnvironmentMembership` | `env-membership/1` | dataclass | [`05_ENVIRONMENT.md §5`](05_ENVIRONMENT.md) | Stable | Persona ↔ env binding with role + surface + community standing. |
+| `CommunityStanding` | `community-standing/1` | dataclass | [`05_ENVIRONMENT.md §5.4`](05_ENVIRONMENT.md) | Draft | Per (persona, env) relational standing (LPP); non-portable; conferred, never self-awarded. |
+| `StandingEndorsement` | `standing-endorsement/1` | dataclass | [`05_ENVIRONMENT.md §5.4`](05_ENVIRONMENT.md) | Draft | Recognition event conferring community standing; anti-gaming reuses §3D / A.16–A.18. |
 | `PresenceState` | `presence/1` | dataclass | [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md) | Stable | Per-member liveness. |
 | `AttentionBudget` | `attention-budget/1` | dataclass | [`05_ENVIRONMENT.md §7`](05_ENVIRONMENT.md) | Stable | Per-member rate limits. |
 | `EnvironmentLineage event` | `env-lineage/1` | dataclass | [`05_ENVIRONMENT.md §10`](05_ENVIRONMENT.md) | Stable | The env scope of J9 lineage. |
@@ -593,6 +596,22 @@ v1.1 addition (ADR-0045, [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md
 | `CrossEnvCoordinationBinding` | `cross-env-coordination-binding/1` | dataclass | [`15_COORDINATION_SHAPES.md §4.7`](15_COORDINATION_SHAPES.md) | Draft | Bilateral shape agreement between two envs. |
 | `EnvironmentComposition` | `env-composition/1` | dataclass | [`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md), [`15_COORDINATION_SHAPES.md §4.8`](15_COORDINATION_SHAPES.md) | Draft | Parent-child env hierarchy with rule cascade. |
 | `ChildEnvFormationProposal` | `child-env-formation-proposal/1` | dataclass | [`15_COORDINATION_SHAPES.md §4.8.5`](15_COORDINATION_SHAPES.md) | Draft | Proposal to spawn child env within parent. |
+
+### 7.12b Population dynamics (v1.1)
+
+v1.1 addition (ADR-0048, ADR-0049, ADR-0050, [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)). Bounded, environment-driven persona genesis with demographic regulation, a rigorous effective-population-size metric, and continuous diversity maintenance.
+
+| Schema | Version | Form | Defined in | Stability | Used by |
+|--------|---------|------|------------|-----------|---------|
+| `PopulationPressureSignal` | `population-pressure-signal/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4A`](16_POPULATION_DYNAMICS.md) | Draft | Kernel-measured genesis trigger (recruitment gap, role coverage, backlog, EPS). |
+| `NicheDescriptor` | `niche-descriptor/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md) | Draft | MAP-Elites behaviour-descriptor cell with occupancy + distinctiveness band. |
+| `GenesisProposal` | `genesis-proposal/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md) | Draft | Persona-authored seed-creation proposal (default-deny; `ReplicationBound`-gated). |
+| `GenesisProvenance` | `genesis-provenance/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md) | Draft | Newborn lineage record distinguishing genesis from fork. |
+| `MentorshipEdge` | `mentorship-edge/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md) | Draft | Mentor↔newborn maturation/scaffolding edge (secure base). |
+| `PopulationPolicy` | `population-policy/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md) | Draft | Operator demographic policy (r/K, density curve, descriptor mode, audit cadence). |
+| `EffectivePopulationSizeEstimate` | `eps-estimate/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md) | Draft | Kernel-computed `min(Ne_v, Ne_d)` founder-effect / monoculture signal. |
+| `DiversityAudit` | `diversity-audit/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4H`](16_POPULATION_DYNAMICS.md) | Draft | Periodic diversity-maintenance audit (novelty pressure, fitness-sharing, recalibration). |
+| `CrossKernelGenesisRequest` | `cross-kernel-genesis-request/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4J`](16_POPULATION_DYNAMICS.md) | Draft | Always-refused marker enforcing the cross-kernel genesis boundary (anti-circumvention). |
 
 ### 7.13 Adding or modifying schemas
 

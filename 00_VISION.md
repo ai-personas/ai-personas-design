@@ -274,7 +274,8 @@ Cross-document risks for v1.0 as a system. Per-document risks appear in each doc
 | R-v1.0-5 | **Goodhart on engagement metrics.** PERFORMATIVE / RELATIONAL pathways could over-optimise for engagement signals. | High | Medium | Anti-Goodhart panel; multi-judge rotation; engagement metrics never sole acceptance signal ([`03_TASKS.md §4`](03_TASKS.md)). |. |
 | R-v1.0-6 | **Schema-version drift between docs and implementation.** A doc may cite `entity/N` while code carries `entity/N+1` or vice versa. | Medium | High | Single master registry in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md); CI check that every cited version exists in registry. |. |
 | R-v1.0-7 | **Domain-promotion gate latency.** AUTHORITATIVE / STANDARDISED promotion requires operator review which may bottleneck. | Medium | High | Domain curator role; bounded review SLA; degraded gate under principal collapse ([`01_KERNEL.md §2.4`](01_KERNEL.md), [`06_DOMAIN.md §3`](06_DOMAIN.md)). | v1.1. |
-| R-v1.0-8 | **Population-scale evolution unspecified.** v1.0 ships single-kernel emergence; multi-kernel dynamics not yet specified. | Medium | High | Spec extension v1.1+; explicit non-goal in §2.2. | v1.1. |
+| R-v1.0-8 | **Population-scale evolution unspecified.** v1.0 ships single-kernel emergence; multi-kernel dynamics not yet specified. | Medium | High | Single-kernel population dynamics + Persona Genesis now drafted in [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) (v1.1 draft; cross-doc risks R-POP-1…7); the age/standing model is reworked per ADR-0051 (wall-clock age + per-env conferred standing); multi-kernel federated genesis remains a v1.1+ extension (OQ-POP-4); explicit non-goal in §2.2. | v1.1. |
+| R-PERSONA-AGE-1 | **Idle-but-old personas occupy upper ALPS bands.** ALPS bands are now wall-clock-derived (ADR-0051), so a chronologically old but inactive persona sits in an upper age layer it under-earns. | Low | Medium | Accepted by design — ALPS protects the *young* for diversity, not penalizes the idle; low fitness from inactivity keeps idle-old personas from dominating selection. Bounded by fitness decay, not by re-deriving age from activity ([`02_PERSONA.md §7.3`](02_PERSONA.md)). | v1.1. |
 | R-v1.0-9 | **English-only knowledge ingestion.** v1.0 assumes English-dominated corpora; multi-language emergence unspecified. | Medium | High | Spec extension v1.2+; explicit non-goal in §2.2. | v1.2. |
 | R-v1.0-10 | **Provider opacity in proxy bodies.** A2A / framework-runtime bodies hide internal LLM calls; lineage gaps possible. | High | Medium | body_attestation trust ceiling; proxy bodies SHALL NOT carry safety-critical work ([`02_PERSONA.md §3.5`](02_PERSONA.md)). |. |
 | R-v1.0-11 | **Long-horizon self-direction tail risks.** MilestoneDrivenAutonomy + MissionCharter open partial autonomy surface. | Medium | Low | Drift bounds; re-attestation cadence; substrate-refused forbidden surfaces ([`02_PERSONA.md §11.2-§11.3`](02_PERSONA.md)). | v1.1. |
@@ -509,7 +510,7 @@ C4 (from J1, J5)  Substrate is domain-agnostic; kinds are emergent.
 
 ```text
 INV-1  Identity is kernel-owned. (≡ J1)
-       SOUL.md + soul.state.json are kernel-signed (soul/4, soul-state/5);
+       SOUL.md + soul.state.json are kernel-signed (soul/4, soul-state/6);
        no body process may write either. Mutation = signed kernel
        transaction. Mechanism: 02_PERSONA §3, 01_KERNEL §4.
 

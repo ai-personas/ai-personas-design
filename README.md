@@ -69,6 +69,7 @@ PersonaOS is built around five key mechanisms:
 | 13 | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) | Real-world scenarios — concrete examples (build a house, design a chip, run a study) walked end-to-end against the design. | 8 min |
 | 14 | [`14_DECISIONS.md`](14_DECISIONS.md) | Why the design is the way it is — 40+ architectural decision records explaining the trade-offs behind each major choice. | 10 min |
 | 15 | [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) | *(v1.1 draft)* How AI Personas organise themselves — 5 building blocks for self-organising coordination within environments. | 12 min |
+| 16 | [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) | *(v1.1 draft)* How a few personas grow into a varied population — Persona Genesis (personas authoring new personas) under environmental pressure, with diversity guarantees and hard replication brakes. | 12 min |
 
 **Short on time?** Read just `00_VISION.md` (12 min) for the complete overview. Add `02_PERSONA.md` for how AI Personas are built. For a third file, pick the one closest to your interest: projects → `04_PROJECT.md`; shared workspaces → `05_ENVIRONMENT.md`; new domains → `06_DOMAIN.md`; memory → `08_KNOWLEDGE.md`.
 
@@ -216,7 +217,7 @@ WHAT COMES NEXT (v1.0.2-v1.0.6):
 | **Not a sales document** | v1.0 describes mechanisms, not benefits. Each section names what is, what isn't, and what is honestly limited. |
 | **Not theoretical only** | Every entity has a schema; every mechanism has a code-organisation pointer; every test has a pass/fail criterion. |
 | **Not tied to any AI provider** | The kernel signs identity and maintains the audit trail; the AI model is replaceable. Swap Claude for GPT or an open-weight model — the persona's identity, memory, and skills transfer intact. |
-| **Not finished** | v1.0 has honest residuals. Future work includes population dynamics, federation hardening, and multi-language domain emergence. |
+| **Not finished** | v1.0 has honest residuals. Population dynamics now has a v1.1 draft ([`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)); federation hardening and multi-language domain emergence remain future work. |
 
 ---
 
@@ -228,7 +229,11 @@ v1.0 stands on the shoulders of:
 - **Voyager** (Wang et al., 2023 — [arXiv 2305.16291](https://arxiv.org/abs/2305.16291)) — ever-growing skill library, automatic curriculum, lifelong learning; skills generalise.
 - **MAP-Elites** (Mouret & Clune, 2015) — diversity preservation across multiple behaviour descriptors.
 - **DGM (Darwin–Gödel Machine)** (Lehman et al., 2024) — fertility-weighted parent selection for open-ended evolution.
-- **ALPS** (Hornby, 2006) — Age-Layered Population Structure for evolutionary diversity.
+- **ALPS** (Hornby, 2006) — Age-Layered Population Structure for evolutionary diversity (layers wall-clock-derived per ADR-0051).
+- **AutoAgents / auto-scaling multi-agent systems** (IJCAI 2024; 2025) — on-demand generation of new specialized agent roles; basis for Persona Genesis (`16_POPULATION_DYNAMICS.md`).
+- **Quality-Diversity / MAP-Elites via AI feedback** (ICLR 2024) — diverse high-performing repertoires; the variety guarantee for genesis.
+- **Self-replication risk in LLM agents** (2025) — motivates hard replication brakes (`ReplicationBound`) for persona genesis.
+- **Population-science grounding for population dynamics** — logistic carrying capacity (Malthus→Daly), demographic transition, r/K selection, Easterlin hypothesis; Erikson generativity, Holland RIASEC + Belbin roles, optimal distinctiveness (Brewer), niche-picking/sibling differentiation (Scarr & McCartney), Vygotsky ZPD + Lave–Wenger legitimate peripheral participation; competitive exclusion (Gause), adaptive radiation, founder effect/effective population size, dual inheritance (Boyd & Richerson), organizational ecology density dependence (Hannan & Freeman). See `16_POPULATION_DYNAMICS.md §1.3`.
 - **DSPy GEPA** (2025) — Genetic-Pareto reflective prompt optimization; outperforms MIPROv2 by 10%, GRPO by 20%, 35× fewer rollouts.
 - **MIPROv2** — Bayesian instruction + demonstration search.
 - **GraphRAG / Hierarchical Graph Memory** (2026) — Graph + vector hybrid retrieval; 35% precision improvement.

@@ -196,7 +196,7 @@ The form is implied by the code-fence language (`python`, `json`, `typescript`) 
 
 Each schema declaration MUST include:
 
-- A **`schema` field** carrying a version string of the form `<name>/<integer>` (e.g. `schema: str = "soul-state/5"`, `"schema": "domain-context/2"`). The field name is `schema` (not `schema_version`); the value carries both the registry name and the integer version.
+- A **`schema` field** carrying a version string of the form `<name>/<integer>` (e.g. `schema: str = "soul-state/6"`, `"schema": "domain-context/2"`). The field name is `schema` (not `schema_version`); the value carries both the registry name and the integer version.
 - A one-line purpose statement immediately above or below the schema block (markdown prose; not part of the schema itself).
 - A list of fields with type + units + nullability.
 - Cross-reference to the doc section that defines its lifecycle (where applicable).
@@ -218,7 +218,7 @@ Two forms are conformant; authors MAY choose either per schema, but SHOULD NOT m
 ```python
 @dataclass(kw_only=True)
 class SoulState:
-    schema: str = "soul-state/5"
+    schema: str = "soul-state/6"
     # ...required and optional fields below...
 ```
 

@@ -54,7 +54,7 @@ This is the project's institutional memory — every major design decision, the 
 
 **Why alternatives matter.** Listing rejected options tells you the boundaries of the design space that was explored. If you are wondering "why not just do X instead?", the alternatives section likely already answers that question.
 
-**How the catalog is organised.** Decisions are grouped by topic area: identity and signing, substrate philosophy, the persona model, task handling, domain emergence, memory and knowledge, protocols, multi-principal collaboration, persona retirement, user protections, teaching, and project composition. Each ADR has a four-digit ID (ADR-0001 through ADR-0047 as of this version) allocated in order. When a later decision replaces an earlier one, the old entry stays with a note pointing to its successor — nothing is deleted.
+**How the catalog is organised.** Decisions are grouped by topic area: identity and signing, substrate philosophy, the persona model, task handling, domain emergence, memory and knowledge, protocols, multi-principal collaboration, persona retirement, user protections, teaching, and project composition. Each ADR has a four-digit ID (ADR-0001 through ADR-0051 as of this version) allocated in order. When a later decision replaces an earlier one, the old entry stays with a note pointing to its successor — nothing is deleted.
 
 **How to use this document.** If you want to understand a specific design choice, find the relevant ADR by topic section or ID. If you want the foundational decisions that shaped everything else, start with ADR-0001 (why the kernel owns identity) and ADR-0006 (what is hardcoded versus what emerges through use). This document is informative, not normative — the actual rules live in the specification documents it references.
 
@@ -527,7 +527,7 @@ This is the project's institutional memory — every major design decision, the 
 
 **Context.** Persona population dynamics must preserve diversity (MAP-Elites), grow an ever-larger skill library (Voyager), and weight parent selection by fertility (DGM). Each algorithm alone has a known failure mode: MAP-Elites can stagnate in low-fertility cells; Voyager can over-specialise; DGM can collapse to a single high-fertility lineage. The three combine in v1.0.
 
-**Decision.** Persona evolution combines three algorithms: MAP-Elites maintains diversity across behaviour descriptors (cognitive mode profile, domain spread, voice signature); Voyager grows the per-persona skill library with automatic curriculum; DGM weights parent selection by fertility (number of successful descendants). ALPS (Age-Layered Population Structure) provides a fourth diversity preservation axis at the population level.
+**Decision.** Persona evolution combines three algorithms: MAP-Elites maintains diversity across behaviour descriptors (cognitive mode profile, domain spread, voice signature); Voyager grows the per-persona skill library with automatic curriculum; DGM weights parent selection by fertility (number of successful descendants). ALPS (Age-Layered Population Structure) provides a fourth diversity preservation axis at the population level. (ALPS age-layering is **wall-clock-derived** per ADR-0051; its diversity-preservation role is unchanged.)
 
 **Consequences.**
 - (+) Population diversity is preserved across at least two orthogonal axes (behaviour and age).
@@ -1140,6 +1140,95 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 **Decision.** Add `CrossEnvProactiveOffer` (`cross-env-proactive-offer/1`) and `GuestPresence` (`guest-presence/1`) to `05_ENVIRONMENT.md §11.6`. The offering persona proposes a scoped contribution; the target env validates against operator policy, charter, and reputation gates. On acceptance, a time-bounded GuestPresence (default 72h, renewable 3x) provides scoped read/write without full membership. Guest cannot write ProvenFacts directly; contributions flow through the accepting persona's envelope.
 
 **Consequences.** New schemas in `09_PROTOCOLS §7.4`. New OTel conventions. Composition with A2A for cross-kernel offers (both kernel signatures required). Anti-spam: 3 offers per 30 days per persona per target env; reputation gate; operator can disable inbound offers per env. Tests: A-CEPO-1 through A-CEPO-8.
+
+---
+
+### ADR-0048 — Persona Genesis: bounded persona-authored seed creation under environmental pressure
+
+**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)).
+
+**Context.** v1.0 creates personas only via operator-authored `PersonaSeed`s (`02_PERSONA §12`). Personas may recruit from the existing pool (`05_ENVIRONMENT §12c`) or fork existing parents (`02_PERSONA §7.4`), but cannot author a *new role* when the recruit pool is empty. The result is the dead-end in `04_PROJECT §14.1` ("pause, or operator interim") — the unfilled "population dynamics" residual (`00_VISION §11`, R-v1.0-8). Recent research (AutoAgents, IJCAI 2024; auto-scaling MAS, 2025) shows agents can author specialized roles on demand; self-replication-risk work (2025) shows hard brakes are mandatory.
+
+**Decision.** Add **Persona Genesis**: a persona with `cohort_assembly.may_author_seeds = true` that clears the generativity gate (global experiential floor + wall-clock ALPS layer + fitness — a safety-relevant gate keyed only on kernel-anchored facts, never on peer-conferred standing, per ADR-0051) MAY author a new `PersonaSeed` via a signed `GenesisProposal`, minted through the existing birth ceremony. Genesis is admissible only (a) after recruitment is exhausted, (b) into an empty, optimally-distinct MAP-Elites niche (variety guarantee — competitive exclusion + optimal distinctiveness + sibling differentiation), and (c) under an active `ReplicationBound` for `replication_kind = "persona_genesis"` (default-deny; `required_cosigns` includes `operator`). Bounded-autonomous operation is permitted via an `operator_deferred` `PolicyEnvelope` sub-limit. Newborns start at experiential_floor=0 / ALPS Layer 0 / peripheral community standing, under a mentorship edge with fading scaffolding (Erikson generativity; Vygotsky ZPD; Lave–Wenger LPP; dual inheritance).
+
+**Consequences.**
+- (+) Resolves the recruitment-gap dead-end; enables autopopulation from a few founders.
+- (+) Reuses existing brakes (`ReplicationBound`), evolution machinery (ADR-0019: MAP-Elites/Voyager/DGM/ALPS), and lifecycle/attention/listening-mode mechanisms — additive and default-off.
+- (+) Variety is a structural guarantee (niche occupancy + distinctiveness), not a hope.
+- (−) New attack surface (genesis spam) — mitigated by the floor-source-1 bound + generativity gate.
+- (−) Niche-grid axis choice biases diversity (inherited limitation from ADR-0019); operator-tunable.
+- (−) Departs from operator-only seed authorship — justified by bounding + recruitment-first + operator pre-authorization/veto.
+
+**Alternatives considered.**
+- *Operator-only authorship forever (status quo).* Rejected: does not solve the residual; blocks autonomy.
+- *Auto-fork into the gap.* Rejected: fork copies existing parents — produces clones, not variety, and would violate the diversity guarantee.
+- *Per-birth synchronous operator cosign only.* Rejected as the sole mode: reintroduces a human in every loop, defeating autopopulation; offered as an option alongside pre-authorization.
+
+---
+
+### ADR-0049 — Population demographic regulation (carrying capacity, density dependence, r/K strategy)
+
+**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md)).
+
+**Context.** A generative birth mechanism (ADR-0048) needs a principled birth-rate model so the population grows when under-served and stabilises when saturated, rather than oscillating or exploding up to the hard ceiling. Human-population and organizational-ecology theory provide validated models.
+
+**Decision.** Regulate persona population via a `population-policy/1`: carrying capacity = free host resources (`AttentionBudget` + `Energy` + INV-7 compute/cost); a non-monotonic density-dependence curve (legitimation rises then competition falls — Hannan & Freeman) with logistic damping near `population_ceiling`; and an `r/K` reproduction-strategy lever (many lightweight vs few high-investment births) plus a specialist/generalist niche-width choice (resource partitioning). The population-pressure signal weights demand relative to supply (Easterlin) and falls as niches fill (demographic transition).
+
+**Consequences.**
+- (+) Smooth approach to equilibrium; self-regulating birth rate; operator-tunable strategy.
+- (+) Grounds birth dynamics in validated human/organizational models.
+- (−) Curve calibration is a design burden (OQ-POP-1); a rigorous `effective_population_size` metric is supplied by ADR-0050.
+
+---
+
+### ADR-0050 — Rigorous effective population size, continuous diversity maintenance, and learned niche descriptors
+
+**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md)–`§4J`). Closes the SCENARIO 13 residuals (`13_DESIGN_VALIDATION.md`).
+
+**Context.** ADR-0048/0049 left four honest residuals: `effective_population_size` was informal (OQ-POP-5); diversity was guaranteed only at birth, not against post-birth drift (OQ-POP-6); the RIASEC/Belbin niche grid could mis-calibrate (R-POP-3 / OQ-POP-2); and cross-kernel genesis was declared OOS without enforcement (OQ-POP-4 — a `ReplicationBound` evasion risk).
+
+**Decision.**
+1. **Rigorous EPS (`§4G`).** `effective_population_size = harmonic_mean_over_window(min(Ne_v, Ne_d))` — Crow–Kimura variance effective size `Ne_v` (authorship skew / founder effect) and the inverse-Simpson effective number of niches `Ne_d` (niche concentration), Wright's temporal harmonic mean for smoothing. Schema `eps-estimate/1`.
+2. **Continuous diversity maintenance (`§4H`).** A periodic `diversity-audit/1` arms novelty pressure (novelty search on the next birth's niche) and attention fitness-sharing (routing-weight only; never demotes a persona), mitigating post-birth drift toward monoculture.
+3. **Learned niche descriptors (`§4I`).** `population-policy/1.niche_descriptor_mode ∈ {fixed_axes, cvt, learned}` (CVT-MAP-Elites / AURORA) plus a mis-calibration detector (`false_collision_rate` / `unfillable_gap_rate` → `niche_recalibration_advisory`), removing operator axis-choice bias and self-correcting the grid.
+4. **Enforced cross-kernel boundary (`§4J`).** Cross-kernel `GenesisProposal`s are REFUSED (`cross_kernel_genesis_not_supported_v1_1`) so the per-kernel population ceiling cannot be evaded by minting elsewhere; federated genesis (cross-kernel quorum + federated bound aggregation + replicated provenance) is the specified, deferred v1.1 federation-chapter work.
+
+**Consequences.**
+- (+) Three of four SCENARIO 13 residuals resolved or mitigated; the fourth converted from open to specified-but-deferred-and-enforced.
+- (+) The founder-effect signal and monoculture defence are now measurable and testable (A-GEN18–A-GEN24).
+- (+) `learned` descriptor mode is the most V-aligned (names no domain category).
+- (−) Whether continuous maintenance *prevents* (not just mitigates) collapse at N=100/1000 remains the v1.2 empirical study (OQ-POP-6 / OQ-PERSONA-1); detector thresholds need calibration.
+
+**Related.** ADR-0048, ADR-0049, ADR-0019 (evolution machinery), [`13_DESIGN_VALIDATION.md` SCENARIO 13](13_DESIGN_VALIDATION.md).
+
+---
+
+### ADR-0051 — Wall-clock age primary; per-environment conferred standing (LPP); named life-stages removed
+
+**Status:** Accepted.
+**Date:** 2026-05-29.
+**Origin:** v1.1 (persona model rework).
+**Related:** [`02_PERSONA.md §7.2`](02_PERSONA.md), [`05_ENVIRONMENT.md §5.4`](05_ENVIRONMENT.md), [`16_POPULATION_DYNAMICS.md §4D–§4E`](16_POPULATION_DYNAMICS.md), ADR-0019, ADR-0048; Lave & Wenger (LPP); Hornby (ALPS).
+
+**Context.** The v1.0 model conflated distinct concepts. "Age" was defined by an experience counter (`age_tasks`), so a persona that did real work was "old" while one dormant for a year stayed "young"; wall-clock time was explicitly declared *not* a substrate metric. "Maturity" was a single, portable scalar rendered as **named human-life-stage labels** (`newborn / juvenile / adolescent / adult / expert`) that appeared as string literals in schemas (`soul.state.maturity`, `MaturityInheritancePolicy.cap_at_band`, the ALPS band table). This muddled raw experience with social/role standing and baked an anthropomorphic ladder into normative schemas.
+
+**Decision.** Separate the persona into **three orthogonal facets** (`02_PERSONA §7.2`):
+1. **Wall-clock age** (`age = now − born_at`) becomes the single primary age — continuous, monotone, never reset, not paused by dormancy. **ALPS layering is re-derived from wall-clock age-bands** (numeric Layer 0..N via `alps-band-policy/1`); its diversity-protection role is unchanged. Experience (`experience_tasks`, renamed from `age_tasks`) is demoted to a competence stat.
+2. **Global experiential floor** (`experiential_floor`) — a portable, monotone capability minimum (DGM-style function of experience + fertility) that gates substrate capability minimums **including safety-relevant gates**.
+3. **Community standing** — per `(persona, environment)`, **non-portable**, **conferred by the community, never self-awarded** (Lave & Wenger LPP; `05_ENVIRONMENT §5.4`, `community-standing/1` + `standing-endorsement/1`). It gates **relational/collaborative privileges only**; safety-relevant capability stays on the experiential floor + operator/`ReplicationBound`, never reachable by peer quorum. Anti-gaming reuses the existing reputation engine (`09_PROTOCOLS §3D / A.16–A.18`).
+
+The **named life-stage labels are removed**: `juvenile / adolescent / adult / expert` are purged entirely (including schema literals); "newborn" survives only as descriptive prose, never as a gate value. `MaturityInheritancePolicy` → `StandingFloorInheritancePolicy` (caps the portable floor only; standing is never inherited). `soul-state/5` → `soul-state/6`.
+
+**Consequences.**
+- (+) A persona's age is simply how long it has existed; experience, capability, and social position are cleanly separable.
+- (+) The kernel safety floor is provably out of peer-quorum reach (standing gates relational privileges only).
+- (+) Anti-laundering is strengthened: per-env standing is never inherited at all.
+- (+) Reuses existing machinery (ALPS, reputation anti-gaming, EnvironmentLineage anchors) — additive.
+- (−) `soul-state/6` requires a migration (INV-10; A-MIGRATE-SOUL6-1).
+- (−) **Residual R-PERSONA-AGE-1:** a chronologically old but idle persona occupies an upper ALPS band it under-earns; accepted by design (ALPS protects the young, not penalizes the idle) and bounded by fitness decay, not by re-deriving age from activity.
+- (−) Wall-clock ALPS band defaults need calibration (OQ-POP-1-style).
+
+**Alternatives rejected.** (a) Keep experience-as-age — rejected: conflates activity with age and mis-protects the idle. (b) Make standing portable across environments — rejected: defeats LPP (standing is earned within a community) and would re-open laundering.
 
 ---
 

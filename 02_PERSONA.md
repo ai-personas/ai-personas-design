@@ -99,9 +99,9 @@ Every persona has seven layers. The first and seventh are **frozen** (changing t
 
 > **Schema/spec:** Complete SOUL.md example (schema soul/4) for persona Sparky. See [Appendix A.2](#appendix-a2).
 
-### 3.1 The sidecar — `soul.state.json` (schema soul-state/5)
+### 3.1 The sidecar — `soul.state.json` (schema soul-state/6)
 
-> **Schema/spec:** Complete soul.state.json sidecar example (schema soul-state/5). See [Appendix A.3](#appendix-a3).
+> **Schema/spec:** Complete soul.state.json sidecar example (schema soul-state/6). See [Appendix A.3](#appendix-a3).
 
 ### 3.2 PersonaEnvelope — the body-side contract (envelope/4)
 
@@ -254,34 +254,104 @@ A future lifecycle transition (e.g., a hypothetical `LIFECYCLE_TRANSFERRED` for 
 
 > **Schema/spec:** Birth ceremony steps. See [Appendix A.20](#appendix-a20).
 
-### 7.2 Maturity (steady-state)
+### 7.2 Age, experience, and standing (steady-state)
 
-v1.0 uses two scalars:
-- `age_tasks`: linear count of tasks attempted as envelope source
-- `maturity`: DGM-style steady-state function
+A persona carries **three orthogonal facets** — they are deliberately separated so that *how
+long a persona has existed*, *how much it has done*, and *how it is regarded by a community*
+never collapse into a single number:
+
+| Facet | Field | Scope | Portable? | Conferred? |
+|---|---|---|---|---|
+| **Wall-clock age** | `born_at` → `age = now − born_at` | global, intrinsic | n/a | no |
+| **Experiential floor** | `experiential_floor` | global capability | **yes** | no — earned by activity/fertility |
+| **Community standing** | `community_standing` per env | per (persona, environment) | **no** — earned fresh per env | **yes** — conferred, never self-awarded |
+
+**Wall-clock age IS the primary substrate age metric.** `age` is `now − born_at`, continuous,
+monotone, and never resets. `born_at` is **kernel-set at the birth ceremony**
+([Appendix A.20](#appendix-a20)) and on fork ([Appendix A.22](#appendix-a22)), carried on the
+kernel-signed `soul.state.json`, and is **immutable** — a persona cannot write or backdate it (on
+migration it is backfilled only from the signed `LIFECYCLE_SEEDED` lineage event). Because the
+ALPS layer is a *safety* gate term (`generativity_min_alps_layer`), this immutability is what makes
+the age term unspoofable. Note that `born_at` lives in the `soul.state.json` sidecar, not in the
+SOUL.md frozen identity blocks (§3.2), so — like all sidecar state — it is **not** part of
+`identity_signature` and does not affect J7 body-swap equivalence; "immutable" here means *never
+altered after birth*, not *part of identity*. ALPS layering (§7.3), the generativity gate
+(`16_POPULATION_DYNAMICS §4D`), and the newborn maturation ramp (`16_POPULATION_DYNAMICS §4E`) key
+off `age`. **Dormancy does not pause `age`** — a persona dormant for a year is one year older.
+Note that aging alone is **necessary but not sufficient** for any safety-relevant capability: the
+generativity gate also requires a fertility-dominant experiential floor and sufficient fitness
+(neither obtainable while idle), so a persona cannot simply *wait* its way to a replication-class
+capability.
+
+**Experience is a competence stat, NOT age.** `experience_tasks` (a single global counter, the
+renamed v1.0 `age_tasks`) and the DGM steady-state terms feed the **global experiential floor** —
+a portable, monotone capability minimum that a persona carries into every environment. The floor is
+deliberately **fertility/track-record-dominant**, preserving the hard-to-game character of the v1.0
+maturity gate (which used `parent_selection_count` + `validated_descendants_count` only):
 
 ```text
-maturity = 0.5 · log1p(parent_selection_count)
-        + 0.5 · log1p(validated_descendants_count)
+experiential_floor = 0.5 · log1p(validated_descendants_count)   # hardest to game: offspring
+                                                                 # must themselves be validated
+                   + 0.3 · log1p(parent_selection_count)
+                   + 0.2 · log1p(experience_tasks)               # minor; volume alone is bounded
 ```
 
-Bands: NEWBORN / JUVENILE / ADULT / EXPERT.
+The experiential floor gates substrate-level capability minimums **including safety-relevant
+gates** (e.g., the `may_author_seeds` floor, `16_POPULATION_DYNAMICS §4D`). It is **not** relational
+standing: it says what a persona is minimally capable of anywhere, not how a particular community
+regards it. Relational standing is per-environment and conferred (§7.2.1 / `05_ENVIRONMENT §5.4`).
 
-**Multi-environment age counting.** `age_tasks` is a **single global counter** on the persona's `soul.state.json`, incremented exactly once per task the persona served as envelope source — regardless of how many EnvironmentInstances the persona is concurrently a member of. A persona active in env_A AND env_B who minted one envelope in env_A this hour increments `age_tasks` by 1, not 2. Tasks accepted via DELEGATED inheritance (`03_TASKS §2.6`) count once per sub-task instance, not once per delegation hop. Dormancy does not increment `age_tasks` (DORMANT personas mint no envelopes); it also does not reset it — a persona dormant for a year wakes with the same `age_tasks`.
+**Anti-grinding (safety).** Because the floor gates safety-relevant capability (notably
+replication via `may_author_seeds`), the `experience_tasks` term is given the **smallest weight** so
+that raw task volume alone CANNOT cross a safety-relevant threshold: a persona must accrue
+demonstrated **fertility/track record** (validated descendants) — not merely grind tasks — to earn
+a replication-class capability. This is anti-Goodhart by construction and composes with the
+downstream `ReplicationBound` brake (population/rate/depth/cosigns, `01_KERNEL §2.7`) and operator
+veto, giving defence-in-depth on every birth.
 
-**Wall-clock age is NOT a substrate metric in v1.0.** No wall-clock decay, no "this persona is 6 months old" counter. All age is task-discrete. Operator may compute wall-clock age externally from `created_at` for reporting, but it does not affect ALPS layering, maturity gating, or evolution behaviour.
+**Multi-environment experience counting.** `experience_tasks` is a **single global counter** on
+the persona's `soul.state.json`, incremented exactly once per task the persona served as envelope
+source — regardless of how many EnvironmentInstances the persona is concurrently a member of. A
+persona active in env_A AND env_B who minted one envelope in env_A this hour increments
+`experience_tasks` by 1, not 2. Tasks accepted via DELEGATED inheritance (`03_TASKS §2.6`) count
+once per sub-task instance, not once per delegation hop. Dormancy does not increment
+`experience_tasks` (DORMANT personas mint no envelopes); it also does not reset it — a persona
+dormant for a year wakes with the same `experience_tasks`.
+
+#### 7.2.1 Community standing (relational, per-environment)
+
+A persona's social/role position is **community standing**, held per (persona, environment),
+**non-portable**, and **conferred by the community — never self-awarded**. It is specified
+normatively in `05_ENVIRONMENT §5.4` (`community-standing/1`) and grounds the newborn maturation
+ramp on Lave & Wenger *Legitimate Peripheral Participation*: a persona joins each environment at
+peripheral standing — regardless of its global experiential floor or its standing elsewhere — and
+earns fuller standing through community recognition. Standing gates **relational/collaborative
+privileges only**; safety-relevant capability remains gated by the global experiential floor +
+operator/`ReplicationBound`, never by peer quorum.
 
 ### 7.3 ALPS age layering
 
-Personas stratified into 5 age layers:
+Personas are stratified into numeric age layers (Layer 0..N) **derived from wall-clock age**:
 
-> **Schema/spec:** ALPS age layer bands. See [Appendix A.21](#appendix-a21).
+> **Schema/spec:** ALPS age layer bands + operator-tunable band policy. See [Appendix A.21](#appendix-a21).
 
-Sketch round picks one variant per layer; prevents old high-fitness personas from suppressing newly-born ones.
+Sketch round picks one variant per layer; this prevents old high-fitness personas from suppressing
+newly-born ones. Only the layer *derivation* changes from v1.0 (elapsed wall-clock time, not task
+count); the diversity-protection purpose is unchanged. Band membership is recomputed lazily at
+selection time; boundaries are operator-tunable via `alps-band-policy/1`.
+
+**Residual R-PERSONA-AGE-1 (dormant-but-old personas).** Because ALPS bands are wall-clock-derived,
+a chronologically old but idle persona occupies an upper (old) ALPS band despite minting few
+envelopes. This is **acceptable and intentional**: ALPS exists to protect the *young* for diversity,
+not to penalize the idle. Low fitness (from inactivity) — not age re-derivation — prevents idle-old
+personas from dominating selection. An idle-but-old persona consuming an upper-band slot it
+under-earns is the accepted residual, mirrored to `00_VISION §11`.
 
 ### 7.4 Fork mechanics
 
 > **Schema/spec:** Clone and compositional fork mechanics. See [Appendix A.22](#appendix-a22).
+
+**Fork vs. Genesis.** Fork creates a new persona by *copying or merging existing parents* — it produces variations of personas that already exist. **Persona Genesis** (`16_POPULATION_DYNAMICS §4D`) instead *authors a new seed* for a role that no current persona fills, driven by an environmental capability gap. Use fork when a close-enough persona exists; use genesis only when recruitment and fork are exhausted and the target niche is empty.
 
 ### 7.4.1 MemoryInheritancePolicy
 
@@ -291,19 +361,31 @@ The prior design specifies that experience-layer memory (episodic / semantic / r
 
 **Composition with MPA mitigations (§11.1).** Memory inheritance is subject to **counterparty consent** for any entry naming a counterparty. The kernel emits `MEMORY_INHERITANCE_CONSENT_REQUEST` to each affected user/persona during the fork-draft window; the child only sees inherited memories whose counterparties consented. Decline-by-default on timeout. This protects user privacy across persona generations.
 
-### 7.4.2 MaturityInheritancePolicy
+### 7.4.2 StandingFloorInheritancePolicy
 
-Prior default: child always starts at `maturity = 0` (parent_selection_count = 0, validated_descendants_count = 0). For compositional forks of multiple ADULT parents, this throws away accumulated standing. v1.0 makes the inheritance tunable:
+Prior default: child always starts at `experiential_floor = 0` (parent_selection_count = 0,
+validated_descendants_count = 0). For compositional forks of multiple high-floor parents, this
+throws away accumulated capability. v1.0 makes the inheritance tunable:
 
-> **Schema/spec:** MaturityInheritancePolicy dataclass definition (schema maturity-inheritance-policy/1). See [Appendix A.24](#appendix-a24).
+> **Schema/spec:** StandingFloorInheritancePolicy dataclass definition (schema standing-floor-inheritance-policy/1). See [Appendix A.24](#appendix-a24).
 
-**Why a cap by default.** Compositional forks from two EXPERT parents could otherwise inherit EXPERT maturity at birth, bypassing the apprenticeship structure that ALPS enforces. The default cap at `juvenile` band means a child is born with at most JUVENILE-level standing regardless of parent maturity. Operators may relax for specific seeds where the inheritance is honest (e.g., merging two narrow specialists into a generalist).
+**Scope: the portable global floor only.** This policy governs inheritance of the **global
+experiential floor** (§7.2). **Per-environment community standing is NEVER inherited** — a forked
+child starts at peripheral standing in every environment, exactly like any other newly-joined
+persona (`05_ENVIRONMENT §5.4`). This is strictly stronger than the v1.0 anti-laundering rule.
 
-**Recording.** Inherited maturity is tracked in `soul.state.json.maturity_provenance`:
+**Why a cap by default.** Compositional forks from two high-floor parents could otherwise inherit a
+high experiential floor at birth, bypassing the apprenticeship structure that ALPS enforces. The
+default `cap_at_floor` limits a child to at most a low floor regardless of parent floors. Operators
+may relax for specific seeds where the inheritance is honest (e.g., merging two narrow specialists
+into a generalist).
 
-> **Schema/spec:** Maturity provenance recording format. See [Appendix A.25](#appendix-a25).
+**Recording.** Inherited floor is tracked in `soul.state.json.floor_provenance`:
 
-The effective maturity is the sum of earned + inherited (capped). Lineage audits can recompute earned-only maturity at any time.
+> **Schema/spec:** Floor provenance recording format. See [Appendix A.25](#appendix-a25).
+
+The effective floor is the sum of earned + inherited (capped). Lineage audits can recompute
+earned-only floor at any time.
 
 ### 7.4.3 CharterConflictResolution
 
@@ -332,7 +414,7 @@ When a persona is forked without explicit policy declarations in the seed, the k
 | Skill library | Full copy minus `seed.fork_skill_exclusions` (default empty) | Union of all parents' libraries |
 | Tactics | Parent's tactics + seed_tactic_perturbation | Union pooled with `lexical_dedup` |
 | MemoryInheritancePolicy | episodic=summary; semantic=facts_only; reflective=about_work; klines=role_keyed | All `inherit_none` |
-| MaturityInheritancePolicy | start_at_zero, cap=newborn | inherit_min_parent_halved, cap=juvenile |
+| StandingFloorInheritancePolicy | start_at_zero, cap=floor_0 | inherit_min_parent_halved, cap=floor_low |
 | CharterConflictResolution | N/A (single parent) | most_restrictive_wins; semantic_similarity detection |
 | DormantForkPolicy | dormant_parent_admissible=True; requires_parent_wake=True | Same |
 | RelationshipInheritance (§11) | inherit_summary_only | inherit_none |
@@ -347,7 +429,7 @@ All emitted to the parent(s)' evolution log, child's evolution log, and global L
 
 ### 7.4.7 MidProjectForkComposition — project-side composition for in-flight forks
 
-The fork machinery (`§7.4` through `§7.4.6`) specifies how persona-internal state composes across a fork — memory inheritance per `MemoryInheritancePolicy` (§7.4.1), maturity per `MaturityInheritancePolicy` (§7.4.2), charters per `CharterConflictResolution` (§7.4.3). Subsequent additions introduced many *project-side* primitives that the original fork mechanics could not have anticipated: `ProjectMember.principal_attribution_id`, `LeadHandoffCeremony` + `ObligationReassignment` + `PlannedDeparture`, `UserBoundary` + `DistressDetectionRoutingPolicy` + `operator_blind_mode`, `LearnerStateRecord` + `TeachingAuthorisation` + `Curriculum`. When a persona that holds active *project-side* state forks mid-project, the spec was silent on whether children inherit each of these.
+The fork machinery (`§7.4` through `§7.4.6`) specifies how persona-internal state composes across a fork — memory inheritance per `MemoryInheritancePolicy` (§7.4.1), experiential floor per `StandingFloorInheritancePolicy` (§7.4.2), charters per `CharterConflictResolution` (§7.4.3). Subsequent additions introduced many *project-side* primitives that the original fork mechanics could not have anticipated: `ProjectMember.principal_attribution_id`, `LeadHandoffCeremony` + `ObligationReassignment` + `PlannedDeparture`, `UserBoundary` + `DistressDetectionRoutingPolicy` + `operator_blind_mode`, `LearnerStateRecord` + `TeachingAuthorisation` + `Curriculum`. When a persona that holds active *project-side* state forks mid-project, the spec was silent on whether children inherit each of these.
 
 `MidProjectForkComposition` is the unified envelope that resolves the composition question by enumerating, for each dimension, the operator-declared inheritance choice *before* the fork executes. Children's project-side state is determined at fork time; substrate refuses fork-of-active-project-member without an envelope.
 
@@ -875,6 +957,8 @@ Per `00_VISION §10` clarification, responsible-companionship constraints (no me
 
 > **Schema/spec:** Complete PersonaSeed example (schema persona-seed/2) for Sparky. See [Appendix A.71](#appendix-a71).
 
+**Authorship (v1.0 operator; v1.1 persona-authored).** In v1.0 a `PersonaSeed` is **operator-authored**. The v1.1 draft `16_POPULATION_DYNAMICS.md` adds **Persona Genesis**: a generative persona (with `cohort_assembly.may_author_seeds = true`) MAY author a seed to fill an environmental capability gap, minted through the same birth ceremony under a `persona_genesis` `ReplicationBound`. When a seed is persona-authored, its `provenance` records the `genesis_proposal_id` and authoring persona(s); the kernel emits `LIFECYCLE_GENESIS` rather than the operator-seed `LIFECYCLE_SEEDED`/`LIFECYCLE_ACTIVATED` path.
+
 ## 13. Risks & known limitations
 
 Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations). These risks describe inherent limits of the persona model; they are not implementation bugs.
@@ -896,11 +980,11 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 
 | ID | Question | Owner | Resolves into |
 |----|----------|-------|---------------|
-| OQ-PERSONA-1 | Population-level evolution dynamics: when N personas evolve in the same env, do MAP-Elites + ALPS layers produce healthy diversity or collapse? Empirical study needed at N=20, 100, 1000. | Evolution WG | v1.2 population study. |
+| OQ-PERSONA-1 | Population-level evolution dynamics: when N personas evolve in the same env, do MAP-Elites + ALPS layers produce healthy diversity or collapse? Empirical study needed at N=20, 100, 1000. Partially addressed by the genesis-time diversity guarantees in `16_POPULATION_DYNAMICS §4C` (competitive exclusion, optimal distinctiveness, diversity-injection); the empirical N-scale study remains open (see `OQ-POP-6`). | Evolution WG | v1.2 population study. |
 | OQ-PERSONA-2 | Relational survivorship after fork: should the parent persona's relationship records be readable by the child, or fully partitioned? v1.0 ships partition-by-default; some operators may want soft inheritance. | Persona authors WG | v1.1 relational policy. |
 | OQ-PERSONA-3 | Mood schema (`mood/1`) is VAD-based. Does the affect literature have a richer scheme (PAD, OCC) we should adopt? | Persona authors | v1.2 mood model review. |
 | OQ-PERSONA-4 | Character-vector binding optional everywhere — but should operator policy default to off for safety-critical deployments, or on for cohort tuning? | Operator policy | v1.1 default policy. |
-| OQ-PERSONA-5 | MHBB recurrence detector threshold (> 3 occurrences / quarter) is heuristic. Should it scale with persona maturity or remain fixed? | Persona authors | v1.1 calibration. |
+| OQ-PERSONA-5 | MHBB recurrence detector threshold (> 3 occurrences / quarter) is heuristic. Should it scale with persona experiential floor / community standing or remain fixed? | Persona authors | v1.1 calibration. |
 | OQ-PERSONA-6 | Charter conflict resolution: how should the substrate handle three-way conflicts (persona × project × env charters)? Currently `charter-conflict-resolution/1` covers pairwise. | Charter WG | v1.1 three-way resolution. |
 
 ## 14. Acceptance tests
@@ -924,8 +1008,9 @@ A-P9   Charter-contradicting personal goal refused; signed audit event.
 A-P10  Cross-adapter parity: same Soul on Claude Code + OpenAI SDK
        produces equivalence-class mode-entry sequences on same task.
 A-P11  Lifecycle FSM: signed transitions; reanimate operator-only.
-A-P12  Maturity scalar updates per parent_selection + validated_descendants.
-A-P13  ALPS layering: sketch round picks one variant per layer.
+A-P12  Experiential-floor scalar updates per parent_selection +
+       validated_descendants + experience_tasks.
+A-P13  ALPS layering (wall-clock-derived): sketch round picks one variant per layer.
 A-P14  Anti-degradation: charter conformance scan ≥ 0.95 across actions.
 A-P15  Anti-degradation: voice consistency ≥ 0.9 vs declared voice.
 A-P16  Rollback on degradation: GEPA-evolved tactics revertable.
@@ -1078,6 +1163,12 @@ cohort_assembly:
     joined_env: tenant_or_n_interactions
     long_running_collab: federation_with_tenant_attestation
   consent_terms_template: default
+  may_author_seeds: false           # genesis capability gate; default-deny
+                                     # (16_POPULATION_DYNAMICS §4D). Requires an
+                                     # active persona_genesis ReplicationBound.
+  genesis_recursion_cap: 0          # how deep this persona's genesis
+                                     # descendants may themselves author seeds;
+                                     # bounded by ReplicationBound.depth_ceiling
 default_env_memberships:           # OPTIONAL
   - environment_blueprint_id: companion_space
     role: companion
@@ -1149,17 +1240,18 @@ The mode shifts; the disposition does not.
 
 ### Appendix A.3
 
-**Complete soul.state.json sidecar example (schema soul-state/5)** (referenced from §3.1)
+**Complete soul.state.json sidecar example (schema soul-state/6)** (referenced from §3.1)
 
 ```json
 {
-  "schema": "soul-state/5",
+  "schema": "soul-state/6",
   "persona_id": "01HZ9V5K6T2Y7BQXA3N0F8E2WM",
   "soul_version": 3,
+  "born_at": "2026-01-15T09:00:00Z",       // primary age anchor; age = now − born_at
   "fitness": 0.71,
   "fertility": 12,
-  "age_tasks": 184,
-  "maturity": "adult",
+  "experience_tasks": 184,                  // competence stat (renamed from age_tasks); NOT age
+  "experiential_floor": 0.83,               // portable global capability floor (replaces "maturity")
   "mode_proficiencies": { "falsifier": {"competence": 0.84, "uses": 412}, ... },
   "skill_library": [ ... ],                  // Voyager-style executable skills
   "tactic_archive": { ... },                 // MAP-Elites grid (v1.2+)
@@ -1812,6 +1904,14 @@ LIFECYCLE_FORK                ACTIVE → FORKED (sibling persona minted);
                               parent state preserved per
                               MemoryInheritancePolicy / CharterConflict
                               Resolution (§7.4.1, §7.4.3)
+LIFECYCLE_GENESIS             SEEDED → ACTIVE birth of a persona-AUTHORED
+                              seed (16_POPULATION_DYNAMICS §4D); carries
+                              authoring_persona_ids + mentor_persona_id.
+                              Distinct from LIFECYCLE_FORK: a NEW role from
+                              an environmental gap, NOT a copy/merge of
+                              existing parents. Newborn starts at
+                              experiential_floor=0, ALPS Layer 0 (age 0),
+                              conferred standing = none in every environment.
 LIFECYCLE_RETIRED             DORMANT → RETIRED (retirement predicates
                               cleared per §7.5; project pins and active
                               obligations released)
@@ -1823,7 +1923,15 @@ LIFECYCLE_REANIMATED          ARCHIVED → ACTIVE via operator-only path
                               (fresh keys + SOUL re-sign per §7.5);
                               alias for the second LIFECYCLE_ACTIVATED
                               fired on reanimation (carries
-                              `reanimated_from_archive = True` field)
+                              `reanimated_from_archive = True` field).
+                              `born_at` is RETAINED (never reset): age is
+                              continuous and the archived interval counts as
+                              elapsed age, consistent with born_at's
+                              immutability (§7.2). The ALPS layer is therefore
+                              recomputed from the unchanged born_at — a
+                              reanimated persona is chronologically old, NOT
+                              reset to Layer 0. (experiential_floor / fitness
+                              are likewise carried, not reset.)
 LIFECYCLE_CONSULTED           v1.0.8 read-only access to a RETIRED
                               persona's frozen state via
                               PersonaConsultation (§7.5.2); does NOT
@@ -1859,7 +1967,7 @@ MIDPROJECT_FORK_REFUSED       v1.0.11: fork refused per substrate
 4. Kernel signs SOUL v1 (Ed25519 over canonical concatenation of
    persona_id || version || cacheable identity blocks)
 5. Kernel initializes soul.state.json (empty archives, fitness=0,
-   fertility=0, age_tasks=0)
+   fertility=0, experience_tasks=0, experiential_floor=0, born_at=now())
 6. Kernel publishes persona to local PersonaRegistry
 7. (Optional) Mint signed A2A AgentCard if network presence allowed
 ```
@@ -1868,12 +1976,31 @@ MIDPROJECT_FORK_REFUSED       v1.0.11: fork refused per substrate
 
 **ALPS age layer bands** (referenced from §7.3)
 
+Layers are **wall-clock-derived** from `age = now − born_at`. Numeric bands only (no named
+life-stages). Spec defaults below are illustrative and operator-tunable via `alps-band-policy/1`
+(`band_edges`); the layer count adjusts to the number of edges.
+
 ```text
-Layer 0  age_tasks ∈ [0, 5)        newborn; sketch round always represented
-Layer 1  age_tasks ∈ [5, 20)       juvenile
-Layer 2  age_tasks ∈ [20, 80)      adolescent
-Layer 3  age_tasks ∈ [80, 320)     adult
-Layer 4  age_tasks ≥ 320           expert
+Layer 0  age ∈ [0, 1d)        sketch round always represented (protects the newly-born)
+Layer 1  age ∈ [1d, 7d)
+Layer 2  age ∈ [7d, 30d)
+Layer 3  age ∈ [30d, 180d)
+Layer 4  age ≥ 180d
+```
+
+Default `band_edges = [1d, 7d, 30d, 180d]`. Calibration of the defaults is tracked as an open
+question (mirrors `16_POPULATION_DYNAMICS` OQ-POP-1 calibration framing): the v1.0 task-count
+bands were `[5, 20, 80, 320]`; the wall-clock equivalents depend on expected task cadence.
+
+```python
+@dataclass(frozen=True)
+class ALPSBandPolicy:
+    schema: str = "alps-band-policy/1"
+    policy_id: str
+    deployment_id: str
+    band_edges: list[timedelta]              # e.g. [1d, 7d, 30d, 180d] → Layers 0..4
+    sketch_round_protects_layer_0: bool = True
+    signed_by: bytes
 ```
 
 ### Appendix A.22
@@ -1891,7 +2018,8 @@ CLONE FORK
   Skill library default: full copy of parent's skill_library minus the
   entries listed in seed.fork_skill_exclusions (default = empty list;
   operator may exclude per-fork to encourage re-discovery in the child).
-  Child starts fitness=0, fertility=0, age_tasks=0, layer 0.
+  Child starts fitness=0, fertility=0, experience_tasks=0, born_at=now(),
+  experiential_floor per StandingFloorInheritancePolicy, ALPS layer 0.
 
 COMPOSITIONAL FORK
   Multiple parents (≥ 2 with same role_slot).
@@ -1899,7 +2027,8 @@ COMPOSITIONAL FORK
   Tactics from parents pooled (union with seed.fork_tactic_dedup_kind
   applied; default kind = "lexical_dedup" KindRegistry-resolved).
   Skill library union (parent_a.skill_library ∪ parent_b.skill_library ∪ ...).
-  Child starts fitness=0, fertility=0, age_tasks=0, layer 0.
+  Child starts fitness=0, fertility=0, experience_tasks=0, born_at=now(),
+  experiential_floor per StandingFloorInheritancePolicy, ALPS layer 0.
 
 Both forks emit LIFECYCLE_FORK to lineage with parent_ids.
 ```
@@ -1958,29 +2087,32 @@ class MemoryInheritancePolicy:
 
 ### Appendix A.24
 
-**MaturityInheritancePolicy dataclass definition (schema maturity-inheritance-policy/1)** (referenced from §7.4.2)
+**StandingFloorInheritancePolicy dataclass definition (schema standing-floor-inheritance-policy/1)** (referenced from §7.4.2)
+
+Governs inheritance of the **portable global experiential floor** only. Per-environment community
+standing is never inherited (`05_ENVIRONMENT §5.4`).
 
 ```python
 @dataclass
-class MaturityInheritancePolicy:
-    schema: str = "maturity-inheritance-policy/1"
+class StandingFloorInheritancePolicy:
+    schema: str = "standing-floor-inheritance-policy/1"
     policy_id: str
 
     # Substrate-shape modes; not domain.
     mode: Literal[
         "start_at_zero",                   # v1.0 default; clean slate
-        "inherit_min_parent",              # min(parent.maturity for p in parents)
-        "inherit_avg_parent",              # mean(parents.maturity)
-        "inherit_min_parent_halved"]       # min(parent.maturity) / 2;
+        "inherit_min_parent",              # min(parent.experiential_floor for p in parents)
+        "inherit_avg_parent",              # mean(parents.experiential_floor)
+        "inherit_min_parent_halved"]       # min(parent.experiential_floor) / 2;
                                            # conservative middle ground
 
-    # Caps — prevent compositional fork "laundering" of expert maturity
-    cap_at_band: Literal["newborn",        # ceiling = newborn band
-                          "juvenile",       # ceiling = juvenile band (DEFAULT)
-                          "adult",          # ceiling = adult band
-                          "no_cap"]         # honest inheritance; auditable
+    # Cap — prevents compositional fork "laundering" of a high experiential floor.
+    # Expressed as a floor ceiling (numeric) on the portable global floor.
+    cap_at_floor: float                    # ceiling on inherited experiential_floor;
+                                           # DEFAULT ≈ floor-equivalent of one ALPS band.
+                                           # Use math.inf for honest, auditable, uncapped.
 
-    # Provenance: maturity inherited is recorded as "inherited" credit;
+    # Provenance: floor inherited is recorded as "inherited" credit;
     # tracked separately from the child's own earned credit
     track_inherited_separately: bool = True
 
@@ -1988,29 +2120,29 @@ class MaturityInheritancePolicy:
 
 
 # Default policy when seed is silent:
-DEFAULT_MATURITY_INHERITANCE_CLONE = MaturityInheritancePolicy(
+DEFAULT_STANDING_FLOOR_INHERITANCE_CLONE = StandingFloorInheritancePolicy(
     mode="start_at_zero",
-    cap_at_band="newborn",
+    cap_at_floor=0.0,                      # clean slate
     track_inherited_separately=True,
 )
 
-DEFAULT_MATURITY_INHERITANCE_COMPOSE = MaturityInheritancePolicy(
+DEFAULT_STANDING_FLOOR_INHERITANCE_COMPOSE = StandingFloorInheritancePolicy(
     mode="inherit_min_parent_halved",
-    cap_at_band="juvenile",
+    cap_at_floor=0.25,                     # low floor ceiling (≈ one band)
     track_inherited_separately=True,
 )
 ```
 
 ### Appendix A.25
 
-**Maturity provenance recording format** (referenced from §7.4.2)
+**Floor provenance recording format** (referenced from §7.4.2)
 
 ```json
 {
-  "earned_credit": { "parent_selections": 0, "validated_descendants": 0 },
+  "earned_credit": { "parent_selections": 0, "validated_descendants": 0, "experience_tasks": 0 },
   "inherited_credit": { "parent_selections": 3, "validated_descendants": 2 },
   "policy_used": "inherit_min_parent_halved",
-  "cap_applied": "juvenile",
+  "cap_applied": 0.25,
   "signed_by": "kernel:lifecycle:..."
 }
 ```
@@ -2170,7 +2302,7 @@ fork_skill_library_unioned  per parent (compose)
 fork_memory_inherited       per memory tier (per MemoryInheritancePolicy)
 fork_memory_consent_request emitted to each affected counterparty
 fork_memory_consent_granted / declined / timeout
-fork_maturity_inherited     records earned vs inherited credit + cap applied
+fork_floor_inherited        records earned vs inherited credit + cap applied
 fork_charter_conflicts_detected
 fork_charter_conflicts_resolved
 fork_dormant_parent_woken   per dormant parent
@@ -2700,7 +2832,7 @@ Signal                       Weight   Notes
 ─────────────────────────    ──────   ──────────────────────────────
 bench_measurement             1.2     Physical / production reality;
                                        outranks LLM judgment
-peer_review_verdict           0.85    Multi-round expert critique
+peer_review_verdict           0.85    Multi-round senior-practitioner critique
 verified outcome              1.0     Programmatic verifier passed
                                        (programmatic verifier)
 panel_verdict                 0.6     LLM panel with anti-Goodhart
