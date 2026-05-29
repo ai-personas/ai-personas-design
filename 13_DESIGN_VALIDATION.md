@@ -1057,6 +1057,70 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 - **AUTHORITATIVE promotion path is long in frontier domains.** RECOGNISED (0.6) is achievable; AUTHORITATIVE (0.85) requires frontier exit (6+ months of low drift) + the standard K'=10 successful projects + 5+ co-signing personas + external validation. For genuinely frontier fields, AUTHORITATIVE may take years. This is correct — the substrate refuses to manufacture certainty in uncertain fields.
 - **Self-organization and meta-primitives.** SCENARIOs 06-12 collectively surface ~35 specific primitives as substrate-shape gaps. The cumulative pattern prompted **ADR-0045** (self-organizing coordination). ADR-0045 accepts the architectural direction: the five meta-mechanisms (EntityGroup, BatchOperation, StagedSequence, StreamPolicy, DerivedMetric) subsume the specific primitives; personas propose coordination shapes via `CoordinationShapeRegistry` (parallel to `KindRegistry`). Implementation targets v1.1. The specific primitives (SupersessionCascade, CorpusDriftMetric, etc.) remain as working implementations; v1.1 generalises them into seed shapes.
 
+### SCENARIO 13 — Environment-driven persona genesis (autopopulation from a few founders)
+
+**Scenario premise.** Validate that a small number of founder personas can grow a *varied* cohort by **authoring new personas** under sustained environmental pressure when the recruit pool is empty — the "population dynamics" residual (`00_VISION §11` R-v1.0-8) and the continuation of SCENARIO 04's `ReplicationBound` lineage (gap #4). Stress-tests that genesis stays bounded, diverse, domain-agnostic, and identity-coherent.
+
+**User request** (the in-scenario task). "Investigate topic T and deliver a falsification-grade analysis" — given to two founder personas in a fresh deployment whose recruit pool is otherwise empty.
+
+**Task class.** INVESTIGATIVE.
+**Acceptance pathway.** `PROJECT_PROGRESS_ACCEPT`. (Genesis itself is not a task class; it is an admission-gated envelope raised *within* the investigative work when the cohort cannot be assembled.)
+
+**World shape.**
+- Principal: `operator_distinct` — the operator pre-declares a `ReplicationBound` for `replication_kind = "persona_genesis"` and a `population-policy/1`.
+- Persona(s): 2 founders (generative; above `generativity_threshold`); they author N newborns over the project's life.
+- Environment: persistent `Lab` (`05_ENVIRONMENT §3`).
+- Project: multi-session, digital ArtifactBundle.
+- External participants: none.
+
+**Domain shape.** Emergent domain T (no pre-authored DomainContext). Niche axes (`interest_type`, `team_role`, `contribution_kind`, `domain`, `disposition`) are KindRegistry-resolved (`06_DOMAIN §7.6`). Hazard axes low (`physical_harm_class = none`); the safety interest here is **replication topology**, not physical harm.
+
+**Phase walk (against each design doc).**
+
+| Design doc | Verdict | Notes |
+|---|---|---|
+| `00_VISION` | [PASS w/ note] | Population dynamics was OOS (R-v1.0-8); `16_POPULATION_DYNAMICS` (v1.1 draft) lifts **single-kernel** genesis. J5 open-capability admits the attempt; C4 `ReplicationBound` bounds it. Multi-kernel/federated genesis remains OOS (OQ-POP-4). |
+| `01_KERNEL` | [PASS] | Reuses `ReplicationBound` (`§2.7`) at floor source 1 with new `replication_kind = "persona_genesis"`; INV-7 budget gate composes ahead of it; bounded-autonomy reuses `operator_deferred` + `PolicyEnvelope` (`§2.4.2`, from SCENARIO 04); all genesis events signed into lineage. Default-deny without a bound. |
+| `02_PERSONA` | [PASS] | Reuses seed→mint (`§12`), the birth ceremony (Appendix A.20), and `LIFECYCLE_GENESIS` (new, distinct from `LIFECYCLE_FORK`). **Consistent with the prior `§11.3` rule** that a persona may not spawn without a `ReplicationBound`. Reuses ADR-0019 (MAP-Elites/Voyager/DGM/ALPS). Gated by `cohort_assembly.may_author_seeds` (default false). |
+| `03_TASKS` | [PASS] | No new task class or pathway: genesis is an admission-gated action within INVESTIGATIVE/PROJECT_PROGRESS_ACCEPT work. |
+| `04_PROJECT` | [PASS] | Extends the `§14.1` "no candidate" forced choice with a third option (propose genesis); unmet `CohortConstraint.required_kinds` feed the pressure signal. |
+| `05_ENVIRONMENT` | [PASS] | Recruitment-gap fallback in `§12c`; the newborn maturation ramp reuses listening modes (`§9`, `passive→active→deliberative`) and attention allocation (`§7`); carrying capacity = free `AttentionBudget` + `Energy`. |
+| `06_DOMAIN` | [PASS] | Niche axis *values* (RIASEC/Belbin/contribution_kind) are registry keys resolved via `§7.6`, never substrate enums (see V-check below). |
+| `07_ARTIFACTS` | [PASS] | The `proposed_seed` draft is an opaque authored artifact; the kernel validates safety *shape*, not domain content. |
+| `08_KNOWLEDGE` | [PASS] | Dual inheritance reuses the Voyager skill library + memory-inheritance-consent (`02_PERSONA §7.4`) + hybrid retrieval indexing. |
+| `09_PROTOCOLS` | [PARTIAL] | New schemas (`population-pressure-signal/1`, `niche-descriptor/1`, `genesis-proposal/1`, `genesis-provenance/1`, `mentorship-edge/1`, `population-policy/1`) MUST be added to the `§7` schema registry when `16_POPULATION_DYNAMICS` promotes from Draft to Stable. A2A cross-kernel genesis is OOS. |
+| `11_ACCEPTANCE_TESTS` | [PASS] | `A-GEN*` family (17 tests) registered; reuses `A-RB*` for the replication-bound paths. |
+| `12_GLOSSARY` | [PASS] | ~20 terms added (Persona Genesis, GenesisProposal, NicheDescriptor, generativity gate, mentorship edge, secure base, …). |
+| `14_DECISIONS` | [PASS] | ADR-0048 (Persona Genesis) + ADR-0049 (demographic regulation); related to ADR-0019. |
+
+**Validation-invariant V check.** Genesis introduces persona-authored creation; V must hold.
+- **V.1 / V.3 — no closed domain Literal.** Niche axes (RIASEC interest types, Belbin roles, contribution_kinds, domains) are KindRegistry-resolved string keys, explicitly *not* a substrate enum (`16 §4C` domain-agnosticism note). PASS.
+- **V.4 — no pre-loaded domain knowledge.** The newborn's seed carries OCEAN/VAD priors + parent-authored `seed_skills` (Voyager-class learned skills), not substrate constants; cultural inheritance flows through the Voyager library. PASS.
+- **V.5 — domain-shaped categories resolve to registry / opaque artifact.** The `proposed_seed` is opaque to the kernel (V.5c); niche kinds resolve via `§7.6` (V.5a). PASS.
+- **V.6 — acquired + indexed.** Dual-inheritance skills are transmitted with consent and indexed through the standard retrieval pipeline. PASS.
+
+**Substrate-shape gaps surfaced.** Six topology problems the v1.0 substrate could not express (each about *workflow/replication topology*, not a domain):
+
+1. **No persona-authored seed.** Creation was operator-only; no primitive let a persona author a seed for a role no one fills.
+2. **No recruitment-gap → generative fallback ordering.** The `04_PROJECT §14.1` dead-end had only pause / operator-interim.
+3. **No niche-occupancy / variety guarantee.** Nothing enforced that a new persona be *distinct* (competitive exclusion + optimal distinctiveness + sibling differentiation) rather than a clone.
+4. **No newborn maturation ramp.** New members were full participants instantly; no peripheral→full scaffolding (mentorship) topology.
+5. **No demographic regulation of births.** No carrying-capacity / density-dependence / r-vs-K control over the birth *rate* (only the hard `ReplicationBound` ceiling).
+6. **No founder-effect safeguard.** Nothing detected low effective population size to inject diversity against monoculture.
+
+**Resolution.** All six landed in `16_POPULATION_DYNAMICS` (v1.1 draft): `§4A` pressure signal (gap 6 EPS factor), `§4B` recruitment-exhausted-first ordering (gap 2), `§4C` niche/optimal-distinctiveness/sibling-differentiation + diversity-injection (gaps 3, 6), `§4D` `GenesisProposal`→mint + generativity gate (gap 1), `§4E` ZPD/LPP maturation ramp + mentorship edge (gap 4), `§4F` carrying capacity + density dependence + r/K + the `persona_genesis` `ReplicationBound` (gap 5). Supporting edits in `01_KERNEL §2.7`, `02_PERSONA §3/§7/§7.4/§12`, `04_PROJECT §14.1`, `05_ENVIRONMENT §12c`, ADR-0048/0049, `A-GEN*` tests, glossary.
+
+**Not-gaps (persona evolves these).** The niche-axis *values* (RIASEC interest types, Belbin roles, `contribution_kind`s, domains), the newborn's domain skills, and any verifier/convention kinds are emergent via `KindRegistry` (`06_DOMAIN §7.5/§7.6`) — the substrate supplies the slots; personas fill them.
+
+**Status.** Validated against the v1.1 draft; aligns with the intended design. Genesis is the sanctioned, bounded continuation of SCENARIO 04's `ReplicationBound` (gap #4) and the `02_PERSONA §11.3` no-spawn-without-bound rule.
+
+**Honest residuals.**
+- **Cross-kernel / federated genesis is OOS** (OQ-POP-4) — same light-time/federation boundary as SCENARIO 04's residuals.
+- **`effective_population_size` lacks a rigorous metric** (OQ-POP-5); the founder-effect safeguard is heuristic until defined.
+- **Niche-grid axis choice biases diversity** (R-POP-3) — inherited from ADR-0019's behaviour-descriptor caveat; operator-tunable, not eliminated.
+- **Diversity is guaranteed at birth, not forever.** Post-birth drift toward monoculture is *mitigated* by MAP-Elites + ALPS + character displacement, but the empirical N=100/1000 collapse question remains open (OQ-PERSONA-1 / OQ-POP-6).
+- **`09_PROTOCOLS §7` registry entries are pending** Stable promotion of `16_POPULATION_DYNAMICS` (same draft-status handling as `15_COORDINATION_SHAPES`).
+
 ---
 
 ## Scenario template (copy + fill)
@@ -1124,6 +1188,8 @@ These are not commitments — they are a backlog of task topologies that would s
 
 18. **Progressive automation of human dependencies across a physical-world project.** Tests the full MHBB reduction loop: persona inventories Tier 4/5 dependencies → authors Tier 3 bridge designs → installs bridges → validates → promotes to skill_library → reuses across projects. Also tests sensor-bridge substitution for human professional attestation (construction inspection via camera/sensor, calibration verification via automated measurement, environmental compliance via IoT). Exercises `BridgeReductionPlan` (`04_PROJECT §26a.10`), `AttestationEquivalencePolicy` (`06_DOMAIN §5.7`), their composition with `BridgeCalibrationBinding` (`§5.5.5`), `BridgeInstallerKind` (`§5.5.6`), `MilestoneDrivenAutonomy` (`02_PERSONA §11.2`), and `skill_library` Voyager accumulation. **(ADDED — `BridgeReductionPlan` (`04_PROJECT §26a.10`) + `AttestationEquivalencePolicy` (`06_DOMAIN §5.7`). Scenario walk pending.)**
 
+19. **Environment-driven persona genesis (autopopulation from a few founders).** A small founder cohort grows a varied population by authoring new personas under environmental pressure when recruitment is exhausted. Tests the continuation of SCENARIO 04's `ReplicationBound` (gap #4) and the `02_PERSONA §11.3` no-spawn-without-bound rule. **(ADDRESSED — see SCENARIO 13 above; added `16_POPULATION_DYNAMICS.md` (Persona Genesis: population-pressure signal, recruitment-exhausted-first, MAP-Elites niche/variety guarantee, mentorship maturation ramp, demographic regulation, all bounded by `persona_genesis` `ReplicationBound`) + ADR-0048/0049 + `A-GEN*` (17 tests) + supporting edits across `01_KERNEL §2.7`, `02_PERSONA §3/§7/§7.4/§12`, `04_PROJECT §14.1`, `05_ENVIRONMENT §12c`. v1.1 draft.)**
+
 A scenario should be added to the catalog as it is walked, with the same eight-step structure.
 
 ## Maintenance
@@ -1149,6 +1215,7 @@ A scenario should be added to the catalog as it is walked, with the same eight-s
 - Acceptance tests for these mechanisms: `06_DOMAIN.md §22` (A-EN, A-CS, A-PR, A-SP, A-HV); `01_KERNEL.md §x` (A-DO* deferred-operator, A-RB* replication-bound); `02_PERSONA.md §14` (A-MC* mission-charter, A-P30..P33 body binding); `04_PROJECT §x` (A-RS* resource-stock, A-PR-AN* anonymity); `06_DOMAIN.md §22` (A-BC* bridge-calibration, A-BI* bridge-installer); `11_ACCEPTANCE_TESTS.md §9f` (A-MT* multi-principal attribution + quorum + cross-tenancy; A-DP* derivation-provenance edge); `11_ACCEPTANCE_TESTS.md §9g` (A-LH* lead handoff, A-OR* obligation reassignment, A-PD* planned departure, A-RT-PERS* retired-state persistence, A-PC* persona consultation, A-LE* lifecycle event enum, A-RT-RESP* retired-persona response policy); `11_ACCEPTANCE_TESTS.md §9h` (A-UB* user boundary, A-UM* user memory transparency, A-UF* user selective forgetting, A-URR* user relationship release, A-DD* distress detection routing, A-RRC* relationship review checkpoint, A-OBM* operator blind mode, A-CP* companion pathway routing); `11_ACCEPTANCE_TESTS.md §9i` (A-LSR* learner state record, A-LCA* learner competency attestation, A-TA* teaching authorisation, A-CUR* curriculum, A-LP* lesson plan, A-MASTERY* mastery checkpoint, A-GPA-ACK* goal-progress-accept learner ack, A-HST* hazardous skill teaching gate); `11_ACCEPTANCE_TESTS.md §9j` (A-MPFC* mid-project fork composition).
   - SCENARIO 12 fixes: `08_KNOWLEDGE §6.3` (`SupersessionCascade`), `06_DOMAIN §4.4.1` (`CorpusDriftMetric`), `06_DOMAIN §5.6.1` (`ReplicatedAttestationFrontierComposition` — composition rule paragraph).
   - SCENARIO 17 fixes: `05_ENVIRONMENT §5.2` (Wake Path 6), `03_TASKS §4.1` (dispatcher dormancy check), `05_ENVIRONMENT §11.6` (CrossEnvProactiveOffer + GuestPresence); `11_ACCEPTANCE_TESTS.md` (A-WK6* + A-CEPO* families).
+  - SCENARIO 13 fixes: `16_POPULATION_DYNAMICS.md` (whole doc — Persona Genesis + demographic regulation; schemas `population-pressure-signal/1`, `niche-descriptor/1`, `genesis-proposal/1`, `genesis-provenance/1`, `mentorship-edge/1`, `population-policy/1`), `01_KERNEL §2.7` (`persona_genesis` replication_kind), `02_PERSONA §3` (`may_author_seeds`) + `§7` (`LIFECYCLE_GENESIS`) + `§7.4` (fork-vs-genesis) + `§12` (persona-authored seeds), `04_PROJECT §14.1` (genesis forced-choice option), `05_ENVIRONMENT §12c` (recruitment-gap fallback), `14_DECISIONS` (ADR-0048, ADR-0049); `11_ACCEPTANCE_TESTS.md` (A-GEN* family, 17 tests).
   - Backlog #18 primitives: `04_PROJECT §26a.10` (`BridgeReductionPlan` + `BridgeReductionEntry`), `06_DOMAIN §5.7` (`AttestationEquivalencePolicy` + `AgreementHistory`); `11_ACCEPTANCE_TESTS.md §9l` (A-BRP* bridge reduction plan, A-AEP* attestation equivalence policy).
 - Glossary entries for the v1.0.14 primitives: `12_GLOSSARY.md` (AttestationEquivalencePolicy, BridgeReductionEntry, BridgeReductionPlan).
 - Glossary entries for the v1.0.13 primitives: `12_GLOSSARY.md` (CorpusDriftMetric, CrossEnvProactiveOffer, GuestPresence, ReplicatedAttestationFrontierComposition, SupersessionCascade, Wake Path 6).
