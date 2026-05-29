@@ -359,7 +359,7 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
                     address (05_ENVIRONMENT §5.2 Wake Path 6)
   A-CEPO*  8        CrossEnvProactiveOffer +
                     GuestPresence (05_ENVIRONMENT §11.6)
-  A-GEN*   17       Persona Genesis + population dynamics
+  A-GEN*   24       Persona Genesis + population dynamics
                     (16_POPULATION_DYNAMICS §8) — v1.1-scoped
 
 TOTAL                ~441 tests across v1.0 lineage (+108 from v1.0 spec work)
@@ -1393,6 +1393,27 @@ A-GEN16     Secure base / mentor reassignment: mentor RETIRED before
 A-GEN17     Parental-investment bound: author whose projected rearing
              investment would breach population-policy mentor_investment_bound
              is REFUSED/throttled (parent-offspring-conflict guard).
+A-GEN18     EPS variance estimator: one founder authored all others →
+             Ne_v ≪ N; effective_population_size drops below
+             diversity_injection_eps_threshold; injection mandate arms (§4G).
+A-GEN19     EPS niche estimator: population concentrated in one cell →
+             Ne_d → 1 regardless of headcount; min(Ne_v, Ne_d) reflects it (§4G).
+A-GEN20     Temporal smoothing: a one-window diversity bottleneck keeps the
+             mandate armed across later windows until the harmonic mean
+             recovers (§4G).
+A-GEN21     Diversity audit + novelty pressure: diversity-audit/1 with
+             declining Ne_d tightens distinctiveness band; near-niche proposal
+             REFUSED out_of_distinctiveness_band (§4H).
+A-GEN22     Attention fitness-sharing applies routing-weight pressure only on
+             a crowded niche; never retires/demotes a persona (lifecycle
+             unchanged, §4H).
+A-GEN23     Niche recalibration: sustained false_collision_rate emits
+             niche_recalibration_advisory; under learned/cvt mode descriptors
+             re-fit and formerly-colliding proposals resolve to distinct
+             cells (§4I).
+A-GEN24     Cross-kernel boundary: GenesisProposal naming a foreign kernel as
+             author/host REFUSED cross_kernel_genesis_not_supported_v1_1;
+             population_ceiling not evadable across kernels (§4J).
 
 MEMBER-ZERO ARCHIVAL (; §5.3)
 A-EN-v1.0-13  Env with empty active members for member_zero_window

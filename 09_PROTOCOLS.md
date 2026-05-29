@@ -594,6 +594,22 @@ v1.1 addition (ADR-0045, [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md
 | `EnvironmentComposition` | `env-composition/1` | dataclass | [`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md), [`15_COORDINATION_SHAPES.md §4.8`](15_COORDINATION_SHAPES.md) | Draft | Parent-child env hierarchy with rule cascade. |
 | `ChildEnvFormationProposal` | `child-env-formation-proposal/1` | dataclass | [`15_COORDINATION_SHAPES.md §4.8.5`](15_COORDINATION_SHAPES.md) | Draft | Proposal to spawn child env within parent. |
 
+### 7.12b Population dynamics (v1.1)
+
+v1.1 addition (ADR-0048, ADR-0049, ADR-0050, [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)). Bounded, environment-driven persona genesis with demographic regulation, a rigorous effective-population-size metric, and continuous diversity maintenance.
+
+| Schema | Version | Form | Defined in | Stability | Used by |
+|--------|---------|------|------------|-----------|---------|
+| `PopulationPressureSignal` | `population-pressure-signal/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4A`](16_POPULATION_DYNAMICS.md) | Draft | Kernel-measured genesis trigger (recruitment gap, role coverage, backlog, EPS). |
+| `NicheDescriptor` | `niche-descriptor/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md) | Draft | MAP-Elites behaviour-descriptor cell with occupancy + distinctiveness band. |
+| `GenesisProposal` | `genesis-proposal/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md) | Draft | Persona-authored seed-creation proposal (default-deny; `ReplicationBound`-gated). |
+| `GenesisProvenance` | `genesis-provenance/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md) | Draft | Newborn lineage record distinguishing genesis from fork. |
+| `MentorshipEdge` | `mentorship-edge/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md) | Draft | Mentor↔newborn maturation/scaffolding edge (secure base). |
+| `PopulationPolicy` | `population-policy/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md) | Draft | Operator demographic policy (r/K, density curve, descriptor mode, audit cadence). |
+| `EffectivePopulationSizeEstimate` | `eps-estimate/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md) | Draft | Kernel-computed `min(Ne_v, Ne_d)` founder-effect / monoculture signal. |
+| `DiversityAudit` | `diversity-audit/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4H`](16_POPULATION_DYNAMICS.md) | Draft | Periodic diversity-maintenance audit (novelty pressure, fitness-sharing, recalibration). |
+| `CrossKernelGenesisRequest` | `cross-kernel-genesis-request/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4J`](16_POPULATION_DYNAMICS.md) | Draft | Always-refused marker enforcing the cross-kernel genesis boundary (anti-circumvention). |
+
 ### 7.13 Adding or modifying schemas
 
 A change to any schema in this registry MUST follow this process:

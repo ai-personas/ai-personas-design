@@ -179,7 +179,23 @@ The definitions in this document are **documentation-normative**: when a term de
 
 ## E
 
-**Effective population size** — A measure of the genuinely diverse persona population (analogue of N_e in population genetics), used as a founder-effect signal: a small effective size arms the diversity-injection mandate. Rigorous metric is open (OQ-POP-5). See [`16_POPULATION_DYNAMICS.md §4A`](16_POPULATION_DYNAMICS.md).
+**Effective population size** — A measure of the genuinely diverse persona population (analogue of N_e in population genetics), used as a founder-effect / monoculture signal: a small effective size arms the diversity-injection mandate. Computed rigorously (resolving OQ-POP-5) as the temporally harmonic-mean-smoothed `min(Ne_v, Ne_d)` — the Crow–Kimura **variance effective size** `Ne_v` (sensitive to a few founders authoring everyone) and the inverse-Simpson **effective number of niches** `Ne_d` (sensitive to niche concentration). Schema `eps-estimate/1`. See [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md).
+
+**Effective number of niches (Ne_d)** — The niche-diversity component of effective population size: a Hill number of order 2 (inverse Simpson index) over the MAP-Elites occupancy distribution, `1 / Σ p_i²`. Falls toward 1 under capability monoculture regardless of headcount. See [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md).
+
+**Variance effective size (Ne_v)** — The authorship-skew component of effective population size, per Crow & Kimura: `Ne_v = (N·k̄ − 1)/(k̄ − 1 + V_k/k̄)`, reduced below census `N` when a few founder personas author most of the lineage (founder effect). See [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md).
+
+**Diversity audit** — Periodic kernel audit (schema `diversity-audit/1`, cadence per `population-policy/1`) that recomputes effective population size and niche occupancy and, on detecting drift toward monoculture, arms novelty pressure, attention fitness-sharing, and (on mis-calibration signals) a niche recalibration advisory. The continuous, post-birth complement to the at-birth diversity-injection mandate. See [`16_POPULATION_DYNAMICS.md §4H`](16_POPULATION_DYNAMICS.md).
+
+**Novelty pressure** — Diversity-maintenance lever in Persona Genesis: when the effective number of niches is low or declining, the kernel scores the next birth's candidate niches by distance to the nearest occupied cells (novelty search) and tightens the distinctiveness band so near-niche proposals are refused. See [`16_POPULATION_DYNAMICS.md §4H`](16_POPULATION_DYNAMICS.md).
+
+**Attention fitness-sharing** — Diversity-maintenance lever in Persona Genesis: routing/selection weight on a crowded niche is divided among its co-occupants (fitness sharing / niching) to remove the reproductive advantage of an over-occupied niche. Applies selection pressure only — never retires, archives, or demotes a persona. See [`16_POPULATION_DYNAMICS.md §4H`](16_POPULATION_DYNAMICS.md).
+
+**Learned niche descriptor** — A `population-policy/1.niche_descriptor_mode` option (`cvt` or `learned`) that replaces hand-chosen RIASEC/Belbin axes with CVT-MAP-Elites centroids or AURORA-style unsupervised descriptors learned from observed behaviour, removing operator axis-choice bias and naming no domain category. See [`16_POPULATION_DYNAMICS.md §4I`](16_POPULATION_DYNAMICS.md).
+
+**Niche recalibration advisory** — Mis-calibration signal in Persona Genesis: a sustained `false_collision_rate` (proposals refused `niche_occupied` while pressure stays high) or `unfillable_gap_rate` breach triggers a re-fit (`learned`), re-tessellation (`cvt`), or operator axis review (`fixed_axes`). Resolves R-POP-3. See [`16_POPULATION_DYNAMICS.md §4I`](16_POPULATION_DYNAMICS.md).
+
+**Cross-kernel genesis boundary** — The enforced (not merely declared) v1.1 limit that a `GenesisProposal` naming a foreign kernel as author/host is REFUSED (`cross_kernel_genesis_not_supported_v1_1`), so a persona cannot evade its `ReplicationBound` population ceiling by minting on a sibling kernel. Federated genesis (cross-kernel quorum + federated bound aggregation + replicated provenance) is the deferred v1.1 federation-chapter work. See [`16_POPULATION_DYNAMICS.md §4J`](16_POPULATION_DYNAMICS.md).
 
 **DormantDomain** — Domain that has gone N=6 months without activity. Enters DORMANT state; M=12 further months without reanimation triggers DEPRECATED. Reanimation requires fresh probe + co-sign. See `06_DOMAIN.md §12.1`.
 

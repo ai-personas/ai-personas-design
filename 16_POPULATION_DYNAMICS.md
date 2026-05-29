@@ -15,7 +15,7 @@ This document follows the [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md) skeleton 
 
 **In scope.** Persona-authored seed creation (Genesis); the population-pressure signal that triggers it; recruitment-exhausted-first ordering; MAP-Elites niche allocation and the variety/distinctiveness guarantee; the newborn maturation ramp (mentorship + scaffolding); demographic regulation (carrying capacity, density dependence, r/K strategy); and safety bounding via the existing `ReplicationBound`.
 
-**Out of scope.** Operator-authored seeds (unchanged — `02_PERSONA §12`). Fork mechanics (unchanged — `02_PERSONA §7.4`). Cross-kernel federated genesis (deferred — `OQ-POP-4`). The empirical population-collapse study at N=100/1000 (remains `OQ-PERSONA-1`, v1.2). Any change to operator authority over charter-class ceilings.
+**Out of scope.** Operator-authored seeds (unchanged — `02_PERSONA §12`). Fork mechanics (unchanged — `02_PERSONA §7.4`). Cross-kernel federated genesis (enforced-refused now, federation flow deferred — `§4J`, `OQ-POP-4`). The empirical population-collapse study at N=100/1000 (remains `OQ-PERSONA-1` / `OQ-POP-6`, v1.2). Any change to operator authority over charter-class ceilings.
 
 **Additivity.** Every mechanism here is **additive and default-off**: no genesis is admissible unless an operator has declared a `ReplicationBound` for `replication_kind = "persona_genesis"` (or a wildcard fall-through) **and** the authoring persona's `cohort_assembly.may_author_seeds` is `true`. With neither, behaviour is identical to v1.0.
 
@@ -84,6 +84,8 @@ Persona Genesis is modelled as **bounded adaptive radiation**: a few founder per
 
 **Ecology, genetics, culture.** Competitive exclusion (Gause), adaptive radiation, character displacement, and resource partitioning; founder effect, genetic drift, effective population size, and inbreeding depression; dual-inheritance theory with prestige/conformist transmission biases (Boyd & Richerson); and organizational ecology — density dependence and niche width (Hannan & Freeman).
 
+**Residual-resolution grounding (`§4G`–`§4J`).** The rigorous EPS metric uses Wright's effective population size and Crow & Kimura's *variance effective size* (`Ne_v` reduced below census `N` by variance in reproductive success), combined with the ecological *Hill number / inverse-Simpson effective number of types* (`Ne_d`) and Wright's *harmonic-mean temporal `Ne`* for smoothing. Continuous diversity maintenance reuses the quality-diversity / evolutionary-computation toolkit for preventing premature convergence: **novelty search** (Lehman & Stanley) and **fitness sharing / niching** (Goldberg & Richardson). Learned niche descriptors draw on **CVT-MAP-Elites** (Vassiliades, Chatzilygeroudis & Mouret) and **AURORA** (Cully — unsupervised behavioural descriptors via dimensionality reduction), which also maximise V-alignment by naming no domain category.
+
 ## 2. Goals / Non-Goals
 
 **Goals.**
@@ -103,7 +105,7 @@ Persona Genesis is modelled as **bounded adaptive radiation**: a few founder per
 
 ## 3. Definitions
 
-Terms used normatively below are defined in `§0a` and in [`12_GLOSSARY.md`](12_GLOSSARY.md): *Persona Genesis*, *GenesisProposal*, *population-pressure signal*, *niche cell / niche descriptor*, *competitive-exclusion refusal*, *optimal distinctiveness*, *sibling differentiation*, *generativity gate*, *mentorship edge*, *maturation ramp*, *dual inheritance*, *carrying capacity*, *reproduction strategy (r/K)*, *niche width*, *effective population size*, *diversity-injection mandate*. Schemas are listed in the Technical Appendix and MUST be registered per [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md).
+Terms used normatively below are defined in `§0a` and in [`12_GLOSSARY.md`](12_GLOSSARY.md): *Persona Genesis*, *GenesisProposal*, *population-pressure signal*, *niche cell / niche descriptor*, *competitive-exclusion refusal*, *optimal distinctiveness*, *sibling differentiation*, *generativity gate*, *mentorship edge*, *maturation ramp*, *dual inheritance*, *carrying capacity*, *reproduction strategy (r/K)*, *niche width*, *effective population size*, *diversity-injection mandate*, *variance effective size (Ne_v)*, *effective number of niches (Ne_d)*, *diversity audit*, *novelty pressure*, *attention fitness-sharing*, *learned niche descriptor (CVT / AURORA)*, *niche recalibration advisory*, *cross-kernel genesis boundary*. Schemas are listed in the Technical Appendix and MUST be registered per [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md).
 
 ## 4. Normative specification
 
@@ -184,6 +186,60 @@ A newborn does not start as a full participant. The kernel initialises it as a *
 
 **Anti-pathologies.** (a) *Genesis spam / runaway* — bounded by the `ReplicationBound` rate and population ceilings. (b) *Stagnation-driven over-birthing* — a low-utility persona birthing to feel useful (controlled rather than generative motivation, Deci & Ryan) is blocked by the generativity gate plus a utility check on the authoring persona. (c) *Monoculture / inbreeding* — countered by the diversity-injection mandate (`§4C`). (d) *Refusal laundering* — a persona attempting to birth a child to perform actions it is itself refused does not escape the floor: the newborn inherits the same floor sources, and the seed-validation step (`§4D.5`) refuses seeds that widen the safety surface. (e) *Perpetual re-storming* — every birth pushes the cohort back through Tuckman's forming/storming phases (an integration cost); too-frequent births keep a team from ever reaching *performing*. This integration cost is part of the density-dependent competition term and is a further reason the birth rate is rate-limited.
 
+## 4G. Effective population size — a rigorous metric (resolves OQ-POP-5)
+
+`§4A` and `§4C` use `effective_population_size` as the founder-effect signal that arms the diversity-injection mandate. v1.0's draft left it informal; this section makes it rigorous, borrowing directly from population genetics (Wright; Crow & Kimura) and from the Hill-number family of diversity indices used in ecology.
+
+The kernel computes **two complementary estimators** and takes the **most conservative** (smallest), because either failure mode — a few founders authoring everyone, or everyone crowding a few niches — is a monoculture risk:
+
+1. **Variance effective size `Ne_v`** (authorship-skew / founder effect). Per Crow & Kimura's variance effective size for non-overlapping generations:
+
+   ```text
+   Ne_v = (N·k̄ − 1) / (k̄ − 1 + V_k / k̄)
+   ```
+
+   where `N` = ACTIVE population, `k̄` = mean number of lineage descendants a persona has authored (genesis births + compositional-fork authorships), and `V_k` = the variance of that count across the population. When a handful of founders author the entire cohort, `V_k ≫ k̄` and `Ne_v ≪ N` — exactly the founder-effect signature (in polygynous biological populations the analogous `Ne/N` is ~0.1–0.3).
+
+2. **Niche-diversity effective size `Ne_d`** (the *effective number of occupied niches*) — a Hill number of order 2 (the inverse Simpson index):
+
+   ```text
+   Ne_d = 1 / Σ_i p_i²        where p_i = (ACTIVE personas in niche cell i) / N
+   ```
+
+   `Ne_d` falls toward 1 as the population concentrates into one cell, regardless of headcount, capturing capability monoculture that `Ne_v` alone would miss.
+
+**Combined, temporally smoothed metric.** `effective_population_size = harmonic_mean over the last eps_temporal_window of min(Ne_v, Ne_d)`. The harmonic mean over time is Wright's temporal-`Ne` construction — it is dominated by the *lowest* recent value, so a brief diversity bottleneck keeps the injection mandate armed until diversity genuinely recovers, not merely for one window. The result feeds `population-pressure-signal/1.effective_population_size` (`§4A` factor 6) and the `§4C` injection threshold; it is kernel-measured and read-only to personas.
+
+## 4H. Continuous diversity maintenance (mitigates post-birth drift, OQ-POP-6)
+
+`§4C` guarantees variety **at birth**. It does not, on its own, stop a cohort from drifting toward monoculture *after* birth (selection, imitation, and prestige-biased cultural transmission all pull toward the locally-successful type). v1.0 left this as the honest residual behind OQ-POP-6 / OQ-PERSONA-1. This section adds a continuous loop, reusing the standard quality-diversity / evolutionary-computation toolkit for diversity preservation.
+
+1. **Diversity audit.** Every `population-policy/1.diversity_audit_cadence`, the kernel recomputes `§4G` EPS plus the niche-occupancy histogram and emits a signed `diversity-audit/1` with a `DIVERSITY_AUDIT` lineage event. The audit is observational; it changes no persona state directly.
+2. **Novelty pressure on the *next* birth.** When `Ne_d` is below threshold or trending down across audits, the kernel scores candidate genesis niches by **novelty** — mean descriptor distance to the *k* nearest occupied cells (novelty search; Lehman & Stanley) — and tightens the `§4C` distinctiveness band so near-niche proposals are refused `out_of_distinctiveness_band` until a sufficiently distant niche is offered. This composes with, and is strictly a superset of, the existing founder-effect injection.
+3. **Attention fitness-sharing (post-birth, no demotion).** When a niche cell's occupancy exceeds its optimum, the kernel divides **task-routing / selection weight** among the co-occupants — fitness sharing (Goldberg & Richardson) — so redundant occupants of a crowded niche lose the routing advantage that would otherwise let the locally-dominant type out-reproduce. This applies **selection pressure only**: it adjusts routing weight, and MUST NOT retire, archive, or demote a persona (lifecycle transitions remain governed by `02_PERSONA §7` and are not a diversity-control lever). It is the in-vivo analogue of the at-birth character-displacement rule (`§4C`).
+
+This loop **mitigates** drift; it does not prove the population is collapse-proof at N=100/1000. That empirical question stays open as OQ-POP-6 (cross-referenced to OQ-PERSONA-1), now with the maintenance mechanism it will be measured against.
+
+## 4I. Niche-descriptor calibration & learned descriptors (resolves R-POP-3, addresses OQ-POP-2)
+
+R-POP-3 (hand-chosen RIASEC/Belbin axes mis-calibrate — leaving true gaps unfillable or false gaps over-filled) is the niche-grid's structural weakness. The fix is to make the descriptor space itself selectable and self-correcting via `population-policy/1.niche_descriptor_mode`:
+
+- **`fixed_axes`** (default) — the `§4C` `interest_type × team_role × primary_disposition × domain × contribution_kind` grid. Operator-legible; the recommended starting point.
+- **`cvt`** — **CVT-MAP-Elites** (Vassiliades, Chatzilygeroudis & Mouret): partition the (possibly high-dimensional) descriptor space with `k` well-spread centroids via a centroidal Voronoi tessellation, instead of a rigid axis grid. Scales to many descriptor dimensions without an exploding cell count.
+- **`learned`** — **AURORA**-style unsupervised descriptors: a dimensionality-reduction encoder (e.g. a VAE) over persona behaviour-trajectory embeddings *learns* the descriptor space from observed behaviour, then tessellates it. This removes the operator's axis-choice bias entirely — nothing domain-specific is named — and is therefore the most V-aligned mode (descriptors are learned data, never a substrate enum). The encoder is periodically re-fit; descriptor drift past a bound triggers re-tessellation and an occupancy remap.
+
+All three modes resolve to the same `niche-descriptor/1` occupancy interface, so `§4C`/`§4D` admission is unchanged; only the cell definition differs.
+
+**Mis-calibration detector.** Regardless of mode, the kernel tracks two rates per audit window: `false_collision_rate` (genesis proposals refused `niche_occupied` while `pressure_score` stays high and the capability gap stays unfilled — a sign the grid is too coarse) and `unfillable_gap_rate` (sustained pressure with no admissible empty cell — too fine, or wrong axes). Sustained breach of either emits a `niche_recalibration_advisory` → re-fit (`learned`) / re-tessellate (`cvt`) / operator axis review (`fixed_axes`). This converts R-POP-3 from "live with it" to a detected, self-correcting condition.
+
+## 4J. Cross-kernel genesis boundary (OQ-POP-4 — specified-but-deferred)
+
+Federated cross-kernel genesis remains out of scope for v1.1 (`§0`, NG4). But "out of scope" must be **enforced**, not merely declared, because it is a safety boundary: a persona must not evade its `ReplicationBound` by authoring offspring on a sibling kernel.
+
+- **Refusal.** A `GenesisProposal` whose authoring persona or whose host environment crosses a kernel boundary is REFUSED `cross_kernel_genesis_not_supported_v1_1`. (Recruiting an *existing* foreign persona over A2A is unaffected — recruitment is not creation; `§4B`.)
+- **Anti-circumvention.** Until federated genesis ships, the per-kernel `persona_genesis` `ReplicationBound` is the whole story; there is no cross-kernel path to mint around it.
+- **v1.1 federation requirements (specified, deferred).** Lifting this needs three things, which is why it is a chapter, not a flag: (1) a cross-kernel **consent/quorum** on the proposal carried over signed AgentCards (`09_PROTOCOLS §3`); (2) a **federated `ReplicationBound` aggregation** so the population ceiling is *global across the federation* rather than per-kernel — otherwise `M` kernels silently multiply the ceiling `M`-fold; (3) genesis-provenance replicated into the federated lineage. This converts OQ-POP-4 from open-ended to a specified, bounded deferral.
+
 ## 5. Worked examples
 
 1. **Adaptive radiation from one founder.** A lone founder persona has a task requiring an `experimental` contribution_kind. Local and federation recruitment return no admissible candidate; no existing persona is close enough to fork (`§4B`). `pressure_score` crosses threshold (capability backlog + unfilled role). The founder (generative; above the gate) authors a `GenesisProposal` for a falsifier-leaning experimenter in an **empty** RIASEC×Belbin niche. The `persona_genesis` bound admits; the kernel mints `LIFECYCLE_GENESIS`. The newborn starts `passive` with low attention; the founder mentors within the newborn's ZPD; scaffolding fades as the newborn clears tasks (`§4E`).
@@ -191,6 +247,9 @@ A newborn does not start as a full participant. The kernel initialises it as a *
 3. **Saturation damping.** As the ecosystem fills, population nears `population_ceiling`. Density-dependent competition plus logistic damping drive the effective birth rate toward zero; new pressure resolves to `pause` or `operator-interim` (`04_PROJECT §14.1`) rather than genesis.
 4. **Founder-effect injection.** Effective population size is below threshold and the existing personas are similar. The diversity-injection mandate forces selection of a **distant** empty niche, REFUSING a near-niche proposal with `out_of_distinctiveness_band` until a sufficiently novel seed is offered.
 5. **Recursion cap.** A second-generation newborn (itself born via genesis) attempts to author a seed at lineage depth equal to `depth_ceiling`. Admission REFUSES with `replication_bound_exceeded` (depth).
+6. **EPS bottleneck holds the mandate.** Twelve personas exist but eleven were authored by one founder and ten sit in two adjacent niche cells. Headcount `N = 12`, but `Ne_v ≈ 2.4` (authorship skew) and `Ne_d ≈ 2.1` (niche concentration); `effective_population_size = min(...) ≈ 2.1`, smoothed below threshold. The diversity-injection mandate (`§4C`) plus novelty pressure (`§4H`) force the next birth into a distant empty niche and keep near-niche proposals refused until the temporal harmonic mean recovers — not just for one window.
+7. **Self-correcting grid.** Under `niche_descriptor_mode = fixed_axes`, three successive genesis proposals are refused `niche_occupied` while `pressure_score` stays high and the capability gap stays unfilled. The `false_collision_rate` breach emits a `niche_recalibration_advisory`; the operator switches to `learned` mode, AURORA re-fits descriptors from observed behaviour, the formerly-colliding proposals now resolve to distinct cells, and genesis proceeds (`§4I`).
+8. **Cross-kernel circumvention blocked.** A persona near its kernel's `population_ceiling` submits a `GenesisProposal` naming a sibling kernel as host. REFUSED `cross_kernel_genesis_not_supported_v1_1`; the bound cannot be evaded by minting elsewhere (`§4J`).
 
 ## 6. Open questions
 
@@ -199,11 +258,11 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | ID | Question | Owner | Resolves into |
 |----|----------|-------|---------------|
 | OQ-POP-1 | `pressure_score` aggregation weights across the six factors — operator-tunable or learned? | Population WG | v1.1 calibration |
-| OQ-POP-2 | Are RIASEC + Belbin + disposition×domain×contribution_kind sufficient niche axes, or is a finer mode-profile axis needed to avoid false collisions? | Persona authors WG | v1.1 niche-grid spec |
+| OQ-POP-2 | Are RIASEC + Belbin + disposition×domain×contribution_kind sufficient niche axes, or is a finer mode-profile axis needed to avoid false collisions? | Persona authors WG | **Addressed (`§4I`)**: `niche_descriptor_mode` adds `cvt` / `learned` descriptor spaces + mis-calibration detector; residual is calibration of the detector thresholds. |
 | OQ-POP-3 | Newborn genesis: hard depth-1 cap, or operator-tunable depth from the start? | Operator policy | v1.1 default policy |
-| OQ-POP-4 | Federated cross-kernel genesis — consent/quorum model for authoring across kernels. | Federation WG | v1.1 federation chapter |
-| OQ-POP-5 | A rigorous `effective_population_size` metric for personas (analogue of N_e). | Population WG | v1.2 population study |
-| OQ-POP-6 | Does environment-driven genesis accelerate or mitigate the diversity collapse studied in `OQ-PERSONA-1` at N=100/1000? | Evolution WG | v1.2 population study |
+| OQ-POP-4 | Federated cross-kernel genesis — consent/quorum model for authoring across kernels. | Federation WG | **Specified-but-deferred (`§4J`)**: enforced refusal + anti-circumvention now; the three federation requirements (cross-kernel quorum, federated `ReplicationBound` aggregation, replicated provenance) land in the v1.1 federation chapter. |
+| OQ-POP-5 | A rigorous `effective_population_size` metric for personas (analogue of N_e). | Population WG | **Addressed (`§4G`)**: `min(Ne_v, Ne_d)` (Crow–Kimura variance size + inverse-Simpson effective niches), temporally harmonic-mean smoothed; empirical N-scale calibration still folds into the v1.2 study. |
+| OQ-POP-6 | Does environment-driven genesis accelerate or mitigate the diversity collapse studied in `OQ-PERSONA-1` at N=100/1000? | Evolution WG | **Partially addressed (`§4H`)**: continuous diversity-maintenance loop (novelty pressure + attention fitness-sharing + periodic audit) now mitigates post-birth drift; whether it *prevents* collapse at scale remains the v1.2 empirical study. |
 
 ## 7. Risks & known limitations
 
@@ -212,8 +271,8 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | ID | Risk | Severity | Likelihood | Mitigation | Target release |
 |----|------|----------|------------|------------|----------------|
 | R-POP-1 | Genesis spam / runaway reproduction. | Critical | Medium | `persona_genesis` `ReplicationBound` (population/rate/depth) at floor source 1; operator cosign; default-deny. | v1.1 |
-| R-POP-2 | Diversity collapse / inbreeding despite the grid. | High | Medium | Occupancy ceiling + optimal-distinctiveness band + EPS-keyed diversity injection; ties to OQ-PERSONA-1. | v1.1 (grid); v1.2 (study) |
-| R-POP-3 | Niche-grid mis-calibration leaves true gaps unfillable or false gaps over-filled. | Medium | High | Operator-tunable RIASEC/Belbin axes; advisory on near-miss cells. | v1.1 |
+| R-POP-2 | Diversity collapse / inbreeding despite the grid. | High | Medium | Occupancy ceiling + optimal-distinctiveness band + EPS-keyed diversity injection (`§4C`) **+ continuous diversity-maintenance loop (`§4H`: novelty pressure + attention fitness-sharing + periodic audit)**; rigorous EPS metric (`§4G`); ties to OQ-PERSONA-1. | v1.1 (grid + maintenance); v1.2 (study) |
+| R-POP-3 | Niche-grid mis-calibration leaves true gaps unfillable or false gaps over-filled. | Medium | High | `niche_descriptor_mode ∈ {fixed_axes, cvt, learned}` (`§4I`: CVT-MAP-Elites / AURORA learned descriptors remove axis-choice bias) + mis-calibration detector (`false_collision_rate` / `unfillable_gap_rate` → `niche_recalibration_advisory`). | v1.1 |
 | R-POP-4 | Newborn quality dilution (low-maturity personas flood the ecosystem). | High | Medium | ALPS Layer 0 + ZPD scaffolding + generativity gate + rate ceiling. | v1.1 |
 | R-POP-5 | Genesis vs fork lineage confusion in audits. | Medium | Low | Distinct `LIFECYCLE_GENESIS` + `genesis-provenance/1`. | v1.1 |
 | R-POP-6 | Operator cosign latency stalls autonomous task flow. | Medium | Medium | `operator_deferred` `PolicyEnvelope` sub-limit pre-authorising genesis up to a hazard-bounded sub-ceiling. | v1.1 |
@@ -240,6 +299,13 @@ Family `A-GEN*`, co-located in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md
 - **A-GEN15** Dual inheritance: cultural skills transmitted only with counterparty consent; prestige-biased mentor learning recorded in provenance.
 - **A-GEN16** Secure base / mentor reassignment: a mentor enters RETIRED before the newborn reaches autonomy maturity → the `mentorship-edge/1` is re-assigned to another generative member (or a `mentor_vacancy` advisory is surfaced); the newborn is never left without a secure base.
 - **A-GEN17** Parental-investment bound: an author whose projected investment would breach the parent-offspring-conflict bound (over-investing against its own obligations) is REFUSED / throttled per `population-policy/1`.
+- **A-GEN18** EPS variance estimator: a population where one founder authored all others yields `Ne_v ≪ N`; `effective_population_size` drops below `diversity_injection_eps_threshold` and the injection mandate arms (`§4G`).
+- **A-GEN19** EPS niche estimator: a population concentrated in one niche cell yields `Ne_d → 1` regardless of headcount; `min(Ne_v, Ne_d)` reflects it (`§4G`).
+- **A-GEN20** Temporal smoothing: a one-window diversity bottleneck keeps the mandate armed across subsequent windows until the harmonic mean recovers (`§4G`).
+- **A-GEN21** Diversity audit + novelty pressure: a `diversity-audit/1` showing declining `Ne_d` tightens the distinctiveness band so a near-niche proposal is refused `out_of_distinctiveness_band` (`§4H`).
+- **A-GEN22** Attention fitness-sharing applies *routing-weight* pressure only on a crowded niche and never retires/demotes a persona (lifecycle unchanged; `§4H`).
+- **A-GEN23** Niche recalibration: sustained `false_collision_rate` (refused `niche_occupied` while pressure stays high) emits a `niche_recalibration_advisory`; under `learned`/`cvt` mode descriptors re-fit and formerly-colliding proposals resolve to distinct cells (`§4I`).
+- **A-GEN24** Cross-kernel boundary: a `GenesisProposal` naming a foreign kernel as author or host is REFUSED `cross_kernel_genesis_not_supported_v1_1`; the `population_ceiling` cannot be evaded across kernels (`§4J`).
 
 ## 9. Cross-references
 
@@ -374,6 +440,68 @@ class PopulationPolicy:
     genesis_threshold: float                       # default pressure trigger_threshold
     mentor_investment_bound: tuple[float, float]   # (min, max) author rearing investment
                                                    # (parent-offspring-conflict guard)
+    # Residual-resolution levers (§4G–§4I)
+    niche_descriptor_mode: str = "fixed_axes"      # "fixed_axes" | "cvt" | "learned" (§4I)
+    eps_temporal_window: timedelta                 # harmonic-mean smoothing window for EPS (§4G)
+    diversity_audit_cadence: timedelta             # how often §4H audit runs
+    novelty_pressure_enabled: bool = True          # §4H novelty bias on next birth
+    attention_fitness_sharing_enabled: bool = True # §4H routing-weight sharing on crowded niches
+    false_collision_rate_ceiling: float            # breach → niche_recalibration_advisory (§4I)
+    unfillable_gap_rate_ceiling: float             # breach → niche_recalibration_advisory (§4I)
     declared_by_operator_id: str
+    signed_by: bytes
+```
+
+### A.7 `EffectivePopulationSizeEstimate` schema
+
+```python
+@dataclass(frozen=True)
+class EffectivePopulationSizeEstimate:
+    schema: str = "eps-estimate/1"                 # kernel-computed; read-only to personas (§4G)
+    estimate_id: str
+    environment_id: str
+    census_n: int                                  # ACTIVE population N
+    ne_variance: float                             # Crow–Kimura Ne_v (authorship-skew / founder effect)
+    ne_niche_diversity: float                      # inverse-Simpson effective number of occupied niches Ne_d
+    effective_population_size: float               # harmonic_mean over eps_temporal_window of min(Ne_v, Ne_d)
+    below_injection_threshold: bool                # arms §4C diversity-injection mandate
+    computed_at: datetime
+    signed_by: bytes
+```
+
+### A.8 `DiversityAudit` schema
+
+```python
+@dataclass(frozen=True)
+class DiversityAudit:
+    schema: str = "diversity-audit/1"              # emitted each diversity_audit_cadence (§4H)
+    audit_id: str
+    environment_id: str
+    eps_estimate_ref: str                          # EffectivePopulationSizeEstimate.estimate_id
+    niche_occupancy_histogram: dict                # cell -> ACTIVE count
+    ne_d_trend: float                              # signed delta vs prior audit (negative => drifting)
+    novelty_pressure_armed: bool                   # §4H novelty bias active for next birth
+    fitness_sharing_cells: list["NicheDescriptor"] # crowded cells under routing-weight sharing
+    false_collision_rate: float                    # §4I mis-calibration signal
+    unfillable_gap_rate: float                     # §4I mis-calibration signal
+    recalibration_advised: bool                    # true => niche_recalibration_advisory emitted
+    audited_at: datetime
+    signed_by: bytes
+```
+
+### A.9 `CrossKernelGenesisRequest` schema (refused in v1.1)
+
+```python
+@dataclass(frozen=True)
+class CrossKernelGenesisRequest:
+    schema: str = "cross-kernel-genesis-request/1" # §4J — always REFUSED in v1.1
+    request_id: str
+    origin_kernel_id: str
+    target_kernel_id: str                          # foreign kernel named as author/host
+    genesis_proposal_ref: str
+    refusal_reason: str = "cross_kernel_genesis_not_supported_v1_1"
+    # v1.1 federation chapter will replace this with a consented, quorum-signed,
+    # federated-ReplicationBound-aggregated flow (§4J requirements 1–3).
+    created_at: datetime
     signed_by: bytes
 ```

@@ -1088,7 +1088,7 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 | `06_DOMAIN` | [PASS] | Niche axis *values* (RIASEC/Belbin/contribution_kind) are registry keys resolved via `§7.6`, never substrate enums (see V-check below). |
 | `07_ARTIFACTS` | [PASS] | The `proposed_seed` draft is an opaque authored artifact; the kernel validates safety *shape*, not domain content. |
 | `08_KNOWLEDGE` | [PASS] | Dual inheritance reuses the Voyager skill library + memory-inheritance-consent (`02_PERSONA §7.4`) + hybrid retrieval indexing. |
-| `09_PROTOCOLS` | [PARTIAL] | New schemas (`population-pressure-signal/1`, `niche-descriptor/1`, `genesis-proposal/1`, `genesis-provenance/1`, `mentorship-edge/1`, `population-policy/1`) MUST be added to the `§7` schema registry when `16_POPULATION_DYNAMICS` promotes from Draft to Stable. A2A cross-kernel genesis is OOS. |
+| `09_PROTOCOLS` | [PASS] | All schemas (now 9, incl. `eps-estimate/1`, `diversity-audit/1`, `cross-kernel-genesis-request/1`) registered in `§7.12b` (Draft, mirroring §7.12a). Cross-kernel genesis is enforced-refused (`§4J`), not silently OOS. |
 | `11_ACCEPTANCE_TESTS` | [PASS] | `A-GEN*` family (17 tests) registered; reuses `A-RB*` for the replication-bound paths. |
 | `12_GLOSSARY` | [PASS] | ~20 terms added (Persona Genesis, GenesisProposal, NicheDescriptor, generativity gate, mentorship edge, secure base, …). |
 | `14_DECISIONS` | [PASS] | ADR-0048 (Persona Genesis) + ADR-0049 (demographic regulation); related to ADR-0019. |
@@ -1112,14 +1112,15 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 
 **Not-gaps (persona evolves these).** The niche-axis *values* (RIASEC interest types, Belbin roles, `contribution_kind`s, domains), the newborn's domain skills, and any verifier/convention kinds are emergent via `KindRegistry` (`06_DOMAIN §7.5/§7.6`) — the substrate supplies the slots; personas fill them.
 
-**Status.** Validated against the v1.1 draft; aligns with the intended design. Genesis is the sanctioned, bounded continuation of SCENARIO 04's `ReplicationBound` (gap #4) and the `02_PERSONA §11.3` no-spawn-without-bound rule.
+**Status.** Validated against the v1.1 draft; aligns with the intended design. Genesis is the sanctioned, bounded continuation of SCENARIO 04's `ReplicationBound` (gap #4) and the `02_PERSONA §11.3` no-spawn-without-bound rule. **Residuals researched and addressed in a follow-up pass (ADR-0050; `16 §4G–§4J`) — see below.**
 
-**Honest residuals.**
-- **Cross-kernel / federated genesis is OOS** (OQ-POP-4) — same light-time/federation boundary as SCENARIO 04's residuals.
-- **`effective_population_size` lacks a rigorous metric** (OQ-POP-5); the founder-effect safeguard is heuristic until defined.
-- **Niche-grid axis choice biases diversity** (R-POP-3) — inherited from ADR-0019's behaviour-descriptor caveat; operator-tunable, not eliminated.
-- **Diversity is guaranteed at birth, not forever.** Post-birth drift toward monoculture is *mitigated* by MAP-Elites + ALPS + character displacement, but the empirical N=100/1000 collapse question remains open (OQ-PERSONA-1 / OQ-POP-6).
-- **`09_PROTOCOLS §7` registry entries are pending** Stable promotion of `16_POPULATION_DYNAMICS` (same draft-status handling as `15_COORDINATION_SHAPES`).
+**Honest residuals (researched + addressed; ADR-0050).**
+- **`effective_population_size` is now rigorous** — RESOLVED (`§4G`). Defined as the harmonic-mean-smoothed `min(Ne_v, Ne_d)`: Crow–Kimura variance effective size (authorship-skew founder effect) + inverse-Simpson effective number of niches (concentration). No longer heuristic. Empirical N-scale calibration folds into the v1.2 study.
+- **Niche-grid axis bias** — RESOLVED (`§4I`). `niche_descriptor_mode ∈ {fixed_axes, cvt, learned}` (CVT-MAP-Elites / AURORA learned descriptors) + a `false_collision_rate`/`unfillable_gap_rate` mis-calibration detector that emits a self-correcting `niche_recalibration_advisory`. Closes R-POP-3.
+- **Diversity at birth vs forever** — MITIGATED (`§4H`). A continuous diversity-maintenance loop (periodic audit + novelty pressure on the next birth + attention fitness-sharing on crowded niches, routing-weight only) now counters post-birth drift. Whether it *prevents* collapse at N=100/1000 remains the open empirical question (OQ-POP-6 / OQ-PERSONA-1, v1.2) — now with a mechanism to measure against.
+- **Cross-kernel / federated genesis** — ENFORCED + SPECIFIED-BUT-DEFERRED (`§4J`). No longer silently OOS: cross-kernel proposals are refused (`cross_kernel_genesis_not_supported_v1_1`) so the `ReplicationBound` ceiling cannot be evaded across kernels; the v1.1 federation chapter needs cross-kernel quorum + federated bound aggregation + replicated provenance.
+- **`09_PROTOCOLS §7` registry** — RESOLVED. All 9 schemas registered in `§7.12b` (Draft).
+- **Remaining true residual:** the empirical population-collapse study at scale (OQ-POP-6 / OQ-PERSONA-1) and detector/curve threshold calibration (OQ-POP-1) — both correctly v1.2 study items, not design gaps.
 
 ---
 

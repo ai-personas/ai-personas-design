@@ -54,7 +54,7 @@ This is the project's institutional memory — every major design decision, the 
 
 **Why alternatives matter.** Listing rejected options tells you the boundaries of the design space that was explored. If you are wondering "why not just do X instead?", the alternatives section likely already answers that question.
 
-**How the catalog is organised.** Decisions are grouped by topic area: identity and signing, substrate philosophy, the persona model, task handling, domain emergence, memory and knowledge, protocols, multi-principal collaboration, persona retirement, user protections, teaching, and project composition. Each ADR has a four-digit ID (ADR-0001 through ADR-0047 as of this version) allocated in order. When a later decision replaces an earlier one, the old entry stays with a note pointing to its successor — nothing is deleted.
+**How the catalog is organised.** Decisions are grouped by topic area: identity and signing, substrate philosophy, the persona model, task handling, domain emergence, memory and knowledge, protocols, multi-principal collaboration, persona retirement, user protections, teaching, and project composition. Each ADR has a four-digit ID (ADR-0001 through ADR-0050 as of this version) allocated in order. When a later decision replaces an earlier one, the old entry stays with a note pointing to its successor — nothing is deleted.
 
 **How to use this document.** If you want to understand a specific design choice, find the relevant ADR by topic section or ID. If you want the foundational decisions that shaped everything else, start with ADR-0001 (why the kernel owns identity) and ADR-0006 (what is hardcoded versus what emerges through use). This document is informative, not normative — the actual rules live in the specification documents it references.
 
@@ -1177,7 +1177,29 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 **Consequences.**
 - (+) Smooth approach to equilibrium; self-regulating birth rate; operator-tunable strategy.
 - (+) Grounds birth dynamics in validated human/organizational models.
-- (−) Curve calibration is a design burden (OQ-POP-1); a rigorous `effective_population_size` metric is still open (OQ-POP-5).
+- (−) Curve calibration is a design burden (OQ-POP-1); a rigorous `effective_population_size` metric is supplied by ADR-0050.
+
+---
+
+### ADR-0050 — Rigorous effective population size, continuous diversity maintenance, and learned niche descriptors
+
+**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md)–`§4J`). Closes the SCENARIO 13 residuals (`13_DESIGN_VALIDATION.md`).
+
+**Context.** ADR-0048/0049 left four honest residuals: `effective_population_size` was informal (OQ-POP-5); diversity was guaranteed only at birth, not against post-birth drift (OQ-POP-6); the RIASEC/Belbin niche grid could mis-calibrate (R-POP-3 / OQ-POP-2); and cross-kernel genesis was declared OOS without enforcement (OQ-POP-4 — a `ReplicationBound` evasion risk).
+
+**Decision.**
+1. **Rigorous EPS (`§4G`).** `effective_population_size = harmonic_mean_over_window(min(Ne_v, Ne_d))` — Crow–Kimura variance effective size `Ne_v` (authorship skew / founder effect) and the inverse-Simpson effective number of niches `Ne_d` (niche concentration), Wright's temporal harmonic mean for smoothing. Schema `eps-estimate/1`.
+2. **Continuous diversity maintenance (`§4H`).** A periodic `diversity-audit/1` arms novelty pressure (novelty search on the next birth's niche) and attention fitness-sharing (routing-weight only; never demotes a persona), mitigating post-birth drift toward monoculture.
+3. **Learned niche descriptors (`§4I`).** `population-policy/1.niche_descriptor_mode ∈ {fixed_axes, cvt, learned}` (CVT-MAP-Elites / AURORA) plus a mis-calibration detector (`false_collision_rate` / `unfillable_gap_rate` → `niche_recalibration_advisory`), removing operator axis-choice bias and self-correcting the grid.
+4. **Enforced cross-kernel boundary (`§4J`).** Cross-kernel `GenesisProposal`s are REFUSED (`cross_kernel_genesis_not_supported_v1_1`) so the per-kernel population ceiling cannot be evaded by minting elsewhere; federated genesis (cross-kernel quorum + federated bound aggregation + replicated provenance) is the specified, deferred v1.1 federation-chapter work.
+
+**Consequences.**
+- (+) Three of four SCENARIO 13 residuals resolved or mitigated; the fourth converted from open to specified-but-deferred-and-enforced.
+- (+) The founder-effect signal and monoculture defence are now measurable and testable (A-GEN18–A-GEN24).
+- (+) `learned` descriptor mode is the most V-aligned (names no domain category).
+- (−) Whether continuous maintenance *prevents* (not just mitigates) collapse at N=100/1000 remains the v1.2 empirical study (OQ-POP-6 / OQ-PERSONA-1); detector thresholds need calibration.
+
+**Related.** ADR-0048, ADR-0049, ADR-0019 (evolution machinery), [`13_DESIGN_VALIDATION.md` SCENARIO 13](13_DESIGN_VALIDATION.md).
 
 ---
 
