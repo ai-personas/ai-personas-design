@@ -488,7 +488,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-KNOWLEDGE-2 | Cross-encoder reranker fine-tuning (R-KNOWLEDGE-7): per-domain weights, or per-persona personalisation? Trade-off: storage cost vs retrieval precision. | — | v1.1 fine-tune scheme. |
 | OQ-KNOWLEDGE-3 | Memory consolidation cadence: per-task, per-session, per-cohort sweep, or driven by retrieval-rate signals? v1.0 ships batch; v1.1 may add adaptive. | — | v1.1 cadence policy. |
 | OQ-KNOWLEDGE-4 | Graph-memory pruning policy (R-KNOWLEDGE-9): time-based, importance-based, retrieval-frequency-based, or composite? | — | v1.1 pruning. |
-| OQ-KNOWLEDGE-5 | GEPA + MIPROv2 budget per persona (R-KNOWLEDGE-5): operator-tunable, or per-persona maturity-scaled? | Prompt engineers | v1.1 budget policy. |
+| OQ-KNOWLEDGE-5 | GEPA + MIPROv2 budget per persona (R-KNOWLEDGE-5): operator-tunable, or per-persona experiential-floor / community-standing-scaled? | Prompt engineers | v1.1 budget policy. |
 | OQ-KNOWLEDGE-6 | MeasurementFact + UncertaintyEnvelope: do we ship a small standard library of common uncertainty distributions (Gaussian, lognormal, uniform, Student's t), or leave to per-domain plugins? | Domain curators | v1.1 distribution library. |
 | OQ-KNOWLEDGE-7 | Hierarchical Graph Memory (`§7`): what's the canonical node-merge protocol when two personas independently observe the same entity? Currently one-shot dedup; would semantic clustering help? | — | v1.2 cluster merge. |
 

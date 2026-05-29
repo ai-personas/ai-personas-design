@@ -1359,7 +1359,8 @@ A-GEN3      Target niche occupied (occupancy ≥ ceiling) → REFUSED
 A-GEN4      Bound present + recruitment exhausted + empty cell +
              pressure_score ≥ threshold + generative author → minted
              SEEDED→ACTIVATED; LIFECYCLE_GENESIS with authoring_persona_ids;
-             newborn NEWBORN, ALPS Layer 0.
+             age-0 newborn (born_at=now, experiential_floor=0, ALPS Layer 0,
+             peripheral community standing).
 A-GEN5      Population / rate / depth breach → REFUSED
              (replication_bound_exceeded, floor source 1).
 A-GEN6      Operator-pre-authorized bound → birth WITHOUT per-birth
@@ -1369,7 +1370,8 @@ A-GEN7      No environment with spare attention/energy to host newborn →
              REFUSED (no_host_capacity).
 A-GEN8      Recursive genesis: within depth_ceiling admitted; at
              depth_ceiling+1 REFUSED.
-A-GEN9      Author below generativity_threshold → REFUSED
+A-GEN9      Author below the generativity gate (any of floor / standing /
+             ALPS-layer / fitness thresholds unmet) → REFUSED
              (author_not_generative); mentorship-edge/1 created on success.
 A-GEN10     Optimal distinctiveness: too-close proposal REFUSED
              (niche_occupied/fork); too-distant REFUSED
@@ -1378,16 +1380,17 @@ A-GEN11     Sibling/character displacement: a second lineage birth that
              does not de-correlate disposition → REFUSED (sibling_collision).
 A-GEN12     Demographic regulation: near ceiling, effective birth rate
              damps below rate_ceiling_per_window; r vs K strategy yields
-             expected birth cadence/maturity profile.
+             expected birth cadence / experiential-floor profile.
 A-GEN13     Low effective_population_size → diversity-injection mandate
              forces a distant niche (near-niche proposals refused).
 A-GEN14     Maturation ramp: newborn starts passive + low attention;
-             scaffolding fades to deliberative as age_tasks rise.
+             scaffolding fades to deliberative as wall-clock age rises and
+             community standing is conferred.
 A-GEN15     Dual inheritance: cultural skills transmitted only with
              counterparty consent; prestige-biased mentor learning
              recorded in genesis-provenance/1.
 A-GEN16     Secure base / mentor reassignment: mentor RETIRED before
-             newborn autonomy maturity → mentorship-edge/1 re-assigned to
+             newborn autonomy threshold → mentorship-edge/1 re-assigned to
              another generative member (or mentor_vacancy advisory);
              newborn never left without a secure base.
 A-GEN17     Parental-investment bound: author whose projected rearing
@@ -1652,22 +1655,30 @@ A-EF-36   Path 0 (EnvFormationProposal) and Path 1 (PROJECT_INVITATION)
 
 ## 9d. v1.0 fork-inheritance tests (A-FK*)
 
-Tests for the persona fork inheritance policies added per `02_PERSONA.md §7.4`. Covers clone vs. compose fork mechanics, four new policy schemas (MemoryInheritancePolicy, MaturityInheritancePolicy, CharterConflictResolution, DormantForkPolicy), multi-environment age counting, and clarifications on skill library inheritance.
+Tests for the persona fork inheritance policies added per `02_PERSONA.md §7.4`. Covers clone vs. compose fork mechanics, four new policy schemas (MemoryInheritancePolicy, StandingFloorInheritancePolicy, CharterConflictResolution, DormantForkPolicy), multi-environment experience counting, wall-clock age + ALPS, per-environment community standing, and clarifications on skill library inheritance.
 
-### A-FK-AGE — Age counting clarifications
+### A-FK-AGE — Wall-clock age + experience counting
 
 ```text
-A-FK-AGE-1   age_tasks is a single global counter on soul.state.json;
-             increments exactly once per task served as envelope source
-             regardless of which env(s) the persona is concurrently
-             present in.  Two-env presence does NOT double-count.
-A-FK-AGE-2   DELEGATED sub-task increments age_tasks once on the
+A-FK-AGE-1   age is wall-clock: age = now − born_at, continuous, monotone,
+             never reset.  experience_tasks is a single global counter on
+             soul.state.json; increments exactly once per task served as
+             envelope source regardless of which env(s) the persona is
+             concurrently present in.  Two-env presence does NOT double-count.
+A-FK-AGE-2   DELEGATED sub-task increments experience_tasks once on the
              delegate's record, not per delegation hop.
-A-FK-AGE-3   DORMANT persona does NOT increment age_tasks (no envelope
-             minted).  Wake from DORMANT does NOT reset age_tasks.
-A-FK-AGE-4   No wall-clock age component is part of substrate metrics.
-             Operator-computed wall-clock age (from created_at) does
-             not affect ALPS layering, maturity, or evolution gating.
+A-FK-AGE-3   DORMANT persona does NOT increment experience_tasks (no envelope
+             minted) and dormancy does NOT pause born_at: a persona dormant
+             for a year is one year older.  Wake from DORMANT does NOT reset
+             experience_tasks.
+A-FK-AGE-4   ALPS layer is derived from wall-clock age via alps-band-policy/1,
+             NOT from experience_tasks.  A persona born 10d ago with
+             experience_tasks=500 sits in the wall-clock band for 10d
+             (default Layer 2), not an experience-derived layer.
+A-FK-AGE-5   Idle-but-old (R-PERSONA-AGE-1): persona born 200d ago, dormant,
+             experience_tasks=2 → upper ALPS band (default Layer 4) by age;
+             low fitness keeps it from dominating selection; experience_tasks
+             unchanged at 2.  Documents the accepted residual.
 ```
 
 ### A-FK-CLONE — Clone fork skill library defaults
@@ -1712,31 +1723,82 @@ A-FK-MEM-7   COMPOSE fork with default policy: all memory tiers
              inherit_none; child starts with empty archives.
 ```
 
-### A-FK-MAT — MaturityInheritancePolicy (§7.4.2)
+### A-FK-FLOOR — StandingFloorInheritancePolicy (§7.4.2)
 
 ```text
-A-FK-MAT-1   Default CLONE policy: mode=start_at_zero, cap=newborn;
-             child starts with maturity = 0 regardless of parent's
-             maturity.
-A-FK-MAT-2   Default COMPOSE policy: mode=inherit_min_parent_halved,
-             cap=juvenile; child's inherited maturity = min(parents'
-             maturity) / 2, capped at juvenile band ceiling.
-A-FK-MAT-3   mode=inherit_avg_parent: child's inherited credit equals
-             mean of parents' parent_selection_count + validated_
-             descendants_count contributions; tracked separately from
-             earned credit.
-A-FK-MAT-4   cap_at_band=newborn enforces ceiling: even if parent has
-             EXPERT maturity, child's inherited maturity is capped at
-             the newborn band upper bound.
-A-FK-MAT-5   track_inherited_separately=True: soul.state.json has
-             maturity_provenance with earned_credit + inherited_credit
-             dicts; replay can recompute earned-only maturity.
-A-FK-MAT-6   Compositional fork from two EXPERT parents with default
-             cap=juvenile: child's effective maturity ≤ juvenile band
-             upper bound (~2.0), preventing inheritance laundering.
-A-FK-MAT-7   cap_at_band="no_cap": honest inheritance without cap;
-             requires operator signature; signed FORK_MATURITY_CAP_
-             WAIVED event for audit.
+A-FK-FLOOR-1 Default CLONE policy: mode=start_at_zero, cap_at_floor=0.0;
+             child starts with experiential_floor = 0 regardless of
+             parent's floor.
+A-FK-FLOOR-2 Default COMPOSE policy: mode=inherit_min_parent_halved,
+             cap_at_floor=0.25; child's inherited floor = min(parents'
+             experiential_floor) / 2, capped at the numeric ceiling.
+A-FK-FLOOR-3 mode=inherit_avg_parent: child's inherited credit equals
+             mean of parents' experience_tasks + parent_selection_count +
+             validated_descendants_count contributions; tracked separately
+             from earned credit.
+A-FK-FLOOR-4 cap_at_floor enforces ceiling: even if parents have a high
+             experiential_floor, child's inherited floor is capped at
+             cap_at_floor.
+A-FK-FLOOR-5 track_inherited_separately=True: soul.state.json has
+             floor_provenance with earned_credit + inherited_credit
+             dicts; replay can recompute earned-only floor.
+A-FK-FLOOR-6 Compositional fork from two high-floor parents with default
+             cap_at_floor=0.25: child's effective floor ≤ 0.25, preventing
+             inheritance laundering.
+A-FK-FLOOR-7 Community standing is NEVER inherited: a forked child starts
+             at peripheral standing (standing_level=0) in every environment
+             regardless of parent standing.  No standing_provenance exists.
+A-FK-FLOOR-8 cap_at_floor=math.inf: honest inheritance without cap;
+             requires operator signature; signed FORK_FLOOR_CAP_WAIVED
+             event for audit.
+```
+
+### A-STAND — Community standing (05_ENVIRONMENT §5.x)
+
+```text
+A-STAND-1    Conferred, not self-awarded: a persona's attempt to write its
+             own community_standing.standing_level is REFUSED with
+             standing_self_award_forbidden.  standing_level rises only via
+             standing-endorsement/1 from a peer quorum.
+A-STAND-2    Non-portable: a persona with full standing in env_A joins env_B
+             → standing_level in env_B = 0 (peripheral); standing in env_A
+             is unaffected; no carry-over.
+A-STAND-3    Global floor portable: a persona with experiential_floor=0.83
+             joins env_C → floor = 0.83 there; but conferred standing in
+             env_C is still 0.  A non-safety relational gate uses standing.
+A-STAND-4    Safety gate stays on floor+operator: may_author_seeds (and
+             other safety-relevant capability) is gated by experiential_floor
+             + operator/ReplicationBound and is never satisfied by conferred
+             standing alone, even at standing_level=1.0.
+A-STAND-5    Anti-gaming (sybil): 5 freshly-minted personas with no prior
+             standing and no cited contributions mutually endorse P → each
+             endorser_weight ≈ 0 (A.18 rule 4), quorum_met=False, standing
+             unchanged.  Endorsements citing kernel-signed EnvironmentLineage
+             contributions from diverse in-env members → standing rises.
+A-STAND-6    Decay: standing_level=0.7 with 31d in-env inactivity decays per
+             decays_after; restate requires fresh endorsements.
+A-STAND-7    Operator cosign: a sensitive RELATIONAL privilege gated by
+             standing requires operator_cosigned=True; operator cosign does
+             NOT extend standing into the safety path (A-STAND-4 still holds).
+```
+
+### A-NOSTAGE — Named life-stage removal (soul-state/6)
+
+```text
+A-NOSTAGE-1  No named-stage literals: grep of every schema-bearing
+             dataclass/JSON yields zero "juvenile" / "adolescent" / "adult" /
+             "expert" gate values or band literals; soul.state has no
+             maturity string; cap_at_band is gone.  ("newborn" remains
+             permitted only as descriptive prose, never as a gate value.)
+A-NOSTAGE-2  Gates still fire: with named stages removed, the generativity
+             gate still REFUSES a sub-threshold author (A-GEN9) via
+             floor+standing+layer+fitness, and ALPS sketch-round protection
+             still selects a Layer-0 variant.
+A-MIGRATE-SOUL6-1  Legacy soul-state/5 record (age_tasks=184,
+             maturity:"adult") is REFUSED until migrated (INV-10); migration
+             yields soul-state/6 with experience_tasks=184, born_at
+             backfilled (created_at / first LIFECYCLE_SEEDED event),
+             experiential_floor recomputed, and no maturity field.
 ```
 
 ### A-FK-CHARTER — CharterConflictResolution (§7.4.3)
@@ -1799,8 +1861,8 @@ A-FK-DORM-8   Operator may set retired_parent_admissible=True per
 ### A-FK-INTEGRATION — composition + substrate purity
 
 ```text
-A-FK-INT-1   Composed fork policy (skill + memory + maturity + charter
-             + dormant) signed atomically at fork-draft; replay
+A-FK-INT-1   Composed fork policy (skill + memory + experiential-floor +
+             charter + dormant) signed atomically at fork-draft; replay
              reconstructs deterministically.
 A-FK-INT-2   Substrate-purity: all "kind" fields in fork policies
              (rationale_kind, conflict_detection_kind, fork_tactic_
@@ -1808,7 +1870,8 @@ A-FK-INT-2   Substrate-purity: all "kind" fields in fork policies
              kinds) resolve against KindRegistry; no closed list of
              domain-shape categories in any policy schema.
 A-FK-INT-3   ALPS Layer 0 entry preserved: every fork places child in
-             Layer 0 (age_tasks=0) regardless of inherited maturity.
+             Layer 0 (born_at=now ⇒ age 0) regardless of inherited
+             experiential floor.
 A-FK-INT-4   Relationship inheritance (02_PERSONA.md §11) composes orthogonally
              with memory inheritance: a child may inherit summary
              memory of counterparty C without inheriting an active

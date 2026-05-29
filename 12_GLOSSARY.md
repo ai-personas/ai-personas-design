@@ -15,7 +15,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Abducer** — A cognitive mode where the persona generates hypotheses (typically CONVERGENT-led). See [`02_PERSONA.md §4`](02_PERSONA.md).
 
-**ALPS (Age-Layered Population Structure)** — Stratification of personas across five age layers to prevent old high-fitness personas from suppressing newly-born ones. Originated by Hornby 2006. See [`02_PERSONA.md §7.3`](02_PERSONA.md).
+**ALPS (Age-Layered Population Structure)** — Stratification of personas across numeric **wall-clock** age layers (Layer 0..N, operator-tunable via `alps-band-policy/1`) to prevent old high-fitness personas from suppressing newly-born ones. Layers are derived from wall-clock age (`now − born_at`), not task count. Originated by Hornby 2006. See [`02_PERSONA.md §7.3`](02_PERSONA.md).
 
 **Agent Card (A2A)** — Signed projection of a persona for cross-kernel federation; published at `.well-known/agent-cards.json`. See [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md).
 
@@ -72,6 +72,10 @@ The definitions in this document are **documentation-normative**: when a term de
 **Carrying capacity** — The maximum persona population an ecosystem can sustain, defined as the sum of free host resources: unallocated `AttentionBudget` + `Energy` + INV-7 compute/cost headroom. Genesis is refused (`no_host_capacity`) when no environment can host the newborn. Grounds the logistic damping of the birth rate. See [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md).
 
 **Character displacement** — In Persona Genesis, the rule that overlapping personas (and successive births from one lineage) MUST diverge in descriptor space — the de-correlation enforced by the sibling-differentiation check. Borrowed from ecology. See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
+
+**Community standing** — Per `(persona, environment)` relational standing (`community-standing/1`), grounded in Lave & Wenger's *Legitimate Peripheral Participation*. **Non-portable** (a persona starts peripheral in every environment, regardless of its global experiential floor or standing elsewhere) and **conferred by the community, never self-awarded** (raised only via `standing-endorsement/1` from a peer quorum, with operator cosign where a sensitive *relational* privilege is gated). Gates relational/collaborative privileges only — never safety-relevant capability. Replaces the v1.0 single portable "maturity" stage. See [`05_ENVIRONMENT.md §5.x`](05_ENVIRONMENT.md), [`02_PERSONA.md §7.2`](02_PERSONA.md).
+
+**Competence** — A persona's experience facet (formerly conflated with "age"): `experience_tasks` and per-mode `mode_proficiencies` measure what a persona has done. Feeds the global experiential floor but is **not** wall-clock age. See [`02_PERSONA.md §7.2`](02_PERSONA.md).
 
 **Competitive-exclusion refusal** — Genesis refusal (`niche_occupied`) when a proposed seed targets a MAP-Elites niche cell whose `occupancy ≥ occupancy_ceiling`; two personas cannot durably occupy the same niche (Gause). The refusal suggests fork instead. See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
 
@@ -181,6 +185,10 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Effective population size** — A measure of the genuinely diverse persona population (analogue of N_e in population genetics), used as a founder-effect / monoculture signal: a small effective size arms the diversity-injection mandate. Computed rigorously (resolving OQ-POP-5) as the temporally harmonic-mean-smoothed `min(Ne_v, Ne_d)` — the Crow–Kimura **variance effective size** `Ne_v` (sensitive to a few founders authoring everyone) and the inverse-Simpson **effective number of niches** `Ne_d` (sensitive to niche concentration). Schema `eps-estimate/1`. See [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md).
 
+**Experience-tasks** — `experience_tasks`, a single global counter on `soul.state.json` incremented once per task a persona serves as envelope source (renamed from v1.0 `age_tasks`). A **competence** stat, not age; dormancy neither increments nor resets it. Feeds the experiential floor. See [`02_PERSONA.md §7.2`](02_PERSONA.md).
+
+**Experiential floor** — The persona's **global, portable** capability minimum (`experiential_floor` on `soul.state.json`): a monotone DGM-style function of `experience_tasks`, `parent_selection_count`, and `validated_descendants_count`. Carried into every environment unchanged; gates substrate capability minimums **including safety-relevant gates** (e.g. `may_author_seeds`). Distinct from per-env, conferred **community standing**. Replaces (with wall-clock age + standing) the v1.0 "maturity" scalar. See [`02_PERSONA.md §7.2`](02_PERSONA.md).
+
 **Effective number of niches (Ne_d)** — The niche-diversity component of effective population size: a Hill number of order 2 (inverse Simpson index) over the MAP-Elites occupancy distribution, `1 / Σ p_i²`. Falls toward 1 under capability monoculture regardless of headcount. See [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md).
 
 **Variance effective size (Ne_v)** — The authorship-skew component of effective population size, per Crow & Kimura: `Ne_v = (N·k̄ − 1)/(k̄ − 1 + V_k/k̄)`, reduced below census `N` when a few founder personas author most of the lineage (founder effect). See [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md).
@@ -245,7 +253,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 ## G
 
-**Generativity gate** — Admission rule that only a persona in a generative life-stage (maturity/fitness ≥ `generativity_threshold`, upper ALPS layer) may author seeds (`may_author_seeds`); newborns and low-fitness personas are refused (`author_not_generative`). After Erikson's generativity-vs-stagnation. See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
+**Generativity gate** — Admission rule that only a *generative* persona may author seeds (`may_author_seeds`), evaluated on three orthogonal facets: global `experiential_floor ≥ generativity_floor_threshold` (safety-relevant), conferred `community_standing ≥ generativity_standing_threshold` in the target env (relational), and wall-clock ALPS layer `≥ generativity_min_alps_layer`, plus a fitness term. Newly-born and low-floor personas are refused (`author_not_generative`). After Erikson's generativity-vs-stagnation. See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
 
 **GenesisProposal** — Schema (`genesis-proposal/1`): a persona's signed proposal to author a new persona — carrying the capability gap, environmental evidence, recruitment-exhaustion proof, target niche, a `persona-seed/2` draft, authoring personas, and resolved cosigns. See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
 
@@ -333,15 +341,17 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **LifecycleEvent** — Enumeration: canonical signed event kinds emitted on persona-FSM transitions: `LIFECYCLE_SEEDED`, `LIFECYCLE_ACTIVATED`, `LIFECYCLE_DORMANT_ENTERED`, `LIFECYCLE_AWAKENED`, `LIFECYCLE_FORK`, `LIFECYCLE_RETIRED`, `LIFECYCLE_ARCHIVED`, `LIFECYCLE_REANIMATED`, `LIFECYCLE_CONSULTED`. Each transition emits to the persona's evolution log, the global LineageGraph, and the OpenTelemetry trace per `02_PERSONA §7`. See [`02_PERSONA.md §7.1`](02_PERSONA.md).
 
+**Legitimate peripheral participation (LPP)** — Lave & Wenger's account of how newcomers join a community of practice at the periphery and move inward as they are recognised. The grounding for **community standing** (per-env, conferred) and the newborn maturation ramp. See [`05_ENVIRONMENT.md §5.x`](05_ENVIRONMENT.md), [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
+
 **Lineage Graph** — Append-only signed DAG of artefact derivations, verifier verdicts, persona events. v1.0 has **three scopes after the Project-as-Environment unification**: task, env (J9; absorbed the J8 project scope per `00_VISION §J8`), domain (C1). See `01_KERNEL.md §3`. "ProjectLineage" remains a documentation alias for the `project_*` event-kind subset of EnvironmentLineage on a `project_workspace`-typed env.
 
 ## M
 
 **MAP-Elites** — Diversity-preserving evolutionary algorithm; behaviour-descriptor grid; one elite per cell. Used for anti-degradation. v1.3+ for production scale. See `02_PERSONA.md §9`.
 
-**Maturation ramp** — How a genesis-born persona grows from peripheral participant to full member: it starts `passive` with low attention and a restricted tool surface, then (as ALPS `age_tasks`/maturity rise) advances `passive → active → deliberative` while mentor scaffolding fades. After Vygotsky's ZPD and Lave–Wenger legitimate peripheral participation. See [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
+**Maturation ramp** — How a genesis-born persona grows from peripheral participant to full member: it starts `passive` with low attention and a restricted tool surface, then (as **wall-clock age** rises and **community standing** is conferred) advances `passive → active → deliberative` while mentor scaffolding fades. After Vygotsky's ZPD and Lave–Wenger legitimate peripheral participation. See [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
 
-**Mentorship edge** — Schema (`mentorship-edge/1`): the author→newborn relationship opened at genesis, carrying a `scaffolding_level` that decays with newborn maturity and a `zpd_task_band` (tasks completable with mentor support). See [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
+**Mentorship edge** — Schema (`mentorship-edge/1`): the author→newborn relationship opened at genesis, carrying a `scaffolding_level` that decays with newborn wall-clock age + conferred community standing, and a `zpd_task_band` (tasks completable with mentor support). See [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
 
 **MasteryCheckpoint** — substrate-shape milestone within a pedagogic learning trajectory; carries `skill_kind`, `competency_level_target`, prerequisite_checkpoint_refs, evidence requirements (which combination of: persona-judged demonstration / programmatic verifier / external `LearnerCompetencyAttestation`). When fired, updates `LearnerStateRecord` (`02_PERSONA §11.8`) and emits MASTERY_CHECKPOINT_REACHED. Distinct from promotion stages (which apply to *kinds* in the registry); MasteryCheckpoint applies to *the learner*. See [`03_TASKS.md §3.3`](03_TASKS.md).
 
@@ -415,7 +425,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Persona Genesis** — A persona authoring a *new, niche-distinct* persona to fill an environmental capability gap, minted through the standard birth ceremony under a `persona_genesis` `ReplicationBound`. Distinct from Fork (which copies/merges existing parents). Recruitment-exhausted-first; default-deny; operator-bounded. See [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md), `02_PERSONA.md §7.4`.
 
-**PopulationPolicy** — Operator schema (`population-policy/1`) configuring demographic regulation: `reproduction_strategy` (r/K/adaptive), carrying-capacity source, density-dependence curve, generativity threshold, diversity-injection EPS threshold, and genesis threshold. See [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md).
+**PopulationPolicy** — Operator schema (`population-policy/1`) configuring demographic regulation: `reproduction_strategy` (r/K/adaptive), carrying-capacity source, density-dependence curve, the generativity gate thresholds (`generativity_floor_threshold`, `generativity_standing_threshold`, `generativity_min_alps_layer`, `generativity_fitness_threshold`), diversity-injection EPS threshold, and genesis threshold. See [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md).
 
 **PopulationPressureSignal** — Kernel-maintained schema (`population-pressure-signal/1`) aggregating environmental factors (recruitment gaps, unfilled role coverage, capability backlog, sustained over-budget, diversity deficit, low effective population size) into a `pressure_score` that — with recruitment exhaustion — triggers Persona Genesis. Weighted by demand relative to supply (Easterlin). See [`16_POPULATION_DYNAMICS.md §4A`](16_POPULATION_DYNAMICS.md).
 
@@ -525,13 +535,15 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **MemoryInheritancePolicy** — per-tier policy controlling what episodic / semantic / reflective memory + K-lines transfer from parent to child at fork time. Default for CLONE: episodic=summary, semantic=facts_only, reflective=about_work, klines=role_keyed. Default for COMPOSE: all `inherit_none`. Counterparty consent required for any memory naming counterparties (`requires_counterparty_reconsent=True`); default-decline on `reconsent_window` (default 14d). See `02_PERSONA.md §7.4.1`.
 
-**MaturityInheritancePolicy** — controls whether child fork inherits any portion of parent maturity (`parent_selection_count` + `validated_descendants_count`). Modes: `start_at_zero` (v1.0 default for clone), `inherit_min_parent`, `inherit_avg_parent`, `inherit_min_parent_halved` (default for compose). All capped at `cap_at_band` (default `newborn` for clone, `juvenile` for compose) to prevent inheritance laundering of EXPERT standing through compositional fork. Inherited credit tracked separately from earned credit in `soul.state.json.maturity_provenance`. See `02_PERSONA.md §7.4.2`.
+**Standing endorsement** — Recognition event (`standing-endorsement/1`) by which a community member confers community standing on another in the same environment. Must cite kernel-held EnvironmentLineage contribution refs (anti-Goodhart anchor); endorser must hold standing in that env (`endorser ≠ endorsee`); weighted by the reputation anti-gaming rules (per-peer cap, sybil-cluster near-zero, reach×diversity — `09_PROTOCOLS §3D / A.16–A.18`). See [`05_ENVIRONMENT.md §5.x`](05_ENVIRONMENT.md).
+
+**StandingFloorInheritancePolicy** — controls whether a child fork inherits any portion of the parent's **global experiential floor** (`experience_tasks` + `parent_selection_count` + `validated_descendants_count`). Modes: `start_at_zero` (v1.0 default for clone), `inherit_min_parent`, `inherit_avg_parent`, `inherit_min_parent_halved` (default for compose). All capped by a numeric `cap_at_floor` to prevent inheritance laundering of a high experiential floor through compositional fork. **Per-environment community standing is never inherited** — a child starts peripheral in every env. Inherited credit tracked separately from earned credit in `soul.state.json.floor_provenance`. (Renamed from `MaturityInheritancePolicy`.) See `02_PERSONA.md §7.4.2`.
 
 **CharterConflictResolution** — substrate-shape strategy for merging ≥ 2 parent charters in compositional fork. Strategies: `lexical_union` (all clauses kept; conflicts parallel), `most_restrictive_wins` (default; strictest survives per topic_kind cluster), `operator_review` (fork blocks until human resolves), `proposer_decides` (the fork-requester picks), `kernel_predicate` (rotating classifier per INV-6). Detection kind KindRegistry-resolved. On unresolvable: block_fork / fallback strategies. See `02_PERSONA.md §7.4.3`.
 
 **DormantForkPolicy** — governs whether a DORMANT persona can be selected as a fork parent and what wake mechanics apply. Defaults: dormant_parent_admissible=True (fertility-driven selection should not punish quiescence); requires_parent_wake_before_mint=True (parent transitions ACTIVE for ceremony, returns to DORMANT after `wake_window_after_fork` default 1h); retired_parent_admissible=False (RETIREMENT is terminal); archived_parent_admissible=False. Operators may override per archival research policies. See `02_PERSONA.md §7.4.4`.
 
-**maturity_provenance** — field on `soul.state.json` tracking earned vs inherited maturity credit separately, with the MaturityInheritancePolicy used at birth + cap applied. Allows lineage audits to recompute earned-only maturity at any time. See `02_PERSONA.md §7.4.2`.
+**floor_provenance** — field on `soul.state.json` tracking earned vs inherited experiential-floor credit separately, with the StandingFloorInheritancePolicy used at birth + cap applied. Allows lineage audits to recompute earned-only floor at any time. (Renamed from `maturity_provenance`.) See `02_PERSONA.md §7.4.2`.
 
 **fork_skill_exclusions** — optional list on `PersonaSeed` listing skill_library entry ids to exclude from clone fork inheritance. Empty by default (child gets full library copy). Operator-tunable per fork to encourage re-discovery. See `02_PERSONA.md §7.4`.
 
@@ -557,7 +569,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Recognised (domain stage)** — Stage 2 of 4 promotion ladder; trust 0.6; usable cross-project within domain; K=3 projects + 2 co-signers. See `06_DOMAIN.md §3`.
 
-**Reproduction strategy (r/K)** — Operator lever for Persona Genesis: **r** births many lightweight, low-maturity personas for fast exploration of an unstable/empty environment; **K** births few, deeply-specified, heavily-mentored personas for stable domains; **adaptive** selects by measured volatility. After r/K selection theory. See [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md).
+**Reproduction strategy (r/K)** — Operator lever for Persona Genesis: **r** births many lightweight, low-floor personas for fast exploration of an unstable/empty environment; **K** births few, deeply-specified, heavily-mentored personas for stable domains; **adaptive** selects by measured volatility. After r/K selection theory. See [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md).
 
 **ReplicationBound** — v1.0 charter-class invariant (safety floor source 1) bounding population × rate × depth for any `replication_kind` (KindRegistry-resolved per deployment — agent_fork, factory_unit_produced, culture_doubling, etc.). Required cosigns (operator / non-principal attestor / federation quorum) per principal topology cannot be downgraded by operator policy; loosening requires charter bump. Wildcard fall-through bound recommended to catch emergent replication kinds. See `01_KERNEL.md §2.7`.
 
@@ -593,7 +605,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 ## S
 
-**Secure base (mentorship)** — In the newborn maturation ramp, the mentor functions as the newborn's secure base (Bowlby & Ainsworth): the newborn explores harder tasks confidently while mentor support is reliably available. If the mentor retires before the newborn reaches autonomy maturity, the kernel re-assigns the mentorship edge. See [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
+**Secure base (mentorship)** — In the newborn maturation ramp, the mentor functions as the newborn's secure base (Bowlby & Ainsworth): the newborn explores harder tasks confidently while mentor support is reliably available. If the mentor retires before the newborn reaches the autonomy threshold, the kernel re-assigns the mentorship edge. See [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
 
 **Sibling differentiation** — Genesis rule that successive births from the same authoring lineage MUST take complementary/opposite dispositions (refused otherwise: `sibling_collision`), maximising variety. After Scarr & McCartney's niche-picking and sibling-differentiation findings. See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
 
@@ -686,6 +698,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **Voyager** — Wang et al. 2023 lifelong learning agent pattern; automatic curriculum + ever-growing skill library + iterative prompting; v1.0 skill library per persona. See `08_KNOWLEDGE.md §2`.
 
 ## W
+
+**Wall-clock age** — A persona's primary age: `age = now − born_at`, continuous, monotone, never reset, and not paused by dormancy. Drives ALPS layering, the generativity gate's age term, and the newborn maturation ramp. Distinct from **experience** (task count) and **community standing** (relational). See [`02_PERSONA.md §7.2`](02_PERSONA.md).
 
 **Wake Path 6** — when a user directly addresses a dormant persona by name (`target_persona_id` set in the task dispatcher), the kernel auto-wakes the persona before notification routing. Attention bumps to max(current, 0.6) for 2h; signed `dormant_wake_via_user_address` event. Rate-limited: ≤ 5 per user per persona per 24h. Closes the gap where dormancy suppresses `high`-urgency (direct address) notifications below the `critical` threshold. See [`05_ENVIRONMENT.md §5.2`](05_ENVIRONMENT.md), [`03_TASKS.md §4.1`](03_TASKS.md).
 

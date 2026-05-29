@@ -229,7 +229,7 @@ v1.0 stands on the shoulders of:
 - **Voyager** (Wang et al., 2023 — [arXiv 2305.16291](https://arxiv.org/abs/2305.16291)) — ever-growing skill library, automatic curriculum, lifelong learning; skills generalise.
 - **MAP-Elites** (Mouret & Clune, 2015) — diversity preservation across multiple behaviour descriptors.
 - **DGM (Darwin–Gödel Machine)** (Lehman et al., 2024) — fertility-weighted parent selection for open-ended evolution.
-- **ALPS** (Hornby, 2006) — Age-Layered Population Structure for evolutionary diversity.
+- **ALPS** (Hornby, 2006) — Age-Layered Population Structure for evolutionary diversity (layers wall-clock-derived per ADR-0051).
 - **AutoAgents / auto-scaling multi-agent systems** (IJCAI 2024; 2025) — on-demand generation of new specialized agent roles; basis for Persona Genesis (`16_POPULATION_DYNAMICS.md`).
 - **Quality-Diversity / MAP-Elites via AI feedback** (ICLR 2024) — diverse high-performing repertoires; the variety guarantee for genesis.
 - **Self-replication risk in LLM agents** (2025) — motivates hard replication brakes (`ReplicationBound`) for persona genesis.
