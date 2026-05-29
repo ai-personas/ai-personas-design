@@ -286,7 +286,7 @@ experiential_floor = 0.5 · log1p(experience_tasks)
 The experiential floor gates substrate-level capability minimums **including safety-relevant
 gates** (e.g., the `may_author_seeds` floor, `16_POPULATION_DYNAMICS §4D`). It is **not** relational
 standing: it says what a persona is minimally capable of anywhere, not how a particular community
-regards it. Relational standing is per-environment and conferred (§7.2.1 / `05_ENVIRONMENT §5.x`).
+regards it. Relational standing is per-environment and conferred (§7.2.1 / `05_ENVIRONMENT §5.4`).
 
 **Multi-environment experience counting.** `experience_tasks` is a **single global counter** on
 the persona's `soul.state.json`, incremented exactly once per task the persona served as envelope
@@ -301,7 +301,7 @@ dormant for a year wakes with the same `experience_tasks`.
 
 A persona's social/role position is **community standing**, held per (persona, environment),
 **non-portable**, and **conferred by the community — never self-awarded**. It is specified
-normatively in `05_ENVIRONMENT §5.x` (`community-standing/1`) and grounds the newborn maturation
+normatively in `05_ENVIRONMENT §5.4` (`community-standing/1`) and grounds the newborn maturation
 ramp on Lave & Wenger *Legitimate Peripheral Participation*: a persona joins each environment at
 peripheral standing — regardless of its global experiential floor or its standing elsewhere — and
 earns fuller standing through community recognition. Standing gates **relational/collaborative
@@ -351,7 +351,7 @@ throws away accumulated capability. v1.0 makes the inheritance tunable:
 **Scope: the portable global floor only.** This policy governs inheritance of the **global
 experiential floor** (§7.2). **Per-environment community standing is NEVER inherited** — a forked
 child starts at peripheral standing in every environment, exactly like any other newly-joined
-persona (`05_ENVIRONMENT §5.x`). This is strictly stronger than the v1.0 anti-laundering rule.
+persona (`05_ENVIRONMENT §5.4`). This is strictly stronger than the v1.0 anti-laundering rule.
 
 **Why a cap by default.** Compositional forks from two high-floor parents could otherwise inherit a
 high experiential floor at birth, bypassing the apprenticeship structure that ALPS enforces. The
@@ -2061,7 +2061,7 @@ class MemoryInheritancePolicy:
 **StandingFloorInheritancePolicy dataclass definition (schema standing-floor-inheritance-policy/1)** (referenced from §7.4.2)
 
 Governs inheritance of the **portable global experiential floor** only. Per-environment community
-standing is never inherited (`05_ENVIRONMENT §5.x`).
+standing is never inherited (`05_ENVIRONMENT §5.4`).
 
 ```python
 @dataclass

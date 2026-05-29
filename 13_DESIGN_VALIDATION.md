@@ -1068,7 +1068,7 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 
 **World shape.**
 - Principal: `operator_distinct` — the operator pre-declares a `ReplicationBound` for `replication_kind = "persona_genesis"` and a `population-policy/1`.
-- Persona(s): 2 founders (generative; clear the generativity gate — floor + standing + ALPS layer + fitness); they author N newborns over the project's life.
+- Persona(s): 2 founders (generative; clear the generativity gate — floor + ALPS layer + fitness, no standing precondition); they author N newborns over the project's life.
 - Environment: persistent `Lab` (`05_ENVIRONMENT §3`).
 - Project: multi-session, digital ArtifactBundle.
 - External participants: none.

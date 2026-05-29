@@ -234,7 +234,7 @@ This closes the gap "a pair env where both members leave lingers in DORMANT inde
 
 **Composition with project_workspace.** For an env of type `project_workspace`, `project_bound_to` is itself; the rule checks the project's lifecycle status. If the project is `completed` or `abandoned`, archival proceeds normally; if `active`, the env MUST NOT archive on member-zero alone (an operator-signed `project_orphaned` event is REQUIRED to advance — the operator MUST explicitly resolve the orphaned-project situation, not silently archive it).
 
-### 5.x Community standing — Legitimate Peripheral Participation (community-standing/1)
+### 5.4 Community standing — Legitimate Peripheral Participation (community-standing/1)
 
 A persona's social/role position in an environment is its **community standing**: a per
 `(persona, environment)` scalar grounded in Lave & Wenger's *Legitimate Peripheral Participation*.
@@ -685,7 +685,7 @@ This specification defines the five-step decision flow for self-proposals: draft
 
 Prior versions lacked a first-class primitive for a persona to *form a new environment*. Existing flows only covered (a) admission to a pre-existing env via `ENV_INVITATION` / `ENV_RECRUIT_PROPOSAL` (`§5.1`), (b) joined env cross-kernel formation via `PROPOSE_JOINED_ENV` (`09_PROTOCOLS §3C.1`), and (c) self-admission to an existing env via `EnvSelfProposalRequest` (`§12b`). None of these capture the common case: **"I want to start a new Lab / Pair / project_workspace env to investigate topic T, with recruits B, C, D, under charter Δ, with these initial roles and attention allocations."** `EnvFormationProposal` is that primitive.
 
-**Recruitment-gap fallback (v1.1).** When cohort assembly finds no admissible recruit (locally or via federation) and no existing persona is close enough to fork, a proposer whose `cohort_assembly.may_author_seeds = true` MAY escalate to **Persona Genesis** — authoring a new niche-distinct persona to fill the gap — instead of abandoning formation. Genesis is recruitment-exhausted-first, niche-bounded, and gated by a `persona_genesis` `ReplicationBound`; the newborn enters at **peripheral community standing** (§5.x) whose listening mode (`§9`) and attention allocation (`§7`) ramp up under mentorship as wall-clock age rises and standing is conferred. See [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md).
+**Recruitment-gap fallback (v1.1).** When cohort assembly finds no admissible recruit (locally or via federation) and no existing persona is close enough to fork, a proposer whose `cohort_assembly.may_author_seeds = true` MAY escalate to **Persona Genesis** — authoring a new niche-distinct persona to fill the gap — instead of abandoning formation. Genesis is recruitment-exhausted-first, niche-bounded, and gated by a `persona_genesis` `ReplicationBound`; the newborn enters at **peripheral community standing** (§5.4) whose listening mode (`§9`) and attention allocation (`§7`) ramp up under mentorship as wall-clock age rises and standing is conferred. See [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md).
 
 It composes atomically with the existing machinery — `cohort_assembly` capability (`02_PERSONA §3`), `PersonaPersonaBoundary` (`02_PERSONA §11.6`), `PersonaRelationshipEdge` accelerator (`02_PERSONA §11.4`), `ReputationSummary` gating (`09_PROTOCOLS §3D`), the consent flow (`09_PROTOCOLS §3C.4`), and the env lifecycle FSM (`§4`). It does **not** replace any of them; it gives the persona a single signed object to draft, submit, negotiate, and consummate.
 
@@ -1463,12 +1463,6 @@ class EnvironmentMembership:
     consents: list[Consent]
     boundaries: list[UserBoundary]
 
-    # COMMUNITY STANDING — per (persona, env) relational standing.
-    # NON-PORTABLE: starts at peripheral on admission regardless of the
-    # persona's global experiential_floor or its standing in any other env.
-    # CONFERRED by the community, never self-awarded.  See §5.x / Appendix A.8b.
-    community_standing: CommunityStanding
-
     # META
     admitted_by: str
     admission_event_ref: str
@@ -1483,6 +1477,16 @@ class EnvironmentMembership:
     # unification: a project_workspace env's members reuse the env binding.
     principal_attribution_id: str | None = None
 
+    # COMMUNITY STANDING — per (persona, env) relational standing (§5.4 / A.8b).
+    # Additive optional field (like principal_attribution_id) — env-membership/1
+    # is retained per §7.13.  The ADMISSION ceremony (A.9) initialises it to a
+    # PERIPHERAL CommunityStanding (standing_level=0); legacy records and any
+    # null value are read as peripheral (forward-compat default, 01_KERNEL §5.3).
+    # NON-PORTABLE: starts peripheral regardless of the persona's global
+    # experiential_floor or its standing in any other env.  CONFERRED by the
+    # community, never self-awarded.
+    community_standing: CommunityStanding | None = None
+
     signed_by_persona_kernel: bytes
     signed_by_environment_kernel: bytes
 ```
@@ -1491,7 +1495,7 @@ class EnvironmentMembership:
 <a id="appendix-a8b"></a>
 ### A.8b. CommunityStanding + StandingEndorsement schemas
 
-Per `(persona, environment)` relational standing (§5.x). Non-portable; conferred, never
+Per `(persona, environment)` relational standing (§5.4). Non-portable; conferred, never
 self-awarded; anti-gaming reuses `09_PROTOCOLS §3D / Appendix A.16–A.18`.
 
 ```python
@@ -1545,10 +1549,15 @@ ADMISSION CEREMONY
        window; persona deliberates → ACCEPT | DECLINE | COUNTER
     3. if ACCEPT: env kernel runs admission checks
        (max_member_count, attention_budget, operator_policy)
-    4. dual-sign EnvironmentMembership (persona kernel + env kernel)
+    4. dual-sign EnvironmentMembership (persona kernel + env kernel);
+       initialise community_standing to a PERIPHERAL CommunityStanding
+       (standing_level=0, quorum_met=False) regardless of the persona's
+       global experiential_floor or its standing in any other env (§5.4)
     5. emit ENV_MEMBER_ADMITTED to EnvironmentLineage
   consent:    persona deliberation step is mandatory; cannot be bypassed
   audit:      admission_event_ref preserved on membership record
+  standing:   re-admission (below) likewise starts peripheral — standing is
+              per-tenure and never carried across records or environments
 
 DEPARTURE CEREMONY
   trigger:    voluntary | env-admin-removed | retirement |

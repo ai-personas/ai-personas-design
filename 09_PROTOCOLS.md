@@ -455,8 +455,8 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 | `EnvironmentBlueprint` | `env-blueprint/1` | dataclass | [`05_ENVIRONMENT.md §2`](05_ENVIRONMENT.md) | Stable | Env-type template. |
 | `EnvironmentInstance` | `env-instance/1` | dataclass | [`05_ENVIRONMENT.md §1`](05_ENVIRONMENT.md) | Stable | Persistent env record (J9). |
 | `EnvironmentMembership` | `env-membership/1` | dataclass | [`05_ENVIRONMENT.md §5`](05_ENVIRONMENT.md) | Stable | Persona ↔ env binding with role + surface + community standing. |
-| `CommunityStanding` | `community-standing/1` | dataclass | [`05_ENVIRONMENT.md §5.x`](05_ENVIRONMENT.md) | Draft | Per (persona, env) relational standing (LPP); non-portable; conferred, never self-awarded. |
-| `StandingEndorsement` | `standing-endorsement/1` | dataclass | [`05_ENVIRONMENT.md §5.x`](05_ENVIRONMENT.md) | Draft | Recognition event conferring community standing; anti-gaming reuses §3D / A.16–A.18. |
+| `CommunityStanding` | `community-standing/1` | dataclass | [`05_ENVIRONMENT.md §5.4`](05_ENVIRONMENT.md) | Draft | Per (persona, env) relational standing (LPP); non-portable; conferred, never self-awarded. |
+| `StandingEndorsement` | `standing-endorsement/1` | dataclass | [`05_ENVIRONMENT.md §5.4`](05_ENVIRONMENT.md) | Draft | Recognition event conferring community standing; anti-gaming reuses §3D / A.16–A.18. |
 | `PresenceState` | `presence/1` | dataclass | [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md) | Stable | Per-member liveness. |
 | `AttentionBudget` | `attention-budget/1` | dataclass | [`05_ENVIRONMENT.md §7`](05_ENVIRONMENT.md) | Stable | Per-member rate limits. |
 | `EnvironmentLineage event` | `env-lineage/1` | dataclass | [`05_ENVIRONMENT.md §10`](05_ENVIRONMENT.md) | Stable | The env scope of J9 lineage. |

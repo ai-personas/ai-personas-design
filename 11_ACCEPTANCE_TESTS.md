@@ -1370,9 +1370,11 @@ A-GEN7      No environment with spare attention/energy to host newborn →
              REFUSED (no_host_capacity).
 A-GEN8      Recursive genesis: within depth_ceiling admitted; at
              depth_ceiling+1 REFUSED.
-A-GEN9      Author below the generativity gate (any of floor / standing /
-             ALPS-layer / fitness thresholds unmet) → REFUSED
-             (author_not_generative); mentorship-edge/1 created on success.
+A-GEN9      Author below the generativity gate (any of floor / ALPS-layer /
+             fitness thresholds unmet) → REFUSED (author_not_generative).
+             Community standing is NOT a gate term: a high-floor author with
+             zero standing still passes (see A-STAND-4).  mentorship-edge/1
+             created on success.
 A-GEN10     Optimal distinctiveness: too-close proposal REFUSED
              (niche_occupied/fork); too-distant REFUSED
              (out_of_distinctiveness_band).
@@ -1753,7 +1755,7 @@ A-FK-FLOOR-8 cap_at_floor=math.inf: honest inheritance without cap;
              event for audit.
 ```
 
-### A-STAND — Community standing (05_ENVIRONMENT §5.x)
+### A-STAND — Community standing (05_ENVIRONMENT §5.4)
 
 ```text
 A-STAND-1    Conferred, not self-awarded: a persona's attempt to write its
