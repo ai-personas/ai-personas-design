@@ -15,6 +15,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Abducer** — A cognitive mode where the persona generates hypotheses (typically CONVERGENT-led). See [`02_PERSONA.md §4`](02_PERSONA.md).
 
+**AccessGrant** — Per principal / role / env / principal-attribution `r`|`rw` access entry (`access-grant/1`) inside an `ArtifactSharingPolicy`. See `07_ARTIFACTS.md §4a`.
+
 **ALPS (Age-Layered Population Structure)** — Stratification of personas across numeric **wall-clock** age layers (Layer 0..N, operator-tunable via `alps-band-policy/1`) to prevent old high-fitness personas from suppressing newly-born ones. Layers are derived from wall-clock age (`now − born_at`), not task count. Originated by Hornby 2006. See [`02_PERSONA.md §7.3`](02_PERSONA.md).
 
 **Agent Card (A2A)** — Signed projection of a persona for cross-kernel federation; published at `.well-known/agent-cards.json`. See [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md).
@@ -25,7 +27,9 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Artifact** — Individual file in an ArtifactBundle; carries a `media_kind` name resolved against the open `KindRegistry` (not a closed enum — see *Media kinds (open set)* below). See `07_ARTIFACTS.md §2-3`.
 
-**ArtifactBundle** — Multi-modal multi-file deliverable produced by personas in a project. See `07_ARTIFACTS.md §4`.
+**ArtifactBundle** — Multi-modal multi-file deliverable produced by personas in a project; owned by an environment via optional `owning_env_id` and governed by an `ArtifactSharingPolicy` (both additive on `artifact-bundle/1`, version retained). See `07_ARTIFACTS.md §4`.
+
+**ArtifactSharingPolicy** — Signed, env-authored policy (`artifact-share/1`) defining per-grantee access levels (`AccessGrant`), intra-composition inheritance (parent → child), and outward visibility tier; reuses the 5 visibility tiers + `CrossTenancyAgreementRef` with most-restrictive-wins. See `07_ARTIFACTS.md §4a`.
 
 **Attention Budget** — Per-persona cap on attention allocated across multiple environment presences; default 1.0; overrun emits warning. See `05_ENVIRONMENT.md §7`.
 
@@ -222,6 +226,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **EnvironmentMembership** — Persistent signed presence of persona in env with role + observation surface + attention allocation. See `05_ENVIRONMENT.md §5`.
 
 **EnvironmentProvenFacts** — Per-environment CRDT G-set of facts that hold in this env. See `05_ENVIRONMENT.md §12`.
+
+**EnvironmentRule** — Signed, versioned, env-scoped executable rule (`env-rule/1`; `rule_kind` ∈ `code` | `rule_engine` | `contract`, KindRegistry-resolved) authored by the user or a persona to express the environment's definition of acceptable work (a shipment contract, a buildable-design validator, a robot-performance check). Enforced under safety-floor source 8 at INV-8 admission points with `refuse_action` | `warn_and_log` | `escalate_operator`; reuses the verifier-recipe + sandbox + ProposedSafetyExtension lifecycle; cascades to child envs when `cascade_locked`. See `05_ENVIRONMENT.md §2.2b`.
 
 **ElaborationPolicy** — v1.0 component of a `MissionCharter` declaring `permitted_elaboration_kinds` (KindRegistry-resolved), rate limit per window, and whether each elaboration requires self-critique pass and / or PANEL_ACCEPT. Pairs with `DriftBoundsEnvelope`: drift bounds say *how far* an elaboration may depart, ElaborationPolicy says *what kinds* of elaboration are admissible. See `02_PERSONA.md §11.3`.
 

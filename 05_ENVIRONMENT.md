@@ -142,11 +142,37 @@ This schema defines how a parent environment contains a child environment, inclu
 
 **Cascade rule.** Parent charter rules tagged as `safety_floor_source` (sources 1-8 per [`01_KERNEL.md §2`](01_KERNEL.md)) cascade to all children and cannot be relaxed. Children MAY add stricter rules. The kernel enforces cascade at child-env formation and refuses charter amendments that would violate inherited safety rules.
 
+**Cascade of EnvironmentRules.** Executable [`EnvironmentRule`](#22b-environmentrule-env-rule1)s (`env-rule/1`, [`§2.2b`](#22b-environmentrule-env-rule1)) participate in the same cascade. A parent rule with `cascade_locked = True` is an inherited source-8 rule: each child's effective rule set is the union of the inherited locked parent rules (copied into the child at formation with `inherited_from_parent_env_id` set, then evaluated identically against the child's actions) plus the child's own stricter additions. A child charter amendment that removes or weakens an inherited locked rule MUST be refused with `env_child_charter_amendment_refused (safety_violation)`. Non-locked parent rules MAY be relaxed by the child only with parent consent (`child_may_relax_non_safety`, `A.4`). This is the "company → org → team" model: the parent fixes the binding rules; children specialise within them.
+
 **Parent says WHAT, child decides HOW.** The parent environment sets constraints (charter rules, safety requirements, policy mandates). The child environment's personas self-organise their own coordination shapes (per [`15_COORDINATION_SHAPES.md §4.1-4.3`](15_COORDINATION_SHAPES.md)) within those constraints.
 
 **Tests:** A-EC1 (composition creation with cascade), A-EC2 (child cannot weaken safety-critical parent rule), A-EC3 (child adds stricter rule succeeds), A-EC4 (child relaxes non-safety rule with parent consent), A-EC5 (parent rule cascade verified at child formation). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
 **Lineage:** `env_composition_established`, `env_composition_cascade_applied`, `env_child_charter_amendment_refused (safety_violation)`.
+
+## 2.2b EnvironmentRule (env-rule/1)
+
+*Dynamically-authored, executable, env-scoped rules.* Environments are purpose-specific, and each carries its own *definition of acceptable work*: a shipment-coordination env enforces a shipment contract; a chip-design env enforces a buildable / orderable-design validator; a robot-bringup env enforces a performance check. v1.0 ships none of these as substrate. An **EnvironmentRule** is a signed, versioned, env-scoped rule that the human user (when creating the env) or a persona (via [`EnvFormationProposal §12c`](#12c-envformationproposal--persona-initiated-env-creation) or a signed charter amendment, [`§16.2`](#162-environment-morph)) authors. The framework supplies only the *shape*; the rule *content* emerges and is signed exactly like every other proposal (commitment C4; same lifecycle as [`06_DOMAIN.md §7.5`](06_DOMAIN.md#75-emergent-kind-proposals-v10--substrate-domain-agnostic)).
+
+This schema defines an env-scoped rule: a KindRegistry-resolved `rule_kind` (`code` | `rule_engine` | `contract`, [`06_DOMAIN.md §7.6.3`](06_DOMAIN.md#763-the-env_rule_kinds-family--env-scoped-executable-rules)), a content binding to existing executable machinery, the admission points at which it fires, a failure action, hazard classification, a proposal lifecycle, operator-approval gating, evidence binding, and cascade fields.
+
+**Technical detail:** See [Appendix A.4a](#appendix-a4a).
+
+**`rule_kind` and content — reuse, not new machinery.** A `code` rule binds a sandboxed `ToolArtifact` (the `PROPOSED → SANDBOXED → VERIFIED → PROMOTED` FSM with OWASP filter + resource caps, [`01_KERNEL.md §6`](01_KERNEL.md#6-sandbox-execution)) wrapped in a `VerifierStage`; a `rule_engine` rule binds an authored or `InferredVerifierRecipe` cascade ([`06_DOMAIN.md §7.1`](06_DOMAIN.md)); a `contract` rule binds a machine-readable contract `ArtifactBundle` checked by a `verifier_recipe_id`. The substrate runs none of these specially — it reuses the verifier / sandbox path and enforces only the generic evidence contract.
+
+**Enforcement — rides under safety-floor source 8.** An EnvironmentRule does NOT add a ninth safety-floor source. The kernel evaluates each `accepted`-stage rule under source 8 (`env_charter`) at the admission points named in its `enforced_at` (the canonical INV-8 points, [`01_KERNEL.md §13.7`](01_KERNEL.md#137-constraint-admission-within-a-round-inv-8-map)); a `refuse_action` verdict denies via most-restrictive-wins exactly as any source-8 refusal. EnvironmentRules MUST only ADD refusals; they MUST NOT relax sources 1-7. See the source-8 composition loop in [`01_KERNEL.md §2`](01_KERNEL.md#2-the-safety-floor--8-sources--1-advisory).
+
+**Lifecycle and operator gate.** Rules follow the Proposed\* FSM ([`06_DOMAIN.md §7.5`](06_DOMAIN.md#75-emergent-kind-proposals-v10--substrate-domain-agnostic)): `candidate → trial → accepted | rejected`, signed into EnvironmentLineage. A rule whose `hazard_axes` cross the C2 threshold (`physical_harm_class ≥ bodily_injury` OR `information_hazard_class ≥ dual_use_civilian`, [`06_DOMAIN.md §2`](06_DOMAIN.md)) is `safety_critical` and MUST carry operator approval before reaching `accepted` (composes with `MultiPrincipalAttestationQuorum`, [`§12c.4a`](#12c4a-multiprincipalattestationquorum--multi-principal-ratification)). `revoked` is the terminal state on supersession, cascade failure, or operator action.
+
+**Evidence-bound.** Every rule evaluation that gates a refusal MUST append a schema-valid `VerifierInvocationEvidence` record ([`07_ARTIFACTS.md §7`](07_ARTIFACTS.md#7-verifier-invocation-against-bundle)) binding the verdict to the exact inputs observed; a prose-only "rule passed" token is never sufficient (fail-closed, mirroring the artifact verifier contract).
+
+**Authoring and cascade.** At env formation, `EnvFormationProposal.proposed_rules` ([`§12c`](#12c-envformationproposal--persona-initiated-env-creation)) carries candidate rules; safety-critical ones hold env instantiation at `consent_complete` until the C2 gate clears. After formation, rules are added / amended / revoked via signed `CharterAmendment` ([`§16.2`](#162-environment-morph)). In a composition ([`§2.2a`](#22a-environmentcomposition--hierarchical-environment-nesting-v11)), `cascade_locked` parent rules are inherited by children and MUST NOT be weakened.
+
+Worked examples: a **shipment contract** is `rule_kind = contract`, `enforced_at = [output]`, `failure_action = refuse_action`; a **robot-performance check** is `rule_kind = code` (a sandboxed benchmark), `enforced_at = [tool_call, output]`, physical `hazard_axes`, `safety_critical = True`; a **chip buildable / orderable validator** is `rule_kind = rule_engine` (a DRC + BOM-orderability cascade), `enforced_at = [output, mutation_propose]`.
+
+**Tests:** A-ER1 (rule authored at EnvFormationProposal enters trial; safety-critical holds at operator gate), A-ER2 (rule fires at declared admission point; `refuse_action` refuses with signed evidence), A-ER3 (`warn_and_log` / `escalate_operator` emit signals without refusing), A-ER4 (safety-critical rule requires operator co-sign; degraded gate under principal collapse), A-ER5 (rule rides source 8 — floor still reports 8 sources; refusal composes most-restrictive-wins), A-ER6 (parent `cascade_locked` rule cascades; child weakening refused), A-ER7 (`rule_kind` resolves via KindRegistry `env_rule_kinds`), A-ER8 (contract / robot-perf / chip-validator worked examples enforce), A-ER9 (charter with no rules behaves as before). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+
+**Lineage:** `env_rule_proposed`, `env_rule_trial_entered`, `env_rule_operator_review`, `env_rule_approved`, `env_rule_rejected`, `env_rule_revoked`, `env_rule_amended`, `env_rule_evaluated` (carries `VerifierInvocationEvidence` ref), `env_rule_refusal`, `env_rule_warned`, `env_rule_escalated`.
 
 ## 3. The eight base types
 
@@ -741,6 +767,7 @@ This specification defines the quorum mechanics: draft verification, per-princip
 | Event kind | Gating section | Effect when multi-principal enabled |
 |---|---|---|
 | `env_charter_ratified` | §5.1 admission ceremony + §12c | EnvFormationProposal stays at `consent_complete` until quorum clears; cannot transition to `instantiated`. |
+| `env_rule_ratified` | §2.2b + §12c + `01_KERNEL §2.4` C2 gate | A `safety_critical` EnvironmentRule (env-rule/1) cannot reach `accepted`, and its env cannot transition to `instantiated`, until the operator co-sign / quorum clears; degraded gate composes per-principal as in §2.4.3. |
 | `project_completed` | `04_PROJECT §4.1` | Completion ceremony step 8 (`status → completed` signed event) blocks until quorum clears. |
 | `safety_extension_approved` | `06_DOMAIN §8` + `01_KERNEL §2.4` C2 gate | Operator co-sign step requires quorum clear; degraded gate composes per-principal as in §2.4.3. |
 | `domain_promotion` | `06_DOMAIN §3` PromotionPolicy | C2 gate at AUTHORITATIVE / STANDARDISED transitions requires quorum clear when the domain's host env carries multi-principal attribution. |
@@ -806,6 +833,7 @@ This specification defines three fork inheritance policies: inherit_all (full me
 Charter or type changes substantially:
 - **Charter version bump** (continue same instance)
 - **Morph into new env** if structural (different blueprint, different members; new env_id; parent reference)
+- **EnvironmentRule amendment** (continue same instance): a signed `CharterAmendment` MAY add, replace, or revoke an [`EnvironmentRule`](#22b-environmentrule-env-rule1) (`env-rule/1`, §2.2b). Adding or replacing a `safety_critical` rule routes through the C2 / quorum gate (`env_rule_ratified`, §12c.4a) before the rule reaches `accepted`; revoking emits `env_rule_revoked`. A charter amendment that would remove or weaken a `cascade_locked` rule inherited from a parent env (§2.2a) MUST be refused (`env_child_charter_amendment_refused (safety_violation)`).
 
 Threshold: charter-classifier judgment + operator confirmation.
 
@@ -841,6 +869,8 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-ENV-8 | EnvFormationProposal can be abused to create spam envs. | Medium | Low | Per-persona rate limit; consent flow from invitees; PersonaPersonaBoundary checks; reputation impact on refused proposals. | v1.0 (rate limit); v1.1 (reputation-weighted). |
 | R-ENV-9 | User-address wake (§5.2 Wake Path 6) could disrupt dormancy rest cycles if a user repeatedly addresses the same dormant persona. | Low | Medium | Per-user per-persona rate limit (≤ 5 wakes per 24h); `dormant_user_address_rate_limited` event queues further wakes; user advisory on prolonged dormancy. | (baseline). |
 | R-ENV-10 | CrossEnvProactiveOffer (§11.6) spam: personas flooding cross-env offers to envs they don't belong to. | Medium | Low | Per-persona per-target-env rate limit (3 offers / 30 days); reputation gate; target env operator_policy may refuse inbound offers entirely; declined offers degrade offering persona's reputation. | (baseline). |
+| R-ENV-11 | Executable `EnvironmentRule` (env-rule/1, §2.2b) as a safety-floor-bypass vector: a malicious `rule_kind=code` rule could attempt to weaken effective enforcement or exfiltrate. | Critical | Low | Rules run in the existing sandbox (OWASP filter + resource caps, `01_KERNEL §6`); rules ride UNDER source 8 and may only ADD refusals, never relax sources 1-7; `safety_critical` rules are operator-gated (C2); `cascade_locked` parent rules are immutable by children; A-ER2/A-ER5/A-ER6. Cross-document: also `00_VISION §11`. | v1.1 (sandbox + source-8 ride). |
+| R-ENV-12 | `EnvironmentRule` evaluation latency at admission points adds verifier-stage cost to the ≤400 ms floor budget (`01_KERNEL §2.3`). | Medium | Medium | Rule evaluation is budgeted per INV-7; deterministic `before_action` rules are cached; operators may cap per-env rule count; heavy `code` rules SHOULD run `after_action` where admissible. | v1.1 (budget + cache). |
 
 ## 19a. Open questions
 
@@ -855,6 +885,8 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-ENV-5 | Per-member AttentionBudget defaults: by wall-clock age / community standing, by env type, or by relationship depth? | Persona authors | v1.1 calibration. |
 | OQ-ENV-6 | ScheduledTrigger composition with quiet hours: should triggers respect quiet hours by default, or burst-through? Per-trigger override? | Persona UX | v1.1 trigger policy. |
 | OQ-ENV-7 | Alert auto-resolve conditions (`§11a`): what's the canonical set of resolve-condition primitives? Explicit ack, time-based, signal-disappeared, all three? | Persona UX | v1.1 alert taxonomy. |
+| OQ-ENV-8 | EnvironmentRule (§2.2b) holdout validation: should an executable rule pass a holdout-trace gate (as InferredVerifierRecipe does, `06_DOMAIN §7.1`) before reaching `accepted`, and what false-positive ceiling applies? | Safety floor WG | v1.1 rule-validation gate. |
+| OQ-ENV-9 | Cascade conflict under multi-parent composition: when (future) multi-parent compositions supply two `cascade_locked` rules that conflict, what is the resolution? v1.0/v1.1 composition is single-parent. | Federation WG | v1.2 multi-parent cascade. |
 
 ## 20. Acceptance tests
 
@@ -1008,6 +1040,12 @@ class EnvironmentInstance:
     charter: list[str]
     charter_version: int
     charter_signed_by: bytes
+    env_rules: list[str] = field(          # EnvironmentRule ids (env-rule/1,
+        default_factory=list)              #  §2.2b) bound to this env; the
+                                           #  active subset (stage=="accepted")
+                                           #  is read by the source-8 loop in
+                                           #  01_KERNEL §A.3. Additive; version
+                                           #  retained per 09_PROTOCOLS §7.13.
     
     # DOMAIN
     default_domain_context_ref: str | None
@@ -1075,9 +1113,14 @@ class EnvironmentInstance:
 ```python
 @dataclass
 class EnvironmentCharter:
-    schema: str = "env-charter/1"
+    schema: str = "env-charter/1"          # additive field below; version
+                                           # retained per 09_PROTOCOLS §7.13
     env_id: str
-    charter_text: list[str]                # env-specific norms
+    charter_text: list[str]                # env-specific prose norms
+    rule_refs: list[str] = field(          # EnvironmentRule ids (env-rule/1,
+        default_factory=list)              #  §2.2b) bound at source 8. An
+                                           #  empty list == prose-only charter
+                                           #  (pre-existing behaviour).
     composition_order: list[Literal[       # precedence top→bottom
         "universal_harm_floor",
         "operator_policy",
@@ -1153,6 +1196,80 @@ class EnvironmentComposition:
     established_at: datetime
     signed_by_parent: bytes
     signed_by_child: bytes
+```
+
+
+<a id="appendix-a4a"></a>
+### A.4a. EnvironmentRule schema (env-rule/1)
+
+```python
+@dataclass
+class EnvironmentRule:
+    schema: str = "env-rule/1"
+    rule_id: str                           # ULID
+    env_id: str                            # bound env (source-8 scope)
+    rule_name: str
+    description: str
+
+    # WHAT KIND OF RULE — KindRegistry-resolved (06_DOMAIN §7.6.3); never a
+    # closed enum (C4). MetaRegistry seeds: "code" | "rule_engine" | "contract".
+    rule_kind: str
+
+    # CONTENT BINDING — reuse existing executable machinery; do not inline code.
+    #   code        -> sandboxed_tool_artifact_id (ToolArtifact FSM, 06_DOMAIN
+    #                  §7.2.x; OWASP + caps, 01_KERNEL §6) wrapped in a stage
+    #   rule_engine -> verifier_recipe_id (authored / InferredVerifierRecipe,
+    #                  06_DOMAIN §7.1) — declarative, no executable surface
+    #   contract    -> contract_bundle_id (ArtifactBundle) + verifier_recipe_id
+    sandboxed_tool_artifact_id: str | None = None
+    verifier_recipe_id: str | None = None
+    contract_bundle_id: str | None = None
+
+    # WHERE IT FIRES — canonical INV-8 admission points (00_VISION INV-8;
+    # 01_KERNEL §13.7). A subset only; never a new point.
+    enforced_at: list[Literal[
+        "env_instantiation", "envelope_mint", "body_invoke",
+        "tool_call", "output", "round_barrier",
+        "budget_tick", "mutation_propose"]] = field(default_factory=list)
+    claim_pattern: str | None = None       # optional match (reuse safety-
+                                           #  extension claim-pattern shape)
+    timing: Literal["before_action", "after_action",
+                     "both"] = "before_action"
+
+    # WHAT HAPPENS ON FAILURE — reuse ProposedVerifierKind / SafetyExtension
+    # enum verbatim (06_DOMAIN §7.2). Env rules may only ADD refusals.
+    failure_action: Literal["refuse_action", "warn_and_log",
+                             "escalate_operator"] = "refuse_action"
+    cascade_position: str | None = None    # reuse ProposedVerifierKind field
+
+    # HAZARD SHAPE — reuse substrate hazard axes (06_DOMAIN §2)
+    hazard_axes: dict | None = None        # {physical_harm_class,
+                                           #  information_hazard_class}
+    safety_critical: bool = False          # derived when axes cross C2 thresh
+
+    # LIFECYCLE — reuse the Proposed* FSM (06_DOMAIN §7.5): candidate -> trial
+    # -> accepted | rejected. Only "accepted" rules are read by the source-8
+    # loop. "revoked" is the ToolArtifact-style terminal (06_DOMAIN §7.2.x).
+    stage: Literal["candidate", "trial", "accepted",
+                    "rejected", "revoked"] = "candidate"
+    co_signing_personas: list[str] = field(default_factory=list)
+    operator_approval: bool | None = None  # REQUIRED iff safety_critical (C2)
+    operator_approval_signed_by: bytes | None = None
+
+    # EVIDENCE BINDING — reuse VerifierInvocationEvidence (07_ARTIFACTS §7/A.9a).
+    last_evidence_refs: list[str] = field(default_factory=list)
+
+    # AUTHORSHIP / CASCADE
+    authored_via: Literal["env_formation_proposal", "charter_amendment",
+                           "operator_authored"] = "charter_amendment"
+    authoring_ref: str | None = None       # proposal_id / amendment id
+    inherited_from_parent_env_id: str | None = None   # set when cascaded (§2.2a)
+    cascade_locked: bool = False           # True => child cannot relax/remove
+
+    version: int = 1
+    parent_rule_hash: str | None = None    # prior version on amendment
+    rule_hash: str = ""                    # sha256(canonical content)
+    signed_by: bytes = b""
 ```
 
 
@@ -3073,6 +3190,14 @@ class EnvFormationProposal:
         "default_from_blueprint"]           # use blueprint.seed_charter;
                                             # charter_draft ignored
 
+    # CHARTER RULES — optional executable EnvironmentRules (env-rule/1, §2.2b)
+    # authored with the env. Enter at stage="candidate"; non-safety rules
+    # advance to "trial" on instantiation; safety_critical rules hold env
+    # instantiation at consent_complete until the C2 / quorum gate clears
+    # (§12c.4a, env_rule_ratified). Additive; version retained per
+    # 09_PROTOCOLS §7.13.
+    proposed_rules: list[EnvironmentRule] = field(default_factory=list)
+
     # COHORT — who is invited, in what role, with what surface
     recruits: list[CohortInvite]            # see §12c.2
     cohort_atomicity: Literal[
@@ -3529,7 +3654,24 @@ event_kinds:
   peer_boundary_active                 # PersonaPersonaBoundary fires
   peer_boundary_refusal
   disagreement_to_boundary_transition
-  
+
+  # v1.1 §2.2b — EnvironmentRule (env-rule/1) event family
+  env_rule_proposed                    env_rule_trial_entered
+  env_rule_operator_review             env_rule_approved
+  env_rule_rejected                    env_rule_revoked
+  env_rule_amended                     env_rule_ratified
+  env_rule_evaluated                   # carries VerifierInvocationEvidence ref
+  env_rule_refusal                     env_rule_warned
+  env_rule_escalated
+
+  # v1.1 §07 — ArtifactSharingPolicy (artifact-share/1) events, surfaced
+  # in EnvironmentLineage because the owning env governs the sharing
+  artifact_bundle_env_ownership_set
+  artifact_sharing_policy_created      artifact_sharing_policy_amended
+  artifact_sharing_policy_revoked
+  artifact_access_granted              artifact_access_refused
+  # cross-tenant artifact-share demotion reuses CROSS_TENANT_VISIBILITY_DEMOTED
+
   # project_workspace-typed envs ADDITIONALLY carry the rich
   # project_* event family formerly housed in J8.  Examples:
   project_milestone_reached            project_conjecture_proposed

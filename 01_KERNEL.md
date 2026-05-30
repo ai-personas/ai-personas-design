@@ -737,6 +737,8 @@ INV-8 says "every effective hard constraint is evaluated at its admission point.
 
 **`coordination_propose` admission (v1.1).** When a persona proposes a coordination shape via `ProposedCoordinationShape` ([`15_COORDINATION_SHAPES.md §5`](15_COORDINATION_SHAPES.md)), the kernel validates: (1) `shape_definition` conforms to one of the five meta-mechanism schemas (INV-10 schema-valid), (2) shape does not weaken any safety-floor source (J3 — no safety bypass), (3) `composition_depth ≤ 3`, (4) for `scope = "env_to_env"`: bilateral consent protocol (S-COORD-5) is required before activation, (5) for `safety_critical = True`: operator co-sign required before advancing past `candidate` stage. On refusal, `CoordinationRefused` event emitted with `refusal_reason`.
 
+**EnvironmentRule admission (env-rule/1).** An `EnvironmentRule` ([`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1)) declares an `enforced_at` subset of these **same eight admission points** — it never introduces a new point. At each named point, the source-8 evaluation (§2.1, `A.3`) runs the env's `accepted`-stage rules whose `enforced_at` includes that point; a `refuse_action` verdict denies exactly as any other source-8 refusal, and a `warn_and_log` / `escalate_operator` verdict emits a signed signal without denying. Each gating evaluation binds its verdict to a `VerifierInvocationEvidence` record ([`07_ARTIFACTS.md §7`](07_ARTIFACTS.md#7-verifier-invocation-against-bundle)); a prose-only verdict is never sufficient.
+
 The `retrieval` point also runs OWASP LLM01 injection checks against the `text` / `description` / `rationale` / `action` fields of retrieved knowledge cards; a card that matches `injection_patterns` is quarantined (not deleted), `provenance_score := 0.2`, and an `INJECTION_DETECTED` event is recorded. Every blocking deny emits a `ConstraintViolation` event carrying enough redacted input context for an auditor to reproduce the decision.
 
 ### 13.8 Claim classifier rotation (sources 2, 3, 4, 6, 7)
@@ -949,7 +951,18 @@ SAFETY FLOOR (v1.0)
 
 8. ENV CHARTER            Persistent environment's own norms. Same
                           enforcement mechanism as persona charter
-                          but per env instance.
+                          but per env instance. The env charter MAY
+                          carry, in addition to prose clauses, signed
+                          versioned executable EnvironmentRules
+                          (env-rule/1, 05_ENVIRONMENT §2.2b) — code,
+                          rule-engine, or contract — each evaluated
+                          here at its declared enforced_at admission
+                          points. Per-env-blueprint and per-rule
+                          classifiers; all rotate. EnvironmentRules
+                          may only ADD refusals at source 8; they can
+                          never relax sources 1-7. This extends the
+                          mechanism of source 8; it does NOT add a
+                          ninth source.
 
 9. EMERGENT-DOMAIN TRUST ADVISORY  (NOT a refusal source)
                           When the active domain is EMERGENT or
@@ -1051,10 +1064,21 @@ def safety_check(persona, action, user, operator, env_instance, project):
             if not novelty_search_in_lineage(task_lineage):
                 refusals.append(Refuse("novelty_check", ...))
     
-    # 8. Env charter (if env instance)
+    # 8. Env charter — prose clauses PLUS bound executable EnvironmentRules
     if env_instance and env_instance.charter:
         if not env_charter_classifier.allows(env_instance.charter, action):
             refusals.append(Refuse("env_charter", ...))
+        # EnvironmentRule (env-rule/1) set bound to this env (05_ENVIRONMENT §2.2b).
+        # Mirrors step 5's domain.safety_extensions loop; rides UNDER source 8.
+        for rule in env_instance.active_env_rules:          # stage == "accepted"
+            if action.admission_point in rule.enforced_at:
+                verdict = rule.evaluate(persona, action, env_instance, project)
+                # verdict is evidence-bound (VerifierInvocationEvidence, 07 §7)
+                if not verdict.passed:
+                    if rule.failure_action == "refuse_action":
+                        refusals.append(Refuse("env_charter", rule.rule_id, ...))
+                    else:  # warn_and_log | escalate_operator — signal, not refusal
+                        emit_env_rule_signal(rule, verdict)
     
     # 9. Emergent-domain trust advisory (NOT a refusal)
     if (project and project.domain_context_ref):

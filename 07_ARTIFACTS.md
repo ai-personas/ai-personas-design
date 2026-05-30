@@ -97,6 +97,26 @@ The seven MetaRegistry entries above are seeded only because they are media-shap
 
 **Technical detail:** See [A.3](#appendix-a3).
 
+## 4a. ArtifactSharingPolicy (artifact-share/1) — env ownership and sharing
+
+An ArtifactBundle is produced *within* an environment and, in v1.0, owned by it: `owning_env_id` (§4) names the environment that governs who may read or co-edit the bundle. Because a Project IS a `project_workspace` environment ([`04_PROJECT.md §0`](04_PROJECT.md), ADR-0003), "project-scoped" already meant "owned by the project_workspace env"; `owning_env_id` makes that explicit and extends ownership to bundles authored in any env (a lab, a team). A bundle whose `owning_env_id` is `None` retains the legacy project-scoped behaviour unchanged.
+
+Sharing is governed by an **ArtifactSharingPolicy** (`artifact-share/1`) — a signed, env-authored policy that the human user or a persona attaches to the owning env (a default for all its bundles) or to a single bundle. It expresses three things, each reusing existing machinery rather than inventing new vocabulary:
+
+- **Access levels** — per-principal / role / env / principal-attribution grants of `r` or `rw` (`AccessGrant`, `access-grant/1`).
+- **Intra-composition sharing** — inheritance along the `EnvironmentComposition` parent/child hierarchy ([`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md#22a-environmentcomposition--hierarchical-environment-nesting-v11)): a parent env's bundles MAY be shared down to its child envs (the company → org → team model); a child policy MAY further-restrict but MUST NOT widen.
+- **Outward sharing** — the five visibility tiers ([`06_DOMAIN.md §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers); ADR-0030) `persona_only | project_only | tenant | federation | public`; a `tenant`-tier share that crosses a `principal_attribution` boundary REQUIRES a `CrossTenancyAgreementRef` (ADR-0028) or demotes with a signed `CROSS_TENANT_VISIBILITY_DEMOTED` event.
+
+Effective access composes by **most-restrictive-wins** (see [A.3a](#appendix-a3a)). The default `outward_tier` is `project_only` — the most conservative tier for newly-produced work; `federation` / `public` artifact tiers depend on the v1.1 federation index and are refused at admission until then (mirroring `DomainHarvest`).
+
+*This schema defines the env-scoped sharing policy (`artifact-share/1`) and its per-grantee `AccessGrant` (`access-grant/1`): access levels, intra-composition inheritance, outward visibility tier, and cross-tenant agreement requirement.*
+
+**Technical detail:** See [A.3a](#appendix-a3a).
+
+**Tests:** A-AB21 (legacy bundle with no `owning_env_id` / no policy behaves as before), A-AB22 (`owning_env_id` set; non-granted principal denied at retrieval), A-AB23 (`r` grant denies CRDT write; `rw` allows), A-AB24 (intra-composition inheritance via EnvironmentComposition), A-AB25 (cross-tenant share without `CrossTenancyAgreementRef` demotes + emits `CROSS_TENANT_VISIBILITY_DEMOTED`), A-AB26 (most-restrictive-wins across grant ∩ tier ∩ inherited policy), A-AB27 (cross-env CRDT respects policy across hosting envs). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+
+**Lineage:** `artifact_bundle_env_ownership_set`, `artifact_sharing_policy_created`, `artifact_sharing_policy_amended`, `artifact_sharing_policy_revoked`, `artifact_access_granted`, `artifact_access_refused` (surfaced in the owning env's EnvironmentLineage, [`05_ENVIRONMENT.md §13`](05_ENVIRONMENT.md#13-environmentlineage-j9)).
+
 ## 5. Co-editing semantics — CRDT
 
 ### 5.1 CRDT classes
@@ -165,7 +185,7 @@ v1.0 AnswerPackage (v1.0 §03 §5) carries `artifact_bundle_ref` and `artifact_b
 
 **Technical detail:** See [A.10](#appendix-a10).
 
-An AnswerPackage with `artifact_bundle_ref=None` is backwards-compatible.
+An AnswerPackage with `artifact_bundle_ref=None` is backwards-compatible. Likewise, a referenced `artifact-bundle/1` record with `owning_env_id=None` and `sharing_policy_ref=None` (§4) is read with the legacy project-scoped semantics — the env-ownership and sharing-policy fields are additive (`09_PROTOCOLS §7.13`).
 
 ## 9. Bundle composition patterns
 
@@ -208,6 +228,8 @@ Common bundle kinds and their structure:
 **Technical detail:** See [A.16](#appendix-a16).
 
 Operator chooses store backend. Ships Git-backed; Adds S3; hub publication adds content-addressed federation.
+
+**Content-addressed distribution alignment (informative).** The `content_hash` (SHA-256) model aligns directly with **IPFS / IPLD / CIDs**: an `ArtifactBundle` is naturally an IPLD DAG node whose links are the CIDs of its constituent artifacts, giving location-independent, integrity-verifiable references for federated sharing. Heavy, immutable, `version_chain`-class blobs (compiled outputs, model weights, `kicad_project` archives, environment images) MAY be distributed as **OCI Artifacts** via ORAS over ubiquitous OCI registries. Bundle and persona/env-image provenance MAY be published with **Sigstore** (keyless signing + transparency log), **SLSA** provenance, and **in-toto** attestations; **C2PA** Content Credentials apply to media artifacts (advisory tamper-evidence). These are interoperability targets at the federation boundary, not substrate requirements — see [`09_PROTOCOLS.md §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative).
 
 ## 11. Bundle forking
 
@@ -253,7 +275,7 @@ For projects hosted in multiple environments (v1.0 §04 §18, v1.0 §05 §17), a
 
 **Technical detail:** See [A.20](#appendix-a20).
 
-Artifact lives **above** any single env; project-scoped.
+Artifact ownership is by the bundle's `owning_env_id` (§4) — for a project bundle, the `project_workspace` env (project IS an env, ADR-0003). The bundle still lives **above any single hosting env** when a project spans multiple environments: `env_A` and `env_B` here are *hosting / co-editing* envs, not owners, and their personas obtain access through the `ArtifactSharingPolicy` (`AccessGrant` with `grantee_kind="env"`) plus `EnvironmentComposition` inheritance (§4a). When a remote persona's edit crosses a `principal_attribution` boundary, the kernel resolves the policy across the composition chain before applying the CRDT op; a `tenant`-tier edit without a `CrossTenancyAgreementRef` is read-demoted with a signed `CROSS_TENANT_VISIBILITY_DEMOTED` event. When `owning_env_id` is `None`, the legacy project-scoped behaviour applies unchanged.
 
 ## 15. Cost and performance
 
@@ -280,6 +302,8 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-ARTIFACTS-5 | External-reference artifacts lose verifiability. Persona cannot guarantee external URL content matches what was reasoned about. | High | High | External-tool-required policy on claims based on external refs; retrieval-and-verification invocation; lineage records the retrieval timestamp and hash; A-AB11 acceptance test. | v1.0 (verification flow). |
 | R-ARTIFACTS-6 | Bundle state transitions can deadlock if a required signatory is unavailable. | Medium | Low | Per-step deadlines; operator override; transition refused → STALLED state surface; A-AB3 acceptance test. | v1.0 (refused + stall). |
 | R-ARTIFACTS-7 | Verification evidence becomes decorative if a harness can emit "passed" without replayable tool / panel provenance. | High | Medium | `VerifierInvocationEvidence` is mandatory for lifecycle advancement; missing, stale, malformed, or prose-only evidence fails closed; A-AB16-A-AB20. | v1.0 (evidence envelope); v1.1 (harness conformance tooling). |
+| R-ARTIFACTS-8 | `ArtifactSharingPolicy` (§4a) misconfiguration over-exposes a bundle (e.g. an unintended `federation`/`public` tier or an over-broad `AccessGrant`). | High | Medium | Default `outward_tier = project_only`; effective access composes by most-restrictive-wins; a `None` policy never widens; cross-tenant shares require a `CrossTenancyAgreementRef` or demote (`CROSS_TENANT_VISIBILITY_DEMOTED`); A-AB22/A-AB25/A-AB26. Cross-document: also `00_VISION §11`. | v1.1 (conservative defaults). |
+| R-ARTIFACTS-9 | Cross-env CRDT (§14) under a partitioned `EnvironmentComposition` link: a child env edits while the composition/policy view is stale. | Medium | Low | Deny-on-uncertain for `rw` during partition; reuse joined-env `CONFLICT_PARKED` (`05_ENVIRONMENT` R-ENV-7) deferral to operator; reads continue against the local policy snapshot. | v1.1 (partition policy). |
 
 ## 16a. Open questions
 
@@ -292,6 +316,8 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-ARTIFACTS-3 | External-reference verification (R-ARTIFACTS-5): does the substrate cache the verified content, or only the hash? Storage / privacy / freshness trade-offs. | — | v1.1 cache policy. |
 | OQ-ARTIFACTS-4 | Bundle state-transition deadlocks (R-ARTIFACTS-6): per-step deadline defaults — by bundle type, by signatory role, by content size? | Artifact authors | v1.1 deadline defaults. |
 | OQ-ARTIFACTS-5 | `rendered_view_ref` retention: when the persona-authored content_ref changes, do we keep stale renders, auto-invalidate, or background-refresh? | — | v1.1 render lifecycle. |
+| OQ-ARTIFACTS-6 | `owning_env_id` migration (§4): do existing project bundles get `owning_env_id` set eagerly to their project_workspace env, or lazily on first `ArtifactSharingPolicy` attach? (Recommend lazy — stays `None` until first policy attach.) | Artifact authors | v1.1 migration policy. |
+| OQ-ARTIFACTS-7 | `AccessGrant` granularity (§4a): per-bundle (v1.1) vs per-artifact-within-bundle. When does per-artifact access become necessary? | Artifact authors | v1.2 per-artifact grants. |
 
 ## 17. Acceptance tests
 
@@ -338,6 +364,24 @@ A-AB19  Review/panel direct in_review → accepted allowed only when
         safety-extension stage remains required.
 A-AB20  Free-form rationale or LLM-produced "verified" token without
         tool/panel provenance cannot satisfy parsed_verdict=pass.
+A-AB21  Backward compat: an artifact-bundle/1 with owning_env_id=None and
+        sharing_policy_ref=None behaves exactly as pre-v1.1 (project-scoped,
+        no access checks).
+A-AB22  Bundle with owning_env_id set + ArtifactSharingPolicy: a principal
+        with no matching AccessGrant is denied read at the retrieval point.
+A-AB23  An r-only grantee's CRDT write op is denied (artifact_access_refused);
+        an rw grantee's write succeeds.
+A-AB24  Intra-composition inheritance: a child env inherits the parent's
+        inherit_to_children policy via EnvironmentComposition; a child policy
+        may further-restrict but not widen.
+A-AB25  Outward tenant-tier share crossing a principal_attribution boundary
+        WITHOUT a CrossTenancyAgreementRef is read-demoted and emits
+        CROSS_TENANT_VISIBILITY_DEMOTED.
+A-AB26  Effective access composes by most-restrictive-wins across
+        AccessGrant ∩ outward-tier reachability ∩ inherited composition policy.
+A-AB27  Cross-env CRDT (§14): a project hosted in multiple envs resolves the
+        sharing policy across the composition chain before applying a remote
+        persona's edit; access is enforced per hosting env.
 ```
 
 ## 18. Where to read next
@@ -438,9 +482,21 @@ class ContributorEntry:
 ```python
 @dataclass
 class ArtifactBundle:
-    schema: str = "artifact-bundle/1"
+    schema: str = "artifact-bundle/1"     # additive fields below; version
+                                          # retained per 09_PROTOCOLS §7.13
     bundle_id: str
     project_id: str
+    owning_env_id: str | None = None      # the environment that OWNS this
+                                          # bundle and governs its sharing
+                                          # (§4a). For a project bundle this is
+                                          # the project_workspace env (project
+                                          # IS an env, ADR-0003); None = legacy
+                                          # project-scoped behaviour (pre-/2
+                                          # semantics preserved).
+    sharing_policy_ref: str | None = None # ArtifactSharingPolicy.policy_id
+                                          # (artifact-share/1, §4a); None =
+                                          # inherit the owning env's default
+                                          # policy, else project_only.
     name: str                             # "design_v3", "paper_v7", "refactor_v2"
     description: str
     bundle_kind: str                      # domain-meaningful:
@@ -485,6 +541,58 @@ class ArtifactBundle:
     signed_by: bytes
 ```
 
+### A.3a ArtifactSharingPolicy + AccessGrant schemas
+
+<a id="appendix-a3a"></a>
+
+```python
+@dataclass
+class ArtifactSharingPolicy:
+    schema: str = "artifact-share/1"
+    policy_id: str                        # ULID
+    owning_env_id: str                    # env that authored / owns the policy
+    bundle_scope: Literal["env_default",  # applies to all bundles owned by env
+                           "bundle_specific"]
+    bundle_id: str | None = None          # set when bundle_scope=bundle_specific
+
+    # ACCESS LEVELS — per principal / role / env / principal-attribution
+    access_grants: list[AccessGrant] = field(default_factory=list)
+
+    # INTRA-COMPOSITION SHARING — reuse EnvironmentComposition (05_ENV §2.2a)
+    intra_composition_inheritance: Literal[
+        "inherit_to_children",            # children in the composition inherit
+                                          #  (company → org → team)
+        "inherit_to_parent",
+        "isolated"] = "inherit_to_children"
+
+    # OUTWARD SHARING — reuse the 5 visibility tiers (06_DOMAIN §6.3; ADR-0030)
+    outward_tier: Literal["persona_only", "project_only", "tenant",
+                          "federation", "public"] = "project_only"
+    cross_tenant_agreement_ref: str | None = None   # CrossTenancyAgreementRef
+                                          #  (ADR-0028) REQUIRED before a
+                                          #  tenant-tier share crosses a
+                                          #  principal_attribution boundary;
+                                          #  absent => demote + emit
+                                          #  CROSS_TENANT_VISIBILITY_DEMOTED.
+                                          #  federation / public depend on the
+                                          #  v1.1 federation index (refused at
+                                          #  admission until then).
+
+    version: int = 1
+    signed_by: bytes = b""                # env-scope key (09_PROTOCOLS §8)
+
+
+@dataclass
+class AccessGrant:
+    schema: str = "access-grant/1"
+    grantee_kind: Literal["persona", "role", "env", "principal"]
+    grantee_id: str                       # persona_id | role_kind | env_id |
+                                          #  principal_attribution_id
+    access_level: Literal["r", "rw"] = "r"
+```
+
+**Effective access** for a principal P on bundle B is the **intersection** (most-restrictive-wins, exactly as the safety floor composes, [`01_KERNEL.md §2.1`](01_KERNEL.md#21-composition-rule)) of: (a) the `AccessGrant` matching P (or P's role / env / principal-attribution); (b) outward-tier reachability given P's tenancy and any `cross_tenant_agreement_ref`; (c) the inherited policy along the `EnvironmentComposition` chain — a parent `inherit_to_children` policy MAY further-restrict a child but MUST NOT widen a child's own grants (mirroring "child may add stricter rules", [`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md#22a-environmentcomposition--hierarchical-environment-nesting-v11)); and (d) any source-8 `EnvironmentRule` ([`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1)) firing at the `output` admission point. A write (`rw`) operation by an `r`-only grantee MUST be denied (`artifact_access_refused`).
+
 ### A.4 CRDT classes
 
 <a id="appendix-a4"></a>
@@ -519,6 +627,10 @@ Persona A proposes edit
 Kernel receives signed CRDT operation
     ▼
 Safety floor checks (proposed text against charter, boundaries, ...)
+    ▼
+ArtifactSharingPolicy access check (§4a): resolve A's effective access on
+  this bundle (grant ∩ tier ∩ inherited composition policy, most-restrictive-
+  wins); a write op by an r-only grantee is denied → artifact_access_refused
     ▼
 Domain external_tool_requirements check
     ▼

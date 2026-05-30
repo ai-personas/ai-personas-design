@@ -59,7 +59,8 @@ A-DM*   domain recognition + probe tests         (15 tests; +3 v1.0 phase record
 A-DI*   discovery + ingestion tests              (15 tests; +3 v1.0 toolkit/visibility/federated lookup)
 A-IN*   inference + proposal tests               (12 tests; +2 v1.0 convergence/convention reconciliation)
 A-CR*   curation + promotion tests               (17 tests; +3 v1.0 ToolArtifact/dormancy/multi-tenant)
-A-AB*   artifact + bundle tests                  (20 tests; +5 verifier-evidence hardening)
+A-AB*   artifact + bundle tests                  (27 tests; +5 verifier-evidence hardening;
+                                                  +7 v1.1 env-scoping/sharing A-AB21-27)
 A-TX*   knowledge + retrieval + prompt tests     (25 tests; +5 v1.0 reflection/lesson promotion/matrix/channel tactics)
 A-RL*   roles + operator tests                   (12 tests)
 A-CO*   collaboration tests (peer review,
@@ -97,13 +98,20 @@ Frontier-domain families:
 A-SC*   supersession cascade                     (7 tests; 08_KNOWLEDGE §6.3)
 A-CDM*  corpus drift metric                      (6 tests; 06_DOMAIN §4.4.1)
 A-RFC*  replicated attestation frontier comp.    (2 tests; 06_DOMAIN §5.6.1)
+
+v1.1 environment-rule + composition + sharing families:
+A-EC*   environment composition (rule cascade)   (5 tests; 05_ENVIRONMENT §2.2a)
+A-CA*   coordination admission                   (5 tests; 15_COORDINATION_SHAPES §5)
+A-ER*   environment rule (env-rule/1)            (9 tests; 05_ENVIRONMENT §2.2b)
+A-AB21-27  artifact env-scoping + sharing policy (7 tests; 07_ARTIFACTS §4a)
 ─────────────────────────────────────────────────────────
-TOTAL                                            ~456 tests
+TOTAL                                            ~472 tests
                                                  (+45 from prior-version spec backfill;
                                                   +48 from families;
                                                   +23 from v1.0.12 fleet-management;
                                                   +15 from v1.0.13 frontier-domain;
-                                                  +5 verifier-evidence hardening)
+                                                  +5 verifier-evidence hardening;
+                                                  +16 from v1.1 env rules + artifact sharing)
 ```
 
 ## 3. Per-release gate matrix (concise)
@@ -2863,9 +2871,9 @@ A-RFC2    Domain promotion to AUTHORITATIVE remains blocked (requires
           Promotion only unblocks after frontier exit per §4.4.1.
 ```
 
-## 9m. Environment composition + coordination admission tests (A-EC*, A-CA*) — v1.1
+## 9m. Environment composition, coordination, and rule admission tests (A-EC*, A-CA*, A-ER*) — v1.1
 
-v1.1 addition (ADR-0045, [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), [`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md), [`01_KERNEL.md §13.7`](01_KERNEL.md)). Tests exercise environment composition (hierarchical nesting with rule cascade) and the coordination_propose kernel admission gate.
+v1.1 addition (ADR-0045, ADR-0052, ADR-0053, [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), [`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md), [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md), [`01_KERNEL.md §13.7`](01_KERNEL.md)). Tests exercise environment composition (hierarchical nesting with rule cascade), the coordination_propose kernel admission gate, and dynamically-authored executable EnvironmentRules enforced under safety-floor source 8.
 
 ### A-EC* — EnvironmentComposition tests
 
@@ -2914,6 +2922,49 @@ A-CA4     Cross-env coordination shape (scope = "env_to_env") requires
 A-CA5     Safety-critical shape in safety_critical=True environment
           requires operator co-sign before advancing past candidate
           stage. Advancement without operator co-sign REFUSED.
+```
+
+### A-ER* — EnvironmentRule tests (env-rule/1, 05_ENVIRONMENT §2.2b)
+
+```text
+A-ER1     EnvironmentRule authored in EnvFormationProposal.proposed_rules
+          enters stage="trial" on instantiation; a safety_critical rule
+          holds env instantiation at consent_complete until the C2 /
+          MultiPrincipalAttestationQuorum gate clears (env_rule_ratified).
+
+A-ER2     An accepted rule fires at a declared enforced_at admission point;
+          failure_action="refuse_action" denies via source-8 most-
+          restrictive-wins, and a signed VerifierInvocationEvidence record
+          + env_rule_refusal event are appended (prose-only verdict rejected).
+
+A-ER3     failure_action="warn_and_log" / "escalate_operator" emit
+          env_rule_warned / env_rule_escalated WITHOUT denying the action.
+
+A-ER4     A safety_critical rule (hazard axes ≥ C2 threshold) cannot reach
+          stage="accepted" without operator approval; under principal
+          collapse the degraded gate (01_KERNEL §2.4) applies.
+
+A-ER5     EnvironmentRule rides UNDER source 8: the safety floor still
+          reports 8 sources (A-K2 unaffected); a rule refusal composes with
+          other sources by most-restrictive-wins and may only ADD refusals.
+
+A-ER6     A parent EnvironmentRule with cascade_locked=True is inherited by
+          a child env at formation (inherited_from_parent_env_id set); a
+          child charter amendment weakening it is REFUSED with
+          env_child_charter_amendment_refused (safety_violation).
+
+A-ER7     rule_kind resolves against KindRegistry env_rule_kinds
+          (code | rule_engine | contract); an unknown rule_kind triggers the
+          proposal / probe-extension flow, not a substrate enum branch.
+
+A-ER8     Worked examples enforce: a contract rule (rule_kind=contract,
+          enforced_at=[output]) refuses a non-conforming shipment; a sandboxed
+          robot-performance code rule refuses an out-of-spec result; a chip
+          buildable/orderable rule_engine rule refuses a non-orderable BOM.
+
+A-ER9     Backward compatibility: an env whose charter carries no rules
+          (env_rules / rule_refs empty) behaves exactly as a pre-v1.1 env;
+          source-8 evaluation is unchanged.
 ```
 
 ## 9e. Risks & known limitations
