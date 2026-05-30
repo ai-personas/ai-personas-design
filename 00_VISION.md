@@ -528,7 +528,10 @@ INV-3  Every accepted artefact passes a verifier. (≡ J4 for CONVERGENT)
        VerifierCascade has four tiers: schema → sandbox → invariant →
        policy. Each tier MUST clear before the next; failure at any
        tier rejects the candidate and emits a ProvenFact constraint.
-       Tier rotation per INV-6. Mechanism: 01_KERNEL §13.1.
+       Tier rotation per INV-6. Accepted artifact verifier claims are
+       evidence-bound: missing, stale, malformed, or prose-only evidence
+       cannot satisfy a stage. Mechanism: 01_KERNEL §13.1,
+       07_ARTIFACTS §7.
 
 INV-4  ProvenFacts grow within a class (monotonic). (≡ J2 corollary)
        Inside one task instance, ProvenFacts only accrue — never
