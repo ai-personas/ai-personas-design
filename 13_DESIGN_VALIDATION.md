@@ -1124,6 +1124,47 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 
 ---
 
+### SCENARIO 14 — Composed multi-org environment with dynamically-authored rules and access-scoped artifact sharing
+
+**Scenario premise.** Validates that a purpose-specific environment can carry dynamically-authored, executable rules (`env-rule/1`) enforced at the safety floor, and that the artifacts it produces are owned by the environment and shared by access level within a composition and outward by policy — with no new substrate hardcode.
+
+**User request** (the in-scenario task). "Stand up a chip-design group inside our manufacturing org; every taped-out design must pass a buildable/orderable check and ship under our standard shipment contract, and share the result read-only with our foundry partner."
+
+**Task class.** INVESTIGATIVE (multi-session design work).
+**Acceptance pathway.** PROJECT_PROGRESS_ACCEPT (milestones) composed with VERIFIER_ACCEPT (the buildable/orderable rule).
+
+**World shape.**
+- Principal: multi-tenant (ManufacturingCorp operator + Foundry partner tenant).
+- Persona(s): a small chip-design cohort (lead + DRC / BOM specialists), formed via `EnvFormationProposal`.
+- Environment: a parent `team` env "ManufacturingCorp" composing a child `project_workspace` env "chip-design" (`05_ENVIRONMENT §2.2a`).
+- Project: yes, multi-session, produces a digital `ArtifactBundle` (schematic + netlist + BOM + sim report).
+- External participants: the foundry as a separate tenant receiving an outward read-only share.
+
+**Domain shape.** Emergent `chip_design` DomainContext; hazard axes low (digital), so the env rules are non-safety-critical except where physical fabrication is implicated. `KindRegistry` resolves `env_rule_kinds` (`code`/`rule_engine`/`contract`) and the `kicad_project` / BOM media kinds.
+
+**Phase walk.**
+
+| Phase | Primitives carrying load | Events fired |
+|---|---|---|
+| Form env | parent composes child via `EnvironmentComposition`; `EnvFormationProposal.proposed_rules` carries two rules | `env_composition_established`, `env_formation_proposal_instantiated`, `env_rule_proposed` |
+| Author rules | "buildable/orderable validator" (`rule_kind=rule_engine`: DRC + BOM-orderability cascade, `enforced_at=[output, mutation_propose]`); "shipment contract" (`rule_kind=contract`, `enforced_at=[output]`) | `env_rule_trial_entered` → `env_rule_approved` |
+| Cascade | parent marks a corp-wide "no export-controlled parts" rule `cascade_locked=True`; it inherits into the child | `env_composition_cascade_applied`; a child attempt to relax it → `env_child_charter_amendment_refused (safety_violation)` |
+| Design | cohort co-edits the `ArtifactBundle` (`owning_env_id` = chip-design env) | `artifact_bundle_env_ownership_set`, `project_artifact_edited` |
+| Verify | at `output`, source-8 runs the buildable/orderable rule; a non-orderable BOM → `env_rule_refusal` with `VerifierInvocationEvidence`; fixed → passes | `env_rule_evaluated`, `env_rule_refusal` |
+| Share | `ArtifactSharingPolicy`: `inherit_to_children` within ManufacturingCorp (org roles get `rw`); `outward_tier=tenant` to the foundry partner gated by a `CrossTenancyAgreementRef` (read-only) | `artifact_sharing_policy_created`, `artifact_access_granted`; without the agreement → `CROSS_TENANT_VISIBILITY_DEMOTED` |
+
+**Substrate-shape gaps surfaced** (pre-feature). (1) Env rules could only be declarative prose — no way to express an executable buildable/orderable check or a shipment-contract conformance gate bound to the environment. (2) Artifacts had no env ownership or sharing policy — no way to share read-only across the org composition or outward to a partner tenant under a defined policy.
+
+**Resolution.** (1) `EnvironmentRule` (`env-rule/1`, `05_ENVIRONMENT §2.2b`) riding under safety-floor source 8 (`01_KERNEL §2`; ADR-0052/0053), with the `env_rule_kinds` KindRegistry family (`06_DOMAIN §7.6.3`). (2) `owning_env_id` + `ArtifactSharingPolicy` (`artifact-share/1`, `07_ARTIFACTS §4a`; ADR-0054/0055) reusing the 5 visibility tiers + `CrossTenancyAgreementRef` + `EnvironmentComposition` cascade. Distribution/discovery interop in `09_PROTOCOLS §3F` (ADR-0056). Tests A-ER1–9, A-AB21–27, A-EC1–5.
+
+**Not-gaps (persona evolves these).** The actual DRC ruleset, BOM-orderability criteria, and shipment-contract clauses are rule *content* authored by the user/personas and signed like any Proposed\*Kind (`06_DOMAIN §7.5/§7.6`); the substrate supplies only the env-rule shape and the sharing-policy slots.
+
+**Status.** Validated against the v1.1 additions; aligns with the intended design. Every step is expressible with the new schemas, fires at the correct admission point, emits the right lineage events, and composes most-restrictive-wins.
+
+**Honest residuals.** Rule-evaluation latency in the floor budget (R-ENV-12); sharing-policy misconfiguration exposure (R-ARTIFACTS-8); multi-parent cascade conflict deferred (OQ-ENV-9); per-artifact (vs per-bundle) grants deferred (OQ-ARTIFACTS-7).
+
+---
+
 ## Scenario template (copy + fill)
 
 ```text
@@ -1217,6 +1258,7 @@ A scenario should be added to the catalog as it is walked, with the same eight-s
   - SCENARIO 12 fixes: `08_KNOWLEDGE §6.3` (`SupersessionCascade`), `06_DOMAIN §4.4.1` (`CorpusDriftMetric`), `06_DOMAIN §5.6.1` (`ReplicatedAttestationFrontierComposition` — composition rule paragraph).
   - SCENARIO 17 fixes: `05_ENVIRONMENT §5.2` (Wake Path 6), `03_TASKS §4.1` (dispatcher dormancy check), `05_ENVIRONMENT §11.6` (CrossEnvProactiveOffer + GuestPresence); `11_ACCEPTANCE_TESTS.md` (A-WK6* + A-CEPO* families).
   - SCENARIO 13 fixes: `16_POPULATION_DYNAMICS.md` (whole doc — Persona Genesis + demographic regulation; schemas `population-pressure-signal/1`, `niche-descriptor/1`, `genesis-proposal/1`, `genesis-provenance/1`, `mentorship-edge/1`, `population-policy/1`), `01_KERNEL §2.7` (`persona_genesis` replication_kind), `02_PERSONA §3` (`may_author_seeds`) + `§7` (`LIFECYCLE_GENESIS`) + `§7.4` (fork-vs-genesis) + `§12` (persona-authored seeds), `04_PROJECT §14.1` (genesis forced-choice option), `05_ENVIRONMENT §12c` (recruitment-gap fallback), `14_DECISIONS` (ADR-0048, ADR-0049); `11_ACCEPTANCE_TESTS.md` (A-GEN* family, 17 tests).
+  - SCENARIO 14 fixes: `05_ENVIRONMENT §2.2b` (`EnvironmentRule`, `env-rule/1`) + `§2.2a` (rule cascade) + `§12c`/`§16.2` (authoring) + `§13`/`A.43` (env_rule_* + artifact-share events), `01_KERNEL §2`/`A.2`/`A.3`/`§13.7` (source-8 generalization), `06_DOMAIN §7.6.3` (`env_rule_kinds`) + `§6.3` (tier reuse note), `07_ARTIFACTS §4` (`owning_env_id`/`sharing_policy_ref`) + `§4a` (`ArtifactSharingPolicy`/`AccessGrant`, `artifact-share/1`/`access-grant/1`) + `§5.2`/`§14`/`§10` (enforcement + IPLD/OCI), `09_PROTOCOLS §7.4`/`§7.6` (registry) + `§3`/`§3F`/`§8` (distribution/discovery alignment), `00_VISION` (J3 clarification + §11 R-v1.0-13/14), `14_DECISIONS` (ADR-0052..0056), `12_GLOSSARY` (EnvironmentRule, ArtifactSharingPolicy, AccessGrant); `11_ACCEPTANCE_TESTS.md` (A-ER* 9 tests, A-AB21-27).
   - Backlog #18 primitives: `04_PROJECT §26a.10` (`BridgeReductionPlan` + `BridgeReductionEntry`), `06_DOMAIN §5.7` (`AttestationEquivalencePolicy` + `AgreementHistory`); `11_ACCEPTANCE_TESTS.md §9l` (A-BRP* bridge reduction plan, A-AEP* attestation equivalence policy).
 - Glossary entries for the v1.0.14 primitives: `12_GLOSSARY.md` (AttestationEquivalencePolicy, BridgeReductionEntry, BridgeReductionPlan).
 - Glossary entries for the v1.0.13 primitives: `12_GLOSSARY.md` (CorpusDriftMetric, CrossEnvProactiveOffer, GuestPresence, ReplicatedAttestationFrontierComposition, SupersessionCascade, Wake Path 6).

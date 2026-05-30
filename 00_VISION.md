@@ -280,6 +280,8 @@ Cross-document risks for v1.0 as a system. Per-document risks appear in each doc
 | R-v1.0-10 | **Provider opacity in proxy bodies.** A2A / framework-runtime bodies hide internal LLM calls; lineage gaps possible. | High | Medium | body_attestation trust ceiling; proxy bodies SHALL NOT carry safety-critical work ([`02_PERSONA.md §3.5`](02_PERSONA.md)). |. |
 | R-v1.0-11 | **Long-horizon self-direction tail risks.** MilestoneDrivenAutonomy + MissionCharter open partial autonomy surface. | Medium | Low | Drift bounds; re-attestation cadence; substrate-refused forbidden surfaces ([`02_PERSONA.md §11.2-§11.3`](02_PERSONA.md)). | v1.1. |
 | R-v1.0-12 | **Federated trust establishment.** A2A peer admission protocol assumes signed AgentCards; revocation/key rotation under-specified. | High | Low | Federation hardening v1.1+; pinned peer registry per kernel for v1.0. | v1.1. |
+| R-v1.0-13 | **Executable EnvironmentRule as floor-bypass vector.** Dynamically-authored `env-rule/1` code/contract rules (`05_ENVIRONMENT §2.2b`) extend safety-floor source 8; a malicious rule could attempt to weaken enforcement. | Critical | Low | Rules run in the existing sandbox (OWASP + caps, `01_KERNEL §6`); ride UNDER source 8 and may only ADD refusals (never relax sources 1-7); `safety_critical` rules operator-gated (C2); `cascade_locked` parent rules immutable by children; the "8 sources" count is unchanged ([`01_KERNEL.md §2`](01_KERNEL.md), [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md)). Per-doc: R-ENV-11. | v1.1. |
+| R-v1.0-14 | **ArtifactSharingPolicy misconfiguration over-exposes artifacts.** Env-scoped sharing (`artifact-share/1`, `07_ARTIFACTS §4a`) could leak a bundle across orgs if mis-set. | High | Medium | Default `outward_tier = project_only`; most-restrictive-wins composition; `None` policy never widens; cross-tenant shares require `CrossTenancyAgreementRef` or demote ([`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md), [`06_DOMAIN.md §6.3`](06_DOMAIN.md), ADR-0028/0030). Per-doc: R-ARTIFACTS-8. | v1.1. |
 
 ### 11.1 Severity legend
 
@@ -409,6 +411,10 @@ J3  Safety floor is universal.
     + domain_safety_extensions + external_tool_required + novelty_check
     + env_charter. Plus a 9th advisory: emergent-domain trust warning.
     The floor cannot be bypassed by any acceptance pathway.
+    (env_charter MAY carry signed, versioned, executable
+    EnvironmentRules — see 05_ENVIRONMENT §2.2b — which compose under
+    source 8 and may only add refusals; this does not change the
+    source count.)
 
 J4  Acceptance is task-class-appropriate.
     Ten task classes route to eight acceptance pathways:

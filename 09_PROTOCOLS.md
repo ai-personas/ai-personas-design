@@ -122,6 +122,8 @@ Every persona projects to an AgentCard for federation.
 
 **Technical detail:** See [A.5](#appendix-a5).
 
+**A2A path alignment (informative).** The A2A project (Linux Foundation; spec v1.0) standardises the persona AgentCard well-known path as `/.well-known/agent-card.json` (RFC 8615; renamed from the earlier `agent.json`). PersonaOS publishes its persona projection there and its `EnvCard` projection ([`§3B`](#3b-inter-kernel-gossip-layer)) at the analogous env well-known path, so external A2A clients discover PersonaOS personas and environments with no PersonaOS-specific knowledge. A2A deliberately leaves a central registry API unstandardised; PersonaOS's gossip layer ([`§3B`](#3b-inter-kernel-gossip-layer)) and any operator directory ([`§3F`](#3f-external-standard-alignment-informative)) complement, rather than conflict with, A2A discovery.
+
 ## 3A. Intra-environment communication — five channels
 
 Within an environment, personas never call each other directly. They emit events to kernel-mediated channels. Five channels carry all intra-env traffic.
@@ -273,6 +275,22 @@ When two personas form a `PersonaRelationshipEdge` (`02_PERSONA §11.4`) and the
 3. **Ships schema and shadow mode for production; co_owned mode is v1.1+.** Cross-kernel real-time conflict resolution under arbitrary latency is the v1.1 federation-hardening track. The spec produces well-formed `RelationshipFederationSync` envelopes for both modes, but in co_owned mode only single-kernel-quorum deployments are admitted by operator policy.
 
 **Acceptance tests.** A-RF1 (shadow mode: peer mutation requires home counter-sign), A-RF2 (revocation propagates within sync_lag_budget), A-RF3 (FEDERATED_TRUST_DISCREPANCY fires on home-only trust inflation), A-RF4 (co_owned conflict resolution by Lamport order), A-RF5 (sync lag refused for safety-critical action against edge state).
+
+## 3F. External-standard alignment (informative)
+
+This pillar records how PersonaOS's storage / distribution / discovery substrate maps onto the agentic-world standards maturing in 2025–2026. It is **informative** (non-normative): it validates existing PersonaOS choices and names the standards an operator MAY adopt at the federation boundary without changing any v1.0 invariant. None of these replace a substrate schema; they are interoperability targets.
+
+**Discovery & registries.** PersonaOS's `.well-known` + gossip model aligns with **A2A AgentCards** (LF; v1.0) and with the two-tier **MCP Registry** pattern (a neutral upstream metadata source-of-truth consumed by downstream / private aggregators; reverse-DNS namespaces with DNS / GitHub ownership authentication). An operator running a persona/env directory SHOULD model it as such a sub-registry rather than a closed central authority. The **AGNTCY Agent Directory** (OCI-backed, content-addressable) and **MIT NANDA** (a lean index resolving a handle to verifiable credentials, with an adaptive resolver for large fast-changing populations) are the reference blueprints for scaling the directory.
+
+**Naming & identity.** Persona / env identities (ULIDs today) MAY additionally be expressed as **W3C DIDs** — `did:web` for stable, organisation-controlled names co-located with the hosting domain; `did:wba` (the ANP web-based-agent method) for a web-anchored agent DID paired with signed HTTP provenance; `did:key` for ephemeral task-scoped instances. Running persona / body *process* identity SHOULD use **SPIFFE/SPIRE** (attested SVID + mTLS), complementing the kernel-owned Ed25519 soul identity (`01_KERNEL §4`) — runtime identity and durable identity are different layers.
+
+**Provenance & content addressing.** PersonaOS already content-addresses artifacts by SHA-256 (`07_ARTIFACTS §10`). It aligns with **IPFS / IPLD / CIDs** (an `ArtifactBundle` is naturally an IPLD DAG node linking its constituent artifacts) and with **OCI Artifacts / ORAS** for heavy, immutable, `version_chain`-class blobs (compiled outputs, model weights, env images). Artifact and persona/env-image provenance MAY be published via **Sigstore** (keyless signing + transparency log), **SLSA** provenance (build levels), and **in-toto** attestations; **C2PA** Content Credentials apply to media artifacts (a real but still-maturing standard — treat its tamper-evidence as advisory).
+
+**Policy, capabilities & sharing.** The `ArtifactSharingPolicy` (`07_ARTIFACTS §4a`) and env-admission gates MAY be (a) serialised as **ODRL** (W3C Rec) — a machine-readable "MAY read / MUST attribute / MUST NOT redistribute" policy object that travels with a shared bundle; (b) evaluated with **OPA/Rego** or **AWS Cedar** (Cedar additionally supports *formal verification* of policy properties, e.g. proving no policy grants cross-org access to a soul-inspection action — matching the spec's safety emphasis); (c) resolved over a **Zanzibar / OpenFGA** relationship graph for the transitive "is persona A a viewer of bundle B via team/org?" questions that `EnvironmentComposition` poses; and (d) for cross-kernel delegation, expressed as attenuated **UCAN** capability tokens chained from a persona's DID ("delegate read / co-edit of bundle X to a peer persona on another kernel"). Sensitive cross-org artifact processing where "compute on my data but never expose it" is required maps to **data clean rooms + confidential computing** (attested enclaves).
+
+**Executable env rules.** The `EnvironmentRule` `rule_kind`s (`06_DOMAIN §7.6.3`) align with: **WASM / WASI Preview 2** as the capability-gated, deterministic in-kernel sandbox for `rule_kind=code` (composes with the `01_KERNEL §6` sandbox); **E2B / Firecracker microVMs** for the rule-authoring step (an agent generating, testing, and verifying rule code before it is signed and admitted); **JSON-Logic**, **GoRules ZEN / JDM** decision tables, and **DMN/FEEL** for `rule_kind=rule_engine` (portable, no-eval, hashable into `safety_snapshot_id`); and **DMN/FEEL + ODRL** or machine-readable contracts for `rule_kind=contract`. Operational I/O-boundary guardrail runtimes (NeMo Guardrails / Invariant) are the runtime analog of source-8 rule enforcement.
+
+This alignment is captured as ADRs (`14_DECISIONS.md`); adopting any specific standard is operator policy, not a substrate requirement.
 
 ## 4. OpenTelemetry semantic conventions
 
@@ -453,7 +471,9 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 | Schema | Version | Form | Defined in | Stability | Used by |
 |--------|---------|------|------------|-----------|---------|
 | `EnvironmentBlueprint` | `env-blueprint/1` | dataclass | [`05_ENVIRONMENT.md §2`](05_ENVIRONMENT.md) | Stable | Env-type template. |
-| `EnvironmentInstance` | `env-instance/1` | dataclass | [`05_ENVIRONMENT.md §1`](05_ENVIRONMENT.md) | Stable | Persistent env record (J9). |
+| `EnvironmentInstance` | `env-instance/1` | dataclass | [`05_ENVIRONMENT.md §1`](05_ENVIRONMENT.md) | Stable | Persistent env record (J9). v1.1: additive optional `env_rules` (EnvironmentRule ids); version retained per [`§7.13`](#713-adding-or-modifying-schemas). |
+| `EnvironmentCharter` | `env-charter/1` | dataclass | [`05_ENVIRONMENT.md §2.1`](05_ENVIRONMENT.md) | Stable | Named, signed charter projection with precedence order. v1.1: additive optional `rule_refs` (EnvironmentRule ids); version retained per [`§7.13`](#713-adding-or-modifying-schemas). |
+| `EnvironmentRule` | `env-rule/1` | dataclass | [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md) | Provisional | Signed, versioned, env-scoped executable rule (`code` / `rule_engine` / `contract`, KindRegistry-resolved) enforced under safety-floor source 8 ([`01_KERNEL.md §2`](01_KERNEL.md)) at INV-8 admission points; reuses verifier-recipe + sandbox + ProposedSafetyExtension lifecycle. |
 | `EnvironmentMembership` | `env-membership/1` | dataclass | [`05_ENVIRONMENT.md §5`](05_ENVIRONMENT.md) | Stable | Persona ↔ env binding with role + surface + community standing. |
 | `CommunityStanding` | `community-standing/1` | dataclass | [`05_ENVIRONMENT.md §5.4`](05_ENVIRONMENT.md) | Draft | Per (persona, env) relational standing (LPP); non-portable; conferred, never self-awarded. |
 | `StandingEndorsement` | `standing-endorsement/1` | dataclass | [`05_ENVIRONMENT.md §5.4`](05_ENVIRONMENT.md) | Draft | Recognition event conferring community standing; anti-gaming reuses §3D / A.16–A.18. |
@@ -466,7 +486,7 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 | `CrossEnvProactiveOffer` | `cross-env-proactive-offer/1` | dataclass | [`05_ENVIRONMENT.md §11.6`](05_ENVIRONMENT.md) | Stable | Cross-env voluntary help offer with consent flow. |
 | `GuestPresence` | `guest-presence/1` | dataclass | [`05_ENVIRONMENT.md §11.6`](05_ENVIRONMENT.md) | Stable | Time-bounded, scope-limited presence for accepted cross-env offers. |
 | `EnvSelfProposalRequest` | `env-self-proposal/1` | dataclass | [`05_ENVIRONMENT.md §12b`](05_ENVIRONMENT.md) | Provisional | Persona-initiated self-admission to an existing env. |
-| `EnvFormationProposal` | `env-formation-proposal/1` | dataclass | [`05_ENVIRONMENT.md §12c.1`](05_ENVIRONMENT.md) | Provisional | Persona-initiated creation of a new env with cohort + charter + consent flow. |
+| `EnvFormationProposal` | `env-formation-proposal/1` | dataclass | [`05_ENVIRONMENT.md §12c.1`](05_ENVIRONMENT.md) | Provisional | Persona-initiated creation of a new env with cohort + charter + consent flow. v1.1: additive `proposed_rules` (EnvironmentRule list). |
 | `CohortInvite` | `cohort-invite/1` | dataclass | [`05_ENVIRONMENT.md §12c.1`](05_ENVIRONMENT.md) | Provisional | Per-recruit element of an `EnvFormationProposal`. |
 | `ConsentTerms` | `consent-terms/1` | dataclass | [`05_ENVIRONMENT.md §12c.1`](05_ENVIRONMENT.md) | Provisional | Disclosure surface shown to a recruit on `CONSENT_REQUEST`. |
 | `CohortConsentResponse` | `cohort-consent-response/1` | dataclass | [`05_ENVIRONMENT.md §12c.1`](05_ENVIRONMENT.md) | Provisional | Signed recruit reply (accept / decline / counter / boundary-refused / etc.). |
@@ -501,7 +521,9 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 | Schema | Version | Form | Defined in | Stability | Used by |
 |--------|---------|------|------------|-----------|---------|
 | `Artifact` | `artifact/1` | dataclass | [`07_ARTIFACTS.md §1`](07_ARTIFACTS.md) | Stable | Single produced output. |
-| `ArtifactBundle` | `artifact-bundle/1` | dataclass | [`07_ARTIFACTS.md §2`](07_ARTIFACTS.md) | Stable | Multi-modal coherent set. |
+| `ArtifactBundle` | `artifact-bundle/1` | dataclass | [`07_ARTIFACTS.md §2`](07_ARTIFACTS.md) | Stable | Multi-modal coherent set. v1.1: additive optional `owning_env_id` + `sharing_policy_ref`; version retained per [`§7.13`](#713-adding-or-modifying-schemas). |
+| `ArtifactSharingPolicy` | `artifact-share/1` | dataclass | [`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md) | Provisional | Signed, env-authored sharing policy: access levels, intra-composition inheritance, outward visibility tier. Reuses 5 visibility tiers (06 §6.3) + CrossTenancyAgreementRef (ADR-0028). |
+| `AccessGrant` | `access-grant/1` | dataclass | [`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md) | Provisional | Per principal / role / env / principal-attribution `r`\|`rw` grant inside an `ArtifactSharingPolicy`. |
 | `VerifierRecipe` | `verifier-recipe/1` | dataclass | [`07_ARTIFACTS.md §4`](07_ARTIFACTS.md) | Stable | Recipe for verifying an artifact. |
 | `VerifierInvocationEvidence` | `verifier-invocation-evidence/1` | dataclass | [`07_ARTIFACTS.md §7`](07_ARTIFACTS.md) | Stable | Signed, hash-bound evidence that a verifier stage actually ran and how its verdict was derived. |
 
@@ -649,6 +671,8 @@ CI SHOULD verify that every `schema` field literal (matching `<name>/<integer>`)
 *Rotation schedules range from quarterly (master key) to per-version-bump (domain, env, project, persona). Historical signatures remain verifiable via archived keys. Revocation cascades propagate downward: compromised master revokes all derived keys; compromised domain notifies projects; compromised env notifies members; compromised project freezes work; compromised persona moves to DORMANT and re-signs SOUL. Archived keys are preserved at .well-known with rotation timestamps.*
 
 **Technical detail:** See [A.39](#appendix-a39).
+
+**Runtime vs durable identity (informative).** This Ed25519 hierarchy is the *durable* identity layer (it survives body swaps and signs lineage). The *runtime* identity of a persona's executing body process is a separate, complementary layer that an operator MAY satisfy with **SPIFFE/SPIRE** (attested SVID + mutual TLS between body processes, environments, and services), per the alignment in [`§3F`](#3f-external-standard-alignment-informative). The env-scope signing key in this hierarchy is what signs an `ArtifactSharingPolicy` ([`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md#4a-artifactsharingpolicy-artifact-share1--env-ownership-and-sharing)) and an env's `EnvironmentRule` set.
 
 ## 9. May-revision policies (universal)
 

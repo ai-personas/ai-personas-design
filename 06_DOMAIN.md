@@ -545,6 +545,8 @@ Every `KnowledgeRef` carries a `visibility` field (added to schema in `knowledge
 
 **Technical detail:** See [A.38](#appendix-a38).
 
+**Reuse note.** These five tiers are the single source of truth for outward visibility across the substrate. `ArtifactSharingPolicy.outward_tier` ([`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md#4a-artifactsharingpolicy-artifact-share1--env-ownership-and-sharing)) and `DomainHarvest.visibility_tier` (§13a) reuse this same enumeration (the 4-value `DomainHarvest` list maps onto it per ADR-0030); no new visibility vocabulary is introduced for artifacts.
+
 ### 6.4 Federated knowledge lookup
 
 To avoid re-ingestion across kernels working in the same domain.
@@ -635,7 +637,7 @@ Proposed*Kind schemas share the same lifecycle as ProposedSafetyExtension / Prop
 
 Accepted Proposed*Kind entries land in a **KindRegistry**. The kernel consults the registry at every site that previously held a closed Literal[...]: artifact construction (`07_ARTIFACTS §3`), ingestion (`§6.1`), bridge minting (`§5.5`), verifier cascade composition (`01_KERNEL §13`), contribution crediting (`04_PROJECT §5`), env-proven-fact emission (`05_ENVIRONMENT §12`).
 
-*The KindRegistry holds accepted kinds organised by family (media, source, verifier, capability, contribution, fact, bundle, item, outcome, quality tag). Each entry (e.g. MediaKindEntry) carries the proposal payload plus stage, trust score, promotion history, and usage tracking. Resolution first checks the per-domain registry, then falls back to the MetaRegistry; an unknown kind triggers Signal G and a probe extension. Promotion to MetaRegistry requires STANDARDISED stage, cross_domain_promotable flag, and citation in K=5 projects across M=2 distinct domains. Drift detection may demote MetaRegistry entries back to per-domain RECOGNISED.*
+*The KindRegistry holds accepted kinds organised by family (media, source, verifier, capability, contribution, fact, bundle, item, outcome, quality tag, env rule). Each entry (e.g. MediaKindEntry) carries the proposal payload plus stage, trust score, promotion history, and usage tracking. Resolution first checks the per-domain registry, then falls back to the MetaRegistry; an unknown kind triggers Signal G and a probe extension. Promotion to MetaRegistry requires STANDARDISED stage, cross_domain_promotable flag, and citation in K=5 projects across M=2 distinct domains. Drift detection may demote MetaRegistry entries back to per-domain RECOGNISED.*
 
 **Technical detail:** See [A.48](#appendix-a48).
 
@@ -662,6 +664,16 @@ Substrate registers a metadata schema per kind family. When a `KindRegistryEntry
 **Substrate purity preserved.** The kind families themselves are substrate-shape labels (positions in the registry namespace), not domain categories. The metadata field schemas are per-family declarations the operator may extend. The seed phase_kinds bundle ships as DATA (per §7.2.1's pattern), not as substrate enum.
 
 **Composition with ProjectPhaseState (`04_PROJECT §26a.6`):** when a project enters a new phase, the kernel resolves the phase_kind in KindRegistry and copies `stall_evaluator_suppressed` + `requires_user_sign` into the ProjectPhaseState instance at transition time. Subsequent stall-evaluator queries read directly from the ProjectPhaseState instance (so the value is signed-at-transition rather than re-resolved each evaluation). Operator changes to the KindRegistry entry's metadata after transition do not retroactively change the phase's behaviour — that requires an explicit signed `PHASE_METADATA_UPDATE` event in ProjectLineage.
+
+### 7.6.3 The `env_rule_kinds` family — env-scoped executable rules
+
+An [`EnvironmentRule`](12_GLOSSARY.md#e) ([`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1), `env-rule/1`) carries a `rule_kind` that resolves against a dedicated KindRegistry family, `env_rule_kinds`, exactly as `media_kind` resolves against `media_kinds` (§7.6). Per commitment C4 the substrate hardcodes no closed list of rule kinds. The MetaRegistry seeds three **shape-only** entries as DATA — they describe how a rule is *expressed*, never what any domain's rule *says*:
+
+- `code` — the rule is a sandboxed, persona- or operator-authored `ToolArtifact` (the `PROPOSED → SANDBOXED → VERIFIED → PROMOTED` FSM of §7.2.x with OWASP filter + resource caps per [`01_KERNEL.md §6`](01_KERNEL.md#6-sandbox-execution)) wrapped in a `VerifierStage` ([`01_KERNEL.md §13.1`](01_KERNEL.md#131-verifier-cascade--4-tiers--rotation)).
+- `rule_engine` — the rule is a declarative decision artifact: an authored or [`InferredVerifierRecipe`](12_GLOSSARY.md#i) (§7.1) cascade; portable declarative encodings (e.g. a decision table) are admissible and carry no executable surface.
+- `contract` — the rule is a machine-readable contract `ArtifactBundle` whose conformance is checked by a `verifier_recipe_id`.
+
+These three are positions in the registry namespace, not domain categories; an operator MAY register further `env_rule_kinds` entries, and any domain-specific rule *content* emerges and is signed exactly like every other Proposed\*Kind (§7.5). The rule's enforcement point, lifecycle, cascade, and operator gating are specified in [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1); enforcement composes under safety-floor source 8 (`env_charter`) per [`01_KERNEL.md §2`](01_KERNEL.md#2-the-safety-floor--8-sources--1-advisory).
 
 ## 8. Cross-source validation
 

@@ -1232,6 +1232,107 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ---
 
+### ADR-0052 — EnvironmentRule rides under safety-floor source 8, not a ninth source
+
+**Status:** Accepted.
+**Date:** 2026-05-30.
+**Origin:** v1.1 (dynamic environment rules).
+**Related:** [`J3`](00_VISION.md#3-invariants-j1j9), [`INV-8`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10), [`01_KERNEL.md §2`](01_KERNEL.md#2-the-safety-floor--8-sources--1-advisory), [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1), ADR-0006.
+
+**Context.** Environments are purpose-specific and need their own enforceable "definition of acceptable work" (a shipment contract, a buildable/orderable validator, a robot-performance check). The env charter (`env-charter/1`) held only declarative prose; executable enforcement (`VerifierRecipe`, `ProposedSafetyExtension`) was domain-scoped. The naive design adds a ninth safety-floor source — but the "8 sources" count is load-bearing (J3, INV-8, ADR-0006, `01_KERNEL §2` title, and many strings), and source 8 (`env_charter`) is already "the env's own norms, per env instance" with rotating per-env-blueprint classifiers.
+
+**Decision.** Executable `EnvironmentRule`s (`env-rule/1`) extend the *mechanism* of safety-floor source 8 rather than adding a refusal source. The composition function (`01_KERNEL §A.3`) loops the env's `accepted`-stage rules at each rule's declared `enforced_at` admission point — the canonical INV-8 points, no new point — appending refusals exactly as the source-5 `domain.safety_extensions` loop does. EnvironmentRules may only ADD refusals; they can never relax sources 1-7. The "8 sources" count is unchanged; only J3's prose carries a one-line additive clarification.
+
+**Consequences.**
+- (+) No invariant amendment; the "8 sources" invariant count and every dependent string survive untouched.
+- (+) Most-restrictive-wins composition is preserved verbatim; rules cannot weaken the floor.
+- (−) Source 8 now carries both prose and executable rules; readers must consult `§2.2b` for the executable shape.
+- (−) Adds rule-evaluation latency to the ≤400 ms floor budget (R-ENV-12; mitigated by INV-7 budgeting + caching deterministic `before_action` rules).
+
+**Alternatives rejected.** (a) Add a ninth refusal source — rejected: corpus-wide renumber of J3/INV-8/ADR-0006 and the "8 sources" strings for no semantic gain. (b) Keep rules domain-scoped only — rejected: a rule like a shipment contract is an env norm, not a domain fact, and would mis-file in DomainLineage.
+
+---
+
+### ADR-0053 — EnvironmentRule reuses the Proposed* lifecycle, KindRegistry rule-kinds, and the existing sandbox
+
+**Status:** Accepted.
+**Date:** 2026-05-30.
+**Origin:** v1.1 (dynamic environment rules).
+**Related:** [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1), [`06_DOMAIN.md §7.6.3`](06_DOMAIN.md#763-the-env_rule_kinds-family--env-scoped-executable-rules), [`06_DOMAIN.md §7.5`](06_DOMAIN.md), [`01_KERNEL.md §6`](01_KERNEL.md#6-sandbox-execution), ADR-0005, ADR-0006, C2, C4.
+
+**Context.** "Rules can be code, a rule engine, or any artefact needed" — but inventing a new execution engine, lifecycle, and operator gate for env rules would duplicate proven machinery and risk a new floor-bypass surface.
+
+**Decision.** `EnvironmentRule.rule_kind` is KindRegistry-resolved (`env_rule_kinds` family; MetaRegistry seeds `code | rule_engine | contract` as data, C4/ADR-0005) — the substrate carries no closed rule-type enum. Content binds to existing machinery: `code` → a sandboxed `ToolArtifact` (`PROPOSED → SANDBOXED → VERIFIED → PROMOTED`, OWASP + caps) wrapped in a `VerifierStage`; `rule_engine` → an authored / `InferredVerifierRecipe` cascade; `contract` → a contract `ArtifactBundle` checked by a `verifier_recipe_id`. The lifecycle is the Proposed* FSM (`candidate → trial → accepted | rejected`, plus a `revoked` terminal); `safety_critical` rules (hazard axes crossing the C2 threshold) require operator approval, composing with `MultiPrincipalAttestationQuorum`. Gating evaluations are evidence-bound (`VerifierInvocationEvidence`).
+
+**Consequences.**
+- (+) Zero new execution / lifecycle / gating machinery; rule content is emergent and signed like every other proposal (C4).
+- (+) Executable rules inherit the sandbox's OWASP filter, resource caps, and rotation — the floor-bypass risk (R-ENV-11) is bounded by the same controls that govern persona-authored tools.
+- (−) Rule authors must express logic within the verifier/sandbox contract rather than ad-hoc code paths.
+
+**Alternatives rejected.** (a) A bespoke env rule-VM — rejected: duplicates the sandbox and widens the trusted surface. (b) Declarative-policy-only (no code) — rejected: cannot express rules needing real computation (running a SPICE check, a buildability validator); the three rule-kinds keep declarative *and* computational options open.
+
+---
+
+### ADR-0054 — Artifact bundles gain env ownership while remaining project-scoped under the project↔env unification
+
+**Status:** Accepted.
+**Date:** 2026-05-30.
+**Origin:** v1.1 (env-scoped artifact sharing).
+**Related:** [`07_ARTIFACTS.md §4`](07_ARTIFACTS.md), [`07_ARTIFACTS.md §14`](07_ARTIFACTS.md), [`04_PROJECT.md §0`](04_PROJECT.md), ADR-0003, [`09_PROTOCOLS.md §7.13`](09_PROTOCOLS.md#713-adding-or-modifying-schemas).
+
+**Context.** `ArtifactBundle` was `project_id`-scoped and "lived above any single env", with no field naming the environment that owns it — yet the request is that an environment own and govern its artifacts (the company → org → team model). Because a Project IS a `project_workspace` env (ADR-0003), "project-scoped" already meant "owned by the project_workspace env"; the ownership was implicit and unnamed.
+
+**Decision.** Add optional `owning_env_id` and `sharing_policy_ref` to `artifact-bundle/1` (additive; version retained per §7.13). `owning_env_id` names the owning env — the `project_workspace` env for project bundles, or any lab/team env for non-project bundles. The multi-env-hosted case (`§14`) is preserved: the bundle is owned by the project_workspace env while hosting envs and their personas get access via `AccessGrant(grantee_kind="env")` + composition inheritance. `owning_env_id = None` retains legacy project-scoped behaviour (backward compatible).
+
+**Consequences.**
+- (+) Makes the always-implicit ownership explicit without breaking existing bundles.
+- (+) Fixes the `§14` prose defect ("lives above any single env") under the unification.
+- (−) Two notions now coexist (owning env vs hosting env); the §14 reconciliation must be read to disambiguate.
+
+**Alternatives rejected.** (a) Keep bundles project-only and bolt sharing onto projects — rejected: doesn't make "the environment owns its artifacts" first-class and fragments the model. (b) Bump `artifact-bundle/2` — rejected: the additions are additive-optional; §7.13 permits version retention, avoiding corpus-wide churn and migration mappers.
+
+---
+
+### ADR-0055 — ArtifactSharingPolicy reuses the 5 visibility tiers, CrossTenancyAgreementRef, and the composition hierarchy
+
+**Status:** Accepted.
+**Date:** 2026-05-30.
+**Origin:** v1.1 (env-scoped artifact sharing).
+**Related:** [`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md), [`06_DOMAIN.md §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers), [`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md#22a-environmentcomposition--hierarchical-environment-nesting-v11), ADR-0028, ADR-0030.
+
+**Context.** Sharing artifacts "by access level within a composed hierarchy, and outward per a policy" needs access control, a composition-aware sharing model, and cross-org governance — all of which partially exist (visibility tiers, `CrossTenancyAgreementRef`, `EnvironmentComposition`) but had no artifact-level binding.
+
+**Decision.** Add `artifact-share/1` (`ArtifactSharingPolicy`) + `access-grant/1` (`AccessGrant`). Access levels are per principal/role/env/principal-attribution (`r`|`rw`). Intra-composition sharing follows the `EnvironmentComposition` parent/child hierarchy (a child policy MAY further-restrict, MUST NOT widen — mirroring §2.2a). Outward sharing reuses the **5 visibility tiers** (ADR-0030) with `CrossTenancyAgreementRef` (ADR-0028) required before a tenant-tier share crosses a principal boundary (else demote + `CROSS_TENANT_VISIBILITY_DEMOTED`). Effective access composes by most-restrictive-wins. The policy MAY be serialised as **ODRL**, evaluated with **Cedar/OPA**, resolved over a **Zanzibar/OpenFGA** relationship graph, and delegated cross-kernel via **UCAN** (`09_PROTOCOLS §3F`) — all operator-policy interop choices, not substrate requirements.
+
+**Consequences.**
+- (+) No new visibility vocabulary; reuses tiers, cross-tenancy agreements, and composition verbatim.
+- (+) Clean alignment path to mature external policy/capability standards without coupling the substrate to any.
+- (−) Misconfiguration can over-expose bundles (R-ARTIFACTS-8; mitigated by `project_only` default + most-restrictive-wins + `None`-policy = no widening).
+
+**Alternatives rejected.** (a) A bespoke per-artifact ACL vocabulary — rejected: duplicates and would drift from the knowledge-tier visibility model. (b) Per-artifact (not per-bundle) grants — deferred (OQ-ARTIFACTS-7); v1.1 grants are per-bundle.
+
+---
+
+### ADR-0056 — Distribution / discovery alignment with A2A, MCP-Registry, DIDs, SPIFFE, Sigstore/SLSA, IPLD/OCI
+
+**Status:** Accepted.
+**Date:** 2026-05-30.
+**Origin:** v1.1 (agentic-world interop).
+**Related:** [`09_PROTOCOLS.md §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative), [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md#3-a2a--agent-to-agent-federation), [`07_ARTIFACTS.md §10`](07_ARTIFACTS.md), ADR-0020, ADR-0021.
+
+**Context.** The request asked how personas/environments/artifacts are stored, distributed, and discovered in the agentic world, and to fold in any new mechanisms. A 2025–2026 survey (A2A, MCP Registry, ANP/AGNTCY/NANDA, DIDs, SPIFFE, Sigstore/SLSA/C2PA, IPFS/IPLD, OCI, UCAN, ODRL, OPA/Cedar, Zanzibar) largely *validates* PersonaOS's existing substrate (content addressing, Ed25519, A2A/MCP, CRDTs).
+
+**Decision.** Record the alignment as informative `§3F` (and `§8`, `07 §10`): align the AgentCard well-known path with A2A's `agent-card.json`; model any persona/env directory as an MCP-Registry-style two-tier registry (with AGNTCY/NANDA as scale blueprints); offer `did:web`/`did:wba`/`did:key` naming over ULIDs; use SPIFFE/SPIRE for runtime body-process identity (complementing Ed25519 durable identity); publish artifact provenance via Sigstore/SLSA/in-toto; model bundles as IPLD DAGs and distribute heavy blobs as OCI Artifacts. Adopting any specific standard is operator policy; none changes a v1.0 invariant.
+
+**Consequences.**
+- (+) Explicit, current interop story; existing choices are validated rather than reworked.
+- (+) Operators gain a clear menu of standards at the federation boundary.
+- (−) Some surveyed standards are early-stage (Agent Passports/KYA, C2PA effectiveness, "verified-agent" tooling) — flagged as emerging, not load-bearing.
+
+**Alternatives rejected.** (a) Mandate a single discovery standard in-substrate — rejected: couples the kernel to a still-moving ecosystem; A2A itself leaves the central registry unstandardised. (b) Ignore external standards — rejected: the request explicitly asked for the research and interop is a real operator need.
+
+---
+
 ## 13. Cross-references
 
 - Normative invariants and commitments referenced above: [`00_VISION.md §3`](00_VISION.md#3-invariants-j1j9), [`00_VISION.md §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10).
