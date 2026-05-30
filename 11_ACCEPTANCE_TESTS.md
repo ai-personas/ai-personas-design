@@ -59,7 +59,7 @@ A-DM*   domain recognition + probe tests         (15 tests; +3 v1.0 phase record
 A-DI*   discovery + ingestion tests              (15 tests; +3 v1.0 toolkit/visibility/federated lookup)
 A-IN*   inference + proposal tests               (12 tests; +2 v1.0 convergence/convention reconciliation)
 A-CR*   curation + promotion tests               (17 tests; +3 v1.0 ToolArtifact/dormancy/multi-tenant)
-A-AB*   artifact + bundle tests                  (15 tests)
+A-AB*   artifact + bundle tests                  (20 tests; +5 verifier-evidence hardening)
 A-TX*   knowledge + retrieval + prompt tests     (25 tests; +5 v1.0 reflection/lesson promotion/matrix/channel tactics)
 A-RL*   roles + operator tests                   (12 tests)
 A-CO*   collaboration tests (peer review,
@@ -98,11 +98,12 @@ A-SC*   supersession cascade                     (7 tests; 08_KNOWLEDGE §6.3)
 A-CDM*  corpus drift metric                      (6 tests; 06_DOMAIN §4.4.1)
 A-RFC*  replicated attestation frontier comp.    (2 tests; 06_DOMAIN §5.6.1)
 ─────────────────────────────────────────────────────────
-TOTAL                                            ~451 tests
+TOTAL                                            ~456 tests
                                                  (+45 from prior-version spec backfill;
                                                   +48 from families;
                                                   +23 from v1.0.12 fleet-management;
-                                                  +15 from v1.0.13 frontier-domain)
+                                                  +15 from v1.0.13 frontier-domain;
+                                                  +5 verifier-evidence hardening)
 ```
 
 ## 3. Per-release gate matrix (concise)
@@ -124,7 +125,7 @@ TOTAL                                            ~451 tests
 | A-IN1-10 (inference + proposal) | — | — | — | — | ✓ | ✓ | ✓ |
 | A-CR1-14 (curation + promotion) | — | — | — | — | ✓ | ✓ | ✓ |
 | A-CR13 (federated cross-kernel promotion) | — | — | — | — | — | ✓ | ✓ |
-| A-AB1-15 (artifacts) | — | ◇ (text+code) | ✓ | ✓ | ✓ | ✓ | ✓ |
+| A-AB1-20 (artifacts) | — | ◇ (text+code) | ✓ | ✓ | ✓ | ✓ | ✓ |
 | A-TX1-20 (knowledge + retrieval + prompt) | ◇ | ◇ | ◇ | ◇ | ✓ | ✓ | ✓ |
 | A-RL1-12 (roles + operator) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | A-CO1-12 (collaboration) | — | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -303,7 +304,7 @@ Per series:
   A-DI*   15        discovery + ingestion (+3 toolkit/visibility/federation)
   A-IN*   12        inference + proposal (+2 convergence/convention reconciliation)
   A-CR*   17        curation + promotion (+3 ToolArtifact/dormancy/multi-tenant)
-  A-AB*   15        artifacts
+  A-AB*   20        artifacts (+5 verifier-evidence hardening)
   A-TX*   25        knowledge + retrieval + prompt (+5 reflection/lesson promotion)
   A-RL*   12        roles + operator
   A-CO*   12        collaboration
@@ -409,7 +410,7 @@ Each row carries: invariant ID, the canonical v1.0 doc section that defines it, 
 |---|---|---|---|
 | INV-1 — Identity kernel-owned | [`00_VISION §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10) | A-K1 | A-P1, A-P3 (equivalent to J1) |
 | INV-2 — Lineage append-only & signed | [`00_VISION §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10) | A-K2 | A-v2.0 (equivalent to J2/J9/C1) |
-| INV-3 — Every accepted artefact passes a verifier | [`00_VISION §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10) | A-K5 | A-K6, A-T1–A-T3, A-AB1–A-AB15 |
+| INV-3 — Every accepted artefact passes a verifier | [`00_VISION §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10) | A-K5 | A-K6, A-T1–A-T3, A-AB1–A-AB20 |
 | INV-4 — ProvenFacts grow within a class (monotonic) | [`00_VISION §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10) | A-K7 | A-V5–A-V8 |
 | INV-5 — Tactics evolve only in EVOLVE-BLOCKs | [`00_VISION §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10) | A-K8 | A-E1–A-E10, A-V14 |
 | INV-6 — Verifiers rotate | [`00_VISION §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10) | A-K9 | A-K10, A-V11–A-V13 |

@@ -652,6 +652,7 @@ Rules:
 2. **Whole-cascade acceptance.** A candidate that passes a subset is `partial`, never `verified`.
 3. **Rotation (INV-6).** Every `rotation_period_tasks`, the kernel swaps one stage out of the active cascade and pulls an alternate from `rotation_pool`. Tier 1 (schema) is exempt — schemas are public spec. Tiers 2-4 rotate. The rotated stage's id and version are recorded in every subsequent verdict.
 4. **Cascade-failure-after-fast-pass penalty.** If a candidate passes Tier 1+2 but fails Tier 3 or 4, the originating persona variant takes a fitness penalty (anti-Goodhart).
+5. **Evidence-bound verdicts.** Any stage verdict used for `VERIFIED`, `DELIVERED`, `PANEL_ACCEPT`, or artifact `verified`/`accepted` state MUST reference schema-valid evidence (`VerifierInvocationEvidence` for artifact verifier stages, panel / review evidence for policy stages). Missing, stale, malformed, or prose-only evidence is a hard failure at the admission point; it is never upgraded to success by persona text.
 
 ### 13.2 Unified Candidate state machine
 
@@ -2602,6 +2603,8 @@ class Candidate:
     originating_persona_id: str
     cascade_id: str                                  # which cascade gated
     verdicts: list["StageVerdict"]                   # one per stage seen
+    evidence_refs: list[str]                         # schema-valid evidence
+                                                     # records for verdicts
     lineage_event_ids: list[str]                     # per transition
     payload_ref: str                                 # signed artefact ref
     signed_by: bytes

@@ -7,15 +7,15 @@ status: Stable
 
 > **Reader guide.** Artifacts are the things AI Personas produce — documents, code, schematics, datasets, formal proofs. In this document, you'll learn how artifacts are structured, versioned, co-edited by multiple personas, and verified before delivery. The key design principle: artifact types are NOT hardcoded — new types emerge as personas encounter new kinds of work. **Prerequisites:** `06_DOMAIN.md` (KindRegistry), `01_KERNEL.md` (signing). **Key terms:** *ArtifactBundle* = a multi-file deliverable (like a design package); *media_kind* = the type of an artifact (open, not a fixed list); *CRDT* = a method for merging concurrent edits automatically.
 
-Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). This document specifies the Artifact entity (open media-kind set resolved via KindRegistry), ArtifactBundle, CRDT co-editing (Yjs + G-set), the lifecycle FSM (draft → review → verified → accepted → shipped), verifier_recipe invocation, and co-signing.
+Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). This document specifies the Artifact entity (open media-kind set resolved via KindRegistry), ArtifactBundle, CRDT co-editing (Yjs + G-set), the lifecycle FSM (draft → review → verified → accepted → shipped), verifier_recipe invocation with signed evidence, and co-signing.
 
 ## 0. Status & scope
 
 **Status.** `Stable`; current revision per front matter. Fully normative; RFC 2119 keywords carry normative force per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174).
 
-**In scope.** The Artifact entity with its open media-kind set (resolved via the KindRegistry — physical paper, schematic, BOM, code module, proof, netlist, sim report, audio, video, dataset, plus any emergent kind), the ArtifactBundle aggregation, CRDT co-editing semantics (Yjs operations + G-set for append-only references), the artifact lifecycle FSM (draft → review → verified → accepted → shipped), `verifier_recipe` declaration and invocation, and the co-signing protocol that binds artifact verdicts to lineage.
+**In scope.** The Artifact entity with its open media-kind set (resolved via the KindRegistry — physical paper, schematic, BOM, code module, proof, netlist, sim report, audio, video, dataset, plus any emergent kind), the ArtifactBundle aggregation, CRDT co-editing semantics (Yjs operations + G-set for append-only references), the artifact lifecycle FSM (draft → review → verified → accepted → shipped), `verifier_recipe` declaration and invocation, `VerifierInvocationEvidence` manifests that make verifier claims replayable, and the co-signing protocol that binds artifact verdicts to lineage.
 
-**Out of scope.** Project item entities such as OpenProblem, Milestone, Conjecture, PeerReview (see [`04_PROJECT.md`](04_PROJECT.md)); the kernel-side verifier cascade, anti-Goodhart panel, and signing primitives (see [`01_KERNEL.md §2`](01_KERNEL.md#2-the-safety-floor--8-sources--1-advisory) and [`01_KERNEL.md §4`](01_KERNEL.md#4-signing-infrastructure--3-custody-tiers--key-hierarchy)); the schema-registry entries for artifact / bundle / verifier_recipe (see [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry)).
+**Out of scope.** Project item entities such as OpenProblem, Milestone, Conjecture, PeerReview (see [`04_PROJECT.md`](04_PROJECT.md)); the kernel-side verifier cascade, anti-Goodhart panel, and signing primitives (see [`01_KERNEL.md §2`](01_KERNEL.md#2-the-safety-floor--8-sources--1-advisory) and [`01_KERNEL.md §4`](01_KERNEL.md#4-signing-infrastructure--3-custody-tiers--key-hierarchy)); concrete verifier harness implementations (operator/tooling concern); the schema-registry entries for artifact / bundle / verifier_recipe / verifier-invocation-evidence (see [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry)).
 
 **Supersession.** Subsumes prior artifact handling. Replaces the fixed media-kind enum with the KindRegistry-resolved open set (commitment C4).
 
@@ -47,7 +47,7 @@ Every bundle moves through stages, like a document going through an approval wor
 
 **How artifacts get verified**
 
-Each domain defines a verification recipe -- a sequence of automated checks tailored to the kind of work. For code, that means running tests. For electronics, checking electrical rules. For math, running the proof checker. Stages run in order; if any fails, the bundle cannot advance.
+Each domain defines a verification recipe -- a sequence of automated checks tailored to the kind of work. For code, that means running tests. For electronics, checking electrical rules. For math, running the proof checker. Stages run in order; if any fails, the bundle cannot advance. Every passing stage leaves a signed evidence receipt tied to the exact artifact hashes, tool or panel used, output hash, and parsed verdict; a text claim that a check ran is not evidence.
 
 **Forking: editing after the lock**
 
@@ -147,9 +147,15 @@ Verifier cascade applies to ArtifactBundles, with domain-specific verifier recip
 
 **Technical detail:** See [A.9](#appendix-a9).
 
-VerifierInvocations are appended to bundle's `verifier_invocations` and to ProjectLineage. Rotation per v1.0 §08 applies.
+Verifier invocations are evidence-bound. Each stage that contributes to `verified`, `accepted`, `VERIFIER_ACCEPT`, or a domain-required external-tool claim MUST append a schema-valid `VerifierInvocationEvidence` record to the bundle and to lineage. The evidence envelope records the resolved recipe/stage, current artifact content hashes, execution surface, tool or panel reference, output hash, parsed verdict, and signatures. A stage verdict without admissible evidence is `not_run`, never `passed`.
 
-**Tests:** A-AB5 (verifier_recipe invocation appends VerifierInvocation entries; verdicts feed state transition), A-AB6 (AnswerPackage referencing bundle returns primary artifact + state). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+This preserves the design intent: the substrate does not know what a `kicad_project`, `lean_proof`, or future artifact kind means. The domain supplies verifier recipes and tools through `KindRegistry` / `DomainContext`; the substrate enforces only the generic evidence contract, hash binding, ordering, and fail-closed state transitions.
+
+Verifier rotation per [`01_KERNEL.md §13.1`](01_KERNEL.md#131-verifier-cascade--4-tiers--rotation) still applies; the rotated stage id and version are recorded in the evidence.
+
+**Fail-closed rule.** If no applicable recipe exists, or if a required stage is unavailable, skipped, malformed, unverifiable, stale with respect to current artifact hashes, or only supported by unaudited prose, the bundle MUST NOT transition to `verified`. If the domain or safety floor marks the stage as required before acceptance, the bundle MUST NOT transition directly from `in_review` to `accepted` either; review may record concerns, but it cannot substitute for missing required evidence.
+
+**Tests:** A-AB5 (verifier_recipe invocation appends VerifierInvocationEvidence entries; verdicts feed state transition), A-AB6 (AnswerPackage referencing bundle returns primary artifact + state), A-AB16-A-AB20 (evidence completeness and fail-closed verifier transitions). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
 ## 8. AnswerPackage referencing bundles
 
@@ -273,6 +279,7 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-ARTIFACTS-4 | Content store costs grow with project lifetime and bundle versions. | Low | High | Decay policy: `deprecated → cold` after 90 days; operator-tunable retention; content-hash dedup. | v1.0 (decay); v1.1 (operator tuning surface). |
 | R-ARTIFACTS-5 | External-reference artifacts lose verifiability. Persona cannot guarantee external URL content matches what was reasoned about. | High | High | External-tool-required policy on claims based on external refs; retrieval-and-verification invocation; lineage records the retrieval timestamp and hash; A-AB11 acceptance test. | v1.0 (verification flow). |
 | R-ARTIFACTS-6 | Bundle state transitions can deadlock if a required signatory is unavailable. | Medium | Low | Per-step deadlines; operator override; transition refused → STALLED state surface; A-AB3 acceptance test. | v1.0 (refused + stall). |
+| R-ARTIFACTS-7 | Verification evidence becomes decorative if a harness can emit "passed" without replayable tool / panel provenance. | High | Medium | `VerifierInvocationEvidence` is mandatory for lifecycle advancement; missing, stale, malformed, or prose-only evidence fails closed; A-AB16-A-AB20. | v1.0 (evidence envelope); v1.1 (harness conformance tooling). |
 
 ## 16a. Open questions
 
@@ -299,7 +306,7 @@ A-AB3   Bundle state transitions require configured signatories;
 A-AB4   Shipped bundles locked; edits require explicit fork to new
         bundle.
 A-AB5   verifier_recipe invocation against bundle appends
-        VerifierInvocation entries; verdicts feed state transition.
+        VerifierInvocationEvidence entries; verdicts feed state transition.
 A-AB6   AnswerPackage referencing ArtifactBundle returns primary
         artifact and state.
 A-AB7   Backward compat: AnswerPackage with no project/no bundle =
@@ -318,6 +325,19 @@ A-AB14  Cross-env CRDT: artifact in project hosted multi-env
         merges project-wide; env streams record events.
 A-AB15  Multi-modal media kind support (11 kinds); each with appropriate
         storage + edit semantics.
+A-AB16  No applicable verifier recipe OR required verifier stage with
+        missing VerifierInvocationEvidence refuses verified/accepted
+        transition; signed refusal cites recipe_id/stage_id when present.
+A-AB17  VerifierInvocationEvidence with unavailable/timed_out/not_run
+        execution surface is recorded but parsed_verdict != pass; bundle
+        remains in_review or draft.
+A-AB18  Evidence whose input_artifact_hashes do not match current bundle
+        versions is stale; transition to verified refuses.
+A-AB19  Review/panel direct in_review → accepted allowed only when
+        signed review/panel evidence exists AND no DomainContext /
+        safety-extension stage remains required.
+A-AB20  Free-form rationale or LLM-produced "verified" token without
+        tool/panel provenance cannot satisfy parsed_verdict=pass.
 ```
 
 ## 18. Where to read next
@@ -445,7 +465,7 @@ class ArtifactBundle:
     
     # VERIFICATION
     verifier_recipe_id: str | None        # from DomainContext
-    verifier_invocations: list[VerifierInvocation]
+    verifier_invocations: list[VerifierInvocationEvidence]
     panel_verdicts: list[PanelVerdict]
     structured_feedback: list[StructuredFeedbackRef]
     
@@ -537,7 +557,8 @@ draft        any contributor may edit; multi-mode work
    ▼
 in_review    PeerReview open; expected stable
    ▼
-verified     verifier_recipe ran and accepted
+verified     verifier_recipe ran and accepted;
+             every required stage has admissible evidence
               (VERIFIER_ACCEPT pathway gate)
    ▼
 accepted     co-signed by required signatories
@@ -566,10 +587,13 @@ IN_REVIEW
   peer_review_comment        peer_review_revision_requested
   artifact_edited_under_review (flagged in review)
   state_transition: in_review → draft (revisions)
-                              → verified | accepted (review passes)
+                              → verified (evidence-complete verifier pass)
+                              → accepted (review/panel pass AND no missing
+                                          required verifier evidence)
 
 VERIFIED
-  verifier_recipe_invoked    verifier_passed
+  verifier_recipe_invoked    verifier_evidence_recorded
+  verifier_passed
   state_transition: verified → accepted (panel/co-sign passes)
 
 ACCEPTED
@@ -594,13 +618,78 @@ def verify_bundle(bundle, project, domain):
     
     invocations = []
     for stage in recipe.stages:
-        result = run_stage(stage, bundle)
-        invocations.append(VerifierInvocation(stage_id, result, ts, signed))
-        if not result.passed:
+        evidence = run_stage_and_capture_evidence(stage, bundle)
+        invocations.append(evidence)
+        append_lineage("verifier_evidence_recorded", evidence)
+        if not evidence_admissible(evidence, stage, bundle):
+            return VerifierResult.failed(invocations, reason="inadmissible_evidence")
+        if evidence.parsed_verdict != "pass":
             return VerifierResult.failed(invocations)
     
     return VerifierResult.passed(invocations)
 ```
+
+### A.9a VerifierInvocationEvidence schema
+
+<a id="appendix-a9a"></a>
+
+```python
+@dataclass
+class VerifierInvocationEvidence:
+    schema: str = "verifier-invocation-evidence/1"
+    invocation_id: str                       # ULID
+    bundle_id: str
+    verifier_recipe_id: str
+    verifier_recipe_version: int
+    stage_id: str
+    stage_version: int
+    stage_kind: str                          # resolves against
+                                             # KindRegistry.verifier_kinds
+    execution_surface_kind: str              # resolved capability/tool/panel
+                                             # kind; never a domain enum
+
+    # Bind the verdict to the exact artifact bytes observed by the stage.
+    input_artifact_hashes: dict[str, str]     # artifact_id -> SHA-256
+    input_bundle_hash: str
+
+    # Execution / judgement provenance. Programmatic stages use tool fields;
+    # panel/review stages use panel_verdict_ref or peer_review_ref.
+    required_tool_id: str | None
+    tool_version_ref: str | None
+    tool_invocation_ref: str | None
+    sandbox_ref: str | None
+    command_or_api_fingerprint: str | None
+    panel_verdict_ref: str | None
+    peer_review_ref: str | None
+
+    started_at: datetime
+    completed_at: datetime
+    exit_status_kind: str                    # KindRegistry-resolved:
+                                             # e.g. success, failed,
+                                             # unavailable, timed_out
+    raw_output_ref: str | None
+    raw_output_hash: str | None
+    parsed_verdict: Literal["pass", "fail", "inconclusive", "not_run"]
+    failure_kind: str | None                 # KindRegistry-resolved
+    rationale_ref: str | None                # optional prose; never sufficient
+                                             # by itself for parsed_verdict=pass
+
+    signed_by_tool_or_panel: bytes | None
+    signed_by_kernel: bytes
+```
+
+**Admissibility predicate.** `evidence_admissible(e, stage, bundle)` returns true only when:
+
+1. `e.schema` is registered and valid.
+2. `e.verifier_recipe_id`, `e.verifier_recipe_version`, `e.stage_id`, and
+   `e.stage_version` match the active recipe and rotated stage.
+3. `e.input_artifact_hashes` match the bundle's current artifact versions.
+4. The required execution provenance for the stage's resolved kind is present.
+5. `raw_output_hash` matches retrieved output when `raw_output_ref` is present.
+6. `parsed_verdict="pass"` is derived from the stage parser, not from free-form rationale.
+7. Kernel signature verifies and, when present, tool / panel signatures verify.
+
+Any false predicate yields `parsed_verdict="not_run"` or `fail` for lifecycle purposes and blocks `verified`.
 
 ### A.10 AnswerPackage with bundle reference
 

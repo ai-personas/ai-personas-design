@@ -503,6 +503,7 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 | `Artifact` | `artifact/1` | dataclass | [`07_ARTIFACTS.md §1`](07_ARTIFACTS.md) | Stable | Single produced output. |
 | `ArtifactBundle` | `artifact-bundle/1` | dataclass | [`07_ARTIFACTS.md §2`](07_ARTIFACTS.md) | Stable | Multi-modal coherent set. |
 | `VerifierRecipe` | `verifier-recipe/1` | dataclass | [`07_ARTIFACTS.md §4`](07_ARTIFACTS.md) | Stable | Recipe for verifying an artifact. |
+| `VerifierInvocationEvidence` | `verifier-invocation-evidence/1` | dataclass | [`07_ARTIFACTS.md §7`](07_ARTIFACTS.md) | Stable | Signed, hash-bound evidence that a verifier stage actually ran and how its verdict was derived. |
 
 ### 7.7 Knowledge
 

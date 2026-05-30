@@ -691,6 +691,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Verifier Cascade** — Ordered stages (fast → medium → expensive); rotation per rotation_period tasks (INV-6); Goodhart defence. See `08_KNOWLEDGE.md §2`.
 
+**VerifierInvocationEvidence** — Schema (`verifier-invocation-evidence/1`) carrying the signed, hash-bound proof that a verifier stage ran against a specific artifact bundle version: recipe/stage ids and versions, input artifact hashes, execution surface, tool/panel refs, output hash, parsed verdict, and signatures. Missing or stale evidence blocks `verified` / required `accepted` transitions. See `07_ARTIFACTS.md §7`.
+
 **VerifierRecipe** — Domain-specific verifier configuration; named, signed reference to a verifier cascade for an artifact kind. See `06_DOMAIN.md §7.1`.
 
 **Visibility Tier** — Four tiers: private (operator only) / tenant (org) / federation (peer kernels) / public (hub). Applies to PersonaCard, ProjectCard, EnvCard, DomainContextCard. See `09_PROTOCOLS.md §3`.
