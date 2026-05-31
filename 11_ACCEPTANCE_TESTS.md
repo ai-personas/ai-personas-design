@@ -104,14 +104,16 @@ A-EC*   environment composition (rule cascade)   (5 tests; 05_ENVIRONMENT §2.2a
 A-CA*   coordination admission                   (5 tests; 15_COORDINATION_SHAPES §5)
 A-ER*   environment rule (env-rule/1)            (9 tests; 05_ENVIRONMENT §2.2b)
 A-AB21-27  artifact env-scoping + sharing policy (7 tests; 07_ARTIFACTS §4a)
+A-LE5-9 dormancy reasons + auto-resume (idle)    (5 tests; 02_PERSONA §7.6)
 ─────────────────────────────────────────────────────────
-TOTAL                                            ~472 tests
+TOTAL                                            ~477 tests
                                                  (+45 from prior-version spec backfill;
                                                   +48 from families;
                                                   +23 from v1.0.12 fleet-management;
                                                   +15 from v1.0.13 frontier-domain;
                                                   +5 verifier-evidence hardening;
-                                                  +16 from v1.1 env rules + artifact sharing)
+                                                  +16 from v1.1 env rules + artifact sharing;
+                                                  +5 from v1.0.14 dormancy reasons + auto-resume)
 ```
 
 ## 3. Per-release gate matrix (concise)
@@ -2195,6 +2197,27 @@ A-LE3     LIFECYCLE_CONSULTED is informational-only (does NOT change
           persona.state field).
 A-LE4     New lifecycle kinds (v1.1+) MUST land in §7.1 enumeration
           AND in 14_DECISIONS ADR before A-LE* tests admit them.
+A-LE5     LIFECYCLE_DORMANT_ENTERED carries a `reason` from the §7.6
+          enumeration (low_salience default); an unknown reason refuses
+          with `dormancy_reason_unregistered`. No new FSM state is
+          introduced — persona.state remains DORMANT.
+A-LE6     Per-TASK budget hard-gate refusal ends the TASK
+          (status="budget_exhausted") and does NOT change persona.state;
+          sustained per-persona / per-env SOFT-budget exhaustion parks the
+          persona DORMANT(reason=budget_starved) and auto-resumes
+          (wake_cause=resource_recovered) on budget refresh. (01_KERNEL A.37)
+A-LE7     All fallback_bodies unattestable → DORMANT(reason=body_unavailable);
+          a fresh admissible body attestation auto-resumes via
+          LIFECYCLE_AWAKENED(wake_cause=resource_recovered). (02_PERSONA A.11)
+A-LE8     Multi-membership: a persona parks DORMANT(reason=work_drained)
+          only when NO membership has pending work, and
+          DORMANT(reason=objective_met) only when EVERY membership's env
+          objective is complete; one env completing while another has work
+          keeps the persona ACTIVE. (05_ENVIRONMENT §6.3)
+A-LE9     Resource / no-work auto-resume emits LIFECYCLE_AWAKENED with
+          wake_cause ∈ {resource_recovered, work_routed} and is NOT one of
+          the 6 wake paths; A-EN-v1.0-10 (6 wake paths) still passes; INV_R9
+          holds for every dormancy reason (no envelope minted while DORMANT).
 
 ### A-RT-RESP — retired_persona_response_policy (02_PERSONA §11.7 rule 7)
 
