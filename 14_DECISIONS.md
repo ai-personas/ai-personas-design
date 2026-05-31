@@ -1333,6 +1333,27 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ---
 
+### ADR-0057 — "Idle mode" is DORMANT with an enumerated reason + auto-resume, not a new FSM state
+
+**Status:** Accepted.
+**Date:** 2026-05-30.
+**Origin:** v1.0.14 (persona "run-forever / heartbeat / idle" model).
+**Related:** [`02_PERSONA.md §7.6`](02_PERSONA.md), Appendix A.18a/A.19, [`01_KERNEL.md §7`](01_KERNEL.md) (A.37 budget gate), [`05_ENVIRONMENT.md §5.2`](05_ENVIRONMENT.md) (wake paths), [`05_ENVIRONMENT.md §6.3`](05_ENVIRONMENT.md) (multi-membership), [`05_ENVIRONMENT.md §7`](05_ENVIRONMENT.md) (attention budget), [`00_VISION.md`](00_VISION.md) INV-9 / R-v1.0-15, ADR-0046 (Wake Path 6), ADR-0051 (wall-clock age).
+
+**Context.** The intended model is: personas run indefinitely ("forever, like a heartbeat") until they retire, serve one or more environments, may voluntarily help other environments, and go *idle* when they (a) lack token budget, (b) have no model availability, (c) hit env constraints, or (d) have no pending work / their env objective is met. A coverage review found the lifecycle loop, multi-env membership (`§6.3`), and voluntary env-jumping (`CrossEnvProactiveOffer`, `§11.6`) already first-class, and retirement already the sole terminus. The gap: the only enumerated cause of `DORMANT` entry was `importance < τ_dormant`; the four idle triggers were each handled as *state-less* refusals (per-task `budget_exhausted`; a quarantined body binding; per-action `ATTENTION_OVER_BUDGET`) that never parked the persona, and resource recovery had no defined wake.
+
+**Decision.** Do **not** add a new "IDLE" FSM state. Broaden the existing `LIFECYCLE_DORMANT_ENTERED` event to carry an enumerated `reason` (`low_salience` | `unresponsive` | `budget_starved` | `body_unavailable` | `env_constrained` | `work_drained` | `objective_met`), and pair each reason with a kernel-monitored **auto-resume predicate** that fires `LIFECYCLE_AWAKENED` with a `wake_cause` (`resource_recovered` | `work_routed` | …) when the cause clears. Wire the three resource triggers to this transition at their existing signal points (budget soft-envelope exhaustion, all-bodies-unattestable, sustained over-budget), and evaluate the two no-work reasons across **all** of a persona's memberships. Resource/no-work auto-resume is explicitly **not** a 7th wake path — the six wake paths overcome notification suppression; this is state restoration on resource return.
+
+**Consequences.**
+- (+) Fully expresses the intended idle model while reusing the existing `DORMANT` state, `LifecycleEvent` enumeration, the six wake paths, and already-emitted budget/body/attention/completion signals.
+- (+) No invariant churn: no new FSM state, no new lineage scope; INV_R9 (no DORMANT persona mints an envelope) and lineage-replay determinism are unaffected; the "8 safety-floor sources" and "6 wake paths" counts are untouched.
+- (+) Closes the model-unavailability hole (a persona with no usable body parks-and-auto-resumes rather than wedging on a dead binding).
+- (−) The kernel must monitor an auto-resume predicate per parked persona; bounded by re-evaluating only on the relevant signal (budget tick, `body_attestation_state_changed`, attention recover, task routing), not by polling.
+
+**Alternatives rejected.** (a) Add a distinct `IDLE` state — rejected: duplicates `DORMANT` semantics (reversible, mints-no-envelope) and forces every FSM consumer, replay path, and test to learn a second parked state. (b) Add a 7th wake path for resource recovery — rejected: conflates notification-suppression-override with state-restoration and breaks the "6 wake paths" count + `A-EN-v1.0-10`. (c) Leave the triggers as state-less refusals — rejected: that is precisely the reviewed gap (no persona-level idle, no auto-resume).
+
+---
+
 ## 13. Cross-references
 
 - Normative invariants and commitments referenced above: [`00_VISION.md §3`](00_VISION.md#3-invariants-j1j9), [`00_VISION.md §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10).

@@ -2385,6 +2385,15 @@ CALL REFUSAL
     - the task may continue with reduced capability (cache-only retrieval,
       no fresh LLM calls)
     - or the task ends with status="budget_exhausted"
+
+  PERSONA-LEVEL PARKING (distinct from per-task refusal)
+    A per-TASK hard-gate refusal ends/degrades the TASK only.  When the
+    persona's per-persona or per-env SOFT budget envelope (not a single
+    task) is sustainedly exhausted, the PERSONA is parked: it transitions
+    ACTIVE → DORMANT with LIFECYCLE_DORMANT_ENTERED.reason=budget_starved
+    (02_PERSONA §7.6) and auto-resumes (wake_cause=resource_recovered) on
+    budget refresh (daily-cap reset or operator top-up).  This adds no new
+    FSM state — "idle for lack of budget" IS DORMANT with a reason.
 ```
 
 ### A.38 OpenTelemetry semantic conventions

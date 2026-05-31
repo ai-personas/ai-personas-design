@@ -282,6 +282,7 @@ Cross-document risks for v1.0 as a system. Per-document risks appear in each doc
 | R-v1.0-12 | **Federated trust establishment.** A2A peer admission protocol assumes signed AgentCards; revocation/key rotation under-specified. | High | Low | Federation hardening v1.1+; pinned peer registry per kernel for v1.0. | v1.1. |
 | R-v1.0-13 | **Executable EnvironmentRule as floor-bypass vector.** Dynamically-authored `env-rule/1` code/contract rules (`05_ENVIRONMENT §2.2b`) extend safety-floor source 8; a malicious rule could attempt to weaken enforcement. | Critical | Low | Rules run in the existing sandbox (OWASP + caps, `01_KERNEL §6`); ride UNDER source 8 and may only ADD refusals (never relax sources 1-7); `safety_critical` rules operator-gated (C2); `cascade_locked` parent rules immutable by children; the "8 sources" count is unchanged ([`01_KERNEL.md §2`](01_KERNEL.md), [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md)). Per-doc: R-ENV-11. | v1.1. |
 | R-v1.0-14 | **ArtifactSharingPolicy misconfiguration over-exposes artifacts.** Env-scoped sharing (`artifact-share/1`, `07_ARTIFACTS §4a`) could leak a bundle across orgs if mis-set. | High | Medium | Default `outward_tier = project_only`; most-restrictive-wins composition; `None` policy never widens; cross-tenant shares require `CrossTenancyAgreementRef` or demote ([`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md), [`06_DOMAIN.md §6.3`](06_DOMAIN.md), ADR-0028/0030). Per-doc: R-ARTIFACTS-8. | v1.1. |
+| R-v1.0-15 | **Resource-starved personas wedge instead of parking, never auto-resume, or flap.** A persona that loses budget / all bodies / env access could (a) hold capacity it cannot use, (b) park as DORMANT(reason) but never wake when the resource returns, or (c) oscillate park↔resume on a noisy signal. | Medium | Medium | Enumerated dormancy `reason` + kernel-monitored auto-resume predicate per reason ([`02_PERSONA.md §7.6`](02_PERSONA.md), A.18a); resume re-evaluated once per signal (budget tick / `body_attestation_state_changed` / attention recover / task routing); parking gated by an operator-policy `dormancy_park_threshold` and a symmetric resume predicate (hysteresis → no flapping); reuses existing DORMANT state (no new state) so INV_R9 and replay are unaffected; ADR-0057. | v1.1. |
 
 ### 11.1 Severity legend
 
@@ -569,7 +570,12 @@ INV-8  Constraints effective at the right admission point.
 INV-9  Lifecycle states have signed transitions.
        Persona FSM: SEEDED → ACTIVE ↕ DORMANT → RETIRED → ARCHIVED
        (with FORKED branch). Same shape for Project and EnvironmentInstance.
-       Every transition emits LifecycleEvent (signed). Mechanism:
+       The ACTIVE ↕ DORMANT oscillation is the indefinite liveness loop
+       ("run forever"); RETIRED is the sole terminus. DORMANT entry carries
+       an enumerated `reason` (low_salience | unresponsive | budget_starved |
+       body_unavailable | env_constrained | work_drained | objective_met;
+       02_PERSONA §7.6) — "idle mode" is DORMANT-with-a-reason, NOT a new
+       state. Every transition emits LifecycleEvent (signed). Mechanism:
        02_PERSONA §7, 04_PROJECT §3, 05_ENVIRONMENT §4.
 
 INV-10 Schemas are versioned and validated.

@@ -344,6 +344,8 @@ This specification defines how a persona's global mood seeds per-environment att
 
 Composition is recomputed at each PresenceState update; AttentionBudget watchdog catches over-allocation (§7).
 
+**Dormancy across memberships.** Because a persona may belong to N environments at once, the no-work dormancy reasons (`02_PERSONA §7.6`) are evaluated over *all* N memberships, never one: a persona parks with `LIFECYCLE_DORMANT_ENTERED.reason=work_drained` only when **no** membership has pending work, and with `reason=objective_met` only when **every** membership's environment has reached its objective (the env-side completion transition, §4). One env completing while another still has work does NOT park the persona — it remains ACTIVE and continues serving the busy membership. It auto-resumes (`wake_cause=work_routed`) when new work arrives in any membership.
+
 ### 6.3a Cross-environment coordination consent (v1.1)
 
 v1.1 addition (ADR-0045, [`15_COORDINATION_SHAPES.md §4.7`](15_COORDINATION_SHAPES.md)). Environments are **bilateral peers**. Any environment can both request and receive coordination. When an environment receives a coordination request, its personas review through their own organisational structure and accept, counter-propose, or deny. One environment cannot impose coordination on another.
@@ -387,6 +389,8 @@ These four kernel operations (allocate, spend, recover, borrow) manipulate the a
 **Technical detail:** See [Appendix A.17](#appendix-a17).
 
 Invariants: `sum(allocations) ≤ refusal_threshold` enforced on every op; over-threshold operations emit `ATTENTION_OVER_BUDGET` and refuse new admissions until restored.
+
+**Sustained over-budget parks the persona.** A transient `ATTENTION_OVER_BUDGET` refuses individual admissions; a *sustained* one — where the persona cannot act in any membership — transitions the persona to `DORMANT` with `LIFECYCLE_DORMANT_ENTERED.reason=env_constrained` (`02_PERSONA §7.6`), the same parked posture used for a charter admission refusal or a blocking `EnvironmentRule` (§2.2b). It auto-resumes (`wake_cause=resource_recovered`) when the constraint clears (attention budget restored or env un-paused). This is an enumerated cause of the existing `DORMANT` state, not a new state.
 
 ## 8. Ambient event stream
 
@@ -1835,6 +1839,18 @@ WAKE PATH 6 — direct user address
   24h.  Beyond this, the kernel queues the wake and emits
   `dormant_user_address_rate_limited` — this prevents a user from
   continuously disrupting a persona's dormancy rest cycle.
+
+NOTE — resource-reason auto-resume is NOT a 7th wake path.
+  The six paths above overcome NOTIFICATION SUPPRESSION for a persona
+  dormant by low_salience / unresponsive.  A persona parked for a
+  RESOURCE reason (budget_starved / body_unavailable / env_constrained)
+  or a NO-WORK reason (work_drained / objective_met) — see 02_PERSONA
+  §7.6 / A.18a — instead auto-resumes by kernel-monitored predicate
+  (budget refresh, body re-attestation, constraint cleared, new work
+  routed), emitting LIFECYCLE_AWAKENED with
+  wake_cause = resource_recovered | work_routed.  This is state
+  restoration, not a notification; the "6 wake paths" count and the
+  A-EN-v1.0-10 conformance test are unchanged.
 ```
 
 
