@@ -518,6 +518,28 @@ On PersonaConsultation.request:
 3. **Consultation does not extend retirement.** Each `LIFECYCLE_CONSULTED` event is informational; it does not reset retention timers or block the ARCHIVED transition.
 4. **No write-back.** Consulting persona cannot transfer the consulted entries into their own skill_library directly; doing so requires a separate `SkillTransferGrant` (§11.5) which itself requires consent — and a RETIRED persona cannot consent. The consulting persona may *learn from* the consultation and author new K-lines through normal evolution; provenance to the consulted source is recorded in `DerivationProvenanceEdge` (`08_KNOWLEDGE §16b`) when DPE is enabled.
 
+### 7.6 Dormancy reasons and auto-resume
+
+A persona "runs forever until it retires": `RETIRED` (§7.5) is the **only** terminal exit, and the `ACTIVE ↕ DORMANT` oscillation (A.18) is the steady-state liveness loop — the substrate's realisation of what a deployment may call a *heartbeat*. `DORMANT` is always reversible; it is a **parked** posture, never a degraded identity. `INV_R9` holds for every dormancy reason (a DORMANT persona mints no envelopes), while `born_at`, experience, fitness, and relationships persist untouched per §7.2.
+
+v1.0.14 makes the *cause* of a `DORMANT` transition explicit. Previously the only enumerated cause was attention decay (`importance < τ_dormant`). A persona now enters `DORMANT` for exactly one of the enumerated **dormancy reasons** below — every transition MUST record its reason — each carried on the `LIFECYCLE_DORMANT_ENTERED` event's `reason` field (A.19) and each paired with an **auto-resume predicate** the kernel monitors so the heartbeat resumes when the cause clears (A.18a):
+
+- `low_salience` — `importance < τ_dormant` (attention decay / no recent calls). The existing default. Resumes via the six wake paths (`05_ENVIRONMENT §5.2`).
+- `unresponsive` — K consecutive round-barrier timeouts (`01_KERNEL §13`). Resumes on operator directive (Wake Path 4) or fresh address.
+- `budget_starved` — the persona's per-persona or per-env **soft** budget envelope is exhausted (`01_KERNEL §7 / A.37`). Distinct from a per-task hard-gate refusal, which ends the *task* with `status="budget_exhausted"` and does NOT park the persona: only sustained soft-envelope exhaustion parks the *persona*. Auto-resumes on budget refresh (daily-cap reset or operator top-up).
+- `body_unavailable` — every admissible body in `fallback_bodies` is unattestable or unreachable (`§3.5 / A.11`), so no inference capacity remains. Auto-resumes when any admissible body returns a fresh attestation.
+- `env_constrained` — a sustained environment constraint (`ATTENTION_OVER_BUDGET`, charter admission refusal, or an `EnvironmentRule` at `env_instantiation`/`round_barrier`; `05_ENVIRONMENT §7, §11.5, §2.2b`) blocks the persona from acting in all its memberships. Auto-resumes when the constraint clears (attention budget restored, env un-paused).
+- `work_drained` — the persona has no pending work across **any** of its memberships (`05_ENVIRONMENT §6.3` multi-membership; queue empty per `03_TASKS §4`). Auto-resumes when new work is routed to any membership.
+- `objective_met` — **every** environment the persona belongs to has reached its objective / completed its bound project (the env-side `ACTIVE → DORMANT`-on-completion transition, `05_ENVIRONMENT §4`). Auto-resumes on admission to a new membership or reactivation of an existing one.
+
+**What "sustained" means (hysteresis, no flapping).** `budget_starved` and `env_constrained` park the persona only after the condition *persists* — never on a single refusal. The persistence threshold is operator-policy-configurable via `operator_policy.dormancy_park_threshold`: by default `budget_starved` parks after the soft budget envelope stays exhausted across **2 consecutive budget-refresh cycles**, and `env_constrained` parks after **continuous** `ATTENTION_OVER_BUDGET` / admission refusal for a `park_window` (default **1 h**) throughout which the persona can act in *no* membership. (`unresponsive` keeps its existing precise threshold — K consecutive round-barrier timeouts, default K=3, `01_KERNEL §13`; `body_unavailable` parks immediately, since zero inference capacity is unambiguous.) The symmetric auto-resume predicate MUST likewise *hold* — budget actually refreshed, constraint actually cleared, a body actually re-attested — before `LIFECYCLE_AWAKENED` fires. This hysteresis means a single transient signal neither parks nor wakes the persona, so the FSM cannot flap.
+
+**This adds no new FSM state and no new lineage scope.** "Idle mode" is exactly `DORMANT` carrying an enumerated `reason`; the substrate reuses the existing `DORMANT` state, the `LifecycleEvent` enumeration (A.19), the six wake paths, and the already-emitted budget / body / attention / completion signals — it only **binds those signals to the state transition** and records why. A persona present in N environments (§6.3) is parked only when its reason holds across all of them: `work_drained` and `objective_met` require an empty/complete state in *every* membership, never just one.
+
+**Resource-reason auto-resume is not a seventh wake path.** The six wake paths (`05_ENVIRONMENT §5.2`) overcome *notification suppression* for a `low_salience`/`unresponsive` dormant persona. Resource-reason auto-resume is *state restoration on resource return* — a kernel-monitored predicate, not a notification. It emits `LIFECYCLE_AWAKENED` with a `wake_cause` naming the cleared reason (A.19); the "six wake paths" count and its conformance tests are unchanged.
+
+> **Schema/spec:** Dormancy reasons → entry condition → auto-resume predicate → wake_cause. See [Appendix A.18a](#appendix-a18a).
+
 ## 8. Evolution — 8 signals + 5 horizons
 
 ### 8.1 Eight evolution signals with weights
@@ -1628,7 +1650,13 @@ MAP-Elites archive                            — diversity-preserved fitness
    for project-scope, 1h for safety-critical).  A positive
    revocation response transitions the binding to ATTESTATION_REVOKED
    (terminal); any in-flight call is quarantined; fallback_bodies are
-   tried in order.
+   tried in order.  If EVERY body in fallback_bodies is itself
+   unattestable or unreachable (no inference capacity remains), the
+   persona transitions ACTIVE → DORMANT with
+   LIFECYCLE_DORMANT_ENTERED.reason = body_unavailable (02_PERSONA §7.6)
+   rather than holding a binding it cannot use; it auto-resumes
+   (wake_cause = resource_recovered) when any admissible body returns a
+   fresh attestation.  Identity is preserved throughout (step 4).
 
 4. STALE / REVOKED → IDENTITY PRESERVED
    Neither substate mutates persona identity; both mutate the binding
@@ -1863,10 +1891,11 @@ class FatigueCurve:
                 └────┬───┘
                      │ kernel mints persona_id, signs SOUL v1
                      ▼
-                ┌────────┐    importance < τ_dormant     ┌────────┐
+                ┌────────┐   dormancy_reason (A.18a)     ┌────────┐
                 │ ACTIVE │ ──────────────────────────►  │DORMANT │
                 └────┬───┘                                └───┬────┘
-                     │           wake heuristic               │
+                     │  wake path (§5.2) OR auto-resume        │
+                     │  (A.18a) when reason clears             │
                      │ ◄──────────────────────────────────────┘
                      │
                      │ fork (clone or compositional)
@@ -1887,6 +1916,38 @@ class FatigueCurve:
                 └────────┘
 ```
 
+### Appendix A.18a
+
+**Dormancy reasons and auto-resume predicates** (referenced from §7.6)
+
+```text
+reason            entry condition                            auto-resume predicate          AWAKENED.wake_cause
+─────────────     ────────────────────────────────────      ──────────────────────────     ───────────────────
+low_salience      importance < τ_dormant                     any of the 6 wake paths(§5.2)  salience_wake
+unresponsive      K consecutive round-barrier timeouts       operator directive / address   operator_wake
+budget_starved    persona|env SOFT budget exhausted          budget refresh (reset/top-up)  resource_recovered
+body_unavailable  all fallback_bodies unattestable           any admissible body re-attests resource_recovered
+env_constrained   sustained env admission refusal            env constraint cleared         resource_recovered
+work_drained      no pending work in ANY membership          new work routed to a membership work_routed
+objective_met     ALL memberships' objectives complete       new / reactivated membership   work_routed
+
+Notes:
+  • `reason` is recorded on LIFECYCLE_DORMANT_ENTERED (A.19); `wake_cause`
+    on LIFECYCLE_AWAKENED.
+  • The kernel re-evaluates each parked persona's auto-resume predicate on
+    the relevant signal (budget tick, body_attestation_state_changed,
+    attention recover, task routing) — once per kernel-emitted signal, not
+    polled; a cleared predicate transitions DORMANT → ACTIVE and emits
+    LIFECYCLE_AWAKENED with wake_cause.
+  • Parking thresholds ("sustained", §7.6) and the symmetric resume
+    predicate give hysteresis: a single transient signal neither parks nor
+    wakes the persona, so the FSM does not flap.
+  • Resource/no-work auto-resume is NOT one of the 6 wake paths (§5.2):
+    those overcome notification suppression; this is state restoration.
+  • No new FSM state; no new lineage scope. INV_R9 holds for every reason
+    (a DORMANT persona — for ANY reason — mints no envelopes).
+```
+
 ### Appendix A.19
 
 **Canonical LifecycleEvent.kind enumeration** (referenced from §7)
@@ -1895,11 +1956,24 @@ class FatigueCurve:
 LIFECYCLE_SEEDED              SEEDED → first kernel mint of the persona
 LIFECYCLE_ACTIVATED           SEEDED → ACTIVE on first envelope or
                               ARCHIVED → ACTIVE on reanimation
-LIFECYCLE_DORMANT_ENTERED     ACTIVE → DORMANT (importance < τ_dormant)
-LIFECYCLE_AWAKENED            DORMANT → ACTIVE via §5.2 wake heuristics
-                              (05_ENVIRONMENT); 6 enumerated wake paths
-                              including Wake Path 6 (direct user address,
-                              v1.0.13)
+LIFECYCLE_DORMANT_ENTERED     ACTIVE → DORMANT; carries `reason` ∈
+                              {low_salience (importance < τ_dormant,
+                              default), unresponsive, budget_starved,
+                              body_unavailable, env_constrained,
+                              work_drained, objective_met} per §7.6 /
+                              A.18a. Adds no new FSM state — "idle mode"
+                              IS DORMANT with a reason.
+LIFECYCLE_AWAKENED            DORMANT → ACTIVE; carries `wake_cause`.
+                              For low_salience/unresponsive: via §5.2
+                              wake heuristics (05_ENVIRONMENT); 6
+                              enumerated wake paths including Wake Path 6
+                              (direct user address, v1.0.13). For resource
+                              reasons (budget_starved / body_unavailable /
+                              env_constrained): wake_cause=resource_recovered
+                              when the auto-resume predicate clears (A.18a).
+                              For work_drained / objective_met:
+                              wake_cause=work_routed. Auto-resume is NOT a
+                              7th wake path (A.18a).
 LIFECYCLE_FORK                ACTIVE → FORKED (sibling persona minted);
                               parent state preserved per
                               MemoryInheritancePolicy / CharterConflict
