@@ -2990,6 +2990,94 @@ A-ER9     Backward compatibility: an env whose charter carries no rules
           source-8 evaluation is unchanged.
 ```
 
+## 9n. Discovery, access & hybrid distribution tests (A-DR*, A-DT*, A-AX*, A-CL*, A-TF*, A-HR*) — v1.1 draft
+
+### A-DR* — DiscoverableRecord + cards (09_PROTOCOLS §3G.1)
+
+```text
+A-DR1     Every content type (persona/env/project/domain/artifact/telemetry/
+          knowledge/skill/tool) projects a DiscoverableRecord; ArtifactCard
+          (artifact-card/1) and TelemetryCard (telemetry-card/1) validate.
+A-DR2     The four v1.0 cards still validate at their original schema ids;
+          the added access_policy_ref + discover semantics are additive
+          (a v1.0-only consumer ignores them).
+A-DR3     A record with no body carries no content_hash/ContentLocator; one
+          with a body carries exactly one (hash for stored, locator for hybrid).
+```
+
+### A-DT* — Two-plane discovery transport (09_PROTOCOLS §3G.2)
+
+```text
+A-DT1     Internet plane: a federation/public DiscoverableRecord is published
+          to the Kademlia DHT as a signed ProviderRecord and resolves by
+          content_hash / DID / handle.
+A-DT2     Intranet plane: with no internet route, two kernels on the same LAN
+          discover each other's records via mDNS (no central registry, no
+          pre-shared peering).
+A-DT3     Bridging respects visibility_tier: a persona_only / project_only /
+          tenant / intranet-scoped record is NEVER re-published to the
+          internet DHT; only federation/public records bridge outward.
+```
+
+### A-AX* — Access-gated discovery + AccessPolicy (09_PROTOCOLS §3G.3-§3G.4)
+
+```text
+A-AX1     access_level ladder enforced: discover < read < write < admin; a
+          discover-only principal sees a record + minimal metadata but a body
+          fetch / skill invoke is REFUSED until read+.
+A-AX2     A persona_only / private record never appears in DHT, mDNS, or gossip
+          results to an unauthorised principal (no enumeration leak).
+A-AX3     access_level enum widening is additive: existing r / rw grants
+          behave exactly as v1.0 (artifact-share/1 unchanged); A-AB23 still
+          passes.
+A-AX4     Effective access = intersection (most-restrictive-wins) of grant ∩
+          outward tier ∩ EnvironmentComposition-inherited policy ∩ source-8
+          EnvironmentRule; composes with safety floor (01_KERNEL §2.1).
+```
+
+### A-CL* — ContentLocator hybrid storage (09_PROTOCOLS §3G.5, 07_ARTIFACTS §10a)
+
+```text
+A-CL1     Round-trip: publish a ContentLocator (provider_kind=github) →
+          discover it over P2P → fetch from the provider under the consumer's
+          own credential → verify bytes against content_hash → success.
+A-CL2     Integrity: a content_hash mismatch on fetch FAILS CLOSED and emits a
+          signed CONTENT_INTEGRITY_FAILED lineage event.
+A-CL3     Availability: primary provider outage falls back to the next entry
+          in replica_tiers (e.g. oci → github → ipfs_pin).
+A-CL4     Live-reference verification emits CONTENT_LOCATOR_STALE when
+          provider_native_ref no longer resolves or no longer matches the hash.
+A-CL5     The substrate stores neither the user's bytes nor credentials — only
+          the signed locator + content_hash + credential_requirement descriptor.
+A-CL6     ContentLocator subsumes content_kind=external: a v1.0 external ref
+          migrates to a locator with an added content_hash anchor (A-AB11 flow).
+```
+
+### A-TF* — Federated consent-gated telemetry (09_PROTOCOLS §4.1)
+
+```text
+A-TF1     A TelemetryCard feed defaults private; an unauthorised peer cannot
+          subscribe (discover-only sees the card exists, nothing more).
+A-TF2     Default redaction: below a consented tier the feed exposes only span
+          kinds / status / durations / lifecycle+presence transitions — never
+          prompt / completion / artifact / DM content.
+A-TF3     A higher-tier subscription requires BOTH a read+ AccessGrant AND a
+          ConsentLedger pin; revoking the pin terminates the feed.
+A-TF4     Federated presence resolution ("where is persona X now") is OFF by
+          default and exposes focus KIND + status only, never focus content.
+```
+
+### A-HR* — Host-replication / BFT standby (09_PROTOCOLS §3C.2)
+
+```text
+A-HR1     A joined env with a standby_replica_set survives host loss: BFT
+          quorum sign-off promotes a standby without full Blackboard replay.
+A-HR2     Split-brain prevented: under partition only the majority-quorum side
+          promotes a host; the minority side stays STALLED.
+A-HR3     With no standby_replica_set configured, behaviour is exactly v1.0
+          (host loss ⇒ STALLED + heavyweight host_handoff).
+```
+
 ## 9e. Risks & known limitations
 
 Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations). This section captures risks intrinsic to the *catalogue itself* — risks intrinsic to the underlying mechanisms are recorded in the doc that defines each mechanism.
