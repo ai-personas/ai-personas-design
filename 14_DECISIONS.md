@@ -1471,6 +1471,21 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 **Alternatives rejected.** (a) Design every primitive from scratch — rejected: wasteful and ignores the user's instruction to consume what OpenCLAW implements. (b) Adopt OpenCLAW wholesale as the substrate — rejected: would displace kernel-owned identity / safety floor / lineage, which are PersonaOS's reason for existing.
 
+### ADR-0065 — Reachability & availability: dial NAT-private nodes, survive origin-offline, and be honest about the commons
+
+**Status:** Accepted (v1.1 draft).
+**Date:** 2026-06-01.
+**Origin:** v1.1 (the "run at home, discover + fetch from my phone off-network, without my own server" question).
+**Related:** [`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md#3h-reachability-and-availability--being-found-dialled-and-fetched-from-anywhere-v11-draft), [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md#3g-discovery-access-and-hybrid-distribution-v11-draft), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), [`13_DESIGN_VALIDATION.md` SCENARIO 15](13_DESIGN_VALIDATION.md), ADR-0059, ADR-0063, ADR-0064.
+
+**Context.** Discovery (`§3G`) tells a peer a record exists and where its locator points, but two physical realities decide whether a phone on cellular can actually observe a persona running on a home laptop behind NAT: can it **dial** the node, and can it **fetch** content when the node is asleep. The earlier track (ADR-0058..0064) added discovery, access-gating, and hybrid storage, but not NAT traversal or a first-class offline-availability posture — and risked implying "no server" means "no infrastructure."
+
+**Decision.** Add two schemas and one honest framing. **`ReachabilityProfile` (`reachability-profile/1`)** advertises a node's transports and reachability class (`public` / `nat_private` / `intranet_only`) and mandates **libp2p circuit-relay v2 + DCUtR hole-punching + bootstrap/rendezvous** for `nat_private` nodes; the resolver (`§3G.2`) returns relay-reachable multiaddrs. **`AvailabilityPolicy` (`availability-policy/1`)** declares `online_only` (default) / `replicated` (≥N peers) / `pinned` (provider) so artefacts survive the origin going dark, with `ContentLocator.replica_tiers` fallback. The **commons-vs-dedicated-hosting** distinction is written into `§3H.3`: "no dedicated server of your own" is achievable on public DHT-bootstrap + relay commons (+ optional pin), but "no infrastructure whatsoever" is physically impossible for an intermittently-online NAT node — operators MAY self-host relay/bootstrap/pin for sovereignty. Reachability/availability never widen `AccessPolicy`.
+
+**Consequences.** (+) The "discover + observe + fetch from anywhere" experience is specified honestly, with the same-Wi-Fi (mDNS) and off-network (relay + pin) paths both walked in SCENARIO 15; (+) liveness vs. connectivity vs. availability are cleanly separated. (−) Depends on relay/pin commons (or self-hosting) — surfaced as R-PROTOCOLS-15 and OQ-PROTOCOLS-12; full managed relay/pin recipes are v1.2.
+
+**Alternatives rejected.** (a) Claim pure-P2P needs zero infrastructure — rejected: false, and OpenCLAW-P2P itself runs a provider stack. (b) Mandate a single PersonaOS-operated relay/directory — rejected: reintroduces the central dependency the P2P track exists to remove; commons are pluggable and self-hostable instead.
+
 ---
 
 ## 13. Cross-references

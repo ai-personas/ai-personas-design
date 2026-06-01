@@ -352,6 +352,31 @@ Normative properties:
 
 Where the open-source OpenCLAW-P2P stack (arXiv 2604.19792; `github.com/Agnuxo1/OpenCLAW-P2P`) has a production, formally-checked implementation of a primitive PersonaOS needs, PersonaOS adopts the *pattern* and names it an interop target rather than building a parallel mechanism: **Kademlia DHT discovery** (`§3G.2` internet plane); **epidemic gossip** (align `§3B`); **BFT consensus voting** (the quorum for host-replica hand-off `§3C.2` and cross-kernel ratification, composing with `MultiPrincipalAttestationQuorum`, [`05_ENVIRONMENT §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification)); **reputation-weighted allocation** (composes with [`§3D`](#3d-reputation-and-anti-goodhart) — PersonaOS does not add a second reputation system); and the **tiered hybrid persistence + content-hash / IPFS / GitHub attribution** model (`§3G.5`). What stays PersonaOS-native: kernel-owned soul identity, the 8-source safety floor, and signed lineage. A PersonaOS kernel sharing DHT / CID conventions MAY federate discovery with an OpenCLAW node. Captured as ADR-0064.
 
+## 3H. Reachability and availability — being found, dialled, and fetched from anywhere (v1.1 draft)
+
+Discovery (`§3G`) tells a peer that a record *exists* and points at its locator. Two **physical** realities decide whether a phone on a cellular network can actually observe a persona that is running on a laptop at home behind a NAT router: can the peer **dial** the node (reachability), and can it **fetch** the content when the node is asleep (availability). v1.1 makes both first-class and — crucially — **honest about what P2P can and cannot abolish**. This section is the substrate answer to "I run PersonaOS on my own machine; can I discover my personas and get their progress + artefacts from my phone, off-network, without my own server?"
+
+### 3H.1 ReachabilityProfile — dialing a NAT-private node
+
+*A `ReachabilityProfile` (`reachability-profile/1`) advertises a node's transports (multiaddrs) and its observed reachability class: `public` (directly dialable — a public IP or forwarded port), `nat_private` (behind NAT / CGNAT / a home router — the common case), or `intranet_only` (link-local; never leaves the LAN, by policy or topology). For `nat_private` nodes it specifies normative use of **libp2p circuit-relay v2** (a willing relay peer forwards the initial connection) plus **DCUtR hole-punching** (the two ends upgrade to a direct connection once introduced), bootstrapped through a configured set of **bootstrap / rendezvous** peers. The resolver (`§3G.2`) returns these relay-reachable multiaddrs — not just a host id — so a record published from a NAT-private home node is dialable from elsewhere on the internet. The profile is signed and access-gated like any other record.*
+
+**Honest limit, stated in the spec.** Reachability addresses *connectivity*, not *liveness*. It gets a packet to a **live** node behind NAT; it does nothing for a node that is **asleep, powered off, or offline** — P2P changes addressing, not physics. The closed-laptop case is handled by availability (`§3H.2`), not reachability. An `intranet_only` node is reachable only from its own LAN by design (this is the same-Wi-Fi phone case, served zero-config by the mDNS plane, `§3G.2`).
+
+### 3H.2 AvailabilityPolicy — surviving the origin going dark
+
+*An `AvailabilityPolicy` (`availability-policy/1`) declares how a `DiscoverableRecord`'s body stays fetchable when its origin node is unreachable: `online_only` (default — fetchable only while the owning node is up; lowest cost, no replication), `replicated` (the bundle is mirrored to ≥ `replication_factor` peer kernels / replicas, listed as `ContentLocator.replica_tiers`, `§3G.5`), or `pinned` (delegated to a persistent provider — an IPFS pinning service or an OCI / object-store tier). When a consumer cannot reach the origin, the resolver and `ProviderAdapter` fall back **in `replica_tiers` order** until one serves bytes that verify against `content_hash`.*
+
+This is exactly OpenCLAW-P2P's tiered-persistence answer (`§3G.6`): the laptop can sleep and the *artefacts* remain fetchable from a replica or pin, even though the *live persona* is paused until the laptop wakes. Progress telemetry (`§4.1`) is `online_only` by nature — a paused persona emits no new spans — so a `TelemetryCard` consumer sees the last state plus a `presence=dormant` transition until the origin returns.
+
+### 3H.3 Commons vs. dedicated hosting — the honest framing
+
+The design separates two claims that are easy to conflate, and writes the trade-off into the substrate rather than implying magic:
+
+- **"No *dedicated* hosting" (no always-on server of your own)** — **achievable.** A node leans on **shared commons**: public DHT bootstrap + circuit-relay peers for rendezvous / NAT-traversal, and optionally a pinning service for offline availability. An operator wanting full self-sovereignty MAY run *their own* relay / bootstrap / pin node — still infrastructure, but neither a content host nor a third party.
+- **"No infrastructure *whatsoever*"** — **not physically possible.** An intermittently-online node behind NAT cannot be reached "from anywhere" unless *something* public brokers the introduction or holds a replica. This is not a PersonaOS limitation: the decentralised reference **OpenCLAW-P2P** itself runs a Cloudflare R2 + Railway + GitHub + IPFS stack (`§3G.6`).
+
+PersonaOS's stance: make the commons **pluggable and minimal** (any relay, any pin, any provider via `ProviderAdapter`) and the trade-off **explicit**. Reachability and availability never widen *who* may read — a dialable, replicated record is still gated by `AccessPolicy` (`§3G.3`–`§3G.4`): the owner (own DID / VC) holds `read` / `admin`; a stranger gets only the `visibility_tier` the owner opted into. Walked end-to-end in [`13_DESIGN_VALIDATION.md` SCENARIO 15](13_DESIGN_VALIDATION.md). Captured as ADR-0065.
+
 ## 4. OpenTelemetry semantic conventions
 
 Every kernel operation emits OTel spans with PersonaOS conventions.
@@ -678,6 +703,8 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 | `AccessGrant` | `access-grant/1` | dataclass | [`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md) | Provisional | `access_level` ladder widened additively to `discover < r < rw < admin`; principal kinds extended (`peer_kernel`/`intranet_peer`/`public`). |
 | `ContentLocator` | `content-locator/1` | dataclass | [`09_PROTOCOLS.md §3G.5`](09_PROTOCOLS.md#3g5-hybrid-provider-backed-storage--distribute-the-reference-not-the-bytes) | Draft | Signed, integrity-anchored reference to provider-hosted bytes; distributed over P2P instead of the content itself. |
 | `ProviderAdapter` | `provider-adapter/1` | dataclass | [`09_PROTOCOLS.md §3G.5`](09_PROTOCOLS.md#3g5-hybrid-provider-backed-storage--distribute-the-reference-not-the-bytes) | Draft | Fetch / store / verify contract per `provider_kind` (github / arxiv / s3 / r2 / oci / ipfs_pin / https). |
+| `ReachabilityProfile` | `reachability-profile/1` | dataclass | [`09_PROTOCOLS.md §3H.1`](09_PROTOCOLS.md#3h1-reachabilityprofile--dialing-a-nat-private-node) | Draft | Advertised transports + reachability class (`public`/`nat_private`/`intranet_only`); relay-v2 + DCUtR + bootstrap for NAT traversal; resolver returns relay multiaddrs. |
+| `AvailabilityPolicy` | `availability-policy/1` | dataclass | [`09_PROTOCOLS.md §3H.2`](09_PROTOCOLS.md#3h2-availabilitypolicy--surviving-the-origin-going-dark) | Draft | How a record's body stays fetchable when the origin is offline: `online_only` / `replicated` (≥N) / `pinned`; resolver falls back through `ContentLocator.replica_tiers`. |
 
 ### 7.12 Lineage
 
@@ -818,6 +845,7 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-PROTOCOLS-12 | Hybrid `ContentLocator` (`§3G.5`) dangling / drift: the provider deletes, rotates, or mutates bytes behind the reference. | High | High | Mandatory `content_hash` fails closed on mismatch (`CONTENT_INTEGRITY_FAILED`); ordered `replica_tiers` fallback; live-reference verification emits `CONTENT_LOCATOR_STALE`; optional IPFS pinning for permanence. | v1.1 (integrity + tiers); v1.2 (auto re-pin). |
 | R-PROTOCOLS-13 | Federated telemetry feed (`§4.1`) over-exposes activity if a `TelemetryCard` is mis-tiered. | High | Medium | Default-private + default redaction (kinds/status/durations only); higher tiers need `read`+ grant AND `ConsentLedger` pin; reuses `§3G.4` gating; A-DT* tests. | v1.1 (conservative defaults). |
 | R-PROTOCOLS-14 | Single-host replica promotion (`§3C.2`) under partition could elect two hosts (split-brain). | High | Low | BFT quorum sign-off requires majority of `standby_replica_set`; minority side stays `STALLED`; sequence assignment flows through one promoted host; full BFT deferred. | v1.1 (quorum); v2.0 (multi-writer BFT). |
+| R-PROTOCOLS-15 | "From-anywhere" access (`§3H`) is misread as needing zero infrastructure. A NAT-private home node that is asleep/offline is unreachable; relay/bootstrap/pin commons are still required. | Medium | High | Honest framing in `§3H.3` (commons ≠ dedicated hosting); `ReachabilityProfile` advertises class so consumers fail informatively; `AvailabilityPolicy=replicated`/`pinned` keeps artefacts fetchable while the origin sleeps; operators MAY self-host relay/pin. Reachability never widens `AccessPolicy`. | v1.1 (profiles + framing); v1.2 (managed relay/pin recipes). |
 
 ## 10a. Open questions
 
@@ -834,8 +862,9 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-PROTOCOLS-7 | `AccessPolicy` (`§3G.3`): does `admin` collapse into operator policy (floor source 4), or is it a distinct grantable level for non-operator principals? | Safety floor WG | v1.1 access model. |
 | OQ-PROTOCOLS-8 | `ProviderAdapter` (`§3G.5`): minimal built-in adapter set for v1.1 (github / ipfs_pin / https?) vs. fully operator-supplied; and the credential-presentation contract (DID+VC vs. provider-native token). | Storage WG | v1.1 adapter set. |
 | OQ-PROTOCOLS-9 | OpenCLAW-P2P interop (`§3G.6`): shared DHT key/CID conventions only, or a deeper bridge (cross-publish `DiscoverableRecord` ↔ OpenCLAW directory entries)? | Federation WG | v1.2 interop profile. |
-| OQ-PROTOCOLS-6 | DeploymentProfile in v2.0 (R-PROTOCOLS-9): top-level security-model fold-in — which existing sections does it merge into, and what does the migration path look like? | — | v2.0 vision. |
-| OQ-PROTOCOLS-7 | Key custody tier defaults: v1.0 ships Tier 2 (cloud KMS) baseline; should safety-critical deployments require Tier 3 (HSM) by default? | Security auditors | v1.1 default policy. |
+| OQ-PROTOCOLS-10 | DeploymentProfile in v2.0 (R-PROTOCOLS-9): top-level security-model fold-in — which existing sections does it merge into, and what does the migration path look like? | — | v2.0 vision. |
+| OQ-PROTOCOLS-11 | Key custody tier defaults: v1.0 ships Tier 2 (cloud KMS) baseline; should safety-critical deployments require Tier 3 (HSM) by default? | Security auditors | v1.1 default policy. |
+| OQ-PROTOCOLS-12 | Reachability/availability (`§3H`): does v1.1 ship a default public relay/bootstrap commons (and whose?), require operator-supplied relay, or bundle a self-hosted relay recipe? And what is the default `AvailabilityPolicy` per content kind (artefact vs. telemetry vs. persona)? | Federation WG | v1.1 commons + availability defaults. |
 
 ## 11. Acceptance tests
 

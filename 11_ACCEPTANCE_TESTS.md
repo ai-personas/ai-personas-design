@@ -3078,6 +3078,28 @@ A-HR3     With no standby_replica_set configured, behaviour is exactly v1.0
           (host loss ⇒ STALLED + heavyweight host_handoff).
 ```
 
+### A-RA* — Reachability & availability (09_PROTOCOLS §3H, 07_ARTIFACTS §10a)
+
+```text
+A-RA1     Intranet/same-LAN: a phone-kernel on the same LAN as a NAT-private
+          home kernel discovers its personas via mDNS with NO internet route,
+          and reads progress/artefacts at read+ (intranet_only profile honoured).
+A-RA2     NAT traversal: a nat_private home kernel is dialable from an off-network
+          peer via circuit-relay v2 + DCUtR; the resolver returns relay-reachable
+          multiaddrs, not a bare host id.
+A-RA3     Liveness honesty: when the origin node is OFFLINE, an online_only record
+          is unfetchable and the consumer gets an informative not-reachable result
+          (no false "exists+available").
+A-RA4     Availability fallback: an AvailabilityPolicy=replicated (or pinned)
+          bundle is fetched from a replica/pin while the origin is offline, and
+          the bytes verify against content_hash.
+A-RA5     Availability never widens access: a replica/pin fetch still enforces
+          AccessPolicy — a discover-only or unauthorised principal is refused
+          at read regardless of where the bytes are served from.
+A-RA6     Commons-optional sovereignty: an operator-run relay+pin (no third-party
+          commons) yields the same A-RA2/A-RA4 outcomes.
+```
+
 ## 9e. Risks & known limitations
 
 Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations). This section captures risks intrinsic to the *catalogue itself* — risks intrinsic to the underlying mechanisms are recorded in the doc that defines each mechanism.

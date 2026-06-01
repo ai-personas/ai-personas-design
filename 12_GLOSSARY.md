@@ -33,6 +33,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Access level** *(v1.1 draft)* — The additive `AccessGrant.access_level` ladder `discover < read (r) < write (rw) < admin`. `discover` permits finding a record + minimal metadata without reading its body; gates the discovery layer (`09_PROTOCOLS.md §3G.4`). v1.0 `r`/`rw` grants are unchanged. See `09_PROTOCOLS.md §3G.3`.
 
+**AvailabilityPolicy** *(v1.1 draft)* — How a `DiscoverableRecord`'s body stays fetchable when its origin node is offline (`availability-policy/1`): `online_only` (default), `replicated` (≥ `replication_factor` peers), or `pinned` (IPFS / OCI / object-store provider). On origin loss the resolver + `ProviderAdapter` fall back through `ContentLocator.replica_tiers` until bytes verify against `content_hash`. Never widens `AccessPolicy`. See `09_PROTOCOLS.md §3H.2`, `07_ARTIFACTS.md §10a`, ADR-0065.
+
 **ArtifactCard** *(v1.1 draft)* — Discoverable projection of an `ArtifactBundle` (`artifact-card/1`); specialisation of `DiscoverableRecord`. Carries bundle id, media kinds, `content_hash` / `ContentLocator`, `sharing_policy_ref`. Rides the internet (DHT) + intranet (mDNS) discovery planes, access-gated. See `09_PROTOCOLS.md §3G.1`, `07_ARTIFACTS.md §10a`.
 
 **ArtifactSharingPolicy** — Signed, env-authored policy (`artifact-share/1`) defining per-grantee access levels (`AccessGrant`), intra-composition inheritance (parent → child), and outward visibility tier; reuses the 5 visibility tiers + `CrossTenancyAgreementRef` with most-restrictive-wins. The artifact-specific case of `AccessPolicy` (v1.1). See `07_ARTIFACTS.md §4a`.
@@ -170,6 +172,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **Demotion Event** — Promotion reversal; signed in DomainLineage; conformance audit may trigger. See `06_DOMAIN.md §12`.
 
 **Disagreement** — Persistent methodological dialectic preserved verbatim; resolution via co-signed Resolution. See `04_PROJECT.md §10`.
+
+**Commons (vs dedicated hosting)** *(v1.1 draft)* — The honest distinction underpinning "discover + fetch from anywhere without your own server": **no *dedicated* hosting** is achievable by leaning on shared commons (public DHT-bootstrap + circuit-relay peers for NAT traversal, optional pinning for offline availability — all self-hostable for sovereignty), but **no infrastructure *whatsoever*** is physically impossible for an intermittently-online NAT node. Reachability/availability use commons; neither widens `AccessPolicy`. See `09_PROTOCOLS.md §3H.3`, ADR-0065.
 
 **ContentLocator** *(v1.1 draft)* — Signed, integrity-anchored reference (`content-locator/1`) to provider-hosted bytes (GitHub / arXiv / S3 / R2 / OCI / IPFS pin / HTTPS): `provider_kind` + `provider_native_ref` + mandatory SHA-256 `content_hash` + ordered `replica_tiers` + `access_policy_ref` + credential requirement. The substrate distributes the locator over P2P, never the bytes or the user's credentials; the consumer fetches under its own credential and verifies against `content_hash`. Subsumes v1.0 `content_kind=external`. See `09_PROTOCOLS.md §3G.5`, ADR-0063.
 
@@ -482,6 +486,12 @@ The definitions in this document are **documentation-normative**: when a term de
 **PersonaCard** — Signed projection of persona for discovery; visibility tiers; published at .well-known/personas/. The persona specialisation of `DiscoverableRecord` (v1.1). See `09_PROTOCOLS.md §3`, `§3G.1`.
 
 **ProviderAdapter** *(v1.1 draft)* — Fetch / store / verify contract (`provider-adapter/1`) per `provider_kind` (github / arxiv / s3 / r2 / oci / ipfs_pin / https) backing the hybrid `ContentLocator` storage tier. See `09_PROTOCOLS.md §3G.5`.
+
+**ReachabilityProfile** *(v1.1 draft)* — Advertised transports + reachability class (`reachability-profile/1`): `public` (directly dialable), `nat_private` (behind NAT — uses libp2p circuit-relay v2 + DCUtR hole-punching + bootstrap), or `intranet_only` (link-local, served by the mDNS plane). The resolver returns relay-reachable multiaddrs so a NAT-private node is dialable from off-network. Addresses connectivity, not liveness — an offline node is unreachable regardless. See `09_PROTOCOLS.md §3H.1`, ADR-0065.
+
+**Relay / NAT traversal** *(v1.1 draft)* — How a peer dials a node behind NAT without that node running a public server: a willing **circuit-relay v2** peer forwards the introduction and **DCUtR** upgrades it to a direct connection, bootstrapped via rendezvous peers. Relay peers are shared commons (or operator-self-hosted); they broker connectivity, never read content (still `AccessPolicy`-gated). See `09_PROTOCOLS.md §3H.1`.
+
+**Resolver** *(v1.1 draft)* — A NANDA-style verifiable index mapping a stable handle / DID to its current `DiscoverableRecord`, replica set, and relay-reachable multiaddrs (reads DHT `ProviderRecord`s, or the local mDNS cache on an intranet). Answers "exactly where, right now"; itself access-gated. See `09_PROTOCOLS.md §3G.2`, `§3H.1`.
 
 **PersonaConsultation** — operator-gated, read-only access to a RETIRED persona's frozen K-lines / lessons / skill_library / relationships, without reanimation. No envelopes minted; no mutations; consultation event signed and recorded in the consulted persona's lineage. Distinct from REANIMATE (which moves persona from ARCHIVED back to ACTIVE with fresh keys + SOUL re-sign per `§7.5`). Composes with RetiredStatePersistencePolicy: consultation is admissible only when `soul_state_storage_tier ∈ {warm, cold}` (archived personas refuse with `consultation_unavailable_archived`). See [`02_PERSONA.md §7.5.2`](02_PERSONA.md).
 
