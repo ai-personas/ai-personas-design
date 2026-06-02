@@ -1057,7 +1057,7 @@ A-P25  charter_hash + voice_hash on PersonaCard match SOUL frozen blocks;
 
 ## 15. Where to read next
 
-- Tasks and acceptance pathways: [`03_TASKS.md`](03_TASKS.md)
+- Tasks and acceptance pathways (emergent KindRegistry kinds per ADR-0066; the v1.0 set below is the STANDARDISED seed): [`03_TASKS.md`](03_TASKS.md) (§2a–§2b)
 - Project layer where personas collaborate: [`04_PROJECT.md`](04_PROJECT.md)
 - Environment layer where personas live: [`05_ENVIRONMENT.md`](05_ENVIRONMENT.md)
 - Domain layer (emergent + authored): [`06_DOMAIN.md`](06_DOMAIN.md)
@@ -1161,7 +1161,11 @@ exposed_skills:
   - id: hold_space
     description: Be present with the user without producing artefacts.
     tags: [relational, existential]
-acceptance_pathways:
+acceptance_pathways:           # STANDARDISED seed pathway kinds (ADR-0066,
+                               # 03_TASKS §2a); names resolve from the
+                               # acceptance_pathway_kinds registry, not a
+                               # closed enum. Personas MAY attempt emergent
+                               # pathways, trust-calibrated per 03_TASKS §2b.
   - verifier_accept
   - panel_accept
   - user_accept
@@ -1430,7 +1434,11 @@ class PersonaEnvelope:
                                             # Domain-emergent kinds added
                                             # via ProposedVerifierKind.
     verifier_snapshot_id: str | None        # pinned for cross-adapter parity
-    acceptance_pathway: str                  # one of the 8 v1.0 pathways
+    acceptance_pathway: str                  # KindRegistry-resolved pathway name
+                                            # (acceptance_pathway_kinds); v1.0 eight
+                                            # pathways seeded STANDARDISED, emergent
+                                            # per ADR-0066 / 03_TASKS §2a. Never a
+                                            # closed enum.
     # --- BEHAVIOUR ---
     invariants: list[Invariant]              # mode-aware role contract
     output_schema: type                      # typed candidate envelope
@@ -1523,7 +1531,9 @@ class PersonaCard:
                                               # never raw fitness number
     federation_visibility: Literal["private", "tenant", "federation", "public"]
     advertised_interests: list[str]
-    acceptance_pathways: list[str]            # which pathways persona accepts
+    acceptance_pathways: list[str]            # which pathways persona accepts;
+                                              # KindRegistry-resolved names (seed
+                                              # set STANDARDISED, ADR-0066), not enum
     accepts_inbound_from: str                 # VisibilityPolicy projection
     rate_limit: RateLimitSpec
     can_lead_cohorts: bool
@@ -4859,7 +4869,11 @@ exposed_skills:
   - id: refute_with_evidence
     description: Produce one counter-example for a stated claim given evidence.
     tags: [refutation, evidence]
-acceptance_pathways:
+acceptance_pathways:           # STANDARDISED seed pathway kinds (ADR-0066,
+                               # 03_TASKS §2a); names resolve from the
+                               # acceptance_pathway_kinds registry, not a
+                               # closed enum. Personas MAY attempt emergent
+                               # pathways, trust-calibrated per 03_TASKS §2b.
   - verifier_accept
   - panel_accept
   - user_accept

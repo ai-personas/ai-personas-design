@@ -336,7 +336,9 @@ A `TaskClass` and an `AcceptancePathway` are emergent KindRegistry kinds (per `0
 
 **Safety composition (unchanged floor).** Orchestration shapes are validated exactly as other shapes (§8): the kernel verifies INV-7 budget admission, signed lineage on every transition (J2/J9), and most-restrictive-wins floor clearance (J3) on every action. What is NOT pre-restricted is the *acceptance method*; instead, a verdict from an emergent/unvalidated orchestration shape is **trust-calibrated** (J4/J5) — it enters at EMERGENT trust and degrades honestly until validated, and the AnswerPackage records the producing shape and its promotion stage. Operator policy (floor source 4) MAY pin a minimum-trust or seed pathway for safety-critical task families.
 
-**Tests:** A-EO1–A-EO10 ([`11_ACCEPTANCE_TESTS.md §9o`](11_ACCEPTANCE_TESTS.md)).
+**Promotion ladder and policy profile.** An emergent acceptance shape accrues and loses trust on an asymmetric-EWMA curve and auto-promotes EMERGENT → RECOGNISED only against an independent acceptance-soundness reference; operators MAY select the `bounded_compositional` policy profile (compose only from STANDARDISED seed primitives) where they want a hard a-priori floor on acceptance methods, with `fully_open` the substrate default. The full ladder, thresholds, and profile definition are normative in [`03_TASKS.md §2b`](03_TASKS.md#2b-orchestration-kind-promotion--trust-decay-curve-evidence-threshold-and-the-bounded-compositional-policy-profile).
+
+**Tests:** A-EO1–A-EO13 ([`11_ACCEPTANCE_TESTS.md §9o`](11_ACCEPTANCE_TESTS.md)).
 
 ## 5. ProposedCoordinationShape
 

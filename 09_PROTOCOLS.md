@@ -549,7 +549,8 @@ Encoding per [`SPEC_CONVENTIONS.md §4`](SPEC_CONVENTIONS.md#4-schemas). Where a
 | `AcceptanceConfig` | `acceptance-config/1` | dataclass | [`03_TASKS.md §3`](03_TASKS.md) | Stable | Per-pathway routing config. |
 | `TaskClassEstimate` | `task-class-estimate/1` | dataclass | [`03_TASKS.md §4`](03_TASKS.md) | Stable | Classifier output over the resolved class-kind set. |
 | `TaskClass` | KindRegistry-resolved (`task_class_kinds`) | name | [`03_TASKS.md §2a`](03_TASKS.md) | Emergent (ADR-0066) | Emergent task-class kind; v1.0 ten classes seeded STANDARDISED. Resolved by name, never a closed `Literal[...]`. |
-| `AcceptancePathway` | KindRegistry-resolved (`acceptance_pathway_kinds`) | name | [`03_TASKS.md §2a`](03_TASKS.md) | Emergent (ADR-0066) | Emergent acceptance-pathway kind; v1.0 eight pathways seeded STANDARDISED. An orchestration coordination shape ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md)) composes a class→pathway binding from the meta-mechanisms. |
+| `AcceptancePathway` | KindRegistry-resolved (`acceptance_pathway_kinds`) | name | [`03_TASKS.md §2a`](03_TASKS.md) | Emergent (ADR-0066) | Emergent acceptance-pathway kind; v1.0 eight pathways seeded STANDARDISED. An orchestration coordination shape ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md)) composes a class→pathway binding from the meta-mechanisms. Carries `pathway_trust` and promotes/demotes per the [`§2b`](03_TASKS.md) ladder. |
+| `OrchestrationPolicyProfile` | `orchestration-policy-profile/1` | enum + binding | [`03_TASKS.md §2b.4`](03_TASKS.md) | Emergent (ADR-0066) | Operator policy (floor source 4) selecting `fully_open` (default) or `bounded_compositional` per env / task family; governs what orchestration may be proposed, never the floor (J3) or signing (J2/J9). |
 
 ### 7.3 Project workspace (env type)
 

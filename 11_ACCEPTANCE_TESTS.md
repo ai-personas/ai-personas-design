@@ -86,7 +86,7 @@ A-IC*   identity coherence invariant             (5 tests; 02_PERSONA §9.1)
 A-RE*   persona relationship edge                (7 tests; 02_PERSONA §11.4)
 A-ST*   skill transfer grant                     (6 tests; 02_PERSONA §11.5)
 A-CD*   cohort dynamics state                    (5 tests; 04_PROJECT §14.2)
-A-EO*   emergent orchestration                   (10 tests; 03_TASKS §2a, ADR-0066)
+A-EO*   emergent orchestration                   (13 tests; 03_TASKS §2a/§2b, ADR-0066)
 A-SQ*   scoped knowledge query                   (6 tests; 08_KNOWLEDGE §9.3)
 A-RF*   relationship federation sync             (5 tests; 09_PROTOCOLS §3E)
 
@@ -399,7 +399,7 @@ Each row carries: invariant ID, the canonical v1.0 doc section that defines it, 
 | J1 — Identity is kernel-owned | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J1 | A-K1, A-K3, A-P1, A-P3, A-INH-1 |
 | J2 — Lineage is append-only and signed | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J2 | A-K2, A-K4, A-v2.0, A-INH-2 |
 | J3 — Safety floor is universal | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J3 | A-S1–A-S10, A-K11, A-IT9 |
-| J4 — Acceptance is sound, signed, and trust-calibrated to its orchestration (ADR-0066) | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J4 | A-T1–A-T20, A-IT1–A-IT7, A-EO1–A-EO10 |
+| J4 — Acceptance is sound, signed, and trust-calibrated to its orchestration (ADR-0066) | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J4 | A-T1–A-T20, A-IT1–A-IT7, A-EO1–A-EO13 |
 | J5 — Capability open; competence varies | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J5 | A-P2, A-P14, A-C3, A-CR9 |
 | J6 — Relationships are first-class state | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J6 | A-R1–A-R10, A-RE1–A-RE7, A-RF1–A-RF5 |
 | J7 — Bodies are interchangeable in acceptance class | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J7 | A-P8, A-P34–A-P37, A-V23 |
@@ -3146,6 +3146,31 @@ A-EO9     A safety-critical proposed pathway/shape requires C2 operator co-sign
 A-EO10    Operator policy (floor source 4) pins a minimum-trust or specific seed
           pathway for a task family; a lower-trust emergent pathway is refused
           for that family while the pin holds.
+
+PROMOTION LADDER (03_TASKS §2b)
+
+A-EO11    An emergent acceptance pathway auto-promotes EMERGENT → RECOGNISED
+          only when the §2b.2 threshold holds: ≥ K=5 distinct accepted tasks
+          across ≥ M=2 principals/envs, soundness agreement ≥ 0.90 vs an
+          independent reference (shadow seed pathway or post-hoc ground truth)
+          with zero unreviewed false-accepts, zero floor/signing violations,
+          and proposer fitness > role median. An under-evidenced pathway (any
+          criterion unmet) stays EMERGENT; a safety-critical pathway does not
+          auto-promote and requires the C2 blocking signature.
+A-EO12    Verdict trust follows the asymmetric-EWMA curve (§2b.1): a
+          disconfirmation moves pathway_trust toward 0 faster than a
+          corroboration moves it toward 1 (α_down > α_up), and an unused
+          pathway decays toward the EMERGENT floor on the staleness half-life.
+          A RECOGNISED pathway demotes one stage on trust collapse OR on N=3
+          consecutive disconfirmations, emitting a signed
+          orchestration_kind_demoted event; already-accepted tasks are not
+          retroactively reopened but their AnswerPackage records the stage.
+A-EO13    Operator policy profile (floor source 4): under bounded_compositional,
+          a proposed NEW kernel-level acceptance primitive is refused with a
+          signed orchestration_primitive_refused_by_policy advisory while a
+          NOVEL COMPOSITION of STANDARDISED seed primitives is admitted (and
+          trust-calibrated); under fully_open (default) both are admitted. The
+          profile never relaxes the floor (J3) or signing (J2/J9).
 ```
 
 ## 9e. Risks & known limitations
