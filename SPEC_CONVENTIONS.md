@@ -175,6 +175,7 @@ Pre-existing letter-suffix sections in the v1.0 corpus are conformant under one 
 | `## 16a.` MeasurementFact + UncertaintyEnvelope, `## 18a.` Open questions | A (inserted section) | `08_KNOWLEDGE.md` |
 | `## 13a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering the §13 acceptance/test sections) | `02_PERSONA.md` |
 | `## 9a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering §9 acceptance tests) | `03_TASKS.md` |
+| `## 2a.` Orchestration is emergent, `## 2b.` Orchestration-kind promotion | A (v1.1 ADR-0066 inserted sections, without renumbering §3+) | `03_TASKS.md` |
 | `## 16a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering §16 acceptance tests) | `07_ARTIFACTS.md` |
 | `## 3A-E.` federation pillars, `## 10a.` Open questions | B (federation pillars under §3) + A (OQ bookend) | `09_PROTOCOLS.md` |
 

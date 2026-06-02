@@ -639,7 +639,9 @@ Proposed*Kind schemas share the same lifecycle as ProposedSafetyExtension / Prop
 
 Accepted Proposed*Kind entries land in a **KindRegistry**. The kernel consults the registry at every site that previously held a closed Literal[...]: artifact construction (`07_ARTIFACTS §3`), ingestion (`§6.1`), bridge minting (`§5.5`), verifier cascade composition (`01_KERNEL §13`), contribution crediting (`04_PROJECT §5`), env-proven-fact emission (`05_ENVIRONMENT §12`).
 
-*The KindRegistry holds accepted kinds organised by family (media, source, verifier, capability, contribution, fact, bundle, item, outcome, quality tag, env rule). Each entry (e.g. MediaKindEntry) carries the proposal payload plus stage, trust score, promotion history, and usage tracking. Resolution first checks the per-domain registry, then falls back to the MetaRegistry; an unknown kind triggers Signal G and a probe extension. Promotion to MetaRegistry requires STANDARDISED stage, cross_domain_promotable flag, and citation in K=5 projects across M=2 distinct domains. Drift detection may demote MetaRegistry entries back to per-domain RECOGNISED.*
+*The KindRegistry holds accepted kinds organised by family (media, source, verifier, capability, contribution, fact, bundle, item, outcome, quality tag, env rule, task class, acceptance pathway). Each entry (e.g. MediaKindEntry) carries the proposal payload plus stage, trust score, promotion history, and usage tracking. Resolution first checks the per-domain registry, then falls back to the MetaRegistry; an unknown kind triggers Signal G and a probe extension. Promotion to MetaRegistry requires STANDARDISED stage, cross_domain_promotable flag, and citation in K=5 projects across M=2 distinct domains. Drift detection may demote MetaRegistry entries back to per-domain RECOGNISED.*
+
+**Orchestration kind families (ADR-0066).** The `task_class_kinds` and `acceptance_pathway_kinds` families hold the emergent orchestration kinds defined in [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes): the v1.0 ten task classes and eight acceptance pathways ship as STANDARDISED **seed** entries (the [`09_PROTOCOLS.md §7.2`](09_PROTOCOLS.md#72-acceptance--task) registry rows resolve against exactly these families). An `acceptance_pathway_kinds` entry additionally carries `pathway_trust` and promotes/demotes on the acceptance-soundness ladder of [`03_TASKS.md §2b`](03_TASKS.md#2b-orchestration-kind-promotion--trust-decay-curve-evidence-threshold-and-the-bounded-compositional-policy-profile) (asymmetric-EWMA trust, independent-reference agreement ≥ 0.90 for EMERGENT → RECOGNISED, C2 blocking for safety-critical) — the orchestration analogue of the domain promotion ladder. Operators MAY constrain proposals into these families via the `OrchestrationPolicyProfile` (`bounded_compositional` vs the `fully_open` default, [`03_TASKS.md §2b.4`](03_TASKS.md)).
 
 **Technical detail:** See [A.48](#appendix-a48).
 
@@ -3588,6 +3590,8 @@ class KindRegistry:
     item_kinds:         dict[str, ItemKindEntry]
     outcome_kinds:      dict[str, OutcomeKindEntry]
     quality_tag_kinds:  dict[str, QualityKindEntry]
+    task_class_kinds:        dict[str, TaskClassKindEntry]        # ADR-0066
+    acceptance_pathway_kinds: dict[str, AcceptancePathwayKindEntry]  # ADR-0066
 
     last_updated_at: datetime
     signed_by: bytes
@@ -3622,6 +3626,17 @@ class MediaKindEntry:
 # usage tracking. Detailed schemas elided for brevity; each mirrors
 # MediaKindEntry's fields plus its kind-class-specific resolved fields
 # from the matching ProposedXKind.
+#
+# TaskClassKindEntry and AcceptancePathwayKindEntry (ADR-0066) mirror the
+# same shape. AcceptancePathwayKindEntry additionally carries:
+#   pathway_trust: float          # asymmetric-EWMA verdict trust (03_TASKS §2b.1)
+#   safety_critical: bool         # C2 blocking gate at EMERGENT->RECOGNISED
+#   reference_pathway_id: str | None  # seed pathway used for shadow agreement
+# Its stage promotes/demotes on the §2b acceptance-soundness ladder, not on
+# usage volume alone: EMERGENT->RECOGNISED requires independent-reference
+# agreement >= 0.90 with zero unreviewed false-accepts (03_TASKS §2b.2),
+# and demotes on trust collapse or N=3 consecutive disconfirmations
+# (03_TASKS §2b.3).
 ```
 
 ```text
