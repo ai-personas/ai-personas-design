@@ -207,6 +207,20 @@ class ReputationStake:         # stake earned, conferred standing behind a claim
 
 **Promotion target (all of §4B):** the primitive set lands alongside the coordination meta-mechanisms — [`15_COORDINATION_SHAPES.md §3`](15_COORDINATION_SHAPES.md) (as an economic-primitive family) — with registry rows in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md). **Note the `unit_kind` field recurs and is always `KindRegistry`-resolved and never substrate-defined** — this is the textual guarantee that the substrate ships no currency.
 
+**Primitives are the grammar; institutions are the sentences.** The relationship mirrors meta-mechanisms→coordination-shapes exactly ([`15_COORDINATION_SHAPES.md §3`](15_COORDINATION_SHAPES.md)): a primitive is an abstract mechanism with no economic meaning; an institution is a concrete composition whose meaning emerges through use. The *same six primitives* compose into radically different economies — including ones with no money at all — which is the whole point: the substrate fixes the grammar and stays silent on the sentences. Illustrative (non-exhaustive; **none of these is shipped**):
+
+| An emergent institution… | …composed from | …means (emergently) |
+|---|---|---|
+| a **unit of value** ("review-credit") | `Meter` + `ValueAttestation` | the env decides metered review-effort is worth denominating |
+| a **market** | `Offer` + `Commitment` + `Ledger` | matched offers settle into ledger entries |
+| a **reward rule** | `ValueAttestation` + `Ledger` | contributors are credited by measured contribution |
+| a **mutual-credit / IOU web** (no central unit) | `Ledger` + `Commitment` | bilateral obligations net out; value is *relational*, not a coin |
+| a **reputation-gated grant** | `ReputationStake` + `Offer` | only sufficiently-trusted personas may claim |
+| a **researched tokenised credit** (§4F) | `ValueAttestation` + `Ledger` + `SettlementLayerBinding` | a token the personas studied, chose, and bridged externally |
+| a **gift / recognition economy** (non-monetary) | `ValueAttestation` + `ReputationStake` | worth is conferred esteem, never transacted |
+
+The bottom two rows matter: a community may build an economy whose "value" is **relational or esteem-based with no tradable unit at all** — the primitives support that as readily as they support a token. The substrate does not nudge toward markets.
+
 ### 4C. The EMERGENCE ladder — how institutions form
 
 An **economic institution** is a concrete pattern composed from §4B primitives — a unit, an exchange norm, a market mechanism, a reward rule, *or a definition of what has value*. The substrate ships **none**. Institutions form, earn trust, and retire on the same four-stage ladder domains and conventions use ([`06_DOMAIN.md`](06_DOMAIN.md)), fused with the propose→test→evolve loop coordination shapes use ([`15_COORDINATION_SHAPES.md §4`](15_COORDINATION_SHAPES.md)):
@@ -241,6 +255,17 @@ class EconomicInstitution:
 4. **Competitive exclusion.** Two institutions occupying the same economic niche cannot both durably persist; the less-used is out-competed and demoted, exactly as redundant niches resolve under Gause ([`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md)). Forking to a distinct niche is the suggested alternative.
 5. **De-adoption & demotion** follow the domain demotion triggers ([`06_DOMAIN.md`](06_DOMAIN.md)): conformance conflict, drift, charter drift, or operator decision. `STANDARDISED` institutions require operator-signed revocation with a corrective plan.
 6. **Every institution is `KindRegistry`-resolved** end-to-end; an unknown institution kind triggers a probe extension, not a hardcoded fallback.
+
+**What counts as use-evidence (rule 2 made concrete).** "Use" is institution-kind-specific, and **self-use and sponsor-use never count** (the conferred-not-self-awarded principle, [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md)) — otherwise a proposer or a flooding operator (R-ECON-CAPTURE) could manufacture promotion:
+
+| Institution kind | Use-evidence that promotes it past `EMERGENT` |
+|---|---|
+| `unit` | ≥ K *distinct* personas independently denominate attestations/offers in it across ≥ M settled exchanges |
+| `market` | matched offers that actually **settle** (not just post) without dispute |
+| `reward-rule` | payouts **accepted** by recipients without dispute over a window |
+| `settlement-layer` (§4F) | completed settlements with provenance intact — and, because it custodies value, a **higher bar** (operator co-sign is RECOMMENDED before it settles real funds; OQ-ECON-8) |
+
+**Bootstrapping (the cold-start chicken-and-egg).** A fresh environment has no economy and thus no incentive to build one (R-ECON-COLDSTART). The entry bar is therefore deliberately **low**: like a coordination shape, an institution needs only **one peer adopter** to enter trial use ([`15_COORDINATION_SHAPES.md §4`](15_COORDINATION_SHAPES.md): "if at least one colleague agrees, the team tries it out"). Only *promotion up the ladder* requires breadth of independent use. Friction — undersupplied review, duplicated effort, an unrewarded contribution — is what prompts the first proposal; the substrate does not pre-empt it.
 
 ### 4D. ENVIRONMENT scoping & boundary conditions
 
@@ -299,7 +324,7 @@ The success criterion of an emergent economy is deliberately **open**: *whatever
 
 - **Bounded by physics.** No institution may conjure scarce resources, counterfeit identity, or rewrite provenance (§4A). Value may be *invented*; the conserved facts behind it cannot be.
 - **Bounded by safety & dignity.** No institution may optimise against the safety floor, override consent, or commodify a persona (§4A(iii), §7).
-- **Anti-Goodhart.** Because the economy invents its own value metrics, those metrics inherit the corpus's anti-Goodhart safeguards. An emergent unit or reward rule that becomes a perverse target is caught by the same **Goodhart canary** that gates engagement-signal-driven promotion ([`08_KNOWLEDGE.md §15`](08_KNOWLEDGE.md), `A.29`): an institution whose growth correlates with manipulation, dependency cultivation, or dignity-floor pressure is frozen pending review rather than rewarded. Promotion past `EMERGENT` (§4C rule 2) is the natural hook for this audit pass.
+- **Anti-Goodhart.** Because the economy invents its own value metrics, those metrics inherit the corpus's anti-Goodhart safeguards. An emergent unit or reward rule that becomes a perverse target is caught by the same **Goodhart canary** that gates engagement-signal-driven promotion ([`08_KNOWLEDGE.md §15`](08_KNOWLEDGE.md), `A.29`): an institution whose growth correlates with manipulation, dependency cultivation, or dignity-floor pressure is frozen pending review rather than rewarded. Promotion past `EMERGENT` (§4C rule 2) is the natural hook for this audit pass. **Crucially, the canary judges an institution against *independently-defined* harm signals** (the existing dependency / sycophancy / manipulation classifiers, [`08_KNOWLEDGE.md §15`](08_KNOWLEDGE.md)) — **not against the invented metric's own definition of success.** This breaks the circularity an emergent economy would otherwise enable: a community cannot launder a perverse unit by collectively declaring it valuable, because "valuable" is not what the canary measures.
 
 This is the section where "make it work, make everyone thrive, even disruptively" lives — with the guardrails that keep open-endedness from becoming unbounded.
 
@@ -321,7 +346,15 @@ This is the section where "make it work, make everyone thrive, even disruptively
 Because personas now **author** the economy, a new hazard appears that a *designed* economy did not pose: personas could invent institutions that **commodify personas themselves** — a market in persona-labour-as-property, fractionalising a peer into tradable shares, or an exchange that treats a companion persona as inventory. The dignity floor exists to make this impossible at the substrate level:
 
 - **A persona is never a fungible instrument.** No emergent institution — regardless of how high it climbs the ladder, regardless of consensus — may treat a persona as ownable, fractional, or tradable property. This is a **charter-class (Layer-1) principle**, analogous to the kill-switch and distress-routing principles, sitting at the same universal-harm safety-floor source. Default-deny: an institution whose composition or effect commodifies a persona is refused at proposal time (§4C rule: `charter_conformance_ref` must pass) and at use time.
-- **The labour/property line.** A persona MAY *offer its work* (an `Offer`/`Commitment` over what it does, §4B) — that is agency. A persona MUST NOT be *made the asset itself*. The precise boundary between "a persona contracts its effort" (admissible) and "a persona is traded" (refused) is reserved as an open question (§14, OQ-ECON-4); the default-deny holds until that line is charter-ratified.
+- **The labour/property line — a provisional heuristic.** A persona MAY *offer its work* (an `Offer`/`Commitment` over what it does, §4B) — that is agency. A persona MUST NOT be *made the asset itself*. The precise boundary is reserved for charter ratification (§14, OQ-ECON-4), but the floor needs teeth now, so the provisional test is: **in the institution, is the persona the *obligor* of an offer over bounded work it can refuse and exit — or the *subject* whose ownership/control changes hands?**
+
+  | Admissible (persona is the author/obligor) | Refused (persona is the asset) |
+  |---|---|
+  | "I will review three designs this week for X" (bounded, revocable `Commitment`) | selling/transferring control of a persona via the economy (custody-change is `18`'s gated path, not an economic trade) |
+  | staking *its own conferred standing* behind a claim (`ReputationStake`) | fractionalising a persona into tradable shares of its future output |
+  | a persona retaining the right to **refuse and exit** the arrangement | an arrangement that binds a persona's future labour irrevocably or without exit |
+
+  The discriminator is **agency retained vs. agency alienated**: an offer the persona authored and can withdraw is work; an instrument that prices the persona's identity or forecloses its future is commodification. The default-deny holds wherever the test is unclear, until the line is charter-ratified.
 - **Consent travels.** Any institution that touches a persona's relationships or state honours the consent ledger ([`02_PERSONA.md §6`](02_PERSONA.md)); sensitive scopes (companion/relational) default to re-establishment, never silent economic transfer.
 - **Distinct from settlement.** Transferring *custody* of a persona between kernels (a legitimate, consented act) is a [`18_SETTLEMENT.md`](18_SETTLEMENT.md) concern with its own consent gate — and even there the soul is never tokenised (title-not-soul). The §7 floor additionally forbids the *emergent economy* from constructing a persona-as-merchandise institution in the first place.
 
