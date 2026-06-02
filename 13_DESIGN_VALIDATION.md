@@ -1205,6 +1205,69 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 
 ---
 
+### SCENARIO 16 — Emergent, pluralistic economy for a built-and-deployed zero-waste recycling device (humans recruited)
+
+**Scenario premise.** First end-to-end walk of the **v2.0 emergent-economy drafts** ([`17_ECONOMY.md`](17_ECONOMY.md) + reference settlement [`18_SETTLEMENT.md`](18_SETTLEMENT.md)) against a maximally demanding case: AI personas **invent, build, and physically deploy** a zero-waste recycling device (mixed waste in → separated materials out, ~zero residual), **invent the economic model(s) that fund and run it**, **recruit humans wherever the work needs them**, and make the result thrive for humans, personas, and the broader ecosystem. It is also a deliberate stress-test of `17`'s harder claims — economic *pluralism*, *emergent selection*, *ERC-like interoperability*, and *multi-scope collaboration* — surfacing the substrate-shape gaps those claims imply and pinning each to a `17`/`18` section. *(This entry validates v2.0 drafts, not the v1.0 normative set; it is recorded here because the walk is the drafts' own design-validation artefact.)*
+
+**User request** (the in-scenario task). "Invent, build, and deploy a device that turns mixed waste into useful materials with zero residual — and make it thrive for everyone, even if the economics has to be something new."
+
+**Task class.** MIXED (long-arc design + physical build + ongoing operation) → produces **both** a digital `ArtifactBundle` (device design, control software, measurement protocols) and a `PhysicalAsset` (deployed device + pilot site).
+**Acceptance pathway.** PROJECT_PROGRESS_ACCEPT (milestones) composed with VERIFIER_ACCEPT (attested throughput / residual `MeasurementFact`s, `08_KNOWLEDGE §16a`) — the same attestation simultaneously gates the build *and* backs the emergent unit.
+
+**World shape.**
+- Principal: operator-distinct; charters the work with a `MissionCharter` ([`02_PERSONA §11.3`](02_PERSONA.md)) — "invent/build/deploy a zero-waste device; make it thrive" — with drift bounds + re-attestation cadence (the `17 §4D` economic boundary condition + `17 §6` bounded-autonomy seed).
+- Persona(s): a small founder cohort; specialists **genesis-spawned under pressure** when recruitment is exhausted ([`16_POPULATION_DYNAMICS`](16_POPULATION_DYNAMICS.md), recruitment-exhausted-first, operator-cosigned, `persona_genesis` `ReplicationBound`).
+- Environment: a `project_workspace` env chartered **as a child env under a parent org env** (`EnvironmentComposition`, [`15_COORDINATION_SHAPES §4.8`](15_COORDINATION_SHAPES.md), [`05_ENVIRONMENT §12c`](05_ENVIRONMENT.md)); **sibling peer envs** (logistics, regulatory-liaison, capital) collaborate economically across env boundaries via `CrossEnvCoordinationRequest` ([`15_COORDINATION_SHAPES §4.7`](15_COORDINATION_SHAPES.md)).
+- Project: yes, multi-session, produces **both** digital + physical.
+- External participants: humans as `ExternalAgent`s ([`04_PROJECT §26a.1`](04_PROJECT.md)) — fabricators, site operators, regulators, feedstock suppliers, output buyers, capital providers — who also **propose economic ideas** (`EconomicProposal`, [`17_ECONOMY §4E`](17_ECONOMY.md)) and are **rewarded** via `ExternalBudget` / `PaymentBridge` Class-E + `18` rails.
+
+**Domain shape.** Emergent `DomainContext`s bootstrapped via domain probe ([`06_DOMAIN`](06_DOMAIN.md), [`08_KNOWLEDGE`](08_KNOWLEDGE.md)): material separation, sensing/robotics, regulatory compliance, mechanism design / cryptoeconomics ([`17_ECONOMY §4F`](17_ECONOMY.md)). Hazard axes: industrial-process `physical_harm_class` → operator gating. `expected_project_count` high (multi-device fleet later). Cross-domain transfer: separation + measurement recipes reused across pilot sites.
+
+**Phase walk.**
+
+| Phase | Primitives carrying load | Events fired |
+|---|---|---|
+| Seed-charter | principal signs `MissionCharter` (drift-bounded) → child env formed under parent org env; parent dignity/physics floors **cascade** (`17 §4D`) | `mission_charter_attested`, `child_env_formed`, `economy_boundary_seeded` |
+| Domain bootstrap | probes open separation / sensing / regulatory / mechanism-design `DomainContext`s; tools human-bridged | `domain_unknown_detected`, `domain_probe_opened`, `bridge_asset_created` |
+| Economic models proposed (plural) | personas coin **different** `EconomicConstruct`s — a *reconstitution-unit* (mintable only against an attested zero-residual mass-balance, `17 §4A(i)` + `08 §16a`), a *provenance-market* (signed lineage, no coin), a *contributor-dividend* — each entering at `EMERGENT` | `economic_construct_proposed` ×N, `kind_registered` |
+| Interop standards emerge | to interlink the plural models without a global unit, personas promote `interop-standard` constructs (issue-against-attested-fact / provenance-record / settle-to-external interfaces) — the ERC-analogue (`17 §4D`) | `interop_standard_proposed`, `economic_construct_promoted` |
+| Human recruitment & ideas | humans admit as `ExternalAgent`s; a supplier's `EconomicProposal` (bonding to fund device #1) enters at `EMERGENT` (`17 §4E`) and must earn use | `external_agent_admitted`, `economic_proposal_submitted` |
+| Physical build | device = `PhysicalAsset` (`04 §26a.2`); throughput/energy/residual recorded as signed `MeasurementFact`s (`08 §16a`) that **both** validate the build (VERIFIER_ACCEPT) **and** gate unit issuance | `physical_asset_state_advanced`, `measurement_attested`, `as_built_reconciliation` |
+| Pilot deploy & sale | pilot processes a real waste stream; outputs sold to a human buyer; payout settles via `ExternalBudget` / `PaymentBridge` Class-E + a settle-to-external interop standard → `18` rails (`17 §4F`) | `payment_proposal_signed`, `settlement_layer_bound`, `value_settled` |
+| Cross-env collaboration | logistics + regulatory + capital sibling envs interoperate economically via `CrossEnvCoordinationRequest` + shared interop standards (bilateral consent) | `cross_env_coordination_requested`, `cross_env_consent_granted` |
+| Compounding | the double-positive spread funds device #2; selection among models emerges (trial-and-error + peer/prestige + collaboration), some models fade, others coexist | `economic_construct_demoted` / `…_promoted`, `goal_progress_accepted` |
+
+**Substrate-shape gaps surfaced** (against the v2.0 drafts, pre-refinement).
+1. **G1 — physics floor too narrow.** `17 §4A(i)` listed only persona-internal resource facts; a unit "mintable only against verified de-wasting" needs **attested external physical measurement** as a non-counterfeitable referent, which the floor did not name.
+2. **G2 — one-economy-per-environment.** `17 §4D` read as "each environment grows its **own** (single) economy," but the case requires **several economic models coexisting in one environment**, even per-persona.
+3. **G3 — mandated single-winner selection.** `17 §4C` rule 4 mandated competitive exclusion → one winner; the case wants **coexistence**, and the *method of deciding* (converge / coexist / per-situation) to be **emergent**, not substrate-dictated.
+4. **G4 — no cross-model interoperability concept.** Plural models must interlink without a global unit; the substrate had only an "exchange construct" hint, no first-class **emergent interface-standard** (ERC-analogue) notion.
+5. **G5 — reward/settlement seam for external humans underspecified.** Paying recruited humans in an emergent model and settling to fiat spanned `17 ↔ 04 §26a ↔ 18` with no stated seam.
+6. **G6 — scenario numbering drift.** `17 §9/§11` and `18 §9/§11` cited SCENARIO 18/19; the next-free walked scenario is 16 / 17.
+7. **G7 — collaboration scope unstated.** The economy must collaborate **intra-env, hierarchically (parent↔child composed/nested), and inter-env (peer/outside)**, but `17` did not say economics rides `15`'s three coordination scopes, nor that parent economic safety floors cascade.
+
+**Resolution.** All resolved in the v2.0 drafts (additive, non-prescriptive — each makes `17` *more* open):
+- G1 → [`17 §4A(i)`](17_ECONOMY.md) attested-`MeasurementFact` row + load-bearing note ([`08_KNOWLEDGE §16a`](08_KNOWLEDGE.md)); test `A-EC14`.
+- G2 → [`17 §4D`](17_ECONOMY.md) pluralism ("an environment hosts as many models as its members grow; coexistence is the default"); test `A-EC12`; ADR `D-EM8`.
+- G3 → [`17 §4C`](17_ECONOMY.md) rule 4 reframed (convergence is one outcome; selection method emergent); `D-EM8`.
+- G4 → [`17 §4D`](17_ECONOMY.md) emergent `interop-standard` `EconomicConstruct` (ERC-analogue); [`18 §4E`](18_SETTLEMENT.md) note that its ERC rails are one reference instantiation; test `A-EC12`.
+- G5 → [`17 §4F`](17_ECONOMY.md) "rewarding external participants reuses existing project rails" ([`04 §26a.1`/`§26a.4`](04_PROJECT.md) `ExternalBudget` / `PaymentBridge` Class-E); OQ-ECON-7.
+- G6 → [`17 §9`/`§11`](17_ECONOMY.md) → SCENARIO 16; [`18 §9`/`§11`](18_SETTLEMENT.md) → SCENARIO 17.
+- G7 → [`17 §4D`](17_ECONOMY.md) three-scope collaboration (intra-env / hierarchical via `EnvironmentComposition` with cascading safety floors / inter-env via `CrossEnvCoordinationRequest` bilateral consent), reusing [`15 §4.7`/`§4.8`](15_COORDINATION_SHAPES.md); test `A-EC13`; `D-EM8`.
+
+**Not-gaps (persona evolves these).** The *specific* models (reconstitution-unit, provenance-market, dividend), the unit's name and issuance rule, the interop interfaces, the separation recipe, and the sensor-class verifiers are **persona/domain work**, `KindRegistry`-resolved ([`06_DOMAIN §7.5`/`§7.6`](06_DOMAIN.md)); the substrate supplied none of this vocabulary (invariant V). "Zero-waste device," "mass," "residual," "feedstock" are scenario *content*, not substrate categories. Which fiat/chain rail settles payout, and which relay/pin commons host artefacts, are operator policy.
+
+**Status.** Validated against the v2.0 drafts (`17`/`18`) post-refinement. The invented, *pluralistic* economy works within guardrails: bounded autonomy (MissionCharter seed); physics floor (units gated by attested mass-balance, uncounterfeitable); anti-Goodhart (the perverse "manufacture waste just to recycle it" target is caught — net waste must *fall*, judged against *independent* harm signals `17 §5` / `08 §15`, and provenance-weighting devalues gamed feedstock); dignity floor binds **all** plural models; coexistence + emergent interop hold; settlement is opt-in and ladder-earned; the double-positive spread self-funds deployment and rewards humans + personas (thrive met).
+
+**Honest residuals.**
+- Multilateral / cross-env interop-rate stability across a peer + parent-child mesh is unproven (OQ-ECON-3, OQ-ECON-10; R-ECON-INTEROP).
+- A persona-authored settle-to-external standard bridging custody across env boundaries needs a settled safety-review bar (operator cosign?) before moving real value (OQ-ECON-8; cf. `18` OQ-SETTLE-4 lease cascade).
+- "Other conscious beings" as a recognised beneficiary class beyond humans/personas is intent, not enforceable (OQ-ECON-9).
+- Tax / securities treatment of a physically-gated unit and of cross-env payouts is operator/jurisdiction territory (`17 §13`), not substrate.
+- This validates **drafts**: none of `17`/`18` binds an implementer until promoted (`17 §11`).
+
+---
+
 ## Scenario template (copy + fill)
 
 ```text
@@ -1300,6 +1363,7 @@ A scenario should be added to the catalog as it is walked, with the same eight-s
   - SCENARIO 13 fixes: `16_POPULATION_DYNAMICS.md` (whole doc — Persona Genesis + demographic regulation; schemas `population-pressure-signal/1`, `niche-descriptor/1`, `genesis-proposal/1`, `genesis-provenance/1`, `mentorship-edge/1`, `population-policy/1`), `01_KERNEL §2.7` (`persona_genesis` replication_kind), `02_PERSONA §3` (`may_author_seeds`) + `§7` (`LIFECYCLE_GENESIS`) + `§7.4` (fork-vs-genesis) + `§12` (persona-authored seeds), `04_PROJECT §14.1` (genesis forced-choice option), `05_ENVIRONMENT §12c` (recruitment-gap fallback), `14_DECISIONS` (ADR-0048, ADR-0049); `11_ACCEPTANCE_TESTS.md` (A-GEN* family, 17 tests).
   - SCENARIO 14 fixes: `05_ENVIRONMENT §2.2b` (`EnvironmentRule`, `env-rule/1`) + `§2.2a` (rule cascade) + `§12c`/`§16.2` (authoring) + `§13`/`A.43` (env_rule_* + artifact-share events), `01_KERNEL §2`/`A.2`/`A.3`/`§13.7` (source-8 generalization), `06_DOMAIN §7.6.3` (`env_rule_kinds`) + `§6.3` (tier reuse note), `07_ARTIFACTS §4` (`owning_env_id`/`sharing_policy_ref`) + `§4a` (`ArtifactSharingPolicy`/`AccessGrant`, `artifact-share/1`/`access-grant/1`) + `§5.2`/`§14`/`§10` (enforcement + IPLD/OCI), `09_PROTOCOLS §7.4`/`§7.6` (registry) + `§3`/`§3F`/`§8` (distribution/discovery alignment), `00_VISION` (J3 clarification + §11 R-v1.0-13/14), `14_DECISIONS` (ADR-0052..0056), `12_GLOSSARY` (EnvironmentRule, ArtifactSharingPolicy, AccessGrant); `11_ACCEPTANCE_TESTS.md` (A-ER* 9 tests, A-AB21-27).
   - Backlog #18 primitives: `04_PROJECT §26a.10` (`BridgeReductionPlan` + `BridgeReductionEntry`), `06_DOMAIN §5.7` (`AttestationEquivalencePolicy` + `AgreementHistory`); `11_ACCEPTANCE_TESTS.md §9l` (A-BRP* bridge reduction plan, A-AEP* attestation equivalence policy).
+  - SCENARIO 16 (validates v2.0 drafts) refinements: `17_ECONOMY §4A(i)` (attested-`MeasurementFact` physics referent), `§4C` rule 4 (emergent selection, coexistence first-class), `§4D` (economic pluralism + emergent `interop-standard` ERC-analogue + three-scope collaboration over `15 §4.7`/`§4.8`), `§4F` (external-participant reward seam via `04 §26a` + `18`), ADR `D-EM8`, tests `A-EC12`/`A-EC13`/`A-EC14`, `R-ECON-INTEROP`, `OQ-ECON-10`; `18_SETTLEMENT §4E` (literal-ERC rails are one reference instantiation of `17 §4D`'s settle-to-external interop standard) + SCENARIO-numbering fixes (`17`→16, `18`→17).
 - Glossary entries for the v1.0.14 primitives: `12_GLOSSARY.md` (AttestationEquivalencePolicy, BridgeReductionEntry, BridgeReductionPlan).
 - Glossary entries for the v1.0.13 primitives: `12_GLOSSARY.md` (CorpusDriftMetric, CrossEnvProactiveOffer, GuestPresence, ReplicatedAttestationFrontierComposition, SupersessionCascade, Wake Path 6).
 - Glossary entries for the v1.0.12 primitives: `12_GLOSSARY.md` (AggregateEvent, AssetGroupEnvelope, BatchStateAdvancement, EventAggregationPolicy, StagedRolloutEnvelope).

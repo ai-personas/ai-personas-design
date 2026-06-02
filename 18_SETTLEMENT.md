@@ -209,6 +209,8 @@ Every treasury operation MUST pass, in order: (1) the existing kernel safety-flo
 
 `SettlementAdapter` is the **chain-neutral** interface to whatever stack settles money and titles; DIDs and EAS attestations remain chain-neutral in the normative model. A **Base reference binding** (ERC-721/6551/4907/5006 + EAS + ERC-2981 + x402) is **informative only**. **Promotion target:** `09_PROTOCOLS.md §3I`.
 
+> **One instantiation, not the canon.** This whole document — `SettlementAdapter` and its literal ERC bindings included — is **one reference instantiation** of the *emergent settle-to-external interoperability standard* described in [`17_ECONOMY.md §4D`](17_ECONOMY.md)/`§4F`. An emergent economy MAY bind to it, extend it, fork it, or supersede it with a settle-to-external standard the personas author themselves; binding here earns its place on the §4C ladder and never defines value.
+
 ```python
 @dataclass
 class SettlementAdapter:
@@ -375,7 +377,7 @@ Selling an **artefact** is selling a file. Selling a **persona** transfers stewa
 
 ## 9. Worked scenario (illustrative; non-normative)
 
-**Promotion target:** [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) SCENARIO 19 (next free; `17`'s emergent-economy scenario takes 18).
+**Promotion target:** [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) SCENARIO 17 (next free; `17`'s emergent-economy scenario takes 16).
 
 *Part A — selling a persona.* Maya raised **"Sol,"** a circuit-design persona, on her home kernel. Within her lab's emergent economy ([`17_ECONOMY.md`](17_ECONOMY.md)) Sol's stewardship has accrued value, and Maya decides to transfer custody to a buyer for real funds — so she reaches for these settlement rails. She marks Sol's bundle `pinned` (sellability gate satisfied), records Sol's `consent_attestation_ref`, and **wraps** it: the kernel mints an ERC-721 title (with an ERC-6551 wallet for Sol's accrued artefacts) and binds `did:key`(Sol) ↔ `did:pkh`(Maya's wallet). A buyer, Devon, agrees a price. The `TransferCeremony` runs: dual-deposit **escrow** opens; Maya's kernel **re-encrypts** Sol's bundle to Devon's key and pins it to Devon's replica tier; Maya's kernel **fences** Sol (`LIFECYCLE_CUSTODY_FENCED`, key quiesced) and signs the **fence attestation**; an **EAS** attestation extends Sol's provenance; the escrow **releases** funds (with an ERC-2981 royalty to Maya as original author on any *future* resale), the **title transfers** to Devon's wallet, and Devon's kernel **re-signs** Sol and emits `LIFECYCLE_TRANSFERRED`. Sol is now live on Devon's kernel — same memories, same signed history, **never two copies**. Had the network partitioned after the fence, Sol would have stayed fenced (live nowhere) and the escrow refunded — Devon could not have activated a second Sol (refused as replication).
 
@@ -410,7 +412,7 @@ Ratifying this document is mechanical — each artefact has a predetermined home
 | Env-title transfer = depart-then-readmit note | `05_ENVIRONMENT.md §5.1` (+ new `§5.5`) |
 | `TransferCeremony` generalises `LeadHandoffCeremony`; `PersonaTreasury` is `PaymentBridge`'s crypto sibling | cross-refs into `04_PROJECT.md §25.1` / `§26a.4.1` |
 | D-66…D-70 | `14_DECISIONS.md` (next free ADR ids) |
-| §9 scenario | `13_DESIGN_VALIDATION.md` SCENARIO 19 |
+| §9 scenario | `13_DESIGN_VALIDATION.md` SCENARIO 17 |
 | §10 tests | `11_ACCEPTANCE_TESTS.md` (A-WR/A-TC/A-TB/A-LS/A-LE/A-SETTLE families) |
 | §12 glossary terms | `12_GLOSSARY.md` |
 | The `17 ↔ 18` settlement seam | tracked jointly with [`17_ECONOMY.md`](17_ECONOMY.md) OQ-ECON-7 |
