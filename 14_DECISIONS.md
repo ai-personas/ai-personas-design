@@ -1428,18 +1428,20 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0062 — Replicated-host / BFT standby promotion to soften the single-host bottleneck
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted under ADR-0067).
 **Date:** 2026-06-01.
-**Origin:** v1.1 (decentralisation / availability of joined environments).
-**Related:** [`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md#3c2-single-host-kernel-rule), [`05_ENVIRONMENT.md §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification), ADR-0064.
+**Origin:** Decentralisation / availability of joined environments in the global object space.
+**Related:** [`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md#3c2-single-host-kernel-rule), [`05_ENVIRONMENT.md §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification), ADR-0064, ADR-0067.
 
 **Context.** Joined environments have exactly one host kernel; host loss ⇒ `STALLED`. This is the design's weakest decentralisation property.
 
-**Decision.** Add an optional `standby_replica_set` holding a warm signed Blackboard shadow, with **BFT quorum sign-off** (OpenCLAW-P2P pattern, composing with `MultiPrincipalAttestationQuorum`) promoting a standby on host loss without full replay. **Honest limit:** full multi-writer BFT state is out of v1.1 scope; sequence assignment still flows through one promoted host (split-brain prevented by majority quorum, R-PROTOCOLS-14).
+**Decision.** The `standby_replica_set` — a warm signed Blackboard shadow held by peer nodes, with **BFT quorum sign-off** (OpenCLAW-P2P pattern, composing with `MultiPrincipalAttestationQuorum`) promoting a standby on host loss without full replay — is **normative** and ships as a STANDARDISED seed coordination shape (`15_COORDINATION_SHAPES`). It survives host loss without operator replay; sequence assignment still flows through one promoted host at a time, with split-brain prevented by majority quorum (R-PROTOCOLS-14).
 
-**Consequences.** (+) Survives host loss without operator replay; (−) replica upkeep cost; partial, not full, decentralisation.
+**The irreducible remainder is navigated, not deferred (V.8).** Full leaderless multi-writer BFT state against *genuinely adversarial, independent* nodes is not abolished by this design — it is a hard distributed-systems + trust reality. PersonaOS navigates it honestly: (1) replicated-host failover removes the *availability* single point of failure (landed here); (2) cross-node references and verdicts are **trust-calibrated**, never assumed (a peer node's signatures verify identity and integrity, but its *honesty* enters at calibrated trust and degrades on disconfirmation — the same J5/C3 machinery used for emergent domains); (3) the safety floor and signing are enforced locally on every node regardless of peer behaviour. A colluding-majority attack on a specific joined env's quorum is bounded by which peers an operator admits to the replica set (operator policy) and is surfaced, not hidden. This is recorded as a **V.8 navigated-reality PASS** in `13_DESIGN_VALIDATION.md`, not a deferral.
 
-**Alternatives rejected.** Full leaderless multi-writer BFT now — rejected: large, and clock-drift/sequence-distribution were the original reasons for the single-host rule; deferred to v2.0.
+**Consequences.** (+) Survives host loss without operator replay; failover is normative. (−) Replica upkeep cost; (−) honesty-of-independent-nodes is trust-calibrated, not cryptographically guaranteed — stated plainly rather than over-promised.
+
+**Alternatives rejected.** Claiming full Byzantine robustness against adversarial nodes as a substrate guarantee — rejected: it would be dishonest (the spec's "honest residuals" ethic forbids manufacturing certainty); trust-calibration is the truthful posture.
 
 ---
 

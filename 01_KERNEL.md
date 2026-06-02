@@ -151,18 +151,18 @@ Safety-critical promotion (C2) is refused outright; the system honestly cannot s
 
 **Honest limit:** the degraded gate raises the cost of unsafe self-approval but does not eliminate it. A determined principal can wait 72h, hire a complicit attestor, and sign the acknowledgement. The system is not adversarially robust against the principal themselves; it is robust against unconsidered self-approval. Operator-distinct topology remains the strong-form recommendation for safety-critical work.
 
-### 2.4.1 FederatedTimeLock — alternative degraded gate (v1.1+; staged)
+### 2.4.1 FederatedTimeLock — alternative degraded gate (normative)
 
-When `principal_topology = operator_is_user` and the principal cannot reach a non-principal credentialed attestor (frontier domains with no licensing board; principal in geographic isolation; cost prohibitive), the §2.4 attestation-based gate is unreachable in practice. v1.0 supplies a **second** degraded gate path. The principal picks one; the kernel signs the choice.
+When `principal_topology = operator_is_user` and the principal cannot reach a non-principal credentialed attestor (frontier domains with no licensing board; principal in geographic isolation; cost prohibitive), the §2.4 attestation-based gate is unreachable in practice. PersonaOS supplies a **second** degraded gate path. The principal picks one; the kernel signs the choice.
 
-**AVAILABILITY (v1.0 honest residual).** FederatedTimeLock requires ≥ 3 federation peer kernels with `independence_attested = True`. Federation arrives in **v1.1** (the v1.1 federation milestone). Under v1.0.0–single-kernel deployments, FederatedTimeLock is **structurally unavailable** — there are no peers to federate with. The schema is reserved here so v1.1 has the contract locked in, and so v1.0 deployments that anticipate v1.1 federation can begin pre-staging consent.
+**Availability (now normative).** FederatedTimeLock requires ≥ 3 federation peer nodes with `independence_attested = True`. Federation is now a normative part of the global object space (ADR-0067), so this path is **available** wherever the deployment can reach ≥ 3 admissible independent peer nodes (discovered over `09_PROTOCOLS §3G`).
 
-Under v1.0 with `principal_topology = operator_is_user`:
-- Path 1 (§2.4 attestation gate) is the **only** admissible path.
-- If the principal cannot reach a non-principal credentialed attestor, safety-critical actions **MUST refuse** — v1.0 does not manufacture an alternative. The audit-tag `principal_collapse_path_2_unavailable_v1_0` is added to the refusal lineage so operators can track unfulfilled work waiting on v1.1.
-- Operators may pre-stage a `FederatedTimeLockIntent` (a deferred-action record) which will activate automatically when v1.1 federation registers ≥ 3 admissible peers.
+Under `principal_topology = operator_is_user`:
+- Path 1 (§2.4 attestation gate) is admissible whenever a non-principal credentialed attestor is reachable.
+- Path 2 (FederatedTimeLock) is admissible when ≥ 3 independent peer nodes are reachable to observe the waiting period.
+- **When neither is reachable** (a genuinely isolated single node with no peers and no attestor), safety-critical actions **MUST refuse** — the substrate does not manufacture a gate it cannot honestly supply. This is the **V.8 navigated reality**: isolation is a physical condition, not a missing feature; the audit-tag `principal_collapse_no_gate_reachable` records the refusal, and the pre-staged `FederatedTimeLockIntent` activates automatically once peers become reachable.
 
-This is an **honest residual**, not a hidden bug: the substrate refuses to ceremonialise the gate further than §2.4 already allows. Operators who need the second path before v1.1 MUST run a federation-enabled deployment (multi-kernel, even within one org).
+This is the honest posture: the substrate refuses to ceremonialise the gate beyond what §2.4 / the federated path can truthfully provide.
 
 *The federated time lock allows safety-critical actions to proceed under principal collapse by requiring at least three independent peer kernels to observe a 7-day waiting period with no objections.*
 
@@ -647,7 +647,7 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-KERNEL-4 | Lineage storage cost. Append-only lineage grows linearly with task volume. | Medium | High | HOT / WARM / COLD / ARCHIVE retention tiers; `LineageSnapshot` summarisation-with-archival for multi-year retention. | v1.0 (tiers); v1.1 (snapshot policy tuning). |
 | R-KERNEL-5 | Cross-scope lineage queries (task × env × domain replay, including `project_*` subset) are slow at scale. | Medium | Medium | Per-scope indices; pre-computed `project_workspace` slice; operator-tunable replay budget. | v1.0 (indices); v1.1 (replay planner). |
 | R-KERNEL-6 | OTel cardinality explosion. Many tag dimensions (persona × project × env × domain × task × mode) inflate observability storage. | Medium | High | Cardinality limits per metric; sampling at trace level; operator-defined whitelist on tag combinations. | v1.0 (sampling); v1.1 (adaptive caps). |
-| R-KERNEL-7 | Principal-collapse second path (`§2.4`) requires v1.1 federation. Safety-critical actions refuse rather than synthesise an alternative. | High | Low | Audit-tag `principal_collapse_path_2_unavailable_v1_0` on refusals; operator pre-staged `FederatedTimeLockIntent`. | v1.1 (federation registers ≥ 3 admissible peers). |
+| R-KERNEL-7 | A genuinely isolated single node (no reachable attestor AND no reachable peers) cannot supply either principal-collapse gate, so safety-critical actions refuse rather than synthesise an alternative. | High | Low | Both gates now normative (§2.4.1); refuse with `principal_collapse_no_gate_reachable` + pre-staged `FederatedTimeLockIntent` auto-activates when peers become reachable. Isolation is a physical condition (V.8 navigated), not a missing feature. | Navigated (V.8). |
 
 ## 13. Verified-loop substrate
 
