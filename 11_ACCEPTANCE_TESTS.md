@@ -86,6 +86,7 @@ A-IC*   identity coherence invariant             (5 tests; 02_PERSONA §9.1)
 A-RE*   persona relationship edge                (7 tests; 02_PERSONA §11.4)
 A-ST*   skill transfer grant                     (6 tests; 02_PERSONA §11.5)
 A-CD*   cohort dynamics state                    (5 tests; 04_PROJECT §14.2)
+A-EO*   emergent orchestration                   (10 tests; 03_TASKS §2a, ADR-0066)
 A-SQ*   scoped knowledge query                   (6 tests; 08_KNOWLEDGE §9.3)
 A-RF*   relationship federation sync             (5 tests; 09_PROTOCOLS §3E)
 
@@ -398,7 +399,7 @@ Each row carries: invariant ID, the canonical v1.0 doc section that defines it, 
 | J1 — Identity is kernel-owned | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J1 | A-K1, A-K3, A-P1, A-P3, A-INH-1 |
 | J2 — Lineage is append-only and signed | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J2 | A-K2, A-K4, A-v2.0, A-INH-2 |
 | J3 — Safety floor is universal | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J3 | A-S1–A-S10, A-K11, A-IT9 |
-| J4 — Acceptance is task-class-appropriate | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J4 | A-T1–A-T20, A-IT1–A-IT7 |
+| J4 — Acceptance is sound, signed, and trust-calibrated to its orchestration (ADR-0066) | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J4 | A-T1–A-T20, A-IT1–A-IT7, A-EO1–A-EO10 |
 | J5 — Capability open; competence varies | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J5 | A-P2, A-P14, A-C3, A-CR9 |
 | J6 — Relationships are first-class state | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J6 | A-R1–A-R10, A-RE1–A-RE7, A-RF1–A-RF5 |
 | J7 — Bodies are interchangeable in acceptance class | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J7 | A-P8, A-P34–A-P37, A-V23 |
@@ -3098,6 +3099,53 @@ A-RA5     Availability never widens access: a replica/pin fetch still enforces
           at read regardless of where the bytes are served from.
 A-RA6     Commons-optional sovereignty: an operator-run relay+pin (no third-party
           commons) yields the same A-RA2/A-RA4 outcomes.
+```
+
+## 9o. emergent orchestration tests (A-EO*)
+
+Tests for the [ADR-0066](14_DECISIONS.md#adr-0066--self-organizing-orchestration-the-run-loop-is-an-emergent-coordination-shape-not-a-fixed-dispatcher) reframe: task classes, acceptance pathways, and the run loop are emergent (the v1.0 set seeded as STANDARDISED), fully open, and made safe by trust-calibration rather than topology restriction. Anchored in [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes), [`00_VISION.md §3 (J4)`](00_VISION.md#3-invariants-j1j9), and [`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop).
+
+### A-EO — emergent, fully-open, trust-calibrated orchestration
+
+```text
+SEED-KIND COMPATIBILITY
+
+A-EO1     The ten v1.0 task classes and eight acceptance pathways resolve as
+          STANDARDISED seed kinds from the KindRegistry; the seed class→pathway
+          mapping (J4 A.1 table) is unchanged and A-T2–A-T11 still pass.
+A-EO2     Substrate code resolves a class/pathway by name from the registry;
+          a build that branches on a closed Literal[...] of class or pathway
+          names fails the C4 purity check (A-C4 / A-EK*).
+
+PERSONA-PROPOSED ORCHESTRATION (FULLY OPEN)
+
+A-EO3     A persona proposes a novel AcceptancePathway kind; the kernel admits
+          it for trial and MUST NOT refuse it solely because it is novel.
+A-EO4     A persona proposes a novel TaskClass kind; classifier (§2.1) and
+          demotion ladder (§2.2) operate over the resolved kind set including it.
+A-EO5     A persona proposes a new acceptance primitive (meta-mechanism beyond
+          the five) when none fits; it enters promotion, not refusal.
+A-EO6     The run loop / phase arc declared as a StagedSequence in the
+          EnvironmentCoordinationProfile executes; the INVESTIGATIVE four-phase
+          arc resolves as a STANDARDISED seed StagedSequence, not a kernel constant.
+
+TRUST-CALIBRATION IS THE SAFETY MECHANISM
+
+A-EO7     A verdict produced by an EMERGENT (unvalidated) acceptance pathway
+          carries EMERGENT trust; the AnswerPackage records the producing
+          orchestration kind and its promotion stage.
+A-EO8     Floor + signing are never bypassed: every action under an emergent
+          orchestration shape is signed (J2/J9), floor-cleared (J3, 8 sources,
+          most-restrictive-wins), and budget-admitted (INV-7) — a shape that
+          attempts to skip any of these is refused at validation (§8 / A-CA*).
+
+OPERATOR CONTROL
+
+A-EO9     A safety-critical proposed pathway/shape requires C2 operator co-sign
+          before promotion; absent it, it remains at EMERGENT trust.
+A-EO10    Operator policy (floor source 4) pins a minimum-trust or specific seed
+          pathway for a task family; a lower-trust emergent pathway is refused
+          for that family while the pin holds.
 ```
 
 ## 9e. Risks & known limitations

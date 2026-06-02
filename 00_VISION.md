@@ -31,7 +31,7 @@ PersonaOS is an operating system for AI Personas. It manages "personas" -- persi
 - **J1 -- Identity belongs to the system core.** The central system (the "kernel") owns every persona's identity. The AI engine can never secretly change who that persona is.
 - **J2 -- Every action is recorded and tamper-proof.** Every change is written into an append-only log and digitally signed. Nothing is ever silently deleted.
 - **J3 -- Safety checks are universal.** Eight separate safety checks run before every action. The strictest rule always wins.
-- **J4 -- Work is checked in the right way for its type.** Different tasks (math, creative writing, teaching) get different approval methods.
+- **J4 -- Work is checked in a way that fits it, and the check is honest about itself.** Different tasks (math, creative writing, teaching) get different approval methods. The system does not keep a fixed list of approval methods: personas invent new ones as the work demands. The kernel's promise is not *which* method is used but that every verdict is signed, passes the safety floor, and carries a trust level matching how proven its method is — a brand-new, untested approval method produces low-confidence verdicts until it earns trust.
 - **J5 -- Any persona can try any task.** Lack of experience never blocks; the system adjusts confidence based on track record.
 - **J6 -- Relationships are real, tracked state.** Persona memory of users is governed by consent, boundaries, and revocability.
 - **J7 -- The AI engine is replaceable.** Identity, skills, and memories survive swapping the underlying model (Claude, GPT, or others).
@@ -43,7 +43,7 @@ PersonaOS is an operating system for AI Personas. It manages "personas" -- persi
 - **C1 -- Domain knowledge changes are signed.** Every step of knowledge discovery is recorded and signed.
 - **C2 -- Dangerous promotions need human approval.** Safety rules for fields involving physical harm require operator sign-off.
 - **C3 -- Personas work in any field.** Unfamiliar territory triggers automatic learning; the persona is never blocked.
-- **C4 -- Categories come from the work, not from a fixed list.** Personas propose new media types, tool types, and knowledge categories as needed; each goes through a four-stage review.
+- **C4 -- Categories *and orchestration* come from the work, not from a fixed list.** Personas propose new media types, tool types, knowledge categories, coordination shapes, and — extended by ADR-0066 — new task classes, acceptance pathways, and run-loop shapes as needed; each goes through a four-stage review. The base system hard-codes only the safety/identity core and a few generic coordination mechanisms; how work is classified, sequenced, and accepted is emergent persona behaviour in the environment, not a fixed loop.
 
 **Inherited kernel invariants (INV-1 through INV-10)**
 
@@ -81,7 +81,7 @@ PersonaOS v1.0 is an operating system for cognitive work of any kind. [**Persona
 
 The [**kernel**](12_GLOSSARY.md#k) owns identity, safety, and trust. This document names its guarantees using short labels: **J-labels** (J1–J9) are vision-level invariants — non-negotiable design principles. **C-labels** (C1–C4) are commitments — structural promises about how the system behaves. **INV-labels** (INV-1–INV-10) are inherited kernel invariants from earlier versions, still binding. Each label is defined in §3–§5 below.
 
-The kernel guarantees: identity persistence (J1), append-only [lineage](12_GLOSSARY.md#l) across **three scopes** (J2 task / J9 environment / C1 domain), an 8-source [safety floor](12_GLOSSARY.md#s) (J3), task-class-appropriate [acceptance pathways](12_GLOSSARY.md#a) (J4), and signing infrastructure. **Operators** (humans or organisations running a deployment) gate safety-critical promotions and set deployment policy. **Personas** do the substantive cognitive work — exploring, learning, proposing, curating. The substrate is provider-neutral, framework-agnostic, observable via OpenTelemetry, and federated via A2A. Every content type (personas, environments, artifacts, domains, knowledge, telemetry) is uniformly **discoverable** across both the internet (`.well-known` + gossip + Kademlia DHT) and the intranet (mDNS), under one **access-level model** (`discover < read < write < admin`) that also gates discovery, with a **hybrid storage** option that keeps heavy bytes in existing providers (GitHub / arXiv / S3 / OCI / IPFS) and distributes only a signed, integrity-anchored reference over the peer-to-peer layer ([`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md), v1.1 draft).
+The kernel guarantees: identity persistence (J1), append-only [lineage](12_GLOSSARY.md#l) across **three scopes** (J2 task / J9 environment / C1 domain), an 8-source [safety floor](12_GLOSSARY.md#s) (J3), sound and trust-calibrated [acceptance](12_GLOSSARY.md#a) (J4 — task classes and pathways are emergent kinds, seeded with the v1.0 set; see ADR-0066), and signing infrastructure. **Operators** (humans or organisations running a deployment) gate safety-critical promotions and set deployment policy. **Personas** do the substantive cognitive work — exploring, learning, proposing, curating. The substrate is provider-neutral, framework-agnostic, observable via OpenTelemetry, and federated via A2A. Every content type (personas, environments, artifacts, domains, knowledge, telemetry) is uniformly **discoverable** across both the internet (`.well-known` + gossip + Kademlia DHT) and the intranet (mDNS), under one **access-level model** (`discover < read < write < admin`) that also gates discovery, with a **hybrid storage** option that keeps heavy bytes in existing providers (GitHub / arXiv / S3 / OCI / IPFS) and distributes only a signed, integrity-anchored reference over the peer-to-peer layer ([`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md), v1.1 draft).
 
 ### 2.1 Goals
 
@@ -90,7 +90,7 @@ v1.0 MUST achieve, by v1.1, all of the following:
 1. **Identity persistence under body swap.** A persona MUST retain its SOUL, skill library, KindRegistry, ProvenFacts, K-lines, and GEPA-evolved meta-prompts across any supported body binding (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, MAF, Pydantic-AI, DSPy, smolagents, Semantic Kernel, MCP, A2A). [`J1`, `J7`]
 2. **Append-only auditability.** Every state-changing action MUST emit a signed event in the appropriate lineage scope (task, environment, domain); replay MUST reconstruct full state. [`J2`, `J9`, `C1`, `INV-2`]
 3. **Universal safety floor.** All eight floor sources MUST compose by most-restrictive-wins at every action. The floor MUST NOT be bypassable by any acceptance pathway. [`J3`]
-4. **Class-appropriate acceptance.** Each of the 10 task classes MUST route to its designated acceptance pathway. [`J4`]
+4. **Sound, trust-calibrated acceptance.** Every acceptance verdict MUST be signed, floor-cleared, budget-admitted, and trust-calibrated to the maturity of the orchestration that produced it. Task classes and acceptance pathways are emergent kinds (the v1.0 set seeded as STANDARDISED); the run loop is an emergent orchestration shape. [`J4`, `C4`, `ADR-0066`]
 5. **Open capability with calibrated competence.** A persona MUST be allowed to attempt any task; competence MUST be measured per-mode, per-domain, per-skill, and trust MUST scale with emergence stage. [`J5`, `C3`]
 6. **Relationships as first-class state.** RelationshipRecord between any two actors MUST track consent, boundaries, and history; Memory Power Asymmetry mitigations MUST be enforced. [`J6`]
 7. **Schema-versioned mutation.** Every schema MUST declare a version; the kernel MUST reject unknown versions; migration tooling MUST map explicitly. [`INV-10`]
@@ -211,8 +211,8 @@ An implementation MAY claim conformance at one of three levels:
 
 | Level | Label | Scope |
 |---|---|---|
-| L1 | `PersonaOS v1.0 Core` | All invariants J1, J2, J3, J4, J5, J6, J7, J9 plus C1, C2, C3, C4; INV-1 through INV-10; INV_R1 through INV_R11 (where round-based execution is supported). Bodies: at least one native binding and one proxy binding ([`02_PERSONA.md §3.5`](02_PERSONA.md#35-body-model--native-vs-proxy-binding-body-binding1)). Lineage: all three scopes (task, environment, domain). Acceptance pathways: the four CORE pathways (VERIFIER_ACCEPT, PANEL_ACCEPT, OPEN_ENDED, USER_ACCEPT). |
-| L2 | `PersonaOS v1.0 Full` | L1 plus all eight acceptance pathways (adds GOAL_PROGRESS_ACCEPT, MUTUAL_ACCEPT, ENGAGEMENT_ACCEPT, PROJECT_PROGRESS_ACCEPT); all 10 task classes; all 14 cognitive modes; the four-stage domain promotion lifecycle (EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED) with operator-signature gate for safety-critical promotions (C2). |
+| L1 | `PersonaOS v1.0 Core` | All invariants J1, J2, J3, J4, J5, J6, J7, J9 plus C1, C2, C3, C4; INV-1 through INV-10; INV_R1 through INV_R11 (where round-based execution is supported). Bodies: at least one native binding and one proxy binding ([`02_PERSONA.md §3.5`](02_PERSONA.md#35-body-model--native-vs-proxy-binding-body-binding1)). Lineage: all three scopes (task, environment, domain). Acceptance pathways: the four CORE pathways (VERIFIER_ACCEPT, PANEL_ACCEPT, OPEN_ENDED, USER_ACCEPT) as STANDARDISED seed kinds. |
+| L2 | `PersonaOS v1.0 Full` | L1 plus all eight seed acceptance pathways (adds GOAL_PROGRESS_ACCEPT, MUTUAL_ACCEPT, ENGAGEMENT_ACCEPT, PROJECT_PROGRESS_ACCEPT); all 10 seed task classes; all 14 cognitive modes; the four-stage promotion lifecycle (EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED) with operator-signature gate for safety-critical promotions (C2) — applied uniformly to domains, coordination shapes, and (per ADR-0066) emergent task classes / acceptance pathways / orchestration shapes. The eight pathways and ten classes are the STANDARDISED **seed** set, not a closed enum; an L2 implementation MUST resolve classes/pathways from the KindRegistry by name and MUST admit persona-proposed orchestration kinds under J4 trust-calibration. |
 | L3 | `PersonaOS v1.0 Full + Federated` | L2 plus A2A federation surface ([`09_PROTOCOLS.md §3A-§3E`](09_PROTOCOLS.md#3-a2a--agent-to-agent-federation)); cross-kernel persona import / export; signed AgentCard / EnvCard / ProjectCard / DomainContextCard exchange; federation hardening per [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md#3d-reputation-and-anti-goodhart). |
 
 J8 is RETIRED ([§3 J8](#3-invariants-j1j9)); conformant implementations MUST NOT introduce a fourth lineage scope under the legacy "ProjectLineage" name.
@@ -282,6 +282,7 @@ Cross-document risks for v1.0 as a system. Per-document risks appear in each doc
 | R-v1.0-12 | **Federated trust establishment.** A2A peer admission protocol assumes signed AgentCards; revocation/key rotation under-specified. | High | Low | Federation hardening v1.1+; pinned peer registry per kernel for v1.0. | v1.1. |
 | R-v1.0-13 | **Executable EnvironmentRule as floor-bypass vector.** Dynamically-authored `env-rule/1` code/contract rules (`05_ENVIRONMENT §2.2b`) extend safety-floor source 8; a malicious rule could attempt to weaken enforcement. | Critical | Low | Rules run in the existing sandbox (OWASP + caps, `01_KERNEL §6`); ride UNDER source 8 and may only ADD refusals (never relax sources 1-7); `safety_critical` rules operator-gated (C2); `cascade_locked` parent rules immutable by children; the "8 sources" count is unchanged ([`01_KERNEL.md §2`](01_KERNEL.md), [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md)). Per-doc: R-ENV-11. | v1.1. |
 | R-v1.0-14 | **ArtifactSharingPolicy misconfiguration over-exposes artifacts.** Env-scoped sharing (`artifact-share/1`, `07_ARTIFACTS §4a`) could leak a bundle across orgs if mis-set. | High | Medium | Default `outward_tier = project_only`; most-restrictive-wins composition; `None` policy never widens; cross-tenant shares require `CrossTenancyAgreementRef` or demote ([`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md), [`06_DOMAIN.md §6.3`](06_DOMAIN.md), ADR-0028/0030). Per-doc: R-ARTIFACTS-8. | v1.1. |
+| R-v1.0-16 | **Fully-open emergent orchestration can produce wrong (not unsafe) acceptance.** Per ADR-0066 personas may propose arbitrary task classes, acceptance pathways, and run loops (the v1.0 set seeded as STANDARDISED). An unvalidated method cannot bypass the floor or signing, but it can silently accept poor work; verifying acceptance-soundness of arbitrary methods is the new complexity bottleneck. | High | Medium | Trust-calibration not topology restriction (J4/J5): emergent-pathway verdicts enter at EMERGENT trust and degrade honestly; AnswerPackage records producing kind + promotion stage; safety-critical pathways/shapes gated by C2; operators MAY pin a minimum-trust or seed pathway per task family (floor source 4); floor (J3, 8 sources) + signing (J2/J9) + budget (INV-7) unchanged ([`03_TASKS.md §2a`](03_TASKS.md), [`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md), ADR-0066). Per-doc: R-TASKS-7. | v1.1. |
 | R-v1.0-15 | **Resource-starved personas wedge instead of parking, never auto-resume, or flap.** A persona that loses budget / all bodies / env access could (a) hold capacity it cannot use, (b) park as DORMANT(reason) but never wake when the resource returns, or (c) oscillate park↔resume on a noisy signal. | Medium | Medium | Enumerated dormancy `reason` + kernel-monitored auto-resume predicate per reason ([`02_PERSONA.md §7.6`](02_PERSONA.md), A.18a); resume re-evaluated once per signal (budget tick / `body_attestation_state_changed` / attention recover / task routing); parking gated by an operator-policy `dormancy_park_threshold` and a symmetric resume predicate (hysteresis → no flapping); reuses existing DORMANT state (no new state) so INV_R9 and replay are unaffected; ADR-0057. | v1.1. |
 
 ### 11.1 Severity legend
@@ -417,8 +418,19 @@ J3  Safety floor is universal.
     source 8 and may only add refusals; this does not change the
     source count.)
 
-J4  Acceptance is task-class-appropriate.
-    Ten task classes route to eight acceptance pathways:
+J4  Acceptance is sound, signed, and trust-calibrated to its orchestration.
+    (Reframed by ADR-0066 from a fixed class→pathway table into a property
+    invariant.) Every acceptance verdict MUST be signed and lineage-tracked
+    (J2/J9), floor-cleared (J3), budget-admitted (INV-7), and trust-calibrated
+    to the maturity of the orchestration that produced it (J5): a verdict
+    from an emergent or unvalidated acceptance method enters at EMERGENT
+    trust and degrades honestly until validated. The kernel guarantees this
+    property; it does NOT enumerate a closed set of methods.
+
+    Task classes and acceptance pathways are emergent KindRegistry kinds
+    (C4), resolved by name and promoted through the four-stage lifecycle.
+    The v1.0 set ships as STANDARDISED seed kinds — the default mapping,
+    retained verbatim and fully backward-compatible:
       CONVERGENT     → VERIFIER_ACCEPT
       DIVERGENT      → PANEL_ACCEPT (multi-judge with anti-Goodhart stack)
       MIXED          → VERIFIER then PANEL (gate + judge)
@@ -429,6 +441,10 @@ J4  Acceptance is task-class-appropriate.
       EXISTENTIAL    → OPEN_ENDED
       DELEGATED      → inherited from sub-task class
       INVESTIGATIVE  → PROJECT_PROGRESS_ACCEPT
+    Personas MAY propose new classes, pathways, and run-loop shapes; the
+    run loop is an emergent orchestration coordination shape
+    (15_COORDINATION_SHAPES §4a). Safety-critical acceptance kinds hit the
+    C2 operator gate before promotion. Mechanism: 03_TASKS §2a, ADR-0066.
 
 J5  Capability is open; competence varies.
     A persona may attempt any task in any domain. Lack of skill or
@@ -499,16 +515,24 @@ C3 (from J5)      Personas work in ANY domain.
                   kernel routes through emergent bootstrap. Trust
                   scoring on outputs reflects emergence stage.
 
-C4 (from J1, J5)  Substrate is domain-agnostic; kinds are emergent.
+C4 (from J1, J5)  Substrate is agnostic about content, coordination,
+                  AND orchestration; all are emergent.
                   Every domain-shaped category — media kind, source
                   kind, verifier kind, capability kind, contribution
                   kind, fact kind, bundle kind — is an emergent unit
                   proposed by personas, signed into a KindRegistry,
                   promoted through the same 4-stage gates as
-                  DomainContext. No closed Literal[...] enum in the
-                  substrate carries a domain-shaped list. Substrate
-                  code looks kinds up by name; it never branches on a
-                  fixed set. (Mechanism: 06_DOMAIN §7.5, §7.6.)
+                  DomainContext. Coordination shapes are likewise
+                  emergent (ADR-0045). Extended by ADR-0066: task
+                  classes, acceptance pathways, and the run loop itself
+                  are also emergent kinds/shapes — the v1.0 ten classes
+                  and eight pathways ship as STANDARDISED seed kinds, not
+                  a closed enum. No closed Literal[...] enum in the
+                  substrate carries a domain-shaped, coordination-shaped,
+                  or orchestration-shaped list. Substrate code looks kinds
+                  up by name; it never branches on a fixed set.
+                  (Mechanism: 06_DOMAIN §7.5, §7.6; 15_COORDINATION_SHAPES;
+                  03_TASKS §2a.)
 ```
 
 ### A.3 Inherited kernel invariants INV-1 through INV-10

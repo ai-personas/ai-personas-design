@@ -11,7 +11,7 @@ status: Draft
 
 **Status.** `Draft`; v1.1 target. This document will become normative when it reaches `Stable` status. Implements **ADR-0045** (self-organizing coordination). Coordination is **environment-scoped**: each environment defines how its members coordinate — internally, with external agents, and with peer environments. The five meta-mechanisms are the kernel-level building blocks; environments compose them into specific coordination patterns.
 
-**In scope.** The five meta-mechanism building blocks, environment-scoped coordination shape declarations, the three coordination scopes (intra-env, env-to-external, env-to-env), shape proposal within environments, cross-environment shape inheritance, seed-shape catalog, and safety-floor composition.
+**In scope.** The five meta-mechanism building blocks, environment-scoped coordination shape declarations, the four coordination scopes (intra-env, env-to-external, env-to-env, and orchestration of the task-execution loop — §4a, ADR-0066), shape proposal within environments, cross-environment shape inheritance, seed-shape catalog, and safety-floor composition.
 
 **Out of scope.** Cross-kernel coordination shape negotiation (v1.1 federation chapter). Implementation of the shape-validation engine (operator tooling).
 
@@ -54,9 +54,9 @@ All coordination shapes are built from five generic building blocks:
 4. **Stream policies** (StreamPolicy) -- Manage high-volume information flows. "Summarise 57,000 sensor readings per day into 96 floor-level reports."
 5. **Derived metrics** (DerivedMetric) -- Compute scores from raw data and trigger actions at thresholds. "Team health = trust + velocity; alert the lead when it drops below 0.4."
 
-**The three coordination scopes**
+**The four coordination scopes**
 
-Coordination happens at three levels: (1) *Within a room* -- how workers inside one environment coordinate with each other (reviews, handoffs, task assignment). (2) *With outsiders* -- how the environment coordinates with external parties like vendors or regulators. (3) *Between rooms* -- how two environments coordinate as peers (a chip lab and a firmware lab exchanging register maps), including parent-child relationships when environments nest (company sets rules, team operates within them).
+Coordination happens at four levels: (1) *Within a room* -- how workers inside one environment coordinate with each other (reviews, handoffs, task assignment). (2) *With outsiders* -- how the environment coordinates with external parties like vendors or regulators. (3) *Between rooms* -- how two environments coordinate as peers (a chip lab and a firmware lab exchanging register maps), including parent-child relationships when environments nest (company sets rules, team operates within them). (4) *The work loop itself* -- how the room decides what kind of work a task is, how to run it, and when it counts as done (added by ADR-0066, so the run loop is something the workers shape, not a fixed machine).
 
 **How coordination patterns emerge and evolve**
 
@@ -87,11 +87,11 @@ But coordination is not global — it is **contextual**. A chip design lab coord
 
 The environment already holds all of these: membership, charter, conventions, observation surfaces, ambient events. Coordination shapes belong here — as part of the environment's self-description, not as global substrate types.
 
-## 2. The three coordination scopes
+## 2. The coordination scopes
 
-Every environment manages coordination across three scopes:
+Every environment manages coordination across four scopes:
 
-*Scope 1 (intra-environment) covers how personas inside coordinate with each other -- design reviews, handoff ceremonies, staged operations, obligation management, milestone gates. Scope 2 (env-to-external) covers how the environment coordinates with outside agents -- foundry submissions, calibration requests, inspection scheduling, vendor communication. Scope 3 (env-to-env) covers how this environment coordinates with peer environments -- chip lab and firmware lab, research and publishing, design and manufacturing -- including parent-child coordination when environments nest hierarchically (company to org to team, country to state to city), where parent rules cascade as constraints while child coordination remains autonomous.*
+*Scope 1 (intra-environment) covers how personas inside coordinate with each other -- design reviews, handoff ceremonies, staged operations, obligation management, milestone gates. Scope 2 (env-to-external) covers how the environment coordinates with outside agents -- foundry submissions, calibration requests, inspection scheduling, vendor communication. Scope 3 (env-to-env) covers how this environment coordinates with peer environments -- chip lab and firmware lab, research and publishing, design and manufacturing -- including parent-child coordination when environments nest hierarchically (company to org to team, country to state to city), where parent rules cascade as constraints while child coordination remains autonomous. Scope 4 (orchestration), added by [ADR-0066](14_DECISIONS.md#adr-0066--self-organizing-orchestration-the-run-loop-is-an-emergent-coordination-shape-not-a-fixed-dispatcher), covers how the environment coordinates the **task-execution loop itself** — how work is classified, sequenced, evaluated, and accepted — so the run loop is emergent rather than a fixed kernel dispatcher. See [§4a](#4a-orchestration-scope--coordinating-the-task-execution-loop).*
 
 **Technical detail:** See [A.1](#appendix-a1).
 
@@ -194,7 +194,7 @@ The Reflector cognitive mode (`02_PERSONA §4`) is the natural source of these o
 
 The profile is the **living record** of an environment's current coordination shapes. It starts empty (or near-empty) and grows as personas propose and adopt shapes.
 
-*The EnvironmentCoordinationProfile holds three lists of active shapes (one per scope: intra-env, env-to-external, env-to-env), a complete history of all shapes ever proposed, adopted, or retired, a version counter, and a signature. Each CoordinationShapeBinding records a shape's ID, version, meta-mechanism type, definition, lifecycle stage (candidate, trial, accepted, retired), proposer, cosigning personas, adoption/retirement timestamps, and operator co-sign status. Each CoordinationShapeEvent records what happened (proposed, cosigned, trial started, accepted, modified, retired, operator cosigned, or refused), which shape, which persona, when, why, and the signature.*
+*The EnvironmentCoordinationProfile holds four lists of active shapes (one per scope: intra-env, env-to-external, env-to-env, and — per §4a / ADR-0066 — orchestration of the task-execution loop), a complete history of all shapes ever proposed, adopted, or retired, a version counter, and a signature. Each CoordinationShapeBinding records a shape's ID, version, meta-mechanism type, definition, lifecycle stage (candidate, trial, accepted, retired), proposer, cosigning personas, adoption/retirement timestamps, and operator co-sign status. Each CoordinationShapeEvent records what happened (proposed, cosigned, trial started, accepted, modified, retired, operator cosigned, or refused), which shape, which persona, when, why, and the signature.*
 
 **Technical detail:** See [A.10](#appendix-a10).
 
@@ -319,6 +319,25 @@ When personas in a parent environment decide they need a child environment, they
 
 The child environment starts with an EMPTY coordination profile (per §4.1) — its personas self-organise from there, within the parent's cascaded constraints.
 
+## 4a. Orchestration scope — coordinating the task-execution loop
+
+*This section is normative. It establishes the fourth coordination scope (§2): coordination of the run loop itself, per [ADR-0066](14_DECISIONS.md#adr-0066--self-organizing-orchestration-the-run-loop-is-an-emergent-coordination-shape-not-a-fixed-dispatcher). The full reframe of task classes and acceptance pathways lives in [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes); this section states how it composes from the five meta-mechanisms.*
+
+**The insight.** "Orchestration" — classify → route → execute → evaluate → accept — is just coordination of the task-execution loop. It therefore needs no separate model: it is a coordination shape like any other, declared in the [`EnvironmentCoordinationProfile`](#44-the-environmentcoordinationprofile) (§4.4) and proposed via [`ProposedCoordinationShape`](#5-proposedcoordinationshape) (§5). v1.0.x froze this scope in the kernel; ADR-0066 unfreezes it.
+
+**Composition.** An orchestration shape composes from the same five meta-mechanisms (§3):
+- a **`StagedSequence`** (§3.3) expresses the run loop's phases and gates — e.g. the INVESTIGATIVE `exploration → verification → synthesis → expert_review` arc ([`03_TASKS §2.3`](03_TASKS.md#23-investigative-sub-modes)) is a STANDARDISED seed `StagedSequence`, not a kernel constant;
+- a **`DerivedMetric`** (§3.5) expresses an acceptance gate (a verdict computed from constituent evidence — the generalisation of progress scores, panel quorum, engagement signals);
+- **`StreamPolicy`** / **`EntityGroup`** / **`BatchOperation`** express round aggregation, judge-panel grouping, and batch evaluation.
+
+A `TaskClass` and an `AcceptancePathway` are emergent KindRegistry kinds (per `03_TASKS §2a`); an orchestration shape binds a class to a pathway-composition over these mechanisms.
+
+**Fully open, with the meta-mechanism set itself extensible.** Personas MAY propose orchestration shapes that compose the five mechanisms, AND MAY propose a **new acceptance primitive** (a new meta-mechanism) when none of the five fits — promoted through the same lifecycle, with safety-critical primitives gated by C2. This extends ADR-0045 (which fixed the five) per the fully-open-orchestration decision in ADR-0066.
+
+**Safety composition (unchanged floor).** Orchestration shapes are validated exactly as other shapes (§8): the kernel verifies INV-7 budget admission, signed lineage on every transition (J2/J9), and most-restrictive-wins floor clearance (J3) on every action. What is NOT pre-restricted is the *acceptance method*; instead, a verdict from an emergent/unvalidated orchestration shape is **trust-calibrated** (J4/J5) — it enters at EMERGENT trust and degrades honestly until validated, and the AnswerPackage records the producing shape and its promotion stage. Operator policy (floor source 4) MAY pin a minimum-trust or seed pathway for safety-critical task families.
+
+**Tests:** A-EO1–A-EO10 ([`11_ACCEPTANCE_TESTS.md §9o`](11_ACCEPTANCE_TESTS.md)).
+
 ## 5. ProposedCoordinationShape
 
 Personas propose new coordination shapes **within their environment**. Any member may propose; the cohort validates through adoption.
@@ -421,7 +440,7 @@ All coordination shapes — regardless of how they are proposed or adopted — o
 
 The appendices below contain the full technical schemas, data structures, diagrams, and specification tables referenced throughout this document. Each appendix is referenced from the section where it applies.
 
-### A.1 Three coordination scopes diagram
+### A.1 Four coordination scopes diagram
 
 <a id="appendix-a1"></a>
 
@@ -452,6 +471,15 @@ The appendices below contain the full technical schemas, data structures, diagra
 │  │  compose hierarchically (company → org → team,    │   │
 │  │  country → state → city). Parent rules cascade    │   │
 │  │  as constraints; child coordination is autonomous. │   │
+│  └──────────────────────────────────────────────────┘   │
+│                                                         │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │  SCOPE 4: ORCHESTRATION  (§4a, ADR-0066)          │   │
+│  │  How the env coordinates the task-execution loop  │   │
+│  │  itself — classify → route → execute → evaluate → │   │
+│  │  accept. Task classes & acceptance pathways are    │   │
+│  │  emergent kinds (v1.0 set seeded STANDARDISED);    │   │
+│  │  the run loop is a StagedSequence personas evolve. │   │
 │  └──────────────────────────────────────────────────┘   │
 │                                                         │
 └─────────────────────────────────────────────────────────┘
@@ -739,11 +767,15 @@ class EnvironmentCoordinationProfile:
     schema: str = "env-coordination-profile/1"
     environment_id: str
 
-    # Active shapes across the three scopes.
+    # Active shapes across the four scopes.
     # Starts EMPTY at env formation. Grows as personas propose.
     intra_env_shapes: list[CoordinationShapeBinding]
     env_to_external_shapes: list[CoordinationShapeBinding]
     env_to_env_shapes: list[CoordinationShapeBinding]
+    # Scope 4 (orchestration of the task-execution loop; §4a, ADR-0066).
+    # Additive field; the env-coordination-profile/1 version is retained.
+    # Empty here means the env uses the STANDARDISED seed orchestration shape.
+    orchestration_shapes: list[CoordinationShapeBinding]
 
     # HISTORY (lineage of all shapes ever proposed, adopted, retired)
     shape_history: list[CoordinationShapeEvent]

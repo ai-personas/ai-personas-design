@@ -199,6 +199,8 @@ This is the project's institutional memory — every major design decision, the 
 
 **v1.1 supersession note (ADR-0045).** The v1.0.x "hardcode" scope included coordination primitives (acceptance pathways, lifecycle FSMs, coordination ceremonies). ADR-0045 (accepted 2026-05-25) moves coordination from hardcoded to emergent: personas propose coordination shapes within their environments using five meta-mechanisms (EntityGroup, BatchOperation, StagedSequence, StreamPolicy, DerivedMetric). What remains hardcoded: kernel invariants (J1-J9, INV-1..10), safety floor (8 sources), signing infrastructure, lineage model, the five meta-mechanisms themselves. What becomes emergent: coordination shapes, acceptance pathway compositions, lifecycle FSM details. See [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md).
 
+**v1.1 supersession note (ADR-0066).** ADR-0066 (accepted 2026-06-02) extends the split one layer further: the **ten task classes and eight acceptance pathways themselves** move from hardcoded to emergent KindRegistry kinds (the v1.0 set retained as STANDARDISED seed kinds), and the run loop becomes an emergent orchestration coordination shape. Substrate code resolves classes/pathways from the registry rather than a fixed `Literal[...]`. The hardcoded core narrows to: kernel invariants (J1–J3, J5–J7, J9 + INV-1..10), the safety floor (8 sources), signing, the lineage model, budget admission (INV-7), and the (now extensible) coordination meta-mechanisms; J4 is reframed from a fixed class→pathway mapping into a property invariant (acceptance is signed, floor-cleared, and trust-calibrated to the orchestration that produced it). See ADR-0066 and [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes).
+
 **Consequences.**
 - (+) The minimal substrate is small enough to audit, formalise, and prove correct against the invariants.
 - (+) Emergence absorbs the long tail without re-baking the substrate.
@@ -325,6 +327,8 @@ This is the project's institutional memory — every major design decision, the 
 **Context.** Different kinds of work require different acceptance criteria: a math proof needs a verifier; a creative essay needs a panel; an interactive conversation needs goal-progress; a long-running research project needs progress-relative-to-milestones. A single "did the LLM finish" verdict collapses these into a single bit and produces wrong rejections (a creative essay can be perfectly fine and "fail" a code verifier) or wrong acceptances (a buggy proof passes prose review).
 
 **Decision.** Ten task classes (CONVERGENT, DIVERGENT, MIXED, INTERACTIVE, RELATIONAL, PEDAGOGIC, PERFORMATIVE, EXISTENTIAL, DELEGATED, INVESTIGATIVE) route to eight acceptance pathways (VERIFIER_ACCEPT, PANEL_ACCEPT, GOAL_PROGRESS_ACCEPT, USER_ACCEPT, ENGAGEMENT_ACCEPT, OPEN_ENDED, PROJECT_PROGRESS_ACCEPT, MUTUAL_ACCEPT). A task-classifier component picks the class; a demotion rule lowers trust if the classifier's confidence is below threshold. The mapping is fixed in J4.
+
+> **v1.1 supersession note (ADR-0066).** The classes and pathways are no longer a *closed* mapping fixed in J4. They are now **emergent KindRegistry kinds**, with this v1.0 set shipping as **STANDARDISED seed kinds** (the default mapping, retained verbatim and fully backward-compatible). Personas MAY propose new classes and pathways; J4 is reframed from "the mapping is fixed" to the property invariant that acceptance is signed, floor-cleared, and trust-calibrated to the orchestration that produced it. See ADR-0066 and [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes).
 
 **Consequences.**
 - (+) Each task is judged against criteria appropriate to its kind.
@@ -1485,6 +1489,48 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 **Consequences.** (+) The "discover + observe + fetch from anywhere" experience is specified honestly, with the same-Wi-Fi (mDNS) and off-network (relay + pin) paths both walked in SCENARIO 15; (+) liveness vs. connectivity vs. availability are cleanly separated. (−) Depends on relay/pin commons (or self-hosting) — surfaced as R-PROTOCOLS-15 and OQ-PROTOCOLS-12; full managed relay/pin recipes are v1.2.
 
 **Alternatives rejected.** (a) Claim pure-P2P needs zero infrastructure — rejected: false, and OpenCLAW-P2P itself runs a provider stack. (b) Mandate a single PersonaOS-operated relay/directory — rejected: reintroduces the central dependency the P2P track exists to remove; commons are pluggable and self-hostable instead.
+
+---
+
+### ADR-0066 — Self-organizing orchestration: the run loop is an emergent coordination shape, not a fixed dispatcher
+
+**Status:** Accepted (v1.1 draft).
+**Date:** 2026-06-02.
+**Origin:** v1.1 (the "we don't need a fixed orchestration loop; orchestration must itself be emergent persona behaviour in the environment" alignment review). Extends ADR-0045 one layer down.
+**Related:** [`C4`](00_VISION.md#3-invariants-j1j9) (domain-agnostic substrate), [`J4`](00_VISION.md#3-invariants-j1j9) (class-appropriate acceptance), [`J5`](00_VISION.md#3-invariants-j1j9) (open capability, calibrated competence), ADR-0006, ADR-0011, ADR-0012, ADR-0045, [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes), [`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop).
+
+**Context.** ADR-0045 diagnosed that the substrate was "domain-agnostic in *content* but domain-specific in *coordination*" — a C4 violation at the meta-level — and resolved it by turning the fixed coordination *library* (~35 primitives) into a coordination *kernel* (five generic meta-mechanisms personas compose). But that move stopped at the orchestration boundary. The **run loop itself remains hardcoded**: ten task classes route to eight acceptance pathways via a fixed mapping "fixed in J4" (ADR-0011); the dispatcher's classify → select-pathway → route → cascade → round-barrier sequence is kernel-owned (ADR-0006, ADR-0012); INVESTIGATIVE's four phases are a fixed sequence. ADR-0011 itself records that the classes and pathways "evolved from 3 to 8 pathways" and were each surfaced by a kind of work the substrate could not otherwise express — the *same* linear-growth-with-scenarios anti-pattern ADR-0045 called unsustainable, one level down. When a persona encounters work whose natural acceptance criterion or run shape is not one of the eight pathways or fixed phases, it cannot express it — it must wait for a substrate spec revision. This contradicts C4 at the orchestration level: orchestration is *how work is classified, sequenced, evaluated, and accepted*, and in v1.0 it is substrate-fixed rather than emergent.
+
+**Decision.** Orchestration becomes **emergent, environment-scoped, persona-proposed, experience-evolved** — the same way domain knowledge, kinds, and coordination shapes already emerge. Specifically:
+
+1. **Orchestration is coordination of the task-execution loop.** It is not a separate model. The run loop is a fourth coordination scope (alongside intra-env, env-to-external, env-to-env) in [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md): personas compose the classify → execute → evaluate → accept sequence from the five meta-mechanisms (primarily `StagedSequence` with gates) as part of their `EnvironmentCoordinationProfile`.
+
+2. **`TaskClass` and `AcceptancePathway` are emergent KindRegistry kinds**, resolved by name, promoted through the same four-stage lifecycle (EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED) as every other kind. Substrate code stops branching on a fixed `Literal[...]` of classes/pathways (the ADR-0006 conformance line, now extended to orchestration).
+
+3. **The v1.0 set ships as STANDARDISED seed kinds.** The ten task classes, eight acceptance pathways, three routing modes, and the INVESTIGATIVE four-phase arc enter the registry pre-promoted at MetaShape/STANDARDISED tier — universally available, fully backward-compatible. Existing deployments and the L1/L2 conformance levels are unchanged; they now describe *seed* kinds rather than a closed enum.
+
+4. **Orchestration is fully open; safety is preserved by trust-calibration, not by restricting topology.** Personas MAY propose arbitrary acceptance criteria, run loops, and **new kernel-level acceptance primitives** — going beyond ADR-0045's fixed five mechanisms, which themselves become an extensible (promotable) set. The kernel does **not** restrict what orchestration may be proposed. It instead guarantees, unchanged:
+   - every orchestration action is **signed and lineage-tracked** (J2/J9), **floor-cleared** (J3, all 8 sources, most-restrictive-wins), and **budget-admitted** (INV-7);
+   - a verdict produced by an emergent/unvalidated acceptance method is **trust-calibrated to the maturity of the orchestration that produced it** (J5): it enters at EMERGENT trust and degrades honestly until validated, exactly as emergent-domain outputs do (C3);
+   - **safety-critical** acceptance primitives and orchestration shapes hit the **C2** operator gate before promotion.
+
+5. **J4 is reframed from a fixed mapping into a property invariant.** J4 no longer enumerates "10 classes → 8 pathways." It guarantees that acceptance is **signed, floor-cleared, and trust-calibrated to the orchestration that produced it** — appropriate to the work by construction, not by a closed table. The guarantee (acceptance is sound and its provenance honest) is preserved; only the enumeration moves out of the core into the registry.
+
+**Consequences.**
+- (+) Completes the C4 trajectory: the substrate is now agnostic about *what orchestration exists*, not just what kinds and coordination shapes exist. The "gap → spec revision" pattern for new acceptance criteria becomes "gap → persona proposes orchestration → kernel signs + trust-calibrates → kind enters registry."
+- (+) Orchestration adapts per environment: a chip-design lab, a pharma trial, and a companion relationship can each evolve their own classification, acceptance, and run shapes without substrate changes.
+- (+) Full backward compatibility via the seed-kind tier; no data migration; L1/L2/L3 conformance levels retained.
+- (−) **Acceptance-soundness verification of arbitrary, fully-open orchestration is the new complexity bottleneck** (the orchestration analogue of ADR-0045's shape-validation cost). The mitigation is honest trust-calibration rather than a priori restriction: an unvalidated acceptance method cannot *bypass* the floor or signing, but it *can* be wrong — and its verdicts carry correspondingly low trust until evidence accrues. Deployments that need a hard floor on acceptance methods set operator policy (source 4) to pin a minimum-trust pathway for safety-critical task families.
+- (−) Operator review burden shifts from "approve a spec change" to "approve / pin a proposed orchestration kind," reusing the ADR-0045 operator tooling.
+- (−) J4 is a vision-level invariant; reframing it is foundational and was made deliberately, not silently — the guarantee is preserved, the enumeration relocated.
+
+**Alternatives considered.**
+- *Bounded-compositional orchestration (compose only from a fixed acceptance-primitive set).* This is the direct analogue of ADR-0045's accepted model and keeps kernel validation tractable. Rejected per the alignment decision in favour of fully-open orchestration: the design goal is maximal emergence, and J5 + the immovable floor + trust-calibration make "fully open" safe without an a-priori method whitelist. (Operators MAY still impose the bounded set as policy where they want it.)
+- *Keep orchestration fixed (status quo).* Rejected: reproduces, at the orchestration layer, exactly the C4-meta-level contradiction ADR-0045 was created to remove.
+- *Let operators (not personas) define orchestration.* Rejected on the same grounds as ADR-0045: the persona is the cognitive worker who encounters the orchestration need; operators gate safety-critical promotions and MAY pin policy, but do not author workflow topology.
+- *A new parallel orchestration subsystem.* Rejected: orchestration is coordination of the run loop, so it folds into the existing `15_COORDINATION_SHAPES.md` framework as a fourth scope — unification, not a parallel model.
+
+**Implementation scope.** This ADR is landed with full normative spec edits: the J4 reframe and C4 extension ([`00_VISION.md §3`, A.1, A.2](00_VISION.md#3-invariants-j1j9)), the emergent-orchestration section ([`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes)), the orchestration coordination scope ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop)), glossary, schema-registry entries, and the A-EO acceptance-test family. ADR-0006 and ADR-0011 carry supersession notes pointing here.
 
 ---
 

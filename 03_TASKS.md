@@ -7,7 +7,7 @@ status: Stable
 
 > **Reader guide.** Every piece of work in PersonaOS is a *task*. In this document, you'll learn how the system classifies work into 10 types, decides when work is "done" through 8 acceptance pathways, and routes tasks to the right workspace and personas. **Prerequisites:** `00_VISION.md` (invariant J4), `01_KERNEL.md` (safety floor). **Key terms:** *task class* = what kind of work this is (question, creative request, conversation, etc.); *acceptance pathway* = how "done" is determined (computer check, panel review, user approval, etc.); *routing mode* = whether one persona, a project team, or a temporary session handles the task.
 
-Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). This document specifies the 10 task classes, the 8 acceptance pathways, the 3 routing modes (A / B / C), the task classifier + demotion ladder, and the canonical AnswerPackage. It realises invariant J4 and INV_R1…INV_R11 for round-based pathways.
+Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). This document specifies the ten **seed** task classes, the eight **seed** acceptance pathways, the 3 routing modes (A / B / C), the task classifier + demotion ladder, and the canonical AnswerPackage. Per [§2a](#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes) (ADR-0066) these are emergent KindRegistry kinds, not a closed set; orchestration itself is emergent. It realises invariant J4 (reframed as a property invariant — acceptance is signed, floor-cleared, and trust-calibrated to its orchestration) and INV_R1…INV_R11 for round-based pathways.
 
 ## 0. Status & scope
 
@@ -71,15 +71,17 @@ For full technical detail on any concept above, see the corresponding section in
 
 ## 1. The shift
 
-v1.0 routes every [task](12_GLOSSARY.md#t) through one of **10 task classes** to one of **8 [acceptance pathways](12_GLOSSARY.md#a)**, via one of **3 routing modes**. The [kernel](12_GLOSSARY.md#k) classifies the task, picks the pathway, dispatches to the right [environment](12_GLOSSARY.md#e) + members, and evaluates acceptance per pathway.
+v1.0 routes every [task](12_GLOSSARY.md#t) through a task class to an [acceptance pathway](12_GLOSSARY.md#a), via a routing mode. The [kernel](12_GLOSSARY.md#k) classifies the task, picks the pathway, dispatches to the right [environment](12_GLOSSARY.md#e) + members, and evaluates acceptance per pathway. The **10 task classes**, **8 acceptance pathways**, and **3 routing modes** described in this document are the STANDARDISED **seed** kinds; per [§2a](#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes) (ADR-0066) they are not a closed set — orchestration is emergent, and the run loop itself is a coordination shape personas evolve in their environment.
 
 *Task-flow diagram: task arrives, kernel classifies, picks pathway, dispatches via routing mode, persona responds, kernel evaluates acceptance, AnswerPackage returned.* See [Appendix A.1](#appendix-a1--task-flow-diagram-1).
 
 **Tests:** A-T1 (classifier latency), A-T13–A-T15 (routing modes A / B / C), A-T19 (AnswerPackage status enum). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
-## 2. The ten task classes
+## 2. The ten seed task classes
 
-*Table mapping each of the 10 task classes to an example and its default acceptance pathway.* See [Appendix A.2](#appendix-a2--ten-task-classes-table-2).
+*The ten classes below are the STANDARDISED **seed** task-class kinds (per [§2a](#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes) / ADR-0066), not a closed set. New classes are emergent KindRegistry kinds.*
+
+*Table mapping each of the 10 seed task classes to an example and its default acceptance pathway.* See [Appendix A.2](#appendix-a2--ten-task-classes-table-2).
 
 ### 2.1 TaskClass classification
 
@@ -143,9 +145,33 @@ A persona's `primary_disposition` biases mode selection when multiple modes are 
 
 **Tests:** A-T2 (CONVERGENT → VERIFIER_ACCEPT), A-T3 (DIVERGENT → PANEL_ACCEPT), A-T4 (MIXED), A-T5 (INTERACTIVE → GOAL_PROGRESS_ACCEPT), A-T6 (RELATIONAL → USER_ACCEPT), A-T7 (PEDAGOGIC), A-T8 (PERFORMATIVE → ENGAGEMENT_ACCEPT), A-T9 (EXISTENTIAL → OPEN_ENDED), A-T10 (DELEGATED), A-T11 (INVESTIGATIVE → PROJECT_PROGRESS_ACCEPT), A-T25 (mode-by-class dispatcher bias). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
-## 3. The eight acceptance pathways
+## 2a. Orchestration is emergent — classes, pathways, and the run loop are coordination shapes
 
-*Table of all 8 acceptance pathways with their semantics.* See [Appendix A.11](#appendix-a11--eight-acceptance-pathways-table-3).
+*This section is normative. It reframes the ten task classes (§2) and eight acceptance pathways (§3) per [ADR-0066](14_DECISIONS.md#adr-0066--self-organizing-orchestration-the-run-loop-is-an-emergent-coordination-shape-not-a-fixed-dispatcher). It extends ADR-0045 (emergent coordination) to the run loop itself: how work is classified, sequenced, evaluated, and accepted is **emergent persona behaviour in the environment, not a fixed kernel loop.***
+
+**The reframe.** v1.0.x treated the task classes, acceptance pathways, routing modes, and the INVESTIGATIVE phase arc as a closed, kernel-fixed set. This reproduced, at the orchestration layer, the C4-meta-level contradiction that [ADR-0045](14_DECISIONS.md) removed for coordination: the substrate was agnostic about *content* and *coordination* but not about *orchestration*. ADR-0066 closes that gap.
+
+1. **`TaskClass` and `AcceptancePathway` are emergent KindRegistry kinds.** They are resolved by name and promoted through the same four-stage lifecycle (EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED) as every other kind ([`06_DOMAIN §7.5–§7.6`](06_DOMAIN.md#75-emergent-kind-proposals-v10--substrate-domain-agnostic)). Substrate code MUST resolve them from the registry and MUST NOT branch on a closed `Literal[...]` of class or pathway names ([`C4`](00_VISION.md#3-invariants-j1j9), the ADR-0006 conformance line extended to orchestration).
+
+2. **The run loop is an emergent orchestration coordination shape.** The dispatcher sequence (clarify → classify → route → execute → evaluate → accept) and phase structures (e.g. the INVESTIGATIVE four-phase arc of §2.3) are compositions of the coordination meta-mechanisms — primarily `StagedSequence` with gates — declared in the environment's `EnvironmentCoordinationProfile`, NOT kernel constants. See [`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop).
+
+3. **The v1.0 set ships as STANDARDISED seed kinds.** The ten task classes (§2), eight acceptance pathways (§3), three routing modes, and the INVESTIGATIVE phase arc enter the registry pre-promoted at STANDARDISED tier. They remain the default mapping verbatim; existing behaviour, the J4 seed table ([`00_VISION §3 A.1`](00_VISION.md#3-invariants-j1j9)), and the L1/L2 conformance levels are unchanged — they now describe *seed* kinds rather than a closed enum.
+
+4. **Orchestration is fully open.** A persona MAY propose an arbitrary task class, acceptance pathway, run-loop shape, or **new kernel-level acceptance primitive** (the coordination meta-mechanism set is itself extensible by promotion). The kernel does NOT restrict orchestration topology and MUST NOT refuse a proposal merely because it is novel.
+
+5. **Safety is preserved by trust-calibration, not by restricting topology** ([`J4`](00_VISION.md#3-invariants-j1j9), [`J5`](00_VISION.md#3-invariants-j1j9)). Every orchestration action MUST be signed and lineage-tracked (J2/J9), floor-cleared (J3, all eight sources, most-restrictive-wins), and budget-admitted (INV-7). A verdict produced by an emergent or unvalidated acceptance method MUST enter at EMERGENT trust and degrade honestly until validated — exactly as emergent-domain outputs do ([`C3`](00_VISION.md#3-invariants-j1j9)) — and the AnswerPackage MUST record the producing orchestration kind and its promotion stage so downstream consumers and audits see the provenance. "Fully open" means open *topology*, never bypass of the floor or signing.
+
+6. **Operator gates and pins are retained.** Safety-critical proposed pathways and orchestration shapes MUST hit the [`C2`](00_VISION.md#3-invariants-j1j9) operator gate before promotion. Operator policy (floor source 4) MAY pin a minimum-trust or specific seed pathway for a task family (e.g. "safety-critical CONVERGENT work MUST use a STANDARDISED VERIFIER_ACCEPT-class pathway"), giving deployments a hard floor on acceptance methods where they want one.
+
+*`TaskClass` and `AcceptancePathway` are registered as KindRegistry-resolved schemas; see [`09_PROTOCOLS.md §7.2`](09_PROTOCOLS.md#72-acceptance--task). The classifier (§2.1) and demotion ladder (§2.2) operate over the resolved kind set, not a hardcoded enum; a proposed class with no usable acceptance kind demotes per §2.2 with a signed event.*
+
+**Tests:** A-EO1–A-EO10 (emergent orchestration: seed-kind resolution, persona-proposed pathway admitted under trust-calibration, novel pathway not refused for novelty, unvalidated-pathway verdict carries EMERGENT trust, floor/signing never bypassed, safety-critical pathway gated by C2, operator pin honoured, run-loop-as-StagedSequence). See [`11_ACCEPTANCE_TESTS.md §9o`](11_ACCEPTANCE_TESTS.md). Seed-mapping tests A-T2–A-T11 continue to hold against the STANDARDISED seed set.
+
+## 3. The eight seed acceptance pathways
+
+*The eight pathways below are the STANDARDISED **seed** acceptance-pathway kinds (per §2a / ADR-0066), not a closed set. New pathways are emergent KindRegistry kinds proposed by personas and trust-calibrated under J4.*
+
+*Table of all 8 seed acceptance pathways with their semantics.* See [Appendix A.11](#appendix-a11--eight-acceptance-pathways-table-3).
 
 ### 3.1 Pathway details
 
@@ -360,6 +386,7 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-TASKS-4 | `GOAL_PROGRESS_ACCEPT` depends on goal quality. Vague goals → vague signals. | Medium | High | Operator + user co-define goals at task start; goal-quality classifier flags vague goals at admission. | v1.1 (goal-quality classifier). |
 | R-TASKS-5 | `OPEN_ENDED` quality assessment is post-hoc. No real-time acceptance; trajectory quality judged retrospectively. | Medium | High | Periodic reflection checkpoints; user-feedback surface during execution; A-T9 acceptance test. | v1.0 (baseline); v1.2 (mid-trajectory probes). |
 | R-TASKS-6 | Multi-class tasks add latency. Decomposition + sequencing increases tail latency. | Low | Medium | Single-class fast path retained; classifier produces estimate ≤ 200 ms p95 (A-T1). | v1.0 (baseline). |
+| R-TASKS-7 | Fully-open emergent orchestration (§2a, ADR-0066) means an unvalidated persona-proposed acceptance method can be *wrong* (silently accept poor work) even though it cannot bypass the floor or signing. Acceptance-soundness verification of arbitrary methods is the new complexity bottleneck. | High | Medium | Trust-calibration (J4/J5): emergent-pathway verdicts enter at EMERGENT trust and degrade honestly; AnswerPackage records producing kind + stage; safety-critical pathways gated by C2; operators MAY pin a minimum-trust/seed pathway per task family (floor source 4); A-EO7–A-EO10. Cross-document: also `00_VISION §11`. | v1.1 (trust-calibration + operator pin). |
 
 ## 9a. Open questions
 
@@ -372,6 +399,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-TASKS-3 | DELEGATED inheritance semantics for cross-domain sub-tasks: does the sub-task inherit parent's domain trust, its own assigned domain's trust, or the minimum? | — | v1.1 cross-domain delegation. |
 | OQ-TASKS-4 | INVESTIGATIVE sub-mode taxonomy (exploration / verification / synthesis / expert_review) — is four enough? Some projects have a distinct "calibration" or "rehearsal" sub-mode that doesn't fit cleanly. | Project WG | v1.1 sub-mode extension. |
 | OQ-TASKS-5 | OPEN_ENDED mid-trajectory probes: how often, what cost ceiling, what user-facing UX? | — | v1.2 probe design. |
+| OQ-TASKS-6 | Fully-open orchestration (ADR-0066): what is the right default trust-decay curve and evidence threshold for promoting an emergent acceptance pathway EMERGENT → RECOGNISED, and should the bounded-compositional mode (compose only from seed primitives) be offered as a selectable operator policy profile? | Task WG | v1.1 orchestration-promotion tuning. |
 
 ## 10. Acceptance tests
 

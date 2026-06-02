@@ -545,9 +545,11 @@ Encoding per [`SPEC_CONVENTIONS.md §4`](SPEC_CONVENTIONS.md#4-schemas). Where a
 
 | Schema | Version | Form | Defined in | Stability | Used by |
 |--------|---------|------|------------|-----------|---------|
-| `AnswerPackage` | `answer/4` | dataclass | [`03_TASKS.md §6`](03_TASKS.md) | Stable | Canonical task output. |
+| `AnswerPackage` | `answer/4` | dataclass | [`03_TASKS.md §6`](03_TASKS.md) | Stable | Canonical task output. Carries the producing orchestration kind + promotion stage for trust-calibration (ADR-0066). |
 | `AcceptanceConfig` | `acceptance-config/1` | dataclass | [`03_TASKS.md §3`](03_TASKS.md) | Stable | Per-pathway routing config. |
-| `TaskClassEstimate` | `task-class-estimate/1` | dataclass | [`03_TASKS.md §4`](03_TASKS.md) | Stable | Classifier output. |
+| `TaskClassEstimate` | `task-class-estimate/1` | dataclass | [`03_TASKS.md §4`](03_TASKS.md) | Stable | Classifier output over the resolved class-kind set. |
+| `TaskClass` | KindRegistry-resolved (`task_class_kinds`) | name | [`03_TASKS.md §2a`](03_TASKS.md) | Emergent (ADR-0066) | Emergent task-class kind; v1.0 ten classes seeded STANDARDISED. Resolved by name, never a closed `Literal[...]`. |
+| `AcceptancePathway` | KindRegistry-resolved (`acceptance_pathway_kinds`) | name | [`03_TASKS.md §2a`](03_TASKS.md) | Emergent (ADR-0066) | Emergent acceptance-pathway kind; v1.0 eight pathways seeded STANDARDISED. An orchestration coordination shape ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md)) composes a class→pathway binding from the meta-mechanisms. |
 
 ### 7.3 Project workspace (env type)
 
@@ -725,7 +727,7 @@ v1.1 addition (ADR-0045, [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md
 | `StageDefinition` | `stage-definition/1` | dataclass | [`15_COORDINATION_SHAPES.md §3.3`](15_COORDINATION_SHAPES.md) | Draft | Stage within a StagedSequence. |
 | `StreamPolicyShape` | `stream-policy-shape/1` | dataclass | [`15_COORDINATION_SHAPES.md §3.4`](15_COORDINATION_SHAPES.md) | Draft | Meta-mechanism: aggregate/propagate events. |
 | `DerivedMetricShape` | `derived-metric-shape/1` | dataclass | [`15_COORDINATION_SHAPES.md §3.5`](15_COORDINATION_SHAPES.md) | Draft | Meta-mechanism: compute metrics from state. |
-| `EnvironmentCoordinationProfile` | `env-coordination-profile/1` | dataclass | [`15_COORDINATION_SHAPES.md §4.4`](15_COORDINATION_SHAPES.md) | Draft | Per-env active coordination shapes across 3 scopes. |
+| `EnvironmentCoordinationProfile` | `env-coordination-profile/1` | dataclass | [`15_COORDINATION_SHAPES.md §4.4`](15_COORDINATION_SHAPES.md) | Draft | Per-env active coordination shapes across 4 scopes (intra-env, env-to-external, env-to-env, orchestration). v1.1: additive `orchestration_shapes` (§4a, ADR-0066); version retained. |
 | `CoordinationShapeBinding` | `coordination-shape-binding/1` | dataclass | [`15_COORDINATION_SHAPES.md §4.4`](15_COORDINATION_SHAPES.md) | Draft | Shape binding within an env's coordination profile. |
 | `CoordinationShapeEvent` | `coordination-shape-event/1` | dataclass | [`15_COORDINATION_SHAPES.md §4.4`](15_COORDINATION_SHAPES.md) | Draft | Lineage event for shape lifecycle transitions. |
 | `ProposedCoordinationShape` | `proposed-coordination-shape/1` | dataclass | [`15_COORDINATION_SHAPES.md §5`](15_COORDINATION_SHAPES.md) | Draft | Persona-proposed coordination pattern. |

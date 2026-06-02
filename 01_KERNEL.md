@@ -581,6 +581,8 @@ When a task arrives, the kernel dispatches:
 
 The dispatcher composes context (project + env + domain), respects acceptance pathway, applies safety floor, and mints envelopes.
 
+**Emergent orchestration (ADR-0066).** The classify → select-pathway → route → execute → evaluate → accept sequence above is the STANDARDISED **seed** orchestration shape, not a kernel-fixed loop. Task classes and acceptance pathways are emergent KindRegistry kinds resolved by name; the run loop is an environment-scoped orchestration coordination shape ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop)) that personas MAY evolve. The kernel does not restrict orchestration topology; it guarantees that every dispatch action is signed, floor-cleared, and budget-admitted, and that verdicts from emergent/unvalidated pathways are trust-calibrated (J4/J5). The verifier cascade (§13.1) and round barrier (§13.3) remain the seed mechanisms a pathway composes; they are not bypassable. See [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes).
+
 ## 10. Authority decision matrix (concise)
 
 For decisions in PersonaOS, who has authority?

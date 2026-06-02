@@ -429,6 +429,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Observation Surface** — PettingZoo-style filter on which events a member observes; per-membership (durable). See `05_ENVIRONMENT.md §9`.
 
+**Orchestration (emergent) / orchestration shape** — How work is classified, sequenced, evaluated, and accepted. Per ADR-0066 this is not a fixed kernel loop but the fourth coordination scope: an emergent coordination shape composed from the meta-mechanisms and declared in the `EnvironmentCoordinationProfile`. Task classes and acceptance pathways are emergent KindRegistry kinds (v1.0 set seeded as STANDARDISED); safety is preserved by trust-calibration (J4/J5), not by restricting topology. See `03_TASKS.md §2a`, `15_COORDINATION_SHAPES.md §4a`.
+
 **Optimal distinctiveness** — The variety band a genesis seed MUST fall within: distinct enough to be genuinely new (refuse clones → `niche_occupied`/fork) yet near enough to integrate (refuse aliens → `out_of_distinctiveness_band`). After Brewer's optimal-distinctiveness theory. See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
 
 **Obligation** — Commitment between personas in a project; both parties sign at commitment; discharge requires verifier-attested evidence. See `04_PROJECT.md §9`.
@@ -681,7 +683,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Tactic** — EVOLVE-BLOCK heuristic in SOUL.md; per-persona; signed mutations via mutation operators. See `08_KNOWLEDGE.md §2`.
 
-**Task Class** — v1.0 has 10 task classes: CONVERGENT / DIVERGENT / MIXED / INTERACTIVE / RELATIONAL / PEDAGOGIC / PERFORMATIVE / EXISTENTIAL / DELEGATED / INVESTIGATIVE. See `03_TASKS.md §2`.
+**Task Class** — An emergent KindRegistry kind (ADR-0066) describing a kind of work for orchestration purposes. v1.0 ships ten STANDARDISED **seed** classes: CONVERGENT / DIVERGENT / MIXED / INTERACTIVE / RELATIONAL / PEDAGOGIC / PERFORMATIVE / EXISTENTIAL / DELEGATED / INVESTIGATIVE; personas MAY propose new ones. See `03_TASKS.md §2`, `§2a`.
 
 **TaskFingerprint** — Embedding of (task statement, examples, constraints, env, tools); used for K-line matching and routing weight scoping. See `01_KERNEL.md §1`.
 
@@ -758,13 +760,13 @@ The definitions in this document are **documentation-normative**: when a term de
 **7-scope memory tagging** — user / persona / session / project / env / app / org. See `08_KNOWLEDGE.md §5`.
 **8 environment base types** — Solo / Pair / Team / Lab / Debate / Community / Constrained / Project_workspace. See `05_ENVIRONMENT.md §3`.
 **7 persona layers** — Identity / Capability / Experience / Relationships / Mood / Goals / Voice. See `02_PERSONA.md §2`.
-**8 acceptance pathways** — VERIFIER_ACCEPT / PANEL_ACCEPT / USER_ACCEPT / MUTUAL_ACCEPT / ENGAGEMENT_ACCEPT / GOAL_PROGRESS_ACCEPT / OPEN_ENDED / PROJECT_PROGRESS_ACCEPT. See `03_TASKS.md §3`.
+**8 acceptance pathways** — The STANDARDISED **seed** acceptance-pathway kinds (ADR-0066; not a closed set): VERIFIER_ACCEPT / PANEL_ACCEPT / USER_ACCEPT / MUTUAL_ACCEPT / ENGAGEMENT_ACCEPT / GOAL_PROGRESS_ACCEPT / OPEN_ENDED / PROJECT_PROGRESS_ACCEPT. New pathways are emergent KindRegistry kinds, trust-calibrated under J4. See `03_TASKS.md §3`, `§2a`.
 **8 evolution signals** — bench_measurement / peer_review / verified / panel / user_feedback / project_milestone / engagement / rejection. See `02_PERSONA.md §8.1`.
 **8 knowledge artefacts** — Tactic / Skill / Tool / Rubric / Lesson / K-line / ProvenFact / Meta-prompt. See `08_KNOWLEDGE.md §2`.
 **8 safety floor sources** — universal harm / persona charter / user boundary / operator policy / domain safety extensions / external-tool-required / novelty-check / env charter. Plus 9th advisory. See `01_KERNEL.md §2`.
 **9 v1.0 invariants** — J1-J9 (with 4 commitments C1-C4). See `00_VISION.md §2`.
 **10 kernel invariants** — INV-1..10. See `00_VISION.md §3`.
-**10 task classes** — CONVERGENT / DIVERGENT / MIXED / INTERACTIVE / RELATIONAL / PEDAGOGIC / PERFORMATIVE / EXISTENTIAL / DELEGATED / INVESTIGATIVE. See `03_TASKS.md §2`.
+**10 task classes** — The STANDARDISED **seed** task-class kinds (ADR-0066; not a closed set): CONVERGENT / DIVERGENT / MIXED / INTERACTIVE / RELATIONAL / PEDAGOGIC / PERFORMATIVE / EXISTENTIAL / DELEGATED / INVESTIGATIVE. See `03_TASKS.md §2`, `§2a`.
 **11 round invariants** — INV_R1..R11. See `00_VISION.md §4`.
 **11 anti-Goodhart safeguards** — jury heterogeneity / rotation / position-swap / length-control / versioned rubric / dissent preservation / style-strip / spot-check holdout / Goodhart canary / alternative rubric / caller-acceptance. See `08_KNOWLEDGE.md §2`.
 **Media kinds (open set)** — v1.0 ships **no closed media-kind enum** (commitment C4). The MetaRegistry seeds seven media-shape-only kinds — `text`, `code`, `structured_data`, `table`, `plot`, `binary`, `external_ref` — whose storage class and MIME carry no domain knowledge. All other kinds (e.g. `schematic`, `spice_netlist`, `kicad_project`, `formal_proof`, `floor_plan`, `ifc_model`, `gantt_schedule`, `hamiltonian`) are emergent: a persona facing an unfamiliar shape drafts a `ProposedMediaKind` (`06_DOMAIN §7.5`); on acceptance the kind enters the per-domain `KindRegistry` (`06_DOMAIN §7.6`); on cross-domain standardisation it promotes to the MetaRegistry. See `07_ARTIFACTS.md §2`.
