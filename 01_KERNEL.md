@@ -514,6 +514,15 @@ Public-key registry for federation peers to verify signatures.
 **Technical detail:** See [A.32](#appendix-a32).
 
 
+### 4.4 Global identity handles + cross-node verification (J1, ADR-0067)
+
+A kernel is a **node**: it *roots* the identities it mints but does not silo them. Every first-class entity it mints — persona, environment, project, domain, artifact bundle, knowledge / skill / tool record — carries, alongside its kernel-minted ULID (and, for content, its SHA-256 `content_hash`), a **stable global handle**: a W3C DID over the kernel id (`09_PROTOCOLS §3F`), of the canonical form `did:personaos:<node-id>/<kind>/<entity-id>`. The ULID remains the local primary key (no schema break, INV-10-safe); the global handle is the additive, node-agnostic resolution key by which any other node references the entity.
+
+**Cross-node verification.** Because every lineage event and projection is Ed25519-signed under the scope-key hierarchy (§4) and each node publishes its key registry at `.well-known/personaos-keys.json` (§4.2), a signature rooted in node A's chain is **globally verifiable** by node B: B resolves the signer's DID to A's published scope key and checks the signature over canonical fields. There is no central authority — verification is by signature + DID resolution. This makes J1's guarantee (identity owned, unforgeable, signed) hold *globally*, not merely within the minting node.
+
+**Access-gated reference.** A global handle does not by itself confer access. Resolving, reading, or acting on a referenced entity is gated by its `AccessPolicy` (`09_PROTOCOLS §3G.3`): a principal must hold at least `discover` to learn the entity exists, and `read`/`write`/`admin` for deeper operations, composed most-restrictive-wins exactly as the safety floor composes (§2.1).
+
+
 ## 5. Schema validation (INV-10)
 
 The kernel MUST validate every schema at every boundary (ingress, egress, persistence, and lineage emission). The kernel MUST refuse any message whose `schema` value is not registered in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry).

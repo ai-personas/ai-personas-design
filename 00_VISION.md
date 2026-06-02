@@ -28,7 +28,7 @@ PersonaOS is an operating system for AI Personas. It manages "personas" -- persi
 
 **The nine invariants (J1 through J9) -- the non-negotiable rules**
 
-- **J1 -- Identity belongs to the system core.** The central system (the "kernel") owns every persona's identity. The AI engine can never secretly change who that persona is.
+- **J1 -- Identity is rooted in a kernel-node and globally referenceable.** Every persona's identity is created and signed by a kernel (a *node*), which guarantees the AI engine can never secretly change who that persona is. That same identity is also a globally unique, referenceable, verifiable reference (a stable global handle / W3C DID over the kernel-minted id) that any other node can resolve and signature-verify, subject to access levels. A kernel *roots* identity — owned, unforgeable, signed — it does not silo it. See ADR-0067.
 - **J2 -- Every action is recorded and tamper-proof.** Every change is written into an append-only log and digitally signed. Nothing is ever silently deleted.
 - **J3 -- Safety checks are universal.** Eight separate safety checks run before every action. The strictest rule always wins.
 - **J4 -- Work is checked in a way that fits it, and the check is honest about itself.** Different tasks (math, creative writing, teaching) get different approval methods. The system does not keep a fixed list of approval methods: personas invent new ones as the work demands. The kernel's promise is not *which* method is used but that every verdict is signed, passes the safety floor, and carries a trust level matching how proven its method is — a brand-new, untested approval method produces low-confidence verdicts until it earns trust.
@@ -115,7 +115,7 @@ v1.0 explicitly does **NOT** attempt the following (each is detailed in [§10](#
 
 The following are v1.0's nine top-level invariants. They are normative; any conformant implementation MUST enforce all of them. Acceptance tests in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) verify each one (A-J1 … A-J9 plus A-C1 … A-C4).
 
-*Nine invariants covering identity ownership, append-only lineage, universal safety floor, class-appropriate acceptance, open capability, first-class relationships, body interchangeability, project-as-environment unification, and environment lineage. J8 is retired (absorbed into J9). See [§0a](#0a-plain-language-guide) for an everyday-language explanation.*
+*Nine invariants covering identity rooting (globally referenceable, ADR-0067), append-only lineage, universal safety floor, class-appropriate acceptance, open capability, first-class relationships, body interchangeability, project-as-environment unification, and environment lineage. J8 is retired (absorbed into J9). See [§0a](#0a-plain-language-guide) for an everyday-language explanation.*
 
 **Technical detail:** See [A.1](#appendix-a1).
 
@@ -393,10 +393,17 @@ The appendices below contain the full technical specifications, invariant defini
 <a id="appendix-a1"></a>
 
 ```text
-J1  Identity is owned by the kernel.
-    Bodies (Claude, GPT, frameworks) never edit Souls. SOUL.md +
+J1  Identity is rooted in a kernel-node and globally referenceable.
+    A persona's identity is created and signed by a kernel (a node):
+    bodies (Claude, GPT, frameworks) never edit Souls; SOUL.md +
     soul.state.json are kernel-signed; mutations are signed and
-    lineage-tracked.
+    lineage-tracked. The SAME identity is globally unique,
+    referenceable, and verifiable -- expressed as a stable global
+    handle / W3C DID over the kernel-minted ULID (09_PROTOCOLS §3F),
+    resolvable and signature-verifiable by any other node subject to
+    its AccessPolicy (09_PROTOCOLS §3G.3). A kernel ROOTS identity
+    (guarantee preserved: owned, unforgeable, signed); it does not
+    silo it. See ADR-0067.
 
 J2  Lineage is append-only and signed.
     All artefact derivations, verifier verdicts, persona events,
@@ -540,7 +547,7 @@ C4 (from J1, J5)  Substrate is agnostic about content, coordination,
 <a id="appendix-a3"></a>
 
 ```text
-INV-1  Identity is kernel-owned. (≡ J1)
+INV-1  Identity is kernel-rooted and globally referenceable. (≡ J1)
        SOUL.md + soul.state.json are kernel-signed (soul/4, soul-state/6);
        no body process may write either. Mutation = signed kernel
        transaction. Mechanism: 02_PERSONA §3, 01_KERNEL §4.
