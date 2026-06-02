@@ -577,6 +577,8 @@ The sandbox is the trust boundary for code execution. A failed sandbox is signed
 
 **Technical detail:** See [A.37](#appendix-a37).
 
+**Budget-headroom signal (read-only; ADR-0071).** Alongside the hard `can_call()` gate, `BudgetState` exposes a read-only **headroom** view — the remaining fraction of each dimension (notably `candidates_remaining` and `cost_remaining`) against the envelope. This signal does **not** gate anything by itself; it is consumed by (a) a `ContinuousRefinementMission` to scale per-round exploration breadth — more headroom → more candidate refinements → higher best-so-far ([`03_TASKS §2c`](03_TASKS.md#2c-continuousrefinementmission--anytime-convergence-bounded-budget-scaled-improvement-adr-0071)); and (b) the population-pressure signal's budget-headroom factor and budget-derived carrying capacity ([`16_POPULATION_DYNAMICS §4A/§4F`](16_POPULATION_DYNAMICS.md)). The hard INV-7 gate is unchanged and is never bypassed by either consumer; headroom only informs *how much to attempt within* what the gate already permits.
+
 
 ## 8. Observability (OpenTelemetry)
 

@@ -3250,6 +3250,39 @@ A-SCHED7  An operator-authored non-default SchedulingPolicy is honored but
           more than its AccessPolicy capability.
 ```
 
+## 9q. Continuous refinement mission tests (A-REF*) — ADR-0071
+
+```text
+A-REF1    A ContinuousRefinementMission iterates over an artefact bundle,
+          keeping best-so-far; an inferior candidate never regresses the
+          accepted best (anytime semantics).
+A-REF2    Convergence: when the MarginalValueMetric (objective-vector gain)
+          stays < epsilon for N consecutive rounds, the mission emits
+          converged / no_further_improvement and returns best-so-far.
+A-REF3    Budget-scaled quality: with a larger budget, per-round candidate
+          breadth (min(objective-headroom, candidates_remaining)) is higher
+          and the final objective vector is measurably better — quality is
+          monotone non-decreasing in budget.
+A-REF4    Auto-reopen: an active, un-converged mission in paused_budget
+          resumes from best-so-far on budget replenishment without a manual
+          fork; a converged mission stays closed unless MissionObjective
+          changes.
+A-REF5    Three-condition termination: the mission stops on the FIRST of
+          convergence, user/operator stop (user_terminated /
+          operator_terminated), or INV-7 budget_exhausted.
+A-REF6    Budget->emergence: an improvement-blocking capability gap + budget
+          headroom raises population-pressure factor 7, triggering
+          recruitment-exhausted-first then genesis of the needed specialist
+          and/or an EnvFormationProposal sub-env; all ReplicationBound-capped
+          and operator-cosigned; with no budget headroom, no genesis fires.
+A-REF7    Floor/INV-7 integrity: a refinement action that fails the 8-source
+          floor is refused exactly as any other; refinement never bypasses
+          the floor, signing, or the INV-7 hard budget gate.
+A-REF8    Bounded autonomy: per-round sub-goals are CharteredElaborations
+          within the MissionCharter drift bounds; an attempt to elaborate a
+          NEW top-level goal outside the bounds is refused.
+```
+
 ## 9e. Risks & known limitations
 
 Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations). This section captures risks intrinsic to the *catalogue itself* — risks intrinsic to the underlying mechanisms are recorded in the doc that defines each mechanism.
