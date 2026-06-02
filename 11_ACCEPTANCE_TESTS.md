@@ -274,7 +274,7 @@ QUARTERLY (population dynamics + federation)
   A-CR13 (federated cross-kernel promotion)
   A-RL5 (multi-tenant)
   A-RL11 (dormant domain auto-detection)
-  v1.1+ federation tests (to be defined)
+  cross-node families (§9p: A-GLOBAL*, A-XD*, A-SCHED*)
 
   Estimated: ~40 tests run quarterly
 ```
@@ -1192,13 +1192,13 @@ A-GF-HAZ-4   Operator may swap seed bundle entirely; the seed bundle
              CredentialDirectoryRef.
 ```
 
-### A-GF-FDP — FederatedDomainProbe deferred to v1.1 (06_DOMAIN §4.8)
+### A-GF-FDP — FederatedDomainProbe (normative; 06_DOMAIN §4.8, ADR-0067)
 
 ```text
-A-GF-FDP-1   FederatedDomainProbe schema is reserved;
-             instantiation refused until v1.1 federation kernel
-             registration is online.
-A-GF-FDP-2   single-kernel probes are prior_domain_amortizable
+A-GF-FDP-1   FederatedDomainProbe instantiates across nodes discovered
+             over §3G, access-gated; participating nodes referenced by
+             global handle; honesty of independent nodes trust-calibrated.
+A-GF-FDP-2   single-node probes are prior_domain_amortizable
              into a future FederatedDomainProbe via the
              prior_domain_amortization pledge kind (§4.7.1).
 A-GF-FDP-3   When v1.1 enables: drift_audit_interval re-hash of
@@ -1428,9 +1428,14 @@ A-GEN23     Niche recalibration: sustained false_collision_rate emits
              niche_recalibration_advisory; under learned/cvt mode descriptors
              re-fit and formerly-colliding proposals resolve to distinct
              cells (§4I).
-A-GEN24     Cross-kernel boundary: GenesisProposal naming a foreign kernel as
-             author/host REFUSED cross_kernel_genesis_not_supported_v1_1;
-             population_ceiling not evadable across kernels (§4J).
+A-GEN24     Cross-node bound aggregation: GenesisProposal naming a sibling
+             node as author/host is admitted iff the GLOBAL aggregated
+             persona_genesis ReplicationBound clears; REFUSED
+             genesis_exceeds_global_replication_bound when the global
+             ceiling/rate/depth would be exceeded, and
+             global_replication_bound_unverifiable (fail-closed) when the
+             global counter cannot be confirmed; population_ceiling not
+             evadable across nodes (§4J).
 
 MEMBER-ZERO ARCHIVAL (; §5.3)
 A-EN-v1.0-13  Env with empty active members for member_zero_window
@@ -1454,7 +1459,9 @@ A-EN-v1.0-18  Federated persona submits EnvSelfProposalRequest to a
              run; decision signed.
 A-EN-v1.0-19  Decline triggers self_proposal_cooldown (default 90 days);
              early re-submit refused unless operator overrides.
-A-EN-v1.0-20  Tenant-visible envs refuse cross-kernel self-proposals.
+A-EN-v1.0-20  Tenant-visible envs admit cross-node self-proposals from
+              peers holding the requisite AccessPolicy capability (UCAN);
+              an unauthorized cross-node self-proposal is refused at intake.
 
 STATE-KIND PROMOTION (; §6, §11.3)
 A-EN-v1.0-21  availability + focus_kind + QuietPeriod.suppression
@@ -1635,9 +1642,12 @@ A-EF-30   recruit_kernel_id != proposing_kernel_id triggers joined-env
           formation path per 09_PROTOCOLS §3C; proposer's kernel
           becomes host kernel; signed JOINED_ENV_FORMED event in
           addition to ENV_FORMED.
-A-EF-31   v1.0 local-env-with-remote-member is refused;
-          cross_kernel_local_env_not_supported_v1_0 signed event;
-          deferred to v1.1.
+A-EF-31   local-env-with-remote-member is admitted (global object space):
+          the remote recruit (referenced by global handle) joins under its
+          AccessPolicy + a UCAN capability; cross-node attention/budget
+          compose most-restrictive-wins; a sleeping remote node degrades the
+          member to presence=dormant without stalling the env (09_PROTOCOLS
+          §3H). No cross_kernel_local_env refusal (retired, §12c.4).
 
 WITHDRAWAL + EXPIRY
 
@@ -1902,9 +1912,12 @@ A-FK-INT-4   Relationship inheritance (02_PERSONA.md §11) composes orthogonally
              with memory inheritance: a child may inherit summary
              memory of counterparty C without inheriting an active
              relationship edge to C (and vice versa).
-A-FK-INT-5   Cross-kernel forking is REFUSED in v1.0 with signed
-             fork_cross_kernel_not_supported_v1_0 event; deferred
-             to v1.1 federation.
+A-FK-INT-5   Cross-node forking: a fork whose child is hosted on another
+             node is admitted iff the global aggregated persona_genesis
+             ReplicationBound clears (16 §4J) and the authoring persona
+             holds the host-node capability (UCAN); dual-signed and
+             globally verifiable. Refused genesis_exceeds_global_
+             replication_bound otherwise.
 ```
 
 ## 9f. multi-principal tests (A-MT* + A-DP*)
@@ -2441,8 +2454,10 @@ A-LSR4    operator_visibility_policy_ref required when learner_visibility
           != "full"; absence refuses `visibility_restriction_unjustified`.
 A-LSR5    Mastery checkpoint reach updates mastery_checkpoints_reached;
           MASTERY_CHECKPOINT_REACHED event signed.
-A-LSR6    Cross-persona aggregation refused (one
-          LearnerStateRecord per persona-user pair); deferred to v1.1.
+A-LSR6    Cross-persona aggregation is an emergent DerivedMetric over the
+          per-(persona,user) LearnerStateRecords, gated by the learner's
+          consent/AccessPolicy (privacy-preserving); the base records stay
+          per-(persona,user). Not a substrate primitive.
 
 ### A-LCA — LearnerCompetencyAttestation (02_PERSONA §11.9)
 
@@ -2895,7 +2910,7 @@ A-RFC2    Domain promotion to AUTHORITATIVE remains blocked (requires
           Promotion only unblocks after frontier exit per §4.4.1.
 ```
 
-## 9m. Environment composition, coordination, and rule admission tests (A-EC*, A-CA*, A-ER*) — v1.1
+## 9m. Environment composition, coordination, and rule admission tests (A-EC*, A-CA*, A-ER*)
 
 v1.1 addition (ADR-0045, ADR-0052, ADR-0053, [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), [`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md), [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md), [`01_KERNEL.md §13.7`](01_KERNEL.md)). Tests exercise environment composition (hierarchical nesting with rule cascade), the coordination_propose kernel admission gate, and dynamically-authored executable EnvironmentRules enforced under safety-floor source 8.
 
@@ -2991,7 +3006,7 @@ A-ER9     Backward compatibility: an env whose charter carries no rules
           source-8 evaluation is unchanged.
 ```
 
-## 9n. Discovery, access & hybrid distribution tests (A-DR*, A-DT*, A-AX*, A-CL*, A-TF*, A-HR*) — v1.1 draft
+## 9n. Discovery, access & hybrid distribution tests (A-DR*, A-DT*, A-AX*, A-CL*, A-TF*, A-HR*)
 
 ### A-DR* — DiscoverableRecord + cards (09_PROTOCOLS §3G.1)
 
@@ -3173,6 +3188,68 @@ A-EO13    Operator policy profile (floor source 4): under bounded_compositional,
           profile never relaxes the floor (J3) or signing (J2/J9).
 ```
 
+## 9p. Global object space tests (A-GLOBAL*, A-XD*, A-SCHED*) — ADR-0067/0068/0069
+
+### A-GLOBAL* — global handles + cross-node verification + access-gated reference (ADR-0067)
+
+```text
+A-GLOBAL1 Every first-class entity (persona/env/project/domain/artifact/
+          knowledge/skill/tool) resolves by a global handle (DID over its
+          ULID, 01_KERNEL §4.4) in addition to its ULID; ULID remains the
+          local primary key (no schema-version bump).
+A-GLOBAL2 A signature rooted in node A verifies on node B by DID resolution
+          against A's published .well-known/personaos-keys.json; J1/J2/J9
+          guarantee holds globally.
+A-GLOBAL3 Access-gated reference: a principal with < discover on an entity's
+          AccessPolicy never sees it in ANY discovery plane (DHT, mDNS,
+          gossip); discover < read < write < admin composes
+          most-restrictive-wins.
+A-GLOBAL4 J1 reframe regression: a body still cannot edit a Soul; Souls are
+          kernel-signed; mutations signed + lineage-tracked — the guarantee
+          is unchanged, only locality is lifted.
+```
+
+### A-XD* — cross-env / cross-node task delegation (ADR-0068)
+
+```text
+A-XD1     Cross-env DELEGATED via a CrossEnvCoordinationBinding whose
+          interface carries a task is dual-signed by both envs/nodes;
+          inherits sub-task class/pathway (§2.6); max_delegation_depth
+          honored across the boundary.
+A-XD2     A delegation whose submitter lacks the submit/write capability
+          (UCAN) on the target is REFUSED before the receiver's review.
+A-XD3     Remote placement composes floor + budget most-restrictive-wins
+          (as joined-env execution, 09_PROTOCOLS §3C.3).
+A-XD4     A cross-domain sub-task inherits the MINIMUM of (parent, resolving)
+          domain trust (OQ-TASKS-3).
+A-XD5     CrossEnvPresenceQuery is access-gated: member → full presence;
+          discover-only → existence; unauthorized → nothing.
+A-XD6     CrossEnvLineageVisibility redacts by default (link + event kinds,
+          payloads withheld); never widens access.
+```
+
+### A-SCHED* — owned-node multi-tenant priority scheduling (ADR-0069)
+
+```text
+A-SCHED1  Under the owner-first seed SchedulingPolicy, an owner task is
+          ordered ahead of a concurrently-queued external task.
+A-SCHED2  Priority never bypasses permission: an OWNER task that fails the
+          8-source floor is refused exactly as any other — order changed,
+          not permission.
+A-SCHED3  The task_intake gate enforces the per-submitter-class quota /
+          rate-limit; over-quota external submission → TaskIntakeRefused.
+A-SCHED4  Ageing prevents starvation: a low-priority task eventually rises.
+A-SCHED5  Submitter identity (submitter_kind/_id/_node) is persisted in the
+          AnswerPackage and lineage; audit can answer "who submitted this,
+          at what priority class?".
+A-SCHED6  task_intake is distinct from the INV-7 budget gate: an authorized
+          submitter still hits the hard budget gate at budget_tick; budget
+          headroom never implies intake authorization.
+A-SCHED7  An operator-authored non-default SchedulingPolicy is honored but
+          cannot reorder the floor or the INV-7 hard gate, nor grant a class
+          more than its AccessPolicy capability.
+```
+
 ## 9e. Risks & known limitations
 
 Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations). This section captures risks intrinsic to the *catalogue itself* — risks intrinsic to the underlying mechanisms are recorded in the doc that defines each mechanism.
@@ -3193,7 +3270,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | ID | Question | Owner | Resolves into |
 |----|----------|-------|---------------|
 | OQ-AT-1 | What is the budget for total test runtime per CI cycle? Current ~320 tests; some are expensive (sandbox escape, lineage replay at 10^6 events). Need empirical baseline and budget. | QA + Operator | v1.1 budget table in §5. |
-| OQ-AT-2 | How do we test cross-kernel federation (A-FK-INT-5 deferred to v1.1)? Multi-kernel staging environment required. | Federation WG | v1.1 federation gate. |
+| OQ-AT-2 | Cross-node federation testing requires a multi-node staging environment (≥ 2 nodes). | QA + Federation | **Resolved (normative):** the A-GLOBAL*/A-XD*/A-SCHED* families (§9p) exercise cross-node discovery, delegation, and scheduling against a 2-node staging harness; an empirical N-node load matrix is operator tuning, not a gate. |
 | OQ-AT-3 | Anti-Goodhart panel acceptance threshold tuning: tests assume a fixed disagreement-rate threshold; should it be operator-tunable per deployment? | Safety WG | v1.1 panel policy. |
 | OQ-AT-4 | Test ID renaming: `A-PR*` (presence) vs `A-PT*` (protocol) once collided. Are there other latent collisions in the future namespace? | — | v1.1 ID-scheme audit. |
 | OQ-AT-5 | Should `SKIPPED` count toward gate-pass criteria? Currently a `SKIPPED` with operator sign-off is admissible; tighten policy in safety-critical deployments. | Operator policy | v1.1 deployment profiles. |

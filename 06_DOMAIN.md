@@ -252,9 +252,9 @@ Threshold events route to operator + persona; operator may approve additional bu
 
 **Why this is substrate-shape, not domain-shape.** The five `pledge_kind` values describe *topological position* of the funder relative to the kernel principal (inside / outside / amortized / federated). They name no industry, no grant programme, no domain category. The currency_or_unit string is opaque to the kernel — the same envelope mechanism supplies units for any domain whose probe needs them.
 
-### 4.8 FederatedDomainProbe — cross-kernel shared ingestion (v1.1+ deferred)
+### 4.8 FederatedDomainProbe — cross-node shared ingestion (normative; ADR-0067)
 
-When multiple kernels probe the same frontier domain (e.g., several research groups bootstrapping the same emerging field), each currently pays its own ingestion cost. v1.1 introduces a federated-shared-probe schema that lets participating kernels pool ingestion under a single signed coordination record. The schema is reserved here so emergent contexts can be retroactively federated when v1.1 ships.
+When multiple nodes probe the same frontier domain (e.g., several research groups bootstrapping the same emerging field), they pool ingestion under a single signed coordination record rather than each paying its own cost. The `FederatedDomainProbe` is normative in the global object space (ADR-0067): participating nodes are discovered over `09_PROTOCOLS §3G`, referenced by global handle, and coordinate access-gated; honesty of independent participating nodes is trust-calibrated (V.8). A single-node probe is the degenerate one-participant case.
 
 *The FederatedDomainProbe coordinates shared ingestion across participating kernels with a coordinating kernel driving ingestion, a shared knowledge pool and KindRegistry, configurable cost allocation (equal split, usage proportional, coordinator pays, or pledge pool), periodic drift audits, and a quorum requirement for cross-kernel promotion.*
 
@@ -264,7 +264,7 @@ When multiple kernels probe the same frontier domain (e.g., several research gro
 
 **Drift audit:** the coordinating kernel periodically re-hashes the shared KnowledgeRef set + KindRegistry; peers compare. Divergence ≥ threshold emits `FEDERATED_PROBE_DRIFT_DETECTED`; depending on severity, peers may fork (state → fragmented) or reconcile via a signed convergence proposal.
 
-**Why deferred to v1.1:** cross-kernel federation arrives in v1.1 (the v1.1 federation milestone); the schema is reserved now so single-kernel probes can be retroactively federated without breaking lineage. Single-kernel v1.0.5 probes are *prior-domain-amortizable* into a future federated probe via the `prior_domain_amortization` pledge kind.
+**Cross-node federated probes (normative; ADR-0067).** Cross-node federation is part of the global object space: federated domain probes coordinate over the discovery layer (`09_PROTOCOLS §3G`) with peers identified by global handle, access-gated. Earlier single-kernel probes remain *prior-domain-amortizable* into a federated probe via the `prior_domain_amortization` pledge kind, with no lineage break.
 
 ## 5. Discovery — five sources (v1.0 capability tier)
 
@@ -557,7 +557,7 @@ To avoid re-ingestion across kernels working in the same domain.
 
 Latency budget: ≤ 1 s + A2A network latency p95. Operators may pre-approve trusted peers; un-approved peers respond but their refs are quarantined until operator review.
 
-**Unified discoverability + access (v1.1 draft).** Domains, knowledge refs, skills, and tools are "any content" and project a lightweight `DiscoverableRecord` ([`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type)) so they are findable over both the internet (`.well-known` + gossip + DHT) and intranet (mDNS) discovery planes ([`§3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet)) — not just via point-to-point A2A lookup. Federated lookup, and the discovery planes, are **access-gated** by the same `AccessPolicy` model ([`§3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types), [`§3G.4`](09_PROTOCOLS.md#3g4-access-gated-discovery--who-can-access-what-enforced-at-the-discovery-layer)) whose outward axis is the **5 visibility tiers** defined in §6.3; a `discover`-tier peer learns a knowledge ref exists without reading it, and where a ref is provider-hosted its body is addressed by a `ContentLocator` ([`§3G.5`](09_PROTOCOLS.md#3g5-hybrid-provider-backed-storage--distribute-the-reference-not-the-bytes)) rather than copied.
+**Unified discoverability + access.** Domains, knowledge refs, skills, and tools are "any content" and project a lightweight `DiscoverableRecord` ([`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type)) so they are findable over both the internet (`.well-known` + gossip + DHT) and intranet (mDNS) discovery planes ([`§3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet)) — not just via point-to-point A2A lookup. Federated lookup, and the discovery planes, are **access-gated** by the same `AccessPolicy` model ([`§3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types), [`§3G.4`](09_PROTOCOLS.md#3g4-access-gated-discovery--who-can-access-what-enforced-at-the-discovery-layer)) whose outward axis is the **5 visibility tiers** defined in §6.3; a `discover`-tier peer learns a knowledge ref exists without reading it, and where a ref is provider-hosted its body is addressed by a `ContentLocator` ([`§3G.5`](09_PROTOCOLS.md#3g5-hybrid-provider-backed-storage--distribute-the-reference-not-the-bytes)) rather than copied.
 
 ### 6.5 Ingestion toolkit
 
@@ -678,6 +678,15 @@ An [`EnvironmentRule`](12_GLOSSARY.md#e) ([`05_ENVIRONMENT.md §2.2b`](05_ENVIRO
 - `contract` — the rule is a machine-readable contract `ArtifactBundle` whose conformance is checked by a `verifier_recipe_id`.
 
 These three are positions in the registry namespace, not domain categories; an operator MAY register further `env_rule_kinds` entries, and any domain-specific rule *content* emerges and is signed exactly like every other Proposed\*Kind (§7.5). The rule's enforcement point, lifecycle, cascade, and operator gating are specified in [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1); enforcement composes under safety-floor source 8 (`env_charter`) per [`01_KERNEL.md §2`](01_KERNEL.md#2-the-safety-floor--8-sources--1-advisory).
+
+### 7.6.4 Coordination & attestation kind families (ADR-0070)
+
+Completing the C4 substrate-purity trajectory (ADR-0045 coordination meta-mechanisms, ADR-0066 orchestration), the last closed `Literal[...]` enums on coordination/attestation fields become KindRegistry families resolved exactly as `media_kinds` does (§7.6), each shipping its prior values as STANDARDISED **seed** entries (DATA, not substrate enum):
+
+- **`conflict_policy_kinds`** — the merge-conflict policy on batch/sync shapes ([`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), [`04_PROJECT.md`](04_PROJECT.md)). Seeds: `skip_changed`, `fail_on_conflict`, `force`.
+- **`competency_level_kinds`** — the attested skill-competency ladder ([`02_PERSONA.md §11.9`](02_PERSONA.md)). Seeds, **ordered**: `novice` < `proficient` < `competent_supervised` < `independent`; a proposed level MUST declare its rank in the family's per-family metadata (§7.6.2) so trust-calibration and gating remain monotone.
+
+These are positions in the registry namespace, not domain categories; an operator/domain MAY register further entries via the §7.5 Proposed\*Kind path. Substrate code branches on no closed list of either. (The `summary_function_kinds` field of `DerivedMetric` was already open, §7.6; no change.)
 
 ## 8. Cross-source validation
 
@@ -839,7 +848,7 @@ Multi-kernel emergence requires federated discovery via A2A, cross-kernel promot
 
 **Technical detail:** See [A.67](#appendix-a67).
 
-Federated emergence ships incrementally; v1.0 supports single-kernel emergence.
+Emergence runs both single-node and cross-node: federated emergence over the normative global object space (ADR-0067) is supported, with single-node as the degenerate one-node case.
 
 ## 19. Operator vs Persona role shift
 
@@ -874,7 +883,7 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-DOMAIN-1 | Hallucination during EMERGENT stage. Promotion gates filter most; some slip. | High | Medium | Multi-tier promotion (PROBING → EMERGENT → RECOGNISED → STABLE); tighter co-signing thresholds for safety-critical; convergence detection. | v1.0 (gates); v1.1 (judge panel for emergent claims). |
 | R-DOMAIN-2 | Operator review bottleneck for safety-critical domain adoption. Human review introduces real delay. | Medium | High | Operator pre-approval of broad categories; ProposedSafetyExtension review queue prioritisation. | v1.0 (queue); v1.1 (pre-approval categories). |
 | R-DOMAIN-3 | Drift detection sensitivity tradeoff. Tight thresholds generate false positives; loose thresholds miss. | Medium | High | Operator-tunable thresholds; per-domain calibration via reference signal set; drift-bounds schema. | v1.0 (baseline); v1.1 (auto-calibration). |
-| R-DOMAIN-4 | Federated multi-kernel emergence is only specified for v1.0. Cross-kernel domain probe coordination ships v1.1+. | Medium | Low | Single-kernel emergence is fully supported; federated mode shadow-only until v1.1. | v1.1 (cross-kernel emergence). |
+| R-DOMAIN-4 | Cross-node domain-probe coordination depends on federation. | Medium | Low | **Resolved (ADR-0067):** cross-node emergence is normative over the global discovery layer; single-node is the degenerate case. Honesty of independent peer nodes is trust-calibrated (V.8). | Resolved. |
 | R-DOMAIN-5 | Knowledge sourcing variance. Paywalled sources limit completeness; licensing per source is operator concern. | Medium | High | KnowledgeIngestionRecord declares source + licence; operator policy on admissible sources. | v1.0 (record); v1.1 (license-aware ingestion). |
 | R-DOMAIN-6 | Cross-domain trust calibration is heuristic. Initial 0.3 reduction at transfer is uncalibrated for many domain pairs. | Medium | High | DomainPrecedentImport with kinship measurement; empirical re-calibration after observed cross-domain outcomes. | v1.1 (calibration loop). |
 | R-DOMAIN-7 | Convention reconciliation at federation merge. Communities evolve different notations; merger is hard. | High | Medium | NotationConvention versioning; explicit conflict events `NOTATION_CONFLICT`; operator-mediated reconciliation; A-PJ18 acceptance test. | v1.1 (stronger consensus mechanisms). |
@@ -884,7 +893,7 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-DOMAIN-11 | Cold-start `K_effective` scaling is heuristic. Adversarial proposers may saturate the bundle path. | Medium | Low | Convergence-detection backstop (`§9.1.1`); per-proposer rate caps; classifier rotation. | v1.0 (heuristic); v1.1 (anti-saturation). |
 | R-DOMAIN-12 | Kinship measurement assumes shared lineage history. Recently bootstrapped domains produce low confidence and block imports. | Low | Medium | Manual override at operator level for known-related domains; lineage seeding from authored convention sets. | v1.1 (seed kinship). |
 | R-DOMAIN-13 | Single-project promotion (`§3.2`) concentrates risk. Trades statistical robustness for accessibility. | High | Medium | Trust cap (0.6) on single-project promotions; `refused_when_safety_critical` interlock; principal-collapse degraded gate; explicit downgrade if downstream evidence diverges. | v1.0 (cap + interlock). |
-| R-DOMAIN-14 | DomainHarvest at federation / public tiers depends on v1.1 federation index. v1.0 ships private tier only. | Low | Low | v1.0 emits `DOMAIN_HARVEST_PUBLISHED` and writes entry; non-private tiers refused at admission until v1.1. | v1.1 (federation tier consumers). |
+| R-DOMAIN-14 | DomainHarvest at federation / public tiers needs the discovery layer. | Low | Low | **Resolved (ADR-0067):** `DOMAIN_HARVEST_PUBLISHED` entries project a `DiscoverableRecord` over the normative discovery planes, access-gated by `AccessPolicy`; federation/public tiers are served, not refused. | Resolved. |
 
 ## 21a. Open questions
 
@@ -4314,7 +4323,8 @@ class DomainHarvest:
     #                   tenant_id; principals from different tenants need
     #                   a signed CrossTenancyAgreementRef to share at this
     #                   tier (else the harvest is restricted to "private").
-    #   "federation"  = §6.3 TIER 4 — multi-kernel via A2A; v1.1+.
+    #   "federation"  = §6.3 TIER 4 — cross-node via the normative
+    #                   discovery layer (09_PROTOCOLS §3G, ADR-0067).
     #   "public"      = §6.3 TIER 5 — open access; operator-gated.
     visibility_tier: Literal["private", "tenant",
                               "federation", "public"]

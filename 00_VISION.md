@@ -81,7 +81,7 @@ PersonaOS v1.0 is an operating system for cognitive work of any kind. [**Persona
 
 The [**kernel**](12_GLOSSARY.md#k) owns identity, safety, and trust. This document names its guarantees using short labels: **J-labels** (J1–J9) are vision-level invariants — non-negotiable design principles. **C-labels** (C1–C4) are commitments — structural promises about how the system behaves. **INV-labels** (INV-1–INV-10) are inherited kernel invariants from earlier versions, still binding. Each label is defined in §3–§5 below.
 
-The kernel guarantees: identity persistence (J1), append-only [lineage](12_GLOSSARY.md#l) across **three scopes** (J2 task / J9 environment / C1 domain), an 8-source [safety floor](12_GLOSSARY.md#s) (J3), sound and trust-calibrated [acceptance](12_GLOSSARY.md#a) (J4 — task classes and pathways are emergent kinds, seeded with the v1.0 set; see ADR-0066), and signing infrastructure. **Operators** (humans or organisations running a deployment) gate safety-critical promotions and set deployment policy. **Personas** do the substantive cognitive work — exploring, learning, proposing, curating. The substrate is provider-neutral, framework-agnostic, observable via OpenTelemetry, and federated via A2A. Every content type (personas, environments, artifacts, domains, knowledge, telemetry) is uniformly **discoverable** across both the internet (`.well-known` + gossip + Kademlia DHT) and the intranet (mDNS), under one **access-level model** (`discover < read < write < admin`) that also gates discovery, with a **hybrid storage** option that keeps heavy bytes in existing providers (GitHub / arXiv / S3 / OCI / IPFS) and distributes only a signed, integrity-anchored reference over the peer-to-peer layer ([`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md), v1.1 draft).
+The kernel guarantees: identity persistence (J1), append-only [lineage](12_GLOSSARY.md#l) across **three scopes** (J2 task / J9 environment / C1 domain), an 8-source [safety floor](12_GLOSSARY.md#s) (J3), sound and trust-calibrated [acceptance](12_GLOSSARY.md#a) (J4 — task classes and pathways are emergent kinds, seeded with the v1.0 set; see ADR-0066), and signing infrastructure. **Operators** (humans or organisations running a deployment) gate safety-critical promotions and set deployment policy. **Personas** do the substantive cognitive work — exploring, learning, proposing, curating. The substrate is provider-neutral, framework-agnostic, observable via OpenTelemetry, and federated via A2A. Every content type (personas, environments, artifacts, domains, knowledge, telemetry) is uniformly **discoverable** across both the internet (`.well-known` + gossip + Kademlia DHT) and the intranet (mDNS), under one **access-level model** (`discover < read < write < admin`) that also gates discovery, with a **hybrid storage** option that keeps heavy bytes in existing providers (GitHub / arXiv / S3 / OCI / IPFS) and distributes only a signed, integrity-anchored reference over the peer-to-peer layer ([`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md), normative; ADR-0067). Identity (J1) is **kernel-rooted but globally referenceable**: a kernel is a *node* that roots identities and signs them verifiably for any other node, so PersonaOS is **one global object space** of access-controlled references, not a set of isolated kernels.
 
 ### 2.1 Goals
 
@@ -105,7 +105,6 @@ v1.0 explicitly does **NOT** attempt the following (each is detailed in [§10](#
 - Claims of subjective experience, sentience, or qualia.
 - Automatic inference of regulated category membership from task content alone.
 - Ground-truth verification in domains without programmatic verifiers or bench measurements.
-- Federated multi-kernel evolution dynamics (v1.0 ships single-kernel emergence).
 - Long-horizon self-direction without principal-supplied seed goals.
 - Multi-language / multi-cultural domain emergence (v1.2+).
 - Real-money financial transactions.
@@ -197,7 +196,7 @@ Each rule is normative; implementations MUST adhere to all 19.
 
 Each item below is **out-of-scope by design**, not an oversight. Per-doc "Risks & known limitations" sections enumerate within-scope known weaknesses; this list is the top-level out-of-scope inventory. None of these items is targeted for v1.0 through v1.2.
 
-*Eleven categories of intentionally excluded scope: physical embodiment (personas bridge to the physical world but do not directly control robots); subjective experience (personas do not claim sentience); export-control inference (the system flags hazard shape but does not auto-classify regulatory category); ground-truth without measurement (trust degrades honestly when no verifier exists); population-scale evolution (multi-kernel dynamics deferred to v1.1+); long-horizon self-direction (bounded autonomy only, always requires human-supplied seed goals); multi-language domain emergence (v1.2+); external training-data provenance (provider responsibility); real-money transactions (operator must wrap); nation-state adversarial robustness (not prescribed); and domain-specific professional disclaimers (operator policy, not substrate).*
+*Ten categories of intentionally excluded scope: physical embodiment (personas bridge to the physical world but do not directly control robots); subjective experience (personas do not claim sentience); export-control inference (the system flags hazard shape but does not auto-classify regulatory category); ground-truth without measurement (trust degrades honestly when no verifier exists); long-horizon self-direction (bounded autonomy only, always requires human-supplied seed goals); multi-language domain emergence (v1.2+); external training-data provenance (provider responsibility); real-money transactions (operator must wrap); nation-state adversarial robustness (not prescribed — navigated by honest trust-calibration, V.8); and domain-specific professional disclaimers (operator policy, not substrate). (Multi-kernel / population-scale evolution is no longer excluded — it is normative per ADR-0067; PersonaOS is one global object space over many nodes.)*
 
 **Technical detail (full out-of-scope specifications):** See [A.10](#appendix-a10).
 
@@ -274,7 +273,7 @@ Cross-document risks for v1.0 as a system. Per-document risks appear in each doc
 | R-v1.0-5 | **Goodhart on engagement metrics.** PERFORMATIVE / RELATIONAL pathways could over-optimise for engagement signals. | High | Medium | Anti-Goodhart panel; multi-judge rotation; engagement metrics never sole acceptance signal ([`03_TASKS.md §4`](03_TASKS.md)). |. |
 | R-v1.0-6 | **Schema-version drift between docs and implementation.** A doc may cite `entity/N` while code carries `entity/N+1` or vice versa. | Medium | High | Single master registry in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md); CI check that every cited version exists in registry. |. |
 | R-v1.0-7 | **Domain-promotion gate latency.** AUTHORITATIVE / STANDARDISED promotion requires operator review which may bottleneck. | Medium | High | Domain curator role; bounded review SLA; degraded gate under principal collapse ([`01_KERNEL.md §2.4`](01_KERNEL.md), [`06_DOMAIN.md §3`](06_DOMAIN.md)). | v1.1. |
-| R-v1.0-8 | **Population-scale evolution unspecified.** v1.0 ships single-kernel emergence; multi-kernel dynamics not yet specified. | Medium | High | Single-kernel population dynamics + Persona Genesis now drafted in [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) (v1.1 draft; cross-doc risks R-POP-1…7); the age/standing model is reworked per ADR-0051 (wall-clock age + per-env conferred standing); multi-kernel federated genesis remains a v1.1+ extension (OQ-POP-4); explicit non-goal in §2.2. | v1.1. |
+| R-v1.0-8 | **Population-scale evolution.** Multi-kernel population dynamics. | Medium | High | **Resolved (ADR-0067/0068/0070).** Population dynamics + Persona Genesis are normative ([`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md); cross-doc risks R-POP-1…7); the age/standing model is reworked per ADR-0051 (wall-clock age + per-env conferred standing); **multi-kernel federated genesis is now normative** over the global object space (OQ-POP-4 resolved). Adversarial robustness against independent nodes is navigated by trust-calibration (V.8). | Resolved. |
 | R-PERSONA-AGE-1 | **Idle-but-old personas occupy upper ALPS bands.** ALPS bands are now wall-clock-derived (ADR-0051), so a chronologically old but inactive persona sits in an upper age layer it under-earns. | Low | Medium | Accepted by design — ALPS protects the *young* for diversity, not penalizes the idle; low fitness from inactivity keeps idle-old personas from dominating selection. Bounded by fitness decay, not by re-deriving age from activity ([`02_PERSONA.md §7.3`](02_PERSONA.md)). | v1.1. |
 | R-v1.0-9 | **English-only knowledge ingestion.** v1.0 assumes English-dominated corpora; multi-language emergence unspecified. | Medium | High | Spec extension v1.2+; explicit non-goal in §2.2. | v1.2. |
 | R-v1.0-10 | **Provider opacity in proxy bodies.** A2A / framework-runtime bodies hide internal LLM calls; lineage gaps possible. | High | Medium | body_attestation trust ceiling; proxy bodies SHALL NOT carry safety-critical work ([`02_PERSONA.md §3.5`](02_PERSONA.md)). |. |
@@ -981,9 +980,12 @@ GROUND-TRUTH WITHOUT BENCH MEASUREMENT
   manufacturing certainty.
 
 POPULATION-SCALE EVOLUTION DYNAMICS
-  v1.0 ships single-kernel emergence + ALPS within one kernel.
-  Federated emergence + multi-kernel population dynamics are spec'd
-  for v1.1+, not v1.0.
+  Now in scope (ADR-0067/0068/0070). PersonaOS is one global object
+  space over many nodes; multi-kernel discovery, env membership, task
+  delegation, and persona genesis are normative (16_POPULATION_DYNAMICS;
+  09_PROTOCOLS §3G; 05_ENVIRONMENT §17). What remains genuinely bounded
+  is adversarial robustness against independent/colluding nodes, which
+  is navigated by honest trust-calibration (V.8), not assumed.
 
 LONG-HORIZON SELF-DIRECTION
   v1.0 still has no autonomous "go improve yourself" loop without

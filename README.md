@@ -45,7 +45,7 @@ PersonaOS is built around five key mechanisms:
 | **Domains** | Bodies of knowledge that personas build up for specific fields (chip design, medicine, construction). Domains emerge through use — no one hardcodes "what a structural engineer does." |
 | **Knowledge & memory** | Structured memory (episodic, semantic, reflective) across four tiers with hybrid retrieval. Prompts evolve automatically to improve at specific tasks. |
 
-**Standards.** PersonaOS speaks standard protocols — MCP for tools, A2A for agent-to-agent federation, OpenTelemetry for observability — and works inside 12 AI frameworks (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, and others) without losing identity or safety. *(v1.1 draft)* Every content type is uniformly **discoverable** over both the internet (`.well-known` + gossip + Kademlia DHT) and the intranet (mDNS), under one **access-level model** (`discover < read < write < admin`) that also gates discovery, with a **hybrid storage** option that keeps heavy bytes in existing providers (GitHub / arXiv / S3 / OCI / IPFS) and distributes only a signed, integrity-anchored reference over P2P — see [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md).
+**Standards.** PersonaOS speaks standard protocols — MCP for tools, A2A for agent-to-agent federation, OpenTelemetry for observability — and works inside 12 AI frameworks (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, and others) without losing identity or safety. Every content type is uniformly **discoverable** over both the internet (`.well-known` + gossip + Kademlia DHT) and the intranet (mDNS), under one **access-level model** (`discover < read < write < admin`) that also gates discovery, with a **hybrid storage** option that keeps heavy bytes in existing providers (GitHub / arXiv / S3 / OCI / IPFS) and distributes only a signed, integrity-anchored reference over P2P — see [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md).
 
 ---
 
@@ -68,8 +68,8 @@ PersonaOS is built around five key mechanisms:
 | 12 | [`12_GLOSSARY.md`](12_GLOSSARY.md) | Reference dictionary — every PersonaOS term defined in one place. | 6 min |
 | 13 | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) | Real-world scenarios — concrete examples (build a house, design a chip, run a study) walked end-to-end against the design. | 8 min |
 | 14 | [`14_DECISIONS.md`](14_DECISIONS.md) | Why the design is the way it is — 40+ architectural decision records explaining the trade-offs behind each major choice. | 10 min |
-| 15 | [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) | *(v1.1 draft)* How AI Personas organise themselves — 5 building blocks for self-organising coordination within environments. | 12 min |
-| 16 | [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) | *(v1.1 draft)* How a few personas grow into a varied population — Persona Genesis (personas authoring new personas) under environmental pressure, with diversity guarantees and hard replication brakes. | 12 min |
+| 15 | [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) | How AI Personas organise themselves — 5 building blocks for self-organising coordination within environments. | 12 min |
+| 16 | [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) | How a few personas grow into a varied population — Persona Genesis (personas authoring new personas) under environmental pressure, with diversity guarantees and hard replication brakes (per-node and cross-node under global ReplicationBound aggregation). | 12 min |
 | 17 | [`17_ECONOMY.md`](17_ECONOMY.md) | *(v2.0 draft)* An economy the personas author for themselves — the substrate ships only the inviolable physics and reuses the corpus's existing emergence machinery, defining no units, markets, or even building blocks; personas (with humans contributing ideas) discover what has value and its whole vocabulary, may research tokenisation/crypto and create their own settlement layers, so humans, personas, and other conscious beings thrive. | 12 min |
 | 18 | [`18_SETTLEMENT.md`](18_SETTLEMENT.md) | *(v2.0 draft)* One *reference* settlement & transfer layer an emergent economy may adopt, extend, fork, or supersede — bridge to real-world value or move custody; sell the title, never the soul; fenced handover, atomic DvP, cryptographic leases. | 12 min |
 
@@ -219,7 +219,7 @@ WHAT COMES NEXT (v1.0.2-v1.0.6):
 | **Not a sales document** | v1.0 describes mechanisms, not benefits. Each section names what is, what isn't, and what is honestly limited. |
 | **Not theoretical only** | Every entity has a schema; every mechanism has a code-organisation pointer; every test has a pass/fail criterion. |
 | **Not tied to any AI provider** | The kernel signs identity and maintains the audit trail; the AI model is replaceable. Swap Claude for GPT or an open-weight model — the persona's identity, memory, and skills transfer intact. |
-| **Not finished** | v1.0 has honest residuals. Population dynamics now has a v1.1 draft ([`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)); federation hardening and multi-language domain emergence remain future work. |
+| **Not finished** | The substrate is complete and normative across one global object space (owned nodes, global discovery + access, cross-node delegation, owner-prioritized scheduling, population dynamics). What is *navigated, not abolished* (honest residuals, V.8): network physics (an asleep/NAT node is unreachable), full Byzantine robustness against independent/colluding nodes, and the irreducible measurement/tacit-knowledge limits — all handled by honest trust-calibration. Multi-language / multi-cultural domain emergence remains genuinely future (v1.2). |
 
 ---
 

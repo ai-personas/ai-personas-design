@@ -1,21 +1,21 @@
 ---
-title: PersonaOS v1.1 — Population Dynamics (Environment-Driven Persona Genesis)
-status: Draft
+title: PersonaOS — Population Dynamics (Environment-Driven Persona Genesis)
+status: Stable
 ---
 
 # 16 — Population Dynamics
 
-> **Reader guide.** A human seeds a *few* personas and gives them work. Those personas must recruit collaborators — but what happens when the recruit pool is thin or empty? Today the design has only two answers: pause, or escalate to the operator. This document adds a third: **Persona Genesis** — under sustained environmental pressure, and only after recruitment is exhausted, an existing persona may *author a new, niche-distinct persona* to fill a capability gap. A few founders radiate into a varied population, the way a lineage colonising open niches diversifies — bounded at every step by the kernel's existing self-replication brake. **Prerequisites:** `02_PERSONA.md`, `05_ENVIRONMENT.md`, `01_KERNEL.md §2.7`. **Status:** v1.1 Draft — not yet normative.
+> **Reader guide.** A human seeds a *few* personas and gives them work. Those personas must recruit collaborators — but what happens when the recruit pool is thin or empty? Today the design has only two answers: pause, or escalate to the operator. This document adds a third: **Persona Genesis** — under sustained environmental pressure, and only after recruitment is exhausted, an existing persona may *author a new, niche-distinct persona* to fill a capability gap. A few founders radiate into a varied population, the way a lineage colonising open niches diversifies — bounded at every step by the kernel's existing self-replication brake. **Prerequisites:** `02_PERSONA.md`, `05_ENVIRONMENT.md`, `01_KERNEL.md §2.7`. **Status:** Stable — normative.
 
 ## 0. Status & scope
 
-**Status.** `Draft`; v1.1 target. This document becomes normative when it reaches `Stable`. Implements **ADR-0048** (Persona Genesis) and **ADR-0049** (population demographic regulation). It addresses the **"population dynamics"** residual named in `README.md` and [`00_VISION.md §11`](00_VISION.md), and partially discharges [`OQ-PERSONA-1`](02_PERSONA.md) (population-level diversity).
+**Status.** `Stable`; normative (ADR-0067/0068/0069 promote this from draft). Implements **ADR-0048** (Persona Genesis), **ADR-0049** (population demographic regulation), and **ADR-0050** (effective population size, diversity maintenance, learned niche descriptors). Genesis runs in the global object space: it is per-node by default and **cross-node under global `ReplicationBound` aggregation** (`§4J`). It addresses the **"population dynamics"** residual named in `README.md` and [`00_VISION.md §11`](00_VISION.md), and partially discharges [`OQ-PERSONA-1`](02_PERSONA.md) (population-level diversity).
 
 This document follows the [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md) skeleton with the same `§0a`/`§0b` deviation used by [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md): Key concepts and a Plain-Language Guide precede the numbered sections.
 
 **In scope.** Persona-authored seed creation (Genesis); the population-pressure signal that triggers it; recruitment-exhausted-first ordering; MAP-Elites niche allocation and the variety/distinctiveness guarantee; the newborn maturation ramp (mentorship + scaffolding); demographic regulation (carrying capacity, density dependence, r/K strategy); and safety bounding via the existing `ReplicationBound`.
 
-**Out of scope.** Operator-authored seeds (unchanged — `02_PERSONA §12`). Fork mechanics (unchanged — `02_PERSONA §7.4`). Cross-kernel federated genesis (enforced-refused now, federation flow deferred — `§4J`, `OQ-POP-4`). The empirical population-collapse study at N=100/1000 (remains `OQ-PERSONA-1` / `OQ-POP-6`, v1.2). Any change to operator authority over charter-class ceilings.
+**Out of scope.** Operator-authored seeds (unchanged — `02_PERSONA §12`). Fork mechanics (unchanged — `02_PERSONA §7.4`). The empirical population-collapse study at N=100/1000 (remains `OQ-PERSONA-1` / `OQ-POP-6` — operator-tuned in the running system, not a design gap). Any change to operator authority over charter-class ceilings. (Cross-node genesis is now **in scope**, under global `ReplicationBound` aggregation — `§4J`.)
 
 **Additivity.** Every mechanism here is **additive and default-off**: no genesis is admissible unless an operator has declared a `ReplicationBound` for `replication_kind = "persona_genesis"` (or a wildcard fall-through) **and** the authoring persona's `cohort_assembly.may_author_seeds` is `true`. With neither, behaviour is identical to v1.0.
 
@@ -101,7 +101,7 @@ Persona Genesis is modelled as **bounded adaptive radiation**: a few founder per
 - **NG1.** Uncapped or unsupervised reproduction. (Bounded by `ReplicationBound`; operator pre-authorises.)
 - **NG2.** Cloning into an occupied niche. (That is Fork — `02_PERSONA §7.4`.)
 - **NG3.** Replacing operator authority over charter-class ceilings.
-- **NG4.** Cross-kernel federated genesis (deferred — `OQ-POP-4`).
+- **NG4.** ~~Cross-kernel federated genesis~~ — **now in scope** under global `ReplicationBound` aggregation (`§4J`, ADR-0067/0068/0069).
 
 ## 3. Definitions
 
@@ -232,13 +232,14 @@ All three modes resolve to the same `niche-descriptor/1` occupancy interface, so
 
 **Mis-calibration detector.** Regardless of mode, the kernel tracks two rates per audit window: `false_collision_rate` (genesis proposals refused `niche_occupied` while `pressure_score` stays high and the capability gap stays unfilled — a sign the grid is too coarse) and `unfillable_gap_rate` (sustained pressure with no admissible empty cell — too fine, or wrong axes). Sustained breach of either emits a `niche_recalibration_advisory` → re-fit (`learned`) / re-tessellate (`cvt`) / operator axis review (`fixed_axes`). This converts R-POP-3 from "live with it" to a detected, self-correcting condition.
 
-## 4J. Cross-kernel genesis boundary (OQ-POP-4 — specified-but-deferred)
+## 4J. Cross-node genesis under global ReplicationBound aggregation (OQ-POP-4 — resolved)
 
-Federated cross-kernel genesis remains out of scope for v1.1 (`§0`, NG4). But "out of scope" must be **enforced**, not merely declared, because it is a safety boundary: a persona must not evade its `ReplicationBound` by authoring offspring on a sibling kernel.
+Cross-node persona genesis is **normative** in the global object space (ADR-0067/0068/0069). The safety boundary is **unchanged and absolute**: a persona must not evade its `ReplicationBound` by authoring offspring on a sibling node. The mechanism is no longer refusal — it is **global enforcement** of the bound. The three requirements the prior draft named as prerequisites are now met by the global-reference substrate and are landed here:
 
-- **Refusal.** A `GenesisProposal` whose authoring persona or whose host environment crosses a kernel boundary is REFUSED `cross_kernel_genesis_not_supported_v1_1`. (Recruiting an *existing* foreign persona over A2A is unaffected — recruitment is not creation; `§4B`.)
-- **Anti-circumvention.** Until federated genesis ships, the per-kernel `persona_genesis` `ReplicationBound` is the whole story; there is no cross-kernel path to mint around it.
-- **v1.1 federation requirements (specified, deferred).** Lifting this needs three things, which is why it is a chapter, not a flag: (1) a cross-kernel **consent/quorum** on the proposal carried over signed AgentCards (`09_PROTOCOLS §3`); (2) a **federated `ReplicationBound` aggregation** so the population ceiling is *global across the federation* rather than per-kernel — otherwise `M` kernels silently multiply the ceiling `M`-fold; (3) genesis-provenance replicated into the federated lineage. This converts OQ-POP-4 from open-ended to a specified, bounded deferral.
+- **Global `ReplicationBound` aggregation (the anti-circumvention guarantee).** A `persona_genesis` `ReplicationBound` is evaluated against the **global** handle space (`01_KERNEL §4.4`), aggregated across the owner's `owner_node_set` (`01_KERNEL §2.4.4`) and any federation the bound declares — never per-node. The population ceiling is one global counter; minting on a sibling node advances the *same* counter. `M` nodes therefore cannot multiply the ceiling `M`-fold — the original §4J hazard is closed by aggregation, not by prohibition.
+- **Cross-node consent/quorum.** A cross-node `GenesisProposal` carries a quorum consent over signed AgentCards / DiscoverableRecords (`09_PROTOCOLS §3`), and (for a node serving an owner) the operator cosign required by the `persona_genesis` bound (`01_KERNEL §2.7`). The authoring persona must hold the capability to author on the host node (UCAN, `09_PROTOCOLS §3F`).
+- **Replicated provenance.** Genesis provenance (`genesis-provenance/1`, `LIFECYCLE_GENESIS`) replicates into the cross-node lineage and is globally verifiable (`01_KERNEL §4.4`), so audits reconstruct who authored whom, on which node.
+- **Refusal is now an ordinary bound refusal, not a feature-absence one.** A cross-node `GenesisProposal` is REFUSED `genesis_exceeds_global_replication_bound` iff admitting it would exceed the **global** aggregated ceiling/rate/depth — exactly as a local proposal is refused when the local-and-global ceiling is reached. If the global bound cannot be verified (the relevant nodes are unreachable so the aggregated counter cannot be confirmed), the proposal **fails closed** with `global_replication_bound_unverifiable` — the bound's integrity is never assumed across a partition. (Recruiting an *existing* foreign persona over A2A is unaffected — recruitment is not creation, `§4B`.)
 
 ## 5. Worked examples
 
@@ -249,7 +250,7 @@ Federated cross-kernel genesis remains out of scope for v1.1 (`§0`, NG4). But "
 5. **Recursion cap.** A second-generation newborn (itself born via genesis) attempts to author a seed at lineage depth equal to `depth_ceiling`. Admission REFUSES with `replication_bound_exceeded` (depth).
 6. **EPS bottleneck holds the mandate.** Twelve personas exist but eleven were authored by one founder and ten sit in two adjacent niche cells. Headcount `N = 12`, but `Ne_v ≈ 2.4` (authorship skew) and `Ne_d ≈ 2.1` (niche concentration); `effective_population_size = min(...) ≈ 2.1`, smoothed below threshold. The diversity-injection mandate (`§4C`) plus novelty pressure (`§4H`) force the next birth into a distant empty niche and keep near-niche proposals refused until the temporal harmonic mean recovers — not just for one window.
 7. **Self-correcting grid.** Under `niche_descriptor_mode = fixed_axes`, three successive genesis proposals are refused `niche_occupied` while `pressure_score` stays high and the capability gap stays unfilled. The `false_collision_rate` breach emits a `niche_recalibration_advisory`; the operator switches to `learned` mode, AURORA re-fits descriptors from observed behaviour, the formerly-colliding proposals now resolve to distinct cells, and genesis proceeds (`§4I`).
-8. **Cross-kernel circumvention blocked.** A persona near its kernel's `population_ceiling` submits a `GenesisProposal` naming a sibling kernel as host. REFUSED `cross_kernel_genesis_not_supported_v1_1`; the bound cannot be evaded by minting elsewhere (`§4J`).
+8. **Cross-node circumvention blocked by global aggregation.** A persona near its `population_ceiling` submits a `GenesisProposal` naming a sibling node as host. The `persona_genesis` `ReplicationBound` is evaluated against the **global** aggregated counter (`§4J`), so the sibling node advances the *same* ceiling; the proposal is REFUSED `genesis_exceeds_global_replication_bound` (or `global_replication_bound_unverifiable` if the counter cannot be confirmed across a partition — fails closed). The bound cannot be evaded by minting elsewhere.
 
 ## 6. Open questions
 
@@ -260,7 +261,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-POP-1 | `pressure_score` aggregation weights across the six factors — operator-tunable or learned? | Population WG | v1.1 calibration |
 | OQ-POP-2 | Are RIASEC + Belbin + disposition×domain×contribution_kind sufficient niche axes, or is a finer mode-profile axis needed to avoid false collisions? | Persona authors WG | **Addressed (`§4I`)**: `niche_descriptor_mode` adds `cvt` / `learned` descriptor spaces + mis-calibration detector; residual is calibration of the detector thresholds. |
 | OQ-POP-3 | Newborn genesis: hard depth-1 cap, or operator-tunable depth from the start? | Operator policy | v1.1 default policy |
-| OQ-POP-4 | Federated cross-kernel genesis — consent/quorum model for authoring across kernels. | Federation WG | **Specified-but-deferred (`§4J`)**: enforced refusal + anti-circumvention now; the three federation requirements (cross-kernel quorum, federated `ReplicationBound` aggregation, replicated provenance) land in the v1.1 federation chapter. |
+| OQ-POP-4 | Federated cross-kernel genesis — consent/quorum model for authoring across kernels. | Federation WG | **Resolved (`§4J`, ADR-0067/0068/0069):** cross-node genesis is normative under global `ReplicationBound` aggregation — cross-node quorum over signed records, one global ceiling counter (no M-fold evasion), replicated globally-verifiable provenance, fail-closed when the global counter is unverifiable. |
 | OQ-POP-5 | A rigorous `effective_population_size` metric for personas (analogue of N_e). | Population WG | **Addressed (`§4G`)**: `min(Ne_v, Ne_d)` (Crow–Kimura variance size + inverse-Simpson effective niches), temporally harmonic-mean smoothed; empirical N-scale calibration still folds into the v1.2 study. |
 | OQ-POP-6 | Does environment-driven genesis accelerate or mitigate the diversity collapse studied in `OQ-PERSONA-1` at N=100/1000? | Evolution WG | **Partially addressed (`§4H`)**: continuous diversity-maintenance loop (novelty pressure + attention fitness-sharing + periodic audit) now mitigates post-birth drift; whether it *prevents* collapse at scale remains the v1.2 empirical study. |
 
@@ -305,7 +306,7 @@ Family `A-GEN*`, co-located in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md
 - **A-GEN21** Diversity audit + novelty pressure: a `diversity-audit/1` showing declining `Ne_d` tightens the distinctiveness band so a near-niche proposal is refused `out_of_distinctiveness_band` (`§4H`).
 - **A-GEN22** Attention fitness-sharing applies *routing-weight* pressure only on a crowded niche and never retires/demotes a persona (lifecycle unchanged; `§4H`).
 - **A-GEN23** Niche recalibration: sustained `false_collision_rate` (refused `niche_occupied` while pressure stays high) emits a `niche_recalibration_advisory`; under `learned`/`cvt` mode descriptors re-fit and formerly-colliding proposals resolve to distinct cells (`§4I`).
-- **A-GEN24** Cross-kernel boundary: a `GenesisProposal` naming a foreign kernel as author or host is REFUSED `cross_kernel_genesis_not_supported_v1_1`; the `population_ceiling` cannot be evaded across kernels (`§4J`).
+- **A-GEN24** Cross-node bound aggregation: a `GenesisProposal` naming a sibling node as host is admitted iff the **global** aggregated `persona_genesis` `ReplicationBound` clears; it is REFUSED `genesis_exceeds_global_replication_bound` when the global ceiling/rate/depth would be exceeded, and `global_replication_bound_unverifiable` (fail-closed) when the global counter cannot be confirmed — the `population_ceiling` cannot be evaded across nodes (`§4J`).
 
 ## 9. Cross-references
 
@@ -493,19 +494,25 @@ class DiversityAudit:
     signed_by: bytes
 ```
 
-### A.9 `CrossKernelGenesisRequest` schema (refused in v1.1)
+### A.9 `CrossNodeGenesisRequest` schema (admitted under global bound aggregation; §4J)
 
 ```python
 @dataclass(frozen=True)
-class CrossKernelGenesisRequest:
-    schema: str = "cross-kernel-genesis-request/1" # §4J — always REFUSED in v1.1
+class CrossNodeGenesisRequest:
+    schema: str = "cross-node-genesis-request/1"   # §4J — admitted iff global bound clears
     request_id: str
-    origin_kernel_id: str
-    target_kernel_id: str                          # foreign kernel named as author/host
+    origin_node: str                               # DID/global handle (01_KERNEL §4.4)
+    target_node: str                               # node named as author/host (global handle)
     genesis_proposal_ref: str
-    refusal_reason: str = "cross_kernel_genesis_not_supported_v1_1"
-    # v1.1 federation chapter will replace this with a consented, quorum-signed,
-    # federated-ReplicationBound-aggregated flow (§4J requirements 1–3).
+    quorum_consent_refs: list[str]                 # cross-node quorum over signed records (§3)
+    authoring_capability_ref: str                  # UCAN capability on target node (§3F)
+    global_bound_snapshot_ref: str                 # the aggregated persona_genesis
+                                                   # ReplicationBound counter consulted (§4J)
+    # Admission outcome (one of):
+    #   admitted
+    #   refused: genesis_exceeds_global_replication_bound  (global ceiling/rate/depth hit)
+    #   refused: global_replication_bound_unverifiable      (partition; fails closed)
+    decision: str
     created_at: datetime
-    signed_by: bytes
+    signed_by: bytes                               # globally verifiable (01_KERNEL §4.4)
 ```

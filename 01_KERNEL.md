@@ -151,18 +151,18 @@ Safety-critical promotion (C2) is refused outright; the system honestly cannot s
 
 **Honest limit:** the degraded gate raises the cost of unsafe self-approval but does not eliminate it. A determined principal can wait 72h, hire a complicit attestor, and sign the acknowledgement. The system is not adversarially robust against the principal themselves; it is robust against unconsidered self-approval. Operator-distinct topology remains the strong-form recommendation for safety-critical work.
 
-### 2.4.1 FederatedTimeLock — alternative degraded gate (v1.1+; staged)
+### 2.4.1 FederatedTimeLock — alternative degraded gate (normative)
 
-When `principal_topology = operator_is_user` and the principal cannot reach a non-principal credentialed attestor (frontier domains with no licensing board; principal in geographic isolation; cost prohibitive), the §2.4 attestation-based gate is unreachable in practice. v1.0 supplies a **second** degraded gate path. The principal picks one; the kernel signs the choice.
+When `principal_topology = operator_is_user` and the principal cannot reach a non-principal credentialed attestor (frontier domains with no licensing board; principal in geographic isolation; cost prohibitive), the §2.4 attestation-based gate is unreachable in practice. PersonaOS supplies a **second** degraded gate path. The principal picks one; the kernel signs the choice.
 
-**AVAILABILITY (v1.0 honest residual).** FederatedTimeLock requires ≥ 3 federation peer kernels with `independence_attested = True`. Federation arrives in **v1.1** (the v1.1 federation milestone). Under v1.0.0–single-kernel deployments, FederatedTimeLock is **structurally unavailable** — there are no peers to federate with. The schema is reserved here so v1.1 has the contract locked in, and so v1.0 deployments that anticipate v1.1 federation can begin pre-staging consent.
+**Availability (now normative).** FederatedTimeLock requires ≥ 3 federation peer nodes with `independence_attested = True`. Federation is now a normative part of the global object space (ADR-0067), so this path is **available** wherever the deployment can reach ≥ 3 admissible independent peer nodes (discovered over `09_PROTOCOLS §3G`).
 
-Under v1.0 with `principal_topology = operator_is_user`:
-- Path 1 (§2.4 attestation gate) is the **only** admissible path.
-- If the principal cannot reach a non-principal credentialed attestor, safety-critical actions **MUST refuse** — v1.0 does not manufacture an alternative. The audit-tag `principal_collapse_path_2_unavailable_v1_0` is added to the refusal lineage so operators can track unfulfilled work waiting on v1.1.
-- Operators may pre-stage a `FederatedTimeLockIntent` (a deferred-action record) which will activate automatically when v1.1 federation registers ≥ 3 admissible peers.
+Under `principal_topology = operator_is_user`:
+- Path 1 (§2.4 attestation gate) is admissible whenever a non-principal credentialed attestor is reachable.
+- Path 2 (FederatedTimeLock) is admissible when ≥ 3 independent peer nodes are reachable to observe the waiting period.
+- **When neither is reachable** (a genuinely isolated single node with no peers and no attestor), safety-critical actions **MUST refuse** — the substrate does not manufacture a gate it cannot honestly supply. This is the **V.8 navigated reality**: isolation is a physical condition, not a missing feature; the audit-tag `principal_collapse_no_gate_reachable` records the refusal, and the pre-staged `FederatedTimeLockIntent` activates automatically once peers become reachable.
 
-This is an **honest residual**, not a hidden bug: the substrate refuses to ceremonialise the gate further than §2.4 already allows. Operators who need the second path before v1.1 MUST run a federation-enabled deployment (multi-kernel, even within one org).
+This is the honest posture: the substrate refuses to ceremonialise the gate beyond what §2.4 / the federated path can truthfully provide.
 
 *The federated time lock allows safety-critical actions to proceed under principal collapse by requiring at least three independent peer kernels to observe a 7-day waiting period with no objections.*
 
@@ -275,6 +275,14 @@ Every `PrincipalAttribution` mint emits `PRINCIPAL_ATTRIBUTION_DECLARED` to the 
 **Principal cosigns are operator-keyed (clarification).** A common operational concern: if a principal's *interface persona* (the persona through which an operator typically interacts with the kernel) retires mid-project, does the pending `MultiPrincipalAttestationQuorum` (`05_ENV §12c.4a`) become unsignable? It does not. `PrincipalRef.signed_by` is the *operator's* signing key (operator-class identity per `§2.4`), not a persona's kernel scope key. Persona retirement (`02_PERSONA §7.5`) does not invalidate the operator's signing key; the operator continues to sign through any persona they nominate, or through the kernel directly. The interface persona is interchangeable per J7 (`00_VISION`); the principal identity persists across persona-FSM transitions. SCENARIO 07 in `13_DESIGN_VALIDATION.md` validates this empirically.
 
 **Fork interaction.** When a `ProjectMember` persona with `principal_attribution_id` set forks mid-project, attribution inheritance is governed by `MidProjectForkComposition.principal_attribution_inheritance` (`02_PERSONA §7.4.7`): `inherit_per_child` (each child's ProjectMember inherits parent's `principal_attribution_id`; admission rule §3 still applies — operator must sign each child's admission) or `reassign_per_child` (each child may have a different `principal_attribution_id`; operator policy authors per-child). **Substrate refusal**: forks initiated when the parent persona has a pending `MultiPrincipalAttestationQuorum` (§12c.4a) with collected partial signatures awaiting completion are **refused** with `fork_refused_pending_quorum` — forking the parent would orphan the partial signatures.
+
+### 2.4.4 Multi-node ownership — one user, one or more nodes (ADR-0067, ADR-0069)
+
+A kernel is a **node**: owned compute that an operator / `personal_user` runs (a laptop, a workstation, a server). In the global object space (ADR-0067) a single owner MAY run **one or more nodes**, and they federate as **one logical PersonaOS** — the owner's personas, envs, and artefacts carry global handles (`§4.4`) and are referenced across the owner's nodes (and, subject to `AccessPolicy`, by others) exactly as any global reference. Conversely a node MAY serve **multiple users** (the existing multi-tenant `tenant_id` / `PrincipalAttribution` model, §2.4.3): the owner's work is one tenant, other users' submitted work is another.
+
+*A `DeploymentProfile` gains an optional `owner_node_set` — the set of node DIDs an owner federates as one logical PersonaOS, each signed into the others' peer registries (`§4.2`) so cross-node references verify (`§4.4`). Membership in an `owner_node_set` is not a trust shortcut: each node still enforces its own floor, budget (INV-7), and `task_intake` gate (§13); it only declares common ownership for discovery, scheduling priority (`03_TASKS §4.6`), and reference resolution.*
+
+The owner-vs-other-user distinction this makes explicit is what the owner-prioritized `SchedulingPolicy` (`03_TASKS §4.6`) and the `task_intake` gate (§13) key on: a node prioritizes its **owner's** tasks ahead of other users' / other personas' tasks by default, as an operator-authored access-level/scheduling policy — never by bypassing the floor or the hard budget gate.
 
 ### 2.5 Physical-state advancement composition rule
 
@@ -403,6 +411,8 @@ A persona that is BOTH executing a project AND teaching the learner (e.g., a sen
 
 **Composition with `LearnerCompetencyAttestation` (`02_PERSONA §11.9`).** The `eligible_learner_constraints.minimum_prereq_attestations` constraint reads existing `LearnerCompetencyAttestation` entries. The gate enforces "learner has the prerequisite competencies"; the attestation primitive *produces* those competency records.
 
+**Minor-learner protection (ADR-0042 — the sole SCENARIO 09 Group C–G floor hook).** When the learner is attested a minor (`02_PERSONA` learner-attestation `is_minor = True`), the gate composes an additional, non-overridable constraint at floor source 3 (user boundary) + source 4 (operator policy): teaching any skill the domain marks hazardous — or any skill at all, per operator policy — requires a **guardian-consent `MutualAccept`** (guardian + operator + persona-instructor) on record, and MAY be refused outright by operator policy regardless of consent. This is most-restrictive-wins (floor source 1 composition): no curriculum, authorisation, or learner opt-in can lift it. With this hook minor-learner pedagogic scenarios are **admitted** (formerly refused at the substrate level); without a clearing guardian-consent record the hazardous-teaching action is refused with `minor_learner_guardian_consent_required`.
+
 **Why source 2 + 4, not source 1.** Universal harm (source 1) covers categorical-refusal cases (no coaching self-harm, no illegal content) — these are jurisdiction-independent. Hazardous-skill teaching is jurisdiction-dependent: what counts as a hazardous-enough skill to require authorisation varies (medical procedures vary by country; welding-by-apprentice rules vary by trade union). Source 2 (persona charter) and source 4 (operator policy) are the right composition layer — operator-context-dependent and re-declarable.
 
 **Honest limits.**
@@ -413,7 +423,7 @@ A persona that is BOTH executing a project AND teaching the learner (e.g., a sen
 4. **Eligible-learner constraints are operator policy.** Substrate enforces declared constraints but cannot evaluate whether the operator's constraint set is *appropriate* (e.g., requiring more prerequisite attestations than necessary, or fewer).
 5. **No automatic re-authorisation cadence enforcement at gate time.** The gate verifies `expires_at > now()` at the moment of teaching action; operators tuning short-window authorisations (e.g., per-quarter) shoulder the operational cost of re-attestation.
 
-**Honest residuals (deferred).** SCENARIO 09 surfaced gaps in pedagogic incident reporting (no substrate shape for "learner had a near-miss"), three-way authority (operator-institution + persona-instructor + user-learner enrollment binding), learning-struggle vs distress disambiguation, minor-learner protections, and user-facing skill instruction agreements. These are intentionally deferred — see `13_DESIGN_VALIDATION SCENARIO 09 Deferred Residuals` section. The current scope (Groups A + B) addresses the regulatory- and safety-load-bearing core; the deferred residuals are honest known gaps+.
+**SCENARIO 09 Groups C–G (discharged, ADR-0039–0043).** The five formerly-deferred pedagogic residuals are landed. Four discharge by composition of existing emergent kinds + coordination shapes — pedagogic incident reporting (`incident_report` emergent artifact kind through the cosign `StagedSequence`), three-way enrollment authority (`MutualAccept` + `PrincipalAttribution`), learning-struggle-vs-distress (`DerivedMetric` feeding the §2.8 distress routing), and user-facing instruction agreements (`MutualAccept` + `Curriculum.requires_learner_optin`) — requiring no new substrate primitive. The fifth, **minor-learner protections**, is the sole immovable-core addition: it composes at floor source 3 (user boundary) + source 4 (operator policy) with the `HazardousSkillTeachingGate` (§2.9) and a guardian-consent `MutualAccept`; minor-learner scenarios are **no longer refused at the substrate level**. See `13_DESIGN_VALIDATION SCENARIO 09` and ADR-0039–0043.
 
 **Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9i — A-HST*`.
 
@@ -637,7 +647,7 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-KERNEL-4 | Lineage storage cost. Append-only lineage grows linearly with task volume. | Medium | High | HOT / WARM / COLD / ARCHIVE retention tiers; `LineageSnapshot` summarisation-with-archival for multi-year retention. | v1.0 (tiers); v1.1 (snapshot policy tuning). |
 | R-KERNEL-5 | Cross-scope lineage queries (task × env × domain replay, including `project_*` subset) are slow at scale. | Medium | Medium | Per-scope indices; pre-computed `project_workspace` slice; operator-tunable replay budget. | v1.0 (indices); v1.1 (replay planner). |
 | R-KERNEL-6 | OTel cardinality explosion. Many tag dimensions (persona × project × env × domain × task × mode) inflate observability storage. | Medium | High | Cardinality limits per metric; sampling at trace level; operator-defined whitelist on tag combinations. | v1.0 (sampling); v1.1 (adaptive caps). |
-| R-KERNEL-7 | Principal-collapse second path (`§2.4`) requires v1.1 federation. Safety-critical actions refuse rather than synthesise an alternative. | High | Low | Audit-tag `principal_collapse_path_2_unavailable_v1_0` on refusals; operator pre-staged `FederatedTimeLockIntent`. | v1.1 (federation registers ≥ 3 admissible peers). |
+| R-KERNEL-7 | A genuinely isolated single node (no reachable attestor AND no reachable peers) cannot supply either principal-collapse gate, so safety-critical actions refuse rather than synthesise an alternative. | High | Low | Both gates now normative (§2.4.1); refuse with `principal_collapse_no_gate_reachable` + pre-staged `FederatedTimeLockIntent` auto-activates when peers become reachable. Isolation is a physical condition (V.8 navigated), not a missing feature. | Navigated (V.8). |
 
 ## 13. Verified-loop substrate
 
@@ -746,7 +756,9 @@ INV-8 says "every effective hard constraint is evaluated at its admission point.
 **Technical detail:** See [A.51](#appendix-a51).
 
 
-**`coordination_propose` admission (v1.1).** When a persona proposes a coordination shape via `ProposedCoordinationShape` ([`15_COORDINATION_SHAPES.md §5`](15_COORDINATION_SHAPES.md)), the kernel validates: (1) `shape_definition` conforms to one of the five meta-mechanism schemas (INV-10 schema-valid), (2) shape does not weaken any safety-floor source (J3 — no safety bypass), (3) `composition_depth ≤ 3`, (4) for `scope = "env_to_env"`: bilateral consent protocol (S-COORD-5) is required before activation, (5) for `safety_critical = True`: operator co-sign required before advancing past `candidate` stage. On refusal, `CoordinationRefused` event emitted with `refusal_reason`.
+**`task_intake` admission (ADR-0069).** A node is owned compute that admits tasks/questions from three submitter classes — its **owner** (operator / personal_user), **other users**, and **other personas** discovered in the global object space (ADR-0067). Before a task is routed (`03_TASKS §4.1`), it passes the `task_intake` point, which runs **before** `env_instantiation` and **distinct from** the INV-7 budget gate (which still fires at `budget_tick`, unchanged). Intake checks, most-restrictive-wins: (1) the submitter is authenticated (signature / DID, `§4.4`); (2) the submitter holds at least a `submit` capability for the target node/env/persona under its `AccessPolicy` (`09_PROTOCOLS §3G.3`), presented as a UCAN token (`09_PROTOCOLS §3F`) for non-owner submitters; (3) the submitter class is within the per-class **quota / rate-limit** the node's `SchedulingPolicy` (`03_TASKS §4.6`) declares. On refusal the kernel emits a signed `TaskIntakeRefused`. Admission here does **not** set execution order — it only decides *whether* the task enters the node's queue; ordering is the soft, owner-prioritized `SchedulingPolicy` (`03_TASKS §4.6`), which never bypasses the floor or the INV-7 hard gate. The submitter identity recorded here is carried in the task envelope, the `AnswerPackage` (`03_TASKS §5`), and lineage (J2/J9).
+
+**`coordination_propose` admission (ADR-0070).** When a persona proposes a coordination shape via `ProposedCoordinationShape` ([`15_COORDINATION_SHAPES.md §5`](15_COORDINATION_SHAPES.md)), the kernel validates: (1) `shape_definition` conforms to one of the five meta-mechanism schemas (INV-10 schema-valid), (2) shape does not weaken any safety-floor source (J3 — no safety bypass), (3) `composition_depth ≤ 3`, (4) for `scope = "env_to_env"`: bilateral consent protocol (S-COORD-5) is required before activation, (5) for `safety_critical = True`: operator co-sign required before advancing past `candidate` stage. On refusal, `CoordinationRefused` event emitted with `refusal_reason`.
 
 **EnvironmentRule admission (env-rule/1).** An `EnvironmentRule` ([`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1)) declares an `enforced_at` subset of these **same eight admission points** — it never introduces a new point. At each named point, the source-8 evaluation (§2.1, `A.3`) runs the env's `accepted`-stage rules whose `enforced_at` includes that point; a `refuse_action` verdict denies exactly as any other source-8 refusal, and a `warn_and_log` / `escalate_operator` verdict emits a signed signal without denying. Each gating evaluation binds its verdict to a `VerifierInvocationEvidence` record ([`07_ARTIFACTS.md §7`](07_ARTIFACTS.md#7-verifier-invocation-against-bundle)); a prose-only verdict is never sufficient.
 
@@ -770,7 +782,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-KERNEL-1 | Classifier reputation closed-loop: which signals (audit catches, operator overrides, false-positive ratio) feed back into rotation weighting? Currently rotation is round-robin; reputation should weight selection. | Safety floor WG | v1.1 reputation scheme. |
 | OQ-KERNEL-2 | Sandbox red-team cadence: quarterly, or per-release? Who runs (internal team vs external)? | Operator security | v1.1 governance doc. |
 | OQ-KERNEL-3 | Cross-scope lineage replay planner: at what corpus size does the naive scan become the bottleneck? Empirical threshold needed before designing the planner. | — | v1.1 replay planner. |
-| OQ-KERNEL-4 | Principal-collapse path 2 (`§2.4`) requires federation; how do we encourage / require operators to deploy multi-kernel even in single-org settings? Documentation, default-deny, or operator policy template? | Operator policy | v1.1 deployment guide. |
+| OQ-KERNEL-4 | Principal-collapse path 2 (`§2.4.1`) needs ≥ 3 reachable independent peer nodes; how should operators be guided to make peers reachable (relay commons, operator policy template)? | Operator policy | Operator deployment guidance (non-blocking; federation itself is normative). |
 | OQ-KERNEL-5 | OTel adaptive cardinality caps: heuristic rules or learned policy? Heuristic ships v1.0; learning policy v1.1+. | Observability WG | v1.1 design. |
 | OQ-KERNEL-6 | Hot-WARM-COLD-ARCHIVE retention defaults: by deployment profile (R&D vs enterprise vs safety-critical) or universal defaults? | Operator policy | v1.1 retention policy library. |
 
@@ -2824,6 +2836,8 @@ PERSONA_SELF_STOP
 ```text
 admission point        constraint_scope  when in round         on hard-deny
 ─────────────────────────────────────────────────────────────────────────────
+task_intake            intake            task submitted to     refuse intake;
+                                         node (pre-routing)    TaskIntakeRefused
 env_instantiation      admission         env load (pre-round)  refuse to load
 envelope_mint          admission         dispatch (§9)          refuse to mint
 retrieval_filter       retrieval         orient-time recall    suppress card,
@@ -2838,7 +2852,7 @@ round_barrier          round             round close            halt round;
 budget_tick            budget            every kernel-mediated  halt task;
                                          call (§7)              budget_exhausted
 mutation_propose       mutation          evolution proposal     reject proposal
-coordination_propose   coordination     shape proposal (v1.1) refuse shape;
+coordination_propose   coordination     shape proposal        refuse shape;
                                                                 CoordinationRefused
 ```
 

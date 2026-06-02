@@ -107,9 +107,9 @@ Sharing is governed by an **ArtifactSharingPolicy** (`artifact-share/1`) — a s
 - **Intra-composition sharing** — inheritance along the `EnvironmentComposition` parent/child hierarchy ([`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md#22a-environmentcomposition--hierarchical-environment-nesting-v11)): a parent env's bundles MAY be shared down to its child envs (the company → org → team model); a child policy MAY further-restrict but MUST NOT widen.
 - **Outward sharing** — the five visibility tiers ([`06_DOMAIN.md §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers); ADR-0030) `persona_only | project_only | tenant | federation | public`; a `tenant`-tier share that crosses a `principal_attribution` boundary REQUIRES a `CrossTenancyAgreementRef` (ADR-0028) or demotes with a signed `CROSS_TENANT_VISIBILITY_DEMOTED` event.
 
-Effective access composes by **most-restrictive-wins** (see [A.3a](#appendix-a3a)). The default `outward_tier` is `project_only` — the most conservative tier for newly-produced work; `federation` / `public` artifact tiers depend on the v1.1 federation index and are refused at admission until then (mirroring `DomainHarvest`).
+Effective access composes by **most-restrictive-wins** (see [A.3a](#appendix-a3a)). The default `outward_tier` is `project_only` — the most conservative tier for newly-produced work; `federation` / `public` artifact tiers are **served by the now-normative discovery layer** (`09_PROTOCOLS §3G`, ADR-0067): a `federation`/`public` bundle projects an `ArtifactCard` discoverable over the internet (DHT) / intranet (mDNS) planes, access-gated by its `AccessPolicy`.
 
-**Generalisation to `AccessPolicy` (v1.1 draft).** `ArtifactSharingPolicy` is the artifact-specific case of the content-type-agnostic **`AccessPolicy`** ([`09_PROTOCOLS.md §3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types)) that any first-class entity (persona / env / domain / knowledge / telemetry) may reference. Under that generalisation, `AccessGrant.access_level` widens **additively** from `{r, rw}` to the ladder **`discover < read (r) < write (rw) < admin`** — `discover` lets a principal find a bundle (via the `ArtifactCard`, `§10a`) and see its minimal metadata without reading its bytes — and principal kinds extend to `peer_kernel` / `intranet_peer` / `public`. Existing grants and the `artifact-share/1` / `access-grant/1` schema versions are unchanged (enum widening only, [`09_PROTOCOLS.md §7.13`](09_PROTOCOLS.md#713-adding-or-modifying-schemas)). Captured as ADR-0060.
+**Generalisation to `AccessPolicy`.** `ArtifactSharingPolicy` is the artifact-specific case (a canonical realisation) of the content-type-agnostic **`AccessPolicy`** ([`09_PROTOCOLS.md §3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types)) that every first-class entity (persona / env / domain / knowledge / telemetry) references. Under that generalisation, `AccessGrant.access_level` widens **additively** from `{r, rw}` to the ladder **`discover < read (r) < write (rw) < admin`** — `discover` lets a principal find a bundle (via the `ArtifactCard`, `§10a`) and see its minimal metadata without reading its bytes — and principal kinds extend to `peer_kernel` / `intranet_peer` / `public`. Existing grants and the `artifact-share/1` / `access-grant/1` schema versions are unchanged (enum widening only, [`09_PROTOCOLS.md §7.13`](09_PROTOCOLS.md#713-adding-or-modifying-schemas)). Captured as ADR-0060.
 
 *This schema defines the env-scoped sharing policy (`artifact-share/1`) and its per-grantee `AccessGrant` (`access-grant/1`): access levels, intra-composition inheritance, outward visibility tier, and cross-tenant agreement requirement.*
 
@@ -233,9 +233,9 @@ Operator chooses store backend. Ships Git-backed; Adds S3; hub publication adds 
 
 **Content-addressed distribution alignment (informative).** The `content_hash` (SHA-256) model aligns directly with **IPFS / IPLD / CIDs**: an `ArtifactBundle` is naturally an IPLD DAG node whose links are the CIDs of its constituent artifacts, giving location-independent, integrity-verifiable references for federated sharing. Heavy, immutable, `version_chain`-class blobs (compiled outputs, model weights, `kicad_project` archives, environment images) MAY be distributed as **OCI Artifacts** via ORAS over ubiquitous OCI registries. Bundle and persona/env-image provenance MAY be published with **Sigstore** (keyless signing + transparency log), **SLSA** provenance, and **in-toto** attestations; **C2PA** Content Credentials apply to media artifacts (advisory tamper-evidence). These are interoperability targets at the federation boundary, not substrate requirements — see [`09_PROTOCOLS.md §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative).
 
-## 10a. Artifact discoverability and hybrid provider-backed storage (v1.1 draft)
+## 10a. Artifact discoverability and hybrid provider-backed storage
 
-v1.0 content-addresses bundles but gives them no discovery projection and no first-class story for content that already lives in an external provider. v1.1 closes both, reusing the discovery / access / storage substrate defined in [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md#3g-discovery-access-and-hybrid-distribution-v11-draft).
+v1.0 content-addresses bundles but gives them no discovery projection and no first-class story for content that already lives in an external provider. v1.1 closes both, reusing the discovery / access / storage substrate defined in [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md#3g-discovery-access-and-hybrid-distribution).
 
 **Discoverability.** A bundle projects an **`ArtifactCard` (`artifact-card/1`)** — the artifact specialisation of `DiscoverableRecord` ([`09_PROTOCOLS §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type)) — carrying bundle id, media kinds, `content_hash` / `ContentLocator`, `sharing_policy_ref`, and version-chain head. The card rides the internet (`.well-known` + gossip + DHT) and intranet (mDNS) discovery planes ([`§3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet)) and is **access-gated**: a peer surfaces the card only at `discover`+, and resolves its body only at `read`+ ([`§3G.4`](09_PROTOCOLS.md#3g4-access-gated-discovery--who-can-access-what-enforced-at-the-discovery-layer)).
 
@@ -590,9 +590,10 @@ class ArtifactSharingPolicy:
                                           #  principal_attribution boundary;
                                           #  absent => demote + emit
                                           #  CROSS_TENANT_VISIBILITY_DEMOTED.
-                                          #  federation / public depend on the
-                                          #  v1.1 federation index (refused at
-                                          #  admission until then).
+                                          #  federation / public are served by
+                                          #  the normative discovery layer
+                                          #  (09_PROTOCOLS §3G, ADR-0067),
+                                          #  access-gated by AccessPolicy.
 
     version: int = 1
     signed_by: bytes = b""                # env-scope key (09_PROTOCOLS §8)

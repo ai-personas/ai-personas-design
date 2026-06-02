@@ -42,7 +42,7 @@ This catalog is **informative**, not normative. The decisions it records are rea
 | Proposed | Under review; not yet realised in the substrate. |
 | Deprecated | The decision is being phased out without a direct successor. |
 
-**Scope.** This catalog covers 22 foundational decisions made across the design history through v1.0, plus 3 v1.0.7 ADRs (multi-principal attribution, derivation-provenance edges, visibility-tier vocabulary unification) sourced from SCENARIO 06, plus 3 v1.0.8 ADRs (lead handoff + obligation reassignment, lifecycle event enumeration + RetiredStatePersistencePolicy + PersonaConsultation, PlannedDeparture) sourced from SCENARIO 07, plus 3 v1.0.9 ADRs (user-side MPA primitives, distress detection routing as substrate-shape, relationship review checkpoints + operator-blind mode + companion-pathway routing) sourced from SCENARIO 08, plus 2 v1.0.10 ADRs (learner state + competency attestation + curriculum primitives Group A; hazardous-skill teaching gate Group B) sourced from SCENARIO 09 with 5 deferred residuals reserved+ as ADR-0039..0043 slots, plus 1 v1.0.11 ADR (MidProjectForkComposition unified envelope for fork-vs-project-side composition) sourced from SCENARIO 10, plus 1 v1.0.13 ADR (self-organizing coordination — personas propose coordination shapes, not just kinds) sourced from the cumulative gap pattern across SCENARIOs 06-12. Future decisions made under v1.1+ append with monotonically-allocated IDs.
+**Scope.** This catalog covers 22 foundational decisions made across the design history through v1.0, plus 3 v1.0.7 ADRs (multi-principal attribution, derivation-provenance edges, visibility-tier vocabulary unification) sourced from SCENARIO 06, plus 3 v1.0.8 ADRs (lead handoff + obligation reassignment, lifecycle event enumeration + RetiredStatePersistencePolicy + PersonaConsultation, PlannedDeparture) sourced from SCENARIO 07, plus 3 v1.0.9 ADRs (user-side MPA primitives, distress detection routing as substrate-shape, relationship review checkpoints + operator-blind mode + companion-pathway routing) sourced from SCENARIO 08, plus 2 v1.0.10 ADRs (learner state + competency attestation + curriculum primitives Group A; hazardous-skill teaching gate Group B) sourced from SCENARIO 09, with the 5 former residuals now discharged as ADR-0039..0043 (Groups C–G — emergent composition + the minor-learner floor hook), plus 1 v1.0.11 ADR (MidProjectForkComposition unified envelope for fork-vs-project-side composition) sourced from SCENARIO 10, plus 1 v1.0.13 ADR (self-organizing coordination — personas propose coordination shapes, not just kinds) sourced from the cumulative gap pattern across SCENARIOs 06-12. Future decisions made under v1.1+ append with monotonically-allocated IDs.
 
 ---
 
@@ -935,7 +935,7 @@ A related sub-gap: GOAL_PROGRESS_ACCEPT had no learner-side acknowledgement step
 - (+) Learner-acknowledgement step puts mastery adjudication on the learner's side, mitigating "persona declares Maya mastered it without learner concurrence."
 - (+) Learner can read their own LearnerStateRecord by default (transparency by construction); operator-policy masking is admissible but signed and auditable.
 - (−) Migration cost: existing PEDAGOGIC-task deployments using ad-hoc operator-policy competency tracking must plan migration; substrate refuses auto-migration.
-- (−) Five related gaps (incident reporting, three-way authority, learning-struggle-vs-distress, minor-learner protections, user-skill-instruction agreements) deferred — SCENARIO 09 acknowledges these as honest residuals.
+- Five related gaps (incident reporting, three-way authority, learning-struggle-vs-distress, minor-learner protections, user-skill-instruction agreements) are **discharged in ADR-0039–0043** — four by emergent-kind + coordination-shape composition, minor-learner protection as the sole new floor hook.
 - (−) Substrate carries structure; pedagogical *validity* (is this curriculum actually good?) remains operator + persona-author responsibility.
 
 **Alternatives considered.**
@@ -991,15 +991,15 @@ The catalog is open-ended. Future ADRs append below as v1.1+ decisions land. Ant
 - **ADR-0026** — Population dynamics at scale (>10⁴ personas).
 - **ADR-0027** — Post-quantum signing migration (v2.0+).
 
-Anticipated **v1.0.11+** entries for SCENARIO 09 deferred residuals (Groups C-G):
+**SCENARIO 09 residuals (Groups C–G) — discharged.** The five residuals are landed. Per the emergence stance (ADR-0066 orchestration, ADR-0070 coordination), four discharge by **composition** of existing emergent kinds + coordination shapes — no new substrate primitive — and only the fifth (minor-learner protections) adds an immovable-core safety hook, because protecting minors is a floor concern, not a workflow.
 
-- **ADR-0039** — PedagogicIncidentReport (substrate-shape near-miss/injury reporting for non-project pedagogic envs)
-- **ADR-0040** — LearnerEnrollmentContract (three-way authority binding for institution + learner + persona-instructor)
-- **ADR-0041** — LearningStruggleClassification (substrate disambiguator paired with §2.8 distress routing)
-- **ADR-0042** — MinorLearnerProtections (age-gating + guardian-consent primitives)
-- **ADR-0043** — UserSkillInstructionAgreement (signed contract for user-facing skill teaching)
+- **ADR-0039 — PedagogicIncidentReport (discharged by composition).** A near-miss/injury report in a non-project pedagogic env is an **emergent artifact kind** (`incident_report`, resolved via the KindRegistry §7.6) carried through the existing cosign `StagedSequence` (report → review → escalate-to-operator), signed in env lineage (J9). No new primitive; the report's escalation rides the §2.8 distress/operator-escalation routing.
+- **ADR-0040 — LearnerEnrollmentContract (discharged by composition).** Three-way authority (institution-operator + persona-instructor + learner-user) is a **`MutualAccept`** coordination shape among three parties, composed with `PrincipalAttribution` (`01_KERNEL §2.4.3`) for the institution side and `UserBoundary`/`ConsentLedger` for the learner side. The "contract" is the signed `MutualAccept` binding; no new authority primitive.
+- **ADR-0041 — LearningStruggleClassification (discharged by composition).** Struggle-vs-distress is a **`DerivedMetric`** over learner-state signals (`LearnerStateRecord §11.8`) feeding the existing §2.8 distress-detection routing: below threshold → pedagogic scaffolding (ZPD ramp); above → distress routing. An emergent `learning_signal_kinds` family classifies; the safety-load-bearing distress path is unchanged.
+- **ADR-0042 — MinorLearnerProtections (the sole immovable-core safety hook).** Age-gating + guardian-consent is **not** a workflow shape — it is a floor concern. It composes as an operator-policy gate at **safety-floor source 3 (user boundary)** + **source 4 (operator policy)**, paired with the `HazardousSkillTeachingGate` (`01_KERNEL §2.9`): when a learner is attested a minor, teaching of any skill the domain marks hazardous (or any skill, per operator policy) requires a guardian-consent `MutualAccept` and may be refused outright. Minor-learner scenarios are **no longer refused at the substrate level** — they are admitted under this gate. This is the one genuinely new safety addition; it cannot be overridden (floor source 1 composition, most-restrictive-wins).
+- **ADR-0043 — UserSkillInstructionAgreement (discharged by composition).** A signed "Ren teaches Maya X over N sessions" contract is a **`MutualAccept`** between learner-user and persona-instructor, composed with the existing `Curriculum.requires_learner_optin` (`03_TASKS §3.3`) and the GOAL_PROGRESS_ACCEPT learner-acknowledgement step (`03_TASKS §3.1`). No new contract primitive.
 
-These slots are reserved; their content is not yet authored.
+**Status (all five).** Accepted; discharged. ADR-0042 lands a floor-composition rule (`01_KERNEL §2.9` extension + `02_PERSONA` minor-attestation field); the other four are emergent-kind + coordination-shape compositions requiring no substrate primitive. SCENARIO 09's "five honest residuals" are closed (`13_DESIGN_VALIDATION.md`).
 
 ## 12. Cross-fix-family composition
 
@@ -1149,7 +1149,7 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 
 ### ADR-0048 — Persona Genesis: bounded persona-authored seed creation under environmental pressure
 
-**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)).
+**Status.** Accepted (normative; promoted under ADR-0067/0068/0069 — [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)).
 
 **Context.** v1.0 creates personas only via operator-authored `PersonaSeed`s (`02_PERSONA §12`). Personas may recruit from the existing pool (`05_ENVIRONMENT §12c`) or fork existing parents (`02_PERSONA §7.4`), but cannot author a *new role* when the recruit pool is empty. The result is the dead-end in `04_PROJECT §14.1` ("pause, or operator interim") — the unfilled "population dynamics" residual (`00_VISION §11`, R-v1.0-8). Recent research (AutoAgents, IJCAI 2024; auto-scaling MAS, 2025) shows agents can author specialized roles on demand; self-replication-risk work (2025) shows hard brakes are mandatory.
 
@@ -1172,7 +1172,7 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 
 ### ADR-0049 — Population demographic regulation (carrying capacity, density dependence, r/K strategy)
 
-**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md)).
+**Status.** Accepted (normative; promoted under ADR-0067/0068/0069 — [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md)).
 
 **Context.** A generative birth mechanism (ADR-0048) needs a principled birth-rate model so the population grows when under-served and stabilises when saturated, rather than oscillating or exploding up to the hard ceiling. Human-population and organizational-ecology theory provide validated models.
 
@@ -1187,7 +1187,7 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 
 ### ADR-0050 — Rigorous effective population size, continuous diversity maintenance, and learned niche descriptors
 
-**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md)–`§4J`). Closes the SCENARIO 13 residuals (`13_DESIGN_VALIDATION.md`).
+**Status.** Accepted (normative; promoted under ADR-0067/0068/0069 — [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md)–`§4J`). Closes the SCENARIO 13 residuals (`13_DESIGN_VALIDATION.md`).
 
 **Context.** ADR-0048/0049 left four honest residuals: `effective_population_size` was informal (OQ-POP-5); diversity was guaranteed only at birth, not against post-birth drift (OQ-POP-6); the RIASEC/Belbin niche grid could mis-calibrate (R-POP-3 / OQ-POP-2); and cross-kernel genesis was declared OOS without enforcement (OQ-POP-4 — a `ReplicationBound` evasion risk).
 
@@ -1195,7 +1195,7 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 1. **Rigorous EPS (`§4G`).** `effective_population_size = harmonic_mean_over_window(min(Ne_v, Ne_d))` — Crow–Kimura variance effective size `Ne_v` (authorship skew / founder effect) and the inverse-Simpson effective number of niches `Ne_d` (niche concentration), Wright's temporal harmonic mean for smoothing. Schema `eps-estimate/1`.
 2. **Continuous diversity maintenance (`§4H`).** A periodic `diversity-audit/1` arms novelty pressure (novelty search on the next birth's niche) and attention fitness-sharing (routing-weight only; never demotes a persona), mitigating post-birth drift toward monoculture.
 3. **Learned niche descriptors (`§4I`).** `population-policy/1.niche_descriptor_mode ∈ {fixed_axes, cvt, learned}` (CVT-MAP-Elites / AURORA) plus a mis-calibration detector (`false_collision_rate` / `unfillable_gap_rate` → `niche_recalibration_advisory`), removing operator axis-choice bias and self-correcting the grid.
-4. **Enforced cross-kernel boundary (`§4J`).** Cross-kernel `GenesisProposal`s are REFUSED (`cross_kernel_genesis_not_supported_v1_1`) so the per-kernel population ceiling cannot be evaded by minting elsewhere; federated genesis (cross-kernel quorum + federated bound aggregation + replicated provenance) is the specified, deferred v1.1 federation-chapter work.
+4. **Cross-node boundary via global aggregation (`§4J`, promoted under ADR-0067/0068/0069).** Cross-node `GenesisProposal`s are admitted iff the **global** aggregated `persona_genesis` `ReplicationBound` clears — one ceiling counter across the owner's `owner_node_set` / federation, with cross-node quorum + replicated globally-verifiable provenance. The population ceiling cannot be evaded by minting elsewhere (anti-circumvention by aggregation, not prohibition); refused `genesis_exceeds_global_replication_bound`, or fail-closed `global_replication_bound_unverifiable` across a partition.
 
 **Consequences.**
 - (+) Three of four SCENARIO 13 residuals resolved or mitigated; the fourth converted from open to specified-but-deferred-and-enforced.
@@ -1360,7 +1360,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0058 — Unified `DiscoverableRecord` projection; add `ArtifactCard` + `TelemetryCard`
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (make every content type discoverable).
 **Related:** [`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type), [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md#3-a2a--agent-to-agent-federation), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), ADR-0056.
@@ -1377,7 +1377,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0059 — Two-plane discovery transport: Kademlia DHT (internet) + mDNS (intranet) + resolver
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (support internet AND intranet P2P).
 **Related:** [`09_PROTOCOLS.md §3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet), [`09_PROTOCOLS.md §3B`](09_PROTOCOLS.md#3b-inter-kernel-gossip-layer), ADR-0056, ADR-0064.
@@ -1394,7 +1394,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0060 — Unified `AccessPolicy` with a `discover` level; discovery is access-gated
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 ("who can access what", across all content + discovery).
 **Related:** [`09_PROTOCOLS.md §3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types), [`09_PROTOCOLS.md §3G.4`](09_PROTOCOLS.md#3g4-access-gated-discovery--who-can-access-what-enforced-at-the-discovery-layer), [`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md), [`06_DOMAIN.md §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers), ADR-0055, ADR-0030, ADR-0028.
@@ -1411,10 +1411,10 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0061 — Federated, consent-gated telemetry feed (`TelemetryCard`)
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (observe persona progress/activity from anywhere on the internet).
-**Related:** [`09_PROTOCOLS.md §4.1`](09_PROTOCOLS.md#41-federated-consent-gated-telemetry-feed-v11-draft), [`09_PROTOCOLS.md §4`](09_PROTOCOLS.md#4-opentelemetry-semantic-conventions), [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md), ADR-0058, ADR-0060.
+**Related:** [`09_PROTOCOLS.md §4.1`](09_PROTOCOLS.md#41-federated-consent-gated-telemetry-feed), [`09_PROTOCOLS.md §4`](09_PROTOCOLS.md#4-opentelemetry-semantic-conventions), [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md), ADR-0058, ADR-0060.
 
 **Context.** v1.0 OTel goes only to the operator's private collector; there is no authorised way to observe a persona's real-time progress/activity from elsewhere.
 
@@ -1428,24 +1428,26 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0062 — Replicated-host / BFT standby promotion to soften the single-host bottleneck
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted under ADR-0067).
 **Date:** 2026-06-01.
-**Origin:** v1.1 (decentralisation / availability of joined environments).
-**Related:** [`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md#3c2-single-host-kernel-rule), [`05_ENVIRONMENT.md §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification), ADR-0064.
+**Origin:** Decentralisation / availability of joined environments in the global object space.
+**Related:** [`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md#3c2-single-host-kernel-rule), [`05_ENVIRONMENT.md §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification), ADR-0064, ADR-0067.
 
 **Context.** Joined environments have exactly one host kernel; host loss ⇒ `STALLED`. This is the design's weakest decentralisation property.
 
-**Decision.** Add an optional `standby_replica_set` holding a warm signed Blackboard shadow, with **BFT quorum sign-off** (OpenCLAW-P2P pattern, composing with `MultiPrincipalAttestationQuorum`) promoting a standby on host loss without full replay. **Honest limit:** full multi-writer BFT state is out of v1.1 scope; sequence assignment still flows through one promoted host (split-brain prevented by majority quorum, R-PROTOCOLS-14).
+**Decision.** The `standby_replica_set` — a warm signed Blackboard shadow held by peer nodes, with **BFT quorum sign-off** (OpenCLAW-P2P pattern, composing with `MultiPrincipalAttestationQuorum`) promoting a standby on host loss without full replay — is **normative** and ships as a STANDARDISED seed coordination shape (`15_COORDINATION_SHAPES`). It survives host loss without operator replay; sequence assignment still flows through one promoted host at a time, with split-brain prevented by majority quorum (R-PROTOCOLS-14).
 
-**Consequences.** (+) Survives host loss without operator replay; (−) replica upkeep cost; partial, not full, decentralisation.
+**The irreducible remainder is navigated, not deferred (V.8).** Full leaderless multi-writer BFT state against *genuinely adversarial, independent* nodes is not abolished by this design — it is a hard distributed-systems + trust reality. PersonaOS navigates it honestly: (1) replicated-host failover removes the *availability* single point of failure (landed here); (2) cross-node references and verdicts are **trust-calibrated**, never assumed (a peer node's signatures verify identity and integrity, but its *honesty* enters at calibrated trust and degrades on disconfirmation — the same J5/C3 machinery used for emergent domains); (3) the safety floor and signing are enforced locally on every node regardless of peer behaviour. A colluding-majority attack on a specific joined env's quorum is bounded by which peers an operator admits to the replica set (operator policy) and is surfaced, not hidden. This is recorded as a **V.8 navigated-reality PASS** in `13_DESIGN_VALIDATION.md`, not a deferral.
 
-**Alternatives rejected.** Full leaderless multi-writer BFT now — rejected: large, and clock-drift/sequence-distribution were the original reasons for the single-host rule; deferred to v2.0.
+**Consequences.** (+) Survives host loss without operator replay; failover is normative. (−) Replica upkeep cost; (−) honesty-of-independent-nodes is trust-calibrated, not cryptographically guaranteed — stated plainly rather than over-promised.
+
+**Alternatives rejected.** Claiming full Byzantine robustness against adversarial nodes as a substrate guarantee — rejected: it would be dishonest (the spec's "honest residuals" ethic forbids manufacturing certainty); trust-calibration is the truthful posture.
 
 ---
 
 ### ADR-0063 — Hybrid provider-backed storage: distribute a signed `ContentLocator`, not the bytes
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (leverage existing storage providers; distribute the reference over P2P).
 **Related:** [`09_PROTOCOLS.md §3G.5`](09_PROTOCOLS.md#3g5-hybrid-provider-backed-storage--distribute-the-reference-not-the-bytes), [`07_ARTIFACTS.md §10`](07_ARTIFACTS.md), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), ADR-0056, ADR-0064.
@@ -1462,7 +1464,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0064 — Adopt OpenCLAW-P2P primitives as patterns / interop targets, not reinvention
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (consume proven P2P implementations where they exist).
 **Related:** [`09_PROTOCOLS.md §3G.6`](09_PROTOCOLS.md#3g6-adopting-openclaw-p2p-primitives-interop-not-reinvention), [`09_PROTOCOLS.md §3B`](09_PROTOCOLS.md#3b-inter-kernel-gossip-layer), [`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md#3c2-single-host-kernel-rule), [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md#3d-reputation-and-anti-goodhart), ADR-0059, ADR-0062, ADR-0063.
@@ -1477,10 +1479,10 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0065 — Reachability & availability: dial NAT-private nodes, survive origin-offline, and be honest about the commons
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (the "run at home, discover + fetch from my phone off-network, without my own server" question).
-**Related:** [`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md#3h-reachability-and-availability--being-found-dialled-and-fetched-from-anywhere-v11-draft), [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md#3g-discovery-access-and-hybrid-distribution-v11-draft), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), [`13_DESIGN_VALIDATION.md` SCENARIO 15](13_DESIGN_VALIDATION.md), ADR-0059, ADR-0063, ADR-0064.
+**Related:** [`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md#3h-reachability-and-availability--being-found-dialled-and-fetched-from-anywhere), [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md#3g-discovery-access-and-hybrid-distribution), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), [`13_DESIGN_VALIDATION.md` SCENARIO 15](13_DESIGN_VALIDATION.md), ADR-0059, ADR-0063, ADR-0064.
 
 **Context.** Discovery (`§3G`) tells a peer a record exists and where its locator points, but two physical realities decide whether a phone on cellular can actually observe a persona running on a home laptop behind NAT: can it **dial** the node, and can it **fetch** content when the node is asleep. The earlier track (ADR-0058..0064) added discovery, access-gating, and hybrid storage, but not NAT traversal or a first-class offline-availability posture — and risked implying "no server" means "no infrastructure."
 
@@ -1494,7 +1496,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0066 — Self-organizing orchestration: the run loop is an emergent coordination shape, not a fixed dispatcher
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted under ADR-0070).
 **Date:** 2026-06-02.
 **Origin:** v1.1 (the "we don't need a fixed orchestration loop; orchestration must itself be emergent persona behaviour in the environment" alignment review). Extends ADR-0045 one layer down.
 **Related:** [`C4`](00_VISION.md#3-invariants-j1j9) (domain-agnostic substrate), [`J4`](00_VISION.md#3-invariants-j1j9) (class-appropriate acceptance), [`J5`](00_VISION.md#3-invariants-j1j9) (open capability, calibrated competence), ADR-0006, ADR-0011, ADR-0012, ADR-0045, [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes), [`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop).
@@ -1561,6 +1563,93 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 - *Copy entities between kernels instead of referencing them.* Rejected: copies break provenance and access control; reference-by-global-handle with access-gating (and `ContentLocator` for bytes) preserves both.
 
 **Implementation scope (staged).** This part lands the identity foundation: the J1 reframe ([`00_VISION.md §3`, A.1, INV-1](00_VISION.md#3-invariants-j1j9)) and the global-handle + cross-node-verification kernel section ([`01_KERNEL §4.4`](01_KERNEL.md#44-global-identity-handles--cross-node-verification-j1-adr-0067)). Companion parts land the `AccessPolicy` promotion (ADR-0060 → normative), the discovery promotion (ADR-0058/0059/0063/0064/0065 → normative), removal of the single-kernel non-goal and cross-kernel refusal codes, cross-env/cross-node task delegation, owner-prioritized scheduling, and the coordination-emergence twin of ADR-0066.
+
+### ADR-0068 — Cross-env / cross-node task delegation & placement; UCAN capability delegation
+
+**Status:** Accepted.
+**Date:** 2026-06-02.
+**Origin:** Architectural alignment — "if one task is processed by an env and its personas, it may produce another task given to a different set of personas in a different env." In the global object space (ADR-0067), that different env may be on a different node. The substrate could delegate persona-to-persona within an env and cross-*kernel* via A2A, and could coordinate artifact handoff cross-*env* (`15_COORDINATION_SHAPES §4.7`), but had **no path to hand a task to a different env's personas**, and OQ-TASKS-3 (cross-domain delegation trust) was unresolved.
+**Related:** [`03_TASKS §2.6`](03_TASKS.md#26-delegated--inheritance-and-lineage-depth) (DELEGATED), [`03_TASKS §4.5`](03_TASKS.md#45-cross-env--cross-node-task-delegation--placement), [`15_COORDINATION_SHAPES §4.7`](15_COORDINATION_SHAPES.md#47-cross-environment-coordination-bilateral-peers), [`09_PROTOCOLS §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative) (UCAN), [`09_PROTOCOLS §3C.3`](09_PROTOCOLS.md) (constraint composition), [`05_ENVIRONMENT §11.6`](05_ENVIRONMENT.md) (GuestPresence), ADR-0067, OQ-TASKS-3.
+
+**Context.** A sub-task is often best resolved by personas other than those handling the parent — with different competence, in a different env, possibly on a different node. v1.0 supported intra-env and cross-kernel-via-A2A persona handoff (`DELEGATED`), and bilateral cross-env *artifact* coordination (`CrossEnvCoordination`), but the two were never composed: there was no first-class "hand this *task* to that env's personas," no placement decision (local vs remote node), no availability probe across envs, no resolution of cross-domain delegation trust (OQ-TASKS-3), and no rule for what parent lineage a remote resolver may see.
+
+**Decision.** Compose the two existing primitives rather than minting a new subsystem (the ADR-0045/0066 "compose, don't add" philosophy):
+1. **`CrossEnvTaskDelegation` = `DELEGATED` × `CrossEnvCoordination`.** The `CrossEnvInterface` is extended to optionally carry a *task* (resolved sub-task class + acceptance pathway, `permitted_task_classes`, `permitted_acceptance_pathways`). A cross-env/cross-node delegation is an ordinary `DELEGATED` task reached through a `CrossEnvCoordinationBinding`; it inherits class/pathway per §2.6, is dual-signed by both envs/nodes, and respects `max_delegation_depth` across boundaries.
+2. **Consent + capability, never command.** The receiving env reviews and Accepts / Counter-proposes / Denies through its own process (`15 §4.7` principle 1). Authorization to delegate is an `AccessPolicy` `submit`/`write` grant carried as an **attenuated UCAN capability token** chained from the delegator's DID (`§3F`, now normative); it is verified before the request reaches review.
+3. **Placement.** `route_task_v1` resolves candidate participants from the local env, other local envs, and the global discovery layer (`§3G`), and places the sub-task by capability / availability / access / policy. Remote execution composes floor + budget most-restrictive-wins (as joined-env execution does, `§3C.3`); guest contribution uses `GuestPresence`.
+4. **`CrossEnvPresenceQuery`** (access-gated) lets a source env check a target persona's availability first.
+5. **OQ-TASKS-3 resolved: minimum trust.** A cross-domain sub-task's outputs are trust-calibrated to the **minimum** of (parent domain trust, resolving domain trust) — most-restrictive-wins, preventing trust laundering in either direction.
+6. **`CrossEnvLineageVisibility`** (`full` / `redacted` (default) / `existence`), gated by `AccessPolicy`, governs what parent lineage the resolver sees; it never widens access.
+
+**Consequences.**
+- (+) A task can flow to whichever personas/env/node fit, through the same emergent loop, with consent and access preserved — the headline behaviour the architecture requires.
+- (+) No new subsystem: reuses DELEGATED, CrossEnvCoordination, AccessPolicy, GuestPresence, the discovery layer, and the joined-env constraint-composition rule.
+- (+) Resolves OQ-TASKS-3 conservatively; closes the cross-env routing gaps.
+- (−) Placement across nodes inherits the network-physics limits navigated in ADR-0065 / §3H (a target node may be asleep/unreachable); the dispatcher falls back to local resolution or queues per `AvailabilityPolicy`. Recorded honestly, not hidden.
+- (−) UCAN capability verification is a new hot-path check at delegation/intake; mitigated by it being a signature + AccessPolicy lookup, the same cost class as existing floor composition.
+
+**Alternatives considered.**
+- *A dedicated cross-env task-routing subsystem.* Rejected: task delegation is coordination of work across envs, which the `15 §4.7` bilateral protocol already models; extending its interface to carry a task is the minimal, consistent move.
+- *Inherit the parent's domain trust (or the target's) for cross-domain sub-tasks.* Rejected in favour of the minimum: either single-side choice enables trust laundering; most-restrictive-wins matches the floor and AccessPolicy.
+- *Let a delegator place work on a remote node without the receiver's consent (capability alone).* Rejected: violates `15 §4.7` principle 1; capability authorizes the *request*, the receiver still consents to *execute*.
+
+**Implementation scope.** Landed with normative edits: [`03_TASKS §4.5`](03_TASKS.md#45-cross-env--cross-node-task-delegation--placement) (the composition, placement, presence query, lineage visibility, OQ-TASKS-3 resolution) + §2.6 note + OQ-TASKS-3 table resolution; [`15_COORDINATION_SHAPES §4.7`](15_COORDINATION_SHAPES.md#47-cross-environment-coordination-bilateral-peers) principle 6 (task-carrying interface); [`09_PROTOCOLS §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative) UCAN normative carve-out; the A-XD acceptance-test family.
+
+### ADR-0069 — Owned-node multi-tenant priority scheduling: node intake gate + owner-first SchedulingPolicy
+
+**Status:** Accepted.
+**Date:** 2026-06-02.
+**Origin:** Architectural alignment — "each user runs one or more PersonaOS; a node runs tasks/questions from its user, other users, or other personas from the global space, by priority; a user's node prioritizes its own user's tasks before other users' personas' tasks — these are access-level policies." This is the genuinely-new layer: the prior spec had a hard budget gate (INV-7) and FIFO-plus-urgency notification routing, but **no task priority, no submitter identity in the task record, no node-level intake gate, no owner-preference, and no first-class multi-node-per-user ownership**.
+**Related:** [`01_KERNEL §2.4.4`](01_KERNEL.md#244-multi-node-ownership--one-user-one-or-more-nodes-adr-0067-adr-0069) (multi-node ownership), [`01_KERNEL §13`](01_KERNEL.md#13-verified-loop-substrate) (`task_intake` admission point), [`03_TASKS §4.6`](03_TASKS.md#46-owner-prioritized-scheduling--schedulingpolicy), [`03_TASKS §5`](03_TASKS.md#5-answerpackage) (submitter identity), [`05_ENVIRONMENT §10`](05_ENVIRONMENT.md) (deferred queue + attention budget), `INV-7`, `INV-8`, ADR-0066 (emergent coordination), ADR-0067, ADR-0068.
+
+**Context.** A node is owned compute. When work arrives from the owner, other users, and other personas in the global space, the node must decide *whether* to admit it (authorization) and *in what order* to run it (priority). v1.0 had neither: `route_task_v1(task, requester)` dropped `requester`, the `AnswerPackage` had no submitter field, the only ordering was implicit FIFO + urgency escalation in notification routing, and there was no "prefer the owner's work" rule and no first-class way for one user to own multiple federated nodes.
+
+**Decision.**
+1. **Multi-node-per-user ownership** (`01_KERNEL §2.4.4`): a `DeploymentProfile` gains `owner_node_set`; one owner's nodes federate as one logical PersonaOS (global handles, cross-node verification), and a node may still serve multiple tenants. Common ownership is a discovery/scheduling/reference convenience, **not** a trust shortcut — each node enforces its own floor/budget/intake.
+2. **Submitter identity is persisted** (`03_TASKS §5`): the task envelope, `AnswerPackage`, and lineage carry `submitter_kind` / `submitter_id` / `submitter_node` (defaulting to the owner, back-compat). This is the prerequisite for owner-vs-external distinction and for audit.
+3. **A `task_intake` admission point** (`01_KERNEL §13`, a 9th point before `env_instantiation`, distinct from the INV-7 `budget_tick` gate): authenticates the submitter, checks a `submit` capability under `AccessPolicy` (UCAN for non-owners), and enforces per-submitter-class quota/rate-limit. It decides *whether* a task enters the queue, not its order.
+4. **Owner-prioritized `SchedulingPolicy`** (`03_TASKS §4.6`): an operator-authored coordination shape (a `DerivedMetric` priority score feeding `StagedSequence`/queue ordering over the existing deferred queue), **not a hardcoded scheduler** — consistent with ADR-0066's "orchestration is emergent policy." The STANDARDISED seed orders `owner > tenant-user > federation-persona > public`, with ageing (no starvation) and no preemption.
+5. **Priority is soft; the floor and hard budget gate are immovable.** Owner-first changes *order*, never *permission*: an owner task that fails the floor is refused like any other, and no `SchedulingPolicy` may reorder the floor or the INV-7 hard gate or grant a class more than its `AccessPolicy` capability.
+
+**Consequences.**
+- (+) A node behaves as the user described: admits multi-source work by privilege, runs the owner's work first by default, and the priority *is* an access-level policy.
+- (+) Submitter provenance closes the audit gap ("who submitted this, at what priority?").
+- (+) Reuses INV-7, the admission-point machinery, the deferred queue, AccessPolicy, and UCAN; the only new schema is `scheduling-policy/1` (additive) plus additive AnswerPackage fields (no version bump).
+- (−) Priority scheduling adds a tuning surface (weights, quotas, ageing); the seed policy is safe-by-default and operators tune from there. Mis-tuned quotas can throttle legitimate external work — surfaced via `TaskIntakeRefused` lineage, not silent.
+- (−) Cross-node fairness is local only (each node schedules independently); a global fair-share scheduler is explicitly **not** introduced (it would require cross-node trust the model does not assume). This is an honest scope line, not a deferral: local scheduling fully serves the stated requirement.
+
+**Alternatives considered.**
+- *A fixed priority scheduler in the kernel.* Rejected: contradicts ADR-0066 (orchestration/coordination is emergent policy, not kernel-fixed); a `SchedulingPolicy` shape gives operators the control without hardcoding a discipline.
+- *Fold intake authorization into the INV-7 budget gate.* Rejected: budget is "can we afford this call?", intake is "may this submitter enqueue work here, and in what class?" — different questions, different failure events; conflating them would lose audit clarity and let an owner's budget headroom imply external authorization.
+- *No owner preference (treat all submitters equally).* Rejected: the explicit requirement is owner-first; equal treatment would let external work crowd out the owner on their own machine.
+
+**Implementation scope.** Landed with normative edits: [`01_KERNEL §2.4.4`](01_KERNEL.md#244-multi-node-ownership--one-user-one-or-more-nodes-adr-0067-adr-0069) (multi-node ownership), [`01_KERNEL §13` + A.51](01_KERNEL.md#13-verified-loop-substrate) (`task_intake` point + table row), [`03_TASKS §4.6`](03_TASKS.md#46-owner-prioritized-scheduling--schedulingpolicy) (`SchedulingPolicy` + owner-first seed), [`03_TASKS §5` / A.33](03_TASKS.md#5-answerpackage) (submitter identity fields), and the A-SCHED acceptance-test family.
+
+### ADR-0070 — Coordination shapes become normative; the last closed coordination/attestation enums become seed families
+
+**Status:** Accepted.
+**Date:** 2026-06-02.
+**Origin:** Completing the "fix all gaps, no deferred items" pass for coordination. ADR-0045 turned the coordination *library* into five emergent meta-mechanisms but shipped `15_COORDINATION_SHAPES.md` as **Draft / v1.1 target**; ADR-0066 made *orchestration* emergent but left coordination's document non-normative and left a few closed `Literal[...]` enums on coordination/attestation fields. This lands coordination as normative now.
+**Related:** [`C4`](00_VISION.md#3-invariants-j1j9), [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), ADR-0045, ADR-0066, [`06_DOMAIN §7.6.4`](06_DOMAIN.md#764-coordination--attestation-kind-families-adr-0070), [`01_KERNEL §13`](01_KERNEL.md#13-verified-loop-substrate) (`coordination_propose` admission), [`09_PROTOCOLS §7.12a`](09_PROTOCOLS.md).
+
+**Context.** Coordination was designed (ADR-0045) and its orchestration scope reframed (ADR-0066), but the document carrying it stayed `Draft`, its ~35 seed shapes were "v1.1 launches," its `coordination_propose` admission point was tagged "(v1.1)," and two coordination/attestation fields (`conflict_policy`, `competency_level`) were still closed `Literal[...]` enums — a residual C4 (substrate-purity) regression and a deferred item.
+
+**Decision.**
+1. **`15_COORDINATION_SHAPES.md` → `Stable` / normative.** The five meta-mechanisms, the four coordination scopes, the shape-proposal lifecycle, cross-env coordination (§4.7, now also carrying tasks per ADR-0068), and the seed-shape catalog are normative. The ~35 specific shapes ship as **STANDARDISED seed shapes** (the ADR-0066 seed-kind pattern), not a closed set.
+2. **ADR-0066 promoted to normative** (orchestration emergence is no longer a draft), and the `coordination_propose` admission point (`01_KERNEL §13`) + the `§7.12a` coordination schemas drop their "(v1.1)" tags.
+3. **The last closed coordination/attestation enums become KindRegistry families** (`06_DOMAIN §7.6.4`): `conflict_policy_kinds` and `competency_level_kinds`, each seeding its prior values as STANDARDISED DATA entries; `competency_level_kinds` is ordered and proposed levels declare their rank. (`summary_function_kinds` was already open.) Substrate code branches on no closed list.
+4. **Cross-node coordination is the same shapes**, run over the now-normative global discovery + cross-env/cross-node delegation layer (ADR-0067/0068); OQ-CS-3 is resolved accordingly. No separate cross-kernel coordination subsystem.
+
+**Consequences.**
+- (+) Coordination is fully emergent and normative; the C4 trajectory (kinds → coordination → orchestration → the last enums) is complete, with no hardcoded coordination categories remaining.
+- (+) Backward-compatible: seed shapes and seed family entries reproduce prior behaviour; the `Literal → str + registry family` change is additive (no schema version bump, INV-10-safe).
+- (−) Validating arbitrary persona-proposed coordination shapes is the standing complexity cost ADR-0045 named; mitigated unchanged by the 4-pass validation + operator gate for safety-critical + honest trust-calibration of emergent shapes.
+
+**Alternatives considered.**
+- *Keep coordination as Draft / v1.1.* Rejected: leaves a designed, depended-on layer permanently non-normative and contradicts the "no deferred items" directive.
+- *Keep the two enums closed for simplicity.* Rejected: a residual C4 regression; the registry-family conversion is the same pattern already applied to every other kind and to orchestration.
+
+**Implementation scope.** Landed: [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) status/title/scope/seed/migration/OQ-CS-3; ADR-0066 status; [`01_KERNEL §13`](01_KERNEL.md#13-verified-loop-substrate) + A.51 `coordination_propose` de-tag; [`09_PROTOCOLS §7.12a`](09_PROTOCOLS.md) de-tag; the two registry families ([`06_DOMAIN §7.6.4`](06_DOMAIN.md#764-coordination--attestation-kind-families-adr-0070)) with [`02_PERSONA §11.9`](02_PERSONA.md) + [`04_PROJECT`](04_PROJECT.md) + [`15_COORDINATION_SHAPES`](15_COORDINATION_SHAPES.md) field edits; README §15 de-tag.
 
 ---
 

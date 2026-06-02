@@ -143,7 +143,7 @@ A body never modifies identity, never accepts a candidate, never closes the loop
 
 **Discovery.** `find_persona(role=..., disposition=..., interest_tags=..., min_reputation=..., visibility_at_least=..., can_lead_cohorts=...)` returns matching cards. A2A consumers verify `signature` against the publishing kernel's key before trust.
 
-**Unified discovery + access (v1.1 draft).** `PersonaCard` is the persona specialisation of `DiscoverableRecord` ([`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type)) and is discoverable not only via `.well-known` + gossip but over the Kademlia DHT (internet) and mDNS (intranet) planes ([`§3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet)). All planes are **access-gated**: a peer holding only `discover` (the level below `read` in the unified `AccessPolicy` ladder, [`§3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types)) sees the card and its minimal metadata but cannot fetch the soul or invoke skills until granted `read`+; `VisibilityPolicy` / `ConsentLedger` (§6) compose with `AccessPolicy` as the persona-side consent surface, and `find_persona` returns only records the caller may `discover` ([`§3G.4`](09_PROTOCOLS.md#3g4-access-gated-discovery--who-can-access-what-enforced-at-the-discovery-layer)).
+**Unified discovery + access.** `PersonaCard` is the persona specialisation of `DiscoverableRecord` ([`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type)) and is discoverable not only via `.well-known` + gossip but over the Kademlia DHT (internet) and mDNS (intranet) planes ([`§3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet)). All planes are **access-gated**: a peer holding only `discover` (the level below `read` in the unified `AccessPolicy` ladder, [`§3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types)) sees the card and its minimal metadata but cannot fetch the soul or invoke skills until granted `read`+; `VisibilityPolicy` / `ConsentLedger` (§6) compose with `AccessPolicy` as the persona-side consent surface, and `find_persona` returns only records the caller may `discover` ([`§3G.4`](09_PROTOCOLS.md#3g4-access-gated-discovery--who-can-access-what-enforced-at-the-discovery-layer)).
 
 ### 3.5 Body model — native vs proxy binding (body-binding/1)
 
@@ -813,7 +813,7 @@ Boundaries are user-scoped (`§11.1`): a persona refuses certain content / topic
 
 1. **Privacy of rationale.** `private_rationale` is operator-readable under audit (§3 retention policy). A persona cannot guarantee the rationale stays fully private if the deployment audits boundary patterns.
 2. **Adversarial use.** A malicious operator could plant boundaries to silently isolate a persona. Operator policy should require periodic review (`reviewed_at`) for boundaries that affect critical workflows.
-3. **Cross-kernel federation.** PersonaPersonaBoundary is local-kernel-only in v1.0; cross-kernel boundaries (`global` scope across federated kernels) arrive in v1.1 alongside federation.
+3. **Cross-node boundaries.** `PersonaPersonaBoundary` extends to `global` scope across nodes (ADR-0067): a boundary references the other persona by global handle (`01_KERNEL §4.4`) and is enforced wherever that persona is referenced, composed most-restrictive-wins. The boundary's signatures are globally verifiable; a node that cannot currently be reached falls back per `AvailabilityPolicy` (`09_PROTOCOLS §3H`, V.8), never silently lapsing.
 
 **Acceptance tests.** A-PPB1 (boundary refuses pre-consent-flow), A-PPB2 (severity controls visibility correctly), A-PPB3 (hard mode resists operator override), A-PPB4 (env_specific scope applies only in named env), A-PPB5 (boundary + active edge coexist; refusal doesn't terminate edge), A-PPB6 (operator audit notice on refuse_with_audit), A-PPB7 (reviewed_at update preserves prior signature chain).
 
@@ -905,6 +905,8 @@ a persona teaching a user (PEDAGOGIC task class routed through GOAL_PROGRESS_ACC
 
 `LearnerStateRecord` is the substrate-shape per-(persona, user) record of pedagogic competency state, distinct from `RelationshipRecord` (which holds consent/boundary/history) and distinct from the persona's own skill_library (which tracks the persona's competency, not the learner's).
 
+**Minor-learner attestation (ADR-0042).** The record carries an optional signed `is_minor` attestation. When set, the `HazardousSkillTeachingGate` (`01_KERNEL §2.9`) composes the non-overridable minor-learner protection at floor source 3+4: hazardous-skill teaching (or all teaching, per operator policy) requires a guardian-consent `MutualAccept` and MAY be refused outright. This is how SCENARIO 09 Group F (minor-learner protection) is realised; minor-learner pedagogy is admitted under the gate rather than refused at the substrate level.
+
 > **Schema/spec:** LearnerStateRecord dataclass definition (schema learner-state-record/1). See [Appendix A.65](#appendix-a65).
 
 **Admission rule.**
@@ -918,7 +920,7 @@ a persona teaching a user (PEDAGOGIC task class routed through GOAL_PROGRESS_ACC
 1. **Persona-side levels are self-report.** `introduced` / `demonstrated_assisted` / `demonstrated_independent` / `proficient` are persona's judgement; over- or under-estimation is possible. Higher levels (`competent_supervised`, `independent`) REQUIRE external `LearnerCompetencyAttestation` (`§11.9`); substrate refuses persona-side claims at these levels.
 2. **No automatic gap-inventory regression detection.** Persona must explicitly notice and declare misconceptions / gaps; substrate doesn't infer.
 3. **Visibility-masking is operator policy.** Default is `full` learner visibility (transparency by construction); operator may restrict via signed policy. Substrate enforces the policy; legality of the masking is operator/jurisdiction responsibility (e.g., student-records-privacy laws like FERPA in US contexts).
-4. **No cross-persona aggregation.** Each `LearnerStateRecord` is per-(persona, user). A learner working with multiple teaching personas has multiple records; aggregation across teachers is operator-policy / out-of-band. Cross-persona learner-state aggregation is v1.1+.
+4. **Cross-persona aggregation is composed, not a primitive.** Each `LearnerStateRecord` is per-(persona, user). A learner working with multiple teaching personas has multiple records; an aggregate view is an emergent `DerivedMetric` over those records, gated by the learner's consent / `AccessPolicy` (privacy-preserving). The base records stay per-(persona, user); the substrate adds no aggregation primitive.
 
 **Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9i — A-LSR*`.
 
@@ -981,7 +983,7 @@ Per `00_VISION §10` clarification, responsible-companionship constraints (no me
 
 > **Schema/spec:** Complete PersonaSeed example (schema persona-seed/2) for Sparky. See [Appendix A.71](#appendix-a71).
 
-**Authorship (v1.0 operator; v1.1 persona-authored).** In v1.0 a `PersonaSeed` is **operator-authored**. The v1.1 draft `16_POPULATION_DYNAMICS.md` adds **Persona Genesis**: a generative persona (with `cohort_assembly.may_author_seeds = true`) MAY author a seed to fill an environmental capability gap, minted through the same birth ceremony under a `persona_genesis` `ReplicationBound`. When a seed is persona-authored, its `provenance` records the `genesis_proposal_id` and authoring persona(s); the kernel emits `LIFECYCLE_GENESIS` rather than the operator-seed `LIFECYCLE_SEEDED`/`LIFECYCLE_ACTIVATED` path.
+**Authorship (operator or persona-authored).** A `PersonaSeed` MAY be **operator-authored** or **persona-authored**. Normative `16_POPULATION_DYNAMICS.md` specifies **Persona Genesis**: a generative persona (with `cohort_assembly.may_author_seeds = true`) MAY author a seed to fill an environmental capability gap, minted through the same birth ceremony under a `persona_genesis` `ReplicationBound` (per-node, and cross-node under global bound aggregation, `§4J`). When a seed is persona-authored, its `provenance` records the `genesis_proposal_id` and authoring persona(s); the kernel emits `LIFECYCLE_GENESIS` rather than the operator-seed `LIFECYCLE_SEEDED`/`LIFECYCLE_ACTIVATED` path.
 
 ## 13. Risks & known limitations
 
@@ -4059,10 +4061,13 @@ class UserBoundary:
    admissible during the migration window; RelationshipRecord
    toggles take precedence on conflict (more conservative wins).
 
-6. CROSS-KERNEL FEDERATION
-   UserBoundary is local-kernel-only; cross-kernel
-   propagation arrives in v1.1 alongside federation (analogous to
-   PersonaPersonaBoundary v1.1 trajectory per §11.6).
+6. CROSS-NODE PROPAGATION (ADR-0067)
+   UserBoundary propagates across nodes: it binds wherever the
+   user's protected references are accessed in the global object
+   space, enforced most-restrictive-wins and globally verifiable
+   (analogous to the PersonaPersonaBoundary cross-node model, §11.6).
+   A node that is unreachable falls back per AvailabilityPolicy
+   (09_PROTOCOLS §3H, V.8); the boundary never silently lapses.
 ```
 
 ### Appendix A.59
@@ -4633,17 +4638,17 @@ class LearnerCompetencyAttestation:
     # CONTENT — what is attested
     skill_kind: str                              # KindRegistry-resolved
                                                  # per teaching domain
-    competency_level: Literal[
-        "novice",                                # baseline; rarely
-                                                 # attested explicitly
-        "proficient",                            # consistently demonstrates
-                                                 # the skill in controlled
-                                                 # conditions
-        "competent_supervised",                  # may apply in real
-                                                 # situations under
-                                                 # supervision
-        "independent"]                           # may apply without
-                                                 # supervision
+    competency_level: str                        # KindRegistry family
+                                                 # competency_level_kinds
+                                                 # (06_DOMAIN §7.6); ordered.
+                                                 # STANDARDISED seed ladder:
+                                                 # novice < proficient <
+                                                 # competent_supervised <
+                                                 # independent. Open per C4 /
+                                                 # ADR-0070: a domain MAY
+                                                 # propose further levels that
+                                                 # declare their rank; not a
+                                                 # closed enum.
     scope_of_attestation: str                    # ≤ 500 chars; specifies
                                                  # bounded scope ("ICU
                                                  # protocol X in routine

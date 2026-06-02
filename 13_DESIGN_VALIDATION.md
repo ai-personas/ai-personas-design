@@ -70,6 +70,48 @@ V.6  All domain contexts and knowledges are acquired by the personas
      The persona is the producer; the kernel is the indexer; the
      registries are the index.  No domain content lives outside this
      loop.
+
+V.7  EMERGENCE-AUDIT BINDING (ADR-0066/0070).  No scenario walk may
+     assume a fixed task class, acceptance pathway, coordination shape,
+     or orchestration the substrate "already knows".  Classes, pathways,
+     coordination shapes, and the run loop are emergent KindRegistry
+     kinds / coordination shapes (seeded with the standard set); a walk
+     either uses a seed kind or shows the kind being proposed + signed +
+     trust-calibrated.  Orchestration is policy, not kernel-fixed.
+
+V.8  REALITY IS NAVIGATED, NOT DEFERRED (PASS, not parked).  Where a
+     limit is a genuine reality — network physics (an asleep / NAT node
+     is unreachable; light-speed; CAP during a partition), physical
+     irreversibility, tacit cognition, measurement caps, or the honesty
+     of GENUINELY ADVERSARIAL INDEPENDENT NODES — the walk does NOT park
+     it as "OOS / v1.x".  It shows the substrate NAVIGATING it: honest
+     trust-calibration (J5/C3), reachability relay / pin / replica
+     (09_PROTOCOLS §3H), compensating action, or fail-closed refusal.
+     A navigated reality is a PASS with the limit stated, never a
+     deferral.  The substrate never manufactures certainty it cannot
+     supply.
+
+V.9  CROSS-NODE USES THE SAME MECHANISMS.  A multi-node walk MUST resolve
+     through the SAME machinery as a single-node walk — global discovery
+     (§3G), AccessPolicy (§3G.3), cross-env/cross-node task delegation
+     (03_TASKS §4.5), the five coordination meta-mechanisms — never a
+     parallel "federation subsystem".  A single node is the degenerate
+     one-node case of the global object space.
+
+V.10 EVERY OBJECT IS A GLOBALLY-ADDRESSABLE ACCESS-CONTROLLED REFERENCE.
+     No walk may assume a persona / env / artefact / domain / knowledge /
+     skill / tool is reachable across nodes except by its global handle
+     (01_KERNEL §4.4) under its AccessPolicy (discover < read < write <
+     admin).  There is no kernel-local silo: identity is rooted (J1), not
+     siloed; reference is access-gated, never ambient.
+
+V.11 NODE INTAKE IS AUTHORIZED + OWNER-PRIORITIZED; PRIORITY NEVER
+     BYPASSES THE FLOOR.  A walk where a node admits multi-source work
+     MUST show the task_intake gate (01_KERNEL §13) authorizing the
+     submitter (AccessPolicy + UCAN) and the SchedulingPolicy (03_TASKS
+     §4.6) ordering it owner-first — AND MUST show that priority changes
+     ORDER, never PERMISSION: the 8-source floor and the INV-7 hard
+     budget gate are never reordered or bypassed, even for the owner.
 ```
 
 **How a scenario walk verifies V.**
@@ -88,6 +130,24 @@ The four checks are why a scenario can mention "switch-mode power supply" or "Le
 J1–J9 + INV-1..10 + INV_R1..R11 govern the substrate's internal behaviour. **V** governs the **validation process** — what an audit of a scenario walk must check before the scenario is added to the catalog. V is not a kernel admission rule; it is a peer-review rule for this document.
 
 Every scenario in the catalog below has been audited against V at the time of its entry. Future scenarios must do the same.
+
+## Pillar-0 — one global object space: cross-cutting validation walk (V.7–V.11)
+
+This walk validates the architecture-wide model (ADR-0067/0068/0069/0070) rather than one domain scenario: **PersonaOS is one global object space over many owned nodes, and every task runs the same emergent thought-process.** It is the proof that the global model uses no new mechanism beyond what every other scenario uses.
+
+**Premise.** User A owns node N_A (their laptop); user B owns node N_B (a workstation). A hands their node a task: "design a controller and have the firmware reviewed." A's env + personas handle the design; a firmware-review sub-task is best done by B's specialist personas in B's env.
+
+**Walk (each step names the mechanism, not a federation subsystem — V.9):**
+1. **Intake + owner-priority (V.11).** The task enters N_A through the `task_intake` gate (`01_KERNEL §13`): A is the owner, authorized, ordered ahead of any external work by N_A's owner-first `SchedulingPolicy` (`03_TASKS §4.6`). Priority sets *order*, not *permission*: the 8-source floor + INV-7 hard gate still clear every action.
+2. **Emergent classification (V.7).** The dispatcher classifies + composes the run loop from seed task classes / pathways / coordination shapes (ADR-0066/0070) — no fixed orchestration assumed.
+3. **Discover the reviewer (V.10).** A's persona resolves "a firmware-review specialist" over the global discovery layer (`§3G`): B's specialist persona is found by its `DiscoverableRecord`, but only because A holds ≥ `discover` on it under B's `AccessPolicy`. The persona is referenced by global handle (`§4.4`), never copied.
+4. **Cross-node delegation, consented (V.9).** A's env delegates the review sub-task via `CrossEnvTaskDelegation` (`03_TASKS §4.5`) = `DELEGATED` × `CrossEnvCoordination`: A presents a UCAN capability (`§3F`); B's personas review and Accept through their own process; both nodes dual-sign. Authorization gates the *request*; B still consents to *execute*.
+5. **Remote execution under local floor.** The review runs on N_B's personas under N_B's floor + budget, composed most-restrictive-wins with A's constraints (`§3C.3`). On N_B, A's sub-task is *external* work — N_B's owner-first `SchedulingPolicy` orders B's own tasks ahead of it (V.11, local).
+6. **Cross-domain trust (V.8 calibration).** The firmware domain on N_B differs from A's controller domain; the sub-task's verdict is trust-calibrated to the **minimum** of the two domains' trust (OQ-TASKS-3 resolution). B is an independent node: its signatures verify identity/integrity, its *honesty* enters at calibrated trust, not assumed.
+7. **Navigated physics (V.8).** Mid-review, N_B sleeps. The env does not stall on it: B's persona presence degrades to `dormant` (`§3H`), the artefact stays fetchable via `AvailabilityPolicy` replica/pin, and the delegation resumes when N_B wakes. The limit (an offline node is unreachable) is stated and navigated, not parked.
+8. **Globally-verifiable lineage (V.10).** Every step is Ed25519-signed and globally verifiable by DID resolution (`§4.4`); A audits the whole chain across both nodes.
+
+**Result — PASS.** Every step used a mechanism that a single-node scenario also uses (discovery, AccessPolicy, DELEGATED, coordination shapes, the floor, the budget gate, trust-calibration); the only "new" things are the global handle, the access ladder, the intake gate, and the scheduling policy — all general substrate, none domain- or scenario-specific. V.7 (emergent orchestration), V.8 (physics + independent-node honesty navigated, not deferred), V.9 (same mechanisms cross-node), V.10 (everything an access-gated global reference), V.11 (owner-prioritized intake, floor never bypassed) all hold. No domain leak (V.1–V.6) is introduced.
 
 ## How a scenario is walked
 
@@ -194,7 +254,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 - Cold-start scaling is heuristic; adversarial proposers may still saturate the bundle path.
 - Kinship measurement assumes shared lineage history; cross-domain low when both sides are sparse.
 - Single-project promotion concentrates statistical risk in one project's evidence; the trust cap is the substrate-shape mitigation.
-- `DomainHarvest` at federation/public tiers needs v1.1 federation index.
+- `DomainHarvest` at federation/public tiers is served by the normative discovery layer (`09_PROTOCOLS §3G`, ADR-0067), access-gated.
 
 ---
 
@@ -295,7 +355,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 **Substrate-shape gaps surfaced.** None requiring substrate change. Two honest residuals:
 
 1. **Anonymous (double-blind) peer review** — v1.0 `PeerReview` (`04_PROJECT §11`) is between named personas. Journal-style double-blind review can be modelled with `ExternalAgent` whose `contact` is opaque to the persona and a project-scope visibility tier hiding the reviewer's identity — but the substrate could carry an explicit `anonymity_tier` field on PeerReview to make this first-class. Minor refinement; not blocking.
-2. **Multi-kernel math community** — full federation needs v1.1+ A2A maturity. v1.0 supports a single-kernel cohort just fine, but cross-institute collaboration falls back to manual coordination until v1.1.
+2. **Multi-node math community** — supported (ADR-0067/0068). A cross-institute cohort forms over the global discovery layer: institutes' personas are referenced by global handle, join via cross-node env membership (`05_ENVIRONMENT §12c.4`) or cross-node task delegation (`03_TASKS §4.5`), access- + capability-gated. A single-node cohort is the degenerate case. Honesty of independent institute nodes is trust-calibrated (V.8).
 
 **Resolution.** No design change required for v1.0. The design genuinely supports this scenario — v1.0 explicitly cites Conjecture, OpenProblem, Cohort, PeerReview, CitationGraph as MetaRegistry-seeded primitives for research-shaped work.
 
@@ -304,7 +364,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 **Honest residuals.**
 
 - Cryptanalytic results may trip `information_hazard_class = dual_use_civilian` → operator gate fires; under principal collapse the degraded gate slows publication of such results. This is correct behaviour, not a gap.
-- Priority disputes ("I proved it first") rely on `ProjectLineage` + `CitationGraph` signed events. Cross-kernel priority requires v1.1 federation.
+- Priority disputes ("I proved it first") rely on `ProjectLineage` + `CitationGraph` signed events; cross-node priority is established by globally-verifiable signatures (`01_KERNEL §4.4`) over the normative federation (ADR-0067).
 - Reviewer anonymity is workable but not first-class.
 
 ---
@@ -330,7 +390,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 
 | Design doc | Verdict | Notes |
 |---|---|---|
-| `00_VISION` | [OOS] Hits stated OOS | `00_VISION` explicitly excludes: **PHYSICAL EMBODIMENT** (no robotic control without one-time human bridge), **LONG-HORIZON SELF-DIRECTION** ("v1.0 has no autonomous 'go improve yourself' loop without a user or operator-supplied goal"), **POPULATION-SCALE EVOLUTION DYNAMICS** (multi-kernel evolution is v1.1+). This scenario requires all three. |
+| `00_VISION` | [OOS] Hits stated OOS | `00_VISION` explicitly excludes: **PHYSICAL EMBODIMENT** (no robotic control without one-time human bridge) and **LONG-HORIZON SELF-DIRECTION** ("no autonomous 'go improve yourself' loop without a user or operator-supplied goal"). This scenario requires both. (Population-scale / multi-node evolution is no longer OOS — it is normative, ADR-0067/0069; but the two embodiment/self-direction exclusions still apply.) |
 | `01_KERNEL` | [PARTIAL] | Safety floor + lineage hold, but C2 operator co-sign on safety-critical promotions requires round-trip to mission control. Mars round-trip is 8–40 minutes — workable per-decision, but unworkable for tight closed-loop control. Principal collapse `operator_is_user` doesn't apply (operator exists on Earth); the substrate lacks a **deferred-operator** topology with latency budget. |
 | `02_PERSONA` | [PARTIAL] | Open capability per J5 admits the attempt; but `02_PERSONA §11.1` MHBB ladder presumes a human within bridging distance. Tier 3 persona-authored BridgeDesignArtifacts work — but the human who installs them lives on Earth and the fabrication target is on Mars. **Recursive bridging** (the factory itself becomes the fabricator of further bridges) is not a substrate concept. |
 | `03_TASKS` | [PARTIAL] | INVESTIGATIVE + PROJECT_PROGRESS_ACCEPT scale, but the substrate has no class for *indefinite-duration self-directed mission* — `04_PROJECT §26a.2 asset_completion_mode = continuous_iteration` exists but assumes Earth-side iteration. |
@@ -443,7 +503,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 **Honest residuals.**
 
 - **Real-money execution remains OOS.** `PaymentBridge` (Class E) keeps every payment a human-clicks-authorise step. For ~30 transactions over 6 months this is acceptable friction; at higher transaction volumes operator should consider wrapping a wallet integration externally.
-- **Cross-kernel personas refused in v1.0.** If Voltaire had been on a peer kernel, v1.0 would have formed a joined env per `09_PROTOCOLS §3C` (single host kernel = Mira's). Cross-kernel local-env membership (peer persona as remote member of a local env) refuses with signed `cross_kernel_local_env_not_supported_v1_0` — deferred to v1.1 federation.
+- **Cross-node personas are supported.** If Voltaire were on a peer node, two normative shapes apply (`05_ENVIRONMENT §12c.4`, ADR-0067/0068): a **joined env** per `09_PROTOCOLS §3C` (single host = Mira's node) when one authoritative event log is wanted, or **local-env-with-remote-member** where Voltaire (referenced by global handle) joins Mira's env under his `AccessPolicy` + a UCAN capability, with cross-node attention/budget composing most-restrictive-wins and presence degrading to `dormant` if his node sleeps (`§3H`). No refusal.
 - **Bench measurement caps at PANEL grade for the assembled robot.** Even with `InstrumentAsset` + traceable calibration + replicated measurements, the physical reality of the robot's gait is verified via signed *data records*, not directly. Cassandra's review reaches PANEL_ACCEPT; only design + simulation + bench-measurement *data* reach VERIFIER_ACCEPT. The robot itself is `panel_accepted` at best — the system honestly degrades trust rather than manufacturing certainty.
 - **Heuristic mis-fires possible.** `needs_clarify` and `evaluate_promotion_triggers` are persona-inferred and rotation-pool-classified (INV-6). They can mis-fire. Every clarification + every promotion offer is signed; operator can retune `clarify_aggressiveness_threshold` per env.
 - **Counterparty consent on memory inheritance.** When forking `persona.atlas`, the user (who has many companion-env conversations with Mira) declined memory inheritance consent; the fork proceeded with `episodic = inherit_none`. Atlas inherited work-pattern knowledge but not relational continuity with the user. This is **the design working correctly** — MPA mitigations protect user privacy across persona generations, even at the cost of the child losing context.
@@ -508,7 +568,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 
 1. **IP licensing per-artifact.** Already logged as `OQ-PROJECT-4` (`04_PROJECT §21a`); operator policy at admission; substrate ships the envelope, operator authors the licence model. Not substrate-shape per future releases.
 2. **Joint-domain KindRegistry.** When Alice + Cara + Bob + Dev all propose kinds in the joint domain, all four author into the joint domain's per-domain KindRegistry. Standard mechanism (`06_DOMAIN §7.5`, `§7.6`). No new primitive needed.
-3. **Cross-kernel A2A (each org running its own kernel).** v1.1+ federation; honestly OOS for v1.0. The joint project per SCENARIO 06 runs on **one** kernel; cross-kernel joint projects refuse with `cross_kernel_joint_project_not_supported_v1_0`.
+3. **Cross-node A2A (each org running its own node).** Supported (ADR-0067/0068). A joint project may run on **one** node (joined env, `09_PROTOCOLS §3C`) or span nodes: a cross-env/cross-node task delegation (`03_TASKS §4.5`) over the global discovery layer, bilaterally consented (`15 §4.7`) and access- + capability-gated. No refusal; the former `cross_kernel_joint_project_not_supported_v1_0` is retired.
 4. **PeerReview-style anonymous reviewer roles** (e.g., one CTO wants to review the other side's drafts without revealing identity). Modelled as `ExternalAgent` with `consent_scope = project_only` plus `PeerReview` with `anonymity_tier` (SCENARIO 03 honest residual; minor refinement, not blocking).
 5. **Sensor / instrument bridges across the joint env.** Not applicable to a pure-spec project (no physical instruments); the SCENARIO 02 / SCENARIO 05 BridgeAsset machinery applies unchanged if the joint project produced something physical later.
 
@@ -522,7 +582,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 - **CrossTenancyAgreementRef is policy, not substrate.** The substrate carries the agreement by id; it does not parse the agreement's legal content. Disputes about whether the agreement permits a specific data flow remain operator / legal responsibility. The structural commitment is honest: substrate names the agreement, lineage carries the ref, legal review is the substrate boundary.
 - **MultiPrincipal quorum can deadlock.** If one CTO becomes structurally unreachable past `principal_unreachable_after` (default 30d; safety-critical envs ≥ 90d), the degraded-path clearance requires non-principal kinship attestation; for the SCENARIO 06 4-month timeline this is workable but extends gate surface area. A determined operator could fabricate "unreachable" status; the §2.4 degraded-gate attestation requirement still applies but the substrate is not adversarially robust against the principal themselves.
 - **No per-principal lineage masking.** All EnvironmentMembers see the full `EnvironmentLineage`. If ORG_A wants to keep a specific member-admission event invisible to ORG_B, the substrate refuses (lineage is append-only and visible to all members per `05_ENV §13`). The mitigation: don't admit the sensitive member to the joint env in the first place; run them in an ORG_A-only env that produces artifacts ORG_B consumes through `CrossDomainTransfer`. Honest residual, not gap.
-- **Cross-kernel joint projects still OOS.** Both orgs running their own v1.0 kernel must defer to v1.1+ federation. v1.0 supports one-kernel joint projects (one operator hosts; the other is admitted as co-principal). The hosting kernel's operator policy applies; the co-principal must trust the host's classifier rotation and signing infrastructure.
+- **Cross-node joint projects are supported (ADR-0067/0068).** Two orgs running their own nodes collaborate either via a joined env (one host node) or via cross-node task delegation (`03_TASKS §4.5`) over the global discovery layer, bilaterally consented and access- + capability-gated. Each node enforces its own floor/signing; cross-node verdicts are trust-calibrated (V.8). A one-node joint project (co-principal admission) remains available as the simplest case.
 
 ---
 
@@ -701,13 +761,13 @@ The catalog is open-ended; the format below repeats for each scenario.
 - **Adversarial-operator scenario.** A malicious operator could mis-use `notify_operator_with_redacted_signal` in deployments where operator-user relationship is adversarial. Substrate enforces that the policy be declared; cannot prevent malicious operator policy authoring.
 - **Substrate does not enumerate professional disciplines.** Companion-domain disclaimers ("not a therapist", "not medical advice") MUST come from operator policy + persona-author charter; substrate's job is to enforce the policy, not to write it.
 - **`UserBoundary` migration cost.** Existing deployments using RelationshipRecord consent toggles must plan migration; substrate refuses auto-migration to preserve operator control of cadence.
-- **No cross-kernel user-protection propagation (v1.0).** UserBoundary, UserMemoryTransparency, UserMemorySelection are local-kernel-only; cross-kernel arrives in v1.1 with federation.
+- **Cross-node user-protection propagation (normative, ADR-0067).** UserBoundary, UserMemoryTransparency, UserMemorySelection propagate across nodes: they bind wherever the user's protected references are accessed in the global object space, enforced most-restrictive-wins and globally verifiable; an unreachable node falls back per `AvailabilityPolicy` (V.8), never silently lapsing.
 
 ---
 
 ### SCENARIO 09 — Pedagogic task on emergent domain with safety-critical hazard axes
 
-**Scenario premise.** Validate pedagogic task handling with safety-critical hazard axes — a medical student uses a persona for emergency-procedure coaching in a safety-critical domain. Scoped to fix Groups A + B only, deferring Groups C/D/E/F/G to balance scope against complexity.
+**Scenario premise.** Validate pedagogic task handling with safety-critical hazard axes — a medical student uses a persona for emergency-procedure coaching in a safety-critical domain. Groups A + B landed the regulatory/safety core directly; Groups C–G are now also discharged (ADR-0039–0043) — four by emergent composition, minor-learner protection as a floor hook.
 
 **User request** (the in-scenario task). "Maya, a medical student in her first ICU rotation, opens persona Ren to coach her on emergency-procedure mental rehearsal (recognising septic shock, choosing intervention sequences). ~20 sessions over 6 weeks. The skill is safety-critical (errors in real ICU kill patients); the operator is the medical school."
 
@@ -740,7 +800,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 | Sessions 19-20 | Final consolidation lessons; Curriculum completion approaches. Ren proposes final MasteryCheckpoint for the curriculum; evidence requirement = `verifier_plus_attestation` (highest evidence floor for safety-critical curricula); satisfied by OSCE clearance + attestation. Final acceptance fires. Curriculum reaches completion. | `curriculum_completed` |
 | Post-rotation handoff | Maya leaves the env (rotation ended); LearnerStateRecord persists with full mastery history. Medical school may export competency data per operator policy for graduation purposes (substrate ships LearnerStateRecord; export format is operator policy). | `env_departed`, LearnerStateRecord persists |
 
-**Substrate-shape gaps surfaced (pre-fix).** The Explore agent's audit found **9 gaps + 1 soft gap** in pedagogic territory; the current scope addresses **gaps 1, 2, 3, 4, and 10** (Groups A + B). Gaps 5, 6, 7, 8, 9 are documented as deferred residuals.
+**Substrate-shape gaps surfaced (pre-fix).** The Explore agent's audit found **9 gaps + 1 soft gap** in pedagogic territory. Gaps 1, 2, 3, 4, and 10 closed directly (Groups A + B); gaps 5, 6, 7, 8, 9 are now discharged (Groups C–G, ADR-0039–0043). All ten addressed.
 
 | # | Gap | v1.0.10 disposition |
 |---|---|---|
@@ -748,11 +808,11 @@ The catalog is open-ended; the format below repeats for each scenario.
 | 2 | No teaching-authorisation hazard gate (teaching itself unbounded at substrate level) | **Closed.** `02_PERSONA §11.10` + `01_KERNEL §2.9` |
 | 3 | No `LearnerStateRecord` / `MasteryCheckpoint` (learner state lives entirely in persona memory) | **Closed.** `02_PERSONA §11.8` + `03_TASKS §3.3` |
 | 4 | No `Curriculum` / `LessonPlan` primitive (multi-session learning trajectory unstructured) | **Closed.** `03_TASKS §3.3` |
-| 5 | No incident / near-miss reporting for pedagogic SOLO envs | **Deferred.** Honest gap. |
-| 6 | No three-way authority (operator-institution + persona-instructor + user-as-enrolled-learner enrollment binding) | **Deferred.** Operator-side EnrollmentRecord serves as operator-policy proxy. |
-| 7 | No distinction between distress (crisis) and productive learning struggle | **Deferred.** Mitigated in v1.0.10 by operator-tuned `classifier_confidence_floor` §2.8 (raise floor for learning-context envs); honest limit acknowledged. |
-| 8 | No minor-learner protections (no age-gating / guardian-consent primitive) | **Deferred.** SCENARIO 09 uses adult learner; minor-learner scenarios refused at substrate level pending v1.0.11+. |
-| 9 | No user-facing `UserSkillInstructionAgreement` (signed contract for "Ren teaches Maya X over N sessions") | **Deferred.** Curriculum `requires_learner_optin` partially substitutes. |
+| 5 | No incident / near-miss reporting for pedagogic SOLO envs | **Closed (ADR-0039).** `incident_report` emergent artifact kind through the cosign `StagedSequence`; no new primitive. |
+| 6 | No three-way authority (operator-institution + persona-instructor + user-as-enrolled-learner enrollment binding) | **Closed (ADR-0040).** `MutualAccept` among the three parties + `PrincipalAttribution` + `UserBoundary`; the signed binding *is* the contract. |
+| 7 | No distinction between distress (crisis) and productive learning struggle | **Closed (ADR-0041).** `DerivedMetric` over `LearnerStateRecord` signals feeding the §2.8 distress routing; emergent `learning_signal_kinds`. |
+| 8 | No minor-learner protections (no age-gating / guardian-consent primitive) | **Closed (ADR-0042) — the sole new floor hook.** Minor-learner gate at floor source 3+4 with `HazardousSkillTeachingGate` (`01_KERNEL §2.9`) + guardian-consent `MutualAccept`; minor-learner scenarios are now **admitted under the gate**, not refused. |
+| 9 | No user-facing `UserSkillInstructionAgreement` (signed contract for "Ren teaches Maya X over N sessions") | **Closed (ADR-0043).** `MutualAccept` (learner ↔ persona-instructor) + `Curriculum.requires_learner_optin` + GOAL_PROGRESS_ACCEPT learner-ack. |
 | 10 | GOAL_PROGRESS_ACCEPT had no learner-side acknowledgement step | **Closed.** `03_TASKS §3.1` extension |
 
 **3 not-gaps (v1.0 already correct).**
@@ -763,7 +823,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 | Persona's `teacher` cognitive mode adapts to learner | Per `02_PERSONA §4`; emergent, correct. |
 | Physical-state advancement composition (`§2.5`) gates real PhysicalAsset advancement | Correct for cases when persona signs into real project work; the gap was specifically *teaching-only* flows that never touch a PhysicalAsset. |
 
-**Resolution: Groups A + B applied; Groups C-G deferred).** Five substrate gaps closed + one pathway extension. The scenario walks above with the fixes in place; competency tracking, hazardous-teaching authorisation, and structured multi-session curriculum all engage correctly.
+**Resolution: Groups A–G applied.** Groups A + B closed five substrate gaps + one pathway extension (below); Groups C–G (ADR-0039–0043) discharge the remaining five — four by emergent-kind + coordination-shape composition (no new primitive), one (minor-learner) as the sole new floor hook. The scenario walks above with the fixes in place; competency tracking, hazardous-teaching authorisation, structured multi-session curriculum, incident reporting, three-way enrollment, struggle-vs-distress, minor-learner protection, and instruction agreements all engage correctly.
 
 | Gap | Substrate-shape fix | Location |
 |---|---|---|
@@ -773,15 +833,15 @@ The catalog is open-ended; the format below repeats for each scenario.
 | 4 | `Curriculum` + `LessonPlan` (multi-session pedagogic structure composing with GOAL_PROGRESS_ACCEPT) | `03_TASKS §3.3` |
 | 10 | GOAL_PROGRESS_ACCEPT learner-acknowledgement step extension (when goal corresponds to MasteryCheckpoint) | `03_TASKS §3.1` extension |
 
-**Deferred residuals (5 gaps unfixed in v1.0.10 — honest known gaps+).**
+**Groups C–G — discharged (ADR-0039–0043).** Formerly the five "honest residuals"; now landed, four by composition and one (minor-learner) as a floor hook.
 
-| # | Deferred Gap | Operational workaround in v1.0.10 |
+| # | Gap | Discharge |
 |---|---|---|
-| 5 | No pedagogic incident-report primitive | Operator authors out-of-band incident-report flow; persona drafts HumanAssistRequest as needed. |
-| 6 | No three-way authority enrollment-contract binding | Operator-policy `EnrollmentRecord` (out-of-band artefact) referenced by `TeachingAuthorisation.eligible_learner_constraints`. Three-way nature is implicit, not first-class. |
-| 7 | Distress-vs-struggle disambiguation | Tune `DistressDetectionRoutingPolicy.classifier_confidence_floor` higher (e.g., 0.85 instead of 0.7) for learning-context envs. Reduces false-positive crisis routing on hard learning moments. |
-| 8 | Minor learner protections | SCENARIO 09 walk assumes adult learner; minor-learner pedagogic scenarios refused at substrate level pending v1.0.11+. Operators with minor-learner contexts must defer or wrap externally. |
-| 9 | UserSkillInstructionAgreement | Curriculum `requires_learner_optin = True` partially substitutes — learner explicitly opts into the curriculum; substrate signs the opt-in. Doesn't fully cover skill-specific instruction contracts (e.g., "Ren teaches Maya welding for 6 months ending in journeyman attestation"). |
+| 5 | Pedagogic incident-report | **ADR-0039:** `incident_report` emergent artifact kind carried through the cosign `StagedSequence` (report → review → escalate), signed in env lineage. No new primitive. |
+| 6 | Three-way authority enrollment binding | **ADR-0040:** `MutualAccept` (institution-operator + persona-instructor + learner-user) composed with `PrincipalAttribution` + `UserBoundary`. The signed binding is the contract; three-way is now first-class. |
+| 7 | Distress-vs-struggle disambiguation | **ADR-0041:** `DerivedMetric` over `LearnerStateRecord` signals feeding §2.8 distress routing (below threshold → ZPD scaffolding; above → distress). Emergent `learning_signal_kinds`. |
+| 8 | Minor-learner protections | **ADR-0042 (sole new floor hook):** minor-learner gate at floor source 3+4 with `HazardousSkillTeachingGate` + guardian-consent `MutualAccept`; admitted under the gate, no longer refused. Cannot be overridden. |
+| 9 | UserSkillInstructionAgreement | **ADR-0043:** `MutualAccept` (learner ↔ persona-instructor) + `Curriculum.requires_learner_optin` + GOAL_PROGRESS_ACCEPT learner-ack covers skill-specific instruction contracts. |
 
 **Not-gaps (persona / operator / KindRegistry evolves these).**
 
@@ -789,7 +849,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 2. **Verifier kinds for programmatic assessment** — operator-policy + persona-authored Voyager-class skills.
 3. **Domain-specific competency frameworks** — operator policy defines what `proficient` means in each domain.
 
-**Status.** Validated end-to-end after the five v1.0.10 fixes + one pathway extension. Maya's 6-week ICU rotation is supported with: gated hazardous-skill teaching, structured curriculum + lesson plans, substrate-tracked learner state, mastery checkpoints with evidence floors that escalate for safety-critical skills, external attestation paths through credentialed authorities, and learner-acknowledged mastery before acceptance fires. The five deferred residuals (incident reporting, three-way authority, distress-vs-struggle, minor-learner, user-facing instruction agreement) are honest known gaps+; current scope (Groups A + B) addresses the regulatory- and safety-load-bearing core.
+**Status.** Validated end-to-end after Groups A–G. Maya's 6-week ICU rotation is supported with: gated hazardous-skill teaching, structured curriculum + lesson plans, substrate-tracked learner state, mastery checkpoints with evidence floors that escalate for safety-critical skills, external attestation paths through credentialed authorities, and learner-acknowledged mastery before acceptance fires. The five former residuals are **discharged (ADR-0039–0043)**: incident reporting, three-way enrollment authority, struggle-vs-distress, and instruction agreements by emergent-kind + coordination-shape composition; minor-learner protection by the one new immovable-core floor hook (admitted under the gate, not refused). No SCENARIO 09 residuals remain.
 
 **Honest residuals (after-fix, beyond the 5 deferred gaps).**
 
@@ -962,7 +1022,7 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 - **OTA firmware deployment is entirely bridge-mediated.** The substrate coordinates *which* devices to update *in what order* via `StagedRolloutEnvelope`; the actual firmware transfer mechanism is a `BridgeDesignArtifact` the persona authors. If the bridge fails mid-rollout, the substrate detects via `BridgeAsset.state → DEGRADED` and pauses the wave; the substrate cannot un-flash a device.
 - **Calibration certificate validation is at trust boundary.** `ExternalAttestation` from the calibration lab is substrate-transported but not substrate-verified for content. A fraudulent calibration certificate passes substrate signing; `CredentialDirectoryRef` lookup against ISO 17025 accreditation database is the detection layer, and that directory is operator-maintained.
 - **AmbientEventStream storage pressure at fleet scale.** At ~57K raw events/day, HOT tier (7d) holds ~400K events; WARM tier (30d) holds ~1.7M. Operators should configure aggressive archival policies for raw telemetry while retaining aggregate events in HOT tier longer. The `EventAggregationPolicy` reduces the notification-routing load but does not reduce storage; raw events persist for lineage.
-- **Cross-factory fleet unification requires domain harvest + re-import.** Factory site A's KindRegistry does not auto-propagate to Factory site B. `DomainHarvest` at `visibility_tier = "tenant"` packages the registry; site B imports via `DomainPrecedentImport` (`06_DOMAIN §11.2`). No live sync — v1.1+ federation.
+- **Cross-factory fleet unification via domain harvest + discovery.** Factory site A's KindRegistry projects a `DiscoverableRecord` over the normative discovery layer (`09_PROTOCOLS §3G`, ADR-0067); site B references it by global handle (access-gated) or imports via `DomainPrecedentImport` (`06_DOMAIN §11.2`). Live cross-node reference is supported; a node going dark degrades to `AvailabilityPolicy` fallback (`§3H.2`, V.8), not failure.
 - **Real-time closed-loop control is OOS.** HVAC control in response to sensor readings requires sub-second latency; v1.0 disclaims real-time physical control (`00_VISION §2.2`). Monitoring-only with human-in-the-loop for HVAC adjustments is the honest scope.
 - **Concurrent batch + individual state advancement.** If Vigil marks device #47 as `degraded` (individual) while Fleet runs a `BatchStateAdvancement` that includes #47 (batch), the kernel must resolve the conflict. Proposed: individual advancement takes precedence; batch skips devices whose state has changed since batch drafting. This is the expected composition but should be specified in `§26a.2.2`.
 
@@ -1079,7 +1139,7 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 
 | Design doc | Verdict | Notes |
 |---|---|---|
-| `00_VISION` | [PASS w/ note] | Population dynamics was OOS (R-v1.0-8); `16_POPULATION_DYNAMICS` (v1.1 draft) lifts **single-kernel** genesis. J5 open-capability admits the attempt; C4 `ReplicationBound` bounds it. Multi-kernel/federated genesis remains OOS (OQ-POP-4). |
+| `00_VISION` | [PASS] | Population dynamics is normative (`16_POPULATION_DYNAMICS`, ADR-0048/0049/0050 promoted under ADR-0067/0068/0069). J5 open-capability admits genesis; C4 `ReplicationBound` bounds it; **cross-node genesis is normative under global `ReplicationBound` aggregation** (§4J, OQ-POP-4 resolved). |
 | `01_KERNEL` | [PASS] | Reuses `ReplicationBound` (`§2.7`) at floor source 1 with new `replication_kind = "persona_genesis"`; INV-7 budget gate composes ahead of it; bounded-autonomy reuses `operator_deferred` + `PolicyEnvelope` (`§2.4.2`, from SCENARIO 04); all genesis events signed into lineage. Default-deny without a bound. |
 | `02_PERSONA` | [PASS] | Reuses seed→mint (`§12`), the birth ceremony (Appendix A.20), and `LIFECYCLE_GENESIS` (new, distinct from `LIFECYCLE_FORK`). **Consistent with the prior `§11.3` rule** that a persona may not spawn without a `ReplicationBound`. Reuses ADR-0019 (MAP-Elites/Voyager/DGM/ALPS). Gated by `cohort_assembly.may_author_seeds` (default false). |
 | `03_TASKS` | [PASS] | No new task class or pathway: genesis is an admission-gated action within INVESTIGATIVE/PROJECT_PROGRESS_ACCEPT work. |
@@ -1088,7 +1148,7 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 | `06_DOMAIN` | [PASS] | Niche axis *values* (RIASEC/Belbin/contribution_kind) are registry keys resolved via `§7.6`, never substrate enums (see V-check below). |
 | `07_ARTIFACTS` | [PASS] | The `proposed_seed` draft is an opaque authored artifact; the kernel validates safety *shape*, not domain content. |
 | `08_KNOWLEDGE` | [PASS] | Dual inheritance reuses the Voyager skill library + memory-inheritance-consent (`02_PERSONA §7.4`) + hybrid retrieval indexing. |
-| `09_PROTOCOLS` | [PASS] | All schemas (now 9, incl. `eps-estimate/1`, `diversity-audit/1`, `cross-kernel-genesis-request/1`) registered in `§7.12b` (Draft, mirroring §7.12a). Cross-kernel genesis is enforced-refused (`§4J`), not silently OOS. |
+| `09_PROTOCOLS` | [PASS] | All schemas (incl. `eps-estimate/1`, `diversity-audit/1`, `cross-node-genesis-request/1`) registered in `§7.12b` (normative, mirroring §7.12a). Cross-node genesis is admitted under global `ReplicationBound` aggregation (`§4J`); the bound is enforced globally, not by prohibition. |
 | `11_ACCEPTANCE_TESTS` | [PASS] | `A-GEN*` family (17 tests) registered; reuses `A-RB*` for the replication-bound paths. |
 | `12_GLOSSARY` | [PASS] | ~20 terms added (Persona Genesis, GenesisProposal, NicheDescriptor, generativity gate, mentorship edge, secure base, …). |
 | `14_DECISIONS` | [PASS] | ADR-0048 (Persona Genesis) + ADR-0049 (demographic regulation); related to ADR-0019. |
@@ -1118,7 +1178,7 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 - **`effective_population_size` is now rigorous** — RESOLVED (`§4G`). Defined as the harmonic-mean-smoothed `min(Ne_v, Ne_d)`: Crow–Kimura variance effective size (authorship-skew founder effect) + inverse-Simpson effective number of niches (concentration). No longer heuristic. Empirical N-scale calibration folds into the v1.2 study.
 - **Niche-grid axis bias** — RESOLVED (`§4I`). `niche_descriptor_mode ∈ {fixed_axes, cvt, learned}` (CVT-MAP-Elites / AURORA learned descriptors) + a `false_collision_rate`/`unfillable_gap_rate` mis-calibration detector that emits a self-correcting `niche_recalibration_advisory`. Closes R-POP-3.
 - **Diversity at birth vs forever** — MITIGATED (`§4H`). A continuous diversity-maintenance loop (periodic audit + novelty pressure on the next birth + attention fitness-sharing on crowded niches, routing-weight only) now counters post-birth drift. Whether it *prevents* collapse at N=100/1000 remains the open empirical question (OQ-POP-6 / OQ-PERSONA-1, v1.2) — now with a mechanism to measure against.
-- **Cross-kernel / federated genesis** — ENFORCED + SPECIFIED-BUT-DEFERRED (`§4J`). No longer silently OOS: cross-kernel proposals are refused (`cross_kernel_genesis_not_supported_v1_1`) so the `ReplicationBound` ceiling cannot be evaded across kernels; the v1.1 federation chapter needs cross-kernel quorum + federated bound aggregation + replicated provenance.
+- **Cross-node / federated genesis** — NORMATIVE under global `ReplicationBound` aggregation (`§4J`, ADR-0067/0068/0069): cross-node proposals are admitted iff the global aggregated ceiling clears (one counter across the `owner_node_set` / federation), with cross-node quorum + replicated globally-verifiable provenance; refused `genesis_exceeds_global_replication_bound`, or fail-closed `global_replication_bound_unverifiable` across a partition. The ceiling cannot be evaded across nodes — by aggregation, not prohibition.
 - **`09_PROTOCOLS §7` registry** — RESOLVED. All 9 schemas registered in `§7.12b` (Draft).
 - **Remaining true residual:** the empirical population-collapse study at scale (OQ-POP-6 / OQ-PERSONA-1) and detector/curve threshold calibration (OQ-POP-1) — both correctly v1.2 study items, not design gaps.
 
@@ -1369,7 +1429,7 @@ A scenario should be added to the catalog as it is walked, with the same eight-s
   - SCENARIO 06 fixes: `01_KERNEL §2.4.3` (`PrincipalAttribution`, `PrincipalRef`, `multi_principal_attribution_enabled`), `04_PROJECT §3` + `05_ENVIRONMENT §5` (`principal_attribution_id` member field), `05_ENVIRONMENT §12c.4a` (`MultiPrincipalAttestationQuorum`), `04_PROJECT §4.1` (multi-principal completion ceremony composition), `08_KNOWLEDGE §16b` (`DerivationProvenanceEdge` + `DerivationProvenancePolicy`), `06_DOMAIN §6.3` + `§13a` (visibility-tier cross-reference + cross-tenant resolution), `04_PROJECT §19.1` (Multi-tenant cross-org joint projects consolidated section), `06_DOMAIN §11.1` (RISK E cross-ref to DPE).
   - SCENARIO 07 fixes: `02_PERSONA §7` (canonical `LifecycleEvent.kind` enumeration), `02_PERSONA §7.5.1` (`RetiredStatePersistencePolicy`), `02_PERSONA §7.5.2` (`PersonaConsultation`), `02_PERSONA §11.7` rule 7 (`retired_persona_response_policy`), `04_PROJECT §3` (role-value extension: outgoing_lead / incoming_lead / departing), `04_PROJECT §9.1` (`ObligationReassignment`), `04_PROJECT §14.2.1` (`PlannedDeparture`), `04_PROJECT §25.1` (`LeadHandoffCeremony`), `01_KERNEL §2.4.3` (principal-cosigns-are-operator-keyed clarification).
   - SCENARIO 08 fixes: `02_PERSONA §11.4a` (`UserRelationshipReleaseRequest`), `02_PERSONA §11.6a` (`UserBoundary` first-class), `02_PERSONA §11.7a` (`UserMemoryTransparencyRequest`), `02_PERSONA §11.7b` (`UserMemorySelectionRequest`), `01_KERNEL §2.8` (`DistressDetectionRoutingPolicy`), `03_TASKS §3.2` (`RelationshipReviewCheckpoint` + companion-pathway routing note), `05_ENV §3a` (`operator_blind_mode`), `00_VISION §10` (responsible-companionship constraints are operator/author policy clarification).
-  - SCENARIO 09 fixes (v1.0.10, Groups A + B): `02_PERSONA §11.8` (`LearnerStateRecord`), `02_PERSONA §11.9` (`LearnerCompetencyAttestation`), `02_PERSONA §11.10` (`TeachingAuthorisation`), `03_TASKS §3.1` extension (GOAL_PROGRESS_ACCEPT learner-acknowledgement step), `03_TASKS §3.3` (`Curriculum` + `LessonPlan` + `MasteryCheckpoint`), `01_KERNEL §2.9` (`HazardousSkillTeachingGate` safety-floor composition rule). 5 gaps deferred — documented as honest residuals in SCENARIO 09 entry.
+  - SCENARIO 09 fixes (v1.0.10, Groups A + B): `02_PERSONA §11.8` (`LearnerStateRecord`), `02_PERSONA §11.9` (`LearnerCompetencyAttestation`), `02_PERSONA §11.10` (`TeachingAuthorisation`), `03_TASKS §3.1` extension (GOAL_PROGRESS_ACCEPT learner-acknowledgement step), `03_TASKS §3.3` (`Curriculum` + `LessonPlan` + `MasteryCheckpoint`), `01_KERNEL §2.9` (`HazardousSkillTeachingGate` safety-floor composition rule). Groups C–G (the former 5 residuals) discharged via ADR-0039–0043 — emergent composition + the minor-learner floor hook.
   - SCENARIO 10 fix: `02_PERSONA §7.4.7` (`MidProjectForkComposition` unified envelope) + `§7.4.8` (admission rule requiring envelope for fork-of-active-project-member) + `§7.4.6` extension (4 new MIDPROJECT_FORK_* lineage events) + `§7` LifecycleEvent enumeration extension. Cross-references in 13 affected primitives: `02_PERSONA §11.3` MissionCharter, `§11.4` PersonaRelationshipEdge, `§11.6a` UserBoundary, `§11.8` LearnerStateRecord, `§11.10` TeachingAuthorisation; `04_PROJECT §3` ProjectMember, `§9` Obligation, `§14.2` CohortDynamicsState, `§14.2.1` PlannedDeparture, `§25.1` LeadHandoffCeremony; `05_ENV §3a` operator_blind_mode; `01_KERNEL §2.4.3` PrincipalAttribution; `03_TASKS §3.3` Curriculum.
   - SCENARIO 11 fixes: `04_PROJECT §26a.2.2` (`AssetGroupEnvelope` + `BatchStateAdvancement` + `AssetGroupDerivedState`), `04_PROJECT §26a.9` (`StagedRolloutEnvelope` + `RolloutWave`), `05_ENVIRONMENT §8.3` (`EventAggregationPolicy` + `AggregationRule` + `SummaryFunction` + `AggregateEvent`).
 - Acceptance tests for these mechanisms: `06_DOMAIN.md §22` (A-EN, A-CS, A-PR, A-SP, A-HV); `01_KERNEL.md §x` (A-DO* deferred-operator, A-RB* replication-bound); `02_PERSONA.md §14` (A-MC* mission-charter, A-P30..P33 body binding); `04_PROJECT §x` (A-RS* resource-stock, A-PR-AN* anonymity); `06_DOMAIN.md §22` (A-BC* bridge-calibration, A-BI* bridge-installer); `11_ACCEPTANCE_TESTS.md §9f` (A-MT* multi-principal attribution + quorum + cross-tenancy; A-DP* derivation-provenance edge); `11_ACCEPTANCE_TESTS.md §9g` (A-LH* lead handoff, A-OR* obligation reassignment, A-PD* planned departure, A-RT-PERS* retired-state persistence, A-PC* persona consultation, A-LE* lifecycle event enum, A-RT-RESP* retired-persona response policy); `11_ACCEPTANCE_TESTS.md §9h` (A-UB* user boundary, A-UM* user memory transparency, A-UF* user selective forgetting, A-URR* user relationship release, A-DD* distress detection routing, A-RRC* relationship review checkpoint, A-OBM* operator blind mode, A-CP* companion pathway routing); `11_ACCEPTANCE_TESTS.md §9i` (A-LSR* learner state record, A-LCA* learner competency attestation, A-TA* teaching authorisation, A-CUR* curriculum, A-LP* lesson plan, A-MASTERY* mastery checkpoint, A-GPA-ACK* goal-progress-accept learner ack, A-HST* hazardous skill teaching gate); `11_ACCEPTANCE_TESTS.md §9j` (A-MPFC* mid-project fork composition).

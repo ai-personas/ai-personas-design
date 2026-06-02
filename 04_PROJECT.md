@@ -524,7 +524,7 @@ A joint project shared between two (or more) organisations — ORG_A and ORG_B c
 1. **Cross-tenancy agreements are policy, not substrate.** The substrate carries a `CrossTenancyAgreementRef` by id; it does not parse the agreement's legal content. Disputes about whether the agreement permits a specific data flow remain operator / legal responsibility. `OQ-PROJECT-4` (§21a) tracks the broader question of whether substrate should enforce per-artifact licence inheritance.
 2. **No per-principal lineage masking.** All EnvironmentMembers see the full `EnvironmentLineage`. If ORG_A wishes to keep a specific member-admission event invisible to ORG_B, the substrate refuses — lineage is append-only and visible to all members per `05_ENV §13`. The mitigation is to not admit the sensitive member to the joint env in the first place (run them in an ORG_A-only env that produces artifacts ORG_B can consume through `CrossDomainTransfer`).
 3. **MultiPrincipal quorum can deadlock.** If one principal becomes structurally unreachable, the degraded-path clearance (§12c.4a) requires `principal_unreachable_after` cool-down plus non-principal kinship attestation. Until cool-down elapses, the project cannot complete. Operators should set `principal_unreachable_after` longer than `§2.4`'s 72h (default 30d; safety-critical envs ≥ 90d) to discourage one operator from unilaterally "running out the clock" on a co-principal.
-4. **Federation across kernels is v1.1+.** A joint project where the two organisations run separate v1.0 kernels falls under cross-kernel federation, which v1.0 does not ship (per `05_ENV §12c.4`). The two paths exist: (a) host the joint project on one kernel with the other org's personas admitted as peer personas (v1.0); (b) wait for v1.1's federated env support (deferred). Path (a) requires the hosting kernel's operator to be one of the principals.
+4. **Federation across nodes is normative (ADR-0067/0068).** A joint project where the two organisations run separate nodes is supported two ways (`05_ENV §12c.4`): (a) host the joint project on one node with the other org's personas admitted as cross-node members (referenced by global handle, access- + capability-gated); or (b) span nodes via cross-env/cross-node task delegation (`03_TASKS §4.5`) over the global discovery layer, bilaterally consented. Each node enforces its own floor/signing; cross-node verdicts are trust-calibrated (V.8). Path (a) requires the hosting node's operator to be one of the principals.
 5. **ExternalAgent does not count as a principal.** Legal counsel, auditors, regulatory observers etc. admit through the ExternalAgent path (`§26a.1`) without becoming principals. They produce attestations, not signatures-of-authorisation; their attestations cannot satisfy a `MultiPrincipalAttestationQuorum`.
 
 **Acceptance tests.** A-MT8 (CrossTenancyAgreementRef required for cross-tenant principals), A-MT9 (joint-env charter ratification requires multi-principal quorum), A-MT10 (recruit consent names PrincipalRef explicitly), A-MT11 (joint-env DerivationProvenancePolicy defaults to mandatory_for_cross_principal), A-MT12 (joint-env harvest at tenant tier requires CrossTenancyAgreementRef), A-MT13 (joint-project completion requires multi-principal quorum at `§4.1`), A-MT14 (ExternalAgent cannot satisfy MultiPrincipalAttestationQuorum).
@@ -3097,8 +3097,11 @@ class BatchStateAdvancement:
     skipped_count: int = 0
     failed_count: int = 0
 
-    conflict_policy: Literal["skip_changed",
-                              "fail_on_conflict"] = "skip_changed"
+    conflict_policy: str = "skip_changed"     # KindRegistry family
+                                              # conflict_policy_kinds
+                                              # (06_DOMAIN §7.6); seeds
+                                              # {skip_changed, fail_on_conflict,
+                                              # force}. Open per C4 / ADR-0070.
 
     drafted_at: datetime = field(default_factory=datetime.now)
     executed_at: datetime | None = None
