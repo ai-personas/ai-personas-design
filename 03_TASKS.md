@@ -214,6 +214,35 @@ The profile binds at the same granularity as an operator pathway pin (§2a.6): a
 
 **Tests:** A-EO11 (promotion gated on the §2b.2 evidence threshold; under-evidenced pathway stays EMERGENT), A-EO12 (trust-decay + consecutive-disconfirmation demotion per §2b.1/§2b.3), A-EO13 (`bounded_compositional` refuses a novel kernel-level primitive while admitting a novel seed composition; `fully_open` admits both). See [`11_ACCEPTANCE_TESTS.md §9o`](11_ACCEPTANCE_TESTS.md).
 
+## 2c. ContinuousRefinementMission — anytime, convergence-bounded, budget-scaled improvement (ADR-0071)
+
+*This section is normative.* A user often wants a persona team to **keep improving** a deliverable — "make this inverter design better and better" — and to **stop only** when there is **nothing left to improve**, the **user/operator stops** it, or the **budget is exhausted**, with **more budget producing a better result**. This is not a new kernel primitive: it is a **STANDARDISED seed orchestration shape** (§2a) composed from the five coordination meta-mechanisms, seeded from a user goal via a `MissionCharter` ([`02_PERSONA §11.3`](02_PERSONA.md)) so it stays inside bounded autonomy (it elaborates sub-goals **within the seed goal's drift bounds**, never inventing new top-level goals — the no-unbounded-self-direction non-goal of [`00_VISION §10`](00_VISION.md) is respected).
+
+**The loop.** A `ContinuousRefinementMission` is a looping `StagedSequence`:
+
+> propose-improvement → act → verify (the artefact's `verifier_recipe`, §3 / [`07_ARTIFACTS §7`](07_ARTIFACTS.md)) → **score** → decide-continue
+
+It maintains a **best-so-far** accepted artefact version (anytime semantics): each round refines the current best; an inferior candidate is discarded, the best is never regressed. The mission's objective is a signed **`MissionObjective`** vector of named, measurable targets (e.g. for the inverter: efficiency ↑, BOM cost ↓, EMC margin ↑, DRC-clean, thermal-derating-met) — each target an emergent `outcome_kind` (KindRegistry, no substrate enum).
+
+**Convergence — "nothing left to improve" (the new termination).** The decide-continue gate reads a **`MarginalValueMetric`**: a `DerivedMetric` computing the improvement in the `MissionObjective` vector since the last accepted iteration. The mission emits `CONVERGED` and stops when marginal value `< ε` sustained over `N` consecutive rounds (`ε`, `N` are mission/operator policy; default ε small, N≥3). This is the explicit "no further improvement" detector the seed pathways lacked.
+
+**Three-condition termination (exactly the requirement).** A mission ends on the **first** of:
+1. **Convergence** — `MarginalValueMetric < ε` over `N` rounds → status `converged` / `no_further_improvement`.
+2. **User / operator stop** — existing `user_terminated` / `operator_terminated`.
+3. **Budget exhaustion** — the INV-7 hard gate ([`01_KERNEL §7`](01_KERNEL.md#7-budget-admission)) → `budget_exhausted`.
+
+On any stop the mission returns its **best-so-far** bundle. Convergence and budget never bypass the floor: **every** refinement action still clears the 8-source floor (J3), signing (J2/J9), and the **INV-7 hard gate** — refinement is iteration, not an exemption.
+
+**Budget-scaled quality (the "better with more budget" contract).** Per-round exploration breadth is `min(MissionObjective-headroom, BudgetState.candidates_remaining)` ([`01_KERNEL §7`](01_KERNEL.md#7-budget-admission) — `candidates` is already a budget dimension): **more budget → more candidate refinements per round → a higher best-so-far before convergence or exhaustion.** The mission is an anytime algorithm — it always has a valid best-so-far to return, and quality is monotone non-decreasing in budget.
+
+**Auto-reopen on fresh budget.** While a mission is **active and un-converged**, a budget replenishment (operator top-up, new `SchedulingPolicy` allocation, §4.6) **auto-resumes** the loop from best-so-far — no manual fork ([`07_ARTIFACTS §11`](07_ARTIFACTS.md)). A `converged` mission stays closed unless its `MissionObjective` changes (a new target re-opens it as a fresh elaboration within drift bounds). A `MissionState` (`active` / `converged` / `paused_budget` / `stopped`) tracks this; `paused_budget` is the auto-reopen-eligible state.
+
+**Emergence is in-loop (couples to §16 — see ADR-0071 + [`16_POPULATION_DYNAMICS §4A`](16_POPULATION_DYNAMICS.md)).** When a refinement round hits a **capability gap that blocks further improvement** (no present persona can advance a `MissionObjective` target) **and** budget headroom exists, the mission raises the population-pressure signal → recruitment-exhausted-first → **genesis** of the needed specialist, and MAY propose a **sub-env** (`EnvFormationProposal`) for that workstream. So a growing budget visibly grows the team and its environments to unblock the next increment of quality — bounded by `ReplicationBound` (floor source 1) and the generativity gate.
+
+*The `ContinuousRefinementMission`, `MissionObjective`, `MarginalValueMetric`, and `MissionState` ship as STANDARDISED seed shapes ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop)); they are compositions of `StagedSequence` + `DerivedMetric`, not kernel constants, and are trust-calibrated like any orchestration shape (§2b).*
+
+**Tests:** A-REF1 (iterates + returns best-so-far), A-REF2 (`CONVERGED` stop when marginal value < ε over N rounds), A-REF3 (more budget → more candidates/round → measurably better objective vector), A-REF4 (auto-reopen from `paused_budget` on fresh budget; `converged` stays closed), A-REF5 (three-condition termination: convergence vs user-stop vs budget_exhausted), A-REF6 (improvement-blocking gap + budget headroom → genesis/sub-env, ReplicationBound-capped), A-REF7 (a refinement action failing the floor is refused; INV-7 never bypassed). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+
 ## 3. The eight seed acceptance pathways
 
 *The eight pathways below are the STANDARDISED **seed** acceptance-pathway kinds (per §2a / ADR-0066), not a closed set. New pathways are emergent KindRegistry kinds proposed by personas and trust-calibrated under J4.*
@@ -1702,6 +1731,9 @@ class AnswerPackage:
         "user_terminated",
         "operator_terminated",
         "budget_exhausted",
+        "converged",                        # ContinuousRefinementMission:
+        "no_further_improvement",           #   marginal value < ε over N rounds
+                                            #   (§2c, ADR-0071); returns best-so-far
         "schema_violation",
         "content_refusal",
         "context_overflow_abort",
