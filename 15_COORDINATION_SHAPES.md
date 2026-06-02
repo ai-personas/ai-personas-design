@@ -251,6 +251,8 @@ When an environment receives a coordination request, its personas review the req
 
 5. **Denial is final for that request.** A denied request cannot be re-submitted without material change. The requesting env must modify the proposed interface, rationale, or scope before re-proposing. Repeated identical submissions are rate-limited (max 1 per 30-day window).
 
+6. **The interface MAY carry a task, not just artifacts.** A `CrossEnvInterface` extends beyond artifact handoff to optionally delegate a **task** to the receiving env's personas: it MAY specify `permitted_task_classes`, `permitted_acceptance_pathways`, and the resolved sub-task being delegated. This is how a task handled in one env hands a sub-task to a different set of personas in another env (or on another node) — the `CrossEnvTaskDelegation` composition specified in [`03_TASKS.md §4.5`](03_TASKS.md#45-cross-env--cross-node-task-delegation--placement). It is still bilateral and access-gated: the receiver reviews and consents exactly as for any other interface, and the delegator must hold the requisite capability (`09_PROTOCOLS §3F` UCAN token) — these envs MAY be on different nodes, identified by global handle (`01_KERNEL §4.4`).
+
 *The CrossEnvCoordinationBinding records the binding ID, the two environment IDs, each side's agreed shape (as a CoordinationShapeBinding), the agreed CrossEnvInterface, and the binding state (active, paused, completed, or withdrawn), with establishment timestamp and dual signatures.*
 
 **Technical detail:** See [A.15](#appendix-a15).

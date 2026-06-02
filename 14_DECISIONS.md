@@ -1562,6 +1562,37 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 **Implementation scope (staged).** This part lands the identity foundation: the J1 reframe ([`00_VISION.md §3`, A.1, INV-1](00_VISION.md#3-invariants-j1j9)) and the global-handle + cross-node-verification kernel section ([`01_KERNEL §4.4`](01_KERNEL.md#44-global-identity-handles--cross-node-verification-j1-adr-0067)). Companion parts land the `AccessPolicy` promotion (ADR-0060 → normative), the discovery promotion (ADR-0058/0059/0063/0064/0065 → normative), removal of the single-kernel non-goal and cross-kernel refusal codes, cross-env/cross-node task delegation, owner-prioritized scheduling, and the coordination-emergence twin of ADR-0066.
 
+### ADR-0068 — Cross-env / cross-node task delegation & placement; UCAN capability delegation
+
+**Status:** Accepted.
+**Date:** 2026-06-02.
+**Origin:** Architectural alignment — "if one task is processed by an env and its personas, it may produce another task given to a different set of personas in a different env." In the global object space (ADR-0067), that different env may be on a different node. The substrate could delegate persona-to-persona within an env and cross-*kernel* via A2A, and could coordinate artifact handoff cross-*env* (`15_COORDINATION_SHAPES §4.7`), but had **no path to hand a task to a different env's personas**, and OQ-TASKS-3 (cross-domain delegation trust) was unresolved.
+**Related:** [`03_TASKS §2.6`](03_TASKS.md#26-delegated--inheritance-and-lineage-depth) (DELEGATED), [`03_TASKS §4.5`](03_TASKS.md#45-cross-env--cross-node-task-delegation--placement), [`15_COORDINATION_SHAPES §4.7`](15_COORDINATION_SHAPES.md#47-cross-environment-coordination-bilateral-peers), [`09_PROTOCOLS §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative) (UCAN), [`09_PROTOCOLS §3C.3`](09_PROTOCOLS.md) (constraint composition), [`05_ENVIRONMENT §11.6`](05_ENVIRONMENT.md) (GuestPresence), ADR-0067, OQ-TASKS-3.
+
+**Context.** A sub-task is often best resolved by personas other than those handling the parent — with different competence, in a different env, possibly on a different node. v1.0 supported intra-env and cross-kernel-via-A2A persona handoff (`DELEGATED`), and bilateral cross-env *artifact* coordination (`CrossEnvCoordination`), but the two were never composed: there was no first-class "hand this *task* to that env's personas," no placement decision (local vs remote node), no availability probe across envs, no resolution of cross-domain delegation trust (OQ-TASKS-3), and no rule for what parent lineage a remote resolver may see.
+
+**Decision.** Compose the two existing primitives rather than minting a new subsystem (the ADR-0045/0066 "compose, don't add" philosophy):
+1. **`CrossEnvTaskDelegation` = `DELEGATED` × `CrossEnvCoordination`.** The `CrossEnvInterface` is extended to optionally carry a *task* (resolved sub-task class + acceptance pathway, `permitted_task_classes`, `permitted_acceptance_pathways`). A cross-env/cross-node delegation is an ordinary `DELEGATED` task reached through a `CrossEnvCoordinationBinding`; it inherits class/pathway per §2.6, is dual-signed by both envs/nodes, and respects `max_delegation_depth` across boundaries.
+2. **Consent + capability, never command.** The receiving env reviews and Accepts / Counter-proposes / Denies through its own process (`15 §4.7` principle 1). Authorization to delegate is an `AccessPolicy` `submit`/`write` grant carried as an **attenuated UCAN capability token** chained from the delegator's DID (`§3F`, now normative); it is verified before the request reaches review.
+3. **Placement.** `route_task_v1` resolves candidate participants from the local env, other local envs, and the global discovery layer (`§3G`), and places the sub-task by capability / availability / access / policy. Remote execution composes floor + budget most-restrictive-wins (as joined-env execution does, `§3C.3`); guest contribution uses `GuestPresence`.
+4. **`CrossEnvPresenceQuery`** (access-gated) lets a source env check a target persona's availability first.
+5. **OQ-TASKS-3 resolved: minimum trust.** A cross-domain sub-task's outputs are trust-calibrated to the **minimum** of (parent domain trust, resolving domain trust) — most-restrictive-wins, preventing trust laundering in either direction.
+6. **`CrossEnvLineageVisibility`** (`full` / `redacted` (default) / `existence`), gated by `AccessPolicy`, governs what parent lineage the resolver sees; it never widens access.
+
+**Consequences.**
+- (+) A task can flow to whichever personas/env/node fit, through the same emergent loop, with consent and access preserved — the headline behaviour the architecture requires.
+- (+) No new subsystem: reuses DELEGATED, CrossEnvCoordination, AccessPolicy, GuestPresence, the discovery layer, and the joined-env constraint-composition rule.
+- (+) Resolves OQ-TASKS-3 conservatively; closes the cross-env routing gaps.
+- (−) Placement across nodes inherits the network-physics limits navigated in ADR-0065 / §3H (a target node may be asleep/unreachable); the dispatcher falls back to local resolution or queues per `AvailabilityPolicy`. Recorded honestly, not hidden.
+- (−) UCAN capability verification is a new hot-path check at delegation/intake; mitigated by it being a signature + AccessPolicy lookup, the same cost class as existing floor composition.
+
+**Alternatives considered.**
+- *A dedicated cross-env task-routing subsystem.* Rejected: task delegation is coordination of work across envs, which the `15 §4.7` bilateral protocol already models; extending its interface to carry a task is the minimal, consistent move.
+- *Inherit the parent's domain trust (or the target's) for cross-domain sub-tasks.* Rejected in favour of the minimum: either single-side choice enables trust laundering; most-restrictive-wins matches the floor and AccessPolicy.
+- *Let a delegator place work on a remote node without the receiver's consent (capability alone).* Rejected: violates `15 §4.7` principle 1; capability authorizes the *request*, the receiver still consents to *execute*.
+
+**Implementation scope.** Landed with normative edits: [`03_TASKS §4.5`](03_TASKS.md#45-cross-env--cross-node-task-delegation--placement) (the composition, placement, presence query, lineage visibility, OQ-TASKS-3 resolution) + §2.6 note + OQ-TASKS-3 table resolution; [`15_COORDINATION_SHAPES §4.7`](15_COORDINATION_SHAPES.md#47-cross-environment-coordination-bilateral-peers) principle 6 (task-carrying interface); [`09_PROTOCOLS §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative) UCAN normative carve-out; the A-XD acceptance-test family.
+
 ---
 
 ## 13. Cross-references
