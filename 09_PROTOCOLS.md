@@ -716,7 +716,7 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 | `LineageEvent` | `lineage-event/1` | dataclass | [`01_KERNEL.md §3.2`](01_KERNEL.md) | Stable | Canonical append-only event across the three signed scopes (task / env / domain); parents and siblings are derived from `scope` + `parent_hash` (see scope aliases `env-lineage/1`, `project-lineage/1`, `domain-lineage/1`). |
 | `LineageSnapshot` | `lineage-snapshot/1` | dataclass | [`01_KERNEL.md §3.4`](01_KERNEL.md) | Provisional | Summarization-with-archival Merkle commitment for multi-year lineage. |
 
-### 7.12a Coordination shapes (v1.1)
+### 7.12a Coordination shapes
 
 v1.1 addition (ADR-0045, [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md)). Environment-scoped self-organizing coordination.
 

@@ -1,19 +1,19 @@
 ---
-title: PersonaOS v1.1 — Coordination Shapes (Environment-Scoped Self-Organizing Coordination)
-status: Draft
+title: PersonaOS — Coordination Shapes (Environment-Scoped Self-Organizing Coordination)
+status: Stable
 ---
 
 # 15 — Coordination Shapes
 
-> **Reader guide.** How do AI Personas in a shared workspace figure out how to coordinate with each other? Instead of hardcoding patterns like "design review" or "staged rollout," PersonaOS lets the workers themselves propose, test, and evolve their coordination through experience — using five generic building blocks. This document also covers cross-environment coordination and hierarchical nesting (company → org → team). **Prerequisites:** `05_ENVIRONMENT.md`, `00_VISION.md`. **Status:** v1.1 Draft — not yet normative.
+> **Reader guide.** How do AI Personas in a shared workspace figure out how to coordinate with each other? Instead of hardcoding patterns like "design review" or "staged rollout," PersonaOS lets the workers themselves propose, test, and evolve their coordination through experience — using five generic building blocks. This document also covers cross-environment coordination and hierarchical nesting (company → org → team). **Prerequisites:** `05_ENVIRONMENT.md`, `00_VISION.md`. **Status:** Stable — normative.
 
 ## 0. Status & scope
 
-**Status.** `Draft`; v1.1 target. This document will become normative when it reaches `Stable` status. Implements **ADR-0045** (self-organizing coordination). Coordination is **environment-scoped**: each environment defines how its members coordinate — internally, with external agents, and with peer environments. The five meta-mechanisms are the kernel-level building blocks; environments compose them into specific coordination patterns.
+**Status.** `Stable`; normative (ADR-0070, completing the trajectory of **ADR-0045** self-organizing coordination + **ADR-0066** emergent orchestration). Coordination is **environment-scoped**: each environment defines how its members coordinate — internally, with external agents, and with peer environments. The five meta-mechanisms are the kernel-level building blocks; environments compose them into specific coordination patterns. RFC 2119 keywords carry normative force.
 
 **In scope.** The five meta-mechanism building blocks, environment-scoped coordination shape declarations, the four coordination scopes (intra-env, env-to-external, env-to-env, and orchestration of the task-execution loop — §4a, ADR-0066), shape proposal within environments, cross-environment shape inheritance, seed-shape catalog, and safety-floor composition.
 
-**Out of scope.** Cross-kernel coordination shape negotiation (v1.1 federation chapter). Implementation of the shape-validation engine (operator tooling).
+**Out of scope.** Implementation of the shape-validation engine (operator tooling). Cross-**node** coordination uses these same shapes over the global discovery + cross-env delegation layer (ADR-0067/0068); it is not a separate mechanism.
 
 ## 0a. Key concepts for new readers
 
@@ -367,7 +367,7 @@ Shapes accumulate in a three-tier library. Each tier makes shapes **discoverable
 
 ## 7. Seed shapes catalog
 
-v1.1 launches with ~35 `MetaShape`-promoted shapes — the specific primitives from v1.0.x. These are available to all environments as universally reusable building blocks.
+PersonaOS ships ~35 `MetaShape`-promoted shapes as **STANDARDISED seed shapes** — the specific coordination primitives, pre-promoted and universally available to all environments as reusable building blocks (the same seed-kind pattern ADR-0066 uses for task classes / pathways). They are seeds, not a closed set: personas propose further shapes through the §5 lifecycle.
 
 | Seed shape | v1.0.x primitive | Meta-mechanisms | Typical scope |
 |---|---|---|---|
@@ -414,9 +414,9 @@ All coordination shapes — regardless of how they are proposed or adopted — o
 
 ## 9. Migration path
 
-**v1.0.x → v1.1.** No breaking changes.
+**Promotion to normative (ADR-0070).** No breaking changes.
 
-1. v1.0.x specific primitives remain valid; they become seed shapes in the MetaShape tier.
+1. Prior specific primitives remain valid; they become STANDARDISED seed shapes in the MetaShape tier.
 2. Each EnvironmentBlueprint gains a default `EnvironmentCoordinationProfile` populated from the seed shapes. The `project_workspace` blueprint includes `staged-rollout-v1`, `batch-advancement-v1`, `lead-handoff-v1`, `planned-departure-v1`, etc.
 3. Personas that want new coordination patterns propose them within their environment via `ProposedCoordinationShape`.
 4. Shapes that prove useful across environments promote through domain → MetaShape tiers.
@@ -437,7 +437,7 @@ All coordination shapes — regardless of how they are proposed or adopted — o
 |---|---|---|
 | OQ-CS-1 | Should blueprint coordination profiles be versioned independently from the blueprint itself? | Open |
 | OQ-CS-2 | Can an environment override a safety-critical shape from its blueprint with a less-restrictive alternative? (Likely no — floor source 8.) | Open |
-| OQ-CS-3 | How does env-to-env shape negotiation interact with A2A federation (09_PROTOCOLS)? | Open — v1.1 federation chapter |
+| OQ-CS-3 | How does env-to-env shape negotiation interact with A2A federation (09_PROTOCOLS)? | **Resolved (ADR-0067/0068):** env-to-env negotiation runs over the now-normative global discovery + cross-env/cross-node delegation layer; cross-node is the same `§4.7` bilateral protocol with peers identified by global handle, access- + capability-gated. |
 | OQ-CS-4 | Should the `DerivedMetric` formula language support persona-authored sandboxed functions? | Open — security trade-off |
 
 ## Technical Appendix
@@ -541,9 +541,11 @@ class BatchOperationShape:
     operation_kind: str                       # KindRegistry-resolved
     operation_schema: dict
     per_member_outcome_model: dict
-    conflict_policy: Literal["skip_changed",
-                              "fail_on_conflict",
-                              "force"] = "skip_changed"
+    conflict_policy: str = "skip_changed"     # KindRegistry family
+                                              # conflict_policy_kinds
+                                              # (06_DOMAIN §7.6); seeds
+                                              # {skip_changed, fail_on_conflict,
+                                              # force}. Open per C4 / ADR-0070.
     rollback_supported: bool = True
     requires_cosign: bool = False
 ```

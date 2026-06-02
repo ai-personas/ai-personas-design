@@ -4633,17 +4633,17 @@ class LearnerCompetencyAttestation:
     # CONTENT — what is attested
     skill_kind: str                              # KindRegistry-resolved
                                                  # per teaching domain
-    competency_level: Literal[
-        "novice",                                # baseline; rarely
-                                                 # attested explicitly
-        "proficient",                            # consistently demonstrates
-                                                 # the skill in controlled
-                                                 # conditions
-        "competent_supervised",                  # may apply in real
-                                                 # situations under
-                                                 # supervision
-        "independent"]                           # may apply without
-                                                 # supervision
+    competency_level: str                        # KindRegistry family
+                                                 # competency_level_kinds
+                                                 # (06_DOMAIN §7.6); ordered.
+                                                 # STANDARDISED seed ladder:
+                                                 # novice < proficient <
+                                                 # competent_supervised <
+                                                 # independent. Open per C4 /
+                                                 # ADR-0070: a domain MAY
+                                                 # propose further levels that
+                                                 # declare their rank; not a
+                                                 # closed enum.
     scope_of_attestation: str                    # ≤ 500 chars; specifies
                                                  # bounded scope ("ICU
                                                  # protocol X in routine

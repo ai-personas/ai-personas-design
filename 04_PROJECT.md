@@ -3097,8 +3097,11 @@ class BatchStateAdvancement:
     skipped_count: int = 0
     failed_count: int = 0
 
-    conflict_policy: Literal["skip_changed",
-                              "fail_on_conflict"] = "skip_changed"
+    conflict_policy: str = "skip_changed"     # KindRegistry family
+                                              # conflict_policy_kinds
+                                              # (06_DOMAIN §7.6); seeds
+                                              # {skip_changed, fail_on_conflict,
+                                              # force}. Open per C4 / ADR-0070.
 
     drafted_at: datetime = field(default_factory=datetime.now)
     executed_at: datetime | None = None

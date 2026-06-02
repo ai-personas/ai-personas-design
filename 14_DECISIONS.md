@@ -1494,7 +1494,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0066 — Self-organizing orchestration: the run loop is an emergent coordination shape, not a fixed dispatcher
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted under ADR-0070).
 **Date:** 2026-06-02.
 **Origin:** v1.1 (the "we don't need a fixed orchestration loop; orchestration must itself be emergent persona behaviour in the environment" alignment review). Extends ADR-0045 one layer down.
 **Related:** [`C4`](00_VISION.md#3-invariants-j1j9) (domain-agnostic substrate), [`J4`](00_VISION.md#3-invariants-j1j9) (class-appropriate acceptance), [`J5`](00_VISION.md#3-invariants-j1j9) (open capability, calibrated competence), ADR-0006, ADR-0011, ADR-0012, ADR-0045, [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes), [`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop).
@@ -1622,6 +1622,32 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 - *No owner preference (treat all submitters equally).* Rejected: the explicit requirement is owner-first; equal treatment would let external work crowd out the owner on their own machine.
 
 **Implementation scope.** Landed with normative edits: [`01_KERNEL §2.4.4`](01_KERNEL.md#244-multi-node-ownership--one-user-one-or-more-nodes-adr-0067-adr-0069) (multi-node ownership), [`01_KERNEL §13` + A.51](01_KERNEL.md#13-verified-loop-substrate) (`task_intake` point + table row), [`03_TASKS §4.6`](03_TASKS.md#46-owner-prioritized-scheduling--schedulingpolicy) (`SchedulingPolicy` + owner-first seed), [`03_TASKS §5` / A.33](03_TASKS.md#5-answerpackage) (submitter identity fields), and the A-SCHED acceptance-test family.
+
+### ADR-0070 — Coordination shapes become normative; the last closed coordination/attestation enums become seed families
+
+**Status:** Accepted.
+**Date:** 2026-06-02.
+**Origin:** Completing the "fix all gaps, no deferred items" pass for coordination. ADR-0045 turned the coordination *library* into five emergent meta-mechanisms but shipped `15_COORDINATION_SHAPES.md` as **Draft / v1.1 target**; ADR-0066 made *orchestration* emergent but left coordination's document non-normative and left a few closed `Literal[...]` enums on coordination/attestation fields. This lands coordination as normative now.
+**Related:** [`C4`](00_VISION.md#3-invariants-j1j9), [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), ADR-0045, ADR-0066, [`06_DOMAIN §7.6.4`](06_DOMAIN.md#764-coordination--attestation-kind-families-adr-0070), [`01_KERNEL §13`](01_KERNEL.md#13-verified-loop-substrate) (`coordination_propose` admission), [`09_PROTOCOLS §7.12a`](09_PROTOCOLS.md).
+
+**Context.** Coordination was designed (ADR-0045) and its orchestration scope reframed (ADR-0066), but the document carrying it stayed `Draft`, its ~35 seed shapes were "v1.1 launches," its `coordination_propose` admission point was tagged "(v1.1)," and two coordination/attestation fields (`conflict_policy`, `competency_level`) were still closed `Literal[...]` enums — a residual C4 (substrate-purity) regression and a deferred item.
+
+**Decision.**
+1. **`15_COORDINATION_SHAPES.md` → `Stable` / normative.** The five meta-mechanisms, the four coordination scopes, the shape-proposal lifecycle, cross-env coordination (§4.7, now also carrying tasks per ADR-0068), and the seed-shape catalog are normative. The ~35 specific shapes ship as **STANDARDISED seed shapes** (the ADR-0066 seed-kind pattern), not a closed set.
+2. **ADR-0066 promoted to normative** (orchestration emergence is no longer a draft), and the `coordination_propose` admission point (`01_KERNEL §13`) + the `§7.12a` coordination schemas drop their "(v1.1)" tags.
+3. **The last closed coordination/attestation enums become KindRegistry families** (`06_DOMAIN §7.6.4`): `conflict_policy_kinds` and `competency_level_kinds`, each seeding its prior values as STANDARDISED DATA entries; `competency_level_kinds` is ordered and proposed levels declare their rank. (`summary_function_kinds` was already open.) Substrate code branches on no closed list.
+4. **Cross-node coordination is the same shapes**, run over the now-normative global discovery + cross-env/cross-node delegation layer (ADR-0067/0068); OQ-CS-3 is resolved accordingly. No separate cross-kernel coordination subsystem.
+
+**Consequences.**
+- (+) Coordination is fully emergent and normative; the C4 trajectory (kinds → coordination → orchestration → the last enums) is complete, with no hardcoded coordination categories remaining.
+- (+) Backward-compatible: seed shapes and seed family entries reproduce prior behaviour; the `Literal → str + registry family` change is additive (no schema version bump, INV-10-safe).
+- (−) Validating arbitrary persona-proposed coordination shapes is the standing complexity cost ADR-0045 named; mitigated unchanged by the 4-pass validation + operator gate for safety-critical + honest trust-calibration of emergent shapes.
+
+**Alternatives considered.**
+- *Keep coordination as Draft / v1.1.* Rejected: leaves a designed, depended-on layer permanently non-normative and contradicts the "no deferred items" directive.
+- *Keep the two enums closed for simplicity.* Rejected: a residual C4 regression; the registry-family conversion is the same pattern already applied to every other kind and to orchestration.
+
+**Implementation scope.** Landed: [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) status/title/scope/seed/migration/OQ-CS-3; ADR-0066 status; [`01_KERNEL §13`](01_KERNEL.md#13-verified-loop-substrate) + A.51 `coordination_propose` de-tag; [`09_PROTOCOLS §7.12a`](09_PROTOCOLS.md) de-tag; the two registry families ([`06_DOMAIN §7.6.4`](06_DOMAIN.md#764-coordination--attestation-kind-families-adr-0070)) with [`02_PERSONA §11.9`](02_PERSONA.md) + [`04_PROJECT`](04_PROJECT.md) + [`15_COORDINATION_SHAPES`](15_COORDINATION_SHAPES.md) field edits; README §15 de-tag.
 
 ---
 

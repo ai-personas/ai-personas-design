@@ -679,6 +679,15 @@ An [`EnvironmentRule`](12_GLOSSARY.md#e) ([`05_ENVIRONMENT.md §2.2b`](05_ENVIRO
 
 These three are positions in the registry namespace, not domain categories; an operator MAY register further `env_rule_kinds` entries, and any domain-specific rule *content* emerges and is signed exactly like every other Proposed\*Kind (§7.5). The rule's enforcement point, lifecycle, cascade, and operator gating are specified in [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1); enforcement composes under safety-floor source 8 (`env_charter`) per [`01_KERNEL.md §2`](01_KERNEL.md#2-the-safety-floor--8-sources--1-advisory).
 
+### 7.6.4 Coordination & attestation kind families (ADR-0070)
+
+Completing the C4 substrate-purity trajectory (ADR-0045 coordination meta-mechanisms, ADR-0066 orchestration), the last closed `Literal[...]` enums on coordination/attestation fields become KindRegistry families resolved exactly as `media_kinds` does (§7.6), each shipping its prior values as STANDARDISED **seed** entries (DATA, not substrate enum):
+
+- **`conflict_policy_kinds`** — the merge-conflict policy on batch/sync shapes ([`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), [`04_PROJECT.md`](04_PROJECT.md)). Seeds: `skip_changed`, `fail_on_conflict`, `force`.
+- **`competency_level_kinds`** — the attested skill-competency ladder ([`02_PERSONA.md §11.9`](02_PERSONA.md)). Seeds, **ordered**: `novice` < `proficient` < `competent_supervised` < `independent`; a proposed level MUST declare its rank in the family's per-family metadata (§7.6.2) so trust-calibration and gating remain monotone.
+
+These are positions in the registry namespace, not domain categories; an operator/domain MAY register further entries via the §7.5 Proposed\*Kind path. Substrate code branches on no closed list of either. (The `summary_function_kinds` field of `DerivedMetric` was already open, §7.6; no change.)
+
 ## 8. Cross-source validation
 
 Before promotion, the kernel runs five checks: (1) cross-trace consistency (does inferred recipe match held-out outcomes?), (2) cross-persona agreement (multiple personas arriving at similar inferences?), (3) cross-domain consistency (does proposal contradict existing convention in a related domain?), (4) charter consistency (does extension violate any persona's charter?), (5) operator policy consistency (does proposal violate deployment policy?).
