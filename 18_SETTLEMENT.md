@@ -417,6 +417,8 @@ Ratifying this document is mechanical — each artefact has a predetermined home
 | §12 glossary terms | `12_GLOSSARY.md` |
 | The `17 ↔ 18` settlement seam | tracked jointly with [`17_ECONOMY.md`](17_ECONOMY.md) OQ-ECON-7 |
 
+**Promotion ordering.** A `SettlementLayerBinding` to these rails is hosted by [`17_ECONOMY.md §4F`](17_ECONOMY.md); this document promotes **jointly behind `17`** and inherits `17`'s promotion-ordering dependency (`15`/`16` → `17`/`18`, see `17 §11`) for any cross-env / multi-scope settlement. The chain-neutral title/custody/treasury machinery (which depends only on `01`/`04`/`07`/`09`) carries no such dependency and MAY promote independently.
+
 Environment titles deserve one note now: because environment membership transfer is **not in-place** ([`05_ENVIRONMENT.md §5.1`](05_ENVIRONMENT.md) requires DEPARTURE then fresh ADMISSION), an env sale is modelled as a `TransferCeremony` whose finalise step performs depart-under-old-custodian then readmit-under-new-custodian, not a silent owner swap.
 
 ## 12. Glossary additions (draft — promote to `12_GLOSSARY.md`)
