@@ -1343,6 +1343,40 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 
 ---
 
+### SCENARIO 20 — DC→AC inverter: continuous design-to-manufacturability under a growing budget
+
+**Scenario premise.** A user hands one node: *"Design me a 2 kW DC→AC inverter (48 V DC → 230 V AC, 50 Hz) and keep making it better and more manufacturable until it's as good as my budget allows — don't stop unless there's nothing left to improve, I stop you, or the budget runs out."* This walks the architecture end-to-end against three explicit requirements: **(R1)** a *manufacturable* artefact (verified, not plausible text); **(R2)** *continuous improvement* terminating only on convergence / user-stop / budget-exhaustion, better with more budget; **(R3)** *emergent personas/envs/behaviour* as budget grows. Validated against V.1–V.11, INV-7, and ADR-0071. This is a thought-process walk: each step names the mechanism, never a domain leak (V.1–V.6).
+
+**Setup.** The user signs a `MissionCharter` ([`02_PERSONA §11.3`](02_PERSONA.md)) whose seed goal is "improve the inverter design"; the kernel starts a `ContinuousRefinementMission` ([`03_TASKS §2c`](03_TASKS.md#2c-continuousrefinementmission--anytime-convergence-bounded-budget-scaled-improvement-adr-0071), ADR-0071). The founder persona has no power-electronics knowledge baked in (V.4).
+
+**The thought-process walk.**
+
+1. **Bootstrap the domain (V.4/V.6).** Power electronics is `DOMAIN_UNKNOWN_DETECTED`. A `ProbeBudgetEnvelope`-funded probe ([`06_DOMAIN §4`](06_DOMAIN.md)) ingests app-notes / datasheets / IEC 62368, CISPR 32, IEEE 519 as `StandardRef`s, and the persona proposes emergent KindRegistry kinds — `media_kind ∈ {schematic, netlist, bom, layout_gerbers, magnetics_design, sim_trace}`, `verifier_kind ∈ {erc_check, drc_check, sim_converge, bom_orderable, dfm_check, thermal_derating, bode_phase_margin}`, `outcome_kind ∈ {sim_result, lab_measurement, emc_pre_scan}` — none of which the substrate hardcodes (V.1–V.3). `DomainPrecedentImport` accelerates from kin domains (motor drives, LED drivers).
+
+2. **The MissionObjective (R2 anchor).** The mission's signed `MissionObjective` vector = {efficiency ↑, BOM cost ↓, EMC margin ↑, thermal-derating-met, DRC-clean, BOM-orderable}. Each target is an emergent `outcome_kind`; none is a substrate constant.
+
+3. **Round 1 — first manufacturable bundle (R1).** The persona produces an `ArtifactBundle` ([`07_ARTIFACTS §4`](07_ARTIFACTS.md)): `topology.kicad_sch` + `bom.csv` + `inverter.net` + `sim_report.md` + `layout.gerbers` + `test_plan.md`. The `verifier_recipe` runs **evidence-bound** ([`07_ARTIFACTS §7`](07_ARTIFACTS.md)): ERC, DRC, SPICE convergence, and a `bom_orderable` `EnvironmentRule rule_engine` (distributor-API stock check — the SCENARIO 14 pattern) each append a signed `VerifierInvocationEvidence`; a non-orderable BOM or failing DRC **refuses** at the `output` admission point (no prose-only acceptance). The bundle reaches `accepted` as **best-so-far**.
+
+4. **Rounds 2…k — continuous refinement (R2).** The looping `StagedSequence` re-opens best-so-far each round: propose-improvement (swap to a higher-efficiency SiC switch; re-spin magnetics; tighten EMC filter) → act → verify → **score**. The `MarginalValueMetric` (`DerivedMetric`) computes the objective-vector gain since the last accepted version. Per-round breadth = `min(objective-headroom, BudgetState.candidates_remaining)` — **with more budget the persona explores more candidate refinements per round, so best-so-far climbs faster and higher** (R2 "better with more budget"; anytime, monotone in budget).
+
+5. **Emergence under growing budget (R3).** Round 4's EMC-margin target stalls: **no active persona can advance it** (capability gap) and **budget headroom exists** → population-pressure factor 7 fires ([`16_POP §4A`](16_POPULATION_DYNAMICS.md)) → recruitment-exhausted-first ([`16_POP §4B`](16_POPULATION_DYNAMICS.md)) → **Persona Genesis** of an *EMC specialist* (niche-distinct, generativity-gated, `ReplicationBound`-capped, operator-cosigned). A `magnetics` gap later spawns a second specialist, and an `EnvFormationProposal` forms an **`emc_test` sub-env** ([`05_ENVIRONMENT §12c`](05_ENVIRONMENT.md), `EnvironmentComposition`). The team and its environments **grow with the budget** to unblock the next quality increment — bounded throughout; a coordination shape (a foundry-handoff `StagedSequence`) emerges as work demands it (V.7).
+
+6. **Termination — exactly three conditions (R2).** The mission ends on the **first** of: **convergence** — `MarginalValueMetric < ε` over `N` rounds → `converged`/`no_further_improvement`, returning best-so-far ("nothing left to improve"); **user/operator stop** → `user_terminated`; or **budget exhaustion** → INV-7 `budget_exhausted` (V.11 — the hard gate is never bypassed by refinement). If the user later tops up budget on a still-improving (`paused_budget`) mission, it **auto-resumes** from best-so-far (no manual fork). Every refinement action cleared the 8-source floor + signing throughout.
+
+7. **The honest manufacturability ceiling (R1, stated plainly).** A never-physically-built design reaches `accepted` + `PANEL_ACCEPT` grade on review and `VERIFIER_ACCEPT` on design + simulation + orderable-BOM evidence. To advance the **physical** inverter past design-side acceptance, the §2.5 rule requires BOTH design-side `VERIFIER_ACCEPT` **and** a credentialed `ExternalAttestation` (a licensed engineer's stamp / accredited safety lab / hi-pot + EMC chamber measurement via a calibrated `InstrumentAsset` + `MeasurementFact`). Bench-measured prototype reality caps at `PANEL_ACCEPT` — the substrate honestly degrades trust rather than manufacturing certainty.
+
+**Requirement scorecard.**
+
+| Requirement | Verdict | Mechanism |
+|---|---|---|
+| **R1 — manufacturable circuit** | ✅ PASS (with honest physical cap) | ArtifactBundle + evidence-bound verifier cascade + `bom_orderable`/DRC `rule_engine` + §2.5 physical-state advancement + `ExternalAttestation` + `MeasurementFact`. Never-built design caps at PANEL; verified-buildable needs external attestation. |
+| **R2 — continuous improvement, convergence/user/budget, better with more budget** | ✅ PASS (ADR-0071) | `ContinuousRefinementMission` anytime loop; `MarginalValueMetric` convergence; three-condition termination; budget-scaled `candidates_remaining`; auto-reopen. (Was a gap pre-ADR-0071.) |
+| **R3 — emergent personas/envs/behaviour as budget grows** | ✅ PASS (ADR-0071 coupling) | Budget-headroom pressure factor 7 → genesis of needed specialists; `EnvFormationProposal` sub-envs; emergent coordination shapes — all `ReplicationBound`-capped. (Coupling was a gap pre-ADR-0071.) |
+
+**Status.** Validated end-to-end. R1 was already supported by the substrate; R2 and R3 required the ADR-0071 coupling (`ContinuousRefinementMission` + budget→emergence), now landed. **Honest residuals:** the physical inverter cannot exceed `PANEL_ACCEPT` without external attestation + bench measurement (V.8 — a measurement/ground-truth reality, navigated not hidden); convergence ε/N and `ceiling_from_budget` are operator-tuned surfaces with safe defaults. No domain leak (V.1–V.6); cross-node fabrication handoff, if used, runs the same mechanisms as any cross-node delegation (V.9).
+
+---
+
 ## Scenario template (copy + fill)
 
 ```text

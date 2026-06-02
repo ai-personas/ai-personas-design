@@ -229,11 +229,11 @@ It maintains a **best-so-far** accepted artefact version (anytime semantics): ea
 **Three-condition termination (exactly the requirement).** A mission ends on the **first** of:
 1. **Convergence** — `MarginalValueMetric < ε` over `N` rounds → status `converged` / `no_further_improvement`.
 2. **User / operator stop** — existing `user_terminated` / `operator_terminated`.
-3. **Budget exhaustion** — the INV-7 hard gate ([`01_KERNEL §7`](01_KERNEL.md#7-budget-admission)) → `budget_exhausted`.
+3. **Budget exhaustion** — the INV-7 hard gate ([`01_KERNEL §7`](01_KERNEL.md#7-budget-admission-inv-7)) → `budget_exhausted`.
 
 On any stop the mission returns its **best-so-far** bundle. Convergence and budget never bypass the floor: **every** refinement action still clears the 8-source floor (J3), signing (J2/J9), and the **INV-7 hard gate** — refinement is iteration, not an exemption.
 
-**Budget-scaled quality (the "better with more budget" contract).** Per-round exploration breadth is `min(MissionObjective-headroom, BudgetState.candidates_remaining)` ([`01_KERNEL §7`](01_KERNEL.md#7-budget-admission) — `candidates` is already a budget dimension): **more budget → more candidate refinements per round → a higher best-so-far before convergence or exhaustion.** The mission is an anytime algorithm — it always has a valid best-so-far to return, and quality is monotone non-decreasing in budget.
+**Budget-scaled quality (the "better with more budget" contract).** Per-round exploration breadth is `min(MissionObjective-headroom, BudgetState.candidates_remaining)` ([`01_KERNEL §7`](01_KERNEL.md#7-budget-admission-inv-7) — `candidates` is already a budget dimension): **more budget → more candidate refinements per round → a higher best-so-far before convergence or exhaustion.** The mission is an anytime algorithm — it always has a valid best-so-far to return, and quality is monotone non-decreasing in budget.
 
 **Auto-reopen on fresh budget.** While a mission is **active and un-converged**, a budget replenishment (operator top-up, new `SchedulingPolicy` allocation, §4.6) **auto-resumes** the loop from best-so-far — no manual fork ([`07_ARTIFACTS §11`](07_ARTIFACTS.md)). A `converged` mission stays closed unless its `MissionObjective` changes (a new target re-opens it as a fresh elaboration within drift bounds). A `MissionState` (`active` / `converged` / `paused_budget` / `stopped`) tracks this; `paused_budget` is the auto-reopen-eligible state.
 
