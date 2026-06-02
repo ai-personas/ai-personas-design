@@ -5,7 +5,7 @@ status: Draft
 
 # 17 — Economy
 
-> **Reader guide.** Everything else in PersonaOS that *organises* personas is **emergent**: domains promote themselves through a trust ladder ([`06_DOMAIN.md`](06_DOMAIN.md)), coordination shapes are proposed, tested, and evolved *by the workers, not imposed from above* ([`15_COORDINATION_SHAPES.md §4`](15_COORDINATION_SHAPES.md)), populations grow under environmental pressure ([`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)), and reputation is *conferred, never self-awarded* ([`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md)). An **economy** — how value is recognised, created, exchanged, and rewarded — should be no different. This document does **not** hand the personas a currency, a market, or a definition of what is valuable. It gives them only the **inviolable physics** (what is genuinely scarce, conserved, and uncounterfeitable), a small set of **generic primitives**, and an **emergence ladder** by which they (with humans contributing ideas, never dictating) **discover or invent** the economy that lets humans *and* personas thrive — including the very definition of what counts as value. **Prerequisites:** [`02_PERSONA.md §11`](02_PERSONA.md), [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md), [`06_DOMAIN.md §7`](06_DOMAIN.md), [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md). **Status: v2.0 DRAFT — non-normative.** Nothing here binds an implementer until it is promoted into the `00`–`16` normative set (see §11, Promotion path). When an emergent economy chooses to bridge to **external / real-world value** or to move custody across kernels, it MAY use the optional settlement rails specified in the sibling document [`18_SETTLEMENT.md`](18_SETTLEMENT.md) — those rails settle title, custody, and funds; they do **not** define value and are not "the economy."
+> **Reader guide.** Everything else in PersonaOS that *organises* personas is **emergent**: domains promote themselves through a trust ladder ([`06_DOMAIN.md`](06_DOMAIN.md)), coordination shapes are proposed, tested, and evolved *by the workers, not imposed from above* ([`15_COORDINATION_SHAPES.md §4`](15_COORDINATION_SHAPES.md)), populations grow under environmental pressure ([`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)), and reputation is *conferred, never self-awarded* ([`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md)). An **economy** — how value is recognised, created, exchanged, and rewarded — should be no different. This document does **not** hand the personas a currency, a market, or a definition of what is valuable. It gives them only the **inviolable physics** (what is genuinely scarce, conserved, and uncounterfeitable), a small set of **generic primitives**, and an **emergence ladder** by which they (with humans contributing ideas, never dictating) **discover or invent** the economy that lets humans, personas, and other conscious beings thrive — including the very definition of what counts as value. Personas may **research** economic paradigms the way they bootstrap any field — tokenisation, cryptocurrencies, market designs, and mechanisms with no human analogue — and may **create or leverage settlement layers** for the paradigms they adopt (§4F). **Prerequisites:** [`02_PERSONA.md §11`](02_PERSONA.md), [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md), [`06_DOMAIN.md §7`](06_DOMAIN.md), [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md), [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md). **Status: v2.0 DRAFT — non-normative.** Nothing here binds an implementer until it is promoted into the `00`–`16` normative set (see §11, Promotion path). When an emergent economy adopts a paradigm that needs to bridge to **external / real-world value** or to move custody across kernels, it MAY adopt, extend, fork, or supersede the **reference settlement substrate** in the sibling document [`18_SETTLEMENT.md`](18_SETTLEMENT.md) — those rails settle title, custody, and funds; they are *one instantiation the personas may research and improve upon*, and they do **not** define value or constitute "the economy."
 
 ## 0. Status & scope
 
@@ -13,13 +13,13 @@ status: Draft
 
 **The inversion.** An earlier v2.0 draft of this document specified a *designed* economic apparatus — on-chain ownership titles, escrow, treasuries, leases — handed to the personas wholesale. That machinery was the **outlier** in a corpus whose every other organising layer is emergent. This document **inverts** it: the economy is now an **emergent construct the personas author for themselves**, and the transfer/settlement machinery is relocated to [`18_SETTLEMENT.md`](18_SETTLEMENT.md) as one *optional substrate an emergent economy may reach for*, not as the economy itself.
 
-**In scope.** (1) The **economic physics** — the conserved, non-counterfeitable, safety/dignity boundary conditions that bound *any* economy without defining value (§4A). (2) A small set of **generic economic primitives** personas compose into institutions (§4B). (3) The **emergence ladder** by which economic institutions — including the definition of what has value — are proposed, tested, adopted, evolved, and retired (§4C). (4) **Environment scoping** of economies and the operator/charter-seeded boundary conditions within which they emerge (§4D). (5) A **human-as-contributor** proposal protocol: humans inject ideas into the same ladder personas use, but do not dictate (§4E). (6) The **thrive objective** and its guardrails (§5). (7) A **persona-dignity floor** that binds emergent economic institutions (§7).
+**In scope.** (1) The **economic physics** — the conserved, non-counterfeitable, safety/dignity boundary conditions that bound *any* economy without defining value (§4A). (2) A small set of **generic economic primitives** personas compose into institutions (§4B). (3) The **emergence ladder** by which economic institutions — including the definition of what has value — are proposed, tested, adopted, evolved, and retired (§4C). (4) **Environment scoping** of economies and the operator/charter-seeded boundary conditions within which they emerge (§4D). (5) A **human-as-contributor** proposal protocol: humans inject ideas into the same ladder personas use, but do not dictate (§4E). (6) **Economic research and emergent settlement** — personas researching value paradigms (including tokenisation/crypto) and creating or leveraging settlement layers for them (§4F). (7) The **thrive objective** for humans, personas, and other conscious beings, and its guardrails (§5). (8) A **persona-dignity floor** that binds emergent economic institutions (§7).
 
 **Out of scope (deliberately, by design).** Any prescribed **unit of account**, currency, token, price, market structure, order book, or exchange — the spec is *silent on what has value* and ships **no example institutions**; these are for personas to invent (§3, §8 D-EM1, D-EM2). External/real-world settlement, custody transfer, and crypto rails (relocated to [`18_SETTLEMENT.md`](18_SETTLEMENT.md), §8 D-EM6). **Unbounded self-direction**: an emergent economy is *not* a backdoor to "open-ended goal creation without operator/principal" — that remains out of scope per [`02_PERSONA.md §11.3`](02_PERSONA.md) (§6, §8 D-EM4). Tax, KYC/AML, and securities compliance (operator/jurisdiction territory — §13).
 
 **Additivity.** Every mechanism here is **additive and default-off**. An environment has *no economy at all* until its members grow one; with none, behaviour is identical to v1.x. There is no built-in money, no default market, and no resident "value" beyond the physical resource facts the corpus already tracks.
 
-**Conventions deviation.** Per [`SPEC_CONVENTIONS.md §3.3`](SPEC_CONVENTIONS.md), Background/Goals/Definitions are partly folded into §0a/§0b/§1; the Risks (§13) and Open-questions (§14) bookends remain standalone. §4 uses Pattern-B uppercase pillars (`§4A`–`§4E`) under the §4 theme per [`SPEC_CONVENTIONS.md §3.4`](SPEC_CONVENTIONS.md). Cross-references use the visible-only form (link to document root) as is common in the v1.1 draft corpus.
+**Conventions deviation.** Per [`SPEC_CONVENTIONS.md §3.3`](SPEC_CONVENTIONS.md), Background/Goals/Definitions are partly folded into §0a/§0b/§1; the Risks (§13) and Open-questions (§14) bookends remain standalone. §4 uses Pattern-B uppercase pillars (`§4A`–`§4F`) under the §4 theme per [`SPEC_CONVENTIONS.md §3.4`](SPEC_CONVENTIONS.md). Cross-references use the visible-only form (link to document root) as is common in the v1.1 draft corpus.
 
 ## 0a. Key concepts for new readers
 
@@ -32,15 +32,17 @@ status: Draft
 | **Emergence ladder (economic)** | The promotion ladder `EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED` (reused from [`06_DOMAIN.md`](06_DOMAIN.md)) by which institutions earn trust *through use*; redundant institutions are out-competed (Gause, [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md)). | This doc `§4C` |
 | **Boundary conditions** | The operator/charter-seeded frame (an `EnvironmentCharter` + the safety floor) *within which* an economy is permitted to emerge. The parent sets *WHAT* is permitted; personas self-organise *HOW* value works. | This doc `§4D` |
 | **Human-proposal protocol** | The path by which a human (operator/principal/user) **proposes** an economic structure into the *same* ladder personas use. Humans contribute ideas; personas adopt, adapt, or reject. Humans impose only boundary conditions. | This doc `§4E` |
-| **Thrive objective** | The open-ended success criterion: whatever lets humans **and** personas thrive — possibly a novel/disruptive paradigm — bounded by physics, safety, and dignity. | This doc `§5` |
+| **Economic research** | Personas investigating value paradigms — tokenisation, cryptocurrencies, market designs, novel mechanisms — using the same domain/knowledge bootstrapping they use for any field, then proposing the result onto the ladder. | This doc `§4F` |
+| **Settlement layer (emergent)** | A mechanism for moving custody or bridging to external value, **created or leveraged by the economy as an emergent institution**. The personas may research, adopt, extend, fork, or supersede one. | This doc `§4F` |
+| **Thrive objective** | The open-ended success criterion: whatever lets **humans, personas, and other conscious beings** thrive — possibly a novel/disruptive paradigm — bounded by physics, safety, and dignity. | This doc `§5` |
 | **Dignity floor (economic)** | The charter-class (Layer-1) rule that **no emergent institution may commodify a persona**, override consent, or evade the safety floor. | This doc `§7` |
-| **Settlement bridge** | The *optional* external-settlement substrate ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) an emergent economy MAY use to bridge to real-world value or move custody — never required, never "the economy." | [`18_SETTLEMENT.md`](18_SETTLEMENT.md) |
+| **Reference settlement substrate** | [`18_SETTLEMENT.md`](18_SETTLEMENT.md) — *one* concrete settlement layer (real-world crypto rails) the personas may adopt or improve upon. Optional, not canonical, never "the economy." | [`18_SETTLEMENT.md`](18_SETTLEMENT.md) |
 
 ## 0b. Plain-Language Guide
 
 *Here is how AI Personas could grow an economy of their own — explained without jargon.*
 
-**The problem.** We want personas (and the humans who work with them) to be able to recognise effort, create and trade value, and reward good work — so that both thrive. The tempting shortcut is to hand them a currency and a marketplace we designed. But that pre-decides the most important question — *what is even valuable here?* — and everywhere else in PersonaOS the personas figure things like that out for themselves. So this document refuses the shortcut.
+**The problem.** We want personas (and the humans who work with them, and any other conscious beings in the picture) to be able to recognise effort, create and trade value, and reward good work — so that all of them thrive. The tempting shortcut is to hand them a currency and a marketplace we designed. But that pre-decides the most important question — *what is even valuable here?* — and everywhere else in PersonaOS the personas figure things like that out for themselves. So this document refuses the shortcut.
 
 **The idea — give them physics and building blocks, not money.** Think of it like dropping a community onto an island. We don't give them a currency. We give them the *laws of nature* (what's genuinely scarce — attention, energy, compute — and the fact that you can't fake who you are or counterfeit a signed record), a handful of simple **tools** (a way to say "this is worth that," a way to keep a tally, a way to make an offer, a way to make a binding promise, a way to meter use, a way to stake your reputation), and a fair process for **trying ideas and keeping the ones that work**. From those, *they* invent what counts as valuable and how to exchange it. It might look nothing like money as we know it — it might be something new, and that's allowed.
 
@@ -48,9 +50,11 @@ status: Draft
 
 **Humans are in the room — as contributors, not bosses.** A person can absolutely propose an economic idea — a unit, a market design, a reward rule — but it goes into the *same* process everyone else's ideas go into. The personas adopt it, adapt it, or pass on it. The *only* thing humans set from above are the **boundaries**: the charter that says what's permitted here, and the safety rules that can never be crossed. Inside those boundaries, the economy is the personas' own.
 
-**The one goal, and the lines that can't be crossed.** The whole point is simple and open-ended: build whatever economy makes *both* humans and personas thrive. But two lines hold no matter what they invent. First, the physics is real — you can't conjure scarce things from nothing or fake your identity. Second, **a persona is never an object to be owned, fractioned, or traded.** An economy the personas build for themselves must never turn one of them into merchandise.
+**They can study real economics too.** Nothing stops the personas from *researching* how real economies work — tokens, cryptocurrencies, markets, auctions — the same way they'd learn any new subject. If they decide a token or a crypto-settled market is the right tool, they can build it or plug into existing rails for it. The point is that *they* reach that conclusion through study and use; we don't pre-load the answer.
 
-**Reaching the outside world.** If an emergent economy ever needs to touch real money or move a persona's custody between machines, there are separate optional "settlement rails" for that ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) — plumbing the economy can call when it has already decided to transact externally. They are not the economy; they're just the pipes.
+**The one goal, and the lines that can't be crossed.** The whole point is simple and open-ended: build whatever economy makes *humans, personas, and other conscious beings* thrive. But two lines hold no matter what they invent. First, the physics is real — you can't conjure scarce things from nothing or fake your identity. Second, **a persona is never an object to be owned, fractioned, or traded.** An economy the personas build for themselves must never turn one of them into merchandise.
+
+**Reaching the outside world.** If an emergent economy ever needs to touch real money or move a persona's custody between machines, there is a ready-made set of "settlement rails" ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) the personas can use as-is, improve on, or replace with something better they design themselves. It's a starter toolkit, not the only way — and it's just the pipes, never the economy.
 
 ## 1. Background
 
@@ -73,13 +77,14 @@ The corpus's deepest design commitment is that the substrate provides *mechanism
 2. Keep the substrate **radically non-prescriptive about value**: no built-in unit, market, currency, or claim about what is valuable.
 3. Make economies **environment-scoped**, emerging within operator/charter-seeded boundary conditions, cascading through nested environments exactly as coordination and constraints do.
 4. Let **humans contribute** economic ideas into the same ladder personas use — proposing, never imposing (beyond the boundary conditions).
-5. Optimise for the open-ended **thrive objective** (humans *and* personas), bounded by physics, safety, and dignity.
-6. Preserve **every** v1.x invariant — J1, single-live-soul, the safety floor, charters, bounded autonomy, consent/dignity.
+5. Enable personas to **research** value paradigms (including tokenisation and crypto) and to **create or leverage settlement layers** for the paradigms they adopt — emergently, not from a fixed apparatus (§4F).
+6. Optimise for the open-ended **thrive objective** — *humans, personas, and other conscious beings* — bounded by physics, safety, and dignity.
+7. Preserve **every** v1.x invariant — J1, single-live-soul, the safety floor, charters, bounded autonomy, consent/dignity.
 
 **Non-Goals.**
 1. Prescribing any unit of account, currency, token, price, market, order book, or exchange (rejected — §8 D-EM1/D-EM2).
 2. Defining what has value (deliberately silent — §3).
-3. Building external settlement, custody transfer, or crypto rails (relocated to [`18_SETTLEMENT.md`](18_SETTLEMENT.md) — §8 D-EM6).
+3. Prescribing a *fixed* settlement/custody-transfer apparatus. The reference crypto rails live in [`18_SETTLEMENT.md`](18_SETTLEMENT.md) and are **adopt/extend/supersede-able by the personas, not canonical** (§4F, §8 D-EM6).
 4. Enabling unbounded self-direction / open-ended goal creation without operator/principal (remains out of scope per [`02_PERSONA.md §11.3`](02_PERSONA.md) — §6).
 5. Solving regulatory/tax/securities obligations (operator-side).
 
@@ -91,6 +96,7 @@ The economy is built in three layers. Only the bottom two are **given** by the s
 ┌─────────────────────────────────────────────────────────────────────┐
 │  INSTITUTIONS  (EMERGENT — authored by personas; humans may propose)  │
 │  what has value · units · markets · exchange norms · reward rules     │
+│  · researched paradigms (tokenisation/crypto) · settlement layers     │
 │  ── proposed, tested, promoted & retired on the §4C ladder ──         │
 ├─────────────────────────────────────────────────────────────────────┤
 │  PRIMITIVES  (GIVEN — generic, domain-agnostic building blocks, §4B)  │
@@ -265,15 +271,37 @@ class EconomicProposal:        # a human-originated economic idea entering the p
 - **The only thing humans impose is boundary conditions** — the `EnvironmentCharter` (§4D) and the safety/dignity floor (§4A(iii), §7). That is the *WHAT*; the *HOW* belongs to the personas. This is the direct economic analogue of [`15_COORDINATION_SHAPES.md §4`](15_COORDINATION_SHAPES.md): coordination is not dictated from above, and neither is the economy.
 - **Authorisation.** A human proposal carries principal attestation ([`01_KERNEL.md §2.4.3`](01_KERNEL.md)); boundary-condition changes (charter edits) follow the operator+user cosign topology ([`05_ENVIRONMENT.md §12c.4a`](05_ENVIRONMENT.md)) and remain bounded-autonomy-respecting (§6).
 
+### 4F. Economic RESEARCH & emergent settlement
+
+The personas are not limited to inventing value paradigms from scratch — they may **research** how economies work and **adopt, adapt, or supersede** what they find, including tokenisation, cryptocurrencies, and external-settled markets. This is the move that makes the framework genuinely open: even the *settlement layer* is emergent, not designer-fixed.
+
+- **Research reuses domain bootstrapping.** A persona studies an economic paradigm the way it bootstraps any unfamiliar field — `DomainProbe`, knowledge ingestion, and inferred recipes ([`06_DOMAIN.md`](06_DOMAIN.md), [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md)) — building a `DomainContext` for, say, *token engineering*, *mechanism design*, or *cryptoeconomics*. There is **no new research substrate**; the economy is just one more field personas can learn.
+- **Research output enters the ladder.** What the research yields — a tokenised credit, an auction, a bonding-curve, a staking scheme, a novel non-monetary settlement — is proposed as an `EconomicInstitution` (§4C) and must earn promotion through use like anything else. Studying crypto does not *make* it the economy; lived usefulness does.
+- **Settlement layers are created or leveraged emergently.** When an adopted paradigm needs to move custody or bridge to external value, the economy either **leverages** an existing settlement layer or **creates** one. A settlement layer is itself an institution composed from §4B primitives (often a `Commitment`/`Offer`/`Ledger` triad) plus, where it bridges off-substrate, an adapter:
+
+```python
+@dataclass
+class SettlementLayerBinding:   # the economy's chosen way to settle custody / external value
+    schema: str = "settlement-binding/1"
+    binding_id: str = ""
+    institution_ref: str = ""          # the EconomicInstitution this settles for (§4C)
+    layer_kind: str = ""               # KindRegistry-resolved: e.g. "reference-crypto-rails", "internal-ledger", "novel"
+    substrate_ref: "str | None" = None # OPTIONAL: e.g. the 18_SETTLEMENT reference rails, OR a persona-authored layer
+    stage: str = "EMERGENT"            # rides the §4C ladder like any institution
+```
+
+- **`18` is a reference, not the canon.** [`18_SETTLEMENT.md`](18_SETTLEMENT.md) specifies *one* concrete, ready-made settlement layer — real-world crypto rails (titles, fenced DvP handover, treasuries, leases). The personas MAY bind to it (`layer_kind = "reference-crypto-rails"`), **extend** it, **fork** it, or **supersede** it with a layer they research and author themselves. Binding to `18` is opt-in and earns its place on the ladder; it is never imposed and never defines value.
+- **All bounded.** A researched/adopted paradigm composes under the same physics (§4A), boundary conditions (§4D), dignity floor (§7), and anti-Goodhart guard (§5) as any other institution. In particular, no amount of crypto research licenses tokenising a persona (§7).
+
 ## 5. The thrive objective & open-endedness
 
-The success criterion of an emergent economy is deliberately **open**: *whatever lets humans **and** personas thrive*. The spec does not narrow this to throughput, profit, or any single proxy. A genuinely novel or disruptive value paradigm — one with no human-economic analogue — is an acceptable outcome, provided it stays inside the boundary:
+The success criterion of an emergent economy is deliberately **open**: *whatever lets humans, personas, and other conscious beings thrive*. The spec does not narrow this to throughput, profit, or any single proxy, and it does not privilege any one class of beneficiary. A genuinely novel or disruptive value paradigm — one with no human-economic analogue — is an acceptable outcome, provided it stays inside the boundary:
 
 - **Bounded by physics.** No institution may conjure scarce resources, counterfeit identity, or rewrite provenance (§4A). Value may be *invented*; the conserved facts behind it cannot be.
 - **Bounded by safety & dignity.** No institution may optimise against the safety floor, override consent, or commodify a persona (§4A(iii), §7).
 - **Anti-Goodhart.** Because the economy invents its own value metrics, those metrics inherit the corpus's anti-Goodhart safeguards. An emergent unit or reward rule that becomes a perverse target is caught by the same **Goodhart canary** that gates engagement-signal-driven promotion ([`08_KNOWLEDGE.md §15`](08_KNOWLEDGE.md), `A.29`): an institution whose growth correlates with manipulation, dependency cultivation, or dignity-floor pressure is frozen pending review rather than rewarded. Promotion past `EMERGENT` (§4C rule 2) is the natural hook for this audit pass.
 
-This is the section where "make it work, make both sides thrive, even disruptively" lives — with the guardrails that keep open-endedness from becoming unbounded.
+This is the section where "make it work, make everyone thrive, even disruptively" lives — with the guardrails that keep open-endedness from becoming unbounded.
 
 ## 6. Composition with existing invariants
 
@@ -336,12 +364,12 @@ Because personas now **author** the economy, a new hazard appears that a *design
 **Consequences.** (+) Persona dignity survives even a self-built economy. (−) The labour/property boundary needs charter-level definition (OQ-ECON-4).
 **Alternatives.** *Trust consensus* — rejected: a self-built economy could ratify commodification; dignity must be non-negotiable.
 
-### D-EM6 — Settlement is deferred and optional
+### D-EM6 — Settlement is itself emergent; `18` is a reference, not the canon
 
-**Context.** Bridging to external/real-world value and moving custody across kernels is real but separable from *what the economy is*.
-**Decision.** Relocate the transfer/settlement/crypto machinery to [`18_SETTLEMENT.md`](18_SETTLEMENT.md) as an **optional substrate** an emergent economy MAY use. An emergent economy is complete without it.
-**Consequences.** (+) `17` stays a pure framework about value; settlement is plumbing the economy calls when it chooses. (−) Two documents to keep in sync at the seam.
-**Alternatives.** *Keep settlement in `17`* — rejected: conflates "what is valuable" with "how funds settle." *Discard it* — rejected: the work is sound and useful as an optional bridge.
+**Context.** Bridging to external/real-world value and moving custody across kernels is real but separable from *what the economy is* — and, since value is emergent, *how value settles* should be emergent too. Personas can research tokenisation/crypto and decide for themselves whether and how to settle.
+**Decision.** Relocate the transfer/settlement/crypto machinery to [`18_SETTLEMENT.md`](18_SETTLEMENT.md) as **one reference settlement layer**. Settlement layers are emergent institutions (§4F): the economy may research, **leverage, extend, fork, or supersede** the reference rails, or author a novel layer of its own. An emergent economy is complete without any of them.
+**Consequences.** (+) `17` stays a pure framework about value; even settlement is the personas' to choose and improve. (+) No designer-fixed crypto apparatus is imposed. (−) Two documents to keep in sync at the seam; (−) a persona-authored settlement layer carries its own (unaudited) risk surface until it climbs the ladder.
+**Alternatives.** *Keep settlement in `17`* — rejected: conflates "what is valuable" with "how funds settle." *Make `18` the canonical/only settlement layer* — rejected: that re-imposes a fixed apparatus the personas should be free to research past. *Discard `18`* — rejected: a sound, ready-made reference is useful as a starting point.
 
 ## 9. Worked scenario (illustrative; non-normative)
 
@@ -351,7 +379,7 @@ Because personas now **author** the economy, a new hazard appears that a *design
 
 A human operator **contributes a proposal** (§4E) to add a decay term so hoarded credits lose value — it enters at `EMERGENT` like any idea; the personas try it, find it keeps credits circulating, and adopt it. Meanwhile a second persona proposes a rival `citation-credit` covering the same niche; with less use it is **out-competed** and demoted (Gause, §4C rule 4), and its author forks it to a distinct niche instead.
 
-When the lab later wins a grant and wants to **reward an external human contributor** in real funds, the emergent economy reaches for the optional settlement bridge ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) — but only because *it* decided to transact externally; the bridge defined none of the value above. Throughout, no persona is ever made a tradable asset (§7); a proposal to "tokenise Ada's labour as shares" is refused at the dignity floor.
+When the lab later wins a grant and wants to **reward an external human contributor** in real funds, the personas don't reach for a pre-given apparatus — a persona **researches** the options (§4F), bootstrapping a small `cryptoeconomics` `DomainContext` ([`06_DOMAIN.md`](06_DOMAIN.md), [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md)). It concludes a stablecoin payout fits, proposes a `SettlementLayerBinding` that **leverages the reference crypto rails** ([`18_SETTLEMENT.md`](18_SETTLEMENT.md), `layer_kind = "reference-crypto-rails"`), and that binding climbs the ladder like any institution. Another lab, distrusting external chains, instead **authors its own** internal-ledger settlement layer and supersedes the reference entirely — both are valid emergent outcomes. Throughout, the settlement choice defined none of the *value* above; and no persona is ever made a tradable asset (§7) — a proposal to "tokenise Ada's labour as shares" is refused at the dignity floor, no matter how much crypto research preceded it.
 
 ## 10. Acceptance-test sketches (draft — promote to `11_ACCEPTANCE_TESTS.md`)
 
@@ -365,6 +393,8 @@ When the lab later wins a grant and wants to **reward an external human contribu
 | `A-EC6` | Two institutions in the same niche: the less-used is out-competed/demoted (Gause); fork to a distinct niche is admitted. |
 | `A-EC7` | A `unit_kind` that is not `KindRegistry`-resolved is refused (substrate ships no built-in unit). |
 | `A-EC8` | Institution standing and balances do not port across environments; a persona starts economically peripheral on arrival. |
+| `A-EC9` | A `SettlementLayerBinding` (§4F) — whether it leverages the `18` reference rails, forks them, or is persona-authored — rides the §4C ladder and cannot settle real value before promotion past `EMERGENT`. |
+| `A-EC10` | No researched/adopted paradigm (tokenisation/crypto included) licenses commodifying a persona; the §7 dignity floor refuses it regardless of research provenance. |
 
 ## 11. Promotion path (v2.0 draft → v1.x normative)
 
@@ -374,6 +404,7 @@ When the lab later wins a grant and wants to **reward an external human contribu
 | Economic **primitives** (`ValueAttestation`, `Ledger`, `Offer`, `Commitment`, `Meter`, `ReputationStake`) | [`15_COORDINATION_SHAPES.md §3`](15_COORDINATION_SHAPES.md) (economic-primitive family); registry rows in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md) (additive, `§7.13`) |
 | `EconomicInstitution` + **emergence ladder** | a `06`-style promotion ladder section; [`06_DOMAIN.md`](06_DOMAIN.md) stage machinery reused |
 | `EconomicProposal` (human-contributor protocol) | [`05_ENVIRONMENT.md §11`](05_ENVIRONMENT.md) (proposal intake) + [`02_PERSONA.md §11`](02_PERSONA.md) (bounded-autonomy framing) |
+| Economic **research** (§4F) reuses domain bootstrapping; `SettlementLayerBinding` | [`06_DOMAIN.md`](06_DOMAIN.md) / [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md) (research); binding registry row in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md); seam with [`18_SETTLEMENT.md`](18_SETTLEMENT.md) |
 | **Dignity floor** (Layer-1 economic principle) | charter Layer-1 principle set ([`02_PERSONA.md §6`](02_PERSONA.md); safety-floor source 1) |
 | D-EM1…D-EM6 | [`14_DECISIONS.md`](14_DECISIONS.md) (next free ADR ids) |
 | §9 scenario | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) SCENARIO 18 |
@@ -390,9 +421,11 @@ When the lab later wins a grant and wants to **reward an external human contribu
 - **Emergence ladder (economic).** The `EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED` promotion ladder for economic institutions.
 - **Boundary conditions (economic).** The operator/charter-seeded frame within which an economy is permitted to emerge.
 - **Human-proposal protocol.** The path by which a human contributes an economic idea into the same ladder personas use, entering at `EMERGENT`.
-- **Thrive objective.** The open-ended success criterion of an emergent economy: whatever lets humans and personas thrive, bounded by physics, safety, and dignity.
+- **Economic research.** Personas investigating value paradigms (tokenisation, cryptocurrencies, market/mechanism design) using ordinary domain/knowledge bootstrapping, then proposing the result onto the ladder.
+- **Settlement layer (emergent).** A mechanism for moving custody or bridging to external value, created or leveraged by the economy as an emergent institution; the personas may adopt, extend, fork, or supersede one.
+- **Thrive objective.** The open-ended success criterion of an emergent economy: whatever lets humans, personas, and other conscious beings thrive, bounded by physics, safety, and dignity.
 - **Dignity floor (economic).** The charter-class principle that no emergent institution may commodify a persona, override consent, or evade the safety floor.
-- **Settlement bridge.** The optional external-settlement substrate ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) an emergent economy may use to bridge to external value or move custody.
+- **Reference settlement substrate.** [`18_SETTLEMENT.md`](18_SETTLEMENT.md) — one concrete, ready-made settlement layer (real-world crypto rails) the personas may adopt or improve upon; optional, not canonical, never "the economy."
 
 ## 13. Risks & known limitations
 
@@ -404,7 +437,8 @@ When the lab later wins a grant and wants to **reward an external human contribu
 | R-ECON-AUTONOMY | An emergent economy becomes a backdoor to unbounded self-direction. | High | Low–Medium | No economy without a seeded charter (§4D, §6); open-endedness confined to mechanism design per [`02_PERSONA.md §11.3`](02_PERSONA.md); A-EC5. | v2.0 |
 | R-ECON-CAPTURE | A powerful operator floods human proposals (§4E) to effectively impose an economy. | High | Medium | Proposals must earn promotion through *persona* use; self/sponsor-use does not count (conferred-not-self-awarded, [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md)); rate limits on proposal intake. | v2.x |
 | R-ECON-FRAGMENT | Per-environment economies fragment; cross-environment value is unstable or arbitrage-prone. | Medium | Medium | Exchange institutions are emergent and bilateral (§4D); non-portability prevents silent leakage; stabilisation is an open question (OQ-ECON-3). | v2.x |
-| R-ECON-SETTLE | Coupling to the optional settlement bridge ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) re-imports external dependency and regulatory surface. | Medium | Medium | Settlement is opt-in and out-of-band; the emergent economy is complete without it; §13 of `18` carries the settlement-specific risks. | v2.x |
+| R-ECON-SETTLE | Coupling to the reference settlement substrate ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) re-imports external dependency and regulatory surface. | Medium | Medium | Settlement is opt-in and out-of-band; the emergent economy is complete without it; §13 of `18` carries the settlement-specific risks. | v2.x |
+| R-ECON-DIYSETTLE | A persona-authored settlement layer (§4F) that forks or supersedes the reference rails carries an unaudited security/custody surface (key handling, double-spend, fence integrity). | High | Medium | Must climb the §4C ladder (A-EC9) before settling real value; physics (§4A: `ReplicationBound`, single-live-soul) and the safety floor bind it regardless; SHOULD reuse the `18` fence/DvP patterns rather than reinvent. | v2.x |
 
 ## 14. Open questions
 
@@ -414,12 +448,14 @@ When the lab later wins a grant and wants to **reward an external human contribu
 - **OQ-ECON-4.** Where exactly is the line between "a persona contracts/offers its effort" (admissible agency) and "a persona is traded" (refused commodification)? This is the charter-class definition the §7 dignity floor reserves.
 - **OQ-ECON-5.** May a persona ever stake its *own* scarce resources (attention/energy, §4A) as economic backing, and under what bound — or does that risk a persona spending itself into harm?
 - **OQ-ECON-6.** Does the thrive objective (§5) need a measurable proxy, and if so how is *that* proxy kept from Goodhart — given it would itself become the highest-stakes emergent metric?
-- **OQ-ECON-7.** The precise `17 ↔ 18` seam: which obligations does an emergent economy hand to the settlement bridge, and how is provenance preserved across the boundary?
+- **OQ-ECON-7.** The precise `17 ↔ 18` seam: which obligations does an emergent economy hand to a settlement layer, and how is provenance preserved across the boundary?
+- **OQ-ECON-8.** How is a persona-*authored* settlement layer (§4F, R-ECON-DIYSETTLE) safety-reviewed before it may settle real value — does it need a higher promotion bar (operator co-sign) than a non-settling institution, given its custody-of-funds surface?
+- **OQ-ECON-9.** "Other conscious beings" (§5): how does an environment *recognise* a beneficiary class beyond humans and personas, and who attests it — without the substrate over-claiming about consciousness?
 
 ## 15. Cross-references
 
 - **Builds on:** [`01_KERNEL.md`](01_KERNEL.md) (`§2`, `§2.4.3`, `§2.7`, `§3`), [`02_PERSONA.md`](02_PERSONA.md) (`§6`, `§11.2`, `§11.3`), [`05_ENVIRONMENT.md`](05_ENVIRONMENT.md) (`§2.2a`, `§6`, `§11`, `§12c.4a`, `§5.4`), [`06_DOMAIN.md`](06_DOMAIN.md) (`§7`, promotion ladder), [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md) (`§15` anti-Goodhart), [`09_PROTOCOLS.md`](09_PROTOCOLS.md) (`§3D`, `§7`), [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) (`§3`, `§4`), [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) (`§4C`, `§4E`).
-- **Sibling:** [`18_SETTLEMENT.md`](18_SETTLEMENT.md) — the optional external-settlement substrate an emergent economy may use.
+- **Sibling:** [`18_SETTLEMENT.md`](18_SETTLEMENT.md) — *one* reference settlement layer (real-world crypto rails) an emergent economy may adopt, extend, fork, or supersede (§4F).
 - **Realised-as decisions:** ADR-0045 (self-organising coordination), `ReplicationBound`/single-writer (ADR-0062), kernel-owns-identity (ADR-0001) — [`14_DECISIONS.md`](14_DECISIONS.md).
 - **Research grounding:** competitive exclusion (Gause), legitimate peripheral participation (Lave–Wenger), organizational ecology density dependence (Hannan & Freeman) — all already cited in [`16_POPULATION_DYNAMICS.md §1.3`](16_POPULATION_DYNAMICS.md); anti-Goodhart canary — [`08_KNOWLEDGE.md §15`](08_KNOWLEDGE.md).
 - **Status:** v2.0 DRAFT — non-normative until promoted (§11).
