@@ -1192,13 +1192,13 @@ A-GF-HAZ-4   Operator may swap seed bundle entirely; the seed bundle
              CredentialDirectoryRef.
 ```
 
-### A-GF-FDP — FederatedDomainProbe deferred to v1.1 (06_DOMAIN §4.8)
+### A-GF-FDP — FederatedDomainProbe (normative; 06_DOMAIN §4.8, ADR-0067)
 
 ```text
-A-GF-FDP-1   FederatedDomainProbe schema is reserved;
-             instantiation refused until v1.1 federation kernel
-             registration is online.
-A-GF-FDP-2   single-kernel probes are prior_domain_amortizable
+A-GF-FDP-1   FederatedDomainProbe instantiates across nodes discovered
+             over §3G, access-gated; participating nodes referenced by
+             global handle; honesty of independent nodes trust-calibrated.
+A-GF-FDP-2   single-node probes are prior_domain_amortizable
              into a future FederatedDomainProbe via the
              prior_domain_amortization pledge kind (§4.7.1).
 A-GF-FDP-3   When v1.1 enables: drift_audit_interval re-hash of
@@ -1459,7 +1459,9 @@ A-EN-v1.0-18  Federated persona submits EnvSelfProposalRequest to a
              run; decision signed.
 A-EN-v1.0-19  Decline triggers self_proposal_cooldown (default 90 days);
              early re-submit refused unless operator overrides.
-A-EN-v1.0-20  Tenant-visible envs refuse cross-kernel self-proposals.
+A-EN-v1.0-20  Tenant-visible envs admit cross-node self-proposals from
+              peers holding the requisite AccessPolicy capability (UCAN);
+              an unauthorized cross-node self-proposal is refused at intake.
 
 STATE-KIND PROMOTION (; §6, §11.3)
 A-EN-v1.0-21  availability + focus_kind + QuietPeriod.suppression
@@ -1910,9 +1912,12 @@ A-FK-INT-4   Relationship inheritance (02_PERSONA.md §11) composes orthogonally
              with memory inheritance: a child may inherit summary
              memory of counterparty C without inheriting an active
              relationship edge to C (and vice versa).
-A-FK-INT-5   Cross-kernel forking is REFUSED in v1.0 with signed
-             fork_cross_kernel_not_supported_v1_0 event; deferred
-             to v1.1 federation.
+A-FK-INT-5   Cross-node forking: a fork whose child is hosted on another
+             node is admitted iff the global aggregated persona_genesis
+             ReplicationBound clears (16 §4J) and the authoring persona
+             holds the host-node capability (UCAN); dual-signed and
+             globally verifiable. Refused genesis_exceeds_global_
+             replication_bound otherwise.
 ```
 
 ## 9f. multi-principal tests (A-MT* + A-DP*)
@@ -2449,8 +2454,10 @@ A-LSR4    operator_visibility_policy_ref required when learner_visibility
           != "full"; absence refuses `visibility_restriction_unjustified`.
 A-LSR5    Mastery checkpoint reach updates mastery_checkpoints_reached;
           MASTERY_CHECKPOINT_REACHED event signed.
-A-LSR6    Cross-persona aggregation refused (one
-          LearnerStateRecord per persona-user pair); deferred to v1.1.
+A-LSR6    Cross-persona aggregation is an emergent DerivedMetric over the
+          per-(persona,user) LearnerStateRecords, gated by the learner's
+          consent/AccessPolicy (privacy-preserving); the base records stay
+          per-(persona,user). Not a substrate primitive.
 
 ### A-LCA — LearnerCompetencyAttestation (02_PERSONA §11.9)
 

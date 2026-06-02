@@ -252,9 +252,9 @@ Threshold events route to operator + persona; operator may approve additional bu
 
 **Why this is substrate-shape, not domain-shape.** The five `pledge_kind` values describe *topological position* of the funder relative to the kernel principal (inside / outside / amortized / federated). They name no industry, no grant programme, no domain category. The currency_or_unit string is opaque to the kernel — the same envelope mechanism supplies units for any domain whose probe needs them.
 
-### 4.8 FederatedDomainProbe — cross-kernel shared ingestion (v1.1+ deferred)
+### 4.8 FederatedDomainProbe — cross-node shared ingestion (normative; ADR-0067)
 
-When multiple kernels probe the same frontier domain (e.g., several research groups bootstrapping the same emerging field), each currently pays its own ingestion cost. v1.1 introduces a federated-shared-probe schema that lets participating kernels pool ingestion under a single signed coordination record. The schema is reserved here so emergent contexts can be retroactively federated when v1.1 ships.
+When multiple nodes probe the same frontier domain (e.g., several research groups bootstrapping the same emerging field), they pool ingestion under a single signed coordination record rather than each paying its own cost. The `FederatedDomainProbe` is normative in the global object space (ADR-0067): participating nodes are discovered over `09_PROTOCOLS §3G`, referenced by global handle, and coordinate access-gated; honesty of independent participating nodes is trust-calibrated (V.8). A single-node probe is the degenerate one-participant case.
 
 *The FederatedDomainProbe coordinates shared ingestion across participating kernels with a coordinating kernel driving ingestion, a shared knowledge pool and KindRegistry, configurable cost allocation (equal split, usage proportional, coordinator pays, or pledge pool), periodic drift audits, and a quorum requirement for cross-kernel promotion.*
 

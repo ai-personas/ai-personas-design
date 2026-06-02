@@ -813,7 +813,7 @@ Boundaries are user-scoped (`§11.1`): a persona refuses certain content / topic
 
 1. **Privacy of rationale.** `private_rationale` is operator-readable under audit (§3 retention policy). A persona cannot guarantee the rationale stays fully private if the deployment audits boundary patterns.
 2. **Adversarial use.** A malicious operator could plant boundaries to silently isolate a persona. Operator policy should require periodic review (`reviewed_at`) for boundaries that affect critical workflows.
-3. **Cross-kernel federation.** PersonaPersonaBoundary is local-kernel-only in v1.0; cross-kernel boundaries (`global` scope across federated kernels) arrive in v1.1 alongside federation.
+3. **Cross-node boundaries.** `PersonaPersonaBoundary` extends to `global` scope across nodes (ADR-0067): a boundary references the other persona by global handle (`01_KERNEL §4.4`) and is enforced wherever that persona is referenced, composed most-restrictive-wins. The boundary's signatures are globally verifiable; a node that cannot currently be reached falls back per `AvailabilityPolicy` (`09_PROTOCOLS §3H`, V.8), never silently lapsing.
 
 **Acceptance tests.** A-PPB1 (boundary refuses pre-consent-flow), A-PPB2 (severity controls visibility correctly), A-PPB3 (hard mode resists operator override), A-PPB4 (env_specific scope applies only in named env), A-PPB5 (boundary + active edge coexist; refusal doesn't terminate edge), A-PPB6 (operator audit notice on refuse_with_audit), A-PPB7 (reviewed_at update preserves prior signature chain).
 
@@ -920,7 +920,7 @@ a persona teaching a user (PEDAGOGIC task class routed through GOAL_PROGRESS_ACC
 1. **Persona-side levels are self-report.** `introduced` / `demonstrated_assisted` / `demonstrated_independent` / `proficient` are persona's judgement; over- or under-estimation is possible. Higher levels (`competent_supervised`, `independent`) REQUIRE external `LearnerCompetencyAttestation` (`§11.9`); substrate refuses persona-side claims at these levels.
 2. **No automatic gap-inventory regression detection.** Persona must explicitly notice and declare misconceptions / gaps; substrate doesn't infer.
 3. **Visibility-masking is operator policy.** Default is `full` learner visibility (transparency by construction); operator may restrict via signed policy. Substrate enforces the policy; legality of the masking is operator/jurisdiction responsibility (e.g., student-records-privacy laws like FERPA in US contexts).
-4. **No cross-persona aggregation.** Each `LearnerStateRecord` is per-(persona, user). A learner working with multiple teaching personas has multiple records; aggregation across teachers is operator-policy / out-of-band. Cross-persona learner-state aggregation is v1.1+.
+4. **Cross-persona aggregation is composed, not a primitive.** Each `LearnerStateRecord` is per-(persona, user). A learner working with multiple teaching personas has multiple records; an aggregate view is an emergent `DerivedMetric` over those records, gated by the learner's consent / `AccessPolicy` (privacy-preserving). The base records stay per-(persona, user); the substrate adds no aggregation primitive.
 
 **Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9i — A-LSR*`.
 
@@ -4061,10 +4061,13 @@ class UserBoundary:
    admissible during the migration window; RelationshipRecord
    toggles take precedence on conflict (more conservative wins).
 
-6. CROSS-KERNEL FEDERATION
-   UserBoundary is local-kernel-only; cross-kernel
-   propagation arrives in v1.1 alongside federation (analogous to
-   PersonaPersonaBoundary v1.1 trajectory per §11.6).
+6. CROSS-NODE PROPAGATION (ADR-0067)
+   UserBoundary propagates across nodes: it binds wherever the
+   user's protected references are accessed in the global object
+   space, enforced most-restrictive-wins and globally verifiable
+   (analogous to the PersonaPersonaBoundary cross-node model, §11.6).
+   A node that is unreachable falls back per AvailabilityPolicy
+   (09_PROTOCOLS §3H, V.8); the boundary never silently lapses.
 ```
 
 ### Appendix A.59

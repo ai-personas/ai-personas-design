@@ -761,7 +761,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 - **Adversarial-operator scenario.** A malicious operator could mis-use `notify_operator_with_redacted_signal` in deployments where operator-user relationship is adversarial. Substrate enforces that the policy be declared; cannot prevent malicious operator policy authoring.
 - **Substrate does not enumerate professional disciplines.** Companion-domain disclaimers ("not a therapist", "not medical advice") MUST come from operator policy + persona-author charter; substrate's job is to enforce the policy, not to write it.
 - **`UserBoundary` migration cost.** Existing deployments using RelationshipRecord consent toggles must plan migration; substrate refuses auto-migration to preserve operator control of cadence.
-- **No cross-kernel user-protection propagation (v1.0).** UserBoundary, UserMemoryTransparency, UserMemorySelection are local-kernel-only; cross-kernel arrives in v1.1 with federation.
+- **Cross-node user-protection propagation (normative, ADR-0067).** UserBoundary, UserMemoryTransparency, UserMemorySelection propagate across nodes: they bind wherever the user's protected references are accessed in the global object space, enforced most-restrictive-wins and globally verifiable; an unreachable node falls back per `AvailabilityPolicy` (V.8), never silently lapsing.
 
 ---
 
