@@ -274,7 +274,7 @@ QUARTERLY (population dynamics + federation)
   A-CR13 (federated cross-kernel promotion)
   A-RL5 (multi-tenant)
   A-RL11 (dormant domain auto-detection)
-  v1.1+ federation tests (to be defined)
+  cross-node families (§9p: A-GLOBAL*, A-XD*, A-SCHED*)
 
   Estimated: ~40 tests run quarterly
 ```
@@ -3270,7 +3270,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | ID | Question | Owner | Resolves into |
 |----|----------|-------|---------------|
 | OQ-AT-1 | What is the budget for total test runtime per CI cycle? Current ~320 tests; some are expensive (sandbox escape, lineage replay at 10^6 events). Need empirical baseline and budget. | QA + Operator | v1.1 budget table in §5. |
-| OQ-AT-2 | How do we test cross-kernel federation (A-FK-INT-5 deferred to v1.1)? Multi-kernel staging environment required. | Federation WG | v1.1 federation gate. |
+| OQ-AT-2 | Cross-node federation testing requires a multi-node staging environment (≥ 2 nodes). | QA + Federation | **Resolved (normative):** the A-GLOBAL*/A-XD*/A-SCHED* families (§9p) exercise cross-node discovery, delegation, and scheduling against a 2-node staging harness; an empirical N-node load matrix is operator tuning, not a gate. |
 | OQ-AT-3 | Anti-Goodhart panel acceptance threshold tuning: tests assume a fixed disagreement-rate threshold; should it be operator-tunable per deployment? | Safety WG | v1.1 panel policy. |
 | OQ-AT-4 | Test ID renaming: `A-PR*` (presence) vs `A-PT*` (protocol) once collided. Are there other latent collisions in the future namespace? | — | v1.1 ID-scheme audit. |
 | OQ-AT-5 | Should `SKIPPED` count toward gate-pass criteria? Currently a `SKIPPED` with operator sign-off is admissible; tighten policy in safety-critical deployments. | Operator policy | v1.1 deployment profiles. |

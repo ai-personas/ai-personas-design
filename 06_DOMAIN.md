@@ -4323,7 +4323,8 @@ class DomainHarvest:
     #                   tenant_id; principals from different tenants need
     #                   a signed CrossTenancyAgreementRef to share at this
     #                   tier (else the harvest is restricted to "private").
-    #   "federation"  = §6.3 TIER 4 — multi-kernel via A2A; v1.1+.
+    #   "federation"  = §6.3 TIER 4 — cross-node via the normative
+    #                   discovery layer (09_PROTOCOLS §3G, ADR-0067).
     #   "public"      = §6.3 TIER 5 — open access; operator-gated.
     visibility_tier: Literal["private", "tenant",
                               "federation", "public"]

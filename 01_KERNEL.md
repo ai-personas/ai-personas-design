@@ -782,7 +782,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-KERNEL-1 | Classifier reputation closed-loop: which signals (audit catches, operator overrides, false-positive ratio) feed back into rotation weighting? Currently rotation is round-robin; reputation should weight selection. | Safety floor WG | v1.1 reputation scheme. |
 | OQ-KERNEL-2 | Sandbox red-team cadence: quarterly, or per-release? Who runs (internal team vs external)? | Operator security | v1.1 governance doc. |
 | OQ-KERNEL-3 | Cross-scope lineage replay planner: at what corpus size does the naive scan become the bottleneck? Empirical threshold needed before designing the planner. | — | v1.1 replay planner. |
-| OQ-KERNEL-4 | Principal-collapse path 2 (`§2.4`) requires federation; how do we encourage / require operators to deploy multi-kernel even in single-org settings? Documentation, default-deny, or operator policy template? | Operator policy | v1.1 deployment guide. |
+| OQ-KERNEL-4 | Principal-collapse path 2 (`§2.4.1`) needs ≥ 3 reachable independent peer nodes; how should operators be guided to make peers reachable (relay commons, operator policy template)? | Operator policy | Operator deployment guidance (non-blocking; federation itself is normative). |
 | OQ-KERNEL-5 | OTel adaptive cardinality caps: heuristic rules or learned policy? Heuristic ships v1.0; learning policy v1.1+. | Observability WG | v1.1 design. |
 | OQ-KERNEL-6 | Hot-WARM-COLD-ARCHIVE retention defaults: by deployment profile (R&D vs enterprise vs safety-critical) or universal defaults? | Operator policy | v1.1 retention policy library. |
 
