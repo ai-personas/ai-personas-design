@@ -70,6 +70,48 @@ V.6  All domain contexts and knowledges are acquired by the personas
      The persona is the producer; the kernel is the indexer; the
      registries are the index.  No domain content lives outside this
      loop.
+
+V.7  EMERGENCE-AUDIT BINDING (ADR-0066/0070).  No scenario walk may
+     assume a fixed task class, acceptance pathway, coordination shape,
+     or orchestration the substrate "already knows".  Classes, pathways,
+     coordination shapes, and the run loop are emergent KindRegistry
+     kinds / coordination shapes (seeded with the standard set); a walk
+     either uses a seed kind or shows the kind being proposed + signed +
+     trust-calibrated.  Orchestration is policy, not kernel-fixed.
+
+V.8  REALITY IS NAVIGATED, NOT DEFERRED (PASS, not parked).  Where a
+     limit is a genuine reality — network physics (an asleep / NAT node
+     is unreachable; light-speed; CAP during a partition), physical
+     irreversibility, tacit cognition, measurement caps, or the honesty
+     of GENUINELY ADVERSARIAL INDEPENDENT NODES — the walk does NOT park
+     it as "OOS / v1.x".  It shows the substrate NAVIGATING it: honest
+     trust-calibration (J5/C3), reachability relay / pin / replica
+     (09_PROTOCOLS §3H), compensating action, or fail-closed refusal.
+     A navigated reality is a PASS with the limit stated, never a
+     deferral.  The substrate never manufactures certainty it cannot
+     supply.
+
+V.9  CROSS-NODE USES THE SAME MECHANISMS.  A multi-node walk MUST resolve
+     through the SAME machinery as a single-node walk — global discovery
+     (§3G), AccessPolicy (§3G.3), cross-env/cross-node task delegation
+     (03_TASKS §4.5), the five coordination meta-mechanisms — never a
+     parallel "federation subsystem".  A single node is the degenerate
+     one-node case of the global object space.
+
+V.10 EVERY OBJECT IS A GLOBALLY-ADDRESSABLE ACCESS-CONTROLLED REFERENCE.
+     No walk may assume a persona / env / artefact / domain / knowledge /
+     skill / tool is reachable across nodes except by its global handle
+     (01_KERNEL §4.4) under its AccessPolicy (discover < read < write <
+     admin).  There is no kernel-local silo: identity is rooted (J1), not
+     siloed; reference is access-gated, never ambient.
+
+V.11 NODE INTAKE IS AUTHORIZED + OWNER-PRIORITIZED; PRIORITY NEVER
+     BYPASSES THE FLOOR.  A walk where a node admits multi-source work
+     MUST show the task_intake gate (01_KERNEL §13) authorizing the
+     submitter (AccessPolicy + UCAN) and the SchedulingPolicy (03_TASKS
+     §4.6) ordering it owner-first — AND MUST show that priority changes
+     ORDER, never PERMISSION: the 8-source floor and the INV-7 hard
+     budget gate are never reordered or bypassed, even for the owner.
 ```
 
 **How a scenario walk verifies V.**
@@ -88,6 +130,24 @@ The four checks are why a scenario can mention "switch-mode power supply" or "Le
 J1–J9 + INV-1..10 + INV_R1..R11 govern the substrate's internal behaviour. **V** governs the **validation process** — what an audit of a scenario walk must check before the scenario is added to the catalog. V is not a kernel admission rule; it is a peer-review rule for this document.
 
 Every scenario in the catalog below has been audited against V at the time of its entry. Future scenarios must do the same.
+
+## Pillar-0 — one global object space: cross-cutting validation walk (V.7–V.11)
+
+This walk validates the architecture-wide model (ADR-0067/0068/0069/0070) rather than one domain scenario: **PersonaOS is one global object space over many owned nodes, and every task runs the same emergent thought-process.** It is the proof that the global model uses no new mechanism beyond what every other scenario uses.
+
+**Premise.** User A owns node N_A (their laptop); user B owns node N_B (a workstation). A hands their node a task: "design a controller and have the firmware reviewed." A's env + personas handle the design; a firmware-review sub-task is best done by B's specialist personas in B's env.
+
+**Walk (each step names the mechanism, not a federation subsystem — V.9):**
+1. **Intake + owner-priority (V.11).** The task enters N_A through the `task_intake` gate (`01_KERNEL §13`): A is the owner, authorized, ordered ahead of any external work by N_A's owner-first `SchedulingPolicy` (`03_TASKS §4.6`). Priority sets *order*, not *permission*: the 8-source floor + INV-7 hard gate still clear every action.
+2. **Emergent classification (V.7).** The dispatcher classifies + composes the run loop from seed task classes / pathways / coordination shapes (ADR-0066/0070) — no fixed orchestration assumed.
+3. **Discover the reviewer (V.10).** A's persona resolves "a firmware-review specialist" over the global discovery layer (`§3G`): B's specialist persona is found by its `DiscoverableRecord`, but only because A holds ≥ `discover` on it under B's `AccessPolicy`. The persona is referenced by global handle (`§4.4`), never copied.
+4. **Cross-node delegation, consented (V.9).** A's env delegates the review sub-task via `CrossEnvTaskDelegation` (`03_TASKS §4.5`) = `DELEGATED` × `CrossEnvCoordination`: A presents a UCAN capability (`§3F`); B's personas review and Accept through their own process; both nodes dual-sign. Authorization gates the *request*; B still consents to *execute*.
+5. **Remote execution under local floor.** The review runs on N_B's personas under N_B's floor + budget, composed most-restrictive-wins with A's constraints (`§3C.3`). On N_B, A's sub-task is *external* work — N_B's owner-first `SchedulingPolicy` orders B's own tasks ahead of it (V.11, local).
+6. **Cross-domain trust (V.8 calibration).** The firmware domain on N_B differs from A's controller domain; the sub-task's verdict is trust-calibrated to the **minimum** of the two domains' trust (OQ-TASKS-3 resolution). B is an independent node: its signatures verify identity/integrity, its *honesty* enters at calibrated trust, not assumed.
+7. **Navigated physics (V.8).** Mid-review, N_B sleeps. The env does not stall on it: B's persona presence degrades to `dormant` (`§3H`), the artefact stays fetchable via `AvailabilityPolicy` replica/pin, and the delegation resumes when N_B wakes. The limit (an offline node is unreachable) is stated and navigated, not parked.
+8. **Globally-verifiable lineage (V.10).** Every step is Ed25519-signed and globally verifiable by DID resolution (`§4.4`); A audits the whole chain across both nodes.
+
+**Result — PASS.** Every step used a mechanism that a single-node scenario also uses (discovery, AccessPolicy, DELEGATED, coordination shapes, the floor, the budget gate, trust-calibration); the only "new" things are the global handle, the access ladder, the intake gate, and the scheduling policy — all general substrate, none domain- or scenario-specific. V.7 (emergent orchestration), V.8 (physics + independent-node honesty navigated, not deferred), V.9 (same mechanisms cross-node), V.10 (everything an access-gated global reference), V.11 (owner-prioritized intake, floor never bypassed) all hold. No domain leak (V.1–V.6) is introduced.
 
 ## How a scenario is walked
 
@@ -194,7 +254,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 - Cold-start scaling is heuristic; adversarial proposers may still saturate the bundle path.
 - Kinship measurement assumes shared lineage history; cross-domain low when both sides are sparse.
 - Single-project promotion concentrates statistical risk in one project's evidence; the trust cap is the substrate-shape mitigation.
-- `DomainHarvest` at federation/public tiers needs v1.1 federation index.
+- `DomainHarvest` at federation/public tiers is served by the normative discovery layer (`09_PROTOCOLS §3G`, ADR-0067), access-gated.
 
 ---
 
@@ -295,7 +355,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 **Substrate-shape gaps surfaced.** None requiring substrate change. Two honest residuals:
 
 1. **Anonymous (double-blind) peer review** — v1.0 `PeerReview` (`04_PROJECT §11`) is between named personas. Journal-style double-blind review can be modelled with `ExternalAgent` whose `contact` is opaque to the persona and a project-scope visibility tier hiding the reviewer's identity — but the substrate could carry an explicit `anonymity_tier` field on PeerReview to make this first-class. Minor refinement; not blocking.
-2. **Multi-kernel math community** — full federation needs v1.1+ A2A maturity. v1.0 supports a single-kernel cohort just fine, but cross-institute collaboration falls back to manual coordination until v1.1.
+2. **Multi-node math community** — supported (ADR-0067/0068). A cross-institute cohort forms over the global discovery layer: institutes' personas are referenced by global handle, join via cross-node env membership (`05_ENVIRONMENT §12c.4`) or cross-node task delegation (`03_TASKS §4.5`), access- + capability-gated. A single-node cohort is the degenerate case. Honesty of independent institute nodes is trust-calibrated (V.8).
 
 **Resolution.** No design change required for v1.0. The design genuinely supports this scenario — v1.0 explicitly cites Conjecture, OpenProblem, Cohort, PeerReview, CitationGraph as MetaRegistry-seeded primitives for research-shaped work.
 
@@ -304,7 +364,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 **Honest residuals.**
 
 - Cryptanalytic results may trip `information_hazard_class = dual_use_civilian` → operator gate fires; under principal collapse the degraded gate slows publication of such results. This is correct behaviour, not a gap.
-- Priority disputes ("I proved it first") rely on `ProjectLineage` + `CitationGraph` signed events. Cross-kernel priority requires v1.1 federation.
+- Priority disputes ("I proved it first") rely on `ProjectLineage` + `CitationGraph` signed events; cross-node priority is established by globally-verifiable signatures (`01_KERNEL §4.4`) over the normative federation (ADR-0067).
 - Reviewer anonymity is workable but not first-class.
 
 ---
@@ -522,7 +582,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 - **CrossTenancyAgreementRef is policy, not substrate.** The substrate carries the agreement by id; it does not parse the agreement's legal content. Disputes about whether the agreement permits a specific data flow remain operator / legal responsibility. The structural commitment is honest: substrate names the agreement, lineage carries the ref, legal review is the substrate boundary.
 - **MultiPrincipal quorum can deadlock.** If one CTO becomes structurally unreachable past `principal_unreachable_after` (default 30d; safety-critical envs ≥ 90d), the degraded-path clearance requires non-principal kinship attestation; for the SCENARIO 06 4-month timeline this is workable but extends gate surface area. A determined operator could fabricate "unreachable" status; the §2.4 degraded-gate attestation requirement still applies but the substrate is not adversarially robust against the principal themselves.
 - **No per-principal lineage masking.** All EnvironmentMembers see the full `EnvironmentLineage`. If ORG_A wants to keep a specific member-admission event invisible to ORG_B, the substrate refuses (lineage is append-only and visible to all members per `05_ENV §13`). The mitigation: don't admit the sensitive member to the joint env in the first place; run them in an ORG_A-only env that produces artifacts ORG_B consumes through `CrossDomainTransfer`. Honest residual, not gap.
-- **Cross-kernel joint projects still OOS.** Both orgs running their own v1.0 kernel must defer to v1.1+ federation. v1.0 supports one-kernel joint projects (one operator hosts; the other is admitted as co-principal). The hosting kernel's operator policy applies; the co-principal must trust the host's classifier rotation and signing infrastructure.
+- **Cross-node joint projects are supported (ADR-0067/0068).** Two orgs running their own nodes collaborate either via a joined env (one host node) or via cross-node task delegation (`03_TASKS §4.5`) over the global discovery layer, bilaterally consented and access- + capability-gated. Each node enforces its own floor/signing; cross-node verdicts are trust-calibrated (V.8). A one-node joint project (co-principal admission) remains available as the simplest case.
 
 ---
 
@@ -962,7 +1022,7 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 - **OTA firmware deployment is entirely bridge-mediated.** The substrate coordinates *which* devices to update *in what order* via `StagedRolloutEnvelope`; the actual firmware transfer mechanism is a `BridgeDesignArtifact` the persona authors. If the bridge fails mid-rollout, the substrate detects via `BridgeAsset.state → DEGRADED` and pauses the wave; the substrate cannot un-flash a device.
 - **Calibration certificate validation is at trust boundary.** `ExternalAttestation` from the calibration lab is substrate-transported but not substrate-verified for content. A fraudulent calibration certificate passes substrate signing; `CredentialDirectoryRef` lookup against ISO 17025 accreditation database is the detection layer, and that directory is operator-maintained.
 - **AmbientEventStream storage pressure at fleet scale.** At ~57K raw events/day, HOT tier (7d) holds ~400K events; WARM tier (30d) holds ~1.7M. Operators should configure aggressive archival policies for raw telemetry while retaining aggregate events in HOT tier longer. The `EventAggregationPolicy` reduces the notification-routing load but does not reduce storage; raw events persist for lineage.
-- **Cross-factory fleet unification requires domain harvest + re-import.** Factory site A's KindRegistry does not auto-propagate to Factory site B. `DomainHarvest` at `visibility_tier = "tenant"` packages the registry; site B imports via `DomainPrecedentImport` (`06_DOMAIN §11.2`). No live sync — v1.1+ federation.
+- **Cross-factory fleet unification via domain harvest + discovery.** Factory site A's KindRegistry projects a `DiscoverableRecord` over the normative discovery layer (`09_PROTOCOLS §3G`, ADR-0067); site B references it by global handle (access-gated) or imports via `DomainPrecedentImport` (`06_DOMAIN §11.2`). Live cross-node reference is supported; a node going dark degrades to `AvailabilityPolicy` fallback (`§3H.2`, V.8), not failure.
 - **Real-time closed-loop control is OOS.** HVAC control in response to sensor readings requires sub-second latency; v1.0 disclaims real-time physical control (`00_VISION §2.2`). Monitoring-only with human-in-the-loop for HVAC adjustments is the honest scope.
 - **Concurrent batch + individual state advancement.** If Vigil marks device #47 as `degraded` (individual) while Fleet runs a `BatchStateAdvancement` that includes #47 (batch), the kernel must resolve the conflict. Proposed: individual advancement takes precedence; batch skips devices whose state has changed since batch drafting. This is the expected composition but should be specified in `§26a.2.2`.
 
