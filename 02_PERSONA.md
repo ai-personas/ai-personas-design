@@ -905,6 +905,8 @@ a persona teaching a user (PEDAGOGIC task class routed through GOAL_PROGRESS_ACC
 
 `LearnerStateRecord` is the substrate-shape per-(persona, user) record of pedagogic competency state, distinct from `RelationshipRecord` (which holds consent/boundary/history) and distinct from the persona's own skill_library (which tracks the persona's competency, not the learner's).
 
+**Minor-learner attestation (ADR-0042).** The record carries an optional signed `is_minor` attestation. When set, the `HazardousSkillTeachingGate` (`01_KERNEL §2.9`) composes the non-overridable minor-learner protection at floor source 3+4: hazardous-skill teaching (or all teaching, per operator policy) requires a guardian-consent `MutualAccept` and MAY be refused outright. This is how SCENARIO 09 Group F (minor-learner protection) is realised; minor-learner pedagogy is admitted under the gate rather than refused at the substrate level.
+
 > **Schema/spec:** LearnerStateRecord dataclass definition (schema learner-state-record/1). See [Appendix A.65](#appendix-a65).
 
 **Admission rule.**
