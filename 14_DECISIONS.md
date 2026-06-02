@@ -1593,6 +1593,36 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 **Implementation scope.** Landed with normative edits: [`03_TASKS §4.5`](03_TASKS.md#45-cross-env--cross-node-task-delegation--placement) (the composition, placement, presence query, lineage visibility, OQ-TASKS-3 resolution) + §2.6 note + OQ-TASKS-3 table resolution; [`15_COORDINATION_SHAPES §4.7`](15_COORDINATION_SHAPES.md#47-cross-environment-coordination-bilateral-peers) principle 6 (task-carrying interface); [`09_PROTOCOLS §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative) UCAN normative carve-out; the A-XD acceptance-test family.
 
+### ADR-0069 — Owned-node multi-tenant priority scheduling: node intake gate + owner-first SchedulingPolicy
+
+**Status:** Accepted.
+**Date:** 2026-06-02.
+**Origin:** Architectural alignment — "each user runs one or more PersonaOS; a node runs tasks/questions from its user, other users, or other personas from the global space, by priority; a user's node prioritizes its own user's tasks before other users' personas' tasks — these are access-level policies." This is the genuinely-new layer: the prior spec had a hard budget gate (INV-7) and FIFO-plus-urgency notification routing, but **no task priority, no submitter identity in the task record, no node-level intake gate, no owner-preference, and no first-class multi-node-per-user ownership**.
+**Related:** [`01_KERNEL §2.4.4`](01_KERNEL.md#244-multi-node-ownership--one-user-one-or-more-nodes-adr-0067-adr-0069) (multi-node ownership), [`01_KERNEL §13`](01_KERNEL.md#13-verified-loop-substrate) (`task_intake` admission point), [`03_TASKS §4.6`](03_TASKS.md#46-owner-prioritized-scheduling--schedulingpolicy), [`03_TASKS §5`](03_TASKS.md#5-answerpackage) (submitter identity), [`05_ENVIRONMENT §10`](05_ENVIRONMENT.md) (deferred queue + attention budget), `INV-7`, `INV-8`, ADR-0066 (emergent coordination), ADR-0067, ADR-0068.
+
+**Context.** A node is owned compute. When work arrives from the owner, other users, and other personas in the global space, the node must decide *whether* to admit it (authorization) and *in what order* to run it (priority). v1.0 had neither: `route_task_v1(task, requester)` dropped `requester`, the `AnswerPackage` had no submitter field, the only ordering was implicit FIFO + urgency escalation in notification routing, and there was no "prefer the owner's work" rule and no first-class way for one user to own multiple federated nodes.
+
+**Decision.**
+1. **Multi-node-per-user ownership** (`01_KERNEL §2.4.4`): a `DeploymentProfile` gains `owner_node_set`; one owner's nodes federate as one logical PersonaOS (global handles, cross-node verification), and a node may still serve multiple tenants. Common ownership is a discovery/scheduling/reference convenience, **not** a trust shortcut — each node enforces its own floor/budget/intake.
+2. **Submitter identity is persisted** (`03_TASKS §5`): the task envelope, `AnswerPackage`, and lineage carry `submitter_kind` / `submitter_id` / `submitter_node` (defaulting to the owner, back-compat). This is the prerequisite for owner-vs-external distinction and for audit.
+3. **A `task_intake` admission point** (`01_KERNEL §13`, a 9th point before `env_instantiation`, distinct from the INV-7 `budget_tick` gate): authenticates the submitter, checks a `submit` capability under `AccessPolicy` (UCAN for non-owners), and enforces per-submitter-class quota/rate-limit. It decides *whether* a task enters the queue, not its order.
+4. **Owner-prioritized `SchedulingPolicy`** (`03_TASKS §4.6`): an operator-authored coordination shape (a `DerivedMetric` priority score feeding `StagedSequence`/queue ordering over the existing deferred queue), **not a hardcoded scheduler** — consistent with ADR-0066's "orchestration is emergent policy." The STANDARDISED seed orders `owner > tenant-user > federation-persona > public`, with ageing (no starvation) and no preemption.
+5. **Priority is soft; the floor and hard budget gate are immovable.** Owner-first changes *order*, never *permission*: an owner task that fails the floor is refused like any other, and no `SchedulingPolicy` may reorder the floor or the INV-7 hard gate or grant a class more than its `AccessPolicy` capability.
+
+**Consequences.**
+- (+) A node behaves as the user described: admits multi-source work by privilege, runs the owner's work first by default, and the priority *is* an access-level policy.
+- (+) Submitter provenance closes the audit gap ("who submitted this, at what priority?").
+- (+) Reuses INV-7, the admission-point machinery, the deferred queue, AccessPolicy, and UCAN; the only new schema is `scheduling-policy/1` (additive) plus additive AnswerPackage fields (no version bump).
+- (−) Priority scheduling adds a tuning surface (weights, quotas, ageing); the seed policy is safe-by-default and operators tune from there. Mis-tuned quotas can throttle legitimate external work — surfaced via `TaskIntakeRefused` lineage, not silent.
+- (−) Cross-node fairness is local only (each node schedules independently); a global fair-share scheduler is explicitly **not** introduced (it would require cross-node trust the model does not assume). This is an honest scope line, not a deferral: local scheduling fully serves the stated requirement.
+
+**Alternatives considered.**
+- *A fixed priority scheduler in the kernel.* Rejected: contradicts ADR-0066 (orchestration/coordination is emergent policy, not kernel-fixed); a `SchedulingPolicy` shape gives operators the control without hardcoding a discipline.
+- *Fold intake authorization into the INV-7 budget gate.* Rejected: budget is "can we afford this call?", intake is "may this submitter enqueue work here, and in what class?" — different questions, different failure events; conflating them would lose audit clarity and let an owner's budget headroom imply external authorization.
+- *No owner preference (treat all submitters equally).* Rejected: the explicit requirement is owner-first; equal treatment would let external work crowd out the owner on their own machine.
+
+**Implementation scope.** Landed with normative edits: [`01_KERNEL §2.4.4`](01_KERNEL.md#244-multi-node-ownership--one-user-one-or-more-nodes-adr-0067-adr-0069) (multi-node ownership), [`01_KERNEL §13` + A.51](01_KERNEL.md#13-verified-loop-substrate) (`task_intake` point + table row), [`03_TASKS §4.6`](03_TASKS.md#46-owner-prioritized-scheduling--schedulingpolicy) (`SchedulingPolicy` + owner-first seed), [`03_TASKS §5` / A.33](03_TASKS.md#5-answerpackage) (submitter identity fields), and the A-SCHED acceptance-test family.
+
 ---
 
 ## 13. Cross-references

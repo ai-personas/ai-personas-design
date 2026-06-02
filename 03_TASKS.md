@@ -393,6 +393,23 @@ A task handled by one environment's personas may produce a sub-task that is bett
 
 **Tests:** A-XD1 (cross-env DELEGATED via CrossEnvCoordinationBinding, dual-signed), A-XD2 (unauthorized delegation refused at capability check before receiver review), A-XD3 (remote placement composes floor/budget most-restrictive-wins), A-XD4 (cross-domain sub-task inherits minimum trust — OQ-TASKS-3), A-XD5 (CrossEnvPresenceQuery access-gated), A-XD6 (CrossEnvLineageVisibility redacts by default). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
+### 4.6 Owner-prioritized scheduling — SchedulingPolicy
+
+A node (`01_KERNEL §2.4.4`) admits work from three submitter classes — its **owner** (operator / personal_user), **other users**, and **other personas** from the global object space — through the `task_intake` gate (`01_KERNEL §13`). Once admitted, competing work must be **ordered**, and the ordering is itself an **access-level policy**: a node prioritizes its **owner's** tasks ahead of other users' / other personas' tasks by default. This is the soft scheduling layer; it sits **above** — and never bypasses — the INV-7 hard budget gate and the 8-source floor.
+
+**Not a hardcoded scheduler — an operator-authored policy (the ADR-0066 stance).** Ordering is expressed as a `SchedulingPolicy`, an operator-authored coordination shape over the existing notification **deferred queue** and attention budget (`05_ENVIRONMENT §10`), composed from the same emergent machinery as any coordination shape (a `DerivedMetric` priority score feeding a `StagedSequence`/queue ordering, `15_COORDINATION_SHAPES`). The kernel does not impose a fixed discipline; it guarantees only that the floor and the hard budget gate are never reordered around.
+
+*A `SchedulingPolicy` (`scheduling-policy/1`) maps each submitter class — resolved from the task's `submitter_kind` (§5) against the node's `AccessPolicy` principal kinds — to a priority weight and an admission **quota / rate-limit** (consulted at `task_intake`). It declares the ordering function (default: priority-weight desc, then existing urgency / deadline escalation, then FIFO), preemption policy (default: none — running tasks complete; only queue order changes), and starvation guards (an ageing term so low-priority work cannot be starved indefinitely). It is signed operator policy (floor source 4) and lineage-logged.*
+
+**The seed policy is owner-first.** PersonaOS ships a STANDARDISED seed `SchedulingPolicy`: priority `owner > tenant-user > federation-persona > public`, with generous owner quota and conservative external quotas, ageing on, no preemption. An operator MAY author a different policy (e.g. an SLA tier that floats a paying external tenant above background owner work) — but cannot author one that reorders the floor or the INV-7 hard gate, and cannot grant a submitter class more than its `AccessPolicy` capability allows.
+
+**Invariants.**
+- **The floor and the hard budget gate are never bypassed by priority** — owner-first changes *order*, not *permission*; an owner task that fails the floor is refused exactly as any other.
+- **Submitter identity is recorded** (§5, lineage J2/J9) so audits can answer "who submitted this, and at what priority class did it run?".
+- **Cross-node fairness is local.** Each node applies its own `SchedulingPolicy`; there is no global scheduler. A task placed on a remote node (§4.5) is ordered by *that* node's policy.
+
+**Tests:** A-SCHED1 (owner task ordered ahead of external under seed policy), A-SCHED2 (priority never bypasses floor — owner task failing floor is refused), A-SCHED3 (per-class quota enforced at task_intake), A-SCHED4 (ageing prevents starvation of low-priority work), A-SCHED5 (submitter identity persisted in AnswerPackage + lineage), A-SCHED6 (operator-authored non-default policy honoured; cannot reorder floor/INV-7). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+
 ## 5. AnswerPackage
 
 The canonical kernel return value (schema **answer/4** in v1.0).
@@ -1652,7 +1669,15 @@ class AnswerPackage:
     # --- IDENTITY ---
     schema: str = "answer/4"
     answer_id: str                          # ULID
-    
+
+    # --- ORIGIN / SUBMITTER (ADR-0069; additive, defaults to owner) ---
+    submitter_kind: Literal["owner", "user", "persona", "peer_kernel"] = "owner"
+    submitter_id: str | None = None         # global handle / DID of the submitter
+                                            # (None == the node owner, back-compat)
+    submitter_node: str | None = None       # node DID the task was submitted from
+    intake_priority_class: str | None = None  # SchedulingPolicy class resolved
+                                            # at the task_intake gate (§4.6)
+
     # --- WHAT WAS DONE ---
     answer: str                             # primary text response
     status: Literal[

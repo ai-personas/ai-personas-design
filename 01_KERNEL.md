@@ -276,6 +276,14 @@ Every `PrincipalAttribution` mint emits `PRINCIPAL_ATTRIBUTION_DECLARED` to the 
 
 **Fork interaction.** When a `ProjectMember` persona with `principal_attribution_id` set forks mid-project, attribution inheritance is governed by `MidProjectForkComposition.principal_attribution_inheritance` (`02_PERSONA §7.4.7`): `inherit_per_child` (each child's ProjectMember inherits parent's `principal_attribution_id`; admission rule §3 still applies — operator must sign each child's admission) or `reassign_per_child` (each child may have a different `principal_attribution_id`; operator policy authors per-child). **Substrate refusal**: forks initiated when the parent persona has a pending `MultiPrincipalAttestationQuorum` (§12c.4a) with collected partial signatures awaiting completion are **refused** with `fork_refused_pending_quorum` — forking the parent would orphan the partial signatures.
 
+### 2.4.4 Multi-node ownership — one user, one or more nodes (ADR-0067, ADR-0069)
+
+A kernel is a **node**: owned compute that an operator / `personal_user` runs (a laptop, a workstation, a server). In the global object space (ADR-0067) a single owner MAY run **one or more nodes**, and they federate as **one logical PersonaOS** — the owner's personas, envs, and artefacts carry global handles (`§4.4`) and are referenced across the owner's nodes (and, subject to `AccessPolicy`, by others) exactly as any global reference. Conversely a node MAY serve **multiple users** (the existing multi-tenant `tenant_id` / `PrincipalAttribution` model, §2.4.3): the owner's work is one tenant, other users' submitted work is another.
+
+*A `DeploymentProfile` gains an optional `owner_node_set` — the set of node DIDs an owner federates as one logical PersonaOS, each signed into the others' peer registries (`§4.2`) so cross-node references verify (`§4.4`). Membership in an `owner_node_set` is not a trust shortcut: each node still enforces its own floor, budget (INV-7), and `task_intake` gate (§13); it only declares common ownership for discovery, scheduling priority (`03_TASKS §4.6`), and reference resolution.*
+
+The owner-vs-other-user distinction this makes explicit is what the owner-prioritized `SchedulingPolicy` (`03_TASKS §4.6`) and the `task_intake` gate (§13) key on: a node prioritizes its **owner's** tasks ahead of other users' / other personas' tasks by default, as an operator-authored access-level/scheduling policy — never by bypassing the floor or the hard budget gate.
+
 ### 2.5 Physical-state advancement composition rule
 
 Per `ARCHITECTURE_PERSONA_OS.md §3` principle 1 ("verification is authoritative; personas propose, verifiers decide") and principle 9 ("human approval is not verification"), an action that advances `PhysicalAsset.current_state` (`04_PROJECT §26a.2`) in a domain with `physical_harm_class ≥ bodily_injury` (`06_DOMAIN §2`) MUST be backed by BOTH:
@@ -745,6 +753,8 @@ INV-8 says "every effective hard constraint is evaluated at its admission point.
 
 **Technical detail:** See [A.51](#appendix-a51).
 
+
+**`task_intake` admission (ADR-0069).** A node is owned compute that admits tasks/questions from three submitter classes — its **owner** (operator / personal_user), **other users**, and **other personas** discovered in the global object space (ADR-0067). Before a task is routed (`03_TASKS §4.1`), it passes the `task_intake` point, which runs **before** `env_instantiation` and **distinct from** the INV-7 budget gate (which still fires at `budget_tick`, unchanged). Intake checks, most-restrictive-wins: (1) the submitter is authenticated (signature / DID, `§4.4`); (2) the submitter holds at least a `submit` capability for the target node/env/persona under its `AccessPolicy` (`09_PROTOCOLS §3G.3`), presented as a UCAN token (`09_PROTOCOLS §3F`) for non-owner submitters; (3) the submitter class is within the per-class **quota / rate-limit** the node's `SchedulingPolicy` (`03_TASKS §4.6`) declares. On refusal the kernel emits a signed `TaskIntakeRefused`. Admission here does **not** set execution order — it only decides *whether* the task enters the node's queue; ordering is the soft, owner-prioritized `SchedulingPolicy` (`03_TASKS §4.6`), which never bypasses the floor or the INV-7 hard gate. The submitter identity recorded here is carried in the task envelope, the `AnswerPackage` (`03_TASKS §5`), and lineage (J2/J9).
 
 **`coordination_propose` admission (v1.1).** When a persona proposes a coordination shape via `ProposedCoordinationShape` ([`15_COORDINATION_SHAPES.md §5`](15_COORDINATION_SHAPES.md)), the kernel validates: (1) `shape_definition` conforms to one of the five meta-mechanism schemas (INV-10 schema-valid), (2) shape does not weaken any safety-floor source (J3 — no safety bypass), (3) `composition_depth ≤ 3`, (4) for `scope = "env_to_env"`: bilateral consent protocol (S-COORD-5) is required before activation, (5) for `safety_critical = True`: operator co-sign required before advancing past `candidate` stage. On refusal, `CoordinationRefused` event emitted with `refusal_reason`.
 
@@ -2824,6 +2834,8 @@ PERSONA_SELF_STOP
 ```text
 admission point        constraint_scope  when in round         on hard-deny
 ─────────────────────────────────────────────────────────────────────────────
+task_intake            intake            task submitted to     refuse intake;
+                                         node (pre-routing)    TaskIntakeRefused
 env_instantiation      admission         env load (pre-round)  refuse to load
 envelope_mint          admission         dispatch (§9)          refuse to mint
 retrieval_filter       retrieval         orient-time recall    suppress card,
