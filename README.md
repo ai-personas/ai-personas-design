@@ -70,6 +70,8 @@ PersonaOS is built around five key mechanisms:
 | 14 | [`14_DECISIONS.md`](14_DECISIONS.md) | Why the design is the way it is — 40+ architectural decision records explaining the trade-offs behind each major choice. | 10 min |
 | 15 | [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) | *(v1.1 draft)* How AI Personas organise themselves — 5 building blocks for self-organising coordination within environments. | 12 min |
 | 16 | [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) | *(v1.1 draft)* How a few personas grow into a varied population — Persona Genesis (personas authoring new personas) under environmental pressure, with diversity guarantees and hard replication brakes. | 12 min |
+| 17 | [`17_ECONOMY.md`](17_ECONOMY.md) | *(v2.0 draft)* An economy the personas author for themselves — the substrate ships only the inviolable physics, generic primitives, and an emergence ladder; personas (with humans contributing ideas) discover what has value so humans and personas thrive. | 12 min |
+| 18 | [`18_SETTLEMENT.md`](18_SETTLEMENT.md) | *(v2.0 draft)* Optional settlement & transfer rails an emergent economy may use to bridge to real-world value or move custody — sell the title, never the soul; fenced handover, atomic DvP, cryptographic leases. | 12 min |
 
 **Short on time?** Read just `00_VISION.md` (12 min) for the complete overview. Add `02_PERSONA.md` for how AI Personas are built. For a third file, pick the one closest to your interest: projects → `04_PROJECT.md`; shared workspaces → `05_ENVIRONMENT.md`; new domains → `06_DOMAIN.md`; memory → `08_KNOWLEDGE.md`.
 

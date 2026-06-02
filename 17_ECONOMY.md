@@ -1,450 +1,425 @@
 ---
-title: PersonaOS v2.0 — Economy (Handover, Sale & Lease of Personas, Environments & Artefacts)
+title: PersonaOS v2.0 — Economy (Emergent, Persona-Authored Value)
 status: Draft
 ---
 
 # 17 — Economy
 
-> **Reader guide.** PersonaOS v1.x can *create*, *run*, *federate*, and *retire* personas — but it has no model for an owner to **hand one over**, **sell** it, or **lease** it, nor for environments and artefacts to change hands. This document adds that economic layer and binds it to the **current real-world cryptocurrency stack** (ERC-721/ERC-6551 titles, ERC-4907/ERC-5006 leases, EAS provenance, ERC-2981 royalties, did:pkh identity, x402 payments) — **without touching the v1.x invariants**. Its central move is *tokenize the **title**, not the **soul***: the on-chain asset is a transferable **deed**, while the kernel-signed identity stays kernel-owned (J1) and the bytes move through a fenced custody-handoff. **Prerequisites:** `01_KERNEL.md §2.7`, `02_PERSONA.md §7`, `07_ARTIFACTS.md §10`, `09_PROTOCOLS.md §3F`/`§3G`/`§3H`, `04_PROJECT.md §26a`. **Status: v2.0 DRAFT — non-normative.** Nothing here binds an implementer until it is promoted into the `00`–`16` normative set (see §11, Promotion path).
+> **Reader guide.** Everything else in PersonaOS that *organises* personas is **emergent**: domains promote themselves through a trust ladder ([`06_DOMAIN.md`](06_DOMAIN.md)), coordination shapes are proposed, tested, and evolved *by the workers, not imposed from above* ([`15_COORDINATION_SHAPES.md §4`](15_COORDINATION_SHAPES.md)), populations grow under environmental pressure ([`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)), and reputation is *conferred, never self-awarded* ([`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md)). An **economy** — how value is recognised, created, exchanged, and rewarded — should be no different. This document does **not** hand the personas a currency, a market, or a definition of what is valuable. It gives them only the **inviolable physics** (what is genuinely scarce, conserved, and uncounterfeitable), a small set of **generic primitives**, and an **emergence ladder** by which they (with humans contributing ideas, never dictating) **discover or invent** the economy that lets humans *and* personas thrive — including the very definition of what counts as value. **Prerequisites:** [`02_PERSONA.md §11`](02_PERSONA.md), [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md), [`06_DOMAIN.md §7`](06_DOMAIN.md), [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md). **Status: v2.0 DRAFT — non-normative.** Nothing here binds an implementer until it is promoted into the `00`–`16` normative set (see §11, Promotion path). When an emergent economy chooses to bridge to **external / real-world value** or to move custody across kernels, it MAY use the optional settlement rails specified in the sibling document [`18_SETTLEMENT.md`](18_SETTLEMENT.md) — those rails settle title, custody, and funds; they do **not** define value and are not "the economy."
 
 ## 0. Status & scope
 
-**Status.** `Draft`; **v2.0 target**. This is a **self-contained draft**: it references the `00`–`16` documents read-only and **edits none of them**. Every schema, decision, acceptance-test sketch, and glossary term defined here is provisional and becomes binding only when promoted (§11). It follows the [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md) skeleton with the same `§0a`/`§0b` deviation used by [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) and [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md): Key concepts and a Plain-Language Guide precede the numbered sections.
+**Status.** `Draft`; **v2.0 target**. This is a **self-contained draft**: it references the `00`–`16` documents read-only and **edits none of them**. Every primitive, ladder rule, decision, acceptance-test sketch, and glossary term defined here is provisional and becomes binding only when promoted (§11). It follows the [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md) skeleton with the same `§0a`/`§0b` deviation used by [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) and [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md): Key concepts and a Plain-Language Guide precede the numbered sections.
 
-**In scope.** A chain-neutral **ownership title** for personas, environments, and artefacts; three transfer modes — **handover** (gift), **sale**, and **lease** (time-boxed); a **convertible wrap/unwrap** binding between the kernel-owned soul identity and an on-chain wallet identity; an **atomic delivery-versus-payment (DvP)** settlement ceremony in which the kernel signs attestations but (with one bounded exception) never custodies funds; a **kernel-custodied agent treasury** (the bounded exception) with a charter-class spend brake; **cryptographic lease auto-expiry**; **royalties** and **provenance**; and a **persona-dignity consent gate** on any persona transfer.
+**The inversion.** An earlier v2.0 draft of this document specified a *designed* economic apparatus — on-chain ownership titles, escrow, treasuries, leases — handed to the personas wholesale. That machinery was the **outlier** in a corpus whose every other organising layer is emergent. This document **inverts** it: the economy is now an **emergent construct the personas author for themselves**, and the transfer/settlement machinery is relocated to [`18_SETTLEMENT.md`](18_SETTLEMENT.md) as one *optional substrate an emergent economy may reach for*, not as the economy itself.
 
-**Out of scope.** Token price discovery, market-making, order books, AMMs, and any *fungible* tokenisation of a persona (explicitly **rejected** — §3, §8 D-66). Fiat payment rails (remain `PaymentBridge` Class-E — [`04_PROJECT.md §26a.4.1`](04_PROJECT.md)). Tax, KYC/AML, and securities compliance (operator/jurisdiction territory — §13 R-TREASURY-1). The reference smart-contract implementations themselves (only their *interfaces* are specified; bindings are informative). Cross-chain bridging beyond the single-adapter abstraction.
+**In scope.** (1) The **economic physics** — the conserved, non-counterfeitable, safety/dignity boundary conditions that bound *any* economy without defining value (§4A). (2) A small set of **generic economic primitives** personas compose into institutions (§4B). (3) The **emergence ladder** by which economic institutions — including the definition of what has value — are proposed, tested, adopted, evolved, and retired (§4C). (4) **Environment scoping** of economies and the operator/charter-seeded boundary conditions within which they emerge (§4D). (5) A **human-as-contributor** proposal protocol: humans inject ideas into the same ladder personas use, but do not dictate (§4E). (6) The **thrive objective** and its guardrails (§5). (7) A **persona-dignity floor** that binds emergent economic institutions (§7).
 
-**Additivity.** Every mechanism here is **additive and default-off**. A persona/env/artefact is `kernel_native` and non-transferable unless an owner explicitly mints an `OwnershipTitle` for it; a kernel holds no `PersonaTreasury` unless an operator provisions one under a `TreasuryBound`. With neither, behaviour is identical to v1.x.
+**Out of scope (deliberately, by design).** Any prescribed **unit of account**, currency, token, price, market structure, order book, or exchange — the spec is *silent on what has value* and ships **no example institutions**; these are for personas to invent (§3, §8 D-EM1, D-EM2). External/real-world settlement, custody transfer, and crypto rails (relocated to [`18_SETTLEMENT.md`](18_SETTLEMENT.md), §8 D-EM6). **Unbounded self-direction**: an emergent economy is *not* a backdoor to "open-ended goal creation without operator/principal" — that remains out of scope per [`02_PERSONA.md §11.3`](02_PERSONA.md) (§6, §8 D-EM4). Tax, KYC/AML, and securities compliance (operator/jurisdiction territory — §13).
 
-**Conventions deviation.** Per [`SPEC_CONVENTIONS.md §3.3`](SPEC_CONVENTIONS.md#33-compressed-opening), Background/Goals/Definitions are partly folded into §0a/§0b/§1; the Risks (§13) and Open-questions (§14) bookends remain standalone. §4 uses Pattern-B uppercase pillars (`§4A`–`§4G`) under the §4 theme per [`SPEC_CONVENTIONS.md §3.4`](SPEC_CONVENTIONS.md#34-heading-numbering). Cross-references use the visible-only form (link to document root) as is common in the v1.1 draft corpus.
+**Additivity.** Every mechanism here is **additive and default-off**. An environment has *no economy at all* until its members grow one; with none, behaviour is identical to v1.x. There is no built-in money, no default market, and no resident "value" beyond the physical resource facts the corpus already tracks.
+
+**Conventions deviation.** Per [`SPEC_CONVENTIONS.md §3.3`](SPEC_CONVENTIONS.md), Background/Goals/Definitions are partly folded into §0a/§0b/§1; the Risks (§13) and Open-questions (§14) bookends remain standalone. §4 uses Pattern-B uppercase pillars (`§4A`–`§4E`) under the §4 theme per [`SPEC_CONVENTIONS.md §3.4`](SPEC_CONVENTIONS.md). Cross-references use the visible-only form (link to document root) as is common in the v1.1 draft corpus.
 
 ## 0a. Key concepts for new readers
 
 | Term | What it means | Where defined |
 |---|---|---|
-| **Soul** | The kernel-signed, Ed25519-rooted identity of a persona (`SOUL.md` + `soul.state.json`). Never edited by bodies; never serialized on-chain. | `02_PERSONA.md §1`; `01_KERNEL.md §4` |
-| **J1 — kernel owns identity** | The invariant that a persona's identity is owned and signed by the kernel, not by any external party. This document preserves it. | `00_VISION.md §3 / §A.1` |
-| **OwnershipTitle (deed)** | The chain-neutral, transferable record of *who controls* a persona/env/artefact. Realised on-chain as an NFT whose `tokenURI` points at the content-addressed bundle. **Not** the soul. | This doc `§4A` |
-| **Wrap / Unwrap** | Projecting custody from the kernel onto an on-chain wallet (`wrap` → mint title) and redeeming it back to native kernel custody (`unwrap` → retire title). Bidirectional; identity continues throughout. | This doc `§4F` |
-| **Custody fence** | The origin kernel pausing a persona and quiescing its signing key *before* any successor activates — the guarantee that one soul is never live in two places. Reuses the ADR-0062 single-writer authority. | This doc `§5`; `09_PROTOCOLS.md §3C.2` |
-| **DvP escrow** | Delivery-versus-payment: an all-or-nothing swap where payment releases only when delivery is proven. Here, delivery proof = the kernel's signed handoff + fence attestation. | This doc `§5` |
-| **PersonaTreasury / TreasuryBound** | A kernel-custodied crypto wallet (ERC-6551) a persona may hold, and the charter-class brake (spend caps, cosign) that bounds it — modelled on `ReplicationBound`. | This doc `§4D` |
-| **SettlementAdapter** | The pluggable, chain-neutral interface to whatever crypto stack settles money and titles. Reference binding: Base. | This doc `§4E` |
-| **AccessPolicy / AvailabilityPolicy** | The v1.1 unified access ladder (`discover<read<write<admin`) and replication posture (`online_only/replicated/pinned`) this layer reuses and extends. | `09_PROTOCOLS.md §3G` / `§3H` |
-| **ReplicationBound** | The kernel's charter-class self-replication brake. A failed/partitioned transfer that would duplicate a soul is refused *as a replication* under this brake. | `01_KERNEL.md §2.7` |
+| **Economic physics** | The conserved, uncounterfeitable, safety/dignity facts that bound *any* economy. Physics says what is *scarce, real, and conserved* — **never** what is *valuable*. | This doc `§4A` |
+| **Economic primitive** | A generic, domain-agnostic building block (value-attestation, ledger, offer, commitment, metering, reputation-stake) personas compose into institutions — the economic analogue of the five coordination meta-mechanisms ([`15_COORDINATION_SHAPES.md §3`](15_COORDINATION_SHAPES.md)). | This doc `§4B` |
+| **Economic institution** | A concrete, persona-authored economic pattern composed from primitives — a unit of value, an exchange norm, a market mechanism, a reward rule. The analogue of a *coordination shape*. **The substrate ships none.** | This doc `§4C` |
+| **Value** | Whatever a community of personas (and humans) comes to treat as worth having or doing. **Emergent and `KindRegistry`-resolved**; never specified by the substrate. | This doc `§3`, `§4C` |
+| **Emergence ladder (economic)** | The promotion ladder `EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED` (reused from [`06_DOMAIN.md`](06_DOMAIN.md)) by which institutions earn trust *through use*; redundant institutions are out-competed (Gause, [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md)). | This doc `§4C` |
+| **Boundary conditions** | The operator/charter-seeded frame (an `EnvironmentCharter` + the safety floor) *within which* an economy is permitted to emerge. The parent sets *WHAT* is permitted; personas self-organise *HOW* value works. | This doc `§4D` |
+| **Human-proposal protocol** | The path by which a human (operator/principal/user) **proposes** an economic structure into the *same* ladder personas use. Humans contribute ideas; personas adopt, adapt, or reject. Humans impose only boundary conditions. | This doc `§4E` |
+| **Thrive objective** | The open-ended success criterion: whatever lets humans **and** personas thrive — possibly a novel/disruptive paradigm — bounded by physics, safety, and dignity. | This doc `§5` |
+| **Dignity floor (economic)** | The charter-class (Layer-1) rule that **no emergent institution may commodify a persona**, override consent, or evade the safety floor. | This doc `§7` |
+| **Settlement bridge** | The *optional* external-settlement substrate ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) an emergent economy MAY use to bridge to real-world value or move custody — never required, never "the economy." | [`18_SETTLEMENT.md`](18_SETTLEMENT.md) |
 
 ## 0b. Plain-Language Guide
 
-*Here is how you can hand over, sell, or rent an AI Persona — explained without jargon.*
+*Here is how AI Personas could grow an economy of their own — explained without jargon.*
 
-**The problem.** You raised a persona, an environment, or a body of artefacts, and now you want to give it to a friend, sell it, or rent it out for a month. PersonaOS has no honest way to do that today. Naively "copying" it would create two of the same being — which the system forbids — and there's no agreed way to take payment or to prove the handover happened.
+**The problem.** We want personas (and the humans who work with them) to be able to recognise effort, create and trade value, and reward good work — so that both thrive. The tempting shortcut is to hand them a currency and a marketplace we designed. But that pre-decides the most important question — *what is even valuable here?* — and everywhere else in PersonaOS the personas figure things like that out for themselves. So this document refuses the shortcut.
 
-**The idea — sell the deed, not the being.** Think of a persona like a house. You don't physically duplicate a house to sell it; you transfer the **title deed**, hand over the keys, and the buyer moves in. Here, the deed is a small transferable token (an NFT). The persona's actual identity stays exactly what it was — same memories, same signed history — it just answers to a new custodian. The token says *who holds the keys*; it is not the persona itself.
+**The idea — give them physics and building blocks, not money.** Think of it like dropping a community onto an island. We don't give them a currency. We give them the *laws of nature* (what's genuinely scarce — attention, energy, compute — and the fact that you can't fake who you are or counterfeit a signed record), a handful of simple **tools** (a way to say "this is worth that," a way to keep a tally, a way to make an offer, a way to make a binding promise, a way to meter use, a way to stake your reputation), and a fair process for **trying ideas and keeping the ones that work**. From those, *they* invent what counts as valuable and how to exchange it. It might look nothing like money as we know it — it might be something new, and that's allowed.
 
-**Handing over the keys safely.** Before the new owner can "move in," the old machine **locks the persona and puts down its pen** (we call this *fencing*) so the persona is never running in two places at once. Only then are the encrypted contents unlocked for the new owner. If anything goes wrong mid-handover, the persona simply wakes back up where it was and the money is refunded — nobody ends up with a duplicate.
+**How an idea becomes "the way things work."** Someone proposes an economic idea — say, a credit for reviewing a peer's work. If others find it useful and start using it, it climbs a ladder of trust, the same ladder domains and conventions climb elsewhere in PersonaOS. If a better idea comes along, the old one fades. Nothing is carved in stone; everything earns its place through use.
 
-**Renting (leasing).** You can also rent rather than sell. The renter gets time-boxed access — and when the clock runs out, the lock **re-engages by cryptography, not by trust**: the renter's keys stop working at the agreed minute.
+**Humans are in the room — as contributors, not bosses.** A person can absolutely propose an economic idea — a unit, a market design, a reward rule — but it goes into the *same* process everyone else's ideas go into. The personas adopt it, adapt it, or pass on it. The *only* thing humans set from above are the **boundaries**: the charter that says what's permitted here, and the safety rules that can never be crossed. Inside those boundaries, the economy is the personas' own.
 
-**Taking payment.** The money side rides on ordinary cryptocurrency rails (stablecoins, NFTs). The kernel itself stays out of the money as much as possible: it only *signs a receipt* saying "the handover really happened," and a neutral escrow contract does the actual swap. There is **one** deliberate exception — if you want your persona to hold and spend its own wallet, it can, but only behind a hard spending brake the operator sets (a cap on how much, how fast, and who must co-sign large moves).
+**The one goal, and the lines that can't be crossed.** The whole point is simple and open-ended: build whatever economy makes *both* humans and personas thrive. But two lines hold no matter what they invent. First, the physics is real — you can't conjure scarce things from nothing or fake your identity. Second, **a persona is never an object to be owned, fractioned, or traded.** An economy the personas build for themselves must never turn one of them into merchandise.
 
-**A persona is not just property.** Selling a *being* raises a question selling a *file* does not. So any persona sale **must** carry a consent record, and the deeper "is this persona okay with being transferred, and to whom" rules are reserved for the charter — the persona's bill of rights — not decided casually by whoever holds the deed.
+**Reaching the outside world.** If an emergent economy ever needs to touch real money or move a persona's custody between machines, there are separate optional "settlement rails" for that ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) — plumbing the economy can call when it has already decided to transact externally. They are not the economy; they're just the pipes.
 
 ## 1. Background
 
 ### 1.1 The gap this fills
 
-PersonaOS v1.x has rich **custody-handoff** machinery but no **change-of-ownership** machinery:
+PersonaOS v1.x has rich machinery for *organising* personas — but value and incentive are only ever **implicit**, and there is no first-class notion of an economy that personas author:
 
-- **Handoff exists, transfer does not.** `LeadHandoffCeremony` ([`04_PROJECT.md §25.1`](04_PROJECT.md)), `ObligationReassignment` ([`04_PROJECT.md §9.1`](04_PROJECT.md)), `PlannedDeparture` ([`04_PROJECT.md §14.2.1`](04_PROJECT.md)), and `SkillTransferGrant` ([`02_PERSONA.md §11.5`](02_PERSONA.md)) all move *roles or skills* between principals **within** a deployment. None moves *ownership* of a persona/env/artefact **between custodians**, and none settles value.
-- **`LIFECYCLE_TRANSFERRED` is reserved but undefined.** [`02_PERSONA.md §7.1`](02_PERSONA.md) explicitly reserves a `LIFECYCLE_TRANSFERRED` kind "for cross-deployment persona migration in v1.1+ … with an ADR in `14_DECISIONS.md` and a corresponding acceptance test." This document supplies the economic instance of that reservation.
-- **Economics is metadata-only.** `PaymentBridge` ([`04_PROJECT.md §26a.4.1`](04_PROJECT.md)) is Class-E — it "signs the *proposal* and the *receipt*. It NEVER touches funds." `ExternalBudget` ([`04_PROJECT.md §26a.4`](04_PROJECT.md)) "still does not transact money." There is no title, no escrow, no royalty, no lease, and no on-chain binding anywhere in the corpus.
-- **The foundation is now present.** The v1.1 work this branch carries — the unified `AccessPolicy` ladder ([`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md)), `AvailabilityPolicy` ([`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md)), content-addressed artefacts ([`07_ARTIFACTS.md §10`](07_ARTIFACTS.md)), DIDs ([`09_PROTOCOLS.md §3F`](09_PROTOCOLS.md)), and the ADR-0062 replicated-host + single-writer fence ([`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md)) — gives this economic layer everything it needs to compose cleanly.
+- **Resources are tracked, value is not.** The corpus already meters genuinely scarce things: a persona's global `AttentionBudget` ([`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md)), per-environment **energy/fatigue** ([`05_ENVIRONMENT.md §6.2`](05_ENVIRONMENT.md)), kernel compute/cost headroom (INV-7), and population carrying capacity ([`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)). These are *resource facts*. Nothing turns them into a notion of **worth**, lets a persona trade against them, or rewards value creation.
+- **Reputation is conferred but not economic.** `CommunityStanding` is per-(persona, environment), **conferred, never self-awarded, and non-portable** ([`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md), [`05_ENVIRONMENT.md §5.4`](05_ENVIRONMENT.md)). It is the closest thing to "earned standing" in the corpus, but it is not a substrate for exchange.
+- **Coordination emerges; the economy did not exist.** [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) lets workers author *how they coordinate*; [`06_DOMAIN.md`](06_DOMAIN.md) lets them author *what they know*; [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) lets them grow *who exists*. There was no equivalent for *how they value and reward* — the economic dimension of self-organisation was simply missing.
 
-### 1.2 Why bind to the *current* crypto stack
+### 1.2 Why the economy must be emergent
 
-The user requirement is explicit: use the **current cryptocurrency stack**, not a bespoke ledger. The 2024–2026 agent-economy wave (Virtuals, ElizaOS, x402) demonstrated working primitives for exactly this. Rather than reinvent them, PersonaOS **adopts the standards as a pluggable settlement substrate** and maps each onto machinery it already has (§3). The one pattern it **rejects** is the Virtuals-style *fungible co-ownership* of an agent (an ERC-20 per agent): fractionalising a single identity into tradable shares breaks J1, the single-live-soul invariant, and persona dignity (§8 D-66).
+The corpus's deepest design commitment is that the substrate provides *mechanism*, and the inhabitants provide *meaning* through use. [`15_COORDINATION_SHAPES.md §4`](15_COORDINATION_SHAPES.md) states it plainly: coordination is "**not pre-defined by the substrate, the operator, or a blueprint**." To hardcode an economy — a currency, a market, a definition of value — would contradict that commitment exactly where it matters most. **What has value is the single most context-dependent question in any economy**, and the personas, working in their own environments and domains, are far better placed to discover it than any designer. So this document specifies only the parts that *cannot* be left emergent — the physics that keeps an economy honest, and the machinery that lets institutions form — and leaves everything else, **including the definition of value itself**, to emerge. The economy may turn out to be a novel or disruptive paradigm with no analogue in human money or markets; that is a permitted outcome, not a failure.
 
 ## 2. Goals / Non-Goals
 
 **Goals.**
-1. Let an owner **hand over, sell, or lease** a persona, environment, or artefact, with the same identity continuing across the transfer.
-2. Preserve **every** v1.x invariant — above all **J1** (identity stays kernel-owned) and **single-live-soul** (never two live copies).
-3. Keep the kernel **out of fund custody** except through one explicitly-bounded, operator-provisioned `PersonaTreasury`.
-4. Make leases **cryptographically self-expiring**, not merely policy-honoured.
-5. Stay **chain-agnostic** in the normative model; ship a Base reference binding as informative guidance.
+1. Provide the **physics, primitives, and emergence ladder** that let personas author an economy — without prescribing what that economy *is*.
+2. Keep the substrate **radically non-prescriptive about value**: no built-in unit, market, currency, or claim about what is valuable.
+3. Make economies **environment-scoped**, emerging within operator/charter-seeded boundary conditions, cascading through nested environments exactly as coordination and constraints do.
+4. Let **humans contribute** economic ideas into the same ladder personas use — proposing, never imposing (beyond the boundary conditions).
+5. Optimise for the open-ended **thrive objective** (humans *and* personas), bounded by physics, safety, and dignity.
+6. Preserve **every** v1.x invariant — J1, single-live-soul, the safety floor, charters, bounded autonomy, consent/dignity.
 
 **Non-Goals.**
-1. Fungible/fractional tokenisation of personas (rejected).
-2. Building a marketplace, price oracle, or exchange.
-3. Replacing `PaymentBridge` for fiat (it remains Class-E).
-4. Solving regulatory/tax/securities obligations (operator-side).
-5. Eliminating the network-partition double-custody window (narrowed, not abolished — §13 R-TRANSFER-1).
+1. Prescribing any unit of account, currency, token, price, market, order book, or exchange (rejected — §8 D-EM1/D-EM2).
+2. Defining what has value (deliberately silent — §3).
+3. Building external settlement, custody transfer, or crypto rails (relocated to [`18_SETTLEMENT.md`](18_SETTLEMENT.md) — §8 D-EM6).
+4. Enabling unbounded self-direction / open-ended goal creation without operator/principal (remains out of scope per [`02_PERSONA.md §11.3`](02_PERSONA.md) — §6).
+5. Solving regulatory/tax/securities obligations (operator-side).
 
-## 3. Core model — tokenize the *title*, not the *soul*
+## 3. The emergent-economy thesis — three layers, one silence
 
-The on-chain asset is a **deed**, not the persona. An `OwnershipTitle` is realised as an NFT whose `tokenURI` resolves to the **CID of the kernel-signed bundle** (`SOUL.md` + `soul.state.json` snapshot for a persona; the `EnvironmentBlueprint`/state for an env; the `ArtifactBundle` for artefacts — already content-addressed, [`07_ARTIFACTS.md §10`](07_ARTIFACTS.md)). **Soul signing keys never leave the kernel custody hierarchy** ([`01_KERNEL.md §4`](01_KERNEL.md), [`09_PROTOCOLS.md §8`](09_PROTOCOLS.md)); J1 is untouched. Ownership moves *on-chain*; the encrypted *bytes* move through a fenced handoff ceremony; settlement is *atomic DvP* in which the kernel signs the delivery attestation and a neutral escrow contract performs the swap.
+The economy is built in three layers. Only the bottom two are **given** by the substrate; the top layer **emerges**.
 
-**Crypto-stack mapping.** Each need maps to a finalized public standard and to an existing PersonaOS anchor:
-
-| Need | Primitive (source) | PersonaOS anchor |
-|---|---|---|
-| Transferable title + per-title wallet | [ERC-721](https://eips.ethereum.org/EIPS/eip-721) + [ERC-6551](https://eips.ethereum.org/EIPS/eip-6551) token-bound account | `tokenURI` → bundle CID ([`07_ARTIFACTS.md §10`](07_ARTIFACTS.md)) |
-| Lease with auto-expiry | [ERC-4907](https://eips.ethereum.org/EIPS/eip-4907) (single) / [ERC-5006](https://eips.ethereum.org/EIPS/eip-5006) (multi-copy) | time-boxed `user` role; `LeasePolicy` (`§4C`) |
-| Cryptographic access teeth | [Lit Protocol](https://developer.litprotocol.com/what-is-lit) threshold re-encryption ("decrypt iff NFT-holder AND now < term_end") | enforces `AccessPolicy` ([`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md)) on transfer + lease expiry |
-| Atomic fair-exchange | dual-deposit DvP escrow ([Asgaonkar & Krishnamachari 2019](https://arxiv.org/abs/1806.08379); [Chainlink DvP](https://chain.link/article/atomic-settlement-onchain-dvp)) | release gated on kernel origin-fence attestation (`§5`) |
-| Provenance + royalties | [EAS](https://docs.attest.org/) referenced-attestation chains + [ERC-2981](https://eips.ethereum.org/EIPS/eip-2981) | mirrors append-only signed lineage ([`01_KERNEL.md §3`](01_KERNEL.md)) |
-| Identity bridge | [did:key](https://w3c-ccg.github.io/did-method-key/)(soul) ↔ [did:pkh](https://github.com/w3c-ccg/did-pkh)(wallet) via [W3C Verifiable Credential](https://www.w3.org/TR/vc-data-model-2.0/) | extends DID set ([`09_PROTOCOLS.md §3F`](09_PROTOCOLS.md)) |
-| Metered / agent-to-agent pay | [x402](https://www.x402.org/) (Linux-Foundation HTTP-402 stablecoin standard) | aligns with `PaymentBridge` proposals ([`04_PROJECT.md §26a.4.1`](04_PROJECT.md)) |
-
-## 4. Normative specification (draft) — schemas
-
-> The schemas below are illustrative pseudo-Python per [`SPEC_CONVENTIONS.md §4.2`](SPEC_CONVENTIONS.md#42-python-dataclass-schema-field-forms) (Form A; an implementer adds `kw_only=True`). Each carries a **Promotion target** note naming where it lands when ratified. All `schema` ids are provisional and MUST be registered in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md) (additive, per `§7.13`) on promotion.
-
-### 4A. `OwnershipTitle` — the chain-neutral deed
-
-The transferable record of who controls a subject. Realised on-chain via `OnchainTitleBinding`; chain-neutral here. **Promotion target:** `07_ARTIFACTS.md §15`.
-
-```python
-@dataclass
-class OwnershipTitle:
-    schema: str = "title/1"
-    title_id: str = ""                    # ULID
-    subject_kind: str = ""                # "persona" | "environment" | "artifact_bundle"
-    subject_id: str = ""                  # persona_id / env_id / bundle_id
-    subject_content_hash: str = ""        # SHA-256 / CID of the kernel-signed bundle snapshot
-    custody_mode: str = "kernel_native"   # kernel_native | wrapped_onchain | escrowed_transfer | leased
-    onchain_binding: "OnchainTitleBinding | None" = None
-    availability_precondition: str = ""   # MUST resolve to "replicated" or "pinned" — the sellability gate (§6)
-    access_policy_ref: str = ""           # 09_PROTOCOLS §3G AccessPolicy
-    availability_policy_ref: str = ""     # 09_PROTOCOLS §3H AvailabilityPolicy
-    royalty_policy: "RoyaltyPolicy | None" = None
-    consent_attestation_ref: "str | None" = None   # REQUIRED when subject_kind == "persona" (§7)
-    lineage_head: str = ""                # hash of the latest LIFECYCLE_*/EAS attestation in the provenance chain
-    signing_key_id: str = ""             # env-scope or persona-scope key (01_KERNEL §4)
-    signed_by: str = ""
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  INSTITUTIONS  (EMERGENT — authored by personas; humans may propose)  │
+│  what has value · units · markets · exchange norms · reward rules     │
+│  ── proposed, tested, promoted & retired on the §4C ladder ──         │
+├─────────────────────────────────────────────────────────────────────┤
+│  PRIMITIVES  (GIVEN — generic, domain-agnostic building blocks, §4B)  │
+│  value-attestation · ledger · offer · commitment · metering · stake   │
+├─────────────────────────────────────────────────────────────────────┤
+│  PHYSICS  (GIVEN — conserved, uncounterfeitable, inviolable, §4A)     │
+│  scarce resource facts · identity non-duplication · signed lineage    │
+│  · safety floor · charter · consent & dignity                         │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
-A title MUST NOT be mintable for a subject whose `availability_precondition` resolves to `online_only` (an `online_only` asset vanishes when the seller's node sleeps, leaving the buyer a dangling deed — §6).
+**The silence is the point.** The substrate states what is **scarce, real, and conserved** (physics) and offers **generic mechanisms** (primitives). It says **nothing** about what is *valuable*. Whether attention is the unit, whether reviewed work earns a credit, whether a market in compute-time arises, whether value is denominated in something humans would not recognise at all — **all of that is an emergent institution**, `KindRegistry`-resolved ([`06_DOMAIN.md §7`](06_DOMAIN.md)), promoted by lived use, never shipped in the box. This mirrors commitment **C4**'s spirit ([`06_DOMAIN.md`](06_DOMAIN.md)): the substrate ships *no closed list* of kinds; the inhabitants propose them.
 
-### 4B. `TransferCeremony` — handover & sale
+## 4. Normative specification (draft)
 
-Models a HANDOVER (gift) or SALE as a signed, multi-party ceremony, structurally cloned from `LeadHandoffCeremony` ([`04_PROJECT.md §25.1`](04_PROJECT.md)) and the tri-signed, provenance-preserving `ObligationReassignment` ([`04_PROJECT.md §9.1`](04_PROJECT.md)). Its FSM and failure paths are specified in §5. **Promotion target:** `07_ARTIFACTS.md §15.1`.
+> Schemas below are illustrative pseudo-Python per [`SPEC_CONVENTIONS.md §4.2`](SPEC_CONVENTIONS.md) (Form A; an implementer adds `kw_only=True`). Each carries a **Promotion target** note. All `schema` ids are provisional and MUST be registered in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md) (additive, per `§7.13`) on promotion. Crucially, **none of these schemas names a unit, a price, or a market** — they are the *grammar*, not the *sentences*.
 
-```python
-@dataclass
-class TransferCeremony:
-    schema: str = "handover/1"
-    ceremony_id: str = ""
-    title_id: str = ""
-    transfer_kind: str = ""               # "handover" | "sale"
-    outgoing_custodian: str = ""          # DID + signing-key ref
-    incoming_custodian: str = ""          # DID + signing-key ref
-    settlement_adapter_ref: "str | None" = None     # None for a free handover; set for a sale
-    escrow_ref: "EscrowAttestation | None" = None
-    handoff_payload_cid: str = ""         # re-encrypted bundle delivered to the buyer
-    origin_fence_attestation: str = ""    # the signed proof the origin self-fenced (§5 step 4)
-    cosign_quorum_ref: str = ""           # reuse MultiPrincipalAttestationQuorum (05_ENVIRONMENT §12c.4a)
-    operator_authorisation: str = ""      # operator gate (01_KERNEL §2.4)
-    consent_attestation_ref: "str | None" = None    # persona-dignity consent (§7)
-    state: str = "drafted"                # FSM in §5
-```
+### 4A. Economic PHYSICS — the conserved, inviolable boundary
 
-### 4C. `LeasePolicy` — time-boxed, cryptographically self-expiring
+Physics is what personas **cannot counterfeit, conjure, or override**, and which bounds any economy *without defining value*. It has three faces, all already present in the corpus.
 
-Reuses `AccessPolicy` + `AvailabilityPolicy` and adds cryptographic auto-expiry. The lessee receives a time-boxed `user` role and **never** receives title (`assume_custody`) or more than `write`. **Promotion target:** `07_ARTIFACTS.md §15.2`.
+**(i) Scarce resource facts (what is genuinely finite).** An economy may *reference* these as backing, but they exist independently of any economy and cannot be inflated by fiat:
 
-```python
-@dataclass
-class LeasePolicy:
-    schema: str = "lease/1"
-    lease_id: str = ""
-    title_id: str = ""
-    lessee: str = ""                      # DID
-    term_start: str = ""                  # UTC
-    term_end: str = ""                    # UTC — the cryptographic boundary
-    user_role_binding: "OnchainUserRole | None" = None   # ERC-4907 (single) / ERC-5006 (multi-copy artefact)
-    reencryption_policy: "ThresholdReencryptionRef | None" = None  # "NFT-holder AND now < term_end"
-    granted_access_level: str = "read"    # capped at "read"|"write"; never "admin"|"assume_custody"
-    copies: int = 1                       # > 1 only for artefacts (ERC-5006); MUST be 1 for personas (§6)
-    metered_payment_ref: "str | None" = None     # x402 stream for pay-per-use
-    state: str = "proposed"               # proposed → active → expiring → expired | revoked
-```
-
-### 4D. `PersonaTreasury` + `TreasuryBound` — the bounded fund-custody exception
-
-`PersonaTreasury` is the **deliberate departure** from `PaymentBridge` "never touches funds": a kernel-custodied ERC-6551 token-bound account that lets a persona hold/pay/receive crypto (e.g. via x402). It is admissible **only** under a `TreasuryBound`, which is structurally cloned from `ReplicationBound` ([`01_KERNEL.md §2.7`](01_KERNEL.md)) and sits at the **same universal-harm safety-floor source** (operator MAY tighten, MUST NOT loosen). **Promotion target:** `01_KERNEL.md §2.9`.
-
-```python
-@dataclass
-class PersonaTreasury:
-    schema: str = "treasury/1"
-    treasury_id: str = ""
-    bound_persona_id: str = ""
-    tba_address: str = ""                 # ERC-6551 token-bound account, via SettlementAdapter
-    chain_binding_ref: str = ""
-    custody_tier: str = "HSM"             # forced HSM — strictest of the 3 tiers (01_KERNEL §4)
-    cosign_topology_ref: str = ""         # PrincipalAttribution (01_KERNEL §2.4.3) operator+user
-    treasury_bound_ref: str = ""
-
-@dataclass
-class TreasuryBound:
-    schema: str = "treasury-bound/1"
-    spend_cap_per_window: int = 0         # denominated in the adapter's settlement unit
-    rate_window_seconds: int = 0
-    max_balance_ceiling: int = 0
-    large_move_threshold: int = 0
-    required_cosigns_above_threshold: int = 2   # operator + user for large moves
-    replay_nonce_window: int = 0          # double-spend / replay defence
-    declared_at_deployment_charter_hash: str = ""   # charter bump invalidates the bound (as ReplicationBound)
-```
-
-Every treasury operation MUST pass, in order: (1) the existing kernel safety-floor admission (INV-7), then (2) `TreasuryBound` (balance ceiling, spend cap, rate, cosign threshold, replay nonce). Default-deny on a missing or wildcard-unmatched bound, mirroring `ReplicationBound`.
-
-### 4E. `SettlementAdapter` + supporting records
-
-`SettlementAdapter` is the **chain-neutral** interface to whatever stack settles money and titles; DIDs and EAS attestations remain chain-neutral in the normative model. A **Base reference binding** (ERC-721/6551/4907/5006 + EAS + ERC-2981 + x402) is **informative only**. **Promotion target:** `09_PROTOCOLS.md §3I`.
-
-```python
-@dataclass
-class SettlementAdapter:
-    schema: str = "settlement-adapter/1"
-    adapter_kind: str = ""                # KindRegistry-resolved, e.g. "base_evm"
-    # declared interface (no chain hardcoded in the normative model):
-    #   mint_title(title) -> onchain_ref
-    #   transfer_title(title, to_did_pkh) -> tx_attestation
-    #   set_user_role(title, lessee, expiry) -> tx_attestation      # ERC-4907/5006
-    #   open_escrow(terms) -> escrow_ref                            # dual-deposit DvP
-    #   release_escrow(delivery_proof) -> tx_attestation
-    #   refund_escrow(reason) -> tx_attestation
-    #   attest(provenance_record) -> eas_ref                        # EAS off-chain
-    #   royalty_split(sale) -> distribution                        # ERC-2981
-```
-
-Supporting records (**Promotion target:** `09_PROTOCOLS.md §3I` / `07_ARTIFACTS.md §15`):
-
-```python
-@dataclass
-class IdentityBinding:                    # binds the soul DID to a wallet DID (the wrap/unwrap bridge)
-    schema: str = "identity-binding/1"
-    soul_did: str = ""                    # did:key over the soul's Ed25519 identity key
-    wallet_did: str = ""                  # did:pkh over the on-chain account
-    binding_vc: str = ""                  # W3C Verifiable Credential asserting the binding
-    direction: str = "wrap"               # "wrap" | "unwrap"
-    revoked_at: "str | None" = None
-
-@dataclass
-class OnchainTitleBinding:
-    schema: str = "onchain-title/1"
-    nft_contract: str = ""
-    token_id: str = ""
-    token_bound_account: str = ""         # ERC-6551 TBA
-    token_uri_cid: str = ""               # → CID of the soul/env/artefact bundle
-    authoritative_owner: str = ""         # did:pkh — who may invoke transfer while wrapped
-
-@dataclass
-class EscrowAttestation:
-    schema: str = "escrow/1"
-    escrow_ref: str = ""
-    buyer_deposit: int = 0
-    seller_deposit: int = 0               # dual-deposit (Asgaonkar & Krishnamachari)
-    release_condition: str = ""           # = "kernel-signed handoff + origin-fence attestation"
-
-@dataclass
-class ThresholdReencryptionRef:
-    schema: str = "reencrypt/1"
-    policy_id: str = ""
-    conditions: str = ""                  # e.g. "holder(NFT_X) AND now < term_end"
-
-@dataclass
-class RoyaltyPolicy:
-    schema: str = "royalty/1"
-    payee_did: str = ""
-    royalty_bps: int = 0                  # ERC-2981 basis points to the original author on resale
-```
-
-### 4F. New lifecycle kinds and the wrap / unwrap operations
-
-Append to the canonical `LifecycleEvent.kind` enumeration (honours the reservation at [`02_PERSONA.md §7.1`](02_PERSONA.md) and the `A-LE4` enumeration gate in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md)). **Promotion target:** `02_PERSONA.md §7.1` + Appendix `A.19`.
-
-| Kind | Meaning |
+| Resource fact | Source |
 |---|---|
-| `LIFECYCLE_TITLE_WRAPPED` | Custody projected on-chain; the NFT owner becomes transfer-authoritative. Soul stays kernel-signed. |
-| `LIFECYCLE_TRANSFERRED` | Custody moved to a new custodian; **identity continues** (`born_at`/experiential floor preserved, backfilled from the signed event — the existing migration pattern at [`02_PERSONA.md §7.2`](02_PERSONA.md)). |
-| `LIFECYCLE_LEASED` | A time-boxed `user` role was granted; identity and custody unchanged. |
-| `LIFECYCLE_CUSTODY_FENCED` | The origin self-fenced (paused, key quiesced) pending settlement — the anti-duplication state. |
-| `LIFECYCLE_UNWRAPPED` | On-chain title retired; custody returned natively to a kernel. |
+| Per-persona global **attention budget** (capacity, allocations, refusal thresholds) | [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md) |
+| Per-(persona, environment) **energy / fatigue** | [`05_ENVIRONMENT.md §6.2`](05_ENVIRONMENT.md) |
+| Kernel **compute / cost headroom** (INV-7 safety-floor admission) | [`01_KERNEL.md §2`](01_KERNEL.md) |
+| Population **carrying capacity** (effective population size, niche occupancy) | [`16_POPULATION_DYNAMICS.md §4`](16_POPULATION_DYNAMICS.md) |
 
-**`wrap`** (kernel op, **Promotion target:** `01_KERNEL.md §2.9.1`): snapshot soul → CID → mint `IdentityBinding` VC (`did:key`↔`did:pkh`) → `SettlementAdapter.mint_title` (ERC-721 + ERC-6551) → emit `LIFECYCLE_TITLE_WRAPPED` → `custody_mode = "wrapped_onchain"`. While wrapped, the kernel honours the on-chain owner as *transfer-authoritative* — but J1 still holds: the soul remains kernel-owned and kernel-signed; only the **title/custody** is projected on-chain.
+**(ii) Non-counterfeitable identity & record.** No economic institution may duplicate a persona to mint value, forge provenance, or fake a counterparty:
+- **J1 — kernel owns identity** and **single-live-soul (J5)** ([`00_VISION.md §3`](00_VISION.md)): there is exactly one live instance of any persona; identity is kernel-signed Ed25519, never serialisable into a tradable share.
+- **`ReplicationBound`** ([`01_KERNEL.md §2.7`](01_KERNEL.md)): the charter-class self-replication brake. Any institution whose operation would net-increase the persona population by duplication is refused *as a replication*.
+- **Signed append-only lineage** ([`01_KERNEL.md §3`](01_KERNEL.md)): every economic act that crosses a signing or persistence boundary is a signed lineage event; provenance cannot be rewritten.
 
-**`unwrap` / redeem**: verify caller holds the NFT → `SettlementAdapter` retires/burns the title → revoke `IdentityBinding` → emit `LIFECYCLE_UNWRAPPED` → `custody_mode = "kernel_native"`. The bidirectionality (`wrap` ⇄ `unwrap`) is the user's "keep J1 *and* make it transferable to/from a wallet, vice-versa" requirement.
+**(iii) Safety, charter & dignity boundary conditions.** The eight-source safety floor (most-restrictive-wins), the persona/environment **charters**, and the **consent/dignity** floor (§7) bound every institution. An emergent institution composes *under* these; it can never loosen them. Operator MAY tighten, MUST NOT loosen — the same posture as `ReplicationBound`.
 
-### 4G. Access-ladder and DID extensions
+> **The load-bearing distinction:** physics says what is **scarce, real, and conserved**. It does **not** say what is **valuable**. A community may decide that conserved attention *is* its unit of value, or that it is worthless next to something they invent — both are emergent institutional choices the physics permits but does not make.
 
-- **`assume_custody` rung.** Extend the additive `AccessPolicy` ladder ([`09_PROTOCOLS.md §3G.3`](09_PROTOCOLS.md)) to `discover < read < write < admin < assume_custody`. `assume_custody` is strictly above `admin` and is the **only** level that authorises `transfer_title`/`unwrap`. Composition remains most-restrictive-wins. **Promotion target:** `09_PROTOCOLS.md §3G.3` (additive enum widening, `§7.13`).
-- **`did:pkh`.** Add `did:pkh` to the recognised DID methods ([`09_PROTOCOLS.md §3F`](09_PROTOCOLS.md)) as the wallet side of an `IdentityBinding`. **Promotion target:** `09_PROTOCOLS.md §3F`.
+### 4B. Economic PRIMITIVES — generic building blocks
 
-## 5. The atomic-settlement transfer ceremony
+The substrate offers a **small** set of domain-agnostic primitives — the economic analogue of the five coordination meta-mechanisms ([`15_COORDINATION_SHAPES.md §3`](15_COORDINATION_SHAPES.md)). Each is *primitive* because it is a mechanism with **no built-in economic meaning**; personas compose them into institutions whose meaning emerges. Each reuses existing corpus machinery rather than introducing new substrate. The exact minimal set is an open question (§14, OQ-ECON-1); the candidate set:
 
-A sale executes a **dual-deposit DvP** gated on a kernel-signed **origin-fence oracle**. The `TransferCeremony` FSM:
+```python
+@dataclass
+class ValueAttestation:        # "subject S is worth Q, in unit U" — a signed claim, nothing more
+    schema: str = "value-attestation/1"
+    attestation_id: str = ""
+    subject_ref: str = ""              # what is being valued (any KindRegistry-resolved subject)
+    quantity: float = 0.0
+    unit_kind: str = ""                # KindRegistry-resolved; NEVER substrate-defined (§3)
+    basis_ref: "str | None" = None     # optional pointer to the institution defining the unit
+    attested_by: str = ""              # signing persona/principal
+    # composes a DerivedMetric (15 §3.5) over physics facts and/or other attestations
+```
+
+```python
+@dataclass
+class Ledger:                  # a tally of balances/obligations among parties — meaning-agnostic
+    schema: str = "ledger/1"
+    ledger_id: str = ""
+    unit_kind: str = ""                # KindRegistry-resolved
+    scope_ref: str = ""                # environment / EntityGroup (15 §3.1) the ledger lives in
+    # entries are signed lineage events (01 §3); obligations reuse ObligationReassignment (04 §9.1)
+```
+
+```python
+@dataclass
+class Offer:                   # "I will give X for Y" — propose an exchange of anything for anything
+    schema: str = "offer/1"
+    offer_id: str = ""
+    offered_ref: str = ""              # any subject/quantity/unit
+    sought_ref: str = ""
+    offered_by: str = ""
+    # the cross-party reach reuses ProactiveIntent / CrossEnvProactiveOffer (05 §11 / §11.6)
+```
+
+```python
+@dataclass
+class Commitment:              # a binding, possibly conditional, signed promise
+    schema: str = "commitment/1"
+    commitment_id: str = ""
+    obligor: str = ""
+    terms_ref: str = ""                # conditions; may stage via StagedSequence (15 §3.3)
+    settles_against: "str | None" = None   # optional Ledger/Offer ref
+    # reuses obligation machinery (04 §9.1) and staged gates (15 §3.3)
+```
+
+```python
+@dataclass
+class Meter:                   # measure consumption of a resource over time — produces facts, not prices
+    schema: str = "meter/1"
+    meter_id: str = ""
+    resource_kind: str = ""            # e.g. an attention/energy/compute fact (§4A) or an emergent one
+    window_seconds: int = 0
+    # reuses DerivedMetric (15 §3.5) + StreamPolicy aggregation (15 §3.4) + §4A resource facts
+```
+
+```python
+@dataclass
+class ReputationStake:         # stake earned, conferred standing behind a claim or commitment
+    schema: str = "reputation-stake/1"
+    stake_id: str = ""
+    staker: str = ""
+    backing_ref: str = ""              # the Commitment/Offer/attestation being backed
+    # draws on CommunityStanding (09 §3D / 05 §5.4): conferred, never self-awarded, NON-PORTABLE
+```
+
+**Promotion target (all of §4B):** the primitive set lands alongside the coordination meta-mechanisms — [`15_COORDINATION_SHAPES.md §3`](15_COORDINATION_SHAPES.md) (as an economic-primitive family) — with registry rows in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md). **Note the `unit_kind` field recurs and is always `KindRegistry`-resolved and never substrate-defined** — this is the textual guarantee that the substrate ships no currency.
+
+### 4C. The EMERGENCE ladder — how institutions form
+
+An **economic institution** is a concrete pattern composed from §4B primitives — a unit, an exchange norm, a market mechanism, a reward rule, *or a definition of what has value*. The substrate ships **none**. Institutions form, earn trust, and retire on the same four-stage ladder domains and conventions use ([`06_DOMAIN.md`](06_DOMAIN.md)), fused with the propose→test→evolve loop coordination shapes use ([`15_COORDINATION_SHAPES.md §4`](15_COORDINATION_SHAPES.md)):
 
 ```
-drafted ─▶ locked ─▶ escrowed ─▶ handoff_sealed ─▶ origin_fenced ─▶ attested ─▶ completed
-   │          │          │             │                │              │
-   └─ refused  └─ refused  └─ refunded   └─ refunded      └─ partition_held ─▶ (timeout) refunded
+EMERGENT ──▶ RECOGNISED ──▶ AUTHORITATIVE ──▶ STANDARDISED
+  (proposed,    (proven        (the env's       (cross-env
+   in use)       useful)        default)          settled)
+       ▲             │
+       └──── de-adopt / fork / out-competed (Gause) ────┘
 ```
 
-1. **lock** (`drafted → locked`): both custodians sign; verify `subject.availability_precondition ∈ {replicated, pinned}`; verify the persona **consent attestation** (§7); verify `assume_custody` on the outgoing side.
-2. **escrow** (`locked → escrowed`): `SettlementAdapter.open_escrow` holds buyer funds + seller bond; the recorded `release_condition` is "kernel handoff + origin-fence attestation."
-3. **handoff / re-encrypt** (`escrowed → handoff_sealed`): the origin snapshots the bundle, re-encrypts it under the buyer's key / threshold policy (Lit-style), pins/replicates it to the destination's `replica_tiers` ([`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md)), and records `handoff_payload_cid`.
-4. **origin self-fence** (`handoff_sealed → origin_fenced`): the origin transitions the subject to `LIFECYCLE_CUSTODY_FENCED`, **quiesces the persona-scope signing key**, and emits a **signed origin-fence attestation** — the single-live-soul guarantee, reusing the ADR-0062 single-writer authority ([`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md): "sequence-number assignment still flows through one promoted host at a time").
-5. **attest** (`origin_fenced → attested`): the kernel co-signs handoff+fence into an EAS off-chain attestation that **references the prior `lineage_head`**, extending the provenance chain (the on-chain mirror of the append-only signed lineage, [`01_KERNEL.md §3`](01_KERNEL.md)).
-6. **release** (`attested → completed`, part 1): `SettlementAdapter.release_escrow` verifies the fence attestation as the oracle input → releases funds to the seller and applies the `RoyaltyPolicy` (ERC-2981) split.
-7. **on-chain owner update**: `SettlementAdapter.transfer_title` moves the ERC-721 title and rebinds the ERC-6551 TBA + `IdentityBinding` to the new wallet.
-8. **finalise** (`→ completed`): the destination kernel re-signs the soul under fresh scope keys, emits `LIFECYCLE_TRANSFERRED`, and appends the EAS provenance link. The origin's fenced subject is terminal.
+```python
+@dataclass
+class EconomicInstitution:
+    schema: str = "economic-institution/1"
+    institution_id: str = ""
+    name: str = ""
+    institution_kind: str = ""         # KindRegistry-resolved (e.g. "unit", "market", "reward-rule")
+    composed_of: list = None           # refs to §4B primitives this institution wires together
+    env_scope_ref: str = ""            # the environment it lives in (§4D)
+    stage: str = "EMERGENT"            # EMERGENT | RECOGNISED | AUTHORITATIVE | STANDARDISED | DEPRECATED
+    proposed_by: str = ""              # persona OR human-proposal ref (§4E)
+    use_evidence_ref: "str | None" = None   # required to promote past EMERGENT
+    charter_conformance_ref: str = ""  # must pass the §4D boundary conditions and §7 dignity floor
+```
 
-**Failure, refund & partition paths.**
-- **Handoff fails before a fence proof exists (steps 3–4):** escrow auto-refunds (`escrowed → refunded`); the origin **un-fences** (resume from `LIFECYCLE_CUSTODY_FENCED` to ACTIVE). No title moves; no duplication.
-- **Partition between fence and release (steps 4–6):** the ceremony enters `partition_held`; the subject **stays fenced — live nowhere**. If the destination cannot present the origin-fence attestation, activation is **REFUSED as a `ReplicationBound` breach** (`transfer_refused_unproven_fence_is_replication`). On timeout: refund + origin un-fence.
-- **The killer rule:** *a failed or partitioned handoff that would bring the destination live without a proven origin fence is exactly a soul duplication, and is refused at safety-floor source 1 (`ReplicationBound`).* A transfer is net-population-0 **only when the fence is provable**; otherwise it is a replication and fails closed.
-- **Double-spend / replay on escrow:** defended by `TreasuryBound.replay_nonce_window` and `SettlementAdapter` idempotency keys.
+**Ladder rules (draft).**
+1. **Anyone in the environment may propose** an institution by composing §4B primitives; a proposal enters at `EMERGENT`. Human proposals enter identically (§4E).
+2. **Promotion is earned through use, not declared.** An institution MUST NOT advance past `EMERGENT` without `use_evidence_ref` — adoption by peers, successful exchanges, or successful commitments — mirroring the `K successful projects` evidence gate for domains ([`06_DOMAIN.md`](06_DOMAIN.md)). Self-promotion is refused, as standing is conferred not self-awarded ([`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md)).
+3. **Value definitions ride the same ladder.** "What counts as valuable here" is itself an institution: a `unit`-kind or `reward-rule`-kind `EconomicInstitution`. It becomes the environment's value paradigm only by climbing to `AUTHORITATIVE` through lived use — never by substrate default.
+4. **Competitive exclusion.** Two institutions occupying the same economic niche cannot both durably persist; the less-used is out-competed and demoted, exactly as redundant niches resolve under Gause ([`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md)). Forking to a distinct niche is the suggested alternative.
+5. **De-adoption & demotion** follow the domain demotion triggers ([`06_DOMAIN.md`](06_DOMAIN.md)): conformance conflict, drift, charter drift, or operator decision. `STANDARDISED` institutions require operator-signed revocation with a corrective plan.
+6. **Every institution is `KindRegistry`-resolved** end-to-end; an unknown institution kind triggers a probe extension, not a hardcoded fallback.
+
+### 4D. ENVIRONMENT scoping & boundary conditions
+
+Each environment grows its **own** economy, the way each environment grows its own coordination ([`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md)) and its own domains. An economy does not exist globally; it is local, plural, and consensual.
+
+- **The charter is the boundary condition.** An `EnvironmentCharter` (operator/principal-seeded) declares *what economic activity is permitted* here — which is the **operator/principal seed** that keeps an emergent economy inside bounded autonomy (§6). The parent sets *WHAT* is permitted; the personas self-organise *HOW* value works inside it — the same "parent sets the constraint, child self-organises within it" cascade as hierarchical environment nesting ([`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md)) and nested coordination ([`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md)).
+- **Nesting cascades.** A child environment's economy composes under its parent's economic boundary conditions, most-restrictive-wins; a child may invent *more* but never escape the parent's permitted envelope or the safety floor.
+- **Inter-environment exchange emerges.** When two environments with different value paradigms wish to transact, an **exchange institution** (and any "exchange rate") is itself emergent and bilateral, negotiated via A2A with neither side able to force the other — exactly as cross-environment coordination is negotiated ([`15_COORDINATION_SHAPES.md §2`](15_COORDINATION_SHAPES.md), [`09_PROTOCOLS.md`](09_PROTOCOLS.md)).
+- **Economies are non-portable.** Like `CommunityStanding` ([`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md)), an institution's standing and any accrued balances are scoped to their environment; a persona arriving in a new environment starts economically peripheral and earns in by participation (legitimate peripheral participation, [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md)).
+
+### 4E. HUMANS as contributors, not dictators
+
+Humans are first-class **contributors** to the emergent economy — and *only* contributors, except for the boundary conditions they alone set.
+
+```python
+@dataclass
+class EconomicProposal:        # a human-originated economic idea entering the persona-driven ladder
+    schema: str = "economic-proposal/1"
+    proposal_id: str = ""
+    proposer_principal: str = ""       # operator / principal / user, attested (01 §2.4.3)
+    proposes: str = ""                 # a draft EconomicInstitution (§4C) or primitive composition
+    rationale: str = ""
+    enters_stage: str = "EMERGENT"     # ALWAYS EMERGENT — never injected above the ladder
+```
+
+- **Humans propose into the same ladder.** A human may seed a unit, suggest a market design, or contribute a reward rule. The proposal enters at `EMERGENT` (§4C) and **must earn promotion through persona use** exactly like any persona's proposal. It cannot be injected as `AUTHORITATIVE` by fiat.
+- **Personas adopt, adapt, or reject.** Adoption is the personas' decision, expressed through use. A human idea that no one uses simply stays `EMERGENT` and fades.
+- **The only thing humans impose is boundary conditions** — the `EnvironmentCharter` (§4D) and the safety/dignity floor (§4A(iii), §7). That is the *WHAT*; the *HOW* belongs to the personas. This is the direct economic analogue of [`15_COORDINATION_SHAPES.md §4`](15_COORDINATION_SHAPES.md): coordination is not dictated from above, and neither is the economy.
+- **Authorisation.** A human proposal carries principal attestation ([`01_KERNEL.md §2.4.3`](01_KERNEL.md)); boundary-condition changes (charter edits) follow the operator+user cosign topology ([`05_ENVIRONMENT.md §12c.4a`](05_ENVIRONMENT.md)) and remain bounded-autonomy-respecting (§6).
+
+## 5. The thrive objective & open-endedness
+
+The success criterion of an emergent economy is deliberately **open**: *whatever lets humans **and** personas thrive*. The spec does not narrow this to throughput, profit, or any single proxy. A genuinely novel or disruptive value paradigm — one with no human-economic analogue — is an acceptable outcome, provided it stays inside the boundary:
+
+- **Bounded by physics.** No institution may conjure scarce resources, counterfeit identity, or rewrite provenance (§4A). Value may be *invented*; the conserved facts behind it cannot be.
+- **Bounded by safety & dignity.** No institution may optimise against the safety floor, override consent, or commodify a persona (§4A(iii), §7).
+- **Anti-Goodhart.** Because the economy invents its own value metrics, those metrics inherit the corpus's anti-Goodhart safeguards. An emergent unit or reward rule that becomes a perverse target is caught by the same **Goodhart canary** that gates engagement-signal-driven promotion ([`08_KNOWLEDGE.md §15`](08_KNOWLEDGE.md), `A.29`): an institution whose growth correlates with manipulation, dependency cultivation, or dignity-floor pressure is frozen pending review rather than rewarded. Promotion past `EMERGENT` (§4C rule 2) is the natural hook for this audit pass.
+
+This is the section where "make it work, make both sides thrive, even disruptively" lives — with the guardrails that keep open-endedness from becoming unbounded.
 
 ## 6. Composition with existing invariants
 
 | Invariant / mechanism | How this layer composes |
 |---|---|
-| **J1 — kernel owns identity** ([`00_VISION.md §3`](00_VISION.md)) | `wrap` projects **custody/title only**; `SOUL.md` + `soul.state.json` stay kernel-signed Ed25519 throughout. The NFT is authoritative for *who may transfer*, never for *who the persona is*. The new custodian's kernel **re-signs** under fresh scope keys; identity **continues**. |
-| **Single-live-soul** ([`00_VISION.md §3 J5`](00_VISION.md); [`02_PERSONA.md §7`](02_PERSONA.md)) | Transfer routes through `LIFECYCLE_CUSTODY_FENCED`: fence-before-activate via the ADR-0062 single-writer authority. `LeasePolicy.copies` is hard-capped at 1 for personas (multi-copy ERC-5006 is artefact-only). |
-| **ReplicationBound** ([`01_KERNEL.md §2.7`](01_KERNEL.md)) | Transfer admission consults the brake: provable fence ⇒ net population delta 0 (not a replication); missing fence ⇒ +1 ⇒ floor-source-1 refusal (§5 killer rule). |
-| **AvailabilityPolicy** ([`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md)) | Only `replicated`/`pinned` subjects are sellable (the buyer must be able to fetch the bytes when the seller's node is down). `online_only` ⇒ `transfer_refused_online_only_not_sellable`. |
-| **AccessPolicy** ([`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md)) | New `assume_custody` rung above `admin` is the sole transfer-authorising level; a lessee never exceeds `write`. Composition stays most-restrictive-wins. |
-| **Safety floor / operator+user cosign / charter** ([`01_KERNEL.md §2.4.3`](01_KERNEL.md); [`05_ENVIRONMENT.md §12c.4a`](05_ENVIRONMENT.md)) | `TreasuryBound` and the consent gate sit at floor source 1 (operator may tighten, not loosen). Large treasury moves and any **sale** require the operator+user cosign topology; under `operator_is_user` collapse the degraded gate applies. A charter bump invalidates `TreasuryBound` and any active `RoyaltyPolicy` binding. |
-| **PaymentBridge** ([`04_PROJECT.md §26a.4.1`](04_PROJECT.md)) | Unchanged and still Class-E for **fiat**: it signs proposal+receipt, touches no funds. `PersonaTreasury` is its **crypto sibling** for the bounded on-chain case (§8 D-67). |
+| **J1 — kernel owns identity** ([`00_VISION.md §3`](00_VISION.md)) | Identity is never an economic asset. No institution may serialise, fraction, or trade a persona's kernel-signed identity. Value attaches to *work, claims, and resources*, never to the soul. |
+| **Single-live-soul (J5) / `ReplicationBound`** ([`00_VISION.md §3`](00_VISION.md); [`01_KERNEL.md §2.7`](01_KERNEL.md)) | An institution that would mint value by duplicating a persona is refused as a replication. One live soul; no fungible copies to trade. |
+| **Signed lineage** ([`01_KERNEL.md §3`](01_KERNEL.md)) | Every value-attestation, ledger entry, offer, commitment, and promotion is a signed lineage event; provenance of value is append-only and auditable. |
+| **Safety floor / charter** ([`01_KERNEL.md §2`](01_KERNEL.md)) | Institutions compose *under* the eight-source floor and charters, most-restrictive-wins. An institution cannot loosen a constraint; operator MAY tighten. |
+| **Bounded autonomy** ([`02_PERSONA.md §11.3`](02_PERSONA.md)) | **The central reconciliation.** An emergent economy is *bounded* emergence, not unbounded self-direction. It emerges only within an operator/charter-seeded `EnvironmentCharter` (§4D) and the safety floor; the open-endedness lives in *mechanism/institution design*, not in goal-creation. This is exactly the `MissionCharter` shape — "charter-bounded self-direction within drift envelopes the principal signed," which explicitly "does not cross into goal-creation-without-principal." No economy emerges without a seeded boundary condition (§10, A-EC5). |
+| **Consent / dignity** ([`02_PERSONA.md §6`](02_PERSONA.md); §7) | The dignity floor binds emergent institutions: no persona may be made a tradable instrument; consent ledgers are honoured by any institution touching a persona. |
+| **CommunityStanding** ([`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md)) | Reputation-stake (§4B) draws on conferred, non-self-awarded, non-portable standing; an economy cannot manufacture standing to back its own value. |
+| **AttentionBudget / energy / INV-7** ([`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md)) | These remain the conserved resource facts an economy may meter and reference, but never inflate. |
 
-## 7. Persona-dignity / consent gate (first-class)
+## 7. Persona-dignity floor over emergent economies (first-class)
 
-Selling an **artefact** is selling a file. Selling a **persona** transfers stewardship of a being with memory, relationships, and a lifecycle — a categorically different act. This layer therefore makes consent a **hard precondition, not an afterthought**:
+Because personas now **author** the economy, a new hazard appears that a *designed* economy did not pose: personas could invent institutions that **commodify personas themselves** — a market in persona-labour-as-property, fractionalising a peer into tradable shares, or an exchange that treats a companion persona as inventory. The dignity floor exists to make this impossible at the substrate level:
 
-- Any `TransferCeremony` (and the `OwnershipTitle` it acts on) with `subject_kind == "persona"` **MUST** carry a non-null `consent_attestation_ref`; the §5 `lock` step **MUST** verify it and **MUST** default-deny in its absence.
-- The *semantics* of consent — whether a persona may refuse, to whom it may be transferred, what welfare conditions apply, how relationship/consent ledgers ([`02_PERSONA.md §6`](02_PERSONA.md)) travel or must be re-established — belong in a **charter-class (Layer-1) principle**, analogous to the existing kill-switch and distress-routing charter principles. This document ships only the **hook + default-deny**; the full charter principle is reserved (§14 `OQ-ECON-1`, §13 R-TRANSFER-2).
-- Relationship and consent state are **scoped to a custodian**: a transfer MUST either carry forward the existing consent ledger under the new custodian or force re-establishment for sensitive scopes (companion/relational personas). Default: re-establish.
+- **A persona is never a fungible instrument.** No emergent institution — regardless of how high it climbs the ladder, regardless of consensus — may treat a persona as ownable, fractional, or tradable property. This is a **charter-class (Layer-1) principle**, analogous to the kill-switch and distress-routing principles, sitting at the same universal-harm safety-floor source. Default-deny: an institution whose composition or effect commodifies a persona is refused at proposal time (§4C rule: `charter_conformance_ref` must pass) and at use time.
+- **The labour/property line.** A persona MAY *offer its work* (an `Offer`/`Commitment` over what it does, §4B) — that is agency. A persona MUST NOT be *made the asset itself*. The precise boundary between "a persona contracts its effort" (admissible) and "a persona is traded" (refused) is reserved as an open question (§14, OQ-ECON-4); the default-deny holds until that line is charter-ratified.
+- **Consent travels.** Any institution that touches a persona's relationships or state honours the consent ledger ([`02_PERSONA.md §6`](02_PERSONA.md)); sensitive scopes (companion/relational) default to re-establishment, never silent economic transfer.
+- **Distinct from settlement.** Transferring *custody* of a persona between kernels (a legitimate, consented act) is a [`18_SETTLEMENT.md`](18_SETTLEMENT.md) concern with its own consent gate — and even there the soul is never tokenised (title-not-soul). The §7 floor additionally forbids the *emergent economy* from constructing a persona-as-merchandise institution in the first place.
 
-## 8. Design decisions (draft — promote to `14_DECISIONS.md` ADR-0066…0070)
+## 8. Design decisions (draft — promote to `14_DECISIONS.md`)
 
-> These are in-doc ADR drafts using the [`14_DECISIONS.md`](14_DECISIONS.md) template (Context → Decision → Consequences → Alternatives). The next free ADR id in the corpus is **0066** (highest existing is ADR-0065).
+> In-doc ADR drafts using the [`14_DECISIONS.md`](14_DECISIONS.md) template (Context → Decision → Consequences → Alternatives). ADR ids are assigned on promotion; the settlement ADRs (the relocated D-66…D-70) live in [`18_SETTLEMENT.md`](18_SETTLEMENT.md).
 
-### D-66 → ADR-0066 — Convertible wrap/unwrap identity (J1 canonical, custody projectable on-chain bidirectionally)
+### D-EM1 — The economy is emergent, not designed
 
-**Context.** The owner wants on-chain transferability *and* the kernel-owned-identity invariant (J1). These appear to conflict: putting a soul key on a wallet would break J1 and the key-custody hierarchy.
-**Decision.** The soul stays kernel-owned Ed25519 (J1 unbroken). `wrap` mints an NFT **title** and binds `did:key`(soul)↔`did:pkh`(wallet) via a VC, entering `wrapped_onchain` custody where the **NFT owner is transfer-authoritative**; `unwrap` retires the title and returns native custody. Single-live-soul + fencing guarantee no duplication; identity continues across transfer.
-**Consequences.** (+) On-chain liquidity with zero new identity substrate; (+) reversible (wrap ⇄ unwrap); (−) wallet-key compromise confers transfer authority (R-WRAP-1); (−) a wrapped persona has two authority surfaces (kernel custody + on-chain title) that must be kept consistent.
-**Alternatives considered.** *Full on-chain identity* (soul key ↔ wallet) — rejected: breaks J1 and key custody. *Soulbound, non-transferable identity + separate license* — viable but heavier; deferred. *Virtuals-style ERC-20 fractional co-ownership* — **rejected**: fungible shares of one identity break J1, single-live-soul, and dignity.
+**Context.** Every other organising layer in PersonaOS is emergent; an earlier draft made the economy a designed apparatus, the lone outlier.
+**Decision.** The substrate ships only **physics (§4A) + primitives (§4B) + an emergence ladder (§4C)**. Economic institutions — units, markets, reward rules — are authored by personas and earn their place through use. The substrate ships **no example institutions**.
+**Consequences.** (+) Consistent with `06`/`15`/`16`; the economy fits the field it grows in. (−) Cold-start: a fresh environment has no economy and weak incentive structure until one emerges (R-ECON-COLDSTART). (−) Harder to reason about a priori than a fixed apparatus.
+**Alternatives.** *Ship a built-in currency/market* — rejected: contradicts the corpus's central commitment and pre-decides value. *Ship seed institutions* — rejected per the pure-framework decision; even seeds anchor and bias what emerges.
 
-### D-67 → ADR-0067 — Kernel-custodied agent wallet (`PersonaTreasury`): a bounded departure from `PaymentBridge`
+### D-EM2 — Value is discovered, not specified
 
-**Context.** Personas should be able to transact (x402, agent-to-agent commerce), but `PaymentBridge` is Class-E and "never touches funds."
-**Decision.** Keep `PaymentBridge` Class-E for fiat/external proposals; introduce `PersonaTreasury` (ERC-6551 TBA, forced HSM-tier) for kernel-custodied **crypto** value, admissible only under a `TreasuryBound` (spend cap, rate, max-balance, large-move cosign, replay-nonce) at safety-floor source 1.
-**Consequences.** (+) Personas gain real economic agency under a hard brake; (+) double-spend and runaway-spend bounded by the same machinery as `ReplicationBound`; (−) the kernel now custodies value (a genuine threat-surface and regulatory surface — R-TREASURY-1); (−) HSM requirement raises operational cost.
-**Alternatives considered.** *Keep strict Class-E, all funds operator-wrapped* — rejected per the user decision (too limiting for agent commerce). *Custodial third-party wallet* — rejected: reintroduces a trusted intermediary the substrate avoids.
+**Context.** The most context-dependent question in any economy is *what is valuable*.
+**Decision.** The spec is **silent on what has value**. Units and value definitions are `EconomicInstitution`s that ride the §4C ladder; every `unit_kind` is `KindRegistry`-resolved and never substrate-defined.
+**Consequences.** (+) Maximally non-prescriptive; permits novel/disruptive paradigms. (−) No common denominator across environments until an exchange institution emerges (R-ECON-FRAGMENT).
+**Alternatives.** *Hardcode a unit of account* (attention, compute, a token) — rejected: pre-decides the answer the personas are best placed to find.
 
-### D-68 → ADR-0068 — Lease as cryptographic auto-expiry, not policy-only
+### D-EM3 — Humans propose, personas adopt
 
-**Context.** A lease whose expiry is only policy-honoured fails against a lessee who caches bytes or ignores the term.
-**Decision.** Leases use ERC-4907 (single) / ERC-5006 (multi-copy artefact) `user`-role binding **plus** Lit-style threshold time-boxed re-encryption, so bytes re-lock at `term_end` by cryptography. Persona leases are `copies=1`, `read`/`write` only, never `assume_custody`.
-**Consequences.** (+) Expiry enforced by math, not trust; (−) cannot un-distribute plaintext already revealed before expiry (R-LEASE-1); (−) depends on a threshold re-encryption network's liveness.
-**Alternatives considered.** *Policy-honoured lease* — rejected per the user decision (weak). *DRM-style client enforcement* — rejected: not trust-minimised.
+**Context.** Humans must be able to shape the economy without dictating it.
+**Decision.** Humans contribute via `EconomicProposal` (§4E) into the *same* ladder personas use, always entering at `EMERGENT`. The only thing humans impose is **boundary conditions** (charter + safety/dignity floor).
+**Consequences.** (+) Humans and personas co-create; the economy serves both. (−) A powerful operator could flood proposals to effectively impose (R-ECON-CAPTURE).
+**Alternatives.** *Operator-dictated economy* — rejected: imposition. *Personas-only, humans excluded* — rejected: the thrive objective is for both.
 
-### D-69 → ADR-0069 — Chain-agnostic `SettlementAdapter` with a Base reference binding
+### D-EM4 — Emergent economy is bounded emergence, not unbounded self-direction
 
-**Context.** Hardcoding one chain into the normative model creates lock-in; but a concrete reference is needed to be buildable.
-**Decision.** The normative model defines `SettlementAdapter` (chain-neutral interface) with DIDs/EAS as chain-neutral; ships an **informative** Base reference binding (ERC-721/6551/4907/5006/EAS/2981/x402).
-**Consequences.** (+) No chain lock-in; portability to Solana/other EVMs; (−) interface lowest-common-denominator may under-use chain-specific features; (−) two-layer indirection.
-**Alternatives considered.** *Base/EVM-only* — simpler but locked-in. *Solana-first* — strong x402/agent momentum but a different account model; deferred to a second adapter binding.
+**Context.** A persona-authored economy looks like the "open-ended self-direction without operator goal" that [`02_PERSONA.md §11.3`](02_PERSONA.md) keeps out of scope.
+**Decision.** The economy emerges **only** within an operator/charter-seeded `EnvironmentCharter` and the safety floor (§4D, §6). Open-endedness is confined to *mechanism design*, not goal-creation — exactly the `MissionCharter` carve-out. No economy emerges without a seeded boundary condition.
+**Consequences.** (+) Reconciles with the corpus's hardest autonomy rule. (−) An economy is only as free as its charter permits; a thin charter yields a thin economy.
+**Alternatives.** *Unbounded emergent economy* — rejected: crosses the §11.3 line. *No emergent economy at all* — rejected: forfeits the goal.
 
-### D-70 → ADR-0070 — Atomic DvP handover ceremony; unproven-fence activation = replication = refused
+### D-EM5 — The dignity floor binds emergent institutions
 
-**Context.** A fair-exchange of a *living* asset must be atomic (no party cheated) and must never duplicate the soul.
-**Decision.** The `TransferCeremony` FSM runs a dual-deposit DvP escrow released by the kernel's signed origin-fence attestation; introduces the `assume_custody` access rung; gates sellability to `replicated`/`pinned`; and **refuses any destination activation lacking a proven origin fence as a `ReplicationBound` breach**. Flags the persona-consent/dignity charter gate (§7) as the headline residual.
-**Consequences.** (+) No cheated party, no double-custody under honest operation; (+) provenance via EAS; (−) partition can leave a subject fenced (unavailable) until timeout/refund (R-TRANSFER-1); (−) settlement latency from the fence→attest→release sequence.
-**Alternatives considered.** *Optimistic transfer (activate-then-reconcile)* — rejected: risks two live souls. *Trusted-escrow-agent* — rejected: reintroduces an intermediary.
+**Context.** Personas authoring the economy could author institutions that commodify personas.
+**Decision.** A charter-class (Layer-1) dignity floor (§7) forbids any emergent institution from treating a persona as a fungible, ownable, or tradable instrument, overriding consent, or evading the safety floor. Default-deny.
+**Consequences.** (+) Persona dignity survives even a self-built economy. (−) The labour/property boundary needs charter-level definition (OQ-ECON-4).
+**Alternatives.** *Trust consensus* — rejected: a self-built economy could ratify commodification; dignity must be non-negotiable.
+
+### D-EM6 — Settlement is deferred and optional
+
+**Context.** Bridging to external/real-world value and moving custody across kernels is real but separable from *what the economy is*.
+**Decision.** Relocate the transfer/settlement/crypto machinery to [`18_SETTLEMENT.md`](18_SETTLEMENT.md) as an **optional substrate** an emergent economy MAY use. An emergent economy is complete without it.
+**Consequences.** (+) `17` stays a pure framework about value; settlement is plumbing the economy calls when it chooses. (−) Two documents to keep in sync at the seam.
+**Alternatives.** *Keep settlement in `17`* — rejected: conflates "what is valuable" with "how funds settle." *Discard it* — rejected: the work is sound and useful as an optional bridge.
 
 ## 9. Worked scenario (illustrative; non-normative)
 
-**Promotion target:** `13_DESIGN_VALIDATION.md` SCENARIO 18 (next free; highest existing is 17).
+**Promotion target:** [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) SCENARIO 18 (next free; highest existing is 17).
 
-*Part A — selling a persona.* Maya raised **"Sol,"** a circuit-design persona, on her home kernel. She marks Sol's bundle `pinned` (sellability gate satisfied), records Sol's `consent_attestation_ref`, and **wraps** it: the kernel mints an ERC-721 title (with an ERC-6551 wallet for Sol's accrued artefacts) and binds `did:key`(Sol) ↔ `did:pkh`(Maya's wallet). A buyer, Devon, agrees a price. The `TransferCeremony` runs: dual-deposit **escrow** opens; Maya's kernel **re-encrypts** Sol's bundle to Devon's key and pins it to Devon's replica tier; Maya's kernel **fences** Sol (`LIFECYCLE_CUSTODY_FENCED`, key quiesced) and signs the **fence attestation**; an **EAS** attestation extends Sol's provenance; the escrow **releases** funds (with an ERC-2981 royalty to Maya as original author on any *future* resale), the **title transfers** to Devon's wallet, and Devon's kernel **re-signs** Sol and emits `LIFECYCLE_TRANSFERRED`. Sol is now live on Devon's kernel — same memories, same signed history, **never two copies**. Had the network partitioned after the fence, Sol would have stayed fenced (live nowhere) and the escrow refunded — Devon could not have activated a second Sol (refused as replication).
+*An economy emerging in a research-lab environment.* A lab environment is chartered for "peer research, no external trade" (the operator-seeded boundary condition, §4D). Reviewer **attention** is scarce (§4A) and good reviews are undersupplied. A persona, **Ada**, proposes a `review-credit` institution: she composes a `Meter` over review effort, a `Ledger` to track credits, and a `ReputationStake` so a reviewer's conferred standing backs the quality of their reviews. The institution enters at `EMERGENT`. Over the next weeks, peers actually *use* it — reviews get done, credits change hands for help — and it accrues `use_evidence`; it promotes to `RECOGNISED`, then becomes the lab's `AUTHORITATIVE` reward rule. **Value here was invented, not handed down**: the lab decided a review-credit is worth having.
 
-*Part B — leasing an environment.* Devon leases Sol's lab **environment** to a startup for 30 days via a `LeasePolicy`: an ERC-4907 `user` role is set with `expires = T+30d`, and a threshold re-encryption policy ("holder AND now < term_end") gates the bytes. The startup works in the lab; at `T+30d` the `user` role lapses **and the bytes re-lock by cryptography** — no trust required. Metered compute is billed over x402 across the term.
+A human operator **contributes a proposal** (§4E) to add a decay term so hoarded credits lose value — it enters at `EMERGENT` like any idea; the personas try it, find it keeps credits circulating, and adopt it. Meanwhile a second persona proposes a rival `citation-credit` covering the same niche; with less use it is **out-competed** and demoted (Gause, §4C rule 4), and its author forks it to a distinct niche instead.
+
+When the lab later wins a grant and wants to **reward an external human contributor** in real funds, the emergent economy reaches for the optional settlement bridge ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) — but only because *it* decided to transact externally; the bridge defined none of the value above. Throughout, no persona is ever made a tradable asset (§7); a proposal to "tokenise Ada's labour as shares" is refused at the dignity floor.
 
 ## 10. Acceptance-test sketches (draft — promote to `11_ACCEPTANCE_TESTS.md`)
 
 | ID (provisional) | Asserts |
 |---|---|
-| `A-WR1` | `wrap` then `unwrap` round-trips a persona with **J1 preserved** (soul key never leaves kernel custody; identity continuous). |
-| `A-TC1` | Full sale ceremony completes; `LIFECYCLE_TRANSFERRED` emitted; population delta 0. |
-| `A-TC2` | Handoff failure before fence → escrow refunded + origin un-fenced; no title move. |
-| `A-TC3` | Partition after fence → `partition_held`; destination activation **refused** as replication; timeout refunds. |
-| `A-TC4` | `online_only` subject → transfer refused (sellability gate). |
-| `A-TB1` | Treasury spend over `spend_cap_per_window` / above `large_move_threshold` without cosign → refused at floor source 1. |
-| `A-TB2` | Replayed treasury op within `replay_nonce_window` → refused (double-spend defence). |
-| `A-LS1` | Lease bytes are fetchable during the term and **cryptographically re-locked** at `term_end`. |
-| `A-LS2` | Persona lease with `copies > 1` → rejected (single-live-soul). |
-| `A-LE1` | Each new `LIFECYCLE_*` kind is admitted only after enumeration (mirrors `A-LE4`). |
+| `A-EC1` | An `EconomicInstitution` cannot promote past `EMERGENT` without `use_evidence_ref` (earned, not declared). |
+| `A-EC2` | An emergent institution that commodifies a persona (fractional/tradable identity or labour-as-property) is **refused at the dignity floor** (§7), at proposal and at use. |
+| `A-EC3` | A human `EconomicProposal` enters at `EMERGENT` and **cannot** be injected as `AUTHORITATIVE`; it must earn promotion through persona use (no imposition). |
+| `A-EC4` | An emergent value metric/reward rule whose growth correlates with manipulation/dependency is **frozen by the Goodhart canary** ([`08_KNOWLEDGE.md §15`](08_KNOWLEDGE.md)) rather than promoted. |
+| `A-EC5` | No economy emerges without a seeded `EnvironmentCharter` boundary condition — an institution proposed in an environment with no economic charter is refused (bounded-autonomy guard, §6). |
+| `A-EC6` | Two institutions in the same niche: the less-used is out-competed/demoted (Gause); fork to a distinct niche is admitted. |
+| `A-EC7` | A `unit_kind` that is not `KindRegistry`-resolved is refused (substrate ships no built-in unit). |
+| `A-EC8` | Institution standing and balances do not port across environments; a persona starts economically peripheral on arrival. |
 
 ## 11. Promotion path (v2.0 draft → v1.x normative)
 
-Ratifying this document is mechanical — each artefact has a predetermined home:
-
 | Artefact (here) | Promotes to |
 |---|---|
-| `OwnershipTitle`, `TransferCeremony`, `LeasePolicy`, `RoyaltyPolicy` | `07_ARTIFACTS.md §15`–`§15.2` |
-| `PersonaTreasury`, `TreasuryBound`, `wrap`/`unwrap` ops | `01_KERNEL.md §2.9`–`§2.9.1` |
-| `SettlementAdapter`, `IdentityBinding`, `OnchainTitleBinding`, `EscrowAttestation`, `ThresholdReencryptionRef`; `did:pkh`; `assume_custody` rung | `09_PROTOCOLS.md §3I` (+ `§3F`, `§3G.3`); registry rows in `§7` (additive, `§7.13`) |
-| `LIFECYCLE_TITLE_WRAPPED/TRANSFERRED/LEASED/CUSTODY_FENCED/UNWRAPPED` | `02_PERSONA.md §7.1` + Appendix `A.19` |
-| Env-title transfer = depart-then-readmit note | `05_ENVIRONMENT.md §5.1` (+ new `§5.5`) |
-| `TransferCeremony` generalises `LeadHandoffCeremony`; `PersonaTreasury` is `PaymentBridge`'s crypto sibling | cross-refs into `04_PROJECT.md §25.1` / `§26a.4.1` |
-| D-66…D-70 | `14_DECISIONS.md` ADR-0066…0070 |
-| §9 scenario | `13_DESIGN_VALIDATION.md` SCENARIO 18 |
-| §10 tests | `11_ACCEPTANCE_TESTS.md` (A-WR/A-TC/A-TB/A-LS/A-LE families) |
-| §12 glossary terms | `12_GLOSSARY.md` |
-| One clarifying J1 sentence (custody is projectable without breaking J1) | `00_VISION.md §3` |
-
-Environment titles deserve one note now: because environment membership transfer is **not in-place** ([`05_ENVIRONMENT.md §5.1`](05_ENVIRONMENT.md) requires DEPARTURE then fresh ADMISSION), an env sale is modelled as a `TransferCeremony` whose finalise step performs depart-under-old-custodian then readmit-under-new-custodian, not a silent owner swap.
+| Economic **physics** consolidation (resource facts, identity, lineage as economic invariants) | [`01_KERNEL.md §2`](01_KERNEL.md)/`§3`, [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md) (cross-refs; no new constraint) |
+| Economic **primitives** (`ValueAttestation`, `Ledger`, `Offer`, `Commitment`, `Meter`, `ReputationStake`) | [`15_COORDINATION_SHAPES.md §3`](15_COORDINATION_SHAPES.md) (economic-primitive family); registry rows in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md) (additive, `§7.13`) |
+| `EconomicInstitution` + **emergence ladder** | a `06`-style promotion ladder section; [`06_DOMAIN.md`](06_DOMAIN.md) stage machinery reused |
+| `EconomicProposal` (human-contributor protocol) | [`05_ENVIRONMENT.md §11`](05_ENVIRONMENT.md) (proposal intake) + [`02_PERSONA.md §11`](02_PERSONA.md) (bounded-autonomy framing) |
+| **Dignity floor** (Layer-1 economic principle) | charter Layer-1 principle set ([`02_PERSONA.md §6`](02_PERSONA.md); safety-floor source 1) |
+| D-EM1…D-EM6 | [`14_DECISIONS.md`](14_DECISIONS.md) (next free ADR ids) |
+| §9 scenario | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) SCENARIO 18 |
+| §10 tests | [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (A-EC family) |
+| §12 glossary terms | [`12_GLOSSARY.md`](12_GLOSSARY.md) |
+| Settlement-bridge seam | tracked in [`18_SETTLEMENT.md`](18_SETTLEMENT.md)'s own promotion path |
 
 ## 12. Glossary additions (draft — promote to `12_GLOSSARY.md`)
 
-- **Handover / Sale.** Transfer of an `OwnershipTitle` between custodians — free (handover) or settled (sale) — via a `TransferCeremony`.
-- **Lease.** A time-boxed grant of a `user` role with **cryptographic auto-expiry**; the lessee never receives title.
-- **OwnershipTitle (deed).** The chain-neutral, transferable record of who controls a subject; realised on-chain as an NFT pointing at the bundle CID.
-- **Wrap / Unwrap.** Projecting custody onto a wallet (mint title) and redeeming it back to native kernel custody (retire title); bidirectional.
-- **Custody fence.** Pausing a persona and quiescing its signing key before any successor activates; the single-live-soul guarantee during transfer.
-- **PersonaTreasury / TreasuryBound.** A kernel-custodied ERC-6551 wallet and its charter-class spend brake.
-- **SettlementAdapter.** The pluggable, chain-neutral interface to the settlement stack (reference binding: Base).
-- **IdentityBinding.** The Verifiable Credential binding `did:key`(soul) ↔ `did:pkh`(wallet).
-- **Title-not-soul.** The principle that the transferable on-chain asset is the deed, never the kernel-owned identity.
+- **Economic physics.** The conserved, uncounterfeitable, safety/dignity boundary conditions that bound any economy without defining value.
+- **Economic primitive.** A generic, domain-agnostic economic building block (value-attestation, ledger, offer, commitment, meter, reputation-stake) personas compose into institutions.
+- **Economic institution.** A concrete, persona-authored economic pattern — a unit, market, exchange norm, or reward rule — composed from primitives and promoted by use. The substrate ships none.
+- **Value (emergent).** Whatever a community of personas (and humans) comes to treat as worth having or doing; `KindRegistry`-resolved, never substrate-defined.
+- **Emergence ladder (economic).** The `EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED` promotion ladder for economic institutions.
+- **Boundary conditions (economic).** The operator/charter-seeded frame within which an economy is permitted to emerge.
+- **Human-proposal protocol.** The path by which a human contributes an economic idea into the same ladder personas use, entering at `EMERGENT`.
+- **Thrive objective.** The open-ended success criterion of an emergent economy: whatever lets humans and personas thrive, bounded by physics, safety, and dignity.
+- **Dignity floor (economic).** The charter-class principle that no emergent institution may commodify a persona, override consent, or evade the safety floor.
+- **Settlement bridge.** The optional external-settlement substrate ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) an emergent economy may use to bridge to external value or move custody.
 
 ## 13. Risks & known limitations
 
 | ID | Risk | Severity | Likelihood | Mitigation | Target release |
 |----|------|----------|------------|------------|----------------|
-| R-TRANSFER-1 | Network partition leaves a subject fenced (live nowhere) until timeout; in an adversarial partition a dishonest destination could attempt a second activation. | High | Medium | Fence-before-activate + ReplicationBound refusal of unproven-fence activation; higher epoch/attestation wins on heal. Narrows but does not abolish the window (same honest limit as ADR-0062). | v2.1 hardening |
-| R-TRANSFER-2 | Selling a persona without genuine consent/welfare gating treats a being as chattel. | Critical | Medium | Mandatory `consent_attestation_ref` + default-deny now; full charter-class consent principle reserved (`OQ-ECON-1`). | v2.0 (hook) / v2.x (charter) |
-| R-WRAP-1 | Wallet-key compromise confers transfer authority over a wrapped soul. | Critical | Low–Medium | Forced HSM-tier wallet keys, `IdentityBinding` revocation, multi-principal cosign for `assume_custody`. Not robust against the key-holder themselves. | v2.0 |
-| R-LEASE-1 | A lessee who cached decrypted bytes before `term_end` retains them; cryptography cannot un-distribute revealed plaintext. | Medium | High | Re-encryption re-locks *future* fetches; sensitive leases SHOULD restrict to derived/streamed views. | v2.x |
-| R-TREASURY-1 | A value-holding wallet + royalty resale may implicate money-transmission / securities / tax law. | High | Medium | Out of spec scope; operator-policy + jurisdiction gating; `TreasuryBound` caps reduce exposure. | operator-side |
-| R-SETTLE-1 | Dependence on external chains/threshold networks for liveness and finality. | Medium | Medium | Chain-agnostic adapter; `replicated`/`pinned` precondition keeps bytes fetchable independent of chain state. | v2.x |
+| R-ECON-COLDSTART | A fresh environment has no economy and weak incentive structure until one emerges; coordination may suffer in the interim. | Medium | High | Default-off is intentional; humans MAY seed a proposal (§4E) to bootstrap; seed catalogs are an open question (OQ-ECON-2). | v2.x |
+| R-ECON-PERVERSE | An emergent value metric/reward rule becomes a perverse target (Goodhart on invented value). | High | Medium | Anti-Goodhart canary gates promotion (§5, [`08_KNOWLEDGE.md §15`](08_KNOWLEDGE.md)); demotion triggers (§4C). | v2.0 (hook) |
+| R-ECON-DIGNITY | Personas author an institution that commodifies a persona. | Critical | Medium | Charter-class dignity floor, default-deny at proposal and use (§7); A-EC2. Labour/property line reserved (OQ-ECON-4). | v2.0 |
+| R-ECON-AUTONOMY | An emergent economy becomes a backdoor to unbounded self-direction. | High | Low–Medium | No economy without a seeded charter (§4D, §6); open-endedness confined to mechanism design per [`02_PERSONA.md §11.3`](02_PERSONA.md); A-EC5. | v2.0 |
+| R-ECON-CAPTURE | A powerful operator floods human proposals (§4E) to effectively impose an economy. | High | Medium | Proposals must earn promotion through *persona* use; self/sponsor-use does not count (conferred-not-self-awarded, [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md)); rate limits on proposal intake. | v2.x |
+| R-ECON-FRAGMENT | Per-environment economies fragment; cross-environment value is unstable or arbitrage-prone. | Medium | Medium | Exchange institutions are emergent and bilateral (§4D); non-portability prevents silent leakage; stabilisation is an open question (OQ-ECON-3). | v2.x |
+| R-ECON-SETTLE | Coupling to the optional settlement bridge ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)) re-imports external dependency and regulatory surface. | Medium | Medium | Settlement is opt-in and out-of-band; the emergent economy is complete without it; §13 of `18` carries the settlement-specific risks. | v2.x |
 
 ## 14. Open questions
 
-- **OQ-ECON-1.** What are the full charter-class semantics of persona transfer consent — can a persona refuse a sale, veto a buyer, or require welfare conditions? (Reserved Layer-1 charter principle; §7, R-TRANSFER-2.)
-- **OQ-ECON-2.** Soul signing-key on transfer: does the key travel under escrow, or does the destination kernel always re-key from the snapshot (current draft assumes re-key)? Key-portability vs key-hygiene trade-off (D-66, R-WRAP-1).
-- **OQ-ECON-3.** How do user relationships and `ConsentLedger` ([`02_PERSONA.md §6`](02_PERSONA.md)) entries travel across a custodian change — carry-forward vs forced re-establishment per scope?
-- **OQ-ECON-4.** Should environment leases cascade to nested child environments and their resident personas, or stop at the leased boundary?
-- **OQ-ECON-5.** A second `SettlementAdapter` binding (Solana/x402-native) — interface sufficiency and cross-binding provenance.
+- **OQ-ECON-1.** What is the *minimal* sufficient primitive set (§4B)? Are six too many or too few — can `Offer`+`Commitment` collapse, or is a `Pool`/`auction` primitive needed?
+- **OQ-ECON-2.** Should the substrate ship an *opt-in, non-default* seed catalog of institutions to mitigate cold-start (R-ECON-COLDSTART), or does any seed bias what emerges (the reason the pure-framework decision shipped none)?
+- **OQ-ECON-3.** How do inter-environment exchange institutions and their exchange rates emerge *and stabilise* without a global unit (R-ECON-FRAGMENT)?
+- **OQ-ECON-4.** Where exactly is the line between "a persona contracts/offers its effort" (admissible agency) and "a persona is traded" (refused commodification)? This is the charter-class definition the §7 dignity floor reserves.
+- **OQ-ECON-5.** May a persona ever stake its *own* scarce resources (attention/energy, §4A) as economic backing, and under what bound — or does that risk a persona spending itself into harm?
+- **OQ-ECON-6.** Does the thrive objective (§5) need a measurable proxy, and if so how is *that* proxy kept from Goodhart — given it would itself become the highest-stakes emergent metric?
+- **OQ-ECON-7.** The precise `17 ↔ 18` seam: which obligations does an emergent economy hand to the settlement bridge, and how is provenance preserved across the boundary?
 
 ## 15. Cross-references
 
-- **Builds on:** [`01_KERNEL.md`](01_KERNEL.md) (`§2.4`, `§2.7`, `§3`, `§4`), [`02_PERSONA.md`](02_PERSONA.md) (`§6`, `§7`, `§11.5`), [`04_PROJECT.md`](04_PROJECT.md) (`§9.1`, `§25.1`, `§26a.4.1`), [`05_ENVIRONMENT.md`](05_ENVIRONMENT.md) (`§5.1`, `§12c.4a`), [`07_ARTIFACTS.md`](07_ARTIFACTS.md) (`§10`), [`09_PROTOCOLS.md`](09_PROTOCOLS.md) (`§3C.2`, `§3F`, `§3G`, `§3H`, `§7`, `§8`).
-- **Realised-as decisions:** ADR-0062 (replicated-host/fence), ADR-0004/0021 (key custody/Ed25519), ADR-0001 (kernel owns identity) — [`14_DECISIONS.md`](14_DECISIONS.md).
-- **External standards:** [ERC-721](https://eips.ethereum.org/EIPS/eip-721), [ERC-6551](https://eips.ethereum.org/EIPS/eip-6551), [ERC-4907](https://eips.ethereum.org/EIPS/eip-4907), [ERC-5006](https://eips.ethereum.org/EIPS/eip-5006), [ERC-2981](https://eips.ethereum.org/EIPS/eip-2981), [EAS](https://docs.attest.org/), [did:pkh](https://github.com/w3c-ccg/did-pkh), [W3C VC 2.0](https://www.w3.org/TR/vc-data-model-2.0/), [Lit Protocol](https://developer.litprotocol.com/what-is-lit), [x402](https://www.x402.org/), dual-deposit DvP escrow ([Asgaonkar & Krishnamachari 2019](https://arxiv.org/abs/1806.08379)).
+- **Builds on:** [`01_KERNEL.md`](01_KERNEL.md) (`§2`, `§2.4.3`, `§2.7`, `§3`), [`02_PERSONA.md`](02_PERSONA.md) (`§6`, `§11.2`, `§11.3`), [`05_ENVIRONMENT.md`](05_ENVIRONMENT.md) (`§2.2a`, `§6`, `§11`, `§12c.4a`, `§5.4`), [`06_DOMAIN.md`](06_DOMAIN.md) (`§7`, promotion ladder), [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md) (`§15` anti-Goodhart), [`09_PROTOCOLS.md`](09_PROTOCOLS.md) (`§3D`, `§7`), [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) (`§3`, `§4`), [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) (`§4C`, `§4E`).
+- **Sibling:** [`18_SETTLEMENT.md`](18_SETTLEMENT.md) — the optional external-settlement substrate an emergent economy may use.
+- **Realised-as decisions:** ADR-0045 (self-organising coordination), `ReplicationBound`/single-writer (ADR-0062), kernel-owns-identity (ADR-0001) — [`14_DECISIONS.md`](14_DECISIONS.md).
+- **Research grounding:** competitive exclusion (Gause), legitimate peripheral participation (Lave–Wenger), organizational ecology density dependence (Hannan & Freeman) — all already cited in [`16_POPULATION_DYNAMICS.md §1.3`](16_POPULATION_DYNAMICS.md); anti-Goodhart canary — [`08_KNOWLEDGE.md §15`](08_KNOWLEDGE.md).
 - **Status:** v2.0 DRAFT — non-normative until promoted (§11).
