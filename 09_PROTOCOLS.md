@@ -738,7 +738,7 @@ v1.1 addition (ADR-0045, [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md
 | `EnvironmentComposition` | `env-composition/1` | dataclass | [`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md), [`15_COORDINATION_SHAPES.md §4.8`](15_COORDINATION_SHAPES.md) | Draft | Parent-child env hierarchy with rule cascade. |
 | `ChildEnvFormationProposal` | `child-env-formation-proposal/1` | dataclass | [`15_COORDINATION_SHAPES.md §4.8.5`](15_COORDINATION_SHAPES.md) | Draft | Proposal to spawn child env within parent. |
 
-### 7.12b Population dynamics (v1.1)
+### 7.12b Population dynamics
 
 v1.1 addition (ADR-0048, ADR-0049, ADR-0050, [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)). Bounded, environment-driven persona genesis with demographic regulation, a rigorous effective-population-size metric, and continuous diversity maintenance.
 
@@ -752,7 +752,7 @@ v1.1 addition (ADR-0048, ADR-0049, ADR-0050, [`16_POPULATION_DYNAMICS.md`](16_PO
 | `PopulationPolicy` | `population-policy/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md) | Draft | Operator demographic policy (r/K, density curve, descriptor mode, audit cadence). |
 | `EffectivePopulationSizeEstimate` | `eps-estimate/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md) | Draft | Kernel-computed `min(Ne_v, Ne_d)` founder-effect / monoculture signal. |
 | `DiversityAudit` | `diversity-audit/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4H`](16_POPULATION_DYNAMICS.md) | Draft | Periodic diversity-maintenance audit (novelty pressure, fitness-sharing, recalibration). |
-| `CrossKernelGenesisRequest` | `cross-kernel-genesis-request/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4J`](16_POPULATION_DYNAMICS.md) | Draft | Always-refused marker enforcing the cross-kernel genesis boundary (anti-circumvention). |
+| `CrossNodeGenesisRequest` | `cross-node-genesis-request/1` | dataclass | [`16_POPULATION_DYNAMICS.md §4J`](16_POPULATION_DYNAMICS.md) | Normative | Cross-node genesis admitted iff the global aggregated `persona_genesis` `ReplicationBound` clears; carries cross-node quorum + capability + global-bound snapshot; refuses `genesis_exceeds_global_replication_bound` / fail-closed `global_replication_bound_unverifiable` (anti-circumvention by aggregation). |
 
 ### 7.13 Adding or modifying schemas
 

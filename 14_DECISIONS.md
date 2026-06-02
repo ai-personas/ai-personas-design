@@ -1149,7 +1149,7 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 
 ### ADR-0048 — Persona Genesis: bounded persona-authored seed creation under environmental pressure
 
-**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)).
+**Status.** Accepted (normative; promoted under ADR-0067/0068/0069 — [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)).
 
 **Context.** v1.0 creates personas only via operator-authored `PersonaSeed`s (`02_PERSONA §12`). Personas may recruit from the existing pool (`05_ENVIRONMENT §12c`) or fork existing parents (`02_PERSONA §7.4`), but cannot author a *new role* when the recruit pool is empty. The result is the dead-end in `04_PROJECT §14.1` ("pause, or operator interim") — the unfilled "population dynamics" residual (`00_VISION §11`, R-v1.0-8). Recent research (AutoAgents, IJCAI 2024; auto-scaling MAS, 2025) shows agents can author specialized roles on demand; self-replication-risk work (2025) shows hard brakes are mandatory.
 
@@ -1172,7 +1172,7 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 
 ### ADR-0049 — Population demographic regulation (carrying capacity, density dependence, r/K strategy)
 
-**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md)).
+**Status.** Accepted (normative; promoted under ADR-0067/0068/0069 — [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md)).
 
 **Context.** A generative birth mechanism (ADR-0048) needs a principled birth-rate model so the population grows when under-served and stabilises when saturated, rather than oscillating or exploding up to the hard ceiling. Human-population and organizational-ecology theory provide validated models.
 
@@ -1187,7 +1187,7 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 
 ### ADR-0050 — Rigorous effective population size, continuous diversity maintenance, and learned niche descriptors
 
-**Status.** Proposed (v1.1 draft — [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md)–`§4J`). Closes the SCENARIO 13 residuals (`13_DESIGN_VALIDATION.md`).
+**Status.** Accepted (normative; promoted under ADR-0067/0068/0069 — [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md)–`§4J`). Closes the SCENARIO 13 residuals (`13_DESIGN_VALIDATION.md`).
 
 **Context.** ADR-0048/0049 left four honest residuals: `effective_population_size` was informal (OQ-POP-5); diversity was guaranteed only at birth, not against post-birth drift (OQ-POP-6); the RIASEC/Belbin niche grid could mis-calibrate (R-POP-3 / OQ-POP-2); and cross-kernel genesis was declared OOS without enforcement (OQ-POP-4 — a `ReplicationBound` evasion risk).
 
@@ -1195,7 +1195,7 @@ A self-organizing substrate needs only these five mechanisms as kernel-level pri
 1. **Rigorous EPS (`§4G`).** `effective_population_size = harmonic_mean_over_window(min(Ne_v, Ne_d))` — Crow–Kimura variance effective size `Ne_v` (authorship skew / founder effect) and the inverse-Simpson effective number of niches `Ne_d` (niche concentration), Wright's temporal harmonic mean for smoothing. Schema `eps-estimate/1`.
 2. **Continuous diversity maintenance (`§4H`).** A periodic `diversity-audit/1` arms novelty pressure (novelty search on the next birth's niche) and attention fitness-sharing (routing-weight only; never demotes a persona), mitigating post-birth drift toward monoculture.
 3. **Learned niche descriptors (`§4I`).** `population-policy/1.niche_descriptor_mode ∈ {fixed_axes, cvt, learned}` (CVT-MAP-Elites / AURORA) plus a mis-calibration detector (`false_collision_rate` / `unfillable_gap_rate` → `niche_recalibration_advisory`), removing operator axis-choice bias and self-correcting the grid.
-4. **Enforced cross-kernel boundary (`§4J`).** Cross-kernel `GenesisProposal`s are REFUSED (`cross_kernel_genesis_not_supported_v1_1`) so the per-kernel population ceiling cannot be evaded by minting elsewhere; federated genesis (cross-kernel quorum + federated bound aggregation + replicated provenance) is the specified, deferred v1.1 federation-chapter work.
+4. **Cross-node boundary via global aggregation (`§4J`, promoted under ADR-0067/0068/0069).** Cross-node `GenesisProposal`s are admitted iff the **global** aggregated `persona_genesis` `ReplicationBound` clears — one ceiling counter across the owner's `owner_node_set` / federation, with cross-node quorum + replicated globally-verifiable provenance. The population ceiling cannot be evaded by minting elsewhere (anti-circumvention by aggregation, not prohibition); refused `genesis_exceeds_global_replication_bound`, or fail-closed `global_replication_bound_unverifiable` across a partition.
 
 **Consequences.**
 - (+) Three of four SCENARIO 13 residuals resolved or mitigated; the fourth converted from open to specified-but-deferred-and-enforced.

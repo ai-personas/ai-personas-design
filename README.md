@@ -69,7 +69,7 @@ PersonaOS is built around five key mechanisms:
 | 13 | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) | Real-world scenarios — concrete examples (build a house, design a chip, run a study) walked end-to-end against the design. | 8 min |
 | 14 | [`14_DECISIONS.md`](14_DECISIONS.md) | Why the design is the way it is — 40+ architectural decision records explaining the trade-offs behind each major choice. | 10 min |
 | 15 | [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) | How AI Personas organise themselves — 5 building blocks for self-organising coordination within environments. | 12 min |
-| 16 | [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) | *(v1.1 draft)* How a few personas grow into a varied population — Persona Genesis (personas authoring new personas) under environmental pressure, with diversity guarantees and hard replication brakes. | 12 min |
+| 16 | [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) | How a few personas grow into a varied population — Persona Genesis (personas authoring new personas) under environmental pressure, with diversity guarantees and hard replication brakes (per-node and cross-node under global ReplicationBound aggregation). | 12 min |
 
 **Short on time?** Read just `00_VISION.md` (12 min) for the complete overview. Add `02_PERSONA.md` for how AI Personas are built. For a third file, pick the one closest to your interest: projects → `04_PROJECT.md`; shared workspaces → `05_ENVIRONMENT.md`; new domains → `06_DOMAIN.md`; memory → `08_KNOWLEDGE.md`.
 
@@ -217,7 +217,7 @@ WHAT COMES NEXT (v1.0.2-v1.0.6):
 | **Not a sales document** | v1.0 describes mechanisms, not benefits. Each section names what is, what isn't, and what is honestly limited. |
 | **Not theoretical only** | Every entity has a schema; every mechanism has a code-organisation pointer; every test has a pass/fail criterion. |
 | **Not tied to any AI provider** | The kernel signs identity and maintains the audit trail; the AI model is replaceable. Swap Claude for GPT or an open-weight model — the persona's identity, memory, and skills transfer intact. |
-| **Not finished** | v1.0 has honest residuals. Population dynamics now has a v1.1 draft ([`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)); federation hardening and multi-language domain emergence remain future work. |
+| **Not finished** | The substrate is complete and normative across one global object space (owned nodes, global discovery + access, cross-node delegation, owner-prioritized scheduling, population dynamics). What is *navigated, not abolished* (honest residuals, V.8): network physics (an asleep/NAT node is unreachable), full Byzantine robustness against independent/colluding nodes, and the irreducible measurement/tacit-knowledge limits — all handled by honest trust-calibration. Multi-language / multi-cultural domain emergence remains genuinely future (v1.2). |
 
 ---
 

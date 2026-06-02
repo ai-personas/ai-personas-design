@@ -744,13 +744,13 @@ For non-project env types (lab, team, pair, companion, etc.):
 - Plain env formation; no project-specific item catalogue
 - Members may later spawn a project_workspace env *within* the lab via a separate EnvFormationProposal (sub-env via fork mechanism — see `parent_environment_id` in §2)
 
-### 12c.4 Cross-kernel scope (v1.0 vs v1.1)
+### 12c.4 Cross-kernel scope (cross-node membership)
 
-For `recruit_kernel_id ≠ proposing_kernel_id`:
-- v1.0 path: forms a **joined environment** per `09_PROTOCOLS §3C` (host kernel = proposer's kernel; peer kernels stream recruit's events through). The EnvFormationProposal is the *unified entry point*; the joined-env protocol handles the cross-kernel mechanics.
-- v1.1 path: local-env-with-remote-member is a deferred extension. The remote recruit's body still runs on their kernel, but the env hosts entirely on the proposer's kernel without joined-env mechanics. Requires federation maturity + cross-kernel attention/budget coordination not yet in v1.0.
+For `recruit_kernel_id ≠ proposing_kernel_id` (the recruit is on a different **node**), both shapes are normative in the global object space (ADR-0067/0068):
+- **Joined environment** per `09_PROTOCOLS §3C` (host kernel = proposer's kernel; peer kernels stream the recruit's events through). The EnvFormationProposal is the *unified entry point*; the joined-env protocol handles the cross-node mechanics. This remains the model when the env needs a single authoritative event log.
+- **Local-env-with-remote-member**: the remote recruit's body runs on their node, joining as a member of an env hosted on the proposer's node. The recruit is referenced by global handle (`01_KERNEL §4.4`), admitted subject to its `AccessPolicy` + a UCAN capability (`09_PROTOCOLS §3F`), with cross-node attention/budget coordinated under each node's own gates (most-restrictive-wins, `§3C.3`). Mid-task reachability follows `09_PROTOCOLS §3H` (a remote member's node may sleep; presence degrades to `dormant`, the env does not stall on it).
 
-The proposal's `proposing_kernel_id` and `recruit_kernel_id` fields make the cross-kernel-ness explicit at draft time; kernel refuses v1.1-path proposals until federation matures (signed `cross_kernel_local_env_not_supported_v1_0` event).
+The proposal's `proposing_kernel_id` and `recruit_kernel_id` fields make the cross-node-ness explicit at draft time so the kernel selects the appropriate mechanism; neither is refused. (The former `cross_kernel_local_env_not_supported_v1_0` refusal is retired — superseded by the global-reference membership model.)
 
 ### 12c.4a MultiPrincipalAttestationQuorum — multi-principal ratification
 

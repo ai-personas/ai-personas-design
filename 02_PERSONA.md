@@ -981,7 +981,7 @@ Per `00_VISION §10` clarification, responsible-companionship constraints (no me
 
 > **Schema/spec:** Complete PersonaSeed example (schema persona-seed/2) for Sparky. See [Appendix A.71](#appendix-a71).
 
-**Authorship (v1.0 operator; v1.1 persona-authored).** In v1.0 a `PersonaSeed` is **operator-authored**. The v1.1 draft `16_POPULATION_DYNAMICS.md` adds **Persona Genesis**: a generative persona (with `cohort_assembly.may_author_seeds = true`) MAY author a seed to fill an environmental capability gap, minted through the same birth ceremony under a `persona_genesis` `ReplicationBound`. When a seed is persona-authored, its `provenance` records the `genesis_proposal_id` and authoring persona(s); the kernel emits `LIFECYCLE_GENESIS` rather than the operator-seed `LIFECYCLE_SEEDED`/`LIFECYCLE_ACTIVATED` path.
+**Authorship (operator or persona-authored).** A `PersonaSeed` MAY be **operator-authored** or **persona-authored**. Normative `16_POPULATION_DYNAMICS.md` specifies **Persona Genesis**: a generative persona (with `cohort_assembly.may_author_seeds = true`) MAY author a seed to fill an environmental capability gap, minted through the same birth ceremony under a `persona_genesis` `ReplicationBound` (per-node, and cross-node under global bound aggregation, `§4J`). When a seed is persona-authored, its `provenance` records the `genesis_proposal_id` and authoring persona(s); the kernel emits `LIFECYCLE_GENESIS` rather than the operator-seed `LIFECYCLE_SEEDED`/`LIFECYCLE_ACTIVATED` path.
 
 ## 13. Risks & known limitations
 

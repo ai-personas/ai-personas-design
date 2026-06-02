@@ -1428,9 +1428,14 @@ A-GEN23     Niche recalibration: sustained false_collision_rate emits
              niche_recalibration_advisory; under learned/cvt mode descriptors
              re-fit and formerly-colliding proposals resolve to distinct
              cells (§4I).
-A-GEN24     Cross-kernel boundary: GenesisProposal naming a foreign kernel as
-             author/host REFUSED cross_kernel_genesis_not_supported_v1_1;
-             population_ceiling not evadable across kernels (§4J).
+A-GEN24     Cross-node bound aggregation: GenesisProposal naming a sibling
+             node as author/host is admitted iff the GLOBAL aggregated
+             persona_genesis ReplicationBound clears; REFUSED
+             genesis_exceeds_global_replication_bound when the global
+             ceiling/rate/depth would be exceeded, and
+             global_replication_bound_unverifiable (fail-closed) when the
+             global counter cannot be confirmed; population_ceiling not
+             evadable across nodes (§4J).
 
 MEMBER-ZERO ARCHIVAL (; §5.3)
 A-EN-v1.0-13  Env with empty active members for member_zero_window
@@ -1635,9 +1640,12 @@ A-EF-30   recruit_kernel_id != proposing_kernel_id triggers joined-env
           formation path per 09_PROTOCOLS §3C; proposer's kernel
           becomes host kernel; signed JOINED_ENV_FORMED event in
           addition to ENV_FORMED.
-A-EF-31   v1.0 local-env-with-remote-member is refused;
-          cross_kernel_local_env_not_supported_v1_0 signed event;
-          deferred to v1.1.
+A-EF-31   local-env-with-remote-member is admitted (global object space):
+          the remote recruit (referenced by global handle) joins under its
+          AccessPolicy + a UCAN capability; cross-node attention/budget
+          compose most-restrictive-wins; a sleeping remote node degrades the
+          member to presence=dormant without stalling the env (09_PROTOCOLS
+          §3H). No cross_kernel_local_env refusal (retired, §12c.4).
 
 WITHDRAWAL + EXPIRY
 
