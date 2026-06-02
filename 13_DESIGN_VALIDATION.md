@@ -1165,6 +1165,46 @@ Plus 4 substrate refusal cases enforced (active lead-handoff overlap / pending q
 
 ---
 
+### SCENARIO 15 — Self-hosted single-node task, discovered and observed from a phone on-network and off-network
+
+**Scenario premise.** Validates the v1.1 discovery / access / reachability / availability track end-to-end on the most common real deployment: a user runs PersonaOS **on their own laptop at home** (one kernel, behind a NAT router, no dedicated server) and wants to **discover their personas, watch progress, and fetch artefacts** both from a phone on the same Wi-Fi and from a phone on cellular off-network. Stress-tests exactly the "from anywhere without hosting" question and forces the honest commons/liveness limits into the open.
+
+**User request** (the in-scenario task). "Design an AC circuit" (an analog/power-electronics design deliverable).
+
+**Task class.** INVESTIGATIVE (multi-session design) → produces a digital `ArtifactBundle` (schematic + netlist + sim report).
+**Acceptance pathway.** PROJECT_PROGRESS_ACCEPT (milestones) composed with VERIFIER_ACCEPT (a sim/DRC check, if a domain tool is bridged).
+
+**World shape.**
+- Principal: single-user, single-kernel, **`operator_is_user`** (`DeploymentProfile`, `09_PROTOCOLS R-PROTOCOLS-9`); the laptop is `nat_private` (`§3H.1`).
+- Persona(s): a small analog-design cohort bootstrapped on demand.
+- Environment: a `solo` / `project_workspace` env on the home kernel.
+- Observers: the **same user's phone**, on Wi-Fi (same LAN) and later on cellular (off-network), authenticating as the **owning principal** (own DID / VC).
+
+**Domain shape.** Emergent `analog_circuit_design` / `power_electronics` DomainContext via domain probe; tools (SPICE-class simulator) discovered or human-bridged (`06_DOMAIN §5`).
+
+**Phase walk.**
+
+| Phase | Primitives carrying load | Events fired |
+|---|---|---|
+| Work | task classified → domain probe → cohort designs the circuit; bundle co-edited (`owning_env_id` = the home env) | `domain_unknown_detected`, `project_artifact_edited`, OTel spans (`§4`) |
+| Project for discovery | persona/env/bundle each project a `DiscoverableRecord`; bundle gets an `ArtifactCard`; a `TelemetryCard` advertises a default-private feed | `artifact_card_published`, `telemetry_card_published` |
+| Same-Wi-Fi observe | phone joins LAN; **mDNS** intranet plane (`§3G.2`) surfaces the records with **no internet**; phone holds `read` as owner → sees live progress + pulls artefacts | `discovery_query`, `telemetry_feed_subscribed` |
+| Off-network reach | phone on cellular; **resolver** (`§3G.2`/`§3H.1`) returns relay-reachable multiaddrs; **circuit-relay v2 + DCUtR** dial the `nat_private` laptop while it is awake | `reachability_resolved`, `relay_dial` |
+| Laptop sleeps | live persona pauses (`presence=dormant`); `online_only` content is unfetchable, but the bundle's `AvailabilityPolicy=pinned` keeps artefacts fetchable from an IPFS pin / replica, verified against `content_hash` | `presence_changed`, `replica_fallback_served` |
+| Access gate | a *stranger* who discovers the DHT record holds no grant → sees nothing (or `discover`-only metadata) per `visibility_tier`; only the owner's DID/VC unlocks `read` | `access_refused` / `discover`-tier filter (`§3G.4`) |
+
+**Substrate-shape gaps surfaced** (pre-feature, now resolved by the v1.1 track). (1) No intranet/LAN discovery — a same-Wi-Fi phone could not find a home kernel with no internet. (2) No way to *dial* a NAT-private node from off-network without a dedicated server. (3) No first-class story for artefacts remaining fetchable after the origin sleeps. (4) Discovery was not access-gated, risking enumeration of private personas.
+
+**Resolution.** (1) mDNS intranet plane (`09_PROTOCOLS §3G.2`, ADR-0059). (2) `ReachabilityProfile` + circuit-relay v2 / DCUtR / bootstrap (`§3H.1`, ADR-0065) — commons or self-hosted relay, **not** a dedicated content host. (3) `AvailabilityPolicy` (`online_only`/`replicated`/`pinned`) + `ContentLocator.replica_tiers` (`§3H.2`, `07_ARTIFACTS §10a`, ADR-0063/0065). (4) Access-gated discovery + `AccessPolicy` (`§3G.3`–`§3G.4`, ADR-0060). Tests A-DT2, A-AX*, A-CL*, A-RA1–6, A-AB28–34.
+
+**Not-gaps (persona / operator configures these).** Which relay/bootstrap/pin commons to use (or self-host) is operator policy; the actual circuit content and the SPICE verifier recipe are persona/domain work.
+
+**Status.** Validated against the v1.1 additions; aligns with the intended design. Same-Wi-Fi discovery + observation works fully offline; off-network discovery + live observation works while the laptop is awake and reachable via relay; artefacts remain fetchable after sleep iff `AvailabilityPolicy` is `replicated`/`pinned`. Access is owner-gated throughout.
+
+**Honest residuals (the physics, stated plainly).** "From anywhere without *any* infrastructure" is impossible: an asleep/offline NAT node is unreachable, and off-network reach needs relay/bootstrap commons (or a self-hosted relay) plus a pin/replica for offline availability (R-PROTOCOLS-15). Live *progress* telemetry is inherently `online_only` — a paused persona emits no new spans; only its last state + a dormant-presence transition are observable until the laptop wakes. Default relay/pin commons selection and per-kind availability defaults are open (OQ-PROTOCOLS-12).
+
+---
+
 ## Scenario template (copy + fill)
 
 ```text

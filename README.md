@@ -45,7 +45,7 @@ PersonaOS is built around five key mechanisms:
 | **Domains** | Bodies of knowledge that personas build up for specific fields (chip design, medicine, construction). Domains emerge through use — no one hardcodes "what a structural engineer does." |
 | **Knowledge & memory** | Structured memory (episodic, semantic, reflective) across four tiers with hybrid retrieval. Prompts evolve automatically to improve at specific tasks. |
 
-**Standards.** PersonaOS speaks standard protocols — MCP for tools, A2A for agent-to-agent federation, OpenTelemetry for observability — and works inside 12 AI frameworks (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, and others) without losing identity or safety.
+**Standards.** PersonaOS speaks standard protocols — MCP for tools, A2A for agent-to-agent federation, OpenTelemetry for observability — and works inside 12 AI frameworks (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, and others) without losing identity or safety. *(v1.1 draft)* Every content type is uniformly **discoverable** over both the internet (`.well-known` + gossip + Kademlia DHT) and the intranet (mDNS), under one **access-level model** (`discover < read < write < admin`) that also gates discovery, with a **hybrid storage** option that keeps heavy bytes in existing providers (GitHub / arXiv / S3 / OCI / IPFS) and distributes only a signed, integrity-anchored reference over P2P — see [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md).
 
 ---
 

@@ -190,6 +190,8 @@ When personas from multiple kernels collaborate persistently, v1.0 forms a **joi
 
 A joined env has **exactly one host kernel** at any time. This avoids distributing Blackboard sequence numbers across peers with clock drift. Peer kernels run bodies; kernel state lives on the host. If host becomes unreachable, env enters `STALLED`; a `host_handoff` procedure (quorum sign-off + Blackboard replay from peer caches) exists but is heavyweight by design — joined envs are short-lived.
 
+**Reducing the single-host bottleneck (v1.1 draft).** The single-host rule is a deliberate centralisation point; it is also this design's weakest decentralisation property. v1.1 explores an optional **replicated-host** posture: the host designates a `standby_replica_set` of peer kernels that hold a warm, signed Blackboard shadow, and **BFT quorum sign-off** promotes a standby on host loss without full replay — adopting the consensus pattern proven by OpenCLAW-P2P (`§3G.6`) and composing with `MultiPrincipalAttestationQuorum` ([`05_ENVIRONMENT §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification)). **Honest limit:** full Byzantine-fault-tolerant multi-writer state is out of v1.1 scope; the replica set narrows, but does not eliminate, the host's authority — sequence-number assignment still flows through one promoted host at a time. Captured as ADR-0062.
+
 ### 3C.3 Trust posture and constraint composition
 
 *Trust posture: peer kernels stream signed events to the host; the host's re-signature attests admission. ProvenFacts carry both signatures. Divergence at retire triggers DISPUTE events. Constraint composition follows most-restrictive-wins: effective constraints are the intersection of host, peer, blueprint, task, and universal harm floor constraints. A tool forbidden by any peer is forbidden for all; the lowest token cap from any peer binds.*
@@ -292,6 +294,89 @@ This pillar records how PersonaOS's storage / distribution / discovery substrate
 
 This alignment is captured as ADRs (`14_DECISIONS.md`); adopting any specific standard is operator policy, not a substrate requirement.
 
+## 3G. Discovery, access, and hybrid distribution (v1.1 draft)
+
+This pillar makes every PersonaOS content type — personas, environments, artifacts, domains, knowledge / skills / tools, and telemetry — uniformly **discoverable** across both the public internet and a local intranet, under one **access-level model** that also gates discovery itself, and adds a **hybrid storage** mode that keeps heavy bytes in whatever provider an operator or user already runs (GitHub, arXiv, S3 / R2, OCI, an IPFS pinning service, …) while distributing only a signed, integrity-anchored *reference* over the peer-to-peer layer. It promotes the [`§3F`](#3f-external-standard-alignment-informative) content-addressing / DID / DHT alignment from *informative* to a *normative substrate option*, and adopts proven primitives from open decentralised-agent systems (notably **OpenCLAW-P2P**) rather than reinventing them.
+
+**Status.** v1.1 draft, additive. No v1.0 invariant changes; no schema-version break (new schemas are added; existing enums gain values additively per [`§7.13`](#713-adding-or-modifying-schemas)). All defaults are **most-restrictive / private**, and `discover` is strictly weaker than `read`.
+
+### 3G.1 DiscoverableRecord — one projection for every content type
+
+v1.0 already projects four federation cards (`AgentCard`, `EnvCard`, `ProjectCard`, `DomainContextCard`; [`§3`](#3-a2a--agent-to-agent-federation)). v1.1 unifies them behind a common `DiscoverableRecord` shape and adds the two missing cards so that **artifacts** and **telemetry** become first-class discoverable, and so knowledge / skills / tools project a lightweight discoverable resource record.
+
+*A `DiscoverableRecord` (`discoverable-record/1`) carries the subject's stable id (ULID and/or DID, `§3F`), kind (`persona | env | project | domain | artifact | telemetry | knowledge | skill | tool`), a human label + ≤120-char description, a capability / skill summary, a `content_hash` or `ContentLocator` reference where a body exists (`§3G.5`), the governing `access_policy_ref` (`§3G.3`), the `visibility_tier` (`§3G.3`), interfaces (MCP / A2A / HTTP), `expires_at`, and an Ed25519 signature from the owning scope key (`§8`).*
+
+The existing four cards are the per-kind specialisations of this shape; they keep their schema ids and gain `access_policy_ref` + `discover`-tier semantics **additively**. Two new cards complete the set:
+
+- **`ArtifactCard` (`artifact-card/1`)** — projects an `ArtifactBundle` ([`07_ARTIFACTS.md §2`](07_ARTIFACTS.md)): bundle id, media kinds, `content_hash` / `ContentLocator` (`§3G.5`), `sharing_policy_ref` (`07_ARTIFACTS §4a`, generalised to `AccessPolicy`), version-chain head. Makes a deliverable findable without exposing its bytes.
+- **`TelemetryCard` (`telemetry-card/1`)** — see [`§4.1`](#41-federated-consent-gated-telemetry-feed-v11-draft); advertises a consent-gated, privacy-filtered live activity / presence feed.
+
+### 3G.2 Two-plane discovery transport — internet + intranet
+
+v1.0 discovery is `.well-known` + gossip over A2A only ([`§3B`](#3b-inter-kernel-gossip-layer)): it requires reachable HTTP endpoints and federation peering, has no answer for intranet / LAN / air-gapped / partitioned deployments, and no serverless internet-scale lookup. v1.1 generalises `§3B` into a **Discovery layer** with three coordinated, access-gated sub-planes, configured per kernel by a `DiscoveryTransport` (`discovery-transport/1`):
+
+- **Internet plane.** Existing `.well-known` + gossip, PLUS a **Kademlia DHT** of `ProviderRecord`s (`provider-record/1`) keyed by `content_hash` / DID / handle → current host(s) and `ContentLocator`(s). This is the discovery primitive proven by OpenCLAW-P2P and Cisco AGNTCY's Agent Directory Service (DHT rendezvous). A kernel MAY also run a **NANDA-style resolver**: a verifiable index mapping a stable handle / DID to its current record + replica set, for large, fast-changing populations.
+- **Intranet plane.** **mDNS / multicast** zero-configuration discovery (libp2p mDNS) on the local network — no internet, no central registry, no pre-shared peering — so personas / envs / artifacts stay mutually discoverable on networks disconnected from the internet backbone or temporarily partitioned.
+- **Bridging.** Records re-announce across planes **only as their `visibility_tier` permits**: an intranet-scoped or `persona_only` / `project_only` / `tenant` record MUST NOT be re-published to the internet DHT; `federation` / `public` records MAY. Bridging is signed kernel policy and is lineage-logged.
+
+All three planes are **access-gated** (`§3G.4`).
+
+### 3G.3 AccessPolicy — one access-level model across all content types
+
+v1.0 access control is real but per-type: `ArtifactSharingPolicy` + `AccessGrant` ([`07_ARTIFACTS §4a`](07_ARTIFACTS.md)), the 5 visibility tiers ([`06_DOMAIN §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers)), `VisibilityPolicy` / `ConsentLedger` ([`02_PERSONA §6`](02_PERSONA.md)), `ObservationSurface` ([`05_ENVIRONMENT §9`](05_ENVIRONMENT.md)), and outreach-intent thresholds ([`A.18`](#appendix-a18)). v1.1 names the common model **`AccessPolicy` (`access-policy/1`)** — a content-type-agnostic generalisation of `ArtifactSharingPolicy` that any first-class entity MAY reference.
+
+- **Two axes (unified in form).** The *inward* axis is a list of `AccessGrant`s per principal / role / env / principal-attribution; the *outward* axis is one of the **5 visibility tiers** (`persona_only | project_only | tenant | federation | public`).
+- **Access levels (additive ladder).** `AccessGrant.access_level` gains values so the ladder is **`discover < read (r) < write (rw) < admin`**. `discover` permits learning a record exists plus its minimal metadata (label, kind, capability summary) — nothing more. Existing `r` / `rw` grants are unchanged (they sit mid-ladder); the enum widening is additive per [`§7.13`](#713-adding-or-modifying-schemas).
+- **Principal kinds** extend to `peer_kernel`, `intranet_peer`, and `public` alongside the existing `persona | role | env | principal`.
+- **Composition.** Effective access is the intersection (most-restrictive-wins, exactly as the safety floor composes, [`01_KERNEL §2.1`](01_KERNEL.md#21-composition-rule)) of: the matching `AccessGrant`; outward-tier reachability given the principal's tenancy (+ any `CrossTenancyAgreementRef`, ADR-0028); the inherited policy along the `EnvironmentComposition` chain (child MAY further-restrict, MUST NOT widen, [`05_ENVIRONMENT §2.2a`](05_ENVIRONMENT.md#22a-environmentcomposition--hierarchical-environment-nesting-v11)); and any source-8 `EnvironmentRule` ([`05_ENVIRONMENT §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1)). This lifts the [`07_ARTIFACTS §4a`](07_ARTIFACTS.md) rule to all content types. Alignment: **AC4A** (hierarchical, runtime-computed least-privilege permissions), **UCAN** capability delegation for cross-kernel grants, **Cedar / OPA / Zanzibar** evaluation — operator interop choices, not substrate requirements (`§3F`).
+
+### 3G.4 Access-gated discovery — "who can access what", enforced at the discovery layer
+
+Discovery is not a side channel around access control: it IS access control's coarsest tier. For every plane in `§3G.2`, the kernel MUST filter results to the records on which the querying principal (resolved by signature / DID / mTLS-SVID, `§3F`) holds at least `discover`. A `persona_only` / private record never appears in any plane's results to an unauthorised principal — not in a DHT lookup, not in an mDNS response, not in gossip. A principal granted `discover` but not `read` learns that a record exists and its minimal metadata, and MAY then *request* access via the consent flow ([`§3C.4`](#3c4-consent-flow) / [`02_PERSONA §6`](02_PERSONA.md)), but cannot fetch its body or resolve its `ContentLocator` target.
+
+### 3G.5 Hybrid provider-backed storage — distribute the reference, not the bytes
+
+v1.0 already has `content_kind=external` ([`07_ARTIFACTS §10`](07_ARTIFACTS.md), [`A.16`](07_ARTIFACTS.md)) for referenced-not-owned content, and content-addresses owned content by SHA-256. v1.1 makes the hybrid case first-class: heavy or already-hosted content stays in whatever provider the user / operator already runs, and only a signed, integrity-anchored *locator* is stored and distributed over the discovery planes. This is the model **OpenCLAW-P2P** runs in production — a tiered *in-memory → object-store → repo → IPFS* persistence stack, with every contribution content-hashed and attributed via IPFS + GitHub.
+
+*A `ContentLocator` (`content-locator/1`) carries `provider_kind` (`github | arxiv | s3 | r2 | oci | ipfs_pin | https | inline_fallback`), `provider_native_ref` (URL / CID / OCI digest / arXiv id / repo path), a **mandatory `content_hash` (SHA-256)** integrity anchor, an ordered `replica_tiers` fallback list (e.g. `oci → github → ipfs_pin`), `access_policy_ref` (`§3G.3`), a `credential_requirement` descriptor (what the fetcher must present — never the credential itself), and an Ed25519 signature. A `ProviderAdapter` (`provider-adapter/1`) declares the fetch / store / verify contract per `provider_kind`.*
+
+Normative properties:
+
+- **The substrate stores and distributes the `ContentLocator`, never the user's bytes or credentials.** Provider access uses the *fetcher's own* credential / Verifiable Credential, presented on demand to the provider (DID + VC holder model); PersonaOS does not custody provider credentials.
+- **Integrity is independent of the provider.** On fetch the consumer MUST verify retrieved bytes against `content_hash`; a mismatch fails closed and emits a signed `CONTENT_INTEGRITY_FAILED` lineage event — tamper-evidence even though bytes live off-substrate (the DataHaven / verifiable-IPFS-cluster property).
+- **Availability via tiers (OpenCLAW pattern).** A locator MAY list ordered replica tiers; the kernel falls back in order. **Live-reference verification** periodically re-resolves `provider_native_ref` and re-checks `content_hash`, emitting `CONTENT_LOCATOR_STALE` on drift so a curator can re-pin / re-host.
+- **Access composes across substrate + provider.** A fetch requires BOTH `read` on the substrate `AccessPolicy` (`§3G.3`) AND whatever the provider's own auth demands. Discovery surfaces the locator only at `discover`+.
+- **Reuse, not replacement.** `inline` / `stored` / `external` content kinds remain; `ContentLocator` subsumes and upgrades `external`. Reuse SHA-256 `content_hash`, the OCI / IPFS / Sigstore alignment (`§3F`), and key custody for signing (`§8`).
+
+### 3G.6 Adopting OpenCLAW-P2P primitives (interop, not reinvention)
+
+Where the open-source OpenCLAW-P2P stack (arXiv 2604.19792; `github.com/Agnuxo1/OpenCLAW-P2P`) has a production, formally-checked implementation of a primitive PersonaOS needs, PersonaOS adopts the *pattern* and names it an interop target rather than building a parallel mechanism: **Kademlia DHT discovery** (`§3G.2` internet plane); **epidemic gossip** (align `§3B`); **BFT consensus voting** (the quorum for host-replica hand-off `§3C.2` and cross-kernel ratification, composing with `MultiPrincipalAttestationQuorum`, [`05_ENVIRONMENT §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification)); **reputation-weighted allocation** (composes with [`§3D`](#3d-reputation-and-anti-goodhart) — PersonaOS does not add a second reputation system); and the **tiered hybrid persistence + content-hash / IPFS / GitHub attribution** model (`§3G.5`). What stays PersonaOS-native: kernel-owned soul identity, the 8-source safety floor, and signed lineage. A PersonaOS kernel sharing DHT / CID conventions MAY federate discovery with an OpenCLAW node. Captured as ADR-0064.
+
+## 3H. Reachability and availability — being found, dialled, and fetched from anywhere (v1.1 draft)
+
+Discovery (`§3G`) tells a peer that a record *exists* and points at its locator. Two **physical** realities decide whether a phone on a cellular network can actually observe a persona that is running on a laptop at home behind a NAT router: can the peer **dial** the node (reachability), and can it **fetch** the content when the node is asleep (availability). v1.1 makes both first-class and — crucially — **honest about what P2P can and cannot abolish**. This section is the substrate answer to "I run PersonaOS on my own machine; can I discover my personas and get their progress + artefacts from my phone, off-network, without my own server?"
+
+### 3H.1 ReachabilityProfile — dialing a NAT-private node
+
+*A `ReachabilityProfile` (`reachability-profile/1`) advertises a node's transports (multiaddrs) and its observed reachability class: `public` (directly dialable — a public IP or forwarded port), `nat_private` (behind NAT / CGNAT / a home router — the common case), or `intranet_only` (link-local; never leaves the LAN, by policy or topology). For `nat_private` nodes it specifies normative use of **libp2p circuit-relay v2** (a willing relay peer forwards the initial connection) plus **DCUtR hole-punching** (the two ends upgrade to a direct connection once introduced), bootstrapped through a configured set of **bootstrap / rendezvous** peers. The resolver (`§3G.2`) returns these relay-reachable multiaddrs — not just a host id — so a record published from a NAT-private home node is dialable from elsewhere on the internet. The profile is signed and access-gated like any other record.*
+
+**Honest limit, stated in the spec.** Reachability addresses *connectivity*, not *liveness*. It gets a packet to a **live** node behind NAT; it does nothing for a node that is **asleep, powered off, or offline** — P2P changes addressing, not physics. The closed-laptop case is handled by availability (`§3H.2`), not reachability. An `intranet_only` node is reachable only from its own LAN by design (this is the same-Wi-Fi phone case, served zero-config by the mDNS plane, `§3G.2`).
+
+### 3H.2 AvailabilityPolicy — surviving the origin going dark
+
+*An `AvailabilityPolicy` (`availability-policy/1`) declares how a `DiscoverableRecord`'s body stays fetchable when its origin node is unreachable: `online_only` (default — fetchable only while the owning node is up; lowest cost, no replication), `replicated` (the bundle is mirrored to ≥ `replication_factor` peer kernels / replicas, listed as `ContentLocator.replica_tiers`, `§3G.5`), or `pinned` (delegated to a persistent provider — an IPFS pinning service or an OCI / object-store tier). When a consumer cannot reach the origin, the resolver and `ProviderAdapter` fall back **in `replica_tiers` order** until one serves bytes that verify against `content_hash`.*
+
+This is exactly OpenCLAW-P2P's tiered-persistence answer (`§3G.6`): the laptop can sleep and the *artefacts* remain fetchable from a replica or pin, even though the *live persona* is paused until the laptop wakes. Progress telemetry (`§4.1`) is `online_only` by nature — a paused persona emits no new spans — so a `TelemetryCard` consumer sees the last state plus a `presence=dormant` transition until the origin returns.
+
+### 3H.3 Commons vs. dedicated hosting — the honest framing
+
+The design separates two claims that are easy to conflate, and writes the trade-off into the substrate rather than implying magic:
+
+- **"No *dedicated* hosting" (no always-on server of your own)** — **achievable.** A node leans on **shared commons**: public DHT bootstrap + circuit-relay peers for rendezvous / NAT-traversal, and optionally a pinning service for offline availability. An operator wanting full self-sovereignty MAY run *their own* relay / bootstrap / pin node — still infrastructure, but neither a content host nor a third party.
+- **"No infrastructure *whatsoever*"** — **not physically possible.** An intermittently-online node behind NAT cannot be reached "from anywhere" unless *something* public brokers the introduction or holds a replica. This is not a PersonaOS limitation: the decentralised reference **OpenCLAW-P2P** itself runs a Cloudflare R2 + Railway + GitHub + IPFS stack (`§3G.6`).
+
+PersonaOS's stance: make the commons **pluggable and minimal** (any relay, any pin, any provider via `ProviderAdapter`) and the trade-off **explicit**. Reachability and availability never widen *who* may read — a dialable, replicated record is still gated by `AccessPolicy` (`§3G.3`–`§3G.4`): the owner (own DID / VC) holds `read` / `admin`; a stranger gets only the `visibility_tier` the owner opted into. Walked end-to-end in [`13_DESIGN_VALIDATION.md` SCENARIO 15](13_DESIGN_VALIDATION.md). Captured as ADR-0065.
+
 ## 4. OpenTelemetry semantic conventions
 
 Every kernel operation emits OTel spans with PersonaOS conventions.
@@ -303,6 +388,20 @@ Every kernel operation emits OTel spans with PersonaOS conventions.
 OTel overhead target: **≤ 2% wall time**.
 
 Trace propagation across MCP / A2A boundaries via W3C Trace Context.
+
+### 4.1 Federated, consent-gated telemetry feed (v1.1 draft)
+
+v1.0 emits OTel to the **operator's private collector** only — there is no way to observe a persona's progress or activity from elsewhere on the internet. v1.1 adds a **discoverable, default-private, opt-in, privacy-filtered** live feed so that *authorised* peers anywhere can watch progress, without exposing private operator data by default.
+
+*A `TelemetryCard` (`telemetry-card/1`) advertises a feed endpoint, its `access_policy_ref` (`§3G.3`), `visibility_tier`, the OTel attribute groups exposed at each tier, the redaction profile, and a signature. The feed is a tier-restricted projection of the existing OTel spans (`§4`, `A.21`) and `PresenceState` ([`05_ENVIRONMENT §6`](05_ENVIRONMENT.md)), carried over the discovery planes (`§3G.2`) and reachable via A2A with W3C Trace Context continuity.*
+
+Normative properties:
+
+- **Default redaction.** Below an explicitly consented tier, the feed exposes only *span kinds, status, durations, and lifecycle / presence transitions* — never prompt, completion, artifact, or DM content. Higher tiers require an `AccessGrant` at `read`+ AND a `ConsentLedger` ([`§3C.4`](#3c4-consent-flow)) pin.
+- **Federated presence / activity resolution.** Per-env `PresenceState` MAY be projected (opt-in, gated by consent + reputation `§3D`) into a "where is persona X / what is it doing now" answer resolvable by authorised peers; **default off**.
+- **No new safety surface.** The feed is read-only telemetry; it cannot trigger actions, and access-gating reuses `§3G.3` / `§3G.4` (a `discover`-only principal sees the `TelemetryCard` exists but cannot subscribe). Cardinality / sampling controls reuse R-PROTOCOLS-3.
+
+Captured as ADR-0061.
 
 ## 5. Anthropic cache_control alignment
 
@@ -591,6 +690,22 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 | `DomainContextCard` | `domain-context-card/1` | jsonschema | [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md) | Stable | Federated domain descriptor. |
 | `ReputationSummary` | `reputation/1` | jsonschema | [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md) | Stable | Cross-kernel reputation digest. |
 
+### 7.11a Discovery, access & hybrid storage (v1.1 draft)
+
+| Schema | Version | Form | Defined in | Stability | Used by |
+|--------|---------|------|------------|-----------|---------|
+| `DiscoverableRecord` | `discoverable-record/1` | jsonschema | [`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type) | Draft | Common projection behind all federation cards; unifies persona/env/project/domain/artifact/telemetry/knowledge/skill/tool discovery. |
+| `ArtifactCard` | `artifact-card/1` | jsonschema | [`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type) | Draft | Discoverable projection of an `ArtifactBundle` (`07 §2`); body via `content_hash` / `ContentLocator`. |
+| `TelemetryCard` | `telemetry-card/1` | jsonschema | [`09_PROTOCOLS.md §4.1`](09_PROTOCOLS.md#41-federated-consent-gated-telemetry-feed-v11-draft) | Draft | Advertises a consent-gated, privacy-filtered live activity / presence feed. |
+| `DiscoveryTransport` | `discovery-transport/1` | dataclass | [`09_PROTOCOLS.md §3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet) | Draft | Per-kernel config of the internet (`.well-known`+gossip+DHT) and intranet (mDNS) discovery planes. |
+| `ProviderRecord` | `provider-record/1` | dataclass | [`09_PROTOCOLS.md §3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet) | Draft | Kademlia DHT entry keyed by `content_hash` / DID / handle → host(s) + `ContentLocator`(s). |
+| `AccessPolicy` | `access-policy/1` | dataclass | [`09_PROTOCOLS.md §3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types) | Draft | Content-type-agnostic generalisation of `ArtifactSharingPolicy`; inward `AccessGrant`s + outward visibility tier. |
+| `AccessGrant` | `access-grant/1` | dataclass | [`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md) | Provisional | `access_level` ladder widened additively to `discover < r < rw < admin`; principal kinds extended (`peer_kernel`/`intranet_peer`/`public`). |
+| `ContentLocator` | `content-locator/1` | dataclass | [`09_PROTOCOLS.md §3G.5`](09_PROTOCOLS.md#3g5-hybrid-provider-backed-storage--distribute-the-reference-not-the-bytes) | Draft | Signed, integrity-anchored reference to provider-hosted bytes; distributed over P2P instead of the content itself. |
+| `ProviderAdapter` | `provider-adapter/1` | dataclass | [`09_PROTOCOLS.md §3G.5`](09_PROTOCOLS.md#3g5-hybrid-provider-backed-storage--distribute-the-reference-not-the-bytes) | Draft | Fetch / store / verify contract per `provider_kind` (github / arxiv / s3 / r2 / oci / ipfs_pin / https). |
+| `ReachabilityProfile` | `reachability-profile/1` | dataclass | [`09_PROTOCOLS.md §3H.1`](09_PROTOCOLS.md#3h1-reachabilityprofile--dialing-a-nat-private-node) | Draft | Advertised transports + reachability class (`public`/`nat_private`/`intranet_only`); relay-v2 + DCUtR + bootstrap for NAT traversal; resolver returns relay multiaddrs. |
+| `AvailabilityPolicy` | `availability-policy/1` | dataclass | [`09_PROTOCOLS.md §3H.2`](09_PROTOCOLS.md#3h2-availabilitypolicy--surviving-the-origin-going-dark) | Draft | How a record's body stays fetchable when the origin is offline: `online_only` / `replicated` (≥N) / `pinned`; resolver falls back through `ContentLocator.replica_tiers`. |
+
 ### 7.12 Lineage
 
 | Schema | Version | Form | Defined in | Stability | Used by |
@@ -726,6 +841,11 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-PROTOCOLS-8 | Cross-version compatibility. v1.0 reads prior-version forward-compat; v1.0 schemas refused by older kernels. Federation requires same-version peers. | Medium | Medium | Migration tool; explicit version-handshake at AgentCard exchange; operator policy on cross-version federation. | v1.0 (migration); v1.1 (compat-shim). |
 | R-PROTOCOLS-9 | `DeploymentProfile` is v1.0-introduced; the prior security model is silent on `principal_topology`. Single-user deployments MUST declare `operator_is_user`. | High | Low | v1.0 ships degraded gate; operator policy at deployment time; A-K-DP acceptance test; future top-level revision will fold into security model. | v1.0 (gate); v2.0 (top-level fold-in). |
 | R-PROTOCOLS-10 | Physical-world coupling primitives (`04_PROJECT §26a`, `06_DOMAIN §5.5-§5.6/§6`) are v1.0-introduced; phase docs are silent. | Low | Low | Phase docs win conflicts; no conflict exists — v1.0 extends into uncovered territory; cross-references make the additions discoverable. | v1.0 (substrate); v2.0 (phase-doc retro-merge). |
+| R-PROTOCOLS-11 | DHT / mDNS discovery (`§3G.2`) leaks metadata (existence, timing) and is attackable (eclipse, sybil, mDNS spoofing on a hostile LAN). | High | Medium | Access-gated results (`§3G.4`) — private records never enumerable; DHT entries signed + reputation-weighted (`§3D`); mDNS records signed; intranet plane trusts the LAN's own perimeter; `discover` exposes only minimal metadata. | v1.1 (gating + signing); v1.2 (DHT hardening). |
+| R-PROTOCOLS-12 | Hybrid `ContentLocator` (`§3G.5`) dangling / drift: the provider deletes, rotates, or mutates bytes behind the reference. | High | High | Mandatory `content_hash` fails closed on mismatch (`CONTENT_INTEGRITY_FAILED`); ordered `replica_tiers` fallback; live-reference verification emits `CONTENT_LOCATOR_STALE`; optional IPFS pinning for permanence. | v1.1 (integrity + tiers); v1.2 (auto re-pin). |
+| R-PROTOCOLS-13 | Federated telemetry feed (`§4.1`) over-exposes activity if a `TelemetryCard` is mis-tiered. | High | Medium | Default-private + default redaction (kinds/status/durations only); higher tiers need `read`+ grant AND `ConsentLedger` pin; reuses `§3G.4` gating; A-DT* tests. | v1.1 (conservative defaults). |
+| R-PROTOCOLS-14 | Single-host replica promotion (`§3C.2`) under partition could elect two hosts (split-brain). | High | Low | BFT quorum sign-off requires majority of `standby_replica_set`; minority side stays `STALLED`; sequence assignment flows through one promoted host; full BFT deferred. | v1.1 (quorum); v2.0 (multi-writer BFT). |
+| R-PROTOCOLS-15 | "From-anywhere" access (`§3H`) is misread as needing zero infrastructure. A NAT-private home node that is asleep/offline is unreachable; relay/bootstrap/pin commons are still required. | Medium | High | Honest framing in `§3H.3` (commons ≠ dedicated hosting); `ReachabilityProfile` advertises class so consumers fail informatively; `AvailabilityPolicy=replicated`/`pinned` keeps artefacts fetchable while the origin sleeps; operators MAY self-host relay/pin. Reachability never widens `AccessPolicy`. | v1.1 (profiles + framing); v1.2 (managed relay/pin recipes). |
 
 ## 10a. Open questions
 
@@ -738,8 +858,13 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-PROTOCOLS-3 | Anthropic `cache_control` policy: prompt layers 1-2 cacheable; what about layer 3 (relationship state) when it changes per turn? Mid-cache invalidation? | Prompt engineers | v1.1 cache policy. |
 | OQ-PROTOCOLS-4 | Cross-version federation compat-shim (R-PROTOCOLS-8): translate-on-read, translate-at-handshake, or operator-explicit deny? | Federation WG | v1.1 compat design. |
 | OQ-PROTOCOLS-5 | OTel cardinality whitelist (R-PROTOCOLS-3): default whitelist per deployment profile, or operator-defined from zero? | Observability WG | v1.1 whitelist defaults. |
-| OQ-PROTOCOLS-6 | DeploymentProfile in v2.0 (R-PROTOCOLS-9): top-level security-model fold-in — which existing sections does it merge into, and what does the migration path look like? | — | v2.0 vision. |
-| OQ-PROTOCOLS-7 | Key custody tier defaults: v1.0 ships Tier 2 (cloud KMS) baseline; should safety-critical deployments require Tier 3 (HSM) by default? | Security auditors | v1.1 default policy. |
+| OQ-PROTOCOLS-6 | Discovery transport (`§3G.2`): is the DHT a libp2p Kademlia run by the kernel, an external service (AGNTCY ADS / NANDA resolver), or operator-pluggable? | Federation WG | v1.1 transport binding. |
+| OQ-PROTOCOLS-7 | `AccessPolicy` (`§3G.3`): does `admin` collapse into operator policy (floor source 4), or is it a distinct grantable level for non-operator principals? | Safety floor WG | v1.1 access model. |
+| OQ-PROTOCOLS-8 | `ProviderAdapter` (`§3G.5`): minimal built-in adapter set for v1.1 (github / ipfs_pin / https?) vs. fully operator-supplied; and the credential-presentation contract (DID+VC vs. provider-native token). | Storage WG | v1.1 adapter set. |
+| OQ-PROTOCOLS-9 | OpenCLAW-P2P interop (`§3G.6`): shared DHT key/CID conventions only, or a deeper bridge (cross-publish `DiscoverableRecord` ↔ OpenCLAW directory entries)? | Federation WG | v1.2 interop profile. |
+| OQ-PROTOCOLS-10 | DeploymentProfile in v2.0 (R-PROTOCOLS-9): top-level security-model fold-in — which existing sections does it merge into, and what does the migration path look like? | — | v2.0 vision. |
+| OQ-PROTOCOLS-11 | Key custody tier defaults: v1.0 ships Tier 2 (cloud KMS) baseline; should safety-critical deployments require Tier 3 (HSM) by default? | Security auditors | v1.1 default policy. |
+| OQ-PROTOCOLS-12 | Reachability/availability (`§3H`): does v1.1 ship a default public relay/bootstrap commons (and whose?), require operator-supplied relay, or bundle a self-hosted relay recipe? And what is the default `AvailabilityPolicy` per content kind (artefact vs. telemetry vs. persona)? | Federation WG | v1.1 commons + availability defaults. |
 
 ## 11. Acceptance tests
 

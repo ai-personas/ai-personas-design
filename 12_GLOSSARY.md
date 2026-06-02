@@ -29,7 +29,15 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **ArtifactBundle** — Multi-modal multi-file deliverable produced by personas in a project; owned by an environment via optional `owning_env_id` and governed by an `ArtifactSharingPolicy` (both additive on `artifact-bundle/1`, version retained). See `07_ARTIFACTS.md §4`.
 
-**ArtifactSharingPolicy** — Signed, env-authored policy (`artifact-share/1`) defining per-grantee access levels (`AccessGrant`), intra-composition inheritance (parent → child), and outward visibility tier; reuses the 5 visibility tiers + `CrossTenancyAgreementRef` with most-restrictive-wins. See `07_ARTIFACTS.md §4a`.
+**AccessPolicy** *(v1.1 draft)* — Content-type-agnostic generalisation of `ArtifactSharingPolicy` (`access-policy/1`) referenced by any first-class entity (persona / env / artifact / domain / knowledge / telemetry). Inward axis = `AccessGrant`s; outward axis = the 5 visibility tiers; composes most-restrictive-wins. See `09_PROTOCOLS.md §3G.3`.
+
+**Access level** *(v1.1 draft)* — The additive `AccessGrant.access_level` ladder `discover < read (r) < write (rw) < admin`. `discover` permits finding a record + minimal metadata without reading its body; gates the discovery layer (`09_PROTOCOLS.md §3G.4`). v1.0 `r`/`rw` grants are unchanged. See `09_PROTOCOLS.md §3G.3`.
+
+**AvailabilityPolicy** *(v1.1 draft)* — How a `DiscoverableRecord`'s body stays fetchable when its origin node is offline (`availability-policy/1`): `online_only` (default), `replicated` (≥ `replication_factor` peers), or `pinned` (IPFS / OCI / object-store provider). On origin loss the resolver + `ProviderAdapter` fall back through `ContentLocator.replica_tiers` until bytes verify against `content_hash`. Never widens `AccessPolicy`. See `09_PROTOCOLS.md §3H.2`, `07_ARTIFACTS.md §10a`, ADR-0065.
+
+**ArtifactCard** *(v1.1 draft)* — Discoverable projection of an `ArtifactBundle` (`artifact-card/1`); specialisation of `DiscoverableRecord`. Carries bundle id, media kinds, `content_hash` / `ContentLocator`, `sharing_policy_ref`. Rides the internet (DHT) + intranet (mDNS) discovery planes, access-gated. See `09_PROTOCOLS.md §3G.1`, `07_ARTIFACTS.md §10a`.
+
+**ArtifactSharingPolicy** — Signed, env-authored policy (`artifact-share/1`) defining per-grantee access levels (`AccessGrant`), intra-composition inheritance (parent → child), and outward visibility tier; reuses the 5 visibility tiers + `CrossTenancyAgreementRef` with most-restrictive-wins. The artifact-specific case of `AccessPolicy` (v1.1). See `07_ARTIFACTS.md §4a`.
 
 **Attention Budget** — Per-persona cap on attention allocated across multiple environment presences; default 1.0; overrun emits warning. See `05_ENVIRONMENT.md §7`.
 
@@ -165,7 +173,17 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Disagreement** — Persistent methodological dialectic preserved verbatim; resolution via co-signed Resolution. See `04_PROJECT.md §10`.
 
+**Commons (vs dedicated hosting)** *(v1.1 draft)* — The honest distinction underpinning "discover + fetch from anywhere without your own server": **no *dedicated* hosting** is achievable by leaning on shared commons (public DHT-bootstrap + circuit-relay peers for NAT traversal, optional pinning for offline availability — all self-hostable for sovereignty), but **no infrastructure *whatsoever*** is physically impossible for an intermittently-online NAT node. Reachability/availability use commons; neither widens `AccessPolicy`. See `09_PROTOCOLS.md §3H.3`, ADR-0065.
+
+**ContentLocator** *(v1.1 draft)* — Signed, integrity-anchored reference (`content-locator/1`) to provider-hosted bytes (GitHub / arXiv / S3 / R2 / OCI / IPFS pin / HTTPS): `provider_kind` + `provider_native_ref` + mandatory SHA-256 `content_hash` + ordered `replica_tiers` + `access_policy_ref` + credential requirement. The substrate distributes the locator over P2P, never the bytes or the user's credentials; the consumer fetches under its own credential and verifies against `content_hash`. Subsumes v1.0 `content_kind=external`. See `09_PROTOCOLS.md §3G.5`, ADR-0063.
+
+**DHT discovery** *(v1.1 draft)* — Internet-plane peer/content discovery over a Kademlia distributed hash table of signed `ProviderRecord`s keyed by `content_hash` / DID / handle. Adopts the OpenCLAW-P2P / AGNTCY-ADS pattern; access-gated. See `09_PROTOCOLS.md §3G.2`.
+
+**DiscoverableRecord** *(v1.1 draft)* — Common projection (`discoverable-record/1`) behind every federation card; specialised as `AgentCard` / `EnvCard` / `ProjectCard` / `DomainContextCard` / `ArtifactCard` / `TelemetryCard` and lightweight knowledge/skill/tool records. Carries id/DID, kind, label, capability summary, `content_hash`/`ContentLocator`, `access_policy_ref`, `visibility_tier`, signature. See `09_PROTOCOLS.md §3G.1`.
+
 **DiscoveredTool** — Tool found via MCP-Zero / MCP registry / A2A federation / Voyager authoring; trust score evolves with use. See `06_DOMAIN.md §5`.
+
+**Discovery Layer** *(v1.1 draft)* — Generalisation of the gossip layer into three coordinated, access-gated sub-planes: internet (`.well-known` + gossip + Kademlia DHT + optional NANDA-style resolver) and intranet (mDNS / multicast, for LAN / air-gapped / partitioned networks), with `visibility_tier`-governed bridging. Configured by `DiscoveryTransport` (`discovery-transport/1`). See `09_PROTOCOLS.md §3G.2`.
 
 **Domain** — Body of knowledge + tools + verification patterns + safety norms + conventions in a field; authored or emergent. See `06_DOMAIN.md §1`.
 
@@ -269,7 +287,11 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **GoalStack** — Intra-environment channel CH-5; per-cohort stack of active goals + parent-pointers; signed push/pop. See `09_PROTOCOLS.md §3A.4`.
 
-**Gossip Layer** — Inter-kernel periodic announce + fan-out protocol over A2A; trust-weighted reach; carries PersonaCard / ProjectCard / EnvCard / DomainContextCard updates. See `09_PROTOCOLS.md §3B`.
+**Gossip Layer** — Inter-kernel periodic announce + fan-out protocol over A2A; trust-weighted reach; carries PersonaCard / ProjectCard / EnvCard / DomainContextCard updates. In v1.1 it is one sub-plane of the Discovery Layer (alongside the DHT and mDNS planes). See `09_PROTOCOLS.md §3B`, `§3G.2`.
+
+**Hybrid storage tier** *(v1.1 draft)* — Storage mode where heavy bytes stay in an existing provider (GitHub / arXiv / S3 / R2 / OCI / IPFS) and only a signed `ContentLocator` travels over the P2P discovery layer; integrity via mandatory `content_hash`, availability via ordered `replica_tiers`. Adopts the OpenCLAW-P2P tiered-persistence pattern. See `09_PROTOCOLS.md §3G.5`, ADR-0063.
+
+**Intranet discovery (mDNS)** *(v1.1 draft)* — Intranet-plane zero-configuration peer/content discovery via mDNS / multicast (libp2p mDNS); needs no internet, central registry, or pre-shared peering — works on LAN / air-gapped / partitioned networks. Access-gated like all planes. See `09_PROTOCOLS.md §3G.2`.
 
 **GuestPresence** — Schema (`guest-presence/1`): time-bounded, scope-limited presence in an environment created by accepting a `CrossEnvProactiveOffer`. Guest has READ access to scoped event kinds, WRITE to scoped tasks/artifacts + DirectMessage to accepting persona(s), NO ProvenFacts write. Expires at `expires_at` (default 72h); renewable up to `max_renewals` (default 3); promotable to full `EnvironmentMembership` via standard admission ceremony. Confers no env_role; does not count toward AttentionBudget. See [`05_ENVIRONMENT.md §11.6`](05_ENVIRONMENT.md).
 
@@ -461,7 +483,15 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Persona** — A named, persistent, human-shaped character with 7 layers + 14 modes; kernel-signed identity; long-lived; framework-agnostic. See `02_PERSONA.md §1`.
 
-**PersonaCard** — Signed projection of persona for discovery; visibility tiers; published at .well-known/personas/. See `09_PROTOCOLS.md §3`.
+**PersonaCard** — Signed projection of persona for discovery; visibility tiers; published at .well-known/personas/. The persona specialisation of `DiscoverableRecord` (v1.1). See `09_PROTOCOLS.md §3`, `§3G.1`.
+
+**ProviderAdapter** *(v1.1 draft)* — Fetch / store / verify contract (`provider-adapter/1`) per `provider_kind` (github / arxiv / s3 / r2 / oci / ipfs_pin / https) backing the hybrid `ContentLocator` storage tier. See `09_PROTOCOLS.md §3G.5`.
+
+**ReachabilityProfile** *(v1.1 draft)* — Advertised transports + reachability class (`reachability-profile/1`): `public` (directly dialable), `nat_private` (behind NAT — uses libp2p circuit-relay v2 + DCUtR hole-punching + bootstrap), or `intranet_only` (link-local, served by the mDNS plane). The resolver returns relay-reachable multiaddrs so a NAT-private node is dialable from off-network. Addresses connectivity, not liveness — an offline node is unreachable regardless. See `09_PROTOCOLS.md §3H.1`, ADR-0065.
+
+**Relay / NAT traversal** *(v1.1 draft)* — How a peer dials a node behind NAT without that node running a public server: a willing **circuit-relay v2** peer forwards the introduction and **DCUtR** upgrades it to a direct connection, bootstrapped via rendezvous peers. Relay peers are shared commons (or operator-self-hosted); they broker connectivity, never read content (still `AccessPolicy`-gated). See `09_PROTOCOLS.md §3H.1`.
+
+**Resolver** *(v1.1 draft)* — A NANDA-style verifiable index mapping a stable handle / DID to its current `DiscoverableRecord`, replica set, and relay-reachable multiaddrs (reads DHT `ProviderRecord`s, or the local mDNS cache on an intranet). Answers "exactly where, right now"; itself access-gated. See `09_PROTOCOLS.md §3G.2`, `§3H.1`.
 
 **PersonaConsultation** — operator-gated, read-only access to a RETIRED persona's frozen K-lines / lessons / skill_library / relationships, without reanimation. No envelopes minted; no mutations; consultation event signed and recorded in the consulted persona's lineage. Distinct from REANIMATE (which moves persona from ARCHIVED back to ACTIVE with fresh keys + SOUL re-sign per `§7.5`). Composes with RetiredStatePersistencePolicy: consultation is admissible only when `soul_state_storage_tier ∈ {warm, cold}` (archived personas refuse with `consultation_unavailable_archived`). See [`02_PERSONA.md §7.5.2`](02_PERSONA.md).
 
@@ -703,7 +733,9 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **VerifierRecipe** — Domain-specific verifier configuration; named, signed reference to a verifier cascade for an artifact kind. See `06_DOMAIN.md §7.1`.
 
-**Visibility Tier** — Four tiers: private (operator only) / tenant (org) / federation (peer kernels) / public (hub). Applies to PersonaCard, ProjectCard, EnvCard, DomainContextCard. See `09_PROTOCOLS.md §3`.
+**TelemetryCard** *(v1.1 draft)* — Discoverable projection (`telemetry-card/1`) advertising a default-private, opt-in, privacy-filtered live activity / presence feed: a tier-restricted projection of OTel spans + `PresenceState`, gated by `AccessPolicy` + `ConsentLedger`. See `09_PROTOCOLS.md §4.1`, ADR-0061.
+
+**Visibility Tier** — The outward axis of access/sharing. The full ladder is the **5 tiers** used by `AccessPolicy` / `ArtifactSharingPolicy`: `persona_only` / `project_only` / `tenant` (org) / `federation` (peer kernels) / `public` (hub). The federation cards (`PersonaCard`, `ProjectCard`, `EnvCard`, `DomainContextCard`) historically expose a 4-value `federation_visibility` (`private` / `tenant` / `federation` / `public`), where `private` corresponds to `persona_only` / `project_only`. See `09_PROTOCOLS.md §3`, `§3G.3`; `06_DOMAIN.md §6.3`.
 
 **Voyager** — Wang et al. 2023 lifelong learning agent pattern; automatic curriculum + ever-growing skill library + iterative prompting; v1.0 skill library per persona. See `08_KNOWLEDGE.md §2`.
 

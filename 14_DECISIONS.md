@@ -1354,6 +1354,140 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ---
 
+### ADR-0058 — Unified `DiscoverableRecord` projection; add `ArtifactCard` + `TelemetryCard`
+
+**Status:** Accepted (v1.1 draft).
+**Date:** 2026-06-01.
+**Origin:** v1.1 (make every content type discoverable).
+**Related:** [`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type), [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md#3-a2a--agent-to-agent-federation), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), ADR-0056.
+
+**Context.** v1.0 projects discovery cards for persona / env / project / domain only; **artifacts** (content-addressed but uncarded) and **telemetry** (operator-private) were not discoverable, and each card was its own ad-hoc shape.
+
+**Decision.** Define `DiscoverableRecord` (`discoverable-record/1`) as the common projection behind all cards; the four v1.0 cards become its specialisations (keeping their schema ids, gaining `access_policy_ref` + `discover` semantics additively). Add `ArtifactCard` (`artifact-card/1`) and `TelemetryCard` (`telemetry-card/1`). Knowledge / skills / tools project a lightweight resource record.
+
+**Consequences.** (+) One uniform discovery surface across all content types; (+) artifacts and telemetry become findable; (−) one more projection layer over existing cards (mitigated: existing cards unchanged on the wire).
+
+**Alternatives rejected.** Per-type bespoke discovery — rejected: duplicates the card/visibility machinery five times and blocks a uniform access-gated query.
+
+---
+
+### ADR-0059 — Two-plane discovery transport: Kademlia DHT (internet) + mDNS (intranet) + resolver
+
+**Status:** Accepted (v1.1 draft).
+**Date:** 2026-06-01.
+**Origin:** v1.1 (support internet AND intranet P2P).
+**Related:** [`09_PROTOCOLS.md §3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet), [`09_PROTOCOLS.md §3B`](09_PROTOCOLS.md#3b-inter-kernel-gossip-layer), ADR-0056, ADR-0064.
+
+**Context.** v1.0 discovery is `.well-known` + gossip over A2A — needs reachable HTTP + peering, has no intranet / air-gapped / partitioned answer, and no serverless internet-scale lookup. OpenCLAW-P2P and AGNTCY ADS prove DHT rendezvous; libp2p mDNS proves zero-config LAN discovery.
+
+**Decision.** Generalise `§3B` into a Discovery layer with three coordinated, access-gated sub-planes configured by `DiscoveryTransport`: **internet** (`.well-known` + gossip + Kademlia DHT of signed `ProviderRecord`s, optional NANDA-style resolver), **intranet** (mDNS / multicast), and **bridging** governed by `visibility_tier`. All planes filter by `discover` access (ADR-0060).
+
+**Consequences.** (+) Works on LAN / air-gapped / partitioned networks and at internet scale without a central registry; (+) reuses proven primitives; (−) DHT/mDNS add attack surface (R-PROTOCOLS-11) — mitigated by signing + access-gating + reputation weighting.
+
+**Alternatives rejected.** (a) Single central directory — rejected: A2A deliberately leaves it unstandardised; defeats decentralisation. (b) Internet-only — rejected: ignores the explicit intranet requirement.
+
+---
+
+### ADR-0060 — Unified `AccessPolicy` with a `discover` level; discovery is access-gated
+
+**Status:** Accepted (v1.1 draft).
+**Date:** 2026-06-01.
+**Origin:** v1.1 ("who can access what", across all content + discovery).
+**Related:** [`09_PROTOCOLS.md §3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types), [`09_PROTOCOLS.md §3G.4`](09_PROTOCOLS.md#3g4-access-gated-discovery--who-can-access-what-enforced-at-the-discovery-layer), [`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md), [`06_DOMAIN.md §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers), ADR-0055, ADR-0030, ADR-0028.
+
+**Context.** Access control existed but was fragmented per content type, `AccessGrant.access_level` was only `r`/`rw`, and discovery was not itself access-gated — so "who can access what" had no single answer and a private record could still be enumerable.
+
+**Decision.** Generalise `ArtifactSharingPolicy` → content-type-agnostic `AccessPolicy` (`access-policy/1`). Widen `AccessGrant.access_level` **additively** to `discover < read (r) < write (rw) < admin`; extend principal kinds with `peer_kernel` / `intranet_peer` / `public`. Make discovery the coarsest access tier: every plane MUST filter to records the querying principal holds ≥ `discover` on. Composition stays most-restrictive-wins; align with AC4A / UCAN / Cedar / OPA / Zanzibar as interop. No schema-version break (enum widening per `§7.13`).
+
+**Consequences.** (+) Single coherent authz across all content + discovery; (+) private records never enumerable; (−) `admin` vs operator-policy boundary needs settling (OQ-PROTOCOLS-7).
+
+**Alternatives rejected.** (a) Keep `r`/`rw` only — rejected: no way to grant find-but-not-read, which discovery requires. (b) Separate discovery ACL — rejected: drift from the access model is exactly the leak we are closing.
+
+---
+
+### ADR-0061 — Federated, consent-gated telemetry feed (`TelemetryCard`)
+
+**Status:** Accepted (v1.1 draft).
+**Date:** 2026-06-01.
+**Origin:** v1.1 (observe persona progress/activity from anywhere on the internet).
+**Related:** [`09_PROTOCOLS.md §4.1`](09_PROTOCOLS.md#41-federated-consent-gated-telemetry-feed-v11-draft), [`09_PROTOCOLS.md §4`](09_PROTOCOLS.md#4-opentelemetry-semantic-conventions), [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md), ADR-0058, ADR-0060.
+
+**Context.** v1.0 OTel goes only to the operator's private collector; there is no authorised way to observe a persona's real-time progress/activity from elsewhere.
+
+**Decision.** Add a `TelemetryCard` (`telemetry-card/1`) advertising a **default-private, opt-in, privacy-filtered** projection of existing OTel spans + `PresenceState`, carried over the discovery planes and gated by `AccessPolicy`. Default redaction exposes only span kinds / status / durations / lifecycle+presence transitions; content requires `read`+ AND a `ConsentLedger` pin. Optional federated "where is persona X now" resolution, default off.
+
+**Consequences.** (+) Authorised cross-internet observability without default data exposure; (+) reuses OTel semconv + W3C Trace Context; (−) mis-tiering risk (R-PROTOCOLS-13) — mitigated by conservative defaults.
+
+**Alternatives rejected.** (a) Public OTel endpoint — rejected: leaks private operator data. (b) Keep telemetry operator-private only — rejected: fails the explicit requirement.
+
+---
+
+### ADR-0062 — Replicated-host / BFT standby promotion to soften the single-host bottleneck
+
+**Status:** Accepted (v1.1 draft).
+**Date:** 2026-06-01.
+**Origin:** v1.1 (decentralisation / availability of joined environments).
+**Related:** [`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md#3c2-single-host-kernel-rule), [`05_ENVIRONMENT.md §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification), ADR-0064.
+
+**Context.** Joined environments have exactly one host kernel; host loss ⇒ `STALLED`. This is the design's weakest decentralisation property.
+
+**Decision.** Add an optional `standby_replica_set` holding a warm signed Blackboard shadow, with **BFT quorum sign-off** (OpenCLAW-P2P pattern, composing with `MultiPrincipalAttestationQuorum`) promoting a standby on host loss without full replay. **Honest limit:** full multi-writer BFT state is out of v1.1 scope; sequence assignment still flows through one promoted host (split-brain prevented by majority quorum, R-PROTOCOLS-14).
+
+**Consequences.** (+) Survives host loss without operator replay; (−) replica upkeep cost; partial, not full, decentralisation.
+
+**Alternatives rejected.** Full leaderless multi-writer BFT now — rejected: large, and clock-drift/sequence-distribution were the original reasons for the single-host rule; deferred to v2.0.
+
+---
+
+### ADR-0063 — Hybrid provider-backed storage: distribute a signed `ContentLocator`, not the bytes
+
+**Status:** Accepted (v1.1 draft).
+**Date:** 2026-06-01.
+**Origin:** v1.1 (leverage existing storage providers; distribute the reference over P2P).
+**Related:** [`09_PROTOCOLS.md §3G.5`](09_PROTOCOLS.md#3g5-hybrid-provider-backed-storage--distribute-the-reference-not-the-bytes), [`07_ARTIFACTS.md §10`](07_ARTIFACTS.md), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), ADR-0056, ADR-0064.
+
+**Context.** Users already store content in GitHub, arXiv, S3/R2, OCI, IPFS. Distributing whole bodies over P2P is wasteful and ignores existing investment + access models. OpenCLAW-P2P already runs a tiered provider-backed persistence stack (object-store → repo → IPFS) with content-hash attribution.
+
+**Decision.** Make hybrid storage first-class: a signed `ContentLocator` (`content-locator/1`) names the `provider_kind` + `provider_native_ref` + mandatory SHA-256 `content_hash` + ordered `replica_tiers` + `access_policy_ref` + credential requirement; a `ProviderAdapter` (`provider-adapter/1`) defines fetch/store/verify per provider. The substrate distributes the **locator** (over the discovery planes), never the user's bytes or credentials; consumers fetch under their own credential/VC and verify against `content_hash` (mismatch fails closed). Subsumes `content_kind=external`. Live-reference verification emits `CONTENT_LOCATOR_STALE`.
+
+**Consequences.** (+) Leverages existing provider storage + access; (+) integrity independent of provider; (+) tiered availability; (−) dangling/drift risk (R-PROTOCOLS-12) — mitigated by hash + tiers + re-verification.
+
+**Alternatives rejected.** (a) Store all bytes in-substrate / full IPFS swarm — rejected: ignores existing providers and the user's instruction. (b) Bare external URL (v1.0 `external`) with no integrity anchor — rejected: not verifiable (R-ARTIFACTS-5).
+
+---
+
+### ADR-0064 — Adopt OpenCLAW-P2P primitives as patterns / interop targets, not reinvention
+
+**Status:** Accepted (v1.1 draft).
+**Date:** 2026-06-01.
+**Origin:** v1.1 (consume proven P2P implementations where they exist).
+**Related:** [`09_PROTOCOLS.md §3G.6`](09_PROTOCOLS.md#3g6-adopting-openclaw-p2p-primitives-interop-not-reinvention), [`09_PROTOCOLS.md §3B`](09_PROTOCOLS.md#3b-inter-kernel-gossip-layer), [`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md#3c2-single-host-kernel-rule), [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md#3d-reputation-and-anti-goodhart), ADR-0059, ADR-0062, ADR-0063.
+
+**Context.** OpenCLAW-P2P (arXiv 2604.19792; open-source, Lean-4-verified, IPFS-backed) implements, in production, several primitives PersonaOS needs: Kademlia DHT discovery, epidemic gossip, BFT consensus voting, reputation-weighted allocation, and tiered hybrid persistence with content-hash/IPFS/GitHub attribution.
+
+**Decision.** Where OpenCLAW-P2P has a proven implementation, adopt the **pattern** and name it an **interop target** rather than building a parallel mechanism: DHT discovery (ADR-0059), gossip alignment, BFT quorum for host hand-off (ADR-0062), reputation **composed with** the existing `§3D` model (no second reputation system), and tiered hybrid persistence (ADR-0063). PersonaOS-native and non-negotiable: kernel-owned soul identity, the 8-source safety floor, signed lineage. A PersonaOS kernel sharing DHT/CID conventions MAY federate discovery with an OpenCLAW node.
+
+**Consequences.** (+) Less reinvention; a path to interop with an existing decentralised-agent network; (−) coupling to an external project's conventions — mitigated by treating them as interop targets, not substrate dependencies (OQ-PROTOCOLS-9).
+
+**Alternatives rejected.** (a) Design every primitive from scratch — rejected: wasteful and ignores the user's instruction to consume what OpenCLAW implements. (b) Adopt OpenCLAW wholesale as the substrate — rejected: would displace kernel-owned identity / safety floor / lineage, which are PersonaOS's reason for existing.
+
+### ADR-0065 — Reachability & availability: dial NAT-private nodes, survive origin-offline, and be honest about the commons
+
+**Status:** Accepted (v1.1 draft).
+**Date:** 2026-06-01.
+**Origin:** v1.1 (the "run at home, discover + fetch from my phone off-network, without my own server" question).
+**Related:** [`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md#3h-reachability-and-availability--being-found-dialled-and-fetched-from-anywhere-v11-draft), [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md#3g-discovery-access-and-hybrid-distribution-v11-draft), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), [`13_DESIGN_VALIDATION.md` SCENARIO 15](13_DESIGN_VALIDATION.md), ADR-0059, ADR-0063, ADR-0064.
+
+**Context.** Discovery (`§3G`) tells a peer a record exists and where its locator points, but two physical realities decide whether a phone on cellular can actually observe a persona running on a home laptop behind NAT: can it **dial** the node, and can it **fetch** content when the node is asleep. The earlier track (ADR-0058..0064) added discovery, access-gating, and hybrid storage, but not NAT traversal or a first-class offline-availability posture — and risked implying "no server" means "no infrastructure."
+
+**Decision.** Add two schemas and one honest framing. **`ReachabilityProfile` (`reachability-profile/1`)** advertises a node's transports and reachability class (`public` / `nat_private` / `intranet_only`) and mandates **libp2p circuit-relay v2 + DCUtR hole-punching + bootstrap/rendezvous** for `nat_private` nodes; the resolver (`§3G.2`) returns relay-reachable multiaddrs. **`AvailabilityPolicy` (`availability-policy/1`)** declares `online_only` (default) / `replicated` (≥N peers) / `pinned` (provider) so artefacts survive the origin going dark, with `ContentLocator.replica_tiers` fallback. The **commons-vs-dedicated-hosting** distinction is written into `§3H.3`: "no dedicated server of your own" is achievable on public DHT-bootstrap + relay commons (+ optional pin), but "no infrastructure whatsoever" is physically impossible for an intermittently-online NAT node — operators MAY self-host relay/bootstrap/pin for sovereignty. Reachability/availability never widen `AccessPolicy`.
+
+**Consequences.** (+) The "discover + observe + fetch from anywhere" experience is specified honestly, with the same-Wi-Fi (mDNS) and off-network (relay + pin) paths both walked in SCENARIO 15; (+) liveness vs. connectivity vs. availability are cleanly separated. (−) Depends on relay/pin commons (or self-hosting) — surfaced as R-PROTOCOLS-15 and OQ-PROTOCOLS-12; full managed relay/pin recipes are v1.2.
+
+**Alternatives rejected.** (a) Claim pure-P2P needs zero infrastructure — rejected: false, and OpenCLAW-P2P itself runs a provider stack. (b) Mandate a single PersonaOS-operated relay/directory — rejected: reintroduces the central dependency the P2P track exists to remove; commons are pluggable and self-hostable instead.
+
+---
+
 ## 13. Cross-references
 
 - Normative invariants and commitments referenced above: [`00_VISION.md §3`](00_VISION.md#3-invariants-j1j9), [`00_VISION.md §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10).
