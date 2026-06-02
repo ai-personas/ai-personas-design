@@ -1360,7 +1360,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0058 — Unified `DiscoverableRecord` projection; add `ArtifactCard` + `TelemetryCard`
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (make every content type discoverable).
 **Related:** [`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type), [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md#3-a2a--agent-to-agent-federation), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), ADR-0056.
@@ -1377,7 +1377,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0059 — Two-plane discovery transport: Kademlia DHT (internet) + mDNS (intranet) + resolver
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (support internet AND intranet P2P).
 **Related:** [`09_PROTOCOLS.md §3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet), [`09_PROTOCOLS.md §3B`](09_PROTOCOLS.md#3b-inter-kernel-gossip-layer), ADR-0056, ADR-0064.
@@ -1394,7 +1394,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0060 — Unified `AccessPolicy` with a `discover` level; discovery is access-gated
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 ("who can access what", across all content + discovery).
 **Related:** [`09_PROTOCOLS.md §3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types), [`09_PROTOCOLS.md §3G.4`](09_PROTOCOLS.md#3g4-access-gated-discovery--who-can-access-what-enforced-at-the-discovery-layer), [`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md), [`06_DOMAIN.md §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers), ADR-0055, ADR-0030, ADR-0028.
@@ -1411,10 +1411,10 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0061 — Federated, consent-gated telemetry feed (`TelemetryCard`)
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (observe persona progress/activity from anywhere on the internet).
-**Related:** [`09_PROTOCOLS.md §4.1`](09_PROTOCOLS.md#41-federated-consent-gated-telemetry-feed-v11-draft), [`09_PROTOCOLS.md §4`](09_PROTOCOLS.md#4-opentelemetry-semantic-conventions), [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md), ADR-0058, ADR-0060.
+**Related:** [`09_PROTOCOLS.md §4.1`](09_PROTOCOLS.md#41-federated-consent-gated-telemetry-feed), [`09_PROTOCOLS.md §4`](09_PROTOCOLS.md#4-opentelemetry-semantic-conventions), [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md), ADR-0058, ADR-0060.
 
 **Context.** v1.0 OTel goes only to the operator's private collector; there is no authorised way to observe a persona's real-time progress/activity from elsewhere.
 
@@ -1445,7 +1445,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0063 — Hybrid provider-backed storage: distribute a signed `ContentLocator`, not the bytes
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (leverage existing storage providers; distribute the reference over P2P).
 **Related:** [`09_PROTOCOLS.md §3G.5`](09_PROTOCOLS.md#3g5-hybrid-provider-backed-storage--distribute-the-reference-not-the-bytes), [`07_ARTIFACTS.md §10`](07_ARTIFACTS.md), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), ADR-0056, ADR-0064.
@@ -1462,7 +1462,7 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0064 — Adopt OpenCLAW-P2P primitives as patterns / interop targets, not reinvention
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (consume proven P2P implementations where they exist).
 **Related:** [`09_PROTOCOLS.md §3G.6`](09_PROTOCOLS.md#3g6-adopting-openclaw-p2p-primitives-interop-not-reinvention), [`09_PROTOCOLS.md §3B`](09_PROTOCOLS.md#3b-inter-kernel-gossip-layer), [`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md#3c2-single-host-kernel-rule), [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md#3d-reputation-and-anti-goodhart), ADR-0059, ADR-0062, ADR-0063.
@@ -1477,10 +1477,10 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ### ADR-0065 — Reachability & availability: dial NAT-private nodes, survive origin-offline, and be honest about the commons
 
-**Status:** Accepted (v1.1 draft).
+**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
 **Date:** 2026-06-01.
 **Origin:** v1.1 (the "run at home, discover + fetch from my phone off-network, without my own server" question).
-**Related:** [`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md#3h-reachability-and-availability--being-found-dialled-and-fetched-from-anywhere-v11-draft), [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md#3g-discovery-access-and-hybrid-distribution-v11-draft), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), [`13_DESIGN_VALIDATION.md` SCENARIO 15](13_DESIGN_VALIDATION.md), ADR-0059, ADR-0063, ADR-0064.
+**Related:** [`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md#3h-reachability-and-availability--being-found-dialled-and-fetched-from-anywhere), [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md#3g-discovery-access-and-hybrid-distribution), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), [`13_DESIGN_VALIDATION.md` SCENARIO 15](13_DESIGN_VALIDATION.md), ADR-0059, ADR-0063, ADR-0064.
 
 **Context.** Discovery (`§3G`) tells a peer a record exists and where its locator points, but two physical realities decide whether a phone on cellular can actually observe a persona running on a home laptop behind NAT: can it **dial** the node, and can it **fetch** content when the node is asleep. The earlier track (ADR-0058..0064) added discovery, access-gating, and hybrid storage, but not NAT traversal or a first-class offline-availability posture — and risked implying "no server" means "no infrastructure."
 

@@ -2991,7 +2991,7 @@ A-ER9     Backward compatibility: an env whose charter carries no rules
           source-8 evaluation is unchanged.
 ```
 
-## 9n. Discovery, access & hybrid distribution tests (A-DR*, A-DT*, A-AX*, A-CL*, A-TF*, A-HR*) — v1.1 draft
+## 9n. Discovery, access & hybrid distribution tests (A-DR*, A-DT*, A-AX*, A-CL*, A-TF*, A-HR*)
 
 ### A-DR* — DiscoverableRecord + cards (09_PROTOCOLS §3G.1)
 

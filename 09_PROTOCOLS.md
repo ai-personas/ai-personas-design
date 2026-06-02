@@ -294,26 +294,26 @@ This pillar records how PersonaOS's storage / distribution / discovery substrate
 
 This alignment is captured as ADRs (`14_DECISIONS.md`); adopting any specific standard is operator policy, not a substrate requirement.
 
-## 3G. Discovery, access, and hybrid distribution (v1.1 draft)
+## 3G. Discovery, access, and hybrid distribution
 
-This pillar makes every PersonaOS content type — personas, environments, artifacts, domains, knowledge / skills / tools, and telemetry — uniformly **discoverable** across both the public internet and a local intranet, under one **access-level model** that also gates discovery itself, and adds a **hybrid storage** mode that keeps heavy bytes in whatever provider an operator or user already runs (GitHub, arXiv, S3 / R2, OCI, an IPFS pinning service, …) while distributing only a signed, integrity-anchored *reference* over the peer-to-peer layer. It promotes the [`§3F`](#3f-external-standard-alignment-informative) content-addressing / DID / DHT alignment from *informative* to a *normative substrate option*, and adopts proven primitives from open decentralised-agent systems (notably **OpenCLAW-P2P**) rather than reinventing them.
+This pillar makes every PersonaOS content type — personas, environments, artifacts, domains, knowledge / skills / tools, and telemetry — uniformly **discoverable** across both the public internet and a local intranet, under one **access-level model** that also gates discovery itself, and adds a **hybrid storage** mode that keeps heavy bytes in whatever provider an operator or user already runs (GitHub, arXiv, S3 / R2, OCI, an IPFS pinning service, …) while distributing only a signed, integrity-anchored *reference* over the peer-to-peer layer. It makes the [`§3F`](#3f-external-standard-alignment-informative) content-addressing / DID alignment a **normative substrate layer** (the DID global handle of [`01_KERNEL §4.4`](01_KERNEL.md#44-global-identity-handles--cross-node-verification-j1-adr-0067) / ADR-0067), and adopts proven primitives from open decentralised-agent systems (notably **OpenCLAW-P2P**) rather than reinventing them. This is the substrate realisation of the "one global object space" of ADR-0067: every entity is a globally-addressable, access-controlled reference.
 
-**Status.** v1.1 draft, additive. No v1.0 invariant changes; no schema-version break (new schemas are added; existing enums gain values additively per [`§7.13`](#713-adding-or-modifying-schemas)). All defaults are **most-restrictive / private**, and `discover` is strictly weaker than `read`.
+**Status.** Normative, additive (ADR-0058/0059/0060/0061/0063/0064/0065; promoted from v1.1 draft to normative under ADR-0067). No invariant changes beyond the J1 reframe (ADR-0067); no schema-version break (new schemas are added; existing enums gain values additively per [`§7.13`](#713-adding-or-modifying-schemas)). All defaults are **most-restrictive / private**, and `discover` is strictly weaker than `read`.
 
 ### 3G.1 DiscoverableRecord — one projection for every content type
 
-v1.0 already projects four federation cards (`AgentCard`, `EnvCard`, `ProjectCard`, `DomainContextCard`; [`§3`](#3-a2a--agent-to-agent-federation)). v1.1 unifies them behind a common `DiscoverableRecord` shape and adds the two missing cards so that **artifacts** and **telemetry** become first-class discoverable, and so knowledge / skills / tools project a lightweight discoverable resource record.
+The four original federation cards (`AgentCard`, `EnvCard`, `ProjectCard`, `DomainContextCard`; [`§3`](#3-a2a--agent-to-agent-federation)) are unified behind a common `DiscoverableRecord` shape, with two further cards so that **artifacts** and **telemetry** are first-class discoverable, and so knowledge / skills / tools project a lightweight discoverable resource record.
 
 *A `DiscoverableRecord` (`discoverable-record/1`) carries the subject's stable id (ULID and/or DID, `§3F`), kind (`persona | env | project | domain | artifact | telemetry | knowledge | skill | tool`), a human label + ≤120-char description, a capability / skill summary, a `content_hash` or `ContentLocator` reference where a body exists (`§3G.5`), the governing `access_policy_ref` (`§3G.3`), the `visibility_tier` (`§3G.3`), interfaces (MCP / A2A / HTTP), `expires_at`, and an Ed25519 signature from the owning scope key (`§8`).*
 
 The existing four cards are the per-kind specialisations of this shape; they keep their schema ids and gain `access_policy_ref` + `discover`-tier semantics **additively**. Two new cards complete the set:
 
 - **`ArtifactCard` (`artifact-card/1`)** — projects an `ArtifactBundle` ([`07_ARTIFACTS.md §2`](07_ARTIFACTS.md)): bundle id, media kinds, `content_hash` / `ContentLocator` (`§3G.5`), `sharing_policy_ref` (`07_ARTIFACTS §4a`, generalised to `AccessPolicy`), version-chain head. Makes a deliverable findable without exposing its bytes.
-- **`TelemetryCard` (`telemetry-card/1`)** — see [`§4.1`](#41-federated-consent-gated-telemetry-feed-v11-draft); advertises a consent-gated, privacy-filtered live activity / presence feed.
+- **`TelemetryCard` (`telemetry-card/1`)** — see [`§4.1`](#41-federated-consent-gated-telemetry-feed); advertises a consent-gated, privacy-filtered live activity / presence feed.
 
 ### 3G.2 Two-plane discovery transport — internet + intranet
 
-v1.0 discovery is `.well-known` + gossip over A2A only ([`§3B`](#3b-inter-kernel-gossip-layer)): it requires reachable HTTP endpoints and federation peering, has no answer for intranet / LAN / air-gapped / partitioned deployments, and no serverless internet-scale lookup. v1.1 generalises `§3B` into a **Discovery layer** with three coordinated, access-gated sub-planes, configured per kernel by a `DiscoveryTransport` (`discovery-transport/1`):
+The original `.well-known` + gossip discovery over A2A ([`§3B`](#3b-inter-kernel-gossip-layer)) requires reachable HTTP endpoints and federation peering, has no answer for intranet / LAN / air-gapped / partitioned deployments, and no serverless internet-scale lookup. PersonaOS generalises `§3B` into a **Discovery layer** with three coordinated, access-gated sub-planes, configured per kernel by a `DiscoveryTransport` (`discovery-transport/1`):
 
 - **Internet plane.** Existing `.well-known` + gossip, PLUS a **Kademlia DHT** of `ProviderRecord`s (`provider-record/1`) keyed by `content_hash` / DID / handle → current host(s) and `ContentLocator`(s). This is the discovery primitive proven by OpenCLAW-P2P and Cisco AGNTCY's Agent Directory Service (DHT rendezvous). A kernel MAY also run a **NANDA-style resolver**: a verifiable index mapping a stable handle / DID to its current record + replica set, for large, fast-changing populations.
 - **Intranet plane.** **mDNS / multicast** zero-configuration discovery (libp2p mDNS) on the local network — no internet, no central registry, no pre-shared peering — so personas / envs / artifacts stay mutually discoverable on networks disconnected from the internet backbone or temporarily partitioned.
@@ -323,7 +323,7 @@ All three planes are **access-gated** (`§3G.4`).
 
 ### 3G.3 AccessPolicy — one access-level model across all content types
 
-v1.0 access control is real but per-type: `ArtifactSharingPolicy` + `AccessGrant` ([`07_ARTIFACTS §4a`](07_ARTIFACTS.md)), the 5 visibility tiers ([`06_DOMAIN §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers)), `VisibilityPolicy` / `ConsentLedger` ([`02_PERSONA §6`](02_PERSONA.md)), `ObservationSurface` ([`05_ENVIRONMENT §9`](05_ENVIRONMENT.md)), and outreach-intent thresholds ([`A.18`](#appendix-a18)). v1.1 names the common model **`AccessPolicy` (`access-policy/1`)** — a content-type-agnostic generalisation of `ArtifactSharingPolicy` that any first-class entity MAY reference.
+Access control was originally per-type: `ArtifactSharingPolicy` + `AccessGrant` ([`07_ARTIFACTS §4a`](07_ARTIFACTS.md)), the 5 visibility tiers ([`06_DOMAIN §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers)), `VisibilityPolicy` / `ConsentLedger` ([`02_PERSONA §6`](02_PERSONA.md)), `ObservationSurface` ([`05_ENVIRONMENT §9`](05_ENVIRONMENT.md)), and outreach-intent thresholds ([`A.18`](#appendix-a18)). PersonaOS names the common model **`AccessPolicy` (`access-policy/1`)** — a content-type-agnostic generalisation of `ArtifactSharingPolicy` that **every** first-class entity references (the per-type policies above are its canonical realisations, retained for back-compat). It governs all global references (ADR-0067): no entity is reachable across nodes except through its `AccessPolicy`.
 
 - **Two axes (unified in form).** The *inward* axis is a list of `AccessGrant`s per principal / role / env / principal-attribution; the *outward* axis is one of the **5 visibility tiers** (`persona_only | project_only | tenant | federation | public`).
 - **Access levels (additive ladder).** `AccessGrant.access_level` gains values so the ladder is **`discover < read (r) < write (rw) < admin`**. `discover` permits learning a record exists plus its minimal metadata (label, kind, capability summary) — nothing more. Existing `r` / `rw` grants are unchanged (they sit mid-ladder); the enum widening is additive per [`§7.13`](#713-adding-or-modifying-schemas).
@@ -336,7 +336,7 @@ Discovery is not a side channel around access control: it IS access control's co
 
 ### 3G.5 Hybrid provider-backed storage — distribute the reference, not the bytes
 
-v1.0 already has `content_kind=external` ([`07_ARTIFACTS §10`](07_ARTIFACTS.md), [`A.16`](07_ARTIFACTS.md)) for referenced-not-owned content, and content-addresses owned content by SHA-256. v1.1 makes the hybrid case first-class: heavy or already-hosted content stays in whatever provider the user / operator already runs, and only a signed, integrity-anchored *locator* is stored and distributed over the discovery planes. This is the model **OpenCLAW-P2P** runs in production — a tiered *in-memory → object-store → repo → IPFS* persistence stack, with every contribution content-hashed and attributed via IPFS + GitHub.
+The `content_kind=external` mode ([`07_ARTIFACTS §10`](07_ARTIFACTS.md), [`A.16`](07_ARTIFACTS.md)) already references not-owned content, and owned content is content-addressed by SHA-256. PersonaOS makes the hybrid case first-class: heavy or already-hosted content stays in whatever provider the user / operator already runs, and only a signed, integrity-anchored *locator* is stored and distributed over the discovery planes. This is the model **OpenCLAW-P2P** runs in production — a tiered *in-memory → object-store → repo → IPFS* persistence stack, with every contribution content-hashed and attributed via IPFS + GitHub.
 
 *A `ContentLocator` (`content-locator/1`) carries `provider_kind` (`github | arxiv | s3 | r2 | oci | ipfs_pin | https | inline_fallback`), `provider_native_ref` (URL / CID / OCI digest / arXiv id / repo path), a **mandatory `content_hash` (SHA-256)** integrity anchor, an ordered `replica_tiers` fallback list (e.g. `oci → github → ipfs_pin`), `access_policy_ref` (`§3G.3`), a `credential_requirement` descriptor (what the fetcher must present — never the credential itself), and an Ed25519 signature. A `ProviderAdapter` (`provider-adapter/1`) declares the fetch / store / verify contract per `provider_kind`.*
 
@@ -352,9 +352,9 @@ Normative properties:
 
 Where the open-source OpenCLAW-P2P stack (arXiv 2604.19792; `github.com/Agnuxo1/OpenCLAW-P2P`) has a production, formally-checked implementation of a primitive PersonaOS needs, PersonaOS adopts the *pattern* and names it an interop target rather than building a parallel mechanism: **Kademlia DHT discovery** (`§3G.2` internet plane); **epidemic gossip** (align `§3B`); **BFT consensus voting** (the quorum for host-replica hand-off `§3C.2` and cross-kernel ratification, composing with `MultiPrincipalAttestationQuorum`, [`05_ENVIRONMENT §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification)); **reputation-weighted allocation** (composes with [`§3D`](#3d-reputation-and-anti-goodhart) — PersonaOS does not add a second reputation system); and the **tiered hybrid persistence + content-hash / IPFS / GitHub attribution** model (`§3G.5`). What stays PersonaOS-native: kernel-owned soul identity, the 8-source safety floor, and signed lineage. A PersonaOS kernel sharing DHT / CID conventions MAY federate discovery with an OpenCLAW node. Captured as ADR-0064.
 
-## 3H. Reachability and availability — being found, dialled, and fetched from anywhere (v1.1 draft)
+## 3H. Reachability and availability — being found, dialled, and fetched from anywhere
 
-Discovery (`§3G`) tells a peer that a record *exists* and points at its locator. Two **physical** realities decide whether a phone on a cellular network can actually observe a persona that is running on a laptop at home behind a NAT router: can the peer **dial** the node (reachability), and can it **fetch** the content when the node is asleep (availability). v1.1 makes both first-class and — crucially — **honest about what P2P can and cannot abolish**. This section is the substrate answer to "I run PersonaOS on my own machine; can I discover my personas and get their progress + artefacts from my phone, off-network, without my own server?"
+Discovery (`§3G`) tells a peer that a record *exists* and points at its locator. Two **physical** realities decide whether a phone on a cellular network can actually observe a persona that is running on a laptop at home behind a NAT router: can the peer **dial** the node (reachability), and can it **fetch** the content when the node is asleep (availability). PersonaOS makes both first-class and — crucially — **honest about what P2P can and cannot abolish**. This section is the substrate answer to "I run PersonaOS on my own machine; can I discover my personas and get their progress + artefacts from my phone, off-network, without my own server?"
 
 ### 3H.1 ReachabilityProfile — dialing a NAT-private node
 
@@ -389,9 +389,9 @@ OTel overhead target: **≤ 2% wall time**.
 
 Trace propagation across MCP / A2A boundaries via W3C Trace Context.
 
-### 4.1 Federated, consent-gated telemetry feed (v1.1 draft)
+### 4.1 Federated, consent-gated telemetry feed
 
-v1.0 emits OTel to the **operator's private collector** only — there is no way to observe a persona's progress or activity from elsewhere on the internet. v1.1 adds a **discoverable, default-private, opt-in, privacy-filtered** live feed so that *authorised* peers anywhere can watch progress, without exposing private operator data by default.
+OTel was originally emitted to the **operator's private collector** only — with no way to observe a persona's progress or activity from elsewhere on the internet. PersonaOS adds a **discoverable, default-private, opt-in, privacy-filtered** live feed so that *authorised* peers anywhere can watch progress, without exposing private operator data by default (ADR-0061).
 
 *A `TelemetryCard` (`telemetry-card/1`) advertises a feed endpoint, its `access_policy_ref` (`§3G.3`), `visibility_tier`, the OTel attribute groups exposed at each tier, the redaction profile, and a signature. The feed is a tier-restricted projection of the existing OTel spans (`§4`, `A.21`) and `PresenceState` ([`05_ENVIRONMENT §6`](05_ENVIRONMENT.md)), carried over the discovery planes (`§3G.2`) and reachable via A2A with W3C Trace Context continuity.*
 
@@ -693,13 +693,13 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 | `DomainContextCard` | `domain-context-card/1` | jsonschema | [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md) | Stable | Federated domain descriptor. |
 | `ReputationSummary` | `reputation/1` | jsonschema | [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md) | Stable | Cross-kernel reputation digest. |
 
-### 7.11a Discovery, access & hybrid storage (v1.1 draft)
+### 7.11a Discovery, access & hybrid storage
 
 | Schema | Version | Form | Defined in | Stability | Used by |
 |--------|---------|------|------------|-----------|---------|
 | `DiscoverableRecord` | `discoverable-record/1` | jsonschema | [`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type) | Draft | Common projection behind all federation cards; unifies persona/env/project/domain/artifact/telemetry/knowledge/skill/tool discovery. |
 | `ArtifactCard` | `artifact-card/1` | jsonschema | [`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type) | Draft | Discoverable projection of an `ArtifactBundle` (`07 §2`); body via `content_hash` / `ContentLocator`. |
-| `TelemetryCard` | `telemetry-card/1` | jsonschema | [`09_PROTOCOLS.md §4.1`](09_PROTOCOLS.md#41-federated-consent-gated-telemetry-feed-v11-draft) | Draft | Advertises a consent-gated, privacy-filtered live activity / presence feed. |
+| `TelemetryCard` | `telemetry-card/1` | jsonschema | [`09_PROTOCOLS.md §4.1`](09_PROTOCOLS.md#41-federated-consent-gated-telemetry-feed) | Draft | Advertises a consent-gated, privacy-filtered live activity / presence feed. |
 | `DiscoveryTransport` | `discovery-transport/1` | dataclass | [`09_PROTOCOLS.md §3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet) | Draft | Per-kernel config of the internet (`.well-known`+gossip+DHT) and intranet (mDNS) discovery planes. |
 | `ProviderRecord` | `provider-record/1` | dataclass | [`09_PROTOCOLS.md §3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet) | Draft | Kademlia DHT entry keyed by `content_hash` / DID / handle → host(s) + `ContentLocator`(s). |
 | `AccessPolicy` | `access-policy/1` | dataclass | [`09_PROTOCOLS.md §3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types) | Draft | Content-type-agnostic generalisation of `ArtifactSharingPolicy`; inward `AccessGrant`s + outward visibility tier. |
