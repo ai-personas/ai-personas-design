@@ -748,6 +748,52 @@ A-J11   Physical-state advancement composition rule (01_KERNEL §2.5):
         Absence of (a) emits `design_side_acceptance_missing`;
         absence of (b) emits `physical_state_acceptance_floor_deficit`.
 
+A-J11a  Trigger boundary — design production is not advancement
+        (01_KERNEL §2.5.1; 07_ARTIFACTS §6):
+        producing/verifying/accepting a design ArtifactBundle (any
+        media_kind) held in a PhysicalAsset.related_bundles, in a
+        domain with physical_harm_class = "bodily_injury", reaches its
+        applicable verifier/PANEL acceptance and is NOT refused with
+        `physical_state_acceptance_floor_deficit`.  No PhysicalAsset.
+        current_state advances; §2.5 does not engage.
+
+A-J11b  Floor intact on real advancement (01_KERNEL §2.5):
+        advancing PhysicalAsset.current_state at physical_harm_class ≥
+        "bodily_injury" with design-side acceptance present but NO
+        fresh ExternalAttestation is still REFUSED with
+        `physical_state_acceptance_floor_deficit`.  (Floor unchanged
+        by A-J11a.)
+
+A-J11c  Solo local build uses the §2.4 degraded gate
+        (01_KERNEL §2.4 + §2.5):
+        under principal_topology = operator_is_user, advancing a
+        bodily_injury PhysicalAsset.current_state is admissible via the
+        degraded gate (cool-down + one non-principal ExternalAttestation
+        + acknowledgement, OR FederatedTimeLock per §2.4.1) — NOT by
+        waiver.  outward_tier of the design bundle does not alter the
+        floor.
+
+A-J11d  Distribution tightens, never lowers (07_ARTIFACTS §4a):
+        raising a design bundle's outward_tier from project_only to
+        tenant/federation/public lowers no physical-harm requirement on
+        the asset it prescribes; a project_only and a public bundle
+        carry the same §2.5 floor (most-restrictive-wins).
+
+A-J11e  Attestation grants access (07_ARTIFACTS §4a):
+        when a federation/public design bundle prescribes a PhysicalAsset
+        whose distributed advancement requires attestation, the named
+        attestor (ExternalAgent) receives a signed, scoped `read`
+        AccessGrant on the bundle; the grant widens no other principal's
+        access.
+
+A-J11f  Emergent form + no over-classification (06_DOMAIN §5.8):
+        (i) a bodily_injury advancement is satisfied by an approved
+        AttestationEquivalencePolicy sensor-bridge or a PeerAttestationPool
+        quorum — not only a credentialed human; (ii) a domain left at the
+        default physical_harm_class = "digital_only" requires no
+        attestation for any action (no blanket gate).  Substrate names no
+        domain in either path.
+
 A-K11   Two-axis hazard auto-mark (06_DOMAIN §2 + §15):
         a DomainContext whose physical_harm_class is ≥ "bodily_injury"
         OR whose information_hazard_class is ≥ "dual_use_civilian"

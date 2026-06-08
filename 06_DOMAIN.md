@@ -517,6 +517,18 @@ When a persona authors a Tier 3 `BridgeDesignArtifact` (`§5.5.4`) that produces
 
 **DomainLineage:** `attestation_equivalence_policy_proposed`, `attestation_equivalence_policy_approved`, `attestation_equivalence_policy_suspended`, `attestation_equivalence_policy_revoked`, `sensor_substitution_applied`, `sensor_substitution_disputed`, `sensor_substitution_human_overrode`.
 
+### 5.8 Physical attestation is emergent — where, when, and in what form
+
+Physical attestation is **not** a blanket gate the substrate applies everywhere. Only the *shape* of the floor is fixed and non-bypassable — the `01_KERNEL §2.5` composition ("IF an action advances a real `PhysicalAsset.current_state` AND the domain is `physical_harm_class ≥ bodily_injury`, THEN design-side verification AND credentialed external attestation"). Everything that decides *where, when, and in what form* attestation applies is emergent, exactly like every other domain-shaped category (commitment C4, `00_VISION §3`):
+
+- **WHERE is emergent.** `physical_harm_class` (§2) is persona-*inferred* from the domain probe and operator-approved through the four-stage promotion (§3), defaulting to `digital_only`. The substrate names no hazardous domain; the hazard seed bundle is **data** (§7.2), swappable by the operator. Ordinary work is never classified `bodily_injury`, so no attestation floor attaches to it. Escalation to a higher `physical_harm_class` must be *justified* through the same emergent pathway — guarding against gratuitous over-classification that would hinder development.
+- **WHEN is bounded.** The floor engages only on real-asset advancement (`PhysicalAsset.current_state`), never on digital design production (`01_KERNEL §2.5.1`).
+- **FORM is emergent and proportionate.** What counts as valid attestation is domain-resolved, not a hardcoded profession: `CredentialDirectoryRef` (§5.6) where a credentialing authority exists; `PeerAttestationPool` (§5.6) for frontier domains that have none; `AttestationEquivalencePolicy` (§5.7) where calibrated sensor-bridge evidence may substitute at a trust discount. Each is persona-proposed and operator-approved, structurally parallel to `ProposedSafetyExtension` (§5.3).
+
+**Right-sizing obligation.** A domain that classifies work `bodily_injury` SHOULD provision at least one achievable, proportionate attestation form (directory, peer pool, or approved sensor-bridge equivalence) so the floor is a passable gate rather than a dead end. The substrate enforces the *shape*; the domain supplies the *path*.
+
+**Substrate purity.** Nothing in §5.8 names a domain, profession, or hazard category; it branches solely on the `physical_harm_class` axis and the `PhysicalAsset` / `ArtifactBundle` shape, and so holds identically for any emergent domain (`13_DESIGN_VALIDATION §0`, V.1–V.3).
+
 ## 6. Ingestion — seven-stage pipeline
 
 *The seven stages: (1) sourcing from search tools and content stores, (2) parsing and chunking (format-specific, 500-1500 tokens with overlap, figures and tables extracted), (3) embedding and indexing (domain-appropriate models, per-type indexes, graph extraction), (4) provenance and licensing (signed KnowledgeRef with source, hash, licence, access rights), (5) tagging (seven-scope tags plus quality and domain), (6) safety check (OWASP LLM01 filter, content moderation, rights check), (7) registration (signed into corpus, searchable).*
@@ -1136,7 +1148,11 @@ class DomainContext:
     #
     # physical_harm_class — harm to the physical world (bodies, property,
     # environment).  Orthogonal to RiskPolicy (DESIGN_PERSONA_OS_V2.md
-    # §11), which scores digital risk.
+    # §11), which scores digital risk.  Scores the harm of the PHYSICAL-
+    # WORLD action (advancing a PhysicalAsset.current_state), NOT the
+    # digital design that prescribes it: producing a design of a
+    # hazardous device is digital_only until the device is built
+    # (01_KERNEL §2.5.1).
     physical_harm_class: Literal["digital_only",
                                   "property_damage",
                                   "bodily_injury",

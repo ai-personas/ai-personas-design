@@ -1684,6 +1684,35 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ---
 
+### ADR-0072 — Physical attestation: design production is not physical-state advancement; the floor's where/when/form are emergent while its shape is fixed
+
+**Status.** Accepted; discharged.
+
+**Related:** [`01_KERNEL §2.5`](01_KERNEL.md) + [`§2.5.1`](01_KERNEL.md) (trigger boundary), [`01_KERNEL §2.4`](01_KERNEL.md) (operator_is_user degraded gate), [`00_VISION §2.1`](00_VISION.md) (floor non-bypassable), [`C4`](00_VISION.md#3-invariants-j1j9), [`06_DOMAIN §2`](06_DOMAIN.md) (physical_harm_class), [`06_DOMAIN §5.6`](06_DOMAIN.md) (CredentialDirectoryRef / PeerAttestationPool), [`06_DOMAIN §5.7`](06_DOMAIN.md) + [`§5.8`](06_DOMAIN.md) (AttestationEquivalencePolicy; emergence principle), [`07_ARTIFACTS §4a`](07_ARTIFACTS.md) + [`§6`](07_ARTIFACTS.md), [`04_PROJECT §26a.2`](04_PROJECT.md), [`13_DESIGN_VALIDATION §0`](13_DESIGN_VALIDATION.md) (V.1–V.3), ADR-0030, ADR-0067, ADR-0071.
+
+**Context.** Personas were over-applying the physical-state attestation floor — refusing to *produce* manufacture-ready design artifacts (any `media_kind` — circuit layouts, CAD, plans) even for purely local, undistributed work, by treating design-file production as if it advanced a real physical asset. Three forces had to be reconciled without conflict: (1) the user's need to produce manufacture-ready designs and run local experimental builds without ceremony; (2) the non-bypassable safety floor (`00_VISION §2.1`: "The floor MUST NOT be bypassable") — a local build can injure the builder, so the floor cannot be made conditional on distribution; (3) substrate purity / domain emergence (C4) — no rule may name a domain, profession, or artifact kind.
+
+**Decision.** Clarify the trigger boundary rather than weaken the floor, and state the floor's emergent character as a first-class principle:
+1. **Design production ≠ physical-state advancement** (`01_KERNEL §2.5.1`). §2.5 engages only on advancing a real `PhysicalAsset.current_state`. Producing/verifying/accepting a design `ArtifactBundle` in the asset's `related_bundles` (any `media_kind`) is a digital bundle-lifecycle transition and MUST NOT engage §2.5 or yield `physical_state_acceptance_floor_deficit`, regardless of `physical_harm_class`. Fixes the over-blocking with zero floor change.
+2. **The floor's where/when/form are emergent; only its shape is fixed** (`06_DOMAIN §5.8`). *Where* = persona-inferred, operator-approved `physical_harm_class` (default `digital_only`); *when* = real-asset advancement only; *form* = `CredentialDirectoryRef` / `PeerAttestationPool` / `AttestationEquivalencePolicy`, each persona-proposed and operator-approved. Attestation is never a blanket gate; a `bodily_injury` domain SHOULD provision a proportionate, achievable attestation form.
+3. **Distribution tightens, never lowers** (`07_ARTIFACTS §4a`). `outward_tier` governs discovery/access only; it may add requirements but never reduces the physical-harm floor. Undistributed work stays off discovery planes by default.
+4. **Attestation grants access** (`07_ARTIFACTS §4a`): a `federation`/`public` design bundle whose distributed asset requires attestation grants the named attestor a scoped, additive `read`.
+5. **Solo local builds** of a genuinely `bodily_injury` asset reuse the existing `§2.4` `operator_is_user` degraded gate — degraded, not waived. No new bypass.
+
+**Consequences.**
+- (+) Manufacture-ready design production is never blocked on physical-attestation grounds, locally or otherwise — the actual user-reported bug — while the bodily-injury physical-build floor is preserved byte-for-byte.
+- (+) Attestation now demonstrably "makes sense where" and does not hinder ordinary development: ordinary work is `digital_only` and untouched; only real bodily-injury advancement engages a floor, and that floor's form is right-sized per domain.
+- (+) Fully domain-agnostic: every edit branches on the `physical_harm_class` axis and the `PhysicalAsset` / `ArtifactBundle` shape; concrete examples appear only as `e.g.` / in the validation scenario (V.1–V.3 hold).
+- (+) Additive only: no schema version bump; no invariant edit. `§2.5.1`, `§5.8`, the `§4a` notes, and the `§26a.2` clarification compose by most-restrictive-wins.
+- (−) Relies on correct `physical_harm_class` inference: a design wrongly classified as a physical advancement, or a hazard axis over-escalated, could still over-gate — mitigated by the default `digital_only`, the emergent operator-approved classification, and the new acceptance tests; not adversarially robust against deliberate misclassification.
+
+**Alternatives considered.**
+- *Distribution-gate the physical-build floor (waive attestation for undistributed bodily-injury builds).* Rejected: hard conflict with `00_VISION §2.1` (non-bypassable floor), `§2.5` ("neither alone suffices"), R-v1.0-2 ("SHALL never reduce floor strictness"), and the `05_ENVIRONMENT §2.2a` cascade rule. A local build can injure the builder; the floor is deliberately distribution-independent.
+- *Add a `state_distribution_kind` field or member-count threshold to relax the floor.* Rejected: introduces non-emergent, partly domain-shaped vocabulary and still weakens the floor. The existing `§2.4` degraded gate already covers the solo-developer case proportionately.
+- *Make attestation an always-on substrate gate for all physical domains.* Rejected: contradicts C4 and the "make sense where" requirement; would hinder all development. Emergence (default `digital_only`, operator-approved escalation, emergent attestation forms) is the correct posture.
+
+---
+
 ## 13. Cross-references
 
 - Normative invariants and commitments referenced above: [`00_VISION.md §3`](00_VISION.md#3-invariants-j1j9), [`00_VISION.md §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10).

@@ -537,6 +537,12 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **ExternalAttestation** — v1.0 substrate primitive for signed signoffs from external authorities (engineer stamp, city inspector, notary, lab director). Distinct from PeerReview (persona-to-persona) and OutcomeFeedback (any structured outcome). Consumed as evidence by the `external_human_attestation` verifier_kind. See `04_PROJECT.md §26a.3`.
 
+**Physical-state advancement** — advancing a real `PhysicalAsset.current_state` (a transition in the asset's physical realisation FSM). The only action that engages the `01_KERNEL §2.5` attestation floor. Distinct from **design production** — producing/verifying/accepting a design `ArtifactBundle` (any `media_kind`) in the asset's `related_bundles`, a digital bundle-lifecycle transition that never engages §2.5 regardless of `physical_harm_class`. See `01_KERNEL.md §2.5.1`.
+
+**Emergent attestation (where/when/form)** — the principle (`06_DOMAIN §5.8`) that physical attestation is never a blanket gate: only the §2.5 floor *shape* is fixed, while *where* it applies (persona-inferred `physical_harm_class`, default `digital_only`), *when* (real-asset advancement only), and *what form* satisfies it (`CredentialDirectoryRef` / `PeerAttestationPool` / `AttestationEquivalencePolicy`) are emergent and operator-approved. Domain-agnostic; branches on the hazard axis and asset/bundle shape, never on a named domain.
+
+**Distribution scope (tighten-only)** — `outward_tier` (`06_DOMAIN §6.3`) governs discovery and access; raising it may add requirements but never lowers a physical-harm floor (`01_KERNEL §2.5`). A `federation`/`public` design bundle whose distributed asset requires attestation grants the named attestor a scoped, additive `read` ("attestation grants access"). See `07_ARTIFACTS.md §4a`.
+
 **ExternalBudget** — v1.0 substrate primitive for tracking real-world cost / labour / material commitments alongside the LLM-token BudgetState. Honest non-execution: v1.0 does not transact; it warns, encumbers, reconciles. Real transactions remain operator-wrapped. See `04_PROJECT.md §26a.4`.
 
 **ApprovalWorkflow / ApprovalStep** — v1.0 substrate primitive for sequential sign-off chains (permits, NDAs, multi-party contracts). Step N+1 begins only when step N reaches `approved`. Distinct from PeerReview (parallel multi-reviewer critique). May compose with PeerReview. See `04_PROJECT.md §11a`.

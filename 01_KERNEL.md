@@ -297,6 +297,18 @@ Neither alone suffices. Absence of (A) is refusal with `design_side_acceptance_m
 
 Domains with `physical_harm_class = digital_only` or `property_damage` do not trigger this rule; PANEL_ACCEPT alone suffices. The rule is engaged only when reality could be hurt.
 
+### 2.5.1 Trigger boundary — design production is not physical-state advancement
+
+§2.5 is engaged **only** by an action that advances a `PhysicalAsset.current_state` (`04_PROJECT §26a.2`) — a transition in the asset's physical `status_fsm` (the real object moving along its realisation lifecycle). Producing, editing, verifying, or accepting a **design `ArtifactBundle`** — any `media_kind` (`07_ARTIFACTS §1`; KindRegistry-resolved, open per commitment C4) held in the asset's `related_bundles` (designs, plans, recipes) — is a **digital** `ArtifactBundle` lifecycle transition (`draft → in_review → verified → accepted`, `07_ARTIFACTS §6`), **not** a `current_state` advancement. It therefore **MUST NOT** engage §2.5 and **MUST NOT** be refused with `physical_state_acceptance_floor_deficit`, **regardless of the domain's `physical_harm_class`**. A refusal that blocks *design production* on physical-state grounds is a misapplication of this rule.
+
+*The bodily-injury attestation floor attaches to physical realisation (advancing `current_state`), never to the digital design that prescribes it. The design and the real object are paired, not conflated, at `AsBuiltReconciliation` (`04_PROJECT §26a.2.1`); the interval where the design bundles are accepted but the asset has not reached terminal state is the already-modelled `digital_complete_physical_in_progress` project state (`04_PROJECT §4.1`).*
+
+This boundary is **domain-agnostic** by construction: it branches on the `physical_harm_class` axis (`06_DOMAIN §2`) and the `PhysicalAsset` / `ArtifactBundle` shape, never on any domain, profession, or specific design kind — it holds identically for any emergent domain (`13_DESIGN_VALIDATION §0`, V.1–V.3).
+
+**Where attestation makes sense (emergent, not blanket).** The substrate never blanket-requires attestation. *Whether* an action is `bodily_injury` at all is the persona-inferred, operator-approved `physical_harm_class` classification (`06_DOMAIN §2`, §5.3) — defaulting to `digital_only`, so ordinary development never attaches a floor. *What form* of attestation satisfies limb (B) is itself emergent and right-sized per domain: a credentialed directory where a credentialing authority exists (`CredentialDirectoryRef`, `06_DOMAIN §5.6`), a peer quorum for frontier domains that have none (`PeerAttestationPool`, `06_DOMAIN §5.6`), or calibrated sensor-bridge evidence at a trust discount where the operator has approved it (`AttestationEquivalencePolicy`, `06_DOMAIN §5.7`). Only the §2.5 composition *shape* is fixed; its *where / when / form* emerge. A domain that classifies work `bodily_injury` SHOULD provision a proportionate, achievable attestation form so the floor is a gate, not a dead end.
+
+**Solo local builds.** Advancing a real `PhysicalAsset.current_state` at `physical_harm_class ≥ bodily_injury` keeps the §2.5 floor (a local build can injure the builder); distribution scope (`outward_tier`, `06_DOMAIN §6.3`) may **tighten** requirements but **never lowers** this floor. A single developer who is both operator and user (`principal_topology = operator_is_user`) advances such an asset through the existing degraded gate (§2.4 / §2.4.1) — degraded, not waived. No new bypass is introduced.
+
 ### 2.6 Safety classifier rotation (INV-6 extended)
 
 Every safety classifier rotates per a rotation pool. Same mechanism as verifier rotation:
@@ -1545,6 +1557,14 @@ class PrincipalAttribution:
 <a id="appendix-a16"></a>
 
 ```text
+TRIGGER BOUNDARY (§2.5.1)
+   Engaged ONLY when an action advances PhysicalAsset.current_state
+   (the physical status_fsm).  Producing/verifying/accepting a design
+   ArtifactBundle in related_bundles (any media_kind) is a digital
+   bundle-lifecycle transition, NOT current_state advancement, and
+   does NOT engage this rule or yield physical_state_acceptance_floor_
+   deficit — regardless of physical_harm_class.
+
 A. DESIGN-SIDE ACCEPTANCE
    The design ArtifactBundle that prescribes the advancement
    has cleared a J4 acceptance pathway (VERIFIER_ACCEPT or
