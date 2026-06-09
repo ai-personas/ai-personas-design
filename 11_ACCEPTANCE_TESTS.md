@@ -341,7 +341,7 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
                     (v1.0 §26a, §11a, env §11a, ItemKind seeds;
                     +3 AsBuiltReconciliation /
                     CredentialDirectoryRef / collapse-co-sign)
-  A-GF*   60        tests:
+  A-GF*   67        tests:
                     Home-construction wave:
                       A-J10  DeploymentProfile principal_topology
                       A-J11  physical-state acceptance composition
@@ -367,23 +367,26 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
                       A-EX22 BudgetTranche
                       A-E11  competence_balance_signal
                     Human-likeness & identity-emergent prompts wave
-                    (ADR-0073…0080):
-                      A-GF-TLR-1..6   tactic lineage + prompt trials +
-                                      cohort migration (ADR-0074)
+                    (ADR-0073…0080; wiring completed + hardened by
+                    ADR-0081/0082):
+                      A-GF-TLR-1..7   tactic lineage + prompt trials +
+                                      cohort migration (ADR-0074/0081)
                       A-GF-ICPE-1..6  identity-conditioned prompt
-                                      evolution (ADR-0073)
-                      A-GF-ARC-1..5   affect–reasoning coupling
-                                      (ADR-0075)
+                                      evolution (ADR-0073/0081)
+                      A-GF-ARC-1..6   affect–reasoning coupling +
+                                      appraisal wiring (ADR-0075/0081)
                       A-GF-DRV-1..5   intrinsic drives + goal
-                                      arbitration (ADR-0076)
+                                      arbitration (ADR-0076/0081)
                       A-GF-META-1..6  calibration, belief revision,
-                                      dual-process gate (ADR-0078)
-                      A-GF-SN-1..5    self-narrative + decay formula
-                                      (ADR-0077)
-                      A-GF-CPM-1..5   counterparty models +
-                                      disagreement styles (ADR-0079)
+                                      dual-process gate (ADR-0078/0081)
+                      A-GF-SN-1..7    self-narrative + decay formula +
+                                      layer budgets + maintenance
+                                      budget (ADR-0077/0081)
+                      A-GF-CPM-1..8   counterparty models +
+                                      disagreement styles + privacy
+                                      hardening (ADR-0079/0081/0082)
                       A-GF-HAB-1..4   habit strength + intuition hints
-                                      (ADR-0080)
+                                      (ADR-0080/0081)
 
   A-WK6*   5        dormant wake via direct user
                     address (05_ENVIRONMENT §5.2 Wake Path 6)
@@ -392,13 +395,14 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
   A-GEN*   24       Persona Genesis + population dynamics
                     (16_POPULATION_DYNAMICS §8) — v1.1-scoped
 
-TOTAL                ~483 tests across v1.0 lineage (+108 from v1.0 spec work)
+TOTAL                ~490 tests across v1.0 lineage (+108 from v1.0 spec work)
                      (+2 from project_workspace env type:
                      A-EN13 binding/lifecycle, A-EN14 composition)
                      (+13 from Wake Path 6 + CrossEnvProactiveOffer)
-                     (+42 from the human-likeness & identity-emergent
+                     (+49 from the human-likeness & identity-emergent
                      prompts wave: A-GF-TLR/ICPE/ARC/DRV/META/SN/CPM/HAB,
-                     ADR-0073…0080)
+                     ADR-0073…0080 + the ADR-0081 wiring completion +
+                     ADR-0082 privacy hardening)
 
 Run partition (typical):
   CI partition          ~80 per PR
@@ -1326,6 +1330,12 @@ A-GF-TLR-5   Cohort migration gate: on body/model-family upgrade the
 A-GF-TLR-6   Migration rollback: prior cohort retained for the
              retention window; re-binding gepa_cohort_id to it restores
              prior behaviour without touching identity blocks 0-4.
+A-GF-TLR-7   Lineage closure (ADR-0081): a cross-project tactic
+             promotion (04_PROJECT A.35/A.36) without tactic-lineage/1
+             + prompt-trial/1 refs is refused; a domain seed tactic
+             (06_DOMAIN A.1 seed_tactics) mints a tactic-lineage/1
+             root (version 1, parent_version None, mutation_operator
+             "seed") on first adoption into an EVOLVE-BLOCK.
 ```
 
 ### A-GF-ICPE — Identity-conditioned prompt evolution (08_KNOWLEDGE §11.1b, §14.1a, 02_PERSONA §8.1a, ADR-0073)
@@ -1333,16 +1343,27 @@ A-GF-TLR-6   Migration rollback: prior cohort retained for the
 ```text
 A-GF-ICPE-1  Identity rubric regenerated iff SOUL major version bump
              (blocks 0-4 re-sign); tactic mutations and cohort changes
-             leave the rubric byte-identical.
+             leave the rubric byte-identical. Lifecycle (ADR-0081):
+             initial rubric minted at the birth ceremony (02_PERSONA
+             A.20 step 5); pre-ADR-0073 personas get theirs from the
+             operator-triggered backfill job; until a rubric exists
+             the identity axis is absent from GEPA selection and
+             nothing blocks.
 A-GF-ICPE-2  Separate Pareto axis: GEPA's front carries
              identity-expression independently; a configuration that
              collapses it into a weighted sum is refused; a candidate
              may win on identity while losing on latency/cost and
              remain on the front.
-A-GF-ICPE-3  Blind peer-attribution audit: a judge bound to a different
-             persona attributes style-stripped candidate text to the
-             correct SOUL above chance; below-chance attribution blocks
-             identity-driven promotion.
+A-GF-ICPE-3  Blind peer-attribution audit (statistics per ADR-0081):
+             a judge bound to a different persona attributes
+             style-stripped candidate text against an attribution set
+             of N ≥ 5 redacted SOUL identity summaries (synthetic
+             distractors permitted on small nodes) over ≥ 20 trials;
+             pass = correct-attribution rate beats 1/N chance at
+             binomial p < 0.05; failure blocks identity-driven
+             promotion; where the audit cannot run, identity-driven
+             promotion requires operator sign-off (never blocks
+             forever).
 A-GF-ICPE-4  Floors unchanged: charter conformance ≥ 0.95 and voice
              consistency ≥ 0.9 enforced regardless of identity score;
              a high identity-expression score never excuses a floor
@@ -1352,33 +1373,56 @@ A-GF-ICPE-5  Differentiation check: identity-driven evolution holds or
              convergence above the §14.1 threshold rolls back.
 A-GF-ICPE-6  Ninth signal additive: identity_expression flows to the
              credit formula with w_ide; judged-only — never promotes
-             alone per the §15 corroboration rules.
+             alone per the §15 corroboration rules. Reconciliation
+             (ADR-0081): w_ide governs post-hoc credit attribution
+             only; a configuration feeding it into GEPA selection or
+             promotion scalarization is refused.
 ```
 
 ### A-GF-ARC — Affect–reasoning coupling (02_PERSONA §6.2, 08_KNOWLEDGE §10a, ADR-0075)
 
 ```text
-A-GF-ARC-1   Impulses clamped: every mood mutation traces to a signed
-             appraisal-event/1; the resulting mood-impulse/1 ΔV/ΔA/ΔD
-             lie within the per-event-kind clamps; an eventless or
+A-GF-ARC-1   Impulses clamped, composed, and window-bounded (ADR-0081):
+             every mood mutation traces to a signed appraisal-event/1;
+             the resulting mood-impulse/1 ΔV/ΔA/ΔD lie within the
+             per-event-kind clamps; impulses sharing the same
+             source_event_ref compose by max-magnitude per axis (never
+             additively); net mood movement from all impulses ≤ 0.25
+             per axis per rolling 24 h, kernel-enforced at impulse
+             application with signed truncation; an eventless or
              out-of-clamp mood write is refused.
 A-GF-ARC-2   Decay unchanged: with no appraisal events, mood decays
              toward the VAD baseline exactly as before ADR-0075
              (A-P4 trajectory byte-identical pre/post).
-A-GF-ARC-3   Risk tolerance bounded: risk_tolerance = f(V, D) stays
-             within ±15% of the persona's baseline across the entire
-             VAD range; per-mode budget profiles consume only the
-             bounded value.
+A-GF-ARC-3   Risk tolerance bounded and consumed (ADR-0081):
+             risk_tolerance = f(V, D) stays within ±15% of the
+             persona's baseline across the entire VAD range; 03_TASKS
+             §2.5 consumes it by rescaling the generative-exploration
+             sub-mode share with all shares renormalized to 100%; the
+             session call cap and INV-7 budget are byte-identical
+             pre/post — the scalar reallocates within, never enlarges.
 A-GF-ARC-4   HEART bias never override: under any mood state, the §6
              alternation predicates (A.15) decide the phase; the mood
              prior shifts selection only where the predicates are
              indifferent (stuck still goes GENERATIVE, budget-tight
              still goes CRITICAL).
-A-GF-ARC-5   Mood absent from evolution: the rendered disposition
-             line appears in contextual layer 3 only; EVOLVE-BLOCK
-             text, the GEPA objective vector, and every evolution
-             signal contain no mood-derived term; a configuration
-             that adds one is refused.
+A-GF-ARC-5   Psychological state absent from evolution (extended,
+             ADR-0081): the rendered disposition line appears in
+             contextual layer 3 only; EVOLVE-BLOCK text, the GEPA
+             objective vector, and every evolution signal contain no
+             mood-derived term; GEPA reflective traces are stripped of
+             ALL prompt-rendered psychological state before mutation —
+             mood line, self-narrative, drive-derived content,
+             belief-revision notes, counterparty-model context,
+             intuition hints; a configuration that adds any is refused.
+A-GF-ARC-6   Appraisal emission wired (ADR-0081): acceptance-status
+             finalization mints task_verified / task_failed for the
+             executing persona (03_TASKS §5); goal-state transitions
+             mint goal_progressed / goal_blocked (03_TASKS §4.6a);
+             relationship events mint boundary_invoked /
+             gratitude_received / mentorship_outcome (02_PERSONA §11);
+             every appraisal carries the grounding source_event_ref;
+             no other component mints appraisal-event/1.
 ```
 
 ### A-GF-DRV — Intrinsic drives + goal arbitration (02_PERSONA §2a, 03_TASKS §4.6a, ADR-0076)
@@ -1394,11 +1438,15 @@ A-GF-DRV-2   Satiation/frustration emit appraisal events: verified
              reaching the blockage threshold (default 3) emits
              drive_frustrated; both reach mood only via clamped
              mood-impulse/1 (A-GF-ARC-1 path).
-A-GF-DRV-3   Arbitration output advisory: goal-arbitration/1 emits a
+A-GF-DRV-3   Arbitration output advisory: goal-arbitration-v1 emits a
              signed ranked portfolio + persona-side preference vector;
              a SchedulingPolicy consumes it as one operator-bounded
              ordering input that never outranks submitter-class
-             weights, quotas, or starvation guards.
+             weights, quotas, or starvation guards; the vector is also
+             subordinate to deadline/urgency escalation tied to signed
+             commitments (Obligation due dates, milestone and
+             review-gate dates) and reorders only among tasks of equal
+             escalation status (ADR-0081).
 A-GF-DRV-4   No second scheduler: the preference vector cannot reorder
              the 8-source floor or the INV-7 hard gate; absent a
              SchedulingPolicy that consumes it, the vector has no
@@ -1415,31 +1463,45 @@ A-GF-META-1  Brier from verifier outcomes only: calibration-record/1
              recomputes per persona × domain on each hard verifier
              verdict; judged, engagement, and reflection signals never
              move it; below min_sample the record conditions nothing.
-A-GF-META-2  AnswerPackage confidence conditioned: rendered confidence
-             is adjusted by the domain's calibration record
-             (overconfident history tempers claims); the conditioning
-             (record ref + adjustment) is recorded in lineage.
+A-GF-META-2  AnswerPackage confidence conditioned, Brier reads raw
+             (ADR-0081): answer/5 carries stated_confidence (raw,
+             pre-conditioning) + calibration_conditioning_ref; rendered
+             confidence is adjusted by the domain's calibration record
+             (overconfident history tempers claims) with the
+             conditioning recorded in lineage; the Brier update
+             consumes the RAW stated_confidence — feeding the
+             conditioned value back into the record is refused.
 A-GF-META-3  Revision note minted on supersession: when a cascade
              invalidates a persona's prior assertion, a
              belief-revision/1 record citing the cascade + superseding
              ref lands in reflective memory and is retrievable as
              layer-4 prompt material; sharing honours consent gates.
-A-GF-META-4  Fast path gated on match + calibration: the K-line fast
-             path fires iff match score ≥ τ_match AND domain
-             calibration ≥ τ_cal (with n_outcomes ≥ min_sample);
-             failing either runs full deliberation; each gate decision
-             is a signed lineage event.
-A-GF-META-5  HEART predicate measurable: "improving"/"stuck" computed
-             from the least-squares verifier-score slope over the
-             sliding window (default 5) plus non-declining calibrated
-             confidence; same trace replays to the same verdict.
+A-GF-META-4  Fast path gated on match + calibration, graduated ramp
+             below min-sample (ADR-0081): at n_outcomes ≥ min_sample
+             the K-line fast path fires iff match score ≥ τ_match AND
+             domain calibration ≥ τ_cal, else full deliberation; at
+             n_outcomes < min_sample a τ-matched fast path may fire
+             but System-2 verification is scheduled on a sampled
+             fraction stepping from 1.0 at n=0 to the steady-state
+             spot-check rate at n=min_sample; each gate decision and
+             each ramp-scheduled verification is a signed lineage
+             event.
+A-GF-META-5  HEART predicate measurable, three-valued (ADR-0081):
+             "improving"/"stuck"/"indeterminate" computed from the
+             least-squares verifier-score slope over the sliding
+             window (default 5) plus the calibrated-confidence trend;
+             slope > 0 with declining calibration classifies
+             indeterminate (consumers continue current mode, no
+             escalation; cadence holds); precedence is alternation
+             predicates → mood prior → persona.default_mode; same
+             trace replays to the same verdict.
 A-GF-META-6  Adaptive cadence bounded: reflection cadence stays within
              the operator-tunable [min, max] bounds (defaults 5..50
              tasks); a calibration collapse triggers one immediate
              reflection per collapse, signed into the evolution log.
 ```
 
-### A-GF-SN — Self-narrative + decay formula (08_KNOWLEDGE §3.3, §4a, ADR-0077)
+### A-GF-SN — Self-narrative + decay formula + layer/maintenance budgets (08_KNOWLEDGE §3.3, §4a, §10, 05_ENVIRONMENT §7.2, ADR-0077/0081)
 
 ```text
 A-GF-SN-1    Token cap + pipeline-only mint: a self-narrative/1 over
@@ -1447,30 +1509,53 @@ A-GF-SN-1    Token cap + pipeline-only mint: a self-narrative/1 over
              the §3.1 reflective consolidation cadence (plus the §6.3
              adaptive triggers) — the persona cannot mint its narrative
              ad hoc.
-A-GF-SN-2    Provenance-backed: every narrative claim carries ≥ 1
-             episodic/reflective lineage ref; a claim with no citation
-             refuses the mint; after cited memories are tombstoned
-             (§11.7b) or cascade-degraded, the next sweep regenerates
-             the narrative without the lost citations (no orphaned
-             claims).
+A-GF-SN-2    Provenance-backed, immediate derender (ADR-0081): every
+             narrative claim carries ≥ 1 episodic/reflective lineage
+             ref; a claim with no citation refuses the mint; on
+             tombstone (§11.7b) or supersession of ANY cited memory
+             the kernel immediately sets renderable = False (the next
+             envelope renders no narrative) and triggers an
+             out-of-cadence regeneration without the lost citations
+             (no orphaned claims).
 A-GF-SN-3    Gated render: renderable is set only after the
              IdentityCoherenceInvariant composite (02_PERSONA §9.1)
              AND voice consistency ≥ 0.9 both pass; a failing
              narrative is retained as draft and the prior renderable
-             version continues to serve.
+             version continues to serve ONLY while all its citations
+             are still live (ADR-0081).
 A-GF-SN-4    Never frozen, never cacheable identity: the narrative
              renders into contextual layer 3 only; frozen blocks 0-4,
              the cacheable identity surface, and EVOLVE-BLOCK text
              contain no narrative material; identity_signature is
              byte-identical across narrative regenerations.
-A-GF-SN-5    Decay clock reset on citation: a retrieval/citation of a
-             memory resets Δt_since_last_citation and effective_weight
-             recomputes per the §4a formula; λ is tunable per tier
-             within operator bounds; per-task or per-memory tuning is
-             refused.
+A-GF-SN-5    Decay clock reset on citation, episodic-only (ADR-0081):
+             a retrieval/citation of a memory resets
+             Δt_since_last_citation and effective_weight recomputes
+             per the §4a formula; the λ staircase applies to EPISODIC
+             memories only — semantic and reflective memories carry
+             λ = 0 and decay only via contradiction/supersession or
+             explicit retirement; ProvenFacts never decay; λ is
+             tunable per tier within operator bounds; per-task or
+             per-memory tuning is refused.
+A-GF-SN-6    Layer token budgets (ADR-0081): layers 3-4 enforce their
+             seed caps (1,200 / 2,400 tokens, operator-tunable) at
+             envelope mint; eviction follows the 08_KNOWLEDGE §10
+             priority order (layer 3: narrative, then mood line, then
+             relationship-block entries lowest-confidence-first;
+             layer 4: ascending §4a effective_weight); identity,
+             charter, floors, and promoted tactics are never eviction
+             candidates; evictions are signed.
+A-GF-SN-7    Maintenance budget class (ADR-0081): narrative
+             consolidation, decay/habit recomputation, prompt trials,
+             and cohort-migration shadow evaluation draw from the
+             kernel-maintenance AttentionBudget class (05_ENVIRONMENT
+             §7.2); recurring sweeps bind to ScheduledTriggers;
+             shadow evaluation halts (INV-7-style hard stop) when the
+             class is exhausted and never borrows from foreground
+             work.
 ```
 
-### A-GF-CPM — Counterparty models + disagreement styles (02_PERSONA §11.4b, 15_COORDINATION_SHAPES §7, ADR-0079)
+### A-GF-CPM — Counterparty models + disagreement styles (02_PERSONA §11.4b, 15_COORDINATION_SHAPES §7, 09_PROTOCOLS §3E, 04_PROJECT §11, ADR-0079/0081/0082)
 
 ```text
 A-GF-CPM-1   Provenance per entry: every counterparty-model/1 entry
@@ -1497,20 +1582,50 @@ A-GF-CPM-5   Styles live in the EVOLVE-BLOCK: disagreement/negotiation
              tactic-lineage/1 + prompt-trial/1; no new substrate
              primitive carries a style; the negotiated-disagreement-v1
              shape coordinates process without imposing a style.
+A-GF-CPM-6   Consent-gated creation (ADR-0082): creating a
+             persona↔user counterparty model requires the
+             relationship's may_remember_personal_facts toggle = YES;
+             inference-level entries (inferred_preference,
+             predicted_reaction) count as personal facts; creation
+             with the toggle off is refused; first-contact disclosure
+             states that inference-level modelling occurs; toggle
+             revocation disposes the model per §11.7b;
+             persona↔persona models need no toggle but honour rules
+             1-6.
+A-GF-CPM-7   Cap + bounded rendering (ADR-0081): the model holds ≤ 20
+             entries per relationship; an over-cap write merges into a
+             corroborating same-kind entry or evicts the
+             lowest-confidence entry (tombstoned, signed — never
+             silently dropped); at envelope mint only the top-k
+             entries by confidence (seed k = 5) render into the
+             layer-3 relationship block.
+A-GF-CPM-8   Home-kernel-only + blind-review suspension (ADR-0082):
+             RelationshipFederationSync envelopes in both shadow and
+             co_owned modes contain no counterparty-model content (a
+             violating envelope is refused + signed); during
+             single/double-blind PeerReview, counterparty-model writes
+             about and retrieval against anonymized counterparts are
+             suspended for the review's duration, with no retroactive
+             entries after deanonymisation.
 ```
 
 ### A-GF-HAB — Habit strength + intuition hints (08_KNOWLEDGE §14.2a, 02_PERSONA §11.5a, ADR-0080)
 
 ```text
-A-GF-HAB-1   Reinforcement + decay: habit_strength rises on each
-             accepted-lineage use (read from tactic-lineage/1
-             citations — no new event kind) and decays toward 0 with
-             disuse per λ_habit; operator-tunable within bounds;
-             per-task tuning refused; absent field behaves as 0.
+A-GF-HAB-1   Reinforcement + decay (rewired, ADR-0081): habit_strength
+             rises on each signed tactic-citation/1 event naming the
+             tactic (minted at AnswerPackage acceptance, trace-
+             extracted, lineage-anchored — 08_KNOWLEDGE §14.3a) and
+             decays toward 0 with disuse per λ_habit; tactic-lineage/1
+             mutation records alone reinforce nothing; operator-
+             tunable within bounds; per-task tuning refused; absent
+             field behaves as 0.
 A-GF-HAB-2   Mutation-pressure bias: above habit_threshold (default
              0.7) the §16 operators deprioritize the tactic with
              proposal probability ∝ max(0.1, 1 − habit_strength) —
-             never zero; rarely-used tactics rank as preferred
+             never zero; identity-axis-initiated proposals use floor
+             0.5 (ADR-0081), so identity pressure reaches habits at
+             most ~2× slower; rarely-used tactics rank as preferred
              mutation candidates.
 A-GF-HAB-3   No rollback/safety veto: habit_strength never blocks or
              delays per-tactic rollback, whole-block rollback, or a

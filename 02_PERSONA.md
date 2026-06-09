@@ -99,14 +99,14 @@ Layer 6 (Goals) names *what* a persona pursues; until v1.1 nothing modelled *why
 
 **`drives/1` — three SDT-grounded scalars.** Each persona carries three slow-moving drive scalars — **curiosity**, **competence**, **relatedness** — grounded in self-determination theory [Deci & Ryan 2000], each ∈ [0, 1] with satiation/frustration dynamics. Drives move on a much slower clock than Layer-5 mood: per-update deltas are drift-bounded, and each drive relaxes toward its baseline over days, not minutes.
 
-> **Schema/spec:** Drives dataclass definition (schema drives/1), satiation/frustration dynamics, and the goal-arbitration/1 shape sketch. See [Appendix A.72](#appendix-a72).
+> **Schema/spec:** Drives dataclass definition (schema drives/1), satiation/frustration dynamics, and the goal-arbitration-v1 shape sketch. See [Appendix A.72](#appendix-a72).
 
 Four rules are normative:
 
 1. **Drive baselines MUST be seeded from the frozen OCEAN priors** by a deterministic, replayable derivation at birth (e.g. high openness ⇒ higher curiosity baseline; high conscientiousness ⇒ higher competence baseline; high extraversion/agreeableness ⇒ higher relatedness baseline) — drives are emergent *from* identity, never a parallel identity surface. Operator policy MAY tune baselines within bounds; per-task tuning is refused.
 2. **Satiation and frustration emit appraisal events.** Verified progress on a goal carrying a matching `drive_tag` satiates the drive (urgency falls); repeated blockage (default: 3 consecutive blocked attempts) frustrates it (urgency rises, then disengagement pressure). Both MUST emit a signed `appraisal-event/1` ([`§6.2`](#62-affect-coupling-surfaces-adr-0075)) — the appraisal path is the **only** way drives touch mood.
 3. **Layer-6 goal records gain OPTIONAL `drive_tags`** (one or more of the three drive names). Additive: untagged goals remain valid and are treated as drive-neutral by arbitration.
-4. **`goal-arbitration/1` is a coordination shape, NOT a kernel primitive** ([`15_COORDINATION_SHAPES.md §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog)). When a persona's goals conflict across projects, the shape composes an `EntityGroup` (the competing goal records) with a `DerivedMetric` ranking over four inputs — drive alignment, charter alignment, commitments/deadlines, relationship obligations — into a **ranked portfolio**, emitted as a persona-side **preference vector**. That vector is an admissible input to the existing ADR-0069 `SchedulingPolicy` ([`03_TASKS.md §4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076)); it is **explicitly NOT a second scheduler** — it never reorders the floor or the INV-7 hard gate, and absent a `SchedulingPolicy` that consumes it, it has no scheduling effect.
+4. **`goal-arbitration-v1` is a coordination shape, NOT a kernel primitive** ([`15_COORDINATION_SHAPES.md §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog)). When a persona's goals conflict across projects, the shape composes an `EntityGroup` (the competing goal records) with a `DerivedMetric` ranking over four inputs — drive alignment, charter alignment, commitments/deadlines, relationship obligations — into a **ranked portfolio**, emitted as a persona-side **preference vector**. That vector is an admissible input to the existing ADR-0069 `SchedulingPolicy` ([`03_TASKS.md §4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076)); it is **explicitly NOT a second scheduler** — it never reorders the floor or the INV-7 hard gate, and absent a `SchedulingPolicy` that consumes it, it has no scheduling effect.
 
 **Honest limits.**
 
@@ -274,21 +274,22 @@ Layer-5 mood decayed toward its VAD baseline (A-P4) and coupled into almost noth
 
 Four rules are normative:
 
-1. **Mood mutates only via clamped impulses.** Every mood change MUST trace to a signed `appraisal-event/1` whose `mood-impulse/1` lies within the per-event-kind clamps; the existing decay-to-baseline dynamics are unchanged (A-P4 holds byte-for-byte). No event, no mood change.
+1. **Mood mutates only via clamped impulses — with two fan-out bounds (ADR-0081).** Every mood change MUST trace to a signed `appraisal-event/1` whose `mood-impulse/1` lies within the per-event-kind clamps; the existing decay-to-baseline dynamics are unchanged (A-P4 holds byte-for-byte). No event, no mood change. (a) *Dedup/composition:* impulses sharing the same `source_event_ref` MUST compose by **max-magnitude per axis**, never additively — one grounding event moves mood at most once, however many appraisal kinds it matches (a verified task that also progresses a goal and satiates a drive is one impulse-worth of movement, not three). (b) *Window clamp:* the net mood movement from all impulses MUST NOT exceed **0.25 per axis per rolling 24 h**, kernel-enforced at impulse application; excess movement is truncated and the truncation signed.
 2. **Coupling surface (a) — risk tolerance.** `risk_tolerance = f(V, D)` (high valence + high dominance widen it; low/low narrow it), consumed by per-mode budget profiles ([`03_TASKS.md §2.5`](03_TASKS.md#25-investigative-per-mode-budget)) as a breadth scalar. It MUST stay within **±15% of the persona's baseline** across the entire VAD range — mood tilts exploration, it never doubles a budget or zeroes one.
-3. **Coupling surface (b) — HEART prior, never override.** Mood contributes a mode-selection **prior** to the §6 alternation: low-V/low-A biases toward CRITICAL/consolidation work, high-V/high-A toward GENERATIVE. It is a bias term consulted only where the A.15 predicates are indifferent; it MUST NOT override the §6 alternation contract (a stuck task still goes GENERATIVE, a budget-tight task still goes CRITICAL, whatever the mood).
+3. **Coupling surface (b) — HEART prior, never override.** Mood contributes a mode-selection **prior** to the §6 alternation: low-V/low-A biases toward CRITICAL/consolidation work, high-V/high-A toward GENERATIVE. It is a bias term consulted only where the A.15 predicates are indifferent or return `indeterminate` (§6.3); it MUST NOT override the §6 alternation contract (a stuck task still goes GENERATIVE, a budget-tight task still goes CRITICAL, whatever the mood). The precedence order is fixed (ADR-0081): **alternation predicates → mood prior → `persona.default_mode`** — the prior fills the gap between a decided predicate and the static default, nothing more.
 4. **Coupling surface (c) — one rendered line, contextual layer only.** Current mood renders as a single "current disposition" line into the **contextual** prompt layer 3 ([`08_KNOWLEDGE.md §10a`](08_KNOWLEDGE.md#10a-contextual-mood-line-adr-0075)) and nowhere else. Mood state MUST NOT enter EVOLVE-BLOCKs, the GEPA objective vector, or any evolution signal — **a persona must never be selected for appearing affected.**
 
 **Honest limits.** Coupling makes the affect performance more *consistent*, not more *real*: appraisal events, clamps, and coupling surfaces give mood lawful, auditable behavioural consequences, but mood remains a decaying number and its declarations remain performance, not interiority (R-PERSONA-3, restated in [`§13`](#13-risks--known-limitations)). The OCC taxonomy is adopted for *appraisal events only*; the mood **state** stays VAD (resolves OQ-PERSONA-3, [`§13a`](#13a-open-questions)) — richer affect-state machinery remains out of scope.
 
-**Acceptance tests.** A-GF-ARC-1 … A-GF-ARC-5 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+**Acceptance tests.** A-GF-ARC-1 … A-GF-ARC-6 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
 
 ### 6.3 HEART switch predicate — concrete (ADR-0078)
 
 The A.15 phase selection turned on `rounds_without_progress` and `candidate_score_improves` without defining them — "stuck" and "improving" were vague, and the reflection cadence ([`08_KNOWLEDGE.md §13`](08_KNOWLEDGE.md#13-reflection-driven-refinement), every 20 tasks) was a constant. Both become measurable:
 
-- **improving** := the least-squares slope of verifier scores over a sliding window (default **5 attempts**, operator-tunable) is **positive** AND the persona's calibrated confidence ([`08_KNOWLEDGE.md §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078)) is **not declining** over the same window. Rising scores with collapsing calibration is not improvement — it is luck the persona cannot yet predict.
+- **improving** := the least-squares slope of verifier scores over a sliding window (default **5 attempts**, operator-tunable) is **positive** AND the persona's calibrated confidence ([`08_KNOWLEDGE.md §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078)) is **not declining** over the same window.
 - **stuck** := slope ≤ 0 over the window.
+- **indeterminate** := slope > 0 with declining calibration (ADR-0081) — neither improving nor stuck. Rising scores with collapsing calibration is not improvement (it is luck the persona cannot yet predict), but it is not stuckness either. Consumers MUST treat `indeterminate` as "continue current mode, no escalation": HEART falls through to the §6.2 mood prior then `persona.default_mode` (the rule-3 precedence), and the adaptive cadence below neither stretches nor compresses.
 
 > **Schema/spec:** HEART switch predicate definition + adaptive reflection-cadence bounds. See [Appendix A.74](#appendix-a74).
 
@@ -625,6 +626,8 @@ v1.0 default weights (operator-tunable):
 
 **ADR-0073 note.** The `identity_expression` term (§8.1a) is additive to the credit formula (`w_ide`, A.37/A.38); default weights renormalise in the evolution-config v-next. Operator-tunable; no schema break.
 
+**Reconciliation with Pareto separation (ADR-0081).** `w_ide` governs **post-hoc credit attribution** only — how an accepted outcome's fitness delta is apportioned. GEPA candidate **selection** keeps identity expression as a separate Pareto axis ([`08_KNOWLEDGE.md §11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073) rule 2) and never scalarizes it; `w_ide` MUST NOT feed selection or promotion scalarization. The credit weight and the Pareto axis never meet in one sum.
+
 ### 8.4 Mutation operators
 
 v1.0 has 22 kernel-mediated mutation operators (all gated, signed, rate-limited):
@@ -688,6 +691,8 @@ Reflection candidates require **signal corroboration** before promotion:
 When a persona interacts with a user, RelationshipRecord governs:
 
 > **Schema/spec:** Default new-relationship consents and memory power asymmetry mitigations. See [Appendix A.43](#appendix-a43).
+
+**Appraisal hook (ADR-0075, wired by ADR-0081).** The relationship-kind appraisal events of [`§6.2`](#62-affect-coupling-surfaces-adr-0075)/A.73 — `boundary_invoked`, `gratitude_received`, `mentorship_outcome` — are minted by the kernel from the corresponding signed relationship events in this section: a boundary enforcement (§11.6/§11.6a), a user gratitude/feedback event on the `RelationshipRecord`, a mentorship outcome on a `PersonaRelationshipEdge` (§11.4). The relationship event is the appraisal's `source_event_ref`; no relationship appraisal mints without one. Together with the task-acceptance and goal-transition emissions of [`03_TASKS.md §5`](03_TASKS.md#5-answerpackage)/[`§4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076), this completes the minting surface for the seed appraisal taxonomy. Tests: A-GF-ARC-6.
 
 ### 11.1 Minimize Human Bootstrap Burden (MHBB)
 
@@ -830,7 +835,7 @@ Each transition emits a signed `persona_relationship_state_changed` event to bot
 
 > **Schema/spec:** CounterpartyModel + CounterpartyEntry dataclass definitions (schema counterparty-model/1) and the disagreement-style seed vocabulary. See [Appendix A.75](#appendix-a75).
 
-Six rules are normative:
+Eight rules are normative:
 
 1. **Additive sidecar.** A `counterparty-model/1` attaches to a `RelationshipRecord` (persona ↔ user) or to one persona's side of a `PersonaRelationshipEdge` (persona ↔ persona). It is OPTIONAL — relationships without one remain valid; no schema version bump on either parent.
 2. **Every entry is provenance-linked.** Each entry (inferred preference, communication style, predicted reaction) MUST carry at least one lineage ref to the episodic memories that justify it; an unsourced entry is refused at write. The model can contain only what the relationship's recorded history supports — the same anti-confabulation stance as `self-narrative/1` ([`08_KNOWLEDGE.md §3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077)).
@@ -838,6 +843,8 @@ Six rules are normative:
 4. **Selective forgetting reaches it.** A `UserMemorySelectionRequest` (§11.7b) MUST be able to name and delete individual counterparty-model entries; deletion follows the §11.7b disposition semantics (tombstone default), and a deleted entry is refused at retrieval exactly as tombstoned memory is.
 5. **Never shared cross-persona outside consent.** A counterparty model MUST NOT be shared with another persona except through the §11.7 consent path; `cross_persona_transferable` defaults `False`. Persona A's model of Sarah never reaches persona B because A and B collaborate.
 6. **Composes with, never bypasses, the MPA mitigations.** The Memory Power Asymmetry mitigations (§11.1 / A.43 — mutual forgetting, transparency, granular consent, co-signed summaries) apply to counterparty-model entries as to any user-scoped memory; the sidecar adds an addressable surface for them, it weakens none of them.
+7. **Persona↔user models require consent (ADR-0082).** Creating a `counterparty-model/1` on a persona↔user `RelationshipRecord` REQUIRES the relationship's `may_remember_personal_facts` consent toggle (A.43) to be **YES** — inference-level entries (`inferred_preference`, `predicted_reaction`) count as personal facts for consent purposes; an inference about a person is no less personal than a remembered fact about them. First-contact disclosure MUST state that inference-level modelling occurs when the toggle is on — the user opts into being modelled, not merely remembered. If the toggle is later revoked, the model is disposed per §11.7b semantics. Persona↔persona models need no toggle but remain subject to rules 1–6.
+8. **Bounded and rendered (ADR-0081).** A counterparty model is capped at **20 entries per relationship**. A write that would exceed the cap MUST first consolidate: merge the new entry into a corroborating existing entry of the same kind where one exists, else evict the lowest-confidence entry (tombstoned per §11.7b semantics, never silently dropped). At envelope mint, the **top-k entries by confidence (seed k = 5)** render into the existing layer-3 relationship context block ([`08_KNOWLEDGE.md §10`](08_KNOWLEDGE.md#10-five-layer-prompt-assembly)/A.20), subject to the layer-3 token cap — the model informs behaviour through the same bounded surface as the rest of relationship state, never as an unbounded dossier.
 
 **Disagreement and negotiation styles — seed vocabulary, not a primitive.** How a persona *disagrees with this counterparty* ships as seed vocabulary for the existing `relational_style` EVOLVE-BLOCK (the A.2 SOUL example's "in disagreement: prefer one specific concrete example over abstraction" line is already this shape): **direct-challenge** (state the disagreement plainly, evidence attached), **evidence-first** (lead with the disconfirming evidence, let it speak), **socratic** (surface the contradiction through questions), **accommodate-then-revisit** (yield the moment, reopen with evidence at the next natural point). These are tactic lines, so the existing evolution machinery differentiates them per relationship emergently — mutations ride `tactic-lineage/1` + `prompt-trial/1` (ADR-0073/0074, [`08_KNOWLEDGE.md §14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074)) with the counterparty model's observed-style entries as reflection material. No new substrate primitive carries styles; the §9 relational-drift cap and the one-counterparty influence cap apply unchanged. A coordination shape for structured disagreement, `negotiated-disagreement-v1`, ships in the seed catalog ([`15_COORDINATION_SHAPES.md §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog)).
 
@@ -847,7 +854,7 @@ Six rules are normative:
 2. **The implicit-modelling residual shrinks but survives.** What a persona internalises without writing an entry remains unaddressable (the same residual as §11.7b honest limit 3); the sidecar moves explicit modelling into the transparency/forgetting surface, it cannot force all modelling to be explicit.
 3. **Profiling humans is sensitive by construction.** An explicit persistent model of a human's preferences and predicted reactions is exactly the artefact privacy regimes exist for — recorded as R-PERSONA-9 (§13), mitigated by rules 2–6, not waved away.
 
-**Acceptance tests.** A-GF-CPM-1 … A-GF-CPM-5 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+**Acceptance tests.** A-GF-CPM-1 … A-GF-CPM-8 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
 
 ### 11.5 SkillTransferGrant — persona-to-persona skill transfer
 
@@ -1110,7 +1117,7 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-PERSONA-6 | Charter is finite — cannot anticipate every situation. Out-of-charter actions risk unsafe refusal or unsafe acceptance. | High | Medium | Safety floor 8-source composition; operator override; ProactiveIntent rate limits; refusal-on-uncertain default. | v1.0 (baseline). |
 | R-PERSONA-7 | Forking is identity loss. New persona_id and new lineage; prior relationships need consent + re-establishment. | Medium | Medium | Consent flow at fork; relationship-survivorship metadata; A-P8 acceptance test enforces fork inheritance policy. | v1.0 (consent flow); v1.1 (relational survivorship metadata richer). |
 | R-PERSONA-8 | Character-vector binding is body-side state; the substrate signs the reference, not the vector. A compromised body provider invalidates the substrate signature semantics. | High | Low | Optional binding mode; conformance audit at admission (`§3.5`); operator policy may forbid character-vector binding for safety-critical personas. | v1.0 (optional); v1.1 (operator policy hardening). |
-| R-PERSONA-9 | Counterparty models are profiling. An explicit, persistent model of a human user's inferred preferences, communication style, and predicted reactions (`§11.4b`) is sensitive personal-data processing; misused, it is manipulation infrastructure. | High | Medium | Every entry provenance-linked to justifying episodes (unsourced entries refused); full transparency via `§11.7a`; selective deletion via `§11.7b`; no cross-persona sharing outside the `§11.7` consent path; MPA mitigations (`§11.1`) compose unweakened; anti-manipulation audit clearance (`§10`, `08_KNOWLEDGE §15`) gates engagement-driven promotion of relational tactics. | v1.1 (ADR-0079). |
+| R-PERSONA-9 | Counterparty models are profiling. An explicit, persistent model of a human user's inferred preferences, communication style, and predicted reactions (`§11.4b`) is sensitive personal-data processing; misused, it is manipulation infrastructure. | High | Medium | Creation of a persona↔user model gated on the `may_remember_personal_facts` consent toggle, with inference-level entries counted as personal facts and first-contact disclosure of inference-level modelling (`§11.4b` rule 7, ADR-0082); every entry provenance-linked to justifying episodes (unsourced entries refused); 20-entry cap with merge-or-evict consolidation and top-k bounded rendering (rule 8, ADR-0081); full transparency via `§11.7a`; selective deletion via `§11.7b`; no cross-persona sharing outside the `§11.7` consent path; sidecars are home-kernel-only — excluded from federation sync in all modes (`09_PROTOCOLS §3E`, ADR-0082); writes and retrieval suspended against anonymized counterparts during blind review (`04_PROJECT §11`, ADR-0082); MPA mitigations (`§11.1`) compose unweakened; anti-manipulation audit clearance (`§10`, `08_KNOWLEDGE §15`) gates engagement-driven promotion of relational tactics. | v1.1 (ADR-0079; hardened ADR-0082). |
 
 ## 13a. Open questions
 
@@ -1928,7 +1935,11 @@ elif budget_tight and no_verified_candidate:
 elif phase == "DIVERGE":
     mode = GENERATIVE
 else:
-    mode = persona.default_mode
+    # Predicates indifferent, or the §6.3 verdict is `indeterminate`
+    # (slope > 0, declining calibration → continue current mode, no
+    # escalation).  Precedence (ADR-0081): alternation predicates →
+    # mood prior (§6.2 rule 3) → persona.default_mode.
+    mode = heart_prior if heart_prior is not None else persona.default_mode
 
 # Mood composition:
 attention_baseline = 1.0 - (1.0 - mood.V) * 0.5
@@ -2170,10 +2181,14 @@ MIDPROJECT_FORK_REFUSED       v1.0.11: fork refused per substrate
 3. Kernel mints persona_id (ULID)
 4. Kernel signs SOUL v1 (Ed25519 over canonical concatenation of
    persona_id || version || cacheable identity blocks)
-5. Kernel initializes soul.state.json (empty archives, fitness=0,
+5. Kernel derives + signs the identity rubric (identity-rubric/1)
+   from the just-signed blocks 0-4 (08_KNOWLEDGE §11.1b rule 5,
+   ADR-0073/0081); pre-ADR-0073 personas get theirs from the
+   operator-triggered backfill job instead
+6. Kernel initializes soul.state.json (empty archives, fitness=0,
    fertility=0, experience_tasks=0, experiential_floor=0, born_at=now())
-6. Kernel publishes persona to local PersonaRegistry
-7. (Optional) Mint signed A2A AgentCard if network presence allowed
+7. Kernel publishes persona to local PersonaRegistry
+8. (Optional) Mint signed A2A AgentCard if network presence allowed
 ```
 
 ### Appendix A.21
@@ -5050,7 +5065,7 @@ provenance:
 
 ### Appendix A.72
 
-**Drives dataclass definition (schema drives/1), satiation/frustration dynamics, and goal-arbitration/1 shape sketch** (referenced from §2a)
+**Drives dataclass definition (schema drives/1), satiation/frustration dynamics, and goal-arbitration-v1 shape sketch** (referenced from §2a)
 
 ```python
 @dataclass
@@ -5094,7 +5109,7 @@ class Drives:
 ```
 
 ```text
-GOAL ARBITRATION (goal-arbitration/1, STANDARDISED seed shape,
+GOAL ARBITRATION (goal-arbitration-v1, STANDARDISED seed shape,
 intra_env; composition of EntityGroup + DerivedMetric — NOT a kernel
 primitive, NOT a second scheduler):
 
@@ -5161,6 +5176,19 @@ class MoodImpulse:
 ```
 
 ```text
+FAN-OUT BOUNDS (kernel-enforced at impulse application; §6.2 rule 1,
+ADR-0081):
+
+  dedup/composition: impulses sharing the same source_event_ref
+                     compose by max-magnitude per axis — never
+                     additively.  One grounding event ⇒ at most one
+                     impulse-worth of movement.
+  window clamp:      net mood movement from all impulses ≤ 0.25 per
+                     axis per rolling 24 h; excess truncated, the
+                     truncation signed.
+```
+
+```text
 COUPLING SURFACES (seed formulas; operator-tunable within stated bounds)
 
 (a) risk tolerance — consumed by per-mode budget profiles
@@ -5203,11 +5231,15 @@ PREDICATES
   cal_trend  = trend of calibrated confidence (08_KNOWLEDGE §13a
                calibration-record/1 for the task's domain) over W
 
-  improving := slope > 0  AND  cal_trend ≥ 0
-  stuck     := slope ≤ 0
+  improving     := slope > 0  AND  cal_trend ≥ 0
+  stuck         := slope ≤ 0
+  indeterminate := slope > 0  AND  cal_trend < 0     (ADR-0081)
 
   (rising scores + collapsing calibration is NOT improving — it is
-   luck the persona cannot yet predict; HEART treats it as stuck.)
+   luck the persona cannot yet predict — but it is not stuck either;
+   consumers treat indeterminate as "continue current mode, no
+   escalation": HEART falls through to the §6.2 rule-3 precedence,
+   the cadence holds.)
 
 ADAPTIVE REFLECTION CADENCE
   cadence bounds (operator-tunable): min 5 tasks .. max 50 tasks
@@ -5215,6 +5247,7 @@ ADAPTIVE REFLECTION CADENCE
 
   sustained improving  → cadence stretches toward max
   stuck                → cadence compresses toward min
+  indeterminate        → cadence holds (no stretch, no compress)
   calibration collapse (Brier-style score worsens by ≥
   collapse_threshold, default 0.15, within W)
                        → reflection triggers immediately,
@@ -5239,10 +5272,24 @@ class CounterpartyModel:
     attached_to: str                   # RelationshipRecord id (persona↔user)
                                        # or persona-relationship/1 edge_id
                                        # (this persona's side only)
-    entries: list[CounterpartyEntry]
+    entries: list[CounterpartyEntry]   # capped at max_entries; an over-cap
+                                       # write merges-or-evicts per §11.4b
+                                       # rule 8 (ADR-0081)
+    max_entries: int = 20              # per-relationship cap (rule 8)
+    render_top_k: int = 5              # top-k by confidence rendered into
+                                       # the layer-3 relationship block
+                                       # (rule 8; 08_KNOWLEDGE §10)
+    consent_ref: str | None = None     # persona↔user models: ref to the
+                                       # may_remember_personal_facts = YES
+                                       # consent (rule 7, ADR-0082);
+                                       # None only for persona↔persona
     cross_persona_transferable: bool = False
                                        # share ONLY via the §11.7 consent
                                        # path; default stays False
+                                       # HOME-KERNEL-ONLY: never enters
+                                       # RelationshipFederationSync
+                                       # envelopes (09_PROTOCOLS §3E,
+                                       # ADR-0082)
     updated_at: datetime
     signed_by: bytes                   # kernel signature — signing only
 

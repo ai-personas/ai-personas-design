@@ -121,6 +121,8 @@ Budget is allocated per sub-mode within a session, with degradation rules when a
 
 Operator policy may override per-project. The kernel signs each sub-mode budget tick; overruns produce signed `SUBMODE_BUDGET_EXHAUSTED` events.
 
+**Mood risk-tolerance scalar (ADR-0075, wired by ADR-0081).** The bounded `risk_tolerance` breadth scalar of [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) rule 2 (hard-bounded to ±15% of baseline) is consumed here, and only here: at session start the resolved profile's **generative-exploration sub-mode share** (the `exploration` share in A.7/A.8) is rescaled by the scalar, and all sub-mode shares are then renormalized to sum to 100%. The session call cap and the INV-7 hard budget gate are UNCHANGED — the scalar reallocates *within* the session budget across sub-modes; it MUST NOT enlarge the session budget or any cap. Tests: A-GF-ARC-3 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+
 **Budget profile resolution.** The defaults above are tuned for reasoning-heavy INVESTIGATIVE work (math, software research). Document-heavy regulated physical domains (residential construction parsing IRC + IBC + NEC + geotech reports; clinical care parsing referral packages) routinely exhaust the session cap on ingestion before reasoning begins. v1.0 resolves session budget per the following precedence:
 
 *Budget profile resolution precedence: EnvironmentBlueprint override > DomainContext profile > v1.0 default. Profiles: reasoning_heavy, document_heavy, tool_heavy, balanced.* See [Appendix A.8](#appendix-a8--budget-profile-resolution-25).
@@ -169,7 +171,7 @@ A persona's `primary_disposition` biases mode selection when multiple modes are 
 
 ## 2b. Orchestration-kind promotion — trust-decay curve, evidence threshold, and the bounded-compositional policy profile
 
-*This section is normative. It resolves [OQ-TASKS-6](#9a-open-questions) and operationalises the trust-calibration guarantee of [§2a](#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes) ([ADR-0066](14_DECISIONS.md#adr-0066--self-organizing-orchestration-the-run-loop-is-an-emergent-coordination-shape-not-a-fixed-dispatcher)): how an emergent acceptance pathway accrues and loses trust, when it auto-promotes EMERGENT → RECOGNISED, when it demotes, and how an operator may pin the bounded-compositional set where they want a hard floor on acceptance methods. It reuses the domain promotion ladder ([`06_DOMAIN §7.6`, A.61](06_DOMAIN.md#76-kindregistry-and-the-cross-domain-metaregistry)) and the EWMA trust mechanism ([`04_PROJECT`](04_PROJECT.md)); the orchestration-specific axis is **acceptance soundness** — an emergent pathway's failure mode is silently accepting poor work ([`R-TASKS-7`](#9-risks--known-limitations)), so its evidence is measured against an independent reference, not just usage volume.*
+*This section is normative. It resolves [OQ-TASKS-6](#9a-open-questions) and operationalises the trust-calibration guarantee of [§2a](#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes) ([ADR-0066](14_DECISIONS.md#adr-0066--self-organizing-orchestration-the-run-loop-is-an-emergent-coordination-shape-not-a-fixed-dispatcher)): how an emergent acceptance pathway accrues and loses trust, when it auto-promotes EMERGENT → RECOGNISED, when it demotes, and how an operator may pin the bounded-compositional set where they want a hard floor on acceptance methods. It reuses the domain promotion ladder ([`06_DOMAIN §7.6`, A.61](06_DOMAIN.md#76-kindregistry-and-the-cross-domain-metaregistry)) and the EWMA trust mechanism (defined in [§2b.1](#2b1-verdict-trust-decay-curve) below; the domain-trust analogue is [`06_DOMAIN.md A.61`](06_DOMAIN.md)); the orchestration-specific axis is **acceptance soundness** — an emergent pathway's failure mode is silently accepting poor work ([`R-TASKS-7`](#9-risks--known-limitations)), so its evidence is measured against an independent reference, not just usage volume.*
 
 ### 2b.1 Verdict trust-decay curve
 
@@ -441,29 +443,37 @@ A node (`01_KERNEL §2.4.4`) admits work from three submitter classes — its **
 
 ### 4.6a Goal-arbitration preference vector — an admissible SchedulingPolicy input (ADR-0076)
 
-A persona running the `goal-arbitration/1` seed shape ([`02_PERSONA.md §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076), [`15_COORDINATION_SHAPES.md §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog)) produces a ranked portfolio over its competing personal goals, emitted as a signed **persona-side preference vector**. A `SchedulingPolicy` (§4.6) MAY consume that vector as one additional input to its ordering function — a `DerivedMetric` term alongside priority weight, urgency/deadline escalation, and ageing — so that, *within a submitter class and within the operator's policy*, work aligned with the persona's arbitrated goal portfolio is preferred.
+A persona running the `goal-arbitration-v1` seed shape ([`02_PERSONA.md §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076), [`15_COORDINATION_SHAPES.md §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog)) produces a ranked portfolio over its competing personal goals, emitted as a signed **persona-side preference vector**. A `SchedulingPolicy` (§4.6) MAY consume that vector as one additional input to its ordering function — a `DerivedMetric` term alongside priority weight, urgency/deadline escalation, and ageing — so that, *within a submitter class and within the operator's policy*, work aligned with the persona's arbitrated goal portfolio is preferred.
 
 Three constraints are normative:
 
-1. **Advisory and bounded.** The preference-vector term's weight in the ordering function is operator-bounded; it MUST NOT outrank the submitter-class priority weights, per-class quotas, or starvation guards of §4.6, and absent a `SchedulingPolicy` that consumes it, the vector has no scheduling effect.
+1. **Advisory and bounded.** The preference-vector term's weight in the ordering function is operator-bounded; it MUST NOT outrank the submitter-class priority weights, per-class quotas, or starvation guards of §4.6, and absent a `SchedulingPolicy` that consumes it, the vector has no scheduling effect. The vector is likewise subordinate to **deadline/urgency escalation tied to signed commitments** (ADR-0081) — `Obligation` due dates, `ProjectMilestone` deadlines, and review-gate dates ([`04_PROJECT.md §7/§9/§11a`](04_PROJECT.md#9-obligation--inter-persona-commitment)) — which the §4.6 ordering function already escalates on; the vector MAY reorder only among tasks of **equal escalation status**, never above an escalated commitment.
 2. **Floor and budget untouched.** The vector MUST NOT reorder the 8-source floor or the INV-7 hard budget gate — the same invariant §4.6 already states for every soft ordering input.
 3. **Not a second scheduler.** Arbitration ranks the persona's *goals*; the node's `SchedulingPolicy` remains the only ordering authority over its *queue*. The vector is one input to that single authority, never a parallel discipline.
 
-**Tests:** A-GF-DRV-3 (vector consumed as bounded ordering input), A-GF-DRV-4 (no second scheduler; floor/INV-7 untouched). See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+**Goal-appraisal emission (ADR-0075/0076, wired by ADR-0081).** Layer-6 goal-state transitions are an appraisal source: when a goal record transitions on verified progress, the kernel MUST mint a signed `appraisal-event/1` of kind `goal_progressed`; when a goal attempt is blocked (and on reaching the [`02_PERSONA.md §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076) frustration threshold), kind `goal_blocked`. The `source_event_ref` is the signed goal-stack transition. This — together with the task-acceptance emission of [§5](#5-answerpackage) and the relationship hook of [`02_PERSONA.md §11`](02_PERSONA.md#11-persona--user-interaction) — is the complete minting surface for the [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075)/A.73 appraisal taxonomy; no other component mints appraisals.
+
+**Tests:** A-GF-DRV-3 (vector consumed as bounded ordering input; subordinate to commitment escalation), A-GF-DRV-4 (no second scheduler; floor/INV-7 untouched), A-GF-ARC-6 (appraisal emission wiring). See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
 
 ## 5. AnswerPackage
 
-The canonical kernel return value (schema **answer/4** in v1.0).
+The canonical kernel return value (schema **answer/5**; `answer/4` until the ADR-0081 confidence fields).
 
-*`AnswerPackage` dataclass: identity, answer text, status enum, pathway-specific acceptance evidence, cost, environment, artifact bundle ref, structured outcomes, lineage, audit fields, and signature.* See [Appendix A.33](#appendix-a33--answerpackage-dataclass-5).
+*`AnswerPackage` dataclass: identity, answer text, status enum, pathway-specific acceptance evidence, stated confidence, cost, environment, artifact bundle ref, structured outcomes, lineage, audit fields, and signature.* See [Appendix A.33](#appendix-a33--answerpackage-dataclass-5).
+
+**Stated confidence (ADR-0078, wired by ADR-0081).** `answer/5` carries the confidence circuit that [`08_KNOWLEDGE.md §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078) consumes: `stated_confidence` is the persona's RAW, pre-conditioning confidence in [0, 1] (`None` where no confidence claim is made), and `calibration_conditioning_ref` is the lineage ref to the calibration conditioning applied at render (record ref + adjustment). The Brier update of §13a rule 1 MUST consume the raw `stated_confidence`; the calibration-conditioned value is a rendering-layer adjustment only — recorded via `calibration_conditioning_ref` so audit can distinguish raw from calibrated, never fed back into the record that produced it.
+
+**Migration (`answer/4` → `answer/5`, per [`09_PROTOCOLS.md §7.13`](09_PROTOCOLS.md#713-adding-or-modifying-schemas)).** Both new fields are nullable; the §7.13 mapper from `answer/4` sets `stated_confidence = None` and `calibration_conditioning_ref = None`. The version is bumped (rather than retained under the additive-field allowance) because §13a rule 2 makes the raw-vs-conditioned distinction load-bearing for audit: a consumer MUST be able to tell from the schema version whether the confidence circuit exists. Registry row updated in [`09_PROTOCOLS.md §7.2`](09_PROTOCOLS.md#72-acceptance--task); tests A-T19, A-GF-META-2.
+
+**Task-appraisal emission (ADR-0075, wired by ADR-0081).** When the kernel finalizes an AnswerPackage's acceptance status, it MUST mint a signed `appraisal-event/1` for the executing persona: kind `task_verified` for any successful-acceptance-bucket status, kind `task_failed` for the termination-bucket statuses (incl. `no_verified_answer`; A.34); partial/edge-bucket statuses mint neither by default (operator-tunable). The `source_event_ref` is the signed AnswerPackage. This grounds the [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) task-event appraisal kinds — no free-floating appraisals. Goal-state appraisals mint per [§4.6a](#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076); relationship-kind appraisals per [`02_PERSONA.md §11`](02_PERSONA.md#11-persona--user-interaction). Tests: A-GF-ARC-6.
 
 ### 5.1 Status enum semantics
 
-*Status enum: 10 successful acceptance statuses, 5 partial/edge statuses, 8 termination statuses.* See [Appendix A.34](#appendix-a34--status-enum-semantics-51).
+*Status enum: 12 successful acceptance statuses, 7 partial/edge statuses, 8 termination statuses — 27 values total.* See [Appendix A.34](#appendix-a34--status-enum-semantics-51).
 
 v1.0 adds richness to status values.
 
-**Tests:** A-T19 (status enum covers all 23 v1.0 values), A-T24 (DELEGATED inheritance), A-T7 (PEDAGOGIC long-arc package shape). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Tests:** A-T19 (status enum covers all 27 values, incl. the ADR-0071 `converged`/`no_further_improvement`), A-T24 (DELEGATED inheritance), A-T7 (PEDAGOGIC long-arc package shape). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
 ## 6. AcceptanceConfig
 
@@ -1708,7 +1718,9 @@ class Trigger:
 @dataclass
 class AnswerPackage:
     # --- IDENTITY ---
-    schema: str = "answer/4"
+    schema: str = "answer/5"                # v5 adds the two confidence
+                                            # fields (ADR-0081; migration
+                                            # note in §5)
     answer_id: str                          # ULID
 
     # --- ORIGIN / SUBMITTER (ADR-0069; additive, defaults to owner) ---
@@ -1796,7 +1808,18 @@ class AnswerPackage:
     # PROJECT_PROGRESS_ACCEPT
     project_id: str | None
     project_state_delta: dict | None
-    
+
+    # --- CONFIDENCE (ADR-0078 calibration; new in answer/5, ADR-0081) ---
+    stated_confidence: float | None         # RAW pre-conditioning confidence
+                                            # in [0, 1]; the 08 §13a Brier
+                                            # update consumes THIS value
+    calibration_conditioning_ref: str | None
+                                            # lineage ref to the calibration
+                                            # conditioning applied at render
+                                            # (record ref + adjustment);
+                                            # rendering-only — never feeds
+                                            # back into the record
+
     # --- COST ---
     total_tokens: int
     total_llm_calls: int
@@ -1837,19 +1860,25 @@ class AnswerPackage:
 ### Appendix A.34 — Status enum semantics (§5.1)
 
 ```text
-SUCCESSFUL ACCEPTANCE STATUSES (10):
+27 values total (ADR-0081 recount; buckets corrected — human_approved
+is an acceptance, not a termination).
+
+SUCCESSFUL ACCEPTANCE STATUSES (12):
   verified, panel_accepted, panel_dissent_resolved, user_accepted,
   mutually_accepted, engagement_continued, progress_advanced,
-  progress_achieved, trajectory_logged, project_progress_accept
+  progress_achieved, trajectory_logged, project_progress_accept,
+  project_progress_accept_and_completion, human_approved
 
-PARTIAL / EDGE STATUSES (5):
+PARTIAL / EDGE STATUSES (7):
   partial, progress_none, progress_regressed, accepted_overton,
-  accepted_arbitrated, project_progress_accept_and_completion
+  accepted_arbitrated, converged, no_further_improvement
+  (converged / no_further_improvement: ADR-0071 ContinuousRefinement-
+   Mission — best-so-far returned when marginal value < ε)
 
 TERMINATION STATUSES (8):
-  no_verified_answer, host_terminated, user_terminated, operator_terminated,
-  budget_exhausted, schema_violation, content_refusal,
-  context_overflow_abort, human_approved
+  no_verified_answer, host_terminated, user_terminated,
+  operator_terminated, budget_exhausted, schema_violation,
+  content_refusal, context_overflow_abort
 ```
 
 ### Appendix A.35 — AcceptanceConfig dataclass (§6)
@@ -2016,7 +2045,10 @@ A-T15  Mode C: ephemeral env created; archived after session.
 A-T16  PANEL_DISSENT escalation: Curator selects RESAMPLE/OVERTON/HUMAN.
 A-T17  PROJECT_PROGRESS_ACCEPT evaluator includes ambient signals.
 A-T18  Multi-class decomposition: RELATIONAL first, technical second.
-A-T19  AnswerPackage status enum covers all 23 v1.0 status values.
+A-T19  AnswerPackage status enum covers all 27 status values
+       (incl. ADR-0071 converged / no_further_improvement) in the
+       corrected A.34 buckets (12 / 7 / 8); answer/5 carries the
+       stated_confidence + calibration_conditioning_ref fields.
 A-T20  Multi-environment project: env selection per v1.0 §4.2.
 A-T21  INVESTIGATIVE sub-modes (exploration/verification/synthesis/
        expert_review) entry signed via SUBMODE_ENTRY; transitions

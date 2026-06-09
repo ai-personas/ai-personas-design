@@ -1211,7 +1211,13 @@ class DomainContext:
     
     # SEEDS
     seed_skills: list[SkillSpec]
-    seed_tactics: list[str]
+    seed_tactics: list[str]            # on first adoption into a persona's
+                                       # EVOLVE-BLOCK, each seed tactic
+                                       # MUST mint a tactic-lineage/1 root
+                                       # (version 1, parent_version None,
+                                       # mutation_operator "seed") so later
+                                       # mutations/trials anchor to a DAG
+                                       # root (08_KNOWLEDGE §14.3; ADR-0081)
     seed_charters: list[str]
     seed_acceptance_pathways: list[str]
     

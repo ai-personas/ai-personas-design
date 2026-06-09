@@ -275,7 +275,9 @@ Disagreements are **explicitly preserved**, not suppressed. Default lifetime is 
 
 **Persona-evolvable surface — none.** This is pure substrate topology; the field names and tiers are fixed (named, single_blind, double_blind cover the real-world space).
 
-**Acceptance tests.** A-PR-AN1 (single-blind strips reviewer identity from author-visible projections), A-PR-AN2 (double-blind requires independent anonymity_holder under collapse), A-PR-AN3 (deanonymisation only on policy match + signed event), A-PR-AN4 (visibility tier consistent with anonymity_tier).
+**Counterparty-model suspension under blind review (ADR-0082).** The anonymity-enforcement rules (A.14) include the following: for the duration of a `single_blind` or `double_blind` review, counterparty-model writes about, AND counterparty-model retrieval against, anonymized counterparts ([`02_PERSONA.md §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079)) MUST be suspended — a reviewer's stored model of an author (or an author's of a reviewer) would otherwise deanonymize through behavioural priors, and a blind review must not silently *grow* a model of a party whose identity is being withheld. Suspension lifts when the review's deanonymisation policy fires or the review closes; suspended-period interactions mint no retroactive entries. Test: A-GF-CPM-8.
+
+**Acceptance tests.** A-PR-AN1 (single-blind strips reviewer identity from author-visible projections), A-PR-AN2 (double-blind requires independent anonymity_holder under collapse), A-PR-AN3 (deanonymisation only on policy match + signed event), A-PR-AN4 (visibility tier consistent with anonymity_tier), A-GF-CPM-8 (counterparty-model writes + retrieval suspended under blind review).
 
 PeerReview is distinct from PANEL_ACCEPT:
 - PANEL_ACCEPT: ephemeral LLM judges; per-task; minutes
@@ -2609,7 +2611,10 @@ PROJECT HORIZON      per-project consolidation; contribution_credit
 
 MULTI-PROJECT        cross-project knowledge transfer; skills
 HORIZON              used in N projects promote to domain seed_skills;
-                     tactics confirmed across projects promote;
+                     tactics confirmed across projects promote —
+                     each cross-project tactic promotion MUST carry
+                     tactic-lineage/1 + prompt-trial/1 refs
+                     (08_KNOWLEDGE §14.3 rule 2; ADR-0081);
                      reflections about PROJECT KINDS accumulate.
                      Window: months-years.
                      Credit formula (per-persona persona-fitness):
@@ -2645,6 +2650,10 @@ A REFLECTION IS TRANSFERABLE IF:
 A TACTIC IS TRANSFERABLE IF:
   - confirmed across K ≥ 3 projects
   - charter-compatible with target project at retrieval time
+  - its promotion references the tactic's tactic-lineage/1 record +
+    the prompt-trial/1 evidence behind the cross-project confirmation
+    (08_KNOWLEDGE §14.3 rule 2 — no trial record, no cross-project
+    promotion; ADR-0081)
 ```
 
 Anti-leakage (analogous to cross-domain §19, applied at the project boundary):

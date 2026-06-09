@@ -392,6 +392,18 @@ Invariants: `sum(allocations) ≤ refusal_threshold` enforced on every op; over-
 
 **Sustained over-budget parks the persona.** A transient `ATTENTION_OVER_BUDGET` refuses individual admissions; a *sustained* one — where the persona cannot act in any membership — transitions the persona to `DORMANT` with `LIFECYCLE_DORMANT_ENTERED.reason=env_constrained` (`02_PERSONA §7.6`), the same parked posture used for a charter admission refusal or a blocking `EnvironmentRule` (§2.2b). It auto-resumes (`wake_cause=resource_recovered`) when the constraint clears (attention budget restored or env un-paused). This is an enumerated cause of the existing `DORMANT` state, not a new state.
 
+### 7.2 Kernel-maintenance budget class (ADR-0081)
+
+The AttentionBudget above governed *foreground* work. The psychology wave (ADR-0073…0080) added recurring **background** compute with no budget home: self-narrative consolidation sweeps ([`08_KNOWLEDGE §3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077)), decay and habit recomputation ([`08_KNOWLEDGE §4a`](08_KNOWLEDGE.md#4a-decay-formula-adr-0077)/[`§14.2a`](08_KNOWLEDGE.md#142a-habit-strength-on-tactics-adr-0080)), prompt trials ([`08_KNOWLEDGE §14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074)), and cohort-migration shadow evaluation ([`08_KNOWLEDGE §11.1a`](08_KNOWLEDGE.md#111a-cohort-migration-across-model-upgrades-adr-0074)). v1.1 defines the **[maintenance budget class](12_GLOSSARY.md#m)**: a named allocation inside the persona's AttentionBudget (seed 10% of `total_capacity`, operator-tunable) that all of the above draws from.
+
+Three rules are normative:
+
+1. **Sweeps bind to `ScheduledTrigger`s.** Every recurring maintenance sweep (consolidation, decay/habit recomputation, narrative regeneration cadence) MUST run as a declared, signed [`§11b`](#11b-scheduledtrigger--kernel-driven-recurring-events) `ScheduledTrigger` — never an ad-hoc loop — so cadence, pause, and floor composition are auditable. The out-of-cadence triggers the wave defines (narrative derender regeneration, calibration-collapse reflection) fire as one-shot triggers under the same accounting.
+2. **Shadow evaluation is gated on this budget — INV-7-style hard stop.** Cohort-migration shadow evaluation MUST draw exclusively from the maintenance class: when the class is exhausted, shadow evaluation pauses (and the cohort swap waits) rather than borrowing from foreground work or proceeding unbudgeted. The same hard stop applies to prompt-trial batches.
+3. **Bounded within, never above.** The class is an allocation *inside* the §7/§7.1 invariants — it cannot push `sum(allocations)` past the refusal threshold, never starves the floor, and maintenance work passes INV-7 per call exactly as foreground work does.
+
+**Tests:** A-GF-SN-7 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md)).
+
 ## 8. Ambient event stream
 
 Per-environment persistent log of events:
@@ -503,6 +515,10 @@ Kernel periodically reviews:
 - Items past `expected_response_by` re-notified at boosted urgency
 - Consistent over-deferring triggers audit (charter mismatch indicator)
 - Items in dormant membership summarised on wake
+
+### 10.3 Node-level task-queue admission — where SchedulingPolicy plugs in (ADR-0069/ADR-0081)
+
+Notification routing (§10) and the deferred queue (§10.2) govern *attention*; the **ordering of admitted work** on a node's task queue is governed by the node's `SchedulingPolicy` ([`03_TASKS.md §4.6`](03_TASKS.md#46-owner-prioritized-scheduling--schedulingpolicy), `scheduling-policy/1`). The plug-in point is here: the policy's ordering function (priority weight, urgency/deadline escalation, ageing, and the optional [`03_TASKS.md §4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076) preference-vector term) is applied at the node's `task_intake` admission gate over this section's deferred queue and the §7 attention budget, and is re-applied when a deferred item re-notifies at boosted urgency. The floor and the INV-7 hard gate are never reordered around — §4.6's invariants apply verbatim; this section only names the substrate surfaces the policy orders. (Cross-ref both ways: §4.6 declares the policy *over* "the existing notification deferred queue and attention budget (`05_ENVIRONMENT §10`)"; this subsection is that queue's admission point.)
 
 ## 11. ProactiveIntent
 

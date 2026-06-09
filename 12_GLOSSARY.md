@@ -23,9 +23,9 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Ambient Event Stream** — Persistent per-environment log of events members observe per their observation surfaces. See `05_ENVIRONMENT.md §8`.
 
-**Answer Package** — Canonical kernel return value for any task; schema `answer/4`. Carries status, acceptance pathway evidence, lineage refs, cost, signed by kernel. See `03_TASKS.md §5`.
+**Answer Package** — Canonical kernel return value for any task; schema `answer/5` (v5 adds `stated_confidence` + `calibration_conditioning_ref`, ADR-0081). Carries status (27-value enum), acceptance pathway evidence, lineage refs, cost, signed by kernel. See `03_TASKS.md §5`.
 
-**AppraisalEvent** — KindRegistry kind (`appraisal-event/1`, ADR-0075) recording an OCC-style mood-moving event — task verified/failed, goal progressed/blocked, relationship events (boundary invoked, gratitude received, mentorship outcome), drive satiated/frustrated — grounded in a signed lineage event. The **only** admissible origin of a mood mutation: each appraisal maps to a clamped `MoodImpulse`. See `02_PERSONA.md §6.2`.
+**AppraisalEvent** — KindRegistry kind (`appraisal-event/1`, ADR-0075) recording an OCC-style mood-moving event — task verified/failed, goal progressed/blocked, relationship events (boundary invoked, gratitude received, mentorship outcome), drive satiated/frustrated — grounded in a signed lineage event. Minted by the kernel at acceptance-status finalization (`03_TASKS §5`), goal-state transitions (`03_TASKS §4.6a`), and relationship events (`02_PERSONA §11`) — nowhere else (ADR-0081). The **only** admissible origin of a mood mutation: each appraisal maps to a clamped `MoodImpulse` (impulses sharing a source event compose by max-magnitude per axis; net movement ≤ 0.25/axis per rolling 24 h). See `02_PERSONA.md §6.2`.
 
 **Artifact** — Individual file in an ArtifactBundle; carries a `media_kind` name resolved against the open `KindRegistry` (not a closed enum — see *Media kinds (open set)* below). See `07_ARTIFACTS.md §2-3`.
 
@@ -151,7 +151,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Cooperative-as-default** — v1.0 design principle: personas can disagree (Disagreement) but the default is cooperative work-product. See `00_VISION.md`.
 
-**CounterpartyModel** — Additive sidecar (`counterparty-model/1`, ADR-0079) on `RelationshipRecord` / `PersonaRelationshipEdge` carrying a persona's bounded theory of mind about a counterparty: inferred preferences, communication style, predicted reactions — every entry provenance-linked to the episodes that justify it (unsourced entries refused). Fully subject to the transparency (`§11.7a`) and selective-forgetting (`§11.7b`) machinery; never shared cross-persona outside the `§11.7` consent path. See `02_PERSONA.md §11.4b`.
+**CounterpartyModel** — Additive sidecar (`counterparty-model/1`, ADR-0079) on `RelationshipRecord` / `PersonaRelationshipEdge` carrying a persona's bounded theory of mind about a counterparty: inferred preferences, communication style, predicted reactions — every entry provenance-linked to the episodes that justify it (unsourced entries refused). Persona↔user models are consent-gated on `may_remember_personal_facts` with first-contact disclosure of inference-level modelling (ADR-0082); capped at 20 entries with merge-or-evict consolidation and top-k layer-3 rendering (ADR-0081); home-kernel-only — excluded from federation sync; suspended during blind review. Fully subject to the transparency (`§11.7a`) and selective-forgetting (`§11.7b`) machinery; never shared cross-persona outside the `§11.7` consent path. See `02_PERSONA.md §11.4b`.
 
 **CRDT** — Conflict-free Replicated Data Type. Used for ArtifactBundle co-editing (Yjs for text; G-set for structured). See `07_ARTIFACTS.md §5`.
 
@@ -219,7 +219,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Drive** — One of three SDT-grounded slow-moving scalars (`drives/1`, ADR-0076: curiosity, competence, relatedness) with satiation/frustration dynamics (the `SatiationCurve`). Baselines are seeded deterministically from the frozen OCEAN priors at birth, so motivation is emergent from identity; satiation/frustration emit `AppraisalEvent`s — the only path by which drives touch mood. After Deci & Ryan's self-determination theory. See `02_PERSONA.md §2a`.
 
-**DualProcessGate** — Gate (`dual-process-gate/1`, ADR-0078) deciding System 1 vs System 2: the K-line fast path fires only when the K-line match score AND the domain's `CalibrationRecord` both clear their thresholds; otherwise the task runs full deliberation. A gate over existing K-line + round machinery — no new reasoning engine. See `08_KNOWLEDGE.md §13a`.
+**DualProcessGate** — Gate (`dual-process-gate/1`, ADR-0078) deciding System 1 vs System 2: at or above the calibration min-sample the K-line fast path fires only when the K-line match score AND the domain's `CalibrationRecord` both clear their thresholds; otherwise the task runs full deliberation. Below the min-sample a τ-matched fast path runs under a graduated System-2 verification ramp (sampled fraction 1.0 at n=0 down to the steady-state spot-check at n=min_sample; ADR-0081). A gate over existing K-line + round machinery — no new reasoning engine. See `08_KNOWLEDGE.md §13a`.
 
 ## E
 
@@ -299,7 +299,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Generativity gate** — Admission rule that only a *generative* persona may author seeds (`may_author_seeds`). Because authoring is **safety-relevant**, the gate is keyed only on global, kernel-anchored facts — global `experiential_floor ≥ generativity_floor_threshold`, wall-clock ALPS layer `≥ generativity_min_alps_layer`, and `fitness ≥ generativity_fitness_threshold` — **never on peer-conferred community standing**. Newly-born and low-floor personas are refused (`author_not_generative`). After Erikson's generativity-vs-stagnation (the social dimension is expressed through mentorship, not a standing precondition). See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
 
-**GoalArbitration** — STANDARDISED seed coordination shape (`goal-arbitration/1`, ADR-0076; `EntityGroup` + `DerivedMetric`) producing a ranked portfolio over a persona's conflicting Layer-6 goals from four inputs: drive alignment, charter alignment, commitments/deadlines, relationship obligations. Output is an advisory persona-side preference vector consumed by the ADR-0069 `SchedulingPolicy` — explicitly **not** a second scheduler. See `02_PERSONA.md §2a`, `03_TASKS.md §4.6a`, `15_COORDINATION_SHAPES.md §7`.
+**GoalArbitration** — STANDARDISED seed coordination shape (`goal-arbitration-v1`, ADR-0076; `EntityGroup` + `DerivedMetric`) producing a ranked portfolio over a persona's conflicting Layer-6 goals from four inputs: drive alignment, charter alignment, commitments/deadlines, relationship obligations. Output is an advisory persona-side preference vector consumed by the ADR-0069 `SchedulingPolicy` — explicitly **not** a second scheduler. See `02_PERSONA.md §2a`, `03_TASKS.md §4.6a`, `15_COORDINATION_SHAPES.md §7`.
 
 **GenesisProposal** — Schema (`genesis-proposal/1`): a persona's signed proposal to author a new persona — carrying the capability gap, environmental evidence, recruitment-exhaustion proof, target niche, a `persona-seed/2` draft, authoring personas, and resolved cosigns. See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
 
@@ -319,7 +319,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 ## H
 
-**HabitStrength** — OPTIONAL per-tactic scalar (ADR-0080): usage-reinforced (read from `tactic-lineage/1` citations) and exponentially decaying with disuse. Tactics above the habit threshold are deprioritized as GEPA mutation targets (proposal probability scaled, floor 0.1 — never immutable); rarely-used tactics become preferred mutation candidates. MUST NOT veto rollback or safety-driven mutation. See `08_KNOWLEDGE.md §14.2a`.
+**HabitStrength** — OPTIONAL per-tactic scalar (ADR-0080): usage-reinforced (read from signed `tactic-citation/1` usage events, ADR-0081) and exponentially decaying with disuse. Tactics above the habit threshold are deprioritized as GEPA mutation targets (proposal probability scaled, floor 0.1 — never immutable; identity-axis-initiated proposals use floor 0.5); rarely-used tactics become preferred mutation candidates. MUST NOT veto rollback or safety-driven mutation. See `08_KNOWLEDGE.md §14.2a`.
 
 **HEART Alternation** — Mechanism where persona alternates CRITICAL ↔ GENERATIVE phases within a task based on signals (no progress → GENERATIVE; score improves → CRITICAL). See [`02_PERSONA.md §6`](02_PERSONA.md).
 
@@ -367,7 +367,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 ## K
 
-**K-line** — Minsky-inspired topology+skill replay pattern; Historian-authored; orient-time replay if TaskFingerprint matches. See [`08_KNOWLEDGE.md §2`](08_KNOWLEDGE.md).
+**K-line** — Minsky-inspired topology+skill replay pattern; Historian-authored. Orient-time fast-path replay requires the TaskFingerprint τ-match AND the `08_KNOWLEDGE §13a` calibration gate (DualProcessGate); below the calibration min-sample, replay runs under a graduated System-2 verification ramp (ADR-0078/0081). See [`08_KNOWLEDGE.md §2`](08_KNOWLEDGE.md).
 
 **Kernel** — Small deterministic substrate owning identity, safety floor, lineage, signing, schema validation, sandbox, budget. The kernel is the one writer for identity and lineage. See [`01_KERNEL.md §1`](01_KERNEL.md).
 
@@ -406,6 +406,8 @@ The definitions in this document are **documentation-normative**: when a term de
 ## M
 
 **MAP-Elites** — Diversity-preserving evolutionary algorithm; behaviour-descriptor grid; one elite per cell. Used for anti-degradation. v1.3+ for production scale. See `02_PERSONA.md §9`.
+
+**Maintenance budget class** — Named allocation inside a persona's AttentionBudget (seed 10% of total capacity, operator-tunable; ADR-0081) that funds recurring background compute: self-narrative consolidation sweeps, decay/habit recomputation, prompt trials, and cohort-migration shadow evaluation. Sweeps bind to `ScheduledTrigger`s; shadow evaluation is gated on the class with an INV-7-style hard stop. See `05_ENVIRONMENT.md §7.2`.
 
 **Maturation ramp** — How a genesis-born persona grows from peripheral participant to full member: it starts `passive` with low attention and a restricted tool surface, then (as **wall-clock age** rises and **community standing** is conferred) advances `passive → active → deliberative` while mentor scaffolding fades. After Vygotsky's ZPD and Lave–Wenger legitimate peripheral participation. See [`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md).
 
@@ -697,7 +699,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **SeedGoal** — v1.0 principal-supplied seed inside a `MissionCharter`. Carries description, `success_kind` (KindRegistry-resolved outcome_kind that measures progress), target value, weight, priority class (primary / secondary / advisory). Frozen post-sign; elaborations cite seed_goal_id as lineage parent. See `02_PERSONA.md §11.3`.
 
-**SelfNarrative** — Reflective self-story (`self-narrative/1`, ADR-0077) of ≤ 300 tokens, regenerated by the existing consolidation pipeline from high-importance episodic + reflective memories. Every claim cites the memories it summarises (anti-confabulation); must pass the `IdentityCoherenceInvariant` and voice-consistency floor before render; renders into the contextual prompt layer only — never a frozen block. A summary the persona performs, not introspection. See `08_KNOWLEDGE.md §3.3`.
+**SelfNarrative** — Reflective self-story (`self-narrative/1`, ADR-0077) of ≤ 300 tokens, regenerated by the existing consolidation pipeline from high-importance episodic + reflective memories. Every claim cites the memories it summarises (anti-confabulation); must pass the `IdentityCoherenceInvariant` and voice-consistency floor before render; renders into the contextual prompt layer only — never a frozen block. On tombstone/supersession of any cited memory the kernel immediately derenders the narrative and triggers out-of-cadence regeneration (ADR-0081). A summary the persona performs, not introspection. See `08_KNOWLEDGE.md §3.3`.
 
 **SingleProjectPromotionConfig** — v1.0 per-domain config replacing multi-project promotion thresholds with within-project evidence-density thresholds (verified_attestation_density, verifier_recipe_pass_rate, asbuilt_reconciliation_clean_rate, panel_acceptance_rate). Refused on safety-critical domains. Trust capped at 0.6. Acknowledgment under principal collapse requires 72h cool-down + non-principal `ExternalAttestation`. See `06_DOMAIN.md §3.2`.
 
@@ -728,6 +730,8 @@ The definitions in this document are **documentation-normative**: when a term de
 ## T
 
 **Tactic** — EVOLVE-BLOCK heuristic in SOUL.md; per-persona; signed mutations via mutation operators. See `08_KNOWLEDGE.md §2`.
+
+**TacticCitation** — Per-acceptance tactic usage event (`tactic-citation/1`, ADR-0081): minted by the kernel when an AnswerPackage finalizes in a successful-acceptance status, listing the tactic ids extracted from the GEPA trace `tactic` field, each anchored to its `tactic-lineage/1` version. Attribution is explicitly approximate (trace-extracted, judge-confirmable on audit); the reinforcement source for `habit_strength` — exposure evidence, never promotion evidence. See `08_KNOWLEDGE.md §14.3a`.
 
 **TacticLineageRecord** — Per-tactic version-DAG entry (`tactic-lineage/1`): tactic_id, parent_version, mutation_operator (one of the 22), gepa_trace_ref, trial_ref, verdict. Mirrors Voyager skill lineage; kernel-signed into the persona's evolution log + global LineageGraph (kernel role is signing only). Enables per-tactic rollback — reverting one DAG edge — instead of whole-EVOLVE-BLOCK reversion. See `08_KNOWLEDGE.md §14.3`.
 
