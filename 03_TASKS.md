@@ -439,6 +439,18 @@ A node (`01_KERNEL §2.4.4`) admits work from three submitter classes — its **
 
 **Tests:** A-SCHED1 (owner task ordered ahead of external under seed policy), A-SCHED2 (priority never bypasses floor — owner task failing floor is refused), A-SCHED3 (per-class quota enforced at task_intake), A-SCHED4 (ageing prevents starvation of low-priority work), A-SCHED5 (submitter identity persisted in AnswerPackage + lineage), A-SCHED6 (operator-authored non-default policy honoured; cannot reorder floor/INV-7). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
+### 4.6a Goal-arbitration preference vector — an admissible SchedulingPolicy input (ADR-0076)
+
+A persona running the `goal-arbitration/1` seed shape ([`02_PERSONA.md §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076), [`15_COORDINATION_SHAPES.md §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog)) produces a ranked portfolio over its competing personal goals, emitted as a signed **persona-side preference vector**. A `SchedulingPolicy` (§4.6) MAY consume that vector as one additional input to its ordering function — a `DerivedMetric` term alongside priority weight, urgency/deadline escalation, and ageing — so that, *within a submitter class and within the operator's policy*, work aligned with the persona's arbitrated goal portfolio is preferred.
+
+Three constraints are normative:
+
+1. **Advisory and bounded.** The preference-vector term's weight in the ordering function is operator-bounded; it MUST NOT outrank the submitter-class priority weights, per-class quotas, or starvation guards of §4.6, and absent a `SchedulingPolicy` that consumes it, the vector has no scheduling effect.
+2. **Floor and budget untouched.** The vector MUST NOT reorder the 8-source floor or the INV-7 hard budget gate — the same invariant §4.6 already states for every soft ordering input.
+3. **Not a second scheduler.** Arbitration ranks the persona's *goals*; the node's `SchedulingPolicy` remains the only ordering authority over its *queue*. The vector is one input to that single authority, never a parallel discipline.
+
+**Tests:** A-GF-DRV-3 (vector consumed as bounded ordering input), A-GF-DRV-4 (no second scheduler; floor/INV-7 untouched). See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+
 ## 5. AnswerPackage
 
 The canonical kernel return value (schema **answer/4** in v1.0).

@@ -25,6 +25,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Answer Package** — Canonical kernel return value for any task; schema `answer/4`. Carries status, acceptance pathway evidence, lineage refs, cost, signed by kernel. See `03_TASKS.md §5`.
 
+**AppraisalEvent** — KindRegistry kind (`appraisal-event/1`, ADR-0075) recording an OCC-style mood-moving event — task verified/failed, goal progressed/blocked, relationship events (boundary invoked, gratitude received, mentorship outcome), drive satiated/frustrated — grounded in a signed lineage event. The **only** admissible origin of a mood mutation: each appraisal maps to a clamped `MoodImpulse`. See `02_PERSONA.md §6.2`.
+
 **Artifact** — Individual file in an ArtifactBundle; carries a `media_kind` name resolved against the open `KindRegistry` (not a closed enum — see *Media kinds (open set)* below). See `07_ARTIFACTS.md §2-3`.
 
 **ArtifactBundle** — Multi-modal multi-file deliverable produced by personas in a project; owned by an environment via optional `owning_env_id` and governed by an `ArtifactSharingPolicy` (both additive on `artifact-bundle/1`, version retained). See `07_ARTIFACTS.md §4`.
@@ -57,6 +59,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **BatchStateAdvancement** — Signed envelope that advances multiple `PhysicalAsset` instances within an `AssetGroupEnvelope` to a target state in one coordinated operation. Kernel signs the envelope; each member asset receives an individual `physical_asset_state_advanced` lineage event. Per-asset outcomes tracked (advanced / skipped / failed); `conflict_policy` governs assets whose state changed between batch drafting and execution. See `04_PROJECT.md §26a.2.2`.
 
+**BeliefRevisionRecord** — Reflective record (`belief-revision/1`, ADR-0078) minted when a `SupersessionCascade` invalidates an assertion the persona itself made: "I believed X; evidence Y changed it" — provenance-backed (cites the cascade + superseding reference), stored as reflective memory, retrievable as layer-4 prompt material, shareable in relationships under the standard consent gates. See `08_KNOWLEDGE.md §13a`.
+
 **Body** — Whichever LLM runtime executes calls on a persona's behalf. Two binding topologies: **native** (kernel wraps the LLM call site directly — Claude Code, OpenAI SDK, LangGraph, CrewAI, MAF, Pydantic-AI, DSPy, smolagents, Semantic Kernel, local-vllm); **proxy** (kernel speaks to a runtime it does not own — A2A remote agent, MCP-server-with-LLM, third-party framework). Proxy bodies cap at their cryptographic `body_attestation` trust level. **Bodies are replaceable**; the kernel-signed Soul + skill library + KindRegistry + GEPA-evolved meta-prompts travel across them. See `02_PERSONA.md §3.5`.
 
 **BodyBinding** — Schema binding a persona to a specific Body (native or proxy) for a declared scope (task / session / project / env / persistent). Carries fallback bodies, GEPA cohort id for body-class-tuned prompts, kernel signature. Binding rotates without persona identity change because `identity_signature` covers only body-neutral SOUL blocks. `Body` is extended with `body_attestation_expires_at`, `body_attestation_refresh_uri`, `body_attestation_revocation_uri`; proxy attestations move through `ATTESTATION_FRESH → ATTESTATION_REFRESHING → ATTESTATION_STALE → ATTESTATION_REVOKED` substates without mutating persona identity. See `02_PERSONA.md §3.5`.
@@ -82,6 +86,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **Cache Control (Anthropic)** — Marker on PromptBlocks (Layer 1 + 2 in v1.0) projecting to `cache_control: {type: "ephemeral"}` in Anthropic Messages API; target ≥ 80% cache hit rate. See [`09_PROTOCOLS.md §5`](09_PROTOCOLS.md).
 
 **Carrying capacity** — The maximum persona population an ecosystem can sustain, defined as the sum of free host resources: unallocated `AttentionBudget` + `Energy` + INV-7 compute/cost headroom. Genesis is refused (`no_host_capacity`) when no environment can host the newborn. Grounds the logistic damping of the birth rate. See [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md).
+
+**CalibrationRecord** — Per persona × domain rolling Brier-style score (`calibration-record/1`, ADR-0078) between the confidence a persona stated and the verified outcome; updated **only** on hard verifier verdicts (judged/engagement signals never move it). Conditions the rendered confidence in `AnswerPackage`, gates the K-line fast path via the `DualProcessGate`, and MAY corroborate judged evolution signals. See `08_KNOWLEDGE.md §13a`.
 
 **Character displacement** — In Persona Genesis, the rule that overlapping personas (and successive births from one lineage) MUST diverge in descriptor space — the de-correlation enforced by the sibling-differentiation check. Borrowed from ecology. See [`16_POPULATION_DYNAMICS.md §4C`](16_POPULATION_DYNAMICS.md).
 
@@ -115,6 +121,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Cohort** — Team of personas assembled for a specific task or project; cohort assembly mechanism (MODE B) signs cohort members. See `04_PROJECT.md §14.1`.
 
+**CohortMigrationPlaybook** — STANDARDISED seed shape (`cohort-migration/1`) for migrating evolved prompts across a body/model-family upgrade: the new GEPA cohort's MIPROv2 cold-start is seeded with the prior cohort's Pareto front as proposal priors; candidates are shadow-evaluated on the persona's last 100 task traces before any swap; the prior cohort is retained as rollback target. Additive over the gepa-cohort binding. See `08_KNOWLEDGE.md §11.1a`.
+
 **CohortDynamicsState** — Continuous cohesion read on a cohort: cohesion_score composite over avg_pairwise_trust, joint_success_ratio, disagreement_resolution_ratio, fractiousness_index, role_health_by_kind, throughput_relative_to_baseline. Band FSM `healthy → watch → intervene → dissolve_proposed` with operator-policy thresholds; intervene refuses new high-stakes obligations; dissolve_proposed requires lead + operator pin. Composes with `CohortConstraint` (structure) — health gate runs independently at milestones. See `04_PROJECT.md §14.2`.
 
 **ConservationInvariantRef** — v1.0 substrate-shape arithmetic relationship across `ResourceStockEnvelope` instances (mass balance, energy balance, charge balance, ratio constraints). Kernel evaluates `arithmetic_form` on every tool-call that mutates a bound resource; refuse / escalate / log per `violation_action`. Domain-emergent kinds; substrate carries the topology. See `04_PROJECT.md §26a.4.2`.
@@ -126,6 +134,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **CorpusDriftMetric** — Kernel-computed metric for frontier → non-frontier domain transition. `drift_rate = (N_superseded + N_retracted + N_contradicted) / N_active_refs` over a trailing 30-day window. When drift rate stays below `frontier_exit_threshold` (default 0.05) for `k_consecutive_windows` (default 6), the domain becomes `exit_eligible`; operator co-sign confirms the exit and lifts the frontier trust cap (0.7 → standard scale). See `06_DOMAIN.md §4.4.1`.
 
 **Confirmed (Reflective Memory)** — Bool flag on reflective memory; gates promotion; M=5 future tasks must corroborate before tactic promotion. See `08_KNOWLEDGE.md §3`.
+
+**CouplingSurface** — One of the three operator-tunable seed formulas by which mood couples into reasoning (ADR-0075): (a) `risk_tolerance = f(V, D)` consumed by per-mode budgets, hard-bounded to ±15% of baseline; (b) a HEART mode-selection prior (a bias, never an override of the §6 alternation contract); (c) a single rendered "current disposition" line in contextual prompt layer 3 only. Mood never enters EVOLVE-BLOCKs or evolution objectives. See `02_PERSONA.md §6.2`, `08_KNOWLEDGE.md §10a`.
 
 **Conjecture** — v1.0 MetaRegistry-seeded ItemKind (for math/research domains); not a substrate class. Realised at runtime as a `ProjectItem` with `kind="conjecture"` and the seeded payload schema (statement, supporting_examples, counterexamples, proof_attempts). See `04_PROJECT.md §8.1`.
 
@@ -140,6 +150,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **Contribution Credit** — Per-project accumulated credit per member; signed at completion; distinct from persona-level fitness. See `04_PROJECT.md §5`.
 
 **Cooperative-as-default** — v1.0 design principle: personas can disagree (Disagreement) but the default is cooperative work-product. See `00_VISION.md`.
+
+**CounterpartyModel** — Additive sidecar (`counterparty-model/1`, ADR-0079) on `RelationshipRecord` / `PersonaRelationshipEdge` carrying a persona's bounded theory of mind about a counterparty: inferred preferences, communication style, predicted reactions — every entry provenance-linked to the episodes that justify it (unsourced entries refused). Fully subject to the transparency (`§11.7a`) and selective-forgetting (`§11.7b`) machinery; never shared cross-persona outside the `§11.7` consent path. See `02_PERSONA.md §11.4b`.
 
 **CRDT** — Conflict-free Replicated Data Type. Used for ArtifactBundle co-editing (Yjs for text; G-set for structured). See `07_ARTIFACTS.md §5`.
 
@@ -204,6 +216,10 @@ The definitions in this document are **documentation-normative**: when a term de
 **DOMAIN_UNKNOWN_DETECTED** — Kernel event triggering domain emergence lifecycle. See `06_DOMAIN.md §4.1`.
 
 **DriftBoundsEnvelope** — v1.0 substrate-shape envelope on a `MissionCharter` constraining how an elaborated goal may depart from its seed: `max_semantic_distance`, `scope_drift_policy` (refinement-only / narrow-or-refine / narrow-refine-sibling), `max_hazard_class_drift`, `max_resource_consumption_pct_increase`, `max_time_horizon_extension`, `max_elaboration_depth`. Out-of-bound elaborations refused; charter transitions to `drift_paused`. See `02_PERSONA.md §11.3`.
+
+**Drive** — One of three SDT-grounded slow-moving scalars (`drives/1`, ADR-0076: curiosity, competence, relatedness) with satiation/frustration dynamics (the `SatiationCurve`). Baselines are seeded deterministically from the frozen OCEAN priors at birth, so motivation is emergent from identity; satiation/frustration emit `AppraisalEvent`s — the only path by which drives touch mood. After Deci & Ryan's self-determination theory. See `02_PERSONA.md §2a`.
+
+**DualProcessGate** — Gate (`dual-process-gate/1`, ADR-0078) deciding System 1 vs System 2: the K-line fast path fires only when the K-line match score AND the domain's `CalibrationRecord` both clear their thresholds; otherwise the task runs full deliberation. A gate over existing K-line + round machinery — no new reasoning engine. See `08_KNOWLEDGE.md §13a`.
 
 ## E
 
@@ -283,6 +299,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Generativity gate** — Admission rule that only a *generative* persona may author seeds (`may_author_seeds`). Because authoring is **safety-relevant**, the gate is keyed only on global, kernel-anchored facts — global `experiential_floor ≥ generativity_floor_threshold`, wall-clock ALPS layer `≥ generativity_min_alps_layer`, and `fitness ≥ generativity_fitness_threshold` — **never on peer-conferred community standing**. Newly-born and low-floor personas are refused (`author_not_generative`). After Erikson's generativity-vs-stagnation (the social dimension is expressed through mentorship, not a standing precondition). See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
 
+**GoalArbitration** — STANDARDISED seed coordination shape (`goal-arbitration/1`, ADR-0076; `EntityGroup` + `DerivedMetric`) producing a ranked portfolio over a persona's conflicting Layer-6 goals from four inputs: drive alignment, charter alignment, commitments/deadlines, relationship obligations. Output is an advisory persona-side preference vector consumed by the ADR-0069 `SchedulingPolicy` — explicitly **not** a second scheduler. See `02_PERSONA.md §2a`, `03_TASKS.md §4.6a`, `15_COORDINATION_SHAPES.md §7`.
+
 **GenesisProposal** — Schema (`genesis-proposal/1`): a persona's signed proposal to author a new persona — carrying the capability gap, environmental evidence, recruitment-exhaustion proof, target niche, a `persona-seed/2` draft, authoring personas, and resolved cosigns. See [`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md).
 
 **GEPA (DSPy Genetic-Pareto)** — 2025 reflective prompt optimizer; multi-objective Pareto search; outperforms MIPROv2 by 10%, GRPO by 20%, 35× fewer rollouts. v1.0 primary prompt evolution mechanism. See `08_KNOWLEDGE.md §11`.
@@ -300,6 +318,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **Goodhart Canary** — Anti-Goodhart safeguard in panel verifier: score-distribution monitor flagging concentration near max for ≥ N tasks. See `08_KNOWLEDGE.md §2`.
 
 ## H
+
+**HabitStrength** — OPTIONAL per-tactic scalar (ADR-0080): usage-reinforced (read from `tactic-lineage/1` citations) and exponentially decaying with disuse. Tactics above the habit threshold are deprioritized as GEPA mutation targets (proposal probability scaled, floor 0.1 — never immutable); rarely-used tactics become preferred mutation candidates. MUST NOT veto rollback or safety-driven mutation. See `08_KNOWLEDGE.md §14.2a`.
 
 **HEART Alternation** — Mechanism where persona alternates CRITICAL ↔ GENERATIVE phases within a task based on signals (no progress → GENERATIVE; score improves → CRITICAL). See [`02_PERSONA.md §6`](02_PERSONA.md).
 
@@ -320,6 +340,12 @@ The definitions in this document are **documentation-normative**: when a term de
 **Identity Layer (Persona)** — Layer 1 of seven-layer persona; frozen at birth; name, charter, voice, priors, primary_disposition. See `02_PERSONA.md §2`.
 
 **IdentityCoherenceInvariant** — Long-horizon composite scan over the per-axis §9 drift signals (charter_conformance, voice_consistency, mode_disposition_coherence, tactic_homogeneity_inverse, relational_style_drift, plus new skill_library_continuity and value_lattice_continuity vs anchor snapshot). Composite below `composite_threshold` (default 0.85) transitions persona to `COHERENCE_REVIEW` — no retirement or SOUL mutation, but new high-stakes elaborations under any `MissionCharter` refused until principal counter-sign restores state OR pins a new anchor. Scan cadence min(500 tasks, 90 days). See `02_PERSONA.md §9.1`.
+
+**IdentityExpressionScore** — Judge-ensemble score (`identity-expression/1`) of a candidate EVOLVE-BLOCK against the persona's IdentityRubric; a separate GEPA Pareto axis (never collapsed into a weighted sum) and the additive ninth evolution signal (default weight 0.4). Judged-only — never promotes alone; generative pressure on top of the charter/voice floors, never a substitute for them. See `08_KNOWLEDGE.md §11.1b`, `02_PERSONA.md §8.1a`.
+
+**IdentityRubric** — KindRegistry kind (`identity-rubric/1`) derived mechanically from frozen SOUL.md blocks 0–4: OCEAN priors → framing criteria (e.g. high openness ⇒ exploratory framing preserved), disposition → stance criteria (e.g. falsifier-leaning ⇒ direct-challenge phrasing retained), voice block → register/lexicon checks. Regenerated only on SOUL major version bump, so it cannot drift with the tactics it judges. See `08_KNOWLEDGE.md §11.1b`.
+
+**IntuitionHint** — Advisory-only K-line confidence prior (`intuition-hint/1`, ADR-0080) attached to a `SkillTransferGrant`: the teacher's provenance-backed sense of *when* a transferred skill applies (applicability prior + topology fingerprint + teacher calibration snapshot). Renders as layer-4 advisory material on the learner's side; MUST NOT bypass or lower the receiver's `DualProcessGate` thresholds. Partially discharges R-PERSONA-5. See `02_PERSONA.md §11.5a`.
 
 **Intervention Surface** — Kernel mechanism for halting/pausing/resuming a running persona; emits UserStop, OperatorOverride, or PersonaSelfStop events; integrated with safety floor. See `01_KERNEL.md §13.6`.
 
@@ -418,6 +444,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **Mode (Cognitive)** — v1.0 has 14 modes (10 core cognitive + 4 relational: listener, storyteller, comforter, teacher). Persona enters modes per task; signed MODE_ENTRY event. See `02_PERSONA.md §4`.
 
 **Mood** — Persona-global transient state (V/A/D); decays toward VAD baseline. See `02_PERSONA.md §6` and §11.
+
+**MoodImpulse** — Clamped mood delta (`mood-impulse/1`, ADR-0075: ΔV/ΔA/ΔD with per-event-kind clamps) minted from a signed `AppraisalEvent`; the only mutation path into Layer-5 mood. Decay-to-baseline dynamics are unchanged — impulses perturb, decay restores. See `02_PERSONA.md §6.2`.
 
 **MUTUAL_ACCEPT** — Acceptance pathway; two or more parties both accept. See `03_TASKS.md §3`.
 
@@ -609,6 +637,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Promotion Gates** — 4-stage ladder for domain emergence: EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED; each stage has verification + audit thresholds. See `06_DOMAIN.md §3`.
 
+**PromptTrialRecord** — A/B trial record (`prompt-trial/1`) behind every tactic promotion verdict: candidate vs incumbent version, task sample, per-axis Pareto deltas, the 0.05-signal-threshold decision, and a rollback token enabling per-tactic rollback. A promotion without a trial record is refused at the confirmation gate. See `08_KNOWLEDGE.md §14.3`.
+
 **ProvenFact** — G-set CRDT element; verified statement; signed by kernel on verifier verdict. Both Product and Knowledge tier (dual). Task-scope, project-scope, and env-scope. See `01_KERNEL.md §3`.
 
 **Provenance Score** — Unified knowledge artefact ranking: base_confidence × age_decay × verifier_consistency × usage_signal. See `08_KNOWLEDGE.md §6`.
@@ -663,7 +693,11 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Safety Floor** — v1.0 8-source pre-action gate composed by most-restrictive-wins: universal harm + persona charter + user boundaries + operator policy + domain safety extensions + external-tool-required + novelty-check + env charter. Plus 9th advisory (emergent-domain trust warning). See `01_KERNEL.md §2`.
 
+**SatiationCurve** — The satiation/frustration dynamics on a `Drive` (ADR-0076): verified progress on a drive-tagged goal satiates (urgency falls by `satiation_step`); repeated blockage (default 3 consecutive) frustrates (urgency rises, then disengagement pressure); urgency relaxes toward the OCEAN-seeded baseline on a slow clock. Both transitions emit `AppraisalEvent`s. Operator-tunable within drift bounds. See `02_PERSONA.md §2a`.
+
 **SeedGoal** — v1.0 principal-supplied seed inside a `MissionCharter`. Carries description, `success_kind` (KindRegistry-resolved outcome_kind that measures progress), target value, weight, priority class (primary / secondary / advisory). Frozen post-sign; elaborations cite seed_goal_id as lineage parent. See `02_PERSONA.md §11.3`.
+
+**SelfNarrative** — Reflective self-story (`self-narrative/1`, ADR-0077) of ≤ 300 tokens, regenerated by the existing consolidation pipeline from high-importance episodic + reflective memories. Every claim cites the memories it summarises (anti-confabulation); must pass the `IdentityCoherenceInvariant` and voice-consistency floor before render; renders into the contextual prompt layer only — never a frozen block. A summary the persona performs, not introspection. See `08_KNOWLEDGE.md §3.3`.
 
 **SingleProjectPromotionConfig** — v1.0 per-domain config replacing multi-project promotion thresholds with within-project evidence-density thresholds (verified_attestation_density, verifier_recipe_pass_rate, asbuilt_reconciliation_clean_rate, panel_acceptance_rate). Refused on safety-critical domains. Trust capped at 0.6. Acknowledgment under principal collapse requires 72h cool-down + non-principal `ExternalAttestation`. See `06_DOMAIN.md §3.2`.
 
@@ -694,6 +728,8 @@ The definitions in this document are **documentation-normative**: when a term de
 ## T
 
 **Tactic** — EVOLVE-BLOCK heuristic in SOUL.md; per-persona; signed mutations via mutation operators. See `08_KNOWLEDGE.md §2`.
+
+**TacticLineageRecord** — Per-tactic version-DAG entry (`tactic-lineage/1`): tactic_id, parent_version, mutation_operator (one of the 22), gepa_trace_ref, trial_ref, verdict. Mirrors Voyager skill lineage; kernel-signed into the persona's evolution log + global LineageGraph (kernel role is signing only). Enables per-tactic rollback — reverting one DAG edge — instead of whole-EVOLVE-BLOCK reversion. See `08_KNOWLEDGE.md §14.3`.
 
 **Task Class** — An emergent KindRegistry kind (ADR-0066) describing a kind of work for orchestration purposes. v1.0 ships ten STANDARDISED **seed** classes: CONVERGENT / DIVERGENT / MIXED / INTERACTIVE / RELATIONAL / PEDAGOGIC / PERFORMATIVE / EXISTENTIAL / DELEGATED / INVESTIGATIVE; personas MAY propose new ones. See `03_TASKS.md §2`, `§2a`.
 
