@@ -628,6 +628,8 @@ v1.0 default weights (operator-tunable):
 
 **Reconciliation with Pareto separation (ADR-0081).** `w_ide` governs **post-hoc credit attribution** only — how an accepted outcome's fitness delta is apportioned. GEPA candidate **selection** keeps identity expression as a separate Pareto axis ([`08_KNOWLEDGE.md §11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073) rule 2) and never scalarizes it; `w_ide` MUST NOT feed selection or promotion scalarization. The credit weight and the Pareto axis never meet in one sum.
 
+**Corroboration at the reproduction gate (ADR-0083).** Where this credit-assigned `fitness` is consumed by the Persona Genesis generativity gate and by `dgm_fertility_weighted` author selection ([`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md#4d-genesisproposal--mint-flow)), the §15 corroboration rule binds the gate-consumed composition: the judged credit terms (`w_eng · engagement_signal_corroborated`, `w_ide · identity_expression_signal`, and any other judge-scored term) are capped at **25%** of gate-consumed fitness, and no judged signal may flip gate eligibility absent verified-outcome support. The cap exists only at the reproduction boundary; ordinary per-task credit assignment is unchanged.
+
 ### 8.4 Mutation operators
 
 v1.0 has 22 kernel-mediated mutation operators (all gated, signed, rate-limited):

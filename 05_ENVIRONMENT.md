@@ -316,6 +316,14 @@ but it never auto-confers standing.
 membership ceremony emitting `STANDING_CONFERRED` / `STANDING_REVOKED` EnvironmentLineage events
 (Appendix A.9).
 
+**Calibration as corroborating evidence (advisory, ADR-0083).** Where an endorsee holds a
+`calibration-record/1` ([`08_KNOWLEDGE.md §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078))
+in the relevant domain, conferral MAY consume it as **corroborating** evidence — it updates from
+verified outcomes only and is among the least-gameable competence signals — but it MUST NOT become
+the sole basis of conferral (the rule-2 peer quorum and rule-6 anti-gaming engine still bind), and
+its absence is never disqualifying. See the advisory note in
+[`16_POPULATION_DYNAMICS.md §4E`](16_POPULATION_DYNAMICS.md#4e-newborn-maturation-ramp-zpd--lpp--scaffolding).
+
 ## 6. PresenceState — transient per-membership
 
 These schemas define the transient presence state of a persona in an environment (attention level, availability, current focus, energy, timestamps, recent signals) and the focus object (focus kind, reference, duration, interruptibility).

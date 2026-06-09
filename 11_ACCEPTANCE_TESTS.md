@@ -392,7 +392,7 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
                     address (05_ENVIRONMENT §5.2 Wake Path 6)
   A-CEPO*  8        CrossEnvProactiveOffer +
                     GuestPresence (05_ENVIRONMENT §11.6)
-  A-GEN*   24       Persona Genesis + population dynamics
+  A-GEN*   26       Persona Genesis + population dynamics
                     (16_POPULATION_DYNAMICS §8) — v1.1-scoped
 
 TOTAL                ~490 tests across v1.0 lineage (+108 from v1.0 spec work)
@@ -1845,6 +1845,18 @@ A-GEN24     Cross-node bound aggregation: GenesisProposal naming a sibling
              global_replication_bound_unverifiable (fail-closed) when the
              global counter cannot be confirmed; population_ceiling not
              evadable across nodes (§4J).
+A-GEN25     Corroborated gate fitness (§4D, ADR-0083): an author whose
+             judged-signal credit (identity_expression / w_ide) would carry
+             it over generativity_fitness_threshold while its verified-outcome
+             components alone fall below → REFUSED author_not_generative;
+             judged signals capped at 25% of gate-consumed fitness and never
+             flip eligibility absent verified-outcome support.
+A-GEN26     Treasury→compute→population invariant (§4F, ADR-0083): a
+             treasury-funded budget increase that would raise
+             ceiling_from_budget WITHOUT a fresh per-increase operator
+             cosignature → ceiling move REFUSED (hosting capacity may rise;
+             ceiling does not); a standing/operator_deferred authorization
+             does NOT satisfy the cosign.
 
 MEMBER-ZERO ARCHIVAL (; §5.3)
 A-EN-v1.0-13  Env with empty active members for member_zero_window
