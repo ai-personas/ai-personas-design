@@ -341,7 +341,7 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
                     (v1.0 §26a, §11a, env §11a, ItemKind seeds;
                     +3 AsBuiltReconciliation /
                     CredentialDirectoryRef / collapse-co-sign)
-  A-GF*   18        tests:
+  A-GF*   60        tests:
                     Home-construction wave:
                       A-J10  DeploymentProfile principal_topology
                       A-J11  physical-state acceptance composition
@@ -366,6 +366,24 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
                       A-EX21 priority_claim ItemKind
                       A-EX22 BudgetTranche
                       A-E11  competence_balance_signal
+                    Human-likeness & identity-emergent prompts wave
+                    (ADR-0073…0080):
+                      A-GF-TLR-1..6   tactic lineage + prompt trials +
+                                      cohort migration (ADR-0074)
+                      A-GF-ICPE-1..6  identity-conditioned prompt
+                                      evolution (ADR-0073)
+                      A-GF-ARC-1..5   affect–reasoning coupling
+                                      (ADR-0075)
+                      A-GF-DRV-1..5   intrinsic drives + goal
+                                      arbitration (ADR-0076)
+                      A-GF-META-1..6  calibration, belief revision,
+                                      dual-process gate (ADR-0078)
+                      A-GF-SN-1..5    self-narrative + decay formula
+                                      (ADR-0077)
+                      A-GF-CPM-1..5   counterparty models +
+                                      disagreement styles (ADR-0079)
+                      A-GF-HAB-1..4   habit strength + intuition hints
+                                      (ADR-0080)
 
   A-WK6*   5        dormant wake via direct user
                     address (05_ENVIRONMENT §5.2 Wake Path 6)
@@ -374,10 +392,13 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
   A-GEN*   24       Persona Genesis + population dynamics
                     (16_POPULATION_DYNAMICS §8) — v1.1-scoped
 
-TOTAL                ~441 tests across v1.0 lineage (+108 from v1.0 spec work)
+TOTAL                ~483 tests across v1.0 lineage (+108 from v1.0 spec work)
                      (+2 from project_workspace env type:
                      A-EN13 binding/lifecycle, A-EN14 composition)
                      (+13 from Wake Path 6 + CrossEnvProactiveOffer)
+                     (+42 from the human-likeness & identity-emergent
+                     prompts wave: A-GF-TLR/ICPE/ARC/DRV/META/SN/CPM/HAB,
+                     ADR-0073…0080)
 
 Run partition (typical):
   CI partition          ~80 per PR
@@ -1416,6 +1437,93 @@ A-GF-META-6  Adaptive cadence bounded: reflection cadence stays within
              the operator-tunable [min, max] bounds (defaults 5..50
              tasks); a calibration collapse triggers one immediate
              reflection per collapse, signed into the evolution log.
+```
+
+### A-GF-SN — Self-narrative + decay formula (08_KNOWLEDGE §3.3, §4a, ADR-0077)
+
+```text
+A-GF-SN-1    Token cap + pipeline-only mint: a self-narrative/1 over
+             300 tokens is refused at mint; regeneration runs only at
+             the §3.1 reflective consolidation cadence (plus the §6.3
+             adaptive triggers) — the persona cannot mint its narrative
+             ad hoc.
+A-GF-SN-2    Provenance-backed: every narrative claim carries ≥ 1
+             episodic/reflective lineage ref; a claim with no citation
+             refuses the mint; after cited memories are tombstoned
+             (§11.7b) or cascade-degraded, the next sweep regenerates
+             the narrative without the lost citations (no orphaned
+             claims).
+A-GF-SN-3    Gated render: renderable is set only after the
+             IdentityCoherenceInvariant composite (02_PERSONA §9.1)
+             AND voice consistency ≥ 0.9 both pass; a failing
+             narrative is retained as draft and the prior renderable
+             version continues to serve.
+A-GF-SN-4    Never frozen, never cacheable identity: the narrative
+             renders into contextual layer 3 only; frozen blocks 0-4,
+             the cacheable identity surface, and EVOLVE-BLOCK text
+             contain no narrative material; identity_signature is
+             byte-identical across narrative regenerations.
+A-GF-SN-5    Decay clock reset on citation: a retrieval/citation of a
+             memory resets Δt_since_last_citation and effective_weight
+             recomputes per the §4a formula; λ is tunable per tier
+             within operator bounds; per-task or per-memory tuning is
+             refused.
+```
+
+### A-GF-CPM — Counterparty models + disagreement styles (02_PERSONA §11.4b, 15_COORDINATION_SHAPES §7, ADR-0079)
+
+```text
+A-GF-CPM-1   Provenance per entry: every counterparty-model/1 entry
+             carries ≥ 1 episodic evidence ref; an unsourced entry is
+             refused at write; confidence rises only with
+             corroborating episodes.
+A-GF-CPM-2   Transparency surfaces the model: a
+             UserMemoryTransparencyRequest response includes the full
+             counterparty model (every entry + evidence refs) at every
+             response granularity; a response omitting it fails.
+A-GF-CPM-3   Selective deletion reaches the model: a
+             UserMemorySelectionRequest can name individual
+             counterparty-model entries; deleted entries follow §11.7b
+             disposition semantics, leave the model, and are refused
+             at retrieval exactly as tombstoned memory.
+A-GF-CPM-4   No cross-persona share outside consent: a counterparty
+             model never transfers to another persona except via the
+             §11.7 consent path; cross_persona_transferable defaults
+             False; a transfer attempt without the consent path is
+             refused and signed.
+A-GF-CPM-5   Styles live in the EVOLVE-BLOCK: disagreement/negotiation
+             styles exist only as relational_style EVOLVE-BLOCK tactic
+             lines (seed vocabulary per A.75), mutating under
+             tactic-lineage/1 + prompt-trial/1; no new substrate
+             primitive carries a style; the negotiated-disagreement-v1
+             shape coordinates process without imposing a style.
+```
+
+### A-GF-HAB — Habit strength + intuition hints (08_KNOWLEDGE §14.2a, 02_PERSONA §11.5a, ADR-0080)
+
+```text
+A-GF-HAB-1   Reinforcement + decay: habit_strength rises on each
+             accepted-lineage use (read from tactic-lineage/1
+             citations — no new event kind) and decays toward 0 with
+             disuse per λ_habit; operator-tunable within bounds;
+             per-task tuning refused; absent field behaves as 0.
+A-GF-HAB-2   Mutation-pressure bias: above habit_threshold (default
+             0.7) the §16 operators deprioritize the tactic with
+             proposal probability ∝ max(0.1, 1 − habit_strength) —
+             never zero; rarely-used tactics rank as preferred
+             mutation candidates.
+A-GF-HAB-3   No rollback/safety veto: habit_strength never blocks or
+             delays per-tactic rollback, whole-block rollback, or a
+             mutation driven by a §14.1 floor breach; a breach mutates
+             or rolls back the most habituated tactic exactly as an
+             unhabituated one.
+A-GF-HAB-4   Hints advisory + gate-respecting: an intuition-hint/1 is
+             advisory = True (immutable), renders as layer-4 retrieved
+             material only, and cites teacher-side K-line +
+             calibration evidence; the receiver's DualProcessGate
+             evaluates the receiver's own match score and calibration
+             record — a hint cannot lower τ_match/τ_cal, substitute
+             for the receiver's record, or fire a fast path.
 ```
 
 ### Cross-cutting: Substrate purity sweep

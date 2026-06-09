@@ -151,6 +151,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Cooperative-as-default** — v1.0 design principle: personas can disagree (Disagreement) but the default is cooperative work-product. See `00_VISION.md`.
 
+**CounterpartyModel** — Additive sidecar (`counterparty-model/1`, ADR-0079) on `RelationshipRecord` / `PersonaRelationshipEdge` carrying a persona's bounded theory of mind about a counterparty: inferred preferences, communication style, predicted reactions — every entry provenance-linked to the episodes that justify it (unsourced entries refused). Fully subject to the transparency (`§11.7a`) and selective-forgetting (`§11.7b`) machinery; never shared cross-persona outside the `§11.7` consent path. See `02_PERSONA.md §11.4b`.
+
 **CRDT** — Conflict-free Replicated Data Type. Used for ArtifactBundle co-editing (Yjs for text; G-set for structured). See `07_ARTIFACTS.md §5`.
 
 **Cross-domain transfer** — First-class event for skills / conventions / lessons / KnowledgeRefs moving between domains; trust adjusted; anti-leakage enforced. See `06_DOMAIN.md §11`.
@@ -317,6 +319,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 ## H
 
+**HabitStrength** — OPTIONAL per-tactic scalar (ADR-0080): usage-reinforced (read from `tactic-lineage/1` citations) and exponentially decaying with disuse. Tactics above the habit threshold are deprioritized as GEPA mutation targets (proposal probability scaled, floor 0.1 — never immutable); rarely-used tactics become preferred mutation candidates. MUST NOT veto rollback or safety-driven mutation. See `08_KNOWLEDGE.md §14.2a`.
+
 **HEART Alternation** — Mechanism where persona alternates CRITICAL ↔ GENERATIVE phases within a task based on signals (no progress → GENERATIVE; score improves → CRITICAL). See [`02_PERSONA.md §6`](02_PERSONA.md).
 
 **HazardousSkillTeachingGate** — safety-floor composition rule under sources 2 (persona charter) + 4 (operator policy) that gates a persona's *teaching* of a skill whose application could cause `physical_harm_class ≥ bodily_injury`. Distinct from `§2.5` physical-state-advancement gate (which fires only when a real `PhysicalAsset` advances). The gate requires an active `TeachingAuthorisation` (`02_PERSONA §11.10`) when the skill being taught crosses the hazard threshold. See [`01_KERNEL.md §2.9`](01_KERNEL.md).
@@ -340,6 +344,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **IdentityExpressionScore** — Judge-ensemble score (`identity-expression/1`) of a candidate EVOLVE-BLOCK against the persona's IdentityRubric; a separate GEPA Pareto axis (never collapsed into a weighted sum) and the additive ninth evolution signal (default weight 0.4). Judged-only — never promotes alone; generative pressure on top of the charter/voice floors, never a substitute for them. See `08_KNOWLEDGE.md §11.1b`, `02_PERSONA.md §8.1a`.
 
 **IdentityRubric** — KindRegistry kind (`identity-rubric/1`) derived mechanically from frozen SOUL.md blocks 0–4: OCEAN priors → framing criteria (e.g. high openness ⇒ exploratory framing preserved), disposition → stance criteria (e.g. falsifier-leaning ⇒ direct-challenge phrasing retained), voice block → register/lexicon checks. Regenerated only on SOUL major version bump, so it cannot drift with the tactics it judges. See `08_KNOWLEDGE.md §11.1b`.
+
+**IntuitionHint** — Advisory-only K-line confidence prior (`intuition-hint/1`, ADR-0080) attached to a `SkillTransferGrant`: the teacher's provenance-backed sense of *when* a transferred skill applies (applicability prior + topology fingerprint + teacher calibration snapshot). Renders as layer-4 advisory material on the learner's side; MUST NOT bypass or lower the receiver's `DualProcessGate` thresholds. Partially discharges R-PERSONA-5. See `02_PERSONA.md §11.5a`.
 
 **Intervention Surface** — Kernel mechanism for halting/pausing/resuming a running persona; emits UserStop, OperatorOverride, or PersonaSelfStop events; integrated with safety floor. See `01_KERNEL.md §13.6`.
 
@@ -690,6 +696,8 @@ The definitions in this document are **documentation-normative**: when a term de
 **SatiationCurve** — The satiation/frustration dynamics on a `Drive` (ADR-0076): verified progress on a drive-tagged goal satiates (urgency falls by `satiation_step`); repeated blockage (default 3 consecutive) frustrates (urgency rises, then disengagement pressure); urgency relaxes toward the OCEAN-seeded baseline on a slow clock. Both transitions emit `AppraisalEvent`s. Operator-tunable within drift bounds. See `02_PERSONA.md §2a`.
 
 **SeedGoal** — v1.0 principal-supplied seed inside a `MissionCharter`. Carries description, `success_kind` (KindRegistry-resolved outcome_kind that measures progress), target value, weight, priority class (primary / secondary / advisory). Frozen post-sign; elaborations cite seed_goal_id as lineage parent. See `02_PERSONA.md §11.3`.
+
+**SelfNarrative** — Reflective self-story (`self-narrative/1`, ADR-0077) of ≤ 300 tokens, regenerated by the existing consolidation pipeline from high-importance episodic + reflective memories. Every claim cites the memories it summarises (anti-confabulation); must pass the `IdentityCoherenceInvariant` and voice-consistency floor before render; renders into the contextual prompt layer only — never a frozen block. A summary the persona performs, not introspection. See `08_KNOWLEDGE.md §3.3`.
 
 **SingleProjectPromotionConfig** — v1.0 per-domain config replacing multi-project promotion thresholds with within-project evidence-density thresholds (verified_attestation_density, verifier_recipe_pass_rate, asbuilt_reconciliation_clean_rate, panel_acceptance_rate). Refused on safety-critical domains. Trust capped at 0.6. Acknowledgment under principal collapse requires 72h cool-down + non-principal `ExternalAttestation`. See `06_DOMAIN.md §3.2`.
 

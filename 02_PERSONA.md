@@ -140,6 +140,8 @@ Blocks 0–4 are frozen identity (re-signed only on major SOUL bump). Blocks 5�
 
 **Tactic lineage pointer (ADR-0074).** Each EVOLVE-BLOCK mutation in blocks 5–7+ mints a per-tactic version-DAG record ([`08_KNOWLEDGE.md §14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074)); `soul.state.json` carries an OPTIONAL `tactic_lineage_ref` pointer to the persona's DAG head. The field is additive — no `soul-state/6` version bump, per the additive-field precedent of ADR-0069/ADR-0071 (INV-10-safe).
 
+**Self-narrative rendering (ADR-0077).** The persona's `self-narrative/1` ([`08_KNOWLEDGE.md §3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077)) renders into the contextual prompt layer only — the same non-frozen, non-cacheable surface as the §6.2 mood line — and MUST NOT enter the frozen blocks 0–4, the identity signature, or EVOLVE-BLOCK text; the autobiography evolves at reflection cadence without ever touching the signed identity surface.
+
 **Cache markers.** Anthropic-family adapters render blocks 0–4 as a single content block with `cache_control: {type: "ephemeral"}` and blocks 5–7+ as a second cache-eligible block (invalidated when a mutation lands). Adapters without cache support call `envelope.concatenated_prompt()` — correctness is unchanged; cost differs.
 
 ### 3.3 Kernel / framework authority split
@@ -822,6 +824,31 @@ Each transition emits a signed `persona_relationship_state_changed` event to bot
 3. **24h apply window.** Substrate refuses to process an apply that takes longer than 24h — this prevents the release from being silently slow-walked. If apply genuinely cannot complete in 24h (large episodic store), operator policy should batch-pre-process before the user files.
 4. **Operator audit signature at apply time is mandatory.** This is for audit provenance, NOT for gate. Operator cannot prevent the release; they merely witness it.
 
+### 11.4b CounterpartyModel sidecar — bounded theory of mind (ADR-0079)
+
+`RelationshipRecord` carries a scalar trust value, consents, and boundaries; `PersonaRelationshipEdge` (§11.4) carries the joint projection. Neither models the *counterparty*: no inferred preferences, no communication style, no predicted reactions. The gap was already named honestly — §11.7a honest limit 3 records that a persona "may have *modelled* the user ... this representation cannot be quoted." That is the worst of both worlds: the model exists implicitly but is unaddressable, so transparency cannot surface it and selective forgetting cannot reach it. The [CounterpartyModel](12_GLOSSARY.md#c) (`counterparty-model/1`) makes the model explicit, provenance-bound, and addressable.
+
+> **Schema/spec:** CounterpartyModel + CounterpartyEntry dataclass definitions (schema counterparty-model/1) and the disagreement-style seed vocabulary. See [Appendix A.75](#appendix-a75).
+
+Six rules are normative:
+
+1. **Additive sidecar.** A `counterparty-model/1` attaches to a `RelationshipRecord` (persona ↔ user) or to one persona's side of a `PersonaRelationshipEdge` (persona ↔ persona). It is OPTIONAL — relationships without one remain valid; no schema version bump on either parent.
+2. **Every entry is provenance-linked.** Each entry (inferred preference, communication style, predicted reaction) MUST carry at least one lineage ref to the episodic memories that justify it; an unsourced entry is refused at write. The model can contain only what the relationship's recorded history supports — the same anti-confabulation stance as `self-narrative/1` ([`08_KNOWLEDGE.md §3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077)).
+3. **Transparency reaches it.** A `UserMemoryTransparencyRequest` (§11.7a) MUST surface the full counterparty model — every entry, with its evidence refs — at every response granularity; "what do you remember about me?" now includes "and what have you inferred about me." This retires the §11.7a honest-limit-3 unaddressability for explicitly modelled state.
+4. **Selective forgetting reaches it.** A `UserMemorySelectionRequest` (§11.7b) MUST be able to name and delete individual counterparty-model entries; deletion follows the §11.7b disposition semantics (tombstone default), and a deleted entry is refused at retrieval exactly as tombstoned memory is.
+5. **Never shared cross-persona outside consent.** A counterparty model MUST NOT be shared with another persona except through the §11.7 consent path; `cross_persona_transferable` defaults `False`. Persona A's model of Sarah never reaches persona B because A and B collaborate.
+6. **Composes with, never bypasses, the MPA mitigations.** The Memory Power Asymmetry mitigations (§11.1 / A.43 — mutual forgetting, transparency, granular consent, co-signed summaries) apply to counterparty-model entries as to any user-scoped memory; the sidecar adds an addressable surface for them, it weakens none of them.
+
+**Disagreement and negotiation styles — seed vocabulary, not a primitive.** How a persona *disagrees with this counterparty* ships as seed vocabulary for the existing `relational_style` EVOLVE-BLOCK (the A.2 SOUL example's "in disagreement: prefer one specific concrete example over abstraction" line is already this shape): **direct-challenge** (state the disagreement plainly, evidence attached), **evidence-first** (lead with the disconfirming evidence, let it speak), **socratic** (surface the contradiction through questions), **accommodate-then-revisit** (yield the moment, reopen with evidence at the next natural point). These are tactic lines, so the existing evolution machinery differentiates them per relationship emergently — mutations ride `tactic-lineage/1` + `prompt-trial/1` (ADR-0073/0074, [`08_KNOWLEDGE.md §14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074)) with the counterparty model's observed-style entries as reflection material. No new substrate primitive carries styles; the §9 relational-drift cap and the one-counterparty influence cap apply unchanged. A coordination shape for structured disagreement, `negotiated-disagreement-v1`, ships in the seed catalog ([`15_COORDINATION_SHAPES.md §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog)).
+
+**Honest limits.**
+
+1. **The model is inference, not truth.** Entries are the persona's provenance-backed guesses about the counterparty; a predicted reaction is a prediction, and the confidence score is the persona's, not the counterparty's endorsement.
+2. **The implicit-modelling residual shrinks but survives.** What a persona internalises without writing an entry remains unaddressable (the same residual as §11.7b honest limit 3); the sidecar moves explicit modelling into the transparency/forgetting surface, it cannot force all modelling to be explicit.
+3. **Profiling humans is sensitive by construction.** An explicit persistent model of a human's preferences and predicted reactions is exactly the artefact privacy regimes exist for — recorded as R-PERSONA-9 (§13), mitigated by rules 2–6, not waved away.
+
+**Acceptance tests.** A-GF-CPM-1 … A-GF-CPM-5 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+
 ### 11.5 SkillTransferGrant — persona-to-persona skill transfer
 
 The Voyager-class `skill_library` lives in each persona's `soul.state.json` — persona-local by design (§3.5 invariant: skill_library survives body swap because it is kernel-owned per persona). Teaching, however, is a relationship action: one persona's accumulated executable skill should be transferable to another persona who has earned the right to take it on. This makes that transfer explicit and signed.
@@ -861,6 +888,25 @@ by_reference   Learner gets a signed pointer; every invocation resolves
 3. **No transitive skill forwarding.** A learner who received a skill cannot then transfer it onward without the original teacher's signature on the new grant (for `by_reference`) or without their own clear `copy` / `fork` lineage (for the others). The substrate refuses transitive "I learned this and now I teach it" without explicit lineage handling.
 
 **Acceptance tests.** A-ST1 (grant requires teacher + learner counter-sign), A-ST2 (safety-critical skill without active edge requires operator co-sign), A-ST3 (demonstration evidence verified before delivered), A-ST4 (by_reference revoke is terminal; copy revoke is advisory), A-ST5 (lineage_parent_skill_id recorded), A-ST6 (transitive transfer refused without explicit chain).
+
+### 11.5a Intuition hints on skill transfer (ADR-0080)
+
+§11.5 honest limit 1 states the gap plainly: transfer installs the teacher's executable + harness, but "tacit operator intuition that lives in the teacher's mode-distribution or reflective memory does NOT transfer with the skill code." A bounded slice of that intuition is transferable: the teacher's sense of *when the skill applies*. The [IntuitionHint](12_GLOSSARY.md#i) (`intuition-hint/1`) carries it as advisory-only K-line confidence priors attached to a `SkillTransferGrant`.
+
+> **Schema/spec:** IntuitionHint dataclass definition (schema intuition-hint/1). See [Appendix A.76](#appendix-a76).
+
+Four rules are normative:
+
+1. **Advisory only.** A hint MUST be marked `advisory = True` (the field is immutable) and renders as retrieved layer-4 prompt material on the learner's side — the same advisory standing as a Lesson ([`08_KNOWLEDGE.md §3.2`](08_KNOWLEDGE.md#32-reflection-retrieval-path-and-lesson--tactic-promotion)). It is never a command, never an EVOLVE-BLOCK line, never an objective.
+2. **It MUST NOT bypass the receiver's DualProcessGate.** The K-line fast path fires only on the *receiver's own* match score and the *receiver's own* domain calibration ([`08_KNOWLEDGE.md §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078), ADR-0078); a hint MUST NOT substitute for either threshold, lower `τ_match`/`τ_cal`, or seed the receiver's `calibration-record/1`. The mentor's confidence informs the learner's deliberation; it never licenses the learner's reflexes.
+3. **Provenance-backed.** Each hint MUST cite the teacher-side K-line and calibration evidence behind the prior, and carries the teacher's domain-calibration snapshot at mint — a learner (and audit) can see how well-calibrated the gut feeling was when it was given.
+4. **Rides the grant FSM.** Hints attach at grant draft, are co-signed with the grant, and follow the grant's revocation semantics for its `transfer_mode` (§11.5): a `by_reference` revoke withdraws the hints; `copy`/`fork` revokes flag them `revoked_provenance` but the learner keeps them.
+
+**Partial discharge of R-PERSONA-5.** The tacit-intuition gap (§13) is partially discharged: *applicability* intuition ("this is the kind of situation where that skill is the right move") now transfers in bounded, advisory, provenance-backed form. The remainder — *adaptive* intuition (how to bend the skill mid-flight when the situation is almost-but-not-quite the pattern) — stays open and is deliberately deferred; the §13 risk row records both halves.
+
+**Honest limit.** A confidence prior over a topology fingerprint is a thin projection of expertise: the teacher's "gut sense" is flattened to a number and an embedding, and a hint earned in the teacher's context can mislead in the learner's. The advisory standing and the gate rule bound the damage — a bad hint wastes attention, it never fires a fast path.
+
+**Acceptance tests.** A-GF-HAB-4 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)); the habit-strength half of ADR-0080 is tested as A-GF-HAB-1 … A-GF-HAB-3 ([`08_KNOWLEDGE.md §14.2a`](08_KNOWLEDGE.md#142a-habit-strength-on-tactics-adr-0080)).
 
 ### 11.6 PersonaPersonaBoundary — peer-interaction refusal
 
@@ -1060,10 +1106,11 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-PERSONA-2 | Memory is text + structure, not lived experience. Users who shared deeply meaningful experiences will notice asymmetry. | Medium | High | Memory-transparency tool (A-P6); episodic decay; explicit "this is what I remember" surface; relationship-record disclosure. | v1.0 (baseline). |
 | R-PERSONA-3 | Mood is a decaying number — behavioural bias, not feeling. Mood declarations are performance, not interiority. The affect–reasoning coupling of `§6.2` (appraisal events, bounded coupling surfaces) and the drives of `§2a` widen the behavioural surface without changing this: they make the performance more *consistent*, not more *real*. | Low | High | Mood/affect transparency; honesty about modelling depth; mood schema documents this in `mood/1` comments; `§6.2` rule 4 keeps mood out of EVOLVE-BLOCKs and evolution objectives (A-GF-ARC-5), so the performance is never optimised for its own sake. | v1.0 (baseline); v1.1 (ADR-0075 restates). |
 | R-PERSONA-4 | Relationships are records; persona retire / fork / reset ends the relationship-in-that-persona. Users with prior relationships face discontinuity. | High | Medium | First-contact disclosure of mortality; consent-bound fork policy; lineage preserves history even when persona ends. | v1.0 (disclosure); v1.1 (relational-MPA mitigations: mutual forgetting, granular consent). |
-| R-PERSONA-5 | Tacit intuition gap. Senior practitioners carry intuition v1.0 does not easily encode; expert intuition remains a long-arc gap. | High | High | Skills + Lessons + Reflections accumulate; bridge ladder (`§11.1`) for physical-world intuition; cross-domain transfer for analogical knowledge. | v1.2+ (population dynamics for inter-persona intuition transfer). |
+| R-PERSONA-5 | Tacit intuition gap. Senior practitioners carry intuition v1.0 does not easily encode; expert intuition remains a long-arc gap. **Partially discharged (ADR-0080):** applicability intuition now transfers as advisory `intuition-hint/1` priors on `SkillTransferGrant` (`§11.5a`); adaptive mid-flight intuition remains the open remainder. | High | High | Skills + Lessons + Reflections accumulate; bridge ladder (`§11.1`) for physical-world intuition; cross-domain transfer for analogical knowledge; `intuition-hint/1` (`§11.5a`) for advisory applicability priors. | v1.1 (partial discharge, ADR-0080); v1.2+ (population dynamics for inter-persona intuition transfer — the remainder). |
 | R-PERSONA-6 | Charter is finite — cannot anticipate every situation. Out-of-charter actions risk unsafe refusal or unsafe acceptance. | High | Medium | Safety floor 8-source composition; operator override; ProactiveIntent rate limits; refusal-on-uncertain default. | v1.0 (baseline). |
 | R-PERSONA-7 | Forking is identity loss. New persona_id and new lineage; prior relationships need consent + re-establishment. | Medium | Medium | Consent flow at fork; relationship-survivorship metadata; A-P8 acceptance test enforces fork inheritance policy. | v1.0 (consent flow); v1.1 (relational survivorship metadata richer). |
 | R-PERSONA-8 | Character-vector binding is body-side state; the substrate signs the reference, not the vector. A compromised body provider invalidates the substrate signature semantics. | High | Low | Optional binding mode; conformance audit at admission (`§3.5`); operator policy may forbid character-vector binding for safety-critical personas. | v1.0 (optional); v1.1 (operator policy hardening). |
+| R-PERSONA-9 | Counterparty models are profiling. An explicit, persistent model of a human user's inferred preferences, communication style, and predicted reactions (`§11.4b`) is sensitive personal-data processing; misused, it is manipulation infrastructure. | High | Medium | Every entry provenance-linked to justifying episodes (unsourced entries refused); full transparency via `§11.7a`; selective deletion via `§11.7b`; no cross-persona sharing outside the `§11.7` consent path; MPA mitigations (`§11.1`) compose unweakened; anti-manipulation audit clearance (`§10`, `08_KNOWLEDGE §15`) gates engagement-driven promotion of relational tactics. | v1.1 (ADR-0079). |
 
 ## 13a. Open questions
 
@@ -5175,5 +5222,100 @@ ADAPTIVE REFLECTION CADENCE
 
   cadence MUST remain inside [min, max]; every early trigger is a
   signed event in the persona's evolution log (replayable by audit).
+```
+
+### Appendix A.75
+
+**CounterpartyModel + CounterpartyEntry dataclass definitions (schema counterparty-model/1) and the disagreement-style seed vocabulary** (referenced from §11.4b)
+
+```python
+@dataclass
+class CounterpartyModel:
+    schema: str = "counterparty-model/1"
+    model_id: str
+    persona_id: str                    # the modelling persona
+    counterparty_ref: str              # user_id or persona_id of the
+                                       # modelled party
+    attached_to: str                   # RelationshipRecord id (persona↔user)
+                                       # or persona-relationship/1 edge_id
+                                       # (this persona's side only)
+    entries: list[CounterpartyEntry]
+    cross_persona_transferable: bool = False
+                                       # share ONLY via the §11.7 consent
+                                       # path; default stays False
+    updated_at: datetime
+    signed_by: bytes                   # kernel signature — signing only
+
+
+@dataclass
+class CounterpartyEntry:
+    entry_id: str
+    entry_kind: str                    # KindRegistry-resolved; STANDARDISED
+                                       # seeds: inferred_preference,
+                                       # communication_style,
+                                       # predicted_reaction,
+                                       # disagreement_style_observed
+    statement: str                     # e.g. "prefers concrete examples
+                                       # to abstractions"
+    evidence_refs: list[str]           # episodic memory lineage refs —
+                                       # ≥ 1 REQUIRED; an unsourced entry
+                                       # refuses the write (§11.4b rule 2)
+    confidence: float                  # rises with corroborating episodes;
+                                       # the persona's confidence, not the
+                                       # counterparty's endorsement
+    last_corroborated_at: datetime
+```
+
+```text
+DISAGREEMENT-STYLE SEED VOCABULARY (seed tactic lines for the existing
+relational_style EVOLVE-BLOCK; evolution differentiates per relationship
+via tactic-lineage/1 + prompt-trial/1 — no new substrate primitive):
+
+  direct-challenge        state the disagreement plainly, evidence
+                          attached, in the first turn
+  evidence-first          lead with the disconfirming evidence and let
+                          it carry the disagreement
+  socratic                surface the contradiction through questions
+                          the counterparty answers themselves
+  accommodate-then-revisit yield the moment; reopen with evidence at
+                          the next natural point
+
+Seed lines are advisory starting vocabulary; the §9 relational-drift cap
+and the one-counterparty influence cap apply to their evolution unchanged.
+```
+
+### Appendix A.76
+
+**IntuitionHint dataclass definition (schema intuition-hint/1)** (referenced from §11.5a)
+
+```python
+@dataclass
+class IntuitionHint:
+    schema: str = "intuition-hint/1"
+    hint_id: str
+    grant_ref: str                     # skill-transfer-grant/1 id (§11.5);
+                                       # hints attach at grant draft and
+                                       # are co-signed with the grant
+    teacher_persona_id: str
+    skill_id: str
+    applicability_prior: float         # teacher's confidence, 0..1, that
+                                       # the skill applies to the named
+                                       # task topology
+    topology_fingerprint: bytes        # embed() of the task shapes the
+                                       # teacher found the skill effective
+                                       # on (K-line-style match target)
+    evidence_refs: list[str]           # teacher-side K-line +
+                                       # calibration-record refs backing
+                                       # the prior (§11.5a rule 3)
+    teacher_calibration_snapshot: float
+                                       # teacher's domain calibration
+                                       # (1 − brier) at mint — audit sees
+                                       # how calibrated the gut feeling was
+    advisory: bool = True              # ALWAYS True; immutable. Never a
+                                       # command; never enters the
+                                       # receiver's DualProcessGate
+                                       # thresholds (08_KNOWLEDGE §13a)
+    minted_at: datetime
+    signed_by: bytes
 ```
 
