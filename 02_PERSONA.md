@@ -115,6 +115,8 @@ The kernel renders SOUL + per-task state into a `PersonaEnvelope`. This is the *
 
 Blocks 0–4 are frozen identity (re-signed only on major SOUL bump). Blocks 5–7+ change on EVOLVE-BLOCK mutation. The `identity_signature` is computed over the concatenation of cacheable blocks only — evolved tactics never enter the signature, so identity verifies across mutations.
 
+**Tactic lineage pointer (ADR-0074).** Each EVOLVE-BLOCK mutation in blocks 5–7+ mints a per-tactic version-DAG record ([`08_KNOWLEDGE.md §14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074)); `soul.state.json` carries an OPTIONAL `tactic_lineage_ref` pointer to the persona's DAG head. The field is additive — no `soul-state/6` version bump, per the additive-field precedent of ADR-0069/ADR-0071 (INV-10-safe).
+
 **Cache markers.** Anthropic-family adapters render blocks 0–4 as a single content block with `cache_control: {type: "ephemeral"}` and blocks 5–7+ as a second cache-eligible block (invalidated when a mutation lands). Adapters without cache support call `envelope.concatenated_prompt()` — correctness is unchanged; cost differs.
 
 ### 3.3 Kernel / framework authority split
@@ -548,6 +550,10 @@ v1.0.14 makes the *cause* of a `DORMANT` transition explicit. Previously the onl
 
 > **Schema/spec:** Eight evolution signals with weights table. See [Appendix A.35](#appendix-a35).
 
+### 8.1a Ninth signal — identity expression (ADR-0073)
+
+`identity_expression` (default weight 0.4) is an additive ninth signal: the judge-ensemble score of a candidate EVOLVE-BLOCK against the persona's identity rubric, derived mechanically from frozen SOUL blocks 0–4 ([`08_KNOWLEDGE.md §11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073)). It enters GEPA as a **separate Pareto axis** — it MUST NOT be collapsed into a weighted sum with the other objectives — and it is a judged signal: per the §10 corroboration rules it never promotes alone. The §9 floors (charter conformance ≥ 0.95, voice consistency ≥ 0.9) are untouched; identity expression is generative pressure on top of them, never a substitute ([`08_KNOWLEDGE.md §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073)). Tests: A-GF-ICPE ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+
 ### 8.2 Five evolution horizons
 
 > **Schema/spec:** Five evolution horizons. See [Appendix A.36](#appendix-a36).
@@ -559,6 +565,8 @@ v1.0.14 makes the *cause* of a `DORMANT` transition explicit. Previously the onl
 v1.0 default weights (operator-tunable):
 
 > **Schema/spec:** v1.0 default evolution weights. See [Appendix A.38](#appendix-a38).
+
+**ADR-0073 note.** The `identity_expression` term (§8.1a) is additive to the credit formula (`w_ide`, A.37/A.38); default weights renormalise in the evolution-config v-next. Operator-tunable; no schema break.
 
 ### 8.4 Mutation operators
 
@@ -1014,6 +1022,8 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-PERSONA-4 | Character-vector binding optional everywhere — but should operator policy default to off for safety-critical deployments, or on for cohort tuning? | Operator policy | v1.1 default policy. |
 | OQ-PERSONA-5 | MHBB recurrence detector threshold (> 3 occurrences / quarter) is heuristic. Should it scale with persona experiential floor / community standing or remain fixed? | Persona authors | v1.1 calibration. |
 | OQ-PERSONA-6 | Charter conflict resolution: how should the substrate handle three-way conflicts (persona × project × env charters)? Currently `charter-conflict-resolution/1` covers pairwise. | Charter WG | v1.1 three-way resolution. |
+| OQ-PERSONA-7 | Tactic-lineage retention: how long should dead branches of a persona's tactic version DAG (`08_KNOWLEDGE §14.3` rejected / rolled-back versions) be retained — indefinitely for audit, or pruned per memory-tier policy? Storage cost vs lineage-replay completeness. | Prompt engineers | v1.2 retention policy. |
+| OQ-PERSONA-8 | Identity-rubric circularity: can identity rubrics (`08_KNOWLEDGE §11.1b`) themselves be evolved — e.g. judge-refined criteria — without circularity, i.e. without the rubric drifting toward whatever the evolved prompts already express? v1.1 pins regeneration to SOUL major bumps; rubric evolution remains open. | Prompt engineers + Persona authors | v1.2 rubric evolution study. |
 
 ## 14. Acceptance tests
 
@@ -2958,6 +2968,15 @@ competence_balance_signal    -0.2     Triggered when the kernel
                                        authority modes.  Negative
                                        weight is small; the signal is
                                        a routing hint, not a punishment.
+
+ADR-0073 ADDITION
+identity_expression           0.4     Judge-ensemble score of a
+                                       candidate EVOLVE-BLOCK against
+                                       the identity rubric (frozen
+                                       SOUL blocks 0-4).  Separate
+                                       GEPA Pareto axis — never
+                                       weighted-summed; judged-only,
+                                       never promotes alone (§10).
 ```
 
 ### Appendix A.36
@@ -3003,6 +3022,7 @@ fitness_delta = w_lin  · lineage_credit
               + w_proj  · project_milestone_signal
               + w_dom   · domain_promotion_signal      (v1.1+)
               + w_env   · env_horizon_transfer_signal  (v1.1+)
+              + w_ide   · identity_expression_signal   (ADR-0073)
 ```
 
 ### Appendix A.38
@@ -3013,7 +3033,8 @@ fitness_delta = w_lin  · lineage_credit
 w_lin  = 1.0    w_sha  = 0.7    w_tool = 0.5    w_sub  = 0.5
 w_cas  = 0.5    w_rel  = 0.3    w_eng  = 0.2    w_ref  = 0.2
 w_bench = 1.2   w_peer = 0.85   w_proj = 0.7    w_dom  = 0.5
-w_env  = 0.4
+w_env  = 0.4    w_ide  = 0.4    (ADR-0073; weights renormalise in
+                                 evolution-config v-next)
 ```
 
 ### Appendix A.39

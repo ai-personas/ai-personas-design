@@ -1713,6 +1713,72 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ---
 
+### ADR-0073 — Identity-conditioned prompt evolution: identity becomes a Pareto axis (a generator), not just a floor (a filter)
+
+**Status:** Accepted.
+**Date:** 2026-06-09.
+**Origin:** Design review — "persona prompts should be self-evolved and **emergent from persona identity**." The GEPA objective vector was generic (verifier pass rate / cost / latency / charter conformance); identity constrained evolution only as a *filter* (charter conformance ≥ 0.95, voice consistency ≥ 0.9). Under generic objectives, evolved prompts converge toward task performance and merely *avoid violating* identity — they are never *selected for expressing* it. Lands after ADR-0074, its infrastructure prerequisite: adding a new Pareto axis to live prompt evolution without per-tactic rollback and trial records would be unsafe.
+**Related:** [`08_KNOWLEDGE §11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073) (objective), [`08_KNOWLEDGE §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073) (safeguards), [`08_KNOWLEDGE §15`](08_KNOWLEDGE.md#15-anti-goodhart-for-signal-corroboration) (corroboration), [`02_PERSONA §8.1a`](02_PERSONA.md#81a-ninth-signal--identity-expression-adr-0073) (ninth signal), [`02_PERSONA §8.3`](02_PERSONA.md#83-credit-assignment-formula) (credit assignment), [`02_PERSONA §9`](02_PERSONA.md#9-anti-degradation-safeguards) (floors), OQ-PERSONA-8, ADR-0067…0072 (non-contradiction), ADR-0071 (ContinuousRefinementMission), ADR-0074 (prerequisite).
+
+**Context.** The persona model freezes identity in SOUL.md blocks 0–4 and lets tactics evolve in blocks 5–7+. The conformance and voice scans guarantee evolution never *leaves* identity, but nothing makes evolution *move toward* it: two personas with very different OCEAN priors, dispositions, and voices, optimized on the same generic objectives, drift toward whatever phrasing passes verifiers cheapest — identity reduced to a fence around a performance-shaped landscape. The user-stated goal is the opposite: prompts emergent *from* identity.
+
+**Decision.** Make identity a first-class evolution objective, with the drift and Goodhart risks engineered out:
+1. **`identity-rubric/1`** (a KindRegistry kind) — a rubric derived *mechanically* (deterministic, replayable derivation function) from the frozen SOUL.md blocks 0–4: OCEAN priors → framing criteria, disposition → stance criteria, voice block → register/lexicon checks. Regenerated **only on a SOUL major version bump** — never on tactic mutation or cohort change — so the rubric cannot drift with the tactics it judges.
+2. **`identity-expression/1`** — a judge-ensemble score (INV-6 rotation) of candidate EVOLVE-BLOCK text against the rubric, added to GEPA as a **separate Pareto axis**. It MUST NOT be collapsed into a weighted sum: identity trades visibly against latency/cost on the front rather than averaging away.
+3. **Ninth evolution signal** — `identity_expression` (default weight 0.4) joins the credit formula additively (`w_ide`); weights renormalise in the evolution-config v-next, no schema break.
+4. **Floors untouched.** Charter conformance ≥ 0.95 and voice consistency ≥ 0.9 remain hard floors; identity expression is generative pressure *on top of* the floors, never a substitute. Identity moves from filter to generator without the filter weakening.
+5. **Anti-Goodhart safeguards** (`08_KNOWLEDGE §14.1a`): (a) the floors as stated; (b) a blind peer-attribution audit — another persona's judge must attribute style-stripped evolved-prompt text to the correct SOUL above chance, else identity-driven promotion blocks; (c) the existing cross-persona similarity audit doubles as a differentiation check — identity expression must differentiate personas, not homogenize them.
+
+**Consequences.**
+- (+) Evolved prompts are selected for *expressing* the persona's identity — the headline "prompts emergent from identity" behaviour — while every existing safety property holds byte-for-byte.
+- (+) No new kernel responsibility: rubric derivation is deterministic and replayable, judges run in the existing INV-6 rotation, the kernel signs scores and trials as it already signs everything; per-tactic rollback and trial records (ADR-0074) make a mis-tuned axis cheaply reversible.
+- (+) ContinuousRefinementMission (ADR-0071) picks up identity-expression as one more anytime objective in its `MissionObjective` vector with no change required. Nothing contradicts ADR-0067–0070/0072: federation, delegation, scheduling, coordination emergence, and the attestation boundary are untouched.
+- (−) Judge-ensemble evaluation adds cost per GEPA cycle (one more axis to score per candidate); mitigated by the §11.1 rollout budget being unchanged — the axis scores existing rollouts, it does not add rollouts.
+- (−) A mechanical rubric is a coarse projection of identity, and judged scores rank below verified outcomes (`§15`); the axis can prefer *legible* identity expression over subtle expression. Recorded honestly; the blind-attribution audit bounds, but does not eliminate, this.
+- (−) Whether rubrics themselves can be evolved without circularity is open — OQ-PERSONA-8, deliberately *not* attempted here.
+
+**Alternatives considered.**
+- *Fold identity into the objective as a weighted-sum term.* Rejected: a weighted sum lets identity average away against cost/latency — exactly the collapse the separate-axis rule forbids; Pareto separation keeps the trade visible and auditable.
+- *Human-authored identity rubrics.* Rejected: operator burden per persona, subjective drift across re-authorings, and no replayable derivation; the mechanical derivation from already-signed frozen blocks is auditable and free.
+- *Train identity into the body (fine-tuning / character vectors as the mechanism).* Rejected as the primary path: bakes identity into a disposable body, violating body-replaceability (design rule 14, `02_PERSONA §3.5`); `CharacterVectorBinding` remains the optional body-side complement (`02_PERSONA §3.6`).
+- *Strengthen the floors instead (raise conformance/voice thresholds).* Rejected: a higher fence still only *filters*; no threshold makes generic objectives *select for* identity expression.
+
+**Implementation scope.** Landed with normative edits: [`08_KNOWLEDGE §11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073) + A.39 (schemas) + the A.22 objective-list addition, [`08_KNOWLEDGE §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073) (safeguards), [`02_PERSONA §8.1a`](02_PERSONA.md#81a-ninth-signal--identity-expression-adr-0073) + the §8.3 credit-assignment note + A.35/A.37/A.38 weight entries, OQ-PERSONA-8 ([`02_PERSONA §13a`](02_PERSONA.md#13a-open-questions)), the A-GF-ICPE test family ([`11_ACCEPTANCE_TESTS §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)), and glossary entries (*IdentityExpressionScore*, *IdentityRubric*).
+
+---
+
+### ADR-0074 — Tactic lineage & PromptOps: per-tactic version DAG, trial records, per-tactic rollback, cohort migration across model upgrades
+
+**Status:** Accepted.
+**Date:** 2026-06-09.
+**Origin:** Design review of the prompt-evolution layer ("prompts should be self-evolved and emergent from persona identity"). Skills had Voyager-style lineage (`lineage_parent_skill_id`); EVOLVE-BLOCK tactics — the other half of a persona's evolved behaviour — had **none**: no per-tactic version history, no record of the A/B trial behind a promotion, rollback only at whole-EVOLVE-BLOCK grain, and no migration story for gepa-cohort bindings when a body/model family upgrades. This ADR is the infrastructure prerequisite for ADR-0073 (adding a new Pareto axis to live prompt evolution without per-tactic rollback and trial records would be unsafe).
+**Related:** [`08_KNOWLEDGE §14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074) (lineage + trials), [`08_KNOWLEDGE §11.1a`](08_KNOWLEDGE.md#111a-cohort-migration-across-model-upgrades-adr-0074) (cohort migration), [`08_KNOWLEDGE §11.1`](08_KNOWLEDGE.md#111-v10-gepa-integration) (GEPA), [`08_KNOWLEDGE §12`](08_KNOWLEDGE.md#12-miprov2--bayesian-instruction--demo-search) (MIPROv2 cold-start), [`08_KNOWLEDGE §14.1`](08_KNOWLEDGE.md#141-anti-degradation-safeguards) (whole-block rollback), [`02_PERSONA §3.2`](02_PERSONA.md#32-personaenvelope--the-body-side-contract-envelope4) (`tactic_lineage_ref`), [`02_PERSONA §3.5`](02_PERSONA.md#35-body-model--native-vs-proxy-binding-body-binding1) (gepa-cohort binding), OQ-PERSONA-7, ADR-0067…0072 (non-contradiction), ADR-0073.
+
+**Context.** The evolution cycle (`08_KNOWLEDGE §14`) promotes tactics through a confirmation gate and can roll back "to the previous EVOLVE-BLOCK version" — a blunt instrument. Three gaps: (1) **no tactic lineage** — audit could not answer "which mutation operator produced this tactic, from which parent, justified by which evidence"; (2) **no trial record** — the 0.05-threshold Pareto decision (`§11.1`) was computed and discarded, so promotions were signed but not *replayable*; (3) **no cohort migration** — a body-family upgrade cold-started a fresh `gepa_cohort_id` from charter alone, discarding the prior cohort's entire Pareto front. All three are record-keeping and composition gaps, not missing subsystems.
+
+**Decision.** Mirror the skill-lineage pattern onto tactics, additively:
+1. **`tactic-lineage/1`** — every EVOLVE-BLOCK mutation mints a per-tactic version-DAG record (tactic_id, parent_version, mutation_operator of the 22, gepa_trace_ref, trial_ref, verdict), kernel-signed into the persona's evolution log + global LineageGraph exactly as skill mutations are. The kernel's role is **signing only** — no new kernel responsibility (the ADR-0070 emergence posture holds).
+2. **`prompt-trial/1`** — the A/B evidence behind each verdict: candidate vs incumbent, task sample, per-axis Pareto deltas, the 0.05-threshold decision, rollback token. A promotion without a trial record is refused at the confirmation gate.
+3. **Per-tactic rollback** — reverting one DAG edge restores that tactic's prior version without touching siblings; whole-block rollback (`§14.1`) remains as the coarse safety path.
+4. **`cohort-migration/1`** — a STANDARDISED seed shape: on body/model-family upgrade, the new cohort's MIPROv2 cold-start is seeded with the prior cohort's Pareto front as proposal priors, shadow-evaluated on the last 100 task traces before swap, with the prior cohort retained as rollback target. Additive over the existing gepa-cohort binding.
+5. **`soul.state.json`** gains an OPTIONAL `tactic_lineage_ref` pointer — additive, no `soul-state/6` version bump (the ADR-0069/0071 additive-field precedent, INV-10-safe).
+
+**Consequences.**
+- (+) Tactic evolution becomes auditable and reversible at the grain it mutates: "who proposed this line, from what, on what evidence, and how do I undo just it" all have signed answers — symmetric with what skills already had.
+- (+) A model upgrade no longer forfeits learned tactics: migration is seeded, shadow-gated, and reversible; regressions surface in the shadow evaluation, never silently in live traffic.
+- (+) Purely additive: two new narrow schemas + one seed shape + one optional field; no invariant edit, no schema version bump, no new kernel responsibility beyond signing. Nothing contradicts ADR-0067–0072: federation/identity (0067), delegation (0068), scheduling (0069), coordination emergence (0070), ContinuousRefinementMission (0071), and the attestation boundary (0072) are untouched.
+- (−) Lineage records accrete; dead branches (rejected / rolled-back versions) have an unresolved retention policy — recorded as OQ-PERSONA-7, not hidden.
+- (−) The shadow-evaluation gate adds latency and cost to body upgrades (re-scoring 100 traces per persona); mitigated by it being a one-time per-upgrade cost in the same cost class as one GEPA cycle.
+
+**Alternatives considered.**
+- *Reuse skill lineage records for tactics.* Rejected: tactics version per channel inside a signed prompt block, not as standalone executable artefacts; forcing them through `skill_library` shapes would conflate the Capability and Evolution tiers.
+- *Keep whole-EVOLVE-BLOCK rollback only.* Rejected: reverting an entire channel block to undo one bad tactic discards unrelated learned tactics — exactly the collateral damage that made adding new evolution objectives (ADR-0073) unsafe.
+- *Re-evolve from scratch on model upgrade (status quo).* Rejected: discards the Pareto front a persona may have spent months earning; the seeded + shadow-gated migration is strictly safer than both silent reuse and blind cold-start.
+
+**Implementation scope.** Landed with normative edits: [`08_KNOWLEDGE §14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074) + A.37 (schemas), [`08_KNOWLEDGE §11.1a`](08_KNOWLEDGE.md#111a-cohort-migration-across-model-upgrades-adr-0074) + A.38 (migration seed shape), the [`02_PERSONA §3.2`](02_PERSONA.md#32-personaenvelope--the-body-side-contract-envelope4) `tactic_lineage_ref` note, OQ-PERSONA-7 ([`02_PERSONA §13a`](02_PERSONA.md#13a-open-questions)), the A-GF-TLR test family ([`11_ACCEPTANCE_TESTS §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)), and glossary entries (*TacticLineageRecord*, *PromptTrialRecord*, *CohortMigrationPlaybook*).
+
+---
+
 ## 13. Cross-references
 
 - Normative invariants and commitments referenced above: [`00_VISION.md §3`](00_VISION.md#3-invariants-j1j9), [`00_VISION.md §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10).

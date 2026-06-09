@@ -314,6 +314,43 @@ GEPA is the **primary mechanism for tactic mutation**.
 
 **Tests:** A-P16 (rollback on degradation — GEPA-evolved tactics revertable), A-P17 (eight evolution signals + v1.1 additions flow to credit formula), A-P18 (22 mutation operators all gated, signed, rate-limited). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
+### 11.1a Cohort migration across model upgrades (ADR-0074)
+
+The GEPA cohort binding ([`02_PERSONA.md §3.5`](02_PERSONA.md#35-body-model--native-vs-proxy-binding-body-binding1)) evolves prompt variants per body class, but had no migration story: on a body/model-family upgrade a new `gepa_cohort_id` cold-started from the charter alone, discarding everything the prior cohort had learned. `cohort-migration/1` is the STANDARDISED seed shape that closes this; it is additive over the existing gepa-cohort binding — no change to `body-binding/1`.
+
+*On a body or model-family upgrade, a CohortMigrationPlaybook seeds the new cohort's MIPROv2 cold-start (§12) with the prior cohort's Pareto front as proposal priors — Phase-1 instruction candidates are drawn from the surviving front, not from a blank charter prompt — then shadow-evaluates the migrated candidates against the persona's last 100 task traces before any swap, and retains the prior cohort as the rollback target.*
+
+**Technical detail:** See [A.38](#appendix-a38).
+
+Three rules are normative:
+
+1. A cohort swap MUST NOT activate until the shadow evaluation over the last 100 task traces completes and no Pareto axis regresses beyond the operator-tunable tolerance (default 0.05 — the same signal threshold as §11.1 promotion).
+2. The prior cohort MUST be retained as a rollback target for at least the operator-tunable retention window (default 30 days); rollback re-binds `gepa_cohort_id` and MUST NOT touch identity blocks 0–4 (the identity signature verifies across cohorts unchanged).
+3. Migration records (seed set, shadow-evaluation scores, swap verdict) are kernel-signed into the persona's evolution log; the kernel's role is signing only.
+
+**Honest limit.** Pareto-front priors transfer *what worked*, not *why*. A sufficiently different body family may render prior tactics useless; the shadow evaluation then honestly reports the regression and the cold-start proceeds from charter alone — slower, never silent.
+
+**Tests:** A-GF-TLR-5, A-GF-TLR-6. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+
+### 11.1b Identity-expression objective (ADR-0073)
+
+The §11.1 objectives are generic — verifier pass rate, cost, latency, charter conformance. Identity entered evolution only as a *filter* (the §14.1 conformance + voice floors), so evolved prompts converged toward task performance and merely avoided violating identity. ADR-0073 makes identity a *generator*: candidate EVOLVE-BLOCKs are selected for **expressing** the persona's identity, not merely passing its floors.
+
+*An identity rubric (identity-rubric/1, a KindRegistry kind) is derived mechanically from the frozen SOUL.md blocks 0–4: OCEAN priors map to framing criteria (e.g. high openness ⇒ exploratory framing preserved), the disposition maps to stance criteria (e.g. falsifier-leaning ⇒ direct-challenge phrasing retained), and the voice block maps to register and lexicon checks. The identity-expression score (identity-expression/1) is a judge-ensemble evaluation of candidate EVOLVE-BLOCK text against that rubric, added to GEPA's Pareto search as a separate axis.*
+
+**Technical detail:** See [A.39](#appendix-a39).
+
+Four rules are normative:
+
+1. The rubric MUST be regenerated only on a SOUL major version bump (when blocks 0–4 re-sign); it MUST NOT be regenerated on tactic mutation or cohort change — the rubric cannot drift with the tactics it judges.
+2. `identity-expression/1` MUST be a separate Pareto axis; it MUST NOT be collapsed into a weighted sum with the other objectives. Identity trades visibly against latency and cost on the front rather than averaging away.
+3. The judge ensemble runs under INV-6 rotation and the §15 corroboration rules: identity expression is a judged signal and never promotes alone; the §14.1a safeguards apply before any identity-driven promotion.
+4. Charter conformance ≥ 0.95 and voice consistency ≥ 0.9 stay untouched floors (§14.1). Identity expression is generative pressure **on top of** the floors, never a substitute for them.
+
+**Honest limit.** A rubric mechanically derived from OCEAN priors, disposition, and voice is a coarse projection of identity, and a judge-ensemble score is judgment, not verification — it ranks below verified outcomes per §15. Whether rubrics themselves can be evolved without circularity is open (OQ-PERSONA-8, [`02_PERSONA.md §13a`](02_PERSONA.md#13a-open-questions)).
+
+**Tests:** A-GF-ICPE-1, A-GF-ICPE-2, A-GF-ICPE-6. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+
 ## 12. MIPROv2 — Bayesian instruction + demo search
 
 For cold-start tactic generation.
@@ -357,6 +394,16 @@ Reflector mode + reflection loop drive prompt evolution.
 
 **Technical detail:** See [A.27](#appendix-a27).
 
+### 14.1a Identity-expression safeguards (ADR-0073)
+
+The identity-expression axis (§11.1b) is a judged signal and could be gamed — tactics that *sound* like the persona without coordinating better. Three safeguards, additive over §14.1:
+
+1. **Floors unchanged.** Voice consistency ≥ 0.9 and charter conformance ≥ 0.95 remain hard floors; an identity-expression score, however high, MUST NOT excuse a floor breach.
+2. **Blind peer-attribution audit.** At the §13 confirmation gate, a judge bound to a *different* persona receives the candidate EVOLVE-BLOCK text (style-stripped of names and ids) alongside a small set of SOUL.md identity summaries, and MUST attribute the text to the correct SOUL above chance over the audit window. Failure blocks identity-driven promotion — the score was measuring something other than this persona's identity.
+3. **Differentiation, not homogenisation.** The existing cross-persona similarity audit (§14.1) doubles as a differentiation check: identity-expression-driven evolution MUST hold or increase pairwise tactic distance between personas; convergence above the §14.1 threshold rolls back exactly as before.
+
+**Tests:** A-GF-ICPE-3, A-GF-ICPE-4, A-GF-ICPE-5. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+
 ### 14.2 Per-channel tactic evolution
 
 Communication tactics evolve **per channel**, not as a single undifferentiated set. Each persona's SOUL.md permits an EVOLVE-BLOCK region per channel.
@@ -366,6 +413,26 @@ Communication tactics evolve **per channel**, not as a single undifferentiated s
 **Technical detail:** See [A.28](#appendix-a28).
 
 The principle: **a persona gets better at coordinating in each channel independently**, not just better at the cognitive function. A persona may have strong blackboard tactics and weak DM tactics; evolution per channel preserves the distinction.
+
+### 14.3 Tactic lineage and trial records (ADR-0074)
+
+Skills carry lineage (Voyager-style `lineage_parent_skill_id`); EVOLVE-BLOCK tactics did not — a promoted tactic replaced its predecessor with no per-tactic version history, no record of the trial that justified the promotion, and rollback only at whole-EVOLVE-BLOCK grain (§14.1). v1.1 closes this with two schemas.
+
+*The tactic-lineage record gives every tactic a version DAG: tactic_id, parent_version, the mutation_operator applied (one of the 22 in §16), a gepa_trace_ref to the optimization run that proposed it, a trial_ref to the promotion trial, and the verdict (promoted / rejected / rolled_back). The prompt-trial record is the A/B evidence behind each verdict: candidate vs incumbent version, the task sample evaluated, per-axis Pareto deltas (verifier pass rate, cost, latency, charter conformance), the 0.05-signal-threshold decision (§11.1), and a rollback token.*
+
+**Technical detail:** See [A.37](#appendix-a37).
+
+Three rules are normative:
+
+1. Every mutation that lands in an EVOLVE-BLOCK MUST mint a `tactic-lineage/1` record, kernel-signed into the persona's evolution log and the global LineageGraph exactly as skill mutations are. The kernel's role is **signing only** — no new kernel responsibility.
+2. Every promotion MUST reference a `prompt-trial/1` record; a promotion without one is refused at the §13 confirmation gate.
+3. Rollback becomes **per-tactic**: reverting one DAG edge restores that tactic's prior version without touching sibling tactics in the same EVOLVE-BLOCK. Whole-block rollback (§14.1) remains available as the coarse safety path.
+
+`soul.state.json` gains an OPTIONAL `tactic_lineage_ref` pointer to the persona's DAG head ([`02_PERSONA.md §3.2`](02_PERSONA.md#32-personaenvelope--the-body-side-contract-envelope4)) — additive, no `soul-state/6` version bump.
+
+**Honest limit.** Lineage records *which* operator produced *which* version under *which* trial; it does not explain why a tactic works. Dead branches (rejected / rolled-back versions) accrete; their retention policy is open (OQ-PERSONA-7, [`02_PERSONA.md §13a`](02_PERSONA.md#13a-open-questions)).
+
+**Tests:** A-GF-TLR-1 … A-GF-TLR-4. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
 
 ## 15. Anti-Goodhart for signal corroboration
 
@@ -1246,6 +1313,8 @@ class GEPA:
                 "cost ↓",
                 "latency ↓",
                 "charter conformance ≥ 0.95",
+                "identity expression ↑",   # separate Pareto axis;
+                                           # never weighted-summed (§11.1b)
             ],
             pareto_front=True,
             rollouts=10,  # GEPA is sample-efficient
@@ -1791,4 +1860,115 @@ CACHE HIT RATE (cache_control on layers 1-2)
 Target                                                  ≥ 80%
 Cost amortisation vs uncached                         ~10× savings
                                                         at scale
+```
+
+### A.37 TacticLineageRecord + PromptTrialRecord schemas
+
+<a id="appendix-a37"></a>
+
+```python
+@dataclass
+class TacticLineageRecord:
+    schema: str = "tactic-lineage/1"
+    record_id: str
+    tactic_id: str                     # stable across versions
+    version: int                       # monotonic per tactic_id
+    parent_version: int | None         # null for a tactic's first version
+    channel: str                       # EVOLVE-BLOCK channel (§14.2)
+    mutation_operator: str             # one of the 22 (§16)
+    gepa_trace_ref: str | None         # GEPA / MIPROv2 optimization run id
+    trial_ref: str | None              # prompt-trial/1 record id
+    verdict: Literal["promoted",
+                     "rejected",
+                     "rolled_back"]
+    minted_at: datetime
+    signed_by: bytes                   # kernel signature — signing only
+
+
+@dataclass
+class PromptTrialRecord:
+    schema: str = "prompt-trial/1"
+    trial_id: str
+    candidate_ref: str                 # (tactic_id, version) under trial
+    incumbent_ref: str | None          # currently promoted version;
+                                       # null on cold-start
+    task_sample_refs: list[str]        # task lineage ids evaluated
+    pareto_deltas: dict[str, float]    # per-axis: verifier_pass_rate,
+                                       # cost, latency, charter_conformance
+                                       # (open dict — additive axes admissible)
+    decision: Literal["promote", "reject"]
+    decision_threshold: float = 0.05   # the §11.1 signal threshold
+    rollback_token: str                # consumed by per-tactic rollback
+                                       # (reverts exactly one DAG edge)
+    evaluated_at: datetime
+    signed_by: bytes
+```
+
+### A.38 Cohort migration seed shape
+
+<a id="appendix-a38"></a>
+
+```text
+COHORT MIGRATION (cohort-migration/1, STANDARDISED seed shape):
+
+trigger: body / model-family upgrade proposes a new gepa_cohort_id
+
+  1. SEED     MIPROv2 cold-start (§12) for the new cohort draws its
+              Phase-1 instruction candidates from the prior cohort's
+              Pareto front (proposal priors), not from charter alone.
+  2. SHADOW   Candidates shadow-evaluated against the persona's last
+              100 task traces (the §11.1 trace window) before any live
+              traffic; per-axis scores compared to the prior front.
+  3. GATE     Swap admissible iff no axis regresses beyond the
+              operator-tunable tolerance (default 0.05).
+  4. RETAIN   Prior cohort retained as rollback target for the
+              retention window (default 30 days); rollback re-binds
+              gepa_cohort_id; identity blocks 0-4 untouched.
+
+All four steps emit kernel-signed records to the persona's evolution
+log; the playbook references cohorts, it does not own them.
+```
+
+### A.39 IdentityRubric + IdentityExpressionScore schemas
+
+<a id="appendix-a39"></a>
+
+```python
+@dataclass
+class IdentityRubric:
+    schema: str = "identity-rubric/1"
+    rubric_id: str
+    persona_id: str
+    soul_major_version: int            # the SOUL version derived from
+    derived_from_blocks: list[int]     # always [0, 1, 2, 3, 4] (frozen)
+    criteria: dict[str, str]           # criterion id -> check text,
+                                       # derived MECHANICALLY:
+                                       #   OCEAN priors -> framing criteria
+                                       #     (e.g. openness 0.9 ->
+                                       #      "exploratory framing preserved")
+                                       #   disposition -> stance criteria
+                                       #     (e.g. falsifier_leaning ->
+                                       #      "direct-challenge phrasing
+                                       #       retained")
+                                       #   voice block -> register / lexicon
+                                       #     checks
+    derivation_fn_ref: str             # deterministic derivation function id;
+                                       # signed so audit can replay
+    minted_at: datetime
+    signed_by: bytes                   # re-signed ONLY on SOUL major bump
+
+
+@dataclass
+class IdentityExpressionScore:
+    schema: str = "identity-expression/1"
+    score_id: str
+    candidate_ref: str                 # (tactic_id, version) under evaluation
+    rubric_ref: str                    # identity-rubric/1 id
+    judge_ensemble: list[str]          # ≥ 3 judges, INV-6 rotation
+    per_criterion: dict[str, float]    # criterion id -> 0..1
+    score: float                       # ensemble median, 0..1
+    pareto_axis_separate: bool = True  # MUST remain a separate axis (§11.1b);
+                                       # weighted-sum collapse is refused
+    evaluated_at: datetime
+    signed_by: bytes
 ```

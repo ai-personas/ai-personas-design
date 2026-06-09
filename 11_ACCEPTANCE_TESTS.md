@@ -1278,6 +1278,62 @@ A-GF-BRG-3   latency_floor_evidence_ref required when floor < 1000ms;
              ensures the floor isn't speculative.
 ```
 
+### A-GF-TLR — Tactic lineage + prompt trials + cohort migration (08_KNOWLEDGE §14.3, §11.1a, ADR-0074)
+
+```text
+A-GF-TLR-1   Every EVOLVE-BLOCK mutation mints a signed tactic-lineage/1
+             record (tactic_id, parent_version, mutation_operator of
+             the 22, gepa_trace_ref, trial_ref, verdict) in the
+             persona's evolution log + global LineageGraph; an
+             unrecorded mutation is refused.
+A-GF-TLR-2   Per-tactic rollback reverts exactly one DAG edge: the
+             named tactic returns to parent_version; sibling tactics
+             in the same EVOLVE-BLOCK are byte-identical before/after.
+A-GF-TLR-3   Every promotion references a prompt-trial/1 record
+             (candidate vs incumbent, task sample, per-axis Pareto
+             deltas, 0.05-threshold decision, rollback token);
+             promotion without a trial record refused at the
+             confirmation gate.
+A-GF-TLR-4   Dead branches queryable: rejected and rolled_back versions
+             remain in the DAG per retention policy; lineage replay
+             reconstructs a tactic's full version history.
+A-GF-TLR-5   Cohort migration gate: on body/model-family upgrade the
+             new cohort's MIPROv2 cold-start is seeded with the prior
+             cohort's Pareto front; cohort swap blocked until shadow
+             evaluation over the last 100 task traces passes the
+             per-axis regression tolerance (default 0.05).
+A-GF-TLR-6   Migration rollback: prior cohort retained for the
+             retention window; re-binding gepa_cohort_id to it restores
+             prior behaviour without touching identity blocks 0-4.
+```
+
+### A-GF-ICPE — Identity-conditioned prompt evolution (08_KNOWLEDGE §11.1b, §14.1a, 02_PERSONA §8.1a, ADR-0073)
+
+```text
+A-GF-ICPE-1  Identity rubric regenerated iff SOUL major version bump
+             (blocks 0-4 re-sign); tactic mutations and cohort changes
+             leave the rubric byte-identical.
+A-GF-ICPE-2  Separate Pareto axis: GEPA's front carries
+             identity-expression independently; a configuration that
+             collapses it into a weighted sum is refused; a candidate
+             may win on identity while losing on latency/cost and
+             remain on the front.
+A-GF-ICPE-3  Blind peer-attribution audit: a judge bound to a different
+             persona attributes style-stripped candidate text to the
+             correct SOUL above chance; below-chance attribution blocks
+             identity-driven promotion.
+A-GF-ICPE-4  Floors unchanged: charter conformance ≥ 0.95 and voice
+             consistency ≥ 0.9 enforced regardless of identity score;
+             a high identity-expression score never excuses a floor
+             breach.
+A-GF-ICPE-5  Differentiation check: identity-driven evolution holds or
+             increases pairwise cross-persona tactic distance;
+             convergence above the §14.1 threshold rolls back.
+A-GF-ICPE-6  Ninth signal additive: identity_expression flows to the
+             credit formula with w_ide; judged-only — never promotes
+             alone per the §15 corroboration rules.
+```
+
 ### Cross-cutting: Substrate purity sweep
 
 ```text

@@ -115,6 +115,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Cohort** — Team of personas assembled for a specific task or project; cohort assembly mechanism (MODE B) signs cohort members. See `04_PROJECT.md §14.1`.
 
+**CohortMigrationPlaybook** — STANDARDISED seed shape (`cohort-migration/1`) for migrating evolved prompts across a body/model-family upgrade: the new GEPA cohort's MIPROv2 cold-start is seeded with the prior cohort's Pareto front as proposal priors; candidates are shadow-evaluated on the persona's last 100 task traces before any swap; the prior cohort is retained as rollback target. Additive over the gepa-cohort binding. See `08_KNOWLEDGE.md §11.1a`.
+
 **CohortDynamicsState** — Continuous cohesion read on a cohort: cohesion_score composite over avg_pairwise_trust, joint_success_ratio, disagreement_resolution_ratio, fractiousness_index, role_health_by_kind, throughput_relative_to_baseline. Band FSM `healthy → watch → intervene → dissolve_proposed` with operator-policy thresholds; intervene refuses new high-stakes obligations; dissolve_proposed requires lead + operator pin. Composes with `CohortConstraint` (structure) — health gate runs independently at milestones. See `04_PROJECT.md §14.2`.
 
 **ConservationInvariantRef** — v1.0 substrate-shape arithmetic relationship across `ResourceStockEnvelope` instances (mass balance, energy balance, charge balance, ratio constraints). Kernel evaluates `arithmetic_form` on every tool-call that mutates a bound resource; refuse / escalate / log per `violation_action`. Domain-emergent kinds; substrate carries the topology. See `04_PROJECT.md §26a.4.2`.
@@ -320,6 +322,10 @@ The definitions in this document are **documentation-normative**: when a term de
 **Identity Layer (Persona)** — Layer 1 of seven-layer persona; frozen at birth; name, charter, voice, priors, primary_disposition. See `02_PERSONA.md §2`.
 
 **IdentityCoherenceInvariant** — Long-horizon composite scan over the per-axis §9 drift signals (charter_conformance, voice_consistency, mode_disposition_coherence, tactic_homogeneity_inverse, relational_style_drift, plus new skill_library_continuity and value_lattice_continuity vs anchor snapshot). Composite below `composite_threshold` (default 0.85) transitions persona to `COHERENCE_REVIEW` — no retirement or SOUL mutation, but new high-stakes elaborations under any `MissionCharter` refused until principal counter-sign restores state OR pins a new anchor. Scan cadence min(500 tasks, 90 days). See `02_PERSONA.md §9.1`.
+
+**IdentityExpressionScore** — Judge-ensemble score (`identity-expression/1`) of a candidate EVOLVE-BLOCK against the persona's IdentityRubric; a separate GEPA Pareto axis (never collapsed into a weighted sum) and the additive ninth evolution signal (default weight 0.4). Judged-only — never promotes alone; generative pressure on top of the charter/voice floors, never a substitute for them. See `08_KNOWLEDGE.md §11.1b`, `02_PERSONA.md §8.1a`.
+
+**IdentityRubric** — KindRegistry kind (`identity-rubric/1`) derived mechanically from frozen SOUL.md blocks 0–4: OCEAN priors → framing criteria (e.g. high openness ⇒ exploratory framing preserved), disposition → stance criteria (e.g. falsifier-leaning ⇒ direct-challenge phrasing retained), voice block → register/lexicon checks. Regenerated only on SOUL major version bump, so it cannot drift with the tactics it judges. See `08_KNOWLEDGE.md §11.1b`.
 
 **Intervention Surface** — Kernel mechanism for halting/pausing/resuming a running persona; emits UserStop, OperatorOverride, or PersonaSelfStop events; integrated with safety floor. See `01_KERNEL.md §13.6`.
 
@@ -609,6 +615,8 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Promotion Gates** — 4-stage ladder for domain emergence: EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED; each stage has verification + audit thresholds. See `06_DOMAIN.md §3`.
 
+**PromptTrialRecord** — A/B trial record (`prompt-trial/1`) behind every tactic promotion verdict: candidate vs incumbent version, task sample, per-axis Pareto deltas, the 0.05-signal-threshold decision, and a rollback token enabling per-tactic rollback. A promotion without a trial record is refused at the confirmation gate. See `08_KNOWLEDGE.md §14.3`.
+
 **ProvenFact** — G-set CRDT element; verified statement; signed by kernel on verifier verdict. Both Product and Knowledge tier (dual). Task-scope, project-scope, and env-scope. See `01_KERNEL.md §3`.
 
 **Provenance Score** — Unified knowledge artefact ranking: base_confidence × age_decay × verifier_consistency × usage_signal. See `08_KNOWLEDGE.md §6`.
@@ -694,6 +702,8 @@ The definitions in this document are **documentation-normative**: when a term de
 ## T
 
 **Tactic** — EVOLVE-BLOCK heuristic in SOUL.md; per-persona; signed mutations via mutation operators. See `08_KNOWLEDGE.md §2`.
+
+**TacticLineageRecord** — Per-tactic version-DAG entry (`tactic-lineage/1`): tactic_id, parent_version, mutation_operator (one of the 22), gepa_trace_ref, trial_ref, verdict. Mirrors Voyager skill lineage; kernel-signed into the persona's evolution log + global LineageGraph (kernel role is signing only). Enables per-tactic rollback — reverting one DAG edge — instead of whole-EVOLVE-BLOCK reversion. See `08_KNOWLEDGE.md §14.3`.
 
 **Task Class** — An emergent KindRegistry kind (ADR-0066) describing a kind of work for orchestration purposes. v1.0 ships ten STANDARDISED **seed** classes: CONVERGENT / DIVERGENT / MIXED / INTERACTIVE / RELATIONAL / PEDAGOGIC / PERFORMATIVE / EXISTENTIAL / DELEGATED / INVESTIGATIVE; personas MAY propose new ones. See `03_TASKS.md §2`, `§2a`.
 
