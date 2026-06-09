@@ -268,6 +268,8 @@ When two personas form a `PersonaRelationshipEdge` (`02_PERSONA §11.4`) and the
 
 **Sync transport.** `RelationshipFederationSync` rides on the same A2A channel `§3` uses for joined environments. Sync envelopes are signed by both kernels; replay rejects unsigned envelopes; the host of a joined env is a natural sync-broker if both participants are present.
 
+**Counterparty-model sidecars never federate (ADR-0082).** A `counterparty-model/1` sidecar ([`02_PERSONA.md §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079)) is **home-kernel-only**: it MUST be excluded from `RelationshipFederationSync` envelopes in ALL replication modes (`shadow` and `co_owned`). The edge and its joint counters sync; each persona's model *of* the counterparty stays on its own kernel — a persona's inferences about a party never replicate to the kernel that hosts that party (or anyone else) as a side effect of edge continuity. A sync envelope carrying counterparty-model content MUST be refused and the refusal signed. Test: A-GF-CPM-8 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md)).
+
 **Anti-Goodhart for federated trust.** A home kernel that inflates `trust_a_of_b` without matching `joint_successes` recorded against the same shared `LineageGraph` triggers `FEDERATED_TRUST_DISCREPANCY` on the peer's side; the peer kernel MAY freeze the edge or downgrade replication_mode to shadow. This composes with `§3D` reputation anti-gaming and prevents one kernel from unilaterally manufacturing trust history.
 
 **Honest limits.**
@@ -516,7 +518,7 @@ v1.0-specific extensions (project_context, env_context, emergent-domain warning)
 
 This section catalogues the **headline v1.0 schemas** by entity group. Every entity that crosses a process or signing boundary in v1.0 declares a `schema` field carrying a `<name>/<integer>` version string per [`SPEC_CONVENTIONS.md §4`](SPEC_CONVENTIONS.md#4-schemas); [`INV-10`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10) enforces that the kernel MUST refuse unknown versions.
 
-The headline catalogue below lists ~80 of the most-referenced schemas across the design. A full automated registry (covering ~150 schemas including narrower schemas like `deferred-admission/1`, `drift-bounds/1`, `policy-envelope/1`, `bulk-kind-proposal/1`, etc.) is generated from source by the schema-extractor CI job, which `grep`s all docs and source for `schema` field literals matching `<name>/<integer>` and emits `schemas/registry.json`. The headline table is the human-reviewed curated subset; the generated registry is authoritative for runtime version checks.
+The headline catalogue below lists ~95 of the most-referenced schemas across the design. A full automated registry (covering ~150 schemas including narrower schemas like `deferred-admission/1`, `drift-bounds/1`, `policy-envelope/1`, `bulk-kind-proposal/1`, etc.) is generated from source by the schema-extractor CI job, which `grep`s all docs and source for `schema` field literals matching `<name>/<integer>` and emits `schemas/registry.json`. The headline table is the human-reviewed curated subset; the generated registry is authoritative for runtime version checks.
 
 Adding a new schema requires either (a) extending the headline table here if the schema is broadly load-bearing, or (b) confirming it shows up in the generated registry. Either way, [`§7.13`](#713-adding-or-modifying-schemas) below applies.
 
@@ -545,9 +547,9 @@ Encoding per [`SPEC_CONVENTIONS.md §4`](SPEC_CONVENTIONS.md#4-schemas). Where a
 
 | Schema | Version | Form | Defined in | Stability | Used by |
 |--------|---------|------|------------|-----------|---------|
-| `AnswerPackage` | `answer/4` | dataclass | [`03_TASKS.md §6`](03_TASKS.md) | Stable | Canonical task output. Carries the producing orchestration kind + promotion stage for trust-calibration (ADR-0066). |
-| `AcceptanceConfig` | `acceptance-config/1` | dataclass | [`03_TASKS.md §3`](03_TASKS.md) | Stable | Per-pathway routing config. |
-| `TaskClassEstimate` | `task-class-estimate/1` | dataclass | [`03_TASKS.md §4`](03_TASKS.md) | Stable | Classifier output over the resolved class-kind set. |
+| `AnswerPackage` | `answer/5` | dataclass | [`03_TASKS.md §5`](03_TASKS.md) | Stable | Canonical task output. Carries the producing orchestration kind + promotion stage for trust-calibration (ADR-0066). v5: adds `stated_confidence` (raw, pre-conditioning) + `calibration_conditioning_ref` so raw vs calibrated confidence stays auditable (ADR-0078/0081; migration [`§7.13`](#713-adding-or-modifying-schemas), mapper sets both `None`). |
+| `AcceptanceConfig` | `acceptance-config/1` | dataclass | [`03_TASKS.md §6`](03_TASKS.md) | Stable | Per-pathway routing config. |
+| `TaskClassEstimate` | `task-class-estimate/1` | dataclass | [`03_TASKS.md §2.1`](03_TASKS.md) | Stable | Classifier output over the resolved class-kind set. |
 | `TaskClass` | KindRegistry-resolved (`task_class_kinds`) | name | [`03_TASKS.md §2a`](03_TASKS.md) | Emergent (ADR-0066) | Emergent task-class kind; v1.0 ten classes seeded STANDARDISED. Resolved by name, never a closed `Literal[...]`. |
 | `AcceptancePathway` | KindRegistry-resolved (`acceptance_pathway_kinds`) | name | [`03_TASKS.md §2a`](03_TASKS.md) | Emergent (ADR-0066) | Emergent acceptance-pathway kind; v1.0 eight pathways seeded STANDARDISED. An orchestration coordination shape ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md)) composes a class→pathway binding from the meta-mechanisms. Carries `pathway_trust` and promotes/demotes per the [`§2b`](03_TASKS.md) ladder. |
 | `OrchestrationPolicyProfile` | `orchestration-policy-profile/1` | enum + binding | [`03_TASKS.md §2b.4`](03_TASKS.md) | Emergent (ADR-0066) | Operator policy (floor source 4) selecting `fully_open` (default) or `bounded_compositional` per env / task family; governs what orchestration may be proposed, never the floor (J3) or signing (J2/J9). |
@@ -666,6 +668,28 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 | `UserBoundary` | `boundary/1` | dataclass | [`02_PERSONA.md §6`](02_PERSONA.md) | Stable | User-set restrictions. |
 | `MoodState` | `mood/1` | dataclass | [`02_PERSONA.md §5`](02_PERSONA.md) | Stable | Transient affective state. |
 | `PersonalGoal` | `personal-goal/1` | dataclass | [`02_PERSONA.md §6`](02_PERSONA.md) | Stable | Persona-side goal distinct from task. |
+
+### 7.9a Psychology, metacognition & PromptOps (ADR-0073…0082)
+
+Registry rows for the ADR-0073…0080 wave, completed by ADR-0081/0082 (plus the ADR-0084 probe battery). The first ten schemas are **boundary-crossing** (they ride grants, federation envelopes, evolution logs read by the GEPA harness, or operator policy); the last five are **kernel-internal** — signed and persisted in the persona's own stores, but never leaving the owning kernel. `counterparty-model/1` sits in between: it attaches to a federated edge yet is **home-kernel-only** by ADR-0082. Changes follow [`§7.13`](#713-adding-or-modifying-schemas) (migration mapper + acceptance test per row; the anchoring tests are the A-GF-* families, [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md)).
+
+| Schema | Version | Form | Defined in | Stability | Used by |
+|--------|---------|------|------------|-----------|---------|
+| `SkillTransferGrant` | `skill-transfer-grant/1` | dataclass | [`02_PERSONA.md §11.5`](02_PERSONA.md) | Stable | Persona-to-persona skill transfer; teacher + learner counter-signed; FSM + revocation semantics. |
+| `IntuitionHint` | `intuition-hint/1` | dataclass | [`02_PERSONA.md §11.5a`](02_PERSONA.md) | Provisional | Advisory applicability prior riding a `SkillTransferGrant` (ADR-0080); never enters the receiver's `DualProcessGate` thresholds. |
+| `CounterpartyModel` | `counterparty-model/1` | dataclass | [`02_PERSONA.md §11.4b`](02_PERSONA.md) | Provisional | Bounded theory-of-mind sidecar (ADR-0079); consent-gated for persona↔user (ADR-0082). **Home-kernel-only:** MUST be excluded from `RelationshipFederationSync` envelopes in all modes ([`§3E`](#3e-cross-kernel-relationship-continuity), ADR-0082). |
+| `BeliefRevisionRecord` | `belief-revision/1` | dataclass | [`08_KNOWLEDGE.md §13a`](08_KNOWLEDGE.md) | Provisional | "I believed X; evidence Y changed it" note; layer-4 retrievable; shareable under consent gates. |
+| `TacticLineageRecord` | `tactic-lineage/1` | dataclass | [`08_KNOWLEDGE.md §14.3`](08_KNOWLEDGE.md) | Provisional | Per-tactic version DAG record (ADR-0074); global LineageGraph + evolution log. |
+| `PromptTrialRecord` | `prompt-trial/1` | dataclass | [`08_KNOWLEDGE.md §14.3`](08_KNOWLEDGE.md) | Provisional | A/B promotion evidence + rollback token; required at the confirmation gate. |
+| `CohortMigrationPlaybook` | `cohort-migration/1` | seed shape | [`08_KNOWLEDGE.md §11.1a`](08_KNOWLEDGE.md) | Provisional | Seeded, shadow-gated cohort migration on body/model-family upgrade (ADR-0074); shadow evaluation budget-gated per [`05_ENVIRONMENT.md §7.2`](05_ENVIRONMENT.md). |
+| `SchedulingPolicy` | `scheduling-policy/1` | dataclass | [`03_TASKS.md §4.6`](03_TASKS.md) | Provisional | Operator-authored node queue ordering (ADR-0069); applied at the `task_intake` admission point ([`05_ENVIRONMENT.md §10`](05_ENVIRONMENT.md)). |
+| `CalibrationRecord` | `calibration-record/1` | dataclass | [`08_KNOWLEDGE.md §13a`](08_KNOWLEDGE.md) | Provisional | Per persona × domain Brier record; conditions rendered confidence; gates the K-line fast path (graduated ramp, ADR-0081). |
+| `IdentityRubric` | `identity-rubric/1` | dataclass | [`08_KNOWLEDGE.md §11.1b`](08_KNOWLEDGE.md) | Provisional | Mechanically derived identity rubric (ADR-0073); minted at birth ceremony; operator backfill for older personas (ADR-0081). |
+| `AppraisalEvent` | `appraisal-event/1` | dataclass | [`02_PERSONA.md §6.2`](02_PERSONA.md) | Provisional | **Kernel-internal.** Minted at acceptance finalization ([`03_TASKS.md §5`](03_TASKS.md)), goal-state transitions, and relationship events; grounds every mood movement. |
+| `MoodImpulse` | `mood-impulse/1` | dataclass | [`02_PERSONA.md §6.2`](02_PERSONA.md) | Provisional | **Kernel-internal.** The only mood-mutation path; per-event-kind clamps + dedup/24 h window clamp (ADR-0081). |
+| `SelfNarrative` | `self-narrative/1` | dataclass | [`08_KNOWLEDGE.md §3.3`](08_KNOWLEDGE.md) | Provisional | **Kernel-internal.** Provenance-backed self-story; layer-3 render only; derendered immediately on cited-memory tombstone (ADR-0081). |
+| `TacticCitation` | `tactic-citation/1` | dataclass | [`08_KNOWLEDGE.md §14.3a`](08_KNOWLEDGE.md) | Provisional | **Kernel-internal.** Per-acceptance tactic usage event (ADR-0081); the reinforcement source for `habit_strength`. |
+| `IdentityEquivalenceProbeBattery` | `probe-battery/1` | dataclass | [`11_ACCEPTANCE_TESTS.md §8e`](11_ACCEPTANCE_TESTS.md) | Provisional | **Kernel-internal.** Versioned ≥ 20-probe battery for the A-J7 body-swap identity-equivalence test (ADR-0084); minted at the birth ceremony from SOUL blocks + `identity-rubric/1`; regenerated only on SOUL major bump; operator backfill for older personas. |
 
 ### 7.10 Constraints & policy
 
@@ -1624,9 +1648,12 @@ class PromptBlock:
         "advisory_lessons", "advisory_skills", "advisory_tools",
         "task_framing",
         "project_context", "env_context",
+        "contextual_mood", "self_narrative",
         "domain_advisory"
     ]
 ```
+
+*Enum change note (ADR-0081, per the [`§7.13`](#713-adding-or-modifying-schemas) CI discipline):* `contextual_mood` and `self_narrative` are additive origin literals so the ADR-0075 rendered disposition line ([`08_KNOWLEDGE.md §10a`](08_KNOWLEDGE.md#10a-contextual-mood-line-adr-0075)) and the ADR-0077 self-narrative ([`08_KNOWLEDGE.md §3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077)) are carriable as first-class layer-3 blocks (`cacheable = False` always). `PromptBlock` is an internal value type (no `schema` field, [`SPEC_CONVENTIONS.md §4.3`](SPEC_CONVENTIONS.md#43-schema-scope)); the addition is flagged here for the schema-extractor / CI grep rather than the registry table. Tests: A-GF-ARC-5, A-GF-SN-4.
 
 ```json
 {

@@ -205,6 +205,8 @@ class TreasuryBound:
 
 Every treasury operation MUST pass, in order: (1) the existing kernel safety-floor admission (INV-7), then (2) `TreasuryBound` (balance ceiling, spend cap, rate, cosign threshold, replay nonce). Default-deny on a missing or wildcard-unmatched bound, mirroring `ReplicationBound`.
 
+> **Treasury→compute→population invariant (ADR-0083).** A treasury can buy metered compute (x402), which raises INV-7 budget headroom, which the population layer can read as genesis pressure and — under `ceiling_from_budget` — as a higher population ceiling. To prevent treasury earnings from silently financing their own reproduction loop, the [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md#4f-demographic-regulation--safety) invariant binds: **treasury-funded budget increases MUST NOT move `ceiling_from_budget` without a fresh operator cosignature per increase** (no standing authorization). Treasury-funded headroom MAY raise hosting capacity; the population *ceiling* moves only by an explicit per-increase operator act. Risk rows: R-POP-8 ([`16_POPULATION_DYNAMICS.md §7`](16_POPULATION_DYNAMICS.md#7-risks--known-limitations)) / R-ECON-COMPOUND ([`17_ECONOMY.md §13`](17_ECONOMY.md)).
+
 ### 4E. `SettlementAdapter` + supporting records
 
 `SettlementAdapter` is the **chain-neutral** interface to whatever stack settles money and titles; DIDs and EAS attestations remain chain-neutral in the normative model. A **Base reference binding** (ERC-721/6551/4907/5006 + EAS + ERC-2981 + x402) is **informative only**. **Promotion target:** `09_PROTOCOLS.md §3I`.

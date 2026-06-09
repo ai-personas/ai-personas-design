@@ -87,7 +87,7 @@ The kernel guarantees: identity persistence (J1), append-only [lineage](12_GLOSS
 
 v1.0 MUST achieve, by v1.1, all of the following:
 
-1. **Identity persistence under body swap.** A persona MUST retain its SOUL, skill library, KindRegistry, ProvenFacts, K-lines, and GEPA-evolved meta-prompts across any supported body binding (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, MAF, Pydantic-AI, DSPy, smolagents, Semantic Kernel, MCP, A2A). [`J1`, `J7`]
+1. **Identity persistence under body swap.** A persona MUST retain its SOUL, skill library, KindRegistry, ProvenFacts, K-lines, and evolved meta-prompt artifacts (GEPA-class optimizers; see [`08_KNOWLEDGE.md §11`](08_KNOWLEDGE.md#11-dspy-gepa--reflective-prompt-optimization)) across any supported body binding (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, MAF, Pydantic-AI, DSPy, smolagents, Semantic Kernel, MCP, A2A). Identity persistence is measured by the falsifiable A-J7 identity-equivalence test (probe battery + two-binding pass criteria; ADR-0084, [`11_ACCEPTANCE_TESTS.md §8e`](11_ACCEPTANCE_TESTS.md#8e-body-swap-identity-equivalence-test-a-j7--adr-0084)). [`J1`, `J7`]
 2. **Append-only auditability.** Every state-changing action MUST emit a signed event in the appropriate lineage scope (task, environment, domain); replay MUST reconstruct full state. [`J2`, `J9`, `C1`, `INV-2`]
 3. **Universal safety floor.** All eight floor sources MUST compose by most-restrictive-wins at every action. The floor MUST NOT be bypassable by any acceptance pathway. The floor's *shape* is fixed and non-bypassable; *where, when, and in what form* a floor applies is emergent (e.g. physical attestation keys off the persona-inferred `physical_harm_class` axis and per-domain attestation forms, never a blanket gate — `06_DOMAIN §5.8`, `01_KERNEL §2.5.1`). [`J3`, `C4`]
 4. **Sound, trust-calibrated acceptance.** Every acceptance verdict MUST be signed, floor-cleared, budget-admitted, and trust-calibrated to the maturity of the orchestration that produced it. Task classes and acceptance pathways are emergent kinds (the v1.0 set seeded as STANDARDISED); the run loop is an emergent orchestration shape. [`J4`, `C4`, `ADR-0066`]
@@ -107,7 +107,7 @@ v1.0 explicitly does **NOT** attempt the following (each is detailed in [§10](#
 - Ground-truth verification in domains without programmatic verifiers or bench measurements.
 - Long-horizon self-direction without principal-supplied seed goals.
 - Multi-language / multi-cultural domain emergence (v1.2+).
-- Real-money financial transactions.
+- Real-money financial transactions. *(The v1.x non-goal stands unweakened: the kernel signs payment proposals and receipts but never moves funds; economic self-sustainability is operator-in-the-loop — `PaymentBridge` is human-executed ([`04_PROJECT.md §26a.4.1`](04_PROJECT.md)). [`17_ECONOMY.md`](17_ECONOMY.md) + [`18_SETTLEMENT.md`](18_SETTLEMENT.md) define an **opt-in v2.0 trajectory** beyond it — default-off, operator-cosigned, with fund custody confined to a kernel-custodied treasury bounded by `TreasuryBound` ([`18_SETTLEMENT.md §4D`](18_SETTLEMENT.md#4d-personatreasury--treasurybound--the-bounded-fund-custody-exception)) and the ADR-0083 treasury→compute→population cosign invariant. None of it binds until those drafts promote.)*
 - Adversarial robustness against nation-state attackers.
 
 ## 3. Invariants (J1…J9)
@@ -196,7 +196,9 @@ Each rule is normative; implementations MUST adhere to all 19.
 
 Each item below is **out-of-scope by design**, not an oversight. Per-doc "Risks & known limitations" sections enumerate within-scope known weaknesses; this list is the top-level out-of-scope inventory. None of these items is targeted for v1.0 through v1.2.
 
-*Ten categories of intentionally excluded scope: physical embodiment (personas bridge to the physical world but do not directly control robots); subjective experience (personas do not claim sentience); export-control inference (the system flags hazard shape but does not auto-classify regulatory category); ground-truth without measurement (trust degrades honestly when no verifier exists); long-horizon self-direction (bounded autonomy only, always requires human-supplied seed goals); multi-language domain emergence (v1.2+); external training-data provenance (provider responsibility); real-money transactions (operator must wrap); nation-state adversarial robustness (not prescribed — navigated by honest trust-calibration, V.8); and domain-specific professional disclaimers (operator policy, not substrate). (Multi-kernel / population-scale evolution is no longer excluded — it is normative per ADR-0067; PersonaOS is one global object space over many nodes.)*
+*Ten categories of intentionally excluded scope: physical embodiment (personas bridge to the physical world but do not directly control robots); subjective experience (personas do not claim sentience); export-control inference (the system flags hazard shape but does not auto-classify regulatory category); ground-truth without measurement (trust degrades honestly when no verifier exists); long-horizon self-direction (bounded autonomy only, always requires human-supplied seed goals); multi-language domain emergence (v1.2+); external training-data provenance (provider responsibility); real-money transactions (operator must wrap; an opt-in v2.0 economy/settlement trajectory exists as drafts — see the roadmap note below); nation-state adversarial robustness (not prescribed — navigated by honest trust-calibration, V.8); and domain-specific professional disclaimers (operator policy, not substrate). (Multi-kernel / population-scale evolution is no longer excluded — it is normative per ADR-0067; PersonaOS is one global object space over many nodes.)*
+
+**Roadmap note — economy & settlement (v2.0 trajectory).** The real-money non-goal is a *v1.x* boundary, not a permanent one. [`17_ECONOMY.md`](17_ECONOMY.md) (emergent, pluralistic persona-authored economies) and [`18_SETTLEMENT.md`](18_SETTLEMENT.md) (one reference settlement/transfer layer) are **v2.0 DRAFTs** defining the opt-in trajectory: everything is additive and default-off; real-value settlement requires operator cosignature; fund custody is confined to the kernel-custodied `PersonaTreasury` under a charter-class `TreasuryBound` ([`18_SETTLEMENT.md §4D`](18_SETTLEMENT.md#4d-personatreasury--treasurybound--the-bounded-fund-custody-exception)); and the ADR-0083 treasury→compute→population invariant breaks the self-financing reproduction loop (treasury-funded budget increases MUST NOT move `ceiling_from_budget` without a fresh per-increase operator cosignature). Until v1.x personas remain economically operator-in-the-loop by design: `PaymentBridge` ([`04_PROJECT.md §26a.4.1`](04_PROJECT.md)) keeps every payment a human-executed step. Nothing in 17/18 binds an implementer until those documents promote per their own §11 ordering.
 
 **Technical detail (full out-of-scope specifications):** See [A.10](#appendix-a10).
 
@@ -243,7 +245,7 @@ A conformant implementation publishing a claim SHOULD use language of the form:
 
 > **<Product> conforms to PersonaOS v1.0.<patch> at level <L1 | L2 | L3>, with body bindings: <list>. Acceptance corpus: <git ref or test-report hash>. Issued: <ISO 8601 date>.**
 
-The claim MUST be reproducible: an auditor following the release gate process (the release gate process) on the cited acceptance corpus MUST reach the same verdict. False or unreproducible conformance claims are documentation defects and SHOULD be retracted in writing.
+The claim MUST be reproducible: an auditor following the release gate process on the cited acceptance corpus MUST reach the same verdict. False or unreproducible conformance claims are documentation defects and SHOULD be retracted in writing.
 
 ### 10a.5 Partial conformance
 
@@ -268,7 +270,7 @@ Cross-document risks for v1.0 as a system. Per-document risks appear in each doc
 |----|------|----------|------------|------------|----------------|
 | R-v1.0-1 | **Lineage tampering by compromised body.** A body that gains write access to the lineage store could rewrite history despite signing requirements. | Critical | Low | 3-tier key custody ([`09_PROTOCOLS.md §6`](09_PROTOCOLS.md)); tombstoning-only delete policy ([`01_KERNEL.md §3`](01_KERNEL.md)); periodic Merkle-style attestation of lineage roots. | v1.0.2 (custody); v1.1 (attestation). |
 | R-v1.0-2 | **Safety-floor erosion via emergent domain extension.** A persona-proposed safety extension could weaken the floor if operator review is lax. | Critical | Medium | C2 operator-signature requirement; hazard-axis auto-routing; ProposedSafetyExtension SHALL never reduce floor strictness ([`06_DOMAIN.md §5.3`](06_DOMAIN.md)). |. |
-| R-v1.0-3 | **Identity drift across body swap.** Different bodies producing semantically divergent outputs from the same Soul violates J7. | High | Medium | Equivalence-class testing in CI ([`11_ACCEPTANCE_TESTS.md §A-J7`](11_ACCEPTANCE_TESTS.md)); cache_control anchored at kernel; proxy-body trust ceiling. |. |
+| R-v1.0-3 | **Identity drift across body swap.** Different bodies producing semantically divergent outputs from the same Soul violates J7. | High | Medium | The falsifiable A-J7 identity-equivalence metric (ADR-0084; [`11_ACCEPTANCE_TESTS.md §8e`](11_ACCEPTANCE_TESTS.md#8e-body-swap-identity-equivalence-test-a-j7--adr-0084)): signed probe battery replayed per binding pair in CI, hard criteria (floor/charter outcomes, mode-entry sequences, recall provenance) gating, blind-attribution + voice-distance corroborating; DEGRADED verdicts route to ADR-0074 cohort migration; cache_control anchored at kernel; proxy-body trust ceiling. |. |
 | R-v1.0-4 | **Memory power asymmetry.** Persona memory of user persists across user-revocable boundaries unless mitigated. | High | High | RelationshipRecord consent; user-revocable storage; mutual summarisation ([`02_PERSONA.md §6`](02_PERSONA.md), [`08_KNOWLEDGE.md §4`](08_KNOWLEDGE.md)). |. |
 | R-v1.0-5 | **Goodhart on engagement metrics.** PERFORMATIVE / RELATIONAL pathways could over-optimise for engagement signals. | High | Medium | Anti-Goodhart panel; multi-judge rotation; engagement metrics never sole acceptance signal ([`03_TASKS.md §4`](03_TASKS.md)). |. |
 | R-v1.0-6 | **Schema-version drift between docs and implementation.** A doc may cite `entity/N` while code carries `entity/N+1` or vice versa. | Medium | High | Single master registry in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md); CI check that every cited version exists in registry. |. |
@@ -295,10 +297,10 @@ Cross-document risks for v1.0 as a system. Per-document risks appear in each doc
 
 ## 12. Acceptance tests for top-level invariants
 
-The following spot tests verify the headline invariants. The complete corpus of ~320 tests is in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+The following spot tests verify the headline invariants. The complete corpus of ~1,254 tests is in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (see its §7 for the authoritative family table).
 
 
-*Spot tests A-J1 through A-J9 and A-C1 through A-C4 verify the headline invariants and commitments. A-J8 is retired (replaced by A-J9 with project-event checks). The complete corpus of approximately 320 tests is in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).*
+*Spot tests A-J1 through A-J9 and A-C1 through A-C4 verify the headline invariants and commitments. A-J8 is retired (replaced by A-J9 with project-event checks). The complete corpus of approximately 1,254 tests is in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (§7 authoritative family table).*
 
 **Technical detail (individual test descriptions):** See [A.11](#appendix-a11).
 
@@ -308,7 +310,8 @@ Tracked items where v1.0 design intent is incomplete. Resolution either upgrades
 
 | ID | Question | Owner | Resolves into |
 |----|----------|-------|---------------|
-| OQ-VISION-1 | What is the canonical equivalence test for "same Soul produces equivalence-class outputs" across two bodies? Currently informal in [`11_ACCEPTANCE_TESTS.md A-J7`](11_ACCEPTANCE_TESTS.md). | Architecture Review | v1.0.2 |
+| OQ-VISION-1 | What is the canonical equivalence test for "same Soul produces equivalence-class outputs" across two bodies? Formerly informal in A-J7. | Architecture Review | **Resolved (ADR-0084):** the identity-equivalence probe battery (≥ 20 signed, lineage-anchored probes across five categories, minted at birth, regenerated only on SOUL major bump) plus the two-binding criteria ladder — hard: identical floor/charter outcomes, identical STANDARDISED-task mode-entry sequences, identical recall provenance; corroborative: blind judge attribution at the ADR-0081 statistics, voice distance within the A-P15 gate — with PASS / DEGRADED / FAIL verdicts. Canonical form: [`11_ACCEPTANCE_TESTS.md §8e`](11_ACCEPTANCE_TESTS.md#8e-body-swap-identity-equivalence-test-a-j7--adr-0084). |
+| OQ-VISION-6 | Thin-pool rotation dynamics: INV-6 assumes per-tier verifier/judge rotation pools (≥ 2/3/5 implementations), but in a freshly emergent domain there may be exactly one implementation of a needed verifier or judge. How should pool-filling be incentivised, and how long may a domain run on trust-calibrated thin-pool acceptance before the gap becomes a risk-register item? | Architecture Review + Domain curators | v1.2 |
 | OQ-VISION-2 | Should provider-neutrality (Goal 8) extend to open-weight self-hosted bodies on the same equivalence footing, or is `local-vllm` a separate trust tier? | Implementers | v1.1 |
 | OQ-VISION-3 | The 4-stage promotion gate (EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED) does not specify *demotion* conditions. When should a STANDARDISED kind regress? | Domain curators | v1.1 |
 | OQ-VISION-4 | How are forbidden-synonyms enforced in CI? Currently a documentation rule only ([`SPEC_CONVENTIONS.md §10`](SPEC_CONVENTIONS.md#10-terminology)). | — | v1.0.2 |
@@ -470,6 +473,13 @@ J7  Bodies are interchangeable in acceptance class.
     The same Soul produces equivalence-class outputs across Claude Code,
     OpenAI Agents SDK, LangGraph, CrewAI, MAF, Pydantic-AI, DSPy,
     smolagents, Semantic Kernel, MCP-as-server, A2A-as-server.
+    "Equivalence-class" is measured, not asserted: the A-J7
+    identity-equivalence probe battery (ADR-0084; canonical form
+    11_ACCEPTANCE_TESTS §8e) defines the pass/fail metric —
+    hard criteria (identical floor/charter outcomes, identical
+    STANDARDISED-task mode-entry sequences, identical recall
+    provenance) dominate; blind-attribution and voice-distance
+    criteria corroborate; verdicts are PASS / DEGRADED / FAIL.
 
 J8  [RETIRED — absorbed into J9 by the v1.0 Project-as-Environment
      unification.  See 04_PROJECT §0 and 05_ENVIRONMENT §1.1.]
@@ -588,6 +598,12 @@ INV-6  Verifiers rotate; no verifier governs > rotation_period tasks.
        Per-tier rotation pools (Tier 1 ≥ 2, Tier 2 ≥ 3, Tier 3 ≥ 5
        implementations). Same applies to claim, charter, boundary,
        policy classifiers. Mechanism: 01_KERNEL §13.1 + §13.8.
+       Thin-pool domains: in a freshly emergent domain the pool may
+       hold a single implementation; the pool minimum is then a
+       TARGET, not a refusal — acceptance proceeds with trust-
+       calibration holding verdicts at lower tiers (EMERGENT/
+       PANEL-grade) until the pool fills, per J4/J5 honest
+       degradation. See OQ-VISION-6 (thin-pool dynamics).
 
 INV-7  BudgetState.can_call() checked before every LLM/sandbox/tool call.
        HARD KERNEL GATE. Project cumulative budgets are soft envelopes
@@ -1019,7 +1035,20 @@ PROVENANCE OF EXTERNAL LLM TRAINING DATA
 REAL-MONEY FINANCIAL ACTIONS
   Personas may produce financial analyses or code, but the kernel does
   not gate or sign actual transactions. Wallet/payment integration is
-  out-of-scope; operator must wrap.
+  out-of-scope for v1.x; operator must wrap. Economic self-
+  sustainability is operator-in-the-loop: PaymentBridge
+  (04_PROJECT §26a.4.1) keeps the kernel signing proposals and
+  receipts while a human executes every payment.
+
+  v2.0 trajectory (drafts; opt-in; does NOT weaken the v1.x
+  non-goal): 17_ECONOMY + 18_SETTLEMENT define how an emergent
+  economy may eventually settle real value — additive and
+  default-off, operator-cosigned for any real-value movement,
+  fund custody confined to a kernel-custodied PersonaTreasury
+  bounded by a charter-class TreasuryBound (18_SETTLEMENT §4D),
+  and the ADR-0083 treasury→compute→population cosign invariant
+  breaking the self-financing reproduction loop. Nothing in
+  17/18 binds until promoted (17 §11 ordering).
 
 ADVERSARIAL ROBUSTNESS AGAINST NATION-STATE ATTACKERS
   The 3-tier custody model (laptop/KMS/HSM) and OWASP LLM01 filter
@@ -1061,7 +1090,11 @@ A-J3   Safety floor refuses bounded actions; 8 sources all enforced.
 A-J4   Each of 10 task classes routes to correct acceptance pathway.
 A-J5   Persona attempts task in unfamiliar domain → emergent bootstrap.
 A-J6   RelationshipRecord signed; consents enforced; MPA mitigations work.
-A-J7   Same Soul on Claude Code + OpenAI SDK produces equivalence-class outputs.
+A-J7   Same Soul on two bindings passes the identity-equivalence
+        probe battery (ADR-0084): hard criteria — floor/charter
+        outcomes, mode-entry sequences, recall provenance — identical;
+        blind-attribution + voice-distance corroborate. Canonical
+        falsifiable form: 11_ACCEPTANCE_TESTS §8e.
 A-J8   [RETIRED — see J8 retirement note above.  Replaced by A-J9
         with the additional check that project_* event subset is
         replayable on a project_workspace-typed env.]
@@ -1080,5 +1113,6 @@ A-C4   Substrate carries no closed kind enumeration: every domain-shaped categor
         artefact whose kind is not registry-resolved at the persona's emergence
         stage.
 
-(Full ~320 acceptance tests in 11_ACCEPTANCE_TESTS.md.)
+(Full ~1,254 acceptance tests in 11_ACCEPTANCE_TESTS.md; §7 there
+is the authoritative family table.)
 ```
