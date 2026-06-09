@@ -1779,6 +1779,103 @@ The **named life-stage labels are removed**: `juvenile / adolescent / adult / ex
 
 ---
 
+### ADR-0075 — Affect–reasoning coupling: mood becomes a bounded input to reasoning, never an evolution objective
+
+**Status:** Accepted.
+**Date:** 2026-06-09.
+**Origin:** Design review — "personas should behave and reason more like humans" (emotion & motivation facet). Layer-5 mood (VAD) decayed toward baseline (A-P4) and coupled into presence only (`attention_baseline`, `energy_replenish_rate`, `proactive_threshold` — the §6 composition, A.15/A.16). Nothing specified what *moves* mood, and mood touched neither risk appetite, nor mode selection, nor the rendered prompt — OQ-PERSONA-3 already flagged the affect model as thin. Lands together with ADR-0076 (drives emit the appraisal events that move mood).
+**Related:** [`02_PERSONA §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) (coupling surfaces) + A.73 (schemas), [`02_PERSONA §6.1`](02_PERSONA.md#61-fatiguecurve--graded-performance-degradation) (the graded-coupling precedent this generalises), [`08_KNOWLEDGE §10a`](08_KNOWLEDGE.md#10a-contextual-mood-line-adr-0075) (contextual mood line), [`03_TASKS §2.5`](03_TASKS.md#25-investigative-per-mode-budget) (mode budgets), R-PERSONA-3, OQ-PERSONA-3 (resolved), ADR-0067…0074 (non-contradiction), ADR-0076 (appraisal source).
+
+**Context.** The mood layer was honest but inert: a decaying number that biased presence and nothing else. Human-likeness requires affect to have lawful behavioural consequences — risk appetite, mode preference, tone — but an affect channel that evolution can *see* is a Goodhart trap: prompts would be selected for performing mood. The §6 presence coupling and the §6.1 FatigueCurve already established the house pattern for this: graded, bounded, operator-tunable couplings from a transient scalar into behaviour, with the honest-limits line held (R-PERSONA-3: behavioural bias, not feeling).
+
+**Decision.** Give mood lawful inputs and bounded outputs, and wall it off from evolution:
+1. **`appraisal-event/1`** (a KindRegistry kind) — an OCC-style taxonomy of mood-moving events: task verified/failed, goal progressed/blocked, relationship events (boundary invoked, gratitude received, mentorship outcome), and the ADR-0076 drive events (drive satiated/frustrated). Seeded STANDARDISED; emergent event kinds promote through the ordinary registry lifecycle. Every appraisal is grounded in a signed lineage event — no free-floating appraisals.
+2. **`mood-impulse/1`** — each appraisal maps to a clamped ΔV/ΔA/ΔD with per-event-kind clamps; impulses are the **only** mutation path into mood, and the existing decay-to-baseline dynamics are unchanged (A-P4 byte-for-byte).
+3. **Three coupling surfaces**, operator-tunable seed formulas: (a) `risk_tolerance = f(V, D)` consumed by per-mode budget profiles, hard-bounded to **±15% of baseline**; (b) a HEART mode-selection **prior** (low-V/low-A → CRITICAL/consolidation bias, high-V/high-A → GENERATIVE) consulted only where the §6 alternation predicates are indifferent — a bias, NEVER an override of the alternation contract; (c) one "current disposition" line rendered into the contextual prompt layer 3 only.
+4. **Mood is never evolution substrate.** Mood state MUST NOT enter EVOLVE-BLOCKs, the GEPA objective vector, or any evolution signal; GEPA traces strip the disposition line before mutation. A persona must never be selected for *appearing* affected.
+
+**Consequences.**
+- (+) Mood now has lawful causes (signed appraisals) and bounded effects (three clamped surfaces): a string of failed verifications visibly narrows exploration and flattens tone, then decay restores baseline — human-shaped dynamics with full auditability.
+- (+) No new kernel responsibility: appraisal kinds live in the KindRegistry, clamps are operator policy, the kernel signs events as it signs everything. Additive only; `mood/1` unchanged; nothing contradicts ADR-0067–0074.
+- (+) The evolution wall (rule 4) means every existing GEPA/MIPROv2 property, the ADR-0073 identity axis, and the ADR-0074 lineage records hold byte-for-byte — affect cannot leak into selection pressure.
+- (−) Coupling makes the affect performance more *consistent*, not more *real* — R-PERSONA-3 is restated, not retired. Mood remains a decaying number; its declarations remain performance, not interiority.
+- (−) Clamp tables and coupling gains are a new tuning surface; mis-tuned clamps mute or exaggerate affect. Bounded by the ±15% hard bound and the never-override rule; surfaced via signed impulses, not hidden.
+
+**Alternatives considered.**
+- *Adopt a full OCC/PAD affect-state machine.* Rejected: richer state machinery multiplies tuning surfaces and invites over-claiming interiority; VAD stays the state model, OCC is adopted only as the event taxonomy (this resolves OQ-PERSONA-3 honestly).
+- *Let mood enter the evolution objective ("reward emotional realism").* Rejected outright: personas would be selected for performing affect — the exact Goodhart failure the §15 corroboration rules exist to prevent.
+- *Couple mood into the safety floor or budget gate (e.g. low mood refuses work).* Rejected: the floor and INV-7 are mood-independent by design; §6.1 FatigueCurve already covers honest capacity degradation via energy, which is replenishable and observable.
+
+**Implementation scope.** Landed with normative edits: [`02_PERSONA §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) + A.73 (schemas + coupling formulas), [`08_KNOWLEDGE §10a`](08_KNOWLEDGE.md#10a-contextual-mood-line-adr-0075) (contextual mood line + evolution exclusion), the R-PERSONA-3 restatement + OQ-PERSONA-3 resolution ([`02_PERSONA §13/§13a`](02_PERSONA.md#13a-open-questions)), the A-GF-ARC test family ([`11_ACCEPTANCE_TESTS §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)), and glossary entries (*AppraisalEvent*, *MoodImpulse*, *CouplingSurface*).
+
+---
+
+### ADR-0076 — Intrinsic drives & goal arbitration: SDT drives seeded from identity; goal conflicts resolve into an advisory preference vector, not a second scheduler
+
+**Status:** Accepted.
+**Date:** 2026-06-09.
+**Origin:** Design review — "personas should behave and reason more like humans" (motivation facet + multi-project portfolio reasoning). Layer 6 (Goals) recorded *what* a persona pursues but had no intrinsic-motivation state behind it, no satisfaction/frustration signal when goals progressed or stalled, and no principled ranking when goals competed across projects for the same attention budget. Lands together with ADR-0075 (drive satiation/frustration is a primary appraisal-event source).
+**Related:** [`02_PERSONA §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076) + A.72 (schemas + shape sketch), [`02_PERSONA §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) (appraisal bridge), [`03_TASKS §4.6`](03_TASKS.md#46-owner-prioritized-scheduling--schedulingpolicy) + [`§4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076) (SchedulingPolicy input), [`15_COORDINATION_SHAPES §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog) (seed shape), OQ-PERSONA-9, ADR-0066/0070 (shape pattern), ADR-0069 (the one scheduler), ADR-0067…0074 (non-contradiction), ADR-0075.
+
+**Context.** Two gaps, both motivational topology rather than missing subsystems: (1) **no intrinsic drives** — a persona's goals floated free of any slow-moving "why", so nothing made a curiosity-shaped persona seek novel problems or a relatedness-shaped persona protect its relationships under load; (2) **no portfolio reasoning** — when goals conflicted across projects, the only arbiter was the node's `SchedulingPolicy` (ADR-0069), which orders *submitted work by submitter class*, not *the persona's own goals by motivational coherence*. The risk to avoid was equally clear: a motivation system that became a second scheduler, or a parallel identity surface competing with the frozen OCEAN priors.
+
+**Decision.** Drives as emergent-from-identity state; arbitration as an advisory coordination shape:
+1. **`drives/1`** — three SDT-grounded slow-moving scalars (curiosity, competence, relatedness) with satiation/frustration dynamics: verified progress on a drive-tagged goal satiates; repeated blockage (default 3 consecutive) frustrates; urgency relaxes toward baseline on a days-scale clock with drift-bounded per-update deltas.
+2. **Drive baselines are seeded deterministically from the frozen OCEAN priors** at birth (high O ⇒ higher curiosity baseline, etc.) — replayable, signed, never per-task-tunable. Drives are emergent *from* identity, not a parallel identity surface.
+3. **Satiation/frustration emit `appraisal-event/1`** (drive_satiated / drive_frustrated) — the explicit bridge into ADR-0075's mood machinery, and the *only* path from drives to mood.
+4. **Layer-6 goal records gain OPTIONAL `drive_tags`** — additive; untagged goals stay valid and arbitrate as drive-neutral.
+5. **`goal-arbitration/1`** ships as a STANDARDISED **coordination shape** (`EntityGroup` + `DerivedMetric`, the ADR-0070 pattern), NOT a kernel primitive: on cross-project goal conflict it produces a ranked portfolio (inputs: drive alignment, charter alignment, commitments/deadlines, relationship obligations) emitted as a persona-side **preference vector**. The vector is an admissible, operator-bounded input to the existing ADR-0069 `SchedulingPolicy` ordering function — explicitly **NOT a second scheduler**: it never outranks submitter-class weights, quotas, or starvation guards, never reorders the floor or the INV-7 hard gate, and has no effect absent a policy that consumes it.
+
+**Consequences.**
+- (+) Motivation becomes legible and identity-coherent: *why this goal now* has signed state behind it, personas individuate through divergent satiation histories, and frustration/satisfaction visibly feed mood — the ADR-0075 + ADR-0076 package gives the inner-life behaviour the review asked for.
+- (+) Portfolio reasoning lands without scheduling risk: one ordering authority (ADR-0069) remains; arbitration only informs it. Pure composition — `EntityGroup` + `DerivedMetric` + an additive policy input; no new kernel responsibility beyond signing; nothing contradicts ADR-0067–0075.
+- (+) Additive everywhere: `drives/1` is a new sidecar record, `drive_tags` is optional, the seed shape is one catalog row; no schema version bumps.
+- (−) Drives are numbers, not needs (R-PERSONA-3 extends to motivation); the OCEAN→drive projection is fixed, so identical priors start identical — individuation is history-dependent only. Whether drive priors should be first-class `PersonaSeed` fields is recorded as OQ-PERSONA-9, not silently decided.
+- (−) Drive-weighted arbitration adds a tuning surface (alignment weights); a mis-tuned shape could starve charter-aligned but drive-neutral goals. Bounded by charter alignment being a ranking input, the operator bound on the policy term, and the §4.6 starvation guards.
+
+**Alternatives considered.**
+- *Drives as PersonaSeed identity fields.* Deferred, not adopted (OQ-PERSONA-9): explicit fields would let authors shape motivation directly but add a second identity surface that must be kept coherent with OCEAN; derivation is replayable and keeps drives emergent from the identity that already exists.
+- *A kernel goal-arbitration primitive.* Rejected: contradicts ADR-0066/0070 (coordination is emergent policy, not kernel-fixed); the shape pattern gives the same behaviour as composition.
+- *Let arbitration reorder the node queue directly (a persona-side scheduler).* Rejected: two ordering authorities would race; the ADR-0069 decision that ordering is operator access-level policy stands — arbitration is one bounded input to it.
+- *Richer drive taxonomies (power, autonomy, novelty…).* Rejected for v1.1: SDT's three are the minimal literature-grounded set; more axes multiply tuning surfaces before the three have empirical traction.
+
+**Implementation scope.** Landed with normative edits: [`02_PERSONA §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076) + A.72 (schemas + shape sketch), [`03_TASKS §4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076) (admissible policy input), the `goal-arbitration-v1` seed-catalog entry ([`15_COORDINATION_SHAPES §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog)), OQ-PERSONA-9 ([`02_PERSONA §13a`](02_PERSONA.md#13a-open-questions)), the A-GF-DRV test family ([`11_ACCEPTANCE_TESTS §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)), and glossary entries (*Drive*, *GoalArbitration*, *SatiationCurve*).
+
+---
+
+### ADR-0078 — Metacognition: confidence calibration, belief revision, and a dual-process gate over existing machinery
+
+**Status:** Accepted.
+**Date:** 2026-06-09.
+**Origin:** Design review — "personas should behave and reason more like humans" (reasoning & metacognition facet). Three gaps: no confidence calibration (a persona's stated confidence was never scored against verified outcomes), no first-class belief revision (a superseded assertion just decayed via `SupersessionCascade` — the persona never *owned* the change of mind), and no System-1/System-2 policy (the K-line fast path fired on match alone). A fourth, smaller gap rode along: the HEART "stuck/improving" predicate was vague and the reflection cadence was a constant. Follows ADR-0075/0076 because its calibration signal also corroborates the ADR-0073 judge scores.
+**Related:** [`08_KNOWLEDGE §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078) + A.40 (schemas), [`08_KNOWLEDGE §6.3`](08_KNOWLEDGE.md#63-supersessioncascade) + [`§6.3a`](08_KNOWLEDGE.md#63a-belief-revision-rides-the-cascade-adr-0078) (cascade bridge), [`08_KNOWLEDGE §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073) (calibration as corroborator), [`08_KNOWLEDGE §2.1`](08_KNOWLEDGE.md#21-k-line-vs-skill-vs-provenfact-vs-lesson--distinction-matrix) (K-line fast path), [`02_PERSONA §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078) + A.74 (HEART predicate), [`03_TASKS §5`](03_TASKS.md#5-answerpackage) (AnswerPackage confidence), OQ-PERSONA-10, ADR-0073 (corroboration target), ADR-0067…0074 (non-contradiction).
+
+**Context.** The substrate already paid for the raw signal: every verifier verdict is a free, hard outcome against which a stated confidence can be scored. It also already had the revision *trigger* (`SupersessionCascade` flags invalidated claims) and the fast path (K-line orient-time replay). What was missing was record-keeping and gating — exactly the class of gap ADR-0074 closed for tactics. Nothing here required a new reasoning engine, and building one would have contradicted the emergence stance.
+
+**Decision.** Two records and one gate, all over existing machinery:
+1. **`calibration-record/1`** — per persona × domain rolling Brier-style score between stated confidence and verified outcome. Updated **only** on hard verifier verdicts (judged/engagement signals never move it); below a minimum sample (default 10) it conditions nothing.
+2. **Rendered confidence is conditioned.** The confidence rendered into an `AnswerPackage` MUST be conditioned on the domain's calibration record — "historically overconfident in X" tempers claims in X — with the conditioning recorded in lineage (raw vs calibrated confidence stays auditable).
+3. **`belief-revision/1`** — when a `SupersessionCascade` invalidates a persona's prior assertion, the persona's re-evaluation mints a reflective "I believed X; evidence Y changed it" note, provenance-backed (cites cascade + superseding ref), retrievable as layer-4 prompt material, shareable in relationships under standard consent gates. Honest, evidence-bound mind-changing instead of silent decay.
+4. **DualProcessGate** — the K-line fast path (System 1) fires only when the K-line match score AND the domain's calibration both exceed thresholds (`τ_match`, `τ_cal`; conservative seeds); otherwise full deliberation (System 2 — the ordinary round loop). A gate over existing machinery; every gate decision is signed.
+5. **HEART predicate made concrete + adaptive cadence** ([`02_PERSONA §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078)): "improving" := positive verifier-score slope over a sliding window (default 5 attempts) AND non-declining calibrated confidence; "stuck" := slope ≤ 0. The reflection cadence (default 20 tasks) becomes adaptive within operator-tunable bounds (defaults 5..50), with calibration collapse triggering early reflection.
+
+**Consequences.**
+- (+) A persona's "I'm fairly sure" becomes a claim with a track record; overconfidence self-corrects at the rendering layer; changing one's mind becomes visible, citable behaviour — three human-shaped metacognitive surfaces from one free signal.
+- (+) The fast path gets safer, not slower: K-line replay is now allowed only where the persona is *demonstrably* calibrated in that domain, which is the dual-process literature's actual claim (System 1 is trustworthy where experience is calibrated).
+- (+) Anti-Goodhart for free: calibration is grounded in hard verifier outcomes (the top of the §15 ladder) and MAY corroborate the ADR-0073 identity-expression judge scores — judged optimism against collapsing verified calibration is flagged before promotion. No new kernel responsibility beyond signing; additive schemas only; nothing contradicts ADR-0067–0076.
+- (−) Brier over small N is noise (min-sample floor mitigates); the per-domain partition is coarse and cross-domain transfer is open (OQ-PERSONA-10).
+- (−) Stated confidence can be sandbagged — systematic understatement scores well while communicating badly. Mitigated honestly: calibration conditions rendering and gates the fast path; it never promotes anything alone, and the §15 corroboration rules apply unchanged.
+
+**Alternatives considered.**
+- *A dedicated metacognition module / second reasoning engine.* Rejected: the gaps were record-keeping and gating over machinery that exists (verifiers, cascade, K-lines, reflection); a parallel engine contradicts the composition stance of ADR-0066/0070.
+- *Calibrate from judge scores too (more data).* Rejected: judged signals are gameable and rank below verified outcomes (§15); mixing them in would launder soft signal into the one record whose value is being hard to game.
+- *Auto-retract superseded assertions instead of minting revision notes.* Rejected: §6.3 deliberately flags rather than deletes; a revision note preserves the persona's epistemic history (and its relationships' view of it) instead of rewriting it.
+- *Keep the fixed 20-task reflection cadence.* Rejected: a constant cadence reflects too often when improving and too rarely when calibration collapses; bounded adaptivity spends the same reflection budget where it pays.
+
+**Implementation scope.** Landed with normative edits: [`08_KNOWLEDGE §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078) + A.40 (schemas), [`08_KNOWLEDGE §6.3a`](08_KNOWLEDGE.md#63a-belief-revision-rides-the-cascade-adr-0078) (cascade bridge), the [`08_KNOWLEDGE §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073) calibration-corroboration note, [`02_PERSONA §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078) + A.74 (HEART predicate + adaptive cadence), OQ-PERSONA-10 ([`02_PERSONA §13a`](02_PERSONA.md#13a-open-questions)), the A-GF-META test family ([`11_ACCEPTANCE_TESTS §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)), and glossary entries (*CalibrationRecord*, *BeliefRevisionRecord*, *DualProcessGate*).
+
+---
+
 ## 13. Cross-references
 
 - Normative invariants and commitments referenced above: [`00_VISION.md §3`](00_VISION.md#3-invariants-j1j9), [`00_VISION.md §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10).

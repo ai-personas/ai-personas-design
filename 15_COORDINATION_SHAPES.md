@@ -392,8 +392,11 @@ PersonaOS ships ~35 `MetaShape`-promoted shapes as **STANDARDISED seed shapes** 
 | `approval-workflow-v1` | ApprovalWorkflow | StagedSequence | intra_env / env_to_external |
 | `gossip-propagation-v1` | GossipEvent | StreamPolicy | env_to_env |
 | `relationship-federation-v1` | RelationshipFederationSync | StagedSequence + BatchOperation | env_to_env |
+| `goal-arbitration-v1` | GoalArbitration (new in v1.1, ADR-0076) | EntityGroup + DerivedMetric | intra_env |
 
 (Full catalog: ~35 shapes; abbreviated here for the draft.)
+
+**v1.1 addition — `goal-arbitration-v1` (ADR-0076).** A STANDARDISED seed shape with no v1.0.x predecessor: when a persona's Layer-6 goals conflict across projects, an `EntityGroup` (the competing goal records) composes with a `DerivedMetric` ranking over drive alignment, charter alignment, commitments/deadlines, and relationship obligations into a ranked portfolio, emitted as a persona-side preference vector consumed by the ADR-0069 `SchedulingPolicy` ([`03_TASKS.md §4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076)). It is advisory — explicitly not a second scheduler. Normative spec: [`02_PERSONA.md §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076).
 
 ## 8. Safety composition model
 

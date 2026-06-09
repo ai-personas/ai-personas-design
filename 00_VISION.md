@@ -358,6 +358,8 @@ The following inform the v1.0 design but are not binding on conformant implement
 - Park, J. et al. (2023). *Generative Agents: Interactive Simulacra of Human Behavior*. UIST 2023. [arXiv:2304.03442](https://arxiv.org/abs/2304.03442).
 - Zhou, X. et al. (2024). *SOTOPIA: Interactive Evaluation for Social Intelligence in Language Agents*. ICLR 2024. [arXiv:2310.11667](https://arxiv.org/abs/2310.11667).
 - Anthropic. *Constitutional Character Training* and *Persona Vectors*, 2024–2025.
+- Ortony, A., Clore, G. L. & Collins, A. (1988). *The Cognitive Structure of Emotions*. Cambridge University Press. [DOI:10.1017/CBO9780511571299](https://doi.org/10.1017/CBO9780511571299). (Appraisal-event taxonomy, `02_PERSONA.md §6.2`, ADR-0075.)
+- Deci, E. L. & Ryan, R. M. (2000). *The "What" and "Why" of Goal Pursuits: Human Needs and the Self-Determination of Behavior*. Psychological Inquiry 11(4). [DOI:10.1207/S15327965PLI1104_01](https://doi.org/10.1207/S15327965PLI1104_01). (Intrinsic-drive model, `02_PERSONA.md §2a`, ADR-0076.)
 
 **Skill growth and evolution**
 - Wang, G. et al. (2023). *Voyager: An Open-Ended Embodied Agent with Large Language Models*. [arXiv:2305.16291](https://arxiv.org/abs/2305.16291).

@@ -202,6 +202,10 @@ When a `KnowledgeRef` is marked `superseded_by` (a newer publication contradicts
 
 **Lineage:** `supersession_cascade_triggered`, `supersession_cascade_applied`, `supersession_cascade_claim_re_confirmed`, `supersession_cascade_claim_further_downgraded`.
 
+### 6.3a Belief revision rides the cascade (ADR-0078)
+
+When a cascade invalidates a claim that a persona had itself asserted (the persona authored the claim or signed the asserting AnswerPackage), the persona's §6.3 re-evaluation additionally mints a `belief-revision/1` record — a provenance-backed "I believed X; evidence Y changed it" note. This is a cross-link only; the normative specification is [`§13a`](#13a-calibration-and-belief-revision-adr-0078). No change to the cascade mechanics above: discounts, depth bound, rate limit, and persona override all hold byte-for-byte.
+
 ## 7. Hybrid retrieval — six-stage pipeline
 
 *A query enters the six-stage pipeline with scope context, intent, and persona context. Stage 1 (structured filter) eliminates ~99% of the corpus using scope tags, type, tier, provenance threshold, and charter compatibility. Stage 2 (vector retrieval) finds the top-50 semantically similar entries. Stage 3 (graph retrieval) walks the hierarchical graph for multi-hop connections, returning the top-20 graph-relevant entries. Stage 4 (fusion) merges vector and graph results via reciprocal rank fusion. Stage 5 (cross-encoder rerank) scores the fused candidates and returns the top-10. Stage 6 (per-persona composition) applies observation surface and role/charter filters, then composes the result into the envelope context block.*
@@ -296,6 +300,18 @@ Layers 1, 2, and stable parts of 3 cacheable. **Target ≥ 80% cache hit rate** 
 
 **Tests:** A-TX12 (`cache_control` layers 1-2; hit rate ≥ 80%), A-P22 (prompt-block rendering deterministic; blocks 0-4 cached; per-task suffix blocks never cached). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
+## 10a. Contextual mood line (ADR-0075)
+
+Layer 3 (CONTEXTUAL) already names "mood + presence state" among its contents (A.20); ADR-0075 makes the mood rendering concrete and bounds it. The kernel renders the persona's current VAD state as **exactly one "current disposition" line** (coarse band rendered as prose — seed formula in [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) / A.73) into layer 3 at envelope mint.
+
+Three rules are normative:
+
+1. **Layer 3 only.** The mood line is part of the non-cacheable contextual layer; it MUST NOT migrate into the cacheable layers 1–2 (it would poison the ≥ 80% cache-hit target and, worse, leak transient state into the identity-signed surface).
+2. **Never evolution substrate.** The mood line — and mood state generally — MUST NOT appear in EVOLVE-BLOCK text (layer 2), in the GEPA objective vector (§11.1, §11.1b), or in any evolution signal ([`02_PERSONA.md §8.1`](02_PERSONA.md#81-eight-evolution-signals-with-weights)). GEPA's reflective traces strip the rendered disposition line before mutation so evolved tactics cannot condition on it. A persona must never be selected for *appearing* affected.
+3. **One line, honestly sourced.** The rendering derives from the signed mood state (moved only by clamped `mood-impulse/1` events, [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075)); the persona does not author its own disposition line.
+
+**Tests:** A-GF-ARC-5 (mood absent from EVOLVE-BLOCKs + evolution objectives); A-GF-ARC-1/A-GF-ARC-2 cover the impulse + decay mechanics. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+
 ## 11. DSPy GEPA — reflective prompt optimization
 
 v1.0 integrates DSPy GEPA as primary prompt optimizer for evolution.
@@ -382,6 +398,31 @@ Reflector mode + reflection loop drive prompt evolution.
 
 **Technical detail:** See [A.25](#appendix-a25).
 
+## 13a. Calibration and belief revision (ADR-0078)
+
+Reflection (§13) refines *tactics*; nothing tracked whether a persona's **stated confidence** was worth anything, and "changing one's mind" left no first-class trace — a superseded assertion simply degraded (§6.3) without the persona owning the revision. v1.1 adds two records and one gate, all over existing machinery — no new reasoning engine.
+
+*A calibration record (calibration-record/1) keeps, per persona × domain, a rolling Brier-style score between the confidence the persona stated in its candidate / AnswerPackage and the verified outcome — a free signal, since the verifiers already produce the outcome. A belief-revision record (belief-revision/1) is minted when a SupersessionCascade (§6.3a) invalidates an assertion the persona had made: a reflective "I believed X; evidence Y changed it" note citing the cascade and the superseding reference. The DualProcessGate decides System 1 vs System 2: the K-line fast path (§2.1 orient-time replay) fires only when both the K-line match score and the domain's calibration clear their thresholds; otherwise the task runs full deliberation.*
+
+**Technical detail:** See [A.40](#appendix-a40).
+
+Four rules are normative:
+
+1. **Calibration updates from verified outcomes only.** A `calibration-record/1` MUST be recomputed only on hard verifier verdicts; judged, engagement, or reflection signals MUST NOT move it. This keeps the record on the verified side of the §15 ladder — hard to game.
+2. **Rendered confidence is conditioned.** The confidence a persona renders into an AnswerPackage ([`03_TASKS.md §5`](03_TASKS.md#5-answerpackage)) MUST be conditioned on the domain's calibration record — a persona historically overconfident in a domain tempers its claims there — and the conditioning (record ref + adjustment applied) is recorded in lineage, so audit can distinguish raw from calibrated confidence.
+3. **Revision is owned, provenance-backed, shareable.** When a cascade invalidates a persona's prior assertion ([`§6.3a`](#63a-belief-revision-rides-the-cascade-adr-0078)), the persona's re-evaluation MUST mint a `belief-revision/1` note citing the cascade and superseding reference. The note lands in reflective memory, is retrievable as layer-4 prompt material (§10) like any reflection, and MAY be shared in relationships under the standard consent gates — honest, evidence-bound mind-changing instead of silent decay.
+4. **The fast path is gated on both match and calibration.** The K-line fast path (System 1) MUST fire only when the K-line match score ≥ `τ_match` AND the domain's calibration ≥ `τ_cal` (both operator-tunable; conservative seeds in A.40); failing either, the task runs the ordinary deliberative path (System 2). The gate sits over the existing §2.1 K-line machinery and the existing round loop — it adds no new reasoning engine.
+
+**Anti-Goodhart note.** Calibration is corroborated by hard verifier outcomes, which makes it one of the hardest signals in the system to game (§15); for the same reason it MAY serve as a corroborator for the ADR-0073 identity-expression judge scores ([`§14.1a`](#141a-identity-expression-safeguards-adr-0073)) — judged-signal optimism against collapsing verified calibration is a Goodhart flag.
+
+**Honest limits.**
+
+1. **Brier over small N is noise.** A per-domain record with a handful of outcomes swings wildly; the seed thresholds require a minimum sample (default 10 verified outcomes) before the record conditions anything or admits a fast path.
+2. **The domain partition is coarse.** Whether calibration earned in one domain should inform an adjacent one is open (OQ-PERSONA-10, [`02_PERSONA.md §13a`](02_PERSONA.md#13a-open-questions)); v1.1 starts every domain flat.
+3. **Stated confidence can be sandbagged.** A persona that systematically understates confidence scores well on Brier while communicating badly. Mitigation: calibration conditions rendering and gates the fast path; it never promotes tactics alone, and the §15 corroboration rules apply unchanged.
+
+**Tests:** A-GF-META-1 … A-GF-META-4 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)); the HEART predicate + adaptive cadence consumers are A-GF-META-5/A-GF-META-6 ([`02_PERSONA.md §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078)).
+
 ## 14. Per-persona prompt evolution
 
 *The evolution cycle flows: task produces outcome, outcome produces signals, GEPA reflects and proposes tactic mutations, mutations pass through a confirmation gate (signal corroboration over time), promoted tactics enter the EVOLVE-BLOCK, and the next envelope mint uses the new tactics. The cycle continues indefinitely.*
@@ -401,6 +442,8 @@ The identity-expression axis (§11.1b) is a judged signal and could be gamed —
 1. **Floors unchanged.** Voice consistency ≥ 0.9 and charter conformance ≥ 0.95 remain hard floors; an identity-expression score, however high, MUST NOT excuse a floor breach.
 2. **Blind peer-attribution audit.** At the §13 confirmation gate, a judge bound to a *different* persona receives the candidate EVOLVE-BLOCK text (style-stripped of names and ids) alongside a small set of SOUL.md identity summaries, and MUST attribute the text to the correct SOUL above chance over the audit window. Failure blocks identity-driven promotion — the score was measuring something other than this persona's identity.
 3. **Differentiation, not homogenisation.** The existing cross-persona similarity audit (§14.1) doubles as a differentiation check: identity-expression-driven evolution MUST hold or increase pairwise tactic distance between personas; convergence above the §14.1 threshold rolls back exactly as before.
+
+**Calibration corroboration (ADR-0078).** The per-persona×domain `calibration-record/1` ([`§13a`](#13a-calibration-and-belief-revision-adr-0078)), being grounded in hard verifier outcomes, MAY serve as an additional corroborator for the identity-expression judge scores under the §15 rules — rising judged identity scores against a collapsing verified calibration flag the promotion for audit before it lands.
 
 **Tests:** A-GF-ICPE-3, A-GF-ICPE-4, A-GF-ICPE-5. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
 
@@ -1971,4 +2014,67 @@ class IdentityExpressionScore:
                                        # weighted-sum collapse is refused
     evaluated_at: datetime
     signed_by: bytes
+```
+
+### A.40 CalibrationRecord + BeliefRevisionRecord + DualProcessGate schemas
+
+<a id="appendix-a40"></a>
+
+```python
+@dataclass
+class CalibrationRecord:
+    schema: str = "calibration-record/1"
+    record_id: str
+    persona_id: str
+    domain_id: str                     # one record per persona × domain
+    brier_score: float                 # rolling Brier-style score in [0, 1]
+                                       # over (stated confidence, verified
+                                       # outcome) pairs; 0 = perfectly
+                                       # calibrated
+    window_size: int = 50              # rolling window of verified outcomes
+    n_outcomes: int                    # verified outcomes accumulated
+    min_sample: int = 10               # below this the record conditions
+                                       # nothing and admits no fast path
+    bias_direction: Literal[
+        "overconfident",
+        "underconfident",
+        "calibrated"]                  # summary used by the §13a rule-2
+                                       # rendering conditioner
+    updated_at: datetime               # updated ONLY on hard verifier
+                                       # verdicts (§13a rule 1)
+    signed_by: bytes
+
+
+@dataclass
+class BeliefRevisionRecord:
+    schema: str = "belief-revision/1"
+    revision_id: str
+    persona_id: str
+    prior_assertion_ref: str           # the invalidated claim / signed
+                                       # AnswerPackage the persona made
+    cascade_ref: str                   # SupersessionCascade id (§6.3/§6.3a)
+    superseding_ref: str               # the KnowledgeRef that changed it
+    revision_note: str                 # reflective "I believed X;
+                                       # evidence Y changed it" — stored as
+                                       # reflective memory; retrievable as
+                                       # layer-4 prompt material (§10)
+    shareable_in_relationships: bool = True   # under standard consent gates
+    minted_at: datetime
+    signed_by: bytes
+
+
+@dataclass
+class DualProcessGate:
+    schema: str = "dual-process-gate/1"
+    persona_id: str
+    # System 1 (K-line fast path, §2.1 orient-time replay) fires iff
+    # BOTH thresholds clear; otherwise System 2 (full deliberation —
+    # the ordinary collaborative round loop).  A gate over existing
+    # machinery; no new reasoning engine.
+    tau_match: float = 0.80            # minimum K-line match score
+    tau_cal: float = 0.85              # minimum domain calibration
+                                       # (1 − brier_score), and
+                                       # n_outcomes ≥ min_sample
+    decisions_logged: bool = True      # each fast-path admission/refusal
+                                       # is a signed lineage event
 ```

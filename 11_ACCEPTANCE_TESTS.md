@@ -1334,6 +1334,90 @@ A-GF-ICPE-6  Ninth signal additive: identity_expression flows to the
              alone per the §15 corroboration rules.
 ```
 
+### A-GF-ARC — Affect–reasoning coupling (02_PERSONA §6.2, 08_KNOWLEDGE §10a, ADR-0075)
+
+```text
+A-GF-ARC-1   Impulses clamped: every mood mutation traces to a signed
+             appraisal-event/1; the resulting mood-impulse/1 ΔV/ΔA/ΔD
+             lie within the per-event-kind clamps; an eventless or
+             out-of-clamp mood write is refused.
+A-GF-ARC-2   Decay unchanged: with no appraisal events, mood decays
+             toward the VAD baseline exactly as before ADR-0075
+             (A-P4 trajectory byte-identical pre/post).
+A-GF-ARC-3   Risk tolerance bounded: risk_tolerance = f(V, D) stays
+             within ±15% of the persona's baseline across the entire
+             VAD range; per-mode budget profiles consume only the
+             bounded value.
+A-GF-ARC-4   HEART bias never override: under any mood state, the §6
+             alternation predicates (A.15) decide the phase; the mood
+             prior shifts selection only where the predicates are
+             indifferent (stuck still goes GENERATIVE, budget-tight
+             still goes CRITICAL).
+A-GF-ARC-5   Mood absent from evolution: the rendered disposition
+             line appears in contextual layer 3 only; EVOLVE-BLOCK
+             text, the GEPA objective vector, and every evolution
+             signal contain no mood-derived term; a configuration
+             that adds one is refused.
+```
+
+### A-GF-DRV — Intrinsic drives + goal arbitration (02_PERSONA §2a, 03_TASKS §4.6a, ADR-0076)
+
+```text
+A-GF-DRV-1   Priors derived from OCEAN: drive baselines are computed
+             by the deterministic, replayable derivation from the
+             frozen OCEAN priors at birth; two personas with identical
+             OCEAN priors get identical baselines; per-task tuning
+             refused.
+A-GF-DRV-2   Satiation/frustration emit appraisal events: verified
+             progress on a drive-tagged goal emits drive_satiated;
+             reaching the blockage threshold (default 3) emits
+             drive_frustrated; both reach mood only via clamped
+             mood-impulse/1 (A-GF-ARC-1 path).
+A-GF-DRV-3   Arbitration output advisory: goal-arbitration/1 emits a
+             signed ranked portfolio + persona-side preference vector;
+             a SchedulingPolicy consumes it as one operator-bounded
+             ordering input that never outranks submitter-class
+             weights, quotas, or starvation guards.
+A-GF-DRV-4   No second scheduler: the preference vector cannot reorder
+             the 8-source floor or the INV-7 hard gate; absent a
+             SchedulingPolicy that consumes it, the vector has no
+             scheduling effect.
+A-GF-DRV-5   drive_tags additive: Layer-6 goal records without
+             drive_tags remain valid (no schema version bump);
+             arbitration treats untagged goals as drive-neutral.
+```
+
+### A-GF-META — Calibration, belief revision, dual-process gate (08_KNOWLEDGE §13a, 02_PERSONA §6.3, ADR-0078)
+
+```text
+A-GF-META-1  Brier from verifier outcomes only: calibration-record/1
+             recomputes per persona × domain on each hard verifier
+             verdict; judged, engagement, and reflection signals never
+             move it; below min_sample the record conditions nothing.
+A-GF-META-2  AnswerPackage confidence conditioned: rendered confidence
+             is adjusted by the domain's calibration record
+             (overconfident history tempers claims); the conditioning
+             (record ref + adjustment) is recorded in lineage.
+A-GF-META-3  Revision note minted on supersession: when a cascade
+             invalidates a persona's prior assertion, a
+             belief-revision/1 record citing the cascade + superseding
+             ref lands in reflective memory and is retrievable as
+             layer-4 prompt material; sharing honours consent gates.
+A-GF-META-4  Fast path gated on match + calibration: the K-line fast
+             path fires iff match score ≥ τ_match AND domain
+             calibration ≥ τ_cal (with n_outcomes ≥ min_sample);
+             failing either runs full deliberation; each gate decision
+             is a signed lineage event.
+A-GF-META-5  HEART predicate measurable: "improving"/"stuck" computed
+             from the least-squares verifier-score slope over the
+             sliding window (default 5) plus non-declining calibrated
+             confidence; same trace replays to the same verdict.
+A-GF-META-6  Adaptive cadence bounded: reflection cadence stays within
+             the operator-tunable [min, max] bounds (defaults 5..50
+             tasks); a calibration collapse triggers one immediate
+             reflection per collapse, signed into the evolution log.
+```
+
 ### Cross-cutting: Substrate purity sweep
 
 ```text
