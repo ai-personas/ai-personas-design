@@ -64,7 +64,7 @@ PersonaOS is built around five key mechanisms:
 | 8 | [`07_ARTIFACTS.md`](07_ARTIFACTS.md) | Work products — how files and deliverables are structured, co-edited, verified, and shipped. | 12 min |
 | 9 | [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md) | Memory and learning — how personas remember, find relevant information, and improve their own prompts over time. | 18 min |
 | 10 | [`09_PROTOCOLS.md`](09_PROTOCOLS.md) | Connecting to the outside world — MCP for tools, A2A for federation, 12 framework adapters, and cryptographic key management. | 14 min |
-| 11 | [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) | The test catalog — ~460 pass/fail criteria that prove the system works as specified. | 8 min |
+| 11 | [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) | The test catalog — ~1,254 pass/fail criteria (see its §7 for the authoritative family table) that prove the system works as specified. | 8 min |
 | 12 | [`12_GLOSSARY.md`](12_GLOSSARY.md) | Reference dictionary — every PersonaOS term defined in one place. | 6 min |
 | 13 | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) | Real-world scenarios — concrete examples (build a house, design a chip, run a study) walked end-to-end against the design. | 8 min |
 | 14 | [`14_DECISIONS.md`](14_DECISIONS.md) | Why the design is the way it is — 40+ architectural decision records explaining the trade-offs behind each major choice. | 10 min |
@@ -206,6 +206,8 @@ WHAT THIS GETS YOU:
 WHAT COMES NEXT (v1.0.2-v1.0.6):
   Environments, domain emergence, multi-persona coordination,
   knowledge retrieval, prompt evolution. Each release gate in
+  11_ACCEPTANCE_TESTS.md §3 (the per-release gate matrix) names
+  the test families that must pass before that slice ships.
 ```
 
 

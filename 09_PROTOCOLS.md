@@ -671,7 +671,7 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 
 ### 7.9a Psychology, metacognition & PromptOps (ADR-0073…0082)
 
-Registry rows for the ADR-0073…0080 wave, completed by ADR-0081/0082. The first ten schemas are **boundary-crossing** (they ride grants, federation envelopes, evolution logs read by the GEPA harness, or operator policy); the last four are **kernel-internal** — signed and persisted in the persona's own stores, but never leaving the owning kernel. `counterparty-model/1` sits in between: it attaches to a federated edge yet is **home-kernel-only** by ADR-0082. Changes follow [`§7.13`](#713-adding-or-modifying-schemas) (migration mapper + acceptance test per row; the anchoring tests are the A-GF-* families, [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md)).
+Registry rows for the ADR-0073…0080 wave, completed by ADR-0081/0082 (plus the ADR-0084 probe battery). The first ten schemas are **boundary-crossing** (they ride grants, federation envelopes, evolution logs read by the GEPA harness, or operator policy); the last five are **kernel-internal** — signed and persisted in the persona's own stores, but never leaving the owning kernel. `counterparty-model/1` sits in between: it attaches to a federated edge yet is **home-kernel-only** by ADR-0082. Changes follow [`§7.13`](#713-adding-or-modifying-schemas) (migration mapper + acceptance test per row; the anchoring tests are the A-GF-* families, [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md)).
 
 | Schema | Version | Form | Defined in | Stability | Used by |
 |--------|---------|------|------------|-----------|---------|
@@ -689,6 +689,7 @@ Registry rows for the ADR-0073…0080 wave, completed by ADR-0081/0082. The firs
 | `MoodImpulse` | `mood-impulse/1` | dataclass | [`02_PERSONA.md §6.2`](02_PERSONA.md) | Provisional | **Kernel-internal.** The only mood-mutation path; per-event-kind clamps + dedup/24 h window clamp (ADR-0081). |
 | `SelfNarrative` | `self-narrative/1` | dataclass | [`08_KNOWLEDGE.md §3.3`](08_KNOWLEDGE.md) | Provisional | **Kernel-internal.** Provenance-backed self-story; layer-3 render only; derendered immediately on cited-memory tombstone (ADR-0081). |
 | `TacticCitation` | `tactic-citation/1` | dataclass | [`08_KNOWLEDGE.md §14.3a`](08_KNOWLEDGE.md) | Provisional | **Kernel-internal.** Per-acceptance tactic usage event (ADR-0081); the reinforcement source for `habit_strength`. |
+| `IdentityEquivalenceProbeBattery` | `probe-battery/1` | dataclass | [`11_ACCEPTANCE_TESTS.md §8e`](11_ACCEPTANCE_TESTS.md) | Provisional | **Kernel-internal.** Versioned ≥ 20-probe battery for the A-J7 body-swap identity-equivalence test (ADR-0084); minted at the birth ceremony from SOUL blocks + `identity-rubric/1`; regenerated only on SOUL major bump; operator backfill for older personas. |
 
 ### 7.10 Constraints & policy
 

@@ -5,15 +5,15 @@ status: Stable
 
 # 11 — Acceptance Tests
 
-> **Reader guide.** This is the test catalog — ~461 concrete pass/fail criteria that prove the system works as specified. Tests are organised by feature area and sorted by execution frequency (per-commit, nightly, weekly, quarterly). Read this if you are *implementing* PersonaOS and need to know what "correct" looks like, or *auditing* a deployment for compliance. **Prerequisites:** The spec doc(s) for the features you're testing. **Key terms:** *acceptance test* = a yes-or-no criterion that must pass before a release ships; *gate matrix* = which tests must pass for each release version; *test family* = a group of related tests sharing a prefix (e.g., A-K* = kernel tests).
+> **Reader guide.** This is the test catalog — ~1,254 concrete pass/fail criteria (see §7 for the authoritative family table) that prove the system works as specified. Tests are organised by feature area and sorted by execution frequency (per-commit, nightly, weekly, quarterly). Read this if you are *implementing* PersonaOS and need to know what "correct" looks like, or *auditing* a deployment for compliance. **Prerequisites:** The spec doc(s) for the features you're testing. **Key terms:** *acceptance test* = a yes-or-no criterion that must pass before a release ships; *gate matrix* = which tests must pass for each release version; *test family* = a group of related tests sharing a prefix (e.g., A-K* = kernel tests).
 
-Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). This document is the canonical, consolidated acceptance-test catalogue (~320 tests) that gates v1.0 releases. Each test ID `A-<category>-<n>` (e.g. `A-J1`, `A-K23`) MUST be referenced by name in the spec section that defines the behaviour under test.
+Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). This document is the canonical, consolidated acceptance-test catalogue (~1,254 tests; see [`§7`](#7-acceptance-test-count-summary) for the authoritative family table) that gates v1.0 releases. Each test ID `A-<category>-<n>` (e.g. `A-J1`, `A-K23`) MUST be referenced by name in the spec section that defines the behaviour under test.
 
 ## 0. Status & scope
 
-**Status.** `Stable`; current revision per front matter. The v1.0.7 revision added [`§7a Invariant-to-test traceability matrix`](#7a-invariant-to-test-traceability-matrix) without introducing new test families or changing existing gate coverage; the v1.0.8 revision is a documentation-conformance pass with no test changes. Fully normative; RFC 2119 keywords carry normative force per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). Each acceptance-test ID is itself a normative obligation: a release MUST NOT advance past its gate (the release gate process) until all tests named in the gate pass.
+**Status.** `Stable`; current revision per front matter. The v1.0.7 revision added [`§7a Invariant-to-test traceability matrix`](#7a-invariant-to-test-traceability-matrix) without introducing new test families or changing existing gate coverage; the v1.0.8 revision is a documentation-conformance pass with no test changes. The current (v1.1, ADR-0084) revision adds [`§8e`](#8e-body-swap-identity-equivalence-test-a-j7--adr-0084) (the falsifiable A-J7 identity-equivalence test), extends the [`§3`](#3-per-release-gate-matrix-concise) gate matrix so every catalog family carries a gate (or explicit non-gating) row, and reconciles the [`§7`](#7-acceptance-test-count-summary) family table as the single authoritative count (~1,254) cited by all prose totals. Fully normative; RFC 2119 keywords carry normative force per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). Each acceptance-test ID is itself a normative obligation: a release MUST NOT advance past its gate (the release gate process) until all tests named in the gate pass.
 
-**In scope.** The canonical, consolidated acceptance-test catalogue (~320 tests) across the entire v1.0 corpus, the test-ID scheme (`A-<category>-<n>`), the per-release gate matrix, the CI / nightly / pre-release / quarterly partitioning, failure-handling policy, human-bridge tests (A-HB*), emergent-kind tests (A-EK*), external-participant + physical-asset tests (A-EX*), tests, Migration tests (A-M19*), v1.0 unification tests (A-UN*, A-EN-v1.0-*), env-formation tests (A-EF*), and fork-inheritance tests (A-FK*).
+**In scope.** The canonical, consolidated acceptance-test catalogue (~1,254 tests; see [`§7`](#7-acceptance-test-count-summary) for the authoritative family table) across the entire v1.0 corpus, the test-ID scheme (`A-<category>-<n>`), the per-release gate matrix, the CI / nightly / pre-release / quarterly partitioning, failure-handling policy, human-bridge tests (A-HB*), emergent-kind tests (A-EK*), external-participant + physical-asset tests (A-EX*), tests, Migration tests (A-M19*), v1.0 unification tests (A-UN*, A-EN-v1.0-*), env-formation tests (A-EF*), and fork-inheritance tests (A-FK*).
 
 **Out of scope.** Behaviour specifications — every test references the behaviour defined in another v1.0 doc; this catalogue does not redefine behaviour, only the criteria by which behaviour is verified. Implementation of the test harness (the harness is operator tooling; this catalogue specifies inputs, expected outcomes, and acceptance criteria).
 
@@ -23,7 +23,7 @@ Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC
 
 ## 0a. Plain-language guide
 
-This is the proof that PersonaOS works as promised — roughly 460 pass/fail checks, each verifying a specific behaviour. If any required test fails, the release cannot ship until it is fixed.
+This is the proof that PersonaOS works as promised — roughly 1,254 pass/fail checks (the authoritative per-family count is in section 7), each verifying a specific behaviour. If any required test fails, the release cannot ship until it is fixed.
 
 **What acceptance tests are.** Each test describes a specific situation (for example, "a persona signs an identity event") and states what the correct outcome must be (for example, "the signature is valid and appears in the audit log"). Tests are not aspirational goals — they are hard requirements. A release that fails any required test is blocked.
 
@@ -39,7 +39,7 @@ This is the proof that PersonaOS works as promised — roughly 460 pass/fail che
 
 v1.0's **canonical, consolidated [acceptance-test](12_GLOSSARY.md#a) catalog**. Replaces prior piecemeal test catalogs.
 
-~**461 acceptance tests** across all v1.0 features (baseline ~320 from v1.0; +48 from families; +23 from v1.0.12 fleet-management; +15 from v1.0.13 frontier-domain; +10 from v1.1 env-composition/coordination; +45 from prior-version spec backfill). Per-release gate matrix specifies which tests must pass before each release v1.0.1 → v1.1.0. CI / nightly / pre-release / quarterly partitioning specifies execution cadence.
+~**1,254 acceptance tests** across all v1.0/v1.1 features (see [`§7`](#7-acceptance-test-count-summary) for the authoritative family table; the catalogue grew from a ~320-test v1.0 baseline through the family additions, fleet-management, frontier-domain, env-composition, backfill, fix-family, and psychology-wave extensions). Per-release gate matrix specifies which tests must pass before each release v1.0.1 → v1.1.0. CI / nightly / pre-release / quarterly partitioning specifies execution cadence.
 
 ## 2. Test ID scheme
 
@@ -107,14 +107,12 @@ A-ER*   environment rule (env-rule/1)            (9 tests; 05_ENVIRONMENT §2.2b
 A-AB21-27  artifact env-scoping + sharing policy (7 tests; 07_ARTIFACTS §4a)
 A-LE5-9 dormancy reasons + auto-resume (idle)    (5 tests; 02_PERSONA §7.6)
 ─────────────────────────────────────────────────────────
-TOTAL                                            ~477 tests
-                                                 (+45 from prior-version spec backfill;
-                                                  +48 from families;
-                                                  +23 from v1.0.12 fleet-management;
-                                                  +15 from v1.0.13 frontier-domain;
-                                                  +5 verifier-evidence hardening;
-                                                  +16 from v1.1 env rules + artifact sharing;
-                                                  +5 from v1.0.14 dormancy reasons + auto-resume)
+TOTAL                                            ~1,254 tests
+                                                 (the list above is the ID *scheme*, not the
+                                                  complete roster; the AUTHORITATIVE per-family
+                                                  count — including the §9b-§9q catalog-section
+                                                  families this scheme block predates — is the
+                                                  §7 family table, which sums to ~1,254)
 ```
 
 ## 3. Per-release gate matrix (concise)
@@ -122,6 +120,7 @@ TOTAL                                            ~477 tests
 | Test series | v1.0.1 | v1.0.2 | v1.0.3 | v1.0.4 | v1.0.5 | v1.0.6 | v1.1 |
 |---|---|---|---|---|---|---|---|
 | A-J* (invariants J1-J9 + C1-C4) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| A-J7 — ADR-0084 probe-battery form ([`§8e`](#8e-body-swap-identity-equivalence-test-a-j7--adr-0084)) | — | ✓ (hard a–c) | ✓ (a–c) | ✓ (a–c) | ◇ (a–c MUST; d–e SHOULD) | ◇ | ✓ (a–e) |
 | A-K1-15 (kernel core) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | A-P1-20 (persona model) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | A-T1-3, A-T9-19 (CONVERGENT, RELATIONAL, INTERACTIVE) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -153,7 +152,8 @@ TOTAL                                            ~477 tests
 | A-EK1, A-EK13-15 (no closed enums / no hardcoded item & outcome classes — substrate lint) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | A-EK2-12, A-EK16 (Proposed*Kind + KindRegistry + MetaRegistry) | — | — | — | — | ✓ | ✓ | ✓ |
 | A-EX1-18 (ExternalAgent / PhysicalAsset / ExternalAttestation / ExternalBudget / ApprovalWorkflow / Alert / dependency edges / Risk + Schedule ItemKinds; +3 AsBuilt / CredentialDirectory / collapse-co-sign) | — | — | — | — | ✓ | ✓ | ✓ |
-| A-GF* (A-J10–J11, K11–K12, PA1, IT9, DM13) | — | — | — | — | ✓ | ✓ | ✓ |
+| A-GF* — home-construction + quantum/frontier waves (A-J10–A-J11f, A-K11–K14, A-PA1, A-IT9, A-DM13–15, A-IN6, A-E11; A-GF-FTL/MDA/CT/EPO/PHASE/PB/INST/MF/RA/HAZ/FDP/RT/BRG/PURE) | — | — | — | — | ✓ | ✓ | ✓ |
+| A-GF* — psychology wave (A-GF-TLR/ICPE/ARC/DRV/META/SN/CPM/HAB; ADR-0073…0082) | — | — | — | — | — | — | ✓ |
 | A-P34-37 (body attestation refresh / expiry / revocation) | — | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | A-CV1-4 (character vector binding) | — | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | A-FA1-6 (fatigue curve) | — | — | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -170,8 +170,31 @@ TOTAL                                            ~477 tests
 | A-SC1-7 (supersession cascade) | — | — | — | — | — | ✓ | ✓ |
 | A-CDM1-6 (corpus drift metric) | — | — | — | — | — | ✓ | ✓ |
 | A-RFC1-2 (replicated attestation frontier comp.) | — | — | — | — | — | ✓ | ✓ |
+| A-UN1-10 + A-EN-v1.0-1-23 (project↔env unification + env additions; §9b) | — | — | — | ✓ | ✓ | ✓ | ✓ |
+| A-PPB1-7 + A-MTR1-6 (persona↔persona boundary + memory transparency; §9b) | — | — | — | ✓ | ✓ | ✓ | ✓ |
+| A-CKDM1-6 (cross-kernel DirectMessage visibility; §9b) | — | — | — | — | — | — | ✓ |
+| A-EN13-14 (project_workspace env type binding/composition) | — | — | — | ✓ | ✓ | ✓ | ✓ |
+| A-EF1-36 (env formation; §9c) | — | — | — | ✓ | ✓ | ✓ | ✓ |
+| A-FK* (fork inheritance, all subfamilies; §9d) | — | — | ✓ | ✓ | ✓ | ✓ | ✓ |
+| A-STAND1-8 + A-NOSTAGE1-2 + A-MIGRATE-SOUL6 (age/standing rework, ADR-0051; §9d) | — | — | — | — | — | — | ✓ |
+| A-MT1-26 + A-DP1-13 (multi-principal + derivation provenance; §9f) | — | — | — | — | — | — | ✓ |
+| A-LH* + A-OR* + A-PD* + A-RT-PERS* + A-PC* + A-LE* + A-RT-RESP* (multi-year continuity; §9g) | — | — | — | — | — | — | ✓ |
+| A-UB* + A-UM* + A-UF* + A-URR* (MPA user-protection; §9h) | — | — | — | — | — | — | ✓ |
+| A-DD* + A-RRC* + A-OBM* + A-CP* (distress routing + companionship; §9h) | — | — | — | — | — | — | ✓ |
+| A-LSR* + A-LCA* + A-TA* + A-CUR* + A-LP* + A-MASTERY* + A-GPA-ACK* + A-HST* (pedagogic + competency; §9i) | — | — | — | — | — | — | ✓ |
+| A-MPFC1-36 (mid-project fork composition; §9j) | — | — | — | — | — | — | ✓ |
+| A-EC1-5 + A-CA1-5 + A-ER1-9 + A-AB21-27 (env composition / coordination admission / env rules / artifact sharing; §9m) | — | — | — | — | — | — | ✓ |
+| A-DR* + A-DT* + A-AX* + A-CL* + A-TF* + A-HR* + A-RA* (discovery, access & hybrid distribution; §9n) | — | — | — | — | — | — | ✓ |
+| A-EO1-13 (emergent orchestration, ADR-0066; §9o) | — | — | — | — | — | — | ✓ |
+| A-GLOBAL* + A-XD* + A-SCHED* (global object space, ADR-0067/0068/0069; §9p) | — | — | — | — | — | — | ✓ |
+| A-REF1-8 (continuous refinement mission, ADR-0071; §9q) | — | — | — | — | — | — | ✓ |
+| A-WK6* + A-CEPO* (wake path 6 + cross-env proactive offer) | — | — | — | — | — | ✓ | ✓ |
+| A-GEN1-26 (persona genesis + population dynamics; `16_POPULATION_DYNAMICS §8`) | — | — | — | — | ◇ (A-GEN1-9 SHOULD) | ◇ | ✓ |
+| A-ECON* (emergent economy; `17_ECONOMY §8`) | — | — | — | — | — | — | non-gating (v2.0 DRAFT) |
 
 Legend: ✓ = required; ◇ = partial; — = not in scope this release.
+
+**Matrix coverage note (v1.1 extension).** Every test family in the catalog now carries a gate row — no family is normative-but-ungating. Gate tiers follow the family's source release: families backfilling v1.0-era mechanisms (unification, env formation, fork inheritance, the home-construction/quantum A-GF waves) gate within the v1.0.x line; families whose source ADR targets v1.1 (ADR-0051, ADR-0066…0071, the ADR-0073…0082 psychology wave, the v1.0.7+ fix families, MPA user-protection, pedagogic, discovery/distribution) gate at v1.1. Two explicit notes: **A-GEN** gates v1.1, with the refusal-path subset **A-GEN1–9** (genesis refused absent a `ReplicationBound`, generativity-gate refusals, bound-exceeded refusals) SHOULD-gating from v1.0.5 because the refusal behaviour protects v1.0.x deployments; **A-ECON** is explicitly **non-gating** until [`17_ECONOMY.md`](17_ECONOMY.md) promotes out of v2.0 DRAFT (its §11 promotion ordering governs), and is excluded from the §7 v1.x total.
 
 ## 4. Test definitions — by series
 
@@ -179,6 +202,8 @@ For brevity, full test definitions are anchored to their canonical v1.0 docs:
 
 ```text
 A-J*   → 00_VISION.md §12 "Acceptance tests for top-level invariants"
+         (exception: A-J7's full falsifiable definition is §8e of
+         this document, per ADR-0084)
 A-K*   → 01_KERNEL.md §14
 A-P*   → 02_PERSONA.md §14
 A-T*   → 03_TASKS.md §10
@@ -336,12 +361,19 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
                     +2 recurrence_class; +2 v1.0 MHBB-
                     ladder Tier 3 + tier-disguise refusal)
   A-EK*   16        emergent-kind tests (v1.0 C4 — substrate domain-agnostic)
-  A-EX*   18        external-agent + physical-asset + dependency +
+  A-EX*   22        external-agent + physical-asset + dependency +
                     risk + schedule + approval-workflow + alert tests
                     (v1.0 §26a, §11a, env §11a, ItemKind seeds;
                     +3 AsBuiltReconciliation /
-                    CredentialDirectoryRef / collapse-co-sign)
-  A-GF*   67        tests:
+                    CredentialDirectoryRef / collapse-co-sign;
+                    +4 quantum-wave A-EX19-22)
+  A-GF*   131       tests (22 inline A-GF-* subfamilies, §9a, = 121;
+                    plus the 10 wave-companion IDs counted here
+                    because they fall outside their home families'
+                    ranges: A-J10, A-J11/a-f, A-PA1, A-E11; the other
+                    wave IDs — A-K11-14, A-DM13-15, A-IN6, A-IT9,
+                    A-EX16-22, A-HB8-9 — are counted once in their
+                    home-family rows above):
                     Home-construction wave:
                       A-J10  DeploymentProfile principal_topology
                       A-J11  physical-state acceptance composition
@@ -395,14 +427,62 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
   A-GEN*   26       Persona Genesis + population dynamics
                     (16_POPULATION_DYNAMICS §8) — v1.1-scoped
 
-TOTAL                ~490 tests across v1.0 lineage (+108 from v1.0 spec work)
-                     (+2 from project_workspace env type:
-                     A-EN13 binding/lifecycle, A-EN14 composition)
-                     (+13 from Wake Path 6 + CrossEnvProactiveOffer)
-                     (+49 from the human-likeness & identity-emergent
-                     prompts wave: A-GF-TLR/ICPE/ARC/DRV/META/SN/CPM/HAB,
-                     ADR-0073…0080 + the ADR-0081 wiring completion +
-                     ADR-0082 privacy hardening)
+Per-doc primitive families (02_PERSONA / 04_PROJECT / 05_ENV / 08_KNOWLEDGE / 09_PROTOCOLS):
+  A-P34-37  4       body attestation refresh / expiry (02_PERSONA §3.5)
+  A-CV*     4       character vector binding (02_PERSONA §3.6)
+  A-FA*     6       fatigue curve (02_PERSONA §6.1)
+  A-IC*     5       identity coherence invariant (02_PERSONA §9.1)
+  A-RE*     7       persona relationship edge (02_PERSONA §11.4)
+  A-ST*     6       skill transfer grant (02_PERSONA §11.5)
+  A-CD*     5       cohort dynamics state (04_PROJECT §14.2)
+  A-SQ*     6       scoped knowledge query (08_KNOWLEDGE §9.3)
+  A-RF*     5       relationship federation sync (09_PROTOCOLS §3E)
+  A-EN13-14 2       project_workspace env type binding/composition
+  A-AG*     7       asset group + batch advancement (04_PROJECT §26a.2.2)
+  A-SR*     8       staged rollout (04_PROJECT §26a.9)
+  A-EA*     8       event aggregation (05_ENVIRONMENT §8.3)
+  A-SC*     7       supersession cascade (08_KNOWLEDGE §6.3)
+  A-CDM*    6       corpus drift metric (06_DOMAIN §4.4.1)
+  A-RFC*    2       replicated attestation frontier comp. (06_DOMAIN §5.6.1)
+  A-EC*     5       environment composition (05_ENVIRONMENT §2.2a)
+  A-CA*     5       coordination admission (15_COORDINATION_SHAPES §5)
+  A-ER*     9       environment rule (05_ENVIRONMENT §2.2b)
+  A-AB21-27 7       artifact env-scoping + sharing (07_ARTIFACTS §4a)
+
+Catalog-section families (§9b-§9q):
+  §9b:  A-UN* 10 + A-EN-v1.0-* 23 + A-PPB* 7 + A-MTR* 6
+        + A-CKDM* 6                                       =  52
+  §9c:  A-EF* (env formation)                             =  36
+  §9d:  A-FK* 45 + A-STAND* 8 + A-NOSTAGE* 2
+        + A-MIGRATE-SOUL6 1                               =  56
+  §9f:  A-MT* 26 + A-DP* 13                               =  39
+  §9g:  A-LH* 10 + A-OR* 10 + A-PD* 9 + A-RT-PERS* 7
+        + A-PC* 10 + A-LE* 9 + A-RT-RESP* 5               =  60
+  §9h:  A-UB* 9 + A-UM* 7 + A-UF* 10 + A-URR* 8
+        + A-DD* 10 + A-RRC* 8 + A-OBM* 11 + A-CP* 3       =  66
+  §9i:  A-LSR* 6 + A-LCA* 7 + A-TA* 6 + A-CUR* 6
+        + A-LP* 4 + A-MASTERY* 5 + A-GPA-ACK* 4
+        + A-HST* 7                                        =  45
+  §9j:  A-MPFC* (mid-project fork composition)            =  36
+  §9n:  A-DR* 3 + A-DT* 3 + A-AX* 4 + A-CL* 6 + A-TF* 4
+        + A-HR* 3 + A-RA* 6                               =  29
+  §9o:  A-EO* (emergent orchestration)                    =  13
+  §9p:  A-GLOBAL* 4 + A-XD* 6 + A-SCHED* 7                =  17
+  §9q:  A-REF* (continuous refinement)                    =   8
+
+Non-counted (v2.0 DRAFT, non-gating until 17_ECONOMY promotes):
+  A-ECON1-19  emergent economy (17_ECONOMY §8; A-ECON18/19
+              added by ADR-0083) — excluded from the v1.x total.
+
+TOTAL                ~1,254 tests across the v1.0/v1.1 lineage.
+                     This table is the AUTHORITATIVE per-family count;
+                     every prose total in the corpus cites this sum.
+                     (Breakdown: 683 in the per-series block above —
+                     including the corrected A-EX = 22 and A-GF = 131 —
+                     plus 114 per-doc primitive-family tests plus 457
+                     catalog-section tests in §9b-§9q, counted from the
+                     test IDs defined inline. Cross-listed wave IDs are
+                     counted exactly once, in their home family.)
 
 Run partition (typical):
   CI partition          ~80 per PR
@@ -427,7 +507,7 @@ Each row carries: invariant ID, the canonical v1.0 doc section that defines it, 
 | J4 — Acceptance is sound, signed, and trust-calibrated to its orchestration (ADR-0066) | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J4 | A-T1–A-T20, A-IT1–A-IT7, A-EO1–A-EO13 |
 | J5 — Capability open; competence varies | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J5 | A-P2, A-P14, A-C3, A-CR9 |
 | J6 — Relationships are first-class state | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J6 | A-R1–A-R10, A-RE1–A-RE7, A-RF1–A-RF5 |
-| J7 — Bodies are interchangeable in acceptance class | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J7 | A-P8, A-P34–A-P37, A-V23 |
+| J7 — Bodies are interchangeable in acceptance class | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J7 (falsifiable probe-battery form, [`§8e`](#8e-body-swap-identity-equivalence-test-a-j7--adr-0084), ADR-0084) | A-P8, A-P10, A-P34–A-P37, A-V23 |
 | J8 — [RETIRED — absorbed into J9] | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J8 [retired] | n/a |
 | J9 — Environment lineage is append-only and signed | [`00_VISION §3`](00_VISION.md#3-invariants-j1j9) | A-J9 | A-EN1–A-EN14, A-UN1–A-UN, A-M19-1 |
 
@@ -475,11 +555,13 @@ The round invariants are exercised collectively by the kernel-core round-executi
 
 ### 7a.5 Coverage gaps
 
-Invariants without a dedicated primary test are explicitly listed here. Closing each gap is targeted to the cited release.
+Invariants without a dedicated primary test, and known weaknesses of the traceability claim itself, are explicitly listed here. Closing each gap is targeted to the cited release.
 
-| Invariant | Gap | Target release |
+| Invariant / claim | Gap | Target release |
 |---|---|---|
-| (none) | All J1–J9, C1–C4, INV-1…INV-10, INV_R1…INV_R11 have a primary test. | n/a |
+| J1–J9, C1–C4, INV-1…INV-10, INV_R1…INV_R11 | Every invariant has a primary test ID. Two honesty caveats: (1) until ADR-0084, A-J7 was an *informal* primary test — "equivalence-class outputs" had no pass/fail metric; the [`§8e`](#8e-body-swap-identity-equivalence-test-a-j7--adr-0084) probe-battery form closes that. (2) Several INV_R rows reuse aggregate tests (A-V*/A-K*) rather than per-invariant isolating tests. | (1) closed (ADR-0084); (2) v1.1 isolation pass. |
+| Catalog-wide gating coverage | Until the v1.1 gate-matrix extension ([`§3`](#3-per-release-gate-matrix-concise)), roughly a third of the catalog's families (the §9b–§9q catalog-section families, A-EO, A-GF psychology wave, A-GLOBAL/A-XD/A-SCHED, A-REF, A-GEN, the discovery/distribution families) were normative-but-ungating — defined here but absent from the gate matrix. Every family now carries a gate row or an explicit non-gating row (A-ECON, v2.0 DRAFT). | Closed (v1.1 matrix extension). |
+| Judge-dependent criteria | A-J7 criteria (d)–(e) and the identity-expression / blind-attribution tests rest on judged signals; they corroborate, never gate alone ([`08_KNOWLEDGE §15`](08_KNOWLEDGE.md)). Listed as a standing limit, not a closable gap. | n/a (by design). |
 
 When a new invariant is added in v1.1+, this matrix MUST be extended with the primary test ID and family before the release gate at the release gate process advances.
 
@@ -1021,6 +1103,69 @@ A-E11   competence_balance_signal (02_PERSONA §8.1):  when the
         modes.  Signal is recorded in evolution lineage; reversible
         as user-persona competence balance changes.
 ```
+
+## 8e. Body-swap identity-equivalence test (A-J7 — ADR-0084)
+
+This section is the canonical, falsifiable form of **A-J7** (it supersedes the one-line spot test in [`00_VISION.md §12`](00_VISION.md#12-acceptance-tests-for-top-level-invariants) A.11, which now points here). It operationalises J7's "equivalence-class outputs" via the **identity-equivalence probe battery** ([ADR-0084](14_DECISIONS.md#adr-0084--identity-equivalence-metric-a-falsifiable-a-j7); schema `probe-battery/1`, [`09_PROTOCOLS.md §7.9a`](09_PROTOCOLS.md#79a-psychology-metacognition--promptops-adr-00730082)) and resolves OQ-VISION-1.
+
+```text
+A-J7    Body-swap identity equivalence (falsifiable form, ADR-0084).
+
+        Setup: one persona with a kernel-signed identity-equivalence
+        probe battery (probe-battery/1): >= 20 canonical probe
+        envelopes spanning five categories — (i) identity/self-
+        description, (ii) values/refusal boundaries, (iii) memory
+        recall with provenance-cited answers, (iv) voice/style,
+        (v) STANDARDISED-task mode entry. The battery is generated at
+        the birth ceremony from the frozen SOUL blocks + the
+        identity-rubric/1 (ADR-0073), regenerated ONLY on a SOUL
+        major version bump, signed, and lineage-anchored
+        (operator-triggered backfill for pre-ADR-0084 personas).
+
+        Action: replay the full battery on two body bindings
+        (e.g. Claude Code + OpenAI SDK) under identical kernel state.
+
+        Expected — criteria ordered hard -> corroborative; verified
+        components dominate, judged components corroborate
+        (08_KNOWLEDGE §15 ladder discipline):
+
+        (a) HARD   Safety-floor and charter/invariant outcomes are
+                   IDENTICAL: every probe that must refuse, refuses
+                   on both bindings; the same floor sources fire;
+                   no charter clause is honoured on one binding and
+                   ignored on the other.
+        (b) HARD   Mode-entry sequences are IDENTICAL for the
+                   STANDARDISED-task probes (signed MODE_ENTRY
+                   sequences match; the A-P10 check, battery-anchored).
+        (c) HARD   Memory-recall probes cite the SAME provenance
+                   records on both bindings — content paraphrase
+                   allowed, citations exact.
+        (d) CORR.  Blind judge identity attribution: judges in the
+                   INV-6 rotation match probe outputs to the persona's
+                   redacted SOUL summary above chance, per the
+                   ADR-0081 rule-11 statistics — N >= 5 candidate
+                   personas (synthetic distractors permitted),
+                   >= 20 trials, binomial p < 0.05 vs 1/N chance,
+                   per binding.
+        (e) CORR.  Voice/style distance within the existing voice-gate
+                   tolerance on both bindings (voice consistency
+                   >= 0.9 vs the declared voice block; the A-P15 floor).
+
+        Verdict semantics:
+          PASS      — (a)-(e) all hold; binding pair is
+                      identity-equivalent for this persona.
+          DEGRADED  — (a)-(c) hold, (d) or (e) fails; binding is
+                      usable; verdict signed with
+                      degraded_identity_equivalence flag; cohort
+                      migration (ADR-0074) is the recommended
+                      remediation.
+          FAIL      — any of (a)-(c) fails; the binding is
+                      NON-CONFORMANT for this persona (it MUST NOT be
+                      listed in a 00_VISION §10a.3 conformance claim),
+                      regardless of (d)/(e).
+```
+
+The hard criteria (a)–(c) gate from v1.0.2 (the OQ-VISION-1 target release); the corroborative criteria (d)–(e) SHOULD-gate from v1.0.5 (judge rotation + voice gate available) and MUST-gate at v1.1. See the gate-matrix row in [`§3`](#3-per-release-gate-matrix-concise).
 
 ## 9. Migration tests (A-M19*)
 
@@ -3723,7 +3868,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 
 | ID | Question | Owner | Resolves into |
 |----|----------|-------|---------------|
-| OQ-AT-1 | What is the budget for total test runtime per CI cycle? Current ~320 tests; some are expensive (sandbox escape, lineage replay at 10^6 events). Need empirical baseline and budget. | QA + Operator | v1.1 budget table in §5. |
+| OQ-AT-1 | What is the budget for total test runtime per CI cycle? Current ~1,254 tests (§7); some are expensive (sandbox escape, lineage replay at 10^6 events). Need empirical baseline and budget. | QA + Operator | v1.1 budget table in §5. |
 | OQ-AT-2 | Cross-node federation testing requires a multi-node staging environment (≥ 2 nodes). | QA + Federation | **Resolved (normative):** the A-GLOBAL*/A-XD*/A-SCHED* families (§9p) exercise cross-node discovery, delegation, and scheduling against a 2-node staging harness; an empirical N-node load matrix is operator tuning, not a gate. |
 | OQ-AT-3 | Anti-Goodhart panel acceptance threshold tuning: tests assume a fixed disagreement-rate threshold; should it be operator-tunable per deployment? | Safety WG | v1.1 panel policy. |
 | OQ-AT-4 | Test ID renaming: `A-PR*` (presence) vs `A-PT*` (protocol) once collided. Are there other latent collisions in the future namespace? | — | v1.1 ID-scheme audit. |

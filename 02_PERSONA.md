@@ -1157,7 +1157,10 @@ A-P8   Fork inherits per declared policy (clone OR compositional);
        parent's evolution log unchanged.
 A-P9   Charter-contradicting personal goal refused; signed audit event.
 A-P10  Cross-adapter parity: same Soul on Claude Code + OpenAI SDK
-       produces equivalence-class mode-entry sequences on same task.
+       produces identical mode-entry sequences on the same
+       STANDARDISED-task probes — this is hard criterion (b) of the
+       A-J7 identity-equivalence test (ADR-0084;
+       11_ACCEPTANCE_TESTS §8e), which defines "equivalence-class".
 A-P11  Lifecycle FSM: signed transitions; reanimate operator-only.
 A-P12  Experiential-floor scalar updates per parent_selection +
        validated_descendants + experience_tasks.
