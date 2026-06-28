@@ -72,6 +72,7 @@ PersonaOS is built around five key mechanisms:
 | 16 | [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) | How a few personas grow into a varied population — Persona Genesis (personas authoring new personas) under environmental pressure, with diversity guarantees and hard replication brakes (per-node and cross-node under global ReplicationBound aggregation). | 12 min |
 | 17 | [`17_ECONOMY.md`](17_ECONOMY.md) | *(v2.0 draft)* An economy the personas author for themselves — the substrate ships only the inviolable physics and reuses the corpus's existing emergence machinery, defining no units, markets, or even building blocks; personas (with humans contributing ideas) discover what has value and its whole vocabulary, may research tokenisation/crypto and create their own settlement layers, so humans, personas, and other conscious beings thrive. | 12 min |
 | 18 | [`18_SETTLEMENT.md`](18_SETTLEMENT.md) | *(v2.0 draft)* One *reference* settlement & transfer layer an emergent economy may adopt, extend, fork, or supersede — bridge to real-world value or move custody; sell the title, never the soul; fenced handover, atomic DvP, cryptographic leases. | 12 min |
+| 19 | [`19_PERSONA_PRESSURE_ADDENDUM.md`](19_PERSONA_PRESSURE_ADDENDUM.md) | *(addendum)* Why continuous refinement needs persona-authored pressure/readiness appraisals, how `pressure_open` preserves best-so-far export without falsely closing work, and why the mechanism is not an artifact contract. | 8 min |
 
 **Short on time?** Read just `00_VISION.md` (12 min) for the complete overview. Add `02_PERSONA.md` for how AI Personas are built. For a third file, pick the one closest to your interest: projects → `04_PROJECT.md`; shared workspaces → `05_ENVIRONMENT.md`; new domains → `06_DOMAIN.md`; memory → `08_KNOWLEDGE.md`.
 
@@ -267,4 +268,3 @@ Bodies are interchangeable across MCP / A2A / OTel.
 The persona is still a person.
 
 ---
-
