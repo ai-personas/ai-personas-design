@@ -54,9 +54,11 @@ environment id, phase, active pathway/mode, artifact refs, peer refs, available
 affordance refs, pressure refs, failure refs, resume refs, and budget refs.
 
 `active-agent-spec/1` is the per-turn operating spec compiled from selected
-fragments. It records mission reading, selected fragment ids, operating strategy,
-tool/MCP stance, artifact stance, coordination stance, quality bar,
-stop/continue pressure, and learning watchpoints.
+fragments. Its active prompt material is the selected persona-authored fragment
+text. The substrate may record selected fragment ids, hashes, timestamps, and
+opaque section metadata, but it must not impose fixed prompt sections or a
+runtime-owned behavioral taxonomy. If a persona wants recurring operating
+concepts, it authors them inside its own fragments.
 
 `brain-compile/1` records the situation hash, candidate fragment ids, selected
 fragment ids, active spec hash, and timestamp.
@@ -71,8 +73,7 @@ whole brain to the model. It builds candidates through bounded retrieval:
 
 - hard filters: owning persona or allowed lineage, active status, valid
   signature, readable scope;
-- lexical retrieval over fragment body and cues;
-- semantic retrieval where embeddings are available;
+- semantic retrieval over persona-authored fragment material;
 - hot-set retrieval from the current environment;
 - artifact, tool, MCP, skill, pressure, and failure refs;
 - bounded one-hop or two-hop expansion over persona-authored links;
@@ -80,9 +81,10 @@ whole brain to the model. It builds candidates through bounded retrieval:
 - diversity selection to avoid duplicate fragments.
 
 The selected fragments are compiled into `active-agent-spec/1`. The runtime may
-format the selected persona-authored bodies, but it must not add domain-specific
-instructions or artifact requirements. The compile record is persisted so later
-success or failure can credit the selected fragments.
+join or frame selected persona-authored bodies, but it must not create prompt
+instructions, domain-specific instructions, artifact requirements, tool choices,
+or fixed behavioral categories. The compile record is persisted so later success
+or failure can credit the selected fragments.
 
 ## 4. BrainEdit
 
@@ -110,17 +112,24 @@ inspect, use, provision, register, or ignore them.
 Tool success and failure traces feed back into BrainEdit, allowing personas to
 learn when a capability helped or hurt.
 
-## 6. Example
+## 6. Empty By Default
 
-If a persona performs an open-ended spatial design task and later receives
-evidence that the result is not inspectable enough, it may create a fragment like:
+A new persona brain starts with no runtime-authored prompt fragments. Contexts,
+episodes, traces, peer messages, artifacts, tool receipts, and feedback are
+evidence. They do not become active prompt fragments unless a persona proposes
+or applies a fragment edit through the signed brain tools.
 
-> When a task asks for physical or spatial design, decide whether prose is enough
-> or whether inspectable representation is needed. If geometry matters, inspect
-> available tools, MCPs, or commands before declaring completion.
+This avoids the bootstrap trap where the substrate appears to "teach" the
+persona by preloading fixed lessons. The substrate exposes records and edit
+mechanics; the persona decides what, if anything, should become reusable prompt
+material.
 
-That fragment is persona-learned. The runtime did not hardcode the domain,
-deliverable, or tool.
+The repository must not ship a default fragment library, domain fragment set,
+tool-use fragment set, or task-specific starter fragments. Examples in tests or
+design prose are illustrative fixtures only; they are not initial state. Runtime
+code may create empty signed storage, retrieval indexes, compile records, and
+tool schemas, but it must not author fragment bodies, activation cues,
+deactivation cues, labels, or prompt sections on behalf of the persona.
 
 ## 7. Risks and Controls
 
