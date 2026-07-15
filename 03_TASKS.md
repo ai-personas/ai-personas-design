@@ -372,9 +372,15 @@ Each helper (`has_ambiguous_intent_verb`, `has_unbounded_scope_keywords`, `has_l
 
 ### 4.2 Env selection when persona is named
 
-When user addresses persona by name without specifying env, kernel picks:
-
-*Environment selection priority: active context, charter+domain match, privacy hint, recency, fallback to ephemeral.* See [Appendix A.28](#appendix-a28--env-selection-when-persona-named-42).
+When a user addresses a persona by name without specifying an environment, the
+kernel exposes the bounded candidate contexts and their observations. Zero
+candidates routes to an ephemeral encounter; one candidate is unambiguous. With
+multiple candidates, the persona selects by an exact signed
+`RoutingContextChoice`. Active context, charter/domain affinity, privacy hints,
+and recency are evidence for the persona, never kernel tie-breakers. Silence,
+tampering, stale task bindings, or conflicting choices leave explicit routing
+pressure/refusal rather than fabricating a winner or silently entering Mode C.
+See [Appendix A.28](#appendix-a28--env-selection-when-persona-named-42).
 
 ### 4.3 Notification routing within env (Mode A and B)
 
@@ -501,7 +507,7 @@ v1.0 adds richness to status values.
 
 ### 7.5 Multi-environment project — env_id not specified
 
-*Multi-env project routing: requester presence, activity recency, or primary_environment_id fallback.* See [Appendix A.40](#appendix-a40--multi-environment-project-75).
+*Multi-env project routing: sole presence is unambiguous; multiple present hosts require an exact persona/requester-signed context choice; an already signed primary is prior project authority; otherwise pressure remains open.* See [Appendix A.40](#appendix-a40--multi-environment-project-75).
 
 ### 7.6 Cross-domain transfer task
 
@@ -1568,22 +1574,18 @@ def route_task_v1(task, requester):
 ### Appendix A.28 — Env selection when persona named (§4.2)
 
 ```text
-1. ACTIVE CONTEXT
-   Open conversation thread in one of persona's envs → continue there.
-
-2. CHARTER + DOMAIN MATCH
-   Task topic matches one of persona's envs (technical → engineering lab;
-   personal → companion env) → prefer that env.
-
-3. PRIVACY HINT
-   Task content suggests personal/relational → prefer companion-tier
-   over work-tier envs.
-
-4. RECENCY
-   Pick env where persona + user most recently interacted.
-
-5. FALLBACK
-   Ephemeral env (Mode C).
+0 candidates → ephemeral env (Mode C).
+1 candidate  → route to the sole context (no semantic conflict exists).
+N candidates → publish the exact candidate set and observations:
+  - open conversation-thread state
+  - charter/domain affinity observations
+  - privacy/tier observations
+  - interaction recency observations
+The persona signs RoutingContextChoice(persona_id, task_id,
+candidate_set_hash, selected_environment_id, rationale, created_at).
+Kernel verifies exact membership, candidate-set hash, identity signature, and
+task binding. No valid exact choice → routing_context_pressure remains open and
+the task is refused/parked; ambiguity is never interpreted as an ephemeral route.
 ```
 
 ### Appendix A.29 — Notification routing within env (§4.3)
@@ -1979,10 +1981,14 @@ Both signed; lineage shows ordering.
 
 ```text
 Task to project P; env_id absent; project hosts in env_A, env_B, env_C.
-Kernel picks:
-  - if requester present in one of (A, B, C) → that env
-  - if requester present in N hosting envs → highest activity_recency
-  - if requester not present → project.primary_environment_id (default A)
+Kernel exposes host observations:
+  - requester present in exactly one host → that sole host
+  - requester present in N hosts → exact signed requester/persona choice
+  - requester absent → project.primary_environment_id, only when the current
+    designation verifies as already signed project authority
+  - no verified primary and N hosts → explicit project_host_choice pressure
+Activity recency is evidence for a persona, never a substrate tie-breaker.
+Unresolved host choice refuses/parks the route; it never falls through to Mode C.
 ```
 
 ### Appendix A.41 — Cross-domain transfer (§7.6)

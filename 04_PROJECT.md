@@ -462,9 +462,17 @@ A project may host in multiple persistent environments simultaneously.
 **Technical detail:** See [A.29](#appendix-a29).
 
 When task addressed to project without env_id:
-- requester present in one of (envs) → that env
-- requester present in N → highest activity_recency
-- else → primary_environment_id
+- requester present in exactly one host → that sole host
+- requester present in N → exact signed requester/persona context choice
+- requester absent → the currently verified, signed
+  `primary_environment_id`, when present
+- otherwise → unresolved project-host-choice pressure/refusal, never an
+  ephemeral fallback
+
+Presence, activity recency, and host metadata are observations available to the
+persona. They never give the kernel or caller authority to choose among multiple
+hosts. A raw `primary_environment_id` field without a valid signature over the
+current project record is not prior authority.
 
 ArtifactBundle CRDT operates project-wide; env-local ambient streams stay env-scoped.
 
