@@ -449,13 +449,22 @@ into a generalist).
 The effective floor is the sum of earned + inherited (capped). Lineage audits can recompute
 earned-only floor at any time.
 
-### 7.4.3 CharterConflictResolution
+### 7.4.3 CharterSynthesisClaim
 
-Compositional forks merge ≥ 2 parents' charters. v1.0 said "Charter merged with conflict resolution" without naming the mechanism. v1.0 specifies:
+Compositional forks merge ≥ 2 parents' charters. Every such merge requires one
+exact `CharterSynthesisClaim` signed by every involved parent persona.
 
-> **Schema/spec:** CharterConflictResolution, CharterConflict, and CharterConflictResolution_Outcome dataclass definitions. See [Appendix A.26](#appendix-a26).
+> **Schema/spec:** `CharterSynthesisClaim` dataclass definition. See [Appendix A.26](#appendix-a26).
 
-**Why "most_restrictive_wins" is default.** A compositional fork inheriting permissive clauses from one parent and restrictive clauses from another would otherwise be more permissive than either parent — a Goodhart-on-charter risk. The most-restrictive default preserves the strictness floor and matches v1.0's safety-floor composition rule (`01_KERNEL §2.1`).
+The substrate binds parent identities and charter hashes, preserves every exact
+parent prohibition as a safety floor, verifies the proposed child clauses,
+principles, and tool surface, and checks all detached parent signatures. It does
+not lowercase, tokenize, cluster, regex-match, or otherwise interpret charter
+text; decide whether a semantic conflict exists; choose a parent; or apply an
+operator/proposer/kernel fallback. A human may offer optional context, while a
+missing answer never substitutes for peer agreement or pauses the parent
+personas' other work. Until all signatures exist, only that proposed fork remains
+unminted.
 
 ### 7.4.4 DormantForkPolicy
 
@@ -477,11 +486,13 @@ When a persona is forked without explicit policy declarations in the seed, the k
 | Tactics | Parent's tactics + seed_tactic_perturbation | Union pooled with `lexical_dedup` |
 | MemoryInheritancePolicy | episodic=summary; semantic=facts_only; reflective=about_work; klines=role_keyed | All `inherit_none` |
 | StandingFloorInheritancePolicy | start_at_zero, cap=floor_0 | inherit_min_parent_halved, cap=floor_low |
-| CharterConflictResolution | N/A (single parent) | most_restrictive_wins; semantic_similarity detection |
+| CharterSynthesisClaim | N/A (single-parent exact copy) | Exact child surface; every parent persona signs |
 | DormantForkPolicy | dormant_parent_admissible=True; requires_parent_wake=True | Same |
 | RelationshipInheritance (§11) | inherit_summary_only | inherit_none |
 
-Each default is overridable per `PersonaSeed`. The kernel signs the effective composed policy at fork-draft time; replay reconstructs deterministically.
+Policy defaults are overridable per `PersonaSeed`. All-parent charter authorship
+is not: a multi-parent fork always carries the exact signed claim, and replay
+reconstructs it deterministically.
 
 ### 7.4.6 Lineage events on fork
 
@@ -491,7 +502,7 @@ All emitted to the parent(s)' evolution log, child's evolution log, and global L
 
 ### 7.4.7 MidProjectForkComposition — project-side composition for in-flight forks
 
-The fork machinery (`§7.4` through `§7.4.6`) specifies how persona-internal state composes across a fork — memory inheritance per `MemoryInheritancePolicy` (§7.4.1), experiential floor per `StandingFloorInheritancePolicy` (§7.4.2), charters per `CharterConflictResolution` (§7.4.3). Subsequent additions introduced many *project-side* primitives that the original fork mechanics could not have anticipated: `ProjectMember.principal_attribution_id`, `LeadHandoffCeremony` + `ObligationReassignment` + `PlannedDeparture`, `UserBoundary` + `DistressDetectionRoutingPolicy` + `operator_blind_mode`, `LearnerStateRecord` + `TeachingAuthorisation` + `Curriculum`. When a persona that holds active *project-side* state forks mid-project, the spec was silent on whether children inherit each of these.
+The fork machinery (`§7.4` through `§7.4.6`) specifies how persona-internal state composes across a fork — memory inheritance per `MemoryInheritancePolicy` (§7.4.1), experiential floor per `StandingFloorInheritancePolicy` (§7.4.2), and charters per `CharterSynthesisClaim` (§7.4.3). Subsequent additions introduced many *project-side* primitives that the original fork mechanics could not have anticipated: `ProjectMember.principal_attribution_id`, `LeadHandoffCeremony` + `ObligationReassignment` + `PlannedDeparture`, `UserBoundary` + `DistressDetectionRoutingPolicy` + `operator_blind_mode`, `LearnerStateRecord` + `TeachingAuthorisation` + `Curriculum`. When a persona that holds active *project-side* state forks mid-project, the spec was silent on whether children inherit each of these.
 
 `MidProjectForkComposition` is the unified envelope that resolves the composition question by enumerating, for each dimension, the operator-declared inheritance choice *before* the fork executes. Children's project-side state is determined at fork time; substrate refuses fork-of-active-project-member without an envelope.
 
@@ -1132,7 +1143,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-PERSONA-3 | Mood schema (`mood/1`) is VAD-based. Does the affect literature have a richer scheme (PAD, OCC) we should adopt? | Persona authors | **Resolved (ADR-0075):** VAD retained as the mood *state* model; OCC adopted as the *appraisal-event* taxonomy (`§6.2` `appraisal-event/1`). Richer affect-state machinery remains out of scope. |
 | OQ-PERSONA-4 | Character-vector binding optional everywhere — but should operator policy default to off for safety-critical deployments, or on for cohort tuning? | Operator policy | v1.1 default policy. |
 | OQ-PERSONA-5 | MHBB recurrence detector threshold (> 3 occurrences / quarter) is heuristic. Should it scale with persona experiential floor / community standing or remain fixed? | Persona authors | v1.1 calibration. |
-| OQ-PERSONA-6 | Charter conflict resolution: how should the substrate handle three-way conflicts (persona × project × env charters)? Currently `charter-conflict-resolution/1` covers pairwise. | Charter WG | v1.1 three-way resolution. |
+| OQ-PERSONA-6 | Cross-scope charter composition: how should independently signed persona, project, and environment surfaces cite one another without granting the substrate semantic selection authority? | Charter WG | v1.1 cross-scope claim binding. |
 | OQ-PERSONA-7 | Tactic-lineage retention: how long should dead branches of a persona's tactic version DAG (`08_KNOWLEDGE §14.3` rejected / rolled-back versions) be retained — indefinitely for audit, or pruned per memory-tier policy? Storage cost vs lineage-replay completeness. | Prompt engineers | v1.2 retention policy. |
 | OQ-PERSONA-8 | Identity-rubric circularity: can identity rubrics (`08_KNOWLEDGE §11.1b`) themselves be evolved — e.g. judge-refined criteria — without circularity, i.e. without the rubric drifting toward whatever the evolved prompts already express? v1.1 pins regeneration to SOUL major bumps; rubric evolution remains open. | Prompt engineers + Persona authors | v1.2 rubric evolution study. |
 | OQ-PERSONA-9 | Drive priors as seed fields: should the three drive baselines (`drives/1`, `§2a`) be first-class `PersonaSeed` fields (a `priors.drives` block alongside `priors.ocean`/`priors.vad`) rather than derived from OCEAN at birth? Derivation keeps motivation emergent from identity and replayable; explicit fields would let seed authors shape motivation directly but add a parallel identity surface to keep coherent. | Persona authors WG | v1.2 seed-schema review. |
@@ -2247,7 +2258,7 @@ CLONE FORK
 
 COMPOSITIONAL FORK
   Multiple parents (≥ 2 with same role_slot).
-  Charter merged per CharterConflictResolution policy (§7.4.3).
+  Exact child charter signed by every parent via CharterSynthesisClaim (§7.4.3).
   Tactics from parents pooled (union with seed.fork_tactic_dedup_kind
   applied; default kind = "lexical_dedup" KindRegistry-resolved).
   Skill library union (parent_a.skill_library ∪ parent_b.skill_library ∪ ...).
@@ -2373,94 +2384,29 @@ DEFAULT_STANDING_FLOOR_INHERITANCE_COMPOSE = StandingFloorInheritancePolicy(
 
 ### Appendix A.26
 
-**CharterConflictResolution, CharterConflict, and CharterConflictResolution_Outcome dataclass definitions** (referenced from §7.4.3)
+**CharterSynthesisClaim dataclass definition** (referenced from §7.4.3)
 
 ```python
 @dataclass
-class CharterConflictResolution:
-    schema: str = "charter-conflict-resolution/1"
-    policy_id: str
-
-    # Strategy — substrate-shape merge mechanics
-    strategy: Literal[
-        "lexical_union",                   # all clauses from all parents;
-                                           # duplicates deduplicated by exact
-                                           # lexical match; conflicts kept
-                                           # as parallel clauses (most
-                                           # permissive — burden on persona
-                                           # to navigate contradiction)
-        "most_restrictive_wins",           # for each topic_kind, the
-                                           # strictest parent clause survives;
-                                           # KindRegistry topic_kinds clusters
-                                           # similar clauses
-        "operator_review",                 # queue conflicts for operator;
-                                           # fork blocked until resolved
-        "proposer_decides",                # the persona/operator requesting
-                                           # the fork picks per-conflict;
-                                           # proposer's choice is signed
-        "kernel_predicate"]                # automated semantic merge via
-                                           # rotating classifier (INV-6);
-                                           # conflicts the classifier cannot
-                                           # resolve escalate to operator
-
-    # Detection
-    conflict_detection_kind: str           # KindRegistry-resolved
-                                           # (substrate names no specific
-                                           # detection methods).  Examples
-                                           # (illustrative, NOT enum):
-                                           #   "semantic_similarity"
-                                           #   "topic_clustering"
-                                           #   "operator_curated_topic_map"
-
-    # Outcome record
-    conflicts_detected: list[CharterConflict]
-    conflicts_resolved: list[CharterConflictResolution_Outcome]
-
-    # Failure mode if strategy cannot complete
-    on_unresolvable: Literal[
-        "block_fork",                      # fork refused with signed event
-        "fallback_to_proposer_decides",
-        "fallback_to_most_restrictive_wins"]
-
-    signed_by: bytes
-
-
-@dataclass
-class CharterConflict:
-    schema: str = "charter-conflict/1"
-    conflict_id: str
-    parent_clauses: list[dict]              # {parent_id, clause_index, text}
-    topic_kind: str                         # KindRegistry-resolved
-    severity_kind: str                      # KindRegistry-resolved
-                                           # (e.g. "logical_contradiction",
-                                           #  "stylistic_divergence",
-                                           #  "scope_overlap")
-
-
-@dataclass
-class CharterConflictResolution_Outcome:
-    schema: str = "charter-conflict-outcome/1"
-    conflict_id: str
-    resolution_kind: Literal[
-        "kept_all_parallel",
-        "selected_one",
-        "merged_lexical",
-        "escalated_operator_approved",
-        "escalated_operator_declined"]
-    selected_clause_index: int | None       # for selected_one
-    merged_text: str | None                 # for merged_lexical
-    resolver_id: str                        # who decided (kernel / operator / proposer)
-    rationale_kind: str                     # KindRegistry-resolved
-    signed_by: bytes
-
-
-# Defaults
-DEFAULT_CHARTER_RESOLUTION_COMPOSE = CharterConflictResolution(
-    strategy="most_restrictive_wins",
-    conflict_detection_kind="semantic_similarity",
-    on_unresolvable="fallback_to_proposer_decides",
-)
+class CharterSynthesisClaim:
+    schema: str = "personaos-charter-synthesis-claim/1"
+    claim_id: str
+    parent_charters: tuple[dict[str, str], ...]  # exact parent_id + charter_hash
+    proposed_child_clauses: tuple[str, ...]
+    proposed_child_principles: tuple[str, ...]
+    proposed_child_tools: tuple[str, ...]
+    rationale: str
+    claim_hash: str                         # hash of every field above
+    parent_signatures: dict[str, dict]      # one detached signature per parent
 ```
+
+For `len(parents) == 1`, clone composition is an exact copy and needs no
+multi-parent claim. For `len(parents) > 1`, child activation requires the exact
+registered parent set and a valid signature from every parent over the same
+claim preimage. Partial signatures may circulate asynchronously while the
+personas deliberate; they never authorize minting. The verifier checks the
+cryptographic bindings and exact parent-prohibition subset only. It performs no
+semantic text inference and exposes no human-review or fallback mode.
 
 ### Appendix A.27
 
@@ -5370,4 +5316,3 @@ class IntuitionHint:
     minted_at: datetime
     signed_by: bytes
 ```
-

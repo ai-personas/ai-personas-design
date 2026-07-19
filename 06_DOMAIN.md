@@ -673,13 +673,19 @@ Several schemas (`ProjectPhaseState`, `PaymentBridge`, `InstrumentAsset`, `Measu
 
 Substrate registers a metadata schema per kind family. When a `KindRegistryEntry` is drafted, the kernel validates `metadata` against the family's schema. Substrate ships seed schemas for kind families; operators may register additional families.
 
-*Per-family metadata schemas define fields per kind family: phase_kinds (stall suppression, user sign requirement, expected duration, severity curve), payment_method_kinds (human authorisation, receipt latency, audit trail kind), instrument_kinds (operational state FSM, calibration interval, systematic floor, reference chain root), and quantity_kinds (units, physical dimension, distribution kind, conventional uncertainty). Seed phase_kinds entries include design, verification, external dependency wait, physical fabrication, peer review pending, regulatory review, iteration, and synthesis.*
+*Per-family metadata schemas define fields per kind family: phase_kinds (stall suppression, user sign requirement, expected duration, severity curve), payment_method_kinds (human authorisation, receipt latency, audit trail kind), instrument_kinds (operational state FSM, calibration interval, systematic floor, reference chain root), and quantity_kinds (units, physical dimension, distribution kind, conventional uncertainty). Seed phase_kinds entries include design, verification, physical fabrication, peer review pending, regulatory review, iteration, and synthesis.*
 
 **Technical detail:** See [A.50](#appendix-a50).
 
 **Substrate purity preserved.** The kind families themselves are substrate-shape labels (positions in the registry namespace), not domain categories. The metadata field schemas are per-family declarations the operator may extend. The seed phase_kinds bundle ships as DATA (per §7.2.1's pattern), not as substrate enum.
 
 **Composition with ProjectPhaseState (`04_PROJECT §26a.6`):** when a project enters a new phase, the kernel resolves the phase_kind in KindRegistry and copies `stall_evaluator_suppressed` + `requires_user_sign` into the ProjectPhaseState instance at transition time. Subsequent stall-evaluator queries read directly from the ProjectPhaseState instance (so the value is signed-at-transition rather than re-resolved each evaluation). Operator changes to the KindRegistry entry's metadata after transition do not retroactively change the phase's behaviour — that requires an explicit signed `PHASE_METADATA_UPDATE` event in ProjectLineage.
+
+Missing outside evidence is not a phase kind and never suppresses the whole
+project's progress evaluation. A persona may record the exact external condition
+on the affected claim, action, artifact, or commitment lane while peers continue
+simulation, review, synthesis, and any other admissible work. Human questions
+remain asynchronous observations rather than phase-transition authority.
 
 ### 7.6.3 The `env_rule_kinds` family — env-scoped executable rules
 
@@ -3765,7 +3771,6 @@ quantity_kinds         units_kind:                  str                   Measur
 phase_kinds(seed)      Bootstrap entries for release:
                        - "design"                  stall=False, user_sign=False
                        - "verification"            stall=False, user_sign=False
-                       - "external_dependency_wait" stall=True,  user_sign=False
                        - "physical_fabrication"    stall=True,  user_sign=True (entry)
                        - "peer_review_pending"     stall=True,  user_sign=False
                        - "regulatory_review"       stall=True,  user_sign=True (exit)

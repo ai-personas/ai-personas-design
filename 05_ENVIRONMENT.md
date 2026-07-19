@@ -3383,6 +3383,14 @@ class CharterAmendment:
     new_text: str | None                    # for add / replace
 ```
 
+`ask_human_pending` is scoped to that recruit's consent slot and optional
+question. It never becomes an environment-wide or task-wide wait state. The
+recruit may consult peers and continue other admissible work, the proposer and
+other recruits continue independently, and expiry resolves this one slot to
+`timed_out`/decline. A later human answer is ordinary signed input for future
+decisions; the kernel neither requires it nor selects an answer on anyone's
+behalf.
+
 
 <a id="appendix-a41"></a>
 ### A.41. EnvFormationProposal end-to-end flow

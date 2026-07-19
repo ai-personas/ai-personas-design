@@ -2223,7 +2223,7 @@ A-EF-36   Path 0 (EnvFormationProposal) and Path 1 (PROJECT_INVITATION)
 
 ## 9d. v1.0 fork-inheritance tests (A-FK*)
 
-Tests for the persona fork inheritance policies added per `02_PERSONA.md §7.4`. Covers clone vs. compose fork mechanics, four new policy schemas (MemoryInheritancePolicy, StandingFloorInheritancePolicy, CharterConflictResolution, DormantForkPolicy), multi-environment experience counting, wall-clock age + ALPS, per-environment community standing, and clarifications on skill library inheritance.
+Validation of the persona fork inheritance surfaces in `02_PERSONA.md §7.4`: clone vs. compose mechanics, `MemoryInheritancePolicy`, `StandingFloorInheritancePolicy`, all-parent `CharterSynthesisClaim`, `DormantForkPolicy`, multi-environment experience counting, wall-clock age + ALPS, per-environment community standing, and skill-library inheritance.
 
 ### A-FK-AGE — Wall-clock age + experience counting
 
@@ -2381,34 +2381,19 @@ A-MIGRATE-SOUL6-1  Legacy soul-state/5 record (age_tasks=184,
              experiential_floor recomputed, and no maturity field.
 ```
 
-### A-FK-CHARTER — CharterConflictResolution (§7.4.3)
+### A-FK-CHARTER — CharterSynthesisClaim (§7.4.3)
 
 ```text
-A-FK-CHARTER-1  Compositional fork from ≥ 2 parents triggers conflict
-                detection per conflict_detection_kind (default
-                "semantic_similarity").  Detected conflicts populated
-                in CharterConflictResolution.conflicts_detected.
-A-FK-CHARTER-2  Default strategy="most_restrictive_wins": for each
-                topic_kind cluster, the strictest parent clause survives;
-                rationale signed.
-A-FK-CHARTER-3  strategy="lexical_union": all clauses kept; duplicates
-                deduplicated by exact lexical match; contradictions kept
-                as parallel clauses; child must navigate at runtime.
-A-FK-CHARTER-4  strategy="operator_review": fork blocks until operator
-                resolves each conflict; signed
-                CHARTER_CONFLICT_OPERATOR_ESCALATED event per conflict;
-                operator may decline (fork refused).
-A-FK-CHARTER-5  strategy="proposer_decides": the persona/operator
-                requesting the fork picks per conflict; choices signed;
-                rationale_kind required.
-A-FK-CHARTER-6  strategy="kernel_predicate": automated semantic merge
-                via rotation-pool classifier (INV-6); classifier
-                identity signed for audit reproducibility; conflicts
-                the classifier cannot resolve escalate to operator.
-A-FK-CHARTER-7  on_unresolvable="block_fork": fork refused with signed
-                FORK_REFUSED_CHARTER_UNRESOLVABLE event.
-A-FK-CHARTER-8  on_unresolvable="fallback_to_most_restrictive_wins":
-                applies that strategy if primary fails; recorded.
+A-FK-CHARTER-1  A compositional fork binds every exact parent identity and
+                charter hash into one proposed child-charter claim.
+A-FK-CHARTER-2  The same claim binds the complete proposed child clauses,
+                principles, tools, and persona-authored rationale.
+A-FK-CHARTER-3  Every involved parent persona must sign that exact preimage;
+                an operator, proposer, or kernel classifier cannot substitute.
+A-FK-CHARTER-4  Until all signatures exist, only this fork mint remains open;
+                parent personas and their environments continue other work.
+A-FK-CHARTER-5  A human answer is optional evidence for parent judgment and
+                is never a task-wide scheduler or completion gate.
 ```
 
 ### A-FK-DORM — DormantForkPolicy (§7.4.4)

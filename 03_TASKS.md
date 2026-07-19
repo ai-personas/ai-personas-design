@@ -1067,13 +1067,13 @@ explicit task.
 PHASE-AWARE STALL SUPPRESSION:
 The "stalled" verdict above is suppressed when the project's current
 ProjectPhaseState (04_PROJECT §26a.7) has stall_evaluator_suppressed
-= True — typical for phase_kind in {external_dependency_wait,
-physical_fabrication, regulatory_review, peer_review_pending}
-(kinds resolve against KindRegistry; substrate names no phase
-categories).  Suppression lifts automatically when any blocking
-ExternalCommitment goes overdue (the phase flips to
-overdue_external) or the phase is signed out by user/operator.
-The stall verdict resumes normally on suppression lift.
+= True under its signed KindRegistry metadata. Suppression describes
+work actually occurring in that phase; missing human input or outside
+evidence can never set it or suspend the whole project. Exact external
+conditions remain scoped to their claim/action/commitment lanes while
+personas continue other admissible work. Suppression lifts under the
+phase's own signed transition conditions, and the stall verdict then
+resumes normally.
 ```
 
 ### Appendix A.20 — RelationshipReviewCheckpoint dataclass (§3.2)
