@@ -156,8 +156,8 @@ A persona with `cohort_assembly.may_author_seeds = true` MAY draft a `genesis-pr
 3. **Budget + replication gates.** INV-7 budget gate, then the `ReplicationBound` for `replication_kind = "persona_genesis"` (`§4F`).
 4. **Recruitment + niche gates.** `§4B` and `§4C`.
 5. **Seed validation.** The embedded `proposed_seed` (a `persona-seed/2` draft) MUST pass the safety floor's seed-validation checks exactly as an operator-authored seed would (`01_KERNEL §2`).
-6. **Mint.** On admission the kernel runs the standard birth ceremony (`02_PERSONA §7.1`, Appendix A.20): `SEEDED → ACTIVATED`, newborn initialised at `experiential_floor = 0`, `experience_tasks = 0`, `born_at = now()` (ALPS Layer 0), and **peripheral community standing** in its environment (`05_ENVIRONMENT §5.4`); `LifecycleEvent.kind = LIFECYCLE_GENESIS` recorded with `authoring_persona_ids` and `mentor_persona_id`.
-7. **Provenance + mentorship.** The kernel writes `genesis-provenance/1` to the newborn's `soul.state.json` and opens a `mentorship-edge/1` from author to newborn.
+6. **Mint.** On admission the kernel runs the standard birth ceremony (`02_PERSONA §7.1`, Appendix A.20): `SEEDED → ACTIVATED`, newborn initialised at `experiential_floor = 0`, `experience_tasks = 0`, `born_at = now()` (ALPS Layer 0); `LifecycleEvent.kind = LIFECYCLE_GENESIS` is recorded with `authoring_persona_ids`, `mentor_persona_id`, environment provenance, proposal ref, and seed hash. Once an environment membership is admitted, the newborn begins with **peripheral community standing** (`05_ENVIRONMENT §5.4`). Birth alone does not silently grant membership.
+7. **Provenance + mentorship.** The kernel writes `genesis-provenance/1` to the newborn's `soul.state.json` and opens a `mentorship-edge/1` from author to newborn. Before membership, only the exact signed author↔newborn bootstrap channel of `09_PROTOCOLS §3A.3` is admissible. It is bound to the verified birth provenance and causal task, carries no general communication, tool, observation, or membership privilege, and lets the newborn answer its author rather than wait silently for enrollment.
 
 **Corroborated gate fitness (ADR-0083).** The `fitness` consumed by the generativity gate (rule 1c) and by `dgm_fertility_weighted` author selection (rule 2) MUST be the **verified-outcome-dominant** composition — the [`08_KNOWLEDGE.md §15`](08_KNOWLEDGE.md#15-anti-goodhart-for-signal-corroboration) corroboration rule restated at the reproduction boundary. Judge-scored credit terms (`identity_expression` / `w_ide` included; [`02_PERSONA.md §8.3`](02_PERSONA.md#83-credit-assignment-formula), A.37) are capped at **25% of gate-consumed fitness**, and a judged signal can never flip gate eligibility absent verified-outcome support: a persona whose verified-outcome components alone fall below `generativity_fitness_threshold` MUST NOT cross it on judged components, however high they score. Rationale: reproduction is where a Goodharted judge score compounds across generations — an author selected for judged identity-expression flair rather than verified outcomes breeds the bias into every descendant. (A-GEN25.)
 
@@ -169,7 +169,10 @@ A persona with `cohort_assembly.may_author_seeds = true` MAY draft a `genesis-pr
 
 ### 4E. Newborn maturation ramp (ZPD / LPP / scaffolding)
 
-A newborn does not start as a full participant. The kernel initialises it as a **legitimate peripheral participant** (Lave & Wenger):
+A newborn does not start as a full participant. In each admitted environment
+membership, the kernel initialises it as a **legitimate peripheral participant**
+(Lave & Wenger). Before membership, the narrow birth-provenance bootstrap channel
+above is its only communication surface:
 
 - **Listening mode** starts `passive` (`05_ENVIRONMENT §9`); the newborn observes before it acts.
 - **Attention allocation** starts capped low (`05_ENVIRONMENT §7`); tool surface is restricted to the seed's `allowed_tools` minus any hazard-class tools until competency accrues.

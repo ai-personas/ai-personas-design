@@ -969,7 +969,7 @@ Add `HazardousSkillTeachingGate` (`01_KERNEL §2.9`): composition rule under saf
 - (+) Composition with `§2.8` DistressDetectionRoutingPolicy is orthogonal — distress signal fires routing; teaching continues (or pauses per `§2.8`'s `pause_normal_interaction` action).
 - (+) `eligible_learner_constraints` give operators a substrate-shape mechanism to verify learner enrollment, prerequisite competency, age, etc.
 - (−) Source 2+4 (not source 1) anchor reflects jurisdiction-dependence — what counts as hazardous-enough varies by jurisdiction. This is correct grain but means hazardous teaching gates are operator-policy-overrideable in principle (operator could authorise inappropriate bindings; review by external audit, regulator is the safety mechanism).
-- (−) PEDAGOGIC task-class mis-classification at task start bypasses the gate (a hazardous-skill conversation labelled RELATIONAL would not trigger). ClarifyTurn (`§4.0`) is the mitigation; operators must configure aggressive thresholds for envs in hazardous teaching domains.
+- (−) A persona that omits or misstates teaching in its signed action manifest can bypass the gate. The later `03_TASKS §4.0` non-blocking clarification alignment supersedes human-wait mitigation: clarification is optional context, while operator policy and independent action audit mitigate false declarations at the exact action boundary.
 - (−) Annual re-attestation cadence + operator-side authorisation ceremony adds operational overhead for deployments running many concurrent hazardous-teaching contexts.
 
 **Alternatives considered.**

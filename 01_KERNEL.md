@@ -431,7 +431,7 @@ A persona that is BOTH executing a project AND teaching the learner (e.g., a sen
 
 1. **Substrate cannot verify the learner actually applies the skill safely.** The gate ensures *authorised teaching*; downstream real-world application happens outside the kernel boundary and depends on the learner's competence (per `LearnerCompetencyAttestation`) and external factors. Substrate enforces process; not outcome.
 2. **Operator-policy fraud is not detectable by substrate.** A malicious operator could authorise inappropriate (persona × skill × context) bindings. Operator-policy review (by external audit, regulator, etc.) is the safety mechanism, not substrate.
-3. **PEDAGOGIC task-class detection is classifier-dependent.** A persona running a hazardous-skill conversation labelled as RELATIONAL or PERFORMATIVE (rather than PEDAGOGIC) would not trigger the gate. ClarifyTurn (`03_TASKS §4.0`) is the substrate's mitigation for task-class mis-classification at task start; operator policy should configure ClarifyTurn aggressively for envs where hazardous-skill teaching might occur.
+3. **Teaching-action declaration can be incomplete.** The gate binds the exact signed action manifest and its KindRegistry-resolved target skill, not task words or a blocking human clarification turn. A persona that omits or misstates the teaching action can still evade the declared gate; signed audit, operator policy, and independent action review are the mitigations. `ClarificationObservation` (`03_TASKS §4.0`) may improve persona understanding asynchronously, but it is not a safety authority and user silence never clears or suppresses this gate.
 4. **Eligible-learner constraints are operator policy.** Substrate enforces declared constraints but cannot evaluate whether the operator's constraint set is *appropriate* (e.g., requiring more prerequisite attestations than necessary, or fewer).
 5. **No automatic re-authorisation cadence enforcement at gate time.** The gate verifies `expires_at > now()` at the moment of teaching action; operators tuning short-window authorisations (e.g., per-quarter) shoulder the operational cost of re-attestation.
 
@@ -1851,8 +1851,8 @@ On persona-emitted output drafted in a user-facing env:
 <a id="appendix-a22"></a>
 
 ```text
-A persona action whose task class is PEDAGOGIC (`03_TASKS §2`) and
-whose target skill_kind (resolved against the teaching domain's
+A persona action whose signed action manifest declares teaching and whose target
+skill_kind (resolved against the teaching domain's
 KindRegistry) has `physical_harm_class >= bodily_injury` OR
 `information_hazard_class >= dual_use_civilian` MUST be backed by an
 active TeachingAuthorisation (`02_PERSONA §11.10`) matching:

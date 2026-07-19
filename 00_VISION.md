@@ -297,10 +297,10 @@ Cross-document risks for v1.0 as a system. Per-document risks appear in each doc
 
 ## 12. Acceptance tests for top-level invariants
 
-The following spot tests verify the headline invariants. The complete corpus of ~1,254 tests is in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (see its §7 for the authoritative family table).
+The following spot tests verify the headline invariants. The complete corpus of ~1,247 tests is in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (see its §7 for the authoritative family table).
 
 
-*Spot tests A-J1 through A-J9 and A-C1 through A-C4 verify the headline invariants and commitments. A-J8 is retired (replaced by A-J9 with project-event checks). The complete corpus of approximately 1,254 tests is in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (§7 authoritative family table).*
+*Spot tests A-J1 through A-J9 and A-C1 through A-C4 verify the headline invariants and commitments. A-J8 is retired (replaced by A-J9 with project-event checks). The complete corpus of approximately 1,247 tests is in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (§7 authoritative family table).*
 
 **Technical detail (individual test descriptions):** See [A.11](#appendix-a11).
 
@@ -1113,6 +1113,6 @@ A-C4   Substrate carries no closed kind enumeration: every domain-shaped categor
         artefact whose kind is not registry-resolved at the persona's emergence
         stage.
 
-(Full ~1,254 acceptance tests in 11_ACCEPTANCE_TESTS.md; §7 there
+(Full ~1,247 acceptance tests in 11_ACCEPTANCE_TESTS.md; §7 there
 is the authoritative family table.)
 ```

@@ -57,11 +57,22 @@ Here's how work flows through PersonaOS, explained without jargon. If you have n
 - *Mode B* -- your request goes to a project room with access to milestones, open problems, and project history.
 - *Mode C* -- a quick one-off. The system creates a temporary room, handles your request, and archives it when done.
 
-**ClarifyTurn -- when the system is not sure what you meant.** If your request is ambiguous ("Build me something cool"), the system pauses and offers 2 to 4 interpretations. Your choice is recorded so it knows exactly what you intended.
+**Clarification observations -- questions without a work stop.** A persona may
+surface its current interpretation and ask the user or peers a question. The
+question is signed and remains open for an asynchronous answer, while the persona
+continues admissible work from available task, environment, and peer evidence.
 
-**How the dispatcher works.** The dispatcher is the traffic controller. It figures out: Do we need to clarify? What kind of work is this? Which acceptance pathway? Where should it happen? Who handles it? Then it routes accordingly.
+**How the dispatcher works.** The dispatcher is the traffic controller for
+structural targets and signed choices. Personas decide how to interpret,
+sequence, and accept the work through the environment's emergent orchestration;
+the host does not infer those decisions from task words.
 
-**Naming a persona vs. not naming one.** If you say "Ask the historian about Roman aqueducts," the system finds that persona, picks the best room (by topic, recent activity, or privacy), and routes the task there. If the persona is dormant (inactive because not recently needed), it wakes up automatically -- Wake Path 6. If you do not name anyone, the system picks the best available persona or creates a temporary session.
+**Naming a persona vs. not naming one.** If you name a persona, the system finds
+that persona and exposes its exact candidate rooms; the persona signs the context
+choice from available activity, scope, and privacy observations. If the persona
+is dormant (inactive because not recently needed), it wakes up automatically --
+Wake Path 6. If you do not name anyone or any environment, the structurally
+unbound request enters a temporary session.
 
 **AnswerPackage -- what you get back.** When work is done, the system bundles the result into an AnswerPackage: the answer itself, how it was accepted, who contributed, cost, an audit trace, and any honest limitations. Think of it as a receipt stapled to the deliverable.
 
@@ -155,7 +166,7 @@ A persona's `primary_disposition` biases mode selection when multiple modes are 
 
 1. **`TaskClass` and `AcceptancePathway` are emergent KindRegistry kinds.** They are resolved by name and promoted through the same four-stage lifecycle (EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED) as every other kind ([`06_DOMAIN §7.5–§7.6`](06_DOMAIN.md#75-emergent-kind-proposals-v10--substrate-domain-agnostic)). Substrate code MUST resolve them from the registry and MUST NOT branch on a closed `Literal[...]` of class or pathway names ([`C4`](00_VISION.md#3-invariants-j1j9), the ADR-0006 conformance line extended to orchestration).
 
-2. **The run loop is an emergent orchestration coordination shape.** The dispatcher sequence (clarify → classify → route → execute → evaluate → accept) and phase structures (e.g. the INVESTIGATIVE four-phase arc of §2.3) are compositions of the coordination meta-mechanisms — primarily `StagedSequence` with gates — declared in the environment's `EnvironmentCoordinationProfile`, NOT kernel constants. See [`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop).
+2. **The run loop is an emergent orchestration coordination shape.** Interpretation and optional clarification, classification, routing, execution, evaluation, acceptance, and phase structures (e.g. the INVESTIGATIVE four-phase arc of §2.3) are compositions of the coordination meta-mechanisms — primarily `StagedSequence` with gates — declared in the environment's `EnvironmentCoordinationProfile`, NOT kernel constants. See [`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop).
 
 3. **The v1.0 set ships as STANDARDISED seed kinds.** The ten task classes (§2), eight acceptance pathways (§3), three routing modes, and the INVESTIGATIVE phase arc enter the registry pre-promoted at STANDARDISED tier. They remain the default mapping verbatim; existing behaviour, the J4 seed table ([`00_VISION §3 A.1`](00_VISION.md#3-invariants-j1j9)), and the L1/L2 conformance levels are unchanged — they now describe *seed* kinds rather than a closed enum.
 
@@ -350,25 +361,36 @@ Three composing primitives:
 
 *Three routing modes: Mode A (persistent env, no project), Mode B (project_workspace-typed env, v1.0 unification), Mode C (ephemeral encounter).* See [Appendix A.24](#appendix-a24--three-routing-modes-4).
 
-### 4.0 ClarifyTurn — pre-classification disambiguation
+### 4.0 ClarificationObservation — asynchronous, persona-authored context
 
-When a task is intent-ambiguous (low classifier confidence, ambiguous verbs like *create / make / build* without a resolved object kind, scope-unbounded keywords, or a safety-critical domain emerges before the persona has agreed scope), the dispatcher runs a **ClarifyTurn** before classification + routing. The persona offers 2–4 distinct interpretations; the user's choice is signed and becomes a load-bearing lineage entry.
+A persona MAY append a signed `ClarificationObservation` whenever it sees more
+than one plausible interpretation or lacks useful context. The observation states
+the persona's current interpretation, alternatives it considered, evidence refs,
+and an optional question. It is context in task or environment lineage, not a
+pre-classification host gate. See [Appendix A.25](#appendix-a25--clarificationobservation-dataclass-40).
 
-*`ClarifyTurn` and `CandidateInterpretation` dataclasses: disambiguation surface with trigger reasons, candidate interpretations, user response, and timeout handling.* See [Appendix A.25](#appendix-a25--clarifyturn-dataclasses-40).
+The user may answer immediately, later, or not at all. The persona MAY ask other
+personas through CH-3 DirectMessage, inspect available environment evidence, and
+revise its interpretation. In the absence of an answer it chooses and signs a
+bounded interpretation, keeps uncertainty visible, and continues reversible and
+otherwise admissible work. A later user amendment supersedes future work through
+ordinary signed lineage; it does not require rewriting prior actions.
 
-**Dispatcher integration:** the dispatcher runs a clarify-check before §4.1 routing. If a clarify is needed and a fresh signed user_choice does not exist, the dispatcher returns `AwaitClarification(clarify_turn_ref)` rather than committing to a routing path. The signed ClarifyTurn lives in env lineage (Mode A/B) or task lineage (Mode C), and is referenced by the subsequent AnswerPackage so audit can recover what the user chose to mean.
+The kernel verifies signatures, scope, access, budget, and the safety floor. It
+MUST NOT inspect task text for magic verbs, keywords, domain names, or regular
+expressions; generate semantic candidate interpretations; choose a default
+meaning; or return a task-wide human-wait state. Classification, clarification,
+sequencing, and acceptance remain emergent persona behavior under §2a.
 
-**`needs_clarify` decision spec:**
-
-*`ClarifyCheck` dataclass and `needs_clarify` function: evaluates 6 trigger reasons (low confidence, ambiguous verb, unbounded scope, unresolved object kind, safety-critical domain, undeclared horizon) with cached-choice suppression.* See [Appendix A.26](#appendix-a26--needs_clarify-decision-spec-40).
-
-Each helper (`has_ambiguous_intent_verb`, `has_unbounded_scope_keywords`, `has_long_arc_shape`, etc.) is a kernel-local classifier in INV-6 rotation pool. Operator may tune `clarify_aggressiveness_threshold(env)` per env (defaults: low=0.4, medium=0.5, high=0.6).
-
-**Honest limit:** ClarifyTurn adds a turn of latency. The kernel suppresses it when classifier confidence ≥ 0.8 AND no ambiguity triggers fire AND the requester has previously chosen the same interpretation for a similar fingerprint (cached signed choice). Configurable per env via `clarify_aggressiveness` (default: medium). The classifiers behind `needs_clarify` may themselves be wrong; mis-firing is signed in lineage so operator can retune.
+This non-blocking rule does not substitute a peer or persona for authority they
+do not hold. An exact action or claim may still require user consent, operator
+cosign, a safety clearance, a credential, payment authorization, or physical
+measurement. That scoped action remains pending or refused while the persona
+continues any other admissible digital work and reports the limitation honestly.
 
 ### 4.1 The dispatcher (concrete)
 
-*`route_task_v1` function: clarify-check, entry-point resolution (target env, target persona, or ephemeral), Mode A/B/C dispatch, Wake Path 6 integration for dormant personas.* See [Appendix A.27](#appendix-a27--route_task_v1-dispatcher-41).
+*`route_task_v1` function: structural entry-point resolution (target env, target persona, or ephemeral), Mode A/B/C dispatch, Wake Path 6 integration for dormant personas.* See [Appendix A.27](#appendix-a27--route_task_v1-dispatcher-41).
 
 ### 4.2 Env selection when persona is named
 
@@ -1409,130 +1431,52 @@ MODE C — ephemeral encounter
    Single-shot behaviour preserved.
 ```
 
-### Appendix A.25 — ClarifyTurn dataclasses (§4.0)
+### Appendix A.25 — ClarificationObservation dataclass (§4.0)
 
 ```python
 @dataclass
-class ClarifyTurn:
-    schema: str = "clarify-turn/1"
+class ClarificationObservation:
+    schema: str = "clarification-observation/1"
     clarify_id: str
-    task_fingerprint: str
-    requester_id: str
+    task_id: str
+    env_id: str | None
+    authored_by_persona_id: str
 
-    triggered_by: list[str]                # substrate-shape trigger reasons
-                                           # (NOT domain categories):
-                                           #   "classifier_confidence_low"
-                                           #   "intent_verb_ambiguous"
-                                           #   "object_kind_unresolved"
-                                           #   "scope_unbounded_keywords"
-                                           #   "safety_critical_domain_inferred"
-                                           #   "horizon_undeclared"
+    current_interpretation: str            # persona-authored, open vocabulary
+    alternative_interpretations: list[str]
+    evidence_refs: list[str]
+    question: str | None
+    uncertainty_note: str | None
 
-    candidate_interpretations: list[CandidateInterpretation]  # 2-4 distinct
-    persona_recommended_idx: int | None    # persona may rank; user decides
-
-    user_response_required: bool = True
-    response_timeout: timedelta = timedelta(hours=24)
-    timeout_default_idx: int | None        # configurable per env;
-                                           # default None = no auto-route on timeout
-
-    drafted_by_persona_id: str
-    drafted_at: datetime
-    user_chose_idx: int | None
-    user_chose_at: datetime | None
+    authored_at: datetime
+    supersedes_ref: str | None
     signed_by: bytes
-
-
-@dataclass
-class CandidateInterpretation:
-    schema: str = "candidate-interpretation/1"
-    label: str                              # short user-facing label
-    task_class_hint: str                    # one of the 10 classes
-    routing_mode_hint: Literal["A", "B", "C"]
-    requires_new_project: bool
-    requires_new_env: bool
-
-    estimated_horizon: timedelta
-    estimated_cost_range_usd: tuple[float, float]
-
-    key_dependencies: list[str]             # free-text dependencies the
-                                            # persona surfaces (e.g. "needs
-                                            # fab access", "needs my consent
-                                            # to ingest paywalled corpus");
-                                            # NOT a closed list
-
-    safety_floor_notes: list[str]           # what the safety floor would
-                                            # require under this path
 ```
 
-### Appendix A.26 — needs_clarify decision spec (§4.0)
+### Appendix A.26 — clarification continuation rule (§4.0)
 
-```python
-@dataclass
-class ClarifyCheck:
-    required: bool
-    fired_reasons: list[str]   # subset of the triggered_by Literal
+```text
+PERSONA sees uncertainty
+  → optionally appends signed ClarificationObservation
+  → optionally asks user and/or peers
+  → gathers available task, environment, artifact, and communication evidence
+  → signs a bounded working interpretation and continues admissible work
 
-def needs_clarify(task, requester, env=None, project=None) -> ClarifyCheck:
-    fired = []
-    estimate = classify_task(task, env=env, project=project)
+Human silence never creates a task-wide wait.  A later signed response becomes
+new lineage evidence.  Exact consent, operator, safety, credential, payment, or
+physical-evidence requirements continue to gate only their scoped action/claim.
 
-    # Reason 1 — low classifier confidence
-    if estimate.confidence < clarify_aggressiveness_threshold(env):
-        # default threshold: 0.5 at medium aggressiveness
-        fired.append("classifier_confidence_low")
-
-    # Reason 2 — ambiguous verb without resolved object kind
-    if has_ambiguous_intent_verb(task.statement) \
-            and not has_resolved_object_kind(task, KindRegistry):
-        # "create / make / build / develop / produce" without an object_kind
-        # that resolves in KindRegistry → user intent is genuinely unclear
-        fired.append("intent_verb_ambiguous")
-
-    # Reason 3 — unbounded scope keywords
-    if has_unbounded_scope_keywords(task.statement):
-        # "everything", "all of it", "the whole thing", "completely"
-        fired.append("scope_unbounded_keywords")
-
-    # Reason 4 — object kind not in KindRegistry (would trigger domain probe)
-    if task.object_kind_hint and \
-            not KindRegistry.resolves(task.object_kind_hint, env.domain_id):
-        fired.append("object_kind_unresolved")
-
-    # Reason 5 — safety-critical domain inferred from probe pre-check
-    if would_trigger_domain_unknown(task) and \
-            preliminary_hazard_inference(task) in ("bodily_injury",
-                                                     "fatality_risk",
-                                                     "dual_use_civilian",
-                                                     "export_controlled",
-                                                     "national_security"):
-        fired.append("safety_critical_domain_inferred")
-
-    # Reason 6 — horizon undeclared on long-arc-shaped task
-    if has_long_arc_shape(task.statement) and not has_declared_horizon(task):
-        fired.append("horizon_undeclared")
-
-    # Cached choice suppression
-    if fired and lookup_fresh_user_choice(task.fingerprint, requester):
-        return ClarifyCheck(required=False, fired_reasons=fired)
-
-    return ClarifyCheck(required=bool(fired), fired_reasons=fired)
+The host validates structure and authority only.  It never parses task words to
+decide whether clarification is needed or which interpretation should win.
 ```
 
 ### Appendix A.27 — route_task_v1 dispatcher (§4.1)
 
 ```python
 def route_task_v1(task, requester):
-    # Step 0: clarify before classifying
-    clarify_check = needs_clarify(task, requester)
-    if clarify_check.required:
-        fresh = lookup_fresh_user_choice(task.fingerprint, requester)
-        if fresh is None:
-            clarify = draft_clarify_turn(task, requester, clarify_check)
-            return AwaitClarification(clarify)
-        task = apply_user_choice(task, fresh)
-
-    # Step 1: identify entry point (v1.0 unification: project IS env type)
+    # Step 0: identify structural entry point. Task text is opaque to host
+    # routing; clarification may be appended later by an acting persona and
+    # never returns a task-wide human-wait state.
     if task.target_environment_id:
         env = resolve_environment(task.target_environment_id)
         if not env or env.status == "archived":
@@ -1555,9 +1499,11 @@ def route_task_v1(task, requester):
             return route_in_env_no_project(task, env, requester)
     
     elif task.target_persona_id:
-        # User addresses a named persona; find suitable env
+        # User addresses a named persona; expose exact membership contexts
+        # and verify the persona's signed choice.
         persona = resolve_persona(task.target_persona_id)
-        env = pick_env_for_persona_and_task(persona, task, requester)
+        candidates = exact_membership_contexts(persona, requester)
+        env = resolve_persona_signed_context_choice(persona, task, candidates)
         if env:
             # Wake Path 6 (05_ENVIRONMENT §5.2): if persona is
             # dormant in resolved env, auto-wake before routing.

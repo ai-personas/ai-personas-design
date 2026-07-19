@@ -98,9 +98,13 @@ operational change. Vague updates that do not affect future behavior are not
 promoted.
 
 BrainReview checks that the proposal is evidence-grounded, preserves frozen
-identity, does not delete unresolved pressure without closure evidence, and does
-not claim unavailable tools or MCPs as available. Accepted proposals are promoted
-as signed fragment versions; rejected proposals remain auditable.
+identity, never deletes signed pressure lineage, and does not claim unavailable
+tools or MCPs as available. The latest persona-signed pressure appraisal is the
+current snapshot: omission retires an item from current pressure but never erases
+the prior appraisal, evidence refs, or learning history. Closure evidence may
+explain that retirement, but the runtime does not require count-matched closure
+records or revive historical pressure as a readiness gate. Accepted proposals are
+promoted as signed fragment versions; rejected proposals remain auditable.
 
 ## 5. Tools, MCP, Skills
 

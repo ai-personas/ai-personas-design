@@ -156,6 +156,19 @@ Write semantics: only verifier-cascade output may become a ProvenFact; a persona
 
 Addressed delivery: kernel routes into recipient's observation surface even when broadcast of that kind would be filtered. Topology allow-list per env `communication_protocol` (linear / bidirectional / star / pipeline / adversarial / mesh / host_governed); out-of-topology edges emit `CONSTRAINT_VIOLATION{kind=topology}` and drop. Back-pressure: `max_direct_inflight=3` per sender per round; `max_direct_queue=8` per recipient per round triggers `ROUTING_DIRECTIVE` to Integrator. Persistence: same round-ordered log as Blackboard, tagged `kind=DIRECT_MESSAGE`. No RPC — every cross-persona call is event-replayable.
 
+**Genesis bootstrap exception (narrow).** A genesis-minted persona that has never
+been admitted to an environment MAY exchange signed bootstrap messages only with
+an exact birth author named by its genesis event. Each admitted message MUST bind the exact
+`authority`, `causal_task_id`, and `pre_membership_birth_provenance` to a verified
+`LIFECYCLE_GENESIS` event: the sender/recipient pair, newborn id, author id,
+environment id, genesis proposal, seed hash, and causal task MUST match. The
+kernel admits no third party, broadcast, delegation, tool authority, observation
+surface, membership right, or general pre-membership messaging through this
+exception. It ends when membership is admitted or the causal bootstrap closes.
+Both directions remain signed, append-only communication events, so the author
+can scaffold and the newborn can answer without the host choosing message
+meaning or silently enrolling it. See `16_POPULATION_DYNAMICS §4D–§4E`.
+
 ### 3A.4 CH-4 CandidateTable and CH-5 GoalStack
 
 Kernel-write, persona-read materialised views.

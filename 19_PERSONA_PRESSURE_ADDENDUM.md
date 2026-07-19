@@ -104,8 +104,9 @@ make the next pass worth doing. The persona authors that frontier itself: whethe
 the minimum floor is satisfied, whether the frontier is satisfied, what next
 improvements remain, what action would pursue them, and why stopping now is
 acceptable or not. The substrate does not convert those strings into a checklist;
-the persona must still express active pressure through `ready_to_complete =
-false` or `open_pressure`.
+the persona must still express a decision to continue the bounded run through
+`ready_to_complete = false`. `open_pressure` records residual tension and may
+coexist with either readiness decision.
 
 ## 3. Completion Semantics
 
@@ -113,43 +114,56 @@ false` or `open_pressure`.
 bundle can still be exported and made visible.
 
 `ready_to_complete = false` SHOULD block the run from being marked complete and
-SHOULD block the bundle from advancing to accepted. A non-empty `open_pressure`
-list is equivalent to `ready_to_complete = false`, even if the model also emits
-`ready_to_complete = true`. The best-so-far bundle may still advance to a
-verified/exported state so users can inspect progress, but accepted must mean no
-persona-owned readiness pressure remains open.
+SHOULD block the bundle from advancing to accepted for that bounded run. A
+non-empty `open_pressure` list MUST NOT mechanically override the same signed
+appraisal's `ready_to_complete = true`. Pressure is persona-authored context, not
+a second host-owned readiness bit.
+
+Each persona's latest signed appraisal is its current pressure snapshot. A later
+snapshot supersedes the earlier snapshot for current-state decisions: pressure
+items omitted from the latest snapshot are retired from current pressure. Every
+prior appraisal remains immutable in lineage and available as learning history;
+supersession never deletes or rewrites it. `closed_pressure_refs` are useful
+persona-authored explanations and evidence links, but the substrate MUST NOT
+require structural count-matching before accepting the persona's newer signed
+state.
 
 `learned_pressure` and arbitrary nested persona memory are not runtime gates by
 themselves. They are replayed as evidence for the persona to interpret on later
 turns. If that learned state should keep the run open, the persona must express
-that explicitly through `ready_to_complete = false` or `open_pressure`; the
-substrate does not parse key names or text values to infer hidden pressure.
+that explicitly through `ready_to_complete = false`; the substrate does not
+parse key names or text values to infer hidden pressure.
 
 The same rule applies to `purpose_alignment`. A non-empty tension, mismatch, or
 ambition note inside that object is memory/evidence unless the persona also
-expresses unresolved readiness through `ready_to_complete = false` or
-`open_pressure`. The substrate does not parse that object to infer hidden
-artifact requirements or scope gates.
+expresses unresolved readiness through `ready_to_complete = false`. The
+substrate does not parse that object to infer hidden artifact requirements or
+scope gates.
 
 The same rule applies to `improvement_frontier`. A listed possible improvement
 is not itself a runtime gate. It is replayed to the persona and peers as
 experience. If the persona judges the frontier unfinished and worth pursuing, it
-must say so through `ready_to_complete = false` or `open_pressure`.
+must say so through `ready_to_complete = false`.
 
-Pressure is evaluated by latest appraisal per persona, but a ready flag alone
-does not erase that persona's own earlier open pressure. A persona can close its
-own earlier pressure only by emitting a later ready appraisal with no open
-pressure and enough `closed_pressure_refs` to structurally account for the prior
-open items. The substrate checks only the structure/count of those closure
-records; it does not parse their strings for domain meaning. Another persona's
-open pressure remains active until that persona closes it. This preserves peer
-pressure and internal accountability without turning early pressure into an
-irreversible latch.
+Another persona's pressure is signed peer evidence for the acting persona to
+consider, not a host-enforced veto. The acting persona may seek a peer response,
+revise its snapshot, or sign readiness while preserving the disagreement and
+follow-up work in lineage.
+
+`ready_to_complete` is readiness for the current bounded run. It does
+not grant an external authority, certify an unavailable measurement, or advance
+a real physical asset. Safety, consent, operator-cosign, credential, payment, and
+physical-state gates remain independently enforced at the exact scoped action or
+claim. A persona may therefore sign a useful design run ready while retaining
+open pressure such as a future field measurement or permit review; the release
+claim stays honestly limited without turning that external dependency into a
+task-wide wait.
 
 This preserves two truths at once:
 
 - the user can inspect the best work currently produced;
-- the persona has not signed off that the work is finished.
+- the persona's bounded-run readiness, residual pressure, and any external
+  release authority remain separately visible.
 
 ## 4. Self-Improvement Path
 
@@ -196,10 +210,10 @@ not scan them for magic strings.
 
 ## 6. Relationship to Drives and Peers
 
-When pressure remains open, the runtime records blockage/progress using the
-persona's own `drive_tags` when supplied. That feeds the existing
-drive-satiation/frustration mechanism without inventing a second motivation
-system.
+The runtime may carry the persona's own `drive_tags` with its pressure and
+progress observations. It MUST NOT mint blockage or frustration merely because
+`open_pressure` is non-empty; signed readiness and experienced outcomes remain
+distinct inputs to the existing drive mechanism.
 
 External pressure is represented as data from the environment: peer
 observations, role obligations, project state, user amendments, and coordination
@@ -214,9 +228,10 @@ provisioned, or invoked, but it must not receive a domain-specific tool
 prescription from the substrate. Tool setup remains persona-authored through the
 existing environment and tool mechanisms.
 
-When persona-authored open pressure identifies available or required action, the
-runtime may require a generic action/tool turn or materialized output. It still
-does not choose a domain tool from the pressure text.
+When persona-authored open pressure identifies available action, the persona may
+choose a generic action/tool turn or materialized output. The runtime exposes the
+action surface but neither requires continuation from pressure alone nor chooses
+a domain tool from the pressure text.
 
 ## 8. Adapter Tool Transport
 
@@ -275,19 +290,23 @@ Conformance tests should verify:
 - pressure structured-output schema is carried out-of-band by the adapter;
 - pressure records are signed and stored on rounds;
 - candidate prompts receive pressure appraisals as data;
-- silent ready appraisals do not close prior persona-owned open pressure;
+- the latest signed appraisal is the current pressure snapshot while every prior
+  appraisal remains in immutable lineage;
+- a signed ready appraisal is not mechanically vetoed by non-empty current or
+  historical pressure;
 - persona-authored purpose/scope alignment is preserved and replayed without
   becoming a runtime-parsed gate;
 - persona-authored floor/frontier appraisal is preserved and replayed without
   becoming a runtime-parsed gate;
 - persona-authored learned pressure is preserved as memory, but only explicit
-  `ready_to_complete = false` or `open_pressure` keeps completion open;
-- persona-authored next-action pressure can require generic tool or materialized
-  output action;
+  `ready_to_complete = false` keeps the bounded run open;
+- persona-authored next-action pressure can inform a persona-chosen generic tool
+  or materialized-output action without becoming a host action gate;
 - pressure appraisal observations enter the persona evolution trace path;
-- post-package pressure can use bounded package-content observations to remain
-  open or close;
-- `pressure_open` is resumable and non-accepting, including bundle acceptance;
+- post-package pressure can use bounded package-content observations to revise
+  the latest current snapshot;
+- bounded-run readiness remains distinct from external release and physical-state
+  authority;
 - artifact export still occurs when pressure remains open;
 - adapter tool transport is explicit and provider-specific;
 - CLI structured-output schemas include the generic tool catalog without adding

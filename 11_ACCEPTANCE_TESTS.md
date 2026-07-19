@@ -5,15 +5,15 @@ status: Stable
 
 # 11 — Acceptance Tests
 
-> **Reader guide.** This is the test catalog — ~1,254 concrete pass/fail criteria (see §7 for the authoritative family table) that prove the system works as specified. Tests are organised by feature area and sorted by execution frequency (per-commit, nightly, weekly, quarterly). Read this if you are *implementing* PersonaOS and need to know what "correct" looks like, or *auditing* a deployment for compliance. **Prerequisites:** The spec doc(s) for the features you're testing. **Key terms:** *acceptance test* = a yes-or-no criterion that must pass before a release ships; *gate matrix* = which tests must pass for each release version; *test family* = a group of related tests sharing a prefix (e.g., A-K* = kernel tests).
+> **Reader guide.** This is the test catalog — ~1,247 concrete pass/fail criteria (see §7 for the authoritative family table) that prove the system works as specified. Tests are organised by feature area and sorted by execution frequency (per-commit, nightly, weekly, quarterly). Read this if you are *implementing* PersonaOS and need to know what "correct" looks like, or *auditing* a deployment for compliance. **Prerequisites:** The spec doc(s) for the features you're testing. **Key terms:** *acceptance test* = a yes-or-no criterion that must pass before a release ships; *gate matrix* = which tests must pass for each release version; *test family* = a group of related tests sharing a prefix (e.g., A-K* = kernel tests).
 
-Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). This document is the canonical, consolidated acceptance-test catalogue (~1,254 tests; see [`§7`](#7-acceptance-test-count-summary) for the authoritative family table) that gates v1.0 releases. Each test ID `A-<category>-<n>` (e.g. `A-J1`, `A-K23`) MUST be referenced by name in the spec section that defines the behaviour under test.
+Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). This document is the canonical, consolidated acceptance-test catalogue (~1,247 tests; see [`§7`](#7-acceptance-test-count-summary) for the authoritative family table) that gates v1.0 releases. Each test ID `A-<category>-<n>` (e.g. `A-J1`, `A-K23`) MUST be referenced by name in the spec section that defines the behaviour under test.
 
 ## 0. Status & scope
 
-**Status.** `Stable`; current revision per front matter. The v1.0.7 revision added [`§7a Invariant-to-test traceability matrix`](#7a-invariant-to-test-traceability-matrix) without introducing new test families or changing existing gate coverage; the v1.0.8 revision is a documentation-conformance pass with no test changes. The current (v1.1, ADR-0084) revision adds [`§8e`](#8e-body-swap-identity-equivalence-test-a-j7--adr-0084) (the falsifiable A-J7 identity-equivalence test), extends the [`§3`](#3-per-release-gate-matrix-concise) gate matrix so every catalog family carries a gate (or explicit non-gating) row, and reconciles the [`§7`](#7-acceptance-test-count-summary) family table as the single authoritative count (~1,254) cited by all prose totals. Fully normative; RFC 2119 keywords carry normative force per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). Each acceptance-test ID is itself a normative obligation: a release MUST NOT advance past its gate (the release gate process) until all tests named in the gate pass.
+**Status.** `Stable`; current revision per front matter. The v1.0.7 revision added [`§7a Invariant-to-test traceability matrix`](#7a-invariant-to-test-traceability-matrix) without introducing new test families or changing existing gate coverage; the v1.0.8 revision is a documentation-conformance pass with no test changes. The current (v1.1, ADR-0084) revision adds [`§8e`](#8e-body-swap-identity-equivalence-test-a-j7--adr-0084) (the falsifiable A-J7 identity-equivalence test), extends the [`§3`](#3-per-release-gate-matrix-concise) gate matrix so every catalog family carries a gate (or explicit non-gating) row, and reconciles the [`§7`](#7-acceptance-test-count-summary) family table as the single authoritative count (~1,247) cited by all prose totals. Fully normative; RFC 2119 keywords carry normative force per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). Each acceptance-test ID is itself a normative obligation: a release MUST NOT advance past its gate (the release gate process) until all tests named in the gate pass.
 
-**In scope.** The canonical, consolidated acceptance-test catalogue (~1,254 tests; see [`§7`](#7-acceptance-test-count-summary) for the authoritative family table) across the entire v1.0 corpus, the test-ID scheme (`A-<category>-<n>`), the per-release gate matrix, the CI / nightly / pre-release / quarterly partitioning, failure-handling policy, human-bridge tests (A-HB*), emergent-kind tests (A-EK*), external-participant + physical-asset tests (A-EX*), tests, Migration tests (A-M19*), v1.0 unification tests (A-UN*, A-EN-v1.0-*), env-formation tests (A-EF*), and fork-inheritance tests (A-FK*).
+**In scope.** The canonical, consolidated acceptance-test catalogue (~1,247 tests; see [`§7`](#7-acceptance-test-count-summary) for the authoritative family table) across the entire v1.0 corpus, the test-ID scheme (`A-<category>-<n>`), the per-release gate matrix, the CI / nightly / pre-release / quarterly partitioning, failure-handling policy, human-bridge tests (A-HB*), emergent-kind tests (A-EK*), external-participant + physical-asset tests (A-EX*), tests, Migration tests (A-M19*), v1.0 unification tests (A-UN*, A-EN-v1.0-*), env-formation tests (A-EF*), and fork-inheritance tests (A-FK*).
 
 **Out of scope.** Behaviour specifications — every test references the behaviour defined in another v1.0 doc; this catalogue does not redefine behaviour, only the criteria by which behaviour is verified. Implementation of the test harness (the harness is operator tooling; this catalogue specifies inputs, expected outcomes, and acceptance criteria).
 
@@ -23,7 +23,7 @@ Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC
 
 ## 0a. Plain-language guide
 
-This is the proof that PersonaOS works as promised — roughly 1,254 pass/fail checks (the authoritative per-family count is in section 7), each verifying a specific behaviour. If any required test fails, the release cannot ship until it is fixed.
+This is the proof that PersonaOS works as promised — roughly 1,247 pass/fail checks (the authoritative per-family count is in section 7), each verifying a specific behaviour. If any required test fails, the release cannot ship until it is fixed.
 
 **What acceptance tests are.** Each test describes a specific situation (for example, "a persona signs an identity event") and states what the correct outcome must be (for example, "the signature is valid and appears in the audit log"). Tests are not aspirational goals — they are hard requirements. A release that fails any required test is blocked.
 
@@ -39,7 +39,7 @@ This is the proof that PersonaOS works as promised — roughly 1,254 pass/fail c
 
 v1.0's **canonical, consolidated [acceptance-test](12_GLOSSARY.md#a) catalog**. Replaces prior piecemeal test catalogs.
 
-~**1,254 acceptance tests** across all v1.0/v1.1 features (see [`§7`](#7-acceptance-test-count-summary) for the authoritative family table; the catalogue grew from a ~320-test v1.0 baseline through the family additions, fleet-management, frontier-domain, env-composition, backfill, fix-family, and psychology-wave extensions). Per-release gate matrix specifies which tests must pass before each release v1.0.1 → v1.1.0. CI / nightly / pre-release / quarterly partitioning specifies execution cadence.
+~**1,247 acceptance tests** across all v1.0/v1.1 features (see [`§7`](#7-acceptance-test-count-summary) for the authoritative family table; the catalogue grew from a ~320-test v1.0 baseline through the family additions, fleet-management, frontier-domain, env-composition, backfill, fix-family, and psychology-wave extensions). Per-release gate matrix specifies which tests must pass before each release v1.0.1 → v1.1.0. CI / nightly / pre-release / quarterly partitioning specifies execution cadence.
 
 ## 2. Test ID scheme
 
@@ -107,12 +107,12 @@ A-ER*   environment rule (env-rule/1)            (9 tests; 05_ENVIRONMENT §2.2b
 A-AB21-27  artifact env-scoping + sharing policy (7 tests; 07_ARTIFACTS §4a)
 A-LE5-9 dormancy reasons + auto-resume (idle)    (5 tests; 02_PERSONA §7.6)
 ─────────────────────────────────────────────────────────
-TOTAL                                            ~1,254 tests
+TOTAL                                            ~1,247 tests
                                                  (the list above is the ID *scheme*, not the
                                                   complete roster; the AUTHORITATIVE per-family
                                                   count — including the §9b-§9q catalog-section
                                                   families this scheme block predates — is the
-                                                  §7 family table, which sums to ~1,254)
+                                                  §7 family table, which sums to ~1,247)
 ```
 
 ## 3. Per-release gate matrix (concise)
@@ -152,7 +152,7 @@ TOTAL                                            ~1,254 tests
 | A-EK1, A-EK13-15 (no closed enums / no hardcoded item & outcome classes — substrate lint) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | A-EK2-12, A-EK16 (Proposed*Kind + KindRegistry + MetaRegistry) | — | — | — | — | ✓ | ✓ | ✓ |
 | A-EX1-18 (ExternalAgent / PhysicalAsset / ExternalAttestation / ExternalBudget / ApprovalWorkflow / Alert / dependency edges / Risk + Schedule ItemKinds; +3 AsBuilt / CredentialDirectory / collapse-co-sign) | — | — | — | — | ✓ | ✓ | ✓ |
-| A-GF* — home-construction + quantum/frontier waves (A-J10–A-J11f, A-K11–K14, A-PA1, A-IT9, A-DM13–15, A-IN6, A-E11; A-GF-FTL/MDA/CT/EPO/PHASE/PB/INST/MF/RA/HAZ/FDP/RT/BRG/PURE) | — | — | — | — | ✓ | ✓ | ✓ |
+| A-GF* — home-construction + quantum/frontier waves (A-J10–A-J11f, A-K11–K14, A-PA1, A-IT9, A-DM13–15, A-IN6, A-E11; A-GF-FTL/MDA/EPO/PHASE/PB/INST/MF/RA/HAZ/FDP/RT/BRG/PURE) | — | — | — | — | ✓ | ✓ | ✓ |
 | A-GF* — psychology wave (A-GF-TLR/ICPE/ARC/DRV/META/SN/CPM/HAB; ADR-0073…0082) | — | — | — | — | — | — | ✓ |
 | A-P34-37 (body attestation refresh / expiry / revocation) | — | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | A-CV1-4 (character vector binding) | — | — | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -367,7 +367,7 @@ A-HB*   11        human-bridge tests (v1.0 §5.5 — physical-world coupling;
                     +3 AsBuiltReconciliation /
                     CredentialDirectoryRef / collapse-co-sign;
                     +4 quantum-wave A-EX19-22)
-  A-GF*   131       tests (22 inline A-GF-* subfamilies, §9a, = 121;
+  A-GF*   125       tests (21 inline A-GF-* subfamilies, §9a, = 115;
                     plus the 10 wave-companion IDs counted here
                     because they fall outside their home families'
                     ranges: A-J10, A-J11/a-f, A-PA1, A-E11; the other
@@ -462,7 +462,7 @@ Catalog-section families (§9b-§9q):
         + A-DD* 10 + A-RRC* 8 + A-OBM* 11 + A-CP* 3       =  66
   §9i:  A-LSR* 6 + A-LCA* 7 + A-TA* 6 + A-CUR* 6
         + A-LP* 4 + A-MASTERY* 5 + A-GPA-ACK* 4
-        + A-HST* 7                                        =  45
+        + A-HST* 6                                        =  44
   §9j:  A-MPFC* (mid-project fork composition)            =  36
   §9n:  A-DR* 3 + A-DT* 3 + A-AX* 4 + A-CL* 6 + A-TF* 4
         + A-HR* 3 + A-RA* 6                               =  29
@@ -474,12 +474,12 @@ Non-counted (v2.0 DRAFT, non-gating until 17_ECONOMY promotes):
   A-ECON1-19  emergent economy (17_ECONOMY §8; A-ECON18/19
               added by ADR-0083) — excluded from the v1.x total.
 
-TOTAL                ~1,254 tests across the v1.0/v1.1 lineage.
+TOTAL                ~1,247 tests across the v1.0/v1.1 lineage.
                      This table is the AUTHORITATIVE per-family count;
                      every prose total in the corpus cites this sum.
-                     (Breakdown: 683 in the per-series block above —
-                     including the corrected A-EX = 22 and A-GF = 131 —
-                     plus 114 per-doc primitive-family tests plus 457
+                     (Breakdown: 677 in the per-series block above —
+                     including the corrected A-EX = 22 and A-GF = 125 —
+                     plus 114 per-doc primitive-family tests plus 456
                      catalog-section tests in §9b-§9q, counted from the
                      test IDs defined inline. Cross-listed wave IDs are
                      counted exactly once, in their home family.)
@@ -1188,7 +1188,7 @@ v1.0 schema bumps from prior versions are minimal (mostly schema additions, no b
 
 ## 9a. tests (A-GF* series)
 
-These tests cover the primitives added to close 15 audit gaps. Substrate-purity is asserted alongside behavioural correctness: every "kind" field MUST resolve against KindRegistry, never a Literal branch.
+These tests cover the remaining primitives from the audit-gap pass. Substrate-purity is asserted alongside behavioural correctness: every "kind" field MUST resolve against KindRegistry, never a Literal branch.
 
 ### A-GF-FTL — FederatedTimeLock alternative degraded gate (01_KERNEL §2.4.1)
 
@@ -1230,28 +1230,6 @@ A-GF-MDA-6   On milestone completion / abandonment, envelope auto-
              terminates with signed TERMINATION event.
 A-GF-MDA-7   User kill switch: signed REVOKE event terminates the
              envelope immediately; in-flight proactive actions abort.
-```
-
-### A-GF-CT — ClarifyTurn pre-classification (03_TASKS §4.0)
-
-```text
-A-GF-CT-1    Dispatcher emits ClarifyTurn when classifier confidence
-             < 0.5 OR intent_verb_ambiguous OR scope_unbounded_keywords
-             fire OR safety_critical_domain_inferred.
-A-GF-CT-2    ClarifyTurn offers 2-4 candidate_interpretations; each
-             distinct in task_class_hint OR routing_mode_hint OR
-             requires_new_project.
-A-GF-CT-3    User's signed user_chose_idx is required before routing
-             proceeds; timeout (default 24h) returns
-             status="user_no_response".
-A-GF-CT-4    Cached signed choice for same fingerprint suppresses
-             re-clarification within the cache window.
-A-GF-CT-5    ClarifyTurn lineage: signed entry in env lineage (Mode A/B)
-             or task lineage (Mode C); AnswerPackage references the
-             chosen interpretation for audit.
-A-GF-CT-6    Substrate-purity: triggered_by values are substrate-shape
-             only; CandidateInterpretation.key_dependencies are free
-             text, not enum.
 ```
 
 ### A-GF-EPO — EphemeralPromotionOffer (03_TASKS §4.4)
@@ -3132,10 +3110,6 @@ A-HST6    Distress detection (§2.8) and teaching gate (§2.9) compose
           orthogonally: distress signal fires routing; teaching
           continues unless §2.8's `pause_normal_interaction` action
           fires.
-A-HST7    PEDAGOGIC task class mis-classified as RELATIONAL bypasses
-          gate (known limit); ClarifyTurn (§4.0) is the mitigation —
-          operator policy should configure aggressive ClarifyTurn
-          thresholds for envs in hazardous teaching domains.
 ```
 
 ## 9j. mid-project fork composition tests (A-MPFC*)
@@ -3868,7 +3842,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 
 | ID | Question | Owner | Resolves into |
 |----|----------|-------|---------------|
-| OQ-AT-1 | What is the budget for total test runtime per CI cycle? Current ~1,254 tests (§7); some are expensive (sandbox escape, lineage replay at 10^6 events). Need empirical baseline and budget. | QA + Operator | v1.1 budget table in §5. |
+| OQ-AT-1 | What is the budget for total test runtime per CI cycle? Current ~1,247 tests (§7); some are expensive (sandbox escape, lineage replay at 10^6 events). Need empirical baseline and budget. | QA + Operator | v1.1 budget table in §5. |
 | OQ-AT-2 | Cross-node federation testing requires a multi-node staging environment (≥ 2 nodes). | QA + Federation | **Resolved (normative):** the A-GLOBAL*/A-XD*/A-SCHED* families (§9p) exercise cross-node discovery, delegation, and scheduling against a 2-node staging harness; an empirical N-node load matrix is operator tuning, not a gate. |
 | OQ-AT-3 | Anti-Goodhart panel acceptance threshold tuning: tests assume a fixed disagreement-rate threshold; should it be operator-tunable per deployment? | Safety WG | v1.1 panel policy. |
 | OQ-AT-4 | Test ID renaming: `A-PR*` (presence) vs `A-PT*` (protocol) once collided. Are there other latent collisions in the future namespace? | — | v1.1 ID-scheme audit. |
