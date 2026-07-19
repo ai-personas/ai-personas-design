@@ -99,7 +99,13 @@ Projects track costs through external budgets that record planned, committed, an
 
 **Project phases -- stages of work with different rules**
 
-A project moves through phases (design, fabrication, regulatory review, iteration), and different phases have different expectations. During a "waiting for external approval" phase, the system will not incorrectly flag the project as stalled just because no internal work is happening. Each phase declares whether stall detection should be suppressed, and for how long, before the system starts asking questions again.
+A project moves through phases (design, fabrication, regulatory review,
+iteration), and different phases have different expectations. An exact external
+commitment, approval, or physical transition may remain pending, but that never
+creates a project-wide wait: personas continue simulations, peer review,
+alternatives, documentation, and any other admissible work. Phase-aware stall
+suppression recognizes signed internal/peer progress during that latency; outside
+silence by itself never suppresses stall detection.
 
 **Completion ceremony -- how a project wraps up properly**
 
@@ -289,7 +295,7 @@ Both may apply sequentially (panel first, then peer review).
 
 PeerReview models **parallel multi-reviewer critique**. Many real-world processes need the orthogonal pattern: **sequential sign-off** where each step must complete before the next begins (a permit application moves applicant to planning to fire dept to building dept to final issue; an NDA moves drafter to reviewer to counter-party to counsel; a multi-party contract chains several signers). v1.0 adds `ApprovalWorkflow` as a first-class project-tier primitive.
 
-*The ApprovalWorkflow and ApprovalStep dataclasses define a sequential sign-off chain where each step has an approver, deadline, required evidence kinds, and status. Steps advance one at a time; rejection or expiration at any step halts the workflow.*
+*The ApprovalWorkflow and ApprovalStep dataclasses define a sequential sign-off chain where each step has an approver, deadline, required evidence kinds, and status. Steps advance one at a time; rejection or expiration at any step halts that exact sign-off chain. Other project items and persona work continue.*
 
 **Technical detail:** See [A.15](#appendix-a15).
 
@@ -756,7 +762,7 @@ When a project manages many homogeneous `PhysicalAsset` instances that share `as
 
 ### 26a.6 ProjectPhaseState — phase-aware progress evaluation
 
-The PROJECT_PROGRESS_ACCEPT evaluator (`03_TASKS §3.1 PROJECT_PROGRESS_ACCEPT`) fires `PROJECT_STALLED` when EMA progress < 0.1 for ≥ 4 sessions. This is correct for *stuck* projects but spuriously fires during *legitimate wait* phases — fab queues, peer review, regulatory approval, contractor scheduling — where the project is healthy but progress requires external action that takes weeks. `ProjectPhaseState` is the substrate annotation that the evaluator consults.
+The PROJECT_PROGRESS_ACCEPT evaluator (`03_TASKS §3.1 PROJECT_PROGRESS_ACCEPT`) fires `PROJECT_STALLED` when EMA progress < 0.1 for ≥ 4 sessions. This is correct for *stuck* projects but can misread scoped external latency — fab queues, regulatory approval, or contractor scheduling — while signed internal or peer work is still advancing. `ProjectPhaseState` is the substrate annotation that the evaluator consults. External silence alone never makes a project healthy and never suppresses the evaluator.
 
 *The ProjectPhaseState dataclass defines phase-aware progress evaluation: each phase has a kind, expected duration, blocking commitments, stall-evaluator suppression flag, overdue auto-lift threshold, and user sign-off. The evaluator integration function shows phase-aware stall suppression logic.*
 
@@ -3477,11 +3483,12 @@ def evaluate_project_progress(project, window):
     current_phase = resolve_current_phase(project)
     ema = compute_ema_progress(project, window)
 
-    # Phase-aware stall suppression
-    if current_phase and current_phase.stall_evaluator_suppressed:
+    # Phase-aware stall suppression requires signed independent work; merely
+    # awaiting an external party never suppresses STALLED.
+    if (current_phase and current_phase.stall_evaluator_suppressed
+            and signed_independent_progress_in_phase(project, current_phase, window)):
         if current_phase.overdue_state != "overdue":
-            # phase is legitimately waiting; do not fire STALLED
-            return ProgressVerdict(label="phased_wait",
+            return ProgressVerdict(label="active_scoped_phase",
                                     ema=ema,
                                     suppressed=True,
                                     phase=current_phase)

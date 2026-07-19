@@ -282,6 +282,11 @@ On any stop the mission returns its **best-so-far** bundle. Convergence and budg
 
 *Both persona and user(s) co-sign acceptance for collaborative work.* See [Appendix A.15](#appendix-a15--mutual_accept-pathway-31).
 
+USER_ACCEPT and MUTUAL_ACCEPT gate only the exact acceptance claim they mint.
+User silence records `user_no_response`; it never pauses the task, hides the
+best-so-far artifact, or prevents personas from consulting peers and continuing
+other admissible work.
+
 #### ENGAGEMENT_ACCEPT (PERFORMATIVE)
 
 *Quality measured by continued engagement signal (user re-prompts within window); NOT attention-economy metrics; operator-configurable window.* See [Appendix A.16](#appendix-a16--engagement_accept-pathway-31).
@@ -513,7 +518,7 @@ v1.0 adds richness to status values.
 
 ### 7.1 MIXED with PANEL_DISSENT escalation
 
-*MIXED escalation: verifier gate passes, panel runs, PANEL_DISSENT triggers Curator resolution (RESAMPLE / OVERTON_BALLOT / ESCALATE_HUMAN).* See [Appendix A.36](#appendix-a36--mixed-panel_dissent-escalation-71).
+*MIXED escalation: verifier gate passes, panel runs, PANEL_DISSENT triggers Curator resolution (RESAMPLE / OVERTON_BALLOT / SURFACE_OPERATOR_REVIEW). Operator review is optional evidence and never pauses resampling or peer resolution.* See [Appendix A.36](#appendix-a36--mixed-panel_dissent-escalation-71).
 
 ### 7.2 PROJECT_PROGRESS_ACCEPT when task completes the project
 
@@ -715,6 +720,10 @@ expert_review    historian, falsifier, panel/peer-review discipline;            
                                        review state and external attestation
                                        is required.
 ```
+
+`review_pending` gates only promotion of that exact bundle. The bundle remains
+visible, and personas continue revisions, peer work, alternative evidence
+paths, and unrelated tasks while a reviewer response is absent.
 
 ### Appendix A.6 — INVESTIGATIVE sub-task taxonomy (§2.4)
 
@@ -941,7 +950,9 @@ Aggregation: max_vote / trimmed_mean / debate_then_vote.
 If PANEL_DISSENT (split decision), Curator resolves:
   - RESAMPLE (request more variants on disputed dimensions)
   - OVERTON_BALLOT (return incomparable top-K)
-  - ESCALATE_HUMAN (defer to operator)
+  - SURFACE_OPERATOR_REVIEW (optional operator observation; keep resampling,
+    returning top-K, or pursuing peer review unless exact operator authority is
+    required for the disputed claim)
 ```
 
 ### Appendix A.14 — USER_ACCEPT pathway (§3.1)
@@ -953,6 +964,8 @@ Acceptance signal types:
   - verbal "yes that's right"
   - implicit: user proceeds with the output as final
 Default ambiguity: timeout (configurable per task) → status="user_no_response".
+That status settles only this acceptance claim. Best-so-far remains published
+and persona/peer work continues without waiting for a later user response.
 ```
 
 ### Appendix A.15 — MUTUAL_ACCEPT pathway (§3.1)
@@ -961,6 +974,8 @@ Default ambiguity: timeout (configurable per task) → status="user_no_response"
 Persona + user(s) BOTH accept.
 For collaborative work where two parties must sign off.
 e.g., "I propose X" → user "I accept" → BOTH co-sign final.
+An absent co-signature leaves only this mutual-acceptance claim unminted; it does
+not suspend other work or artifact visibility.
 ```
 
 ### Appendix A.16 — ENGAGEMENT_ACCEPT pathway (§3.1)
@@ -1701,7 +1716,7 @@ class AnswerPackage:
         "project_progress_accept",
         "project_progress_accept_and_completion",
         "accepted_overton",                 # OVERTON_BALLOT
-        "accepted_arbitrated",              # ESCALATE_HUMAN resolved
+        "accepted_arbitrated",              # optional operator review returned and adopted
         "host_terminated",
         "user_terminated",
         "operator_terminated",
@@ -1884,7 +1899,10 @@ Curator resolves with one of:
   - RESAMPLE → more variants on disputed dimensions; re-panel
   - OVERTON_BALLOT → return incomparable top-K with curator recommendation;
                      status="accepted_overton"
-  - ESCALATE_HUMAN → human arbitration; status="accepted_arbitrated"
+  - SURFACE_OPERATOR_REVIEW → surface an optional operator question while the
+    Curator continues resampling, peer review, or returns top-K. If a later
+    response is adopted, status="accepted_arbitrated"; silence never pauses the
+    task.
 ```
 
 ### Appendix A.37 — Project completion (§7.2)

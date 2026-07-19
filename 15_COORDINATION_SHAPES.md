@@ -184,7 +184,7 @@ Coordination emerges from the personas in the environment — the same way domai
 
 Personas don't propose coordination shapes randomly. They respond to **coordination signals** — observable friction in the environment:
 
-*Duplicate work leads to EntityGroup (assign ownership). Handoff failures lead to StagedSequence (ceremony with gates). Stalled external tasks lead to StagedSequence (env-to-external with tracking and escalation). Information overload leads to StreamPolicy (aggregate events). Inconsistent quality leads to StagedSequence (review ceremony). Declining team health leads to DerivedMetric (cohesion scoring with threshold alerts). Cross-env friction leads to StagedSequence (env-to-env with interface alignment). Budget uncertainty leads to DerivedMetric (utilisation tracking).*
+*Duplicate work leads to EntityGroup (assign ownership). Handoff failures lead to StagedSequence (ceremony with gates). A scoped external action or commitment that remains pending leads to StagedSequence tracking for that lane while personas advance independent work, query peers, or seek alternative providers. Information overload leads to StreamPolicy (aggregate events). Inconsistent quality leads to StagedSequence (review ceremony). Declining team health leads to DerivedMetric (cohesion scoring with threshold alerts). Cross-env friction leads to StagedSequence (env-to-env with interface alignment). Budget uncertainty leads to DerivedMetric (utilisation tracking).*
 
 **Technical detail:** See [A.9](#appendix-a9).
 
@@ -252,6 +252,11 @@ When an environment receives a coordination request, its personas review the req
 5. **Denial is final for that request.** A denied request cannot be re-submitted without material change. The requesting env must modify the proposed interface, rationale, or scope before re-proposing. Repeated identical submissions are rate-limited (max 1 per 30-day window).
 
 6. **The interface MAY carry a task, not just artifacts.** A `CrossEnvInterface` extends beyond artifact handoff to optionally delegate a **task** to the receiving env's personas: it MAY specify `permitted_task_classes`, `permitted_acceptance_pathways`, and the resolved sub-task being delegated. This is how a task handled in one env hands a sub-task to a different set of personas in another env (or on another node) — the `CrossEnvTaskDelegation` composition specified in [`03_TASKS.md §4.5`](03_TASKS.md#45-cross-env--cross-node-task-delegation--placement). It is still bilateral and access-gated: the receiver reviews and consents exactly as for any other interface, and the delegator must hold the requisite capability (`09_PROTOCOLS §3F` UCAN token) — these envs MAY be on different nodes, identified by global handle (`01_KERNEL §4.4`).
+
+Receiver silence expires or denies only that proposed binding. The requester
+continues locally, asks peers, selects another available provider, or later
+submits a materially changed request; delegated work never becomes a task-wide
+wait merely because one receiver did not answer.
 
 *The CrossEnvCoordinationBinding records the binding ID, the two environment IDs, each side's agreed shape (as a CoordinationShapeBinding), the agreed CrossEnvInterface, and the binding state (active, paused, completed, or withdrawn), with establishment timestamp and dual signatures.*
 
@@ -758,8 +763,9 @@ SIGNAL                              COORDINATION RESPONSE
 ──────────────────────────────────  ─────────────────────────────────────
 Duplicate work detected             → EntityGroup (assign ownership)
 Handoff failures between personas   → StagedSequence (ceremony with gates)
-Stalled tasks waiting on external   → StagedSequence (env-to-external with
-                                      tracking + escalation)
+Scoped external action/commitment   → StagedSequence tracking that lane while
+pending                               personas advance independent work, query
+                                      peers, or seek alternate providers
 Information overload (too many      → StreamPolicy (aggregate events before
   events in ambient stream)           notification)
 Inconsistent quality across         → StagedSequence (review ceremony)
