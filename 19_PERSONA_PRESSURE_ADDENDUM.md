@@ -119,6 +119,13 @@ non-empty `open_pressure` list MUST NOT mechanically override the same signed
 appraisal's `ready_to_complete = true`. Pressure is persona-authored context, not
 a second host-owned readiness bit.
 
+Completion readiness and execution resources are separate axes. A
+persona-authored `ready_to_complete = false` remains unchanged when the exact
+finite run budget reaches zero; the run's top-level execution status becomes
+`budget_exhausted` and its mission state becomes `paused_budget`. A later valid
+resource grant resumes that same open work. Neither projection means that the
+persona is waiting for a human, outside authority, or external evidence.
+
 Each persona's latest signed appraisal is its current pressure snapshot. A later
 snapshot supersedes the earlier snapshot for current-state decisions: pressure
 items omitted from the latest snapshot are retired from current pressure. Every
