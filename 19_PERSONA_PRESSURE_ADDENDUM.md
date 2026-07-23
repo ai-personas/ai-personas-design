@@ -108,6 +108,19 @@ the persona must still express a decision to continue the bounded run through
 `ready_to_complete = false`. `open_pressure` records residual tension and may
 coexist with either readiness decision.
 
+`improvement_frontier` has one substrate-visible structural distinction. The
+exact empty object `{}` means the persona carries no active improvement work for
+this bounded run; any non-empty object means the persona carries active work.
+The substrate may inspect only that empty/non-empty shape and MUST NOT interpret
+its keys or values. A completion response is structurally valid only when
+`ready_to_complete = true`, `improvement_frontier = {}`, and `self_wake = null`.
+These implications are one-way: an empty frontier does not require readiness,
+and `ready_to_complete = false` does not require a non-empty frontier.
+
+A non-empty frontier does not itself schedule work. Continuation remains
+persona-authored through `self_wake` or another signed event; the substrate MUST
+NOT manufacture a wake from frontier contents.
+
 ## 3. Completion Semantics
 
 `ready_to_complete = false` MUST NOT block artifact publication. A best-so-far
@@ -147,10 +160,12 @@ expresses unresolved readiness through `ready_to_complete = false`. The
 substrate does not parse that object to infer hidden artifact requirements or
 scope gates.
 
-The same rule applies to `improvement_frontier`. A listed possible improvement
-is not itself a runtime gate. It is replayed to the persona and peers as
-experience. If the persona judges the frontier unfinished and worth pursuing, it
-must say so through `ready_to_complete = false`.
+The substrate does not interpret the contents of `improvement_frontier`, but its
+empty/non-empty shape is an explicit persona-authored control signal. A
+non-empty frontier is active work and is incompatible with
+`ready_to_complete = true`; such an inconsistent judgment is invalid rather
+than silently rewritten. The exact empty object carries no active frontier, but
+does not by itself assert readiness.
 
 Another persona's pressure is signed peer evidence for the acting persona to
 consider, not a host-enforced veto. The acting persona may seek a peer response,
@@ -274,6 +289,15 @@ through the provider-neutral structured tool loop, and that loop must keep
 setup/provisioning tools selectable under persona-authored pressure and refresh
 the tool surface immediately after a tool is mounted.
 
+For a native-command-capable attributed persona turn, the exact
+kernel-authenticated canonical persona workspace MUST be carried unchanged
+through runtime dispatch, model routing, adapter process launch, and provider
+thread/turn creation. The adapter process cwd and provider thread/turn cwd MUST
+use that path and MUST NOT inherit the node launcher cwd. An unavailable or
+mismatched path fails closed. This is transport attribution and
+initial-directory binding, not filesystem containment; separately authorized
+native commands may still select explicit paths.
+
 This is adapter-specific behavior, not domain behavior. The substrate still does
 not name task-specific artifacts.
 
@@ -299,12 +323,14 @@ Conformance tests should verify:
 - candidate prompts receive pressure appraisals as data;
 - the latest signed appraisal is the current pressure snapshot while every prior
   appraisal remains in immutable lineage;
-- a signed ready appraisal is not mechanically vetoed by non-empty current or
-  historical pressure;
+- non-empty `open_pressure` does not veto an otherwise valid completion;
 - persona-authored purpose/scope alignment is preserved and replayed without
   becoming a runtime-parsed gate;
-- persona-authored floor/frontier appraisal is preserved and replayed without
-  becoming a runtime-parsed gate;
+- frontier keys and values are never interpreted, while `{}` remains the exact
+  no-active-frontier sentinel;
+- `ready_to_complete = true` with a non-empty frontier is rejected;
+- completion requires `self_wake = null`, and a non-empty frontier never creates
+  an automatic wake;
 - persona-authored learned pressure is preserved as memory, but only explicit
   `ready_to_complete = false` keeps the bounded run open;
 - persona-authored next-action pressure can inform a persona-chosen generic tool
@@ -322,5 +348,7 @@ Conformance tests should verify:
   when supplied;
 - setup/provisioning tools remain selectable under persona-authored pressure;
 - newly mounted env tools are visible to the next body turn;
+- native adapter process, thread, and turn cwd all use the authenticated persona
+  workspace rather than the node launch directory;
 - no domain names, artifact patterns, or required file extensions are introduced
   by the substrate.
