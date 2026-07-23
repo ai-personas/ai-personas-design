@@ -342,6 +342,34 @@ native commands may still select explicit paths.
 This is adapter-specific behavior, not domain behavior. The substrate still does
 not name task-specific artifacts.
 
+### 8.1 Principal-bound materialization action contract
+
+Every action-capable transport MUST present a cold persona with the same complete,
+bounded catalog of currently admissible, kernel-verified actions. The catalog is
+unranked: the host MUST NOT filter or order it by inferred domain, interpret task
+text to prefer an action, or select an action for the persona. Transport-specific
+encoding may differ, but it must preserve the persona's authorship of the choice.
+
+`require_materialized_outcome` is a principal-bound field on the signed task
+binding. When explicitly true, it establishes a generic action contract: while
+no workspace bytes have been observed and an action opportunity remains, the
+persona must select an action from the complete catalog. The runtime verifies the
+selected action and its effects, but does not prescribe a tool, output kind,
+capability, identity change, or coordination behavior. The contract is satisfied
+only by observed workspace bytes, not by prose, intent, action naming, or a
+post-hoc rejection followed by replay.
+
+An amendment that omits `require_materialized_outcome` inherits the prior signed
+value. An amendment that explicitly supplies either boolean value rebinds that
+value on the newly signed amended task/run. Adapters and host policy MUST NOT
+silently replace either the inherited or explicitly rebound value.
+
+If the bounded action attempt ends without observed workspace bytes, the runtime
+records and projects that outcome once. It MUST NOT replay the identical source
+stimulus merely because the materialization contract remains unsatisfied. A
+subsequent attempt requires a new signed wake, peer or environment event,
+principal amendment, or resource grant under its own lineage.
+
 ## 9. Reference Notes
 
 The referenced body/tool-runner design shows a useful adapter-level pattern:
