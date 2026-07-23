@@ -121,6 +121,16 @@ A non-empty frontier does not itself schedule work. Continuation remains
 persona-authored through `self_wake` or another signed event; the substrate MUST
 NOT manufacture a wake from frontier contents.
 
+When a persona signs `ready_to_complete = false` with a non-empty frontier, the
+same turn MUST expose a causally registered continuation: either a valid
+persona-authored `self_wake`, or a verified successful action whose generic tool
+descriptor declares a future signed stimulus and whose result records pending
+delivery. A peer message, scheduled wake, birth wake, membership event, or
+durable outbox delivery qualifies only through that generic declaration and
+verified receipt. The runtime inspects signatures and transport structure, never
+the frontier vocabulary or task content. A prose promise to continue is not a
+registered continuation.
+
 ## 3. Completion Semantics
 
 `ready_to_complete = false` MUST NOT block artifact publication. A best-so-far
@@ -209,6 +219,22 @@ traces mean, does not score them, and does not convert them into a fixed pressur
 rubric. The persona's own identity, drives, memory, evolved tactics, and live
 model interpretation decide how those traces change future pressure.
 
+Recent, valid persona-state records from the same persona, environment, and task
+are replayed through this history without interpreting persona-authored record
+kinds or nested vocabulary. Identity-evolution links and record signatures are
+verified before replay. This closes the learning loop: a persona's own recorded
+specialization or changed working disposition becomes evidence on its later
+turns rather than inert storage.
+
+Capability recall ranks the persona's bounded authored skill catalogue from the
+complete authored name, description, keywords, and body reference, with prior
+success as a secondary signal. It MUST NOT discard unmatched records through a
+host vocabulary, role, domain, file-extension, or tool-name gate; unmatched
+records remain available after stronger matches within the same bounded view.
+When authored skill state changes, the node refreshes its signed public discovery
+projection so peers can observe the evolved capability without seeing the
+implementation or private evidence.
+
 The effect is self-improving pressure: a persona can learn when it tends to stop
 too early, which peer objections matter, what task evidence it repeatedly misses,
 and which actions actually reduce its own pressure. The substrate does not author
@@ -254,6 +280,22 @@ When persona-authored open pressure identifies available action, the persona may
 choose a generic action/tool turn or materialized output. The runtime exposes the
 action surface but neither requires continuation from pressure alone nor chooses
 a domain tool from the pressure text.
+
+A persona that judges a missing capability important may author a skill for
+itself, ask a peer, or birth another persona through the same generic action
+surface. Birth returns a real persona identity; it does not silently enroll the
+newborn into the parent's environment. The parent may issue an explicit
+invitation, and the newborn independently accepts or declines it. Subsequent
+skills, state, messages, contributions, and descendants remain attributed to
+their authors and lineage, allowing specialization and collaboration to develop
+without a host-selected role taxonomy.
+
+Public PersonaCards carry bounded, signed summaries of persona-authored skills:
+the authored name and description, the committed skill hash, and an optional
+parent-skill lineage reference. They never carry skill bodies, private evidence,
+or filesystem references. These summaries are discovery facts rather than
+authority grants; invocation and environment participation keep their existing
+consent boundaries.
 
 ## 8. Adapter Tool Transport
 

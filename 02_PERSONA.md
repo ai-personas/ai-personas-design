@@ -158,13 +158,13 @@ Three invariants hold regardless of adapter:
 
 A body never modifies identity, never accepts a candidate, never closes the loop. It produces events; the kernel verifies and records them.
 
-### 3.4 PersonaCard — the public projection (persona-card/3)
+### 3.4 PersonaCard — the public projection (persona-card/4)
 
 `PersonaCard` is the **public, signed projection** of a persona for discovery and federation. Published at `/.well-known/personas/<persona_id>.json`; consumed by `find_persona()` and A2A clients. The SOUL stays private; the card is what other personas see.
 
-> **Schema/spec:** PersonaCard dataclass definition (schema persona-card/3). See [Appendix A.7](#appendix-a7).
+> **Schema/spec:** PersonaCard dataclass definition (schema persona-card/4). See [Appendix A.7](#appendix-a7).
 
-**What PersonaCard does NOT carry:** raw OCEAN/VAD values (only coarse archetype), tactic library, skill library implementation, MAP-Elites archive, soul.state.json sidecar, signing keys, raw lineage. Inspecting full SOUL.md requires explicit consent via `soul_inspection` A2A call.
+**What PersonaCard does NOT carry:** raw OCEAN/VAD values (only coarse archetype), tactic library, persona-authored skill bodies or private evidence, MAP-Elites archive, soul.state.json sidecar, signing keys, or private identity lineage. It may carry bounded signed skill summaries and their parent-skill references for public capability discovery. Inspecting full SOUL.md requires explicit consent via `soul_inspection` A2A call.
 
 **.well-known publication contract.** Cards with `federation_visibility ∈ {federation, public}` are published at the kernel's `/.well-known/personas/<persona_id>.json` and gossiped to federation peers via the gossip layer (signed event, TTL-bounded fanout). Cards expire (default 1 hour) and re-publish on update or mutation. Revocation gossips with the same fanout.
 
@@ -1190,7 +1190,7 @@ A-P22  Prompt-block rendering rule deterministic; blocks 0–4 cached;
        per-task suffix blocks N..N+3 never cached.
 A-P23  Kernel/framework authority split: body cannot accept candidate,
        cannot bypass safety-floor evaluation, cannot mutate SOUL.
-A-P24  PersonaCard (persona-card/3) published at
+A-P24  PersonaCard (persona-card/4) published at
        /.well-known/personas/<persona_id>.json; signature verifies.
 A-P25  charter_hash + voice_hash on PersonaCard match SOUL frozen blocks;
        mismatch rejects the card.
@@ -1649,12 +1649,12 @@ Streaming / transport                     —           ✔
 
 ### Appendix A.7
 
-**PersonaCard dataclass definition (schema persona-card/3)** (referenced from §3.4)
+**PersonaCard dataclass definition (schema persona-card/4)** (referenced from §3.4)
 
 ```python
 @dataclass(frozen=True)
 class PersonaCard:
-    schema: Literal["persona-card/3"]
+    schema: Literal["persona-card/4"]
     persona_id: str                          # stable ULID
     name: str
     description: str                          # ≤120 chars; SOUL.description
@@ -1665,8 +1665,10 @@ class PersonaCard:
     soul_hash: str                            # sha256 of full SOUL.md at publish
     kernel_provider: str                      # which kernel published this
     kernel_a2a_url: str                       # AgentCard endpoint
-    capabilities_summary: CapabilitiesSummary # mode_proficiencies (coarse),
-                                              # exposed_skills, can_lead_cohorts
+    capabilities_summary: CapabilitiesSummary # bounded persona-authored skill
+                                              # name, description, committed hash,
+                                              # optional parent-skill reference;
+                                              # never body or private evidence
     reputation_score: ReputationSummary       # role-relative percentile;
                                               # endorsement_count;
                                               # never raw fitness number

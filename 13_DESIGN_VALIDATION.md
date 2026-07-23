@@ -46,7 +46,9 @@ V.4  No persona pre-loaded with domain knowledge baked into its Soul.
      skill_library entries are Voyager-class learned skills, not
      substrate constants.  DomainContext.knowledge_refs are KnowledgeRefs
      ingested through the seven-stage pipeline (§6), not embedded
-     priors.
+     priors.  A persona may author a skill, recruit a peer, or birth and
+     invite a descendant when its own appraisal identifies a capability
+     gap; the kernel never selects the profession or specialization.
 
 V.5  Every domain-shaped category appearing inside a scenario walk
      resolves to:
@@ -209,7 +211,9 @@ The catalog is open-ended; the format below repeats for each scenario.
 
 **World shape.**
 - Principal: solo user; `DeploymentProfile.principal_topology = operator_is_user` (`01_KERNEL §2.4`).
-- Persona: one cognitive worker (any disposition; not constrained by substrate).
+- Persona: one initial cognitive worker (any disposition; not constrained by
+  substrate), free to birth and invite specialists when its own work reveals a
+  capability gap.
 - Environment: persistent **Solo** environment hosting the project.
 - Project: multi-session, multi-month, produces a `PhysicalAsset` (the dwelling) alongside `ArtifactBundle`s (design + permit packages).
 - External participants: contractors, inspectors, engineers, suppliers — modelled as `ExternalAgent` instances (`04_PROJECT §26a.1`), not personas.
@@ -223,6 +227,7 @@ The catalog is open-ended; the format below repeats for each scenario.
 | Task arrival | INVESTIGATIVE classifier; auto-spawns Project | `project_proposed`, `project_activated` |
 | Domain recognition | `DOMAIN_UNKNOWN_DETECTED` signals A + B + G fire; probe scoped ADAPTIVE | `domain_unknown_detected`, `probe_initiated` |
 | Probe & bootstrap | Persona ingests evidence; proposes `Proposed*Kind` for `media_kinds`, `verifier_kinds`, `contribution_kinds`, `outcome_kinds`, `item_kinds`, `safety_extensions`, `conventions`, `standard_refs`. Persona emerges hundreds of kinds via `BulkKindProposal` envelopes (§9.1.1). | `knowledge_ingested`, `bulk_kind_proposal_signed`, `cold_start_uplift_applied`, `safety_extension_proposed` |
+| Capability specialization | The acting persona appraises its current ability and chooses whether to learn, ask an existing peer, or birth a descendant. A newborn is invited explicitly and consents independently; authored skills and contributions retain persona and parent lineage. No role name or deliverable is selected by the substrate. | `persona_born`, `environment_invitation_issued`, `environment_membership_action`, `persona_state_recorded`, `persona_skill_authored` when those actions are persona-chosen |
 | Safety classification | Hazard axes auto-fire `safety_critical = True`; C2 invariant binds | `safety_extension_approved` (operator gate or degraded gate) |
 | Design phase | `ArtifactBundle`s authored; persona drafts plans; `ExternalAttestation` from credentialled external authority required for stampable work | `bundle_drafted`, `external_attestation_received` |
 | Permits | `BridgeAsset` (Class D tool) for portal access OR Tier 4 `ExternalCommitment` if walk-in only | `human_assist_drafted`, `bridge_established` |
@@ -254,6 +259,9 @@ The catalog is open-ended; the format below repeats for each scenario.
 - Disputes / liens / warranty / change orders / punch lists → emergent `item_kinds` and `outcome_kinds` the persona proposes.
 - Drone / photo / weather sensing → persona-authored Tier 3 `BridgeDesignArtifact` (`02_PERSONA §11.1`, `06_DOMAIN §5.5.4`).
 - Credential directories for inspectors / engineers / contractors → `CredentialDirectoryRef` per domain (`06_DOMAIN §5.6`), or `PeerAttestationPool` fallback for non-credentialed fields.
+- Specialist roles, skill names, division of work, descendant lineages, and
+  collaboration messages → persona-authored state and actions carried by the
+  generic birth, invitation, membership, learning, and messaging surfaces.
 - Money flows → out-of-scope by v1.0 design (`00_VISION` honest limits); persona drafts payment requests, principal executes externally.
 
 **Status.** Validated end-to-end after the four fixes. Single-project promotion ceremony pinned at trust_cap = 0.6 acknowledges the statistical limit honestly.

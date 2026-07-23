@@ -553,7 +553,7 @@ Encoding per [`SPEC_CONVENTIONS.md §4`](SPEC_CONVENTIONS.md#4-schemas). Where a
 | `soul.state.json` | `soul-state/6` | jsonschema | [`02_PERSONA.md §3`](02_PERSONA.md) | Stable | Evolving persona state; signed by kernel. v6: `age_tasks`→`experience_tasks`, drop `maturity` string, add `born_at` + `experiential_floor` (migration §7.13). |
 | `PersonaSeed` | `persona-seed/2` | dataclass | [`02_PERSONA.md §2`](02_PERSONA.md) | Stable | Birth templates; seed library. |
 | `ALPSBandPolicy` | `alps-band-policy/1` | dataclass | [`02_PERSONA.md §7.3`](02_PERSONA.md) | Draft | Operator-tunable wall-clock ALPS age-band edges. |
-| `PersonaCard` | `persona-card/3` | dataclass | [`02_PERSONA.md §3`](02_PERSONA.md) | Stable | A2A federation card. |
+| `PersonaCard` | `persona-card/4` | dataclass | [`02_PERSONA.md §3`](02_PERSONA.md) | Stable | A2A federation card with bounded signed persona-authored skill summaries. |
 | `PersonaEnvelope` | `envelope/4` | dataclass | [`02_PERSONA.md §7`](02_PERSONA.md) | Stable | Round-active projection of persona. |
 
 ### 7.2 Acceptance & task

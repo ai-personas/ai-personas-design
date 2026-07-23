@@ -2373,7 +2373,7 @@ Forward-compat read: v1.0 kernel reads prior-version schemas; ignores unknown
 
 Backward-compat read: Prior-version kernel reads v1.0 schemas; refuses unknown
                       schema versions (prior versions won't accept project/2
-                      or persona-card/3 without upgrade).
+                      or any PersonaCard schema other than persona-card/4).
 
 Cross-version federation: requires explicit operator opt-in with
                           compatibility shim.
