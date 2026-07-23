@@ -226,8 +226,10 @@ specialization or changed working disposition becomes evidence on its later
 turns rather than inert storage.
 
 Capability recall ranks the persona's bounded authored skill catalogue from the
-complete authored name, description, keywords, and body reference, with prior
-success as a secondary signal. It MUST NOT discard unmatched records through a
+complete authored name, description, keywords, and exact authored body, with
+prior success as a secondary signal. The substrate derives the body's content
+address; an unresolved caller-supplied reference is not a reusable skill. It MUST
+NOT discard unmatched records through a
 host vocabulary, role, domain, file-extension, or tool-name gate; unmatched
 records remain available after stronger matches within the same bounded view.
 When authored skill state changes, the node refreshes its signed public discovery
@@ -349,6 +351,12 @@ bounded catalog of currently admissible, kernel-verified actions. The catalog is
 unranked: the host MUST NOT filter or order it by inferred domain, interpret task
 text to prefer an action, or select an action for the persona. Transport-specific
 encoding may differ, but it must preserve the persona's authorship of the choice.
+Generic prompt compaction MUST reserve this catalog as a complete registry-order
+projection; it may mechanically bound open descriptions or argument-field detail
+but MUST NOT drop action rows. A strict provider MAY carry the chosen action's
+argument object through an exact JSON carrier rather than merging every action's
+unrelated fields into one schema. The decoded arguments remain subject to the
+selected action's original authenticated descriptor.
 
 `require_materialized_outcome` is a principal-bound field on the signed task
 binding. When explicitly true, it establishes a generic action contract: while
@@ -358,6 +366,12 @@ selected action and its effects, but does not prescribe a tool, output kind,
 capability, identity change, or coordination behavior. The contract is satisfied
 only by observed workspace bytes, not by prose, intent, action naming, or a
 post-hoc rejection followed by replay.
+
+An action-capable turn MUST NOT additionally require an inline artifact package
+from the same provider response. Actions and inline packages are independent
+ways persona-authored bytes may reach the workspace; requiring both couples two
+mechanisms and can prevent the selected action from executing. The common
+postcondition is only mechanically observed workspace bytes.
 
 An amendment that omits `require_materialized_outcome` inherits the prior signed
 value. An amendment that explicitly supplies either boolean value rebinds that
@@ -369,6 +383,20 @@ records and projects that outcome once. It MUST NOT replay the identical source
 stimulus merely because the materialization contract remains unsatisfied. A
 subsequent attempt requires a new signed wake, peer or environment event,
 principal amendment, or resource grant under its own lineage.
+
+### 8.2 Principal stimulus precedes bootstrap observation turns
+
+When a task is already bound, `task_received` is the first semantic model turn.
+The persona's signed activation and initial environment membership are lineage
+facts in that task situation; the runtime MUST NOT spend the task's model-call
+budget on separate activation or bootstrap-membership model wakes before the
+principal stimulus. Those facts may be observed with the task-entry turn without
+losing their distinct signed records.
+
+An unsettled continuation authored under a bootstrap observation or earlier run
+MUST NOT be rebound to a later amendment. This ordering is transport economy, not
+semantic suppression: a lifecycle or membership event that occurs independently
+of a bound task may still wake its persona through the ordinary event path.
 
 ## 9. Reference Notes
 
