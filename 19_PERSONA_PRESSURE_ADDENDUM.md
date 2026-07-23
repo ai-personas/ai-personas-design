@@ -108,27 +108,25 @@ the persona must still express a decision to continue the bounded run through
 `ready_to_complete = false`. `open_pressure` records residual tension and may
 coexist with either readiness decision.
 
-`improvement_frontier` has one substrate-visible structural distinction. The
-exact empty object `{}` means the persona carries no active improvement work for
-this bounded run; any non-empty object means the persona carries active work.
-The substrate may inspect only that empty/non-empty shape and MUST NOT interpret
-its keys or values. A completion response is structurally valid only when
-`ready_to_complete = true`, `improvement_frontier = {}`, and `self_wake = null`.
-These implications are one-way: an empty frontier does not require readiness,
-and `ready_to_complete = false` does not require a non-empty frontier.
+`improvement_frontier` is bounded open persona-authored evidence. Its exact
+empty/non-empty shape is preserved for observation, but the substrate MUST NOT
+turn that shape into a second readiness decision. `ready_to_complete` remains
+the persona's explicit signed disposition. A persona may judge the current
+situation sufficient while still recording optional future possibilities, and
+may independently request another observation through `self_wake`.
 
 A non-empty frontier does not itself schedule work. Continuation remains
 persona-authored through `self_wake` or another signed event; the substrate MUST
 NOT manufacture a wake from frontier contents.
 
-When a persona signs `ready_to_complete = false` with a non-empty frontier and
-`self_wake = null`, the substrate records that exact judgment faithfully and
-projects the bounded run as `persona_continuation_unbound`. This is a valid
-quiescent disposition, not malformed model output and not a reason to retry the
-same stimulus. The substrate neither manufactures a wake nor infers one from
-frontier contents or next-step prose. A later persona-authored signed event,
-signed peer or environment event, or operator-submitted continuation may resume
-the open work under its own authority.
+When a persona signs `ready_to_complete = false` with `self_wake = null`, the
+substrate records that exact judgment faithfully and projects the bounded run as
+`persona_continuation_unbound`. This is a valid quiescent disposition, not
+malformed model output and not a reason to retry the same stimulus. The
+substrate neither manufactures a wake nor infers one from frontier contents or
+next-step prose. A later persona-authored signed event, signed peer or
+environment event, or operator-submitted continuation may resume the open work
+under its own authority.
 
 ## 3. Completion Semantics
 
@@ -169,12 +167,9 @@ expresses unresolved readiness through `ready_to_complete = false`. The
 substrate does not parse that object to infer hidden artifact requirements or
 scope gates.
 
-The substrate does not interpret the contents of `improvement_frontier`, but its
-empty/non-empty shape is an explicit persona-authored control signal. A
-non-empty frontier is active work and is incompatible with
-`ready_to_complete = true`; such an inconsistent judgment is invalid rather
-than silently rewritten. The exact empty object carries no active frontier, but
-does not by itself assert readiness.
+The substrate does not interpret the contents or empty/non-empty shape of
+`improvement_frontier` as a control signal. It preserves that evidence while
+following the separate explicit `ready_to_complete` and `self_wake` choices.
 
 Another persona's pressure is signed peer evidence for the acting persona to
 consider, not a host-enforced veto. The acting persona may seek a peer response,
@@ -423,14 +418,14 @@ Conformance tests should verify:
 - non-empty `open_pressure` does not veto an otherwise valid completion;
 - persona-authored purpose/scope alignment is preserved and replayed without
   becoming a runtime-parsed gate;
-- frontier keys and values are never interpreted, while `{}` remains the exact
-  no-active-frontier sentinel;
-- `ready_to_complete = true` with a non-empty frontier is rejected;
-- completion requires `self_wake = null`, and a non-empty frontier never creates
-  an automatic wake;
-- `ready_to_complete = false` with a non-empty frontier and `self_wake = null`
-  is recorded as valid authored state, settles the current stimulus without
-  retry, and projects `persona_continuation_unbound`;
+- frontier keys, values, and empty/non-empty shape are preserved but never
+  interpreted as readiness or scheduling authority;
+- `ready_to_complete` remains the persona's explicit signed readiness choice;
+- `self_wake` independently controls an immediate continuation, and frontier
+  content never creates an automatic wake;
+- `ready_to_complete = false` with `self_wake = null` is recorded as valid
+  authored state, settles the current stimulus without retry, and projects
+  `persona_continuation_unbound`;
 - persona-authored learned pressure is preserved as memory, but only explicit
   `ready_to_complete = false` keeps the bounded run open;
 - persona-authored next-action pressure can inform a persona-chosen generic tool
