@@ -121,15 +121,14 @@ A non-empty frontier does not itself schedule work. Continuation remains
 persona-authored through `self_wake` or another signed event; the substrate MUST
 NOT manufacture a wake from frontier contents.
 
-When a persona signs `ready_to_complete = false` with a non-empty frontier, the
-same turn MUST expose a causally registered continuation: either a valid
-persona-authored `self_wake`, or a verified successful action whose generic tool
-descriptor declares a future signed stimulus and whose result records pending
-delivery. A peer message, scheduled wake, birth wake, membership event, or
-durable outbox delivery qualifies only through that generic declaration and
-verified receipt. The runtime inspects signatures and transport structure, never
-the frontier vocabulary or task content. A prose promise to continue is not a
-registered continuation.
+When a persona signs `ready_to_complete = false` with a non-empty frontier and
+`self_wake = null`, the substrate records that exact judgment faithfully and
+projects the bounded run as `persona_continuation_unbound`. This is a valid
+quiescent disposition, not malformed model output and not a reason to retry the
+same stimulus. The substrate neither manufactures a wake nor infers one from
+frontier contents or next-step prose. A later persona-authored signed event,
+signed peer or environment event, or operator-submitted continuation may resume
+the open work under its own authority.
 
 ## 3. Completion Semantics
 
@@ -373,6 +372,9 @@ Conformance tests should verify:
 - `ready_to_complete = true` with a non-empty frontier is rejected;
 - completion requires `self_wake = null`, and a non-empty frontier never creates
   an automatic wake;
+- `ready_to_complete = false` with a non-empty frontier and `self_wake = null`
+  is recorded as valid authored state, settles the current stimulus without
+  retry, and projects `persona_continuation_unbound`;
 - persona-authored learned pressure is preserved as memory, but only explicit
   `ready_to_complete = false` keeps the bounded run open;
 - persona-authored next-action pressure can inform a persona-chosen generic tool
