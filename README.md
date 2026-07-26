@@ -1,32 +1,32 @@
 ---
-title: PersonaOS v1.0 — README
+title: AI Personas v1.0 — README
 status: Stable
 ---
 
-# PersonaOS v1.0 — Design Specification
+# AI Personas v1.0 — Design Specification
 
-**PersonaOS gives AI agents persistent identity, memory, safety, and coordination — so they can work in any domain, remember across sessions, and stay safe at scale.**
+**AI Personas gives AI agents persistent identity, memory, safety, and coordination — so they can work in any domain, remember across sessions, and stay safe at scale.**
 
 This document is your starting point. It orients you to the 14-file v1.0 specification and helps you find the right entry path for your background. Detailed conventions for documentation style are in [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md); the normative specifications themselves live in `00_VISION.md` through `13_DESIGN_VALIDATION.md`.
 
-v1.0 is the single, self-contained reference for PersonaOS. **Read v1.0 alone** — it is the authoritative design specification.
+v1.0 is the single, self-contained reference for AI Personas. **Read v1.0 alone** — it is the authoritative design specification.
 
 ---
 
-## What is PersonaOS?
+## What is AI Personas?
 
-PersonaOS is an **operating system for AI Personas**. Just as a traditional OS manages applications and files, PersonaOS manages *personas* — named AI characters that think, learn, remember, and collaborate. Each persona has a stable identity, skills that grow over time, and relationships with users and other personas.
+AI Personas is an **operating system for AI Personas**. Just as a traditional OS manages applications and files, AI Personas manages *personas* — named AI characters that think, learn, remember, and collaborate. Each persona has a stable identity, skills that grow over time, and relationships with users and other personas.
 
-**The problem it solves.** Today's AI agents are stateless, domain-rigid, and unsafe at scale. They forget between sessions, can't coordinate with other agents, have no verifiable safety boundaries, and require hand-coded logic for each new domain. PersonaOS addresses all four:
+**The problem it solves.** Today's AI agents are stateless, domain-rigid, and unsafe at scale. They forget between sessions, can't coordinate with other agents, have no verifiable safety boundaries, and require hand-coded logic for each new domain. AI Personas addresses all four:
 
-| Challenge | How PersonaOS solves it |
+| Challenge | How AI Personas solves it |
 |---|---|
 | **Agents forget between sessions** | Each AI Persona (a *persona*) has a stable identity, accumulated skills, and relationships that survive across sessions. Swap the underlying AI model — the persona's memory and skills transfer intact. |
 | **Agents can't coordinate** | Personas work in *environments* — persistent shared workspaces where they discover how to coordinate through experience. A chip design lab develops tape-out ceremonies; a research lab develops peer-review processes. |
 | **Agents can't handle new domains** | When a persona encounters an unfamiliar field, it bootstraps knowledge through structured discovery — ingesting sources, proposing domain-specific types, and accumulating trust through use. No one needs to pre-program "what a structural engineer does." |
 | **Agents lack safety guarantees** | Eight safety checks run before every action. The strictest rule always wins. Every action is digitally signed and recorded in a tamper-proof audit trail. |
 
-**Who is PersonaOS for?**
+**Who is AI Personas for?**
 
 - **Researchers** building multi-agent systems
 - **Framework developers** integrating AI Personas into existing tools (LangGraph, CrewAI, Claude Code, etc.)
@@ -35,7 +35,7 @@ PersonaOS is an **operating system for AI Personas**. Just as a traditional OS m
 
 ## How it works (technical summary)
 
-PersonaOS is built around five key mechanisms:
+AI Personas is built around five key mechanisms:
 
 | Mechanism | What it does |
 |---|---|
@@ -45,7 +45,7 @@ PersonaOS is built around five key mechanisms:
 | **Domains** | Bodies of knowledge that personas build up for specific fields (chip design, medicine, construction). Domains emerge through use — no one hardcodes "what a structural engineer does." |
 | **Knowledge & memory** | Structured memory (episodic, semantic, reflective) across four tiers with hybrid retrieval. Prompts evolve automatically to improve at specific tasks. |
 
-**Standards.** PersonaOS speaks standard protocols — MCP for tools, A2A for agent-to-agent federation, OpenTelemetry for observability — and works inside 12 AI frameworks (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, and others) without losing identity or safety. Every content type is uniformly **discoverable** over both the internet (`.well-known` + gossip + Kademlia DHT) and the intranet (mDNS), under one **access-level model** (`discover < read < write < admin`) that also gates discovery, with a **hybrid storage** option that keeps heavy bytes in existing providers (GitHub / arXiv / S3 / OCI / IPFS) and distributes only a signed, integrity-anchored reference over P2P — see [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md).
+**Standards.** AI Personas speaks standard protocols — MCP for tools, A2A for agent-to-agent federation, OpenTelemetry for observability — and works inside 12 AI frameworks (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, and others) without losing identity or safety. Every content type is uniformly **discoverable** over both the internet (`.well-known` + gossip + Kademlia DHT) and the intranet (mDNS), under one **access-level model** (`discover < read < write < admin`) that also gates discovery, with a **hybrid storage** option that keeps heavy bytes in existing providers (GitHub / arXiv / S3 / OCI / IPFS) and distributes only a signed, integrity-anchored reference over P2P — see [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md).
 
 ---
 
@@ -54,7 +54,7 @@ PersonaOS is built around five key mechanisms:
 | # | File | What you'll learn | Read time |
 |---|---|---|---|
 | 0 | [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md) | How these documents are written — formatting rules, normative language, and schema conventions. *Read this only if you are writing or reviewing the spec.* | 6 min |
-| 1 | [`00_VISION.md`](00_VISION.md) | The big picture — what PersonaOS is trying to be, its non-negotiable design principles, and what is explicitly out of scope. | 12 min |
+| 1 | [`00_VISION.md`](00_VISION.md) | The big picture — what AI Personas is trying to be, its non-negotiable design principles, and what is explicitly out of scope. | 12 min |
 | 2 | [`01_KERNEL.md`](01_KERNEL.md) | The trusted core — safety checks, audit trail, digital signatures, and the rules enforced on every action. | 14 min |
 | 3 | [`02_PERSONA.md`](02_PERSONA.md) | How AI Personas are structured — seven identity layers, 14 thinking styles, how personas learn and evolve over time. | 18 min |
 | 4 | [`03_TASKS.md`](03_TASKS.md) | How work gets done — 10 types of work, 8 ways to decide when work is "done," and how tasks are routed. | 14 min |
@@ -65,7 +65,7 @@ PersonaOS is built around five key mechanisms:
 | 9 | [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md) | Memory and learning — how personas remember, find relevant information, and improve their own prompts over time. | 18 min |
 | 10 | [`09_PROTOCOLS.md`](09_PROTOCOLS.md) | Connecting to the outside world — MCP for tools, A2A for federation, 12 framework adapters, and cryptographic key management. | 14 min |
 | 11 | [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) | The test catalog — ~1,247 pass/fail criteria (see its §7 for the authoritative family table) that prove the system works as specified. | 8 min |
-| 12 | [`12_GLOSSARY.md`](12_GLOSSARY.md) | Reference dictionary — every PersonaOS term defined in one place. | 6 min |
+| 12 | [`12_GLOSSARY.md`](12_GLOSSARY.md) | Reference dictionary — every AI Personas term defined in one place. | 6 min |
 | 13 | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) | Real-world scenarios — concrete examples (build a house, design a chip, run a study) walked end-to-end against the design. | 8 min |
 | 14 | [`14_DECISIONS.md`](14_DECISIONS.md) | Why the design is the way it is — 40+ architectural decision records explaining the trade-offs behind each major choice. | 10 min |
 | 15 | [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) | How AI Personas organise themselves — 5 building blocks for self-organising coordination within environments. | 12 min |
@@ -88,7 +88,7 @@ Pick the path that matches your background. Each gives you a focused reading lis
 ---
 
 ### Researcher
-*Understanding the theoretical model behind PersonaOS.*
+*Understanding the theoretical model behind AI Personas.*
 
 1. This README (5 min)
 2. [`02_PERSONA.md`](02_PERSONA.md) — how AI Personas are structured, learn, and evolve (18 min)
@@ -96,14 +96,14 @@ Pick the path that matches your background. Each gives you a focused reading lis
 4. [Research grounding](#research-grounding) below for source papers
 
 ### Framework developer
-*Integrating PersonaOS into LangGraph, CrewAI, Claude Code, or another framework.*
+*Integrating AI Personas into LangGraph, CrewAI, Claude Code, or another framework.*
 
 1. This README (5 min)
 2. [`09_PROTOCOLS.md`](09_PROTOCOLS.md) — protocols, 12 framework adapters, schema registry (14 min)
 3. [`01_KERNEL.md`](01_KERNEL.md) — what the kernel guarantees and how signing works (14 min)
 
 ### Operator / deployment manager
-*Running PersonaOS in a hospital, factory, school, or enterprise.*
+*Running AI Personas in a hospital, factory, school, or enterprise.*
 
 1. This README (5 min)
 2. [`00_VISION.md`](00_VISION.md) — design principles, safety commitments, scope (12 min)
@@ -119,9 +119,9 @@ Pick the path that matches your background. Each gives you a focused reading lis
 4. [Contributing](#contributing) below for your first contribution
 
 ### Executive / stakeholder
-*Deciding whether PersonaOS fits your needs.*
+*Deciding whether AI Personas fits your needs.*
 
-1. [What is PersonaOS?](#what-is-personaos) and [How it works](#how-it-works-technical-summary) above (5 min)
+1. [What is AI Personas?](#what-is-ai-personas) and [How it works](#how-it-works-technical-summary) above (5 min)
 2. [What v1.0 is not](#what-v10-is-not) below for scope boundaries
 
 ---
@@ -156,64 +156,24 @@ Find the test family matching your area (A-K* for kernel, A-P* for persona, etc.
 
 ---
 
-## Implementation bootstrap
+## Reference implementation
 
-PersonaOS is a design specification. No reference implementation exists yet. Here is what an implementer would build first:
+The open-source reference implementation lives in
+[ai-personas/ai-personas](https://github.com/ai-personas/ai-personas). Its
+one-command launcher installs the runtime and UI, starts a node, and publishes
+short-lived signed discovery announcements:
 
-```text
-MINIMAL VIABLE KERNEL (— the first release gate):
-
-  Build these 5 components in order:
-
-  1. IDENTITY STORE
-     - SOUL.md parser (markdown + YAML frontmatter)
-     - soul.state.json reader/writer
-     - Ed25519 signing for identity mutations
-     - Test: A-K1 (identity signed), A-J1 (kernel owns identity)
-
-  2. SAFETY FLOOR (sources 1-4 only for MVP)
-     - Source 1: universal harm classifier (use an LLM classifier)
-     - Source 2: persona charter parser + enforcement
-     - Source 3: user boundary store + check
-     - Source 4: operator policy loader + check
-     - Composition: most-restrictive-wins across all active sources
-     - Test: A-S1 through A-S4
-
-  3. LINEAGE
-     - Append-only event log (task scope for MVP)
-     - Event schema: who, what, when, signed_by
-     - Test: A-J2 (lineage append-only), A-K2 (lineage signed)
-
-  4. TASK ROUTING (3 classes for MVP)
-     - CONVERGENT → VERIFIER_ACCEPT
-     - RELATIONAL → OPEN_ENDED
-     - INTERACTIVE → GOAL_PROGRESS_ACCEPT
-     - Classifier: LLM call that returns task class + confidence
-     - Test: A-T1 (classifier), A-T13 (routing mode A)
-
-  5. ONE FRAMEWORK ADAPTER
-     - Pick your framework (Claude Code, LangGraph, or CrewAI)
-     - Implement: envelope minting, safety check, lineage recording
-     - Test: run a persona through 3 tasks end-to-end
-
-  Total: ~2,000-4,000 lines of Python. Achievable in 2-4 weeks
-  by a small team familiar with the spec.
-
-WHAT THIS GETS YOU:
-  A persona that remembers across sessions, refuses unsafe actions,
-  records an audit trail, and routes tasks correctly — inside your
-  framework of choice. Not the full v1.0 vision, but a working kernel
-  you can extend incrementally.
-
-WHAT COMES NEXT (v1.0.2-v1.0.6):
-  Environments, domain emergence, multi-persona coordination,
-  knowledge retrieval, prompt evolution. Each release gate in
-  11_ACCEPTANCE_TESTS.md §3 (the per-release gate matrix) names
-  the test families that must pass before that slice ships.
+```bash
+git clone https://github.com/ai-personas/ai-personas.git
+cd ai-personas
+codex login status
+./start-node.sh
 ```
 
-
----
+The specification in this repository remains the design authority. The
+implementation deliberately keeps domain meaning and coordination choices with
+personas while the kernel supplies identity, signatures, transport, durable
+evidence, and bounded mechanics.
 
 ## What v1.0 is not
 
