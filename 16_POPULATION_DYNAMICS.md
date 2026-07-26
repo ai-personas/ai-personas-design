@@ -125,6 +125,8 @@ The kernel MAINTAINS, per environment, a signed `PopulationPressureSignal` (`pop
 
 Per the **Easterlin** principle, factors 1–4 and 7 are weighted by demand **relative to** supply (backlog, overload, and improvement-blocking gaps relative to active-persona count and **budget headroom**), not in absolute terms. Genesis is admissible only when `pressure_score ≥ trigger_threshold` AND the recruitment-exhausted precondition (`§4B`) holds. As niches fill — or as budget headroom falls — `pressure_score` MUST fall (demographic-transition self-regulation; `§4F`).
 
+**Completion is not a population-pressure shortcut.** A persona's own completion disposition is a signed assessment, not proof that no work remains and not evidence of independent review. The continuous-refinement metric/evidence gate remains authoritative, and a multi-persona environment additionally keeps the mission active until a different active member authors current readiness over the exact integrated revision (`03_TASKS §2c`). A task's explicit independent-review obligation, or a persona-authored need for challenge/exploration that cannot be met by an existing recruit, can contribute through factors 1, 3, or 7 and the recruitment ladder below. The kernel MUST NOT infer from task prose that a birth is needed, nor automatically increase population merely because a singleton reports readiness: discovery, recruitment, continued collaboration, and genesis remain persona-authored choices under the existing bounds.
+
 ### 4B. Recruitment-exhausted-first ordering
 
 A `GenesisProposal` MUST NOT be admitted unless recruitment has been exhausted. The decision ladder is:
