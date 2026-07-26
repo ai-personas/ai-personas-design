@@ -243,12 +243,27 @@ It maintains a **best-so-far** accepted artefact version (anytime semantics): ea
 
 **Population-aware convergence.** One persona's `ready` or `converged` disposition is exactly one persona's signed assessment; it is never presented as independent or collective review and cannot by itself bypass the metric/evidence gate above. In an environment with more than one ACTIVE participant, formal convergence additionally requires a **different active persona's current signed readiness judgment bound to the exact integrated environment-workspace bytes**. A peer review that predates the integrated revision, a self-authored file labelled as another persona's review, or a coordinator's summary does not satisfy this gate. Until the current peer judgment exists, the mission remains active so participants can challenge assumptions, explore alternatives, communicate, integrate, and refine. The substrate selects no reviewer, team, role, birth, or wake: personas author discovery, invitation, messaging, and—after the recruitment ordering of [`16_POPULATION_DYNAMICS §4B`](16_POPULATION_DYNAMICS.md#4b-recruitment-exhausted-first-ordering)—genesis choices. A singleton mission records `singleton_persona_assessment_only`; it may still converge on the objective evidence above when independent review was not an explicit obligation, but the result MUST NOT be labelled collective convergence.
 
-**Three-condition termination (exactly the requirement).** A mission ends on the **first** of:
+**Three-condition bounded-execution stop (exactly the requirement).** A mission's
+current execution slice stops on the **first** of:
 1. **Convergence** — `MarginalValueMetric < ε` over `N` rounds → status `converged` / `no_further_improvement`.
 2. **User / operator stop** — existing `user_terminated` / `operator_terminated`.
 3. **Budget exhaustion** — the INV-7 hard gate ([`01_KERNEL §7`](01_KERNEL.md#7-budget-admission-inv-7)) → `budget_exhausted`.
 
-On any stop the mission returns its **best-so-far** bundle. Convergence and budget never bypass the floor: **every** refinement action still clears the 8-source floor (J3), signing (J2/J9), and the **INV-7 hard gate** — refinement is iteration, not an exemption.
+On any stop the mission returns its **best-so-far** bundle. Budget exhaustion is
+not semantic completion: when signed persona messages, wakes, reviews, or other
+causal persona events remain pending, the durable projection MUST be
+`budget_exhausted` with mission state `paused_budget`, while recording
+`run_quiescence_observed = false` and completion readiness false. The exact
+best-so-far workspace MAY remain publicly inspectable only through signed
+workspace evidence cross-bound to a non-success generation authority for the
+same run, task, environment, model pool, evidence hash, and materialized file
+count. A restart or later exact budget grant verifies those links fail-closed and
+resumes the pending causal work; it MUST NOT discard the events, relabel the open
+generation complete, or require a manual fork.
+
+Convergence and budget never bypass the floor: **every** refinement action still
+clears the 8-source floor (J3), signing (J2/J9), and the **INV-7 hard gate** —
+refinement is iteration, not an exemption.
 
 **Budget-scaled quality (the "better with more budget" contract).** Per-round exploration breadth is `min(MissionObjective-headroom, BudgetState.candidates_remaining)` ([`01_KERNEL §7`](01_KERNEL.md#7-budget-admission-inv-7) — `candidates` is already a budget dimension): **more budget → more candidate refinements per round → a higher best-so-far before convergence or exhaustion.** The mission is an anytime algorithm — it always has a valid best-so-far to return, and quality is monotone non-decreasing in budget.
 

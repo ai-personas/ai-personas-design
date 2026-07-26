@@ -3801,8 +3801,14 @@ A-REF3    Budget-scaled quality: with a larger budget, per-round candidate
           monotone non-decreasing in budget.
 A-REF4    Auto-reopen: an active, un-converged mission in paused_budget
           resumes from best-so-far on budget replenishment without a manual
-          fork; a converged mission stays closed unless MissionObjective
-          changes.
+          fork. If budget reaches zero with a signed peer message/wake still
+          pending, the durable generation is budget_exhausted / paused_budget,
+          explicitly non-quiescent and non-complete; its published best-so-far
+          bytes have cross-verified signed non-success and workspace authority,
+          survive restart, and resume the same causal queue on an exact budget
+          grant. A mismatched run, task, environment, pool, evidence hash, or
+          materialized file count fails closed. A converged mission stays closed
+          unless MissionObjective changes.
 A-REF5    Three-condition termination: the mission stops on the FIRST of
           convergence, user/operator stop (user_terminated /
           operator_terminated), or INV-7 budget_exhausted.

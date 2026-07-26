@@ -146,6 +146,19 @@ finite run budget reaches zero; the run's top-level execution status becomes
 resource grant resumes that same open work. Neither projection means that the
 persona is waiting for a human, outside authority, or external evidence.
 
+Budget exhaustion also does not manufacture quiescence. If a persona has already
+authored a peer message, wake, review request, or other causal continuation that
+has not run, the bounded execution slice is durably paused with
+`run_quiescence_observed = false`; the pending event remains authoritative work.
+The node MAY publish the exact best-so-far bytes for human inspection, but only
+with signed in-progress workspace evidence cross-bound to a signed non-success
+generation authority over the same run, task, environment, run-model pool,
+workspace-evidence hash, and materialized file count. Replay and discovery MUST
+verify every cross-link and fail closed on disagreement. The projection MUST NOT
+carry completion authority, and a later exact budget grant resumes the preserved
+causal queue rather than starting an unrelated task or silently dropping the
+peer's turn.
+
 Each persona's latest signed appraisal is its current pressure snapshot. A later
 snapshot supersedes the earlier snapshot for current-state decisions: pressure
 items omitted from the latest snapshot are retired from current pressure. Every
