@@ -3735,14 +3735,24 @@ A-GLOBAL4 J1 reframe regression: a body still cannot edit a Soul; Souls are
 A-GLOBAL5 P2P-first fallback: with a verified libp2p data route or a recently
           healthy direct node route, a node and browser make zero HTTP locator
           reads/announcements while continuing peer discovery. With no usable
-          primary route after the bounded cold-start window, the locator is
+          primary route after the 4.5-second minimum warm-up, the browser waits
+          for an already-started first DHT pass, bounded by an absolute
+          20-second ceiling; only then is the locator
           queried and its signed announcement is admitted only as a route hint;
           once that node's complete provider inventory verifies, direct/P2P
           discovery becomes primary and locator polling stops again.
           A connected Kademlia table containing only generic bootstrap peers
           does not count as success: with zero admitted remote PersonaOS
           identities/provider routes, fallback still activates after the same
-          bounded window and its signed lease remains short-lived.
+          bounded attempt and its signed lease remains short-lived. While
+          fallback is necessary, successive locator reads respect a 10-second
+          anti-amplification floor even when a shorter server hint is returned.
+A-GLOBAL5a Multi-route provider failover: a DHT ProviderRecord for one stable
+          PeerId carries two independently dialable signed WSS/circuit
+          multiaddrs. The first route fails; the browser tries the second,
+          verifies the peer-bound inventory, and renders the node/personas with
+          zero HTTP locator requests. A failed address never creates a second
+          node identity and never authorises an unsigned HTTPS substitution.
 A-GLOBAL6 An unfocused hosted network view consumes signed discovery and public
           telemetry without polling full /status across every discovered node.
           Full status is fetched only for an authenticated or explicitly focused
