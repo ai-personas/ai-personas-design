@@ -3743,6 +3743,14 @@ A-GLOBAL5 P2P-first fallback: with a verified libp2p data route or a recently
           does not count as success: with zero admitted remote PersonaOS
           identities/provider routes, fallback still activates after the same
           bounded window and its signed lease remains short-lived.
+A-GLOBAL6 An unfocused hosted network view consumes signed discovery and public
+          telemetry without polling full /status across every discovered node.
+          Full status is fetched only for an authenticated or explicitly focused
+          node. Concurrent full-status requests cause one node-side reduction;
+          after one complete snapshot exists, other readers receive that snapshot
+          while exactly one refresh is active. Persona/env presence and public
+          current-work updates continue at the live cadence through the lighter
+          signed feeds.
 ```
 
 ### A-XD* — cross-env / cross-node task delegation (ADR-0068)
