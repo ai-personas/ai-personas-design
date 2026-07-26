@@ -3739,6 +3739,10 @@ A-GLOBAL5 P2P-first fallback: with a verified libp2p data route or a recently
           queried and its signed announcement is admitted only as a route hint;
           once that node's complete provider inventory verifies, direct/P2P
           discovery becomes primary and locator polling stops again.
+          A connected Kademlia table containing only generic bootstrap peers
+          does not count as success: with zero admitted remote PersonaOS
+          identities/provider routes, fallback still activates after the same
+          bounded window and its signed lease remains short-lived.
 ```
 
 ### A-XD* — cross-env / cross-node task delegation (ADR-0068)
