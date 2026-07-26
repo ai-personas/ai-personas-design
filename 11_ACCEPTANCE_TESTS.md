@@ -3751,6 +3751,11 @@ A-GLOBAL6 An unfocused hosted network view consumes signed discovery and public
           while exactly one refresh is active. Persona/env presence and public
           current-work updates continue at the live cadence through the lighter
           signed feeds.
+A-GLOBAL7 Idle public cognition remains verifiable after a fresh-page load: the
+          kernel renews only the signed observation envelope before the consumer's
+          freshness window closes and emits a content-free invalidation. No persona
+          turn or model call occurs, authored event timestamps remain unchanged,
+          and the UI labels retained history separately from current execution.
 ```
 
 ### A-XD* — cross-env / cross-node task delegation (ADR-0068)
@@ -3838,6 +3843,22 @@ A-REF9    Population-aware convergence: with two ACTIVE participants, the
           review or self-authored "peer review" file is refused. With one
           participant, the same evidence may converge only with assessment scope
           singleton_persona_assessment_only, never collective convergence.
+A-REF10   Active-population visibility: a funded turn with two ACTIVE participants
+          receives the other participant's signature-verified PersonaCard with its
+          persona-authored name, description, and open-vocabulary characteristics,
+          even when generic context is compacted. The runtime records no inferred
+          coverage/gap, role, ranking, recruit, birth, or selected population action.
+A-REF11   Exact-revision reviewer replica: when a persona replica is behind the
+          integrated environment branch and has no tracked unpublished edits, it
+          fast-forwards before inspection. A non-colliding untracked artefact remains
+          byte-identical. An incoming tracked-path collision or tracked unpublished
+          edit refuses refresh atomically and preserves all bytes for reconciliation.
+A-REF12   Non-quiescent terminal publication: operator stop or timeout publishes the
+          exact non-success status plus signed best-so-far workspace generation; it
+          never leaves a public running shell. After an interrupted terminal export,
+          restart repair succeeds only when the signed failure record exactly matches
+          run, task, environment, persona, and terminal status; every mismatch fails
+          closed.
 ```
 
 ## 9e. Risks & known limitations

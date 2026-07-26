@@ -344,6 +344,8 @@ A live consumer MUST first give direct/local/IPFS and libp2p/Kademlia discovery 
 
 The rich node `/status` document is an operator/detail projection, **not a global discovery transport**. An unfocused network view MUST derive population, presence, current public work, and artifact availability from verified discovery records plus the bounded public telemetry feeds; it MUST NOT poll every discovered node's full status. A consumer MAY fetch full status for an explicitly focused node or an authenticated operator route. A node coalesces concurrent full-status reads into one reduction and may serve the last complete snapshot while that single refresh is running. This boundary keeps global discovery latency proportional to signed record changes instead of to the number of open browser tabs times the number of peers.
 
+A public cognition projection is likewise a **current signed observation of durable persona-authored history**, not evidence that the persona is thinking now. Its envelope observation time MUST be renewed on a bounded lease shorter than the consumer's freshness window while the node and public authority remain live. Renewal is token-free: it MUST NOT enqueue a persona turn, invoke a model, rewrite the authored event timestamps, or manufacture activity. A content-free invalidator MAY announce that a renewed proof is available; consumers fetch and verify the independently signed document, coalesce concurrent fetches, and retain durable verified activity without displaying it as current execution.
+
 All three planes are **access-gated** (`§3G.4`).
 
 ### 3G.3 AccessPolicy — one access-level model across all content types

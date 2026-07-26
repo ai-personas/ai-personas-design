@@ -243,6 +243,10 @@ It maintains a **best-so-far** accepted artefact version (anytime semantics): ea
 
 **Population-aware convergence.** One persona's `ready` or `converged` disposition is exactly one persona's signed assessment; it is never presented as independent or collective review and cannot by itself bypass the metric/evidence gate above. In an environment with more than one ACTIVE participant, formal convergence additionally requires a **different active persona's current signed readiness judgment bound to the exact integrated environment-workspace bytes**. A peer review that predates the integrated revision, a self-authored file labelled as another persona's review, or a coordinator's summary does not satisfy this gate. Until the current peer judgment exists, the mission remains active so participants can challenge assumptions, explore alternatives, communicate, integrate, and refine. The substrate selects no reviewer, team, role, birth, or wake: personas author discovery, invitation, messaging, and—after the recruitment ordering of [`16_POPULATION_DYNAMICS §4B`](16_POPULATION_DYNAMICS.md#4b-recruitment-exhausted-first-ordering)—genesis choices. A singleton mission records `singleton_persona_assessment_only`; it may still converge on the objective evidence above when independent review was not an explicit obligation, but the result MUST NOT be labelled collective convergence.
 
+**Population context is observable, not inferred.** Every funded task, review, or coordination turn MUST receive a bounded projection of the exact verified PersonaCards for the other ACTIVE participants. The projection preserves the cards' persona-authored names, descriptions, and open-vocabulary characteristics under prompt compaction. It MAY report mechanical counts and signature validity; it MUST NOT translate those cards into host-authored roles, rank a peer, infer that a capability is covered or missing, choose recruitment, or trigger birth. The acting persona compares the principal task, current evidence, available people, and available tools, then authors any coordination, discovery, recruitment, genesis, or acquisition action.
+
+**Exact-revision reviewer replicas.** Before an ACTIVE persona inspects or reviews shared artefact bytes, its durable execution replica MUST advance to the current integrated environment-workspace revision whenever it has no tracked unpublished edits. Non-colliding untracked local artefacts do not make the replica stale: they remain byte-identical while the tracked branch fast-forwards. If an incoming tracked path would overwrite an untracked path, or if tracked unpublished work exists, refresh fails closed and preserves every byte; the collision or unpublished branch is surfaced as exact evidence for persona-authored reconciliation. A stale replica MUST NOT cause repeated model turns to substitute prose requests for byte-grounded review.
+
 **Three-condition bounded-execution stop (exactly the requirement).** A mission's
 current execution slice stops on the **first** of:
 1. **Convergence** — `MarginalValueMetric < ε` over `N` rounds → status `converged` / `no_further_improvement`.
@@ -261,6 +265,15 @@ count. A restart or later exact budget grant verifies those links fail-closed an
 resumes the pending causal work; it MUST NOT discard the events, relabel the open
 generation complete, or require a manual fork.
 
+The same byte-preservation rule applies when an operator stop or execution
+timeout races a non-quiescent causal persona tree. The public run MUST become
+the exact terminal non-success status (`operator_terminated` or `timed_out`),
+never remain as a stale `running` shell. Its best-so-far files are published only
+through the same signed non-success generation authority. If terminal export is
+interrupted, restart recovery MAY repair it only from a verified kernel-signed
+publication-failure record whose run, task, environment, persona, and terminal
+status exactly match the stale shell.
+
 Convergence and budget never bypass the floor: **every** refinement action still
 clears the 8-source floor (J3), signing (J2/J9), and the **INV-7 hard gate** —
 refinement is iteration, not an exemption.
@@ -273,7 +286,7 @@ refinement is iteration, not an exemption.
 
 *The `ContinuousRefinementMission`, `MissionObjective`, `MarginalValueMetric`, and `MissionState` ship as STANDARDISED seed shapes ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop)); they are compositions of `StagedSequence` + `DerivedMetric`, not kernel constants, and are trust-calibrated like any orchestration shape (§2b).*
 
-**Tests:** A-REF1 (iterates + returns best-so-far), A-REF2 (`CONVERGED` stop when marginal value < ε over N rounds), A-REF3 (more budget → more candidates/round → measurably better objective vector), A-REF4 (auto-reopen from `paused_budget` on fresh budget; `converged` stays closed), A-REF5 (three-condition termination: convergence vs user-stop vs budget_exhausted), A-REF6 (improvement-blocking gap + budget headroom → genesis/sub-env, ReplicationBound-capped), A-REF7 (a refinement action failing the floor is refused; INV-7 never bypassed), A-REF8 (bounded-autonomy elaborations remain within the charter), A-REF9 (multi-persona convergence requires a different active persona's exact-revision readiness; singleton readiness remains labelled solo). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Tests:** A-REF1 (iterates + returns best-so-far), A-REF2 (`CONVERGED` stop when marginal value < ε over N rounds), A-REF3 (more budget → more candidates/round → measurably better objective vector), A-REF4 (auto-reopen from `paused_budget` on fresh budget; `converged` stays closed), A-REF5 (three-condition termination: convergence vs user-stop vs budget_exhausted), A-REF6 (improvement-blocking gap + budget headroom → genesis/sub-env, ReplicationBound-capped), A-REF7 (a refinement action failing the floor is refused; INV-7 never bypassed), A-REF8 (bounded-autonomy elaborations remain within the charter), A-REF9 (multi-persona convergence requires a different active persona's exact-revision readiness; singleton readiness remains labelled solo), A-REF10 (bounded signed active-peer cards remain visible without host role/gap/action inference), A-REF11 (reviewer replica refresh preserves non-colliding untracked bytes and fails closed on collisions), A-REF12 (non-quiescent operator stop/timeout publishes and restart-recovers an exact terminal non-success generation). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
 ## 3. The eight seed acceptance pathways
 
