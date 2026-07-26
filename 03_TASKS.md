@@ -270,9 +270,12 @@ timeout races a non-quiescent causal persona tree. The public run MUST become
 the exact terminal non-success status (`operator_terminated` or `timed_out`),
 never remain as a stale `running` shell. Its best-so-far files are published only
 through the same signed non-success generation authority. If terminal export is
-interrupted, restart recovery MAY repair it only from a verified kernel-signed
-publication-failure record whose run, task, environment, persona, and terminal
-status exactly match the stale shell.
+interrupted, restart recovery MAY repair it only from exact verified terminal
+authority: either a kernel-signed publication-failure record whose run, task,
+environment, persona, and terminal status exactly match the stale shell, or the
+kernel-signed non-refusable run intervention that already accepted the operator
+stop for that exact run. Process absence, elapsed time, an idle registry, or an
+unsigned request is never terminal authority.
 
 Convergence and budget never bypass the floor: **every** refinement action still
 clears the 8-source floor (J3), signing (J2/J9), and the **INV-7 hard gate** —

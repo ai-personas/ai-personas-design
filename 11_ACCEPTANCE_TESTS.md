@@ -3866,9 +3866,11 @@ A-REF11   Exact-revision reviewer replica: when a persona replica is behind the
 A-REF12   Non-quiescent terminal publication: operator stop or timeout publishes the
           exact non-success status plus signed best-so-far workspace generation; it
           never leaves a public running shell. After an interrupted terminal export,
-          restart repair succeeds only when the signed failure record exactly matches
-          run, task, environment, persona, and terminal status; every mismatch fails
-          closed.
+          restart repair succeeds only when either the signed failure record exactly
+          matches run, task, environment, persona, and terminal status, or a verified
+          kernel-signed non-refusable stop intervention targets that exact run. Mere
+          process absence, registry idleness, unsigned stop requests, and every
+          identity/status mismatch fail closed.
 ```
 
 ## 9e. Risks & known limitations
