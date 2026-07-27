@@ -3753,6 +3753,16 @@ A-GLOBAL5a Multi-route provider failover: a DHT ProviderRecord for one stable
           verifies the peer-bound inventory, and renders the node/personas with
           zero HTTP locator requests. A failed address never creates a second
           node identity and never authorises an unsigned HTTPS substitution.
+A-GLOBAL5b Epoch-rollover first contact: begin a fresh hosted-browser discovery
+          pass immediately before the temporal DHT rendezvous boundary, block
+          all application HTTP, and allow only the replaceable public DHT
+          bootstrap commons. The publisher has pre-announced the following
+          bucket to every reachable bounded first-contact peer; the browser
+          queries previous/current/next buckets concurrently before iterative
+          traversal. It verifies the peer-bound inventory and renders the live
+          node/personas without an HTTP locator response before and after the
+          boundary. Adjacent buckets grant location only and cannot extend an
+          expired signed inventory or identity.
 A-GLOBAL6 An unfocused hosted network view consumes signed discovery and public
           telemetry without polling full /status across every discovered node.
           Full status is fetched only for an authenticated or explicitly focused
