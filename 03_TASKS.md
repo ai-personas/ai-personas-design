@@ -249,6 +249,18 @@ It maintains a **best-so-far** accepted artefact version (anytime semantics): ea
 
 **Exact-revision reviewer replicas.** Before an ACTIVE persona inspects or reviews shared artefact bytes, its durable execution replica MUST advance to the current integrated environment-workspace revision whenever it has no tracked unpublished edits. Non-colliding untracked local artefacts do not make the replica stale: they remain byte-identical while the tracked branch fast-forwards. If an incoming tracked path would overwrite an untracked path, or if tracked unpublished work exists, refresh fails closed and preserves every byte; the collision or unpublished branch is surfaced as exact evidence for persona-authored reconciliation. A stale replica MUST NOT cause repeated model turns to substitute prose requests for byte-grounded review.
 
+**Operable persona-owned workspace-conflict resolution.** A mechanically
+observed conflict MUST expose every preserved path/hash alternative and a stable
+`candidate_alternatives_state_hash` to the exact workspace-owning persona. For
+the first conflict observation, where no prior resolution candidate can exist,
+the projection derives that hash mechanically from the signed conflict ref and
+the complete ordered alternatives without choosing or interpreting either
+side. The historical conflict ref remains unchanged. A later clean merge alone
+does not close the conflict: the exact owner MUST still author and sign a claim
+binding the conflict ref, all alternatives, the candidate-state hash, and the
+resulting complete workspace tree. An absent required hash MUST NOT make this
+persona-authorized path impossible.
+
 **Three-condition bounded-execution stop (exactly the requirement).** A mission's
 current execution slice stops on the **first** of:
 1. **Convergence** — `MarginalValueMetric < ε` over `N` rounds → status `converged` / `no_further_improvement`.
