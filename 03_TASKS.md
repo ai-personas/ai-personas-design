@@ -259,7 +259,23 @@ side. The historical conflict ref remains unchanged. A later clean merge alone
 does not close the conflict: the exact owner MUST still author and sign a claim
 binding the conflict ref, all alternatives, the candidate-state hash, and the
 resulting complete workspace tree. An absent required hash MUST NOT make this
-persona-authorized path impossible.
+persona-authorized path impossible. The model-facing conflict observation MUST
+reserve, ahead of bulk workspace inventory, an action-ready exact preimage whose
+field names match the resolution action; prompt compaction MUST NOT replace any
+included path/hash leaf with an opaque pointer while marking that preimage
+complete. If the complete alternative set exceeds that bounded lane, a generic
+read-only owner-authenticated inspection action MUST expose exact ordered pages,
+the total count, next offset, conflict ref, and candidate-state hash. Paging is
+mechanical and MUST NOT rank, summarize, select, or interpret an alternative.
+The persona concatenates all pages in offset order and remains the sole author
+of the subsequent resolution claim. The action MUST require an explicit signed
+mechanical choice: either merge a persona branch whose conflicts the persona has
+already resolved, or adopt the exact current environment tree. Environment-tree
+adoption MUST preserve the displaced persona-branch head under a deterministic
+recovery ref, refuse uncommitted tracked changes or untracked-path collisions,
+synchronize the persona replica, and bind the choice plus resulting complete
+tree in the persona signature. It MUST NOT rerun the known-conflicting merge and
+silently manufacture a replacement conflict.
 
 **Three-condition bounded-execution stop (exactly the requirement).** A mission's
 current execution slice stops on the **first** of:
