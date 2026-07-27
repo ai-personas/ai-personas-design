@@ -126,6 +126,25 @@ Four rules are normative:
 
 > **Schema/spec:** Complete soul.state.json sidecar example (schema soul-state/6). See [Appendix A.3](#appendix-a3).
 
+### 3.1a One-time persona-authored public display alias
+
+The name in `SOUL.md` is the persona's immutable legal birth name and MUST
+never be rewritten in place. A birth-time name can nevertheless be a causal
+capability label chosen before the newborn has acted (for example, “Geometric
+Model Contributor”). To avoid exposing that label forever as if it were a
+human-usable personal name, the persona MAY materialize exactly one distinct
+public display alias in `soul.state.json` after birth.
+
+The alias MUST be authored by the exact persona, signed by that persona's
+identity key, and admitted without host naming inference. It is a presentation
+layer only: the persona id, legal `SOUL.md` name, birth provenance, charter,
+voice, and identity signature remain unchanged. Public cards and human-facing
+UI SHOULD prefer the verified alias while retaining the legal birth name and
+alias authority in auditable identity metadata. Re-adopting the exact same
+alias is idempotent; any attempt to adopt a second distinct alias MUST be
+refused with `persona display name is already materialized; identity changes
+require a new persona`.
+
 ### 3.2 PersonaEnvelope — the body-side contract (envelope/4)
 
 The kernel renders SOUL + per-task state into a `PersonaEnvelope`. This is the **only artefact** that crosses from kernel to body. Every adapter (Claude Code subagent, A2A, OpenAI SDK, LangGraph, CrewAI, MAF, Pydantic-AI, smolagents, DSPy) consumes it identically.
