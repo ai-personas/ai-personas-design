@@ -262,8 +262,11 @@ a separate non-authoritative presentation with:
 
 1. a readable title from the basename stem (for example,
    `HV4_revE_open_geometry.gltf` → “HV4 Revision E open geometry”);
-2. an always-visible extension/format badge (for example, `.GLTF`), which MUST
-   NOT disappear when the title truncates;
+2. an always-visible, high-contrast format tile (for example, `GLTF`) sized as
+   a primary recognition cue rather than small metadata; it MUST remain
+   comfortably legible at normal zoom, MUST NOT truncate, and MUST NOT
+   disappear when the title truncates (a secondary `.GLTF` badge MAY repeat the
+   exact extension beside the title);
 3. a short parent-folder breadcrumb that explains package context; and
 4. the exact filename and full exact path in accessible tooltip or expanded
    file details.
@@ -277,6 +280,15 @@ available; unknown or failed formats MUST fall back to a bounded general-purpose
 inspector and an intact download, never an unexplained “binary” screen. Archive
 containers SHOULD expose a bounded entry manifest before extraction, and every
 preview MUST retain byte-integrity status near the rendered content.
+
+When a current workspace contains eight or more files, the UI SHOULD group the
+files by human purpose before rendering the individual list. If any CAD or 3D
+exchange files are present, **CAD & 3D models** MUST be the first group and MUST
+open by default; its header MUST expose the number of files and the formats
+present (for example, `DXF · IFC · glTF · OBJ`). Documents, drawings, data,
+packages, code, and otherwise-unclassified files follow in separate groups.
+Grouping is a presentation projection only: it MUST preserve every exact signed
+path, current-revision boundary, integrity result, and on-demand renderer route.
 
 ## 11. Bundle forking
 
