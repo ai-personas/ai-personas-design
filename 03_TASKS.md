@@ -267,6 +267,27 @@ count. A restart or later exact budget grant verifies those links fail-closed an
 resumes the pending causal work; it MUST NOT discard the events, relabel the open
 generation complete, or require a manual fork.
 
+**Addressed-wake conservation and resource priority.** A newly minted causal
+descendant MUST carry a kernel-signed, budget-free recovery descriptor binding
+its exact run, model-pool hash, relative turn boundary, and mission boundary
+before transport persistence or enqueue. If its shared finite call allowance is
+already exhausted when the addressed persona reaches the handler boundary, the
+attempt MUST end with the closed `model_budget_unavailable` no-authority reason;
+the transport MUST persist the unchanged signed wake, dedupe key, recipient,
+task/environment/run bindings, and kernel-signed execution record. It MUST NOT
+settle delivery, reinterpret the stimulus, create a substitute message, or keep
+the run artificially non-quiescent merely to await funding. A later signed
+resource event for that exact paused run MUST service the oldest verified
+addressed retry before minting a coordinator/mission-owner resource turn. The
+resource carrier binds the wake and execution hashes and transfers only its new
+process-local allowance and cancellation boundary; the original semantic wake
+is what executes. Reopening transport deduplication requires all of those exact
+bindings and fails closed on mismatch. Verified recipient intent settles and
+removes the retry. This ordering is mechanical FIFO over authenticated event
+facts: it does not choose a reviewer, infer task meaning, or multiply the fresh
+grant, and it prevents a coordinator from spending later calls restating work
+that a peer was already asked to perform.
+
 The same byte-preservation rule applies when an operator stop or execution
 timeout races a non-quiescent causal persona tree. The public run MUST become
 the exact terminal non-success status (`operator_terminated` or `timed_out`),
@@ -291,7 +312,7 @@ refinement is iteration, not an exemption.
 
 *The `ContinuousRefinementMission`, `MissionObjective`, `MarginalValueMetric`, and `MissionState` ship as STANDARDISED seed shapes ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop)); they are compositions of `StagedSequence` + `DerivedMetric`, not kernel constants, and are trust-calibrated like any orchestration shape (§2b).*
 
-**Tests:** A-REF1 (iterates + returns best-so-far), A-REF2 (`CONVERGED` stop when marginal value < ε over N rounds), A-REF3 (more budget → more candidates/round → measurably better objective vector), A-REF4 (auto-reopen from `paused_budget` on fresh budget; `converged` stays closed), A-REF5 (three-condition termination: convergence vs user-stop vs budget_exhausted), A-REF6 (improvement-blocking gap + budget headroom → genesis/sub-env, ReplicationBound-capped), A-REF7 (a refinement action failing the floor is refused; INV-7 never bypassed), A-REF8 (bounded-autonomy elaborations remain within the charter), A-REF9 (multi-persona convergence requires a different active persona's exact-revision readiness; singleton readiness remains labelled solo), A-REF10 (bounded signed active-peer cards remain visible without host role/gap/action inference), A-REF11 (reviewer replica refresh preserves non-colliding untracked bytes and fails closed on collisions), A-REF12 (non-quiescent operator stop/timeout publishes and restart-recovers an exact terminal non-success generation). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Tests:** A-REF1 (iterates + returns best-so-far), A-REF2 (`CONVERGED` stop when marginal value < ε over N rounds), A-REF3 (more budget → more candidates/round → measurably better objective vector), A-REF4 (auto-reopen from `paused_budget` on fresh budget; `converged` stays closed), A-REF5 (three-condition termination: convergence vs user-stop vs budget_exhausted), A-REF6 (improvement-blocking gap + budget headroom → genesis/sub-env, ReplicationBound-capped), A-REF7 (a refinement action failing the floor is refused; INV-7 never bypassed), A-REF8 (bounded-autonomy elaborations remain within the charter), A-REF9 (multi-persona convergence requires a different active persona's exact-revision readiness; singleton readiness remains labelled solo), A-REF10 (bounded signed active-peer cards remain visible without host role/gap/action inference), A-REF11 (reviewer replica refresh preserves non-colliding untracked bytes and fails closed on collisions), A-REF12 (non-quiescent operator stop/timeout publishes and restart-recovers an exact terminal non-success generation), A-REF13 (an addressed wake reaching exhausted shared budget is persisted exactly and receives the next same-run resource allowance before the coordinator). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
 ## 3. The eight seed acceptance pathways
 
