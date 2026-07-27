@@ -253,6 +253,31 @@ v1.0 content-addresses bundles but gives them no discovery projection and no fir
 
 **Lineage:** `artifact_card_published`, `artifact_card_revoked`, `content_locator_attached`, `content_locator_stale`, `content_integrity_failed`, `availability_policy_set`, `replica_fallback_served`.
 
+## 10b. Human-facing filenames and lazy format rendering
+
+Artifact paths are exact storage and verification identifiers, not suitable
+primary labels. A human-facing UI MUST keep the exact path unchanged for fetch,
+hash verification, routing, download, and technical inspection, while deriving
+a separate non-authoritative presentation with:
+
+1. a readable title from the basename stem (for example,
+   `HV4_revE_open_geometry.gltf` → “HV4 Revision E open geometry”);
+2. an always-visible extension/format badge (for example, `.GLTF`), which MUST
+   NOT disappear when the title truncates;
+3. a short parent-folder breadcrumb that explains package context; and
+4. the exact filename and full exact path in accessible tooltip or expanded
+   file details.
+
+The presentation transform MUST NOT alter the signed path or infer trusted
+media type from a suffix. Renderer selection remains bound to signed media
+metadata and, when bytes are available, hash-checked content inspection. File
+bytes and heavyweight renderer code SHOULD load only when a user opens the
+file. A registered format renderer SHOULD provide the richest safe local view
+available; unknown or failed formats MUST fall back to a bounded general-purpose
+inspector and an intact download, never an unexplained “binary” screen. Archive
+containers SHOULD expose a bounded entry manifest before extraction, and every
+preview MUST retain byte-integrity status near the rendered content.
+
 ## 11. Bundle forking
 
 Two operations:

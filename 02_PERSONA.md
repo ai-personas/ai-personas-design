@@ -145,6 +145,49 @@ alias is idempotent; any attempt to adopt a second distinct alias MUST be
 refused with `persona display name is already materialized; identity changes
 require a new persona`.
 
+**Human-facing name and role presentation.** A new persona's authored name
+SHOULD be a concise, human-usable personal identity, not a profession, task
+title, capability label, or coordination role. Roles remain open-vocabulary,
+persona-authored claims and MUST be carried separately in characteristics or
+coordination state. A human-facing UI MUST render verified personal name and
+verified role as distinct labelled fields. For a legacy exact signed name that
+unambiguously contains a comma-delimited role suffix, a UI MAY separate that
+suffix visually for readability, but MUST retain the exact signed string in
+verification details and MUST NOT treat the visual split as role, membership,
+routing, or capability authority.
+
+### 3.1b Characteristic-grounded public portrait
+
+A public avatar is a recognisably **person-like portrait**: photographic,
+illustrated, cartoon, painterly, or another persona-selected artistic style are
+all valid. Initials, a document, a CAD model, a logo, an abstract pattern, or a
+role icon alone are not a portrait. The portrait SHOULD use head-and-shoulders
+framing at card scale and SHOULD remain recognisable without task-specific
+props. Non-normative generated examples and their qualitative trait grounding
+are retained in
+[`assets/avatar-portrait-references/`](assets/avatar-portrait-references/README.md).
+
+The persona-authored visual brief MUST derive the portrait's enduring visual
+language primarily from its frozen characteristics. OCEAN priors guide stable
+expression, posture, composition, texture, and palette; **baseline** VAD guides
+the resting emotional tone. Current transient VAD MUST NOT churn visual
+identity. Role, domain, and task objects MAY provide secondary context, but MUST
+NOT replace the person. Psychological traits MUST NOT be used to infer race,
+ethnicity, disability, gender, age, or other protected physical attributes.
+
+The final raster remains persona-owned: the exact persona selects it, signs its
+descriptor, and admits its hash-addressed bytes. The kernel MUST NOT invent the
+face, and the UI MUST NOT silently replace a signed portrait with a stock image.
+While no verified portrait is available, the UI SHOULD show a neutral
+person-shaped silhouette explicitly labelled pending or unavailable; it MUST
+NOT fabricate a specific identity. A persona MAY revise a materialised portrait
+without changing its frozen SOUL only by selecting new exact raster bytes and
+signing the complete descriptor with the same persona identity key. The kernel
+MUST append `PERSONA_RASTER_AVATAR_REVISED` with both previous and current
+content references to the signed evolution chain and MUST retain the old
+content-addressed bytes for audit. Host-selected, UI-selected, task-triggered,
+or transient-VAD-driven replacement remains forbidden.
+
 ### 3.2 PersonaEnvelope — the body-side contract (envelope/4)
 
 The kernel renders SOUL + per-task state into a `PersonaEnvelope`. This is the **only artefact** that crosses from kernel to body. Every adapter (Claude Code subagent, A2A, OpenAI SDK, LangGraph, CrewAI, MAF, Pydantic-AI, smolagents, DSPy) consumes it identically.
