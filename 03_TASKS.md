@@ -267,6 +267,41 @@ count. A restart or later exact budget grant verifies those links fail-closed an
 resumes the pending causal work; it MUST NOT discard the events, relabel the open
 generation complete, or require a manual fork.
 
+Budget headroom is evaluated against the next indivisible actor boundary, not
+against a nominal single call. In particular, when a persona's initial
+activation observation is still unsettled, the substrate MUST preserve enough
+capacity for both the distinct activation turn and the authenticated principal
+task turn. A finite grant below that exact required headroom is exported as
+`budget_exhausted` / `paused_budget` with signed best-so-far authority even if
+one unspent call remains; it MUST NOT become `task_run_not_quiescent`, fail
+publication, spend the lone call on activation, or strand the principal task.
+
+Explicit successor admission is linear per paused source generation. While one
+resume request is authenticating, executing, or publishing a successor, another
+resume request naming that same source MUST fail closed before minting a run,
+model pool, wake, or model call. Different source generations remain
+independently concurrent. Historical lineage may retain every completed leg,
+but only one admitted successor may supersede a particular paused generation.
+
+Completion freshness MUST remain exact over the signed task, environment,
+workspace bytes and conflict state, team and membership, acquired-capability
+state, and bound domain context. The turn-scoped transport/action menu is not
+completion state: contextual one-shot actions disappear after use and native
+transport flags disappear outside a model call. Those mechanical menu changes
+MUST NOT by themselves stale an otherwise-current persona judgment, reopen a
+closed task, or provoke another model call. Any durable capability acquisition,
+membership, task, environment, domain, workspace, or conflict change still
+invalidates the old readiness binding fail-closed.
+
+On restart, the node MAY token-freely reproject only the newest effective
+paused generation of a resume chain under its existing kernel-signed run
+authority. It may change that generation to complete only when the ordinary
+readiness reducer verifies current persona-signed sufficiency and all artifact
+export evidence again; it MUST NOT call a model, interpret task text, or rewrite
+an unrelated paused task. A signed operator termination of an already-paused
+run removes that run from the resumable-mission surface while retaining its
+historical bytes and lineage.
+
 **Addressed-wake conservation and resource priority.** A newly minted causal
 descendant MUST carry a kernel-signed, budget-free recovery descriptor binding
 its exact run, model-pool hash, relative turn boundary, and mission boundary
@@ -312,7 +347,7 @@ refinement is iteration, not an exemption.
 
 *The `ContinuousRefinementMission`, `MissionObjective`, `MarginalValueMetric`, and `MissionState` ship as STANDARDISED seed shapes ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop)); they are compositions of `StagedSequence` + `DerivedMetric`, not kernel constants, and are trust-calibrated like any orchestration shape (§2b).*
 
-**Tests:** A-REF1 (iterates + returns best-so-far), A-REF2 (`CONVERGED` stop when marginal value < ε over N rounds), A-REF3 (more budget → more candidates/round → measurably better objective vector), A-REF4 (auto-reopen from `paused_budget` on fresh budget; `converged` stays closed), A-REF5 (three-condition termination: convergence vs user-stop vs budget_exhausted), A-REF6 (improvement-blocking gap + budget headroom → genesis/sub-env, ReplicationBound-capped), A-REF7 (a refinement action failing the floor is refused; INV-7 never bypassed), A-REF8 (bounded-autonomy elaborations remain within the charter), A-REF9 (multi-persona convergence requires a different active persona's exact-revision readiness; singleton readiness remains labelled solo), A-REF10 (bounded signed active-peer cards remain visible without host role/gap/action inference), A-REF11 (reviewer replica refresh preserves non-colliding untracked bytes and fails closed on collisions), A-REF12 (non-quiescent operator stop/timeout publishes and restart-recovers an exact terminal non-success generation), A-REF13 (an addressed wake reaching exhausted shared budget is persisted exactly and receives the next same-run resource allowance before the coordinator). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Acceptance criteria:** A-REF1 (iterates + returns best-so-far), A-REF2 (`CONVERGED` stop when marginal value < ε over N rounds), A-REF3 (more budget → more candidates/round → measurably better objective vector), A-REF4 (auto-reopen from `paused_budget` on fresh budget; `converged` stays closed), A-REF5 (three-condition termination: convergence vs user-stop vs budget_exhausted), A-REF6 (improvement-blocking gap + budget headroom → genesis/sub-env, ReplicationBound-capped), A-REF7 (a refinement action failing the floor is refused; INV-7 never bypassed), A-REF8 (bounded-autonomy elaborations remain within the charter), A-REF9 (multi-persona convergence requires a different active persona's exact-revision readiness; singleton readiness remains labelled solo), A-REF10 (bounded signed active-peer cards remain visible without host role/gap/action inference), A-REF11 (reviewer replica refresh preserves non-colliding untracked bytes and fails closed on collisions), A-REF12 (non-quiescent operator stop/timeout publishes and restart-recovers an exact terminal non-success generation), A-REF13 (an addressed wake reaching exhausted shared budget is persisted exactly and receives the next same-run resource allowance before the coordinator), A-REF14 (a grant below the next indivisible activation-plus-task headroom pauses and exports exact best-so-far state without consuming the lone call or failing publication), A-REF15 (two concurrent explicit resumes of one paused source admit at most one successor and one model pool before the other fails closed), A-REF16 (consuming a contextual action or leaving a model transport does not stale readiness when every durable completion fact is unchanged), A-REF17 (restart reconciles a currently signed-ready paused generation to complete without a model call and does not rewrite an unrelated paused task), A-REF18 (signed operator termination removes an already-paused run from resumable status while retaining lineage). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
 
 ## 3. The eight seed acceptance pathways
 
