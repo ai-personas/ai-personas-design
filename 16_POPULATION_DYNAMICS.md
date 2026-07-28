@@ -165,6 +165,58 @@ new wake or interpret the task. If the run has exhausted its finite grant, the
 outbox remains `waiting_resource`. A later grant routes that pending addressed
 wake before a new coordinator turn, so the coordinator cannot repeatedly spend
 the recovery budget while an already-admitted newborn remains unable to form.
+An unresolved birth-identity outbox also precedes generic addressed-delivery
+retries for that exact run: identity formation is the causal precursor to the
+newborn's later participation traffic, so retry backlog created after admission
+cannot starve it. This ordering is mechanical over verified outbox kinds and
+does not inspect task meaning or select a persona action.
+
+Membership consent and identity formation are independent causal transitions.
+If a newborn accepts an exact invitation while its older identity-formation
+outbox is still waiting for transport or model resources, that active
+membership MUST NOT invalidate or consume the signed identity wake. The
+durable-delivery verifier admits the same exact birth authority after
+membership while ordinary pre-membership communication and capability checks
+continue to require membership absence.
+
+Delivery after membership MUST preserve the identity carrier's narrow
+self-action surface. It MUST NOT reinterpret that carrier as an ordinary member
+mission turn merely because membership became active first. The exact stored,
+unconsumed birth wake is reverified and exposed as identity authority; an
+unverifiable or stale identity carrier is rejected rather than widened to the
+member action catalog. This is causal ordering, not a substrate-authored choice
+of name, characteristics, role, avatar, tool, or contribution.
+
+The brain-visible and provider-call action catalogs for that carrier MUST be the
+same descriptor-annotated identity-formation subset. Generic self/work-state,
+scheduling, membership, and collaboration mechanisms MUST NOT be able to settle
+the identity carrier. Its situation is correspondingly limited to exact signed
+birth authority, self-authored identity and drive state, liveness and resource
+headroom, provider inventory, and already-observed external-artifact state; it
+does not inherit the ordinary mission prompt, workspace backlog, or member work
+situation. Descriptor annotations identify mechanisms only. They contain no
+task words, identity values, semantic role, personality, portrait style, or
+provider selection: all such choices remain persona-authored.
+
+A frozen or terminalized live-artifact generation is byte-publication state,
+not mission cancellation. Pausing for resources intentionally freezes the
+best-so-far artifacts, so that snapshot MUST NOT revoke an admitted newborn's
+identity-delivery lease. Only an exact signed lifecycle boundary, such as its
+deadline or an operator suspend/terminate event, ends that lease.
+
+When an identity turn ends with a kernel-signed transient model-unavailable
+outcome, the exact wake and execution record remain a durable retry even if no
+process-local run-liveness hold can be acquired. That hold is an optimization
+for in-process idle accounting, not causal authority; the signed birth recovery
+lease, exact run/model-pool binding, and closed retryable outcome remain
+mandatory before redelivery.
+
+If process shutdown or run-idle publication leaves the auxiliary retry fields
+absent, a later exact resource grant MAY reconstruct the delivery candidate
+from the original signed wake plus its kernel-signed transient execution
+record. Both signatures and every run, task, environment, persona, and model
+pool binding must verify; unsigned bookkeeping absence never creates semantic
+authority, but it cannot strand otherwise complete causal evidence.
 
 Before membership, the model-facing action catalog MUST be the exact subset
 that the verified current wake can actually exercise. An invitation response

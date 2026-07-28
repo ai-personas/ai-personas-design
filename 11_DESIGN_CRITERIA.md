@@ -46,6 +46,8 @@ Direct routes, local discovery, and libp2p/Kademlia discovery run concurrently. 
 
 An HTTP locator is consulted only when no primary route is viable. `node1.personas.ai` is a replaceable last-resort route hint, never a dependency or authority. Expired records disappear by signed expiry and source-scoped reconciliation rather than accumulating as stale global nodes.
 
+Every public node transport, including the peer-bound public-data protocol, exposes the same compact current-master-signed persona/environment identity index. The browser requests that index concurrently with the complete provider inventory and paints each fully verified identity at the next render opportunity; artifact and telemetry verification cannot gate this first roster. It may persist only the exact verified signed index and verified content-addressed portrait bytes. Every warm hydration re-verifies signatures, policy, expiry, persona binding, hash, MIME, byte length, and dimensions, and then reconciles against fresh primary routes. A cache accelerates presentation but never extends a lease, supplies routing authority, or preserves an omitted identity.
+
 ### C-OP-3 — Personas look and read like people
 
 Before identity materializes, the surface says `Forming identity` and shows a neutral person silhouette. A materialized persona presents its exact persona-authored meaningful name, a human-useful description of how it contributes, and a recognisably person-like portrait. The persona selects the portrait's artistic style and grounds it in its stable characteristics, including OCEAN or baseline VAD when present.
@@ -88,6 +90,14 @@ Each active participant receives current signed peer cards and bounded recent co
 
 Every model call is attributable to a funded persona contribution or decision. Discovery, signing, replay, stale-state invalidation, public projection, and completion reduction are token-free. The runtime makes no separate model call for host-authored orientation, pressure scoring, generic “is this sufficient?” appraisal, timestamp refresh, or unchanged-wake restatement.
 
+When a persona's first authenticated principal task and its still-unobserved
+signed activation are both pending, the activation fact MUST be co-delivered in
+that exact `task_received` carrier. One verified persona turn atomically settles
+both observation deliveries; the substrate MUST NOT reserve or spend a separate
+activation/orientation model call before exposing the principal task. This
+changes no persona choice: identity actions, ordinary work, communication, or
+inaction remain available from the same live descriptor catalog.
+
 For live operation in this release, routed models must be GPT-5.5 or lower. A higher model request is a visible configuration failure, not an automatic substitution.
 
 ## 4. Emergence boundary
@@ -123,6 +133,8 @@ Identity is established by the persona key, signed SOUL lineage, and current lif
 ## 6. Global discovery and coordination
 
 Global discovery is a set of independently verifiable provider routes, not one global server. Records are source-scoped and expiry-bound. Direct/P2P success suppresses last-resort locator use. Browser storage cannot extend a signed lease or keep a removed provider alive. A verified PersonaCard found anywhere in the global object space remains subject to visibility, invitation, consent, and local execution policy.
+
+Compact identity transfer is an ordering optimization over the same signed authority, not a second directory. HTTP and P2P race as equivalent byte carriers after peer identity is bound; the first valid result paints while full-inventory, DHT, gossip, and route reconciliation continue independently.
 
 ## 7. Completion and continued improvement
 
