@@ -57,6 +57,22 @@ For each structured revision, the transition-ID schema is mechanically restricte
 
 `ready` remains the persona's signed judgment even when it conflicts with its own open commitments or reported uncertainties. The reducer preserves that judgment but projects effective readiness as false until no active or unknown commitment and no persona-reported uncertainty remains. This keeps the disagreement visible to humans instead of discarding the whole work state, while preventing one persona's optimistic posture from closing material work.
 
+### 3a. Persona-authored agency reconciliation
+
+Every task-bound final cognition envelope MUST include a closed `agency_reconciliation` document. The runtime stores that exact authored document inside the work state's open `collaboration` mapping; it does not synthesize or summarize it. Before choosing a continuation posture, the persona explicitly reconciles:
+
+- the exact prior active commitment IDs and prior uncertainties, plus any introduced in the current revision;
+- exact remaining model-call and mission-deadline authority;
+- whether it judges meaningful progress to remain;
+- any genuine external blocker and its evidence references;
+- the causal successor it actually authored, if any; and
+- whether its own characteristics and experience lead it to want a distinct contribution or independent review; and
+- whether its exact open commitments are supported by its own retrieved skills and experience, the complete current action surface, the bounded complete unranked local execution-capability index, and signed acquisition / invocation evidence; any material capability gaps; and the capability action it actually took or authored next.
+
+When the persona judges that meaningful progress remains, it authors an actual successor through the existing generic self-wake, scheduling, or peer-coordination mechanisms, or records an evidenced external blocker. `next_intent`, progress prose, and a filename do not schedule work. When the persona itself wants a distinct contribution or independent review, it initiates or continues the existing need → exact discovery → candidate disposition → genesis path from [`16_POPULATION_DYNAMICS`](16_POPULATION_DYNAMICS.md). The kernel does not infer the judgment from task words, assign a role, choose a peer, force a team size or birth, or mint a semantic wake.
+
+Capability reconciliation is also persona-owned. The signed work situation MUST carry the bounded complete exact-name index of the currently observed local execution namespace, its snapshot hash and pagination cursor, the complete unranked action catalog, current environment-mounted tools, and the persona's retrieved skill evidence. Prompt compaction MUST preserve the compact exact-name index rather than retaining only a lexically early provenance page. Brain compilation receives the mechanically derived exact affordance identifiers; it does not receive a host-selected subset based on task text. The persona MAY conclude that existing capabilities are sufficient. Discovery, acquisition, provisioning, skill authoring, invocation, and delegation remain explicit persona actions with ordinary signed intent and effect evidence; the runtime MUST NOT rank, select, provision, or invoke a capability merely because the reconciliation reports a gap.
+
 ## 4. Workspace settlement
 
 A work state is bound to the exact situation and workspace bytes the persona observed. If the workspace changes between observation and signature, the intent becomes settlement-pending rather than being silently attached to different bytes. A stable recapture may bind it through `PERSONA_WORK_STATE_SETTLEMENT_BOUND` without changing the persona's authored choice.
@@ -95,6 +111,8 @@ The work-state protocol must reduce calls, not add an appraisal loop.
 
 - Situation projection, signature verification, settlement, replay, stale invalidation, public projection, and completion reduction are token-free.
 - A direct task receives one ordinary substantive persona turn unless new causal work justifies another.
+- While an exact materialized-outcome byte/future gate remains open, a non-read-only action descriptor that was already invoked without satisfying that mechanical gate MUST lose replay authority for the remainder of the same semantic turn. Every other currently authorized descriptor remains available. This is descriptor/result/byte evidence, not a semantic tool ranking: the substrate does not name a preferred replacement, infer whether the action was useful in another sense, or prevent a later causally distinct turn from choosing it again.
+- If that turn commits an authenticated non-read-only action but the provider omits the required terminal work-state response, the same semantic turn MAY spend at most one remaining call to recover only that response. The recovery call receives the exact sealed action results and the unchanged signed situation, exposes no action or command capability, and offers one effect-free structured carrier whose argument schema is exactly the required terminal response schema. The carrier is never dispatched and grants no file, MCP, routing, scheduling, or wake authority; its arguments still pass through the unchanged response validator before persona signing. It cannot replay the source effect, schedule a host-selected wake, infer task meaning, or override a persona-authored continuation choice. If an authenticated future stimulus was already registered, no recovery call is added because that stimulus owns the next observation.
 - No host-authored task orientation is generated.
 - No host-authored pressure or sufficiency appraisal is generated.
 - A resume may reproject and close a ready state token-free when every exact binding still verifies.

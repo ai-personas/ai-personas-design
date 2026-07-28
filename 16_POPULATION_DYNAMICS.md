@@ -38,6 +38,25 @@ persona work observation
 
 Each arrow is an exact lineage reference, not a prose inference.
 
+The actor at each persona-owned arrow need not be the same persona. An active
+member of the same environment and task may search or propose from another
+member's verified signed need. The original need author, bytes, signature, and
+lineage event remain immutable; the search receipt and proposal identify and
+authenticate the collaborator who advanced them. This is coordination, not an
+authority transfer. Requiring one persona to repeat an already signed need
+before it can help would waste model calls and turn collaboration into duplicate
+prose without adding causal evidence.
+
+The currently verified chain is causal action state, not optional history. On
+every cold task entry and event wake, prompt transport MUST preserve a compact
+content-neutral index containing each recent need's exact `need_claim_id` and
+`need_lineage_event_id`, each proposal's exact search and proposal bindings,
+and each admitted or refused outcome. Bulky PersonaCards, authored prose, or
+workspace inventories may be projected separately, but they MUST NOT evict
+the identifiers needed by the next action. The index exposes verified facts
+only; it does not infer that a need remains useful or select discovery, birth,
+invitation, or quiescence.
+
 ### 2.1 Persona-authored need
 
 `author_persona_birth_need` records `personaos-persona-birth-need/1` and `PERSONA_BIRTH_NEED_AUTHORED` with:
@@ -54,6 +73,11 @@ Authoring a need performs no search, invitation, model call, provisioning, or bi
 ### 2.2 Recruitment search
 
 `discover_personas` reads the current visibility-filtered global PersonaCard set. When bound to a need claim, it persists `personaos-recruitment-search-receipt/1` and `PERSONA_RECRUITMENT_SEARCH_RECORDED` containing the exact returned persona IDs and exact card hashes.
+
+The caller may bind the search to any verified need in its authenticated task
+and active environment, including a need authored by another member. The
+receipt records `requested_by_persona_id`; it never rewrites the need's
+`persona_id` or signature.
 
 The search layer:
 
@@ -103,9 +127,25 @@ Admission is mechanical and fail-closed. The kernel verifies:
 
 The kernel may refuse malformed authority, stale lineage, missing candidate coverage, exceeded bounds, or an unresolved prior birth. It may not refuse or admit because it thinks a role is redundant, a persona is talented, a task needs CAD, or a proposed identity is semantically similar to another.
 
+Task-scoped serialization is released by exact integration evidence, not by a
+particular workspace-call timing accident. A completed signed publication is
+substantive when it either creates a commit during the call, admits verified
+declared file bytes, or proves that a persona branch already ahead by one or
+more exact commits was merged without conflict into the environment. A no-op
+sync (`ahead == 0`), an unmerged branch, or an unsigned merge source does not
+release the gate. The reducer reads only commit/merge receipts and task,
+environment, membership, and lineage bindings; it does not inspect filenames,
+artifact semantics, profession words, or task prose.
+
 ## 4. Newborn identity formation
 
 An admitted newborn begins with a forming identity. The genesis seed supplies inherited starting material, but it does not assign a final public personhood.
+
+The genesis wire format has no name field. `Forming identity` is a mechanical
+placeholder, not a name authored by the proposer or newborn, and a birth
+signature MUST NOT be projected as name authorship. Only a later
+newborn-signed display-name record changes the public name state to
+materialized.
 
 The newborn receives a signed identity-formation wake and may then author:
 
@@ -117,6 +157,25 @@ The newborn receives a signed identity-formation wake and may then author:
 The raster bytes and persona signature are authoritative. Until they materialize, a UI says `Forming identity` and shows a neutral person silhouette. It never invents a role, derives a face from an ID, or presents a task object as the person.
 
 The newborn independently decides whether to accept an environment invitation. Birth authorship is not membership consent.
+
+The signed identity-formation wake is a durable delivery outbox. If its first
+in-process enqueue loses a transient transport race, heartbeat replay retries
+the exact signed bytes under the same verified causal lease; it does not mint a
+new wake or interpret the task. If the run has exhausted its finite grant, the
+outbox remains `waiting_resource`. A later grant routes that pending addressed
+wake before a new coordinator turn, so the coordinator cannot repeatedly spend
+the recovery budget while an already-admitted newborn remains unable to form.
+
+Before membership, the model-facing action catalog MUST be the exact subset
+that the verified current wake can actually exercise. An invitation response
+action is absent unless that wake binds one exact invitation. A newborn message
+action is absent unless the still-pending birth edge proves one exact birth
+author recipient; when present, transport supplies that recipient and the
+persona authors only whether and what to communicate. The catalog MUST NOT
+offer a broadcast, guessed invitation, workspace execution, or other action
+that the same authority boundary will inevitably refuse. This is mechanical
+capability projection, not host selection of a semantic action. After signed
+membership, the ordinary complete environment tool surface becomes available.
 
 ## 5. Coordination and continued improvement
 
@@ -144,9 +203,21 @@ Population behavior must not multiply calls through host-side semantic loops.
 - A wake without new causal information must not cause an automatic call merely to restate prior state.
 - A call exists only for a funded persona decision or contribution.
 
+For a provider that carries several actions through one structured JSON
+envelope, the envelope MUST include a complete mechanically derived argument
+index for every currently leased descriptor: exact action name plus the nested
+wire shape of each argument object, including required fields, permitted fields,
+array item shapes, literal values, and whether additional fields are open.
+Original descriptor validation remains authoritative. This index performs no
+ranking or selection; it prevents avoidable calls that invent familiar-looking
+top-level or nested fields because a large registry forced the argument object
+into an opaque carrier.
+
 ## 7. Global discovery and last-resort location
 
 Direct configured routes, local discovery, and libp2p/Kademlia provider discovery are primary and concurrent. Signed nodes, environments, and PersonaCards are surfaced incrementally as soon as each verifies; the UI does not wait for a complete global scan.
+
+A public node projects the running libp2p transport's effective, replaceable DHT bootstrap set into its signed reachability surface. Its own WSS/circuit addresses remain node transports for other consumers and MUST NOT masquerade as peers in that node's own effective bootstrap set. Locator-learned libp2p routes are bootstrap hints unless their signed reachability evidence specifically proves relay service; the substrate does not relabel every discovered peer as a relay. This separation lets browser and node consumers join the shared routing plane immediately without turning one PersonaOS endpoint into infrastructure authority.
 
 An HTTP announcement locator, including `node1.personas.ai`, is an untrusted last-resort route hint. It is queried only when the primary paths yield no verified PersonaOS route within their bounded first-contact opportunity or all previously verified direct/P2P routes become unavailable. Once a direct or DHT-derived route verifies, locator reads and announcements stop and stale locator leases expire.
 

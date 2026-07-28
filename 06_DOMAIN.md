@@ -2090,8 +2090,9 @@ class FederatedDomainProbe:
 SOURCE 1: MCP REGISTRY (LOCAL)
   Operator-installed MCP servers; kernel-local registry.
   Discover via:
-    mcp__personaos__list_tools(category="...", capability_hint="...")
-  Returns: tool descriptions, schemas, latency estimates, costs.
+    discover_mcp_capabilities(capability_ids=[exact_persona_authored_id])
+  Returns: every bounded exact-match signed candidate and descriptor evidence;
+           deterministic transport order has no ranking meaning.
   
 SOURCE 2: MCP REGISTRY (FEDERATED)
   A2A federation extends discovery across peer kernels' registries.
@@ -2101,15 +2102,16 @@ SOURCE 2: MCP REGISTRY (FEDERATED)
   Returns: tools from peer kernels; filtered by trust.
 
 SOURCE 3: MCP-ZERO ACTIVE DISCOVERY
-  Persona expresses NEED in natural language; semantic search returns
-  top-K matches.
+  Persona signs an exact capability need; exact registry matching returns
+  bounded candidate evidence without host inference or semantic ranking.
   Discover via:
-    mcp__personaos__request_tool(need="simulate quantum dynamics",
-                                   context={...})
-  Returns: tools ranked by semantic similarity + trust + cost.
+    discover_mcp_capabilities(capability_ids=[...], task_id=...)
+  Returns: candidates only. The persona explicitly dispositions and acquires
+           one exact candidate, or chooses another path.
 
 SOURCE 4: PERSONA-AUTHORED (VOYAGER)
-  If no tool found, persona authors via skill_synthesise + sandbox.
+  If the persona judges existing/discovered capabilities insufficient, it may
+  author via skill_synthesise or an exact provisioning recipe + sandbox.
   Class C (persona-learned) skill; optionally promotable to A via
   ToolArtifact state machine.
 

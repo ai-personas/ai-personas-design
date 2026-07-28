@@ -98,7 +98,7 @@ MCP is the canonical protocol for everything PersonaOS does outside the kernel.
 
 Active discovery was introduced prior to v1.0; v1.0 carries it forward.
 
-*A persona can request a tool by describing what it needs in natural language, optionally providing domain hints, latency, and cost constraints. The system returns candidate tools ranked by semantic similarity, trust, and cost.*
+*A persona authors an exact capability need and may inspect the complete bounded local execution namespace or discover signed registry candidates carrying that exact capability identifier. Discovery returns canonical candidate evidence in deterministic transport order. The substrate does not infer a need from task words, semantically rank candidates, choose one, acquire it, or provision it. Selection and any acquisition / provisioning intent remain explicit persona actions; an already available capability is equally valid.*
 
 **Technical detail:** See [A.2](#appendix-a2).
 
@@ -155,6 +155,8 @@ Write semantics: only verifier-cascade output may become a ProvenFact; a persona
 **Technical detail:** See [A.9](#appendix-a9).
 
 Addressed delivery: kernel routes into recipient's observation surface even when broadcast of that kind would be filtered. Topology allow-list per env `communication_protocol` (linear / bidirectional / star / pipeline / adversarial / mesh / host_governed); out-of-topology edges emit `CONSTRAINT_VIOLATION{kind=topology}` and drop. Back-pressure: `max_direct_inflight=3` per sender per round; `max_direct_queue=8` per recipient per round triggers `ROUTING_DIRECTIVE` to Integrator. Persistence: same round-ordered log as Blackboard, tagged `kind=DIRECT_MESSAGE`. No RPC — every cross-persona call is event-replayable.
+
+The generic `persona_message` action uses the signed `PersonaCommunication` wire names directly: `addressed_to` is an explicit exact array (empty means environment broadcast), `payload` is required opaque JSON, and an optional `parent_communication_id` may carry its exact `parent_communication_hash`. The input contract is closed. Dispatch resolves the parent from signed local authority and rejects a supplied hash that differs; the model is not asked to translate between a tool-only recipient alias and the durable communication schema.
 
 **Genesis bootstrap exception (narrow).** A genesis-minted persona that has never
 been admitted to an environment MAY exchange signed bootstrap messages only with
@@ -347,6 +349,8 @@ A live consumer MUST first give direct/local/IPFS and libp2p/Kademlia discovery 
 The shared DHT first-contact key rotates in bounded temporal epochs. A publisher MUST announce the current key and pre-announce the immediately following key to a bounded set of independently reachable DHT peers; within that bounded phase it attempts every reachable configured first-contact peer instead of stopping after the first acknowledgement. A consumer queries the current, immediately previous, and immediately following keys and gives all three direct `GET_PROVIDERS` requests a concurrent chance before any iterative traversal can consume the job deadline. Adjacent-epoch records convey location only and never extend record authority, identity validity, or signed provider-inventory expiry. This overlap makes an epoch boundary a routine handoff rather than a reason to consult the last-resort HTTP locator.
 
 The rich node `/status` document is an operator/detail projection, **not a global discovery transport**. An unfocused network view MUST derive population, presence, current public work, and artifact availability from verified discovery records plus the bounded public telemetry feeds; it MUST NOT poll every discovered node's full status. A consumer MAY fetch full status for an explicitly focused node or an authenticated operator route. A node coalesces concurrent full-status reads into one reduction and may serve the last complete snapshot while that single refresh is running. This boundary keeps global discovery latency proportional to signed record changes instead of to the number of open browser tabs times the number of peers.
+
+Discovery-derived authorization caches MUST be invalidated after every successful public-discovery refresh, including when an implementation reuses the aggregate snapshot object or signed lease container. Object identity is never generation identity. For a material persona transition, the publisher MUST refresh the signed discovery identity/card generation before projecting live telemetry from it. A currently authorized active persona therefore cannot disappear for one telemetry interval merely because its preceding generation was cached or telemetry raced the new discovery card.
 
 Public endpoint authority and first-contact inventory selection are independent. Enabling anonymous read/control access MUST NOT override an operator's explicit public discovery-kind subset. A node that exposes current workspace files through a signed live-artifact snapshot MAY omit historical per-file artifact cards from its first-contact provider inventory; it MUST retain the current hash-bound filenames and lazy body routes in that snapshot. Omitting artifact cards is valid only while the signed snapshot represents the newest materially published environment generation. After a newer package is published, the node MUST either publish that package's current file cards (with lazy, hash-bound body routes) or publish a terminal/current workspace snapshot for the same or later monotonic run generation. A consumer MUST compare exact environment authority plus monotonic run/revision identity: a non-empty older personal-worktree capture MUST NOT mask a newer durably published shared package, and zero-file scratch captures MUST NOT erase durable outputs. When both evidence lanes exist, the human UI SHOULD label and render the current published package separately from live/earlier captured worktrees; it fetches bodies only when opened and verifies their advertised hash before format-specific rendering. The unpaginated first-contact inventory MUST remain within the consumer's advertised response bound and MUST prioritise node, persona, environment, current task, and telemetry records over artifact history. If those records plus artifact cards exceed the bound, the publisher MUST paginate the artifact history or omit it from first contact rather than making the entire node undiscoverable.
 
@@ -1055,17 +1059,19 @@ PROMPT TEMPLATES
 
 <a id="appendix-a2"></a>
 
-```python
-mcp__personaos__request_tool(
-    need="simulate quantum master equation dynamics",
-    context={
-        "domain_hint": "quantum_device_design",
-        "preferred_latency_ms": 1000,
-        "max_cost_per_call": 0.50,
-    },
-    top_k=5,
-)
-# Returns: candidate tools ranked by semantic similarity + trust + cost
+```text
+1. Persona authors an exact capability ID and rationale against its signed work
+   situation.
+2. inspect_execution_capabilities exposes the complete bounded exact-name index
+   plus paged provenance; it executes and selects nothing.
+3. discover_mcp_capabilities returns every bounded signed registry candidate
+   matching the exact capability ID, in deterministic evidence order.
+4. The persona may explicitly use an existing capability, acquire one exact
+   discovered candidate, author a provisioning recipe, synthesize a reusable
+   skill, delegate, or leave the gap honestly blocked.
+5. Every effect receives ordinary signed action / acquisition / invocation
+   evidence. No host ranking, automatic selection, or automatic provisioning is
+   admissible.
 ```
 
 ### A.3 MCP federated discovery

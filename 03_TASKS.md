@@ -311,6 +311,15 @@ model pool, wake, or model call. Different source generations remain
 independently concurrent. Historical lineage may retain every completed leg,
 but only one admitted successor may supersede a particular paused generation.
 
+Pending operator resource grants are run-scoped records, not one node-wide
+target scalar. Grants naming different paused source generations MUST coexist
+without last-writer-wins target replacement or budget aggregation into another
+run. One heartbeat may transport all currently pending independent grants to
+their exact signed owners; actor serialization remains per persona, while
+distinct personas and admitted successor runs may execute concurrently. A
+failed delivery requeues only its own grant and cannot roll back or consume a
+grant accepted for another run.
+
 Completion freshness MUST remain exact over the signed task, environment,
 workspace bytes and conflict state, team and membership, acquired-capability
 state, and bound domain context. The turn-scoped transport/action menu is not
