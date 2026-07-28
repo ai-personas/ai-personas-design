@@ -252,6 +252,7 @@ Population behavior must not multiply calls through host-side semantic loops.
 - One substantive persona turn may observe, act, communicate, and author one work-state revision.
 - Discovery is a data operation, not a model call.
 - Signing, replay, readiness reduction, stale-state invalidation, and public projection are token-free.
+- Every turn exposes the exact active, closed, and previously introduced commitment IDs. A commitment ID is one-shot: closing it reserves it permanently, the next-turn response contract excludes every reserved ID, and pre-dispatch reduction refuses an attempted reuse before recording an action effect.
 - A wake without new causal information must not cause an automatic call merely to restate prior state.
 - A call exists only for a funded persona decision or contribution.
 
