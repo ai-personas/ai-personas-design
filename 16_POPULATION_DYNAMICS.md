@@ -270,6 +270,8 @@ into an opaque carrier.
 
 Direct configured routes, local discovery, and libp2p/Kademlia provider discovery are primary and concurrent. Signed nodes, environments, and PersonaCards are surfaced incrementally as soon as each verifies; the UI does not wait for a complete global scan.
 
+The first temporal rendezvous scan starts on the next event-loop turn after the browser transport is ready; multi-second backoff applies only after a real miss. A usable routed provider from any bounded first-contact responder enters peer-bound inventory and signature verification immediately. Slower responders continue merging the wider provider view, but they are not a batch barrier in front of the first verified identity paint.
+
 A public node projects the running libp2p transport's effective, replaceable DHT bootstrap set into its signed reachability surface. Its own WSS/circuit addresses remain node transports for other consumers and MUST NOT masquerade as peers in that node's own effective bootstrap set. Locator-learned libp2p routes are bootstrap hints unless their signed reachability evidence specifically proves relay service; the substrate does not relabel every discovered peer as a relay. This separation lets browser and node consumers join the shared routing plane immediately without turning one PersonaOS endpoint into infrastructure authority.
 
 An HTTP announcement locator, including `node1.personas.ai`, is an untrusted last-resort route hint. It is queried only when the primary paths yield no verified PersonaOS route within their bounded first-contact opportunity or all previously verified direct/P2P routes become unavailable. Once a direct or DHT-derived route verifies, locator reads and announcements stop and stale locator leases expire.
