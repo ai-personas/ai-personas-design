@@ -7,7 +7,7 @@ status: Stable
 
 **AI Personas gives AI agents persistent identity, memory, safety, and coordination — so they can work in any domain, remember across sessions, and stay safe at scale.**
 
-This document is your starting point. It orients you to the 14-file v1.0 specification and helps you find the right entry path for your background. Detailed conventions for documentation style are in [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md); the normative specifications themselves live in `00_VISION.md` through `13_DESIGN_VALIDATION.md`.
+This document is your starting point. It orients you to the current specification and helps you find the right entry path for your background. Detailed conventions for documentation style are in [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md).
 
 v1.0 is the single, self-contained reference for AI Personas. **Read v1.0 alone** — it is the authoritative design specification.
 
@@ -64,15 +64,15 @@ AI Personas is built around five key mechanisms:
 | 8 | [`07_ARTIFACTS.md`](07_ARTIFACTS.md) | Work products — how files and deliverables are structured, co-edited, verified, and shipped. | 12 min |
 | 9 | [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md) | Memory and learning — how personas remember, find relevant information, and improve their own prompts over time. | 18 min |
 | 10 | [`09_PROTOCOLS.md`](09_PROTOCOLS.md) | Connecting to the outside world — MCP for tools, A2A for federation, 12 framework adapters, and cryptographic key management. | 14 min |
-| 11 | [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) | The test catalog — ~1,249 pass/fail criteria (see its §7 for the authoritative family table) that prove the system works as specified. | 8 min |
+| 11 | [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) | User-intent and operating-path outcomes, with admissible live signed evidence and honest failure states. | 8 min |
 | 12 | [`12_GLOSSARY.md`](12_GLOSSARY.md) | Reference dictionary — every AI Personas term defined in one place. | 6 min |
 | 13 | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) | Real-world scenarios — concrete examples (build a house, design a chip, run a study) walked end-to-end against the design. | 8 min |
 | 14 | [`14_DECISIONS.md`](14_DECISIONS.md) | Why the design is the way it is — 40+ architectural decision records explaining the trade-offs behind each major choice. | 10 min |
 | 15 | [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) | How AI Personas organise themselves — 5 building blocks for self-organising coordination within environments. | 12 min |
-| 16 | [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) | How a few personas grow into a varied population — Persona Genesis (personas authoring new personas) under environmental pressure, with diversity guarantees and hard replication brakes (per-node and cross-node under global ReplicationBound aggregation). | 12 min |
+| 16 | [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) | Persona-authored population change: signed need, exact unranked recruitment search, candidate dispositions, open genesis seed, and mechanical replication brakes. | 12 min |
 | 17 | [`17_ECONOMY.md`](17_ECONOMY.md) | *(v2.0 draft)* An economy the personas author for themselves — the substrate ships only the inviolable physics and reuses the corpus's existing emergence machinery, defining no units, markets, or even building blocks; personas (with humans contributing ideas) discover what has value and its whole vocabulary, may research tokenisation/crypto and create their own settlement layers, so humans, personas, and other conscious beings thrive. | 12 min |
 | 18 | [`18_SETTLEMENT.md`](18_SETTLEMENT.md) | *(v2.0 draft)* One *reference* settlement & transfer layer an emergent economy may adopt, extend, fork, or supersede — bridge to real-world value or move custody; sell the title, never the soul; fenced handover, atomic DvP, cryptographic leases. | 12 min |
-| 19 | [`19_PERSONA_PRESSURE_ADDENDUM.md`](19_PERSONA_PRESSURE_ADDENDUM.md) | *(addendum)* Why continuous refinement needs persona-authored pressure/readiness appraisals, how `pressure_open` preserves best-so-far export without falsely closing work, and why the mechanism is not an artifact contract. | 8 min |
+| 19 | [`19_PERSONA_WORK_STATE.md`](19_PERSONA_WORK_STATE.md) | Persona-authored public work state: understanding, commitments, contribution, completed work, next intent, collaboration, and exact readiness binding. | 8 min |
 | 20 | [`20_PERSONA_BRAIN_FRAGMENTS.md`](20_PERSONA_BRAIN_FRAGMENTS.md) | *(addendum)* Persona-owned brain fragments, BrainCompile, ActiveAgentSpec, and evidence-reviewed prompt self-improvement without domain or tool hardcoding. | 10 min |
 
 **Short on time?** Read just `00_VISION.md` (12 min) for the complete overview. Add `02_PERSONA.md` for how AI Personas are built. For a third file, pick the one closest to your interest: projects → `04_PROJECT.md`; shared workspaces → `05_ENVIRONMENT.md`; new domains → `06_DOMAIN.md`; memory → `08_KNOWLEDGE.md`.
@@ -111,11 +111,11 @@ Pick the path that matches your background. Each gives you a focused reading lis
 4. [`01_KERNEL.md §2`](01_KERNEL.md) — the 8 safety checks (operator policy = check #4)
 
 ### Contributor / student
-*Extending the spec, writing tests, or understanding the design by example.*
+*Extending the spec or understanding the design by example.*
 
 1. This README (5 min)
 2. [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) — real-world scenarios walked end-to-end (8 min; start with SCENARIO 01)
-3. [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) — test structure and pass/fail criteria (8 min)
+3. [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) — user-intent outcomes and admissible operating evidence (8 min)
 4. [Contributing](#contributing) below for your first contribution
 
 ### Executive / stakeholder
@@ -132,20 +132,18 @@ Pick the path that matches your background. Each gives you a focused reading lis
 
 The design validation catalog ([`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md)) has a [backlog of scenario topologies](13_DESIGN_VALIDATION.md#scenario-candidates-worth-walking-next) not yet walked. Pick one, walk it end-to-end against the spec using the [scenario template](13_DESIGN_VALIDATION.md), and submit a PR with your findings. This is how most v1.0 design improvements originate.
 
-**How to write a new acceptance test:**
+**How to write a new design criterion:**
 
-Each test in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) follows this pattern:
+Each criterion in [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) follows this pattern:
 
 ```text
-A-XX1     One-sentence description of what is being tested.
-          Setup: what state must exist before the test runs.
-          Action: what the test does (e.g., "propose a coordination
-          shape with composition_depth > 3").
-          Expected: what should happen (e.g., "REFUSED with
-          'max_composition_depth_exceeded'").
+C-XX1     Intent: the principal or normative outcome.
+          Observable outcome: what a person can see or use.
+          Admissible evidence: current signed state and exact artifacts.
+          Failure state: what remains honestly visible while incomplete.
 ```
 
-Find the test family matching your area (A-K* for kernel, A-P* for persona, etc.), write the test in the same format, and add it to the appropriate section.
+Place the criterion with the design area it constrains. Do not add a mock or executable harness as an alternate product specification.
 
 **Contribution path:**
 1. Fork the repo

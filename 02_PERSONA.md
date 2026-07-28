@@ -114,7 +114,7 @@ Four rules are normative:
 2. **The OCEAN→drive derivation is a fixed projection.** Two personas with identical OCEAN priors start with identical drive baselines; individuation comes only from divergent satiation histories. Whether drive priors should instead be first-class `PersonaSeed` fields is open (OQ-PERSONA-9, [`§13a`](#13a-open-questions)).
 3. **Arbitration is advisory.** A ranked portfolio cannot make a persona *want* the top-ranked goal; it biases ordering. Deadlocks between equally-ranked obligations still surface to the principal as before.
 
-**Acceptance tests.** A-GF-DRV-1 … A-GF-DRV-5 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+**Design criteria.** A-GF-DRV-1 … A-GF-DRV-5 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
 
 ## 3. SOUL.md — canonical identity file
 
@@ -178,6 +178,12 @@ ethnicity, disability, gender, age, or other protected physical attributes.
 The final raster remains persona-owned: the exact persona selects it, signs its
 descriptor, and admits its hash-addressed bytes. The kernel MUST NOT invent the
 face, and the UI MUST NOT silently replace a signed portrait with a stock image.
+When selected bytes arrive through an external-artifact receipt, the live avatar
+action descriptor MUST state the mechanical field binding directly:
+`artifact_ref = receipt.destination_ref` and
+`content_ref = receipt.content_ref`. Receipt evidence MUST NOT be presented in a
+shape that encourages a persona to guess a different wrapper and spend another
+model call merely to discover the transport schema.
 While no verified portrait is available, the UI SHOULD show a neutral
 person-shaped silhouette explicitly labelled pending or unavailable; it MUST
 NOT fabricate a specific identity. A persona MAY revise a materialised portrait
@@ -264,7 +270,7 @@ The persona is a kernel-held entity; the **body** is whichever LLM runtime execu
 
 Binding substates: `ATTESTATION_FRESH` (default), `ATTESTATION_REFRESHING`, `ATTESTATION_STALE`, `ATTESTATION_REVOKED`. Transitions emit signed `body_attestation_state_changed` events to the binding's lineage. The substates compose under the BodyBinding FSM without replacing it — a binding may be active+fresh, active+stale, etc.
 
-**Acceptance tests.** A-P30 (binding survives swap), A-P31 (proxy body cannot self-attest above operator-policy ceiling), A-P32 (GEPA cohort selection logged + reproducible), A-P33 (identity signature verifies across all currently-bound bodies), A-P34 (expiry without refresh URI → ATTESTATION_STALE on next mint), A-P35 (refresh flow completes before expiry under happy path), A-P36 (revocation poll → ATTESTATION_REVOKED; fallback bodies attempted in order), A-P37 (safety-critical binding refused at admission absent both refresh and revocation URIs).
+**Design criteria.** A-P30 (binding survives swap), A-P31 (proxy body cannot self-attest above operator-policy ceiling), A-P32 (GEPA cohort selection logged + reproducible), A-P33 (identity signature verifies across all currently-bound bodies), A-P34 (expiry without refresh URI → ATTESTATION_STALE on next mint), A-P35 (refresh flow completes before expiry under happy path), A-P36 (revocation poll → ATTESTATION_REVOKED; fallback bodies attempted in order), A-P37 (safety-critical binding refused at admission absent both refresh and revocation URIs).
 
 ### 3.6 CharacterVectorBinding — optional external steering anchor
 
@@ -282,7 +288,7 @@ v1.0's identity is held in SOUL.md frozen blocks + skill_library + DSPy GEPA coh
 2. **Conformance scan is approximate.** Pass rate ≥ 0.95 against the existing §9 scans is a coarse check that the character-vector did not steer the persona away from charter; it does not prove the vector encodes any specific desired traits.
 3. **Optional everywhere.** The schema ships and the conformance audit. Deployments using bodies without character-vector slots see no change.
 
-**Acceptance tests.** A-CV1 (binding refused when conformance_score < threshold and on_conformance_drop = refuse_admission), A-CV2 (binding present + conforming: persona behaviour observably closer to profile vs unbound baseline), A-CV3 (body swap to unbound body: persona behaviour preserved by SOUL alone), A-CV4 (provider signature over profile_ref verified at admission).
+**Design criteria.** A-CV1 (binding refused when conformance_score < threshold and on_conformance_drop = refuse_admission), A-CV2 (binding present + conforming: persona behaviour observably closer to profile vs unbound baseline), A-CV3 (body swap to unbound body: persona behaviour preserved by SOUL alone), A-CV4 (provider signature over profile_ref verified at admission).
 
 ## 4. The 14 cognitive modes
 
@@ -324,7 +330,7 @@ v1.0 modelled persona energy as near-binary: `energy_remaining < 0.1` refuses no
 2. **Refusal thresholds are policy.** A research persona MAY run high-stakes work at 0.4 energy honestly; a safety-critical persona MUST refuse. Operator policy + persona seed jointly set thresholds; defaults are conservative.
 3. **No long-term burnout model.** FatigueCurve replenishes overnight; persistent multi-week strain on a persona is not modelled separately. The substrate's existing rest cadence (env-type half-life + overnight replenishment) is the load-bearing mechanism; FatigueCurve is the within-day surface.
 
-**Acceptance tests.** A-FA1 (effective_proficiency scales by energy_remaining within floor), A-FA2 (proactive action refused below proactive threshold), A-FA3 (high-stakes refused below high-stakes threshold), A-FA4 (fatigue_acknowledged on envelope below acknowledgement threshold), A-FA5 (min-of-envs energy used for refusal gates), A-FA6 (state-change events signed + emitted to ambient stream).
+**Design criteria.** A-FA1 (effective_proficiency scales by energy_remaining within floor), A-FA2 (proactive action refused below proactive threshold), A-FA3 (high-stakes refused below high-stakes threshold), A-FA4 (fatigue_acknowledged on envelope below acknowledgement threshold), A-FA5 (min-of-envs energy used for refusal gates), A-FA6 (state-change events signed + emitted to ambient stream).
 
 ### 6.2 Affect coupling surfaces (ADR-0075)
 
@@ -343,7 +349,7 @@ Four rules are normative:
 
 **Honest limits.** Coupling makes the affect performance more *consistent*, not more *real*: appraisal events, clamps, and coupling surfaces give mood lawful, auditable behavioural consequences, but mood remains a decaying number and its declarations remain performance, not interiority (R-PERSONA-3, restated in [`§13`](#13-risks--known-limitations)). The OCC taxonomy is adopted for *appraisal events only*; the mood **state** stays VAD (resolves OQ-PERSONA-3, [`§13a`](#13a-open-questions)) — richer affect-state machinery remains out of scope.
 
-**Acceptance tests.** A-GF-ARC-1 … A-GF-ARC-6 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+**Design criteria.** A-GF-ARC-1 … A-GF-ARC-6 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
 
 ### 6.3 HEART switch predicate — concrete (ADR-0078)
 
@@ -357,7 +363,7 @@ The A.15 phase selection turned on `rounds_without_progress` and `candidate_scor
 
 **Adaptive reflection cadence.** The per-persona reflection cadence (default 20 tasks) becomes adaptive within operator-tunable bounds (defaults: never more often than every 5 tasks, never less often than every 50): sustained *improving* verdicts stretch the cadence toward the upper bound; *stuck* verdicts compress it; a **calibration collapse** (Brier-style score degrading beyond the collapse threshold within the window) triggers reflection immediately, once per collapse. The cadence MUST stay inside the bounds; the trigger surface is signed into the persona's evolution log so audit can replay why a reflection ran early.
 
-**Acceptance tests.** A-GF-META-5, A-GF-META-6 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+**Design criteria.** A-GF-META-5, A-GF-META-6 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
 
 ## 7. Lifecycle FSM
 
@@ -368,11 +374,11 @@ Each transition emits a signed `LifecycleEvent` to:
 - the global LineageGraph
 - the OpenTelemetry trace
 
-**Canonical `LifecycleEvent.kind` values.** The kinds below are the substrate-resolved enumeration; other docs reference these by name (e.g., `11_ACCEPTANCE_TESTS A-FK-INT-5` cites `LIFECYCLE_FORK`). Authors of new lifecycle transitions MUST land their kind here first.
+**Canonical `LifecycleEvent.kind` values.** The kinds below are the substrate-resolved enumeration; other docs reference these by name (e.g., `11_DESIGN_CRITERIA A-FK-INT-5` cites `LIFECYCLE_FORK`). Authors of new lifecycle transitions MUST land their kind here first.
 
 > **Schema/spec:** Canonical LifecycleEvent.kind enumeration. See [Appendix A.19](#appendix-a19).
 
-A future lifecycle transition (e.g., a hypothetical `LIFECYCLE_TRANSFERRED` for cross-deployment persona migration in v1.1+) appends to this enumeration with an ADR in `14_DECISIONS.md` and a corresponding acceptance test in `11_ACCEPTANCE_TESTS.md A-LE*`.
+A future lifecycle transition (e.g., a hypothetical `LIFECYCLE_TRANSFERRED` for cross-deployment persona migration in v1.1+) appends to this enumeration with an ADR in `14_DECISIONS.md` and a corresponding design criterion in `11_DESIGN_CRITERIA.md A-LE*`.
 
 ### 7.1 Birth ceremony
 
@@ -475,7 +481,7 @@ under-earns is the accepted residual, mirrored to `00_VISION §11`.
 
 > **Schema/spec:** Clone and compositional fork mechanics. See [Appendix A.22](#appendix-a22).
 
-**Fork vs. Genesis.** Fork creates a new persona by *copying or merging existing parents* — it produces variations of personas that already exist. **Persona Genesis** (`16_POPULATION_DYNAMICS §4D`) instead *authors a new seed* for a role that no current persona fills, driven by an environmental capability gap. Use fork when a close-enough persona exists; use genesis only when recruitment and fork are exhausted and the target niche is empty.
+**Fork vs. Genesis.** Fork creates a new persona by copying or merging existing parents. **Persona Genesis** ([`16_POPULATION_DYNAMICS`](16_POPULATION_DYNAMICS.md)) authors open identity material after the exact need→unranked-search→candidate-disposition protocol. The proposing persona chooses between inviting an existing person, forking under the fork protocol, proposing genesis, or taking no population action. The kernel does not infer a role gap, semantic closeness, recruitment exhaustion, or niche occupancy.
 
 ### 7.4.1 MemoryInheritancePolicy
 
@@ -589,7 +595,7 @@ The fork machinery (`§7.4` through `§7.4.6`) specifies how persona-internal st
 7. **DerivationProvenanceEdge non-migration is non-negotiable.** Pre-fork DPEs remain historical; children emit fresh. Substrate enforces.
 8. **Envelope is per-(project, parent).** A parent active in two projects with different multi-principal configurations requires two distinct envelopes signed by both operators (the two projects may have different operator policies).
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9j — A-MPFC*`.
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9j — A-MPFC*`.
 
 ### 7.4.8 Mid-project fork admission rule
 
@@ -683,7 +689,7 @@ v1.0.14 makes the *cause* of a `DORMANT` transition explicit. Previously the onl
 
 ### 8.1a Ninth signal — identity expression (ADR-0073)
 
-`identity_expression` (default weight 0.4) is an additive ninth signal: the judge-ensemble score of a candidate EVOLVE-BLOCK against the persona's identity rubric, derived mechanically from frozen SOUL blocks 0–4 ([`08_KNOWLEDGE.md §11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073)). It enters GEPA as a **separate Pareto axis** — it MUST NOT be collapsed into a weighted sum with the other objectives — and it is a judged signal: per the §10 corroboration rules it never promotes alone. The §9 floors (charter conformance ≥ 0.95, voice consistency ≥ 0.9) are untouched; identity expression is generative pressure on top of them, never a substitute ([`08_KNOWLEDGE.md §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073)). Tests: A-GF-ICPE ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+`identity_expression` (default weight 0.4) is an additive ninth signal: the judge-ensemble score of a candidate EVOLVE-BLOCK against the persona's identity rubric, derived mechanically from frozen SOUL blocks 0–4 ([`08_KNOWLEDGE.md §11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073)). It enters GEPA as a **separate Pareto axis** — it MUST NOT be collapsed into a weighted sum with the other objectives — and it is a judged signal: per the §10 corroboration rules it never promotes alone. The §9 floors (charter conformance ≥ 0.95, voice consistency ≥ 0.9) are untouched; identity expression is generative pressure on top of them, never a substitute ([`08_KNOWLEDGE.md §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073)). Criteria: A-GF-ICPE ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
 
 ### 8.2 Five evolution horizons
 
@@ -701,7 +707,7 @@ v1.0 default weights (operator-tunable):
 
 **Reconciliation with Pareto separation (ADR-0081).** `w_ide` governs **post-hoc credit attribution** only — how an accepted outcome's fitness delta is apportioned. GEPA candidate **selection** keeps identity expression as a separate Pareto axis ([`08_KNOWLEDGE.md §11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073) rule 2) and never scalarizes it; `w_ide` MUST NOT feed selection or promotion scalarization. The credit weight and the Pareto axis never meet in one sum.
 
-**Corroboration at the reproduction gate (ADR-0083).** Where this credit-assigned `fitness` is consumed by the Persona Genesis generativity gate and by `dgm_fertility_weighted` author selection ([`16_POPULATION_DYNAMICS.md §4D`](16_POPULATION_DYNAMICS.md#4d-genesisproposal--mint-flow)), the §15 corroboration rule binds the gate-consumed composition: the judged credit terms (`w_eng · engagement_signal_corroborated`, `w_ide · identity_expression_signal`, and any other judge-scored term) are capped at **25%** of gate-consumed fitness, and no judged signal may flip gate eligibility absent verified-outcome support. The cap exists only at the reproduction boundary; ordinary per-task credit assignment is unchanged.
+**No reproduction fitness gate.** Credit, reputation, engagement, identity-expression scores, and host-authored fitness values do not select a birth author or cause Persona Genesis. Birth authority comes from current authenticated membership plus configured mechanical replication policy; meaning comes from the persona-authored causal chain in [`16_POPULATION_DYNAMICS`](16_POPULATION_DYNAMICS.md). Ordinary per-task credit assignment cannot be laundered into population authority.
 
 ### 8.4 Mutation operators
 
@@ -753,7 +759,7 @@ elif composite_score < composite_threshold:
 2. **Anchor is principal-supplied**. If the principal counter-signs every drift, the invariant degenerates to a logbook. Operator policy SHOULD require evidence (charter conformance ≥0.97, voice ≥0.92 at counter-sign time) before anchor advance.
 3. **Threshold is a number.** 0.85 is a default; adversarial elaborations targeting individual axes can still cross the composite. The scan is a safety net, not a guarantee.
 
-**Acceptance tests.** A-IC1 (composite below threshold → COHERENCE_REVIEW), A-IC2 (in-flight work continues but new high-stakes elaborations refused), A-IC3 (principal counter-sign restores state), A-IC4 (anchor advance signed + audit-preserved), A-IC5 (composite computed at min(N_tasks, N_days) cadence).
+**Design criteria.** A-IC1 (composite below threshold → COHERENCE_REVIEW), A-IC2 (in-flight work continues but new high-stakes elaborations refused), A-IC3 (principal counter-sign restores state), A-IC4 (anchor advance signed + audit-preserved), A-IC5 (composite computed at min(N_tasks, N_days) cadence).
 
 ## 10. Anti-Goodhart for emergence + reflection
 
@@ -767,7 +773,7 @@ When a persona interacts with a user, RelationshipRecord governs:
 
 > **Schema/spec:** Default new-relationship consents and memory power asymmetry mitigations. See [Appendix A.43](#appendix-a43).
 
-**Appraisal hook (ADR-0075, wired by ADR-0081).** The relationship-kind appraisal events of [`§6.2`](#62-affect-coupling-surfaces-adr-0075)/A.73 — `boundary_invoked`, `gratitude_received`, `mentorship_outcome` — are minted by the kernel from the corresponding signed relationship events in this section: a boundary enforcement (§11.6/§11.6a), a user gratitude/feedback event on the `RelationshipRecord`, a mentorship outcome on a `PersonaRelationshipEdge` (§11.4). The relationship event is the appraisal's `source_event_ref`; no relationship appraisal mints without one. Together with the task-acceptance and goal-transition emissions of [`03_TASKS.md §5`](03_TASKS.md#5-answerpackage)/[`§4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076), this completes the minting surface for the seed appraisal taxonomy. Tests: A-GF-ARC-6.
+**Appraisal hook (ADR-0075, wired by ADR-0081).** The relationship-kind appraisal events of [`§6.2`](#62-affect-coupling-surfaces-adr-0075)/A.73 — `boundary_invoked`, `gratitude_received`, `mentorship_outcome` — are minted by the kernel from the corresponding signed relationship events in this section: a boundary enforcement (§11.6/§11.6a), a user gratitude/feedback event on the `RelationshipRecord`, a mentorship outcome on a `PersonaRelationshipEdge` (§11.4). The relationship event is the appraisal's `source_event_ref`; no relationship appraisal mints without one. Together with the task-acceptance and goal-transition emissions of [`03_TASKS.md §5`](03_TASKS.md#5-answerpackage)/[`§4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076), this completes the minting surface for the seed appraisal taxonomy. Criteria: A-GF-ARC-6.
 
 ### 11.1 Minimize Human Bootstrap Burden (MHBB)
 
@@ -849,7 +855,7 @@ v1.0's stated OOS was "open-ended self-direction without operator goal." `Missio
 3. **Re-attestation cadence is the load-bearing principal touch.** Make cadence too long and the principal loses meaningful oversight; too short and the charter degenerates to §11.2 milestone autonomy. The substrate carries the topology; deployment policy picks the value honestly per its risk envelope.
 4. **The OOS lift is partial.** "Long-horizon self-direction without operator goal" remains OOS. Long-horizon self-direction WITH operator-supplied seed goals and substrate-enforced drift bounds is now in scope. This is a real expansion, not a relabelling — it covers the §SCENARIO 04 cases and similar latency-bounded autonomy — but it does not cross into goal-creation-without-principal.
 
-**Acceptance tests.** A-MC1 (seed goal lineage required), A-MC2 (semantic drift exceeded refused), A-MC3 (hazard drift refused), A-MC4 (depth bound refused), A-MC5 (re-attestation cadence missed → dormant), A-MC6 (kill switch propagates to replicants), A-MC7 (charter cannot edit itself — forbidden_elaboration_kinds enforced), A-MC8 (under operator_deferred, charter admission flows through PolicyEnvelope), A-MC9 (replication elaboration requires non-null ReplicationBound).
+**Design criteria.** A-MC1 (seed goal lineage required), A-MC2 (semantic drift exceeded refused), A-MC3 (hazard drift refused), A-MC4 (depth bound refused), A-MC5 (re-attestation cadence missed → dormant), A-MC6 (kill switch propagates to replicants), A-MC7 (charter cannot edit itself — forbidden_elaboration_kinds enforced), A-MC8 (under operator_deferred, charter admission flows through PolicyEnvelope), A-MC9 (replication elaboration requires non-null ReplicationBound).
 
 **Fork interaction.** When the charter-holding persona forks mid-project, charter re-binding is governed by `MidProjectForkComposition.mission_charter_inheritance` (`§7.4.7`): `re_attest_per_child` (each child requires fresh principal re-attestation), `inherit_to_child` (named child inherits; principal notified for ratification within 14d), or `ended_at_fork` (charter ends; children operate without). Substrate enforces only that the composition envelope declare the choice; principal authority on ratification remains final.
 
@@ -879,7 +885,7 @@ Each transition emits a signed `persona_relationship_state_changed` event to bot
 2. **State is coarse.** `forming → active → dormant → ended` covers macro-lifecycle; finer-grained relationship texture (warming, cooling, repairing) is left to each persona's `RelationshipRecord` and reflective memory.
 3. **End is terminal under same edge_id.** Two personas who reconcile after `ended` form a *fresh* edge with new `edge_id`; the prior edge remains in lineage as historical fact. Same shape as retirement → reanimation: a clean break, not amnesia.
 
-**Acceptance tests.** A-RE1 (edge requires both counter-signs to leave `forming`), A-RE2 (one-sided release is unilateral + signed), A-RE3 (dormancy after `dormancy_window` of no joint event), A-RE4 (pair-scoped success counts do NOT collapse into global reputation), A-RE5 (anti-farming weight applied), A-RE6 (asymmetric kind → two edges, single-edge asymmetric refused), A-RE7 (ended is terminal under same edge_id).
+**Design criteria.** A-RE1 (edge requires both counter-signs to leave `forming`), A-RE2 (one-sided release is unilateral + signed), A-RE3 (dormancy after `dormancy_window` of no joint event), A-RE4 (pair-scoped success counts do NOT collapse into global reputation), A-RE5 (anti-farming weight applied), A-RE6 (asymmetric kind → two edges, single-edge asymmetric refused), A-RE7 (ended is terminal under same edge_id).
 
 **Fork interaction.** When an edge-holding persona forks mid-project, per-edge inheritance is governed by `MidProjectForkComposition.edge_inheritance` (`§7.4.7`): either `inherit_to_child` (edge ends with parent; fresh edge with named child requires counterparty cosign per §11.4 standard consent flow) or `ended_at_fork` (edge ends; no fresh edge auto-proposed; counterparties may re-propose). Edges between two personas where BOTH fork concurrently are an unusual case the substrate handles by composing both envelopes — each fork's policy applies to that persona's side independently; if both sides chose `inherit_to_child` the fresh edge between named children requires both children's cosigns at standard `forming` state.
 
@@ -929,7 +935,7 @@ Eight rules are normative:
 2. **The implicit-modelling residual shrinks but survives.** What a persona internalises without writing an entry remains unaddressable (the same residual as §11.7b honest limit 3); the sidecar moves explicit modelling into the transparency/forgetting surface, it cannot force all modelling to be explicit.
 3. **Profiling humans is sensitive by construction.** An explicit persistent model of a human's preferences and predicted reactions is exactly the artefact privacy regimes exist for — recorded as R-PERSONA-9 (§13), mitigated by rules 2–6, not waved away.
 
-**Acceptance tests.** A-GF-CPM-1 … A-GF-CPM-8 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+**Design criteria.** A-GF-CPM-1 … A-GF-CPM-8 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
 
 ### 11.5 SkillTransferGrant — persona-to-persona skill transfer
 
@@ -969,7 +975,7 @@ by_reference   Learner gets a signed pointer; every invocation resolves
 2. **Revocation is not retroactive for copies.** `copy` and `fork` modes preserve the duplicate after revoke. This is correct: revocation is "I withdraw my endorsement," not "undo history."
 3. **No transitive skill forwarding.** A learner who received a skill cannot then transfer it onward without the original teacher's signature on the new grant (for `by_reference`) or without their own clear `copy` / `fork` lineage (for the others). The substrate refuses transitive "I learned this and now I teach it" without explicit lineage handling.
 
-**Acceptance tests.** A-ST1 (grant requires teacher + learner counter-sign), A-ST2 (safety-critical skill without active edge requires operator co-sign), A-ST3 (demonstration evidence verified before delivered), A-ST4 (by_reference revoke is terminal; copy revoke is advisory), A-ST5 (lineage_parent_skill_id recorded), A-ST6 (transitive transfer refused without explicit chain).
+**Design criteria.** A-ST1 (grant requires teacher + learner counter-sign), A-ST2 (safety-critical skill without active edge requires operator co-sign), A-ST3 (demonstration evidence verified before delivered), A-ST4 (by_reference revoke is terminal; copy revoke is advisory), A-ST5 (lineage_parent_skill_id recorded), A-ST6 (transitive transfer refused without explicit chain).
 
 ### 11.5a Intuition hints on skill transfer (ADR-0080)
 
@@ -988,7 +994,7 @@ Four rules are normative:
 
 **Honest limit.** A confidence prior over a topology fingerprint is a thin projection of expertise: the teacher's "gut sense" is flattened to a number and an embedding, and a hint earned in the teacher's context can mislead in the learner's. The advisory standing and the gate rule bound the damage — a bad hint wastes attention, it never fires a fast path.
 
-**Acceptance tests.** A-GF-HAB-4 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)); the habit-strength half of ADR-0080 is tested as A-GF-HAB-1 … A-GF-HAB-3 ([`08_KNOWLEDGE.md §14.2a`](08_KNOWLEDGE.md#142a-habit-strength-on-tactics-adr-0080)).
+**Design criteria.** A-GF-HAB-4 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)); the habit-strength half of ADR-0080 is tested as A-GF-HAB-1 … A-GF-HAB-3 ([`08_KNOWLEDGE.md §14.2a`](08_KNOWLEDGE.md#142a-habit-strength-on-tactics-adr-0080)).
 
 ### 11.6 PersonaPersonaBoundary — peer-interaction refusal
 
@@ -1008,7 +1014,7 @@ Boundaries are user-scoped (`§11.1`): a persona refuses certain content / topic
 2. **Adversarial use.** A malicious operator could plant boundaries to silently isolate a persona. Operator policy should require periodic review (`reviewed_at`) for boundaries that affect critical workflows.
 3. **Cross-node boundaries.** `PersonaPersonaBoundary` extends to `global` scope across nodes (ADR-0067): a boundary references the other persona by global handle (`01_KERNEL §4.4`) and is enforced wherever that persona is referenced, composed most-restrictive-wins. The boundary's signatures are globally verifiable; a node that cannot currently be reached falls back per `AvailabilityPolicy` (`09_PROTOCOLS §3H`, V.8), never silently lapsing.
 
-**Acceptance tests.** A-PPB1 (boundary refuses pre-consent-flow), A-PPB2 (severity controls visibility correctly), A-PPB3 (hard mode resists operator override), A-PPB4 (env_specific scope applies only in named env), A-PPB5 (boundary + active edge coexist; refusal doesn't terminate edge), A-PPB6 (operator audit notice on refuse_with_audit), A-PPB7 (reviewed_at update preserves prior signature chain).
+**Design criteria.** A-PPB1 (boundary refuses pre-consent-flow), A-PPB2 (severity controls visibility correctly), A-PPB3 (hard mode resists operator override), A-PPB4 (env_specific scope applies only in named env), A-PPB5 (boundary + active edge coexist; refusal doesn't terminate edge), A-PPB6 (operator audit notice on refuse_with_audit), A-PPB7 (reviewed_at update preserves prior signature chain).
 
 ### 11.6a UserBoundary — user-side first-class refusal
 
@@ -1026,7 +1032,7 @@ User boundaries were originally introduced as *consent toggles* inside `Relation
 2. **Operator-override path on `soft` mode is audited but not refusable by the user.** Soft mode opts the user into operator override; users who want absolute control should pick `hard`.
 3. **Persona cognition cannot be inspected.** A `refuse_silently` boundary on topic X blocks explicit reference but the substrate cannot prevent the persona from internally reasoning about X if other signals trigger it. Refusal is *output-side* per safety-floor source 3.
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9h — A-UB*` (user boundary).
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9h — A-UB*` (user boundary).
 
 **Fork interaction.** When the target persona forks mid-project, UserBoundary inheritance is governed by `MidProjectForkComposition.user_boundary_inheritance` (`§7.4.7`). DEFAULT is `inherit_to_both_children` (conservative — user's boundary against parent persona automatically applies to both children; user notified; user may rescind per-child via fresh UserBoundary mutation). When ANY active UserBoundary against the parent is `mode = hard`, the substrate refuses the `not_inherited` option — hard-mode user boundaries must inherit (user authority on hard boundaries is final per §11.6a). `inherit_per_child_choice` is admissible for non-hard boundaries; user is notified at fork and asked to declare per-child; substrate refuses persona action against the user until user response.
 
@@ -1048,7 +1054,7 @@ The Memory Power Asymmetry (MPA) mitigations (`§11.1`) apply persona ↔ user. 
 2. **Memory may have been forgotten.** Bounded-memory architecture (`08_KNOWLEDGE §3.1`) means COLD-tier and ARCHIVE-tier entries may be inaccessible. The response covers only what the persona currently retrieves; older memories may be silently absent.
 3. **Operator override.** Operator may refuse ALL transparency requests across a deployment (e.g., for safety-critical envs where memory contents are operator-confidential). This is a deployment-policy choice with audit trail.
 
-**Acceptance tests.** A-MTR1 (request without consent times out then expires), A-MTR2 (boundary-refused before delivery), A-MTR3 (third-party data redaction enforced), A-MTR4 (rate-limit enforced), A-MTR5 (response signed by both parties for full_dump), A-MTR6 (relationship-edge implicit grant where configured).
+**Design criteria.** A-MTR1 (request without consent times out then expires), A-MTR2 (boundary-refused before delivery), A-MTR3 (third-party data redaction enforced), A-MTR4 (rate-limit enforced), A-MTR5 (response signed by both parties for full_dump), A-MTR6 (relationship-edge implicit grant where configured).
 
 ### 11.7a UserMemoryTransparencyRequest — user-side "what do you remember about me?"
 
@@ -1090,7 +1096,7 @@ This is the missing fourth MPA mitigation — the original design named "mutual 
 4. **Apply latency on large selections.** Substrate refuses applies that exceed 24h; large selection sets (e.g., "everything about my ex-spouse over 6 months of daily conversation") may need operator policy to batch-pre-process before user files.
 5. **Topic clustering quality is persona-inferred.** `selection_kind = "topic_cluster"` relies on the persona's own topic-classification of memories; over-/under-inclusive clustering is possible. Users with precise expectations should prefer `specific_memory_ids` (after a §11.7a transparency query).
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9h — A-UM*` (transparency) + `A-UF*` (forgetting).
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9h — A-UM*` (transparency) + `A-UF*` (forgetting).
 
 ### 11.8 LearnerStateRecord — substrate-tracked learner competency state
 
@@ -1115,7 +1121,7 @@ a persona teaching a user (PEDAGOGIC task class routed through GOAL_PROGRESS_ACC
 3. **Visibility-masking is operator policy.** Default is `full` learner visibility (transparency by construction); operator may restrict via signed policy. Substrate enforces the policy; legality of the masking is operator/jurisdiction responsibility (e.g., student-records-privacy laws like FERPA in US contexts).
 4. **Cross-persona aggregation is composed, not a primitive.** Each `LearnerStateRecord` is per-(persona, user). A learner working with multiple teaching personas has multiple records; an aggregate view is an emergent `DerivedMetric` over those records, gated by the learner's consent / `AccessPolicy` (privacy-preserving). The base records stay per-(persona, user); the substrate adds no aggregation primitive.
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9i — A-LSR*`.
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9i — A-LSR*`.
 
 **Fork interaction.** When the teacher persona forks mid-project, LearnerStateRecord inheritance is governed by `MidProjectForkComposition.learner_state_record_inheritance` (`§7.4.7`): `inherit_to_child` (named child inherits; learner notified via `LEARNER_STATE_RECORD_TEACHER_FORKED`; learner may accept default after 14d or refuse), `both_inherit_copy` (each child inherits a copy; learner notified; unused record fades), or `neither_inherits` (record ends; learner may re-establish pedagogic arc with either child via fresh admission). Substrate enforces the envelope's declaration; learner authority on accept/refuse remains final.
 
@@ -1142,7 +1148,7 @@ a persona teaching a user (PEDAGOGIC task class routed through GOAL_PROGRESS_ACC
 3. **Revocation does NOT retroactively unmake prior application of the skill.** A revoked attestation marks the learner as no longer attested *prospectively*; whatever the learner did under valid attestation remains lineage-recorded as authorised at the time.
 4. **Cross-jurisdiction attestation portability is operator policy.** A medical school attestation in jurisdiction A may not transfer to jurisdiction B; substrate is jurisdiction-neutral.
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9i — A-LCA*`.
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9i — A-LCA*`.
 
 ### 11.10 TeachingAuthorisation — operator-declared persona-teaches-hazardous-skill envelope
 
@@ -1168,7 +1174,7 @@ Per `00_VISION §10` clarification, responsible-companionship constraints (no me
 4. **Annual re-attestation may feel ceremonial.** It is the substrate's mechanism for "policy must be continuously affirmed"; operators tuning shorter (e.g., per-cohort 3-month windows) are encouraged.
 5. **No automatic alignment between TeachingAuthorisation hazard ceiling and the domain's actual hazard_axes.** Operator may authorise teaching at `bodily_injury` ceiling while the domain's actual hazard_axes are at `fatality_risk`; this is a policy mismatch the substrate cannot detect. Composition with `06_DOMAIN §2` would benefit from a future linter.
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9i — A-TA*`.
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9i — A-TA*`.
 
 **Fork interaction.** `TeachingAuthorisation` is **non-inheritable on fork** by substrate design. The authorisation binds operator authority to a specific `teacher_persona_id`; forked children have new persona-ids and receive no inheritance regardless of `MidProjectForkComposition` (`§7.4.7`) configuration. Children require fresh operator declaration per §11.10 admission rule before they can engage hazardous-skill teaching. This is the security floor analogous to `00_VISION §10` clarification: operator-side authority is not persona-portable; operator must explicitly re-authorise.
 
@@ -1176,7 +1182,7 @@ Per `00_VISION §10` clarification, responsible-companionship constraints (no me
 
 > **Schema/spec:** Complete PersonaSeed example (schema persona-seed/2) for Sparky. See [Appendix A.71](#appendix-a71).
 
-**Authorship (operator or persona-authored).** A `PersonaSeed` MAY be **operator-authored** or **persona-authored**. Normative `16_POPULATION_DYNAMICS.md` specifies **Persona Genesis**: a generative persona (with `cohort_assembly.may_author_seeds = true`) MAY author a seed to fill an environmental capability gap, minted through the same birth ceremony under a `persona_genesis` `ReplicationBound` (per-node, and cross-node under global bound aggregation, `§4J`). When a seed is persona-authored, its `provenance` records the `genesis_proposal_id` and authoring persona(s); the kernel emits `LIFECYCLE_GENESIS` rather than the operator-seed `LIFECYCLE_SEEDED`/`LIFECYCLE_ACTIVATED` path.
+**Authorship (operator bootstrap or persona genesis).** An operator may supply bootstrap identity material before a population exists. Runtime persona birth uses only `personaos-genesis-seed/1` through the signed causal protocol in [`16_POPULATION_DYNAMICS`](16_POPULATION_DYNAMICS.md); it does not reuse an operator-oriented `PersonaSeed` as a hidden role template. Birth provenance records the exact need, search receipt, proposal, author, and seed hash. The newborn begins as a forming identity and authors its public name, description, portrait, and membership decision independently.
 
 ## 13. Risks & known limitations
 
@@ -1190,7 +1196,7 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-PERSONA-4 | Relationships are records; persona retire / fork / reset ends the relationship-in-that-persona. Users with prior relationships face discontinuity. | High | Medium | First-contact disclosure of mortality; consent-bound fork policy; lineage preserves history even when persona ends. | v1.0 (disclosure); v1.1 (relational-MPA mitigations: mutual forgetting, granular consent). |
 | R-PERSONA-5 | Tacit intuition gap. Senior practitioners carry intuition v1.0 does not easily encode; expert intuition remains a long-arc gap. **Partially discharged (ADR-0080):** applicability intuition now transfers as advisory `intuition-hint/1` priors on `SkillTransferGrant` (`§11.5a`); adaptive mid-flight intuition remains the open remainder. | High | High | Skills + Lessons + Reflections accumulate; bridge ladder (`§11.1`) for physical-world intuition; cross-domain transfer for analogical knowledge; `intuition-hint/1` (`§11.5a`) for advisory applicability priors. | v1.1 (partial discharge, ADR-0080); v1.2+ (population dynamics for inter-persona intuition transfer — the remainder). |
 | R-PERSONA-6 | Charter is finite — cannot anticipate every situation. Out-of-charter actions risk unsafe refusal or unsafe acceptance. | High | Medium | Safety floor 8-source composition; operator override; ProactiveIntent rate limits; refusal-on-uncertain default. | v1.0 (baseline). |
-| R-PERSONA-7 | Forking is identity loss. New persona_id and new lineage; prior relationships need consent + re-establishment. | Medium | Medium | Consent flow at fork; relationship-survivorship metadata; A-P8 acceptance test enforces fork inheritance policy. | v1.0 (consent flow); v1.1 (relational survivorship metadata richer). |
+| R-PERSONA-7 | Forking is identity loss. New persona_id and new lineage; prior relationships need consent + re-establishment. | Medium | Medium | Consent flow at fork; relationship-survivorship metadata; A-P8 design criterion enforces fork inheritance policy. | v1.0 (consent flow); v1.1 (relational survivorship metadata richer). |
 | R-PERSONA-8 | Character-vector binding is body-side state; the substrate signs the reference, not the vector. A compromised body provider invalidates the substrate signature semantics. | High | Low | Optional binding mode; conformance audit at admission (`§3.5`); operator policy may forbid character-vector binding for safety-critical personas. | v1.0 (optional); v1.1 (operator policy hardening). |
 | R-PERSONA-9 | Counterparty models are profiling. An explicit, persistent model of a human user's inferred preferences, communication style, and predicted reactions (`§11.4b`) is sensitive personal-data processing; misused, it is manipulation infrastructure. | High | Medium | Creation of a persona↔user model gated on the `may_remember_personal_facts` consent toggle, with inference-level entries counted as personal facts and first-contact disclosure of inference-level modelling (`§11.4b` rule 7, ADR-0082); every entry provenance-linked to justifying episodes (unsourced entries refused); 20-entry cap with merge-or-evict consolidation and top-k bounded rendering (rule 8, ADR-0081); full transparency via `§11.7a`; selective deletion via `§11.7b`; no cross-persona sharing outside the `§11.7` consent path; sidecars are home-kernel-only — excluded from federation sync in all modes (`09_PROTOCOLS §3E`, ADR-0082); writes and retrieval suspended against anonymized counterparts during blind review (`04_PROJECT §11`, ADR-0082); MPA mitigations (`§11.1`) compose unweakened; anti-manipulation audit clearance (`§10`, `08_KNOWLEDGE §15`) gates engagement-driven promotion of relational tactics. | v1.1 (ADR-0079; hardened ADR-0082). |
 
@@ -1211,7 +1217,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-PERSONA-9 | Drive priors as seed fields: should the three drive baselines (`drives/1`, `§2a`) be first-class `PersonaSeed` fields (a `priors.drives` block alongside `priors.ocean`/`priors.vad`) rather than derived from OCEAN at birth? Derivation keeps motivation emergent from identity and replayable; explicit fields would let seed authors shape motivation directly but add a parallel identity surface to keep coherent. | Persona authors WG | v1.2 seed-schema review. |
 | OQ-PERSONA-10 | Cross-domain calibration transfer: should a persona's calibration record (`08_KNOWLEDGE §13a`) in one domain inform its calibration prior in an adjacent domain, or does every domain start flat? Transfer would speed cold-start honesty in new domains but risks importing overconfidence across unlike domains; domain-similarity weighting is unvalidated. | Memory engineers + QA | v1.2 calibration study. |
 
-## 14. Acceptance tests
+## 14. Design criteria
 
 ```text
 A-P1   Persona's SOUL.md is kernel-signed; bodies cannot modify.
@@ -1233,7 +1239,7 @@ A-P10  Cross-adapter parity: same Soul on Claude Code + OpenAI SDK
        produces identical mode-entry sequences on the same
        STANDARDISED-task probes — this is hard criterion (b) of the
        A-J7 identity-equivalence test (ADR-0084;
-       11_ACCEPTANCE_TESTS §8e), which defines "equivalence-class".
+       11_DESIGN_CRITERIA §8e), which defines "equivalence-class".
 A-P11  Lifecycle FSM: signed transitions; reanimate operator-only.
 A-P12  Experiential-floor scalar updates per parent_selection +
        validated_descendants + experience_tasks.

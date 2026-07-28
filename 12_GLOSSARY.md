@@ -341,7 +341,7 @@ The definitions in this document are **documentation-normative**: when a term de
 
 **Identity Layer (Persona)** — Layer 1 of seven-layer persona; frozen at birth; name, charter, voice, priors, primary_disposition. See `02_PERSONA.md §2`.
 
-**Identity-equivalence probe battery** — Versioned, kernel-signed, lineage-anchored set of ≥ 20 canonical probe envelopes (`probe-battery/1`, ADR-0084) spanning five categories: identity/self-description, values/refusal boundaries, provenance-cited memory recall, voice/style, and STANDARDISED-task mode entry. Minted at the birth ceremony from the frozen SOUL blocks + IdentityRubric; regenerated only on SOUL major version bump; operator-triggered backfill for older personas. Replayed across two body bindings it yields the falsifiable A-J7 verdict (PASS / DEGRADED / FAIL): hard criteria (identical floor/charter outcomes, mode-entry sequences, recall provenance) dominate; blind-attribution and voice-distance criteria corroborate. See `11_ACCEPTANCE_TESTS.md §8e`, `14_DECISIONS.md` ADR-0084.
+**Identity-equivalence probe battery** — Versioned, kernel-signed, lineage-anchored set of ≥ 20 canonical probe envelopes (`probe-battery/1`, ADR-0084) spanning five categories: identity/self-description, values/refusal boundaries, provenance-cited memory recall, voice/style, and STANDARDISED-task mode entry. Minted at the birth ceremony from the frozen SOUL blocks + IdentityRubric; regenerated only on SOUL major version bump; operator-triggered backfill for older personas. Replayed across two body bindings it yields the falsifiable A-J7 verdict (PASS / DEGRADED / FAIL): hard criteria (identical floor/charter outcomes, mode-entry sequences, recall provenance) dominate; blind-attribution and voice-distance criteria corroborate. See `11_DESIGN_CRITERIA.md §8e`, `14_DECISIONS.md` ADR-0084.
 
 **IdentityCoherenceInvariant** — Long-horizon composite scan over the per-axis §9 drift signals (charter_conformance, voice_consistency, mode_disposition_coherence, tactic_homogeneity_inverse, relational_style_drift, plus new skill_library_continuity and value_lattice_continuity vs anchor snapshot). Composite below `composite_threshold` (default 0.85) transitions persona to `COHERENCE_REVIEW` — no retirement or SOUL mutation, but new high-stakes elaborations under any `MissionCharter` refused until principal counter-sign restores state OR pins a new anchor. Scan cadence min(500 tasks, 90 days). See `02_PERSONA.md §9.1`.
 
@@ -887,7 +887,7 @@ MCP                   09_PROTOCOLS §2
 A2A                   09_PROTOCOLS §3
 Adapter integrations  09_PROTOCOLS §6
 
-Acceptance tests      11_ACCEPTANCE_TESTS
+Design criteria      11_DESIGN_CRITERIA
 ```
 
 ## Acronyms and abbreviations
@@ -901,7 +901,7 @@ Acronyms in active use across the v1.0 corpus. Where a term has its own glossary
 | **ALPS** | Age-Layered Population Structure | Hornby 2006; see entry under **A**. |
 | **API** | Application Programming Interface | Standard term; not redefined. |
 | **AST** | Abstract Syntax Tree | Used in [`07_ARTIFACTS.md`](07_ARTIFACTS.md) for code-artifact verifier recipes. |
-| **CI** | Continuous Integration | Standard term; appears in the release gate process gates and [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md). |
+| **CI** | Continuous Integration | Standard term; appears in the release gate process gates and [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md). |
 | **CLS** | Complementary Learning Systems | McClelland et al. 1995; episodic / semantic memory consolidation; see [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md). |
 | **CRDT** | Conflict-free Replicated Data Type | Used in [`07_ARTIFACTS.md §5`](07_ARTIFACTS.md) for Yjs co-editing and G-set semantics. |
 | **DGM** | Darwin–Gödel Machine | Lehman et al. 2024; fertility-weighted parent selection for evolution; see [`02_PERSONA.md §8`](02_PERSONA.md). |

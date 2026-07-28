@@ -146,7 +146,7 @@ This schema defines how a parent environment contains a child environment, inclu
 
 **Parent says WHAT, child decides HOW.** The parent environment sets constraints (charter rules, safety requirements, policy mandates). The child environment's personas self-organise their own coordination shapes (per [`15_COORDINATION_SHAPES.md §4.1-4.3`](15_COORDINATION_SHAPES.md)) within those constraints.
 
-**Tests:** A-EC1 (composition creation with cascade), A-EC2 (child cannot weaken safety-critical parent rule), A-EC3 (child adds stricter rule succeeds), A-EC4 (child relaxes non-safety rule with parent consent), A-EC5 (parent rule cascade verified at child formation). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-EC1 (composition creation with cascade), A-EC2 (child cannot weaken safety-critical parent rule), A-EC3 (child adds stricter rule succeeds), A-EC4 (child relaxes non-safety rule with parent consent), A-EC5 (parent rule cascade verified at child formation). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 **Lineage:** `env_composition_established`, `env_composition_cascade_applied`, `env_child_charter_amendment_refused (safety_violation)`.
 
@@ -170,7 +170,7 @@ This schema defines an env-scoped rule: a KindRegistry-resolved `rule_kind` (`co
 
 Worked examples: a **shipment contract** is `rule_kind = contract`, `enforced_at = [output]`, `failure_action = refuse_action`; a **robot-performance check** is `rule_kind = code` (a sandboxed benchmark), `enforced_at = [tool_call, output]`, physical `hazard_axes`, `safety_critical = True`; a **chip buildable / orderable validator** is `rule_kind = rule_engine` (a DRC + BOM-orderability cascade), `enforced_at = [output, mutation_propose]`.
 
-**Tests:** A-ER1 (rule authored at EnvFormationProposal enters trial; safety-critical holds at operator gate), A-ER2 (rule fires at declared admission point; `refuse_action` refuses with signed evidence), A-ER3 (`warn_and_log` / `escalate_operator` emit signals without refusing), A-ER4 (safety-critical rule requires operator co-sign; degraded gate under principal collapse), A-ER5 (rule rides source 8 — floor still reports 8 sources; refusal composes most-restrictive-wins), A-ER6 (parent `cascade_locked` rule cascades; child weakening refused), A-ER7 (`rule_kind` resolves via KindRegistry `env_rule_kinds`), A-ER8 (contract / robot-perf / chip-validator worked examples enforce), A-ER9 (charter with no rules behaves as before). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-ER1 (rule authored at EnvFormationProposal enters trial; safety-critical holds at operator gate), A-ER2 (rule fires at declared admission point; `refuse_action` refuses with signed evidence), A-ER3 (`warn_and_log` / `escalate_operator` emit signals without refusing), A-ER4 (safety-critical rule requires operator co-sign; degraded gate under principal collapse), A-ER5 (rule rides source 8 — floor still reports 8 sources; refusal composes most-restrictive-wins), A-ER6 (parent `cascade_locked` rule cascades; child weakening refused), A-ER7 (`rule_kind` resolves via KindRegistry `env_rule_kinds`), A-ER8 (contract / robot-perf / chip-validator worked examples enforce), A-ER9 (charter with no rules behaves as before). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 **Lineage:** `env_rule_proposed`, `env_rule_trial_entered`, `env_rule_operator_review`, `env_rule_approved`, `env_rule_rejected`, `env_rule_revoked`, `env_rule_amended`, `env_rule_evaluated` (carries `VerifierInvocationEvidence` ref), `env_rule_refusal`, `env_rule_warned`, `env_rule_escalated`.
 
@@ -210,7 +210,7 @@ This specification details the step-by-step admission, user-revocation, operator
 4. **180d re-attestation may feel ceremonial.** The cadence is the substrate's mechanism for "consent must be continuous" — if either party stops actively wanting blind mode, the env reverts to default. Operators wanting to reduce friction can extend to 365d (the upper bound).
 5. **Not all envs are admissible.** project_workspace, constrained, debate envs refuse blind mode by design — the work in those envs requires operator-visible oversight that the blind-mode trade-off would defeat.
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9h — A-OBM*`.
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9h — A-OBM*`.
 
 **Fork interaction.** When the blind-mode persona forks mid-project, per-env inheritance is governed by `MidProjectForkComposition.operator_blind_mode_inheritance` (`02_PERSONA §7.4.7`). DEFAULT is `require_user_reconfirmation` — env's blind mode suspends at fork until user re-confirms with named child via fresh declaration (substrate enforces fresh `user_safety_privacy_acknowledged = True`). `inherit_to_child` (auto-transfer to named child; user notified) is admissible only when blind mode's `re_attestation_due_at` is at least 30 days out — substrate forces fresh user reconfirmation when re-attestation is imminent, to avoid bundling fork-time and re-attestation-time decisions.
 
@@ -410,7 +410,7 @@ Three rules are normative:
 2. **Shadow evaluation is gated on this budget — INV-7-style hard stop.** Cohort-migration shadow evaluation MUST draw exclusively from the maintenance class: when the class is exhausted, shadow evaluation pauses (and the cohort swap waits) rather than borrowing from foreground work or proceeding unbudgeted. The same hard stop applies to prompt-trial batches.
 3. **Bounded within, never above.** The class is an allocation *inside* the §7/§7.1 invariants — it cannot push `sum(allocations)` past the refusal threshold, never starves the floor, and maintenance work passes INV-7 per call exactly as foreground work does.
 
-**Tests:** A-GF-SN-7 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md)).
+**Criteria:** A-GF-SN-7 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md)).
 
 ## 8. Ambient event stream
 
@@ -449,7 +449,7 @@ These schemas define the event aggregation system: a policy with aggregation rul
 - **Summary functions are pre-declared, not arbitrary code.** The closed set (`count`, `sum`, `mean`, `min`, `max`, `stddev`, `pct_above_threshold`, `pct_below_threshold`, `distinct_count`) prevents injection. Domain-specific analysis beyond these functions remains persona-evolved skill operating on aggregate data.
 - **Alert composition.** A persona MAY raise an `Alert` (§11a) based on `AggregateEvent` data (e.g., "mean temperature on floor 3 exceeds 35°C for 2 consecutive windows"). The `Alert.evidence_refs` point to the `AggregateEvent` ids; lineage traces back to raw events via `source_event_hash`.
 
-**Tests:** A-EA1 (policy creation + operator cosign), A-EA2 (window-based aggregation produces AggregateEvent), A-EA3 (grouping keys produce per-group aggregates), A-EA4 (raw events preserved alongside aggregates), A-EA5 (ObservationSurface subscribes to aggregates), A-EA6 (source_event_hash Merkle root verifiable), A-EA7 (summary function closed-set enforcement), A-EA8 (Alert raised on aggregate data carries lineage). See [`11_ACCEPTANCE_TESTS.md §9k`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-EA1 (policy creation + operator cosign), A-EA2 (window-based aggregation produces AggregateEvent), A-EA3 (grouping keys produce per-group aggregates), A-EA4 (raw events preserved alongside aggregates), A-EA5 (ObservationSurface subscribes to aggregates), A-EA6 (source_event_hash Merkle root verifiable), A-EA7 (summary function closed-set enforcement), A-EA8 (Alert raised on aggregate data carries lineage). See [`11_DESIGN_CRITERIA.md §9k`](11_DESIGN_CRITERIA.md).
 
 **EnvironmentLineage:** `event_aggregation_policy_created`, `event_aggregation_policy_updated`, `aggregate_event_emitted`.
 
@@ -627,7 +627,7 @@ This schema defines the guest presence record created when an offer is accepted,
 3. **No cross-env ProactiveIntent for personas with no discoverable card.** Offering requires the offering persona to have `federation_visibility ∈ {tenant, federation, public}` on their PersonaCard (02_PERSONA §3.4). Private personas cannot offer cross-env help — they must join the target env via standard admission.
 4. **GuestPresence does not carry ProvenFacts write rights.** Guest contributions become ProvenFacts only through the accepting persona's envelope (the accepting persona cites the guest's input and the verifier cascade evaluates it). This preserves the target env's provenance chain.
 
-**Acceptance tests.** A-CEPO1 (offer admitted when all gates pass; delivered to target env), A-CEPO2 (offer refused when target env operator_policy prohibits inbound offers), A-CEPO3 (offer refused when offering persona's reputation below threshold), A-CEPO4 (GuestPresence created on acceptance; scoped read/write enforced), A-CEPO5 (GuestPresence expires at guest_scope_expires_at; renewal extends up to max_renewals), A-CEPO6 (GuestPresence promotion to full membership via standard §5.1 ceremony), A-CEPO7 (cross-kernel offer requires both kernel signatures + fresh body_attestation), A-CEPO8 (per-persona per-target-env rate limit enforced).
+**Design criteria.** A-CEPO1 (offer admitted when all gates pass; delivered to target env), A-CEPO2 (offer refused when target env operator_policy prohibits inbound offers), A-CEPO3 (offer refused when offering persona's reputation below threshold), A-CEPO4 (GuestPresence created on acceptance; scoped read/write enforced), A-CEPO5 (GuestPresence expires at guest_scope_expires_at; renewal extends up to max_renewals), A-CEPO6 (GuestPresence promotion to full membership via standard §5.1 ceremony), A-CEPO7 (cross-kernel offer requires both kernel signatures + fresh body_attestation), A-CEPO8 (per-persona per-target-env rate limit enforced).
 
 ## 11a. Alert — first-class attention primitive
 
@@ -814,9 +814,9 @@ This specification defines the quorum mechanics: draft verification, per-princip
 4. **AttentionBudget pre-check is a soft refusal.** If a recruit's AttentionBudget would exceed 1.1 by accepting, their kernel MAY decline OR counter-propose a lower allocation. The substrate does not auto-rebalance; the recruit MUST do the negotiation.
 5. **No proposal-chaining.** A proposer cannot conditionally form env A *only if* env B forms first. Each EnvFormationProposal is independent. Chained workflows are operator policy.
 
-### 12c.6 Acceptance tests
+### 12c.6 Design criteria
 
-See `11_ACCEPTANCE_TESTS §9c — A-EF-*` for the full ~15-test family covering: draft constraints (a-g per STEP 1); consent flow integration with boundary + reputation + attention budget; counter-proposal negotiation depth; atomicity verdicts (all_or_nothing / min_quorum / best_effort); failure paths (atomicity, safety floor); cross-kernel joined-env path; relationship-edge accelerator; project_workspace formation with initial phase seed; charter authorship modes; cohort assembly capability gating.
+See `11_DESIGN_CRITERIA §9c — A-EF-*` for the full ~15-test family covering: draft constraints (a-g per STEP 1); consent flow integration with boundary + reputation + attention budget; counter-proposal negotiation depth; atomicity verdicts (all_or_nothing / min_quorum / best_effort); failure paths (atomicity, safety floor); cross-kernel joined-env path; relationship-edge accelerator; project_workspace formation with initial phase seed; charter authorship modes; cohort assembly capability gating.
 
 ## 13. EnvironmentLineage (J9)
 
@@ -893,9 +893,9 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-ENV-2 | Ambient stream storage cost at multi-year scale. Tier transitions help but long-tail costs grow. | Medium | High | HOT / WARM / COLD / ARCHIVE tiers; per-env retention policy; lineage snapshot for archival. | v1.0 (tiers); v1.1 (policy tuning). |
 | R-ENV-3 | Multi-env presence coordination cost. N active presences = N streams + N attention allocations. | Medium | Medium | AttentionBudget per-member caps; ObservationSurface filters; presence dormancy / archive transitions. | v1.0 (budgets); v1.1 (cross-env digest). |
 | R-ENV-4 | Conversation-thread state inference is heuristic. "Conversation over" vs "paused" misclassification possible. | Low | High | Operator-tunable thresholds; explicit close events override heuristic; user surface for state correction. | v1.0 (heuristic); v1.2 (state classifier). |
-| R-ENV-5 | Cross-env project consolidated-view UX. Members in multi-env projects see notifications across envs; consolidation is operator concern. | Low | Medium | Per-project digest stream; project-tagged observation surface; A-PJ20 acceptance test. | v1.1 (project digest). |
+| R-ENV-5 | Cross-env project consolidated-view UX. Members in multi-env projects see notifications across envs; consolidation is operator concern. | Low | Medium | Per-project digest stream; project-tagged observation surface; A-PJ20 design criterion. | v1.1 (project digest). |
 | R-ENV-6 | Quiet hours and norms tuning does not scale automatically. 1000s of envs need per-env operator tuning. | Low | Medium | Norm templates per env type; learning surface from member feedback. | v1.1 (norm-templates); v1.2 (norm learning). |
-| R-ENV-7 | Federated joined-env consistency at partition. Multi-kernel CRDT requires careful partition handling. | High | Low | G-set semantics (last-writer-wins where structurally safe); `CONFLICT_PARKED` state for unsafe conflicts; A-CKDM acceptance tests; co-owned mode requires both kernels online. | v1.0 (basic); v1.1 (advanced partition recovery). |
+| R-ENV-7 | Federated joined-env consistency at partition. Multi-kernel CRDT requires careful partition handling. | High | Low | G-set semantics (last-writer-wins where structurally safe); `CONFLICT_PARKED` state for unsafe conflicts; A-CKDM design criteria; co-owned mode requires both kernels online. | v1.0 (basic); v1.1 (advanced partition recovery). |
 | R-ENV-8 | EnvFormationProposal can be abused to create spam envs. | Medium | Low | Per-persona rate limit; consent flow from invitees; PersonaPersonaBoundary checks; reputation impact on refused proposals. | v1.0 (rate limit); v1.1 (reputation-weighted). |
 | R-ENV-9 | User-address wake (§5.2 Wake Path 6) could disrupt dormancy rest cycles if a user repeatedly addresses the same dormant persona. | Low | Medium | Per-user per-persona rate limit (≤ 5 wakes per 24h); `dormant_user_address_rate_limited` event queues further wakes; user advisory on prolonged dormancy. | (baseline). |
 | R-ENV-10 | CrossEnvProactiveOffer (§11.6) spam: personas flooding cross-env offers to envs they don't belong to. | Medium | Low | Per-persona per-target-env rate limit (3 offers / 30 days); reputation gate; target env operator_policy may refuse inbound offers entirely; declined offers degrade offering persona's reputation. | (baseline). |
@@ -918,7 +918,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-ENV-8 | EnvironmentRule (§2.2b) holdout validation: should an executable rule pass a holdout-trace gate (as InferredVerifierRecipe does, `06_DOMAIN §7.1`) before reaching `accepted`, and what false-positive ceiling applies? | Safety floor WG | v1.1 rule-validation gate. |
 | OQ-ENV-9 | Cascade conflict under multi-parent composition: when (future) multi-parent compositions supply two `cascade_locked` rules that conflict, what is the resolution? v1.0/v1.1 composition is single-parent. | Federation WG | v1.2 multi-parent cascade. |
 
-## 20. Acceptance tests
+## 20. Design criteria
 
 ```text
 A-EN1   EnvironmentInstance proposed → active → accumulates events

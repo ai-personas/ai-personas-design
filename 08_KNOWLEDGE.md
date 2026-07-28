@@ -151,7 +151,7 @@ Kernel renders into LAYER 4 (RETRIEVED) of the 5-layer prompt assembly (§10) as
 
 Promotion is a proposal, not auto-write. The closing loop: produce → reflect → cite → promote.
 
-**Tests:** A-TX1 (5-tier ontology — every entity classified once), A-TX2 (Skill dual-tier), A-TX3 (4 tool classes composable), A-TX4 (Lesson/Reflective/ProvenFact distinct lifecycles), A-TX5 (K-line / Skill / ProvenFact distinction). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-TX1 (5-tier ontology — every entity classified once), A-TX2 (Skill dual-tier), A-TX3 (4 tool classes composable), A-TX4 (Lesson/Reflective/ProvenFact distinct lifecycles), A-TX5 (K-line / Skill / ProvenFact distinction). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ### 3.3 Self-narrative consolidation (ADR-0077)
 
@@ -173,7 +173,7 @@ Five rules are normative:
 
 **Honest limit.** The narrative is a summary the persona *performs*, not introspection — there is no inner narrator behind the 300 tokens (R-PERSONA-1/-3 apply). Citation backing bounds confabulation; it does not eliminate selective emphasis — which memories the sweep ranks "high-importance" shapes the story told.
 
-**Tests:** A-GF-SN-1 … A-GF-SN-4 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+**Criteria:** A-GF-SN-1 … A-GF-SN-4 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
 
 ## 4. Four memory tiers
 
@@ -218,7 +218,7 @@ Four rules are normative:
 
 **Honest limit.** Exponential decay with citation reset is a behavioural model of forgetting, not human memory; the λ seeds are uncalibrated defaults chosen to match the §4 tier bands, and "emotional weight" enters only through the A.4 salience term, coarsely.
 
-**Tests:** A-GF-SN-5 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+**Criteria:** A-GF-SN-5 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
 
 ## 5. Seven-scope memory tagging
 
@@ -232,7 +232,7 @@ Defaults: false. Promotion requires consolidation event.
 
 **Pair-scoped memory.** When two personas form a `PersonaRelationshipEdge` (`02_PERSONA §11.4`), co-signed summaries and joint-event reflections may be tagged with the edge's `edge_id` as `relationship_id`. Both personas observe such memories in their own retrieval views; neither persona alone may unilaterally delete them (delete requires the same counter-sign as edge mutation). On edge `ended`, pair-scoped memories with `cross_relationship_transferable = False` enter `ARCHIVE` tier; with the flag set, they remain available to either persona's recall under that pair's history.
 
-**Tests:** A-TX6 (seven-scope tagging composes scope context), A-TX7 (retrieval-score formula deterministic + tie-breaking), A-TX8 (cross-scope transferable flag; anti-leakage blocks differing user_id), A-TX9 (per-persona projection: same task → different envelope context). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-TX6 (seven-scope tagging composes scope context), A-TX7 (retrieval-score formula deterministic + tie-breaking), A-TX8 (cross-scope transferable flag; anti-leakage blocks differing user_id), A-TX9 (per-persona projection: same task → different envelope context). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ## 6. Unified provenance score
 
@@ -257,7 +257,7 @@ When a `KnowledgeRef` is marked `superseded_by` (a newer publication contradicts
 - **Depth-bounded.** `max_cascade_depth = 3` prevents unbounded graph traversal. Claims at depth >3 are not affected; if their provenance depends on deeply-nested superseded evidence, the persona must audit manually.
 - **Rate-limited.** Max 1 cascade per `KnowledgeRef` per `rate_limit_window_hours`. If the same ref receives multiple supersession events within 24h (e.g., two independent retractions), only the first triggers a cascade; subsequent ones update `superseding_ref_id` but do not re-cascade.
 
-**Tests:** A-SC1 (cascade triggers on KnowledgeRef supersession), A-SC2 (direct discount applied correctly), A-SC3 (transitive discount at depth 2), A-SC4 (max_cascade_depth respected), A-SC5 (rate limit enforced), A-SC6 (persona re-confirmation restores provenance), A-SC7 (cascade does not delete or tombstone claims). See [`11_ACCEPTANCE_TESTS.md §9l`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-SC1 (cascade triggers on KnowledgeRef supersession), A-SC2 (direct discount applied correctly), A-SC3 (transitive discount at depth 2), A-SC4 (max_cascade_depth respected), A-SC5 (rate limit enforced), A-SC6 (persona re-confirmation restores provenance), A-SC7 (cascade does not delete or tombstone claims). See [`11_DESIGN_CRITERIA.md §9l`](11_DESIGN_CRITERIA.md).
 
 **Lineage:** `supersession_cascade_triggered`, `supersession_cascade_applied`, `supersession_cascade_claim_re_confirmed`, `supersession_cascade_claim_further_downgraded`.
 
@@ -265,15 +265,19 @@ When a `KnowledgeRef` is marked `superseded_by` (a newer publication contradicts
 
 When a cascade invalidates a claim that a persona had itself asserted (the persona authored the claim or signed the asserting AnswerPackage), the persona's §6.3 re-evaluation additionally mints a `belief-revision/1` record — a provenance-backed "I believed X; evidence Y changed it" note. This is a cross-link only; the normative specification is [`§13a`](#13a-calibration-and-belief-revision-adr-0078). No change to the cascade mechanics above: discounts, depth bound, rate limit, and persona override all hold byte-for-byte.
 
-## 7. Hybrid retrieval — six-stage pipeline
+## 7. Persona-owned retrieval without fabricated semantics
 
-*A query enters the six-stage pipeline with scope context, intent, and persona context. Stage 1 (structured filter) eliminates ~99% of the corpus using scope tags, type, tier, provenance threshold, and charter compatibility. Stage 2 (vector retrieval) finds the top-50 semantically similar entries. Stage 3 (graph retrieval) walks the hierarchical graph for multi-hop connections, returning the top-20 graph-relevant entries. Stage 4 (fusion) merges vector and graph results via reciprocal rank fusion. Stage 5 (cross-encoder rerank) scores the fused candidates and returns the top-10. Stage 6 (per-persona composition) applies observation surface and role/charter filters, then composes the result into the envelope context block.*
+Retrieval first enforces exact authority and scope. It then uses persona-authored graph links, exact evidence/source/affordance references, explicitly hot fragment IDs, signed helped/hurt observations, and recency. These operations do not inspect task words or infer a domain.
+
+Vector similarity is admissible only when an actual embedding provider produced the query vector and stored records carry compatible provider-produced vectors with provenance. The kernel never substitutes token hashing, lexical overlap, a deterministic pseudo-vector, or a host-authored summary when no real vector exists. Without a real query vector, retrieval remains graph/reference/utility/recency based.
+
+A persona may deliberately invoke a search or reranking tool and record its signed result. That funded persona action is distinct from an automatic substrate classifier and cannot silently cause tool use, birth, readiness, or completion.
 
 **Technical detail:** See [A.12](#appendix-a12).
 
 ### 7.1 Composition formula
 
-*The final retrieval score is the product of ten factors: base vector similarity, tier weight, scope match (product across all scopes), cross-encoder relevance, graph boost, reuse signal, recency penalty, promotion stage weight, charter compatibility (binary gate), and observation surface access (binary gate). Differing user_id hard-blocks retrieval (one user's memory never crosses without consent).*
+Authority and observation scope are hard gates, never score multipliers. Within the admitted set, exact link/ref matches, persona-observed utility, and recency provide deterministic ordering. Real vector similarity may contribute only when both sides carry compatible real vectors. Differing `user_id` hard-blocks retrieval without consent.
 
 **Technical detail:** See [A.13](#appendix-a13).
 
@@ -281,13 +285,7 @@ Anti-leakage: differing `user_id` hard-blocks (one user's memory never crosses w
 
 ### 7.2 Stage-aware ranking
 
-*Stage weights map promotion stages to retrieval multipliers: EMERGENT (0.5), RECOGNISED (0.7), AUTHORITATIVE (0.9), STANDARDISED (1.0), DEPRECATED (0.2), TOMBSTONED (0.0).*
-
-**Technical detail:** See [A.14](#appendix-a14).
-
-Higher-trust entries dominate; emergent entries returned with stage indicator surfaced to persona.
-
-**Tests:** A-TX14 (retrieval latency: hot ≤ 50 ms, warm ≤ 100 ms, cold ≤ 500 ms), A-TX15 (six-stage pipeline produces deterministic ranking on same query + corpus). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+Promotion stage remains visible as signed record state. It does not become a host-authored semantic relevance claim. Tombstoned or unauthorized records are excluded mechanically; otherwise the persona sees provenance and decides how much to rely on the material.
 
 ## 8. Hierarchical Graph Memory
 
@@ -345,7 +343,7 @@ The six-stage retrieval pipeline (§7) and the per-persona composition (§9) bui
 2. **Audit callers see redacted lineage refs.** When `return_lineage_refs = True` and the caller is not the persona who owns the entries, lineage refs are redacted to event hashes only (no payload). Full lineage requires operator scope.
 3. **The query is read-only.** It never mutates the index, never advances tier transitions, never marks entries as accessed. Mutation requires the existing kernel-mediated paths.
 
-**Acceptance tests.** A-SQ1 (consent gate refuses user-scope entries when may_share = False), A-SQ2 (scope intersection strict; empty scope refused), A-SQ3 (cross-flag honoured; non-transferable entries omitted under cross-scope request), A-SQ4 (relationship_id scope returns only pair-tagged entries), A-SQ5 (lineage refs redacted for non-owner caller), A-SQ6 (cross-encoder rerank skipped vs §7 full pipeline).
+**Design criteria.** A-SQ1 (consent gate refuses user-scope entries when may_share = False), A-SQ2 (scope intersection strict; empty scope refused), A-SQ3 (cross-flag honoured; non-transferable entries omitted under cross-scope request), A-SQ4 (relationship_id scope returns only pair-tagged entries), A-SQ5 (lineage refs redacted for non-owner caller), A-SQ6 (cross-encoder rerank skipped vs §7 full pipeline).
 
 ## 10. Five-layer prompt assembly
 
@@ -366,7 +364,7 @@ Layers 1, 2, and stable parts of 3 cacheable. **Target ≥ 80% cache hit rate** 
 | 4 (RETRIEVED) | 2,400 tokens | Evict retrieved memories / lessons / hints in ascending §4a `effective_weight` — the faintest memory leaves first. |
 | 5 (TASK) | task-bounded | Never evicted — the task statement and output constraints are the work itself. |
 
-**Tests:** A-TX12 (`cache_control` layers 1-2; hit rate ≥ 80%), A-P22 (prompt-block rendering deterministic; blocks 0-4 cached; per-task suffix blocks never cached), A-GF-SN-6 (layer 3–4 caps + eviction priority). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-TX12 (`cache_control` layers 1-2; hit rate ≥ 80%), A-P22 (prompt-block rendering deterministic; blocks 0-4 cached; per-task suffix blocks never cached), A-GF-SN-6 (layer 3–4 caps + eviction priority). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ## 10a. Contextual mood line (ADR-0075)
 
@@ -378,7 +376,7 @@ Three rules are normative:
 2. **Never evolution substrate.** The mood line — and mood state generally — MUST NOT appear in EVOLVE-BLOCK text (layer 2), in the GEPA objective vector (§11.1, §11.1b), or in any evolution signal ([`02_PERSONA.md §8.1`](02_PERSONA.md#81-eight-evolution-signals-with-weights)). GEPA's reflective traces strip the rendered disposition line before mutation so evolved tactics cannot condition on it. A persona must never be selected for *appearing* affected. **The strip rule covers ALL prompt-rendered psychological state (ADR-0081), not just the mood line:** the self-narrative (§3.3), drive-derived content ([`02_PERSONA.md §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076)), belief-revision notes (§13a), counterparty-model context ([`02_PERSONA.md §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079)), and intuition hints ([`02_PERSONA.md §11.5a`](02_PERSONA.md#115a-intuition-hints-on-skill-transfer-adr-0080)) MUST all be stripped from GEPA's reflective traces before mutation, exactly as the mood line is — evolved tactics cannot condition on any of them.
 3. **One line, honestly sourced.** The rendering derives from the signed mood state (moved only by clamped `mood-impulse/1` events, [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075)); the persona does not author its own disposition line.
 
-**Tests:** A-GF-ARC-5 (mood absent from EVOLVE-BLOCKs + evolution objectives); A-GF-ARC-1/A-GF-ARC-2 cover the impulse + decay mechanics. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+**Criteria:** A-GF-ARC-5 (mood absent from EVOLVE-BLOCKs + evolution objectives); A-GF-ARC-1/A-GF-ARC-2 cover the impulse + decay mechanics. See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
 
 ## 11. DSPy GEPA — reflective prompt optimization
 
@@ -396,7 +394,7 @@ v1.0 integrates DSPy GEPA as primary prompt optimizer for evolution.
 
 GEPA is the **primary mechanism for tactic mutation**.
 
-**Tests:** A-P16 (rollback on degradation — GEPA-evolved tactics revertable), A-P17 (eight evolution signals + v1.1 additions flow to credit formula), A-P18 (22 mutation operators all gated, signed, rate-limited). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-P16 (rollback on degradation — GEPA-evolved tactics revertable), A-P17 (eight evolution signals + v1.1 additions flow to credit formula), A-P18 (22 mutation operators all gated, signed, rate-limited). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ### 11.1a Cohort migration across model upgrades (ADR-0074)
 
@@ -414,7 +412,7 @@ Three rules are normative:
 
 **Honest limit.** Pareto-front priors transfer *what worked*, not *why*. A sufficiently different body family may render prior tactics useless; the shadow evaluation then honestly reports the regression and the cold-start proceeds from charter alone — slower, never silent.
 
-**Tests:** A-GF-TLR-5, A-GF-TLR-6. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+**Criteria:** A-GF-TLR-5, A-GF-TLR-6. See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
 
 ### 11.1b Identity-expression objective (ADR-0073)
 
@@ -434,7 +432,7 @@ Five rules are normative:
 
 **Honest limit.** A rubric mechanically derived from OCEAN priors, disposition, and voice is a coarse projection of identity, and a judge-ensemble score is judgment, not verification — it ranks below verified outcomes per §15. Whether rubrics themselves can be evolved without circularity is open (OQ-PERSONA-8, [`02_PERSONA.md §13a`](02_PERSONA.md#13a-open-questions)).
 
-**Tests:** A-GF-ICPE-1, A-GF-ICPE-2, A-GF-ICPE-6. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+**Criteria:** A-GF-ICPE-1, A-GF-ICPE-2, A-GF-ICPE-6. See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
 
 ## 12. MIPROv2 — Bayesian instruction + demo search
 
@@ -490,7 +488,7 @@ Four rules are normative:
 2. **The domain partition is coarse.** Whether calibration earned in one domain should inform an adjacent one is open (OQ-PERSONA-10, [`02_PERSONA.md §13a`](02_PERSONA.md#13a-open-questions)); v1.1 starts every domain flat.
 3. **Stated confidence can be sandbagged.** A persona that systematically understates confidence scores well on Brier while communicating badly. Mitigation: calibration conditions rendering and gates the fast path; it never promotes tactics alone, and the §15 corroboration rules apply unchanged.
 
-**Tests:** A-GF-META-1 … A-GF-META-4 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)); the HEART predicate + adaptive cadence consumers are A-GF-META-5/A-GF-META-6 ([`02_PERSONA.md §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078)).
+**Criteria:** A-GF-META-1 … A-GF-META-4 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)); the HEART predicate + adaptive cadence consumers are A-GF-META-5/A-GF-META-6 ([`02_PERSONA.md §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078)).
 
 ## 13b. Executing components for the psychology wave (ADR-0081)
 
@@ -527,7 +525,7 @@ The identity-expression axis (§11.1b) is a judged signal and could be gamed —
 
 **Calibration corroboration (ADR-0078).** The per-persona×domain `calibration-record/1` ([`§13a`](#13a-calibration-and-belief-revision-adr-0078)), being grounded in hard verifier outcomes, MAY serve as an additional corroborator for the identity-expression judge scores under the §15 rules — rising judged identity scores against a collapsing verified calibration flag the promotion for audit before it lands.
 
-**Tests:** A-GF-ICPE-3, A-GF-ICPE-4, A-GF-ICPE-5. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+**Criteria:** A-GF-ICPE-3, A-GF-ICPE-4, A-GF-ICPE-5. See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
 
 ### 14.2 Per-channel tactic evolution
 
@@ -558,7 +556,7 @@ Habit formation thus *falls out of* the ADR-0074 PromptOps machinery: the `tacti
 
 **Honest limit.** Habit is an exposure bias, not competence: a strongly-habituated tactic can be stale or context-shifted, and the bias slows the very mutation that would fix it. The §14.1 audits remain the corrector, and the §4a-shaped decay guarantees unused habits release their protection on a tunable half-life.
 
-**Tests:** A-GF-HAB-1 … A-GF-HAB-3 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+**Criteria:** A-GF-HAB-1 … A-GF-HAB-3 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
 
 ### 14.3 Tactic lineage and trial records (ADR-0074)
 
@@ -578,7 +576,7 @@ Three rules are normative:
 
 **Honest limit.** Lineage records *which* operator produced *which* version under *which* trial; it does not explain why a tactic works. Dead branches (rejected / rolled-back versions) accrete; their retention policy is open (OQ-PERSONA-7, [`02_PERSONA.md §13a`](02_PERSONA.md#13a-open-questions)).
 
-**Tests:** A-GF-TLR-1 … A-GF-TLR-4. See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+**Criteria:** A-GF-TLR-1 … A-GF-TLR-4. See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
 
 ### 14.3a Tactic-citation events — usage, not mutation (ADR-0081)
 
@@ -594,7 +592,7 @@ Three rules are normative:
 2. **Attribution is explicitly approximate.** The tactic list is **trace-extracted** (the GEPA trace `tactic` field), not a verified causal claim that each listed tactic produced the acceptance; the extraction method is recorded on the event and is **judge-confirmable on audit**. Consumers (habit reinforcement) MUST treat citations as exposure evidence, never as promotion evidence — the §15 corroboration rules are untouched.
 3. **Lineage-anchored.** Each cited tactic ref carries the `(tactic_id, version)` pair current in the §14.3 DAG at mint, so a later rollback can identify exactly which version earned which reinforcement.
 
-**Tests:** A-GF-HAB-1 (reinforcement reads tactic-citation events). See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+**Criteria:** A-GF-HAB-1 (reinforcement reads tactic-citation events). See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
 
 ## 15. Anti-Goodhart for signal corroboration
 
@@ -681,7 +679,7 @@ For single-tenant deployments this is a non-issue (everything is one tenant). Fo
 3. **Retrieval-span scope is limited to v1.0 OTel coverage.** Memories retrieved through non-standard paths (a Skill that bypasses the §7 pipeline; an MCP tool that fetches memory directly) may not produce a span the policy can inspect. Operators tightening enforcement should also restrict bypass paths.
 4. **No automatic redaction of cross-principal contributions.** When DPE enforcement refuses a contribution, the persona must explicitly re-author without the cross-principal memory OR emit the DPE and accept the lineage record. The substrate does not auto-redact (auto-redaction would be a domain-shaped choice; substrate stays domain-neutral per C4).
 
-**Acceptance tests.** A-DP1 (DPE schema mints cleanly), A-DP2 (opportunistic mode: contribution proceeds with or without DPE), A-DP3 (mandatory_for_cross_principal: cross-principal consultation without DPE refuses), A-DP4 (mandatory_for_cross_principal: same-principal consultation proceeds without DPE), A-DP5 (DPE graph traversal finds all consulted memories for a contribution), A-DP6 (background_context with influence_strength = 0 admitted with audit record).
+**Design criteria.** A-DP1 (DPE schema mints cleanly), A-DP2 (opportunistic mode: contribution proceeds with or without DPE), A-DP3 (mandatory_for_cross_principal: cross-principal consultation without DPE refuses), A-DP4 (mandatory_for_cross_principal: same-principal consultation proceeds without DPE), A-DP5 (DPE graph traversal finds all consulted memories for a contribution), A-DP6 (background_context with influence_strength = 0 admitted with audit record).
 
 ## 17. Cost and latency
 
@@ -696,16 +694,16 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | ID | Risk | Severity | Likelihood | Mitigation | Target release |
 |----|------|----------|------------|------------|----------------|
 | R-KNOWLEDGE-1 | Retrieval is the bottleneck at scale. Multi-scope tag filtering across millions of entries × 7 tags × 4 tiers × top-K requires fast vector stores; cost grows with corpus. | High | High | Tiered index (HOT in-mem; WARM SSD; COLD object store); pre-filtered shards per persona; A-TX14 latency targets. | v1.0 (tiers); v1.1 (sharding). |
-| R-KNOWLEDGE-2 | Per-persona projection cost at envelope mint. First envelope slower; cache mitigates subsequent. | Medium | High | Per-task persona-context cache; A-TX9 acceptance test; prompt layers 1-2 cacheable per Anthropic `cache_control`. | v1.0 (cache); v1.1 (warm-up policy). |
+| R-KNOWLEDGE-2 | Per-persona projection cost at envelope mint. First envelope slower; cache mitigates subsequent. | Medium | High | Per-task persona-context cache; A-TX9 design criterion; prompt layers 1-2 cacheable per Anthropic `cache_control`. | v1.0 (cache); v1.1 (warm-up policy). |
 | R-KNOWLEDGE-3 | Cross-tier confusion at ontology boundaries. Skill spans Capability + Knowledge; ProvenFact spans Product + Knowledge. | Low | Low | Five-tier ontology with explicit dual-tier markers (A-TX1, A-TX2); query APIs handle both. | v1.0 (resolved). |
-| R-KNOWLEDGE-4 | Standards alignment by convention, not enforcement. Adapter authors must follow `09_PROTOCOLS.md §8` mappings for interoperability. | Medium | Medium | Documented mapping tables; cross-adapter parity tests (A-P10); ConformanceProbe in adapter test suite. | v1.0 (docs); v1.1 (enforcement harness). |
+| R-KNOWLEDGE-4 | Standards alignment by convention, not enforcement. Adapter authors must follow `09_PROTOCOLS.md §8` mappings for interoperability. | Medium | Medium | Documented mapping tables plus signed live cross-adapter parity evidence under A-P10; incompatible adapters remain visibly unavailable. | v1.0 (docs); v1.1 (live enforcement evidence). |
 | R-KNOWLEDGE-5 | GEPA + MIPROv2 evolution cost. $1–10 per persona per cycle. | Medium | High | Operator-tunable cadence; per-persona evolution budget; reflection gating. | v1.0 (budgets). |
 | R-KNOWLEDGE-6 | Reflection latency. Per-task 200 ms; per-session seconds; per-project minutes. | Low | High | Async post-task reflection; ROI improves as track record builds; per-tier reflection windows. | v1.0 (async). |
 | R-KNOWLEDGE-7 | Cross-encoder reranker quality. Off-the-shelf models may miss domain-specific patterns. | Medium | Medium | Domain operators may fine-tune; rerank stage is replaceable; rubric-judged retrieval audits. | v1.1 (fine-tune surface). |
 | R-KNOWLEDGE-8 | Memory consolidation is batch. In-task consolidation infeasible; in-moment reasoning relies on Tier 1+2 only. | Low | High | Explicit query path for Tier 3 + Archive; consolidation cadence operator-tunable; lineage replay for cold facts. | v1.0 (baseline). |
 | R-KNOWLEDGE-9 | Graph + presence overhead at scale. Every ambient event as a graph node may explode storage. | High | Medium | Pruning policy per tier; ambient-event tier transitions; per-env retention cap. | v1.0 (pruning); v1.1 (auto-tuning). |
-| R-KNOWLEDGE-10 | GEPA reliability. Genetic search can produce regressions on non-stationary signals. | High | Medium | Anti-degradation safeguards (`02_PERSONA §9`); rollback discipline; human review gate for high-stakes domains; A-P16 acceptance test. | v1.0 (rollback); v1.1 (deeper anti-degradation). |
-| R-KNOWLEDGE-11 | MeasurementFact + UncertaintyEnvelope rely on bridge calibration. Stale calibrations propagate wrong uncertainty. | High | Medium | CalibrationChain provenance (`§16a`); calibration interval enforcement at MeasurementFact admission; A-GF-MF acceptance test. | v1.0 (provenance); v1.1 (auto-renewal warnings). |
+| R-KNOWLEDGE-10 | GEPA reliability. Genetic search can produce regressions on non-stationary signals. | High | Medium | Anti-degradation safeguards (`02_PERSONA §9`); rollback discipline; human review gate for high-stakes domains; A-P16 design criterion. | v1.0 (rollback); v1.1 (deeper anti-degradation). |
+| R-KNOWLEDGE-11 | MeasurementFact + UncertaintyEnvelope rely on bridge calibration. Stale calibrations propagate wrong uncertainty. | High | Medium | CalibrationChain provenance (`§16a`); calibration interval enforcement at MeasurementFact admission; A-GF-MF design criterion. | v1.0 (provenance); v1.1 (auto-renewal warnings). |
 
 ## 18a. Open questions
 
@@ -721,7 +719,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-KNOWLEDGE-6 | MeasurementFact + UncertaintyEnvelope: do we ship a small standard library of common uncertainty distributions (Gaussian, lognormal, uniform, Student's t), or leave to per-domain plugins? | Domain curators | v1.1 distribution library. |
 | OQ-KNOWLEDGE-7 | Hierarchical Graph Memory (`§7`): what's the canonical node-merge protocol when two personas independently observe the same entity? Currently one-shot dedup; would semantic clustering help? | — | v1.2 cluster merge. |
 
-## 19. Acceptance tests
+## 19. Design criteria
 
 ```text
 A-TX1   Five-tier ontology: every entity classified exactly once.
@@ -1099,82 +1097,30 @@ class CascadeAffectedClaim:
     re_evaluated_at: datetime | None = None
 ```
 
-### A.12 Hybrid retrieval six-stage pipeline diagram
+### A.12 Retrieval admission and ordering
 
 <a id="appendix-a12"></a>
 
 ```text
-┌────────────────────────────────────────────────────────────────────┐
-│                  v1.0 HYBRID RETRIEVAL STACK                         │
-├────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  Query (with scope context + intent + persona context)              │
-│         │                                                            │
-│         ├──► STAGE 1: Structured filter                              │
-│         │     - seven-scope tag filter                               │
-│         │     - type filter                                          │
-│         │     - tier filter                                          │
-│         │     - provenance threshold                                 │
-│         │     - charter-compatibility filter                         │
-│         │     (cheap; eliminates 99% of corpus)                      │
-│         │                                                            │
-│         ├──► STAGE 2: Vector retrieval                               │
-│         │     - dense embedding similarity (top-K=50)                │
-│         │     - over filtered corpus                                 │
-│         │     - per-type embedding index                             │
-│         │                                                            │
-│         ├──► STAGE 3: Graph retrieval                                │
-│         │     - multi-hop traversal over hierarchical graph memory   │
-│         │     - global Topic Associative Network +                   │
-│         │       local Event Progression Graphs                       │
-│         │     - returns top-K_g (20) graph-relevant entries          │
-│         │                                                            │
-│         ├──► STAGE 4: Fusion                                         │
-│         │     - reciprocal rank fusion (RRF) over vector + graph     │
-│         │                                                            │
-│         ├──► STAGE 5: Cross-encoder rerank                           │
-│         │     - small cross-encoder over top-K_fused                 │
-│         │     - returns top-K_final (10) with relevance scores       │
-│         │                                                            │
-│         └──► STAGE 6: Per-persona composition                        │
-│               - apply observation surface filter                     │
-│               - apply role/charter compatibility filter              │
-│               - compose into envelope context block                  │
-│                                                                     │
-└────────────────────────────────────────────────────────────────────┘
+signed records
+    → authority / consent / scope gate
+    → exact hot IDs and graph/reference expansion
+    → optional compatible real-vector similarity
+    → persona-observed utility and recency ordering
+    → bounded prompt projection with provenance retained
 ```
 
 ### A.13 Retrieval composition formula
 
 <a id="appendix-a13"></a>
 
-```text
-final_score = base_vector_similarity
-            × tier_weight
-            × Π scope_match[scope]
-            × cross_encoder_relevance
-            × graph_boost
-            × (1 + reuse_signal)
-            × (1 - recency_penalty)
-            × stage_weight                          # promotion stage
-            × (1 if charter_compatible else 0)
-            × (1 if observation_surface_allows else 0)
-```
+There is no universal semantic score. Authorization is Boolean. Exact links and references are structural. Utility is the persona's signed observation. Recency is mechanical. Vector similarity is present only with compatible real provider vectors.
 
 ### A.14 Stage-aware ranking weights
 
 <a id="appendix-a14"></a>
 
-```python
-stage_weight = {
-    "EMERGENT":      0.5,
-    "RECOGNISED":    0.7,
-    "AUTHORITATIVE": 0.9,
-    "STANDARDISED":  1.0,
-    "DEPRECATED":    0.2,
-    "TOMBSTONED":    0.0
-}[entry.stage]
-```
+Promotion stage is carried into the prompt as signed provenance. The substrate excludes tombstoned material but does not translate stage into semantic truth or relevance.
 
 ### A.15 Hierarchical Graph Memory tiers
 

@@ -15,7 +15,7 @@ Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC
 
 **In scope.** Outbound protocol surfaces — **MCP** (tools / resources / prompts), **A2A** (agent-to-agent federation with signed AgentCards), **OpenTelemetry** (traces, metrics, logs); the five federation pillars (`§3A`–`§3E`); the twelve framework adapter integrations (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, MAF, Pydantic-AI, DSPy, smolagents, Semantic Kernel, MCP server, A2A server, MCP Proxy); the **schema-version master registry** (40+ entities across kernel / persona / task / project / env / domain / artifact / knowledge / protocol scopes); the Claude Code Skills/Subagents adapter; Anthropic `cache_control` policy; and the **three-tier key custody hierarchy** (cold-storage master + warm scope keys + hot per-task / per-action keys) with the scope chain (master → kernel → domain → project → env → persona).
 
-**Out of scope.** Internal kernel mechanism (safety floor, sandbox, lineage construction — see [`01_KERNEL.md`](01_KERNEL.md)); persona model and modes (see [`02_PERSONA.md`](02_PERSONA.md)); task-class routing (see [`03_TASKS.md`](03_TASKS.md)); the running of acceptance tests against the registry (see [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md)).
+**Out of scope.** Internal kernel mechanism (safety floor, sandbox, lineage construction — see [`01_KERNEL.md`](01_KERNEL.md)); persona model and modes (see [`02_PERSONA.md`](02_PERSONA.md)); task-class routing (see [`03_TASKS.md`](03_TASKS.md)); the running of design criteria against the registry (see [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md)).
 
 **Supersession.** Subsumes prior protocol design notes; folds the `cache_control` and adapter integration appendices into one normative reference.
 
@@ -67,7 +67,7 @@ PersonaOS marks stable prompt layers (identity and long-lived tactics) as cachea
 
 **Schema registry — the master list of all data structures**
 
-v1.0 defines over 80 named data structures (schemas). The schema registry catalogues each with its version, stability level, and location. The kernel refuses any message with an unrecognised schema version. Adding or changing a schema requires updating the registry, providing a migration path, and adding an acceptance test.
+v1.0 defines over 80 named data structures (schemas). The schema registry catalogues each with its version, stability level, and location. The kernel refuses any message with an unrecognised schema version. Adding or changing a schema requires updating the registry, providing a migration path, and adding an design criterion.
 
 **Key custody — the signing hierarchy**
 
@@ -281,7 +281,7 @@ When two personas form a `PersonaRelationshipEdge` (`02_PERSONA §11.4`) and the
 
 **Sync transport.** `RelationshipFederationSync` rides on the same A2A channel `§3` uses for joined environments. Sync envelopes are signed by both kernels; replay rejects unsigned envelopes; the host of a joined env is a natural sync-broker if both participants are present.
 
-**Counterparty-model sidecars never federate (ADR-0082).** A `counterparty-model/1` sidecar ([`02_PERSONA.md §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079)) is **home-kernel-only**: it MUST be excluded from `RelationshipFederationSync` envelopes in ALL replication modes (`shadow` and `co_owned`). The edge and its joint counters sync; each persona's model *of* the counterparty stays on its own kernel — a persona's inferences about a party never replicate to the kernel that hosts that party (or anyone else) as a side effect of edge continuity. A sync envelope carrying counterparty-model content MUST be refused and the refusal signed. Test: A-GF-CPM-8 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md)).
+**Counterparty-model sidecars never federate (ADR-0082).** A `counterparty-model/1` sidecar ([`02_PERSONA.md §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079)) is **home-kernel-only**: it MUST be excluded from `RelationshipFederationSync` envelopes in ALL replication modes (`shadow` and `co_owned`). The edge and its joint counters sync; each persona's model *of* the counterparty stays on its own kernel — a persona's inferences about a party never replicate to the kernel that hosts that party (or anyone else) as a side effect of edge continuity. A sync envelope carrying counterparty-model content MUST be refused and the refusal signed. Test: A-GF-CPM-8 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md)).
 
 **Anti-Goodhart for federated trust.** A home kernel that inflates `trust_a_of_b` without matching `joint_successes` recorded against the same shared `LineageGraph` triggers `FEDERATED_TRUST_DISCREPANCY` on the peer's side; the peer kernel MAY freeze the edge or downgrade replication_mode to shadow. This composes with `§3D` reputation anti-gaming and prevents one kernel from unilaterally manufacturing trust history.
 
@@ -291,7 +291,7 @@ When two personas form a `PersonaRelationshipEdge` (`02_PERSONA §11.4`) and the
 2. **Co-owned mode requires both kernels online for conflict resolution.** If one kernel is offline past the sync lag budget, the other's mutations enter CONFLICT_PARKED on its side; resolution waits for the peer's return. Joined-env STALLED semantics (`§3C.2`) apply.
 3. **Both `shadow` and `co_owned` modes are normative; their honesty limit is navigated (V.8).** The spec produces well-formed `RelationshipFederationSync` envelopes for both modes. `shadow` (home writes, peer reads + proposes countersigned mutations) has no concurrency hazard. `co_owned` (both write, Lamport-ordered) is admitted, with the **honest physical limit stated rather than wished away**: real-time conflict resolution under *arbitrary* latency cannot be both consistent and available during a partition (CAP is physics, not a missing feature). PersonaOS resolves this deterministically — Lamport ordering + `sync_lag_budget` windows during which safety-critical edge-dependent actions are refused and concurrent mutations enter `CONFLICT_PARKED` until the peer returns (point 2) — rather than pretending the partition does not exist. This is a V.8 navigated-reality PASS, not a deferral; operators MAY still restrict `co_owned` to single-quorum deployments by policy where they prefer availability-over-consistency to be off.
 
-**Acceptance tests.** A-RF1 (shadow mode: peer mutation requires home counter-sign), A-RF2 (revocation propagates within sync_lag_budget), A-RF3 (FEDERATED_TRUST_DISCREPANCY fires on home-only trust inflation), A-RF4 (co_owned conflict resolution by Lamport order), A-RF5 (sync lag refused for safety-critical action against edge state).
+**Design criteria.** A-RF1 (shadow mode: peer mutation requires home counter-sign), A-RF2 (revocation propagates within sync_lag_budget), A-RF3 (FEDERATED_TRUST_DISCREPANCY fires on home-only trust inflation), A-RF4 (co_owned conflict resolution by Lamport order), A-RF5 (sync lag refused for safety-critical action against edge state).
 
 ## 3F. External-standard alignment (informative)
 
@@ -702,7 +702,7 @@ Schemas in this group attach to `EnvironmentInstance.type = "project_workspace"`
 
 ### 7.9a Psychology, metacognition & PromptOps (ADR-0073…0082)
 
-Registry rows for the ADR-0073…0080 wave, completed by ADR-0081/0082 (plus the ADR-0084 probe battery). The first ten schemas are **boundary-crossing** (they ride grants, federation envelopes, evolution logs read by the GEPA harness, or operator policy); the last five are **kernel-internal** — signed and persisted in the persona's own stores, but never leaving the owning kernel. `counterparty-model/1` sits in between: it attaches to a federated edge yet is **home-kernel-only** by ADR-0082. Changes follow [`§7.13`](#713-adding-or-modifying-schemas) (migration mapper + acceptance test per row; the anchoring tests are the A-GF-* families, [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md)).
+Registry rows for the ADR-0073…0080 wave, completed by ADR-0081/0082 (plus the ADR-0084 probe battery). The first ten schemas are **boundary-crossing** (they ride grants, federation envelopes, evolution logs read by the GEPA harness, or operator policy); the last five are **kernel-internal** — signed and persisted in the persona's own stores, but never leaving the owning kernel. `counterparty-model/1` sits in between: it attaches to a federated edge yet is **home-kernel-only** by ADR-0082. Changes follow [`§7.13`](#713-adding-or-modifying-schemas) (migration mapper + design criterion per row; the anchoring tests are the A-GF-* families, [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md)).
 
 | Schema | Version | Form | Defined in | Stability | Used by |
 |--------|---------|------|------------|-----------|---------|
@@ -720,7 +720,7 @@ Registry rows for the ADR-0073…0080 wave, completed by ADR-0081/0082 (plus the
 | `MoodImpulse` | `mood-impulse/1` | dataclass | [`02_PERSONA.md §6.2`](02_PERSONA.md) | Provisional | **Kernel-internal.** The only mood-mutation path; per-event-kind clamps + dedup/24 h window clamp (ADR-0081). |
 | `SelfNarrative` | `self-narrative/1` | dataclass | [`08_KNOWLEDGE.md §3.3`](08_KNOWLEDGE.md) | Provisional | **Kernel-internal.** Provenance-backed self-story; layer-3 render only; derendered immediately on cited-memory tombstone (ADR-0081). |
 | `TacticCitation` | `tactic-citation/1` | dataclass | [`08_KNOWLEDGE.md §14.3a`](08_KNOWLEDGE.md) | Provisional | **Kernel-internal.** Per-acceptance tactic usage event (ADR-0081); the reinforcement source for `habit_strength`. |
-| `IdentityEquivalenceProbeBattery` | `probe-battery/1` | dataclass | [`11_ACCEPTANCE_TESTS.md §8e`](11_ACCEPTANCE_TESTS.md) | Provisional | **Kernel-internal.** Versioned ≥ 20-probe battery for the A-J7 body-swap identity-equivalence test (ADR-0084); minted at the birth ceremony from SOUL blocks + `identity-rubric/1`; regenerated only on SOUL major bump; operator backfill for older personas. |
+| `IdentityEquivalenceProbeBattery` | `probe-battery/1` | dataclass | [`11_DESIGN_CRITERIA.md §8e`](11_DESIGN_CRITERIA.md) | Provisional | **Kernel-internal.** Versioned ≥ 20-probe battery for the A-J7 body-swap identity-equivalence test (ADR-0084); minted at the birth ceremony from SOUL blocks + `identity-rubric/1`; regenerated only on SOUL major bump; operator backfill for older personas. |
 
 ### 7.10 Constraints & policy
 
@@ -816,7 +816,7 @@ A change to any schema in this registry MUST follow this process:
 1. **Bump version** if any field is removed or its type changes; for additive changes (new optional fields), the existing version MAY be retained.
 2. **Update this table** in the same PR.
 3. **Update the migration tool** (see [`01_KERNEL.md §5`](01_KERNEL.md#5-schema-validation-inv-10)) with an explicit mapper from the previous version.
-4. **Add or update an acceptance test** referencing the schema in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+4. **Add or update an design criterion** referencing the schema in [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 5. The kernel MUST refuse messages whose `schema` field value is not present in this registry.
 
 CI SHOULD verify that every `schema` field literal (matching `<name>/<integer>`) in source code is present in this table. Drift between code and registry is a release-blocking defect.
@@ -889,15 +889,15 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 
 | ID | Risk | Severity | Likelihood | Mitigation | Target release |
 |----|------|----------|------------|------------|----------------|
-| R-PROTOCOLS-1 | Adapter parity testing surface is combinatorial (12 adapters × all v1.0 features). | Medium | High | Acceptance suite (`11_ACCEPTANCE_TESTS.md`) per adapter; cross-adapter parity tests (A-P10, A-PT6-PT9); exhaustive parity is operator concern. | v1.0 (suite); v1.1 (matrix CI). |
-| R-PROTOCOLS-2 | Cache hit rate variance. New personas or heavy evolution lower hit rate below 80% target. | Low | Medium | Layer 1-2 cacheable per `cache_control`; per-persona evolution cadence operator-tuned; A-PT11 acceptance test. | v1.0 (cache); v1.1 (adaptive caching). |
+| R-PROTOCOLS-1 | Adapter parity testing surface is combinatorial (12 adapters × all v1.0 features). | Medium | High | Acceptance suite (`11_DESIGN_CRITERIA.md`) per adapter; cross-adapter parity tests (A-P10, A-PT6-PT9); exhaustive parity is operator concern. | v1.0 (suite); v1.1 (matrix CI). |
+| R-PROTOCOLS-2 | Cache hit rate variance. New personas or heavy evolution lower hit rate below 80% target. | Low | Medium | Layer 1-2 cacheable per `cache_control`; per-persona evolution cadence operator-tuned; A-PT11 design criterion. | v1.0 (cache); v1.1 (adaptive caching). |
 | R-PROTOCOLS-3 | OTel cardinality explosion. Many tag dimensions inflate observability storage. | Medium | High | Sampling at trace level; per-metric cardinality limits; operator-defined tag whitelist; A-PT12 overhead target ≤ 2%. | v1.0 (sampling); v1.1 (adaptive caps). |
-| R-PROTOCOLS-4 | Schema migration burden across prior versions to v1.0 (40+ entities). | Medium | High | Migration tool with explicit version mappers; A-PT13 acceptance test; CI drift check. | v1.0 (tool); ongoing. |
-| R-PROTOCOLS-5 | HSM (Tier 3) custody is expensive. | Low | Medium | Operator decides per deployment risk profile; Tier 2 (cloud KMS) admissible for non-critical deployments; A-K-CUST acceptance test. | v1.0 (tiers); operator-tuned. |
+| R-PROTOCOLS-4 | Schema migration burden across prior versions to v1.0 (40+ entities). | Medium | High | Migration tool with explicit version mappers; A-PT13 design criterion; CI drift check. | v1.0 (tool); ongoing. |
+| R-PROTOCOLS-5 | HSM (Tier 3) custody is expensive. | Low | Medium | Operator decides per deployment risk profile; Tier 2 (cloud KMS) admissible for non-critical deployments; A-K-CUST design criterion. | v1.0 (tiers); operator-tuned. |
 | R-PROTOCOLS-6 | A2A federation trust establishment requires multi-operator agreements. Operational, not architectural. | Medium | High | Documented onboarding flow; reputation gossip with kernel-attested provenance; trust caps on new peers. | v1.0 (substrate); v1.1 (onboarding tooling). |
 | R-PROTOCOLS-7 | MCP-Zero discovery quality. Semantic tool search may surface wrong tools. | Medium | Medium | Smoke test on first invocation; reputation-weighted ranking; user-in-loop for high-stakes; per-domain tool registries. | v1.0 (smoke test); v1.1 (reputation rank). |
 | R-PROTOCOLS-8 | Cross-version compatibility. v1.0 reads prior-version forward-compat; v1.0 schemas refused by older kernels. Federation requires same-version peers. | Medium | Medium | Migration tool; explicit version-handshake at AgentCard exchange; operator policy on cross-version federation. | v1.0 (migration); v1.1 (compat-shim). |
-| R-PROTOCOLS-9 | `DeploymentProfile` is v1.0-introduced; the prior security model is silent on `principal_topology`. Single-user deployments MUST declare `operator_is_user`. | High | Low | v1.0 ships degraded gate; operator policy at deployment time; A-K-DP acceptance test; future top-level revision will fold into security model. | v1.0 (gate); v2.0 (top-level fold-in). |
+| R-PROTOCOLS-9 | `DeploymentProfile` is v1.0-introduced; the prior security model is silent on `principal_topology`. Single-user deployments MUST declare `operator_is_user`. | High | Low | v1.0 ships degraded gate; operator policy at deployment time; A-K-DP design criterion; future top-level revision will fold into security model. | v1.0 (gate); v2.0 (top-level fold-in). |
 | R-PROTOCOLS-10 | Physical-world coupling primitives (`04_PROJECT §26a`, `06_DOMAIN §5.5-§5.6/§6`) are v1.0-introduced; phase docs are silent. | Low | Low | Phase docs win conflicts; no conflict exists — v1.0 extends into uncovered territory; cross-references make the additions discoverable. | v1.0 (substrate); v2.0 (phase-doc retro-merge). |
 | R-PROTOCOLS-11 | DHT / mDNS discovery (`§3G.2`) leaks metadata (existence, timing) and is attackable (eclipse, sybil, mDNS spoofing on a hostile LAN). | High | Medium | Access-gated results (`§3G.4`) — private records never enumerable; DHT entries signed + reputation-weighted (`§3D`); mDNS records signed; intranet plane trusts the LAN's own perimeter; `discover` exposes only minimal metadata. | v1.1 (gating + signing); v1.2 (DHT hardening). |
 | R-PROTOCOLS-12 | Hybrid `ContentLocator` (`§3G.5`) dangling / drift: the provider deletes, rotates, or mutates bytes behind the reference. | High | High | Mandatory `content_hash` fails closed on mismatch (`CONTENT_INTEGRITY_FAILED`); ordered `replica_tiers` fallback; live-reference verification emits `CONTENT_LOCATOR_STALE`; optional IPFS pinning for permanence. | v1.1 (integrity + tiers); v1.2 (auto re-pin). |
@@ -925,7 +925,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-PROTOCOLS-11 | Key custody tier defaults: v1.0 ships Tier 2 (cloud KMS) baseline; should safety-critical deployments require Tier 3 (HSM) by default? | Security auditors | v1.1 default policy. |
 | OQ-PROTOCOLS-12 | Reachability/availability (`§3H`): does v1.1 ship a default public relay/bootstrap commons (and whose?), require operator-supplied relay, or bundle a self-hosted relay recipe? And what is the default `AvailabilityPolicy` per content kind (artefact vs. telemetry vs. persona)? | Federation WG | v1.1 commons + availability defaults. |
 
-## 11. Acceptance tests
+## 11. Design criteria
 
 ```text
 A-PT1   MCP tools registered in v1.0 kernel are invocable from any
@@ -1685,7 +1685,7 @@ class PromptBlock:
     ]
 ```
 
-*Enum change note (ADR-0081, per the [`§7.13`](#713-adding-or-modifying-schemas) CI discipline):* `contextual_mood` and `self_narrative` are additive origin literals so the ADR-0075 rendered disposition line ([`08_KNOWLEDGE.md §10a`](08_KNOWLEDGE.md#10a-contextual-mood-line-adr-0075)) and the ADR-0077 self-narrative ([`08_KNOWLEDGE.md §3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077)) are carriable as first-class layer-3 blocks (`cacheable = False` always). `PromptBlock` is an internal value type (no `schema` field, [`SPEC_CONVENTIONS.md §4.3`](SPEC_CONVENTIONS.md#43-schema-scope)); the addition is flagged here for the schema-extractor / CI grep rather than the registry table. Tests: A-GF-ARC-5, A-GF-SN-4.
+*Enum change note (ADR-0081, per the [`§7.13`](#713-adding-or-modifying-schemas) CI discipline):* `contextual_mood` and `self_narrative` are additive origin literals so the ADR-0075 rendered disposition line ([`08_KNOWLEDGE.md §10a`](08_KNOWLEDGE.md#10a-contextual-mood-line-adr-0075)) and the ADR-0077 self-narrative ([`08_KNOWLEDGE.md §3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077)) are carriable as first-class layer-3 blocks (`cacheable = False` always). `PromptBlock` is an internal value type (no `schema` field, [`SPEC_CONVENTIONS.md §4.3`](SPEC_CONVENTIONS.md#43-schema-scope)); the addition is flagged here for the schema-extractor / CI grep rather than the registry table. Criteria: A-GF-ARC-5, A-GF-SN-4.
 
 ```json
 {

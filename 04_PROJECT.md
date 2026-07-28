@@ -283,7 +283,7 @@ Disagreements are **explicitly preserved**, not suppressed. Default lifetime is 
 
 **Counterparty-model suspension under blind review (ADR-0082).** The anonymity-enforcement rules (A.14) include the following: for the duration of a `single_blind` or `double_blind` review, counterparty-model writes about, AND counterparty-model retrieval against, anonymized counterparts ([`02_PERSONA.md §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079)) MUST be suspended — a reviewer's stored model of an author (or an author's of a reviewer) would otherwise deanonymize through behavioural priors, and a blind review must not silently *grow* a model of a party whose identity is being withheld. Suspension lifts when the review's deanonymisation policy fires or the review closes; suspended-period interactions mint no retroactive entries. Test: A-GF-CPM-8.
 
-**Acceptance tests.** A-PR-AN1 (single-blind strips reviewer identity from author-visible projections), A-PR-AN2 (double-blind requires independent anonymity_holder under collapse), A-PR-AN3 (deanonymisation only on policy match + signed event), A-PR-AN4 (visibility tier consistent with anonymity_tier), A-GF-CPM-8 (counterparty-model writes + retrieval suspended under blind review).
+**Design criteria.** A-PR-AN1 (single-blind strips reviewer identity from author-visible projections), A-PR-AN2 (double-blind requires independent anonymity_holder under collapse), A-PR-AN3 (deanonymisation only on policy match + signed event), A-PR-AN4 (visibility tier consistent with anonymity_tier), A-GF-CPM-8 (counterparty-model writes + retrieval suspended under blind review).
 
 PeerReview is distinct from PANEL_ACCEPT:
 - PANEL_ACCEPT: ephemeral LLM judges; per-task; minutes
@@ -388,7 +388,7 @@ Cohort assembly events (list above) are extended: any `RECRUIT_ACCEPTED` or `PRO
 2. **Band thresholds are operator policy.** The defaults (0.70 / 0.55 / 0.40) are starting points; long-arc research cohorts may tolerate higher fractiousness than safety-critical construction cohorts. Operator policy is the right place to set this.
 3. **Dissolve is heavyweight.** Triggering DISSOLVE_PROPOSED is intended to be rare; the substrate logs every band transition so a project lead can intervene before dissolve becomes the only path.
 
-**Acceptance tests.** A-CD1 (recompute on every relevant lineage event), A-CD2 (band transition signed), A-CD3 (intervene band refuses new high-stakes obligations until restored), A-CD4 (dissolve_proposed requires lead + operator pin to keep intact), A-CD5 (composition with §14.1 — both gates run independently at milestones).
+**Design criteria.** A-CD1 (recompute on every relevant lineage event), A-CD2 (band transition signed), A-CD3 (intervene band refuses new high-stakes obligations until restored), A-CD4 (dissolve_proposed requires lead + operator pin to keep intact), A-CD5 (composition with §14.1 — both gates run independently at milestones).
 
 **Fork interaction.** When a cohort member forks mid-project, CohortDynamicsState recomputes reactively after `MidProjectForkComposition` (`02_PERSONA §7.4.7`) applies — children's edges form fresh per `edge_inheritance` policy; band-degradation may spike if many edges convert to `ended_at_fork`. **Substrate refusal**: forks initiated when the cohort is in `dissolve_proposed` band are **refused** with `fork_refused_cohort_dissolving` — fork during dissolution is incoherent. Operators planning fork of a healthy-cohort member SHOULD consider drafting a `PlannedDeparture` (§14.2.1) for the parent persona alongside the fork composition envelope, giving the cohort dynamics anticipatory rebalance over the parent-persona-disappearance event.
 
@@ -413,7 +413,7 @@ Previously, when a member departed (retirement, role change, project leave), `Co
 3. **Operator-tunable `rebalance_window` is load-bearing.** Too short (e.g., 7 days for a multi-month departure) yields the same abrupt transition; too long (e.g., 2 years) ties up operator attention for unrealistic horizons. Default 90d is a starting point; operators should set per-project based on the project's natural cadence.
 4. **No multi-departure aggregation.** When two members both file PlannedDeparture in overlapping windows, CohortDynamicsState applies both anticipatory rebalances independently. If the combined rebalance would force the cohort below `dissolve_proposed`, the second-filed PlannedDeparture refuses with `cohort_dissolve_threshold_reached`; operator must resolve before further departures.
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9g — A-PD*` (planned departure).
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9g — A-PD*` (planned departure).
 
 **Fork interaction.** PlannedDeparture and mid-project fork are distinct primitives that may compose: a `lead`-role persona's planned-departure may *include* a fork into successor children rather than a simple handoff (the parent persona retires; one child takes over with the parent's history). When `MidProjectForkComposition.lead_role_inheritance = "one_child_inherits"` AND a PlannedDeparture is active for the parent, the fork timing SHOULD align with `departure_date` so anticipatory rebalance smooths the transition. **Substrate refusal**: forks initiated within 7 days of an active emergency PlannedDeparture's `departure_date` are **refused** with `fork_refused_imminent_departure` — the substrate refuses to add fork-composition complexity to imminent departure logistics.
 
@@ -543,7 +543,7 @@ A joint project shared between two (or more) organisations — ORG_A and ORG_B c
 4. **Federation across nodes is normative (ADR-0067/0068).** A joint project where the two organisations run separate nodes is supported two ways (`05_ENV §12c.4`): (a) host the joint project on one node with the other org's personas admitted as cross-node members (referenced by global handle, access- + capability-gated); or (b) span nodes via cross-env/cross-node task delegation (`03_TASKS §4.5`) over the global discovery layer, bilaterally consented. Each node enforces its own floor/signing; cross-node verdicts are trust-calibrated (V.8). Path (a) requires the hosting node's operator to be one of the principals.
 5. **ExternalAgent does not count as a principal.** Legal counsel, auditors, regulatory observers etc. admit through the ExternalAgent path (`§26a.1`) without becoming principals. They produce attestations, not signatures-of-authorisation; their attestations cannot satisfy a `MultiPrincipalAttestationQuorum`.
 
-**Acceptance tests.** A-MT8 (CrossTenancyAgreementRef required for cross-tenant principals), A-MT9 (joint-env charter ratification requires multi-principal quorum), A-MT10 (recruit consent names PrincipalRef explicitly), A-MT11 (joint-env DerivationProvenancePolicy defaults to mandatory_for_cross_principal), A-MT12 (joint-env harvest at tenant tier requires CrossTenancyAgreementRef), A-MT13 (joint-project completion requires multi-principal quorum at `§4.1`), A-MT14 (ExternalAgent cannot satisfy MultiPrincipalAttestationQuorum).
+**Design criteria.** A-MT8 (CrossTenancyAgreementRef required for cross-tenant principals), A-MT9 (joint-env charter ratification requires multi-principal quorum), A-MT10 (recruit consent names PrincipalRef explicitly), A-MT11 (joint-env DerivationProvenancePolicy defaults to mandatory_for_cross_principal), A-MT12 (joint-env harvest at tenant tier requires CrossTenancyAgreementRef), A-MT13 (joint-project completion requires multi-principal quorum at `§4.1`), A-MT14 (ExternalAgent cannot satisfy MultiPrincipalAttestationQuorum).
 
 ## 20. Structured outcome kinds
 
@@ -651,7 +651,7 @@ Previously, the `lead` role on a multi-session project was a `ProjectMember.role
 3. **Emergency handoff.** Setting `overlap_window = 0` requires operator-signed `emergency_handoff_signed` event and produces immediate role transition without the rebalance smoothing. Use case: outgoing lead suddenly unavailable (medical emergency, etc.). Cohort dynamics will spike; that's the honest cost of emergency.
 4. **Lead-specific knowledge transfer is operator-policy.** The substrate transfers the *role* and *authorities*; the lead's tacit knowledge (mental model of project history, relationships with external agents, decision context) does NOT auto-transfer. Operators should pair the ceremony with `PersonaConsultation` (`02_PERSONA §7.5.2`) if outgoing lead is RETIRED, OR with explicit knowledge-transfer sessions before overlap begins.
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9g — A-LH*` (lead handoff).
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9g — A-LH*` (lead handoff).
 
 **Fork interaction.** LeadHandoffCeremony is the substrate-shape mechanism for lead transitions to a *distinct* successor persona; mid-project fork into children is a different topology (one persona → N children). When a `lead`-role persona forks, `MidProjectForkComposition.lead_role_inheritance` (`02_PERSONA §7.4.7`) governs: `require_lead_handoff_ceremony` (fork blocks until a downstream LeadHandoffCeremony reaches overlap_active with named incoming-child as incoming_lead — the most ceremonious path, recommended for safety-critical projects), `one_child_inherits` (compressed handoff inside the fork ceremony; cohort quorum signature required; substrate refuses on cohort objection), `neither_inherits` (lead vacant; project enters `lead_vacant` state), or `refused_if_no_successor` (substrate refuses the fork). **Substrate refusal**: forks initiated while parent persona holds an active LeadHandoffCeremony in `overlap_active` state are **refused** with `fork_refused_active_lead_handoff_overlap` — adding fork-into-children to an already-active lead handoff would create three-or-more lead claimants.
 
@@ -708,7 +708,7 @@ When a project manages many homogeneous `PhysicalAsset` instances that share `as
 - **BatchStateAdvancement is a single fan-out.** The kernel signs one envelope; each member asset receives an individual `physical_asset_state_advanced` event in lineage. The batch envelope is the coordination record; individual events are the authoritative state transitions. If `conflict_policy = "skip_changed"`, assets whose state changed between batch drafting and execution are skipped with `reason = "state_changed_since_batch"`.
 - **Derived state is informational.** `AssetGroupDerivedState` is kernel-computed and kernel-signed but is NOT an admission gate. Operators wanting "refuse firmware update if fleet health < 90%" express this as a `StagedRolloutEnvelope` success criterion (see `§26a.9`), not as a derived-state invariant.
 
-**Tests:** A-AG1 (group creation + membership materialisation), A-AG2 (batch advancement fan-out), A-AG3 (conflict_policy skip_changed), A-AG4 (derived state computation), A-AG5 (no nesting refusal), A-AG6 (multi-group membership), A-AG7 (group membership recomputation on asset state change). See [`11_ACCEPTANCE_TESTS.md §9k`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-AG1 (group creation + membership materialisation), A-AG2 (batch advancement fan-out), A-AG3 (conflict_policy skip_changed), A-AG4 (derived state computation), A-AG5 (no nesting refusal), A-AG6 (multi-group membership), A-AG7 (group membership recomputation on asset state change). See [`11_DESIGN_CRITERIA.md §9k`](11_DESIGN_CRITERIA.md).
 
 **ProjectLineage:** `asset_group_created`, `asset_group_membership_recomputed`, `batch_state_advancement_drafted`, `batch_state_advancement_executed`, `batch_state_advancement_partial`, `batch_state_advancement_rolled_back`.
 
@@ -750,7 +750,7 @@ When a project manages many homogeneous `PhysicalAsset` instances that share `as
 
 **Composition with `operator_deferred` topology (§01_KERNEL §2.4.2).** When stock drops below `stock_critical` under `operator_deferred`, escalation goes to the PolicyEnvelope path: a `DeferredAdmission` slot is opened for the operator to acknowledge or revoke the consuming action. Quarantine of consumed stock is impossible (the resource is already consumed); the substrate instead refuses *future* consumption until counter-sign or revoke arrives.
 
-**Acceptance tests.** A-RS1 (refuse-below-floor admission), A-RS2 (critical escalation), A-RS3 (conservation invariant evaluated arithmetic-style, refuses on violation), A-RS4 (drift detection forces model re-fit), A-RS5 (coexistence with ExternalBudget on same project), A-RS6 (under operator_deferred, critical escalation opens DeferredAdmission).
+**Design criteria.** A-RS1 (refuse-below-floor admission), A-RS2 (critical escalation), A-RS3 (conservation invariant evaluated arithmetic-style, refuses on violation), A-RS4 (drift detection forces model re-fit), A-RS5 (coexistence with ExternalBudget on same project), A-RS6 (under operator_deferred, critical escalation opens DeferredAdmission).
 
 ### 26a.4.1 PaymentBridge — structured human-bridged payment
 
@@ -809,7 +809,7 @@ When an `ArtifactBundle` must be deployed across multiple `PhysicalAsset` instan
 - **Composes with AssetGroupEnvelope.** `BatchStateAdvancement` (§26a.2.2) handles the per-wave fan-out; `StagedRolloutEnvelope` handles the wave sequencing and soak enforcement. Neither knows about firmware or IoT — both are topology primitives.
 - **Operator co-sign for safety-critical.** When the project's domain has `safety_critical = True`, `requires_operator_cosign = True` is the default. Operator must co-sign the envelope before `in_progress`; operator must also co-sign each wave transition for domains with `physical_harm_class ≥ bodily_injury`.
 
-**Tests:** A-SR1 (envelope creation + wave ordering), A-SR2 (soak period enforcement), A-SR3 (rollback trigger fires mid-soak), A-SR4 (bridge degradation pauses rollout), A-SR5 (full rollout completion), A-SR6 (operator co-sign for safety-critical), A-SR7 (reverse BatchStateAdvancement on rollback), A-SR8 (composed with AssetGroupEnvelope). See [`11_ACCEPTANCE_TESTS.md §9k`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-SR1 (envelope creation + wave ordering), A-SR2 (soak period enforcement), A-SR3 (rollback trigger fires mid-soak), A-SR4 (bridge degradation pauses rollout), A-SR5 (full rollout completion), A-SR6 (operator co-sign for safety-critical), A-SR7 (reverse BatchStateAdvancement on rollback), A-SR8 (composed with AssetGroupEnvelope). See [`11_DESIGN_CRITERIA.md §9k`](11_DESIGN_CRITERIA.md).
 
 **ProjectLineage:** `staged_rollout_drafted`, `staged_rollout_started`, `staged_rollout_wave_deploying`, `staged_rollout_wave_soaking`, `staged_rollout_wave_completed`, `staged_rollout_wave_rolled_back`, `staged_rollout_completed`, `staged_rollout_rolled_back`, `staged_rollout_paused`, `staged_rollout_resumed`.
 
@@ -845,7 +845,7 @@ Every physical-world project accumulates `HumanAssistRequest` records at Tier 4 
 - **Composes with AttestationEquivalencePolicy.** When a plan entry proposes replacing human attestation (ExternalAttestation) with sensor-bridge evidence, the entry MUST reference an `AttestationEquivalencePolicy` (`06_DOMAIN §5.7`) that the operator has approved for that verification kind. Without an approved equivalence policy, the entry cannot advance past `design_ready`.
 - **Skill library feedback loop.** When a bridge design reaches `bridge_validated` status, the persona SHOULD promote the design to a `skill_library` entry (Voyager-class). The plan tracks `skill_library_entry_id` for each completed entry. Cross-project reuse of validated bridge designs reduces future plans' scope — the persona starts with fewer Tier 4 dependencies because prior projects already solved them.
 
-**Tests:** A-BRP1 (plan creation with initial inventory), A-BRP2 (MHBB_RECURRENCE_DETECTED auto-populates entry), A-BRP3 (review cadence enforcement + stale transition), A-BRP4 (entry advancement through full lifecycle: inventoried → designing → design_ready → awaiting_install → bridge_active → bridge_validated), A-BRP5 (irreducible entry creates OpenProblem), A-BRP6 (chained_bridge topology in plan entry), A-BRP7 (AttestationEquivalencePolicy composition — entry blocked without approved policy), A-BRP8 (skill_library promotion on bridge_validated), A-BRP9 (cross-project skill reuse reduces initial plan scope). See [`11_ACCEPTANCE_TESTS.md §9l`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-BRP1 (plan creation with initial inventory), A-BRP2 (MHBB_RECURRENCE_DETECTED auto-populates entry), A-BRP3 (review cadence enforcement + stale transition), A-BRP4 (entry advancement through full lifecycle: inventoried → designing → design_ready → awaiting_install → bridge_active → bridge_validated), A-BRP5 (irreducible entry creates OpenProblem), A-BRP6 (chained_bridge topology in plan entry), A-BRP7 (AttestationEquivalencePolicy composition — entry blocked without approved policy), A-BRP8 (skill_library promotion on bridge_validated), A-BRP9 (cross-project skill reuse reduces initial plan scope). See [`11_DESIGN_CRITERIA.md §9l`](11_DESIGN_CRITERIA.md).
 
 **ProjectLineage:** `bridge_reduction_plan_drafted`, `bridge_reduction_entry_added`, `bridge_reduction_entry_advanced`, `bridge_reduction_entry_irreducible`, `bridge_reduction_plan_reviewed`, `bridge_reduction_plan_stale`, `bridge_reduction_plan_completed`.
 
@@ -855,12 +855,12 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 
 | ID | Risk | Severity | Likelihood | Mitigation | Target release |
 |----|------|----------|------------|------------|----------------|
-| R-PROJECT-1 | Charter-compatibility evaluation at persona admission is heuristic. Edge cases may pass / refuse incorrectly. | Medium | Medium | Operator override surface; A-PJ12 acceptance test; classifier rotation. | v1.0 (baseline); v1.1 (reputation closed-loop). |
+| R-PROJECT-1 | Charter-compatibility evaluation at persona admission is heuristic. Edge cases may pass / refuse incorrectly. | Medium | Medium | Operator override surface; A-PJ12 design criterion; classifier rotation. | v1.0 (baseline); v1.1 (reputation closed-loop). |
 | R-PROJECT-2 | Long-arc multi-month / multi-year projects accumulate state (bundles, lineage, ProvenFacts). Storage pressure rises. | Medium | High | Bundle retention policy; `LineageSnapshot`; hibernation FSM (`§24`) defers active state. | v1.0 (retention); v1.1 (snapshot tuning). |
 | R-PROJECT-3 | Cross-env project membership coordination overhead. Members in multi-env projects must navigate notifications across envs. | Low | Medium | ObservationSurface filters; project digest stream; AttentionBudget caps. | v1.0 (baseline); v1.1 (project-wide digest). |
 | R-PROJECT-4 | Disagreement resolution stalls. Persistent unresolved disagreements block dependent work. | High | Medium | Stall-detector emits `DISAGREEMENT_STALLED`; operator escalation; A-PJ16 verbatim preservation; mediation pathway. | v1.0 (stall detector); v1.1 (mediation flow). |
 | R-PROJECT-5 | PeerReview reviewer-time bottleneck. Multi-round reviews require human time at scale. | Medium | High | Reviewer queue management is operator concern; PanelVerdict can shortcut some reviews; reviewer-credit incentivises participation. | v1.0 (baseline). |
-| R-PROJECT-6 | External-participant attestations (`§26a.3`) bridge analog and cryptographic chains. Forged credentials are possible without a credential-directory resolution path. | High | Low | `CredentialDirectoryRef` (`06_DOMAIN §5.5`) per-domain resolution; A-EX16 acceptance test; independent co-sign requirement. | v1.0 (CredentialDirectoryRef); v1.1 (cross-domain directory federation). |
+| R-PROJECT-6 | External-participant attestations (`§26a.3`) bridge analog and cryptographic chains. Forged credentials are possible without a credential-directory resolution path. | High | Low | `CredentialDirectoryRef` (`06_DOMAIN §5.5`) per-domain resolution; A-EX16 design criterion; independent co-sign requirement. | v1.0 (CredentialDirectoryRef); v1.1 (cross-domain directory federation). |
 | R-PROJECT-7 | ApprovalWorkflow sign-off chains depend on real-world participants. External delay is uncapped. | Medium | High | Per-step deadlines + escalation; STALLED workflow state surfaces to operator; budget-tranche timeouts (`§26a.4`). | v1.0 (baseline). |
 
 ## 27a. Open questions
@@ -876,9 +876,9 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-PROJECT-5 | ExternalAttestation credential directory federation (`§26a.3` + `06_DOMAIN §5.5`): how do multiple operators (or kernels) share trusted credential roots? | Federation WG | v1.1 directory federation. |
 | OQ-PROJECT-6 | Project-wide notification digest (R-ENV-5): is it env-scoped, project-scoped, or persona-scoped per project? | Persona UX | v1.1 digest design. |
 
-## 28. Acceptance tests
+## 28. Design criteria
 
-*Twenty-seven acceptance tests (A-PJ1 through A-PJ27) cover the full project lifecycle: creation, membership, memory scoping, lineage, ceremonies, forking, milestones, conjectures, obligations, disagreements, peer review, notation, citations, multi-env hosting, cross-domain transfer, progress evaluation, outcome kinds, arrival modes, three horizons, hibernation, and tool-requirement exceptions.*
+*Twenty-seven design criteria (A-PJ1 through A-PJ27) cover the full project lifecycle: creation, membership, memory scoping, lineage, ceremonies, forking, milestones, conjectures, obligations, disagreements, peer review, notation, citations, multi-env hosting, cross-domain transfer, progress evaluation, outcome kinds, arrival modes, three horizons, hibernation, and tool-requirement exceptions.*
 
 **Technical detail:** See [A.52](#appendix-a52).
 
@@ -3716,7 +3716,7 @@ StagedRolloutEnvelope FSM:
                                     (operator resumes or rolls back)
 ```
 
-### A.52 Acceptance tests (A-PJ1 through A-PJ27)
+### A.52 Design criteria (A-PJ1 through A-PJ27)
 
 <a id="appendix-a52"></a>
 

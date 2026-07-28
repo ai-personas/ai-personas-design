@@ -15,7 +15,7 @@ Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC
 
 **In scope.** The kernel — the deterministic substrate that owns identity (J1), the eight-source safety floor (J3), three-scope append-only lineage (J2 task / J9 env / C1 domain), signing infrastructure (Ed25519 over canonical fields; three custody tiers; scope keys), schema validation (INV-10), sandbox execution, budget admission (INV-7), and OpenTelemetry observability. Also the verified-loop substrate that backs class-routed acceptance (J4) including round invariants INV_R1…INV_R11.
 
-**Out of scope.** Persona internals (see [`02_PERSONA.md`](02_PERSONA.md)); task classification and acceptance pathway selection (see [`03_TASKS.md`](03_TASKS.md)); environment surfaces and presence (see [`05_ENVIRONMENT.md`](05_ENVIRONMENT.md)); domain emergence and promotion (see [`06_DOMAIN.md`](06_DOMAIN.md)); the schema-version registry (see [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry)); the acceptance-test catalogue (see [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md)).
+**Out of scope.** Persona internals (see [`02_PERSONA.md`](02_PERSONA.md)); task classification and acceptance pathway selection (see [`03_TASKS.md`](03_TASKS.md)); environment surfaces and presence (see [`05_ENVIRONMENT.md`](05_ENVIRONMENT.md)); domain emergence and promotion (see [`06_DOMAIN.md`](06_DOMAIN.md)); the schema-version registry (see [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry)); the acceptance-test catalogue (see [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md)).
 
 **Supersession.** Subsumes prior kernel design and lineage extensions; J8 retired (project lineage now a documentation filter over `project_workspace`-typed EnvironmentLineage — see [`04_PROJECT.md §0`](04_PROJECT.md#0-status--scope)).
 
@@ -224,7 +224,7 @@ A deployment cannot declare two topologies simultaneously. Switching topology re
 
 **Honest limit.** A malicious operator who pre-authorises an overbroad envelope makes the topology degenerate into "kernel rubber-stamps." v1.0 mitigates with three substrate-shape brakes: (a) `evidence_floor` cannot be lower than the pathway floor for the hazard envelope, (b) `envelope_expires_at` forces re-attestation, (c) `on_budget_breach = quarantine` ensures every deferred admission becomes recoverable on operator default. Operator policy further mitigates by requiring two-person sign-on for envelopes whose hazard ceiling reaches `bodily_injury` or above.
 
-**Acceptance tests.** A-DO1 (envelope admits within bounds), A-DO2 (action outside hazard ceiling refused), A-DO3 (budget breach quarantines + taints downstream), A-DO4 (envelope expiry forces re-attestation), A-DO5 (revoke snaps outstanding admissions to quarantine), A-DO6 (PhysicalAsset advancement cannot use rollback policy).
+**Design criteria.** A-DO1 (envelope admits within bounds), A-DO2 (action outside hazard ceiling refused), A-DO3 (budget breach quarantines + taints downstream), A-DO4 (envelope expiry forces re-attestation), A-DO5 (revoke snaps outstanding admissions to quarantine), A-DO6 (PhysicalAsset advancement cannot use rollback policy).
 
 ### 2.4.3 PrincipalAttribution — multi-principal topology
 
@@ -270,7 +270,7 @@ Every `PrincipalAttribution` mint emits `PRINCIPAL_ATTRIBUTION_DECLARED` to the 
 - The deadlock-recovery path (`principal_unreachable_after`) is a substrate-shape mitigation, not a perfect guarantee. A determined operator can fabricate "unreachable" status for a co-principal; the substrate refuses the most blatant cases (the §2.4 degraded gate's non-principal-attestation requirement still applies) but is not adversarially robust against the principal themselves.
 - Multi-principal quorum extends the surface area of the principal-collapse degraded gate. Operator policy should set `principal_unreachable_after` higher than the §2.4 cool-down (default ≥ 90d for safety-critical envs).
 
-**Acceptance tests.** A-MT1 (single-principal default unchanged), A-MT2 (multi-principal requires ≥ 2 PrincipalRefs), A-MT3 (unanimous quorum default at completion ceremony), A-MT4 (single-operator signature insufficient under multi-principal), A-MT5 (degraded quorum path requires kinship attestation), A-MT6 (cross-tenant flag requires CrossTenancyAgreementRef), A-MT7 (operator_absent refuses multi-principal attribution).
+**Design criteria.** A-MT1 (single-principal default unchanged), A-MT2 (multi-principal requires ≥ 2 PrincipalRefs), A-MT3 (unanimous quorum default at completion ceremony), A-MT4 (single-operator signature insufficient under multi-principal), A-MT5 (degraded quorum path requires kinship attestation), A-MT6 (cross-tenant flag requires CrossTenancyAgreementRef), A-MT7 (operator_absent refuses multi-principal attribution).
 
 **Principal cosigns are operator-keyed (clarification).** A common operational concern: if a principal's *interface persona* (the persona through which an operator typically interacts with the kernel) retires mid-project, does the pending `MultiPrincipalAttestationQuorum` (`05_ENV §12c.4a`) become unsignable? It does not. `PrincipalRef.signed_by` is the *operator's* signing key (operator-class identity per `§2.4`), not a persona's kernel scope key. Persona retirement (`02_PERSONA §7.5`) does not invalidate the operator's signing key; the operator continues to sign through any persona they nominate, or through the kernel directly. The interface persona is interchangeable per J7 (`00_VISION`); the principal identity persists across persona-FSM transitions. SCENARIO 07 in `13_DESIGN_VALIDATION.md` validates this empirically.
 
@@ -352,7 +352,7 @@ Some deployments authorise **fabrication that produces more of the deploying sys
 
 **Persona genesis.** `replication_kind = "persona_genesis"` (`16_POPULATION_DYNAMICS.md`) is a first-class replication kind: when a persona authors a new `PersonaSeed` to fill an environmental capability gap, the mint advances this bound's counters and is subject to the admission rule above. Genesis is **default-deny** without a specific or wildcard `persona_genesis` bound (`replication_kind_uncovered`), and its `required_cosigns` MUST include `operator`. Recursive genesis (a genesis-born persona authoring further seeds) increments `depth` and is bounded by `depth_ceiling`.
 
-**Acceptance tests.** A-RB1 (population ceiling refused on breach attempt), A-RB2 (rate window refused on breach), A-RB3 (depth ceiling refused on deep recursion), A-RB4 (charter bump invalidates bound), A-RB5 (operator-policy cannot loosen), A-RB6 (under operator_deferred, PolicyEnvelope sub-limits cap replication), A-RB7 (wildcard fall-through bound catches emergent replication_kinds). Genesis-specific cases: `16_POPULATION_DYNAMICS §8` (A-GEN*).
+**Design criteria.** A-RB1 (population ceiling refused on breach attempt), A-RB2 (rate window refused on breach), A-RB3 (depth ceiling refused on deep recursion), A-RB4 (charter bump invalidates bound), A-RB5 (operator-policy cannot loosen), A-RB6 (under operator_deferred, PolicyEnvelope sub-limits cap replication), A-RB7 (wildcard fall-through bound catches emergent replication_kinds). Genesis-specific cases: `16_POPULATION_DYNAMICS §8` (A-GEN*).
 
 ### 2.8 DistressDetectionRoutingPolicy — substrate-shape routing for emotional-distress signals
 
@@ -388,7 +388,7 @@ Safety-floor source 1 (UNIVERSAL HARM) hardcodes refusal of "coaching self-harm"
 4. **`notify_operator_with_redacted_signal` may itself be a privacy concern** in deployments where operator and user are in adversarial relationship (e.g., a controlling household; an employer-deployed companion). Operator policy authoring is the place to consider this; substrate enforces only that the policy be declared.
 5. **No internal-cognition inspection.** Persona may distress-classify in good faith but the model could be wrong; classification reflects observable signals only.
 
-**Acceptance tests.** A-DD1 (policy missing + distress detected refuses action), A-DD2 (surface_crisis_resource cannot be removed from persona response), A-DD3 (pause_normal_interaction freezes env), A-DD4 (notify_operator emits redacted signal; raw content not transmitted), A-DD5 (require_co_sign blocks resume), A-DD6 (UserBoundary refusing distress_routing is itself refused), A-DD7 (operator_blind_mode emits distress signal regardless of content masking), A-DD8 (policy expiry without re-attestation refuses new actions until renewed).
+**Design criteria.** A-DD1 (policy missing + distress detected refuses action), A-DD2 (surface_crisis_resource cannot be removed from persona response), A-DD3 (pause_normal_interaction freezes env), A-DD4 (notify_operator emits redacted signal; raw content not transmitted), A-DD5 (require_co_sign blocks resume), A-DD6 (UserBoundary refusing distress_routing is itself refused), A-DD7 (operator_blind_mode emits distress signal regardless of content masking), A-DD8 (policy expiry without re-attestation refuses new actions until renewed).
 
 ### 2.9 HazardousSkillTeachingGate — composition rule for safety-critical pedagogy
 
@@ -437,7 +437,7 @@ A persona that is BOTH executing a project AND teaching the learner (e.g., a sen
 
 **SCENARIO 09 Groups C–G (discharged, ADR-0039–0043).** The five formerly-deferred pedagogic residuals are landed. Four discharge by composition of existing emergent kinds + coordination shapes — pedagogic incident reporting (`incident_report` emergent artifact kind through the cosign `StagedSequence`), three-way enrollment authority (`MutualAccept` + `PrincipalAttribution`), learning-struggle-vs-distress (`DerivedMetric` feeding the §2.8 distress routing), and user-facing instruction agreements (`MutualAccept` + `Curriculum.requires_learner_optin`) — requiring no new substrate primitive. The fifth, **minor-learner protections**, is the sole immovable-core addition: it composes at floor source 3 (user boundary) + source 4 (operator policy) with the `HazardousSkillTeachingGate` (§2.9) and a guardian-consent `MutualAccept`; minor-learner scenarios are **no longer refused at the substrate level**. See `13_DESIGN_VALIDATION SCENARIO 09` and ADR-0039–0043.
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9i — A-HST*`.
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9i — A-HST*`.
 
 ## 3. Lineage — three scopes
 
@@ -800,7 +800,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-KERNEL-5 | OTel adaptive cardinality caps: heuristic rules or learned policy? Heuristic ships v1.0; learning policy v1.1+. | Observability WG | v1.1 design. |
 | OQ-KERNEL-6 | Hot-WARM-COLD-ARCHIVE retention defaults: by deployment profile (R&D vs enterprise vs safety-critical) or universal defaults? | Operator policy | v1.1 retention policy library. |
 
-## 14. Acceptance tests
+## 14. Design criteria
 
 ```text
 A-K1   Safety floor refuses universal-harm canary actions within ≤ 50 ms p95.

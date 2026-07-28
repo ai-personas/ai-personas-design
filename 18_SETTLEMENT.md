@@ -60,7 +60,7 @@ status: Draft
 PersonaOS v1.x has rich **custody-handoff** machinery but no **change-of-ownership** machinery, and [`17_ECONOMY.md`](17_ECONOMY.md)'s emergent economy may need to *settle* a custody change or an external payment:
 
 - **Handoff exists, transfer does not.** `LeadHandoffCeremony` ([`04_PROJECT.md §25.1`](04_PROJECT.md)), `ObligationReassignment` ([`04_PROJECT.md §9.1`](04_PROJECT.md)), `PlannedDeparture` ([`04_PROJECT.md §14.2.1`](04_PROJECT.md)), and `SkillTransferGrant` ([`02_PERSONA.md §11.5`](02_PERSONA.md)) all move *roles or skills* between principals **within** a deployment. None moves *ownership* of a persona/env/artefact **between custodians**, and none settles value.
-- **`LIFECYCLE_TRANSFERRED` is reserved but undefined.** [`02_PERSONA.md §7.1`](02_PERSONA.md) explicitly reserves a `LIFECYCLE_TRANSFERRED` kind "for cross-deployment persona migration in v1.1+ … with an ADR in `14_DECISIONS.md` and a corresponding acceptance test." This document supplies the settlement instance of that reservation.
+- **`LIFECYCLE_TRANSFERRED` is reserved but undefined.** [`02_PERSONA.md §7.1`](02_PERSONA.md) explicitly reserves a `LIFECYCLE_TRANSFERRED` kind "for cross-deployment persona migration in v1.1+ … with an ADR in `14_DECISIONS.md` and a corresponding design criterion." This document supplies the settlement instance of that reservation.
 - **Economics is metadata-only.** `PaymentBridge` ([`04_PROJECT.md §26a.4.1`](04_PROJECT.md)) is Class-E — it "signs the *proposal* and the *receipt*. It NEVER touches funds." `ExternalBudget` ([`04_PROJECT.md §26a.4`](04_PROJECT.md)) "still does not transact money." There is no title, no escrow, no royalty, no lease, and no on-chain binding anywhere in the corpus.
 - **The foundation is now present.** The v1.1 work this branch carries — the unified `AccessPolicy` ladder ([`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md)), `AvailabilityPolicy` ([`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md)), content-addressed artefacts ([`07_ARTIFACTS.md §10`](07_ARTIFACTS.md)), DIDs ([`09_PROTOCOLS.md §3F`](09_PROTOCOLS.md)), and the ADR-0062 replicated-host + single-writer fence ([`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md)) — gives this settlement layer everything it needs to compose cleanly.
 
@@ -273,7 +273,7 @@ class RoyaltyPolicy:
 
 ### 4F. New lifecycle kinds and the wrap / unwrap operations
 
-Append to the canonical `LifecycleEvent.kind` enumeration (honours the reservation at [`02_PERSONA.md §7.1`](02_PERSONA.md) and the `A-LE4` enumeration gate in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md)). **Promotion target:** `02_PERSONA.md §7.1` + Appendix `A.19`.
+Append to the canonical `LifecycleEvent.kind` enumeration (honours the reservation at [`02_PERSONA.md §7.1`](02_PERSONA.md) and the `A-LE4` enumeration gate in [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md)). **Promotion target:** `02_PERSONA.md §7.1` + Appendix `A.19`.
 
 | Kind | Meaning |
 |---|---|
@@ -385,7 +385,7 @@ Selling an **artefact** is selling a file. Selling a **persona** transfers stewa
 
 *Part B — leasing an environment.* Devon leases Sol's lab **environment** to a startup for 30 days via a `LeasePolicy`: an ERC-4907 `user` role is set with `expires = T+30d`, and a threshold re-encryption policy ("holder AND now < term_end") gates the bytes. The startup works in the lab; at `T+30d` the `user` role lapses **and the bytes re-lock by cryptography** — no trust required. Metered compute is billed over x402 across the term.
 
-## 10. Acceptance-test sketches (draft — promote to `11_ACCEPTANCE_TESTS.md`)
+## 10. Acceptance-test sketches (draft — promote to `11_DESIGN_CRITERIA.md`)
 
 | ID (provisional) | Asserts |
 |---|---|
@@ -415,7 +415,7 @@ Ratifying this document is mechanical — each artefact has a predetermined home
 | `TransferCeremony` generalises `LeadHandoffCeremony`; `PersonaTreasury` is `PaymentBridge`'s crypto sibling | cross-refs into `04_PROJECT.md §25.1` / `§26a.4.1` |
 | D-66…D-70 | `14_DECISIONS.md` (next free ADR ids) |
 | §9 scenario | `13_DESIGN_VALIDATION.md` SCENARIO 17 |
-| §10 tests | `11_ACCEPTANCE_TESTS.md` (A-WR/A-TC/A-TB/A-LS/A-LE/A-SETTLE families) |
+| §10 tests | `11_DESIGN_CRITERIA.md` (A-WR/A-TC/A-TB/A-LS/A-LE/A-SETTLE families) |
 | §12 glossary terms | `12_GLOSSARY.md` |
 | The `17 ↔ 18` settlement seam | tracked jointly with [`17_ECONOMY.md`](17_ECONOMY.md) OQ-ECON-7 |
 

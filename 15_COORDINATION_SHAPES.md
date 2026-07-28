@@ -347,7 +347,7 @@ A `TaskClass` and an `AcceptancePathway` are emergent KindRegistry kinds (per `0
 
 **Seed shape — `ContinuousRefinementMission` (ADR-0071).** A STANDARDISED seed orchestration shape for *continuous, convergence-bounded, budget-scaled improvement* ships in this scope. It is a **looping `StagedSequence`** (propose-improvement → act → verify → score → decide-continue) over an artefact bundle, holding a **best-so-far** version, whose decide-continue gate is a **`MarginalValueMetric`** — a `DerivedMetric` (§3.5) computing improvement in a signed `MissionObjective` vector since the last accepted iteration. The mission stops on the first of: convergence (`MarginalValueMetric < ε` over `N` rounds), user/operator stop, or INV-7 `budget_exhausted`; per-round breadth scales with `BudgetState.candidates_remaining` (anytime — quality monotone in budget); and an active, un-converged mission auto-resumes from best-so-far on budget replenishment. It is pure composition of `StagedSequence` + `DerivedMetric` (no new meta-mechanism), seeded from a user goal via `MissionCharter` ([`02_PERSONA §11.3`](02_PERSONA.md)) so it stays inside bounded autonomy, and is trust-calibrated like any orchestration shape. Full normative spec: [`03_TASKS §2c`](03_TASKS.md#2c-continuousrefinementmission--anytime-convergence-bounded-budget-scaled-improvement-adr-0071).
 
-**Tests:** A-EO1–A-EO13 ([`11_ACCEPTANCE_TESTS.md §9o`](11_ACCEPTANCE_TESTS.md)); A-REF1–A-REF7 (refinement mission — [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md)).
+**Criteria:** A-EO1–A-EO13 ([`11_DESIGN_CRITERIA.md §9o`](11_DESIGN_CRITERIA.md)); A-REF1–A-REF7 (refinement mission — [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md)).
 
 ## 5. ProposedCoordinationShape
 

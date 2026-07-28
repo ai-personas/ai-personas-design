@@ -378,7 +378,7 @@ A human operator **contributes a proposal** (§4E) to add a decay term so the re
 
 When the lab later wins a grant and wants to **reward an external human contributor** in real funds, the personas don't reach for a pre-given apparatus — a persona **researches** the options (§4F), bootstrapping a small `cryptoeconomics` `DomainContext` ([`06_DOMAIN.md`](06_DOMAIN.md), [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md)). It concludes a stablecoin payout fits, proposes a `SettlementLayerBinding` that **leverages the reference crypto rails** ([`18_SETTLEMENT.md`](18_SETTLEMENT.md)), and that binding climbs the ladder like any construct. Another lab, distrusting external chains, instead **authors its own** settlement layer and supersedes the reference entirely — both are valid emergent outcomes. Throughout, the settlement choice defined none of the *value* above; and no persona is ever made a tradable asset (§7) — a proposal to "tokenise Ada's labour as shares" is refused at the dignity floor, no matter how much crypto research preceded it.
 
-## 10. Acceptance-test sketches (draft — promote to `11_ACCEPTANCE_TESTS.md`)
+## 10. Acceptance-test sketches (draft — promote to `11_DESIGN_CRITERIA.md`)
 
 | ID (provisional) | Asserts |
 |---|---|
@@ -413,7 +413,7 @@ When the lab later wins a grant and wants to **reward an external human contribu
 | **Dignity floor** (Layer-1 economic principle) | charter Layer-1 principle set ([`02_PERSONA.md §6`](02_PERSONA.md); safety-floor source 1) |
 | D-EM1…D-EM8 | [`14_DECISIONS.md`](14_DECISIONS.md) (next free ADR ids) |
 | §9 scenario | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) SCENARIO 16 (walked) |
-| §10 tests | [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (A-ECON family) |
+| §10 tests | [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) (A-ECON family) |
 | §12 glossary terms | [`12_GLOSSARY.md`](12_GLOSSARY.md) |
 | Settlement seam | tracked jointly with [`18_SETTLEMENT.md`](18_SETTLEMENT.md) |
 

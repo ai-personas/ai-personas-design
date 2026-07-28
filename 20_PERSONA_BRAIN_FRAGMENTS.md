@@ -98,13 +98,13 @@ operational change. Vague updates that do not affect future behavior are not
 promoted.
 
 BrainReview checks that the proposal is evidence-grounded, preserves frozen
-identity, never deletes signed pressure lineage, and does not claim unavailable
-tools or MCPs as available. The latest persona-signed pressure appraisal is the
-current snapshot: omission retires an item from current pressure but never erases
-the prior appraisal, evidence refs, or learning history. Closure evidence may
-explain that retirement, but the runtime does not require count-matched closure
-records or revive historical pressure as a readiness gate. Accepted proposals are
-promoted as signed fragment versions; rejected proposals remain auditable.
+identity, never deletes signed work-state lineage, and does not claim unavailable
+tools or MCPs as available. The latest verified persona work-state revision is the
+current human-facing snapshot. Its commitments remain active until the persona
+authors an explicit transition; assumptions and uncertainties remain authored
+context, not host-scored pressure. Earlier frames, evidence refs, and learning
+history remain auditable. Accepted proposals are promoted as signed fragment
+versions; rejected proposals remain auditable.
 
 ## 5. Tools, MCP, Skills
 
@@ -129,8 +129,8 @@ mechanics; the persona decides what, if anything, should become reusable prompt
 material.
 
 The repository must not ship a default fragment library, domain fragment set,
-tool-use fragment set, or task-specific starter fragments. Examples in tests or
-design prose are illustrative fixtures only; they are not initial state. Runtime
+tool-use fragment set, or task-specific starter fragments. Examples in design
+prose are illustrative only; they are not initial state. Runtime
 code may create empty signed storage, retrieval indexes, compile records, and
 tool schemas, but it must not author fragment bodies, activation cues,
 deactivation cues, labels, or prompt sections on behalf of the persona.
@@ -142,18 +142,15 @@ deactivation cues, labels, or prompt sections on behalf of the persona.
 | Prompt drift | Signed versions, reviews, rollback. |
 | Generic self-improvement fluff | Require operational edits with evidence refs. |
 | Memory bloat | Split, merge, retire, utility counters, bounded retrieval. |
-| Retrieval miss | Combine lexical, semantic, hot-set, link, and utility retrieval. |
+| Retrieval miss | Use exact hot IDs, links, references, persona-observed utility, recency, and only real provider vectors when supplied. |
 | Tool hallucination | Only runtime capability manifests count as available. |
 | Overfitting | Promote risky edits only after review or repeated evidence. |
 | Conflicting fragments | Preserve links and expose conflicts during compile. |
 
-## 8. Tests
+## 8. Design criteria
 
-- fragment signing, hash lineage, retirement, rollback, and stale index rebuild;
-- retrieval over large fragment sets without full-brain model scans;
-- BrainCompile shape, activation logging, and active-spec prompt injection;
-- BrainEdit rejection for evidence-free, vague, identity-mutating, or
-  unavailable-tool edits;
-- integration where evidence from one run changes future active prompt behavior;
-- substrate-purity regression: no domain words, artifact contracts, tool gates,
-  or task-specific regexes in runtime logic.
+Live evidence must show signed fragment lineage, bounded graph/reference retrieval,
+BrainCompile activation provenance, persona-authored edits affecting later work,
+and honest refusal of unauthorized or unavailable-tool edits. Runtime source must
+contain no domain-word, artifact-contract, profession, filename, or task-regex
+branch that authors fragment meaning or chooses behavior for the persona.

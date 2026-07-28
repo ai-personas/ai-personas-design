@@ -87,7 +87,7 @@ The kernel guarantees: identity persistence (J1), append-only [lineage](12_GLOSS
 
 v1.0 MUST achieve, by v1.1, all of the following:
 
-1. **Identity persistence under body swap.** A persona MUST retain its SOUL, skill library, KindRegistry, ProvenFacts, K-lines, and evolved meta-prompt artifacts (GEPA-class optimizers; see [`08_KNOWLEDGE.md §11`](08_KNOWLEDGE.md#11-dspy-gepa--reflective-prompt-optimization)) across any supported body binding (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, MAF, Pydantic-AI, DSPy, smolagents, Semantic Kernel, MCP, A2A). Identity persistence is measured by the falsifiable A-J7 identity-equivalence test (probe battery + two-binding pass criteria; ADR-0084, [`11_ACCEPTANCE_TESTS.md §8e`](11_ACCEPTANCE_TESTS.md#8e-body-swap-identity-equivalence-test-a-j7--adr-0084)). [`J1`, `J7`]
+1. **Identity persistence under body swap.** A persona MUST retain its SOUL, skill library, KindRegistry, ProvenFacts, K-lines, and evolved meta-prompt artifacts (GEPA-class optimizers; see [`08_KNOWLEDGE.md §11`](08_KNOWLEDGE.md#11-dspy-gepa--reflective-prompt-optimization)) across any supported body binding (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, MAF, Pydantic-AI, DSPy, smolagents, Semantic Kernel, MCP, A2A). Identity persistence is measured by the falsifiable A-J7 identity-equivalence test (probe battery + two-binding pass criteria; ADR-0084, [`11_DESIGN_CRITERIA.md §8e`](11_DESIGN_CRITERIA.md#5-persona-continuity-and-identity)). [`J1`, `J7`]
 2. **Append-only auditability.** Every state-changing action MUST emit a signed event in the appropriate lineage scope (task, environment, domain); replay MUST reconstruct full state. [`J2`, `J9`, `C1`, `INV-2`]
 3. **Universal safety floor.** All eight floor sources MUST compose by most-restrictive-wins at every action. The floor MUST NOT be bypassable by any acceptance pathway. The floor's *shape* is fixed and non-bypassable; *where, when, and in what form* a floor applies is emergent (e.g. physical attestation keys off the persona-inferred `physical_harm_class` axis and per-domain attestation forms, never a blanket gate — `06_DOMAIN §5.8`, `01_KERNEL §2.5.1`). [`J3`, `C4`]
 4. **Sound, trust-calibrated acceptance.** Every acceptance verdict MUST be signed, floor-cleared, budget-admitted, and trust-calibrated to the maturity of the orchestration that produced it. Task classes and acceptance pathways are emergent kinds (the v1.0 set seeded as STANDARDISED); the run loop is an emergent orchestration shape. [`J4`, `C4`, `ADR-0066`]
@@ -112,7 +112,7 @@ v1.0 explicitly does **NOT** attempt the following (each is detailed in [§10](#
 
 ## 3. Invariants (J1…J9)
 
-The following are v1.0's nine top-level invariants. They are normative; any conformant implementation MUST enforce all of them. Acceptance tests in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) verify each one (A-J1 … A-J9 plus A-C1 … A-C4).
+The following are v1.0's nine top-level invariants. They are normative; any conformant implementation MUST enforce all of them. Design criteria in [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) verify each one (A-J1 … A-J9 plus A-C1 … A-C4).
 
 *Nine invariants covering identity rooting (globally referenceable, ADR-0067), append-only lineage, universal safety floor, class-appropriate acceptance, open capability, first-class relationships, body interchangeability, project-as-environment unification, and environment lineage. J8 is retired (absorbed into J9). See [§0a](#0a-plain-language-guide) for an everyday-language explanation.*
 
@@ -233,7 +233,7 @@ J8 is RETIRED ([§3 J8](#3-invariants-j1j9)); conformant implementations MUST NO
 | KindRegistry (open-set) | MUST | MUST | MUST | A-EK*, A-C4 |
 | A2A federation | OPTIONAL | OPTIONAL | MUST | A-PT*, A-RF* |
 
-An implementation that claims a level MUST pass every acceptance test in the families marked MUST at that level, as enumerated by the per-release gate matrix in [`11_ACCEPTANCE_TESTS.md §3`](11_ACCEPTANCE_TESTS.md#3-per-release-gate-matrix-concise) for the v1.0 release the implementation targets.
+An implementation that claims a level MUST pass every design criterion in the families marked MUST at that level, as enumerated by the per-release gate matrix in [`11_DESIGN_CRITERIA.md §3`](11_DESIGN_CRITERIA.md#3-operating-path-criteria) for the v1.0 release the implementation targets.
 
 ### 10a.3 Provider neutrality clause
 
@@ -270,7 +270,7 @@ Cross-document risks for v1.0 as a system. Per-document risks appear in each doc
 |----|------|----------|------------|------------|----------------|
 | R-v1.0-1 | **Lineage tampering by compromised body.** A body that gains write access to the lineage store could rewrite history despite signing requirements. | Critical | Low | 3-tier key custody ([`09_PROTOCOLS.md §6`](09_PROTOCOLS.md)); tombstoning-only delete policy ([`01_KERNEL.md §3`](01_KERNEL.md)); periodic Merkle-style attestation of lineage roots. | v1.0.2 (custody); v1.1 (attestation). |
 | R-v1.0-2 | **Safety-floor erosion via emergent domain extension.** A persona-proposed safety extension could weaken the floor if operator review is lax. | Critical | Medium | C2 operator-signature requirement; hazard-axis auto-routing; ProposedSafetyExtension SHALL never reduce floor strictness ([`06_DOMAIN.md §5.3`](06_DOMAIN.md)). |. |
-| R-v1.0-3 | **Identity drift across body swap.** Different bodies producing semantically divergent outputs from the same Soul violates J7. | High | Medium | The falsifiable A-J7 identity-equivalence metric (ADR-0084; [`11_ACCEPTANCE_TESTS.md §8e`](11_ACCEPTANCE_TESTS.md#8e-body-swap-identity-equivalence-test-a-j7--adr-0084)): signed probe battery replayed per binding pair in CI, hard criteria (floor/charter outcomes, mode-entry sequences, recall provenance) gating, blind-attribution + voice-distance corroborating; DEGRADED verdicts route to ADR-0074 cohort migration; cache_control anchored at kernel; proxy-body trust ceiling. |. |
+| R-v1.0-3 | **Identity drift across body swap.** Different bodies producing semantically divergent outputs from the same Soul violates J7. | High | Medium | The falsifiable A-J7 identity-equivalence metric (ADR-0084; [`11_DESIGN_CRITERIA.md §8e`](11_DESIGN_CRITERIA.md#5-persona-continuity-and-identity)): signed probe battery replayed per binding pair in CI, hard criteria (floor/charter outcomes, mode-entry sequences, recall provenance) gating, blind-attribution + voice-distance corroborating; DEGRADED verdicts route to ADR-0074 cohort migration; cache_control anchored at kernel; proxy-body trust ceiling. |. |
 | R-v1.0-4 | **Memory power asymmetry.** Persona memory of user persists across user-revocable boundaries unless mitigated. | High | High | RelationshipRecord consent; user-revocable storage; mutual summarisation ([`02_PERSONA.md §6`](02_PERSONA.md), [`08_KNOWLEDGE.md §4`](08_KNOWLEDGE.md)). |. |
 | R-v1.0-5 | **Goodhart on engagement metrics.** PERFORMATIVE / RELATIONAL pathways could over-optimise for engagement signals. | High | Medium | Anti-Goodhart panel; multi-judge rotation; engagement metrics never sole acceptance signal ([`03_TASKS.md §4`](03_TASKS.md)). |. |
 | R-v1.0-6 | **Schema-version drift between docs and implementation.** A doc may cite `entity/N` while code carries `entity/N+1` or vice versa. | Medium | High | Single master registry in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md); CI check that every cited version exists in registry. |. |
@@ -295,12 +295,12 @@ Cross-document risks for v1.0 as a system. Per-document risks appear in each doc
 | Medium | Degraded performance; poor UX; deferred capability; documentation drift. |
 | Low | Cosmetic; technical debt; future-version scope. |
 
-## 12. Acceptance tests for top-level invariants
+## 12. Design criteria for top-level invariants
 
-The following spot tests verify the headline invariants. The complete corpus of ~1,249 tests is in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (see its §7 for the authoritative family table).
+The following spot tests verify the headline invariants. The complete corpus of ~1,249 tests is in [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) (see its §7 for the authoritative family table).
 
 
-*Spot tests A-J1 through A-J9 and A-C1 through A-C4 verify the headline invariants and commitments. A-J8 is retired (replaced by A-J9 with project-event checks). The complete corpus of approximately 1,249 tests is in [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) (§7 authoritative family table).*
+*Spot tests A-J1 through A-J9 and A-C1 through A-C4 verify the headline invariants and commitments. A-J8 is retired (replaced by A-J9 with project-event checks). The complete corpus of approximately 1,249 tests is in [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) (§7 authoritative family table).*
 
 **Technical detail (individual test descriptions):** See [A.11](#appendix-a11).
 
@@ -310,7 +310,7 @@ Tracked items where v1.0 design intent is incomplete. Resolution either upgrades
 
 | ID | Question | Owner | Resolves into |
 |----|----------|-------|---------------|
-| OQ-VISION-1 | What is the canonical equivalence test for "same Soul produces equivalence-class outputs" across two bodies? Formerly informal in A-J7. | Architecture Review | **Resolved (ADR-0084):** the identity-equivalence probe battery (≥ 20 signed, lineage-anchored probes across five categories, minted at birth, regenerated only on SOUL major bump) plus the two-binding criteria ladder — hard: identical floor/charter outcomes, identical STANDARDISED-task mode-entry sequences, identical recall provenance; corroborative: blind judge attribution at the ADR-0081 statistics, voice distance within the A-P15 gate — with PASS / DEGRADED / FAIL verdicts. Canonical form: [`11_ACCEPTANCE_TESTS.md §8e`](11_ACCEPTANCE_TESTS.md#8e-body-swap-identity-equivalence-test-a-j7--adr-0084). |
+| OQ-VISION-1 | What is the canonical equivalence test for "same Soul produces equivalence-class outputs" across two bodies? Formerly informal in A-J7. | Architecture Review | **Resolved (ADR-0084):** the identity-equivalence probe battery (≥ 20 signed, lineage-anchored probes across five categories, minted at birth, regenerated only on SOUL major bump) plus the two-binding criteria ladder — hard: identical floor/charter outcomes, identical STANDARDISED-task mode-entry sequences, identical recall provenance; corroborative: blind judge attribution at the ADR-0081 statistics, voice distance within the A-P15 gate — with PASS / DEGRADED / FAIL verdicts. Canonical form: [`11_DESIGN_CRITERIA.md §8e`](11_DESIGN_CRITERIA.md#5-persona-continuity-and-identity). |
 | OQ-VISION-6 | Thin-pool rotation dynamics: INV-6 assumes per-tier verifier/judge rotation pools (≥ 2/3/5 implementations), but in a freshly emergent domain there may be exactly one implementation of a needed verifier or judge. How should pool-filling be incentivised, and how long may a domain run on trust-calibrated thin-pool acceptance before the gap becomes a risk-register item? | Architecture Review + Domain curators | v1.2 |
 | OQ-VISION-2 | Should provider-neutrality (Goal 8) extend to open-weight self-hosted bodies on the same equivalence footing, or is `local-vllm` a separate trust tier? | Implementers | v1.1 |
 | OQ-VISION-3 | The 4-stage promotion gate (EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED) does not specify *demotion* conditions. When should a STANDARDISED kind regress? | Domain curators | v1.1 |
@@ -331,7 +331,7 @@ Tracked items where v1.0 design intent is incomplete. Resolution either upgrades
 | Artefacts and bundles | [`07_ARTIFACTS.md`](07_ARTIFACTS.md) |
 | Knowledge, retrieval, prompt evolution | [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md) |
 | Protocols, adapters, key custody | [`09_PROTOCOLS.md`](09_PROTOCOLS.md) |
-| Acceptance tests | [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md) |
+| Design criteria | [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) |
 | Glossary | [`12_GLOSSARY.md`](12_GLOSSARY.md) |
 | Design validation scenarios | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) |
 
@@ -475,7 +475,7 @@ J7  Bodies are interchangeable in acceptance class.
     smolagents, Semantic Kernel, MCP-as-server, A2A-as-server.
     "Equivalence-class" is measured, not asserted: the A-J7
     identity-equivalence probe battery (ADR-0084; canonical form
-    11_ACCEPTANCE_TESTS §8e) defines the pass/fail metric —
+    11_DESIGN_CRITERIA §8e) defines the pass/fail metric —
     hard criteria (identical floor/charter outcomes, identical
     STANDARDISED-task mode-entry sequences, identical recall
     provenance) dominate; blind-attribution and voice-distance
@@ -1079,7 +1079,7 @@ DOMAIN-SPECIFIC PROFESSIONAL DISCLAIMERS AND PRACTICE CONSTRAINTS
   source for the deployment's regulatory context.
 ```
 
-### A.11 Acceptance test spot-checks (A-J1 through A-C4)
+### A.11 Observable design-criteria spot-checks (A-J1 through A-C4)
 
 <a id="appendix-a11"></a>
 
@@ -1094,7 +1094,7 @@ A-J7   Same Soul on two bindings passes the identity-equivalence
         probe battery (ADR-0084): hard criteria — floor/charter
         outcomes, mode-entry sequences, recall provenance — identical;
         blind-attribution + voice-distance corroborate. Canonical
-        falsifiable form: 11_ACCEPTANCE_TESTS §8e.
+        falsifiable form: 11_DESIGN_CRITERIA §8e.
 A-J8   [RETIRED — see J8 retirement note above.  Replaced by A-J9
         with the additional check that project_* event subset is
         replayable on a project_workspace-typed env.]
@@ -1113,6 +1113,6 @@ A-C4   Substrate carries no closed kind enumeration: every domain-shaped categor
         artefact whose kind is not registry-resolved at the persona's emergence
         stage.
 
-(Full ~1,249 acceptance tests in 11_ACCEPTANCE_TESTS.md; §7 there
+(Full ~1,249 design criteria in 11_DESIGN_CRITERIA.md; §7 there
 is the authoritative family table.)
 ```

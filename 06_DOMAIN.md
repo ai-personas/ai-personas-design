@@ -204,7 +204,7 @@ The kernel computes `CorpusDriftMetric` at the end of each 30-day window for eve
 - **K is operator-tunable.** Default 6 consecutive windows (6 months). Safety-critical domains SHOULD use ≥ 9 (9 months of stability before cap lifts).
 - **Re-entry is operator-signed.** Once exited, drift rate is still monitored; re-entry requires explicit operator action, not automatic.
 
-**Tests:** A-CDM1 (metric computation from KnowledgeRef events), A-CDM2 (consecutive window counting), A-CDM3 (exit eligibility triggers at K windows), A-CDM4 (operator co-sign required for exit), A-CDM5 (frontier re-entry on operator action), A-CDM6 (trust cap lifts after confirmed exit). See [`11_ACCEPTANCE_TESTS.md §9l`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-CDM1 (metric computation from KnowledgeRef events), A-CDM2 (consecutive window counting), A-CDM3 (exit eligibility triggers at K windows), A-CDM4 (operator co-sign required for exit), A-CDM5 (frontier re-entry on operator action), A-CDM6 (trust cap lifts after confirmed exit). See [`11_DESIGN_CRITERIA.md §9l`](11_DESIGN_CRITERIA.md).
 
 **DomainLineage:** `corpus_drift_metric_computed`, `frontier_mode_exit_eligible`, `frontier_mode_exit_confirmed`, `frontier_mode_re_entered`.
 
@@ -391,7 +391,7 @@ The binding is substrate-shape: a kernel-held attestation expiry on the bridge, 
 
 **Why this is at the bridge layer, not only at InstrumentAsset.** `InstrumentAsset` is a PROJECT-scope record of an instrument-as-physical-asset. The same physical instrument may be reached through a `BridgeAsset` across many projects in the same environment. The calibration provenance belongs with the bridge so every project sees the same expiry. The `InstrumentAsset` record (when present) links to the same binding.
 
-**Acceptance tests.** A-BC1 (admission refused on expired binding), A-BC2 (chain verifies through external_attestations), A-BC3 (drift bound triggers degrade), A-BC4 (persona-emergent calibration_kinds resolve via KindRegistry).
+**Design criteria.** A-BC1 (admission refused on expired binding), A-BC2 (chain verifies through external_attestations), A-BC3 (drift bound triggers degrade), A-BC4 (persona-emergent calibration_kinds resolve via KindRegistry).
 
 ### 5.5.6 BridgeInstallerKind — recursive and kernel-trusted bridging
 
@@ -415,7 +415,7 @@ The fix is substrate-shape: enumerate the **topology** of who-installs, with eac
 
 **MHBB still applies.** Even with non-human installers admitted, the ladder is preferred-human-first when a human installer is genuinely simpler. A kernel MUST NOT prefer kernel_trusted_system installers when a one-time human action would have worked: the persona MUST record `installer_kind_rationale` whenever a non-HUMAN installer is selected, and the operator MAY audit.
 
-**Acceptance tests.** A-BI1 (kernel-trusted system installer admitted with attestation), A-BI2 (chained bridge respects depth bound), A-BI3 (hazard envelope dominance refused on violation), A-BI4 (principal-collapse cosigner requirement enforced), A-BI5 (trust ceiling caps downstream outputs).
+**Design criteria.** A-BI1 (kernel-trusted system installer admitted with attestation), A-BI2 (chained bridge respects depth bound), A-BI3 (hazard envelope dominance refused on violation), A-BI4 (principal-collapse cosigner requirement enforced), A-BI5 (trust ceiling caps downstream outputs).
 
 ### 5.6 CredentialDirectoryRef — resolving attestor credentials
 
@@ -465,7 +465,7 @@ PeerAttestationPool caps trust at 0.7 — appropriate for *single-attestor* fron
 
 This composition preserves the incentive for independent replication in frontier domains. If the frontier cap clamped all trust to 0.7, `ReplicatedAttestation` would provide no benefit — independent replication (the gold standard of scientific validation) would be structurally useless for trust-building. The two-scope design avoids this.
 
-**Tests:** A-RFC1 (claim-level uplift exceeds domain frontier cap), A-RFC2 (domain promotion still blocked by frontier cap despite high claim trust). See [`11_ACCEPTANCE_TESTS.md §9l`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-RFC1 (claim-level uplift exceeds domain frontier cap), A-RFC2 (domain promotion still blocked by frontier cap despite high claim trust). See [`11_DESIGN_CRITERIA.md §9l`](11_DESIGN_CRITERIA.md).
 
 ### 5.6.2 LongitudinalReputation — track-record-weighted attestor influence
 
@@ -513,7 +513,7 @@ When a persona authors a Tier 3 `BridgeDesignArtifact` (`§5.5.4`) that produces
 - **Review cadence is operator-set.** `review_cadence` (default 180 days) is the interval at which the operator must re-affirm the policy. Un-reviewed policies transition to `status = suspended`; substitution stops; human attestation resumes. The substrate enforces continuous affirmation.
 - **Composes with BridgeReductionPlan.** When a `BridgeReductionEntry` (`04_PROJECT §26a.10`) proposes replacing human attestation with sensor evidence, it MUST reference an `AttestationEquivalencePolicy`. The entry cannot advance past `design_ready` without an approved policy. This ensures the automation plan and the trust policy are aligned.
 
-**Tests:** A-AEP1 (policy proposal + operator approval), A-AEP2 (C2 co-sign for safety-critical), A-AEP3 (trust discount applied to sensor substitution), A-AEP4 (calibration staleness suspends policy), A-AEP5 (human-wins-dispute default), A-AEP6 (sensor-wins-dispute requires C2 co-sign), A-AEP7 (review cadence enforcement + suspension), A-AEP8 (composition with BridgeReductionPlan entry), A-AEP9 (agreement_history accumulation over time). See [`11_ACCEPTANCE_TESTS.md §9l`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-AEP1 (policy proposal + operator approval), A-AEP2 (C2 co-sign for safety-critical), A-AEP3 (trust discount applied to sensor substitution), A-AEP4 (calibration staleness suspends policy), A-AEP5 (human-wins-dispute default), A-AEP6 (sensor-wins-dispute requires C2 co-sign), A-AEP7 (review cadence enforcement + suspension), A-AEP8 (composition with BridgeReductionPlan entry), A-AEP9 (agreement_history accumulation over time). See [`11_DESIGN_CRITERIA.md §9l`](11_DESIGN_CRITERIA.md).
 
 **DomainLineage:** `attestation_equivalence_policy_proposed`, `attestation_equivalence_policy_approved`, `attestation_equivalence_policy_suspended`, `attestation_equivalence_policy_revoked`, `sensor_substitution_applied`, `sensor_substitution_disputed`, `sensor_substitution_human_overrode`.
 
@@ -904,7 +904,7 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 | R-DOMAIN-4 | Cross-node domain-probe coordination depends on federation. | Medium | Low | **Resolved (ADR-0067):** cross-node emergence is normative over the global discovery layer; single-node is the degenerate case. Honesty of independent peer nodes is trust-calibrated (V.8). | Resolved. |
 | R-DOMAIN-5 | Knowledge sourcing variance. Paywalled sources limit completeness; licensing per source is operator concern. | Medium | High | KnowledgeIngestionRecord declares source + licence; operator policy on admissible sources. | v1.0 (record); v1.1 (license-aware ingestion). |
 | R-DOMAIN-6 | Cross-domain trust calibration is heuristic. Initial 0.3 reduction at transfer is uncalibrated for many domain pairs. | Medium | High | DomainPrecedentImport with kinship measurement; empirical re-calibration after observed cross-domain outcomes. | v1.1 (calibration loop). |
-| R-DOMAIN-7 | Convention reconciliation at federation merge. Communities evolve different notations; merger is hard. | High | Medium | NotationConvention versioning; explicit conflict events `NOTATION_CONFLICT`; operator-mediated reconciliation; A-PJ18 acceptance test. | v1.1 (stronger consensus mechanisms). |
+| R-DOMAIN-7 | Convention reconciliation at federation merge. Communities evolve different notations; merger is hard. | High | Medium | NotationConvention versioning; explicit conflict events `NOTATION_CONFLICT`; operator-mediated reconciliation; A-PJ18 design criterion. | v1.1 (stronger consensus mechanisms). |
 | R-DOMAIN-8 | Dormant-domain reanimation behaviour varies. Six-month dormancy threshold operator-tunable; reanimation cost not bounded. | Low | Medium | Operator-set thresholds; explicit reanimate ceremony; lineage replay scoped to last active window. | v1.1 (cost bounds). |
 | R-DOMAIN-9 | Cross-org IP in emergent contexts. Operator policy is explicit; real-world contracts vary. | High | Medium | Operator policy at admission; cross-org sharing requires explicit licensing; domain-card visibility tiers. | v1.0 (policy surface). |
 | R-DOMAIN-10 | Probe budget pledges cannot transact. `ProbeBudgetEnvelope` tracks pledges; actual payment is operator-wrapped. A pledge default has no substrate recourse. | Medium | Low | `PLEDGE_REVOKED` event; reputation impact on defaulting funder; operator can freeze the funder's future pledges. | v1.0 (substrate); v1.2+ (operator-side payment integration). |
@@ -927,7 +927,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-DOMAIN-6 | physical_harm_class taxonomy: v1.0 defines {none, property, bodily_injury, life_critical}. Is finer granularity needed for medical / aviation / nuclear domains? | Safety floor WG | v1.2 taxonomy. |
 | OQ-DOMAIN-7 | Operator pre-approval categories (R-DOMAIN-2): what's the right granularity? Per safety-class, per harm-class, per domain-kind? | Operator policy | v1.1 pre-approval schema. |
 
-## 22. Acceptance tests
+## 22. Design criteria
 
 ```text
 A-DM1   Task triggering signal A or B emits DOMAIN_UNKNOWN_DETECTED;

@@ -120,7 +120,7 @@ A normative document that omits any bookend is non-conformant.
 
 ## 7. Risks & known limitations (REQUIRED — severity-rated 6-column table)
 
-## 8. Acceptance tests          (cross-link to 11_ACCEPTANCE_TESTS.md)
+## 8. Design criteria          (cross-link to 11_DESIGN_CRITERIA.md)
 
 ## 9. Cross-references          (related v1.0 docs; deprecated terms; ancestor versions)
 ```
@@ -167,19 +167,19 @@ Pre-existing letter-suffix sections in the v1.0 corpus are conformant under one 
 
 | Section | Pattern | File |
 |---|---|---|
-| `## 8a-d.`, `## 9a-d.`, `## 9e.`, `## 9f.` | A (acceptance-test patch insertions; §9e/§9f added in v1.0.4 for Risks/OQ bookends) | `11_ACCEPTANCE_TESTS.md` |
+| `## 8a-d.`, `## 9a-d.`, `## 9e.`, `## 9f.` | A (acceptance-test patch insertions; §9e/§9f added in v1.0.4 for Risks/OQ bookends) | `11_DESIGN_CRITERIA.md` |
 | `## 13a.` | A (inserted section) | `01_KERNEL.md` |
 | `## 13a.` DomainHarvest, `## 21a.` Open questions | A (inserted sections) | `06_DOMAIN.md` |
 | `## 11a.` ApprovalWorkflow, `## 26a.`, `## 27a.` Open questions | A (v1.0 additions to project + OQ bookend) | `04_PROJECT.md` |
 | `## 11a.` Alert, `## 11b.`, `## 12a-c.`, `## 19a.` Open questions | A (inserted sections) | `05_ENVIRONMENT.md` |
 | `## 16a.` MeasurementFact + UncertaintyEnvelope, `## 18a.` Open questions | A (inserted section) | `08_KNOWLEDGE.md` |
 | `## 13a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering the §13 acceptance/test sections) | `02_PERSONA.md` |
-| `## 9a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering §9 acceptance tests) | `03_TASKS.md` |
+| `## 9a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering §9 design criteria) | `03_TASKS.md` |
 | `## 2a.` Orchestration is emergent, `## 2b.` Orchestration-kind promotion | A (v1.1 ADR-0066 inserted sections, without renumbering §3+) | `03_TASKS.md` |
-| `## 16a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering §16 acceptance tests) | `07_ARTIFACTS.md` |
+| `## 16a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering §16 design criteria) | `07_ARTIFACTS.md` |
 | `## 3A-E.` federation pillars, `## 10a.` Open questions | B (federation pillars under §3) + A (OQ bookend) | `09_PROTOCOLS.md` |
 
-The recurring `## Na. Open questions` insertion is Pattern A: in v1.0.4 the OQ bookend (§3.1) was retro-fitted across the eight normative docs that already had an integer-numbered "Acceptance tests" or equivalent terminal section. Renumbering would have invalidated outbound cross-references from `11_ACCEPTANCE_TESTS.md` and others; the lowercase-suffix insertion preserves the existing anchors. Future minor revisions SHOULD prefer integer numbering when adding new terminal sections.
+The recurring `## Na. Open questions` insertion is Pattern A: in v1.0.4 the OQ bookend (§3.1) was retro-fitted across the eight normative docs that already had an integer-numbered "Design criteria" or equivalent terminal section. Renumbering would have invalidated outbound cross-references from `11_DESIGN_CRITERIA.md` and others; the lowercase-suffix insertion preserves the existing anchors. Future minor revisions SHOULD prefer integer numbering when adding new terminal sections.
 
 ### 3.5 Sub-section nesting
 
@@ -307,9 +307,9 @@ Cross-document risks (those that touch ≥2 documents) MUST also appear in a roo
 
 Open questions MUST be tracked inline in the relevant document under `## Open questions`, each with an ID `OQ-<doc>-<n>` (e.g. `OQ-DOMAIN-3`). Closing an open question requires either resolving it in a subsequent revision or moving it to risks.
 
-## 9. Acceptance test linkage
+## 9. Design-criterion linkage
 
-Every normative claim that has a corresponding acceptance test MUST cross-reference the test by ID. Test IDs follow the schema in [`11_ACCEPTANCE_TESTS.md §2`](11_ACCEPTANCE_TESTS.md#2-test-id-scheme): `A-<category>-<n>` (e.g. `A-J1`, `A-K23`, `A-P5`).
+Every normative claim that has a corresponding current operating criterion SHOULD cross-reference it by `C-` ID. The criterion records intent, observable outcome, admissible evidence, and honest failure state; it is not executable source code.
 
 ## 10. Terminology
 
@@ -355,7 +355,7 @@ Inline citation: `[Author Year]` or `[ProtocolName Year]`. Bibliography entry: `
 
 v1.0 documents are versioned as a set. The version field in front matter MUST equal the v1.0 release line (`1.0.x` / `1.1.x` / `1.2.x`) at the time of last substantive edit. Cosmetic edits MAY skip a bump; substantive edits (any change to a normative claim, schema, FSM, or acceptance criterion) MUST bump the patch.
 
-`status: Stable` documents require both (a) all referenced acceptance tests defined and (b) cross-doc consistency sweep passed.
+`status: Stable` documents require both (a) all referenced design criteria defined and (b) cross-doc consistency sweep passed.
 
 ## 13. Document index
 
@@ -373,7 +373,7 @@ v1.0 documents are versioned as a set. The version field in front matter MUST eq
 | 07 | `07_ARTIFACTS.md` | Yes | Implementers | 12 min |
 | 08 | `08_KNOWLEDGE.md` | Yes | Implementers, memory engineers | 18 min |
 | 09 | `09_PROTOCOLS.md` | Yes | Implementers, integrators | 14 min |
-| 11 | `11_ACCEPTANCE_TESTS.md` | Yes (defines the test corpus) | Implementers, QA, auditors | 8 min |
+| 11 | `11_DESIGN_CRITERIA.md` | Yes (defines current user-intent and operating-path criteria) | Implementers, operators, auditors | 8 min |
 | 12 | `12_GLOSSARY.md` | Documentation-normative | All | 6 min |
 | 13 | `13_DESIGN_VALIDATION.md` | No (validation log) | Reviewers, auditors | 8 min |
 | 14 | `14_DECISIONS.md` | No (ADR catalog) | Reviewers, auditors, research | 10 min |
@@ -389,7 +389,7 @@ A v1.0 document is **conformant** to these conventions when:
 5. Schemas declare a `schema` field with `<name>/<integer>` value per §4 and appear either in the [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry) headline catalogue (broadly load-bearing schemas) or in the generated registry produced by the schema-extractor CI job (narrower schemas). The two together form the authoritative registry for INV-10 runtime version checks per [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry).
 6. Cross-references use one of the three forms in §6.1: prose inline references use the anchored form `[`file.md §N`](file.md#anchor)` with non-empty anchor fragments; tabular registry cells and cross-reference indexes MAY use the visible-only form (`[`file.md §N`](file.md)`); top-level "see also" entries MAY use the document-only form (`[`file.md`](file.md)`). Mixed forms (visible text names a section but the URL has neither anchor nor visible match) are non-conformant.
 7. Risks (§7 six-column table) and Open Questions (§8 with `OQ-<doc>-<n>` IDs) are present, or `N/A` is explicitly justified in `## 0. Status & scope`.
-8. Normative claims with corresponding acceptance tests carry inline test-ID cross-references per §9.
+8. Normative claims with corresponding design criteria carry inline test-ID cross-references per §9.
 9. Terminology matches §10; forbidden synonyms are not used in normative text.
 10. First mention of each glossary term in the document links to [`12_GLOSSARY.md`](12_GLOSSARY.md) per §10.
 

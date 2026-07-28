@@ -119,7 +119,7 @@ Effective access composes by **most-restrictive-wins** (see [A.3a](#appendix-a3a
 
 **Technical detail:** See [A.3a](#appendix-a3a).
 
-**Tests:** A-AB21 (legacy bundle with no `owning_env_id` / no policy behaves as before), A-AB22 (`owning_env_id` set; non-granted principal denied at retrieval), A-AB23 (`r` grant denies CRDT write; `rw` allows), A-AB24 (intra-composition inheritance via EnvironmentComposition), A-AB25 (cross-tenant share without `CrossTenancyAgreementRef` demotes + emits `CROSS_TENANT_VISIBILITY_DEMOTED`), A-AB26 (most-restrictive-wins across grant ∩ tier ∩ inherited policy), A-AB27 (cross-env CRDT respects policy across hosting envs). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-AB21 (legacy bundle with no `owning_env_id` / no policy behaves as before), A-AB22 (`owning_env_id` set; non-granted principal denied at retrieval), A-AB23 (`r` grant denies CRDT write; `rw` allows), A-AB24 (intra-composition inheritance via EnvironmentComposition), A-AB25 (cross-tenant share without `CrossTenancyAgreementRef` demotes + emits `CROSS_TENANT_VISIBILITY_DEMOTED`), A-AB26 (most-restrictive-wins across grant ∩ tier ∩ inherited policy), A-AB27 (cross-env CRDT respects policy across hosting envs). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 **Lineage:** `artifact_bundle_env_ownership_set`, `artifact_sharing_policy_created`, `artifact_sharing_policy_amended`, `artifact_sharing_policy_revoked`, `artifact_access_granted`, `artifact_access_refused` (surfaced in the owning env's EnvironmentLineage, [`05_ENVIRONMENT.md §13`](05_ENVIRONMENT.md#13-environmentlineage-j9)).
 
@@ -149,7 +149,7 @@ Emergent media kinds choose one of the three at proposal time. A `floor_plan` wh
 
 Conflicts are first-class events in ProjectLineage. They surface for review, don't block writes.
 
-**Tests:** A-AB2 (CRDT co-editing → deterministic merge; conflicts surface as ARTIFACT_FIELD_CONFLICT). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-AB2 (CRDT co-editing → deterministic merge; conflicts surface as ARTIFACT_FIELD_CONFLICT). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ## 6. Bundle lifecycle
 
@@ -163,7 +163,7 @@ Conflicts are first-class events in ProjectLineage. They surface for review, don
 
 **Technical detail:** See [A.8](#appendix-a8).
 
-**Tests:** A-AB1 (multi-modal bundle + signed contributors + state transitions), A-AB3 (state transitions require configured signatories), A-AB4 (shipped bundles locked; edit requires fork), A-AB10 (bundle fork inheritance policy). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-AB1 (multi-modal bundle + signed contributors + state transitions), A-AB3 (state transitions require configured signatories), A-AB4 (shipped bundles locked; edit requires fork), A-AB10 (bundle fork inheritance policy). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ## 7. Verifier invocation against bundle
 
@@ -183,7 +183,7 @@ Verifier rotation per [`01_KERNEL.md §13.1`](01_KERNEL.md#131-verifier-cascade-
 
 **Design-bundle lifecycle vs. physical attestation.** A bundle's lifecycle (`draft → in_review → verified → accepted → shipped`) is a **digital** transition over its own contents; it **never** requires a credentialed physical `ExternalAttestation` on physical-harm grounds — that floor (`01_KERNEL §2.5`) is a property of advancing a real `PhysicalAsset.current_state` (`04_PROJECT §26a.2`), not of accepting a design bundle. A bundle that *prescribes* a hazardous physical advancement (held in a `PhysicalAsset.related_bundles`, any `media_kind`) reaches `accepted` on its applicable verifier recipe alone; the physical-attestation floor is then evaluated separately, at the point the asset's `current_state` advances (`01_KERNEL §2.5.1`). Producing such a bundle is therefore never blocked on physical-attestation grounds, regardless of the domain's `physical_harm_class`.
 
-**Tests:** A-AB5 (verifier_recipe invocation appends VerifierInvocationEvidence entries; verdicts feed state transition), A-AB6 (AnswerPackage referencing bundle returns primary artifact + state), A-AB16-A-AB20 (evidence completeness and fail-closed verifier transitions). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-AB5 (verifier_recipe invocation appends VerifierInvocationEvidence entries; verdicts feed state transition), A-AB6 (AnswerPackage referencing bundle returns primary artifact + state), A-AB16-A-AB20 (evidence completeness and fail-closed verifier transitions). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ## 8. AnswerPackage referencing bundles
 
@@ -249,7 +249,7 @@ v1.0 content-addresses bundles but gives them no discovery projection and no fir
 
 **Availability when the origin is offline.** Discoverability says *where* a bundle is; **availability** says whether it can still be fetched when the producing node sleeps. A bundle MAY carry an **`AvailabilityPolicy` (`availability-policy/1`)** ([`09_PROTOCOLS §3H.2`](09_PROTOCOLS.md#3h2-availabilitypolicy--surviving-the-origin-going-dark)): `online_only` (default — fetchable only while the owning node is up), `replicated` (mirrored to ≥ `replication_factor` peers, listed as `ContentLocator.replica_tiers`), or `pinned` (held by a persistent provider — IPFS pin / OCI / object store). When the origin is unreachable, the resolver + `ProviderAdapter` fall back through `replica_tiers` until bytes verify against `content_hash`. This is what lets the deliverables of a persona on a home laptop stay fetchable from a phone off-network *after the laptop sleeps* — the live persona pauses, but `replicated` / `pinned` artefacts do not vanish. The policy never widens access: a replica is still gated by the bundle's `AccessPolicy` (`§4a`, [`09_PROTOCOLS §3G.4`](09_PROTOCOLS.md#3g4-access-gated-discovery--who-can-access-what-enforced-at-the-discovery-layer)).
 
-**Tests:** A-AB28 (ArtifactCard discoverable at `discover`, body refused without `read`), A-AB29 (`ContentLocator` round-trip: publish → discover over P2P → fetch from provider under credential → verify against `content_hash`), A-AB30 (`content_hash` mismatch ⇒ `CONTENT_INTEGRITY_FAILED` fails closed), A-AB31 (replica-tier fallback on primary-provider outage), A-AB32 (`CONTENT_LOCATOR_STALE` on live-reference drift), A-AB33 (`AvailabilityPolicy=replicated`: bundle fetchable from a replica with the origin offline), A-AB34 (replica fetch still enforces `AccessPolicy` — `discover`-only principal refused at `read`). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-AB28 (ArtifactCard discoverable at `discover`, body refused without `read`), A-AB29 (`ContentLocator` round-trip: publish → discover over P2P → fetch from provider under credential → verify against `content_hash`), A-AB30 (`content_hash` mismatch ⇒ `CONTENT_INTEGRITY_FAILED` fails closed), A-AB31 (replica-tier fallback on primary-provider outage), A-AB32 (`CONTENT_LOCATOR_STALE` on live-reference drift), A-AB33 (`AvailabilityPolicy=replicated`: bundle fetchable from a replica with the origin offline), A-AB34 (replica fetch still enforces `AccessPolicy` — `discover`-only principal refused at `read`). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 **Lineage:** `artifact_card_published`, `artifact_card_revoked`, `content_locator_attached`, `content_locator_stale`, `content_integrity_failed`, `availability_policy_set`, `replica_fallback_served`.
 
@@ -354,12 +354,12 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 
 | ID | Risk | Severity | Likelihood | Mitigation | Target release |
 |----|------|----------|------------|------------|----------------|
-| R-ARTIFACTS-1 | Visual artifact rendering requires external domain tools. Personas produce text representations (netlists, structured data); SVG / KiCad / PDF rendering is tool-side. | Low | High | `rendered_view_ref` field allows attaching tool output; `content_ref` (persona-authored) remains authoritative; A-AB9 acceptance test. | v1.0 (substrate); tool availability per-domain. |
-| R-ARTIFACTS-2 | CRDT semantics imperfect for structured artifacts. Yjs handles text; semantic-constraint artifacts (schematics, electrical connectivity) need domain-aware merge. | High | Medium | G-set with `ARTIFACT_FIELD_CONFLICT` event for unsafe merges; domain-aware merge plugins per artifact kind; A-AB2 acceptance test. | v1.0 (text + G-set); v1.1 (domain-aware merge plugins). |
+| R-ARTIFACTS-1 | Visual artifact rendering requires external domain tools. Personas produce text representations (netlists, structured data); SVG / KiCad / PDF rendering is tool-side. | Low | High | `rendered_view_ref` field allows attaching tool output; `content_ref` (persona-authored) remains authoritative; A-AB9 design criterion. | v1.0 (substrate); tool availability per-domain. |
+| R-ARTIFACTS-2 | CRDT semantics imperfect for structured artifacts. Yjs handles text; semantic-constraint artifacts (schematics, electrical connectivity) need domain-aware merge. | High | Medium | G-set with `ARTIFACT_FIELD_CONFLICT` event for unsafe merges; domain-aware merge plugins per artifact kind; A-AB2 design criterion. | v1.0 (text + G-set); v1.1 (domain-aware merge plugins). |
 | R-ARTIFACTS-3 | Binary artifacts (images, video) cannot be co-edited under CRDT — replaced version-by-version. | Medium | High | Out of v1.0 scope; per-version replacement with co-sign; fork-on-edit. | v1.2+ (binary co-edit out of scope). |
 | R-ARTIFACTS-4 | Content store costs grow with project lifetime and bundle versions. | Low | High | Decay policy: `deprecated → cold` after 90 days; operator-tunable retention; content-hash dedup. | v1.0 (decay); v1.1 (operator tuning surface). |
-| R-ARTIFACTS-5 | External-reference artifacts lose verifiability. Persona cannot guarantee external URL content matches what was reasoned about. | High | High | External-tool-required policy on claims based on external refs; retrieval-and-verification invocation; lineage records the retrieval timestamp and hash; A-AB11 acceptance test. | v1.0 (verification flow). |
-| R-ARTIFACTS-6 | Bundle state transitions can deadlock if a required signatory is unavailable. | Medium | Low | Per-step deadlines; operator override; transition refused → STALLED state surface; A-AB3 acceptance test. | v1.0 (refused + stall). |
+| R-ARTIFACTS-5 | External-reference artifacts lose verifiability. Persona cannot guarantee external URL content matches what was reasoned about. | High | High | External-tool-required policy on claims based on external refs; retrieval-and-verification invocation; lineage records the retrieval timestamp and hash; A-AB11 design criterion. | v1.0 (verification flow). |
+| R-ARTIFACTS-6 | Bundle state transitions can deadlock if a required signatory is unavailable. | Medium | Low | Per-step deadlines; operator override; transition refused → STALLED state surface; A-AB3 design criterion. | v1.0 (refused + stall). |
 | R-ARTIFACTS-7 | Verification evidence becomes decorative if a harness can emit "passed" without replayable tool / panel provenance. | High | Medium | `VerifierInvocationEvidence` is mandatory for lifecycle advancement; missing, stale, malformed, or prose-only evidence fails closed; A-AB16-A-AB20. | v1.0 (evidence envelope); v1.1 (harness conformance tooling). |
 | R-ARTIFACTS-8 | `ArtifactSharingPolicy` (§4a) misconfiguration over-exposes a bundle (e.g. an unintended `federation`/`public` tier or an over-broad `AccessGrant`). | High | Medium | Default `outward_tier = project_only`; effective access composes by most-restrictive-wins; a `None` policy never widens; cross-tenant shares require a `CrossTenancyAgreementRef` or demote (`CROSS_TENANT_VISIBILITY_DEMOTED`); A-AB22/A-AB25/A-AB26. Cross-document: also `00_VISION §11`. | v1.1 (conservative defaults). |
 | R-ARTIFACTS-9 | Cross-env CRDT (§14) under a partitioned `EnvironmentComposition` link: a child env edits while the composition/policy view is stale. | Medium | Low | Deny-on-uncertain for `rw` during partition; reuse joined-env `CONFLICT_PARKED` (`05_ENVIRONMENT` R-ENV-7) deferral to operator; reads continue against the local policy snapshot. | v1.1 (partition policy). |
@@ -378,7 +378,7 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-ARTIFACTS-6 | `owning_env_id` migration (§4): do existing project bundles get `owning_env_id` set eagerly to their project_workspace env, or lazily on first `ArtifactSharingPolicy` attach? (Recommend lazy — stays `None` until first policy attach.) | Artifact authors | v1.1 migration policy. |
 | OQ-ARTIFACTS-7 | `AccessGrant` granularity (§4a): per-bundle (v1.1) vs per-artifact-within-bundle. When does per-artifact access become necessary? | Artifact authors | v1.2 per-artifact grants. |
 
-## 17. Acceptance tests
+## 17. Design criteria
 
 ```text
 A-AB1   ArtifactBundle created with multi-modal artifacts; contributors

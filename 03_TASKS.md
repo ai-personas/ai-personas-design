@@ -86,7 +86,7 @@ v1.0 routes every [task](12_GLOSSARY.md#t) through a task class to an [acceptanc
 
 *Task-flow diagram: task arrives, kernel classifies, picks pathway, dispatches via routing mode, persona responds, kernel evaluates acceptance, AnswerPackage returned.* See [Appendix A.1](#appendix-a1--task-flow-diagram-1).
 
-**Tests:** A-T1 (classifier latency), A-T13–A-T15 (routing modes A / B / C), A-T19 (AnswerPackage status enum). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-T1 (classifier latency), A-T13–A-T15 (routing modes A / B / C), A-T19 (AnswerPackage status enum). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ## 2. The ten seed task classes
 
@@ -132,7 +132,7 @@ Budget is allocated per sub-mode within a session, with degradation rules when a
 
 Operator policy may override per-project. The kernel signs each sub-mode budget tick; overruns produce signed `SUBMODE_BUDGET_EXHAUSTED` events.
 
-**Mood risk-tolerance scalar (ADR-0075, wired by ADR-0081).** The bounded `risk_tolerance` breadth scalar of [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) rule 2 (hard-bounded to ±15% of baseline) is consumed here, and only here: at session start the resolved profile's **generative-exploration sub-mode share** (the `exploration` share in A.7/A.8) is rescaled by the scalar, and all sub-mode shares are then renormalized to sum to 100%. The session call cap and the INV-7 hard budget gate are UNCHANGED — the scalar reallocates *within* the session budget across sub-modes; it MUST NOT enlarge the session budget or any cap. Tests: A-GF-ARC-3 ([`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series)).
+**Mood risk-tolerance scalar (ADR-0075, wired by ADR-0081).** The bounded `risk_tolerance` breadth scalar of [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) rule 2 (hard-bounded to ±15% of baseline) is consumed here, and only here: at session start the resolved profile's **generative-exploration sub-mode share** (the `exploration` share in A.7/A.8) is rescaled by the scalar, and all sub-mode shares are then renormalized to sum to 100%. The session call cap and the INV-7 hard budget gate are UNCHANGED — the scalar reallocates *within* the session budget across sub-modes; it MUST NOT enlarge the session budget or any cap. Criteria: A-GF-ARC-3 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
 
 **Budget profile resolution.** The defaults above are tuned for reasoning-heavy INVESTIGATIVE work (math, software research). Document-heavy regulated physical domains (residential construction parsing IRC + IBC + NEC + geotech reports; clinical care parsing referral packages) routinely exhaust the session cap on ingestion before reasoning begins. v1.0 resolves session budget per the following precedence:
 
@@ -156,7 +156,7 @@ Each of the 10 task classes invokes a dominant subset of v1.0's 14 cognitive mod
 
 A persona's `primary_disposition` biases mode selection when multiple modes are equally appropriate. The dispatcher signs MODE_ENTRY for each round; verifier dispatch follows active_mode, not primary_disposition (v1.0 §02 §5).
 
-**Tests:** A-T2 (CONVERGENT → VERIFIER_ACCEPT), A-T3 (DIVERGENT → PANEL_ACCEPT), A-T4 (MIXED), A-T5 (INTERACTIVE → GOAL_PROGRESS_ACCEPT), A-T6 (RELATIONAL → USER_ACCEPT), A-T7 (PEDAGOGIC), A-T8 (PERFORMATIVE → ENGAGEMENT_ACCEPT), A-T9 (EXISTENTIAL → OPEN_ENDED), A-T10 (DELEGATED), A-T11 (INVESTIGATIVE → PROJECT_PROGRESS_ACCEPT), A-T25 (mode-by-class dispatcher bias). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-T2 (CONVERGENT → VERIFIER_ACCEPT), A-T3 (DIVERGENT → PANEL_ACCEPT), A-T4 (MIXED), A-T5 (INTERACTIVE → GOAL_PROGRESS_ACCEPT), A-T6 (RELATIONAL → USER_ACCEPT), A-T7 (PEDAGOGIC), A-T8 (PERFORMATIVE → ENGAGEMENT_ACCEPT), A-T9 (EXISTENTIAL → OPEN_ENDED), A-T10 (DELEGATED), A-T11 (INVESTIGATIVE → PROJECT_PROGRESS_ACCEPT), A-T25 (mode-by-class dispatcher bias). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ## 2a. Orchestration is emergent — classes, pathways, and the run loop are coordination shapes
 
@@ -178,7 +178,7 @@ A persona's `primary_disposition` biases mode selection when multiple modes are 
 
 *`TaskClass` and `AcceptancePathway` are registered as KindRegistry-resolved schemas; see [`09_PROTOCOLS.md §7.2`](09_PROTOCOLS.md#72-acceptance--task). The classifier (§2.1) and demotion ladder (§2.2) operate over the resolved kind set, not a hardcoded enum; a proposed class with no usable acceptance kind demotes per §2.2 with a signed event.*
 
-**Tests:** A-EO1–A-EO13 (emergent orchestration: seed-kind resolution, persona-proposed pathway admitted under trust-calibration, novel pathway not refused for novelty, unvalidated-pathway verdict carries EMERGENT trust, floor/signing never bypassed, safety-critical pathway gated by C2, operator pin honoured, run-loop-as-StagedSequence, promotion-threshold gate, trust-decay demotion, bounded-compositional policy). See [`11_ACCEPTANCE_TESTS.md §9o`](11_ACCEPTANCE_TESTS.md). Seed-mapping tests A-T2–A-T11 continue to hold against the STANDARDISED seed set.
+**Criteria:** A-EO1–A-EO13 (emergent orchestration: seed-kind resolution, persona-proposed pathway admitted under trust-calibration, novel pathway not refused for novelty, unvalidated-pathway verdict carries EMERGENT trust, floor/signing never bypassed, safety-critical pathway gated by C2, operator pin honoured, run-loop-as-StagedSequence, promotion-threshold gate, trust-decay demotion, bounded-compositional policy). See [`11_DESIGN_CRITERIA.md §9o`](11_DESIGN_CRITERIA.md). Seed-mapping tests A-T2–A-T11 continue to hold against the STANDARDISED seed set.
 
 ## 2b. Orchestration-kind promotion — trust-decay curve, evidence threshold, and the bounded-compositional policy profile
 
@@ -227,7 +227,7 @@ Per OQ-TASKS-6's second clause: **yes — the bounded-compositional mode is offe
 
 The profile binds at the same granularity as an operator pathway pin (§2a.6): a deployment MAY run `fully_open` globally but `bounded_compositional` for a named safety-critical task family. The profile governs *what may be proposed*; it never relaxes the floor (J3) or signing (J2/J9), which apply identically under both.
 
-**Tests:** A-EO11 (promotion gated on the §2b.2 evidence threshold; under-evidenced pathway stays EMERGENT), A-EO12 (trust-decay + consecutive-disconfirmation demotion per §2b.1/§2b.3), A-EO13 (`bounded_compositional` refuses a novel kernel-level primitive while admitting a novel seed composition; `fully_open` admits both). See [`11_ACCEPTANCE_TESTS.md §9o`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-EO11 (promotion gated on the §2b.2 evidence threshold; under-evidenced pathway stays EMERGENT), A-EO12 (trust-decay + consecutive-disconfirmation demotion per §2b.1/§2b.3), A-EO13 (`bounded_compositional` refuses a novel kernel-level primitive while admitting a novel seed composition; `fully_open` admits both). See [`11_DESIGN_CRITERIA.md §9o`](11_DESIGN_CRITERIA.md).
 
 ## 2c. ContinuousRefinementMission — anytime, convergence-bounded, budget-scaled improvement (ADR-0071)
 
@@ -241,7 +241,7 @@ It maintains a **best-so-far** accepted artefact version (anytime semantics): ea
 
 **Convergence — "nothing left to improve" (the new termination).** The decide-continue gate reads a **`MarginalValueMetric`**: a `DerivedMetric` computing the improvement in the `MissionObjective` vector since the last accepted iteration. The mission emits `CONVERGED` and stops when marginal value `< ε` sustained over `N` consecutive rounds (`ε`, `N` are mission/operator policy; default ε small, N≥3). This is the explicit "no further improvement" detector the seed pathways lacked.
 
-**Population-aware convergence.** One persona's `ready` or `converged` disposition is exactly one persona's signed assessment; it is never presented as independent or collective review and cannot by itself bypass the metric/evidence gate above. In an environment with more than one ACTIVE participant, formal convergence additionally requires a **different active persona's current signed readiness judgment bound to the exact integrated environment-workspace bytes**. A peer review that predates the integrated revision, a self-authored file labelled as another persona's review, or a coordinator's summary does not satisfy this gate. Until the current peer judgment exists, the mission remains active so participants can challenge assumptions, explore alternatives, communicate, integrate, and refine. The substrate selects no reviewer, team, role, birth, or wake: personas author discovery, invitation, messaging, and—after the recruitment ordering of [`16_POPULATION_DYNAMICS §4B`](16_POPULATION_DYNAMICS.md#4b-recruitment-exhausted-first-ordering)—genesis choices. A singleton mission records `singleton_persona_assessment_only`; it may still converge on the objective evidence above when independent review was not an explicit obligation, but the result MUST NOT be labelled collective convergence.
+**Population-aware convergence.** One persona's `ready` transition is exactly one persona's signed work state; it is never presented as independent or collective review and cannot by itself bypass the metric/evidence gate above. In an environment with more than one required ACTIVE participant, formal convergence additionally requires every such participant's latest effective `personaos-persona-work-state/1` revision to be current, `ready`, free of active commitments, and bound to the exact integrated environment-workspace bytes. A peer review that predates the integrated revision, a self-authored file labelled as another persona's review, or a coordinator's summary does not satisfy this gate. Until those current states exist, the mission remains active so participants can challenge assumptions, explore alternatives, communicate, integrate, and refine. The substrate selects no reviewer, team, role, birth, or wake: personas author discovery, invitation, messaging, and the need→search→disposition→genesis chain in [`16_POPULATION_DYNAMICS`](16_POPULATION_DYNAMICS.md). A singleton mission records `singleton_persona_assessment_only`; it may still converge on objective evidence when independent review was not an explicit obligation, but the result MUST NOT be labelled collective convergence.
 
 **Population context is observable, not inferred.** Every funded task, review, or coordination turn MUST receive a bounded projection of the exact verified PersonaCards for the other ACTIVE participants. The projection preserves the cards' persona-authored names, descriptions, and open-vocabulary characteristics under prompt compaction. It MAY report mechanical counts and signature validity; it MUST NOT translate those cards into host-authored roles, rank a peer, infer that a capability is covered or missing, choose recruitment, or trigger birth. The acting persona compares the principal task, current evidence, available people, and available tools, then authors any coordination, discovery, recruitment, genesis, or acquisition action.
 
@@ -316,7 +316,7 @@ workspace bytes and conflict state, team and membership, acquired-capability
 state, and bound domain context. The turn-scoped transport/action menu is not
 completion state: contextual one-shot actions disappear after use and native
 transport flags disappear outside a model call. Those mechanical menu changes
-MUST NOT by themselves stale an otherwise-current persona judgment, reopen a
+MUST NOT by themselves stale an otherwise-current persona work state, reopen a
 closed task, or provoke another model call. Any durable capability acquisition,
 membership, task, environment, domain, workspace, or conflict change still
 invalidates the old readiness binding fail-closed.
@@ -324,7 +324,7 @@ invalidates the old readiness binding fail-closed.
 On restart, the node MAY token-freely reproject only the newest effective
 paused generation of a resume chain under its existing kernel-signed run
 authority. It may change that generation to complete only when the ordinary
-readiness reducer verifies current persona-signed sufficiency and all artifact
+readiness reducer verifies current persona-signed work states and all artifact
 export evidence again; it MUST NOT call a model, interpret task text, or rewrite
 an unrelated paused task. A signed operator termination of an already-paused
 run removes that run from the resumable-mission surface while retaining its
@@ -371,11 +371,11 @@ refinement is iteration, not an exemption.
 
 **Auto-reopen on fresh budget.** While a mission is **active and un-converged**, a budget replenishment (operator top-up, new `SchedulingPolicy` allocation, §4.6) **auto-resumes** the loop from best-so-far — no manual fork ([`07_ARTIFACTS §11`](07_ARTIFACTS.md)). A `converged` mission stays closed unless its `MissionObjective` changes (a new target re-opens it as a fresh elaboration within drift bounds). A `MissionState` (`active` / `converged` / `paused_budget` / `stopped`) tracks this; `paused_budget` is the auto-reopen-eligible state.
 
-**Emergence is in-loop (couples to §16 — see ADR-0071 + [`16_POPULATION_DYNAMICS §4A`](16_POPULATION_DYNAMICS.md)).** When a refinement round hits a **capability gap that blocks further improvement** (no present persona can advance a `MissionObjective` target) **and** budget headroom exists, the mission raises the population-pressure signal → recruitment-exhausted-first → **genesis** of the needed specialist, and MAY propose a **sub-env** (`EnvFormationProposal`) for that workstream. So a growing budget visibly grows the team and its environments to unblock the next increment of quality — bounded by `ReplicationBound` (floor source 1) and the generativity gate.
+**Emergence is in-loop (couples to [`16_POPULATION_DYNAMICS`](16_POPULATION_DYNAMICS.md)).** When a refinement round reveals work that a participating persona believes the current cohort cannot responsibly advance, that persona may author a signed birth need, inspect the exact unranked global PersonaCard search result, author a disposition for every returned candidate, and then invite an existing person or propose an open genesis seed. Budget headroom permits the resulting work but never causes it. The substrate does not infer the gap, choose a role, select a person, create a sub-environment, or trigger birth from task words; `ReplicationBound` remains the mechanical creation brake.
 
 *The `ContinuousRefinementMission`, `MissionObjective`, `MarginalValueMetric`, and `MissionState` ship as STANDARDISED seed shapes ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop)); they are compositions of `StagedSequence` + `DerivedMetric`, not kernel constants, and are trust-calibrated like any orchestration shape (§2b).*
 
-**Acceptance criteria:** A-REF1 (iterates + returns best-so-far), A-REF2 (`CONVERGED` stop when marginal value < ε over N rounds), A-REF3 (more budget → more candidates/round → measurably better objective vector), A-REF4 (auto-reopen from `paused_budget` on fresh budget; `converged` stays closed), A-REF5 (three-condition termination: convergence vs user-stop vs budget_exhausted), A-REF6 (improvement-blocking gap + budget headroom → genesis/sub-env, ReplicationBound-capped), A-REF7 (a refinement action failing the floor is refused; INV-7 never bypassed), A-REF8 (bounded-autonomy elaborations remain within the charter), A-REF9 (multi-persona convergence requires a different active persona's exact-revision readiness; singleton readiness remains labelled solo), A-REF10 (bounded signed active-peer cards remain visible without host role/gap/action inference), A-REF11 (reviewer replica refresh preserves non-colliding untracked bytes and fails closed on collisions), A-REF12 (non-quiescent operator stop/timeout publishes and restart-recovers an exact terminal non-success generation), A-REF13 (an addressed wake reaching exhausted shared budget is persisted exactly and receives the next same-run resource allowance before the coordinator), A-REF14 (a grant below the next indivisible activation-plus-task headroom pauses and exports exact best-so-far state without consuming the lone call or failing publication), A-REF15 (two concurrent explicit resumes of one paused source admit at most one successor and one model pool before the other fails closed), A-REF16 (consuming a contextual action or leaving a model transport does not stale readiness when every durable completion fact is unchanged), A-REF17 (restart reconciles a currently signed-ready paused generation to complete without a model call and does not rewrite an unrelated paused task), A-REF18 (signed operator termination removes an already-paused run from resumable status while retaining lineage). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Acceptance criteria:** A-REF1 (iterates + returns best-so-far), A-REF2 (`CONVERGED` stop when marginal value < ε over N rounds), A-REF3 (more budget → more candidates/round → measurably better objective vector), A-REF4 (auto-reopen from `paused_budget` on fresh budget; `converged` stays closed), A-REF5 (three-condition termination: convergence vs user-stop vs budget_exhausted), A-REF6 (improvement-blocking gap + budget headroom → genesis/sub-env, ReplicationBound-capped), A-REF7 (a refinement action failing the floor is refused; INV-7 never bypassed), A-REF8 (bounded-autonomy elaborations remain within the charter), A-REF9 (multi-persona convergence requires a different active persona's exact-revision readiness; singleton readiness remains labelled solo), A-REF10 (bounded signed active-peer cards remain visible without host role/gap/action inference), A-REF11 (reviewer replica refresh preserves non-colliding untracked bytes and fails closed on collisions), A-REF12 (non-quiescent operator stop/timeout publishes and restart-recovers an exact terminal non-success generation), A-REF13 (an addressed wake reaching exhausted shared budget is persisted exactly and receives the next same-run resource allowance before the coordinator), A-REF14 (a grant below the next indivisible activation-plus-task headroom pauses and exports exact best-so-far state without consuming the lone call or failing publication), A-REF15 (two concurrent explicit resumes of one paused source admit at most one successor and one model pool before the other fails closed), A-REF16 (consuming a contextual action or leaving a model transport does not stale readiness when every durable completion fact is unchanged), A-REF17 (restart reconciles a currently signed-ready paused generation to complete without a model call and does not rewrite an unrelated paused task), A-REF18 (signed operator termination removes an already-paused run from resumable status while retaining lineage). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ## 3. The eight seed acceptance pathways
 
@@ -422,11 +422,11 @@ other admissible work.
 
 *Task accepted when project state advances (milestone, conjecture, obligation, artifact bundle, ambient signal); aggregate progress score with stall detection; phase-aware stall suppression for external dependencies.* See [Appendix A.19](#appendix-a19--project_progress_accept-pathway-31).
 
-**Tests:** A-T2–A-T11 (per-pathway routing), A-T16 (PANEL_DISSENT escalation), A-T17 (PROJECT_PROGRESS_ACCEPT ambient signals), A-T22 (INVESTIGATIVE sub-mode budgets). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-T2–A-T11 (per-pathway routing), A-T16 (PANEL_DISSENT escalation), A-T17 (PROJECT_PROGRESS_ACCEPT ambient signals), A-T22 (INVESTIGATIVE sub-mode budgets). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ### 3.2 RelationshipReviewCheckpoint — periodic OPEN_ENDED quality surface
 
-OPEN_ENDED quality assessment was specified as post-hoc only ("trajectory-based"; no real-time acceptance event), with R-TASKS-5 noting "periodic reflection checkpoints + user-feedback surface during execution; A-T9 acceptance test" deferred to v1.2. SCENARIO 08 made the gap concrete: Sarah talking to companion persona Halia daily for 6 months had no substrate-shape signal for "let's pause and reflect on whether this is still serving you." The spec includes `RelationshipReviewCheckpoint`.
+OPEN_ENDED quality assessment was specified as post-hoc only ("trajectory-based"; no real-time acceptance event), with R-TASKS-5 noting "periodic reflection checkpoints + user-feedback surface during execution; A-T9 design criterion" deferred to v1.2. SCENARIO 08 made the gap concrete: Sarah talking to companion persona Halia daily for 6 months had no substrate-shape signal for "let's pause and reflect on whether this is still serving you." The spec includes `RelationshipReviewCheckpoint`.
 
 *`RelationshipReviewCheckpoint` dataclass: periodic review surface for long-arc relational interactions, with schedule triggers, persona-drafted review summary, user response options, and lifecycle states.* See [Appendix A.20](#appendix-a20--relationshipreviewcheckpoint-dataclass-32).
 
@@ -447,7 +447,7 @@ OPEN_ENDED quality assessment was specified as post-hoc only ("trajectory-based"
 3. **Cadence tuning has trade-offs.** Frequent (e.g., 14d/10-session lower bound) burdens users; rare (365d upper bound) loses the early-intervention value. Operator policy is the place to tune; substrate enforces only the floor/ceiling.
 4. **OPEN_ENDED quality remains post-hoc.** Checkpoint adds an intentional surface; it does not change the pathway's fundamental post-hoc nature.
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9h — A-RRC*`.
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9h — A-RRC*`.
 
 **Companion pathway routing note.** Envs whose primary use is long-arc relational interaction (typically SOLO envs running `companion_space`-class blueprints) SHOULD route through OPEN_ENDED pathway, not ENGAGEMENT_ACCEPT. ENGAGEMENT_ACCEPT measures continued user re-engagement as quality signal — for companionship this admits attention-economy drift (the persona optimises for "user keeps coming back" rather than "user's wellbeing improves"). The R-TASKS-3 risk ("engagement-only optimisation drifts toward attention-economy failure") is acute in companionship. Operator policy SHOULD declare `companion`-class envs as OPEN_ENDED-only. The substrate emits `companion_engagement_accept_inadvisable` advisory when a companion-class env attempts ENGAGEMENT_ACCEPT routing without explicit operator-signed exemption.
 
@@ -477,7 +477,7 @@ Three composing primitives:
 4. **No automatic adaptive-curriculum primitive.** The substrate carries fixed prerequisite graphs + fixed lesson plans; "the persona adapts the curriculum based on learner performance" is per-task adaptation within the structure, not curriculum mutation. Adaptive curricula are v1.1+.
 5. **Cross-persona curriculum portability is operator policy.** A `Curriculum` is signed by its authoring entity; another persona inheriting the curriculum to teach is fine but requires that persona's own `TeachingAuthorisation` for the relevant skill_kinds.
 
-**Acceptance tests.** Co-located in `11_ACCEPTANCE_TESTS §9i — A-CUR*` (curriculum), `A-LP*` (lesson plan), `A-MASTERY*` (mastery checkpoint), `A-GPA-ACK*` (learner-acknowledgement step).
+**Design criteria.** Co-located in `11_DESIGN_CRITERIA §9i — A-CUR*` (curriculum), `A-LP*` (lesson plan), `A-MASTERY*` (mastery checkpoint), `A-GPA-ACK*` (learner-acknowledgement step).
 
 **Fork interaction.** When the teacher persona authoring/executing an active Curriculum forks mid-project, per-curriculum inheritance is governed by `MidProjectForkComposition.curriculum_inheritance` (`02_PERSONA §7.4.7`): `suspended_at_fork` (curriculum suspends; operator must re-author under named child OR archive) or `inherit_to_child` (named child inherits; learner re-confirms `requires_learner_optin = True` per standard §3.3 admission; failure to re-confirm within 14d suspends). The inherited child still requires their own `TeachingAuthorisation` (`02_PERSONA §11.10`) for any safety-critical skill_kinds — `TeachingAuthorisation` does NOT inherit on fork.
 
@@ -556,7 +556,7 @@ The offer fires if ≥ 2 triggers OR any single `safety_critical=True` trigger f
 
 **Honest limit:** the trigger heuristics are tunable. Operator may set `promotion_offer_aggressiveness` per env (default: medium). Over-aggressive offers are friction; under-aggressive lose legitimate upgrade candidates. The signed `user_dismissed` event on declined offers feeds a per-user calibration over time.
 
-**Tests:** A-T13 (Mode A: present member at env, no project), A-T14 (Mode B: project_workspace env), A-T15 (Mode C: ephemeral env created + archived), A-T20 (multi-env project env selection). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-T13 (Mode A: present member at env, no project), A-T14 (Mode B: project_workspace env), A-T15 (Mode C: ephemeral env created + archived), A-T20 (multi-env project env selection). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ### 4.5 Cross-env / cross-node task delegation & placement
 
@@ -576,7 +576,7 @@ A task handled by one environment's personas may produce a sub-task that is bett
 
 **Cross-env lineage visibility.** *A `CrossEnvLineageVisibility` setting on the delegation governs what the resolving env may see of the parent task's lineage: `full` (shared members see the parent chain), `redacted` (link + event kinds, payloads withheld — the default, matching the §11.4 privacy invariant for cross-env links), or `existence` (only that a parent exists). It is gated by `AccessPolicy`; it never widens access a principal does not otherwise hold.*
 
-**Tests:** A-XD1 (cross-env DELEGATED via CrossEnvCoordinationBinding, dual-signed), A-XD2 (unauthorized delegation refused at capability check before receiver review), A-XD3 (remote placement composes floor/budget most-restrictive-wins), A-XD4 (cross-domain sub-task inherits minimum trust — OQ-TASKS-3), A-XD5 (CrossEnvPresenceQuery access-gated), A-XD6 (CrossEnvLineageVisibility redacts by default). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-XD1 (cross-env DELEGATED via CrossEnvCoordinationBinding, dual-signed), A-XD2 (unauthorized delegation refused at capability check before receiver review), A-XD3 (remote placement composes floor/budget most-restrictive-wins), A-XD4 (cross-domain sub-task inherits minimum trust — OQ-TASKS-3), A-XD5 (CrossEnvPresenceQuery access-gated), A-XD6 (CrossEnvLineageVisibility redacts by default). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ### 4.6 Owner-prioritized scheduling — SchedulingPolicy
 
@@ -593,7 +593,7 @@ A node (`01_KERNEL §2.4.4`) admits work from three submitter classes — its **
 - **Submitter identity is recorded** (§5, lineage J2/J9) so audits can answer "who submitted this, and at what priority class did it run?".
 - **Cross-node fairness is local.** Each node applies its own `SchedulingPolicy`; there is no global scheduler. A task placed on a remote node (§4.5) is ordered by *that* node's policy.
 
-**Tests:** A-SCHED1 (owner task ordered ahead of external under seed policy), A-SCHED2 (priority never bypasses floor — owner task failing floor is refused), A-SCHED3 (per-class quota enforced at task_intake), A-SCHED4 (ageing prevents starvation of low-priority work), A-SCHED5 (submitter identity persisted in AnswerPackage + lineage), A-SCHED6 (operator-authored non-default policy honoured; cannot reorder floor/INV-7). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-SCHED1 (owner task ordered ahead of external under seed policy), A-SCHED2 (priority never bypasses floor — owner task failing floor is refused), A-SCHED3 (per-class quota enforced at task_intake), A-SCHED4 (ageing prevents starvation of low-priority work), A-SCHED5 (submitter identity persisted in AnswerPackage + lineage), A-SCHED6 (operator-authored non-default policy honoured; cannot reorder floor/INV-7). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ### 4.6a Goal-arbitration preference vector — an admissible SchedulingPolicy input (ADR-0076)
 
@@ -607,7 +607,7 @@ Three constraints are normative:
 
 **Goal-appraisal emission (ADR-0075/0076, wired by ADR-0081).** Layer-6 goal-state transitions are an appraisal source: when a goal record transitions on verified progress, the kernel MUST mint a signed `appraisal-event/1` of kind `goal_progressed`; when a goal attempt is blocked (and on reaching the [`02_PERSONA.md §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076) frustration threshold), kind `goal_blocked`. The `source_event_ref` is the signed goal-stack transition. This — together with the task-acceptance emission of [§5](#5-answerpackage) and the relationship hook of [`02_PERSONA.md §11`](02_PERSONA.md#11-persona--user-interaction) — is the complete minting surface for the [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075)/A.73 appraisal taxonomy; no other component mints appraisals.
 
-**Tests:** A-GF-DRV-3 (vector consumed as bounded ordering input; subordinate to commitment escalation), A-GF-DRV-4 (no second scheduler; floor/INV-7 untouched), A-GF-ARC-6 (appraisal emission wiring). See [`11_ACCEPTANCE_TESTS.md §9a`](11_ACCEPTANCE_TESTS.md#9a-tests-a-gf-series).
+**Criteria:** A-GF-DRV-3 (vector consumed as bounded ordering input; subordinate to commitment escalation), A-GF-DRV-4 (no second scheduler; floor/INV-7 untouched), A-GF-ARC-6 (appraisal emission wiring). See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
 
 ## 5. AnswerPackage
 
@@ -619,7 +619,7 @@ The canonical kernel return value (schema **answer/5**; `answer/4` until the ADR
 
 **Migration (`answer/4` → `answer/5`, per [`09_PROTOCOLS.md §7.13`](09_PROTOCOLS.md#713-adding-or-modifying-schemas)).** Both new fields are nullable; the §7.13 mapper from `answer/4` sets `stated_confidence = None` and `calibration_conditioning_ref = None`. The version is bumped (rather than retained under the additive-field allowance) because §13a rule 2 makes the raw-vs-conditioned distinction load-bearing for audit: a consumer MUST be able to tell from the schema version whether the confidence circuit exists. Registry row updated in [`09_PROTOCOLS.md §7.2`](09_PROTOCOLS.md#72-acceptance--task); tests A-T19, A-GF-META-2.
 
-**Task-appraisal emission (ADR-0075, wired by ADR-0081).** When the kernel finalizes an AnswerPackage's acceptance status, it MUST mint a signed `appraisal-event/1` for the executing persona: kind `task_verified` for any successful-acceptance-bucket status, kind `task_failed` for the termination-bucket statuses (incl. `no_verified_answer`; A.34); partial/edge-bucket statuses mint neither by default (operator-tunable). The `source_event_ref` is the signed AnswerPackage. This grounds the [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) task-event appraisal kinds — no free-floating appraisals. Goal-state appraisals mint per [§4.6a](#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076); relationship-kind appraisals per [`02_PERSONA.md §11`](02_PERSONA.md#11-persona--user-interaction). Tests: A-GF-ARC-6.
+**Task-appraisal emission (ADR-0075, wired by ADR-0081).** When the kernel finalizes an AnswerPackage's acceptance status, it MUST mint a signed `appraisal-event/1` for the executing persona: kind `task_verified` for any successful-acceptance-bucket status, kind `task_failed` for the termination-bucket statuses (incl. `no_verified_answer`; A.34); partial/edge-bucket statuses mint neither by default (operator-tunable). The `source_event_ref` is the signed AnswerPackage. This grounds the [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) task-event appraisal kinds — no free-floating appraisals. Goal-state appraisals mint per [§4.6a](#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076); relationship-kind appraisals per [`02_PERSONA.md §11`](02_PERSONA.md#11-persona--user-interaction). Criteria: A-GF-ARC-6.
 
 ### 5.1 Status enum semantics
 
@@ -627,7 +627,7 @@ The canonical kernel return value (schema **answer/5**; `answer/4` until the ADR
 
 v1.0 adds richness to status values.
 
-**Tests:** A-T19 (status enum covers all 27 values, incl. the ADR-0071 `converged`/`no_further_improvement`), A-T24 (DELEGATED inheritance), A-T7 (PEDAGOGIC long-arc package shape). See [`11_ACCEPTANCE_TESTS.md`](11_ACCEPTANCE_TESTS.md).
+**Criteria:** A-T19 (status enum covers all 27 values, incl. the ADR-0071 `converged`/`no_further_improvement`), A-T24 (DELEGATED inheritance), A-T7 (PEDAGOGIC long-arc package shape). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
 
 ## 6. AcceptanceConfig
 
@@ -669,11 +669,11 @@ Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
 
 | ID | Risk | Severity | Likelihood | Mitigation | Target release |
 |----|------|----------|------------|------------|----------------|
-| R-TASKS-1 | Task classifier mis-classification. Multi-class and ambiguous tasks lead to incorrect routing. | High | Medium | Demotion paths (`§4`); A-T12 acceptance test; classifier reputation tracking; per-class fingerprint cache. | v1.0 (demotion); v1.1 (reputation closed-loop). |
+| R-TASKS-1 | Task classifier mis-classification. Multi-class and ambiguous tasks lead to incorrect routing. | High | Medium | Demotion paths (`§4`); A-T12 design criterion; classifier reputation tracking; per-class fingerprint cache. | v1.0 (demotion); v1.1 (reputation closed-loop). |
 | R-TASKS-2 | `PROJECT_PROGRESS_ACCEPT` evaluator is heuristic. "Did this session advance the project?" may not match user intuition. | Medium | High | Composite signal (lineage + ambient); operator-tunable weights; user-override surface. | v1.0 (baseline); v1.1 (signal weight learning). |
 | R-TASKS-3 | `ENGAGEMENT_ACCEPT` is gameable. Engagement-only optimisation drifts toward attention-economy failure modes. | High | Medium | Corroboration required by `USER_ACCEPT` or audit clearance before driving evolution; anti-Goodhart panel reviews engagement-led evolutions. | v1.0 (corroboration gate). |
 | R-TASKS-4 | `GOAL_PROGRESS_ACCEPT` depends on goal quality. Vague goals → vague signals. | Medium | High | Operator + user co-define goals at task start; goal-quality classifier flags vague goals at admission. | v1.1 (goal-quality classifier). |
-| R-TASKS-5 | `OPEN_ENDED` quality assessment is post-hoc. No real-time acceptance; trajectory quality judged retrospectively. | Medium | High | Periodic reflection checkpoints; user-feedback surface during execution; A-T9 acceptance test. | v1.0 (baseline); v1.2 (mid-trajectory probes). |
+| R-TASKS-5 | `OPEN_ENDED` quality assessment is post-hoc. No real-time acceptance; trajectory quality judged retrospectively. | Medium | High | Periodic reflection checkpoints; user-feedback surface during execution; A-T9 design criterion. | v1.0 (baseline); v1.2 (mid-trajectory probes). |
 | R-TASKS-6 | Multi-class tasks add latency. Decomposition + sequencing increases tail latency. | Low | Medium | Single-class fast path retained; classifier produces estimate ≤ 200 ms p95 (A-T1). | v1.0 (baseline). |
 | R-TASKS-7 | Fully-open emergent orchestration (§2a, ADR-0066) means an unvalidated persona-proposed acceptance method can be *wrong* (silently accept poor work) even though it cannot bypass the floor or signing. Acceptance-soundness verification of arbitrary methods is the new complexity bottleneck. | High | Medium | Trust-calibration (J4/J5): emergent-pathway verdicts enter at EMERGENT trust and degrade honestly; AnswerPackage records producing kind + stage; safety-critical pathways gated by C2; operators MAY pin a minimum-trust/seed pathway per task family (floor source 4). The promotion ladder (§2b) makes soundness load-bearing: trust accrues only on agreement with an independent reference (≥ 0.90) with asymmetric decay (§2b.1–§2b.2), demotes on disconfirmation (§2b.3), and operators MAY select the `bounded_compositional` profile for a hard a-priori floor on acceptance methods (§2b.4); A-EO7–A-EO13. Cross-document: also `00_VISION §11`. | v1.1 (trust-calibration + promotion ladder §2b + operator pin/profile). |
 
@@ -691,9 +691,9 @@ Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
 | OQ-TASKS-6 | **Resolved (v1.1) → [§2b](#2b-orchestration-kind-promotion--trust-decay-curve-evidence-threshold-and-the-bounded-compositional-policy-profile).** Fully-open orchestration (ADR-0066): what is the right default trust-decay curve and evidence threshold for promoting an emergent acceptance pathway EMERGENT → RECOGNISED, and should the bounded-compositional mode (compose only from seed primitives) be offered as a selectable operator policy profile? Resolution: asymmetric-EWMA trust-decay (α_down > α_up) with staleness half-life (§2b.1); auto-promotion gated on breadth + acceptance-soundness agreement ≥ 0.90 vs an independent reference + floor cleanliness + proposer standing, with safety-critical pathways blocked behind C2 (§2b.2); demotion on trust collapse or 3 consecutive disconfirmations (§2b.3); `bounded_compositional` offered as a selectable operator policy profile, `fully_open` retained as the substrate default (§2b.4). Default constants (K=5, M=2, agreement 0.90, α_up 0.10, α_down 0.25, staleness 90 d, N=3) remain operator-tunable; empirical re-tuning tracked below. | Task WG | Constants tuned empirically post-v1.1 deployment. |
 | OQ-TASKS-7 | Could a **judged-work reference protocol** lift the §2b.2 designed limit for reference-free task families (OPEN_ENDED / RELATIONAL / EXISTENTIAL)? Candidate shape: an INV-6-rotated judge panel run in *shadow* as the independent reference, with anti-Goodhart controls (rotation, disagreement-rate ceilings, [`08_KNOWLEDGE §15`](08_KNOWLEDGE.md#15-anti-goodhart-for-signal-corroboration) corroboration discipline), so emergent pathways in these families could earn RECOGNISED against a judged rather than verified reference. The hazard is circularity — a judged reference validating a judged pathway re-opens the judge-Goodhart channel the §2b.2 limit deliberately keeps closed. Until resolved, the designed limit stands: such pathways stay EMERGENT with the trust-calibrated discount indefinitely. | Task WG + Safety WG | v1.2 reference-protocol study. |
 
-## 10. Acceptance tests
+## 10. Design criteria
 
-*Full acceptance test list (A-T1 through A-T25).* See [Appendix A.43](#appendix-a43--acceptance-tests-10).
+*Full design criterion list (A-T1 through A-T25).* See [Appendix A.43](#appendix-a43--acceptance-tests-10).
 
 ## 11. Where to read next
 
@@ -2110,7 +2110,7 @@ Cost targets per task class ($/accepted task):
   SAFETY FLOOR        ≤ $0.012 / action (amortised)
 ```
 
-### Appendix A.43 — Acceptance tests (§10)
+### Appendix A.43 — Design criteria (§10)
 
 ```text
 A-T1   Task classifier returns TaskClassEstimate within ≤ 200 ms p95;
