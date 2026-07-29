@@ -211,9 +211,42 @@ not inspect the message, task, artifact paths, profession, or tool choice. The
 recipient therefore sees the bytes the sender just referenced without spending
 a call racing a publication that is still in flight.
 
+If that same turn both changes the workspace and successfully delivers a
+signed persona communication to a peer, the later workspace-change invalidator
+MUST NOT enqueue a second model turn for that exact peer. The direct delivery
+receipt is the coalescing authority; peers without such a receipt still receive
+the state invalidator. The decision uses no message content, task term,
+filename, format, profession, or tool identity. The ambient event and its
+lineage remain durable even when every peer delivery is coalesced.
+
 ### C-OP-10 — Model calls purchase useful decisions
 
 Every model call is attributable to a funded persona contribution or decision. Discovery, signing, replay, stale-state invalidation, public projection, and completion reduction are token-free. The runtime makes no separate model call for host-authored orientation, pressure scoring, generic “is this sufficient?” appraisal, timestamp refresh, or unchanged-wake restatement.
+
+A resource grant for a paused collaborative run is one shared atomic allowance,
+not a separate full allowance per recipient and not a lease captured by the
+oldest retry row. The current resource observation is concurrently offered to
+every active environment member under that same pool. Each persona receives
+its own current signed identity, mission, team, workspace, capability, and
+action facts and independently chooses whether to contribute, coordinate,
+evolve, seek a capability, propose a birth, or remain quiescent. The runtime
+does not select a profession, tool, role, output, or action for any member.
+
+Multiple effect-free deliveries that failed only because the same causal pool
+was exhausted MAY be presented to their exact recipient as one bounded current
+inbox. Persona communications retain their independently verified authority,
+or the same hash-and-byte-count pointer an individually delivered oversized
+authority would expose. A historic state-change carrier may be compacted only when its
+persona-authenticated delivery semantics explicitly identify it as a current-
+state invalidator and the recovery turn has reconstructed a strictly later
+verified state; the old bulk payload is then replaced by its signed reference
+and that current-state reference. Other event kinds remain exact deliveries
+and are queued behind the recipient's current team carrier under the same
+atomic allowance, so they retain authority without capturing the grant first.
+Inbox rows settle only after the recipient authors a verified intent with those
+rows in view. A failed or narrowed identity turn leaves them pending. This
+prevents one stale notification per LLM call without allowing the host to infer
+that a task, message, commitment, or artifact is semantically complete.
 
 When a seed persona's first authenticated principal task and its still-unobserved
 signed activation are both pending, activation MUST be delivered first as a
