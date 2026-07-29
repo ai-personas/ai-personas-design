@@ -530,6 +530,33 @@ v1.0 personas project into and are consumed by twelve adapter integrations. Each
 
 *The kernel always owns soul/identity, verifier cascade, invariant enforcement, candidate acceptance, lineage append, and ProvenFacts write-through. The body (framework adapter) always owns the LLM call, tool dispatch, persistence, observability transport, and scheduling.*
 
+Tool annotations are part of that authority boundary. If a handler verifies an
+effect against the current causal task and mission, its descriptor MUST declare
+authenticated task binding; the private dispatcher injects the exact task and
+mission identifiers under reserved transport fields. The same rule applies to
+required workspace and owner bindings. Public or model-authored arguments
+cannot populate reserved fields, and an absent required binding fails as
+adapter configuration rather than being reinterpreted as persona intent.
+
+Experience effects follow the same trusted-descriptor rule. Every successful
+mutation or proposal surface in the generic skill, brain, or characteristic
+evolution protocols declares its opaque experience effect, including aliases,
+retirements, observations, reviews, and conflict resolutions that can affect
+later cognition. Reconciliation follows the successful action receipt and its
+descriptor; it never infers learning from an action name, task term,
+profession, command, filename, extension, or model-authored assertion.
+
+An adapter translation MUST preserve every verified provider-supported input
+attachment across its transports. When a command-line image input is rebound
+onto an app-server protocol, the adapter carries the same already-verified
+local path as the protocol's local-image input item; it does not discard the
+attachment or reject the provider's documented option as an unaudited action
+surface. The per-call isolated provider catalogue MUST retain the corresponding
+input modality even when image generation and every unrelated ambient feature
+remain disabled. This translation grants no new filesystem authority: containment,
+type, digest, receipt, and persona ownership verification remain the kernel's
+responsibility before the adapter receives the path.
+
 **Technical detail:** See [A.35](#appendix-a35).
 
 v1.0-specific extensions (project_context, env_context, emergent-domain warning) are **additive** — adapters that don't know about them ignore them; v1.0-aware adapters use them.
@@ -769,6 +796,16 @@ Registry rows for the ADR-0073…0080 wave, completed by ADR-0081/0082 (plus the
 | `AvailabilityPolicy` | `availability-policy/1` | dataclass | [`09_PROTOCOLS.md §3H.2`](09_PROTOCOLS.md#3h2-availabilitypolicy--surviving-the-origin-going-dark) | Draft | How a record's body stays fetchable when the origin is offline: `online_only` / `replicated` (≥N) / `pinned`; resolver falls back through `ContentLocator.replica_tiers`. |
 
 ### 7.12 Lineage
+
+Operational reducers MUST request the exact event-kind index they consume and
+MUST preserve the returned absolute chain position whenever causal ordering is
+part of validation. A reducer for tool availability, population authority,
+coordination, work settlement, domain binding, or workspace conflicts MUST NOT
+materialize unrelated verified events merely to filter them afterward. Exact
+authorized-file publication similarly carries bounded file observations and an
+explicit partial-capture scope; only a full-workspace publication carries a
+complete topology snapshot. These are fidelity rules, not semantic routing:
+they neither select a tool nor infer a role, output, birth, or completion.
 
 | Schema | Version | Form | Defined in | Stability | Used by |
 |--------|---------|------|------------|-----------|---------|

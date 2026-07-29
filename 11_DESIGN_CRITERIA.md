@@ -76,6 +76,15 @@ Opening an artifact lazily loads the renderer selected from verified bytes, decl
 
 Personas inspect generic execution and tool capabilities, acquire or author a capability when needed, and create the artifacts they judge necessary. Every successful invocation has a mechanically bound capability-use receipt, capability gaps have durable actor-authored IDs and explicit transitions, and a sufficiency claim is ineffective while any such gap remains active. The runtime contains no task-word, profession-word, filename, extension, or domain-regex branch that causes CAD, CAM, a specialist birth, or a particular deliverable.
 
+The funded persona boundary receives the current generic capability surface
+before it chooses an action. Restoring that surface, causal domain binding,
+coordination state, population authority, work settlement, and workspace
+conflict state MUST reduce only the exact verified event kinds each projection
+consumes. The reducer preserves absolute signed-chain positions when order is
+authority and does not detach unrelated artifact bodies or workspace topology.
+Growing useful lineage therefore cannot delay a persona until after its tool or
+birth decision would have mattered.
+
 For the current four-bedroom-house intent, useful evidence includes an editable spatial model and human-readable engineering package when personas judge those necessary for a credible result. A prose-only answer that claims a model exists is not equivalent to model bytes.
 
 ### C-OP-8 — Population change is causal and persona-authored
@@ -169,6 +178,13 @@ selected body supports that transport. Path containment, byte length, digest,
 media type, owner, environment, and receipt lineage are reverified first. A
 historical rejected receipt is not an awaiting candidate and cannot keep the
 disposition gate open. The attachment supplies observation, never admission.
+An audited adapter translation MUST preserve that attachment when rebinding
+between provider transports. A command-line local-image option becomes the
+equivalent app-server local-image input item after the same path verification;
+silently dropping it or rejecting the provider-supported option before the
+body call is an infrastructure failure, not a persona-authored disposition.
+The isolated per-call provider catalogue retains image input for that call
+without enabling image generation, shell, browsing, or any other action lane.
 If a later causal carrier reopens that gate, it MUST attach the same uniquely
 awaiting verified bytes. The request ID, request hash, and receipt hash for
 rejection and admission, together with the destination and content references
@@ -178,6 +194,13 @@ because those bytes are visible in a shared environment workspace. The exact
 verified delivery authority is retained in the persona-signed identity
 transition. The persona still chooses the action and authors its rationale; the
 substrate performs no semantic disposition.
+
+Any admission action that compares delivery lineage with the current task and
+mission MUST be declared as an authenticated task-bound tool. Its private
+transport injects those exact hidden bindings together with owner, environment,
+and workspace authority; model-authored arguments cannot supply or replace
+them. Omitting a required hidden binding is an infrastructure configuration
+failure, not a persona rejection of otherwise valid bytes.
 
 Receipt delivery to the exact authorized persona workspace is sufficient for
 the owner's next inspection and disposition turn. Publishing those bytes into
@@ -190,6 +213,19 @@ artifact or turn an available callback into model-budget exhaustion. Durable
 receipt replay may schedule that bounded retry, but MUST NOT execute the
 workspace reconciliation inline on the node heartbeat or make discovery,
 public projection, budget admission, and persona scheduling wait for it.
+Both first delivery and idempotent redelivery enqueue the owner callback before
+shared publication work. While that callback is admitted, live, or waiting on
+its exact retry boundary, the publication lane defers. Terminal callback
+settlement then schedules the independent bounded publication retry; callback
+unavailability may schedule it immediately because no owner turn is being
+overtaken.
+
+When publication authority names an exact bounded set of files, the transaction
+verifies and records those bindings without scanning or embedding the complete
+persona and environment workspaces. Its topology projection explicitly says
+`authorized_files_only`; a full-workspace publication retains the independent
+complete topology proof. Exact-file delivery must not make every later reducer
+copy the rest of a growing workspace.
 
 A raster descriptor and persona signature are necessary but not sufficient
 identity authority. The current descriptor counts as admitted only when the
@@ -289,6 +325,11 @@ score, automatically promoting a profession, or adding a periodic reflection
 call is a failure. Projection and verification MUST use the same bounded exact
 practice-evidence reducer. A reference mechanically attached by the runtime
 cannot be rejected by a narrower traversal or consume a correction call.
+Every admitted brain write or proposal surface that can change later cognition,
+including an alias over the same underlying mutation, MUST carry the trusted
+experience-effect annotation. The receipt reducer follows that descriptor
+annotation rather than a tool name, task term, profession, file extension, or
+model-authored claim.
 
 A population need visible in effective work state must be backed by unresolved
 verified birth lineage or a successful current-turn need, search, or genesis
