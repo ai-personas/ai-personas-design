@@ -179,6 +179,15 @@ verified delivery authority is retained in the persona-signed identity
 transition. The persona still chooses the action and authors its rationale; the
 substrate performs no semantic disposition.
 
+Receipt delivery to the exact authorized persona workspace is sufficient for
+the owner's next inspection and disposition turn. Publishing those bytes into
+the shared environment workspace is a separate durable mechanical effect. A
+slow or refused shared-workspace reconciliation MUST NOT hold the receipt-state
+lock, consume the terminal callback allowance, or delay owner-local cognition.
+Its retry path is serialized independently and may settle after the persona
+turn. Unrelated branch divergence therefore cannot strand a valid delivered
+artifact or turn an available callback into model-budget exhaustion.
+
 A raster descriptor and persona signature are necessary but not sufficient
 identity authority. The current descriptor counts as admitted only when the
 latest avatar evolution transition is signed by that persona, matches every
