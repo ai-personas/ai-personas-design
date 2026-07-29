@@ -44,6 +44,16 @@ Every uncertainty has a stable persona-authored ID, statement, rationale, eviden
 
 All prose and open documents belong to the persona. The kernel validates bounded canonical shape, current authority, signature, revision lineage, and exact references only.
 
+The open keys in `collaboration` retain the ordinary bounded-open-document
+limits. Its reserved `agency_reconciliation` member is validated separately by
+the closed agency schema and that schema's own per-field bounds. An outer open
+JSON list, depth, or byte limit MUST NOT be reapplied recursively to the closed
+member: mechanically attached evidence can legitimately reach the closed
+protocol's larger reference bound. The complete reconstructed collaboration
+document is still signed canonically. This separation prevents a valid causal
+successor from being discarded after its need, capability, or practice effects
+have already been signed.
+
 The persona authors the initial `frame_id`. After a signed revision exists, the structured turn contract mechanically binds the same frame ID, the next integer revision, and the exact prior `work_state_id` as the supersession reference. These are ledger-order consequences, not repeated semantic choices. This prevents a useful completed turn from being discarded merely because a model retyped lineage bookkeeping incorrectly.
 
 ## 3. Durable commitments
@@ -61,30 +71,75 @@ For each structured revision, a transition may name either an exact prior active
 
 ### 3a. Persona-authored agency reconciliation
 
-Every task-bound final cognition envelope MUST include `personaos-agency-reconciliation/3`. The persona authors the reconciliation content and one actual causal mechanism: a self-wake, routed peer message, already registered future, evidenced external blocker, or no successor. The runtime stores the authored content inside the work state's open `collaboration` mapping and mechanically projects `meaningful_progress_remains`, `causal_successor`, and `continuation` from that mechanism. Those three fields are no longer independent model choices and cannot contradict one another. This projection does not summarize prose or infer task meaning. The persona explicitly reconciles:
+Every task-bound final cognition envelope MUST include `personaos-agency-reconciliation/5`. The persona authors the reconciliation content and actual causal mechanisms: a self-wake, routed peer message, already registered future, signed population-protocol action, evidenced external blocker, or no successor. The runtime stores the authored content inside the work state's open `collaboration` mapping and mechanically projects `meaningful_progress_remains`, `causal_successor`, and `continuation` from those mechanisms. Those three fields are no longer independent model choices and cannot contradict one another. This projection does not summarize prose or infer task meaning. The persona explicitly reconciles:
 
 - the exact prior active commitment IDs and prior uncertainties, plus any introduced in the current revision;
 - exact remaining model-call and mission-deadline authority;
 - any genuine external blocker and its evidence references;
 - the causal successor it actually authors through the response or a signed current-turn receipt; and
 - whether its own characteristics and experience lead it to want a distinct contribution or independent review; and
+- whether exact signed practice changed its experience, and whether it already authored a reusable learning action in this turn; and
 - whether its exact open commitments are supported by its own retrieved skills and experience, the complete current action surface, the bounded complete unranked local execution-capability index, and signed acquisition / invocation evidence; any material capability gaps; and the capability action it actually took or authored next.
 
-When the persona judges that meaningful progress remains, it authors an actual successor through the existing generic self-wake, scheduling, or peer-coordination mechanisms, or records an evidenced external blocker. `next_intent`, progress prose, and a filename do not schedule work. When the persona itself wants a distinct contribution or independent review, it initiates or continues the existing need → exact discovery → candidate disposition → genesis path from [`16_POPULATION_DYNAMICS`](16_POPULATION_DYNAMICS.md). The kernel does not infer the judgment from task words, assign a role, choose a peer, force a team size or birth, or mint a semantic wake.
+`personaos-experience-reconciliation/2` is persona-authored inside the same
+substantive response. The persona writes a human-readable experience statement
+and decides whether it observed growth. The runtime attaches the exact signed
+prior-practice and current action references; it derives reusable-learning state
+only from a successful current-turn descriptor explicitly annotated as a skill,
+brain, or characteristic evolution mechanism. The model never copies opaque
+receipt hashes or repeats that mechanical boolean. This adds no reflection
+model call. The projector and verifier use one exact bounded reducer for
+historical practice; a mechanically attached reference cannot become an
+"unobserved" model error or trigger an effect-free correction. The verifier
+does not decide what was learned, score competence,
+grant a profession, or mutate personality traits. After a substantive turn,
+the kernel also appends one idempotent `ACTIVITY_OBSERVED` record bound to the
+signed turn-effect event. This observation carries `automatic_competence_credit:
+false`; future turns and newborn formation receive it as attributable practice
+evidence from which personas may author their own skills and evolving expertise.
 
-Capability reconciliation is also persona-owned. `personaos-capability-reconciliation/2` binds the judgment to the exact current execution-inventory snapshot. Its `commitment_refs` are mechanically projected from the exact post-transition active commitment set rather than being a duplicate model-authored list. Successful native invocations receive `personaos-native-capability-use-receipt/1` records containing the exact provider invocation identity, its hash, mechanical success state, and byte-effect references. The receipt does not classify or recommend the invocation. A persona may cite the invocation ID it observed in the current turn; later turns and peers receive the sealed capability-use reference instead of an opaque content hash.
+When the persona judges that meaningful progress remains, it authors an actual successor through the existing generic self-wake, scheduling, peer-coordination, or population mechanisms, or records an evidenced external blocker. `next_intent`, progress prose, and a filename do not schedule work. Population demand in the effective work state is derived from unresolved verified protocol lineage and successful current-turn need, search, or genesis receipts. Therefore saying that another perspective is wanted without taking a population action cannot manufacture a team or hold a mission open. When the persona itself wants a distinct contribution or independent review, it initiates or continues the existing need → exact discovery → candidate disposition → genesis path from [`16_POPULATION_DYNAMICS`](16_POPULATION_DYNAMICS.md). An admitted genesis action mechanically carries the parent's signed invitation to that exact newborn, but the newborn's separate signed decision is the only path to active membership. The kernel does not infer the judgment from task words, assign a role, choose a peer, force a team size or birth, or mint a semantic wake.
+
+Capability reconciliation is also persona-owned. `personaos-capability-reconciliation/3` binds the judgment to the exact current execution-inventory snapshot. Its `commitment_refs`, prior-experience references, current descriptor/use references, and effective sufficiency boolean are mechanically projected from the exact post-transition commitments, signed history, authenticated action receipts, and reduced active-gap set rather than being duplicate model-authored fields. The persona still authors every gap, transition, rationale, and capability choice. Successful native invocations receive `personaos-native-capability-use-receipt/1` records containing the exact provider invocation identity, its hash, mechanical success state, and byte-effect references. The receipt does not classify or recommend the invocation. Later turns and peers receive the sealed capability-use reference instead of an opaque content hash.
 
 Capability gaps have durable, persona-authored IDs. A revision introduces only new gaps and explicitly classifies each as actionable or externally blocked. Omission never closes a gap. A later revision must transition the exact prior ID with evidence; `resolved` and `superseded` close it, while `blocked_external` keeps it active. Effective `current_capabilities_sufficient` is true only when the reduced active-gap set is empty. This is identity/lifecycle reduction only: the kernel never derives a gap from task text, filenames, extensions, tool names, prompts, regexes, or domain vocabularies.
 
-The signed work situation MUST carry the bounded complete exact-name index of the currently observed local execution namespace, its snapshot hash and pagination cursor, the complete unranked action catalog, current environment-mounted tools, and the persona's retrieved skill evidence. Prompt compaction MUST preserve the compact exact-name index rather than retaining only a lexically early provenance page. Brain compilation receives the mechanically derived exact affordance identifiers; it does not receive a host-selected subset based on task text. The persona MAY conclude that existing capabilities are sufficient. Discovery, acquisition, provisioning, skill authoring, invocation, and delegation remain explicit persona actions with ordinary signed intent and effect evidence; the runtime MUST NOT rank, select, provision, or invoke a capability merely because the reconciliation reports a gap.
+The signed work situation MUST carry the bounded complete exact-name index of the currently observed local execution namespace, its snapshot hash and pagination cursor, the complete unranked action catalog, current environment-mounted tools, and the persona's retrieved skill evidence. The exact names are transported as small readable canonical-JSON array pages, each below the signed situation's scalar projection bound; the index records page and observed counts and explicitly marks capture incomplete if its transport bound is exceeded. Prompt compaction MUST preserve those pages rather than retaining only the first 128 lexical names or an early provenance page. Brain compilation receives the mechanically derived exact affordance identifiers; it does not receive a host-selected subset based on task text. The persona MAY conclude that existing capabilities are sufficient. Discovery, acquisition, provisioning, skill authoring, invocation, and delegation remain explicit persona actions with ordinary signed intent and effect evidence; the runtime MUST NOT rank, select, provision, or invoke a capability merely because the reconciliation reports a gap.
 
-The reconciliation is mechanically cross-consistent. An actual self-wake, active-peer route, or exact registered-future receipt projects `meaningful_progress_remains: true` and `continuation: continue`. An evidenced external blocker binds automatically to the complete current reduced issue set and projects quiescence; the model does not copy those issue identities into a second list. A reported blocker with no current issue has no causal referent, remains visible in the exact authored response, and does not manufacture quiescence in the effective signed work state. With no causal mechanism or effective blocker, the projection is `ready`, which remains ineffective while any active commitment, open uncertainty, active capability gap, or population need is open. An actionable capability gap cannot be hidden behind quiescence. Multiple simultaneous successor mechanisms are rejected as ambiguous rather than ranked by the runtime. Prose such as “next pass”, a filename, successful HTTP status, or an unbound transcript path never supplies continuation authority.
+The reconciliation is mechanically cross-consistent. An actual self-wake, active-peer route, exact registered-future receipt, or signed current-turn population action projects `meaningful_progress_remains: true` and `continuation: continue`. An evidenced external blocker binds automatically to the complete current reduced issue set and projects quiescence; the model does not copy those issue identities into a second list. A reported blocker with no current issue has no causal referent, remains visible in the exact authored response, and does not manufacture quiescence in the effective signed work state. With no causal mechanism or effective blocker, the projection is `ready`, which remains ineffective while any active commitment, open uncertainty, active capability gap, or population need is open. An actionable capability gap cannot be hidden behind quiescence. Several mechanisms may coexist; every signed effect remains visible and the posture uses a fixed content-neutral mechanism order solely to choose one representative successor. Prose such as “next pass”, a filename, successful HTTP status, or an unbound transcript path never supplies continuation authority.
 
 ## 4. Workspace settlement
 
 A work state is bound to the exact situation and workspace bytes the persona observed. If the workspace changes between observation and signature, the intent becomes settlement-pending rather than being silently attached to different bytes. A stable recapture may bind it through `PERSONA_WORK_STATE_SETTLEMENT_BOUND` without changing the persona's authored choice.
 
-Any later durable change to the task, environment, membership, artifacts, conflicts, acquired capabilities, or workspace makes the prior state stale. A transient tool menu or transport flag does not.
+Any later durable change to the task, environment, membership, artifacts,
+conflicts, acquired capabilities, domain context, or workspace makes the prior
+state stale. A transient tool menu or transport flag does not. In particular,
+renewing an already-verified peer card's lease, route, or enclosing signature
+does not change its persona-authored identity, and appending the current turn's
+verified action/practice history does not independently change completion
+authority. Freshness compares a protocol-defined projection that excludes only
+those fields; it still compares exact signed task, membership, identity,
+capability, artifact, conflict, domain, and workspace facts.
+
+Only a persona whose membership was active before the current ordinary mission
+turn may materialize or publish task workspace bytes. Identity formation and
+invitation response are decision turns: their transport has no artifact-package
+lane, and neither package observations nor branch bytes may become an
+environment revision. If the invitation response activates membership, work
+begins from a later signed member wake and is reconciled against the workspace
+revision observed there.
+
+For local peer communication authored during an active source turn, mailbox
+admission and model-call eligibility are separate. The recipient wake is
+durable immediately, but remains execution-inert until the source completion
+callback has settled its workspace/package publication and post-turn evidence.
+This ordering predicate is computed only from the verified communication
+envelope and process-local source lease; transport bytes cannot invent it and
+no message, task, artifact, profession, capability, or tool semantics are
+classified. Failure of the source publication remains explicit evidence, but
+the recipient is never run against an earlier workspace merely because message
+delivery was faster than settlement.
 
 ## 5. Population-aware completion
 
@@ -106,7 +161,9 @@ The UI leads with:
 4. what it intends to do next;
 5. open commitments and expected evidence;
 6. open questions, accepted working assumptions, and other assumptions; and
-7. its collaboration plan.
+7. its own account of experience gained and reusable learning saved;
+8. its capability decision and whether another perspective is wanted; and
+9. its collaboration plan.
 
 Model calls, provider events, latencies, run IDs, schemas, hashes, and signatures remain available in a collapsed technical or verification disclosure. They do not become the human headline.
 
@@ -118,11 +175,13 @@ The work-state protocol must reduce calls, not add an appraisal loop.
 
 - Situation projection, signature verification, settlement, replay, stale invalidation, public projection, and completion reduction are token-free.
 - A direct task receives one ordinary substantive persona turn unless new causal work justifies another.
+- Once a provider-native completion has produced authenticated non-read-only persona activity, an absent or invalid required terminal work-state value goes directly to the effect-free response carrier. The same frozen situation is not sent through another ordinary continuation with command, MCP, routing, wake, or workspace authority. The transition observes only trusted descriptor annotations, exact action receipts, required byte state, and response validity; it does not inspect or match task prose, action names, executable names, file paths, extensions, professions, or domain vocabulary.
 - While an exact materialized-outcome byte/future gate remains open, a non-read-only action descriptor that was already invoked without satisfying that mechanical gate MUST lose replay authority for the remainder of the same semantic turn. Every other currently authorized descriptor remains available. This is descriptor/result/byte evidence, not a semantic tool ranking: the substrate does not name a preferred replacement, infer whether the action was useful in another sense, or prevent a later causally distinct turn from choosing it again.
 - If that turn omits the required terminal work-state response, or supplies one that fails a closed structural or cross-field invariant, the same semantic turn MAY spend at most two remaining calls to recover only that response. A second correction is available only after the first effect-free correction is itself invalid; it prevents one malformed repair from stranding already delivered work while keeping recovery finite. Each correction receives the current bounded mechanical failure record containing the validation stage, failure, schema hash, and response hash. It receives the exact sealed action results and unchanged signed situation, exposes no action or command capability, and offers one structured carrier whose argument schema is exactly the required terminal response schema. Strict-provider transport normalization MUST remove only mechanically introduced optional null placeholders; required or explicitly nullable authored values survive unchanged. The carrier is never dispatched and grants no file, MCP, routing, scheduling, or wake authority; its arguments still pass through the unchanged response validator before persona signing. It cannot replay source effects, schedule a host-selected wake, infer task meaning, or override a persona-authored continuation choice. A registered future suppresses ordinary missing-response recovery, but does not make a contradictory terminal protocol valid; corrections remain effect-free and cannot register another future.
 - No host-authored task orientation is generated.
 - No host-authored pressure or sufficiency appraisal is generated.
 - A resume may reproject and close a ready state token-free when every exact binding still verifies.
+- A local peer wake waits token-free for its verified source turn's effect-settlement boundary instead of spending a call against not-yet-published bytes.
 - An unchanged wake cannot spend a call merely to renew timestamps or restate a prior state.
 
 ## 8. Non-goals

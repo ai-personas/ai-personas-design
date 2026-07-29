@@ -80,27 +80,87 @@ For the current four-bedroom-house intent, useful evidence includes an editable 
 
 ### C-OP-8 — Population change is causal and persona-authored
 
-A new persona appears only after a signed need, exact unranked discovery receipt, persona-authored disposition for every returned candidate, signed genesis proposal, and mechanical admission. The newborn independently authors public identity and membership decisions.
+A new persona appears only after a signed need, exact unranked discovery receipt, persona-authored disposition for every returned candidate, signed genesis proposal, and mechanical admission. The admitted birth action materializes one deterministic parent-signed environment invitation and delivers it to the newborn. The newborn independently authors public identity and the invitation response; membership exists only when that response explicitly commits it.
 
 No birth is also a valid emergent result when current participants can cover the work. The evidence is the causal decision trail, not an expected headcount.
+
+One exact signed need can materialize at most one newborn. Distinct signed
+needs may proceed concurrently under the configured mechanical bounds; one
+broad need or an unintegrated newborn cannot lock unrelated persona-authored
+contributions out of the whole task. Newborn formation receives exact bounded
+parent practice evidence, never a host-assigned profession.
+
+An admitted newborn is not considered a usable team member merely because its
+identity is discoverable. The operating path must show the exact invitation,
+newborn consent, active causal membership, and subsequent peer-visible work.
+Interrupted replay recovers the same invitation authority without duplicating
+the birth or bypassing consent. A durably persisted identity outbox whose first
+enqueue meets a busy actor is pending delivery, not a refused birth; the signed
+invitation must still materialize so identity-completion replay can deliver it.
+Identity and invitation-decision turns expose no artifact-package transport and
+cannot publish a persona branch or package to the shared environment. Consent
+may activate only a subsequent member turn; it never retroactively authorizes
+task artifacts emitted while the persona was still forming or deciding.
 
 ### C-OP-9 — Multiple personas genuinely coordinate
 
 Each active participant receives current signed peer cards and bounded recent contributions. Messages have exact recipients and causal references. A participant can challenge, review, improve, request evidence, or remain quiescent. One persona's ready state cannot close another persona's commitments or be labelled collective review.
 
+When a local persona authors a communication inside a turn, delivery to its
+peer is causally fenced until that source turn's completion boundary has
+settled the associated workspace and package effects. The fence is derived
+only from the verified communication envelope and active source lease. It does
+not inspect the message, task, artifact paths, profession, or tool choice. The
+recipient therefore sees the bytes the sender just referenced without spending
+a call racing a publication that is still in flight.
+
 ### C-OP-10 — Model calls purchase useful decisions
 
 Every model call is attributable to a funded persona contribution or decision. Discovery, signing, replay, stale-state invalidation, public projection, and completion reduction are token-free. The runtime makes no separate model call for host-authored orientation, pressure scoring, generic “is this sufficient?” appraisal, timestamp refresh, or unchanged-wake restatement.
 
-When a persona's first authenticated principal task and its still-unobserved
-signed activation are both pending, the activation fact MUST be co-delivered in
-that exact `task_received` carrier. One verified persona turn atomically settles
-both observation deliveries; the substrate MUST NOT reserve or spend a separate
-activation/orientation model call before exposing the principal task. This
-changes no persona choice: identity actions, ordinary work, communication, or
-inaction remain available from the same live descriptor catalog.
+When a seed persona's first authenticated principal task and its still-unobserved
+signed activation are both pending, activation MUST be delivered first as a
+distinct identity-formation turn. That turn exposes only the live actions whose
+trusted descriptors declare identity-formation authority and the exact current
+name, characteristic, portrait, external-artifact, provider, and readiness
+state. It exposes no native command lane, task-artifact package lane, mission
+work-state disposition, or ordinary work catalog. The later principal-task turn
+gets the ordinary complete action surface after activation and its already
+authored descendants settle. This call is useful identity authorship rather
+than host-authored orientation: the substrate chooses no name, characteristics,
+portrait prompt, style, provider, model, role, profession, or task action.
+
+After any provider-native completion produces authenticated non-read-only
+persona activity, a missing or invalid required terminal response MUST move
+directly to the bounded effect-free response carrier. The ordinary tool-bearing
+continuation MUST NOT be reissued against that completion's frozen situation.
+This boundary is derived only from signed receipts, descriptor annotations,
+required byte evidence, and response validation; it does not classify task
+text, action names, commands, filenames, formats, professions, or tools.
 
 For live operation in this release, routed models must be GPT-5.5 or lower. A higher model request is a visible configuration failure, not an automatic substitution.
+
+Every substantive tool, peer, communication, or workspace effect appends one
+signed idempotent practice observation without another model call. The same
+turn's required persona-authored experience reconciliation says whether the
+practice changed the persona. Its closed agency evidence must remain admissible
+up to that protocol's declared bounds; the surrounding open-collaboration
+limits cannot invalidate it and erase an otherwise valid successor. Exact
+practice references are attached from signed receipts, and reusable-learning
+state exists only when the persona actually used a descriptor-annotated skill,
+brain, or characteristic evolution mechanism. Asking the model to transcribe
+those hashes or a mechanically known boolean, generating a host competence
+score, automatically promoting a profession, or adding a periodic reflection
+call is a failure. Projection and verification MUST use the same bounded exact
+practice-evidence reducer. A reference mechanically attached by the runtime
+cannot be rejected by a narrower traversal or consume a correction call.
+
+A population need visible in effective work state must be backed by unresolved
+verified birth lineage or a successful current-turn need, search, or genesis
+receipt. Population desire expressed only as prose is not an action and cannot
+hold a task open. The mechanism annotation is generic and trusted descriptor
+state; task words, profession names, filenames, extensions, and executable
+names are never population triggers.
 
 ## 4. Emergence boundary
 
@@ -141,6 +201,14 @@ Compact identity transfer is an ordering optimization over the same signed autho
 ## 7. Completion and continued improvement
 
 Completion requires current materialized outcome evidence, no unresolved exact workspace conflict, and current ready work states for every required active participant. A ready state with open commitments, open uncertainties, active capability gaps, or an inconsistent causal successor is invalid. Each uncertainty has actor-authored identity and an explicit `open` or `accepted_assumption` disposition; accepted assumptions remain human-visible without falsely keeping the causal graph open. `PERSONA_WORK_STATE_AUTHORED` is the single authoritative task-progress/readiness signal, so a separate task-progress action cannot present a premature completion label. The persona authors one real successor mechanism or blocker; progress, successor identity, and work-state continuation are mechanically projected from it instead of being three duplicated semantic fields. A same-revision commitment may be satisfied only by an explicit evidence-bearing transition, and capability reconciliation receives the reducer's exact post-transition active commitment IDs rather than asking the model to repeat them. Quiescence with open work requires an evidenced external blocker naming every exact blocked issue. A schema-valid but cross-field-inconsistent terminal value receives at most two effect-free corrections inside the same bounded turn; it is never accepted, semantically repaired by the host, or allowed to replay actions. Provider normalization cannot erase required or explicitly nullable fields from that authored correction, and every rejected correction records its current structural or cross-field validation stage rather than reusing a prior failure. A peer state bound to older bytes is stale. A singleton result must be labelled a singleton assessment unless the principal explicitly required and received independent review.
+
+A work-state freshness comparison excludes only protocol-declared transient
+transport and same-turn history projections: a contextual action menu, an
+already-verified peer card's renewed lease/route/enclosing signature, and the
+append-only verified action/practice account already reconciled inside the
+signed state. Their renewal cannot make current cognition stale. Exact task,
+environment, membership, persona-authored peer identity, domain, acquired
+capability, artifact, conflict, and workspace facts remain freshness authority.
 
 Budget exhaustion pauses open work and preserves best-so-far artifacts; it is not semantic completion. A later exact resource grant resumes the causal work rather than restarting it as a new identity.
 

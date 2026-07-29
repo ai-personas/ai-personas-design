@@ -34,6 +34,9 @@ persona work observation
     → signed genesis proposal
     → kernel admission or refusal
     → newborn identity-formation wake
+    → exact parent-signed environment invitation
+    → newborn-authored accept or decline
+    → signed membership only when accepted
 ```
 
 Each arrow is an exact lineage reference, not a prose inference.
@@ -105,6 +108,15 @@ If the persona prefers an existing candidate, it may author an invitation throug
 - the complete candidate dispositions; and
 - `personaos-genesis-seed/1`.
 
+The action contract explicitly authorizes one deterministic environment
+invitation if and only if that exact proposal is admitted. The invitation binds
+the action, proposal, outcome event, task, need, and recruitment receipt and is
+signed by the proposing persona's identity key. This is a causal continuation
+of the persona's explicit birth action, not a task-derived invitation or a host
+choice. The kernel delivers the exact invitation to the newborn, which still
+authors an independent accept-or-decline response. Admission never writes a
+membership record.
+
 The genesis seed contains open `characteristics`, `principles`, `will_not`, `sections`, `extensions`, and exact inherited-skill references. These fields are persona-authored. The substrate defines their wire shape and byte bounds but no profession list, expertise dictionary, role enum, personality-to-job mapping, task-class mapping, or artifact prescription.
 
 The live action descriptor MUST expose the complete exact seven-field wire shape: `schema`, `characteristics`, `principles`, `will_not`, `sections`, `extensions`, and `inherited_skill_refs`. Every collection may be empty. Exactness is not permission to hide required nested fields behind an opaque action name: doing so converts a valid persona choice into avoidable failed calls and prevents emergence. Opaque formation context belongs inside the persona-authored open mappings, not in substrate-invented top-level fields.
@@ -123,23 +135,49 @@ Admission is mechanical and fail-closed. The kernel verifies:
 - canonical genesis-seed shape and byte bounds;
 - configured `ReplicationBound`, creation rate, population ceiling, and lineage depth;
 - available host and budget authority where required; and
-- task-scoped birth serialization while a prior newborn remains mechanically unresolved.
+- one-newborn-per-exact-signed-need identity.
 
-The kernel may refuse malformed authority, stale lineage, missing candidate coverage, exceeded bounds, or an unresolved prior birth. It may not refuse or admit because it thinks a role is redundant, a persona is talented, a task needs CAD, or a proposed identity is semantically similar to another.
+The kernel may refuse malformed authority, stale lineage, missing candidate coverage, exceeded bounds, or reuse of a need that already materialized a newborn. It may not refuse or admit because it thinks a role is redundant, a persona is talented, a task needs CAD, or a proposed identity is semantically similar to another.
 
-Task-scoped serialization is released by exact integration evidence, not by a
-particular workspace-call timing accident. A completed signed publication is
-substantive when it either creates a commit during the call, admits verified
-declared file bytes, or proves that a persona branch already ahead by one or
-more exact commits was merged without conflict into the environment. A no-op
-sync (`ahead == 0`), an unmerged branch, or an unsigned merge source does not
-release the gate. The reducer reads only commit/merge receipts and task,
-environment, membership, and lineage bindings; it does not inspect filenames,
-artifact semantics, profession words, or task prose.
+One signed need represents one independently useful contribution as judged by
+its persona author and can materialize at most one newborn. Several distinct
+signed needs may proceed concurrently under the same mechanical replication,
+rate, population, depth, run-budget, and delivery bounds. The kernel compares
+exact claim identity only. It does not serialize the whole task behind one
+broad claim, merge several persona-authored needs into a host role, or inspect
+need prose to decide overlap. If a persona judges several contributions useful,
+it authors a separate evidenced need for each; repeating identical need bytes
+is idempotent rather than a second population decision.
+
+The effective work-state population flag is a receipt projection, not a second
+model-authored vote. It is true only while verified need/search/proposal lineage
+is unresolved or the current turn successfully exercised a descriptor-marked
+population mechanism. The trusted marker identifies protocol effect class only;
+it does not encode a profession, task type, tool, role, or reason to reproduce.
+Thus a persona manifests its judgment by acting, while the substrate neither
+forces a birth nor accepts “another reviewer would help” as a causal action.
 
 ## 4. Newborn identity formation
 
 An admitted newborn begins with a forming identity. The genesis seed supplies inherited starting material, but it does not assign a final public personhood.
+
+The initial seed persona follows the same authorship boundary. Before its first
+principal task, its signed activation receives a distinct narrow identity turn
+over the descriptor-annotated identity action set. The task does not compete
+with that turn for attention, and the runtime does not fill missing public
+identity fields. Exact readiness joins the verified persona-authored name,
+characteristic profile, admitted raster portrait, and any already-authored
+external-artifact successor without interpreting their contents. A later
+receipt delivered while public identity is incomplete receives the same narrow
+identity action set, so the persona—not the host—decides whether to admit the
+delivered bytes. Missing components are explicit verified-negative readiness
+facts, never an omitted join: omission would widen the receipt into an ordinary
+mission turn precisely when identity work is still required. Within one
+persona's serialized mailbox, signed lifecycle and birth-identity carriers
+stably precede signed external-artifact receipts, which stably precede ordinary
+mission traffic; FIFO order is preserved inside each protocol class. This
+ordering reads only authenticated protocol discriminants, never task prose,
+artifact content, role, profession, capability names, or tool names.
 
 The genesis wire format has no name field. `Forming identity` is a mechanical
 placeholder, not a name authored by the proposer or newborn, and a birth
@@ -147,7 +185,12 @@ signature MUST NOT be projected as name authorship. Only a later
 newborn-signed display-name record changes the public name state to
 materialized.
 
-The newborn receives a signed identity-formation wake and may then author:
+The newborn receives a signed identity-formation wake. That wake contains the
+exact parent-authored genesis and a bounded, signed, content-neutral projection
+of the parent's verified practice observations and latest persona-authored
+experience reconciliation when those records exist. It is context, not an
+expertise assignment: the newborn decides what to inherit, revise, reject, or
+develop. The newborn may then author:
 
 - a meaningful public name;
 - a public description of how it contributes;
@@ -156,7 +199,23 @@ The newborn receives a signed identity-formation wake and may then author:
 
 The raster bytes and persona signature are authoritative. Until they materialize, a UI says `Forming identity` and shows a neutral person silhouette. It never invents a role, derives a face from an ID, or presents a task object as the person.
 
-The newborn independently decides whether to accept an environment invitation. Birth authorship is not membership consent.
+The newborn independently decides whether to accept the exact environment
+invitation materialized by the admitted birth action. Birth authorship is the
+parent's invitation authority, not the newborn's membership consent. This
+closes the causal gap in which an admitted identity could become visible but
+remain permanently unreachable because the parent received no later wake from
+which to author an invitation.
+
+The invitation ID is deterministic for the exact signed birth action. Replay
+must recover the same signed authority and may redeliver its same deduplicated
+wake; it must never mint another invitation or another newborn. A successful
+birth action is terminal only after the identity wake's durable recovery outbox
+and the exact invitation lineage authority are committed. Immediate queue
+admission is not the commit boundary: a busy actor queue is normal deferred
+delivery, not a failed birth. Identity-outbox replay transports the forming
+wake, and identity materialization redelivers every still-pending exact
+invitation. The invitation response and membership remain separate
+newborn-authored records.
 
 The signed identity-formation wake is a durable delivery outbox. If its first
 in-process enqueue loses a transient transport race, heartbeat replay retries
@@ -229,6 +288,18 @@ that the same authority boundary will inevitably refuse. This is mechanical
 capability projection, not host selection of a semantic action. After signed
 membership, the ordinary complete environment tool surface becomes available.
 
+Pre-membership and identity-delivery turns have no task-artifact publication
+authority. Their provider output contract MUST remove the optional artifact
+package lane, not merely mark it optional, and the node MUST independently
+refuse project materialization, persona-workspace publication, and package
+publication for that turn. Membership accepted during an invitation-response
+turn takes effect only for a later member wake; it cannot retroactively widen
+the response turn. Thus `ENV_WORKSPACE_PUBLISHED` and
+`PERSONA_PACKAGE_PUBLISHED` are impossible before consent even if an adapter
+returns extra bytes or a stale branch contains files. This boundary is derived
+only from verified lifecycle and membership state and does not inspect task,
+profession, tool, filename, or artifact semantics.
+
 ## 5. Coordination and continued improvement
 
 An active population is not a fixed pipeline. Every funded persona receives bounded exact observations of:
@@ -244,6 +315,16 @@ From those facts, each persona may communicate, challenge, review, explore, crea
 
 One persona's `ready` work-state transition is only that persona's signed state. A multi-persona task remains open while another required active participant has current commitments, unresolved uncertainty, or a non-ready current work state. Completion cannot be manufactured from a coordinator summary or an older review bound to different workspace bytes.
 
+A local communication may be durably authored before the source turn has
+finished publishing the workspace effects that motivated it. Its recipient
+wake remains admitted but inert until the source completion callback and
+post-turn evidence boundary have settled. The supervisor derives this causal
+predecessor solely from the exact verified communication author, recipient,
+environment, signing key, and active source lease. It never reads the payload,
+task, filenames, formats, professions, capabilities, or tool names. Broadcast
+recipients share the same source boundary; unrelated persona turns remain
+concurrent.
+
 ## 6. Model-call economy
 
 Population behavior must not multiply calls through host-side semantic loops.
@@ -254,6 +335,7 @@ Population behavior must not multiply calls through host-side semantic loops.
 - Signing, replay, readiness reduction, stale-state invalidation, and public projection are token-free.
 - Every turn exposes the exact active, closed, and previously introduced commitment IDs. A commitment ID is one-shot: closing it reserves it permanently, the next-turn response contract excludes every reserved ID, and pre-dispatch reduction refuses an attempted reuse before recording an action effect.
 - A wake without new causal information must not cause an automatic call merely to restate prior state.
+- A peer message cannot spend a recipient call while the source turn's related workspace publication is still in flight.
 - A call exists only for a funded persona decision or contribution.
 
 For a provider that carries several actions through one structured JSON
@@ -288,12 +370,13 @@ If the current cohort cannot responsibly cover the work, a persona may author th
 
 | Risk | Mitigation |
 |---|---|
-| Runaway creation | Charter-class `ReplicationBound`, rate/population/depth limits, exact task serialization, signed admission. |
+| Runaway creation | Charter-class `ReplicationBound`, rate/population/depth limits, one materialization per exact signed need, signed admission. |
 | Birth without searching | Proposal requires the exact need-bound search receipt. |
 | Search laundering | Exact returned card hashes and one disposition per card are bound into the proposal. |
 | Central discovery dependency | Direct/local/DHT primary; HTTP locator last resort and non-authoritative. |
 | Homogeneous or incoherent identities | Identity meaning is persona-authored and reviewable; the kernel does not impose a taxonomy. |
 | Wasteful model loops | One substantive turn and token-free mechanical reducers; no orientation/appraisal calls. |
+| Peer races unpublished work | Verified local communication delivery waits for its source turn's generic effect-settlement boundary. |
 | False collective completion | Current work-state and exact-workspace binding for every required active participant. |
 
 ## 10. Design criteria
