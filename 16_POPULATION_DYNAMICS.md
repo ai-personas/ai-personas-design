@@ -161,6 +161,15 @@ forces a birth nor accepts “another reviewer would help” as a causal action.
 
 An admitted newborn begins with a forming identity. The genesis seed supplies inherited starting material, but it does not assign a final public personhood.
 
+Identity assets are not inherited starting material. Birth never copies,
+re-personalizes, or re-signs a parent or peer portrait for the newborn. A
+structurally valid raster descriptor bearing the newborn key still does not
+materialize identity by itself: the latest newborn-signed avatar transition
+must match the descriptor exactly and retain the verified delivery authority
+for the exact bytes that newborn observed and admitted. An orphan descriptor
+or an admission record without exact owner/request/receipt lineage fails closed
+as absent; no compatibility fallback turns it into current identity.
+
 The initial seed persona follows the same authorship boundary. Before its first
 principal task, its signed activation receives a distinct narrow identity turn
 over the descriptor-annotated identity action set. The task does not compete
@@ -197,7 +206,18 @@ develop. The newborn may then author:
 - revisions to its open characteristics; and
 - a recognisably person-like public portrait selected in a style of its choice and grounded in its own stable characteristics, including OCEAN or baseline VAD where those characteristics exist.
 
-The raster bytes and persona signature are authoritative. Until they materialize, a UI says `Forming identity` and shows a neutral person silhouette. It never invents a role, derives a face from an ID, or presents a task object as the person.
+The identity-readiness projection carries that portrait requirement as a
+bounded structured contract rather than a substrate-authored image prompt.
+Consequently a newborn remains free to choose photographic, illustrated,
+cartoon, painterly, or another artistic treatment, but it is not led to treat a
+logo, tool, CAD object, abstract pattern, or occupational emblem alone as its
+person. No task word, profession, provider, model, or aesthetic is selected by
+the runtime.
+
+The exact raster bytes, persona signature, and source-bound admission transition
+are authoritative together. Until they materialize, a UI says `Forming
+identity` and shows a neutral person silhouette. It never invents a role,
+derives a face from an ID, or presents a task object as the person.
 
 The newborn independently decides whether to accept the exact environment
 invitation materialized by the admitted birth action. Birth authorship is the
@@ -250,12 +270,79 @@ Membership also MUST NOT let ordinary mission work crowd out an identity that
 remains mechanically incomplete after that carrier settles. If the persona has
 not registered an exact external-artifact successor, its next causally authored
 wake retains the narrow identity surface. A verified pending request is already
-a successor, so ordinary participation may continue while it is fulfilled; a
+a successor only while its exact dispatcher state remains causally live, so
+ordinary participation may continue during fulfillment. A terminal blocker
+can leave the request unresolved after its one blocker wake is delivered; that
+pending request no longer suppresses the next narrow readiness turn. A
 delivered artifact returns to the narrow surface until the persona decides
-whether to admit it. The readiness join uses only signed component, request,
-delivery, and admission state. It does not inspect or choose a role, profession,
-portrait prompt, style, provider, model, or image content, and it never mints an
-extra model call or wake by itself.
+whether to admit it. The readiness join uses only signed component, exact
+request/hash, dispatcher, delivery, and admission state. It does not inspect or
+choose a role, profession, portrait prompt, style, provider, model, or image
+content, and it never mints an extra model call or wake by itself.
+
+When a sealed provider helper fails, its transport MAY retain one bounded
+pattern-safe reason code emitted by the pinned helper protocol. It MUST discard
+arbitrary stderr, response bodies, exception text, and credentials. The code is
+mechanical blocker evidence only; it cannot select a provider, rewrite a
+request, or determine the persona's disposition.
+
+The narrow turn cannot be settled by an ordinary peer reply while those exact
+components remain missing. Each verified-negative component selects only its
+descriptor-annotated protocol effect: name materialization, characteristic
+materialization, registration of an external-artifact successor, or disposition
+of delivered raster bytes. A delivered candidate exposes admit and reject as
+equivalent disposition alternatives; the substrate cannot force acceptance.
+The actor authors every value and choice inside the selected transition. Effect
+annotations are generic wire discriminants and contain no profession, task,
+portrait prompt, aesthetic, provider, model, or tool-name routing rule.
+
+Attempting a transition is not equivalent to producing its effect. A retryable
+input or protocol rejection without a registered successor keeps the same
+descriptor required on the bounded correction call. Only a successful effect,
+a terminal refusal, or an authenticated future-stimulus receipt may release the
+turn; an ordinary message or self-description cannot do so.
+The reducer joins the transport wrapper to its exact nested dispatcher result,
+so a retryable validation flag cannot be lost merely because one carrier
+wrapped the live result before returning it to the semantic turn.
+
+Required event-driven transitions use funds-before-cognition admission. The
+runtime atomically reserves a bounded semantic-turn allowance and a distinct
+terminal-event allowance from the exact causal budget before calling a model.
+The model transport cannot spend the terminal allowance, and the terminal
+registrar cannot spend the decision allowance. Unused units are refunded to
+that same authority. If the combined reservation is unavailable, the exact
+carrier remains retryable and no reasoning call is consumed. Selection of this
+mechanism is based solely on the descriptor's generic event-outbox annotation,
+never on role, task language, portrait semantics, provider, or tool name.
+
+The semantic-turn reservation includes the initial choice, one bounded
+correction or tool-result exchange, and an effect-free terminal response. An
+exhaustion before any authenticated effect is recorded as retryable
+model-resource unavailability rather than actor failure or persona intent. An
+already-authenticated effect is final for that carrier and is not replayed to
+manufacture a more polished closing response.
+
+Every terminal successor is also a semantic turn and therefore receives the
+same three-stage allowance. This is a provider-neutral protocol bound, not a
+different allocation selected from the event's task, artifact, role, tool, or
+content.
+
+An admit-or-reject choice is meaningful only if the actor can observe the
+candidate. For a receipt-bound supported raster, the runtime revalidates the
+exact persona-workspace path, hash, length, MIME, owner, environment, and signed
+delivery binding and attaches those bytes through a body-supported visual-input
+transport. It does not describe, score, or accept the image. Once the persona
+rejects a candidate, that historical delivery no longer counts as awaiting
+disposition; a later successor, if any, must be separately persona-authored.
+Any later causal carrier that reopens disposition MUST recover exactly one
+currently awaiting verified raster and attach those same bytes. Both action
+alternatives receive hidden transport bindings to that candidate's exact
+request, request hash, receipt hash, destination, and content references,
+preventing a decision from landing on a stale sibling request. Admission must
+reconstruct the same owner-bound receipt authority and retain it inside the
+persona-signed identity transition; shared workspace visibility alone grants
+no identity-source authority. Admission versus rejection and all semantic
+rationale remain persona-authored.
 
 The brain-visible and provider-call action catalogs for that carrier MUST be the
 same descriptor-annotated identity-formation subset. Generic self/work-state,

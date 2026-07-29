@@ -106,10 +106,86 @@ Membership and public-identity readiness remain independent after consent. If
 an identity turn leaves verified components incomplete and has no exact pending
 external-artifact successor, the persona's next causally authored wake retains
 the narrow identity action surface. A pending request permits ordinary work
-while fulfillment proceeds; a delivered identity artifact returns to the
-narrow surface for persona-authored admission. This liveness rule observes only
-protocol state and never supplies portrait content, provider choice, semantic
-role, or an unsolicited wake.
+only while its dispatcher state proves a live successor. A terminal blocker
+may deliberately leave the authored request unresolved, but its already
+delivered blocker wake is not still a future event; the next causally authored
+wake therefore reopens the narrow surface. A delivered identity artifact
+returns there for persona-authored admission. This liveness rule observes only
+exact request/hash and dispatcher state and never supplies portrait content,
+provider choice, semantic role, or an unsolicited wake.
+
+A pinned external-action helper may publish at most one bounded, pattern-safe
+failure code from its sealed stderr protocol. Arbitrary stderr, response
+content, credentials, and exception text remain private. This makes retry and
+blocker state diagnosable without turning provider output into persona intent.
+
+An ordinary communication response cannot satisfy that narrow readiness turn.
+Verified missing components require only their descriptor-annotated transition;
+delivered raster bytes require one persona-authored admit-or-reject disposition.
+This guarantees causal progress without choosing identity content or forcing an
+unwanted portrait to be accepted.
+
+Every narrow portrait turn also receives the public-portrait contract as
+bounded structured facts: a recognisably person-like subject is required, an
+emblem or role icon alone does not satisfy it, artistic style remains the
+persona's choice, and the stable characteristic profile (including OCEAN or
+baseline VAD when present) grounds that choice. This is an identity protocol
+invariant, not a generated prompt or a semantic routing rule. The runtime does
+not inspect the candidate pixels or invent a face; it attaches the exact
+receipt bytes and the persona authors the visual disposition.
+
+A retryable validation rejection is not a completed readiness transition. The
+same bounded turn retains the exact required descriptor until it succeeds,
+returns a terminal refusal, or registers an authenticated future stimulus that
+owns the next attempt. Free text after a rejected call cannot settle the gate.
+Retryability is reduced across both the transport wrapper and its exact nested
+dispatcher result; wrapper shape cannot erase a live correction obligation.
+
+If a required descriptor mechanically registers an asynchronous terminal
+event, budget admission MUST atomically pre-fund both the current semantic turn
+and every required terminal successor before the first model call. The two
+allowances remain separate capabilities, and unused units return to the exact
+source budget after settlement. Insufficient combined authority pauses the
+carrier without making an LLM call. This admission rule is derived only from
+the signed action descriptor and run model pool; it cannot inspect task text,
+profession, provider, output format, or action name.
+
+The semantic-turn allowance covers the initial decision, one bounded
+correction or tool-result exchange, and an effect-free terminal response. If
+that allowance is exhausted before any authenticated effect, the outcome is a
+retryable model-resource unavailability state, not actor failure or inferred
+persona intent. Once an effect has occurred, it remains authoritative and the
+turn is never replayed merely to obtain nicer terminal prose.
+
+Each asynchronous terminal successor receives that same three-stage bounded
+allowance. Funding only a decision and one correction strands a valid
+provider-neutral action before its required terminal carrier and converts a
+prepaid callback into deterministic budget exhaustion. This allocation shape
+is uniform across terminal event kinds.
+
+When the transition is disposition of a verified delivered raster, the exact
+receipt-bound workspace bytes MUST be attached as visual model input when the
+selected body supports that transport. Path containment, byte length, digest,
+media type, owner, environment, and receipt lineage are reverified first. A
+historical rejected receipt is not an awaiting candidate and cannot keep the
+disposition gate open. The attachment supplies observation, never admission.
+If a later causal carrier reopens that gate, it MUST attach the same uniquely
+awaiting verified bytes. The request ID, request hash, and receipt hash for
+rejection and admission, together with the destination and content references
+for admission, are hidden transport bindings to that one candidate. Admission
+MUST NOT degrade from an owner-matching receipt to an arbitrary file merely
+because those bytes are visible in a shared environment workspace. The exact
+verified delivery authority is retained in the persona-signed identity
+transition. The persona still chooses the action and authors its rationale; the
+substrate performs no semantic disposition.
+
+A raster descriptor and persona signature are necessary but not sufficient
+identity authority. The current descriptor counts as admitted only when the
+latest avatar evolution transition is signed by that persona, matches every
+descriptor and byte-derived field, and retains the exact owner/request/receipt
+authority for those bytes. An orphan descriptor or a transition without that
+source lineage fails closed as absent. Birth and restore MUST NOT copy,
+re-personalize, or re-sign a parent's or peer's identity asset for a newborn.
 
 ### C-OP-9 — Multiple personas genuinely coordinate
 
