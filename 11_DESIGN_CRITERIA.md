@@ -186,7 +186,10 @@ slow or refused shared-workspace reconciliation MUST NOT hold the receipt-state
 lock, consume the terminal callback allowance, or delay owner-local cognition.
 Its retry path is serialized independently and may settle after the persona
 turn. Unrelated branch divergence therefore cannot strand a valid delivered
-artifact or turn an available callback into model-budget exhaustion.
+artifact or turn an available callback into model-budget exhaustion. Durable
+receipt replay may schedule that bounded retry, but MUST NOT execute the
+workspace reconciliation inline on the node heartbeat or make discovery,
+public projection, budget admission, and persona scheduling wait for it.
 
 A raster descriptor and persona signature are necessary but not sufficient
 identity authority. The current descriptor counts as admitted only when the
