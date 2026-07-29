@@ -246,6 +246,17 @@ unverifiable or stale identity carrier is rejected rather than widened to the
 member action catalog. This is causal ordering, not a substrate-authored choice
 of name, characteristics, role, avatar, tool, or contribution.
 
+Membership also MUST NOT let ordinary mission work crowd out an identity that
+remains mechanically incomplete after that carrier settles. If the persona has
+not registered an exact external-artifact successor, its next causally authored
+wake retains the narrow identity surface. A verified pending request is already
+a successor, so ordinary participation may continue while it is fulfilled; a
+delivered artifact returns to the narrow surface until the persona decides
+whether to admit it. The readiness join uses only signed component, request,
+delivery, and admission state. It does not inspect or choose a role, profession,
+portrait prompt, style, provider, model, or image content, and it never mints an
+extra model call or wake by itself.
+
 The brain-visible and provider-call action catalogs for that carrier MUST be the
 same descriptor-annotated identity-formation subset. Generic self/work-state,
 scheduling, membership, and collaboration mechanisms MUST NOT be able to settle

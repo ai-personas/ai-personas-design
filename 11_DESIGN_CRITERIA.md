@@ -102,6 +102,15 @@ cannot publish a persona branch or package to the shared environment. Consent
 may activate only a subsequent member turn; it never retroactively authorizes
 task artifacts emitted while the persona was still forming or deciding.
 
+Membership and public-identity readiness remain independent after consent. If
+an identity turn leaves verified components incomplete and has no exact pending
+external-artifact successor, the persona's next causally authored wake retains
+the narrow identity action surface. A pending request permits ordinary work
+while fulfillment proceeds; a delivered identity artifact returns to the
+narrow surface for persona-authored admission. This liveness rule observes only
+protocol state and never supplies portrait content, provider choice, semantic
+role, or an unsolicited wake.
+
 ### C-OP-9 — Multiple personas genuinely coordinate
 
 Each active participant receives current signed peer cards and bounded recent contributions. Messages have exact recipients and causal references. A participant can challenge, review, improve, request evidence, or remain quiescent. One persona's ready state cannot close another persona's commitments or be labelled collective review.
