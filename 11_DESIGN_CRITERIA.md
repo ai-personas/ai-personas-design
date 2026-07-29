@@ -231,6 +231,11 @@ its own current signed identity, mission, team, workspace, capability, and
 action facts and independently chooses whether to contribute, coordinate,
 evolve, seek a capability, propose a birth, or remain quiescent. The runtime
 does not select a profession, tool, role, output, or action for any member.
+Mechanically prepaid continuation windows retain their complete protocol
+minimum. A temporary shortage caused by an in-flight reservation waits for
+that reservation's bounded settlement and reuses its returned units within the
+same grant; it MUST NOT be reported as final exhaustion while refundable
+capacity is still causally live.
 
 Multiple effect-free deliveries that failed only because the same causal pool
 was exhausted MAY be presented to their exact recipient as one bounded current
