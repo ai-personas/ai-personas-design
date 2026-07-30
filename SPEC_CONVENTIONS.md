@@ -64,11 +64,11 @@ The audience field MUST list one or more values from the registered set below. N
 | domain curators | Holders of the `DomainCurator` role; gate domain promotion. |
 | artifact authors | Authors producing artifacts under verifier recipes. |
 | memory engineers | Engineers tuning memory tiers, retrieval, consolidation. |
-| prompt engineers | Authors tuning DSPy programs, MetaPrompts, GEPA pipelines. |
+| persona-runtime engineers | Authors preserving exact model carriers, action descriptors, and persona-authored records without semantic host selection. |
 | integrators | Engineers wiring v1.0 into Claude Code / OpenAI SDK / LangGraph / etc. |
 | security auditors | Auditors specifically reviewing key custody, signing, threat model. |
 | planners | Release and capacity planners. |
-| QA | Test engineers, acceptance-test authors. |
+| design reviewers | Reviewers tracing normative authority and information flow against live operating-path evidence. |
 | all | Use only on entry / navigation / glossary documents. |
 
 ## 2. Normative language (RFC 2119 / RFC 8174)
@@ -167,13 +167,13 @@ Pre-existing letter-suffix sections in the v1.0 corpus are conformant under one 
 
 | Section | Pattern | File |
 |---|---|---|
-| `## 8a-d.`, `## 9a-d.`, `## 9e.`, `## 9f.` | A (acceptance-test patch insertions; §9e/§9f added in v1.0.4 for Risks/OQ bookends) | `11_DESIGN_CRITERIA.md` |
+| `## 8a-d.`, `## 9a-d.`, `## 9e.`, `## 9f.` | Retired historical insertion labels; current criteria use direct operating-path evidence. | `11_DESIGN_CRITERIA.md` |
 | `## 13a.` | A (inserted section) | `01_KERNEL.md` |
 | `## 13a.` DomainHarvest, `## 21a.` Open questions | A (inserted sections) | `06_DOMAIN.md` |
-| `## 11a.` ApprovalWorkflow, `## 26a.`, `## 27a.` Open questions | A (v1.0 additions to project + OQ bookend) | `04_PROJECT.md` |
+| `## 11a.`, `## 26a.`, `## 27a.` | Retired historical insertion labels; current project records are open persona-authored material. | `04_PROJECT.md` |
 | `## 11a.` Alert, `## 11b.`, `## 12a-c.`, `## 19a.` Open questions | A (inserted sections) | `05_ENVIRONMENT.md` |
 | `## 16a.` MeasurementFact + UncertaintyEnvelope, `## 18a.` Open questions | A (inserted section) | `08_KNOWLEDGE.md` |
-| `## 13a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering the §13 acceptance/test sections) | `02_PERSONA.md` |
+| `## 13a.` | Retired historical insertion label. | `02_PERSONA.md` |
 | `## 9a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering §9 design criteria) | `03_TASKS.md` |
 | `## 2a.` Orchestration is emergent, `## 2b.` Orchestration-kind promotion | A (v1.1 ADR-0066 inserted sections, without renumbering §3+) | `03_TASKS.md` |
 | `## 16a.` Open questions | A (OQ bookend added in v1.0.4 without renumbering §16 design criteria) | `07_ARTIFACTS.md` |
@@ -331,7 +331,7 @@ Forbidden synonyms (always use the left form):
 | environment instance | env, workspace (in normative text) |
 | project workspace env | project (historical term; retained only in "logical filter" contexts; see [`04_PROJECT.md §0`](04_PROJECT.md)) |
 | lineage scope | log, audit chain |
-| acceptance pathway | verdict path, accept flow |
+| acceptance authority | exact principal/verifier authority |
 | safety floor | guardrails (informal only) |
 | kernel | runtime, host (informal only — but see §10.1 below for the **host kernel** federation-role exception) |
 
@@ -389,7 +389,9 @@ A v1.0 document is **conformant** to these conventions when:
 5. Schemas declare a `schema` field with `<name>/<integer>` value per §4 and appear either in the [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry) headline catalogue (broadly load-bearing schemas) or in the generated registry produced by the schema-extractor CI job (narrower schemas). The two together form the authoritative registry for INV-10 runtime version checks per [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry).
 6. Cross-references use one of the three forms in §6.1: prose inline references use the anchored form `[`file.md §N`](file.md#anchor)` with non-empty anchor fragments; tabular registry cells and cross-reference indexes MAY use the visible-only form (`[`file.md §N`](file.md)`); top-level "see also" entries MAY use the document-only form (`[`file.md`](file.md)`). Mixed forms (visible text names a section but the URL has neither anchor nor visible match) are non-conformant.
 7. Risks (§7 six-column table) and Open Questions (§8 with `OQ-<doc>-<n>` IDs) are present, or `N/A` is explicitly justified in `## 0. Status & scope`.
-8. Normative claims with corresponding design criteria carry inline test-ID cross-references per §9.
+8. Normative claims with corresponding design criteria cite current
+   operating-path evidence and static design walks; test IDs are not a second
+   specification.
 9. Terminology matches §10; forbidden synonyms are not used in normative text.
 10. First mention of each glossary term in the document links to [`12_GLOSSARY.md`](12_GLOSSARY.md) per §10.
 

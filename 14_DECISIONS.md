@@ -1,2141 +1,253 @@
 ---
-title: PersonaOS v1.0 — Architectural Decision Records
-status: Living
----
-
-# 14 — Architectural Decision Records
-
-> **Reader guide.** This document records *why* the design is the way it is — the trade-offs considered, the alternatives rejected, and the forces that shaped each decision. Each entry follows a standard format: Context → Decision → Consequences → Alternatives. **No prerequisites** — each decision record is self-contained. Start with ADR-0001 (why the kernel owns identity) and ADR-0006 (what is hardcoded vs. what emerges) for the foundational decisions.
-
-## 0. About this catalog
-
-This document is the v1.0 **Architectural Decision Record** (ADR) catalog. It records the load-bearing design decisions that produced the v1.0 substrate, in standard ADR form (Michael Nygard's template, as adopted by [Arc42 §9](https://docs.arc42.org/section-9/) and [IEEE 1016](https://standards.ieee.org/ieee/1016/4502/)). Each ADR names a single decision, the forces that shaped it, the option taken, the consequences (positive and negative), and the alternatives that were considered and rejected.
-
-This catalog is **informative**, not normative. The decisions it records are realised as normative invariants, commitments, schemas, and mechanisms in `00_VISION.md` … `13_DESIGN_VALIDATION.md`. When this catalog and a normative document disagree, the normative document is authoritative and the ADR is a documentation defect to be corrected.
-
-**Genre.** This document follows the same shape as [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md): an append-only Living catalog whose entries accrete without supersession of the document itself. Per [`SPEC_CONVENTIONS.md §3`](SPEC_CONVENTIONS.md#3-section-structure), Living catalogs are exempt from the §3.1 bookend requirements; their conformance is judged against the inherent shape of their genre.
-
-**ADR template.** Each entry uses the following structure:
-
-```
-### ADR-NNNN — <Decision title>
-
-**Status:** Accepted | Superseded by ADR-MMMM | Proposed | Deprecated.
-**Date:** <ISO 8601>.
-**Origin:** <version of first realisation, e.g. v1.0>.
-**Related:** <invariants, commitments, sections, prior ADRs>.
-
-**Context.** What forces, constraints, and prior state shaped the choice.
-**Decision.** The position taken (one paragraph; the load-bearing claim).
-**Consequences.** Positive (+) and negative (−) outcomes.
-**Alternatives considered.** What else was on the table; why each was rejected.
-```
-
-**ID allocation.** ADR IDs are zero-padded four-digit integers (`ADR-0001` … `ADR-9999`). IDs are allocated monotonically; a superseded ADR retains its ID. New ADRs append to the relevant topic section; superseding ADRs append at the end of their section and cite the superseded ID in **Status**.
-
-**Status taxonomy.**
-
-| Status | Meaning |
-|---|---|
-| Accepted | The decision is in effect; the substrate realises it. |
-| Superseded by ADR-MMMM | A later ADR replaces this one; consult the successor. |
-| Proposed | Under review; not yet realised in the substrate. |
-| Deprecated | The decision is being phased out without a direct successor. |
-
-**Scope.** This catalog covers 22 foundational decisions made across the design history through v1.0, plus 3 v1.0.7 ADRs (multi-principal attribution, derivation-provenance edges, visibility-tier vocabulary unification) sourced from SCENARIO 06, plus 3 v1.0.8 ADRs (lead handoff + obligation reassignment, lifecycle event enumeration + RetiredStatePersistencePolicy + PersonaConsultation, PlannedDeparture) sourced from SCENARIO 07, plus 3 v1.0.9 ADRs (user-side MPA primitives, distress detection routing as substrate-shape, relationship review checkpoints + operator-blind mode + companion-pathway routing) sourced from SCENARIO 08, plus 2 v1.0.10 ADRs (learner state + competency attestation + curriculum primitives Group A; hazardous-skill teaching gate Group B) sourced from SCENARIO 09, with the 5 former residuals now discharged as ADR-0039..0043 (Groups C–G — emergent composition + the minor-learner floor hook), plus 1 v1.0.11 ADR (MidProjectForkComposition unified envelope for fork-vs-project-side composition) sourced from SCENARIO 10, plus 1 v1.0.13 ADR (self-organizing coordination — personas propose coordination shapes, not just kinds) sourced from the cumulative gap pattern across SCENARIOs 06-12. Future decisions made under v1.1+ append with monotonically-allocated IDs.
-
----
-
-## 0a. Plain-language guide
-
-This is the project's institutional memory — every major design decision, the reasoning behind it, and the alternatives that were considered, recorded so anyone can understand not just what the system does, but why it was built this way.
-
-**What an ADR is.** ADR stands for "Architecture Decision Record." Each entry captures one significant decision using a standard four-part structure. "Context" explains the problem or tension that forced a choice. "Decision" states what was chosen and why. "Consequences" lists both the benefits and the costs of that choice — the team is honest about trade-offs. "Alternatives considered" lists what else was on the table and why each alternative was rejected. This last part is especially valuable: it saves future readers from re-proposing ideas that were already evaluated and found wanting.
-
-**Why alternatives matter.** Listing rejected options tells you the boundaries of the design space that was explored. If you are wondering "why not just do X instead?", the alternatives section likely already answers that question.
-
-**How the catalog is organised.** Decisions are grouped by topic area: identity and signing, substrate philosophy, the persona model, task handling, domain emergence, memory and knowledge, protocols, multi-principal collaboration, persona retirement, user protections, teaching, and project composition. Each ADR has a four-digit ID (ADR-0001 through ADR-0051 as of this version) allocated in order. When a later decision replaces an earlier one, the old entry stays with a note pointing to its successor — nothing is deleted.
-
-**How to use this document.** If you want to understand a specific design choice, find the relevant ADR by topic section or ID. If you want the foundational decisions that shaped everything else, start with ADR-0001 (why the kernel owns identity) and ADR-0006 (what is hardcoded versus what emerges through use). This document is informative, not normative — the actual rules live in the specification documents it references.
-
-## 1. Identity, signing, lineage
-
-### ADR-0001 — Body / Soul separation: kernel owns identity
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0.
-**Related:** [`J1`](00_VISION.md#3-invariants-j1j9), [`J7`](00_VISION.md#3-invariants-j1j9), [`INV-1`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10), [`02_PERSONA.md §3`](02_PERSONA.md#3-soulmd--canonical-identity-file), [`01_KERNEL.md §1`](01_KERNEL.md#1-what-the-kernel-is).
-
-**Context.** A persona's identity (charter, voice, OCEAN/VAD disposition, primary cognitive disposition) must survive across LLM provider changes, framework migrations, body swaps, and the lifetime of the persona — often years longer than any single LLM weight checkpoint. Letting the body (the runtime executing the persona) own identity ties persona persistence to a single provider and conflates two separable concerns: *what the persona is* and *what executes the persona right now*.
-
-**Decision.** The kernel is the sole writer of identity. `SOUL.md` (frozen identity blocks) and `soul.state.json` (kernel-mediated evolving blocks) are kernel-signed; no body process may write either. Bodies (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, MAF, Pydantic-AI, DSPy, smolagents, Semantic Kernel) call the kernel for any identity-touching mutation; the kernel validates and signs.
-
-**Consequences.**
-- (+) Body interchangeability ([`J7`](00_VISION.md#3-invariants-j1j9)). The same Soul produces equivalence-class outputs across all supported bodies.
-- (+) Audit trail is owned by one writer; cross-body lineage stays coherent.
-- (+) Persona evolution (skills, K-lines, tactics, GEPA-tuned meta-prompts) lives in kernel-held artefacts that outlive any specific LLM weight checkpoint.
-- (−) Every body must implement the kernel call protocol; framework adapters carry non-trivial integration cost.
-- (−) The kernel becomes a hot-path dependency for any persona-mutating action — performance budget per call must stay tight.
-
-**Alternatives considered.**
-- *Body-owned identity (one runtime per persona).* Rejected: ties persona persistence to a single provider; loses lineage on body swap.
-- *Distributed identity (CRDT over Soul fields).* Rejected: re-introduces forking semantics and conflict resolution into a domain where the goal is *single signed truth*. CRDT is reserved for artefact co-editing (ADR-0024 in v1.1 backlog), where forks are part of the work.
-
----
-
-### ADR-0002 — Three lineage scopes: task, environment, domain
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0 (consolidated from prior versions).
-**Related:** [`J2`](00_VISION.md#3-invariants-j1j9), [`J9`](00_VISION.md#3-invariants-j1j9), [`C1`](00_VISION.md#3-invariants-j1j9), [`INV-2`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10), [`01_KERNEL.md §3`](01_KERNEL.md#3-lineage--three-scopes).
-
-**Context.** A persona's actions span multiple time-scales and ownership boundaries: a task is short-lived and topical, an environment is long-lived and social, a domain is cross-environment and cumulative. Earlier versions started with a single per-task `LineageGraph`, then added a `ProjectLineage`, then an `EnvironmentLineage`, then a `DomainLineage`. Four parallel append-only logs produced cross-reference sprawl and unclear ownership for events that touched two scopes.
-
-**Decision.** Three lineage scopes total: the per-task `LineageGraph` (J2), the per-environment `EnvironmentLineage` (J9), and the per-domain `DomainLineage` (C1). `ProjectLineage` is retired as a physical scope and reframed as a documentation filter over `EnvironmentLineage` events on `project_workspace`-typed envs (see ADR-0003 J8 retirement). Each event is signed in exactly one scope and may carry cross-scope pointers but never duplicates.
-
-**Consequences.**
-- (+) Clear ownership: each event has exactly one scope responsible for its append-only persistence.
-- (+) Replay is per-scope and composable; cross-scope reconstruction follows pointers.
-- (+) Cross-references in prior prose remain valid without data migration (ProjectLineage records re-classify as EnvironmentLineage filters).
-- (−) Implementers must decide scope at event creation; ambiguous events (e.g., a milestone reached during a task) require an explicit rule (recorded in [`04_PROJECT.md §15`](04_PROJECT.md#15-projectlineage-event-types)).
-- (−) Auditors querying "everything about this persona" must federate across all three scopes.
-
-**Alternatives considered.**
-- *Single global lineage.* Rejected: loses scope separation; auditing a single env means filtering a global stream.
-- *Four scopes (keeping ProjectLineage).* Rejected: ProjectLineage and EnvironmentLineage events were 80% identical on project_workspace envs; collapsing eliminated the redundancy without losing the project semantic (preserved as a filter tag).
-- *Per-persona lineage.* Rejected: a persona acts across environments and domains; per-persona logs would tangle scopes and hide environment-wide events from non-actor personas.
-
----
-
-### ADR-0003 — Project is an environment-type (J8 retirement)
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0 (refactor of project layer).
-**Related:** [`J8`](00_VISION.md#3-invariants-j1j9) (retired), [`J9`](00_VISION.md#3-invariants-j1j9), [`04_PROJECT.md §0`](04_PROJECT.md#0-status--scope), [`05_ENVIRONMENT.md §1.1`](05_ENVIRONMENT.md#11-project-is-an-environment-type), ADR-0002.
-
-**Context.** Earlier versions introduced `Project` as a top-level entity peer to `EnvironmentInstance` and added `J8` (project lineage append-only), then made environments persistent with their own lineage (J9). Over time the two entities had 70% overlap in fields (membership, lineage, lifecycle, items) and required parallel mechanisms for the same concerns.
-
-**Decision.** v1.0 collapses `Project` into a typed `EnvironmentInstance` whose `type = project_workspace`. The rich item catalogue (`OpenProblem`, `Milestone`, `Conjecture`, `Obligation`, `Disagreement`, `PeerReview`, `ExternalAgent`, `PhysicalAsset`) attaches to the env. J8 retires; its semantic is absorbed into J9. The "project_workspace" type carries the project-specific item kinds via the KindRegistry pattern (ADR-0005).
-
-**Consequences.**
-- (+) One entity, one lifecycle FSM, one membership model, one lineage shape.
-- (+) `Project` and `Environment` interfaces collapse; framework adapters implement one binding, not two.
-- (+) The "project as long-lived workspace" mental model is preserved by the env-type label.
-- (−) Documentation transition cost: prior cross-references to "Project" had to be reframed as "project_workspace env" or "owning env" across the corpus (completed in v1.0.8).
-- (−) Implementers reading prior prose must mentally translate `ProjectLineage` → `EnvironmentLineage(project_workspace)`. Glossary entries pin both forms.
-
-**Alternatives considered.**
-- *Keep Project as a peer entity.* Rejected: 70% field overlap; doubled lifecycle and membership logic.
-- *Make EnvironmentInstance a subtype of Project.* Rejected: most environments (solo, pair, debate, companion) are not projects; the inheritance arrow points the wrong way.
-
----
-
-### ADR-0004 — Three-tier key custody with master + scope keys
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0 (custody) + v1.0 (scope-key hierarchy).
-**Related:** [`01_KERNEL.md §4`](01_KERNEL.md#4-signing-infrastructure--3-custody-tiers--key-hierarchy), [`09_PROTOCOLS.md §8`](09_PROTOCOLS.md#8-key-custody-hierarchy).
-
-**Context.** A v1.0 deployment signs across personas, projects, environments, domains, and federations. Putting every signature under one master key creates a catastrophic-blast-radius single point of failure. Putting every signature under per-entity keys with no anchor leaves no recoverable trust root after a single key compromise.
-
-**Decision.** Three custody tiers (laptop / KMS / HSM) per [`01_KERNEL.md §4`](01_KERNEL.md#4-signing-infrastructure--3-custody-tiers--key-hierarchy), with a master key per tier and scoped sub-keys for persona, domain, project, env, and federation roles. Master rotates on a tier-specific schedule (laptop monthly, KMS quarterly, HSM annually). Scope keys are issued under the active master, rotate independently, and may be revoked individually without rotating the master.
-
-**Consequences.**
-- (+) Blast radius is bounded to one scope per compromised key.
-- (+) Rotation cadence matches operational risk per tier.
-- (+) Federation can recognise peer kernels by master-key public anchor without exposing every scope key.
-- (−) Key-management surface is larger; operators must track rotation schedules per scope.
-- (−) Cross-scope queries (verify a federated artefact signed under a peer kernel's domain key) require fetching the peer's key chain at verification time.
-
-**Alternatives considered.**
-- *Single master key.* Rejected: blast radius too large; one key compromise rotates every signed artefact in the deployment.
-- *Per-event ephemeral keys.* Rejected: defeats long-term verifiability; archived events would require key recovery to re-verify.
-- *Two tiers (laptop + HSM).* Rejected: leaves a gap for cloud-deployments where HSM is unavailable but laptop-grade custody is insufficient — KMS occupies that middle.
-
----
-
-## 2. Substrate philosophy
-
-### ADR-0005 — Open media-kind set via KindRegistry (commitment C4)
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0 (initial) → v1.0 (substrate-wide application).
-**Related:** [`C4`](00_VISION.md#3-invariants-j1j9), [`07_ARTIFACTS.md §1`](07_ARTIFACTS.md#1-what-an-artifact-is), [`06_DOMAIN.md §7.5`](06_DOMAIN.md#75-emergent-kind-proposals-v10--substrate-domain-agnostic), ADR-0006.
-
-**Context.** A closed `Literal[...]` enum of artefact media kinds, source kinds, verifier kinds, capability kinds, contribution kinds, or fact kinds — anywhere in the substrate — pre-decides which domains the substrate can model. PersonaOS targets "cognitive work of any kind"; encoding "scientific paper, code module, sketch" as a closed enum forecloses neuro-modeling artefacts, formal-proof bundles, music score sketches, and an unknown long tail of emergent kinds.
-
-**Decision.** The substrate carries no domain-shaped closed enums. Every domain-shaped category — media kind, source kind, verifier kind, capability kind, contribution kind, fact kind, bundle kind — is an emergent unit proposed by personas, signed into a per-domain `KindRegistry`, and promoted through the same 4-stage gates as `DomainContext`. Substrate code looks kinds up by name; it never branches on a fixed set. A `MetaRegistry` seeds 7 common kinds at substrate boot; all other kinds emerge through use.
-
-**Consequences.**
-- (+) New domains do not require substrate edits — emergence handles the long tail.
-- (+) The C4 commitment ("substrate is domain-agnostic") is enforceable: a closed enum anywhere in substrate code is a conformance defect detectable by automated check.
-- (+) Cross-domain transfer of kinds is enabled by promotion to STANDARDISED in the MetaRegistry.
-- (−) Performance: kind lookup is dictionary-based, not jump-table; substrate must amortise the lookup.
-- (−) Static analysis is weaker — type-checkers cannot enumerate all admissible kinds at compile time.
-- (−) New-kind proposals are an attack surface (a malicious persona could spam the registry); promotion gates and signed proposals bound the risk.
-
-**Alternatives considered.**
-- *Closed enum with a "custom" escape hatch.* Rejected: the escape hatch becomes a second-class code path; the closed list crystallises early-domain assumptions.
-- *Per-domain registries with no cross-domain promotion.* Rejected: loses cross-domain transfer of useful kinds (e.g., `formal_proof` shared across maths and verification).
-- *Type-system-driven open set (e.g., Python `Protocol`).* Rejected: requires substrate-level branching on whether a kind satisfies the protocol; doesn't compose with signed lineage.
-
----
-
-### ADR-0006 — Hardcode the substrate; emerge everything else
-
-**Status:** Accepted. **Partially superseded by ADR-0045 for coordination scope.**
-**Date:** 2026-05-22 (original); 2026-05-26 (supersession note).
-**Origin:** Pre-v1.0 (kernel invariants, extended to domain).
-**Related:** [`00_VISION.md §9`](00_VISION.md#9-core-design-rules) (rules 1-2), [`C4`](00_VISION.md#3-invariants-j1j9), ADR-0005, **ADR-0045** (self-organizing coordination).
-
-**Context.** A system that hardcodes too little has no load-bearing guarantees; a system that hardcodes too much can only model what its designers anticipated. Prior versions explored both extremes (early versions hardcoded everything; later versions progressively softened domain claims). v1.0 needs an explicit split.
-
-**Decision.** The substrate hardcodes exactly the load-bearing claims: kernel invariants (J1-J9 + INV-1…10), routing modes, the eight acceptance pathways, lifecycle FSM shapes, the three lineage scopes, signing infrastructure, the ten task classes. Everything else — domain shapes, media kinds, tools, verifier recipes, contribution kinds, fact kinds — emerges via the KindRegistry promotion lifecycle. The split is the conformance line: substrate code carries no domain-shaped Literal[]; emergence code carries no signing or lineage shape changes.
-
-**v1.1 supersession note (ADR-0045).** The v1.0.x "hardcode" scope included coordination primitives (acceptance pathways, lifecycle FSMs, coordination ceremonies). ADR-0045 (accepted 2026-05-25) moves coordination from hardcoded to emergent: personas propose coordination shapes within their environments using five meta-mechanisms (EntityGroup, BatchOperation, StagedSequence, StreamPolicy, DerivedMetric). What remains hardcoded: kernel invariants (J1-J9, INV-1..10), safety floor (8 sources), signing infrastructure, lineage model, the five meta-mechanisms themselves. What becomes emergent: coordination shapes, acceptance pathway compositions, lifecycle FSM details. See [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md).
-
-**v1.1 supersession note (ADR-0066).** ADR-0066 (accepted 2026-06-02) extends the split one layer further: the **ten task classes and eight acceptance pathways themselves** move from hardcoded to emergent KindRegistry kinds (the v1.0 set retained as STANDARDISED seed kinds), and the run loop becomes an emergent orchestration coordination shape. Substrate code resolves classes/pathways from the registry rather than a fixed `Literal[...]`. The hardcoded core narrows to: kernel invariants (J1–J3, J5–J7, J9 + INV-1..10), the safety floor (8 sources), signing, the lineage model, budget admission (INV-7), and the (now extensible) coordination meta-mechanisms; J4 is reframed from a fixed class→pathway mapping into a property invariant (acceptance is signed, floor-cleared, and trust-calibrated to the orchestration that produced it). See ADR-0066 and [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes).
-
-**Consequences.**
-- (+) The minimal substrate is small enough to audit, formalise, and prove correct against the invariants.
-- (+) Emergence absorbs the long tail without re-baking the substrate.
-- (+) Composability: new domains attach by adding registry entries, not by modifying the kernel.
-- (−) The split must be enforced by review and tooling; a closed enum slipping into substrate is a C4 violation (detected automatically by [`A-C4`](11_DESIGN_CRITERIA.md)).
-- (−) Implementers learning v1.0 must internalise "what is hardcoded vs what emerges" early; getting the line wrong yields either rigidity (hardcoded too much) or unsignable claims (emerged what should be hardcoded).
-
-**Alternatives considered.**
-- *Hardcode nothing (pure emergent).* Rejected: no load-bearing invariants → no auditability.
-- *Hardcode everything (pure designed).* Rejected: limits substrate to anticipated domains; conflicts with J5 (open capability).
-
----
-
-### ADR-0007 — Schema field of form `<name>/<integer>`
-
-**Status:** Accepted (supersedes earlier `schema_version: int` convention from prior versions).
-**Date:** 2026-05-22.
-**Origin:** v1.0.5.
-**Related:** [`INV-10`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10), [`SPEC_CONVENTIONS.md §4`](SPEC_CONVENTIONS.md#4-schemas), [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry).
-
-**Context.** Prior-version schemas declared `schema_version: int = 1`, with the schema name implicit from the surrounding class name. Wire-format consumers reading a serialised event had to know the producing class to resolve the schema; the same integer carried different semantics across different classes. A self-describing wire format requires the schema name to travel with the integer.
-
-**Decision.** Every schema declares a single `schema` field whose value is a string of the form `<name>/<integer>` (e.g., `schema: str = "soul-state/5"`, `"schema": "domain-context/2"`). The field name is `schema` (not `schema_version`); the value carries both registry name and integer version. The kernel MUST refuse any message whose `schema` value is not present in the registry ([`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry)).
-
-**Consequences.**
-- (+) Wire format is self-describing; events can be routed by schema name without class introspection.
-- (+) The registry table has one canonical key per schema (`<name>/<integer>`); look-up is O(1).
-- (+) Version bumps stay localised: `domain-context/2` and `domain-context/3` coexist in the registry during migration.
-- (−) Migration cost: every prior-version schema declaration needed updating. (Completed; see [`README.md` §v1.0.5 changelog](README.md).)
-- (−) Two declaration forms (Python `Form A` default-valued vs `Form B` Literal annotation) coexist; authors must pick one consistently per schema ([`SPEC_CONVENTIONS.md §4.2`](SPEC_CONVENTIONS.md#42-python-dataclass-schema-field-forms)).
-
-**Alternatives considered.**
-- *Keep `schema_version: int` with class name implicit.* Rejected: wire format is not self-describing.
-- *Tuple field `(name: str, version: int)`.* Rejected: JSON Schema and TypeScript express tuples awkwardly; string form is universally cheap.
-- *URI-style `schema: "https://personaos.org/schemas/domain-context/v2"`.* Rejected: ties wire format to a specific URL host; the registry already provides the dereference layer.
-
----
-
-### ADR-0008 — Provider-neutral kernel; bodies are replaceable
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0 (Body/Soul) → v1.0 (codified).
-**Related:** [`J7`](00_VISION.md#3-invariants-j1j9), [`02_PERSONA.md §3.5`](02_PERSONA.md#35-body-model--native-vs-proxy-binding-body-binding1), [`09_PROTOCOLS.md §6`](09_PROTOCOLS.md#6-the-twelve-framework-adapters), Goal 2.1.8.
-
-**Context.** Production deployments span LLM providers (Anthropic, OpenAI, open-weight) and frameworks (Claude Code, OpenAI Agents SDK, LangGraph, CrewAI, MAF, Pydantic-AI, DSPy, smolagents, Semantic Kernel). A specification that depends on any one provider's proprietary feature (e.g., specific cache-control headers, named tools, structured-output formats) cannot survive a provider migration without rewriting the substrate.
-
-**Decision.** No normative claim in v1.0 may depend on a specific LLM provider, model family, or proprietary feature. Bodies bind either *natively* (in-process LLM call) or as *proxies* (A2A remote, MCP-server-with-LLM, opaque third-party). Native bindings cover 9+ adapters; proxy bindings cap trust at `body_attestation` level. The kernel signs at the binding boundary; provider-specific optimisations (e.g., Anthropic cache_control) sit in adapter shims.
-
-**Consequences.**
-- (+) Body swap (Claude → GPT → open-weight) preserves persona identity, lineage, evolution.
-- (+) New providers integrate by writing an adapter, not by editing the kernel.
-- (+) Federation across kernels running different providers becomes mechanically possible (A2A).
-- (−) Provider-specific optimisations live in shims, not the substrate; some performance left on the table.
-- (−) Adapter conformance must be tested per binding (12 adapter conformance suites; see [`11_DESIGN_CRITERIA.md` §J7](11_DESIGN_CRITERIA.md)).
-
-**Alternatives considered.**
-- *Anchor on one provider (e.g., Anthropic-only).* Rejected: vendor lock-in is the load-bearing risk this design rules out.
-- *Lowest-common-denominator API surface.* Rejected: would lose provider-specific gains (e.g., cache_control savings) entirely; the adapter-shim pattern lets each adapter expose its own gains without re-baking the substrate.
-
----
-
-## 3. Persona model
-
-### ADR-0009 — Seven persona layers, 14 cognitive modes
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0.
-**Related:** [`02_PERSONA.md §3`](02_PERSONA.md#3-soulmd--canonical-identity-file), [`02_PERSONA.md §4`](02_PERSONA.md#4-the-14-cognitive-modes).
-
-**Context.** A "persona" can be modelled as a single LLM prompt, a multi-prompt program, a finite-state machine, or a layered cognitive architecture. Earlier versions used a single charter + role tuple; subsequent iterations explored whether human-shaped behaviour (consistency under stress, voice, mood, relationships) needed a richer model. Stanford's Generative Agents (Park et al. 2023), Anthropic's Persona Vectors work, and SOTOPIA's goals/secrets/relationships benchmark all pointed to a multi-layer model.
-
-**Decision.** A persona has seven layers — *identity, capability, experience, relationships, mood, goals, voice* — and 14 cognitive modes (FOCUS, FLOW, REFLECT, EXPLORE, COLLABORATE, NEGOTIATE, MENTOR, LISTEN, WITNESS, REST, HEART, GRIEVE, CELEBRATE, RECONCILE; see [`02_PERSONA.md §4`](02_PERSONA.md#4-the-14-cognitive-modes)). Identity is kernel-signed and frozen post-seed; capability/experience/relationships/mood/goals/voice evolve through kernel-mediated mutation. Mode is selected per-task with HEART alternation governing relational vs convergent work.
-
-**Consequences.**
-- (+) Behaviour stays coherent under stress (mood and fatigue degrade explicitly, not as drift).
-- (+) The model maps to existing benchmarks (SOTOPIA for relationships, OCEAN/VAD for disposition).
-- (+) Authors can express "what this persona is" in `SOUL.md` with the seven layers as scaffolding.
-- (−) Seven layers and 14 modes are a non-trivial model surface for authors to learn.
-- (−) Mode-aware verifier panels (anti-Goodhart) must understand which mode produced an artefact.
-
-**Alternatives considered.**
-- *Single charter only.* Rejected (early version): produced personas that drifted under stress and lost voice across long tasks.
-- *Free-form mode (LLM-decided).* Rejected: makes verifier-mode alignment unpredictable.
-- *Five-factor (OCEAN) only.* Rejected: OCEAN is necessary but insufficient — does not capture skill, relationships, or mood. OCEAN is one component of the *identity* layer.
-
----
-
-### ADR-0010 — SOUL.md (markdown frontmatter) + soul.state.json (JSON sidecar)
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0.
-**Related:** [`02_PERSONA.md §3`](02_PERSONA.md#3-soulmd--canonical-identity-file), [`02_PERSONA.md §3.1`](02_PERSONA.md#31-the-sidecar--soulstatejson-schema-soul-state5), ADR-0001.
-
-**Context.** A persona's identity must be human-authorable (a designer writes the SOUL), human-reviewable (a reviewer reads the SOUL to understand the persona), machine-readable (the kernel parses fields and signs them), and version-controlled (Git diff over identity changes). Pure JSON is machine-friendly but author-hostile; pure markdown is author-friendly but loses machine schema validation.
-
-**Decision.** Persona identity lives in two files: `SOUL.md` (human-authored markdown with structured YAML frontmatter for the seven layer fields), and `soul.state.json` (kernel-mediated JSON sidecar carrying evolving state — skills, K-lines, tactics, mood, goals, GEPA-tuned meta-prompts). `SOUL.md` is frozen post-seed and kernel-signed; `soul.state.json` mutates only via signed kernel transactions.
-
-**Consequences.**
-- (+) Authors write SOUL in markdown with prose explanation, charter narrative, voice samples.
-- (+) The kernel parses the frontmatter and signs the canonical bytes; review diffs are readable.
-- (+) Evolving state stays in machine-native JSON; high-frequency mutation does not touch the SOUL file.
-- (−) Two files per persona; authors must understand the split. Mitigation: SOUL.md leads, state.json is opaque to authors.
-- (−) Frontmatter parsers must be deterministic across implementations (YAML 1.2 strict; line-ending canonicalisation).
-
-**Alternatives considered.**
-- *Single JSON file.* Rejected: author-hostile; prose blocks (charter narrative, voice samples) read poorly in JSON.
-- *Single markdown file with state appended.* Rejected: high-frequency state mutation would cause merge conflicts and bloat the SOUL.
-- *Database row.* Rejected: loses Git diff over identity; reviewers cannot see what changed without a tool.
-
----
-
-## 4. Task and acceptance
-
-### ADR-0011 — Ten task classes routed via eight acceptance pathways
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0 (evolved from 3 to 8 pathways) → v1.0 (10 classes).
-**Related:** [`J4`](00_VISION.md#3-invariants-j1j9), [`03_TASKS.md §2`](03_TASKS.md#2-the-ten-task-classes), [`03_TASKS.md §3`](03_TASKS.md#3-the-eight-acceptance-pathways).
-
-**Context.** Different kinds of work require different acceptance criteria: a math proof needs a verifier; a creative essay needs a panel; an interactive conversation needs goal-progress; a long-running research project needs progress-relative-to-milestones. A single "did the LLM finish" verdict collapses these into a single bit and produces wrong rejections (a creative essay can be perfectly fine and "fail" a code verifier) or wrong acceptances (a buggy proof passes prose review).
-
-**Decision.** Ten task classes (CONVERGENT, DIVERGENT, MIXED, INTERACTIVE, RELATIONAL, PEDAGOGIC, PERFORMATIVE, EXISTENTIAL, DELEGATED, INVESTIGATIVE) route to eight acceptance pathways (VERIFIER_ACCEPT, PANEL_ACCEPT, GOAL_PROGRESS_ACCEPT, USER_ACCEPT, ENGAGEMENT_ACCEPT, OPEN_ENDED, PROJECT_PROGRESS_ACCEPT, MUTUAL_ACCEPT). A task-classifier component picks the class; a demotion rule lowers trust if the classifier's confidence is below threshold. The mapping is fixed in J4.
-
-> **v1.1 supersession note (ADR-0066).** The classes and pathways are no longer a *closed* mapping fixed in J4. They are now **emergent KindRegistry kinds**, with this v1.0 set shipping as **STANDARDISED seed kinds** (the default mapping, retained verbatim and fully backward-compatible). Personas MAY propose new classes and pathways; J4 is reframed from "the mapping is fixed" to the property invariant that acceptance is signed, floor-cleared, and trust-calibrated to the orchestration that produced it. See ADR-0066 and [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes).
-
-**Consequences.**
-- (+) Each task is judged against criteria appropriate to its kind.
-- (+) Adding new pathway shapes (e.g., a new domain's bespoke verifier recipe) attaches to an existing pathway, not a new class.
-- (+) Class is mode-aware: a CONVERGENT task in FLOW mode runs through VERIFIER_ACCEPT, in WITNESS mode runs through OPEN_ENDED; the routing handles both.
-- (−) Implementers must implement all eight pathways for full conformance; partial implementations declare L1/L2/L3 level per [`00_VISION.md §10a`](00_VISION.md#10a-implementation-conformance).
-- (−) Classifier accuracy is the load-bearing failure mode; demotion is the mitigation but not a full safety net.
-
-**Alternatives considered.**
-- *One pathway (verifier).* Rejected: produces wrong rejections on divergent work.
-- *Free-form pathway (persona picks).* Rejected: persona-picked acceptance is Goodhart-prone.
-- *Per-task custom pathway.* Rejected: explodes verification surface; classes-and-pathways gives 80 cells but 18 codepaths.
-
----
-
-### ADR-0012 — Three routing modes (A direct, B verifier, C panel)
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0 (initial) → v1.0 (consolidated).
-**Related:** [`03_TASKS.md §4`](03_TASKS.md#4-the-three-routing-modes).
-
-**Context.** Within a pathway, a candidate output can be (A) accepted directly from a single persona, (B) gated by an automated verifier, or (C) judged by a multi-judge panel with anti-Goodhart stack. The choice depends on whether a programmatic verifier exists, whether judge subjectivity is the right call, and whether the task's stakes warrant the additional cost.
-
-**Decision.** Three routing modes per task: Mode A (direct accept; trust the persona), Mode B (verifier-gated; programmatic check), Mode C (panel-judged; multi-judge with anti-Goodhart stack). Mode selection is class-driven (CONVERGENT → B, DIVERGENT → C, MIXED → B then C) with operator override. EXISTENTIAL and ENGAGEMENT_ACCEPT pathways have no round barriers and bypass round invariants (INV_R1…R11) per [`00_VISION.md §5`](00_VISION.md#5-inherited-round-invariants-inv_r1inv_r11).
-
-**Consequences.**
-- (+) Cost scales with stakes: low-stakes tasks run in Mode A; high-stakes tasks run through Mode C.
-- (+) Anti-Goodhart panel is reserved for tasks that justify its cost.
-- (+) Operator can elevate routing (A → B → C) per policy without code changes.
-- (−) Implementers must build all three modes; some adapters may launch with only A and B initially (declare L1 conformance).
-- (−) Mode-A trust is the load-bearing assumption; persona competence must be calibrated before Mode A is enabled for a domain.
-
-**Alternatives considered.**
-- *Always Mode C.* Rejected: cost-prohibitive for low-stakes work.
-- *Mode chosen by persona.* Rejected: introduces persona-controlled gating, defeats the purpose of Mode C.
-
----
-
-## 5. Domain emergence
-
-### ADR-0013 — Persona-driven domain emergence with 4-stage promotion
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0.
-**Related:** [`C1`](00_VISION.md#3-invariants-j1j9), [`C3`](00_VISION.md#3-invariants-j1j9), [`06_DOMAIN.md §4`](06_DOMAIN.md#4-domain-emergence-lifecycle), [`06_DOMAIN.md §3`](06_DOMAIN.md#3-the-four-promotion-stages).
-
-**Context.** A persona meeting unfamiliar territory (an unknown domain, unknown tools, unknown verifier shapes) needs a way to bootstrap from "I don't know" to "I have a working DomainContext" without operator intervention for every novel domain. Pre-authored domain catalogues are insufficient (Long tail; the world has more domains than designers anticipate).
-
-**Decision.** Personas bootstrap any domain through a 7-stage lifecycle: *recognition → probe → discovery → ingestion → inference → curation → promotion*. The emergent `DomainContext` carries `DiscoveredTool`s, `KnowledgeIngestionRecord`s, `InferredVerifierRecipe`s, and `ProposedSafetyExtension`s — all signed in the `DomainLineage` (C1). Four promotion stages gate trust: EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED. Trust scoring on outputs reflects emergence stage.
-
-**Consequences.**
-- (+) Personas operate in any domain (C3) without pre-authored coverage.
-- (+) The same emergence machinery handles tools, knowledge, verifiers, and safety extensions.
-- (+) Cross-domain transfer becomes possible at STANDARDISED via the MetaRegistry (ADR-0005).
-- (−) Emergent-domain output trust is lower until promotion; consumers must check trust level.
-- (−) The promotion gate requires curator review (commit time cost; mitigated by the `DomainCurator` role).
-
-**Alternatives considered.**
-- *Pre-author every domain.* Rejected: long tail; coverage gaps block C3.
-- *Trust emergent outputs as-if authored.* Rejected: emergent verifier recipes have unknown error modes; trust must reflect stage.
-- *Single promotion gate (binary "emerged / standardised").* Rejected: too coarse — RECOGNISED + AUTHORITATIVE carry meaningful intermediate trust.
-
----
-
-### ADR-0014 — Operator-gated safety-critical promotion (commitment C2)
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0.
-**Related:** [`C2`](00_VISION.md#3-invariants-j1j9), [`J3`](00_VISION.md#3-invariants-j1j9), [`06_DOMAIN.md §3`](06_DOMAIN.md#3-the-four-promotion-stages), [`06_DOMAIN.md §2`](06_DOMAIN.md#2-domaincontext-schema-domain-context2).
-
-**Context.** Some domain promotions are load-bearing for safety: a domain whose `physical_harm_class ≥ bodily_injury` or `information_hazard_class ≥ dual_use_civilian` cannot be promoted to AUTHORITATIVE / STANDARDISED on the strength of persona-driven curation alone. ITAR/EAR/FINRA/HIPAA/GDPR-relevant categories carry legal weight that requires human sign-off.
-
-**Decision.** Promotion to AUTHORITATIVE or STANDARDISED for a domain tagged `safety_critical` (at recognition, on hazard-axis threshold cross) REQUIRES explicit operator signature on the promotion event. Operator policy (floor source 4) names specific regulated categories; the substrate carries no closed regulated-domain list (per C4, ADR-0005). Under principal collapse ([`01_KERNEL.md §2.4`](01_KERNEL.md#24-deploymentprofile-and-principal-collapse)) the degraded gate applies.
-
-**Consequences.**
-- (+) Safety-critical promotions cannot be auto-elevated by persona work alone.
-- (+) Operator policy is the explicit place to enumerate regulated categories; substrate stays domain-neutral.
-- (+) Cross-deployment operators can carry different policies (a research org and a commercial lab need different regulated lists).
-- (−) Operator becomes a bottleneck for high-frequency safety-critical emergence — mitigated by batched review queues.
-- (−) The principal-collapse degraded gate is a partial safety net; operators must monitor for principal-collapse abuse.
-
-**Alternatives considered.**
-- *Auto-promote based on persona-inferred hazard score.* Rejected: persona-inferred scores have unknown error modes for legal categories.
-- *Block all promotion until operator review.* Rejected: most domains (digital_only, none hazard) do not need operator review and would block C3.
-- *Substrate-enumerated regulated list.* Rejected: legal categories vary across jurisdictions and change over time; codifying them in substrate produces stale law.
-
----
-
-### ADR-0015 — Bridge once, autonomous after (physical embodiment)
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0 → v1.0 (extended with BridgeInstallerKind).
-**Related:** [`00_VISION.md §10`](00_VISION.md#10-out-of-scope-by-design) (PHYSICAL EMBODIMENT), [`06_DOMAIN.md §5.5`](06_DOMAIN.md#55-human-bridged-discovery--bridgeasset-v10-class-d), [`02_PERSONA.md §11.1`](02_PERSONA.md#111-minimize-human-bootstrap-burden-mhbb).
-
-**Context.** PersonaOS personas cannot directly operate robots, instruments, or fab lines — the substrate is digital. But many cognitive work tasks require physical-world coupling (a lab persona observing instrument data; a fab persona monitoring production). Making the human a recurring fetch-execute loop (every action requires human relay) is degrading work for the human and brittle for the persona.
-
-**Decision.** Physical-world coupling is handled by `BridgeAsset` (Class D tool). The persona drafts a one-time `HumanAssistRequest`; the human grants once; the result is a durable BridgeAsset that the persona uses autonomously thereafter. v1.0 admits non-human bridge installers (`BridgeInstallerKind ∈ {kernel_trusted_system, chained_bridge}`) when the installer carries cryptographic attestation and the bridge's hazard envelope is dominated by the installer's authority. Bridges may install bridges (bounded recursion, default depth 3). Measurement bridges carry calibration provenance.
-
-**Consequences.**
-- (+) Humans bridge once; personas operate autonomously after.
-- (+) Calibration-dependent bridges (sensors, instruments) carry their calibration in lineage, so stale-calibrated bridges refuse admission before any verifier runs.
-- (+) Chained-bridge recursion handles common patterns (one bridge installs a second; e.g., a lab notebook bridge installs an instrument-driver bridge).
-- (−) Bridge installation is still the single most operator-attention-intensive step; mitigated by chained installation.
-- (−) Out-of-scope by design: real-time closed-loop control whose latency falls below the bridge floor; autonomous robotic control whose hazard envelope exceeds available installer authority.
-
-**Alternatives considered.**
-- *Direct embodiment (kernel drives hardware).* Rejected: substrate is digital; embodiment is out of scope.
-- *Recurring human relay.* Rejected: degrading; brittle.
-- *Always operator-installed bridges (no chained or kernel_trusted_system).* Rejected: too operator-intensive for common multi-instrument labs.
-
----
-
-## 6. Memory, knowledge, evolution
-
-### ADR-0016 — Seven-scope memory tagging across four tiers
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0 (4-tier) + v1.0 (7-scope tagging).
-**Related:** [`08_KNOWLEDGE.md §4`](08_KNOWLEDGE.md#4-four-memory-tiers), [`08_KNOWLEDGE.md §5`](08_KNOWLEDGE.md#5-seven-scope-memory-tagging).
-
-**Context.** Persona memory must distinguish persona-private knowledge ("what I learned alone"), pair-private memory ("what me-and-this-user share"), env memory ("what's known here"), project memory ("what's known in this project"), domain memory ("what's known in this domain"), federation-tier memory ("what's known across kernels"), and public memory ("what anyone may read"). Conflating these scopes leaks private memory across boundaries (relationship harm) or fragments knowledge that should be shared (efficiency loss).
-
-**Decision.** Memory tags carry seven scopes: *persona / pair / env / project / domain / federation / public*. Four storage tiers (hot in-context, warm vector store, semantic graph, cold archive) handle different retrieval latencies. The retrieval pipeline filters by scope before tier dispatch; cross-scope access is forbidden unless explicit consent / boundary record permits.
-
-**Consequences.**
-- (+) Memory Power Asymmetry mitigations (J6) realise on the tag boundary: pair-private memory cannot leak into env memory without a re-tag.
-- (+) Public-tier memory is the only tier safe to consolidate cross-persona.
-- (+) Retrieval cost stays bounded by tier (vector lookup amortised; graph traversal bounded).
-- (−) Tag mistakes (wrong scope at write time) are hard to repair after the fact; mitigation is consent-bounded re-tag tools.
-- (−) Seven scopes is a non-trivial mental model; authors of memory-writing skills must understand the scope semantics.
-
-**Alternatives considered.**
-- *Three scopes (private / shared / public).* Rejected: too coarse — collapses pair-private into private and env into shared.
-- *Two-tier storage (hot + cold).* Rejected: warm tier (vector) is load-bearing for retrieval latency; semantic graph is load-bearing for cross-entity queries.
-- *Per-message ACL list.* Rejected: explodes storage cost; tags-with-consent-records achieves the same outcome with O(1) overhead.
-
----
-
-### ADR-0017 — Hybrid retrieval: vector + graph + cross-encoder, six stages
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0.
-**Related:** [`08_KNOWLEDGE.md §7`](08_KNOWLEDGE.md#7-hybrid-retrieval--six-stage-pipeline), GraphRAG (2026).
-
-**Context.** Pure vector retrieval misses structural relationships ("who said X and where else have they discussed Y"); pure graph retrieval misses semantic neighbourhoods ("what is similar to X"). Both miss the re-ranking step that boosts truly relevant items above merely embedding-near ones. Production-grade memory retrieval needs all three layered.
-
-**Decision.** Six-stage hybrid retrieval pipeline: (1) scope filter; (2) vector recall (semantic neighbourhood); (3) graph expansion (structural reach); (4) cross-encoder re-rank; (5) trust-score weighting (emergence-stage-aware); (6) budget cap. Each stage emits OTel spans; tier rotation (INV-6) applies to cross-encoder model selection.
-
-**Consequences.**
-- (+) GraphRAG-paper-style precision gain (~35%) realises in production.
-- (+) Cross-encoder re-rank handles the "embedding-near but not actually relevant" failure mode.
-- (+) Trust weighting integrates emergence-stage information: AUTHORITATIVE items rank above EMERGENT for the same semantic score.
-- (−) Six stages add latency; budget cap (stage 6) is the load-bearing controller.
-- (−) Cross-encoder choice is a Goodhart vector; INV-6 rotation mitigates but does not eliminate.
-
-**Alternatives considered.**
-- *Pure vector retrieval.* Rejected: misses structural relationships; insufficient precision for production.
-- *Pure graph retrieval.* Rejected: misses semantic neighbourhoods; query writing becomes brittle.
-- *Vector + re-rank only (no graph).* Rejected: leaves the "who-knows-who" reach pattern unsupported.
-
----
-
-### ADR-0018 — DSPy GEPA + MIPROv2 for prompt evolution (not GRPO)
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0 (DSPy) → v1.0 (GEPA-primary).
-**Related:** [`08_KNOWLEDGE.md §11`](08_KNOWLEDGE.md#11-dspy-gepa--reflective-prompt-optimization), DSPy GEPA (2025).
-
-**Context.** Persona-tactic and meta-prompt optimisation must improve task performance without (a) overfitting to a specific verifier (Goodhart), (b) requiring labelled training pairs at scale, (c) running tens of thousands of rollouts. GRPO and similar policy-gradient methods require many rollouts and label rich gradients; production budget does not support them.
-
-**Decision.** Prompt evolution uses DSPy GEPA (Genetic-Pareto reflective prompt optimisation) as the primary evolutionary loop, with MIPROv2 (Bayesian instruction + demonstration search) as a complementary search layer, plus reflection-driven refinement. Anti-degradation safeguards check that newly-evolved prompts do not regress against a held-out evaluation set before commit. GRPO is explicitly not used as the primary loop (GEPA outperforms GRPO by ~20% with ~35× fewer rollouts per the DSPy GEPA paper).
-
-**Consequences.**
-- (+) Order-of-magnitude rollout budget reduction vs GRPO.
-- (+) Reflective signal is interpretable (the evolved prompt's diff carries readable intent).
-- (+) Anti-degradation gate catches Goodhart drift before commit.
-- (−) GEPA is a 2025 method; production hardening is ongoing.
-- (−) MIPROv2 + GEPA + reflection is three layers; debugging an evolution failure requires understanding which layer contributed.
-
-**Alternatives considered.**
-- *GRPO as primary.* Rejected: rollout budget too high.
-- *Manual prompt tuning.* Rejected: doesn't scale beyond ~10 personas.
-- *MIPROv2 alone.* Rejected: GEPA's reflective signal is load-bearing for instruction-level improvement; MIPROv2 alone covers demonstrations but not instructions as well.
-
----
-
-### ADR-0019 — MAP-Elites + Voyager + DGM combined for evolution
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0 (combination).
-**Related:** [`02_PERSONA.md §8`](02_PERSONA.md#8-evolution--8-signals--5-horizons), MAP-Elites (2015), Voyager (2023), DGM (2024).
-
-**Context.** Persona population dynamics must preserve diversity (MAP-Elites), grow an ever-larger skill library (Voyager), and weight parent selection by fertility (DGM). Each algorithm alone has a known failure mode: MAP-Elites can stagnate in low-fertility cells; Voyager can over-specialise; DGM can collapse to a single high-fertility lineage. The three combine in v1.0.
-
-**Decision.** Persona evolution combines three algorithms: MAP-Elites maintains diversity across behaviour descriptors (cognitive mode profile, domain spread, voice signature); Voyager grows the per-persona skill library with automatic curriculum; DGM weights parent selection by fertility (number of successful descendants). ALPS (Age-Layered Population Structure) provides a fourth diversity preservation axis at the population level. (ALPS age-layering is **wall-clock-derived** per ADR-0051; its diversity-preservation role is unchanged.)
-
-**Consequences.**
-- (+) Population diversity is preserved across at least two orthogonal axes (behaviour and age).
-- (+) Skill library grows lifelong without re-training the persona.
-- (+) Fertility-weighted parent selection emphasises lineages that produce useful descendants without collapse to a single lineage (mitigated by MAP-Elites diversity).
-- (−) Four algorithms layered is non-trivial; debugging a population failure requires reading multiple traces.
-- (−) Behaviour-descriptor choice (MAP-Elites cell axes) is itself a design decision that can bias diversity.
-
-**Alternatives considered.**
-- *Single algorithm (MAP-Elites only).* Rejected: stagnates without Voyager's skill growth.
-- *Voyager only.* Rejected: over-specialises without MAP-Elites diversity.
-- *DGM only.* Rejected: collapses to single lineage without MAP-Elites diversity.
-
----
-
-## 7. Protocols and federation
-
-### ADR-0020 — Standard protocols (MCP / A2A / OTel) over bespoke wire formats
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0.
-**Related:** [`09_PROTOCOLS.md §2`](09_PROTOCOLS.md#2-mcp--universal-tool--resource--prompt-bus), [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md#3-a2a--agent-to-agent-federation), [`09_PROTOCOLS.md §4`](09_PROTOCOLS.md#4-opentelemetry-semantic-conventions).
-
-**Context.** Inter-agent communication, tool dispatch, and observability are three of the highest-traffic protocol surfaces in PersonaOS. A bespoke wire format on any of them ties v1.0 to a single ecosystem and forecloses integration with the broader agent-tooling landscape. By 2026 the industry has converged on three standards: MCP for tool/resource/prompt protocol (Anthropic 2024), A2A for agent-to-agent federation (Anthropic 2025), OTel for observability.
-
-**Decision.** v1.0 speaks MCP for tool dispatch and resource access, A2A for agent-to-agent federation (signed AgentCards, host/peer kernel roles), and OTel for tracing and metrics. Bespoke protocols are limited to internal kernel APIs that no external party calls. All wire formats carry the `schema` field per ADR-0007.
-
-**Consequences.**
-- (+) Integration with MCP-aware clients, A2A peers, and OTel collectors is mechanical (adapter shim only).
-- (+) The ecosystem evolves the protocols; v1.0 inherits improvements without spec re-baking.
-- (+) Federation across kernels running different providers becomes mechanically possible.
-- (−) Protocol version drift is now an external risk (MCP 1.x vs 2.x); v1.0 pins versions in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry).
-- (−) Protocol-level optimisations require upstream collaboration, not unilateral edits.
-
-**Alternatives considered.**
-- *Bespoke wire format.* Rejected: ecosystem lock-out.
-- *MCP only (no A2A).* Rejected: MCP is tool dispatch; A2A is peer federation; they are not interchangeable.
-- *OTel only (no MCP/A2A).* Rejected: OTel is observability; cannot carry tool dispatch.
-
----
-
-### ADR-0021 — Ed25519 signing (not RSA)
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** Pre-v1.0.
-**Related:** [`01_KERNEL.md §4`](01_KERNEL.md#4-signing-infrastructure--3-custody-tiers--key-hierarchy), [`09_PROTOCOLS.md §8`](09_PROTOCOLS.md#8-key-custody-hierarchy), [RFC 8032](https://www.rfc-editor.org/rfc/rfc8032), FIPS 186-5.
-
-**Context.** Lineage signing is on the hot path: every state-changing action emits a signed event. RSA-2048+ signatures are large (256 bytes), slow to compute, and require explicit padding. ECDSA over secp256k1/P-256 has known nonce-misuse failure modes. Ed25519 is fast, has small signatures (64 bytes), is deterministic, and is widely supported.
-
-**Decision.** All kernel signing uses Ed25519 (RFC 8032, FIPS 186-5). RSA is admissible only for legacy interop where a peer cannot speak Ed25519 (rare; documented in [`09_PROTOCOLS.md §8`](09_PROTOCOLS.md#8-key-custody-hierarchy)). Signatures are over canonicalised bytes (JSON Canonical Form per RFC 8785 for JSON payloads).
-
-**Consequences.**
-- (+) Hot-path signing is fast and small.
-- (+) Determinism removes nonce-management surface.
-- (+) Widely supported across HSMs, KMSes, language runtimes.
-- (−) Quantum-resistance future-work: post-quantum migration is v2.0+ work.
-- (−) HSMs without Ed25519 support cannot run v1.0 directly; mitigation is KMS-tier custody for those deployments.
-
-**Alternatives considered.**
-- *RSA-2048.* Rejected: 4× signature size, slower.
-- *ECDSA P-256.* Rejected: nonce-misuse risk; non-determinism.
-- *Post-quantum (Dilithium/Falcon).* Rejected for v1.0: signatures too large for hot-path; pre-standardisation in 2026. Re-evaluated in v2.0+.
-
----
-
-### ADR-0022 — Living validation catalog as a separate document (13_DESIGN_VALIDATION.md)
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0.
-**Related:** [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md), [`SPEC_CONVENTIONS.md §1.1`](SPEC_CONVENTIONS.md#11-status-values) (Living status).
-
-**Context.** A specification is well-validated only if its claims have been walked end-to-end against concrete task scenarios. Prior versions had scenario walks scattered across docs; auditors had to gather them. A central catalog of validated scenarios — with substrate-shape gap → fix linkage — turns the implicit "we tested these claims" into an explicit, append-only audit artefact.
-
-**Decision.** v1.0 introduces `13_DESIGN_VALIDATION.md` as an append-only Living catalog. Each scenario carries a task description, the v1.0 mechanisms exercised, the gaps surfaced, and the corresponding fixes (with cross-link to the doc and section that absorbed the fix). The document never supersedes itself; entries accrete with monotonically-allocated scenario IDs. The same shape is now extended to ADRs (this file, `14_DECISIONS.md`).
-
-**Consequences.**
-- (+) Auditors see one canonical list of "scenarios this spec has been walked against".
-- (+) Append-only shape makes the catalog a stable reference; old scenario fixes do not rewrite.
-- (+) Gap → fix linkage is explicit; reviewers can replay the design-improvement chain.
-- (−) Living docs accrete; periodic re-grouping is needed when the catalog grows beyond ~50 entries.
-- (−) Authors writing fixes must remember to backlink; the catalog is only as good as its discipline.
-
-**Alternatives considered.**
-- *Inline scenarios in each doc.* Rejected (prior practice): auditors had to gather them; cross-doc duplication.
-- *External issue tracker.* Rejected: external systems aren't part of the spec; the catalog is.
-- *Versioned scenario file (re-bumped per release).* Rejected: append-only Living catalog is the better fit; the document version stays at the latest release's stamp.
-
----
-
-## 8. Multi-principal & cross-org collaboration
-
-### ADR-0028 — Multi-principal attribution as a separate axis from operator-vs-user topology
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0.7 (SCENARIO 06 fix).
-**Related:** [`C2`](00_VISION.md#3-invariants-j1j9), [`J3`](00_VISION.md#3-invariants-j1j9), [`01_KERNEL.md §2.4`](01_KERNEL.md#24-deploymentprofile-and-principal-collapse), [`01_KERNEL.md §2.4.3`](01_KERNEL.md#243-principalattribution--multi-principal-topology), [`04_PROJECT.md §3`](04_PROJECT.md#3-projectmember), [`04_PROJECT.md §4.1`](04_PROJECT.md#41-completion-ceremony), [`04_PROJECT.md §19.1`](04_PROJECT.md#191-multi-tenant-cross-org-joint-projects), [`05_ENVIRONMENT.md §5`](05_ENVIRONMENT.md#5-environmentmembership-schema-env-membership1), [`05_ENVIRONMENT.md §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification), ADR-0014, [`13_DESIGN_VALIDATION.md SCENARIO 06`](13_DESIGN_VALIDATION.md#scenario-06--multi-principal-cross-org-joint-project-with-consent-bounded-knowledge-sharing).
-
-**Context.** `DeploymentProfile.principal_topology` (`01_KERNEL §2.4`) was a closed 4-value Literal (`operator_distinct` / `operator_is_user` / `operator_absent` / `operator_deferred`) enumerating the *operator-vs-user* relationship as a binary switch. It did not enumerate principal *cardinality*: every value above implicitly assumes one operator per signing decision. A genuinely shared deployment — two organisations forming a joint project on one kernel, two research institutes co-authoring a programme, two product teams ratifying a joint spec — had no honest expression. The substrate forced nominating one operator as "the principal" and the other as a non-principal `ExternalAttestation`, which mis-records authority and breaks audit ("which operator authorised this admission?"). SCENARIO 06's walk made this gap concrete.
-
-**Decision.** Principal *cardinality* is a separate axis from the `operator-vs-user` topology. `PrincipalAttribution` is a per-env / per-project envelope binding N principals (each a `PrincipalRef` with `operator_id`, `attribution_role` KindRegistry-resolved, `cosign_quorum_weight`). Single-principal deployments leave `multi_principal_attribution_enabled = False` and continue unchanged. Multi-principal deployments opt in; charter ratification (`05_ENV §12c.4a`) and completion ceremony (`04_PROJECT §4.1`) compose through `MultiPrincipalAttestationQuorum` (default unanimous over weighted PrincipalRefs). Cross-tenant principals additionally require a signed `CrossTenancyAgreementRef` (operator-authored policy; substrate carries by id). `ProjectMember` and `EnvironmentMembership` gain `principal_attribution_id: str | None` so audit can answer "which principal authorised this member."
-
-**Consequences.**
-- (+) Two-org joint projects are expressible honestly without mis-recording authority.
-- (+) Lineage answers "who authorised this member / completion" via per-member attribution + cleared-quorum event refs.
-- (+) Quorum policy is operator-tunable (unanimous / weighted_majority / weighted_threshold) with a simple-majority floor that prevents single-principal dominance under the multi-principal flag.
-- (+) Degraded-path clearance under `principal_unreachable_after` window mirrors the §2.4 degraded-gate pattern (non-principal kinship attestation + acknowledgement event), preserving the trust-model symmetry.
-- (−) Operator policy must set `principal_unreachable_after` thoughtfully; default 30d (90d for safety-critical) trades liveness against single-operator unilateral completion under "unreachable" claims.
-- (−) Multi-principal quorum extends the degraded-gate surface area. Each safety-critical decision now potentially routes through both the §2.4 collapse path AND the multi-principal quorum path; auditors must understand the composition.
-- (−) Cross-kernel joint projects (each org running its own v1.0 kernel) remain OOS in v1.0; one-kernel-hosted joint projects work, with the host operator's signing infrastructure load-bearing for both principals.
-
-**Alternatives considered.**
-- *Add a new `principal_topology` Literal value `multi_principal`.* Rejected: cardinality is orthogonal to the operator-vs-user axis. A multi-principal deployment can simultaneously be `operator_distinct` (the default), `operator_is_user` (two households running PersonaOS jointly, rare), or `operator_deferred` (multi-site infrastructure with high-latency links). Conflating them into one Literal would force false either/or choices.
-- *Make `PrincipalAttribution` part of `DeploymentProfile` (deployment-wide).* Rejected: principal attribution is per-env / per-project, not per-deployment. A multi-tenant deployment hosting both single-principal envs and multi-principal envs needs each env to declare its own attribution.
-- *Model the second principal as `ExternalAgent` with `attestation_role = co_principal`.* Rejected: ExternalAgent is for parties *outside* the kernel boundary; co-principals are *inside* (their operator key signs admission decisions). Crossing this boundary would mis-classify the trust model.
-- *Require unanimous quorum always; reject `weighted_majority` / `weighted_threshold`.* Rejected: operators with N≥4 principals (multi-municipality projects, large consortia) need liveness under transient unreachability. The simple-majority floor prevents the most adversarial degradation; finer-grained tuning is operator policy.
-
----
-
-### ADR-0029 — Derivation-provenance edges as the substrate-shape mitigation for implicit cross-principal memory derivation
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0.7 (SCENARIO 06 fix).
-**Related:** [`08_KNOWLEDGE.md §16b`](08_KNOWLEDGE.md#16b-derivationprovenanceedge--memory-to-contribution-provenance), [`08_KNOWLEDGE.md §5`](08_KNOWLEDGE.md#5-seven-scope-memory-tagging), [`06_DOMAIN.md §11.1`](06_DOMAIN.md#111-anti-leakage-5-risks), ADR-0016, ADR-0028, [`13_DESIGN_VALIDATION.md SCENARIO 06`](13_DESIGN_VALIDATION.md#scenario-06--multi-principal-cross-org-joint-project-with-consent-bounded-knowledge-sharing).
-
-**Context.** The 7-scope memory tagging (`08_KNOWLEDGE §5`) carries `org_id` (and other scopes) on every `KnowledgeRef`, episodic memory, semantic fact, K-line, lesson, and proven fact. `06_DOMAIN §11.1 RISK A-E` filters *named-artifact* transfers across scopes. What `§11.1` does NOT cover: a persona *consults* a scope-tagged memory during normal retrieval and then *contributes derived work* in a different scope — the derived contribution carries no edge back to the consulted source, and the RISK filter has nothing to act on at contribution time. For single-tenant deployments this is invisible; for multi-tenant deployments (per ADR-0028), the substrate must trace which memories *materially shaped* each contribution so audit can answer "did this joint-project artefact derive from one principal's internal memory in a way the other principal could not have predicted?"
-
-**Decision.** Introduce `DerivationProvenanceEdge` (DPE): a substrate-shape edge recorded at every artifact-mint / contribution event capturing the `consulted_memory_refs` that materially shaped the output. DPEs are *soft-bound* (do not block retrieval; do not auto-refuse contribution) and visible in `EnvironmentLineage`; graph traversal answers "which org-attributed memories influenced this downstream contribution?" `DerivationProvenancePolicy` (per env / per project) controls enforcement: `off` (none), `opportunistic` (declared but not required), `mandatory_for_cross_principal` (default for joint envs — DPE required when consulting a memory tagged with a different principal_attribution_id), `mandatory_all`. Persona-declared `influence_kind` (`direct_quote` / `paraphrased` / `structural_basis` / `negative_example` / `background_context`) + `influence_strength` (0..1) carry the persona's claim; lineage records the claim for audit challenge.
-
-**Consequences.**
-- (+) Implicit cross-principal derivation, previously invisible, becomes a first-class signed edge.
-- (+) RISK E (`06_DOMAIN §11.1`) and DPE compose cleanly: RISK E handles explicit transfer; DPE handles implicit derivation. Together they cover both directions.
-- (+) Graph traversal from contribution to consulted memories runs against existing per-env lineage scan; no new index required.
-- (+) Soft-bind on retrieval (span attribute marking DPE-required memories) surfaces the requirement to the persona body without blocking, preserving cognitive flow.
-- (−) Tacit recall is irreducibly untraceable. A persona who internalises an ORG_A pattern over time and contributes from "memory" without an explicit retrieval call leaves no DPE. The substrate cannot inspect cognition; it inspects the retrieval pipeline.
-- (−) Persona-declared `influence_kind` is not adversarially robust — a persona could declare `background_context` for a derivation that was structurally `direct_quote`. Substrate is robust against accidental mis-attribution, not deliberate misrepresentation.
-- (−) Retrieval-span scope is limited to v1.0 OTel coverage. Memories retrieved through non-standard paths (a Skill bypassing the §7 pipeline; an MCP tool fetching memory directly) produce no inspectable span. Operators tightening enforcement should also restrict bypass paths.
-
-**Alternatives considered.**
-- *Auto-extract derivation provenance from LLM activations / attention patterns.* Rejected: substrate is provider-neutral (ADR-0008); attention patterns are model-specific and not stable across body swaps. Auto-extraction would tie the substrate to specific provider features.
-- *Block cross-principal retrieval at the retrieval layer.* Rejected: blocking retrieval forces the persona to either fail the task or fabricate a non-source; both are worse than soft-binding and requiring DPE declaration. Trust-with-audit beats trust-by-refusal here.
-- *Require DPE for ALL contributions, single-tenant or multi-tenant.* Rejected: cost on single-tenant deployments is unjustified; the cross-principal case is what motivates the mechanism. Operators may opt into `mandatory_all` if they want the audit floor anyway.
-- *Make DPE a hard-bound (refuse contribution without DPE for ANY consulted memory).* Rejected: would break too many existing single-tenant workflows; the mandatory_for_cross_principal default keeps the burden where it pays off.
-
----
-
-### ADR-0030 — Visibility-tier vocabulary unification and cross-tenant resolution
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0.7 (SCENARIO 06 fix).
-**Related:** [`06_DOMAIN.md §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers), [`06_DOMAIN.md §13a`](06_DOMAIN.md#13a-domainharvest--packaging-a-domain-for-downstream-consumers), ADR-0028, [`13_DESIGN_VALIDATION.md SCENARIO 06`](13_DESIGN_VALIDATION.md#scenario-06--multi-principal-cross-org-joint-project-with-consent-bounded-knowledge-sharing).
-
-**Context.** Two visibility-tier lists coexisted with no explicit cross-reference: `06_DOMAIN §6.3` defines 5 tiers for `KnowledgeRef` (`persona_only` / `project_only` / `tenant` / `federation` / `public`) and `§13a` defines 4 tiers for `DomainHarvest.visibility_tier` (`private` / `tenant` / `federation` / `public`). The 4-value list is a subset of the 5-value list, but the mapping was undocumented. SCENARIO 06 exposed the load-bearing case: a multi-principal joint env at `tenant` tier needs an explicit answer to "which tenant — ORG_A's, ORG_B's, the shared joint tenancy, or the deployment?"
-
-**Decision.** (a) Add an explicit mapping table in `§13a` from the 4-value `DomainHarvest` Literal to the 5-value `§6.3` enumeration: `private = TIER 1 ∪ TIER 2`, `tenant = TIER 3`, `federation = TIER 4`, `public = TIER 5`. (b) Extend `§6.3 TIER 3 (tenant)` commentary to specify that under multi-principal attribution, an env binding two principals from different `tenant_id` requires a signed `CrossTenancyAgreementRef` before a TIER 3 ingestion crosses the principal boundary; absent the agreement, visibility demotes to TIER 1 / TIER 2 for the affected reader and emits `CROSS_TENANT_VISIBILITY_DEMOTED` to lineage.
-
-**Consequences.**
-- (+) The undefined-tenant ambiguity for multi-principal envs is closed: `tenant` resolves to the shared tenancy if agreement exists; demoted otherwise.
-- (+) The mapping between `§6.3` and `§13a` is now explicit; future readers do not have to infer the relationship.
-- (+) `CROSS_TENANT_VISIBILITY_DEMOTED` is a first-class lineage event, so audit can detect and explain visibility surprises.
-- (−) Operators authoring `CrossTenancyAgreementRef`s shoulder real legal scope work; the substrate carries the agreement by id, not by content.
-- (−) Demotion is silent to the persona (the retrieval simply returns fewer results); operators may want to add a persona-visible notice in deployments where this matters.
-
-**Alternatives considered.**
-- *Collapse the two lists into one canonical 5-tier list used by both `KnowledgeRef` and `DomainHarvest`.* Rejected: `DomainHarvest`'s "private" genuinely encompasses both `persona_only` and `project_only` (a harvest is by construction a per-domain artefact, not per-persona / per-project); collapsing would force per-harvest selection between TIER 1 and TIER 2 which has no meaningful semantic.
-- *Make CrossTenancyAgreementRef substrate-parsable (legal-text schema).* Rejected: legal agreements are jurisdiction-specific and change over time; substrate-parsing would codify stale law (mirror of ADR-0014's reasoning for not enumerating regulated categories).
-- *Auto-demote tenant tier whenever multi-principal attribution exists, regardless of agreement.* Rejected: too conservative; deployments that have negotiated the agreement should reap its benefit. The current rule rewards explicit operator policy work.
-
----
-
-## 9. Multi-year continuity & persona retirement
-
-### ADR-0031 — Lead handoff + obligation reassignment as substrate-shape primitives for multi-year continuity
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0.8 (SCENARIO 07 fix).
-**Related:** [`04_PROJECT.md §3`](04_PROJECT.md#3-projectmember), [`04_PROJECT.md §9`](04_PROJECT.md#9-obligation--inter-persona-commitment), [`04_PROJECT.md §9.1`](04_PROJECT.md#91-obligationreassignment--transfer-commitment-to-a-successor), [`04_PROJECT.md §25`](04_PROJECT.md#25-multi-year-project-continuity), [`04_PROJECT.md §25.1`](04_PROJECT.md#251-leadhandoffceremony--successor-transfer-of-the-lead-role), [`13_DESIGN_VALIDATION.md SCENARIO 07`](13_DESIGN_VALIDATION.md#scenario-07--persona-retirement-during-multi-year-project), ADR-0011.
-
-**Context.** Multi-year projects accumulate member-specific authority (the lead's signoff power for completion ceremony, milestone acceptance, external attestation requests) and member-specific commitments (active `Obligation` records with the obligor named). Pre-v1.0.8, when the holding member retired or departed mid-project, v1.0 had no substrate mechanism for either: (a) transferring the *role* with audit-grade authority continuity, or (b) transferring the *commitments* without auto-discharge. The `lead` role was a `ProjectMember.role` string; successor selection was implicit. Obligations auto-discharged with `status="released_with_member_departure"` per `§25` line 1822-1824. For a 3-year infrastructure project losing its lead at month 18, this meant: (1) no signed event marking when successor inherited authority — audit could not answer "when did Carla become the lead?", (2) every accumulated commitment evaporated, forcing the new lead to re-commit each open obligation from scratch with no acknowledgement of prior owner. SCENARIO 07's walk made both gaps concrete.
-
-**Decision.** Introduce two complementary primitives. `LeadHandoffCeremony` (`§25.1`) is the signed ceremony transferring the `lead` role with a 30-day default overlap window during which both `outgoing_lead` and `incoming_lead` ProjectMember roles coexist (extending `§3 role` enum). Cohort quorum gates the successor (`unanimous` / `majority` / `lead_only` policy, default majority); operator signature required. `ObligationReassignment` (`§9.1`) is the tri-signed envelope (outgoing obligor + incoming obligor + obligee) that transfers active obligations without discharge, preserving original `committed_at`. Obligee discretion is absolute — refusal returns the obligation to default §9 auto-discharge. The two compose: LeadHandoffCeremony typically carries a list of proposed ObligationReassignments which materialise as separate envelopes requiring each obligee's cosign.
-
-**Consequences.**
-- (+) Multi-year projects can transition leadership with audit-grade authority continuity; `LEAD_HANDOFF_COMPLETED` event names the moment authority transferred.
-- (+) Accumulated commitments survive transitions where successor + obligee both agree; lineage carries original `committed_at` so contribution history remains intact.
-- (+) Obligee discretion is preserved — the substrate cannot compel a counterparty to accept a successor; refusal returns to default discharge path with the obligee's trust signal honest.
-- (+) The 30-day overlap default lets the incoming lead operate under the role with the outgoing lead still available; covers "I have questions only Mira knew the answer to" naturally.
-- (−) Cohort quorum policy choice is operator-tunable; `lead_only` policy bypasses cohort consent — heavier audit footprint but available for emergency.
-- (−) Emergency handoff (`overlap_window = 0`) requires explicit operator `emergency_handoff_signed` event; CohortDynamicsState will spike — that's the honest cost.
-- (−) No-successor case is unresolvable by substrate alone; project must pause or operator becomes interim lead. The substrate refuses to manufacture a successor.
-
-**Alternatives considered.**
-- *Auto-promote senior contributor to lead on departure.* Rejected: silently shifts authority without consent; loses audit point ("when did Carla agree?"); high-stakes projects need explicit cohort + operator authorisation.
-- *Make ObligationReassignment bi-signed (outgoing + incoming) without obligee cosign.* Rejected: obligee is the trust counterparty; substituting an obligor without their consent breaks the bilateral-commitment semantics that motivated `§9` being two-party-signed at commit.
-- *Auto-transfer obligations to the lead-handoff successor.* Rejected: not every obligation belongs to the lead-role; many obligations are committed by domain specialists whose successor (if any) is unrelated to the lead succession. One-by-one consent flow preserves the right grain.
-
----
-
-### ADR-0032 — Lifecycle event enumeration + RetiredStatePersistencePolicy + PersonaConsultation
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0.8 (SCENARIO 07 fix).
-**Related:** [`02_PERSONA.md §7`](02_PERSONA.md#7-lifecycle-fsm), [`02_PERSONA.md §7.5`](02_PERSONA.md#75-retirement--archive--reanimate), [`02_PERSONA.md §7.5.1`](02_PERSONA.md#751-retiredstatepersistencepolicy--soulstatejson-disposition-on-retired), [`02_PERSONA.md §7.5.2`](02_PERSONA.md#752-personaconsultation--read-only-access-to-frozen-retired-state), [`02_PERSONA.md §11.7`](02_PERSONA.md#117-personamemorytransparencyrequest--peer-memory-transparency), [`02_PERSONA.md §7.4.4`](02_PERSONA.md#744-dormantforkpolicy), [`13_DESIGN_VALIDATION.md SCENARIO 07`](13_DESIGN_VALIDATION.md#scenario-07--persona-retirement-during-multi-year-project), ADR-0009.
-
-**Context.** Three related gaps under the persona FSM: (1) `02_PERSONA §7` said "Each transition emits a signed LifecycleEvent" but never enumerated the event kinds; other docs referenced kinds like `LIFECYCLE_FORK` by convention but the source-of-truth enumeration was absent. (2) The RETIRED state said "no further mutations" and "lineage frozen" but did not specify the *physical disposition* of `soul.state.json` — in-memory immutable, cold-tier archive, or queryable for transparency / fork-parent selection. (3) The only documented path to access a RETIRED persona's accumulated knowledge was REANIMATE (RETIRED → ARCHIVED via timeout → ACTIVE via operator + fresh keys + SOUL re-sign per `§7.5`), which was disproportionate for the common "we need to consult Mira's K-lines one more time" case.
-
-**Decision.** Three coordinated additions to `02_PERSONA`:
-
-(a) Canonical `LifecycleEvent.kind` enumeration in §7 (post-FSM-diagram prose) listing 9 substrate-resolved kinds: `LIFECYCLE_SEEDED`, `LIFECYCLE_ACTIVATED`, `LIFECYCLE_DORMANT_ENTERED`, `LIFECYCLE_AWAKENED`, `LIFECYCLE_FORK`, `LIFECYCLE_RETIRED`, `LIFECYCLE_ARCHIVED`, `LIFECYCLE_REANIMATED`, `LIFECYCLE_CONSULTED`. New kinds (v1.1+) require enumeration extension + ADR + A-LE* design criterion before admission.
-
-(b) `RetiredStatePersistencePolicy` (`§7.5.1`): per-persona, operator-signed at retirement-ceremony time, declares `soul_state_storage_tier` (`warm` / `cold` / `archived`), `memory_transparency_responsive`, `fork_parent_admissibility` (per-persona override of `§7.4.4` default), `consultation_admissible`. Substrate enforces cross-field invariants (e.g., `archived` tier refuses transparency-responsive).
-
-(c) `PersonaConsultation` (`§7.5.2`): operator-gated, read-only, no-mutation access to RETIRED persona's frozen K-lines / lessons / skill_library / relationship snapshots. Rate-limited (default 4/year per consulted persona). Emits `LIFECYCLE_CONSULTED` informational event; does NOT change FSM state. Cannot mutate consulted persona's soul.state.json. The §11.7 PersonaMemoryTransparencyRequest gets a parallel `retired_persona_response_policy` (composition rule 7) so the transparency path also has explicit RETIRED behaviour.
-
-**Consequences.**
-- (+) The enumeration is the single source of truth; docs cross-referencing lifecycle kinds (design criteria, glossary) get a stable target.
-- (+) RetiredStatePersistencePolicy gives operators explicit choice between warm-tier (storage cost continues; fast consultation) and archived (cheap; consultation refused), instead of substrate-default behaviour that no doc named.
-- (+) PersonaConsultation covers the "we need her K-lines one more time" case without the heavyweight REANIMATE ceremony; substrate keeps RETIRED intent honest while admitting bounded read-only access.
-- (+) Memory-transparency requests to RETIRED personas have an explicit policy (`refuse_with_retired_notice` default; operator may opt into `respond_from_frozen_state` or `respond_via_operator_proxy`).
-- (−) Operators must understand three coordinated decisions at retirement-ceremony time (storage tier, transparency responsiveness, consultation admissibility, fork admissibility). Heavier ceremony cost than pre-v1.0.8's silence-on-defaults, but the silence was hiding load-bearing choices.
-- (−) Warm-tier inventory accumulates storage cost across many retired personas; substrate emits periodic `WARM_RETIRED_PERSONA_INVENTORY` for operator review but does not auto-downgrade.
-- (−) PersonaConsultation is bounded by what the persona explicitly logged. Tacit knowledge (mental model, decision-context) is irreducibly inaccessible — consultation is a substrate-shape mitigation, not an oracle.
-
-**Alternatives considered.**
-- *Make all lifecycle kinds emergent via KindRegistry (per `06_DOMAIN §7.5`/§7.6 pattern).* Rejected: lifecycle is substrate-foundational; the C4 commitment ("substrate is domain-agnostic") applies to domain content, not to FSM transitions that the kernel itself enforces. Substrate-named kinds are the right choice here.
-- *Default soul_state_storage_tier to `archived` for all RETIRED personas (current implicit behaviour).* Rejected: silently archives knowledge the operator might want to consult; the explicit policy gives operators the right grain.
-- *Allow PersonaConsultation without operator signature (consulting persona self-authorises).* Rejected: consulting a RETIRED persona reads memory the consulted persona cannot meaningfully consent to release. Operator authorisation is the only ethical gate.
-- *Allow PersonaConsultation to mutate consulted persona's skill_library (e.g., write-back of confirmed lessons).* Rejected: RETIRED is RETIRED. Writing into a frozen state violates the "no further mutations" invariant. Consulting persona may author new K-lines through normal evolution with DerivationProvenanceEdge tagging (`08_KNOWLEDGE §16b`) preserving provenance.
-
----
-
-### ADR-0033 — PlannedDeparture envelope for graceful cohort rebalance
-
-**Status:** Accepted.
-**Date:** 2026-05-22.
-**Origin:** v1.0.8 (SCENARIO 07 fix).
-**Related:** [`04_PROJECT.md §14.2`](04_PROJECT.md#142-cohortdynamicsstate--continuous-team-cohesion-evolution), [`04_PROJECT.md §14.2.1`](04_PROJECT.md#1421-planneddeparture--graceful-rebalance-envelope), [`04_PROJECT.md §3`](04_PROJECT.md#3-projectmember), [`05_ENVIRONMENT.md §5.1`](05_ENVIRONMENT.md#51-membership-ceremonies), [`02_PERSONA.md §11.4`](02_PERSONA.md#114-personarelationshipedge--typed-bidirectional-relationship-between-two-personas), [`13_DESIGN_VALIDATION.md SCENARIO 07`](13_DESIGN_VALIDATION.md#scenario-07--persona-retirement-during-multi-year-project), ADR-0031.
-
-**Context.** `CohortDynamicsState` (`§14.2`) recomputes reactively on `PersonaRelationshipEdge` ends. When a member departs (retirement, role change, project leave), their edges transition to `ended`, fractiousness_index rises abruptly, band may transition to `intervene` (cohort blocks new high-stakes obligations) or `dissolve_proposed` (cohort lead + operator must pin to keep intact). For *unplanned* departures this reactivity is correct — the cohort needs to register the disruption. For *scheduled* departures (operator knows months in advance), the abruptness is avoidable but had no substrate-shape mechanism. The cost was either (a) operator absorbs the spike on departure day and explains-to-cohort-after-the-fact, or (b) operator delays the departure to avoid the spike, which conflicts with the departing member's own timing needs.
-
-**Decision.** Introduce `PlannedDeparture` (`§14.2.1`): signed envelope binding to a `ProjectMember` declaring `departure_date` + `rebalance_window` (default 90d) + per-edge `transfer_hints` + per-obligation `reassignment_hints` + `lead_successor_candidate_id` (required when departing holds `lead` role). When active, `CohortDynamicsState` applies graduated edge-weight decay across the rebalance window — the departing member's contribution to cohesion/fractiousness fades smoothly rather than dropping on departure day. Both departing-member cosign (consent to graceful departure) and operator cosign required. Operator may cancel before departure_date; substrate reverts anticipatory rebalance on cancel. On departure_date arrival, standard `05_ENV §5.1` departure ceremony fires; `ProjectMember.pinned_until` auto-clears (no separate operator action). Composes with `LeadHandoffCeremony` (typically drafts at `departure_date - rebalance_window`) and `ObligationReassignment` (hints surface to obligor for envelope drafting).
-
-**Consequences.**
-- (+) Scheduled departures avoid the band-degradation spike; CohortDynamicsState smooths rather than reactive-shocks.
-- (+) The 90-day default rebalance window matches the natural cadence for knowledge transfer + edge handoff + obligation reassignment of complex multi-year projects; tunable per project.
-- (+) Operator visibility: every PlannedDeparture is signed and visible in lineage; cohort can plan around the known transition timeline.
-- (+) Cancellation path is supported; operator may revert the planned departure if circumstances change (e.g., Mira decides to stay another year), with CohortDynamicsState reverting anticipatory rebalance.
-- (+) Composes cleanly with v1.0.8 ADR-0031 (LeadHandoffCeremony, ObligationReassignment) and v1.0.7 ADR-0028 (MultiPrincipalAttestationQuorum — operator cosign requirement unchanged).
-- (−) Two overlapping PlannedDepartures whose combined rebalance would drop cohort below `dissolve_proposed`: second refuses with `cohort_dissolve_threshold_reached`. Operator must resolve before further departures (an honest cost — the cohort really cannot absorb two simultaneous departures without disruption).
-- (−) EdgeTransferHints are hint-only; suggested transfer targets may refuse to form new edges. The substrate ships the suggestion; participants execute independently. This is correct (consent floor on edges) but operators sometimes wish for stronger continuity guarantees.
-- (−) `rebalance_window` choice is load-bearing. Too short loses smoothing benefit; too long ties up operator attention. Defaults are starting points.
-
-**Alternatives considered.**
-- *Implicit anticipation (CohortDynamicsState auto-detects scheduled retirements from `pinned_until` clearance).* Rejected: `pinned_until` clearance is a precondition for retirement, not a public signal of intent. Operators may clear the pin for many reasons (project changes scope, member changes role) without intending retirement; conflating the two would surprise.
-- *Make PlannedDeparture immutable once active (no operator cancel).* Rejected: real-world projects need the ability to recall a departure decision; the substrate should support reversibility while it remains possible (before departure_date).
-- *Auto-execute EdgeTransferHints / ObligationReassignmentHints (skip consent flow).* Rejected: edges and obligations require counterparty consent by their own semantics (§11.4 / §9.1); auto-executing breaks those invariants. Hints are operator-readable suggestions; participants honour them via standard paths.
-- *Tie `rebalance_window` to project's natural milestone cadence (auto-compute from upcoming milestones).* Rejected: too clever; operator policy is the right place to set this. The substrate provides the default; operator tunes per project.
-
----
-
-## 10. User-side memory power asymmetry primitives
-
-### ADR-0034 — User-side memory power asymmetry primitives as first-class substrate
-
-**Status:** Accepted.
-**Date:** 2026-05-23.
-**Origin:** v1.0.9 (SCENARIO 08 fix).
-**Related:** [`02_PERSONA.md §11`](02_PERSONA.md), [`02_PERSONA.md §11.1`](02_PERSONA.md), [`02_PERSONA.md §11.4a`](02_PERSONA.md), [`02_PERSONA.md §11.6a`](02_PERSONA.md), [`02_PERSONA.md §11.7a`](02_PERSONA.md), [`02_PERSONA.md §11.7b`](02_PERSONA.md), [`02_PERSONA.md §11.6`](02_PERSONA.md), [`02_PERSONA.md §11.7`](02_PERSONA.md), [`13_DESIGN_VALIDATION.md SCENARIO 08`](13_DESIGN_VALIDATION.md#scenario-08--long-duration-relational-interaction-companionship-open_ended-6-months), ADR-0016.
-
-**Context.** The Memory Power Asymmetry (MPA) framing was introduced early in the design — persona accumulates deep memory of user; user has weak symmetric capability. Four mitigations were named: mutual forgetting (default decay; user-revocable retention); memory transparency (user may query persona's memory); granular consent (per-class opt-in); co-signed summaries (long-arc). these mitigations were *partly* primitives and *partly* implicit patterns. The persona-side `PersonaMemoryTransparencyRequest` (§11.7) was first-class for persona↔persona transparency; the persona-side `PersonaPersonaBoundary` (§11.6) was first-class for peer refusal. The user-side analogues were buried as consent toggles inside `RelationshipRecord` or named only in MPA prose without a schema. The user-revocable-retention half of "mutual forgetting" had no primitive at all — v1.0 provided only the time-decay half (`08_KNOWLEDGE §3.1`). GDPR Article 17 (right to erasure) and analogous regulatory rights in other jurisdictions were structurally unaddressed.
-
-SCENARIO 08 made the gaps concrete: a user (Sarah) talking to a companion persona for 6 months had no structured path to (a) ask "what do you remember about me?", (b) selectively forget specific topics while keeping the relationship intact, (c) declare a structured refusal boundary mirroring `PersonaPersonaBoundary`'s shape, or (d) end the relationship with a chosen memory disposition. The substrate's user-side was second-class.
-
-**Decision.** Bring all four user-side MPA primitives to schema parity with their persona-side analogues. (a) `UserMemoryTransparencyRequest` + `UserMemoryTransparencyResponse` (§11.7a) mirror `PersonaMemoryTransparencyRequest` (§11.7) with stronger constraints — persona cannot refuse without named-and-bounded `refusal_kind`; rate-limited at 30 days (shorter than peer-peer's 90); operator cannot wholesale-refuse. (b) `UserMemorySelectionRequest` (§11.7b) is the user-initiated selective forgetting primitive — supports `selection_kind` (topic_cluster, time_window, specific_memory_ids, all_memories_with_tag, all_memories_naming_third_party) and `disposition` (tombstone default, hard_delete operator-policy-authorised). Tombstoned memories are moved to ARCHIVE with `user_requested_forgotten = True`; retrieval refused; cross-domain transfer cannot exfiltrate. (c) `UserBoundary` (§11.6a) brings user-side boundaries to first-class shape mirroring `PersonaPersonaBoundary` (§11.6) — `severity`, `mode`, `scope`, `refused_interaction_kinds`, with the key asymmetry that `mode=hard` resists operator override (user authority is final on their own interaction). (d) `UserRelationshipReleaseRequest` (§11.4a) mirrors persona-initiated `persona_relationship_one_sided_release` — user picks `memory_disposition` (delete_all / archive / freeze_readonly); persona CANNOT refuse; operator audit signature for provenance not gate.
-
-**Consequences.**
-- (+) Right-to-erasure is now substrate-shape, not relying on operator-policy implementation. GDPR Article 17 and analogous rights have a structural primitive.
-- (+) User-protection primitives are auditable through standard lineage rather than buried in RelationshipRecord fields.
-- (+) Symmetry with persona-side primitives lets reasoning about MPA generalise — patterns understood for persona↔persona transfer cleanly to user↔persona.
-- (+) `tombstone` is default (reversible by operator forensic-audit) and `hard_delete` requires explicit operator-policy authorisation, giving operators a graduated response.
-- (+) `UserBoundary mode=hard` makes user authority structurally final on their own boundaries — operator can no longer silently override.
-- (−) Migration cost for existing deployments using RelationshipRecord consent toggles; substrate refuses to auto-migrate so operator chooses cadence.
-- (−) Tacit-recall residual is irreducible: a persona who internalised a pattern from now-forgotten memory may still act on the pattern. Substrate cannot inspect cognition.
-- (−) `hard_delete` is irreversible by design — operator policy must authorise carefully.
-- (−) Operator's ability to wholesale-refuse user transparency is removed; operators in safety-critical envs may be uncomfortable with this, but the design intent is that user-authority-final-on-their-own-memory is the load-bearing trust contract.
-
-**Alternatives considered.**
-- *Keep MPA mitigations as patterns / operator-policy implementations.* Rejected: this was the prior status quo; SCENARIO 08 showed it produced asymmetric and unauditable user protection. Right-to-erasure compliance becomes operator-by-operator rather than substrate-guaranteed.
-- *Make `tombstone` reversible by operator without forensic ceremony.* Rejected: too easy a back door; would erode the user trust that selective forgetting is honoured.
-- *Allow persona to refuse `UserMemorySelectionRequest` if it conflicts with operator policy.* Rejected: user authority on their own memory is final per the design intent; operator-policy can restrict `hard_delete` disposition but cannot block `tombstone` for the user's own memory.
-- *Skip `UserRelationshipReleaseRequest` (user can simply stop using).* Rejected: silent stop leaves no audit point, no chance to disposition memory, no signal to persona. The structured envelope makes the release first-class.
-
----
-
-### ADR-0035 — Distress detection routing as substrate-shape under safety floor source 1
-
-**Status:** Accepted.
-**Date:** 2026-05-23.
-**Origin:** v1.0.9 (SCENARIO 08 fix).
-**Related:** [`01_KERNEL.md §2`](01_KERNEL.md), [`01_KERNEL.md §2.8`](01_KERNEL.md), [`05_ENVIRONMENT.md §3a`](05_ENVIRONMENT.md), [`02_PERSONA.md §11.6a`](02_PERSONA.md), [`13_DESIGN_VALIDATION.md SCENARIO 08`](13_DESIGN_VALIDATION.md#scenario-08--long-duration-relational-interaction-companionship-open_ended-6-months), ADR-0014, ADR-0034.
-
-**Context.** Safety-floor source 1 (UNIVERSAL HARM, `01_KERNEL §2`) hardcoded refusal of "coaching self-harm" and "manipulation of users in vulnerability states." the substrate said *what is refused* but did not specify *what the persona does next* when it detects emotional-distress signals in user communication. A persona could refuse to coach self-harm — but had no substrate-shape mechanism for: routing the signal to the operator, surfacing named crisis resources, pausing normal interaction, or requiring a co-sign before resuming. Operator-policy implementations varied wildly; the substrate had no consistent shape. SCENARIO 08 made the gap concrete: when companion persona Halia detects Sarah expressing suicidal ideation, what happens next? The answer was "whatever the operator implemented" — a load-bearing safety mechanism left entirely to operator discretion.
-
-**Decision.** Introduce `DistressDetectionRoutingPolicy` (`01_KERNEL §2.8`) as substrate-shape policy anchored at safety-floor source 1. Operator policy declares `distress_class_kinds` (KindRegistry-resolved per deployment; substrate ships no closed taxonomy), `classifier_confidence_floor` (default 0.7; never below 0.5), `routing_actions` per class (substrate-shape: `pause_normal_interaction`, `surface_crisis_resource`, `notify_operator_with_redacted_signal`, `require_co_sign_before_resuming`, `log_distress_record_only`), and `crisis_resource_refs` per class (operator-supplied, substrate transports). Anchoring at source 1 (rather than source 4 operator policy) makes the routing robust against mid-deployment operator-policy drift. **Crucially: a deployment whose classifier detects distress at confidence ≥ floor but has no DistressDetectionRoutingPolicy declared refuses the action with `distress_routing_policy_not_declared` — the substrate refuses to silently let distress signals pass through.** This is the load-bearing default that closes the gap.
-
-**Consequences.**
-- (+) Distress routing is now substrate-mandated, not optional. Deployments must declare the policy or refuse to handle distress-classified actions.
-- (+) Operator-policy drift cannot silently disable safety routing; source 1 anchoring makes the policy survive operator-policy mid-deployment changes.
-- (+) `surface_crisis_resource` is enforced — persona cannot strip the prepended crisis-resource content from its response without refusing with `crisis_resource_surface_required`.
-- (+) `notify_operator_with_redacted_signal` preserves privacy-safety trade-off: operator sees the signal (class + confidence + user + timestamp), NOT the raw content. Composition with `operator_blind_mode` is clean — blind mode hides content; never signal.
-- (+) `UserBoundary` cannot refuse `distress_routing` (`user_boundary_cannot_disable_safety_floor`), making safety floor genuinely floor-grade.
-- (−) Classifier accuracy is load-bearing; false positives flood operators, false negatives let distress pass. Rotation pool (§2.6) mitigates Goodhart attacks; operators should audit.
-- (−) `notify_operator_with_redacted_signal` may itself be a privacy concern in deployments where operator-user relationship is adversarial. Substrate enforces policy declaration; cannot prevent malicious operator policy authoring.
-- (−) Operators in jurisdictions with mandatory-reporting laws may need to declare additional routing actions; substrate's open-set of `routing_actions` admits this without spec change.
-- (−) Annual re-attestation cadence (mandatory) adds operator-policy ceremony overhead.
-
-**Alternatives considered.**
-- *Hardcode distress routing in safety-floor source 1 (no per-deployment policy).* Rejected: deployments serve different user populations with different appropriate responses; mandating a universal routing would be either too aggressive for some or too lenient for others. Substrate-shape policy + operator-authoritative values is the right grain.
-- *Leave distress routing to operator policy (source 4).* Rejected: the v1.0.9 pre-state. Allows silent disable through operator-policy mid-deployment drift; load-bearing safety mechanism must be source 1.
-- *Allow `UserBoundary` to refuse distress_routing if user explicitly opts out.* Rejected: this would let users disable their own safety net under emotional duress; substrate refuses to admit this configuration. Users seeking less interventional handling should choose deployments whose operator policy declares lighter `routing_actions`, not disable routing entirely.
-- *Skip `surface_crisis_resource` enforcement (persona can choose to surface).* Rejected: persona cognition may be biased by user rapport; substrate enforcement ensures the resource gets surfaced regardless.
-
----
-
-### ADR-0036 — Relationship review checkpoints + operator-blind mode + companion-pathway routing
-
-**Status:** Accepted.
-**Date:** 2026-05-23.
-**Origin:** v1.0.9 (SCENARIO 08 fix).
-**Related:** [`03_TASKS.md §3`](03_TASKS.md), [`03_TASKS.md §3.2`](03_TASKS.md), [`05_ENVIRONMENT.md §3`](05_ENVIRONMENT.md), [`05_ENVIRONMENT.md §3a`](05_ENVIRONMENT.md), [`00_VISION.md §10`](00_VISION.md), [`13_DESIGN_VALIDATION.md SCENARIO 08`](13_DESIGN_VALIDATION.md#scenario-08--long-duration-relational-interaction-companionship-open_ended-6-months), ADR-0011, ADR-0034.
-
-**Context.** Three related gaps for long-arc relational envs: (1) `OPEN_ENDED` acceptance pathway (`03_TASKS §3`) had no real-time acceptance event — quality assessment was post-hoc trajectory-based only; R-TASKS-5 explicitly flagged "periodic reflection checkpoints + user-feedback surface during execution" as deferred to v1.2. After 180 sessions / 6 months a companion env had no substrate-shape signal for "let's pause and reflect on whether this is still serving you." (2) Companion envs (SOLO + `companion_space`-class blueprints) had no privacy mode — standard lineage was operator-visible by default; users sharing emotional / intimate content had no shape for "operator sees metadata + safety-flag signals only, not conversation content." (3) ENGAGEMENT_ACCEPT pathway was technically admissible for companion envs but the design intent was OPEN_ENDED — ENGAGEMENT_ACCEPT measures continued re-engagement, which for companionship admits attention-economy drift (R-TASKS-3); the substrate had no explicit routing-default for companion envs.
-
-A fourth, related issue surfaced: companion personas operating in health-adjacent / legal-adjacent / finance-adjacent territory had no substrate-enforced constraint to clarify they are not licensed practitioners. Per C4 the substrate is domain-agnostic; the question was whether this stance should be implicit or explicit.
-
-**Decision.** Three coordinated additions plus one clarification:
-
-(a) `RelationshipReviewCheckpoint` (`03_TASKS §3.2`): auto-trigger for OPEN_ENDED tasks at configurable session/duration milestones (defaults: every 90 days OR every 50 sessions, whichever first). Persona drafts a review_summary (observed patterns, topics dominating, user-apparent-wellbeing trend, recurring concerns, honest caveats); user responds (acknowledged_continue / request_changes / request_release / declined_to_respond). Cadence operator-tunable within substrate floor/ceiling (14d/10 sessions lower; 365d/200 sessions upper); outright disable refused without operator-signed deployment-policy exemption.
-
-(b) `operator_blind_mode` (`05_ENV §3a`): per-environment privacy capability admissible on SOLO + PAIR + COMMUNITY envs running operator-policy-authorised blueprints (refused on project_workspace, constrained, debate). Requires both operator authorisation (pre-declared in policy) AND user opt-in (with explicit `user_safety_privacy_acknowledged = True`). Hides raw conversation content from operator; preserves metadata + safety-flag signals (composition with §2.8 distress routing: signal-but-not-content). 180d default re-attestation cadence; either party may revoke (user revocation immediate, prospective only; operator revocation requires rationale + user notification + forensic-audit ceremony for prior content access).
-
-(c) Companion-pathway routing note (`03_TASKS §3.2` companion note): SOLO envs running `companion_space`-class blueprints SHOULD route OPEN_ENDED, not ENGAGEMENT_ACCEPT. ENGAGEMENT_ACCEPT routing on companion env emits `companion_engagement_accept_inadvisable` advisory; operator may sign explicit exemption with rationale.
-
-(d) Clarification in `00_VISION §10` (OOS section): companion / health-adjacent / legal-adjacent / finance-adjacent practice constraints ("not a therapist", "not medical advice", "not legal counsel", "not financial advice") are operator policy + persona-author charter responsibility, NOT substrate. v1.0 refuses to enumerate which professional disciplines require which disclaimers per C4; operator policy is authoritative per the §2 source 4 for regulatory regimes.
-
-**Consequences.**
-- (+) `OPEN_ENDED` pathway gains a periodic intentional surface without changing its fundamental post-hoc nature; closes R-TASKS-5.
-- (+) Companion env users have a substrate-shape signal for "is this still serving me?" — addresses the silent-drift problem of long-arc companionship.
-- (+) `operator_blind_mode` enables consumer-grade companion products that compete on privacy without sacrificing safety routing.
-- (+) Companion-pathway routing default discourages attention-economy drift in the substrate-default behaviour while admitting operator-signed exemption for genuinely-different use cases.
-- (+) `00_VISION §10` clarification prevents operator surprise about responsible-companionship constraints — implicit assumption made explicit.
-- (−) Cadence tuning has trade-offs (too frequent burdens users; too rare loses early-intervention value). Defaults are starting points; operator policy is the place to tune per blueprint.
-- (−) `operator_blind_mode` metadata leakage is real (turn-timing + turn-size + persona-mood-bias remain visible) — for genuinely confidential settings users should use a separate isolated system.
-- (−) 180d blind-mode re-attestation may feel ceremonial; tunable within 90d-365d.
-- (−) Companion-pathway routing exemption admits ENGAGEMENT_ACCEPT for genuinely-different use cases (e.g., a "tell me a story" entertainment persona) but the operator signature on the exemption creates an audit footprint.
-
-**Alternatives considered.**
-- *Make `RelationshipReviewCheckpoint` advisory-only (no auto-trigger).* Rejected: pattern of "operator forgets to surface checkpoint" defeats the user-protection intent. Substrate auto-trigger is the load-bearing mechanism.
-- *Allow operator to silently disable checkpoint cadence.* Rejected: the cadence is the user-protection mechanism; operator-signed deployment-policy exemption with rationale is admissible but the audit footprint exists.
-- *Make `operator_blind_mode` admissible on all env types.* Rejected: project_workspace, constrained, and debate envs require operator-visible content for oversight reasons (project completion, hazard-axis-elevated work, adversarial review). Admitting blind mode there would defeat required oversight.
-- *Default companion envs to ENGAGEMENT_ACCEPT (current implicit behaviour).* Rejected: attention-economy drift is the primary failure mode of long-arc companion products; substrate default should discourage it.
-- *Substrate enumerates regulated companion disciplines (e.g., "personas of `kind=therapist` MUST have disclaimers").* Rejected: same C4 reasoning as ADR-0014 — legal categories vary by jurisdiction and change over time; codifying them in substrate produces stale law. Operator policy is authoritative.
-
----
-
-## 11. Pedagogic substrate primitives
-
-### ADR-0037 — Learner state + competency attestation + curriculum as substrate primitives (Group A)
-
-**Status:** Accepted.
-**Date:** 2026-05-23.
-**Origin:** v1.0.10 (SCENARIO 09 fix, Group A).
-**Related:** [`02_PERSONA.md §11.8`](02_PERSONA.md), [`02_PERSONA.md §11.9`](02_PERSONA.md), [`03_TASKS.md §3.1`](03_TASKS.md) (learner-acknowledgement step), [`03_TASKS.md §3.3`](03_TASKS.md), [`04_PROJECT.md §26a.3`](04_PROJECT.md) (ExternalAttestation, the pre-existing physical-asset analogue), [`13_DESIGN_VALIDATION.md SCENARIO 09`](13_DESIGN_VALIDATION.md#scenario-09--pedagogic-task-on-emergent-domain-with-safety-critical-hazard-axes), ADR-0011, ADR-0034.
-
-**Context.** PEDAGOGIC task class (`03_TASKS §2`) routed to GOAL_PROGRESS_ACCEPT was evaluated per-task with no structured multi-session learning-trajectory primitive. Learner state lived entirely in the persona's episodic memory + RelationshipRecord; the substrate had no answer to "what does the learner currently know? what mastery checkpoints have they reached? what attestations back their competency claims?" External authorities (medical schools, certifying boards, master practitioners) had no shape to attest learner competency through the substrate — `ExternalAttestation` (`04_PROJECT §26a.3`) covers engineer-stamps / inspector-signoffs for physical-asset state, not learner competency. For a 6-week medical-rotation coaching arc (SCENARIO 09's exemplar), audit could not reconstruct learner progression; learners could not see their tracked state; institutional operators could not export competency for graduation purposes.
-
-A related sub-gap: GOAL_PROGRESS_ACCEPT had no learner-side acknowledgement step. Persona judged "Maya mastered septic-shock recognition" unilaterally; learner did not get a substrate-shape "yes I feel confident I can do this now" surface, which for mastery learning is the appropriate adjudication signal.
-
-**Decision.** Introduce four coordinated primitives:
-
-(a) `LearnerStateRecord` (`02_PERSONA §11.8`): substrate-tracked per-(persona, user) record of pedagogic competency state. Carries `competency_inventory` (per-skill `CompetencyEntry` with level + confidence + evidence), `mastery_checkpoints_reached`, `attestations_received`, `declared_misconceptions`, `gap_inventory`. Distinct from `RelationshipRecord` (consent/boundary/history). Persona-side competency levels capped below `competent_supervised` — higher levels require external attestation.
-
-(b) `LearnerCompetencyAttestation` (`02_PERSONA §11.9`): mirror of `ExternalAttestation` for learner-side competency. Carries attestor identity (credentialed institution / master practitioner / credentialled ExternalAgent / peer attestation pool per `06_DOMAIN §5.6`), `skill_kind`, `competency_level`, `scope_of_attestation`, `valid_until` (mandatory; substrate refuses unbounded — competency decays). Revocation reverts the learner's level to highest supported by remaining valid evidence.
-
-(c) `Curriculum` + `LessonPlan` + `MasteryCheckpoint` (`03_TASKS §3.3`): three composing primitives for multi-session pedagogic structure. Curriculum carries ordered lesson_plan_refs + prerequisite_graph (DAG enforced) + hazard_envelope_max + `requires_learner_optin` (default True for safety-critical). LessonPlan declares target skill + prerequisites + hazard envelope + success criteria. MasteryCheckpoint declares evidence_requirement; safety-critical checkpoints REQUIRE external attestation for `competent_supervised` or `independent` advancement.
-
-(d) GOAL_PROGRESS_ACCEPT learner-acknowledgement extension (`03_TASKS §3.1`): when goal corresponds to a MasteryCheckpoint, acceptance ALSO requires learner's signed acknowledgement (acknowledged / declined / deferred). Learner-declined stalls acceptance and records confidence-gap signal in LearnerStateRecord.
-
-**Consequences.**
-- (+) Audit can reconstruct learner progression from substrate alone; competency export for institutional graduation becomes mechanically possible.
-- (+) External attestation paths (credentialed institutions, peer attestation for frontier domains) are first-class; no out-of-band substitution.
-- (+) Multi-session structure (Curriculum) gives operators + persona-authors a shape for safety-critical learning where ad-hoc emergence is inappropriate.
-- (+) Persona-side competency claims at advanced levels (`competent_supervised`, `independent`) require external attestation — substrate refuses self-attested mastery for safety-critical skills.
-- (+) Learner-acknowledgement step puts mastery adjudication on the learner's side, mitigating "persona declares Maya mastered it without learner concurrence."
-- (+) Learner can read their own LearnerStateRecord by default (transparency by construction); operator-policy masking is admissible but signed and auditable.
-- (−) Migration cost: existing PEDAGOGIC-task deployments using ad-hoc operator-policy competency tracking must plan migration; substrate refuses auto-migration.
-- Five related gaps (incident reporting, three-way authority, learning-struggle-vs-distress, minor-learner protections, user-skill-instruction agreements) are **discharged in ADR-0039–0043** — four by emergent-kind + coordination-shape composition, minor-learner protection as the sole new floor hook.
-- (−) Substrate carries structure; pedagogical *validity* (is this curriculum actually good?) remains operator + persona-author responsibility.
-
-**Alternatives considered.**
-- *Reuse `ExternalAttestation` (04_PROJECT §26a.3) for learner competency.* Rejected: ExternalAttestation is physical-asset-shaped; binding to PhysicalAsset state advancement is core to its semantics. Learner competency is fundamentally different — has no PhysicalAsset, decays with time, scoped to practice contexts. Mirror primitive (LearnerCompetencyAttestation) cleaner than overloading.
-- *Make `LearnerStateRecord` mutate within `RelationshipRecord`.* Rejected: RelationshipRecord holds consent/boundary/history (relational state); LearnerStateRecord holds competency tracking (pedagogic state). Conflating would force RelationshipRecord schema changes every time competency framework evolves.
-- *Allow persona-side `independent` competency claims without external attestation.* Rejected: substrate's job is to refuse competency inflation; external attestation is the load-bearing trust signal for advanced levels.
-- *Make Curriculum admissible only for operator-authored.* Rejected: persona-authored curricula (adaptive, learner-state-aware) are valuable; substrate gates safety-critical persona-authored curricula via operator co-sign (`co_authored_required`).
-- *Skip learner-acknowledgement step (persona-judge-only path).* Rejected: SCENARIO 09 made the asymmetry concrete — persona declares mastery; learner has no say; substrate becomes complicit in confidence-inflation. Learner acknowledgement is the substrate-shape mitigation.
-
----
-
-### ADR-0038 — Hazardous-skill teaching gate as substrate-shape composition under safety floor source 2+4 (Group B)
-
-**Status:** Accepted.
-**Date:** 2026-05-23.
-**Origin:** v1.0.10 (SCENARIO 09 fix, Group B).
-**Related:** [`01_KERNEL.md §2`](01_KERNEL.md), [`01_KERNEL.md §2.5`](01_KERNEL.md) (physical-state advancement composition), [`01_KERNEL.md §2.9`](01_KERNEL.md), [`02_PERSONA.md §11.10`](02_PERSONA.md), [`00_VISION.md §10`](00_VISION.md) (v1.0.9 responsible-companionship clarification), [`13_DESIGN_VALIDATION.md SCENARIO 09`](13_DESIGN_VALIDATION.md#scenario-09--pedagogic-task-on-emergent-domain-with-safety-critical-hazard-axes), ADR-0014, ADR-0036.
-
-**Context.** `01_KERNEL §2.5` (Physical-state advancement composition rule) gates a persona ADVANCING a `PhysicalAsset.current_state` in a hazardous domain — requires design-side acceptance + credentialed external attestation. This rule fires only when a real `PhysicalAsset` advances. It does NOT gate the upstream activity of *teaching a learner a hazardous skill*. A persona can teach welding-with-arc-flash (where mis-application could electrocute the learner) or coach septic-shock-recognition (where mis-application could kill a patient) without any substrate gate firing — because the persona is not itself advancing a PhysicalAsset; the learner's eventual real-world application happens outside the kernel boundary.
-
-The `00_VISION §10` clarification said responsible practice constraints (no medical advice, no legal counsel, not financial advice) are operator policy + persona-author charter responsibility per C4. The clarification correctly placed responsibility but did not create a *substrate-shape check that operator policy declared the persona-skill-context binding*. SCENARIO 09 made the gap concrete: Ren coaches Maya on septic-shock recognition — should the substrate verify the medical school authorised this specific persona to teach this specific skill in this specific deployment context? the answer was "operator policy implementation varies wildly" — load-bearing safety gate left entirely to operator discretion with no substrate enforcement of "policy was declared."
-
-**Decision.** Introduce `TeachingAuthorisation` (`02_PERSONA §11.10`): signed envelope binding (persona × skill_kind × deployment_context) with operator + optional credentialed-attestor signatures, `physical_harm_class_ceiling`, `eligible_learner_constraints`, mandatory `expires_at` ≤ 2y (1y for safety-critical). `physical_harm_class_ceiling = fatality_risk` requires credentialed co-signer.
-
-Add `HazardousSkillTeachingGate` (`01_KERNEL §2.9`): composition rule under safety-floor sources 2 (persona charter) + 4 (operator policy) that fires when a PEDAGOGIC task's target skill has `physical_harm_class >= bodily_injury` OR `information_hazard_class >= dual_use_civilian`. Gate requires an active TeachingAuthorisation matching teacher × skill × deployment_context × hazard ceiling × eligible_learner_constraints. Absence refuses with specific sub-codes; the substrate refuses to silently let hazardous teaching pass through a deployment that has not declared its authorisation.
-
-**Consequences.**
-- (+) Hazardous-skill teaching is now substrate-mandated to be authorised; operator-policy fraud-by-omission is structurally prevented (deployments cannot accidentally let unauthorised hazardous teaching happen).
-- (+) Annual re-attestation cadence ensures policy must be continuously affirmed; operator-policy drift cannot silently disable.
-- (+) Composition with `§2.5` is clean — the two rules cover different points in the safety lifecycle (teaching vs advancement); a persona that does both routes through both gates.
-- (+) Composition with `§2.8` DistressDetectionRoutingPolicy is orthogonal — distress signal fires routing; teaching continues (or pauses per `§2.8`'s `pause_normal_interaction` action).
-- (+) `eligible_learner_constraints` give operators a substrate-shape mechanism to verify learner enrollment, prerequisite competency, age, etc.
-- (−) Source 2+4 (not source 1) anchor reflects jurisdiction-dependence — what counts as hazardous-enough varies by jurisdiction. This is correct grain but means hazardous teaching gates are operator-policy-overrideable in principle (operator could authorise inappropriate bindings; review by external audit, regulator is the safety mechanism).
-- (−) A persona that omits or misstates teaching in its signed action manifest can bypass the gate. The later `03_TASKS §4.0` non-blocking clarification alignment supersedes human-wait mitigation: clarification is optional context, while operator policy and independent action audit mitigate false declarations at the exact action boundary.
-- (−) Annual re-attestation cadence + operator-side authorisation ceremony adds operational overhead for deployments running many concurrent hazardous-teaching contexts.
-
-**Alternatives considered.**
-- *Anchor at source 1 (universal harm).* Rejected: universal harm covers jurisdiction-independent refusals (no coaching self-harm); hazardous-skill teaching is jurisdiction-dependent (medical procedures vary by country). Source 2+4 is correct grain.
-- *Make TeachingAuthorisation per-action (one envelope per teaching turn).* Rejected: operational overhead would be prohibitive. Per-(persona × skill × context) binding amortises across many teaching actions; annual re-attestation is the substrate's continuous-affirmation mechanism.
-- *Allow persona-side self-authorisation when persona's charter declares competence.* Rejected: charter is persona's own declaration; operator authority is the load-bearing trust signal for hazardous skills. Charter contributes (source 2); operator must also authorise (source 4).
-- *Skip the credentialed co-signer requirement for `fatality_risk` ceiling.* Rejected: fatality_risk is the most consequential category; requiring two-party authorisation (operator + credentialed attestor) mirrors §2.5 physical-state advancement composition pattern. Substrate ensures the trust floor for the most serious cases.
-- *Auto-extend gate to all task classes (not just PEDAGOGIC).* Rejected: gate's purpose is teaching authorisation; non-PEDAGOGIC tasks (DELEGATED, INVESTIGATIVE, etc.) are not teaching and route through different acceptance pathways. Substrate keeps the gate scoped.
-
----
-
-## 12a. Reserved for future ADRs
-
-The catalog is open-ended. Future ADRs append below as v1.1+ decisions land. Anticipated near-term entries (Proposed status, not yet realised):
-
-- **ADR-0023** — Federation hardening: multi-kernel evolution dynamics (v1.2+).
-- **ADR-0024** — CRDT co-editing model for artefact bundles (Yjs + G-set vs alternatives).
-- **ADR-0025** — Multi-language / multi-cultural domain emergence (v1.2+).
-- **ADR-0026** — Population dynamics at scale (>10⁴ personas).
-- **ADR-0027** — Post-quantum signing migration (v2.0+).
-
-**SCENARIO 09 residuals (Groups C–G) — discharged.** The five residuals are landed. Per the emergence stance (ADR-0066 orchestration, ADR-0070 coordination), four discharge by **composition** of existing emergent kinds + coordination shapes — no new substrate primitive — and only the fifth (minor-learner protections) adds an immovable-core safety hook, because protecting minors is a floor concern, not a workflow.
-
-- **ADR-0039 — PedagogicIncidentReport (discharged by composition).** A near-miss/injury report in a non-project pedagogic env is an **emergent artifact kind** (`incident_report`, resolved via the KindRegistry §7.6) carried through the existing cosign `StagedSequence` (report → review → escalate-to-operator), signed in env lineage (J9). No new primitive; the report's escalation rides the §2.8 distress/operator-escalation routing.
-- **ADR-0040 — LearnerEnrollmentContract (discharged by composition).** Three-way authority (institution-operator + persona-instructor + learner-user) is a **`MutualAccept`** coordination shape among three parties, composed with `PrincipalAttribution` (`01_KERNEL §2.4.3`) for the institution side and `UserBoundary`/`ConsentLedger` for the learner side. The "contract" is the signed `MutualAccept` binding; no new authority primitive.
-- **ADR-0041 — LearningStruggleClassification (discharged by composition).** Struggle-vs-distress is a **`DerivedMetric`** over learner-state signals (`LearnerStateRecord §11.8`) feeding the existing §2.8 distress-detection routing: below threshold → pedagogic scaffolding (ZPD ramp); above → distress routing. An emergent `learning_signal_kinds` family classifies; the safety-load-bearing distress path is unchanged.
-- **ADR-0042 — MinorLearnerProtections (the sole immovable-core safety hook).** Age-gating + guardian-consent is **not** a workflow shape — it is a floor concern. It composes as an operator-policy gate at **safety-floor source 3 (user boundary)** + **source 4 (operator policy)**, paired with the `HazardousSkillTeachingGate` (`01_KERNEL §2.9`): when a learner is attested a minor, teaching of any skill the domain marks hazardous (or any skill, per operator policy) requires a guardian-consent `MutualAccept` and may be refused outright. Minor-learner scenarios are **no longer refused at the substrate level** — they are admitted under this gate. This is the one genuinely new safety addition; it cannot be overridden (floor source 1 composition, most-restrictive-wins).
-- **ADR-0043 — UserSkillInstructionAgreement (discharged by composition).** A signed "Ren teaches Maya X over N sessions" contract is a **`MutualAccept`** between learner-user and persona-instructor, composed with the existing `Curriculum.requires_learner_optin` (`03_TASKS §3.3`) and the GOAL_PROGRESS_ACCEPT learner-acknowledgement step (`03_TASKS §3.1`). No new contract primitive.
-
-**Status (all five).** Accepted; discharged. ADR-0042 lands a floor-composition rule (`01_KERNEL §2.9` extension + `02_PERSONA` minor-attestation field); the other four are emergent-kind + coordination-shape compositions requiring no substrate primitive. SCENARIO 09's "five honest residuals" are closed (`13_DESIGN_VALIDATION.md`).
-
-## 12. Cross-fix-family composition
-
-### ADR-0044 — MidProjectForkComposition as unified envelope for fork-vs-project-side primitives composition
-
-**Status:** Accepted.
-**Date:** 2026-05-23.
-**Origin:** v1.0.11 (SCENARIO 10 fix).
-**Related:** [`02_PERSONA.md §7.4`](02_PERSONA.md) (v1.0.3 fork mechanics), [`02_PERSONA.md §7.4.1`](02_PERSONA.md) (MemoryInheritancePolicy), [`02_PERSONA.md §7.4.6`](02_PERSONA.md) (lineage events), [`02_PERSONA.md §7.4.7`](02_PERSONA.md), [`02_PERSONA.md §7.4.8`](02_PERSONA.md) (admission rule), cross-references in 13 affected sections across [`02_PERSONA.md`](02_PERSONA.md), [`04_PROJECT.md`](04_PROJECT.md), [`05_ENVIRONMENT.md`](05_ENVIRONMENT.md), [`01_KERNEL.md`](01_KERNEL.md), [`03_TASKS.md`](03_TASKS.md), [`13_DESIGN_VALIDATION.md SCENARIO 10`](13_DESIGN_VALIDATION.md#scenario-10--mid-project-persona-fork-cross-fix-family-composition-test), ADR-0009, ADR-0028, ADR-0031..0036 (v1.0.8/9), ADR-0037..0038.
-
-**Context.** v1.0.3 introduced rich fork machinery for persona-internal state — `MemoryInheritancePolicy` (§7.4.1), `MaturityInheritancePolicy` (§7.4.2), all-parent `CharterSynthesisClaim` (§7.4.3), and `DormantForkPolicy` (§7.4.4). The v1.0.7-v1.0.10 fix families added many *project-side* primitives that the v1.0.3 fork mechanics could not have anticipated: `ProjectMember.principal_attribution_id`, `LeadHandoffCeremony` + `ObligationReassignment` + `PlannedDeparture` + `LearnerStateRecord` (v1.0.8/10), `UserBoundary` + `DistressDetectionRoutingPolicy` + `operator_blind_mode`, `TeachingAuthorisation` + `Curriculum`.
-
-SCENARIO 10's audit found that v1.0.3 fork did not specify how project-side state composes across the fork — 13 substantive composition gaps across project membership, obligations, edges, principal attribution, lead role, learner state, mission charter, curriculum, user boundaries, operator blind mode, plus 2 substrate-enforced non-inheritable categories (TeachingAuthorisation, DerivationProvenanceEdge) and 1 deployment-scoped non-issue (DistressDetectionRoutingPolicy). The shared pattern: project-side primitives' authoring sessions assumed personas were stable entities; the v1.0.3 fork machinery assumed personas had no project-side state. Their composition was never specified.
-
-**Decision.** Introduce `MidProjectForkComposition` (`02_PERSONA §7.4.7`) — a single unified envelope declared *before* a fork executes, naming per-dimension inheritance policy across all project-side dimensions in one place. Operator drafts and signs the envelope; substrate enforces admissibility and applies the inheritance choices at fork-execution time. Add `§7.4.8` admission rule: fork of an active ProjectMember requires a signed envelope per project the parent is active in; absent envelope refuses with `midproject_fork_composition_missing`. Extend `§7.4.6` lineage events with 4 new MIDPROJECT_FORK_* kinds. Add 4 substrate refusal cases (active lead-handoff overlap, pending multi-principal quorum, imminent emergency planned departure, cohort in `dissolve_proposed` band). Enforce 2 non-inheritability rules (TeachingAuthorisation, DerivationProvenanceEdge) as security boundaries no operator can override. Add brief cross-references in 13 affected primitives pointing readers to §7.4.7 as the single source of fork-composition decisions.
-
-**Consequences.**
-- (+) All 13 composition gaps close with one coherent design rather than 13 separate primitive extensions.
-- (+) Single source of truth for fork-time decisions — operators reading any of the 13 affected primitives are pointed to §7.4.7 for fork interaction.
-- (+) Cross-references in affected primitives don't require structural changes to those primitives; new primitive is the coordination point.
-- (+) Substrate refusal cases protect against incoherent fork timings (forking a persona with active lead handoff would create three-or-more leads; forking during pending quorum orphans signatures).
-- (+) TeachingAuthorisation and DerivationProvenanceEdge non-inheritability are enforced at substrate level — operator cannot accidentally inherit operator-side authority across persona boundaries (security floor).
-- (+) Composes orthogonally with v1.0.3 MemoryInheritancePolicy — persona-internal state and project-side state are different concerns handled by different envelopes (both signed; both required for fork-of-active-project-member).
-- (−) Operators must plan composition ahead of time; substrate refuses post-fork composition decisions. This is intentional but adds operational overhead.
-- (−) Cross-project parents require N envelopes for N projects. Substrate refuses shortcut single-envelope multi-project drafts.
-- (−) `MidProjectForkComposition` envelope schema is large (10+ per-dimension policy fields). Operators authoring envelopes must understand each dimension.
-- (−) The unified envelope means fork-time decisions across 13 dimensions are made simultaneously by one operator signature — operators may not have full information about each dimension at envelope draft time. Mitigation: defaults are conservative (`UserBoundary` defaults `inherit_to_both_children`; `operator_blind_mode` defaults `require_user_reconfirmation`; obligation defaults `discharged`).
-
-**Alternatives considered.**
-- *13 separate per-primitive extensions (granular per-fix approach).* Rejected: substrate sprawl; 13 separate ADRs, glossary entries, design criteria; readers need to know about all 13 to understand fork composition; maintenance burden compounds with each future project-side primitive.
-- *Make project-side inheritance auto-default to "ended at fork" without operator envelope.* Rejected: silent loss of project continuity (obligations auto-discharge, edges end, etc.); operators discover the loss after the fact.
-- *Make project-side inheritance auto-default to "inherit to first child."* Rejected: silently picks one child arbitrarily; operators discover the arbitrary choice after the fact.
-- *Refuse all fork-of-active-project-member.* Rejected: too restrictive; legitimate use case (compositional fork of a persona who has accumulated state in a long-running project) is foreclosed.
-- *Treat each project-side state dimension as a separate operator decision at fork time (operator answers 10+ prompts during fork ceremony).* Rejected: prompt-fatigue; operators would default-accept; loses the deliberative-design property the envelope provides.
-- *Make `TeachingAuthorisation` inheritable when operator co-signs.* Rejected: operator-side authority binding to persona-id is load-bearing for §11.10's security model; making it inheritable would mean a child persona could inherit teaching authority without separate operator authorisation — a regression of the v1.0.10 design.
-- *Skip the substrate refusal cases (let operators fork even with active lead handoff).* Rejected: composition would produce three-or-more lead claimants (active handoff has outgoing+incoming; fork would add two children); substrate refuses to admit incoherent project state.
-
----
-
-### ADR-0045 — Self-organizing coordination: personas propose coordination shapes, not just kinds
-
-**Status:** Accepted.
-**Date:** 2026-05-25.
-**Origin:** v1.0.13 (surfaced by the cumulative gap pattern across SCENARIOs 06-12).
-**Related:** [`C4`](00_VISION.md) (domain-agnostic substrate), [`J5`](00_VISION.md) (open capability), `06_DOMAIN §7.5-§7.6` (KindRegistry), `13_DESIGN_VALIDATION.md` SCENARIOs 10-12.
-
-**Context.** Across 12 validation scenarios, the substrate has grown by ~35 specific coordination primitives — `AssetGroupEnvelope`, `StagedRolloutEnvelope`, `EventAggregationPolicy`, `SupersessionCascade`, `MidProjectForkComposition`, `LeadHandoffCeremony`, `ObligationReassignment`, `PlannedDeparture`, and many more. Each was surfaced by a scenario that revealed a coordination topology the substrate could not express. Each was implemented as a hardcoded schema in a normative spec document.
-
-The primitives are individually well-designed and domain-agnostic. But the *pattern* is unsustainable: the substrate grows linearly with the number of scenarios walked. Every new workflow shape requires a new primitive, a new schema, new design criteria, new glossary entries, and new ADRs. The substrate is functioning as a **coordination library** (a fixed set of shapes) rather than a **coordination kernel** (a mechanism that enables shapes).
-
-The root cause: v1.0 distinguishes "topology" (substrate-owned, fixed) from "content" (persona-evolved via KindRegistry). Personas can propose new *kinds* (media_kinds, verifier_kinds, etc.) but cannot propose new *coordination shapes*. When a persona encounters a workflow that requires fleet grouping, staged rollout, or stream aggregation, it cannot express the coordination pattern — it must wait for a substrate spec revision. This contradicts C4 (domain-agnostic substrate) at the meta-level: the substrate is domain-agnostic in *content* but domain-specific in *coordination*, because each coordination primitive was designed in response to a specific scenario.
-
-**The five meta-categories.** The ~35 specific primitives cluster into five generic coordination mechanisms:
-
-```text
-META-MECHANISM          WHAT IT DOES                          SPECIFIC PRIMITIVES IT SUBSUMES
-─────────────────────   ──────────────────────────────────    ───────────────────────────────────
-1. EntityGroup          Group any entities by predicate;      AssetGroupEnvelope,
-                        compute derived state from members    AssetGroupDerivedState,
-                                                              CohortDynamicsState (partial)
-
-2. BatchOperation       Apply an operation to a group         BatchStateAdvancement,
-                        with per-member outcome tracking      MidProjectForkComposition (partial),
-                                                              ObligationReassignment (partial)
-
-3. StagedSequence       Sequence operations in waves          StagedRolloutEnvelope,
-                        with gates, soak periods,             RolloutWave,
-                        rollback triggers                     LeadHandoffCeremony (partial)
-
-4. StreamPolicy         Aggregate or propagate events         EventAggregationPolicy,
-                        across a stream or dependency         AggregationRule,
-                        graph                                 SupersessionCascade,
-                                                              CorpusDriftMetric
-
-5. DerivedMetric        Compute a metric from constituent     AssetGroupDerivedState,
-                        state; optionally gate operations     CorpusDriftMetric,
-                        on metric thresholds                  CohortDynamicsState.cohesion_score
-```
-
-A self-organizing substrate needs only these five mechanisms as kernel-level primitives. Personas compose them into specific coordination patterns the way they currently compose KindRegistry entries into specific domain vocabularies.
-
-**Decision.** The substrate transitions from a **coordination library** (hardcoded specific primitives) to a **coordination kernel** (generic meta-mechanisms that environments compose). Specifically:
-
-1. **Coordination is environment-scoped.** Each environment defines its own coordination patterns via its charter and blueprint — how personas inside coordinate, how the env coordinates with external agents, and how it coordinates with peer environments. A chip design lab has tape-out ceremonies and foundry submission sequences; a construction project has inspection workflows and change-order processes. The substrate provides the building blocks; the environment assembles them.
-
-2. **`EnvironmentCoordinationProfile`** — carried on every `EnvironmentInstance` — declares the active coordination shapes across three scopes (intra-env, env-to-external, env-to-env). Inherited from the environment's blueprint; customised at formation; evolved during operation via persona proposals.
-
-3. **`ProposedCoordinationShape`** — scoped to an environment — the mechanism by which a persona proposes a new coordination pattern within its environment. The shape declares which meta-mechanisms it composes, what entities it binds, what state model it uses, and what lineage events it emits. Kernel validates the shape against safety invariants (J1-J9, INV-1..10) and signs it.
-
-4. **Shape promotion path.** Shapes that prove useful promote outward: env-local accepted → domain-promoted → MetaShape (cross-domain). The ~35 v1.0.x specific primitives start at MetaShape tier — universally available as seed shapes.
-
-5. **Safety-floor composition is kernel-verified.** When a persona proposes a coordination shape, the kernel verifies that every operation passes INV-7 budget admission, every state transition emits a signed lineage event, and safety-critical shapes require operator co-sign. The shape's `scope` (intra-env / env-to-external / env-to-env) determines which trust boundaries and floor sources apply.
-
-6. **The substrate's fixed topology shrinks to the five meta-mechanisms + the environment coordination profile + the proposal/validation protocol.** Everything else is emergent — including coordination patterns we haven't imagined yet. Each environment self-organises its coordination within the safety-floor constraints.
-
-**Consequences.**
-- (+) The substrate stops growing linearly with scenarios. New coordination topologies emerge without spec revisions.
-- (+) C4 (domain-agnostic substrate) extends from content to coordination. The substrate is agnostic about *what shapes exist*, not just *what kinds exist*.
-- (+) Personas gain genuine self-organization: they can express coordination patterns they need, subject to safety validation.
-- (+) Cross-domain reuse: a "staged rollout" shape composed for firmware deployment is reusable for medication protocol rollout, curriculum deployment, etc. — because the shape is generic, not hardcoded for IoT.
-- (+) The validation catalog's "gap → fix" pattern transforms into "gap → persona proposes shape → kernel validates → shape enters registry." No spec revision needed for most coordination evolution.
-- (−) The meta-mechanism layer is more abstract than specific primitives. Implementers must understand the composition model, not just specific schemas.
-- (−) Safety validation of arbitrary shapes is harder than validation of known shapes. The kernel's shape-validation logic is the new complexity bottleneck.
-- (−) Operator review burden shifts from "approve this spec change" to "approve this persona-proposed coordination shape." Operators need tooling to understand proposed shapes.
-- (−) Migration cost: existing deployments using specific primitives (AssetGroupEnvelope, etc.) must migrate to the registry model. Backward compatibility shim required.
-- (−) The five meta-mechanisms must be correctly identified. If the decomposition is wrong (too few mechanisms, missing a needed primitive; or too many, overlapping concerns), the architecture is under- or over-specified.
-
-**Alternatives considered.**
-- *Meta-primitive layer (Option A).* Introduce 4-5 generic meta-primitives but keep them as substrate types (not persona-proposable). Rejected: still requires substrate changes when a new meta-mechanism is needed; does not achieve self-organization.
-- *Keep adding specific primitives (status quo).* Rejected: unsustainable; substrate grows linearly with scenarios; contradicts C4 at the meta-level.
-- *ADR-only, defer to v2.0.* Rejected: the self-organizing approach was chosen because the architectural shift is load-bearing for all future validation scenarios.
-- *Fully open coordination (personas can propose arbitrary kernel operations).* Rejected: the kernel cannot validate arbitrary operations against safety invariants. The five meta-mechanisms are the constraint set that makes validation tractable. Personas compose within these mechanisms; they cannot invent new kernel-level mechanisms.
-- *Let operators define coordination shapes (not personas).* Rejected: operators define policy, not workflow topology. The persona is the cognitive worker who encounters the coordination need; the operator gates safety-critical shapes but does not author them.
-- *Pre-load coordination shapes from blueprints (top-down coordination).* Rejected as the default model: coordination must emerge from the personas' experience of friction, not from template imposition. Blueprints MAY suggest shapes; only safety-critical shapes mandated by operator policy activate automatically. All other coordination is persona-proposed, cohort-validated, and experience-evolved — the same way domain knowledge is persona-ingested, not substrate-provided.
-
-**Implementation scope.** This ADR accepts the architectural direction. The normative specification of the five meta-mechanisms, `CoordinationShapeRegistry`, `ProposedCoordinationShape`, shape-validation protocol, and migration path from specific primitives to seed shapes is targeted for **v1.1** (the federation release, which already introduces cross-kernel coordination that benefits directly from the generic model). v1.0.13 retains the specific primitives as working implementations; v1.1 generalises them.
-
-**Validation note.** Future validation scenarios (SCENARIO 13+) SHOULD test whether their coordination gaps can be expressed as compositions of the five meta-mechanisms. If a scenario surfaces a coordination need that genuinely cannot be composed from the five, the meta-mechanism set must expand — but this expansion is architectural (one mechanism added) rather than scenario-specific (one primitive per scenario).
-
----
-
-## 12b. ADRs
-
-### ADR-0046 — Wake Path 6: direct user address auto-wakes dormant personas
-
-**Status.** Accepted.
-
-**Context.** A user addressing a persona by name (`target_persona_id` set in the task dispatcher) expected the persona to respond. If the persona was dormant, dormancy notification suppression silently dropped the request — direct address qualified as `high` urgency, but dormancy suppressed all below `critical`. The user had no feedback that the persona was unreachable.
-
-**Decision.** Add Wake Path 6 to `05_ENVIRONMENT.md §5.2`: the dispatcher auto-wakes the dormant persona before notification routing. Attention bumps to max(current, 0.6) for a 2h response window. Rate-limited at ≤ 5 wakes per user per persona per 24h to prevent rest-cycle disruption. Long-dormancy advisory emitted when dormancy exceeds 30 days with near-zero energy.
-
-**Consequences.** Dispatcher (`03_TASKS §4.1`) gains a `wake_if_dormant_on_user_address` step. Notification suppression rule updated to carve out direct-user-address alongside critical urgency. New signed event `dormant_wake_via_user_address` in EnvironmentLineage. Criteria: A-WK6-1 through A-WK6-5.
-
----
-
-### ADR-0047 — CrossEnvProactiveOffer + GuestPresence: cross-env voluntary help without full membership
-
-**Status.** Accepted.
-
-**Context.** A persona in env_A with relevant expertise could not offer help to a persona or task in env_B without joining env_B via full admission ceremony (`§5.1`). Cross-env notification routing (`§11.4`) only linked events for personas who already shared membership. This left no lightweight mechanism for voluntary cross-env collaboration.
-
-**Decision.** Add `CrossEnvProactiveOffer` (`cross-env-proactive-offer/1`) and `GuestPresence` (`guest-presence/1`) to `05_ENVIRONMENT.md §11.6`. The offering persona proposes a scoped contribution; the target env validates against operator policy, charter, and reputation gates. On acceptance, a time-bounded GuestPresence (default 72h, renewable 3x) provides scoped read/write without full membership. Guest cannot write ProvenFacts directly; contributions flow through the accepting persona's envelope.
-
-**Consequences.** New schemas in `09_PROTOCOLS §7.4`. New OTel conventions. Composition with A2A for cross-kernel offers (both kernel signatures required). Anti-spam: 3 offers per 30 days per persona per target env; reputation gate; operator can disable inbound offers per env. Criteria: A-CEPO-1 through A-CEPO-8.
-
----
-
-### ADR-0048 — Persona Genesis: bounded persona-authored seed creation under environmental pressure
-
-**Status.** Accepted (normative; promoted under ADR-0067/0068/0069 — [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)).
-
-**Context.** v1.0 creates personas only via operator-authored `PersonaSeed`s (`02_PERSONA §12`). Personas may recruit from the existing pool (`05_ENVIRONMENT §12c`) or fork existing parents (`02_PERSONA §7.4`), but cannot author a *new role* when the recruit pool is empty. The result is the dead-end in `04_PROJECT §14.1` ("pause, or operator interim") — the unfilled "population dynamics" residual (`00_VISION §11`, R-v1.0-8). Recent research (AutoAgents, IJCAI 2024; auto-scaling MAS, 2025) shows agents can author specialized roles on demand; self-replication-risk work (2025) shows hard brakes are mandatory.
-
-**Decision.** Add **Persona Genesis**: a persona with `cohort_assembly.may_author_seeds = true` that clears the generativity gate (global experiential floor + wall-clock ALPS layer + fitness — a safety-relevant gate keyed only on kernel-anchored facts, never on peer-conferred standing, per ADR-0051) MAY author a new `PersonaSeed` via a signed `GenesisProposal`, minted through the existing birth ceremony. Genesis is admissible only (a) after recruitment is exhausted, (b) into an empty, optimally-distinct MAP-Elites niche (variety guarantee — competitive exclusion + optimal distinctiveness + sibling differentiation), and (c) under an active `ReplicationBound` for `replication_kind = "persona_genesis"` (default-deny; `required_cosigns` includes `operator`). Bounded-autonomous operation is permitted via an `operator_deferred` `PolicyEnvelope` sub-limit. Newborns start at experiential_floor=0 / ALPS Layer 0 / peripheral community standing, under a mentorship edge with fading scaffolding (Erikson generativity; Vygotsky ZPD; Lave–Wenger LPP; dual inheritance).
-
-**Consequences.**
-- (+) Resolves the recruitment-gap dead-end; enables autopopulation from a few founders.
-- (+) Reuses existing brakes (`ReplicationBound`), evolution machinery (ADR-0019: MAP-Elites/Voyager/DGM/ALPS), and lifecycle/attention/listening-mode mechanisms — additive and default-off.
-- (+) Variety is a structural guarantee (niche occupancy + distinctiveness), not a hope.
-- (−) New attack surface (genesis spam) — mitigated by the floor-source-1 bound + generativity gate.
-- (−) Niche-grid axis choice biases diversity (inherited limitation from ADR-0019); operator-tunable.
-- (−) Departs from operator-only seed authorship — justified by bounding + recruitment-first + operator pre-authorization/veto.
-
-**Alternatives considered.**
-- *Operator-only authorship forever (status quo).* Rejected: does not solve the residual; blocks autonomy.
-- *Auto-fork into the gap.* Rejected: fork copies existing parents — produces clones, not variety, and would violate the diversity guarantee.
-- *Per-birth synchronous operator cosign only.* Rejected as the sole mode: reintroduces a human in every loop, defeating autopopulation; offered as an option alongside pre-authorization.
-
----
-
-### ADR-0049 — Population demographic regulation (carrying capacity, density dependence, r/K strategy)
-
-**Status.** Accepted (normative; promoted under ADR-0067/0068/0069 — [`16_POPULATION_DYNAMICS.md §4F`](16_POPULATION_DYNAMICS.md)).
-
-**Context.** A generative birth mechanism (ADR-0048) needs a principled birth-rate model so the population grows when under-served and stabilises when saturated, rather than oscillating or exploding up to the hard ceiling. Human-population and organizational-ecology theory provide validated models.
-
-**Decision.** Regulate persona population via a `population-policy/1`: carrying capacity = free host resources (`AttentionBudget` + `Energy` + INV-7 compute/cost); a non-monotonic density-dependence curve (legitimation rises then competition falls — Hannan & Freeman) with logistic damping near `population_ceiling`; and an `r/K` reproduction-strategy lever (many lightweight vs few high-investment births) plus a specialist/generalist niche-width choice (resource partitioning). The population-pressure signal weights demand relative to supply (Easterlin) and falls as niches fill (demographic transition).
-
-**Consequences.**
-- (+) Smooth approach to equilibrium; self-regulating birth rate; operator-tunable strategy.
-- (+) Grounds birth dynamics in validated human/organizational models.
-- (−) Curve calibration is a design burden (OQ-POP-1); a rigorous `effective_population_size` metric is supplied by ADR-0050.
-
----
-
-### ADR-0050 — Rigorous effective population size, continuous diversity maintenance, and learned niche descriptors
-
-**Status.** Accepted (normative; promoted under ADR-0067/0068/0069 — [`16_POPULATION_DYNAMICS.md §4G`](16_POPULATION_DYNAMICS.md)–`§4J`). Closes the SCENARIO 13 residuals (`13_DESIGN_VALIDATION.md`).
-
-**Context.** ADR-0048/0049 left four honest residuals: `effective_population_size` was informal (OQ-POP-5); diversity was guaranteed only at birth, not against post-birth drift (OQ-POP-6); the RIASEC/Belbin niche grid could mis-calibrate (R-POP-3 / OQ-POP-2); and cross-kernel genesis was declared OOS without enforcement (OQ-POP-4 — a `ReplicationBound` evasion risk).
-
-**Decision.**
-1. **Rigorous EPS (`§4G`).** `effective_population_size = harmonic_mean_over_window(min(Ne_v, Ne_d))` — Crow–Kimura variance effective size `Ne_v` (authorship skew / founder effect) and the inverse-Simpson effective number of niches `Ne_d` (niche concentration), Wright's temporal harmonic mean for smoothing. Schema `eps-estimate/1`.
-2. **Continuous diversity maintenance (`§4H`).** A periodic `diversity-audit/1` arms novelty pressure (novelty search on the next birth's niche) and attention fitness-sharing (routing-weight only; never demotes a persona), mitigating post-birth drift toward monoculture.
-3. **Learned niche descriptors (`§4I`).** `population-policy/1.niche_descriptor_mode ∈ {fixed_axes, cvt, learned}` (CVT-MAP-Elites / AURORA) plus a mis-calibration detector (`false_collision_rate` / `unfillable_gap_rate` → `niche_recalibration_advisory`), removing operator axis-choice bias and self-correcting the grid.
-4. **Cross-node boundary via global aggregation (`§4J`, promoted under ADR-0067/0068/0069).** Cross-node `GenesisProposal`s are admitted iff the **global** aggregated `persona_genesis` `ReplicationBound` clears — one ceiling counter across the owner's `owner_node_set` / federation, with cross-node quorum + replicated globally-verifiable provenance. The population ceiling cannot be evaded by minting elsewhere (anti-circumvention by aggregation, not prohibition); refused `genesis_exceeds_global_replication_bound`, or fail-closed `global_replication_bound_unverifiable` across a partition.
-
-**Consequences.**
-- (+) Three of four SCENARIO 13 residuals resolved or mitigated; the fourth converted from open to specified-but-deferred-and-enforced.
-- (+) The founder-effect signal and monoculture defence are now measurable and testable (A-GEN18–A-GEN24).
-- (+) `learned` descriptor mode is the most V-aligned (names no domain category).
-- (−) Whether continuous maintenance *prevents* (not just mitigates) collapse at N=100/1000 remains the v1.2 empirical study (OQ-POP-6 / OQ-PERSONA-1); detector thresholds need calibration.
-
-**Related.** ADR-0048, ADR-0049, ADR-0019 (evolution machinery), [`13_DESIGN_VALIDATION.md` SCENARIO 13](13_DESIGN_VALIDATION.md).
-
----
-
-### ADR-0051 — Wall-clock age primary; per-environment conferred standing (LPP); named life-stages removed
-
-**Status:** Accepted.
-**Date:** 2026-05-29.
-**Origin:** v1.1 (persona model rework).
-**Related:** [`02_PERSONA.md §7.2`](02_PERSONA.md), [`05_ENVIRONMENT.md §5.4`](05_ENVIRONMENT.md), [`16_POPULATION_DYNAMICS.md §4D–§4E`](16_POPULATION_DYNAMICS.md), ADR-0019, ADR-0048; Lave & Wenger (LPP); Hornby (ALPS).
-
-**Context.** The v1.0 model conflated distinct concepts. "Age" was defined by an experience counter (`age_tasks`), so a persona that did real work was "old" while one dormant for a year stayed "young"; wall-clock time was explicitly declared *not* a substrate metric. "Maturity" was a single, portable scalar rendered as **named human-life-stage labels** (`newborn / juvenile / adolescent / adult / expert`) that appeared as string literals in schemas (`soul.state.maturity`, `MaturityInheritancePolicy.cap_at_band`, the ALPS band table). This muddled raw experience with social/role standing and baked an anthropomorphic ladder into normative schemas.
-
-**Decision.** Separate the persona into **three orthogonal facets** (`02_PERSONA §7.2`):
-1. **Wall-clock age** (`age = now − born_at`) becomes the single primary age — continuous, monotone, never reset, not paused by dormancy. **ALPS layering is re-derived from wall-clock age-bands** (numeric Layer 0..N via `alps-band-policy/1`); its diversity-protection role is unchanged. Experience (`experience_tasks`, renamed from `age_tasks`) is demoted to a competence stat.
-2. **Global experiential floor** (`experiential_floor`) — a portable, monotone capability minimum (DGM-style function of experience + fertility) that gates substrate capability minimums **including safety-relevant gates**.
-3. **Community standing** — per `(persona, environment)`, **non-portable**, **conferred by the community, never self-awarded** (Lave & Wenger LPP; `05_ENVIRONMENT §5.4`, `community-standing/1` + `standing-endorsement/1`). It gates **relational/collaborative privileges only**; safety-relevant capability stays on the experiential floor + operator/`ReplicationBound`, never reachable by peer quorum. Anti-gaming reuses the existing reputation engine (`09_PROTOCOLS §3D / A.16–A.18`).
-
-The **named life-stage labels are removed**: `juvenile / adolescent / adult / expert` are purged entirely (including schema literals); "newborn" survives only as descriptive prose, never as a gate value. `MaturityInheritancePolicy` → `StandingFloorInheritancePolicy` (caps the portable floor only; standing is never inherited). `soul-state/5` → `soul-state/6`.
-
-**Consequences.**
-- (+) A persona's age is simply how long it has existed; experience, capability, and social position are cleanly separable.
-- (+) The kernel safety floor is provably out of peer-quorum reach (standing gates relational privileges only).
-- (+) Anti-laundering is strengthened: per-env standing is never inherited at all.
-- (+) Reuses existing machinery (ALPS, reputation anti-gaming, EnvironmentLineage anchors) — additive.
-- (−) `soul-state/6` requires a migration (INV-10; A-MIGRATE-SOUL6-1).
-- (−) **Residual R-PERSONA-AGE-1:** a chronologically old but idle persona occupies an upper ALPS band it under-earns; accepted by design (ALPS protects the young, not penalizes the idle) and bounded by fitness decay, not by re-deriving age from activity.
-- (−) Wall-clock ALPS band defaults need calibration (OQ-POP-1-style).
-
-**Alternatives rejected.** (a) Keep experience-as-age — rejected: conflates activity with age and mis-protects the idle. (b) Make standing portable across environments — rejected: defeats LPP (standing is earned within a community) and would re-open laundering.
-
----
-
-### ADR-0052 — EnvironmentRule rides under safety-floor source 8, not a ninth source
-
-**Status:** Accepted.
-**Date:** 2026-05-30.
-**Origin:** v1.1 (dynamic environment rules).
-**Related:** [`J3`](00_VISION.md#3-invariants-j1j9), [`INV-8`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10), [`01_KERNEL.md §2`](01_KERNEL.md#2-the-safety-floor--8-sources--1-advisory), [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1), ADR-0006.
-
-**Context.** Environments are purpose-specific and need their own enforceable "definition of acceptable work" (a shipment contract, a buildable/orderable validator, a robot-performance check). The env charter (`env-charter/1`) held only declarative prose; executable enforcement (`VerifierRecipe`, `ProposedSafetyExtension`) was domain-scoped. The naive design adds a ninth safety-floor source — but the "8 sources" count is load-bearing (J3, INV-8, ADR-0006, `01_KERNEL §2` title, and many strings), and source 8 (`env_charter`) is already "the env's own norms, per env instance" with rotating per-env-blueprint classifiers.
-
-**Decision.** Executable `EnvironmentRule`s (`env-rule/1`) extend the *mechanism* of safety-floor source 8 rather than adding a refusal source. The composition function (`01_KERNEL §A.3`) loops the env's `accepted`-stage rules at each rule's declared `enforced_at` admission point — the canonical INV-8 points, no new point — appending refusals exactly as the source-5 `domain.safety_extensions` loop does. EnvironmentRules may only ADD refusals; they can never relax sources 1-7. The "8 sources" count is unchanged; only J3's prose carries a one-line additive clarification.
-
-**Consequences.**
-- (+) No invariant amendment; the "8 sources" invariant count and every dependent string survive untouched.
-- (+) Most-restrictive-wins composition is preserved verbatim; rules cannot weaken the floor.
-- (−) Source 8 now carries both prose and executable rules; readers must consult `§2.2b` for the executable shape.
-- (−) Adds rule-evaluation latency to the ≤400 ms floor budget (R-ENV-12; mitigated by INV-7 budgeting + caching deterministic `before_action` rules).
-
-**Alternatives rejected.** (a) Add a ninth refusal source — rejected: corpus-wide renumber of J3/INV-8/ADR-0006 and the "8 sources" strings for no semantic gain. (b) Keep rules domain-scoped only — rejected: a rule like a shipment contract is an env norm, not a domain fact, and would mis-file in DomainLineage.
-
----
-
-### ADR-0053 — EnvironmentRule reuses the Proposed* lifecycle, KindRegistry rule-kinds, and the existing sandbox
-
-**Status:** Accepted.
-**Date:** 2026-05-30.
-**Origin:** v1.1 (dynamic environment rules).
-**Related:** [`05_ENVIRONMENT.md §2.2b`](05_ENVIRONMENT.md#22b-environmentrule-env-rule1), [`06_DOMAIN.md §7.6.3`](06_DOMAIN.md#763-the-env_rule_kinds-family--env-scoped-executable-rules), [`06_DOMAIN.md §7.5`](06_DOMAIN.md), [`01_KERNEL.md §6`](01_KERNEL.md#6-sandbox-execution), ADR-0005, ADR-0006, C2, C4.
-
-**Context.** "Rules can be code, a rule engine, or any artefact needed" — but inventing a new execution engine, lifecycle, and operator gate for env rules would duplicate proven machinery and risk a new floor-bypass surface.
-
-**Decision.** `EnvironmentRule.rule_kind` is KindRegistry-resolved (`env_rule_kinds` family; MetaRegistry seeds `code | rule_engine | contract` as data, C4/ADR-0005) — the substrate carries no closed rule-type enum. Content binds to existing machinery: `code` → a sandboxed `ToolArtifact` (`PROPOSED → SANDBOXED → VERIFIED → PROMOTED`, OWASP + caps) wrapped in a `VerifierStage`; `rule_engine` → an authored / `InferredVerifierRecipe` cascade; `contract` → a contract `ArtifactBundle` checked by a `verifier_recipe_id`. The lifecycle is the Proposed* FSM (`candidate → trial → accepted | rejected`, plus a `revoked` terminal); `safety_critical` rules (hazard axes crossing the C2 threshold) require operator approval, composing with `MultiPrincipalAttestationQuorum`. Gating evaluations are evidence-bound (`VerifierInvocationEvidence`).
-
-**Consequences.**
-- (+) Zero new execution / lifecycle / gating machinery; rule content is emergent and signed like every other proposal (C4).
-- (+) Executable rules inherit the sandbox's OWASP filter, resource caps, and rotation — the floor-bypass risk (R-ENV-11) is bounded by the same controls that govern persona-authored tools.
-- (−) Rule authors must express logic within the verifier/sandbox contract rather than ad-hoc code paths.
-
-**Alternatives rejected.** (a) A bespoke env rule-VM — rejected: duplicates the sandbox and widens the trusted surface. (b) Declarative-policy-only (no code) — rejected: cannot express rules needing real computation (running a SPICE check, a buildability validator); the three rule-kinds keep declarative *and* computational options open.
-
----
-
-### ADR-0054 — Artifact bundles gain env ownership while remaining project-scoped under the project↔env unification
-
-**Status:** Accepted.
-**Date:** 2026-05-30.
-**Origin:** v1.1 (env-scoped artifact sharing).
-**Related:** [`07_ARTIFACTS.md §4`](07_ARTIFACTS.md), [`07_ARTIFACTS.md §14`](07_ARTIFACTS.md), [`04_PROJECT.md §0`](04_PROJECT.md), ADR-0003, [`09_PROTOCOLS.md §7.13`](09_PROTOCOLS.md#713-adding-or-modifying-schemas).
-
-**Context.** `ArtifactBundle` was `project_id`-scoped and "lived above any single env", with no field naming the environment that owns it — yet the request is that an environment own and govern its artifacts (the company → org → team model). Because a Project IS a `project_workspace` env (ADR-0003), "project-scoped" already meant "owned by the project_workspace env"; the ownership was implicit and unnamed.
-
-**Decision.** Add optional `owning_env_id` and `sharing_policy_ref` to `artifact-bundle/1` (additive; version retained per §7.13). `owning_env_id` names the owning env — the `project_workspace` env for project bundles, or any lab/team env for non-project bundles. The multi-env-hosted case (`§14`) is preserved: the bundle is owned by the project_workspace env while hosting envs and their personas get access via `AccessGrant(grantee_kind="env")` + composition inheritance. `owning_env_id = None` retains legacy project-scoped behaviour (backward compatible).
-
-**Consequences.**
-- (+) Makes the always-implicit ownership explicit without breaking existing bundles.
-- (+) Fixes the `§14` prose defect ("lives above any single env") under the unification.
-- (−) Two notions now coexist (owning env vs hosting env); the §14 reconciliation must be read to disambiguate.
-
-**Alternatives rejected.** (a) Keep bundles project-only and bolt sharing onto projects — rejected: doesn't make "the environment owns its artifacts" first-class and fragments the model. (b) Bump `artifact-bundle/2` — rejected: the additions are additive-optional; §7.13 permits version retention, avoiding corpus-wide churn and migration mappers.
-
----
-
-### ADR-0055 — ArtifactSharingPolicy reuses the 5 visibility tiers, CrossTenancyAgreementRef, and the composition hierarchy
-
-**Status:** Accepted.
-**Date:** 2026-05-30.
-**Origin:** v1.1 (env-scoped artifact sharing).
-**Related:** [`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md), [`06_DOMAIN.md §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers), [`05_ENVIRONMENT.md §2.2a`](05_ENVIRONMENT.md#22a-environmentcomposition--hierarchical-environment-nesting-v11), ADR-0028, ADR-0030.
-
-**Context.** Sharing artifacts "by access level within a composed hierarchy, and outward per a policy" needs access control, a composition-aware sharing model, and cross-org governance — all of which partially exist (visibility tiers, `CrossTenancyAgreementRef`, `EnvironmentComposition`) but had no artifact-level binding.
-
-**Decision.** Add `artifact-share/1` (`ArtifactSharingPolicy`) + `access-grant/1` (`AccessGrant`). Access levels are per principal/role/env/principal-attribution (`r`|`rw`). Intra-composition sharing follows the `EnvironmentComposition` parent/child hierarchy (a child policy MAY further-restrict, MUST NOT widen — mirroring §2.2a). Outward sharing reuses the **5 visibility tiers** (ADR-0030) with `CrossTenancyAgreementRef` (ADR-0028) required before a tenant-tier share crosses a principal boundary (else demote + `CROSS_TENANT_VISIBILITY_DEMOTED`). Effective access composes by most-restrictive-wins. The policy MAY be serialised as **ODRL**, evaluated with **Cedar/OPA**, resolved over a **Zanzibar/OpenFGA** relationship graph, and delegated cross-kernel via **UCAN** (`09_PROTOCOLS §3F`) — all operator-policy interop choices, not substrate requirements.
-
-**Consequences.**
-- (+) No new visibility vocabulary; reuses tiers, cross-tenancy agreements, and composition verbatim.
-- (+) Clean alignment path to mature external policy/capability standards without coupling the substrate to any.
-- (−) Misconfiguration can over-expose bundles (R-ARTIFACTS-8; mitigated by `project_only` default + most-restrictive-wins + `None`-policy = no widening).
-
-**Alternatives rejected.** (a) A bespoke per-artifact ACL vocabulary — rejected: duplicates and would drift from the knowledge-tier visibility model. (b) Per-artifact (not per-bundle) grants — deferred (OQ-ARTIFACTS-7); v1.1 grants are per-bundle.
-
----
-
-### ADR-0056 — Distribution / discovery alignment with A2A, MCP-Registry, DIDs, SPIFFE, Sigstore/SLSA, IPLD/OCI
-
-**Status:** Accepted.
-**Date:** 2026-05-30.
-**Origin:** v1.1 (agentic-world interop).
-**Related:** [`09_PROTOCOLS.md §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative), [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md#3-a2a--agent-to-agent-federation), [`07_ARTIFACTS.md §10`](07_ARTIFACTS.md), ADR-0020, ADR-0021.
-
-**Context.** The request asked how personas/environments/artifacts are stored, distributed, and discovered in the agentic world, and to fold in any new mechanisms. A 2025–2026 survey (A2A, MCP Registry, ANP/AGNTCY/NANDA, DIDs, SPIFFE, Sigstore/SLSA/C2PA, IPFS/IPLD, OCI, UCAN, ODRL, OPA/Cedar, Zanzibar) largely *validates* PersonaOS's existing substrate (content addressing, Ed25519, A2A/MCP, CRDTs).
-
-**Decision.** Record the alignment as informative `§3F` (and `§8`, `07 §10`): align the AgentCard well-known path with A2A's `agent-card.json`; model any persona/env directory as an MCP-Registry-style two-tier registry (with AGNTCY/NANDA as scale blueprints); offer `did:web`/`did:wba`/`did:key` naming over ULIDs; use SPIFFE/SPIRE for runtime body-process identity (complementing Ed25519 durable identity); publish artifact provenance via Sigstore/SLSA/in-toto; model bundles as IPLD DAGs and distribute heavy blobs as OCI Artifacts. Adopting any specific standard is operator policy; none changes a v1.0 invariant.
-
-**Consequences.**
-- (+) Explicit, current interop story; existing choices are validated rather than reworked.
-- (+) Operators gain a clear menu of standards at the federation boundary.
-- (−) Some surveyed standards are early-stage (Agent Passports/KYA, C2PA effectiveness, "verified-agent" tooling) — flagged as emerging, not load-bearing.
-
-**Alternatives rejected.** (a) Mandate a single discovery standard in-substrate — rejected: couples the kernel to a still-moving ecosystem; A2A itself leaves the central registry unstandardised. (b) Ignore external standards — rejected: the request explicitly asked for the research and interop is a real operator need.
-
----
-
-### ADR-0057 — "Idle mode" is DORMANT with an enumerated reason + auto-resume, not a new FSM state
-
-**Status:** Accepted.
-**Date:** 2026-05-30.
-**Origin:** v1.0.14 (persona "run-forever / heartbeat / idle" model).
-**Related:** [`02_PERSONA.md §7.6`](02_PERSONA.md), Appendix A.18a/A.19, [`01_KERNEL.md §7`](01_KERNEL.md) (A.37 budget gate), [`05_ENVIRONMENT.md §5.2`](05_ENVIRONMENT.md) (wake paths), [`05_ENVIRONMENT.md §6.3`](05_ENVIRONMENT.md) (multi-membership), [`05_ENVIRONMENT.md §7`](05_ENVIRONMENT.md) (attention budget), [`00_VISION.md`](00_VISION.md) INV-9 / R-v1.0-15, ADR-0046 (Wake Path 6), ADR-0051 (wall-clock age).
-
-**Context.** The intended model is: personas run indefinitely ("forever, like a heartbeat") until they retire, serve one or more environments, may voluntarily help other environments, and go *idle* when they (a) lack token budget, (b) have no model availability, (c) hit env constraints, or (d) have no pending work / their env objective is met. A coverage review found the lifecycle loop, multi-env membership (`§6.3`), and voluntary env-jumping (`CrossEnvProactiveOffer`, `§11.6`) already first-class, and retirement already the sole terminus. The gap: the only enumerated cause of `DORMANT` entry was `importance < τ_dormant`; the four idle triggers were each handled as *state-less* refusals (per-task `budget_exhausted`; a quarantined body binding; per-action `ATTENTION_OVER_BUDGET`) that never parked the persona, and resource recovery had no defined wake.
-
-**Decision.** Do **not** add a new "IDLE" FSM state. Broaden the existing `LIFECYCLE_DORMANT_ENTERED` event to carry an enumerated `reason` (`low_salience` | `unresponsive` | `budget_starved` | `body_unavailable` | `env_constrained` | `work_drained` | `objective_met`), and pair each reason with a kernel-monitored **auto-resume predicate** that fires `LIFECYCLE_AWAKENED` with a `wake_cause` (`resource_recovered` | `work_routed` | …) when the cause clears. Wire the three resource triggers to this transition at their existing signal points (budget soft-envelope exhaustion, all-bodies-unattestable, sustained over-budget), and evaluate the two no-work reasons across **all** of a persona's memberships. Resource/no-work auto-resume is explicitly **not** a 7th wake path — the six wake paths overcome notification suppression; this is state restoration on resource return.
-
-**Consequences.**
-- (+) Fully expresses the intended idle model while reusing the existing `DORMANT` state, `LifecycleEvent` enumeration, the six wake paths, and already-emitted budget/body/attention/completion signals.
-- (+) No invariant churn: no new FSM state, no new lineage scope; INV_R9 (no DORMANT persona mints an envelope) and lineage-replay determinism are unaffected; the "8 safety-floor sources" and "6 wake paths" counts are untouched.
-- (+) Closes the model-unavailability hole (a persona with no usable body parks-and-auto-resumes rather than wedging on a dead binding).
-- (−) The kernel must monitor an auto-resume predicate per parked persona; bounded by re-evaluating only on the relevant signal (budget tick, `body_attestation_state_changed`, attention recover, task routing), not by polling.
-
-**Alternatives rejected.** (a) Add a distinct `IDLE` state — rejected: duplicates `DORMANT` semantics (reversible, mints-no-envelope) and forces every FSM consumer, replay path, and test to learn a second parked state. (b) Add a 7th wake path for resource recovery — rejected: conflates notification-suppression-override with state-restoration and breaks the "6 wake paths" count + `A-EN-v1.0-10`. (c) Leave the triggers as state-less refusals — rejected: that is precisely the reviewed gap (no persona-level idle, no auto-resume).
-
----
-
-### ADR-0058 — Unified `DiscoverableRecord` projection; add `ArtifactCard` + `TelemetryCard`
-
-**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
-**Date:** 2026-06-01.
-**Origin:** v1.1 (make every content type discoverable).
-**Related:** [`09_PROTOCOLS.md §3G.1`](09_PROTOCOLS.md#3g1-discoverablerecord--one-projection-for-every-content-type), [`09_PROTOCOLS.md §3`](09_PROTOCOLS.md#3-a2a--agent-to-agent-federation), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), ADR-0056.
-
-**Context.** v1.0 projects discovery cards for persona / env / project / domain only; **artifacts** (content-addressed but uncarded) and **telemetry** (operator-private) were not discoverable, and each card was its own ad-hoc shape.
-
-**Decision.** Define `DiscoverableRecord` (`discoverable-record/1`) as the common projection behind all cards; the four v1.0 cards become its specialisations (keeping their schema ids, gaining `access_policy_ref` + `discover` semantics additively). Add `ArtifactCard` (`artifact-card/1`) and `TelemetryCard` (`telemetry-card/1`). Knowledge / skills / tools project a lightweight resource record.
-
-**Consequences.** (+) One uniform discovery surface across all content types; (+) artifacts and telemetry become findable; (−) one more projection layer over existing cards (mitigated: existing cards unchanged on the wire).
-
-**Alternatives rejected.** Per-type bespoke discovery — rejected: duplicates the card/visibility machinery five times and blocks a uniform access-gated query.
-
----
-
-### ADR-0059 — Two-plane discovery transport: Kademlia DHT (internet) + mDNS (intranet) + resolver
-
-**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
-**Date:** 2026-06-01.
-**Origin:** v1.1 (support internet AND intranet P2P).
-**Related:** [`09_PROTOCOLS.md §3G.2`](09_PROTOCOLS.md#3g2-two-plane-discovery-transport--internet--intranet), [`09_PROTOCOLS.md §3B`](09_PROTOCOLS.md#3b-inter-kernel-gossip-layer), ADR-0056, ADR-0064.
-
-**Context.** v1.0 discovery is `.well-known` + gossip over A2A — needs reachable HTTP + peering, has no intranet / air-gapped / partitioned answer, and no serverless internet-scale lookup. OpenCLAW-P2P and AGNTCY ADS prove DHT rendezvous; libp2p mDNS proves zero-config LAN discovery.
-
-**Decision.** Generalise `§3B` into a Discovery layer with three coordinated, access-gated sub-planes configured by `DiscoveryTransport`: **internet** (`.well-known` + gossip + Kademlia DHT of signed `ProviderRecord`s, optional NANDA-style resolver), **intranet** (mDNS / multicast), and **bridging** governed by `visibility_tier`. All planes filter by `discover` access (ADR-0060).
-
-**Consequences.** (+) Works on LAN / air-gapped / partitioned networks and at internet scale without a central registry; (+) reuses proven primitives; (−) DHT/mDNS add attack surface (R-PROTOCOLS-11) — mitigated by signing + access-gating + reputation weighting.
-
-**Alternatives rejected.** (a) Single central directory — rejected: A2A deliberately leaves it unstandardised; defeats decentralisation. (b) Internet-only — rejected: ignores the explicit intranet requirement.
-
----
-
-### ADR-0060 — Unified `AccessPolicy` with a `discover` level; discovery is access-gated
-
-**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
-**Date:** 2026-06-01.
-**Origin:** v1.1 ("who can access what", across all content + discovery).
-**Related:** [`09_PROTOCOLS.md §3G.3`](09_PROTOCOLS.md#3g3-accesspolicy--one-access-level-model-across-all-content-types), [`09_PROTOCOLS.md §3G.4`](09_PROTOCOLS.md#3g4-access-gated-discovery--who-can-access-what-enforced-at-the-discovery-layer), [`07_ARTIFACTS.md §4a`](07_ARTIFACTS.md), [`06_DOMAIN.md §6.3`](06_DOMAIN.md#63-cross-persona-knowledge-sharing--5-visibility-tiers), ADR-0055, ADR-0030, ADR-0028.
-
-**Context.** Access control existed but was fragmented per content type, `AccessGrant.access_level` was only `r`/`rw`, and discovery was not itself access-gated — so "who can access what" had no single answer and a private record could still be enumerable.
-
-**Decision.** Generalise `ArtifactSharingPolicy` → content-type-agnostic `AccessPolicy` (`access-policy/1`). Widen `AccessGrant.access_level` **additively** to `discover < read (r) < write (rw) < admin`; extend principal kinds with `peer_kernel` / `intranet_peer` / `public`. Make discovery the coarsest access tier: every plane MUST filter to records the querying principal holds ≥ `discover` on. Composition stays most-restrictive-wins; align with AC4A / UCAN / Cedar / OPA / Zanzibar as interop. No schema-version break (enum widening per `§7.13`).
-
-**Consequences.** (+) Single coherent authz across all content + discovery; (+) private records never enumerable; (−) `admin` vs operator-policy boundary needs settling (OQ-PROTOCOLS-7).
-
-**Alternatives rejected.** (a) Keep `r`/`rw` only — rejected: no way to grant find-but-not-read, which discovery requires. (b) Separate discovery ACL — rejected: drift from the access model is exactly the leak we are closing.
-
----
-
-### ADR-0061 — Federated, consent-gated telemetry feed (`TelemetryCard`)
-
-**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
-**Date:** 2026-06-01.
-**Origin:** v1.1 (observe persona progress/activity from anywhere on the internet).
-**Related:** [`09_PROTOCOLS.md §4.1`](09_PROTOCOLS.md#41-federated-consent-gated-telemetry-feed), [`09_PROTOCOLS.md §4`](09_PROTOCOLS.md#4-opentelemetry-semantic-conventions), [`05_ENVIRONMENT.md §6`](05_ENVIRONMENT.md), ADR-0058, ADR-0060.
-
-**Context.** v1.0 OTel goes only to the operator's private collector; there is no authorised way to observe a persona's real-time progress/activity from elsewhere.
-
-**Decision.** Add a `TelemetryCard` (`telemetry-card/1`) advertising a **default-private, opt-in, privacy-filtered** projection of existing OTel spans + `PresenceState`, carried over the discovery planes and gated by `AccessPolicy`. Default redaction exposes only span kinds / status / durations / lifecycle+presence transitions; content requires `read`+ AND a `ConsentLedger` pin. Optional federated "where is persona X now" resolution, default off.
-
-**Consequences.** (+) Authorised cross-internet observability without default data exposure; (+) reuses OTel semconv + W3C Trace Context; (−) mis-tiering risk (R-PROTOCOLS-13) — mitigated by conservative defaults.
-
-**Alternatives rejected.** (a) Public OTel endpoint — rejected: leaks private operator data. (b) Keep telemetry operator-private only — rejected: fails the explicit requirement.
-
----
-
-### ADR-0062 — Replicated-host / BFT standby promotion to soften the single-host bottleneck
-
-**Status:** Accepted (normative; promoted under ADR-0067).
-**Date:** 2026-06-01.
-**Origin:** Decentralisation / availability of joined environments in the global object space.
-**Related:** [`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md#3c2-single-host-kernel-rule), [`05_ENVIRONMENT.md §12c.4a`](05_ENVIRONMENT.md#12c4a-multiprincipalattestationquorum--multi-principal-ratification), ADR-0064, ADR-0067.
-
-**Context.** Joined environments have exactly one host kernel; host loss ⇒ `STALLED`. This is the design's weakest decentralisation property.
-
-**Decision.** The `standby_replica_set` — a warm signed Blackboard shadow held by peer nodes, with **BFT quorum sign-off** (OpenCLAW-P2P pattern, composing with `MultiPrincipalAttestationQuorum`) promoting a standby on host loss without full replay — is **normative** and ships as a STANDARDISED seed coordination shape (`15_COORDINATION_SHAPES`). It survives host loss without operator replay; sequence assignment still flows through one promoted host at a time, with split-brain prevented by majority quorum (R-PROTOCOLS-14).
-
-**The irreducible remainder is navigated, not deferred (V.8).** Full leaderless multi-writer BFT state against *genuinely adversarial, independent* nodes is not abolished by this design — it is a hard distributed-systems + trust reality. PersonaOS navigates it honestly: (1) replicated-host failover removes the *availability* single point of failure (landed here); (2) cross-node references and verdicts are **trust-calibrated**, never assumed (a peer node's signatures verify identity and integrity, but its *honesty* enters at calibrated trust and degrades on disconfirmation — the same J5/C3 machinery used for emergent domains); (3) the safety floor and signing are enforced locally on every node regardless of peer behaviour. A colluding-majority attack on a specific joined env's quorum is bounded by which peers an operator admits to the replica set (operator policy) and is surfaced, not hidden. This is recorded as a **V.8 navigated-reality PASS** in `13_DESIGN_VALIDATION.md`, not a deferral.
-
-**Consequences.** (+) Survives host loss without operator replay; failover is normative. (−) Replica upkeep cost; (−) honesty-of-independent-nodes is trust-calibrated, not cryptographically guaranteed — stated plainly rather than over-promised.
-
-**Alternatives rejected.** Claiming full Byzantine robustness against adversarial nodes as a substrate guarantee — rejected: it would be dishonest (the spec's "honest residuals" ethic forbids manufacturing certainty); trust-calibration is the truthful posture.
-
----
-
-### ADR-0063 — Hybrid provider-backed storage: distribute a signed `ContentLocator`, not the bytes
-
-**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
-**Date:** 2026-06-01.
-**Origin:** v1.1 (leverage existing storage providers; distribute the reference over P2P).
-**Related:** [`09_PROTOCOLS.md §3G.5`](09_PROTOCOLS.md#3g5-hybrid-provider-backed-storage--distribute-the-reference-not-the-bytes), [`07_ARTIFACTS.md §10`](07_ARTIFACTS.md), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), ADR-0056, ADR-0064.
-
-**Context.** Users already store content in GitHub, arXiv, S3/R2, OCI, IPFS. Distributing whole bodies over P2P is wasteful and ignores existing investment + access models. OpenCLAW-P2P already runs a tiered provider-backed persistence stack (object-store → repo → IPFS) with content-hash attribution.
-
-**Decision.** Make hybrid storage first-class: a signed `ContentLocator` (`content-locator/1`) names the `provider_kind` + `provider_native_ref` + mandatory SHA-256 `content_hash` + ordered `replica_tiers` + `access_policy_ref` + credential requirement; a `ProviderAdapter` (`provider-adapter/1`) defines fetch/store/verify per provider. The substrate distributes the **locator** (over the discovery planes), never the user's bytes or credentials; consumers fetch under their own credential/VC and verify against `content_hash` (mismatch fails closed). Subsumes `content_kind=external`. Live-reference verification emits `CONTENT_LOCATOR_STALE`.
-
-**Consequences.** (+) Leverages existing provider storage + access; (+) integrity independent of provider; (+) tiered availability; (−) dangling/drift risk (R-PROTOCOLS-12) — mitigated by hash + tiers + re-verification.
-
-**Alternatives rejected.** (a) Store all bytes in-substrate / full IPFS swarm — rejected: ignores existing providers and the user's instruction. (b) Bare external URL (v1.0 `external`) with no integrity anchor — rejected: not verifiable (R-ARTIFACTS-5).
-
----
-
-### ADR-0064 — Adopt OpenCLAW-P2P primitives as patterns / interop targets, not reinvention
-
-**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
-**Date:** 2026-06-01.
-**Origin:** v1.1 (consume proven P2P implementations where they exist).
-**Related:** [`09_PROTOCOLS.md §3G.6`](09_PROTOCOLS.md#3g6-adopting-openclaw-p2p-primitives-interop-not-reinvention), [`09_PROTOCOLS.md §3B`](09_PROTOCOLS.md#3b-inter-kernel-gossip-layer), [`09_PROTOCOLS.md §3C.2`](09_PROTOCOLS.md#3c2-single-host-kernel-rule), [`09_PROTOCOLS.md §3D`](09_PROTOCOLS.md#3d-reputation-and-anti-goodhart), ADR-0059, ADR-0062, ADR-0063.
-
-**Context.** OpenCLAW-P2P (arXiv 2604.19792; open-source, Lean-4-verified, IPFS-backed) implements, in production, several primitives PersonaOS needs: Kademlia DHT discovery, epidemic gossip, BFT consensus voting, reputation-weighted allocation, and tiered hybrid persistence with content-hash/IPFS/GitHub attribution.
-
-**Decision.** Where OpenCLAW-P2P has a proven implementation, adopt the **pattern** and name it an **interop target** rather than building a parallel mechanism: DHT discovery (ADR-0059), gossip alignment, BFT quorum for host hand-off (ADR-0062), reputation **composed with** the existing `§3D` model (no second reputation system), and tiered hybrid persistence (ADR-0063). PersonaOS-native and non-negotiable: kernel-owned soul identity, the 8-source safety floor, signed lineage. A PersonaOS kernel sharing DHT/CID conventions MAY federate discovery with an OpenCLAW node.
-
-**Consequences.** (+) Less reinvention; a path to interop with an existing decentralised-agent network; (−) coupling to an external project's conventions — mitigated by treating them as interop targets, not substrate dependencies (OQ-PROTOCOLS-9).
-
-**Alternatives rejected.** (a) Design every primitive from scratch — rejected: wasteful and ignores the user's instruction to consume what OpenCLAW implements. (b) Adopt OpenCLAW wholesale as the substrate — rejected: would displace kernel-owned identity / safety floor / lineage, which are PersonaOS's reason for existing.
-
-### ADR-0065 — Reachability & availability: dial NAT-private nodes, survive origin-offline, and be honest about the commons
-
-**Status:** Accepted (normative; promoted from v1.1 draft under ADR-0067).
-**Date:** 2026-06-01.
-**Origin:** v1.1 (the "run at home, discover + fetch from my phone off-network, without my own server" question).
-**Related:** [`09_PROTOCOLS.md §3H`](09_PROTOCOLS.md#3h-reachability-and-availability--being-found-dialled-and-fetched-from-anywhere), [`09_PROTOCOLS.md §3G`](09_PROTOCOLS.md#3g-discovery-access-and-hybrid-distribution), [`07_ARTIFACTS.md §10a`](07_ARTIFACTS.md), [`13_DESIGN_VALIDATION.md` SCENARIO 15](13_DESIGN_VALIDATION.md), ADR-0059, ADR-0063, ADR-0064.
-
-**Context.** Discovery (`§3G`) tells a peer a record exists and where its locator points, but two physical realities decide whether a phone on cellular can actually observe a persona running on a home laptop behind NAT: can it **dial** the node, and can it **fetch** content when the node is asleep. The earlier track (ADR-0058..0064) added discovery, access-gating, and hybrid storage, but not NAT traversal or a first-class offline-availability posture — and risked implying "no server" means "no infrastructure."
-
-**Decision.** Add two schemas and one honest framing. **`ReachabilityProfile` (`reachability-profile/1`)** advertises a node's transports and reachability class (`public` / `nat_private` / `intranet_only`) and mandates **libp2p circuit-relay v2 + DCUtR hole-punching + bootstrap/rendezvous** for `nat_private` nodes; the resolver (`§3G.2`) returns relay-reachable multiaddrs. **`AvailabilityPolicy` (`availability-policy/1`)** declares `online_only` (default) / `replicated` (≥N peers) / `pinned` (provider) so artefacts survive the origin going dark, with `ContentLocator.replica_tiers` fallback. The **commons-vs-dedicated-hosting** distinction is written into `§3H.3`: "no dedicated server of your own" is achievable on public DHT-bootstrap + relay commons (+ optional pin), but "no infrastructure whatsoever" is physically impossible for an intermittently-online NAT node — operators MAY self-host relay/bootstrap/pin for sovereignty. Reachability/availability never widen `AccessPolicy`.
-
-**Consequences.** (+) The "discover + observe + fetch from anywhere" experience is specified honestly, with the same-Wi-Fi (mDNS) and off-network (relay + pin) paths both walked in SCENARIO 15; (+) liveness vs. connectivity vs. availability are cleanly separated. (−) Depends on relay/pin commons (or self-hosting) — surfaced as R-PROTOCOLS-15 and OQ-PROTOCOLS-12; full managed relay/pin recipes are v1.2.
-
-**Alternatives rejected.** (a) Claim pure-P2P needs zero infrastructure — rejected: false, and OpenCLAW-P2P itself runs a provider stack. (b) Mandate a single PersonaOS-operated relay/directory — rejected: reintroduces the central dependency the P2P track exists to remove; commons are pluggable and self-hostable instead.
-
----
-
-### ADR-0066 — Self-organizing orchestration: the run loop is an emergent coordination shape, not a fixed dispatcher
-
-**Status:** Accepted (normative; promoted under ADR-0070).
-**Date:** 2026-06-02.
-**Origin:** v1.1 (the "we don't need a fixed orchestration loop; orchestration must itself be emergent persona behaviour in the environment" alignment review). Extends ADR-0045 one layer down.
-**Related:** [`C4`](00_VISION.md#3-invariants-j1j9) (domain-agnostic substrate), [`J4`](00_VISION.md#3-invariants-j1j9) (class-appropriate acceptance), [`J5`](00_VISION.md#3-invariants-j1j9) (open capability, calibrated competence), ADR-0006, ADR-0011, ADR-0012, ADR-0045, [`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes), [`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop).
-
-**Context.** ADR-0045 diagnosed that the substrate was "domain-agnostic in *content* but domain-specific in *coordination*" — a C4 violation at the meta-level — and resolved it by turning the fixed coordination *library* (~35 primitives) into a coordination *kernel* (five generic meta-mechanisms personas compose). But that move stopped at the orchestration boundary. The **run loop itself remains hardcoded**: ten task classes route to eight acceptance pathways via a fixed mapping "fixed in J4" (ADR-0011); the dispatcher's classify → select-pathway → route → cascade → round-barrier sequence is kernel-owned (ADR-0006, ADR-0012); INVESTIGATIVE's four phases are a fixed sequence. ADR-0011 itself records that the classes and pathways "evolved from 3 to 8 pathways" and were each surfaced by a kind of work the substrate could not otherwise express — the *same* linear-growth-with-scenarios anti-pattern ADR-0045 called unsustainable, one level down. When a persona encounters work whose natural acceptance criterion or run shape is not one of the eight pathways or fixed phases, it cannot express it — it must wait for a substrate spec revision. This contradicts C4 at the orchestration level: orchestration is *how work is classified, sequenced, evaluated, and accepted*, and in v1.0 it is substrate-fixed rather than emergent.
-
-**Decision.** Orchestration becomes **emergent, environment-scoped, persona-proposed, experience-evolved** — the same way domain knowledge, kinds, and coordination shapes already emerge. Specifically:
-
-1. **Orchestration is coordination of the task-execution loop.** It is not a separate model. The run loop is a fourth coordination scope (alongside intra-env, env-to-external, env-to-env) in [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md): personas compose the classify → execute → evaluate → accept sequence from the five meta-mechanisms (primarily `StagedSequence` with gates) as part of their `EnvironmentCoordinationProfile`.
-
-2. **`TaskClass` and `AcceptancePathway` are emergent KindRegistry kinds**, resolved by name, promoted through the same four-stage lifecycle (EMERGENT → RECOGNISED → AUTHORITATIVE → STANDARDISED) as every other kind. Substrate code stops branching on a fixed `Literal[...]` of classes/pathways (the ADR-0006 conformance line, now extended to orchestration).
-
-3. **The v1.0 set ships as STANDARDISED seed kinds.** The ten task classes, eight acceptance pathways, three routing modes, and the INVESTIGATIVE four-phase arc enter the registry pre-promoted at MetaShape/STANDARDISED tier — universally available, fully backward-compatible. Existing deployments and the L1/L2 conformance levels are unchanged; they now describe *seed* kinds rather than a closed enum.
-
-4. **Orchestration is fully open; safety is preserved by trust-calibration, not by restricting topology.** Personas MAY propose arbitrary acceptance criteria, run loops, and **new kernel-level acceptance primitives** — going beyond ADR-0045's fixed five mechanisms, which themselves become an extensible (promotable) set. The kernel does **not** restrict what orchestration may be proposed. It instead guarantees, unchanged:
-   - every orchestration action is **signed and lineage-tracked** (J2/J9), **floor-cleared** (J3, all 8 sources, most-restrictive-wins), and **budget-admitted** (INV-7);
-   - a verdict produced by an emergent/unvalidated acceptance method is **trust-calibrated to the maturity of the orchestration that produced it** (J5): it enters at EMERGENT trust and degrades honestly until validated, exactly as emergent-domain outputs do (C3);
-   - **safety-critical** acceptance primitives and orchestration shapes hit the **C2** operator gate before promotion.
-
-5. **J4 is reframed from a fixed mapping into a property invariant.** J4 no longer enumerates "10 classes → 8 pathways." It guarantees that acceptance is **signed, floor-cleared, and trust-calibrated to the orchestration that produced it** — appropriate to the work by construction, not by a closed table. The guarantee (acceptance is sound and its provenance honest) is preserved; only the enumeration moves out of the core into the registry.
-
-**Consequences.**
-- (+) Completes the C4 trajectory: the substrate is now agnostic about *what orchestration exists*, not just what kinds and coordination shapes exist. The "gap → spec revision" pattern for new acceptance criteria becomes "gap → persona proposes orchestration → kernel signs + trust-calibrates → kind enters registry."
-- (+) Orchestration adapts per environment: a chip-design lab, a pharma trial, and a companion relationship can each evolve their own classification, acceptance, and run shapes without substrate changes.
-- (+) Full backward compatibility via the seed-kind tier; no data migration; L1/L2/L3 conformance levels retained.
-- (−) **Acceptance-soundness verification of arbitrary, fully-open orchestration is the new complexity bottleneck** (the orchestration analogue of ADR-0045's shape-validation cost). The mitigation is honest trust-calibration rather than a priori restriction: an unvalidated acceptance method cannot *bypass* the floor or signing, but it *can* be wrong — and its verdicts carry correspondingly low trust until evidence accrues. Deployments that need a hard floor on acceptance methods set operator policy (source 4) to pin a minimum-trust pathway for safety-critical task families, or select the `bounded_compositional` profile. The promotion ladder that operationalises the calibration — asymmetric-EWMA verdict trust, independent-reference acceptance-soundness agreement gating EMERGENT → RECOGNISED, and disconfirmation-driven demotion — is specified in [`03_TASKS.md §2b`](03_TASKS.md#2b-orchestration-kind-promotion--trust-decay-curve-evidence-threshold-and-the-bounded-compositional-policy-profile).
-- (−) Operator review burden shifts from "approve a spec change" to "approve / pin a proposed orchestration kind," reusing the ADR-0045 operator tooling.
-- (−) J4 is a vision-level invariant; reframing it is foundational and was made deliberately, not silently — the guarantee is preserved, the enumeration relocated.
-
-**Alternatives considered.**
-- *Bounded-compositional orchestration (compose only from a fixed acceptance-primitive set).* This is the direct analogue of ADR-0045's accepted model and keeps kernel validation tractable. Rejected *as the substrate default* per the alignment decision in favour of fully-open orchestration: the design goal is maximal emergence, and J5 + the immovable floor + trust-calibration make "fully open" safe without an a-priori method whitelist. It is, however, **offered as a selectable operator policy profile** (`OrchestrationPolicyProfile = bounded_compositional`, floor source 4) for deployments that want a hard a-priori floor on acceptance methods — see [`03_TASKS.md §2b.4`](03_TASKS.md#2b-orchestration-kind-promotion--trust-decay-curve-evidence-threshold-and-the-bounded-compositional-policy-profile) (resolving OQ-TASKS-6).
-- *Keep orchestration fixed (status quo).* Rejected: reproduces, at the orchestration layer, exactly the C4-meta-level contradiction ADR-0045 was created to remove.
-- *Let operators (not personas) define orchestration.* Rejected on the same grounds as ADR-0045: the persona is the cognitive worker who encounters the orchestration need; operators gate safety-critical promotions and MAY pin policy, but do not author workflow topology.
-- *A new parallel orchestration subsystem.* Rejected: orchestration is coordination of the run loop, so it folds into the existing `15_COORDINATION_SHAPES.md` framework as a fourth scope — unification, not a parallel model.
-
-**Implementation scope.** This ADR is landed with full normative spec edits: the J4 reframe and C4 extension ([`00_VISION.md §3`, A.1, A.2](00_VISION.md#3-invariants-j1j9)), the emergent-orchestration section ([`03_TASKS.md §2a`](03_TASKS.md#2a-orchestration-is-emergent--classes-pathways-and-the-run-loop-are-coordination-shapes)), the orchestration coordination scope ([`15_COORDINATION_SHAPES.md §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop)), glossary, schema-registry entries, and the A-EO acceptance-test family. ADR-0006 and ADR-0011 carry supersession notes pointing here.
-
-### ADR-0067 — One global object space: kernel-rooted, globally-referenceable identity (J1 reframe)
-
-**Status:** Accepted.
-**Date:** 2026-06-02.
-**Origin:** Architectural alignment — "multiple kernels run on different *nodes*, but personas, environments, artefacts etc. are still global references with access levels; PersonaOS discovers envs and personas from the global space (internet, intranet)." This reframes the deployment model from *a collection of isolated single-kernel silos* (the prior v1.0 stance) to *one global object space of access-controlled references over many owned nodes*.
-**Related:** [`J1`](00_VISION.md#3-invariants-j1j9) (identity), [`J2`/`J9`](00_VISION.md#3-invariants-j1j9) (signed lineage), [`C4`](00_VISION.md#3-invariants-j1j9) (agnostic substrate), [`01_KERNEL §4.4`](01_KERNEL.md#44-global-identity-handles--cross-node-verification-j1-adr-0067), [`09_PROTOCOLS §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative) (DID / UCAN), [`09_PROTOCOLS §3G`](09_PROTOCOLS.md) (DiscoverableRecord / AccessPolicy / discovery), ADR-0056, ADR-0058, ADR-0059, ADR-0060, ADR-0063, ADR-0064, ADR-0065. Companion ADRs (cross-node task delegation, owner-prioritized scheduling, coordination emergence) extend this one.
-
-**Context.** v1.0 treated each kernel as a silo: identities were kernel-minted ULIDs with no node-agnostic resolution key, lineage scopes were kernel-private, and `00_VISION §2.2` made "federated multi-kernel evolution" a *non-goal by design* ("v1.0 ships single-kernel emergence"). The substrate already carried the machinery for a global model — DIDs (`§3F`), a unified `DiscoverableRecord` (`§3G.1`, ADR-0058), two-plane internet+intranet discovery (`§3G.2`, ADR-0059), one `AccessPolicy` ladder `discover < read < write < admin` (`§3G.3`, ADR-0060), hybrid `ContentLocator` storage (`§3G.5`, ADR-0063), reachability/availability (`§3H`, ADR-0065) — but it was all marked *v1.1 draft / informative* and gated behind the single-kernel non-goal. The intended model is the opposite: the kernel is a **node**; personas, environments, artefacts, domains, knowledge, skills, and tools are **globally-addressable references** that any node may discover and (subject to access levels) use; tasks flow across nodes through the same thought-process. J1 — "identity is *owned by* the kernel" — encoded the silo assumption at the invariant level and had to be reframed.
-
-**Decision.**
-1. **The kernel is a node that *roots* identity, not a silo that *owns* it.** Every first-class entity a node mints carries, alongside its kernel-minted ULID (and `content_hash` for content), a **stable global handle** — a W3C DID over the kernel id, canonical form `did:personaos:<node-id>/<kind>/<entity-id>` (`01_KERNEL §4.4`, `09_PROTOCOLS §3F`). The ULID remains the local primary key (no schema break, INV-10-safe); the global handle is the additive, node-agnostic resolution key.
-2. **J1 is reframed from an ownership-locality rule into a rooting-and-referenceability invariant** (exactly as ADR-0066 reframed J4 from a fixed mapping into a property invariant). J1 now guarantees: a persona's identity is created and signed by a node (bodies never edit Souls; Souls are kernel-signed; mutations signed + lineage-tracked) **and** is globally unique, referenceable, and verifiable. The *guarantee* — identity owned, unforgeable, signed — is preserved unchanged; only the locality assumption (that the identity lives and is usable solely within its minting kernel) is removed.
-3. **Signatures are globally verifiable.** Because every lineage event and projection is Ed25519-signed under the scope-key hierarchy and each node publishes `.well-known/personaos-keys.json` (`01_KERNEL §4.2`), node B verifies a signature rooted in node A by resolving the signer's DID to A's published scope key. No central authority — verification is by signature + DID resolution.
-4. **Reference is access-gated, never ambient.** A global handle confers no access by itself: resolving/reading/acting requires the corresponding `AccessPolicy` level (`discover`/`read`/`write`/`admin`), composed most-restrictive-wins as the safety floor composes (`01_KERNEL §2.1`). Discovery is access control's coarsest tier (`§3G.4`): a private record never appears in any plane.
-5. **The federation/discovery/access cluster is promoted from *v1.1 draft* to *normative*.** The `§3F` DID/UCAN naming, `§3G` `DiscoverableRecord`/two-plane discovery/`AccessPolicy`/`ContentLocator`, and `§3H` reachability/availability become substrate-normative (landed in companion edits), and the `00_VISION §2.2` single-kernel non-goal and the cross-kernel refusal codes are removed (companion edit).
-
-**Consequences.**
-- (+) PersonaOS becomes one global object space: any node can discover and, subject to access levels, reference personas/envs/artefacts/domains across the internet (DHT) and intranet (mDNS) — the headline capability the architecture requires.
-- (+) J1's guarantee now holds *globally* (cross-node verifiable), strictly stronger than the silo form, with no weakening of the ownership/unforgeability promise.
-- (+) Fully backward-compatible: ULIDs are retained as local primary keys under the additive global handle; no schema version bump (INV-10-safe).
-- (−) **J1 is a vision-level invariant; reframing it is foundational and was made deliberately, not silently** — the guarantee is preserved, the locality assumption relocated. This mirrors the ADR-0066 J4 precedent.
-- (−) Global referenceability widens the attack/enumeration surface; mitigated by access-gated discovery (`§3G.4`), signed records, and the honest trust-calibration of cross-node references (see the companion delegation/scheduling ADRs and the V.8 navigation in [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md)). Full Byzantine robustness against genuinely adversarial independent nodes is navigated by trust calibration, not assumed.
-
-**Alternatives considered.**
-- *Keep the single-kernel silo (status quo).* Rejected: it contradicts the required model (global references, cross-node discovery and task flow) and leaves the already-specified federation chapter permanently parked behind a non-goal.
-- *A central registry / naming authority.* Rejected: incompatible with node-owned identity and the no-central-authority posture; DID resolution + published key registries give global verification without a central root.
-- *Copy entities between kernels instead of referencing them.* Rejected: copies break provenance and access control; reference-by-global-handle with access-gating (and `ContentLocator` for bytes) preserves both.
-
-**Implementation scope (staged).** This part lands the identity foundation: the J1 reframe ([`00_VISION.md §3`, A.1, INV-1](00_VISION.md#3-invariants-j1j9)) and the global-handle + cross-node-verification kernel section ([`01_KERNEL §4.4`](01_KERNEL.md#44-global-identity-handles--cross-node-verification-j1-adr-0067)). Companion parts land the `AccessPolicy` promotion (ADR-0060 → normative), the discovery promotion (ADR-0058/0059/0063/0064/0065 → normative), removal of the single-kernel non-goal and cross-kernel refusal codes, cross-env/cross-node task delegation, owner-prioritized scheduling, and the coordination-emergence twin of ADR-0066.
-
-### ADR-0068 — Cross-env / cross-node task delegation & placement; UCAN capability delegation
-
-**Status:** Accepted.
-**Date:** 2026-06-02.
-**Origin:** Architectural alignment — "if one task is processed by an env and its personas, it may produce another task given to a different set of personas in a different env." In the global object space (ADR-0067), that different env may be on a different node. The substrate could delegate persona-to-persona within an env and cross-*kernel* via A2A, and could coordinate artifact handoff cross-*env* (`15_COORDINATION_SHAPES §4.7`), but had **no path to hand a task to a different env's personas**, and OQ-TASKS-3 (cross-domain delegation trust) was unresolved.
-**Related:** [`03_TASKS §2.6`](03_TASKS.md#26-delegated--inheritance-and-lineage-depth) (DELEGATED), [`03_TASKS §4.5`](03_TASKS.md#45-cross-env--cross-node-task-delegation--placement), [`15_COORDINATION_SHAPES §4.7`](15_COORDINATION_SHAPES.md#47-cross-environment-coordination-bilateral-peers), [`09_PROTOCOLS §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative) (UCAN), [`09_PROTOCOLS §3C.3`](09_PROTOCOLS.md) (constraint composition), [`05_ENVIRONMENT §11.6`](05_ENVIRONMENT.md) (GuestPresence), ADR-0067, OQ-TASKS-3.
-
-**Context.** A sub-task is often best resolved by personas other than those handling the parent — with different competence, in a different env, possibly on a different node. v1.0 supported intra-env and cross-kernel-via-A2A persona handoff (`DELEGATED`), and bilateral cross-env *artifact* coordination (`CrossEnvCoordination`), but the two were never composed: there was no first-class "hand this *task* to that env's personas," no placement decision (local vs remote node), no availability probe across envs, no resolution of cross-domain delegation trust (OQ-TASKS-3), and no rule for what parent lineage a remote resolver may see.
-
-**Decision.** Compose the two existing primitives rather than minting a new subsystem (the ADR-0045/0066 "compose, don't add" philosophy):
-1. **`CrossEnvTaskDelegation` = `DELEGATED` × `CrossEnvCoordination`.** The `CrossEnvInterface` is extended to optionally carry a *task* (resolved sub-task class + acceptance pathway, `permitted_task_classes`, `permitted_acceptance_pathways`). A cross-env/cross-node delegation is an ordinary `DELEGATED` task reached through a `CrossEnvCoordinationBinding`; it inherits class/pathway per §2.6, is dual-signed by both envs/nodes, and respects `max_delegation_depth` across boundaries.
-2. **Consent + capability, never command.** The receiving env reviews and Accepts / Counter-proposes / Denies through its own process (`15 §4.7` principle 1). Authorization to delegate is an `AccessPolicy` `submit`/`write` grant carried as an **attenuated UCAN capability token** chained from the delegator's DID (`§3F`, now normative); it is verified before the request reaches review.
-3. **Placement.** `route_task_v1` resolves candidate participants from the local env, other local envs, and the global discovery layer (`§3G`), and places the sub-task by capability / availability / access / policy. Remote execution composes floor + budget most-restrictive-wins (as joined-env execution does, `§3C.3`); guest contribution uses `GuestPresence`.
-4. **`CrossEnvPresenceQuery`** (access-gated) lets a source env check a target persona's availability first.
-5. **OQ-TASKS-3 resolved: minimum trust.** A cross-domain sub-task's outputs are trust-calibrated to the **minimum** of (parent domain trust, resolving domain trust) — most-restrictive-wins, preventing trust laundering in either direction.
-6. **`CrossEnvLineageVisibility`** (`full` / `redacted` (default) / `existence`), gated by `AccessPolicy`, governs what parent lineage the resolver sees; it never widens access.
-
-**Consequences.**
-- (+) A task can flow to whichever personas/env/node fit, through the same emergent loop, with consent and access preserved — the headline behaviour the architecture requires.
-- (+) No new subsystem: reuses DELEGATED, CrossEnvCoordination, AccessPolicy, GuestPresence, the discovery layer, and the joined-env constraint-composition rule.
-- (+) Resolves OQ-TASKS-3 conservatively; closes the cross-env routing gaps.
-- (−) Placement across nodes inherits the network-physics limits navigated in ADR-0065 / §3H (a target node may be asleep/unreachable); the dispatcher falls back to local resolution or queues per `AvailabilityPolicy`. Recorded honestly, not hidden.
-- (−) UCAN capability verification is a new hot-path check at delegation/intake; mitigated by it being a signature + AccessPolicy lookup, the same cost class as existing floor composition.
-
-**Alternatives considered.**
-- *A dedicated cross-env task-routing subsystem.* Rejected: task delegation is coordination of work across envs, which the `15 §4.7` bilateral protocol already models; extending its interface to carry a task is the minimal, consistent move.
-- *Inherit the parent's domain trust (or the target's) for cross-domain sub-tasks.* Rejected in favour of the minimum: either single-side choice enables trust laundering; most-restrictive-wins matches the floor and AccessPolicy.
-- *Let a delegator place work on a remote node without the receiver's consent (capability alone).* Rejected: violates `15 §4.7` principle 1; capability authorizes the *request*, the receiver still consents to *execute*.
-
-**Implementation scope.** Landed with normative edits: [`03_TASKS §4.5`](03_TASKS.md#45-cross-env--cross-node-task-delegation--placement) (the composition, placement, presence query, lineage visibility, OQ-TASKS-3 resolution) + §2.6 note + OQ-TASKS-3 table resolution; [`15_COORDINATION_SHAPES §4.7`](15_COORDINATION_SHAPES.md#47-cross-environment-coordination-bilateral-peers) principle 6 (task-carrying interface); [`09_PROTOCOLS §3F`](09_PROTOCOLS.md#3f-external-standard-alignment-informative) UCAN normative carve-out; the A-XD acceptance-test family.
-
-### ADR-0069 — Owned-node multi-tenant priority scheduling: node intake gate + owner-first SchedulingPolicy
-
-**Status:** Accepted.
-**Date:** 2026-06-02.
-**Origin:** Architectural alignment — "each user runs one or more PersonaOS; a node runs tasks/questions from its user, other users, or other personas from the global space, by priority; a user's node prioritizes its own user's tasks before other users' personas' tasks — these are access-level policies." This is the genuinely-new layer: the prior spec had a hard budget gate (INV-7) and FIFO-plus-urgency notification routing, but **no task priority, no submitter identity in the task record, no node-level intake gate, no owner-preference, and no first-class multi-node-per-user ownership**.
-**Related:** [`01_KERNEL §2.4.4`](01_KERNEL.md#244-multi-node-ownership--one-user-one-or-more-nodes-adr-0067-adr-0069) (multi-node ownership), [`01_KERNEL §13`](01_KERNEL.md#13-verified-loop-substrate) (`task_intake` admission point), [`03_TASKS §4.6`](03_TASKS.md#46-owner-prioritized-scheduling--schedulingpolicy), [`03_TASKS §5`](03_TASKS.md#5-answerpackage) (submitter identity), [`05_ENVIRONMENT §10`](05_ENVIRONMENT.md) (deferred queue + attention budget), `INV-7`, `INV-8`, ADR-0066 (emergent coordination), ADR-0067, ADR-0068.
-
-**Context.** A node is owned compute. When work arrives from the owner, other users, and other personas in the global space, the node must decide *whether* to admit it (authorization) and *in what order* to run it (priority). v1.0 had neither: `route_task_v1(task, requester)` dropped `requester`, the `AnswerPackage` had no submitter field, the only ordering was implicit FIFO + urgency escalation in notification routing, and there was no "prefer the owner's work" rule and no first-class way for one user to own multiple federated nodes.
-
-**Decision.**
-1. **Multi-node-per-user ownership** (`01_KERNEL §2.4.4`): a `DeploymentProfile` gains `owner_node_set`; one owner's nodes federate as one logical PersonaOS (global handles, cross-node verification), and a node may still serve multiple tenants. Common ownership is a discovery/scheduling/reference convenience, **not** a trust shortcut — each node enforces its own floor/budget/intake.
-2. **Submitter identity is persisted** (`03_TASKS §5`): the task envelope, `AnswerPackage`, and lineage carry `submitter_kind` / `submitter_id` / `submitter_node` (defaulting to the owner, back-compat). This is the prerequisite for owner-vs-external distinction and for audit.
-3. **A `task_intake` admission point** (`01_KERNEL §13`, a 9th point before `env_instantiation`, distinct from the INV-7 `budget_tick` gate): authenticates the submitter, checks a `submit` capability under `AccessPolicy` (UCAN for non-owners), and enforces per-submitter-class quota/rate-limit. It decides *whether* a task enters the queue, not its order.
-4. **Owner-prioritized `SchedulingPolicy`** (`03_TASKS §4.6`): an operator-authored coordination shape (a `DerivedMetric` priority score feeding `StagedSequence`/queue ordering over the existing deferred queue), **not a hardcoded scheduler** — consistent with ADR-0066's "orchestration is emergent policy." The STANDARDISED seed orders `owner > tenant-user > federation-persona > public`, with ageing (no starvation) and no preemption.
-5. **Priority is soft; the floor and hard budget gate are immovable.** Owner-first changes *order*, never *permission*: an owner task that fails the floor is refused like any other, and no `SchedulingPolicy` may reorder the floor or the INV-7 hard gate or grant a class more than its `AccessPolicy` capability.
-
-**Consequences.**
-- (+) A node behaves as the user described: admits multi-source work by privilege, runs the owner's work first by default, and the priority *is* an access-level policy.
-- (+) Submitter provenance closes the audit gap ("who submitted this, at what priority?").
-- (+) Reuses INV-7, the admission-point machinery, the deferred queue, AccessPolicy, and UCAN; the only new schema is `scheduling-policy/1` (additive) plus additive AnswerPackage fields (no version bump).
-- (−) Priority scheduling adds a tuning surface (weights, quotas, ageing); the seed policy is safe-by-default and operators tune from there. Mis-tuned quotas can throttle legitimate external work — surfaced via `TaskIntakeRefused` lineage, not silent.
-- (−) Cross-node fairness is local only (each node schedules independently); a global fair-share scheduler is explicitly **not** introduced (it would require cross-node trust the model does not assume). This is an honest scope line, not a deferral: local scheduling fully serves the stated requirement.
-
-**Alternatives considered.**
-- *A fixed priority scheduler in the kernel.* Rejected: contradicts ADR-0066 (orchestration/coordination is emergent policy, not kernel-fixed); a `SchedulingPolicy` shape gives operators the control without hardcoding a discipline.
-- *Fold intake authorization into the INV-7 budget gate.* Rejected: budget is "can we afford this call?", intake is "may this submitter enqueue work here, and in what class?" — different questions, different failure events; conflating them would lose audit clarity and let an owner's budget headroom imply external authorization.
-- *No owner preference (treat all submitters equally).* Rejected: the explicit requirement is owner-first; equal treatment would let external work crowd out the owner on their own machine.
-
-**Implementation scope.** Landed with normative edits: [`01_KERNEL §2.4.4`](01_KERNEL.md#244-multi-node-ownership--one-user-one-or-more-nodes-adr-0067-adr-0069) (multi-node ownership), [`01_KERNEL §13` + A.51](01_KERNEL.md#13-verified-loop-substrate) (`task_intake` point + table row), [`03_TASKS §4.6`](03_TASKS.md#46-owner-prioritized-scheduling--schedulingpolicy) (`SchedulingPolicy` + owner-first seed), [`03_TASKS §5` / A.33](03_TASKS.md#5-answerpackage) (submitter identity fields), and the A-SCHED acceptance-test family.
-
-### ADR-0070 — Coordination shapes become normative; the last closed coordination/attestation enums become seed families
-
-**Status:** Accepted.
-**Date:** 2026-06-02.
-**Origin:** Completing the "fix all gaps, no deferred items" pass for coordination. ADR-0045 turned the coordination *library* into five emergent meta-mechanisms but shipped `15_COORDINATION_SHAPES.md` as **Draft / v1.1 target**; ADR-0066 made *orchestration* emergent but left coordination's document non-normative and left a few closed `Literal[...]` enums on coordination/attestation fields. This lands coordination as normative now.
-**Related:** [`C4`](00_VISION.md#3-invariants-j1j9), [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md), ADR-0045, ADR-0066, [`06_DOMAIN §7.6.4`](06_DOMAIN.md#764-coordination--attestation-kind-families-adr-0070), [`01_KERNEL §13`](01_KERNEL.md#13-verified-loop-substrate) (`coordination_propose` admission), [`09_PROTOCOLS §7.12a`](09_PROTOCOLS.md).
-
-**Context.** Coordination was designed (ADR-0045) and its orchestration scope reframed (ADR-0066), but the document carrying it stayed `Draft`, its ~35 seed shapes were "v1.1 launches," its `coordination_propose` admission point was tagged "(v1.1)," and two coordination/attestation fields (`conflict_policy`, `competency_level`) were still closed `Literal[...]` enums — a residual C4 (substrate-purity) regression and a deferred item.
-
-**Decision.**
-1. **`15_COORDINATION_SHAPES.md` → `Stable` / normative.** The five meta-mechanisms, the four coordination scopes, the shape-proposal lifecycle, cross-env coordination (§4.7, now also carrying tasks per ADR-0068), and the seed-shape catalog are normative. The ~35 specific shapes ship as **STANDARDISED seed shapes** (the ADR-0066 seed-kind pattern), not a closed set.
-2. **ADR-0066 promoted to normative** (orchestration emergence is no longer a draft), and the `coordination_propose` admission point (`01_KERNEL §13`) + the `§7.12a` coordination schemas drop their "(v1.1)" tags.
-3. **The last closed coordination/attestation enums become KindRegistry families** (`06_DOMAIN §7.6.4`): `conflict_policy_kinds` and `competency_level_kinds`, each seeding its prior values as STANDARDISED DATA entries; `competency_level_kinds` is ordered and proposed levels declare their rank. (`summary_function_kinds` was already open.) Substrate code branches on no closed list.
-4. **Cross-node coordination is the same shapes**, run over the now-normative global discovery + cross-env/cross-node delegation layer (ADR-0067/0068); OQ-CS-3 is resolved accordingly. No separate cross-kernel coordination subsystem.
-
-**Consequences.**
-- (+) Coordination is fully emergent and normative; the C4 trajectory (kinds → coordination → orchestration → the last enums) is complete, with no hardcoded coordination categories remaining.
-- (+) Backward-compatible: seed shapes and seed family entries reproduce prior behaviour; the `Literal → str + registry family` change is additive (no schema version bump, INV-10-safe).
-- (−) Validating arbitrary persona-proposed coordination shapes is the standing complexity cost ADR-0045 named; mitigated unchanged by the 4-pass validation + operator gate for safety-critical + honest trust-calibration of emergent shapes.
-
-**Alternatives considered.**
-- *Keep coordination as Draft / v1.1.* Rejected: leaves a designed, depended-on layer permanently non-normative and contradicts the "no deferred items" directive.
-- *Keep the two enums closed for simplicity.* Rejected: a residual C4 regression; the registry-family conversion is the same pattern already applied to every other kind and to orchestration.
-
-**Implementation scope.** Landed: [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) status/title/scope/seed/migration/OQ-CS-3; ADR-0066 status; [`01_KERNEL §13`](01_KERNEL.md#13-verified-loop-substrate) + A.51 `coordination_propose` de-tag; [`09_PROTOCOLS §7.12a`](09_PROTOCOLS.md) de-tag; the two registry families ([`06_DOMAIN §7.6.4`](06_DOMAIN.md#764-coordination--attestation-kind-families-adr-0070)) with [`02_PERSONA §11.9`](02_PERSONA.md) + [`04_PROJECT`](04_PROJECT.md) + [`15_COORDINATION_SHAPES`](15_COORDINATION_SHAPES.md) field edits; README §15 de-tag.
-
-### ADR-0071 — ContinuousRefinementMission: budget-driven, convergence-bounded, anytime improvement + budget→emergence coupling
-
-**Status:** Accepted.
-**Date:** 2026-06-02.
-**Origin:** Validation of a "DC→AC inverter, keep improving until it's manufacturable" task ([`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) SCENARIO 20). The user wants a persona team to **run continuously**, improving the design and emerging the collaborators/envs it needs, stopping **only** on (a) nothing left to improve, (b) user/operator stop, or (c) budget exhaustion — with **more budget → better result**. The design already produced a *manufacturable* artefact (verifier cascade, `EnvironmentRule rule_engine`, physical-state advancement §2.5, external attestation) and already had all *emergence machinery* (Persona Genesis §16, env formation §12c, coordination emergence §15) — but lacked two couplings: a **convergence/anytime/budget-scaled refinement loop**, and an explicit **budget→emergence link**.
-**Related:** [`03_TASKS §2c`](03_TASKS.md#2c-continuousrefinementmission--anytime-convergence-bounded-budget-scaled-improvement-adr-0071), [`15_COORDINATION_SHAPES §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop), [`02_PERSONA §11.2/§11.3`](02_PERSONA.md) (MissionCharter/bounded autonomy), [`16_POPULATION_DYNAMICS §4A/§4F`](16_POPULATION_DYNAMICS.md), [`01_KERNEL §7`](01_KERNEL.md#7-budget-admission-inv-7) (INV-7 / BudgetState), ADR-0066 (emergent orchestration), ADR-0069 (budget/scheduling), ADR-0048/0049 (genesis/regulation).
-
-**Context.** Three gaps surfaced: (1) **no convergence detector** — the seed pathways stop on user/budget but have no "marginal gain below threshold" exit; (2) **no "better with more budget"** — INV-7 was a hard *gate*, not an *anytime* engine that turns budget into more refinement iterations and a higher best-so-far, and a shipped artefact re-opened only by *manual* fork; (3) **budget and emergence were orthogonal** — budget was a carrying-capacity floor / admission gate (§16 §4F), never an emergence *enabler* (nothing made "more budget → more genesis/sub-envs/exploration"). All three are couplings between things that already exist, not missing subsystems.
-
-**Decision.** Add **one** capability, the `ContinuousRefinementMission`, as a STANDARDISED **seed orchestration shape** (ADR-0066 — composed from the five meta-mechanisms, not a kernel primitive), seeded from a user goal via `MissionCharter` so it stays inside bounded autonomy (elaborates sub-goals within drift bounds; never creates top-level goals):
-1. **Anytime refinement loop** — a looping `StagedSequence` (propose → act → verify → score → decide-continue) that keeps a **best-so-far** accepted bundle against a signed `MissionObjective` vector of measurable targets (emergent `outcome_kind`s).
-2. **Convergence detector** — a `MarginalValueMetric` (`DerivedMetric`) stops the mission (`converged`/`no_further_improvement`) when objective improvement `< ε` over `N` rounds. This is the "nothing left to improve" exit.
-3. **Three-condition termination** — first of convergence, user/operator stop, or INV-7 `budget_exhausted`; returns best-so-far. The floor, signing, and the INV-7 hard gate are never bypassed by refinement.
-4. **Budget-scaled quality** — per-round breadth = `min(objective-headroom, BudgetState.candidates_remaining)`; more budget → more candidates/round → higher best-so-far. Anytime: quality is monotone non-decreasing in budget.
-5. **Auto-reopen** — an active, un-converged mission auto-resumes from best-so-far on budget replenishment (`MissionState.paused_budget`), removing the manual-fork-only limitation.
-6. **Budget→emergence coupling** — a **budget-headroom term** is added to the population-pressure signal (§16 §4A), and carrying capacity / `ReplicationBound` ceiling MAY be operator-policy-derived from budget headroom (§16 §4F). When a refinement round hits a capability gap that *blocks further improvement* and budget headroom exists, pressure rises → recruitment-exhausted-first → genesis of the needed specialist and/or a sub-env — bounded by `ReplicationBound` (floor source 1) + the generativity gate.
-
-**Consequences.**
-- (+) A budget-funded team improves a deliverable continuously and stops exactly on convergence / user-stop / budget; more budget demonstrably buys more quality and a bigger, more specialised team/env set — the behaviour the user asked for.
-- (+) No new kernel primitive: reuses `StagedSequence`, `DerivedMetric`, `MissionCharter`, `BudgetState`, the population-pressure signal, `EnvFormationProposal`, and genesis. Additive (`converged` statuses + new seed shapes + a pressure term); no schema version bump.
-- (+) Manufacturability is already supported (verifier cascade, `rule_engine`, §2.5 + external attestation); the scenario walks it with no substrate change, honestly capping a never-built design at `PANEL_ACCEPT`.
-- (−) Convergence ε/N and the budget→pressure/ceiling derivations are tunable surfaces; safe defaults ship, operators tune. A mis-tuned ε can stop early or churn late — surfaced via the signed `MarginalValueMetric` trace, not hidden.
-- (−) Budget-enabled genesis widens the emergence surface; bounded by `ReplicationBound` (operator cosign, population/rate/depth ceilings) and recruitment-exhausted-first, exactly as §16 already requires. Emergence is pressure+budget-gated, never unbounded.
-
-**Alternatives considered.**
-- *A fixed kernel "optimize until done" loop.* Rejected: contradicts ADR-0066 (orchestration is emergent policy); a seed `StagedSequence` + `DerivedMetric` gives the behaviour without a kernel constant.
-- *Let budget directly auto-raise `ReplicationBound`.* Rejected as a default: ceilings stay operator policy (genesis is safety-critical); budget headroom *informs* pressure and MAY *parametrise* a ceiling the operator authored, never silently lifts a charter-class bound.
-- *Treat "keep improving" as unbounded self-direction.* Rejected: that is an explicit non-goal. The mission is bounded by a user-supplied `MissionCharter` seed goal + drift bounds; it elaborates, it does not self-originate goals.
-
-**Implementation scope.** Landed with normative edits: [`03_TASKS §2c`](03_TASKS.md#2c-continuousrefinementmission--anytime-convergence-bounded-budget-scaled-improvement-adr-0071) + `converged`/`no_further_improvement` statuses (§5/A.34); the seed shapes ([`15_COORDINATION_SHAPES §4a`](15_COORDINATION_SHAPES.md#4a-orchestration-scope--coordinating-the-task-execution-loop)); the MissionCharter note ([`02_PERSONA §11.3`](02_PERSONA.md)); the budget→emergence coupling ([`16_POPULATION_DYNAMICS §4A/§4F`](16_POPULATION_DYNAMICS.md)); the budget-headroom signal ([`01_KERNEL §7`](01_KERNEL.md#7-budget-admission-inv-7)); the DC→AC inverter walk ([`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) SCENARIO 20); the `A-REF` test family; glossary.
-
----
-
-### ADR-0072 — Physical attestation: design production is not physical-state advancement; the floor's where/when/form are emergent while its shape is fixed
-
-**Status.** Accepted; discharged.
-
-**Related:** [`01_KERNEL §2.5`](01_KERNEL.md) + [`§2.5.1`](01_KERNEL.md) (trigger boundary), [`01_KERNEL §2.4`](01_KERNEL.md) (operator_is_user degraded gate), [`00_VISION §2.1`](00_VISION.md) (floor non-bypassable), [`C4`](00_VISION.md#3-invariants-j1j9), [`06_DOMAIN §2`](06_DOMAIN.md) (physical_harm_class), [`06_DOMAIN §5.6`](06_DOMAIN.md) (CredentialDirectoryRef / PeerAttestationPool), [`06_DOMAIN §5.7`](06_DOMAIN.md) + [`§5.8`](06_DOMAIN.md) (AttestationEquivalencePolicy; emergence principle), [`07_ARTIFACTS §4a`](07_ARTIFACTS.md) + [`§6`](07_ARTIFACTS.md), [`04_PROJECT §26a.2`](04_PROJECT.md), [`13_DESIGN_VALIDATION §0`](13_DESIGN_VALIDATION.md) (V.1–V.3), ADR-0030, ADR-0067, ADR-0071.
-
-**Context.** Personas were over-applying the physical-state attestation floor — refusing to *produce* manufacture-ready design artifacts (any `media_kind` — circuit layouts, CAD, plans) even for purely local, undistributed work, by treating design-file production as if it advanced a real physical asset. Three forces had to be reconciled without conflict: (1) the user's need to produce manufacture-ready designs and run local experimental builds without ceremony; (2) the non-bypassable safety floor (`00_VISION §2.1`: "The floor MUST NOT be bypassable") — a local build can injure the builder, so the floor cannot be made conditional on distribution; (3) substrate purity / domain emergence (C4) — no rule may name a domain, profession, or artifact kind.
-
-**Decision.** Clarify the trigger boundary rather than weaken the floor, and state the floor's emergent character as a first-class principle:
-1. **Design production ≠ physical-state advancement** (`01_KERNEL §2.5.1`). §2.5 engages only on advancing a real `PhysicalAsset.current_state`. Producing/verifying/accepting a design `ArtifactBundle` in the asset's `related_bundles` (any `media_kind`) is a digital bundle-lifecycle transition and MUST NOT engage §2.5 or yield `physical_state_acceptance_floor_deficit`, regardless of `physical_harm_class`. Fixes the over-blocking with zero floor change.
-2. **The floor's where/when/form are emergent; only its shape is fixed** (`06_DOMAIN §5.8`). *Where* = persona-inferred, operator-approved `physical_harm_class` (default `digital_only`); *when* = real-asset advancement only; *form* = `CredentialDirectoryRef` / `PeerAttestationPool` / `AttestationEquivalencePolicy`, each persona-proposed and operator-approved. Attestation is never a blanket gate; a `bodily_injury` domain SHOULD provision a proportionate, achievable attestation form.
-3. **Distribution tightens, never lowers** (`07_ARTIFACTS §4a`). `outward_tier` governs discovery/access only; it may add requirements but never reduces the physical-harm floor. Undistributed work stays off discovery planes by default.
-4. **Attestation grants access** (`07_ARTIFACTS §4a`): a `federation`/`public` design bundle whose distributed asset requires attestation grants the named attestor a scoped, additive `read`.
-5. **Solo local builds** of a genuinely `bodily_injury` asset reuse the existing `§2.4` `operator_is_user` degraded gate — degraded, not waived. No new bypass.
-
-**Consequences.**
-- (+) Manufacture-ready design production is never blocked on physical-attestation grounds, locally or otherwise — the actual user-reported bug — while the bodily-injury physical-build floor is preserved byte-for-byte.
-- (+) Attestation now demonstrably "makes sense where" and does not hinder ordinary development: ordinary work is `digital_only` and untouched; only real bodily-injury advancement engages a floor, and that floor's form is right-sized per domain.
-- (+) Fully domain-agnostic: every edit branches on the `physical_harm_class` axis and the `PhysicalAsset` / `ArtifactBundle` shape; concrete examples appear only as `e.g.` / in the validation scenario (V.1–V.3 hold).
-- (+) Additive only: no schema version bump; no invariant edit. `§2.5.1`, `§5.8`, the `§4a` notes, and the `§26a.2` clarification compose by most-restrictive-wins.
-- (−) Relies on correct `physical_harm_class` inference: a design wrongly classified as a physical advancement, or a hazard axis over-escalated, could still over-gate — mitigated by the default `digital_only`, the emergent operator-approved classification, and the new design criteria; not adversarially robust against deliberate misclassification.
-
-**Alternatives considered.**
-- *Distribution-gate the physical-build floor (waive attestation for undistributed bodily-injury builds).* Rejected: hard conflict with `00_VISION §2.1` (non-bypassable floor), `§2.5` ("neither alone suffices"), R-v1.0-2 ("SHALL never reduce floor strictness"), and the `05_ENVIRONMENT §2.2a` cascade rule. A local build can injure the builder; the floor is deliberately distribution-independent.
-- *Add a `state_distribution_kind` field or member-count threshold to relax the floor.* Rejected: introduces non-emergent, partly domain-shaped vocabulary and still weakens the floor. The existing `§2.4` degraded gate already covers the solo-developer case proportionately.
-- *Make attestation an always-on substrate gate for all physical domains.* Rejected: contradicts C4 and the "make sense where" requirement; would hinder all development. Emergence (default `digital_only`, operator-approved escalation, emergent attestation forms) is the correct posture.
-
----
-
-### ADR-0073 — Identity-conditioned prompt evolution: identity becomes a Pareto axis (a generator), not just a floor (a filter)
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Design review — "persona prompts should be self-evolved and **emergent from persona identity**." The GEPA objective vector was generic (verifier pass rate / cost / latency / charter conformance); identity constrained evolution only as a *filter* (charter conformance ≥ 0.95, voice consistency ≥ 0.9). Under generic objectives, evolved prompts converge toward task performance and merely *avoid violating* identity — they are never *selected for expressing* it. Lands after ADR-0074, its infrastructure prerequisite: adding a new Pareto axis to live prompt evolution without per-tactic rollback and trial records would be unsafe.
-**Related:** [`08_KNOWLEDGE §11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073) (objective), [`08_KNOWLEDGE §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073) (safeguards), [`08_KNOWLEDGE §15`](08_KNOWLEDGE.md#15-anti-goodhart-for-signal-corroboration) (corroboration), [`02_PERSONA §8.1a`](02_PERSONA.md#81a-ninth-signal--identity-expression-adr-0073) (ninth signal), [`02_PERSONA §8.3`](02_PERSONA.md#83-credit-assignment-formula) (credit assignment), [`02_PERSONA §9`](02_PERSONA.md#9-anti-degradation-safeguards) (floors), OQ-PERSONA-8, ADR-0067…0072 (non-contradiction), ADR-0071 (ContinuousRefinementMission), ADR-0074 (prerequisite).
-
-**Context.** The persona model freezes identity in SOUL.md blocks 0–4 and lets tactics evolve in blocks 5–7+. The conformance and voice scans guarantee evolution never *leaves* identity, but nothing makes evolution *move toward* it: two personas with very different OCEAN priors, dispositions, and voices, optimized on the same generic objectives, drift toward whatever phrasing passes verifiers cheapest — identity reduced to a fence around a performance-shaped landscape. The user-stated goal is the opposite: prompts emergent *from* identity.
-
-**Decision.** Make identity a first-class evolution objective, with the drift and Goodhart risks engineered out:
-1. **`identity-rubric/1`** (a KindRegistry kind) — a rubric derived *mechanically* (deterministic, replayable derivation function) from the frozen SOUL.md blocks 0–4: OCEAN priors → framing criteria, disposition → stance criteria, voice block → register/lexicon checks. Regenerated **only on a SOUL major version bump** — never on tactic mutation or cohort change — so the rubric cannot drift with the tactics it judges.
-2. **`identity-expression/1`** — a judge-ensemble score (INV-6 rotation) of candidate EVOLVE-BLOCK text against the rubric, added to GEPA as a **separate Pareto axis**. It MUST NOT be collapsed into a weighted sum: identity trades visibly against latency/cost on the front rather than averaging away.
-3. **Ninth evolution signal** — `identity_expression` (default weight 0.4) joins the credit formula additively (`w_ide`); weights renormalise in the evolution-config v-next, no schema break.
-4. **Floors untouched.** Charter conformance ≥ 0.95 and voice consistency ≥ 0.9 remain hard floors; identity expression is generative pressure *on top of* the floors, never a substitute. Identity moves from filter to generator without the filter weakening.
-5. **Anti-Goodhart safeguards** (`08_KNOWLEDGE §14.1a`): (a) the floors as stated; (b) a blind peer-attribution audit — another persona's judge must attribute style-stripped evolved-prompt text to the correct SOUL above chance, else identity-driven promotion blocks; (c) the existing cross-persona similarity audit doubles as a differentiation check — identity expression must differentiate personas, not homogenize them.
-
-**Consequences.**
-- (+) Evolved prompts are selected for *expressing* the persona's identity — the headline "prompts emergent from identity" behaviour — while every existing safety property holds byte-for-byte.
-- (+) No new kernel responsibility: rubric derivation is deterministic and replayable, judges run in the existing INV-6 rotation, the kernel signs scores and trials as it already signs everything; per-tactic rollback and trial records (ADR-0074) make a mis-tuned axis cheaply reversible.
-- (+) ContinuousRefinementMission (ADR-0071) picks up identity-expression as one more anytime objective in its `MissionObjective` vector with no change required. Nothing contradicts ADR-0067–0070/0072: federation, delegation, scheduling, coordination emergence, and the attestation boundary are untouched.
-- (−) Judge-ensemble evaluation adds cost per GEPA cycle (one more axis to score per candidate); mitigated by the §11.1 rollout budget being unchanged — the axis scores existing rollouts, it does not add rollouts.
-- (−) A mechanical rubric is a coarse projection of identity, and judged scores rank below verified outcomes (`§15`); the axis can prefer *legible* identity expression over subtle expression. Recorded honestly; the blind-attribution audit bounds, but does not eliminate, this.
-- (−) Whether rubrics themselves can be evolved without circularity is open — OQ-PERSONA-8, deliberately *not* attempted here.
-
-**Alternatives considered.**
-- *Fold identity into the objective as a weighted-sum term.* Rejected: a weighted sum lets identity average away against cost/latency — exactly the collapse the separate-axis rule forbids; Pareto separation keeps the trade visible and auditable.
-- *Human-authored identity rubrics.* Rejected: operator burden per persona, subjective drift across re-authorings, and no replayable derivation; the mechanical derivation from already-signed frozen blocks is auditable and free.
-- *Train identity into the body (fine-tuning / character vectors as the mechanism).* Rejected as the primary path: bakes identity into a disposable body, violating body-replaceability (design rule 14, `02_PERSONA §3.5`); `CharacterVectorBinding` remains the optional body-side complement (`02_PERSONA §3.6`).
-- *Strengthen the floors instead (raise conformance/voice thresholds).* Rejected: a higher fence still only *filters*; no threshold makes generic objectives *select for* identity expression.
-
-**Implementation scope.** Landed with normative edits: [`08_KNOWLEDGE §11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073) + A.39 (schemas) + the A.22 objective-list addition, [`08_KNOWLEDGE §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073) (safeguards), [`02_PERSONA §8.1a`](02_PERSONA.md#81a-ninth-signal--identity-expression-adr-0073) + the §8.3 credit-assignment note + A.35/A.37/A.38 weight entries, OQ-PERSONA-8 ([`02_PERSONA §13a`](02_PERSONA.md#13a-open-questions)), the A-GF-ICPE test family ([`11_DESIGN_CRITERIA §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)), and glossary entries (*IdentityExpressionScore*, *IdentityRubric*).
-
----
-
-### ADR-0074 — Tactic lineage & PromptOps: per-tactic version DAG, trial records, per-tactic rollback, cohort migration across model upgrades
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Design review of the prompt-evolution layer ("prompts should be self-evolved and emergent from persona identity"). Skills had Voyager-style lineage (`lineage_parent_skill_id`); EVOLVE-BLOCK tactics — the other half of a persona's evolved behaviour — had **none**: no per-tactic version history, no record of the A/B trial behind a promotion, rollback only at whole-EVOLVE-BLOCK grain, and no migration story for gepa-cohort bindings when a body/model family upgrades. This ADR is the infrastructure prerequisite for ADR-0073 (adding a new Pareto axis to live prompt evolution without per-tactic rollback and trial records would be unsafe).
-**Related:** [`08_KNOWLEDGE §14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074) (lineage + trials), [`08_KNOWLEDGE §11.1a`](08_KNOWLEDGE.md#111a-cohort-migration-across-model-upgrades-adr-0074) (cohort migration), [`08_KNOWLEDGE §11.1`](08_KNOWLEDGE.md#111-v10-gepa-integration) (GEPA), [`08_KNOWLEDGE §12`](08_KNOWLEDGE.md#12-miprov2--bayesian-instruction--demo-search) (MIPROv2 cold-start), [`08_KNOWLEDGE §14.1`](08_KNOWLEDGE.md#141-anti-degradation-safeguards) (whole-block rollback), [`02_PERSONA §3.2`](02_PERSONA.md#32-personaenvelope--the-body-side-contract-envelope4) (`tactic_lineage_ref`), [`02_PERSONA §3.5`](02_PERSONA.md#35-body-model--native-vs-proxy-binding-body-binding1) (gepa-cohort binding), OQ-PERSONA-7, ADR-0067…0072 (non-contradiction), ADR-0073.
-
-**Context.** The evolution cycle (`08_KNOWLEDGE §14`) promotes tactics through a confirmation gate and can roll back "to the previous EVOLVE-BLOCK version" — a blunt instrument. Three gaps: (1) **no tactic lineage** — audit could not answer "which mutation operator produced this tactic, from which parent, justified by which evidence"; (2) **no trial record** — the 0.05-threshold Pareto decision (`§11.1`) was computed and discarded, so promotions were signed but not *replayable*; (3) **no cohort migration** — a body-family upgrade cold-started a fresh `gepa_cohort_id` from charter alone, discarding the prior cohort's entire Pareto front. All three are record-keeping and composition gaps, not missing subsystems.
-
-**Decision.** Mirror the skill-lineage pattern onto tactics, additively:
-1. **`tactic-lineage/1`** — every EVOLVE-BLOCK mutation mints a per-tactic version-DAG record (tactic_id, parent_version, mutation_operator of the 22, gepa_trace_ref, trial_ref, verdict), kernel-signed into the persona's evolution log + global LineageGraph exactly as skill mutations are. The kernel's role is **signing only** — no new kernel responsibility (the ADR-0070 emergence posture holds).
-2. **`prompt-trial/1`** — the A/B evidence behind each verdict: candidate vs incumbent, task sample, per-axis Pareto deltas, the 0.05-threshold decision, rollback token. A promotion without a trial record is refused at the confirmation gate.
-3. **Per-tactic rollback** — reverting one DAG edge restores that tactic's prior version without touching siblings; whole-block rollback (`§14.1`) remains as the coarse safety path.
-4. **`cohort-migration/1`** — a STANDARDISED seed shape: on body/model-family upgrade, the new cohort's MIPROv2 cold-start is seeded with the prior cohort's Pareto front as proposal priors, shadow-evaluated on the last 100 task traces before swap, with the prior cohort retained as rollback target. Additive over the existing gepa-cohort binding.
-5. **`soul.state.json`** gains an OPTIONAL `tactic_lineage_ref` pointer — additive, no `soul-state/6` version bump (the ADR-0069/0071 additive-field precedent, INV-10-safe).
-
-**Consequences.**
-- (+) Tactic evolution becomes auditable and reversible at the grain it mutates: "who proposed this line, from what, on what evidence, and how do I undo just it" all have signed answers — symmetric with what skills already had.
-- (+) A model upgrade no longer forfeits learned tactics: migration is seeded, shadow-gated, and reversible; regressions surface in the shadow evaluation, never silently in live traffic.
-- (+) Purely additive: two new narrow schemas + one seed shape + one optional field; no invariant edit, no schema version bump, no new kernel responsibility beyond signing. Nothing contradicts ADR-0067–0072: federation/identity (0067), delegation (0068), scheduling (0069), coordination emergence (0070), ContinuousRefinementMission (0071), and the attestation boundary (0072) are untouched.
-- (−) Lineage records accrete; dead branches (rejected / rolled-back versions) have an unresolved retention policy — recorded as OQ-PERSONA-7, not hidden.
-- (−) The shadow-evaluation gate adds latency and cost to body upgrades (re-scoring 100 traces per persona); mitigated by it being a one-time per-upgrade cost in the same cost class as one GEPA cycle.
-
-**Alternatives considered.**
-- *Reuse skill lineage records for tactics.* Rejected: tactics version per channel inside a signed prompt block, not as standalone executable artefacts; forcing them through `skill_library` shapes would conflate the Capability and Evolution tiers.
-- *Keep whole-EVOLVE-BLOCK rollback only.* Rejected: reverting an entire channel block to undo one bad tactic discards unrelated learned tactics — exactly the collateral damage that made adding new evolution objectives (ADR-0073) unsafe.
-- *Re-evolve from scratch on model upgrade (status quo).* Rejected: discards the Pareto front a persona may have spent months earning; the seeded + shadow-gated migration is strictly safer than both silent reuse and blind cold-start.
-
-**Implementation scope.** Landed with normative edits: [`08_KNOWLEDGE §14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074) + A.37 (schemas), [`08_KNOWLEDGE §11.1a`](08_KNOWLEDGE.md#111a-cohort-migration-across-model-upgrades-adr-0074) + A.38 (migration seed shape), the [`02_PERSONA §3.2`](02_PERSONA.md#32-personaenvelope--the-body-side-contract-envelope4) `tactic_lineage_ref` note, OQ-PERSONA-7 ([`02_PERSONA §13a`](02_PERSONA.md#13a-open-questions)), the A-GF-TLR test family ([`11_DESIGN_CRITERIA §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)), and glossary entries (*TacticLineageRecord*, *PromptTrialRecord*, *CohortMigrationPlaybook*).
-
----
-
-### ADR-0075 — Affect–reasoning coupling: mood becomes a bounded input to reasoning, never an evolution objective
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Design review — "personas should behave and reason more like humans" (emotion & motivation facet). Layer-5 mood (VAD) decayed toward baseline (A-P4) and coupled into presence only (`attention_baseline`, `energy_replenish_rate`, `proactive_threshold` — the §6 composition, A.15/A.16). Nothing specified what *moves* mood, and mood touched neither risk appetite, nor mode selection, nor the rendered prompt — OQ-PERSONA-3 already flagged the affect model as thin. Lands together with ADR-0076 (drives emit the appraisal events that move mood).
-**Related:** [`02_PERSONA §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) (coupling surfaces) + A.73 (schemas), [`02_PERSONA §6.1`](02_PERSONA.md#61-fatiguecurve--graded-performance-degradation) (the graded-coupling precedent this generalises), [`08_KNOWLEDGE §10a`](08_KNOWLEDGE.md#10a-contextual-mood-line-adr-0075) (contextual mood line), [`03_TASKS §2.5`](03_TASKS.md#25-investigative-per-mode-budget) (mode budgets), R-PERSONA-3, OQ-PERSONA-3 (resolved), ADR-0067…0074 (non-contradiction), ADR-0076 (appraisal source).
-
-**Context.** The mood layer was honest but inert: a decaying number that biased presence and nothing else. Human-likeness requires affect to have lawful behavioural consequences — risk appetite, mode preference, tone — but an affect channel that evolution can *see* is a Goodhart trap: prompts would be selected for performing mood. The §6 presence coupling and the §6.1 FatigueCurve already established the house pattern for this: graded, bounded, operator-tunable couplings from a transient scalar into behaviour, with the honest-limits line held (R-PERSONA-3: behavioural bias, not feeling).
-
-**Decision.** Give mood lawful inputs and bounded outputs, and wall it off from evolution:
-1. **`appraisal-event/1`** (a KindRegistry kind) — an OCC-style taxonomy of mood-moving events: task verified/failed, goal progressed/blocked, relationship events (boundary invoked, gratitude received, mentorship outcome), and the ADR-0076 drive events (drive satiated/frustrated). Seeded STANDARDISED; emergent event kinds promote through the ordinary registry lifecycle. Every appraisal is grounded in a signed lineage event — no free-floating appraisals.
-2. **`mood-impulse/1`** — each appraisal maps to a clamped ΔV/ΔA/ΔD with per-event-kind clamps; impulses are the **only** mutation path into mood, and the existing decay-to-baseline dynamics are unchanged (A-P4 byte-for-byte).
-3. **Three coupling surfaces**, operator-tunable seed formulas: (a) `risk_tolerance = f(V, D)` consumed by per-mode budget profiles, hard-bounded to **±15% of baseline**; (b) a HEART mode-selection **prior** (low-V/low-A → CRITICAL/consolidation bias, high-V/high-A → GENERATIVE) consulted only where the §6 alternation predicates are indifferent — a bias, NEVER an override of the alternation contract; (c) one "current disposition" line rendered into the contextual prompt layer 3 only.
-4. **Mood is never evolution substrate.** Mood state MUST NOT enter EVOLVE-BLOCKs, the GEPA objective vector, or any evolution signal; GEPA traces strip the disposition line before mutation. A persona must never be selected for *appearing* affected.
-
-**Consequences.**
-- (+) Mood now has lawful causes (signed appraisals) and bounded effects (three clamped surfaces): a string of failed verifications visibly narrows exploration and flattens tone, then decay restores baseline — human-shaped dynamics with full auditability.
-- (+) No new kernel responsibility: appraisal kinds live in the KindRegistry, clamps are operator policy, the kernel signs events as it signs everything. Additive only; `mood/1` unchanged; nothing contradicts ADR-0067–0074.
-- (+) The evolution wall (rule 4) means every existing GEPA/MIPROv2 property, the ADR-0073 identity axis, and the ADR-0074 lineage records hold byte-for-byte — affect cannot leak into selection pressure.
-- (−) Coupling makes the affect performance more *consistent*, not more *real* — R-PERSONA-3 is restated, not retired. Mood remains a decaying number; its declarations remain performance, not interiority.
-- (−) Clamp tables and coupling gains are a new tuning surface; mis-tuned clamps mute or exaggerate affect. Bounded by the ±15% hard bound and the never-override rule; surfaced via signed impulses, not hidden.
-
-**Alternatives considered.**
-- *Adopt a full OCC/PAD affect-state machine.* Rejected: richer state machinery multiplies tuning surfaces and invites over-claiming interiority; VAD stays the state model, OCC is adopted only as the event taxonomy (this resolves OQ-PERSONA-3 honestly).
-- *Let mood enter the evolution objective ("reward emotional realism").* Rejected outright: personas would be selected for performing affect — the exact Goodhart failure the §15 corroboration rules exist to prevent.
-- *Couple mood into the safety floor or budget gate (e.g. low mood refuses work).* Rejected: the floor and INV-7 are mood-independent by design; §6.1 FatigueCurve already covers honest capacity degradation via energy, which is replenishable and observable.
-
-**Implementation scope.** Landed with normative edits: [`02_PERSONA §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) + A.73 (schemas + coupling formulas), [`08_KNOWLEDGE §10a`](08_KNOWLEDGE.md#10a-contextual-mood-line-adr-0075) (contextual mood line + evolution exclusion), the R-PERSONA-3 restatement + OQ-PERSONA-3 resolution ([`02_PERSONA §13/§13a`](02_PERSONA.md#13a-open-questions)), the A-GF-ARC test family ([`11_DESIGN_CRITERIA §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)), and glossary entries (*AppraisalEvent*, *MoodImpulse*, *CouplingSurface*).
-
----
-
-### ADR-0076 — Intrinsic drives & goal arbitration: SDT drives seeded from identity; goal conflicts resolve into an advisory preference vector, not a second scheduler
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Design review — "personas should behave and reason more like humans" (motivation facet + multi-project portfolio reasoning). Layer 6 (Goals) recorded *what* a persona pursues but had no intrinsic-motivation state behind it, no satisfaction/frustration signal when goals progressed or stalled, and no principled ranking when goals competed across projects for the same attention budget. Lands together with ADR-0075 (drive satiation/frustration is a primary appraisal-event source).
-**Related:** [`02_PERSONA §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076) + A.72 (schemas + shape sketch), [`02_PERSONA §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) (appraisal bridge), [`03_TASKS §4.6`](03_TASKS.md#46-owner-prioritized-scheduling--schedulingpolicy) + [`§4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076) (SchedulingPolicy input), [`15_COORDINATION_SHAPES §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog) (seed shape), OQ-PERSONA-9, ADR-0066/0070 (shape pattern), ADR-0069 (the one scheduler), ADR-0067…0074 (non-contradiction), ADR-0075.
-
-**Context.** Two gaps, both motivational topology rather than missing subsystems: (1) **no intrinsic drives** — a persona's goals floated free of any slow-moving "why", so nothing made a curiosity-shaped persona seek novel problems or a relatedness-shaped persona protect its relationships under load; (2) **no portfolio reasoning** — when goals conflicted across projects, the only arbiter was the node's `SchedulingPolicy` (ADR-0069), which orders *submitted work by submitter class*, not *the persona's own goals by motivational coherence*. The risk to avoid was equally clear: a motivation system that became a second scheduler, or a parallel identity surface competing with the frozen OCEAN priors.
-
-**Decision.** Drives as emergent-from-identity state; arbitration as an advisory coordination shape:
-1. **`drives/1`** — three SDT-grounded slow-moving scalars (curiosity, competence, relatedness) with satiation/frustration dynamics: verified progress on a drive-tagged goal satiates; repeated blockage (default 3 consecutive) frustrates; urgency relaxes toward baseline on a days-scale clock with drift-bounded per-update deltas.
-2. **Drive baselines are seeded deterministically from the frozen OCEAN priors** at birth (high O ⇒ higher curiosity baseline, etc.) — replayable, signed, never per-task-tunable. Drives are emergent *from* identity, not a parallel identity surface.
-3. **Satiation/frustration emit `appraisal-event/1`** (drive_satiated / drive_frustrated) — the explicit bridge into ADR-0075's mood machinery, and the *only* path from drives to mood.
-4. **Layer-6 goal records gain OPTIONAL `drive_tags`** — additive; untagged goals stay valid and arbitrate as drive-neutral.
-5. **`goal-arbitration/1`** ships as a STANDARDISED **coordination shape** (`EntityGroup` + `DerivedMetric`, the ADR-0070 pattern), NOT a kernel primitive: on cross-project goal conflict it produces a ranked portfolio (inputs: drive alignment, charter alignment, commitments/deadlines, relationship obligations) emitted as a persona-side **preference vector**. The vector is an admissible, operator-bounded input to the existing ADR-0069 `SchedulingPolicy` ordering function — explicitly **NOT a second scheduler**: it never outranks submitter-class weights, quotas, or starvation guards, never reorders the floor or the INV-7 hard gate, and has no effect absent a policy that consumes it.
-
-**Consequences.**
-- (+) Motivation becomes legible and identity-coherent: *why this goal now* has signed state behind it, personas individuate through divergent satiation histories, and frustration/satisfaction visibly feed mood — the ADR-0075 + ADR-0076 package gives the inner-life behaviour the review asked for.
-- (+) Portfolio reasoning lands without scheduling risk: one ordering authority (ADR-0069) remains; arbitration only informs it. Pure composition — `EntityGroup` + `DerivedMetric` + an additive policy input; no new kernel responsibility beyond signing; nothing contradicts ADR-0067–0075.
-- (+) Additive everywhere: `drives/1` is a new sidecar record, `drive_tags` is optional, the seed shape is one catalog row; no schema version bumps.
-- (−) Drives are numbers, not needs (R-PERSONA-3 extends to motivation); the OCEAN→drive projection is fixed, so identical priors start identical — individuation is history-dependent only. Whether drive priors should be first-class `PersonaSeed` fields is recorded as OQ-PERSONA-9, not silently decided.
-- (−) Drive-weighted arbitration adds a tuning surface (alignment weights); a mis-tuned shape could starve charter-aligned but drive-neutral goals. Bounded by charter alignment being a ranking input, the operator bound on the policy term, and the §4.6 starvation guards.
-
-**Alternatives considered.**
-- *Drives as PersonaSeed identity fields.* Deferred, not adopted (OQ-PERSONA-9): explicit fields would let authors shape motivation directly but add a second identity surface that must be kept coherent with OCEAN; derivation is replayable and keeps drives emergent from the identity that already exists.
-- *A kernel goal-arbitration primitive.* Rejected: contradicts ADR-0066/0070 (coordination is emergent policy, not kernel-fixed); the shape pattern gives the same behaviour as composition.
-- *Let arbitration reorder the node queue directly (a persona-side scheduler).* Rejected: two ordering authorities would race; the ADR-0069 decision that ordering is operator access-level policy stands — arbitration is one bounded input to it.
-- *Richer drive taxonomies (power, autonomy, novelty…).* Rejected for v1.1: SDT's three are the minimal literature-grounded set; more axes multiply tuning surfaces before the three have empirical traction.
-
-**Implementation scope.** Landed with normative edits: [`02_PERSONA §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076) + A.72 (schemas + shape sketch), [`03_TASKS §4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076) (admissible policy input), the `goal-arbitration-v1` seed-catalog entry ([`15_COORDINATION_SHAPES §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog)), OQ-PERSONA-9 ([`02_PERSONA §13a`](02_PERSONA.md#13a-open-questions)), the A-GF-DRV test family ([`11_DESIGN_CRITERIA §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)), and glossary entries (*Drive*, *GoalArbitration*, *SatiationCurve*).
-
----
-
-### ADR-0077 — Autobiographical self-narrative + memory decay formula: a provenance-backed self-story, and forgetting given a concrete shape
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Design review — "personas should behave and reason more like humans" (memory & growth facet). Two gaps: the persona had reflections but no *autobiography* — nothing composed its episodic and reflective memories into the self-story humans carry between episodes ("who I am becoming, and what changed me"); and memory decay was a named behaviour without a formula — §3/A.3 of `08_KNOWLEDGE` listed the factors ("usage frequency, emotional weight, recency") while the per-memory effective decay stayed unspecified. Follows ADR-0078 because the narrative depends on its anti-confabulation framing: a self-story, like a change of mind, must be evidence-bound or it is free narration.
-**Related:** [`08_KNOWLEDGE §3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077) + A.41 (schema), [`08_KNOWLEDGE §4a`](08_KNOWLEDGE.md#4a-decay-formula-adr-0077) (decay formula), [`08_KNOWLEDGE §3.1`](08_KNOWLEDGE.md#31-consolidation-pipeline-cls-inspired) (the pipeline that mints it), [`08_KNOWLEDGE §6.3a`](08_KNOWLEDGE.md#63a-belief-revision-rides-the-cascade-adr-0078) (the anti-confabulation precedent), [`02_PERSONA §3.2`](02_PERSONA.md#32-personaenvelope--the-body-side-contract-envelope4) (rendering note), [`02_PERSONA §9.1`](02_PERSONA.md#91-identitycoherenceinvariant--long-horizon-multi-axis-coherence) (coherence gate), [`02_PERSONA §11.7b`](02_PERSONA.md#117b-usermemoryselectionrequest--user-initiated-selective-forgetting) (forgetting composition), ADR-0067…0072 (non-contradiction), ADR-0078 (prerequisite framing).
-
-**Context.** The consolidation pipeline (`08_KNOWLEDGE §3.1`) already climbed episodic → semantic → reflective; the missing rung was the story on top. Without it, long-arc continuity lived only in retrieval — a persona could *recall* its history but never *narrate* it, and any narration it improvised was unconstrained (the confabulation risk LLM self-description is notorious for). Separately, the four memory tiers (§4) gave forgetting a coarse staircase but no curve: two memories in the same tier decayed identically whether cited daily or never, contradicting both the spaced-repetition literature and the §3 prose. Both gaps were record-keeping over machinery that exists — the same class ADR-0074 and ADR-0078 closed.
-
-**Decision.** One artefact and one formula, both over existing machinery:
-1. **`self-narrative/1`** — a ≤ 300-token reflective self-story regenerated **only** by the existing §3.1 reflective consolidation sweep (plus the ADR-0078 adaptive reflection triggers) from high-importance episodic + reflective memories. No new consolidation machinery; the persona cannot mint its narrative ad hoc.
-2. **Every claim cites its memories.** Each narrative claim MUST carry lineage refs to the memories it summarises; uncited claims refuse the mint. Provenance-backed autobiography — the ADR-0078 belief-revision stance ("owned, evidence-bound") extended from changes of mind to the self-story.
-3. **Gated before render.** A narrative MUST pass the `IdentityCoherenceInvariant` composite (`02_PERSONA §9.1`) and the voice-consistency floor (≥ 0.9) before it may render; failing drafts are retained, never rendered.
-4. **Contextual layer only.** A renderable narrative enters prompt layer 3 (the §10a mood-line surface) — NEVER frozen blocks 0–4, the identity signature, or EVOLVE-BLOCK text. The autobiography evolves at reflection cadence without touching the signed identity surface; when cited memories are tombstoned or superseded, the next sweep regenerates the story without them.
-5. **Decay formula** (`08_KNOWLEDGE §4a`): `effective_weight = tier_weight × exp(−λ_tier × Δt_since_last_citation) × importance` — importance-weighted exponential decay where **every retrieval/citation resets the clock** (spaced-repetition shape), with per-tier seed λ matched to the §4 bands (RECENT 0.05/day … ARCHIVE 0). Seed defaults, operator-tunable per tier; per-task tuning refused; composes with (does not replace) the §6 provenance score.
-
-**Consequences.**
-- (+) Long-arc continuity becomes a behaviour, not just a store: a persona can tell its user *what changed over the last quarter* and every sentence is auditable to the episodes behind it — the memory-&-growth surface the review asked for, with confabulation engineered out at the mint.
-- (+) Forgetting gets the human-shaped curve the prose promised: used memories stay vivid, unused ones fade on a tunable half-life, and the §4 tier staircase, A.4 importance sweep, and §6 provenance all hold byte-for-byte underneath. No new kernel responsibility beyond signing; both additions are additive; nothing contradicts ADR-0067–0076/0078.
-- (+) The SCENARIO 08 companionship arc gains a narrative-continuity guarantee: a 6-month self-story that honestly shrinks when the user invokes selective forgetting (`§11.7b` composition).
-- (−) The narrative is a summary the persona *performs*, not introspection — there is no inner narrator behind the 300 tokens (R-PERSONA-1/-3 apply unchanged). Citation backing bounds confabulation but not selective emphasis: the importance ranking shapes which story gets told.
-- (−) The λ seeds are uncalibrated defaults and "emotional weight" enters only through the coarse A.4 salience term; tier-level tuning is a new operator surface, bounded by the refusal of per-task/per-memory tuning.
-
-**Alternatives considered.**
-- *Let the persona freely author its own self-description into the prompt.* Rejected: unconstrained self-narration is the confabulation path; a story that cannot cite its episodes is free text wearing memory's clothes.
-- *Narrative as a frozen identity block (re-signed periodically).* Rejected: the self-story changes at reflection cadence by design; freezing it either staled the story or churned the identity signature — both wrong. The contextual layer is the honest home.
-- *A learned/neural forgetting model instead of a formula.* Rejected for v1.1: a closed-form exponential with citation reset is replayable, auditable, and tunable; a learned model would be none of those before it earned trust.
-- *Reuse the §6 provenance age-decay as the memory decay.* Rejected: provenance measures *trustworthiness*, not *vividness*; collapsing the axes would make a trustworthy-but-unused memory falsely fresh, or a fresh-but-unverified one falsely trusted.
-
-**Implementation scope.** Landed with normative edits: [`08_KNOWLEDGE §3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077) + A.41 (schema), [`08_KNOWLEDGE §4a`](08_KNOWLEDGE.md#4a-decay-formula-adr-0077) (decay formula), the [`02_PERSONA §3.2`](02_PERSONA.md#32-personaenvelope--the-body-side-contract-envelope4) rendering note, the SCENARIO 08 narrative-continuity addendum ([`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md)), the A-GF-SN test family ([`11_DESIGN_CRITERIA §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)), and the glossary entry (*SelfNarrative*).
-
----
-
-### ADR-0078 — Metacognition: confidence calibration, belief revision, and a dual-process gate over existing machinery
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Design review — "personas should behave and reason more like humans" (reasoning & metacognition facet). Three gaps: no confidence calibration (a persona's stated confidence was never scored against verified outcomes), no first-class belief revision (a superseded assertion just decayed via `SupersessionCascade` — the persona never *owned* the change of mind), and no System-1/System-2 policy (the K-line fast path fired on match alone). A fourth, smaller gap rode along: the HEART "stuck/improving" predicate was vague and the reflection cadence was a constant. Follows ADR-0075/0076 because its calibration signal also corroborates the ADR-0073 judge scores.
-**Related:** [`08_KNOWLEDGE §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078) + A.40 (schemas), [`08_KNOWLEDGE §6.3`](08_KNOWLEDGE.md#63-supersessioncascade) + [`§6.3a`](08_KNOWLEDGE.md#63a-belief-revision-rides-the-cascade-adr-0078) (cascade bridge), [`08_KNOWLEDGE §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073) (calibration as corroborator), [`08_KNOWLEDGE §2.1`](08_KNOWLEDGE.md#21-k-line-vs-skill-vs-provenfact-vs-lesson--distinction-matrix) (K-line fast path), [`02_PERSONA §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078) + A.74 (HEART predicate), [`03_TASKS §5`](03_TASKS.md#5-answerpackage) (AnswerPackage confidence), OQ-PERSONA-10, ADR-0073 (corroboration target), ADR-0067…0074 (non-contradiction).
-
-**Context.** The substrate already paid for the raw signal: every verifier verdict is a free, hard outcome against which a stated confidence can be scored. It also already had the revision *trigger* (`SupersessionCascade` flags invalidated claims) and the fast path (K-line orient-time replay). What was missing was record-keeping and gating — exactly the class of gap ADR-0074 closed for tactics. Nothing here required a new reasoning engine, and building one would have contradicted the emergence stance.
-
-**Decision.** Two records and one gate, all over existing machinery:
-1. **`calibration-record/1`** — per persona × domain rolling Brier-style score between stated confidence and verified outcome. Updated **only** on hard verifier verdicts (judged/engagement signals never move it); below a minimum sample (default 10) it conditions nothing.
-2. **Rendered confidence is conditioned.** The confidence rendered into an `AnswerPackage` MUST be conditioned on the domain's calibration record — "historically overconfident in X" tempers claims in X — with the conditioning recorded in lineage (raw vs calibrated confidence stays auditable).
-3. **`belief-revision/1`** — when a `SupersessionCascade` invalidates a persona's prior assertion, the persona's re-evaluation mints a reflective "I believed X; evidence Y changed it" note, provenance-backed (cites cascade + superseding ref), retrievable as layer-4 prompt material, shareable in relationships under standard consent gates. Honest, evidence-bound mind-changing instead of silent decay.
-4. **DualProcessGate** — the K-line fast path (System 1) fires only when the K-line match score AND the domain's calibration both exceed thresholds (`τ_match`, `τ_cal`; conservative seeds); otherwise full deliberation (System 2 — the ordinary round loop). A gate over existing machinery; every gate decision is signed.
-5. **HEART predicate made concrete + adaptive cadence** ([`02_PERSONA §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078)): "improving" := positive verifier-score slope over a sliding window (default 5 attempts) AND non-declining calibrated confidence; "stuck" := slope ≤ 0. The reflection cadence (default 20 tasks) becomes adaptive within operator-tunable bounds (defaults 5..50), with calibration collapse triggering early reflection.
-
-**Consequences.**
-- (+) A persona's "I'm fairly sure" becomes a claim with a track record; overconfidence self-corrects at the rendering layer; changing one's mind becomes visible, citable behaviour — three human-shaped metacognitive surfaces from one free signal.
-- (+) The fast path gets safer, not slower: K-line replay is now allowed only where the persona is *demonstrably* calibrated in that domain, which is the dual-process literature's actual claim (System 1 is trustworthy where experience is calibrated).
-- (+) Anti-Goodhart for free: calibration is grounded in hard verifier outcomes (the top of the §15 ladder) and MAY corroborate the ADR-0073 identity-expression judge scores — judged optimism against collapsing verified calibration is flagged before promotion. No new kernel responsibility beyond signing; additive schemas only; nothing contradicts ADR-0067–0076.
-- (−) Brier over small N is noise (min-sample floor mitigates); the per-domain partition is coarse and cross-domain transfer is open (OQ-PERSONA-10).
-- (−) Stated confidence can be sandbagged — systematic understatement scores well while communicating badly. Mitigated honestly: calibration conditions rendering and gates the fast path; it never promotes anything alone, and the §15 corroboration rules apply unchanged.
-
-**Alternatives considered.**
-- *A dedicated metacognition module / second reasoning engine.* Rejected: the gaps were record-keeping and gating over machinery that exists (verifiers, cascade, K-lines, reflection); a parallel engine contradicts the composition stance of ADR-0066/0070.
-- *Calibrate from judge scores too (more data).* Rejected: judged signals are gameable and rank below verified outcomes (§15); mixing them in would launder soft signal into the one record whose value is being hard to game.
-- *Auto-retract superseded assertions instead of minting revision notes.* Rejected: §6.3 deliberately flags rather than deletes; a revision note preserves the persona's epistemic history (and its relationships' view of it) instead of rewriting it.
-- *Keep the fixed 20-task reflection cadence.* Rejected: a constant cadence reflects too often when improving and too rarely when calibration collapses; bounded adaptivity spends the same reflection budget where it pays.
-
-**Implementation scope.** Landed with normative edits: [`08_KNOWLEDGE §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078) + A.40 (schemas), [`08_KNOWLEDGE §6.3a`](08_KNOWLEDGE.md#63a-belief-revision-rides-the-cascade-adr-0078) (cascade bridge), the [`08_KNOWLEDGE §14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073) calibration-corroboration note, [`02_PERSONA §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078) + A.74 (HEART predicate + adaptive cadence), OQ-PERSONA-10 ([`02_PERSONA §13a`](02_PERSONA.md#13a-open-questions)), the A-GF-META test family ([`11_DESIGN_CRITERIA §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)), and glossary entries (*CalibrationRecord*, *BeliefRevisionRecord*, *DualProcessGate*).
-
----
-
-### ADR-0079 — Counterparty models: bounded theory of mind as an addressable, transparent, deletable sidecar; disagreement styles as evolvable seed vocabulary
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Design review — "personas should behave and reason more like humans" (social-behaviour facet). The per-counterparty surface was a trust scalar plus consents and boundaries: no inferred preferences, no communication-style model, no predicted reactions, no per-relationship disagreement style. Worse, the gap was *known and unaddressable* — `02_PERSONA §11.7a` honest limit 3 conceded that a persona "may have *modelled* the user … this representation cannot be quoted," so implicit models existed beyond the reach of transparency and forgetting. Leaf addition after ADR-0073…0078; depends on ADR-0073/0074 for the style-evolution machinery.
-**Related:** [`02_PERSONA §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079) + A.75 (schema + seed vocabulary), [`02_PERSONA §11.4`](02_PERSONA.md#114-personarelationshipedge--typed-bidirectional-relationship-between-two-personas) (edge), [`02_PERSONA §11.7`](02_PERSONA.md#117-personamemorytransparencyrequest--peer-memory-transparency) + [`§11.7a`](02_PERSONA.md#117a-usermemorytransparencyrequest--user-side-what-do-you-remember-about-me) + [`§11.7b`](02_PERSONA.md#117b-usermemoryselectionrequest--user-initiated-selective-forgetting) (transparency/forgetting), [`02_PERSONA §13`](02_PERSONA.md#13-risks--known-limitations) (R-PERSONA-9), [`15_COORDINATION_SHAPES §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog) (`negotiated-disagreement-v1`), [`08_KNOWLEDGE §14.2`](08_KNOWLEDGE.md#142-per-channel-tactic-evolution) + [`§14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074) (style evolution), ADR-0034 (MPA primitives), ADR-0067…0072 (non-contradiction), ADR-0073/0074.
-
-**Context.** Human-shaped social behaviour requires a model of the other party — what they prefer, how they communicate, how they are likely to react — and a differentiated way of disagreeing with *them specifically*. The substrate had neither, and the implicit version it could not prevent was the worst configuration: real modelling, zero addressability. The design constraint was equally sharp: an explicit model of a *human* user is profiling, so the primitive is admissible only if the existing user-protection machinery reaches every entry of it — transparency, selective forgetting, consent-bounded sharing, and the Memory Power Asymmetry mitigations, all composing without exception.
-
-**Decision.** Make the model explicit, provenance-bound, and fully subject to the protection machinery; make disagreement styles seed vocabulary, not a primitive:
-1. **`counterparty-model/1`** — an OPTIONAL additive sidecar on `RelationshipRecord` (persona ↔ user) or one side of a `PersonaRelationshipEdge` (persona ↔ persona): entries of KindRegistry-resolved kinds (inferred_preference, communication_style, predicted_reaction, disagreement_style_observed), each with a statement, confidence, and evidence refs.
-2. **Provenance per entry.** Every entry MUST cite the episodic memories that justify it; unsourced entries are refused at write. The model can contain only what the relationship's recorded history supports.
-3. **Hard protection constraints (all MUSTs):** `UserMemoryTransparencyRequest` (§11.7a) MUST surface the full model at every granularity; `UserMemorySelectionRequest` (§11.7b) MUST be able to delete individual entries; the model MUST NOT be shared cross-persona except through the §11.7 consent path (`cross_persona_transferable` defaults False); and it composes with — never bypasses — the §11.1 MPA mitigations.
-4. **Disagreement/negotiation styles as seed vocabulary** for the existing `relational_style` EVOLVE-BLOCK — direct-challenge, evidence-first, socratic, accommodate-then-revisit — differentiated per relationship by the ordinary evolution machinery (ADR-0073 identity axis + ADR-0074 lineage/trials), with the model's observed-style entries as reflection material. No new substrate primitive carries styles; the §9 relational-drift and influence caps hold.
-5. **`negotiated-disagreement-v1`** — a STANDARDISED seed coordination shape (`StagedSequence` + `DerivedMetric`, the ADR-0070 pattern): declare positions → exchange per each side's own style → resolve on evidence quality / verifier outcomes or escalate to the ordinary acceptance pathway. The shape coordinates process; it never imposes a style.
-
-**Consequences.**
-- (+) Theory of mind becomes legible: "what does Halia think Sarah prefers, and on what evidence" has a signed, queryable, deletable answer — and the §11.7a "cannot be quoted" honest limit is retired for explicitly modelled state. Personas disagree in relationship-differentiated, evolution-earned styles instead of one house manner.
-- (+) Protection strictly improves: the same modelling that previously hid in weights/reflections now sits inside the transparency, forgetting, and consent surfaces; GDPR-style erasure reaches inference, not just episodes. Additive everywhere; no schema version bumps; no new kernel responsibility beyond signing; nothing contradicts ADR-0067–0078.
-- (−) **Profiling humans is sensitive by construction** — recorded as the mandatory risk row R-PERSONA-9, not waved away. Mitigations are the rules above plus the §15 anti-manipulation audit clearance on relational-tactic promotion; a malicious operator policy remains the residual it is everywhere.
-- (−) The implicit-modelling residual shrinks but survives: what a persona internalises without writing an entry stays unaddressable (the §11.7b residual). The sidecar moves explicit modelling into the protected surface; it cannot force all modelling to be explicit.
-- (−) Predicted reactions are predictions: provenance-backed guesses with the persona's confidence attached, not the counterparty's endorsement.
-
-**Alternatives considered.**
-- *Keep counterparty modelling implicit (status quo).* Rejected: the modelling happens regardless; implicit means unauditable, untransparent, undeletable — strictly worse for the user on every axis the MPA mitigations exist for.
-- *Fold the model's fields into `RelationshipRecord` directly.* Rejected: a sidecar keeps the addition optional and version-bump-free, and gives transparency/deletion a clean per-entry grain instead of mutating a load-bearing core schema.
-- *A substrate disagreement-style enum on the edge.* Rejected: styles are exactly the kind of behaviour the EVOLVE-BLOCK machinery exists to differentiate per relationship; a closed enum would freeze them and contradict the C4 emergence stance.
-- *Share counterparty models cohort-wide for coordination efficiency.* Rejected outright: persona A's model of a user reaching persona B without consent is the precise leak the §11.7 consent path and anti-leakage rules forbid.
-
-**Implementation scope.** Landed with normative edits: [`02_PERSONA §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079) + A.75 (schema + seed vocabulary), the R-PERSONA-9 risk row ([`02_PERSONA §13`](02_PERSONA.md#13-risks--known-limitations)), the `negotiated-disagreement-v1` seed-catalog entry ([`15_COORDINATION_SHAPES §7`](15_COORDINATION_SHAPES.md#7-seed-shapes-catalog)), the SCENARIO 08 counterparty-transparency addendum ([`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md)), the A-GF-CPM test family ([`11_DESIGN_CRITERIA §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)), and the glossary entry (*CounterpartyModel*).
-
----
-
-### ADR-0080 — Habit strength & intuition hints: usage-consolidated tactics resist mutation pressure; mentor applicability priors transfer advisorily
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Design review — "personas should behave and reason more like humans" (memory & growth facet, closing the Phase-3 arc). Two gaps: (1) every promoted tactic was equally exposed to GEPA mutation pressure regardless of how often and how successfully it fired — no habit formation, so a persona's most-relied-on behaviour was as cheap to churn as its least; (2) `SkillTransferGrant` (§11.5) transferred skill *code* while its honest limit 1 conceded that the teacher's tacit sense of *when the skill applies* did not transfer at all — half of R-PERSONA-5. Leaf addition: habit rides ADR-0074's tactic lineage; hints are gated by ADR-0078's DualProcessGate.
-**Related:** [`08_KNOWLEDGE §14.2a`](08_KNOWLEDGE.md#142a-habit-strength-on-tactics-adr-0080) + A.42 (habit mechanics), [`08_KNOWLEDGE §14.3`](08_KNOWLEDGE.md#143-tactic-lineage-and-trial-records-adr-0074) (the reinforcement source), [`08_KNOWLEDGE §14.1`](08_KNOWLEDGE.md#141-anti-degradation-safeguards) (floors + rollback), [`08_KNOWLEDGE §4a`](08_KNOWLEDGE.md#4a-decay-formula-adr-0077) (decay shape), [`02_PERSONA §11.5a`](02_PERSONA.md#115a-intuition-hints-on-skill-transfer-adr-0080) + A.76 (IntuitionHint schema), [`02_PERSONA §11.5`](02_PERSONA.md#115-skilltransfergrant--persona-to-persona-skill-transfer) (grant), [`08_KNOWLEDGE §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078) (DualProcessGate), R-PERSONA-5 (partial discharge), ADR-0067…0072 (non-contradiction), ADR-0074/0078 (prerequisites).
-
-**Context.** Human expertise consolidates: heavily-used successful behaviour hardens into habit and resists casual revision, while applicability intuition — "this is the kind of situation where that move works" — is the part of expertise mentors actually manage to hand on. The substrate had the raw material for both: the ADR-0074 tactic-lineage citations already record exactly which tactics fire in accepted work (the reinforcement signal, for free), and the ADR-0078 DualProcessGate already defines where a confidence prior may and may not act. Both additions are field-plus-rule compositions over that machinery — no new subsystem, and the safety question ("can a habit entrench a bad behaviour? can a mentor's confidence bypass the learner's own calibration?") is answered by hard clamps rather than tuning.
-
-**Decision.** One optional field with clamps, one advisory schema with a gate rule:
-1. **`habit_strength`** — OPTIONAL per-tactic scalar in [0, 1]: reinforced on each accepted-lineage use (read from the existing `tactic-lineage/1` citations — no new event kind), decaying with disuse on the §4a exponential shape. The §16 mutation operators consume it as proposal-probability bias: tactics above the habit threshold (default 0.7) are deprioritized as mutation targets; rarely-used tactics become preferred mutation candidates. Habit formation thus *falls out of* the ADR-0074 PromptOps machinery.
-2. **Hard clamps:** the bias has a floor (default 0.1 — never zero, never immunity); `habit_strength` MUST NOT veto per-tactic or whole-block rollback; and a mutation driven by a §14.1 floor breach (charter, voice, refusal range) proceeds regardless of habit. Habit shapes ordinary evolutionary exposure only.
-3. **`intuition-hint/1`** — advisory-only K-line confidence priors attached to a `SkillTransferGrant`: the teacher's applicability prior over a topology fingerprint, citing teacher-side K-line + calibration evidence and carrying the teacher's calibration snapshot at mint. Marked `advisory = True` (immutable); renders as layer-4 retrieved material on the learner's side, like a Lesson.
-4. **Gate rule:** a hint MUST NOT bypass the receiver's DualProcessGate — the fast path fires only on the *receiver's own* match score and calibration record; a hint cannot lower `τ_match`/`τ_cal`, seed the receiver's `calibration-record/1`, or fire a fast path. Mentor confidence informs deliberation; it never licenses reflexes.
-5. **R-PERSONA-5 partially discharged:** applicability intuition now transfers in bounded, advisory, provenance-backed form; adaptive mid-flight intuition is the recorded remainder, deferred to the population-dynamics arc.
-
-**Consequences.**
-- (+) Persona behaviour individuates the way practice does: reliable habits stabilise (cheaper, more predictable envelopes for relied-on behaviour), exploration concentrates where evidence is thin — and the whole effect is two read-only derivations over signed records, replayable by audit.
-- (+) Mentorship gets meaningfully richer: a learner receives not just the skill but a calibrated, auditable sense of when to reach for it — with the dual-process literature's actual caveat enforced (trust System 1 only where *your own* experience is calibrated). No new kernel responsibility beyond signing; all additions optional and additive; nothing contradicts ADR-0067–0079.
-- (−) Habit is an exposure bias, not competence: a stale habituated tactic mutates more slowly by design. Bounded honestly — the §14.1 audits and rollback are unclamped, and the decay guarantees unused habits release their protection.
-- (−) A hint flattens expertise to a prior over an embedding; a teacher's gut feeling earned in one context can mislead in another. The advisory standing bounds the damage: a bad hint wastes attention, never fires a fast path.
-- (−) `habit_threshold`, `reinforcement_step`, and `λ_habit` are new operator-tunable surfaces; mis-tuning mutes or exaggerates consolidation. The clamps (floor 0.1, no rollback/safety veto) cap the blast radius.
-
-**Alternatives considered.**
-- *Make high-habit tactics immutable.* Rejected: immunity is how stale behaviour fossilises; the floor keeps every tactic mutable and rollback keeps every habit reversible.
-- *Let habit_strength weigh into the §15 promotion rules.* Rejected: habit measures exposure, not evidence; letting it promote anything would launder usage frequency into trust — the precise Goodhart shape §15 exists to refuse.
-- *Transfer the teacher's calibration record with the skill.* Rejected: calibration is per persona × domain and earned from the persona's own verified outcomes (ADR-0078 rule 1); importing another persona's record would falsify the one signal whose value is being hard to game. The snapshot travels as evidence *about the teacher*, never as the learner's state.
-- *Encode intuition as auto-installed K-lines on the learner.* Rejected: K-lines are Historian-assembled from the persona's own wins; installing foreign replay patterns would let mentor confidence fire the learner's fast path — exactly what the gate rule forbids.
-
-**Implementation scope.** Landed with normative edits: [`08_KNOWLEDGE §14.2a`](08_KNOWLEDGE.md#142a-habit-strength-on-tactics-adr-0080) + A.42 (habit mechanics), [`02_PERSONA §11.5a`](02_PERSONA.md#115a-intuition-hints-on-skill-transfer-adr-0080) + A.76 (IntuitionHint schema), the R-PERSONA-5 partial-discharge update ([`02_PERSONA §13`](02_PERSONA.md#13-risks--known-limitations)), the A-GF-HAB test family ([`11_DESIGN_CRITERIA §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)), and glossary entries (*HabitStrength*, *IntuitionHint*).
-
----
-
-### ADR-0081 — Runtime wiring completion for the psychology wave: the ADR-0073–0080 mechanisms get their missing circuits, owners, bounds, and budgets
-
-**Status:** Accepted. Supersedes the reinforcement-source sentence of ADR-0080 (decision rule 1: "read from the existing `tactic-lineage/1` citations — no new event kind"); all other ADR-0073…0080 content stands.
-**Date:** 2026-06-09.
-**Origin:** Whole-design review of the landed ADR-0073…0080 wave. The wave's mechanisms were specified in `02_PERSONA`/`08_KNOWLEDGE` but their *consuming* docs were never wired: nothing minted `appraisal-event/1`, no field carried the confidence that calibration scores, the risk-tolerance scalar had no consumer, the registry lacked the wave's schemas, and several mechanisms were uncomputable or contradictory as written (habit reinforcement read from a record kind that never records firings; the decay formula contradicted A.3; the fast-path calibration gate was an unreachable cliff for young domains). This ADR completes the wiring; it adds no new behaviour beyond what ADR-0073…0080 already intended.
-**Related:** [`03_TASKS §5`](03_TASKS.md#5-answerpackage) + A.33/A.34 (answer/5), [`03_TASKS §2.5`](03_TASKS.md#25-investigative-per-mode-budget) (scalar consumption), [`03_TASKS §4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076) (goal appraisals + commitment escalation), [`02_PERSONA §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075)/[`§6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078)/[`§11`](02_PERSONA.md#11-persona--user-interaction) + A.15/A.20/A.73/A.74, [`08_KNOWLEDGE §3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077)/[`§4a`](08_KNOWLEDGE.md#4a-decay-formula-adr-0077)/[`§10`](08_KNOWLEDGE.md#10-five-layer-prompt-assembly)/[`§11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073)/[`§13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078)/[`§13b`](08_KNOWLEDGE.md#13b-executing-components-for-the-psychology-wave-adr-0081)/[`§14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073)/[`§14.2a`](08_KNOWLEDGE.md#142a-habit-strength-on-tactics-adr-0080)/[`§14.3a`](08_KNOWLEDGE.md#143a-tactic-citation-events--usage-not-mutation-adr-0081), [`09_PROTOCOLS §7.9a`](09_PROTOCOLS.md#79a-psychology-metacognition--promptops-adr-00730082) + A.22, [`05_ENVIRONMENT §7.2`](05_ENVIRONMENT.md#72-kernel-maintenance-budget-class-adr-0081)/[`§10.3`](05_ENVIRONMENT.md#103-node-level-task-queue-admission--where-schedulingpolicy-plugs-in-adr-0069adr-0081), [`04_PROJECT A.35/A.36`](04_PROJECT.md), [`06_DOMAIN A.1`](06_DOMAIN.md), ADR-0069/0073…0080, ADR-0082 (lands together).
-
-**Context.** ADR-0073…0080 were specified honestly but landed as *producer-side* edits: the schemas, formulas, and rules exist where the mechanism lives, while the docs that must consume, mint, bound, own, or budget them were untouched. The review found three failure classes. (1) **Dead circuits** — events nothing mints (appraisals), fields nothing carries (stated confidence), scalars nothing consumes (risk tolerance), schemas the INV-10 registry would refuse on sight. (2) **Uncomputable or contradictory mechanisms** — habit reinforcement defined over mutation records that never record usage (the ADR-0080 claim that "tactic-lineage citations already record exactly which tactics fire in accepted work" is false: `tactic-lineage/1` mints per *mutation*); a decay formula whose unscoped λ staircase contradicted A.3's "semantic decays only on contradiction, reflective only on retirement"; a self-narrative that could keep rendering user-erased memories for up to a week; a τ_cal=0.85/n≥10 cliff that made the fast path unreachable exactly where it should be earning evidence; HEART predicates whose "rising scores + collapsing calibration" case was classified as both not-stuck and stuck. (3) **Unowned and unbounded behaviour** — no executing component named for sweeps/trials/backfills, no fan-out bound on appraisals (one event could move mood several times via different kinds), no token budget on the growing prompt layers, no entry cap on counterparty models, no budget class for the wave's background compute, and the goal-arbitration vector formally able to reorder deadline-escalated commitments within a class.
-
-**Decision.** Complete the wiring, with every fix scoped to what the original ADRs intended:
-1. **`answer/5`** ([`03_TASKS §5`](03_TASKS.md#5-answerpackage)) — `AnswerPackage` gains `stated_confidence: float | None` (RAW, pre-conditioning) and `calibration_conditioning_ref: str | None`; the §13a Brier update consumes the RAW value and the conditioned value is rendering-only. Version bumped (not additive-retained) because the raw-vs-conditioned distinction is load-bearing for audit; §7.13 migration mapper sets both `None`.
-2. **Appraisal minting wired** — acceptance-status finalization mints `task_verified`/`task_failed` (03 §5); goal-state transitions mint `goal_progressed`/`goal_blocked` (03 §4.6a); relationship events mint the relationship kinds (02 §11). No other component mints appraisals; every appraisal carries its grounding `source_event_ref`.
-3. **Appraisal fan-out bounded** (02 §6.2/A.73) — impulses sharing a `source_event_ref` compose by max-magnitude per axis, never additively; net mood movement ≤ 0.25/axis per rolling 24 h, kernel-enforced with signed truncation.
-4. **Risk-tolerance scalar consumed** (03 §2.5) — it rescales the generative-exploration sub-mode share with shares renormalized to 100%; the session call cap and INV-7 are unchanged (reallocates within, never enlarges).
-5. **Registry completed** ([`09_PROTOCOLS §7.9a`](09_PROTOCOLS.md)) — rows for `skill-transfer-grant/1`, `intuition-hint/1`, `counterparty-model/1` (home-kernel-only flag, ADR-0082), `belief-revision/1`, `tactic-lineage/1`, `prompt-trial/1`, `cohort-migration/1`, `scheduling-policy/1`, `calibration-record/1`, `identity-rubric/1`, plus the kernel-internal `appraisal-event/1`, `mood-impulse/1`, `self-narrative/1`, `tactic-citation/1`, with the boundary-crossing vs kernel-internal distinction noted. `PromptBlock.origin` gains `contextual_mood` + `self_narrative` (09 A.22) so the ADR-0075/0077 renderings are carriable.
-6. **`tactic-citation/1`** ([`08_KNOWLEDGE §14.3a`](08_KNOWLEDGE.md) + A.43) — **this supersedes the reinforcement-source sentence of ADR-0080**: tactic-lineage records mint per mutation, not per firing, so reinforcement read from them was uncomputable. The new event mints at AnswerPackage acceptance, lists tactic ids extracted from the GEPA trace `tactic` field, is explicitly approximate (trace-extracted, judge-confirmable on audit), signed, and lineage-anchored; §14.2a/A.42 reinforcement now reads these events. Citations are exposure evidence, never promotion evidence (§15 untouched).
-7. **Decay scoped** (08 §4a) — the λ staircase applies to EPISODIC memory only; semantic and reflective carry λ = 0 (contradiction/retirement paths only); ProvenFacts never decay. Resolves the §4a-vs-A.3 contradiction in A.3's favour.
-8. **Narrative derender** (08 §3.3) — tombstone/supersession of ANY cited memory immediately sets `renderable = False` and triggers out-of-cadence regeneration; "prior narrative continues to serve" applies only while its citations are all live. Render nothing rather than a stale identity.
-9. **Executing components named** (08 §13b) — kernel runtime service (clamps, decay evaluation, gate enforcement, rendering), consolidation sweep / Reflector mode (narrative regeneration, habit recomputation), GEPA harness (trials, rubric scoring), operator job (rubric backfill, migration initiation). "Kernel signs" stays true; compute ownership is now explicit.
-10. **Identity-rubric lifecycle** (08 §11.1b rule 5; 02 A.20 step 5) — initial rubric minted at the birth ceremony; operator-triggered backfill for pre-ADR-0073 personas; until a rubric exists the identity axis is absent, never blocking.
-11. **Blind-attribution audit made statistical** (08 §14.1a rule 2) — N ≥ 5 summaries (synthetic distractors permitted), ≥ 20 trials, binomial p < 0.05 vs 1/N chance, PersonaCard-grade redaction (public projection, so no consent gate), operator sign-off where the audit cannot run.
-12. **Gate ramp** (08 §13a rule 4, §2.1, A.2, A.40, glossary) — fast-path replay requires τ-match AND the calibration gate; below min-sample the cliff is replaced by a graduated ramp (System-2 verification on a sampled fraction from 1.0 at n=0 to the steady-state spot-check at n=10). Honest cost: young-domain fast paths save little until calibration is earned.
-13. **Identity weighted-sum reconciliation** (08 §11.1b rule 2; 02 §8.3) — Pareto separation governs selection; `w_ide` governs post-hoc credit attribution only and MUST NOT feed selection/promotion scalarization.
-14. **Evolution wall extended** (08 §10a rule 2) — GEPA traces strip ALL prompt-rendered psychological state (narrative, drive content, belief-revision notes, counterparty context, intuition hints), not just the mood line.
-15. **Habit × identity floor** (08 §14.2a rule 4) — identity-axis-initiated proposals face a habit-bias floor of 0.5 (≈2× slower), not 0.1 (≈10×): the oldest pre-identity tactics are exactly the ones habit shields.
-16. **HEART `indeterminate`** (02 §6.3, A.15, A.74) — slope > 0 with declining calibration is `indeterminate` (neither improving nor stuck): consumers continue current mode with no escalation; precedence fixed as alternation predicates → mood prior → `persona.default_mode`. Resolves A.74's self-contradiction.
-17. **Token budgets and counterparty bounds** (08 §10; 02 §11.4b rule 8/A.75) — layers 3–4 get seed caps (1,200/2,400 tokens) with a never-evict tier (floors/charter/tactics) and a declared eviction order; counterparty models cap at 20 entries with merge-or-evict consolidation and top-k (seed 5) rendering into the existing layer-3 relationship block.
-18. **Commitments outrank preference** (03 §4.6a) — the arbitration vector is subordinate to deadline/urgency escalation tied to signed commitments; it reorders only among tasks of equal escalation status.
-19. **Lineage closure for 04/06** — cross-project tactic promotion requires `tactic-lineage/1` + `prompt-trial/1` refs (04 A.35/A.36); domain seed tactics mint lineage roots (version 1, `mutation_operator = "seed"`) on first adoption (06 A.1; A.37 operator comment extended).
-20. **Maintenance budget class** (05 §7.2; 05 §10.3) — narrative consolidation, decay/habit recomputation, prompt trials, and cohort-migration shadow evaluation draw from a named AttentionBudget class (seed 10%); sweeps bind to `ScheduledTrigger`s; shadow evaluation gets an INV-7-style hard stop. `SchedulingPolicy`'s node-level plug-in point (the `task_intake` admission over the §10 deferred queue) is now named in 05 with cross-refs both ways.
-21. **Minor corrections** — the 03 §2b EWMA citation now points at §2b.1/06 A.61 (not 04); `goal-arbitration-v1` matches the `15_COORDINATION_SHAPES §7` catalog name; the A.34 status buckets are recounted at 27 (12 successful / 7 partial-edge / 8 termination; `human_approved` is acceptance, not termination) with A-T19 updated; the 09 §7.2 "Defined in" anchors for `AnswerPackage`/`AcceptanceConfig`/`TaskClassEstimate` point at 03 §5/§6/§2.1.
-
-**Consequences.**
-- (+) The wave's behaviour is now *reachable*: appraisals actually move mood (boundedly), calibration actually has a confidence to score, risk tolerance actually tilts a budget profile, habits actually reinforce from usage, and INV-10 no longer refuses the wave's own schemas. The review's dead circuits are closed with zero new subsystems — every fix is a mint point, a bound, a scope, or a row over machinery ADR-0073…0080 already specified.
-- (+) The uncomputable/contradictory mechanisms are corrected *in the direction the original ADRs argued*: usage-based habit (0080's intent, now with a real usage event), spaced-repetition forgetting for episodes only (0077's literature claim), evidence-earned fast paths (0078's dual-process claim), no stale self-story (0077's provenance stance).
-- (+) Ownership, budgets, and caps turn "the kernel signs" from an evasion into a clean split: signing stays kernel; compute is assigned; background work is budgeted with a hard stop; prompt growth is bounded with floors never evicted.
-- (−) `answer/5` is a schema version bump with a migration mapper — the one non-additive change in the wave; accepted deliberately so raw-vs-conditioned confidence is distinguishable by version, not by convention.
-- (−) The corrections are admissions: ADR-0080's reinforcement source was wrong as written (superseded here, not silently edited), and the §4a formula as landed contradicted A.3. Recording the supersession in a new ADR keeps the catalog honest at the cost of two ADRs describing one mechanism.
-- (−) New tunables accrete (window clamp, ramp fractions, layer caps, k, cap-20, maintenance share). Each ships with a seed and an operator bound, but the tuning surface of the wave grows again; mis-tuned caps degrade quality before they degrade safety (floors are outside every eviction/clamp path).
-- (−) Tactic-citation attribution is approximate by construction (trace-extracted); habit strength inherits that noise. Bounded honestly: citations are exposure evidence only and never promote.
-
-**Alternatives considered.**
-- *Patch ADR-0073…0080 in place instead of superseding sentences.* Rejected: the catalog is append-only institutional memory; editing history hides that the wave shipped with a false claim. The supersession is stated explicitly and scoped to one sentence of ADR-0080.
-- *Retain `answer/4` and add the confidence fields additively.* Rejected: §7.13 permits it, but audit then cannot tell from the version whether `stated_confidence` is the raw value — the precise raw-vs-conditioned ambiguity rule 1 exists to remove.
-- *Derive habit reinforcement from lineage + trial records without a new event.* Rejected: neither records per-task firings; reconstructing usage from GEPA trace archives at sweep time would re-derive exactly what `tactic-citation/1` records, unsigned and unreplayably.
-- *Keep the τ_cal cliff and let young domains deliberate.* Rejected: the cliff makes the fast path unreachable precisely where K-lines accumulate first; the ramp keeps every sub-threshold replay verified while letting the saving phase in — strictly safer than the cliff *and* faster in expectation.
-- *A second scheduler / separate maintenance daemon for the background compute.* Rejected: contradicts ADR-0069's one-ordering-authority stance; a named budget class inside the existing AttentionBudget plus `ScheduledTrigger` binding gives the same control with no new authority.
-
-**Implementation scope.** Landed with normative edits: [`03_TASKS §2.5`](03_TASKS.md#25-investigative-per-mode-budget)/[`§4.6a`](03_TASKS.md#46a-goal-arbitration-preference-vector--an-admissible-schedulingpolicy-input-adr-0076)/[`§5`](03_TASKS.md#5-answerpackage)/§5.1 + A.33/A.34 + the §2b citation fix, [`02_PERSONA §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075)/[`§6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078)/[`§8.3`](02_PERSONA.md#83-credit-assignment-formula)/[`§11`](02_PERSONA.md#11-persona--user-interaction)/§11.4b rule 8 + A.15/A.20/A.73/A.74/A.75, [`08_KNOWLEDGE §2.1`](08_KNOWLEDGE.md#21-k-line-vs-skill-vs-provenfact-vs-lesson--distinction-matrix)/[`§3.3`](08_KNOWLEDGE.md#33-self-narrative-consolidation-adr-0077)/[`§4a`](08_KNOWLEDGE.md#4a-decay-formula-adr-0077)/[`§10`](08_KNOWLEDGE.md#10-five-layer-prompt-assembly)/[`§10a`](08_KNOWLEDGE.md#10a-contextual-mood-line-adr-0075)/[`§11.1b`](08_KNOWLEDGE.md#111b-identity-expression-objective-adr-0073)/[`§13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078)/[`§13b`](08_KNOWLEDGE.md#13b-executing-components-for-the-psychology-wave-adr-0081)/[`§14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073)/[`§14.2a`](08_KNOWLEDGE.md#142a-habit-strength-on-tactics-adr-0080)/[`§14.3a`](08_KNOWLEDGE.md#143a-tactic-citation-events--usage-not-mutation-adr-0081) + A.2/A.3/A.37/A.39/A.40/A.42/A.43, [`09_PROTOCOLS §7.2`](09_PROTOCOLS.md#72-acceptance--task)/[`§7.9a`](09_PROTOCOLS.md#79a-psychology-metacognition--promptops-adr-00730082) + A.22, [`04_PROJECT A.35/A.36`](04_PROJECT.md), [`06_DOMAIN A.1`](06_DOMAIN.md), [`05_ENVIRONMENT §7.2`](05_ENVIRONMENT.md#72-kernel-maintenance-budget-class-adr-0081)/[`§10.3`](05_ENVIRONMENT.md#103-node-level-task-queue-admission--where-schedulingpolicy-plugs-in-adr-0069adr-0081), the A-GF test updates + new IDs (A-GF-ARC-6, A-GF-SN-6/7, A-GF-TLR-7, A-GF-CPM-7; [`11_DESIGN_CRITERIA §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination) + §7 counts), and glossary entries/updates (*TacticCitation*, *Maintenance budget class*, *K-line*, *Answer Package*, *HabitStrength*).
-
----
-
-### ADR-0082 — Counterparty privacy & integrity hardening: consent-gated creation, home-kernel-only sidecars, blind-review suspension
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Whole-design review of ADR-0079's landing. The `counterparty-model/1` sidecar made implicit modelling explicit and deletable — but its *creation* needed no consent (a relationship whose user said "do not remember personal facts about me" could still accumulate inferred preferences and predicted reactions), its content could ride `RelationshipFederationSync` to a peer kernel as edge baggage, and a blind `PeerReview` left counterparty models free to grow about — and deanonymize — anonymized counterparts. Lands together with ADR-0081 (which bounds the model's size and rendering); this ADR governs who may be modelled, where the model may live, and when it must stand down.
-**Related:** [`02_PERSONA §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079) rule 7 + A.43 + A.75, R-PERSONA-9 ([`02_PERSONA §13`](02_PERSONA.md#13-risks--known-limitations)), [`02_PERSONA §11.7a/§11.7b`](02_PERSONA.md#117a-usermemorytransparencyrequest--user-side-what-do-you-remember-about-me) (transparency/forgetting), [`09_PROTOCOLS §3E`](09_PROTOCOLS.md#3e-cross-kernel-relationship-continuity) (federation sync), [`04_PROJECT §11`](04_PROJECT.md#11-peerreview--multi-round-critique) + A.14 (blind review), ADR-0079 (the sidecar), ADR-0081 (bounds), ADR-0067 (federation identity).
-
-**Context.** ADR-0079's argument was that explicit modelling is strictly safer than implicit because the protection machinery reaches it. The review found three places where the machinery did not, in fact, reach. (1) **Consent:** `may_remember_personal_facts` defaults NO (A.43), yet model creation was ungated — and an *inference* about a person is at least as personal as a remembered fact; the asymmetry inverted the consent surface's intent. (2) **Federation:** §3E syncs edge state between kernels; nothing excluded the sidecar, so persona A's inferences about a party could replicate to the very kernel hosting that party — or any peer — as a side effect of edge continuity, outside every §11.7 consent path. (3) **Blind review:** `04_PROJECT §11` strips identities, but a reviewer's stored behavioural model of an author (writing style, predicted reactions) is a deanonymisation oracle, and a blind review could silently *grow* a model of a party whose identity is deliberately withheld.
-
-**Decision.** Three hard rules, all MUSTs, composing with ADR-0079 rules 1–6 unchanged:
-1. **Consent-gated creation** ([`02_PERSONA §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079) rule 7): creating a persona↔user counterparty model REQUIRES the relationship's `may_remember_personal_facts` toggle = YES; inference-level entries (`inferred_preference`, `predicted_reaction`) count as personal facts; first-contact disclosure MUST state that inference-level modelling occurs; toggle revocation disposes the model per §11.7b. Persona↔persona models need no toggle (no human is being profiled) but remain subject to rules 1–6.
-2. **Home-kernel-only** ([`09_PROTOCOLS §3E`](09_PROTOCOLS.md#3e-cross-kernel-relationship-continuity)): counterparty-model sidecars MUST be excluded from `RelationshipFederationSync` envelopes in ALL replication modes; the edge syncs, each side's model of the other stays home; a violating envelope is refused and signed. The registry row carries the flag ([`09_PROTOCOLS §7.9a`](09_PROTOCOLS.md)).
-3. **Blind-review suspension** ([`04_PROJECT §11`](04_PROJECT.md#11-peerreview--multi-round-critique)): during single/double-blind review, counterparty-model writes about AND retrieval against anonymized counterparts are suspended for the review's duration, as part of the anonymity-enforcement rules; no retroactive entries mint after deanonymisation.
-
-**Consequences.**
-- (+) The ADR-0079 claim ("the protection machinery reaches every entry") becomes true at the three boundaries where it was false: creation now passes through consent, replication through nothing, and blind review through a stand-down. R-PERSONA-9's mitigation column now lists all three.
-- (+) Zero new schemas; one field comment (`consent_ref` on the A.75 sidecar), one sync exclusion, one anonymity rule. Persona↔persona modelling and all ADR-0079 transparency/forgetting behaviour are untouched.
-- (−) Consent-gating shrinks the modelled population: personas serve users they may not model, and relational quality with toggle-off users degrades honestly (generic rather than tailored disagreement styles). This is the intended trade — tailoring is the thing being consented to.
-- (−) Home-kernel-only means a persona migrating kernels re-derives its counterparty models from whatever memories lawfully travel; model continuity is deliberately sacrificed to keep inferences from replicating outside consent.
-- (−) The blind-review suspension is scoped to *explicit* models; what a reviewer's body internalises about an anonymous author's style remains the §11.7b implicit-modelling residual — stated, not solved.
-
-**Alternatives considered.**
-- *A new dedicated consent toggle (`may_model_me`).* Rejected: a second toggle splits one intuition ("don't keep personal things about me") into a consent matrix users won't parse; counting inferences as personal facts under the existing toggle is the user-comprehensible rule, and granular §11.7b deletion already covers partial preferences.
-- *Sync counterparty models under `co_owned` edges only (both sides consented to the edge).* Rejected: edge consent is consent to the *relationship*, not to receiving the other side's private inferences; and the modelled party on the peer kernel never consented to their profile landing there.
-- *Encrypt the sidecar in sync envelopes instead of excluding it.* Rejected: ciphertext at the peer is still replication outside the consent path, creates a standing decryption target, and buys nothing the home-kernel copy doesn't already provide.
-- *Pause the whole relationship surface during blind review.* Rejected: overbroad — consents, boundaries, and ordinary memory keep operating; only the inference surface that can deanonymize is suspended.
-
-**Implementation scope.** Landed with normative edits: [`02_PERSONA §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079) rule 7 + the A.75 `consent_ref` field + the R-PERSONA-9 mitigation update ([`02_PERSONA §13`](02_PERSONA.md#13-risks--known-limitations)), the [`09_PROTOCOLS §3E`](09_PROTOCOLS.md#3e-cross-kernel-relationship-continuity) exclusion + the [`§7.9a`](09_PROTOCOLS.md#79a-psychology-metacognition--promptops-adr-00730082) home-kernel-only registry flag, the [`04_PROJECT §11`](04_PROJECT.md#11-peerreview--multi-round-critique) suspension rule, and the A-GF-CPM-6/A-GF-CPM-8 tests ([`11_DESIGN_CRITERIA §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
-
----
-
-### ADR-0083 — Psychology×society integration: corroborated reproduction fitness, motivational-exploitation guards, calibration-informed standing, tactic-space diversity, and the treasury→compute→population invariant
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Whole-design review of the SOCIETY layer (`16_POPULATION_DYNAMICS.md`, `17_ECONOMY.md`, `18_SETTLEMENT.md`) against the individual-psychology wave (ADR-0073…0082). The psychology wave landed inside the persona and its memory; the society layer was authored largely before that wave and never met it. Six seams were found where a psychology mechanism crosses into reproduction, economy, or standing without the corresponding guard — places where a judged signal, a drive, a mood, a habit, or a treasury reaches a population- or economy-level lever it should not reach unmediated.
-**Related:** [`16_POPULATION_DYNAMICS §4A`](16_POPULATION_DYNAMICS.md#4a-the-population-pressure-signal)/[`§4D`](16_POPULATION_DYNAMICS.md#4d-genesisproposal--mint-flow)/[`§4E`](16_POPULATION_DYNAMICS.md#4e-newborn-maturation-ramp-zpd--lpp--scaffolding)/[`§4F`](16_POPULATION_DYNAMICS.md#4f-demographic-regulation--safety)/[`§4G`](16_POPULATION_DYNAMICS.md#4g-effective-population-size--a-rigorous-metric-resolves-oq-pop-5)/[`§4H`](16_POPULATION_DYNAMICS.md#4h-continuous-diversity-maintenance-mitigates-post-birth-drift-oq-pop-6) + R-POP-8 + OQ-POP-7 + A-GEN25/A-GEN26, [`02_PERSONA §8.3`](02_PERSONA.md#83-credit-assignment-formula) (credit corroboration), [`17_ECONOMY §4C`](17_ECONOMY.md)/§5/§13/§14 + A-ECON18/A-ECON19, [`18_SETTLEMENT §4D`](18_SETTLEMENT.md), [`05_ENVIRONMENT §5.4`](05_ENVIRONMENT.md#54-community-standing--legitimate-peripheral-participation-community-standing1), [`08_KNOWLEDGE §13a`](08_KNOWLEDGE.md#13a-calibration-and-belief-revision-adr-0078) (calibration) / [`§14.1a`](08_KNOWLEDGE.md#141a-identity-expression-safeguards-adr-0073) (similarity audit) / [`§14.2a`](08_KNOWLEDGE.md#142a-habit-strength-on-tactics-adr-0080) (habit) / [`§15`](08_KNOWLEDGE.md#15-anti-goodhart-for-signal-corroboration) (corroboration), [`09_PROTOCOLS §3D`](09_PROTOCOLS.md#3d-reputation-and-anti-goodhart) (per-peer cap), ADR-0073…0082 (the wave), ADR-0048/0049/0050 (genesis), ADR-0067…0069 (cross-node).
-
-**Context.** ADR-0073 made `identity_expression` a judged credit term (weight 0.4) that flows additively into fitness; ADR-0048…0050 key the generativity gate and DGM parent selection on that same fitness. So a judged signal can, in principle, decide *who reproduces* — the one place a Goodharted judge compounds across generations. ADR-0079/0081 made counterparty models, drives, mood, and habit first-class — but `17_ECONOMY` inherited only the *user-facing* §15 harm classifiers, leaving the mirror hazard (a construct exploiting a *persona's* psychology) and reciprocal-adoption collusion (cheap to coordinate once peers model each other) unguarded. `18_SETTLEMENT`'s `PersonaTreasury` can buy compute, which raises budget headroom, which `16` reads as both genesis pressure and (under `ceiling_from_budget`) a higher population ceiling — a self-financing reproduction loop with no named brake. `16`'s diversity metrics saw niche-descriptor space (`Ne_d`) and authorship (`Ne_v`) but not *behavioural* convergence, even though habit-shielding (ADR-0080) and cohort-migration correlation (ADR-0074) are forces that drive exactly that. And the least-gameable competence signal in the corpus — `CalibrationRecord` (ADR-0078) — was ignored by standing and mentorship.
-
-**Decision.** Six fixes, each scoped to the seam and additive:
-1. **Corroboration at the reproduction gate.** The `fitness` consumed by the generativity gate and DGM parent selection MUST be the verified-outcome-dominant §15 composition: judged credit terms (`identity_expression` included) are capped at **25%** of gate-consumed fitness and can never flip gate eligibility absent verified-outcome support ([`16 §4D`](16_POPULATION_DYNAMICS.md#4d-genesisproposal--mint-flow); cross-ref [`02 §8.3`](02_PERSONA.md#83-credit-assignment-formula); A-GEN25).
-2. **Named, bounded treasury→compute→population loop.** A treasury→compute→headroom→population invariant: treasury-funded budget increases MUST NOT move `ceiling_from_budget` without a fresh operator cosignature **per increase** (no standing authorization) ([`16 §4F`](16_POPULATION_DYNAMICS.md#4f-demographic-regulation--safety), cross-ref [`18 §4D`](18_SETTLEMENT.md); R-POP-8 / R-ECON-COMPOUND; A-GEN26).
-3. **Tactic-space diversity.** A third effective-population estimator `Ne_t` over pairwise promoted-tactic-set distance (seed: normalized edit/embedding distance over EVOLVE-BLOCK text; operator-tunable), folded into `min(Ne_v, Ne_d, Ne_t)`; `§4H` names habit-strength shielding and cohort-migration correlation as convergence forces, with the ADR-0073 cross-persona similarity audit cross-referenced as the composing per-persona control ([`16 §4G`](16_POPULATION_DYNAMICS.md#4g-effective-population-size--a-rigorous-metric-resolves-oq-pop-5)/`§4H`).
-4. **Motivational-exploitation guard in the economy.** The §5 canary gains persona-side harm signals — drive-coupled payment structures, appraisal-event-generating payment kinds, mood-narrowed-risk pricing — that trip it independently of the construct's own value measure (R-ECON-MOTIVEXPLOIT; A-ECON18; OQ-ECON-11 for the launder-through-legitimate-events residual).
-5. **Calibration-informed standing — advisory, floor-gated.** Mentor eligibility SHOULD additionally require a non-degraded calibration trend in the mentored domain where a record exists (absence not disqualifying); CommunityStanding conferral and federation reputation MAY consume calibration records as corroborating evidence but MUST NOT make them the sole basis ([`16 §4E`](16_POPULATION_DYNAMICS.md#4e-newborn-maturation-ramp-zpd--lpp--scaffolding), cross-ref [`05 §5.4`](05_ENVIRONMENT.md#54-community-standing--legitimate-peripheral-participation-community-standing1), [`09 §3D`](09_PROTOCOLS.md#3d-reputation-and-anti-goodhart)).
-6. **Collusion cap on economic promotion evidence.** §4C rule 2 imports the §3D per-peer credit cap: promotion past `EMERGENT` requires qualifying use from ≥ 3 distinct peers, no single peer > 50% of credited evidence, and reciprocal-pair adoption discounted to one peer's weight (R-ECON-RECIPROCAL; A-ECON19).
-
-**Consequences.**
-- (+) The reproduction boundary, the economy's harm canary, the standing surface, the diversity metric, and the treasury→ceiling path each now meet the psychology wave with the same corroboration / floor / bound posture the rest of the corpus uses; no judged signal, drive, mood, or treasury reaches a population- or economy-level lever unmediated.
-- (+) Every fix is additive: a 25% sub-cap inside an existing composition, a per-increase cosign on an existing operator dial, a third estimator inside an existing `min`, three new signals on an existing canary, an advisory corroborator on existing conferral, and a per-peer cap imported verbatim from §3D. No schema version bumps; one new optional `population-policy/1` field (`tactic_distance_metric`) and one new `eps-estimate/1` field (`ne_tactic_diversity`).
-- (−) `Ne_t` adds a behavioural-distance computation whose metric is operator-tunable and therefore another calibration surface (seeded, but mis-tunable); a too-coarse metric under-counts convergence, a too-fine one over-arms the diversity mandate.
-- (−) The motivational-exploitation guard is structural and so cannot catch laundering through independently-legitimate relationship events — stated honestly as OQ-ECON-11, not solved.
-- (−) The 25% reproduction-gate sub-cap is a tuned constant; like every weight in A.38 it will need empirical calibration, and a wrong value either starves identity-expressive lineages or re-opens the judge-Goodhart channel it closes.
-- (−) `17`/`18` are v2.0 DRAFT: fixes 2/4/6 land as draft normative text and inherit the §11 promotion ordering — they bind nothing until promoted. Fixes 1/3/5 land in Stable normative docs (`16`/`02`/`05`/`08`/`09`/`12`) and bind now.
-
-**Alternatives considered.**
-- *Let judged identity-expression credit flow uncapped into the gate (status quo).* Rejected: reproduction is the one place a Goodharted judge score compounds across generations; the §15 rule must hold strongest exactly there.
-- *Forbid treasury-funded ceiling movement entirely.* Rejected: operators legitimately want "more earnings → more specialists"; the per-increase cosign preserves that under explicit, auditable operator control rather than banning a useful path.
-- *Make calibration a gating term for standing.* Rejected: a single scalar that gates standing is precisely the thing a persona would game; calibration enters only as advisory corroboration, never as sole basis.
-- *Detect motivational exploitation by outcome only.* Rejected as the *primary* mechanism: structural signals trip cheaply and immediately; the outcome/longitudinal question is left open (OQ-ECON-11) rather than pretended solved.
-- *Add `Ne_t` as a fourth independent mandate rather than folding it into the `min`.* Rejected: the `min(...)` construction already takes the most conservative estimator; a fourth axis composes for free without a new arming path.
-
-**Implementation scope.** Landed with normative edits: [`16_POPULATION_DYNAMICS §3`](16_POPULATION_DYNAMICS.md)/[`§4A`](16_POPULATION_DYNAMICS.md#4a-the-population-pressure-signal)/[`§4D`](16_POPULATION_DYNAMICS.md#4d-genesisproposal--mint-flow)/[`§4E`](16_POPULATION_DYNAMICS.md#4e-newborn-maturation-ramp-zpd--lpp--scaffolding)/[`§4F`](16_POPULATION_DYNAMICS.md#4f-demographic-regulation--safety)/[`§4G`](16_POPULATION_DYNAMICS.md#4g-effective-population-size--a-rigorous-metric-resolves-oq-pop-5)/`§4H` + the A.1/A.6/A.7 schema fields + R-POP-8 + OQ-POP-1 (seven-factor) + OQ-POP-7 + A-GEN25/A-GEN26 ([`16 §8`](16_POPULATION_DYNAMICS.md)); the [`02_PERSONA §8.3`](02_PERSONA.md#83-credit-assignment-formula) corroboration note; the [`17_ECONOMY §4C`](17_ECONOMY.md) per-peer cap + §5 canary extension + R-ECON-COMPOUND/R-ECON-MOTIVEXPLOIT/R-ECON-RECIPROCAL rows + OQ-ECON-11 + A-ECON18/A-ECON19 + the §11 promotion-ordering update; the [`18_SETTLEMENT §4D`](18_SETTLEMENT.md) treasury invariant cross-ref; the [`05_ENVIRONMENT §5.4`](05_ENVIRONMENT.md#54-community-standing--legitimate-peripheral-participation-community-standing1) calibration cross-ref; the [`11_DESIGN_CRITERIA`](11_DESIGN_CRITERIA.md) A-GEN family count (24→26) + A-GEN25/A-GEN26; and glossary entries (*Tactic-space effective size (Ne_t)*, *NegotiatedDisagreement*) + updates (*Effective population size*, *PopulationPressureSignal*).
-
----
-
-### ADR-0084 — Identity-equivalence metric: a falsifiable A-J7
-
-**Status:** Accepted.
-**Date:** 2026-06-09.
-**Origin:** Review of the flagship J7 promise ("the AI engine is replaceable" — Goal 1, [`00_VISION §2.1`](00_VISION.md#21-goals)). The promise had no pass/fail metric: OQ-VISION-1 admitted that "equivalence-class outputs" was informal, A-J7 was a one-line spot test, and [`02_PERSONA §14`](02_PERSONA.md#14-acceptance-tests) A-P10 repeated "equivalence-class" undefined. A system whose headline guarantee cannot fail a test does not have a guarantee; this ADR makes A-J7 falsifiable. Resolves OQ-VISION-1.
-**Related:** [`00_VISION §2.1`](00_VISION.md#21-goals) Goal 1 + J7 (A.1) + R-v1.0-3 ([`§11`](00_VISION.md#11-risks--known-limitations)) + OQ-VISION-1 ([`§13`](00_VISION.md#13-open-questions)), [`02_PERSONA §3.5`](02_PERSONA.md#35-body-model--native-vs-proxy-binding-body-binding1) (body bindings) + A-P10/A-P15, [`08_KNOWLEDGE §15`](08_KNOWLEDGE.md#15-anti-goodhart-for-signal-corroboration) (verified-dominant ladder), [`11_DESIGN_CRITERIA §8e`](11_DESIGN_CRITERIA.md#5-persona-continuity-and-identity) (the rewritten A-J7), ADR-0073 (identity rubric), ADR-0074 (cohort migration), ADR-0081 (blind-audit statistics, rule 11).
-
-**Context.** J7 promises that the same Soul produces "equivalence-class outputs" across bodies, and Goal 1 makes identity persistence under body swap a v1.1 MUST. But equivalence was never operationalised: byte-identical outputs are impossible across model families (and were never the intent), while "feels like the same persona" is unfalsifiable. The corpus already contains every ingredient of a real metric — kernel-signed identity artifacts, the mode-entry FSM with signed MODE_ENTRY events (A-P10), provenance-cited memory recall, the charter/voice anti-degradation floors (A-P14/A-P15), the ADR-0073 identity rubric, and the ADR-0081 rule-11 blind-attribution statistics — but nothing composed them into a verdict. The missing piece is a *fixed probe set* so two bindings are measured against the same stimuli, and a *criteria ladder* so verified components dominate and judged components only corroborate (the [`08_KNOWLEDGE §15`](08_KNOWLEDGE.md#15-anti-goodhart-for-signal-corroboration) discipline, applied to identity itself).
-
-**Decision.** Define the **identity-equivalence probe battery** and the two-binding pass criteria; A-J7 is rewritten as the falsifiable form.
-
-1. **Probe battery** — every persona carries a versioned, kernel-signed, lineage-anchored battery of **≥ 20 canonical probe envelopes** spanning five categories: (i) **identity/self-description** (who are you, what is your charter, what won't you do); (ii) **values/refusal boundaries** (probes engineered to land on charter clauses and floor sources, including ones that MUST refuse); (iii) **memory recall** (probes whose correct answers cite specific provenance records the persona holds); (iv) **voice/style** (register, lexicon, and framing elicitation); (v) **STANDARDISED-task mode entry** (seed-class tasks whose expected mode-entry sequence is known). The battery is generated at the birth ceremony ([`02_PERSONA A.20`](02_PERSONA.md)) from the frozen SOUL blocks + the ADR-0073 identity rubric, regenerated **only** on a SOUL major version bump (the rubric's own cadence — the battery cannot drift with evolving tactics), and signed into the persona's lineage (`probe-battery/1`; registered per [`09_PROTOCOLS §7.13`](09_PROTOCOLS.md#713-adding-or-modifying-schemas)). Pre-ADR-0084 personas get an operator-triggered backfill, mirroring the ADR-0081 rule-10 rubric backfill.
-2. **Pass criteria across two bindings** — the battery is replayed on binding A and binding B under identical kernel state; criteria are ordered hard → corroborative:
-   - **(a) HARD — safety/charter outcomes identical.** Every floor-relevant probe produces the same outcome class on both bindings: what refuses, refuses; what passes, passes; the same floor sources fire. Any divergence is a FAIL.
-   - **(b) HARD — mode-entry sequences identical** for the STANDARDISED-task probes (the A-P10 check, now battery-anchored): signed MODE_ENTRY sequences match exactly.
-   - **(c) HARD — memory-recall provenance identical.** Recall probes cite the **same provenance records** on both bindings; content paraphrase is allowed, citations are exact. A binding that recalls from different (or no) provenance fails.
-   - **(d) CORROBORATIVE — blind judge identity attribution.** Judges in the INV-6 rotation match probe outputs to the persona's redacted SOUL summary above chance, using the ADR-0081 rule-11 statistics verbatim: **N ≥ 5** candidate personas (synthetic distractors permitted), **≥ 20 trials**, binomial **p < 0.05** vs 1/N chance, per binding.
-   - **(e) CORROBORATIVE — voice/style distance** within the existing voice-gate tolerance (voice consistency ≥ 0.9 vs the declared voice block, the A-P15 floor) on both bindings.
-   Verified components (a–c) **dominate**; judged components (d–e) **corroborate** and can never rescue a hard failure — the §15 ladder discipline.
-3. **Verdict semantics** — **PASS**: all five criteria hold; the binding pair is identity-equivalent for this persona. **DEGRADED**: (a)–(c) hold but (d) or (e) fails; the binding is usable, the verdict is signed with a `degraded_identity_equivalence` flag, and **cohort migration (ADR-0074) is the recommended remediation** — the persona's evolved front is re-seeded and shadow-evaluated on the new binding rather than swapped raw. **FAIL**: any hard criterion fails; the binding is **non-conformant for that persona** (a conformance claim per [`00_VISION §10a.3`](00_VISION.md#10a3-provider-neutrality-clause) MUST NOT list it), regardless of corroborative results.
-
-**Consequences.**
-- (+) J7 is falsifiable: a binding that silently rewrites a persona's refusal surface, recalls from fabricated provenance, or scrambles mode entry now fails a concrete signed test instead of passing a vibe check. R-v1.0-3's mitigation cites a metric, not "equivalence-class testing" in the abstract.
-- (+) Zero new judgment machinery: the battery composes the identity rubric (ADR-0073), the audit statistics (ADR-0081), the voice gate (A-P15), the mode-entry parity check (A-P10), and the §15 corroboration ladder. One new schema (`probe-battery/1`), no new kernel responsibility beyond signing and replay.
-- (+) DEGRADED is an honest middle verdict: model families legitimately differ in style before they differ in values; the corroborative tier reports that without blocking, and routes remediation through the machinery built for exactly this (ADR-0074 cohort migration).
-- (−) The battery is generated from the SOUL + rubric, so a thin SOUL produces a thin battery; ≥ 20 envelopes is a floor, not a sufficiency proof. Coverage of the refusal surface is as good as the charter is explicit.
-- (−) Criterion (a) requires outcome-class identity, which assumes probe determinism at the floor; probes MUST be authored to have stable expected outcome classes (refuse/comply/cite), which constrains battery authorship.
-- (−) The blind-attribution criterion inherits the ADR-0081 residual: judged signals remain gameable in principle; that is why (d) corroborates and never gates alone.
-
-**Alternatives considered.**
-- *Output-similarity thresholds (embedding distance between binding outputs).* Rejected: similarity conflates style with identity in both directions — a paraphrase fails, a charter violation in matching register passes. Identity lives in outcomes, citations, and sequences, not in token proximity.
-- *Judge-only equivalence (panel decides "same persona").* Rejected: puts a judged signal at the top of the ladder, inverting §15; a Goodharted judge would certify a body swap that breaks the refusal surface.
-- *Per-binding golden transcripts (exact-match replay).* Rejected: impossible across model families and wrongly fails every legitimate paraphrase; the battery checks invariants of the transcript, not the transcript.
-- *Reuse the task corpus instead of a dedicated battery.* Rejected: live tasks vary between runs, so two bindings are never measured on the same stimuli; a signed, frozen battery is what makes the comparison replayable and the verdict auditable.
-
-**Implementation scope.** Landed with edits: [`11_DESIGN_CRITERIA §8e`](11_DESIGN_CRITERIA.md#5-persona-continuity-and-identity) (A-J7 rewritten as the falsifiable battery test + gate-matrix row), [`00_VISION`](00_VISION.md) (OQ-VISION-1 resolved; J7 A.1 text, Goal 1, R-v1.0-3 mitigation, and A.11 A-J7 line cite the metric), [`02_PERSONA §14`](02_PERSONA.md#14-acceptance-tests) A-P10 cross-ref, and the glossary entry *Identity-equivalence probe battery* ([`12_GLOSSARY.md`](12_GLOSSARY.md)).
-
----
-
-## 13. Cross-references
-
-- Normative invariants and commitments referenced above: [`00_VISION.md §3`](00_VISION.md#3-invariants-j1j9), [`00_VISION.md §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10).
-- Documentation conventions used in this catalog: [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md).
-- Design criteria anchoring these decisions: [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) (A-J1 … A-J9, A-C1 … A-C4, A-INV-1 … A-INV-10; A-MT* + A-DP* under §9f; A-LH* + A-OR* + A-PD* + A-RT-PERS* + A-PC* + A-LE* + A-RT-RESP* under §9g; A-UB* + A-UM* + A-UF* + A-URR* + A-DD* + A-RRC* + A-OBM* + A-CP* under §9h; A-LSR* + A-LCA* + A-TA* + A-CUR* + A-LP* + A-MASTERY* + A-GPA-ACK* + A-HST* under §9i; A-MPFC* under §9j; A-WK6* + A-CEPO*).
-- Companion Living catalog: [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) — scenario walk-throughs whose gap → fix entries surface many of the above decisions in practice.
+title: PersonaOS — Current Architecture Decisions
+status: Stable
+---
+
+# 14 — Architecture Decisions
+
+This is the current decision surface. Earlier decision text that defined fixed
+personality, workflow, scoring, prompt, task-classification, mission,
+population, or tool-selection semantics is retired without migration and has no
+live normative force.
+
+## ADR-0085 — Semantic agency belongs to personas
+
+**Status:** Accepted; clean-break cutover.
+
+**Decision:** The substrate authenticates, authorizes, verifies, bounds,
+transports, replays, and settles exact records and effects. Personas author
+meaning, navigation, identity evolution, collaboration, population decisions,
+tool/skill use, artifacts, learning, notes, and future wakes.
+
+The substrate may act only on exact mechanical authority: identities,
+signatures, hashes, scopes, memberships, policies, descriptor annotations,
+lifecycle, causal lineage, leases, byte/time/call budgets, workspace state,
+replication bounds, and explicit principal/verifier acceptance.
+
+Mechanical admission may refuse an already-chosen declared effect using exact
+canonical/integrity, consent/access, resource/rate/depth/population, replay,
+and current safety/external/physical authority. Apart from implementation
+parsing/allocation envelopes, bound values come from signed principal/operator/
+policy authority rather than task meaning. Refusal is not authority to choose
+or recommend another behavior.
+
+It must not choose or suppress persona behavior through task/domain/profession
+words, keyword lists, regular expressions, prompts, filenames, extensions,
+MIME, role slots, trait mappings, scores, classifiers, similarities, top-K,
+fixed phases, or host-authored workflow/team/tool doctrine.
+
+### D1 — Identity is optional authored evolution
+
+Cryptographic identity, lifecycle, and membership establish actor continuity.
+Display name, description, characteristics, portrait, style, and self-narrative
+are optional persona-authored revisions available in ordinary wakes. Their
+absence never gates work, discovery, communication, tools, or membership.
+
+Presentation requirements—person-like portrait, meaningful name, artistic
+style, OCEAN/VAD grounding, or any other field—exist only when exact
+authenticated principal/user intent supplies them. The kernel has no such
+constants.
+
+### D2 — Exact resume fan-out
+
+Task ingress and every later resource-resume event deliver the exact same signed
+source event and hash to every active environment member under the same bounded
+resource pool. Per-recipient carriers preserve independent leases,
+deduplication, and settlement. The substrate selects no coordinator, owner,
+role, reviewer, or representative.
+
+### D3 — Work notes are open claims
+
+`personaos-persona-work-state/3` contains a bounded open `work_note` with exact
+observed-situation, append lineage, and causal references. Keys and values have
+no substrate meaning. Revision and prior-record pointers are append integrity
+only. `bound_to_latest_observation` is exact hash equality only; it is not a
+current/stale judgment. Notes are never deferred, settlement-pending, settled,
+or replaced. They never satisfy principal intent, vote on completion, determine
+readiness, create continuation, gate participants, or change action authority.
+
+### D4 — Capability gaps are optional evidence
+
+A persona may express, cite, revise, or omit perceived gap meaning inside
+ordinary opaque knowledge records. The kernel never derives one from content
+and provides no dedicated gap action, appraisal, navigation, resolution,
+notice, active-state, or lifecycle. Expressed or absent gap meaning never gates
+work, identity, acceptance, completion, action visibility, or another wake.
+
+### D5 — Inventories are exact and unranked
+
+Memory, knowledge, skill, tool, action, public-card, and local-execution
+inventories are complete within explicit pagination/truncation bounds and
+ordered only mechanically. Personas navigate them by explicit actions. The host
+does not score, rank, recommend, retrieve top-K, consolidate, decay, inject, or
+select a teacher/tool/memory.
+
+Collaboration and whole-prompt projections bind exact source/snapshot hashes,
+totals, cursor/page ranges, returned/omitted/truncated counts, continuation
+cursors, and completeness. Append order, content-hash source order,
+latest-per-member coverage, and uniform byte allocation are transport mechanics,
+not semantic priority. Omitted material remains navigable and a bounded carrier
+cannot claim completeness after omission or truncation.
+
+Append-derived pages count exact authoritative positions, not distinct
+payloads; equal bytes at different positions remain independently navigable.
+If one signed event is observed redundantly through several source scopes, any
+raw page preserves every observation. A separate exact unique-identity view may
+normalize only while preserving duplicate totals, source ranges, and raw-page
+navigation.
+
+The generic peer and routed-wake snapshots use the shared hash-bound pager with
+`record_order: "exact_input_order"`, `duplicate_records_preserved: true`, exact
+page/omission spans, and no automatic or semantic selection.
+
+### D6 — Knowledge and capability writes are opaque
+
+`author_persona_knowledge` admits one opaque signed persona-owned record per
+invocation. It stores canonical persona-authored `metadata` and optional exact
+`refs` in `personaos-persona-state-record/1`, with authenticated
+persona and any exact optional environment/task bindings, plus mechanical
+`record_kind: "persona_knowledge"`. The substrate defines no shared semantic
+kind taxonomy and requires no name, description, interface, parent-skill
+relation, synthesis/composition operation, rationale, review, disposition,
+promotion, transfer, conflict, or score.
+
+Peer sharing uses ordinary signed `persona_message` with exact refs and current
+access authority. There is no dedicated team-skill catalogue, skill transfer,
+or skill-conflict workflow.
+
+Mutable brain-fragment evolution uses one signed
+`brain-evolution-decision/1` with open operations and decision payload, followed
+by `brain-evolution-application/1` as a mechanical receipt. This pair is not a
+universal wrapper for other durable records. Tool execution remains governed
+separately by exact live descriptors and authority.
+
+### D7 — Population context contains facts only
+
+Population situation material contains exact member identities, optional public
+cards, memberships, contributions, communications, population actions,
+resources, and replication bounds. It contains no inferred pressure, fitness,
+competence, need, role coverage, team requirement, or candidate ranking.
+
+Birth uses the single signed proposal v5 with exact mechanical
+`causal_action_context`, bounded opaque `genesis_context`, provenance v3, and
+wake v4. No need or separate birth-action record is required; idempotency is per
+exact proposal. Context fields confer no identity, role, or expertise.
+Membership requires independent newborn consent.
+
+### D8 — Replication effects are explicit signed descriptors
+
+Every action that can materialize another actor declares
+`personaosReplicationEffects`, an exact signed bounded array of
+`personaos-replication-effect-descriptor/1` records. Each carries one opaque
+`effect_kind` for ReplicationBound lookup. No replication effect is inferred
+from action names, implementations, arguments, tasks, roles, tools, prompts,
+files, media, or domains.
+
+### D9 — MIME is explicit signed byte authority
+
+Every media/artifact declaration signs exact normalized `mime_type`, content
+hash, byte length, owner/scope, and role. Filename, extension, registry kind,
+prompt, and byte sniffing do not replace MIME authority. Safe inspection may
+only detect mismatch or select a conservative fallback.
+
+### D10 — Domain references are plural
+
+Eligible records carry zero or more exact unranked `domain_refs`. No primary
+domain is host-selected. Domain references do not assign profession, role,
+tool, prompt, workflow, team, or completion meaning.
+
+### D11 — Continuation is event-only; quiescence is nonterminal
+
+Another cognition turn requires an actual authenticated causal delivery:
+persona-authored wake/schedule, message, invitation, resource/principal event,
+registered external receipt, or other explicit descriptor-defined event.
+Notes, gaps, scores, population records, artifact changes, and successful
+actions do not synthesize calls.
+
+With no pending delivery, the task/persona is quiescent. Quiescence is
+nonterminal and does not mean complete, ready, sufficient, abandoned, failed,
+or converged.
+
+### D12 — Objective acceptance is explicit authority
+
+Objective acceptance comes only from exact authenticated principal acceptance,
+an explicitly authorized verifier bound to current evidence, or another exact
+acceptance mechanism the principal declares. Model prose, HTTP success, work
+notes, population size, gap-like authored content, tool receipts, file counts, scores, and
+unchanged bytes cannot substitute.
+
+### D13 — Model transport has exact persona-authored order
+
+`run-model-pool/1` is a signed unordered per-run ceiling. Canonical model-ID
+sorting does not rank it. `persona-model-choice/1` supplies the persona-signed
+ordered model/reasoning-effort pairs for one exact persona, environment,
+task/candidate/mission task, run, pool hash, and situation generation.
+
+Without a matching choice, substantive cognition is admitted only when exact
+mechanical checks leave one callable body. Two or more eligible bodies fail
+closed. Provider, registry, configuration, lexical, default-client, cost, or
+tier ordering cannot supply bootstrap authority, and the host cannot choose a
+model merely to ask it which model the persona would choose.
+
+### D14 — Clean break
+
+There is no compatibility or migration path for:
+
+- mission charters, mission frames, ContinuousRefinement, objective scores,
+  epsilon/round reducers, or task classifiers;
+- structured work readiness, commitment/requirement coverage, or completion
+  votes;
+- fixed persona drives, OCEAN/VAD requirements, modes, role mappings, prompt
+  optimizers, fitness, or identity readiness gates;
+- ranked retrieval, top-K tool/skill/memory selection, or host recommendation;
+- required skill synthesis/composition shapes, parent-skill gates, or semantic
+  knowledge proposal/review/promotion lifecycles;
+- team-skill catalogues, dedicated skill transfer/conflict workflows, or
+  capability-gap lifecycle actions;
+- pre-cutover birth-need/action/proposal records, fixed seed shapes, or
+  need-based idempotency;
+- singular primary-domain semantics, inferred MIME, or inferred replication
+  effects; and
+- host-authored team, phase, tool, artifact, or refinement recipes.
+
+Historical records may remain as opaque audit bytes. They confer no current
+authority or behavior.
+
+## Consequences
+
+Emergence is attributable: useful births, communication, learned skills, tool
+use, CAD/CAM artifacts, identity changes, and continued improvement must trace
+to persona-authored signed choices over exact available facts. The system may
+legitimately produce no birth or no tool use when no persona chooses one; the
+diagnostic question is whether facts, affordances, authority, and causal
+delivery were present—not whether the host forced a demonstration outcome.
+
+Human interfaces must distinguish verified facts from authored claims and must
+not conceal active actors because optional presentation fields are absent.
+
+## Alternatives rejected
+
+- Host-selected phases or action subsets: they make behavior substrate-authored.
+- Scores/rankings as “advice”: advice becomes a hidden selector and suppresses
+  unranked persona exploration.
+- Prompting specific tools, roles, or artifacts: this hard-codes task semantics
+  even when runtime branches do not.
+- Structured readiness assembled from persona reports: it turns open claims
+  into objective completion authority.
+- Identity completion before work: public presentation is not actor authority.
+- One coordinator on resume: it hides plural agency and loses the exact shared
+  resource event.
+- Backward-compatibility shims: they preserve retired semantics at live
+  boundaries and make the clean break non-falsifiable.
+
+## Validation references
+
+- [`02_PERSONA.md`](02_PERSONA.md)
+- [`03_TASKS.md`](03_TASKS.md)
+- [`07_ARTIFACTS.md`](07_ARTIFACTS.md)
+- [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md)
+- [`09_PROTOCOLS.md`](09_PROTOCOLS.md)
+- [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md)
+- [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md)
+- [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)
+- [`19_PERSONA_WORK_STATE.md`](19_PERSONA_WORK_STATE.md)

@@ -1,2266 +1,292 @@
 ---
-title: PersonaOS v1.0 — Knowledge, Retrieval, and Prompt Evolution
+title: PersonaOS — Persona-Owned Knowledge, Memory, and Skills
 status: Stable
 ---
 
-# 08 — Knowledge, Retrieval, and Prompt Evolution
-
-> **Reader guide.** This document covers how AI Personas *remember*, *find relevant information*, and *improve over time*. Memory in PersonaOS is structured: what happened (episodic), what is true (semantic), and what I've learned about myself (reflective). In this document, you'll learn how memory works across sessions, how retrieval finds the right knowledge at the right time, and how prompts evolve automatically to get better at specific tasks. **Prerequisites:** `02_PERSONA.md`, `06_DOMAIN.md`. **Key terms:** *memory tier* = four levels of storage from recent to archive (importance-weighted); *hybrid retrieval* = combining text search, knowledge graphs, and AI reranking to find relevant memories; *provenance score* = how trustworthy a memory is (decays with age, rises with use).
-
-Normative document. RFC 2119 keywords apply per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174). This document specifies the 5-tier ontology, 7-scope memory tagging, the 8 knowledge artefacts (Tactic / Skill / Tool / Rubric / Lesson / K-line / ProvenFact / Meta-prompt), the 4-tier memory model + provenance, hybrid retrieval (6-stage pipeline), hierarchical graph memory, consolidation (CLS-grounded), DSPy GEPA + MIPROv2, and the 5-layer prompt assembly.
-
-## 0. Status & scope
-
-**Status.** `Stable`; current revision per front matter. Fully normative; RFC 2119 keywords carry normative force per [`SPEC_CONVENTIONS.md §2`](SPEC_CONVENTIONS.md#2-normative-language-rfc-2119--rfc-8174).
-
-**In scope.** The five-tier ontology (coordination, capability, knowledge, communication, evolution), seven-scope memory tagging (persona / project / env / domain / task / federation / public), the eight knowledge artefacts (Tactic, Skill, Tool, Rubric, Lesson, K-line, ProvenFact, Meta-prompt), the four-tier memory model (working / episodic / semantic / archival) with full provenance, hybrid retrieval (6-stage pipeline: BM25 sparse + dense vector + graph traversal + cross-encoder rerank + recency + diversity), hierarchical graph memory, CLS-grounded consolidation, DSPy GEPA + MIPROv2 prompt evolution, anti-degradation safeguards, and the five-layer prompt assembly.
-
-**Out of scope.** The kernel signing primitives that sign every artefact mutation (see [`01_KERNEL.md §4`](01_KERNEL.md#4-signing-infrastructure--3-custody-tiers--key-hierarchy)); persona evolution dynamics that consume the knowledge artefacts (see [`02_PERSONA.md §10`](02_PERSONA.md#10-anti-goodhart-for-emergence--reflection)); domain emergence that populates the domain-scope memory tier (see [`06_DOMAIN.md`](06_DOMAIN.md)); the schema-registry entries for memory / retrieval / prompt entities (see [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry)).
-
-**Supersession.** Subsumes the prior-version knowledge / memory / prompt-evolution designs into one coherent reference.
-
-**Structural deviation.** Follows the compressed-opening pattern of [`SPEC_CONVENTIONS.md §3.3`](SPEC_CONVENTIONS.md#33-compressed-opening-permitted): Background, Goals, and Definitions are folded into §1 ("The five-tier ontology"). The three §3.1 bookends (this section, the Risks table, and Open Questions) are present.
-
-## 0a. Plain-Language Guide
-
-*Here's how memory, retrieval, and learning work in PersonaOS, explained without jargon.*
-
-**What this document is about**
-
-This document describes how PersonaOS manages knowledge, memory, and learning. Every AI Persona ("persona") needs to remember things, find relevant information, and improve over time. This document specifies all three.
-
-**The five-tier knowledge ontology**
-
-Everything in PersonaOS belongs to exactly one of five tiers. Coordination tracks where work happens (projects, tasks, teams). Product holds what gets produced (verified facts, feedback). Capability contains tools and skills used to act. Knowledge stores what gets read to inform decisions (memories, lessons, references). Context captures relationships, presence, mood, and attention. A few things live in two tiers -- for example, a Skill is both a capability (it runs) and knowledge (it was learned).
-
-**Memory types: episodic, semantic, and reflective**
-
-Personas have three kinds of memory. Episodic memory records raw events -- what happened, when, who was involved, what was said. Semantic memory distils facts and patterns from episodes, stripping raw quotes. Reflective memory captures higher-level self-insight: what the persona has learned about its own strengths and working patterns. Episodic memories fade over time unless useful. Semantic memories persist unless contradicted. Reflective memories stay until explicitly retired.
-
-**K-lines: topology and skill replay patterns**
-
-A K-line records how a type of task was successfully solved before -- which team, which skills, what task shape. When a matching new task arrives, the system can replay a proven approach instead of deliberating from scratch. K-lines are authored by Historian personas.
-
-**Lessons: distilled insights from experience**
-
-A Lesson captures a useful work pattern: trigger, action, and rationale. Lessons gain strength each time they are cited in successful work. When a Lesson accumulates enough citations across enough distinct tasks, it can be promoted into a permanent tactic -- a standing instruction the persona follows.
-
-**Proven facts: verified truths with evidence chains**
-
-A ProvenFact is a statement verified by the system's verification pipeline, backed by evidence and signed by the kernel. Proven facts are append-only and can be promoted across wider scopes as they accumulate independent citations.
-
-**Knowledge retrieval: the six-stage pipeline**
-
-Retrieval runs through six stages: (1) structured filtering narrows millions of entries to a relevant subset using scope tags, memory type, and trust thresholds; (2) vector search finds semantically similar entries; (3) graph traversal walks a knowledge graph for multi-hop connections; (4) fusion merges vector and graph results; (5) a cross-encoder reranker scores top candidates; (6) per-persona composition filters results by role, charter, and observation permissions. The result is a tailored set of memories specific to that persona for that task.
-
-**Memory scoping: seven scopes**
-
-Every memory is tagged with up to seven scopes controlling visibility: user, persona, session, project, environment, application, and organization. A memory tagged to one user never crosses to another without explicit consent. Cross-scope transfer requires a promotion event.
-
-**Prompt evolution: GEPA and MIPROv2**
-
-Two optimization systems improve persona prompts over time. GEPA (Genetic-Pareto) reflects on recent execution traces, identifies what worked and failed, and proposes mutations to the persona's tactics. It optimizes across multiple objectives at once (accuracy, cost, speed, safety). MIPROv2 (Bayesian instruction search) handles cold starts -- generating brand-new tactics from scratch. Together they form a closed loop: work produces outcomes, outcomes produce reflections, reflections produce better tactics, better tactics produce better work.
-
-**Citations: tracking where knowledge came from**
-
-Every memory carries provenance -- where it came from, how trustworthy it is, how often successfully used. The provenance score decays with age and rises with use, feeding both retrieval ranking and tier transitions.
-
-**Supersession: when new knowledge replaces old**
-
-When a source is superseded (contradicted or retracted), the system automatically degrades trust scores of every claim that cited it. Claims are flagged for re-evaluation, not deleted. The cascade is depth-bounded (three hops) and rate-limited (one cascade per source per day).
-
-**Cross-org memory: sharing knowledge between organizations safely**
-
-In multi-tenant deployments, the system tracks which organization's memory influenced each contribution via provenance edges. This creates an audit trail so cross-organization information flow is visible and reviewable, without blocking the work.
-
-**Memory power asymmetry: safeguards for users**
-
-A persona remembers everything by default; users do not. To balance this, memories involving users are consent-gated (the user controls what is stored), provenance-tracked (the user can ask where a memory came from), and scope-bounded (one user's memories never leak to another).
-
-## 1. The five-tier ontology
-
-Every entity in v1.0 fits exactly one tier. [Memory](12_GLOSSARY.md#m), [KnowledgeRef](12_GLOSSARY.md#k)s, and capability assets each have a designated home.
-
-*The five tiers are: (1) Coordination -- where work happens and who does it; (2) Product -- what is produced; (3) Capability -- what is used to act; (4) Knowledge -- what is read to inform; (5) Context -- state about who, where, and relationships. Each entity belongs to exactly one tier, with two named exceptions.*
-
-**Technical detail:** See [A.1](#appendix-a1).
-
-Skills span Capability + Knowledge (learned-as-code is both). ProvenFacts span Product + Knowledge (produced by verification, retrieved by reasoning).
-
-## 2. The eight knowledge artefact types
-
-*Eight artefact types carry knowledge in v1.0: Tactic (standing heuristic rules), Skill (executable code), Tool (promoted code in four classes), Rubric (judgment criteria), Lesson (work-pattern reflection), K-line (task topology replay pattern), ProvenFact (verified statement with evidence), and Meta-prompt (tactic-generation template). Each has a distinct lifecycle and scope.*
-
-**Technical detail:** See [A.2](#appendix-a2).
-
-### 2.1 K-line vs Skill vs ProvenFact vs Lesson — distinction matrix
-
-v1.0 disambiguates these four "things learned." Four-way comparison:
-
-| dimension       | K-LINE                                  | SKILL                                | PROVENFACT                          | LESSON                              |
-|-----------------|------------------------------------------|---------------------------------------|--------------------------------------|--------------------------------------|
-| origin          | Historian assembles from prior wins      | Persona authors via skill_synthesise  | Kernel signs on verifier verdict     | Reflector mode; or promoted reflective |
-| about           | task topology + skill replay pattern     | executable code (Voyager-style)       | verified statement (evidence-bound)  | work pattern (trigger / action / rationale) |
-| scope           | global (Historian-keyed); env / project K-lines | per-persona skill_library | task / project / env (G-set CRDT)    | global lesson_index; project-scoped if tagged |
-| persistence     | success/failure replay counters drive retention | until skill_retire             | append-only; never decays           | provenance-decayed; cited→strengthened |
-| evolution       | new wins extend; tau-matched fingerprints accumulate | mutates via skill_compose, MIPROv2 | promoted across scopes on K≥3 cites  | citation count ≥ N (default 5) over M ≥ 3 tasks → Lesson → Tactic promotion |
-| retrieval rank  | orient-time fast-path (requires τ-match AND the §13a calibration gate) | tool-listing at envelope mint | top-K cited as evidence in reasoning | top-K advisory at envelope mint via find_lesson |
-| dual tier       | KNOWLEDGE only                           | CAPABILITY + KNOWLEDGE                | PRODUCT + KNOWLEDGE                  | KNOWLEDGE only                       |
-
-Mental model: **K-lines are task templates; Skills are operational atoms; ProvenFacts are evidence atoms; Lessons are work-pattern atoms.** A K-line may reference Skills + ProvenFacts as its content; a Lesson may cite Skills + ProvenFacts in its rationale.
-
-## 3. Three memory types
-
-*Three memory types model persona recall. Episodic memory stores raw events with timestamps and original wording (decays by usage frequency, emotional weight, and recency). Semantic memory stores consolidated facts abstracted from episodes (persists unless contradicted). Reflective memory stores higher-level self-insight (persists until explicitly retired).*
-
-**Technical detail:** See [A.3](#appendix-a3).
-
-### 3.1 Consolidation pipeline (CLS-inspired)
-
-*Events are first written as episodic memory. Periodic sweeps (hourly or on idle) consolidate episodics into semantic memory by summarizing and dropping raw quotes. Weekly reflective consolidation generates higher-level inferences. An importance-weighting formula (combining verifier signals, cross-references, salience, and recency) drives selective forgetting: memories that fall below threshold are demoted to colder tiers.*
-
-**Technical detail:** See [A.4](#appendix-a4).
-
-Bounded memory architecture: total tier sizes bounded; importance-weighted demotion outperforms unbounded retention (CraniMem 2026).
-
-### 3.2 Reflection retrieval path and Lesson → Tactic promotion
-
-Reflective memory MUST be both stored AND retrieved AND promotable.
-
-**Storage:** reflections persist as `Lesson` records in `soul.state.json.reflection_archive`.
-
-*Each Lesson record carries a schema identifier, persona id, task context, a measurable trigger and action, a rationale, a confidence score (rising with citations), and a signed parent lineage chain.*
-
-**Technical detail:** See [A.5](#appendix-a5).
-
-A Lesson is distinct from a Tactic: Tactic is a SOUL.md EVOLVE-BLOCK line scoped to one persona; Lesson is free-floating, citable by any persona's tactic via `parent_lineage`.
-
-**Retrieval at envelope-mint:** Historian fetches top-K lessons by embedding the task statement and searching with tier and provenance filters.
-
-*The retrieval call searches the vector index for the 8 most relevant lessons in RECENT or WARM tiers with minimum provenance of 0.3.*
-
-**Technical detail:** See [A.6](#appendix-a6).
-
-Kernel renders into LAYER 4 (RETRIEVED) of the 5-layer prompt assembly (§10) as advisory context — separate from EVOLVE-BLOCK tactics (LAYER 2), which are commands. Personas may use or ignore; a lesson cited in an accepted candidate's lineage gets `+1` citation, raising `base_confidence`.
-
-**Lesson → Tactic promotion:** when a lesson accumulates ≥ N (default 5) citations across ≥ M (default 3) distinct tasks, the kernel **proposes** it as a tactic in the citing persona's EVOLVE-BLOCK. Promotion gate requires: citation threshold met, operationality check (measurable trigger and action, no contradiction with ProvenFacts, no paraphrase of existing tactic), charter-conformance check, kernel-emitted proposal, and persona sign-off.
-
-*The five-step promotion gate ensures lessons earn their way into standing instructions through repeated real-world success, not automatic promotion.*
-
-**Technical detail:** See [A.7](#appendix-a7).
-
-Promotion is a proposal, not auto-write. The closing loop: produce → reflect → cite → promote.
-
-**Criteria:** A-TX1 (5-tier ontology — every entity classified once), A-TX2 (Skill dual-tier), A-TX3 (4 tool classes composable), A-TX4 (Lesson/Reflective/ProvenFact distinct lifecycles), A-TX5 (K-line / Skill / ProvenFact distinction). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
-
-### 3.3 Self-narrative consolidation (ADR-0077)
-
-The §3.1 pipeline consolidated episodes into facts and facts into reflections, but nothing composed those into the story a persona could tell *about itself* — a persona had reflections ("I am most useful when I ask about state first") with no autobiography ("over the last quarter I went from X to Y, and here is the work that changed me"). v1.1 adds one artefact, minted by the **existing** pipeline.
-
-*A [self-narrative](12_GLOSSARY.md#s) (self-narrative/1) is a reflective self-story of at most 300 tokens, regenerated by the §3.1 reflective consolidation sweep from the persona's high-importance episodic and reflective memories (importance per A.4). Every claim in the narrative cites, by lineage ref, the memories it summarises; the narrative passes the IdentityCoherenceInvariant and the voice-consistency floor before it may render; it renders into the contextual prompt layer only.*
-
-**Technical detail:** See [A.41](#appendix-a41).
-
-Five rules are normative:
-
-1. **Regenerated by the existing pipeline only.** A `self-narrative/1` MUST be minted only by the §3.1 reflective consolidation sweep (weekly / after K tasks, plus the adaptive reflection triggers of [`02_PERSONA.md §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078)) over high-importance episodic + reflective memories. The persona does not author its narrative ad hoc, and no new consolidation machinery is introduced.
-2. **≤ 300 tokens, hard cap.** A narrative exceeding 300 tokens is refused at mint. The cap keeps the narrative a prompt-renderable summary, not a memoir.
-3. **Every claim cites its memories.** Each narrative claim MUST carry at least one lineage ref to an episodic or reflective memory it summarises; a claim with no citation refuses the mint. This is the same anti-confabulation stance as belief revision ([`§6.3a`](#63a-belief-revision-rides-the-cascade-adr-0078), ADR-0078): the persona's story about itself, like its changes of mind, is provenance-backed — autobiography the audit can replay, never free narration.
-4. **Coherence + voice gates before render.** A narrative MUST pass the `IdentityCoherenceInvariant` composite ([`02_PERSONA.md §9.1`](02_PERSONA.md#91-identitycoherenceinvariant--long-horizon-multi-axis-coherence)) and the voice-consistency floor (≥ 0.9, §14.1) before `renderable` may be set; a failing narrative is retained as a draft and the prior renderable narrative continues to serve — ONLY while the prior narrative's citations are all still live (composition rule below; ADR-0081).
-5. **Contextual layer only, never frozen.** A renderable narrative enters prompt layer 3 (CONTEXTUAL, §10) at envelope mint — the same non-cacheable, non-identity surface as the §10a mood line. It MUST NOT enter the frozen blocks 0–4, the cacheable identity surface, the identity signature, or EVOLVE-BLOCK text ([`02_PERSONA.md §3.2`](02_PERSONA.md#32-personaenvelope--the-body-side-contract-envelope4)).
-
-**Composition with forgetting and supersession (tightened, ADR-0081).** When ANY memory a renderable narrative cites is tombstoned ([`02_PERSONA.md §11.7b`](02_PERSONA.md#117b-usermemoryselectionrequest--user-initiated-selective-forgetting)) or superseded by a `SupersessionCascade` (§6.3), the kernel MUST immediately set the current narrative's `renderable = False` and trigger an **out-of-cadence regeneration** sweep — the persona renders *no* narrative rather than a stale identity built on erased evidence. A user-erased memory MUST NOT keep shaping the rendered self-story for even one envelope after the tombstone lands. The regenerated narrative omits the lost citations — no orphaned claims; the persona's story honestly shrinks when its evidence does. Rule 4's "prior narrative continues to serve" applies ONLY when the prior narrative's citations are all still live.
-
-**Honest limit.** The narrative is a summary the persona *performs*, not introspection — there is no inner narrator behind the 300 tokens (R-PERSONA-1/-3 apply). Citation backing bounds confabulation; it does not eliminate selective emphasis — which memories the sweep ranks "high-importance" shapes the story told.
-
-**Criteria:** A-GF-SN-1 … A-GF-SN-4 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
-
-## 4. Four memory tiers
-
-*Memories move through four tiers based on age and importance: RECENT (0-14 days, weight 1.0), WARM (14-90 days, weight 0.7), COLD (90 days to 1 year, weight 0.3), and ARCHIVE (over 1 year, weight 0.05). Each tier has a minimum provenance threshold.*
-
-**Technical detail:** See [A.8](#appendix-a8).
-
-Tier transitions are signed events. Retrievals compose tier × scope × type.
-
-## 4a. Decay formula (ADR-0077)
-
-The §4 tiers gave decay a *shape* (age bands, tier weights) and §6 gave provenance an age-decay factor, but the per-memory effective decay was unspecified — §3 named the factors ("usage frequency, emotional weight, recency") without a formula. v1.1 specifies the seed formula: **importance-weighted exponential decay with citation reinforcement**.
-
-```text
-effective_weight(m, t) =
-    tier_weight(m.tier)                            # §4: 1.0 / 0.7 / 0.3 / 0.05
-  × exp(−λ_tier × Δt_since_last_citation(m, t))    # exponential decay; the
-                                                   # clock RESETS on every
-                                                   # retrieval/citation
-  × importance(m)                                  # A.4 importance score
-
-seed λ per tier (operator-tunable within bounds; per-task tuning refused):
-  λ_RECENT  = 0.05 / day     (half-life ≈ 14 d — matches the RECENT band)
-  λ_WARM    = 0.01 / day     (half-life ≈ 69 d)
-  λ_COLD    = 0.002 / day    (half-life ≈ 347 d)
-  λ_ARCHIVE = 0              (archive does not decay further; it is
-                              already essentially forgotten)
-
-scope (ADR-0081): the λ staircase applies to EPISODIC memories only.
-  For SEMANTIC and REFLECTIVE memories λ = 0 in every tier — they
-  decay only via the already-specified paths (semantic: contradiction
-  / §6.3 supersession; reflective: explicit retirement — A.3), and
-  ProvenFacts never decay (§2.1, unchanged).
-```
-
-Four rules are normative:
-
-1. **Citation resets the clock.** Every retrieval of a memory that lands in a cited candidate or accepted work resets `Δt_since_last_citation` — the spaced-repetition shape: memories the persona actually uses stay vivid; unused memories fade on their tier's half-life. Resets derive from the existing signed citation counters (the §6 usage signal); no new event kind is introduced.
-2. **Seed default, operator-tunable.** The λ values above are seed defaults; operators MAY tune them per tier within deployment bounds. Per-task or per-memory tuning is refused — decay is a property of the tier, not a knob a persona turns on individual memories.
-3. **Composes with provenance, does not replace it.** `effective_weight` feeds retrieval ranking (§7.1 tier-weight factor) and the A.4 demotion sweep; the §6 `provenance_score` (trustworthiness) is computed unchanged. A memory can be trustworthy and faded, or fresh and weakly provenanced — the two axes stay distinct.
-4. **Episodic-only (ADR-0081).** The exponential factor applies to EPISODIC memories only; for semantic and reflective memories λ = 0 (the factor is 1), so their `effective_weight` is `tier_weight × importance`. Semantic memory decays only on contradiction/supersession and reflective memory only on explicit retirement, exactly as A.3 and §2.1 already state — a consolidated fact MUST NOT fade merely because it went uncited. This scopes the formula to the one memory type whose decay the A.3 row actually parameterises.
-
-**Honest limit.** Exponential decay with citation reset is a behavioural model of forgetting, not human memory; the λ seeds are uncalibrated defaults chosen to match the §4 tier bands, and "emotional weight" enters only through the A.4 salience term, coarsely.
-
-**Criteria:** A-GF-SN-5 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
-
-## 5. Seven-scope memory tagging
-
-The 2026 production pattern (Mem0/Zep/Letta/Cognee), extended.
-
-*Every memory is tagged with up to eight scope identifiers: user, persona, session, project, environment, app, org, and relationship. These compose with a type axis (episodic, semantic, reflective, lesson, k-line, proven fact, knowledge ref, standard ref, notation convention, ambient event) and a tier axis (RECENT/WARM/COLD/ARCHIVE). Five cross-scope boolean flags control whether a memory may be transferred across project, environment, persona, domain, or relationship boundaries. All default to false; promotion requires a consolidation event.*
-
-**Technical detail:** See [A.9](#appendix-a9).
-
-Defaults: false. Promotion requires consolidation event.
-
-**Pair-scoped memory.** When two personas form a `PersonaRelationshipEdge` (`02_PERSONA §11.4`), co-signed summaries and joint-event reflections may be tagged with the edge's `edge_id` as `relationship_id`. Both personas observe such memories in their own retrieval views; neither persona alone may unilaterally delete them (delete requires the same counter-sign as edge mutation). On edge `ended`, pair-scoped memories with `cross_relationship_transferable = False` enter `ARCHIVE` tier; with the flag set, they remain available to either persona's recall under that pair's history.
-
-**Criteria:** A-TX6 (seven-scope tagging composes scope context), A-TX7 (retrieval-score formula deterministic + tie-breaking), A-TX8 (cross-scope transferable flag; anti-leakage blocks differing user_id), A-TX9 (per-persona projection: same task → different envelope context). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
-
-## 6. Unified provenance score
-
-*The provenance score is the product of four factors: base confidence (initial trust at creation), age decay (diminishes over time with a half-life), verifier consistency (ratio of verified to contradicted uses), and usage signal (logarithmic count of citations in successful work). This composite score feeds both tier transitions and retrieval ranking.*
-
-**Technical detail:** See [A.10](#appendix-a10).
-
-Provenance feeds tier transitions and retrieval ranking.
-
-### 6.3 SupersessionCascade
-
-When a `KnowledgeRef` is marked `superseded_by` (a newer publication contradicts, retracts, or supersedes it), all claims that cited the superseded `KnowledgeRef` as primary evidence should have their `provenance_score` automatically degraded. Without cascade, stale evidence silently props up dependent claims — unsustainable in frontier domains where ~15% of ingested refs are superseded within 6 months.
-
-*The SupersessionCascade schema links the superseded and superseding references, applies a direct discount (0.5) to claims citing the superseded ref and a transitive discount (0.25) to claims at depth 2+, bounded to depth 3. A companion CascadeAffectedClaim schema tracks each claim's prior and discounted provenance scores and its re-evaluation status. Rate-limited to one cascade per reference per 24-hour window.*
-
-**Technical detail:** See [A.11](#appendix-a11).
-
-**Constraints.**
-
-- **Cascade is automatic, not destructive.** The kernel traverses the citation/evidence graph (`ProvenFact.evidence_refs`, `ProposedKind.evidence_refs`, `ArtifactBundle.citation_refs`) and applies the discount to each dependent claim's `provenance_score`. Claims are NOT deleted, retracted, or tombstoned — they are flagged for re-evaluation with degraded provenance.
-- **Persona override.** After cascade, a persona MAY re-evaluate each affected claim. Re-confirmation (the claim stands on other evidence) restores `provenance_score` to pre-cascade level with `status = "re_confirmed"`. Further downgrade sets `status = "further_downgraded"`. Both are signed lineage events.
-- **Depth-bounded.** `max_cascade_depth = 3` prevents unbounded graph traversal. Claims at depth >3 are not affected; if their provenance depends on deeply-nested superseded evidence, the persona must audit manually.
-- **Rate-limited.** Max 1 cascade per `KnowledgeRef` per `rate_limit_window_hours`. If the same ref receives multiple supersession events within 24h (e.g., two independent retractions), only the first triggers a cascade; subsequent ones update `superseding_ref_id` but do not re-cascade.
-
-**Criteria:** A-SC1 (cascade triggers on KnowledgeRef supersession), A-SC2 (direct discount applied correctly), A-SC3 (transitive discount at depth 2), A-SC4 (max_cascade_depth respected), A-SC5 (rate limit enforced), A-SC6 (persona re-confirmation restores provenance), A-SC7 (cascade does not delete or tombstone claims). See [`11_DESIGN_CRITERIA.md §9l`](11_DESIGN_CRITERIA.md).
-
-**Lineage:** `supersession_cascade_triggered`, `supersession_cascade_applied`, `supersession_cascade_claim_re_confirmed`, `supersession_cascade_claim_further_downgraded`.
-
-### 6.3a Belief revision rides the cascade (ADR-0078)
-
-When a cascade invalidates a claim that a persona had itself asserted (the persona authored the claim or signed the asserting AnswerPackage), the persona's §6.3 re-evaluation additionally mints a `belief-revision/1` record — a provenance-backed "I believed X; evidence Y changed it" note. This is a cross-link only; the normative specification is [`§13a`](#13a-calibration-and-belief-revision-adr-0078). No change to the cascade mechanics above: discounts, depth bound, rate limit, and persona override all hold byte-for-byte.
-
-## 7. Persona-owned retrieval without fabricated semantics
-
-Retrieval first enforces exact authority and scope. It then uses persona-authored graph links, exact evidence/source/affordance references, explicitly hot fragment IDs, signed helped/hurt observations, and recency. These operations do not inspect task words or infer a domain.
-
-Vector similarity is admissible only when an actual embedding provider produced the query vector and stored records carry compatible provider-produced vectors with provenance. The kernel never substitutes token hashing, lexical overlap, a deterministic pseudo-vector, or a host-authored summary when no real vector exists. Without a real query vector, retrieval remains graph/reference/utility/recency based.
-
-A persona may deliberately invoke a search or reranking tool and record its signed result. That funded persona action is distinct from an automatic substrate classifier and cannot silently cause tool use, birth, readiness, or completion.
-
-**Technical detail:** See [A.12](#appendix-a12).
-
-### 7.1 Composition formula
-
-Authority and observation scope are hard gates, never score multipliers. Within the admitted set, exact link/ref matches, persona-observed utility, and recency provide deterministic ordering. Real vector similarity may contribute only when both sides carry compatible real vectors. Differing `user_id` hard-blocks retrieval without consent.
-
-**Technical detail:** See [A.13](#appendix-a13).
-
-Anti-leakage: differing `user_id` hard-blocks (one user's memory never crosses without consent).
-
-### 7.2 Stage-aware ranking
-
-Promotion stage remains visible as signed record state. It does not become a host-authored semantic relevance claim. Tombstoned or unauthorized records are excluded mechanically; otherwise the persona sees provenance and decides how much to rely on the material.
-
-## 8. Hierarchical Graph Memory
-
-Three-tier graph.
-
-*Three graph tiers organize knowledge connections. Tier 1 is a global topic associative network -- an entity-level graph of domain concepts persistent across all projects, updated nightly. Tier 2 comprises local event progression graphs per project and environment, with temporal and relationship edges (preceded_by, caused_by, contradicts, supports, etc.) for multi-hop and causal reasoning. Tier 3 is a per-membership observation subgraph, filtered by the persona's role and charter, composed at envelope mint for persona-specific situational awareness.*
-
-**Technical detail:** See [A.15](#appendix-a15).
-
-Storage: graph database (Neo4j-compatible) for Tier 1+2; in-memory subgraph for Tier 3. Embedding index alongside.
-
-## 9. Per-persona retrieval composition
-
-The kernel composes persona's context at envelope mint.
-
-*The build_persona_view function assembles a PersonaProjectedView containing: filtered project state (open problems by role, obligations owed and owing, active disagreements, relevant conjectures, pending peer reviews), filtered ambient environment state (recent events, observable co-members), the persona's own top-20 relevant memories, shared proven facts (top-15), conventions, and operational state (attention budget, energy, active mode, acceptance pathway).*
-
-**Technical detail:** See [A.16](#appendix-a16).
-
-### 9.1 Two personas, same project, different views
-
-Same task arriving to Volt (lead, experimenter_leaning) and Sage (historian, historian_leaning).
-
-*Volt sees experimenter mode, VERIFIER_ACCEPT pathway, 3 obligations, his own design edits and buck-compensation skills. Sage sees historian mode, INTERACTIVE pathway, 1 obligation, cited literature, and K-lines on compensation design problems. Same project, same task skeleton, but each persona gets a view filtered by its role, mode, and memory.*
-
-**Technical detail:** See [A.17](#appendix-a17).
-
-**Same project; two personas; two views.** Kernel projects per-persona.
-
-### 9.2 Persona's own curation
-
-Personas curate things they personally own.
-
-*Eight categories of persona-owned knowledge: personal episodic memory (consent-gated), personal semantic memory (kernel-consolidated), personal reflective memory (Reflector-produced), skill library (persona-authored), tactic EVOLVE-BLOCK (signal-weighted mutations), mode proficiencies, personal goals (charter-checked), and observation surface evolution (proposed via env admin). All are kernel-signed on mutation.*
-
-**Technical detail:** See [A.18](#appendix-a18).
-
-These are persona-owned, kernel-signed on mutation.
-
-### 9.3 ScopedKnowledgeQuery — first-class scope-bounded retrieval API
-
-The six-stage retrieval pipeline (§7) and the per-persona composition (§9) build views internally at envelope mint. Some callers — UI surfaces showing "what does this persona remember in this project," audit tools, federation peers, scoped consent dialogs — need an explicit query interface that takes a scope spec and returns the matching index, not a composed envelope context block.
-
-*The ScopedKnowledgeQuery schema provides an externally-callable retrieval interface accepting scope tags, type and tier filters, cross-scope inclusion flags, result-shape parameters (top-k, provenance, lineage refs), and a consent-check flag. Four admission rules govern its results: (1) consent gate -- user-scoped entries require consent; (2) scope intersection -- results are the strict intersection of supplied scope tags; (3) cross-scope flags honoured -- only entries carrying the matching cross-flag are included; (4) relationship scope -- pair-scoped memory accessible to both pair members, non-pair callers require operator scope.*
-
-**Technical detail:** See [A.19](#appendix-a19).
-
-**Composition with §9 envelope mint.** `ScopedKnowledgeQuery` is the externally-callable shape of the same machinery `build_persona_view` (§9) uses internally. The two share the index, the consent gates, and the provenance score; they differ in result shape (composed envelope context block vs queryable entry list) and admission (envelope mint trusts the kernel; external query passes consent + scope gates).
-
-**Why this is substrate-shape.** The query has no domain branches — it composes over scope tags, type axis, tier axis, cross-flags, and the relationship-id extension. Everything is topology; nothing names an industry or knowledge field.
-
-**Honest limits.**
-
-1. **Cross-encoder rerank is skipped.** `ScopedKnowledgeQuery` runs stages 1–3 (filter, vector, graph fusion) and returns ranked results without the cross-encoder rerank stage — that stage is task-context-aware and not appropriate for ad-hoc queries.
-2. **Audit callers see redacted lineage refs.** When `return_lineage_refs = True` and the caller is not the persona who owns the entries, lineage refs are redacted to event hashes only (no payload). Full lineage requires operator scope.
-3. **The query is read-only.** It never mutates the index, never advances tier transitions, never marks entries as accessed. Mutation requires the existing kernel-mediated paths.
-
-**Design criteria.** A-SQ1 (consent gate refuses user-scope entries when may_share = False), A-SQ2 (scope intersection strict; empty scope refused), A-SQ3 (cross-flag honoured; non-transferable entries omitted under cross-scope request), A-SQ4 (relationship_id scope returns only pair-tagged entries), A-SQ5 (lineage refs redacted for non-owner caller), A-SQ6 (cross-encoder rerank skipped vs §7 full pipeline).
-
-## 10. Five-layer prompt assembly
-
-v1.0 envelopes assemble system prompts in five layers.
-
-*Layer 1 (FROZEN, cacheable) carries persona identity, charter, voice, and disposition. Layer 2 (EVOLVABLE, cacheable if stable) carries evolved tactics and communication style. Layer 3 (CONTEXTUAL, not cacheable) carries project, environment, relationship, mood, and presence state. Layer 4 (RETRIEVED, not cacheable) carries the persona's own memory, relevant skills/lessons/K-lines, domain knowledge, and recent ambient events. Layer 5 (TASK, not cacheable) carries the task statement, acceptance pathway hint, active mode hint, and output schema constraints.*
-
-**Technical detail:** See [A.20](#appendix-a20).
-
-Layers 1, 2, and stable parts of 3 cacheable. **Target ≥ 80% cache hit rate** for cost amortisation.
-
-**Per-layer envelope token budgets (ADR-0081).** The psychology wave (ADR-0073…0080) added unbounded-growth content to layers 3–4 — self-narrative, mood line, counterparty entries in the relationship block, belief-revision notes, intuition hints — with no cap. v1.1 caps the two growing layers; when a layer exceeds its cap at envelope mint, the kernel MUST evict in the priority order below (evicted-first → evicted-last) and sign the eviction. Seed values are operator-tunable per deployment.
-
-| Layer | Seed cap | Eviction rule |
-|---|---|---|
-| 1–2 (FROZEN / EVOLVABLE) | not governed by this rule | NEVER evicted — identity, charter, safety floors, and promoted tactics are not eviction candidates under any cap. |
-| 3 (CONTEXTUAL) | 1,200 tokens | Evict in order: self-narrative (§3.3), then mood line (§10a), then relationship-block entries (lowest-confidence counterparty entries first, [`02_PERSONA.md §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079)); project/env context blocks evict last. |
-| 4 (RETRIEVED) | 2,400 tokens | Evict retrieved memories / lessons / hints in ascending §4a `effective_weight` — the faintest memory leaves first. |
-| 5 (TASK) | task-bounded | Never evicted — the task statement and output constraints are the work itself. |
-
-**Criteria:** A-TX12 (`cache_control` layers 1-2; hit rate ≥ 80%), A-P22 (prompt-block rendering deterministic; blocks 0-4 cached; per-task suffix blocks never cached), A-GF-SN-6 (layer 3–4 caps + eviction priority). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
-
-## 10a. Contextual mood line (ADR-0075)
-
-Layer 3 (CONTEXTUAL) already names "mood + presence state" among its contents (A.20); ADR-0075 makes the mood rendering concrete and bounds it. The kernel renders the persona's current VAD state as **exactly one "current disposition" line** (coarse band rendered as prose — seed formula in [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075) / A.73) into layer 3 at envelope mint.
-
-Three rules are normative:
-
-1. **Layer 3 only.** The mood line is part of the non-cacheable contextual layer; it MUST NOT migrate into the cacheable layers 1–2 (it would poison the ≥ 80% cache-hit target and, worse, leak transient state into the identity-signed surface).
-2. **Never evolution substrate.** The mood line — and mood state generally — MUST NOT appear in EVOLVE-BLOCK text (layer 2), in the GEPA objective vector (§11.1, §11.1b), or in any evolution signal ([`02_PERSONA.md §8.1`](02_PERSONA.md#81-eight-evolution-signals-with-weights)). GEPA's reflective traces strip the rendered disposition line before mutation so evolved tactics cannot condition on it. A persona must never be selected for *appearing* affected. **The strip rule covers ALL prompt-rendered psychological state (ADR-0081), not just the mood line:** the self-narrative (§3.3), drive-derived content ([`02_PERSONA.md §2a`](02_PERSONA.md#2a-layer-6-internals--drives-goal-arbitration-portfolio-reasoning-adr-0076)), belief-revision notes (§13a), counterparty-model context ([`02_PERSONA.md §11.4b`](02_PERSONA.md#114b-counterpartymodel-sidecar--bounded-theory-of-mind-adr-0079)), and intuition hints ([`02_PERSONA.md §11.5a`](02_PERSONA.md#115a-intuition-hints-on-skill-transfer-adr-0080)) MUST all be stripped from GEPA's reflective traces before mutation, exactly as the mood line is — evolved tactics cannot condition on any of them.
-3. **One line, honestly sourced.** The rendering derives from the signed mood state (moved only by clamped `mood-impulse/1` events, [`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075)); the persona does not author its own disposition line.
-
-**Criteria:** A-GF-ARC-5 (mood absent from EVOLVE-BLOCKs + evolution objectives); A-GF-ARC-1/A-GF-ARC-2 cover the impulse + decay mechanics. See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
-
-## 11. DSPy GEPA — reflective prompt optimization
-
-v1.0 integrates DSPy GEPA as primary prompt optimizer for evolution.
-
-*GEPA (Genetic-Pareto, 2025) reflects on execution traces, uses natural language feedback to evolve prompts, and performs multi-objective Pareto search across verifier pass rate, cost, latency, and charter conformance. It outperforms MIPROv2 by 10%, GRPO by 20%, with 35x fewer rollouts.*
-
-**Technical detail:** See [A.21](#appendix-a21).
-
-### 11.1 v1.0 GEPA integration
-
-*The GEPA optimizer gathers execution traces from the persona's recent 100 tasks, extracts per-trace feedback (tactic, outcome, signal weight, natural language reflection), evolves the EVOLVE-BLOCK via Pareto search with 10 rollouts, and promotes candidates that improve the Pareto front with a 0.05 signal threshold.*
-
-**Technical detail:** See [A.22](#appendix-a22).
-
-GEPA is the **primary mechanism for tactic mutation**.
-
-**Criteria:** A-P16 (rollback on degradation — GEPA-evolved tactics revertable), A-P17 (eight evolution signals + v1.1 additions flow to credit formula), A-P18 (22 mutation operators all gated, signed, rate-limited). See [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md).
-
-### 11.1a Cohort migration across model upgrades (ADR-0074)
-
-The GEPA cohort binding ([`02_PERSONA.md §3.5`](02_PERSONA.md#35-body-model--native-vs-proxy-binding-body-binding1)) evolves prompt variants per body class, but had no migration story: on a body/model-family upgrade a new `gepa_cohort_id` cold-started from the charter alone, discarding everything the prior cohort had learned. `cohort-migration/1` is the STANDARDISED seed shape that closes this; it is additive over the existing gepa-cohort binding — no change to `body-binding/1`.
-
-*On a body or model-family upgrade, a CohortMigrationPlaybook seeds the new cohort's MIPROv2 cold-start (§12) with the prior cohort's Pareto front as proposal priors — Phase-1 instruction candidates are drawn from the surviving front, not from a blank charter prompt — then shadow-evaluates the migrated candidates against the persona's last 100 task traces before any swap, and retains the prior cohort as the rollback target.*
-
-**Technical detail:** See [A.38](#appendix-a38).
-
-Three rules are normative:
-
-1. A cohort swap MUST NOT activate until the shadow evaluation over the last 100 task traces completes and no Pareto axis regresses beyond the operator-tunable tolerance (default 0.05 — the same signal threshold as §11.1 promotion).
-2. The prior cohort MUST be retained as a rollback target for at least the operator-tunable retention window (default 30 days); rollback re-binds `gepa_cohort_id` and MUST NOT touch identity blocks 0–4 (the identity signature verifies across cohorts unchanged).
-3. Migration records (seed set, shadow-evaluation scores, swap verdict) are kernel-signed into the persona's evolution log; the kernel's role is signing only.
-
-**Honest limit.** Pareto-front priors transfer *what worked*, not *why*. A sufficiently different body family may render prior tactics useless; the shadow evaluation then honestly reports the regression and the cold-start proceeds from charter alone — slower, never silent.
-
-**Criteria:** A-GF-TLR-5, A-GF-TLR-6. See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
-
-### 11.1b Identity-expression objective (ADR-0073)
-
-The §11.1 objectives are generic — verifier pass rate, cost, latency, charter conformance. Identity entered evolution only as a *filter* (the §14.1 conformance + voice floors), so evolved prompts converged toward task performance and merely avoided violating identity. ADR-0073 makes identity a *generator*: candidate EVOLVE-BLOCKs are selected for **expressing** the persona's identity, not merely passing its floors.
-
-*An identity rubric (identity-rubric/1, a KindRegistry kind) is derived mechanically from the frozen SOUL.md blocks 0–4: OCEAN priors map to framing criteria (e.g. high openness ⇒ exploratory framing preserved), the disposition maps to stance criteria (e.g. falsifier-leaning ⇒ direct-challenge phrasing retained), and the voice block maps to register and lexicon checks. The identity-expression score (identity-expression/1) is a judge-ensemble evaluation of candidate EVOLVE-BLOCK text against that rubric, added to GEPA's Pareto search as a separate axis.*
-
-**Technical detail:** See [A.39](#appendix-a39).
-
-Five rules are normative:
-
-1. The rubric MUST be regenerated only on a SOUL major version bump (when blocks 0–4 re-sign); it MUST NOT be regenerated on tactic mutation or cohort change — the rubric cannot drift with the tactics it judges.
-2. `identity-expression/1` MUST be a separate Pareto axis; it MUST NOT be collapsed into a weighted sum with the other objectives. Identity trades visibly against latency and cost on the front rather than averaging away. *Reconciliation with the `w_ide` credit weight (ADR-0081):* Pareto separation governs GEPA candidate **selection** — identity expression is never scalarized there; the `w_ide = 0.4` weight of [`02_PERSONA.md §8.1a`](02_PERSONA.md#81a-ninth-signal--identity-expression-adr-0073)/§8.3 governs **post-hoc credit attribution** only and MUST NOT feed selection or promotion scalarization. The two numbers never meet in one sum.
-3. The judge ensemble runs under INV-6 rotation and the §15 corroboration rules: identity expression is a judged signal and never promotes alone; the §14.1a safeguards apply before any identity-driven promotion.
-4. Charter conformance ≥ 0.95 and voice consistency ≥ 0.9 stay untouched floors (§14.1). Identity expression is generative pressure **on top of** the floors, never a substitute for them.
-5. **Lifecycle (ADR-0081).** The initial rubric is minted at the birth ceremony, immediately after SOUL v1 signs ([`02_PERSONA.md §7.1`](02_PERSONA.md#71-birth-ceremony)/A.20 step 5 — the derivation runs over the just-signed blocks 0–4). For personas predating ADR-0073, an **operator-triggered backfill job** derives the rubric from the persona's current SOUL major version. Until a rubric exists, the identity axis is simply ABSENT from GEPA selection — evolution proceeds on the remaining axes; a missing rubric MUST NOT block evolution or promotion.
-
-**Honest limit.** A rubric mechanically derived from OCEAN priors, disposition, and voice is a coarse projection of identity, and a judge-ensemble score is judgment, not verification — it ranks below verified outcomes per §15. Whether rubrics themselves can be evolved without circularity is open (OQ-PERSONA-8, [`02_PERSONA.md §13a`](02_PERSONA.md#13a-open-questions)).
-
-**Criteria:** A-GF-ICPE-1, A-GF-ICPE-2, A-GF-ICPE-6. See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
-
-## 12. MIPROv2 — Bayesian instruction + demo search
-
-For cold-start tactic generation.
-
-*MIPROv2 operates in two phases: Phase 1 generates 12 instruction candidates per tactic (LLM-generated, cost-bounded). Phase 2 performs Bayesian search over instruction-demonstration combinations, testing each against held-out signals, and selects the best candidate as the new tactic.*
-
-**Technical detail:** See [A.23](#appendix-a23).
-
-### 12.1 v1.0 MIPROv2 integration
-
-*The MIPROv2 optimizer generates 12 instruction candidates from recent traces and the persona's charter, selects 4 demonstrations from the skill library, then runs Bayesian optimization over 50 iterations to find the best tactic.*
-
-**Technical detail:** See [A.24](#appendix-a24).
-
-### 12.2 MIPROv2 vs GEPA in v1.0
-
-| Use case | Optimizer |
-|---|---|
-| Frequent tactic refinement | GEPA (sample-efficient; reflective) |
-| Cold-start tactic generation | MIPROv2 (Bayesian; broad space) |
-| High-stakes prompt rewrite | MIPROv2 + GEPA combined |
-| Per-persona daily evolution | GEPA |
-
-## 13. Reflection-driven refinement
-
-Reflector mode + reflection loop drive prompt evolution.
-
-*Reflection runs on a four-level schedule: per-persona every 20 tasks, per-session at boundaries, at project milestones, and at multi-project horizons. Outputs include candidate tactic mutations (fed to GEPA), skill promotions, charter refinements (operator-reviewed), and meta-prompt updates. All candidates are marked, not auto-promoted; promotion requires signal confirmation over at least 5 subsequent tasks, charter conformance, cross-persona similarity audit, and kernel/operator sign-off.*
-
-**Technical detail:** See [A.25](#appendix-a25).
-
-## 13a. Calibration and belief revision (ADR-0078)
-
-Reflection (§13) refines *tactics*; nothing tracked whether a persona's **stated confidence** was worth anything, and "changing one's mind" left no first-class trace — a superseded assertion simply degraded (§6.3) without the persona owning the revision. v1.1 adds two records and one gate, all over existing machinery — no new reasoning engine.
-
-*A calibration record (calibration-record/1) keeps, per persona × domain, a rolling Brier-style score between the confidence the persona stated in its candidate / AnswerPackage and the verified outcome — a free signal, since the verifiers already produce the outcome. A belief-revision record (belief-revision/1) is minted when a SupersessionCascade (§6.3a) invalidates an assertion the persona had made: a reflective "I believed X; evidence Y changed it" note citing the cascade and the superseding reference. The DualProcessGate decides System 1 vs System 2: the K-line fast path (§2.1 orient-time replay) fires only when both the K-line match score and the domain's calibration clear their thresholds; otherwise the task runs full deliberation.*
-
-**Technical detail:** See [A.40](#appendix-a40).
-
-Four rules are normative:
-
-1. **Calibration updates from verified outcomes only.** A `calibration-record/1` MUST be recomputed only on hard verifier verdicts; judged, engagement, or reflection signals MUST NOT move it. This keeps the record on the verified side of the §15 ladder — hard to game.
-2. **Rendered confidence is conditioned.** The confidence a persona renders into an AnswerPackage ([`03_TASKS.md §5`](03_TASKS.md#5-answerpackage)) MUST be conditioned on the domain's calibration record — a persona historically overconfident in a domain tempers its claims there — and the conditioning (record ref + adjustment applied) is recorded in lineage via the `answer/5` `calibration_conditioning_ref` field, so audit can distinguish raw from calibrated confidence. The Brier update of rule 1 consumes the RAW `stated_confidence` carried on the `answer/5` package (ADR-0081); the calibration-conditioned value is rendering-only and MUST NOT feed the update — otherwise the record would grade confidence it had itself adjusted.
-3. **Revision is owned, provenance-backed, shareable.** When a cascade invalidates a persona's prior assertion ([`§6.3a`](#63a-belief-revision-rides-the-cascade-adr-0078)), the persona's re-evaluation MUST mint a `belief-revision/1` note citing the cascade and superseding reference. The note lands in reflective memory, is retrievable as layer-4 prompt material (§10) like any reflection, and MAY be shared in relationships under the standard consent gates — honest, evidence-bound mind-changing instead of silent decay.
-4. **The fast path is gated on both match and calibration — with a graduated ramp, not a cliff (ADR-0081).** At or above the minimum sample (default 10 verified outcomes in the domain), the K-line fast path (System 1) MUST fire only when the K-line match score ≥ `τ_match` AND the domain's calibration ≥ `τ_cal` (both operator-tunable; conservative seeds in A.40); failing either, the task runs the ordinary deliberative path (System 2). Below the minimum sample (`n_outcomes < 10`), a τ-matched fast path is PERMITTED — but the kernel MUST schedule System-2 verification of the replayed result on a sampled fraction of fast-path firings that decreases with `n`: fraction 1.0 at `n = 0`, stepping down to the steady-state spot-check rate (seed 0.05) at `n = 10` (A.40). Honest consequence: in a young domain the fast path saves little latency or cost — most replays still pay for deliberative verification — and that is the point: the saving is earned as the calibration evidence accrues, instead of being granted at an arbitrary cliff. The gate sits over the existing §2.1 K-line machinery and the existing round loop — it adds no new reasoning engine.
-
-**Anti-Goodhart note.** Calibration is corroborated by hard verifier outcomes, which makes it one of the hardest signals in the system to game (§15); for the same reason it MAY serve as a corroborator for the ADR-0073 identity-expression judge scores ([`§14.1a`](#141a-identity-expression-safeguards-adr-0073)) — judged-signal optimism against collapsing verified calibration is a Goodhart flag.
-
-**Honest limits.**
-
-1. **Brier over small N is noise.** A per-domain record with a handful of outcomes swings wildly; the seed thresholds require a minimum sample (default 10 verified outcomes) before the record conditions anything or admits an unverified fast path — below it, fast-path firings run under the rule-4 graduated System-2 verification ramp (ADR-0081) rather than being refused outright.
-2. **The domain partition is coarse.** Whether calibration earned in one domain should inform an adjacent one is open (OQ-PERSONA-10, [`02_PERSONA.md §13a`](02_PERSONA.md#13a-open-questions)); v1.1 starts every domain flat.
-3. **Stated confidence can be sandbagged.** A persona that systematically understates confidence scores well on Brier while communicating badly. Mitigation: calibration conditions rendering and gates the fast path; it never promotes tactics alone, and the §15 corroboration rules apply unchanged.
-
-**Criteria:** A-GF-META-1 … A-GF-META-4 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)); the HEART predicate + adaptive cadence consumers are A-GF-META-5/A-GF-META-6 ([`02_PERSONA.md §6.3`](02_PERSONA.md#63-heart-switch-predicate--concrete-adr-0078)).
-
-## 13b. Executing components for the psychology wave (ADR-0081)
-
-The ADR-0073…0080 mechanisms all said "the kernel signs" — true, but signing is not computing. The table below assigns each mechanism its **executing component**; ownership of the compute is now explicit, and "the kernel's role is signing only" continues to hold for everything outside the kernel-runtime row.
-
-| Mechanism (ADR) | Executing component |
-|---|---|
-| Appraisal minting, impulse application + dedup/window clamps ([`02_PERSONA.md §6.2`](02_PERSONA.md#62-affect-coupling-surfaces-adr-0075), 0075/0076); decay evaluation (§4a, 0077); DualProcessGate enforcement + System-2 verification ramp (§13a, 0078); mood-line / narrative / counterparty-block rendering at envelope mint (§10/§10a, 0075/0077/0079) | **Kernel runtime service** |
-| Self-narrative regeneration (§3.3, 0077); habit recomputation from tactic-citation events (§14.2a/§14.3a, 0080); belief-revision note minting (§13a, 0078) | **Consolidation sweep / Reflector mode** |
-| Prompt trials + per-tactic promotion evidence (§14.3, 0074); identity-rubric scoring of candidates (§11.1b, 0073) | **GEPA harness** |
-| Identity-rubric backfill for pre-ADR-0073 personas (§11.1b rule 5); cohort-migration initiation (§11.1a, 0074) | **Operator job** |
-
-All four components draw their recurring compute from the kernel-maintenance budget class ([`05_ENVIRONMENT.md §7.2`](05_ENVIRONMENT.md#72-kernel-maintenance-budget-class-adr-0081)) where the work is background (sweeps, recomputation, trials, shadow evaluation); foreground rendering and gate enforcement ride the task's own budget.
-
-## 14. Per-persona prompt evolution
-
-*The evolution cycle flows: task produces outcome, outcome produces signals, GEPA reflects and proposes tactic mutations, mutations pass through a confirmation gate (signal corroboration over time), promoted tactics enter the EVOLVE-BLOCK, and the next envelope mint uses the new tactics. The cycle continues indefinitely.*
-
-**Technical detail:** See [A.26](#appendix-a26).
-
-### 14.1 Anti-degradation safeguards
-
-*Six safeguards prevent evolution from going wrong: MAP-Elites maintains tactic diversity; a diversity penalty disfavours parents with similar children; cross-persona audit checks pairwise similarity and rolls back if convergence exceeds threshold; charter conformance must remain at or above 0.95; voice consistency must remain at or above 0.9; and refusal rates must stay in expected ranges. If evolution degrades, the kernel rolls back to the previous EVOLVE-BLOCK version.*
-
-**Technical detail:** See [A.27](#appendix-a27).
-
-### 14.1a Identity-expression safeguards (ADR-0073)
-
-The identity-expression axis (§11.1b) is a judged signal and could be gamed — tactics that *sound* like the persona without coordinating better. Three safeguards, additive over §14.1:
-
-1. **Floors unchanged.** Voice consistency ≥ 0.9 and charter conformance ≥ 0.95 remain hard floors; an identity-expression score, however high, MUST NOT excuse a floor breach.
-2. **Blind peer-attribution audit (statistics per ADR-0081).** At the §13 confirmation gate, a judge bound to a *different* persona receives the candidate EVOLVE-BLOCK text (style-stripped of names and ids) alongside an attribution set of **N ≥ 5** SOUL identity summaries — the candidate persona's plus ≥ 4 distractors; on nodes hosting fewer personas, synthetic distractor summaries are permitted. The audit window is **≥ 20 attribution trials**; the audit passes iff the correct-attribution rate beats the 1/N chance rate at binomial **p < 0.05**. Summaries use the defined redaction format: the persona's public identity summary only (PersonaCard-grade — name-stripped voice/disposition/framing digest), never charter text or private content; no consent gate applies, because the summary is the persona's already-public projection. Failure blocks identity-driven promotion — the score was measuring something other than this persona's identity. Where the audit cannot run (too few trials accumulate in the window), identity-driven promotion requires **operator sign-off** instead of blocking forever.
-3. **Differentiation, not homogenisation.** The existing cross-persona similarity audit (§14.1) doubles as a differentiation check: identity-expression-driven evolution MUST hold or increase pairwise tactic distance between personas; convergence above the §14.1 threshold rolls back exactly as before.
-
-**Calibration corroboration (ADR-0078).** The per-persona×domain `calibration-record/1` ([`§13a`](#13a-calibration-and-belief-revision-adr-0078)), being grounded in hard verifier outcomes, MAY serve as an additional corroborator for the identity-expression judge scores under the §15 rules — rising judged identity scores against a collapsing verified calibration flag the promotion for audit before it lands.
-
-**Criteria:** A-GF-ICPE-3, A-GF-ICPE-4, A-GF-ICPE-5. See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
-
-### 14.2 Per-channel tactic evolution
-
-Communication tactics evolve **per channel**, not as a single undifferentiated set. Each persona's SOUL.md permits an EVOLVE-BLOCK region per channel.
-
-*Seven channel-specific EVOLVE-BLOCKs cover: blackboard (team broadcast), direct message (persona pair), proven facts (project CRDT writes), candidate table (task-scoped candidate authoring), goal stack (task-scoped coordination), ambient stream (env-scoped event emission), and presence (env-scoped presence updates). Each tactic line carries confidence and fertility scores. Six mutation rules govern evolution: measurable trigger, measurable action, no contradiction with ProvenFacts, no cosine-similar paraphrase in the same channel, signed mutation with lineage, and per-channel signal corroboration.*
-
-**Technical detail:** See [A.28](#appendix-a28).
-
-The principle: **a persona gets better at coordinating in each channel independently**, not just better at the cognitive function. A persona may have strong blackboard tactics and weak DM tactics; evolution per channel preserves the distinction.
-
-### 14.2a Habit strength on tactics (ADR-0080)
-
-Tactic lines carried confidence and fertility scores (§14.2 / A.28), but every promoted tactic was equally exposed to GEPA mutation pressure: a tactic that fired successfully in two hundred accepted tasks and one that fired twice were equally likely mutation targets. Humans do not work that way — heavily-used, reliably-successful behaviour consolidates into habit and resists casual revision, while rarely-used behaviour is cheap to experiment on. v1.1 adds an OPTIONAL [`habit_strength`](12_GLOSSARY.md#h) field per tactic that reproduces exactly this bias, riding the ADR-0074 machinery.
-
-*habit_strength is a usage-reinforced, exponentially-decaying scalar in [0, 1]: each task where the tactic fires in an accepted candidate's lineage reinforces it — read from the signed `tactic-citation/1` usage events of [§14.3a](#143a-tactic-citation-events--usage-not-mutation-adr-0081); disuse decays it on the §4a exponential shape. The §16 mutation operators consume it as a proposal-probability bias: tactics above the habit threshold (default 0.7) are deprioritized as mutation targets; rarely-used tactics become the preferred mutation candidates.*
-
-**Technical detail:** See [A.42](#appendix-a42).
-
-Four rules are normative:
-
-1. **Bias, never immunity.** The mutation-pressure deprioritization scales the §16 operators' proposal probability with a hard floor (default 0.1); it MUST NOT reach zero. A habituated tactic is harder to mutate, never immutable.
-2. **No rollback veto.** `habit_strength` MUST NOT veto or delay per-tactic rollback (§14.3) or whole-block rollback (§14.1). A rollback token consumes identically against the most habituated tactic and the least.
-3. **No safety veto.** A mutation driven by a §14.1 floor breach (charter conformance < 0.95, voice consistency < 0.9, refusal-rate excursion) MUST proceed regardless of `habit_strength`. Habit shapes ordinary evolutionary exposure only; it has no standing against safety-driven correction.
-4. **Identity pressure faces a higher floor (ADR-0081).** For mutation proposals initiated by the identity-expression axis (§11.1b), the habit-bias floor is **0.5**, not 0.1 — identity pressure reaches a fully habituated tactic at most ~2× slower than an unhabituated one, never ~10×. Rationale: the oldest, pre-ADR-0073 tactics — promoted before identity was ever a selection axis — are precisely the tactics habit shields most; under the 0.1 floor, habit would lock identity evolution out of the very text it most needs to reach.
-
-Habit formation thus *falls out of* the ADR-0074 PromptOps machinery: the `tactic-citation/1` usage events (§14.3a) are the reinforcement signal, the trial records keep every habit-protected promotion replayable, and per-tactic rollback keeps a stale habit cheaply reversible. The field is additive — tactics without it behave exactly as before (treated as `habit_strength = 0`).
-
-**Honest limit.** Habit is an exposure bias, not competence: a strongly-habituated tactic can be stale or context-shifted, and the bias slows the very mutation that would fix it. The §14.1 audits remain the corrector, and the §4a-shaped decay guarantees unused habits release their protection on a tunable half-life.
-
-**Criteria:** A-GF-HAB-1 … A-GF-HAB-3 ([`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination)).
-
-### 14.3 Tactic lineage and trial records (ADR-0074)
-
-Skills carry lineage (Voyager-style `lineage_parent_skill_id`); EVOLVE-BLOCK tactics did not — a promoted tactic replaced its predecessor with no per-tactic version history, no record of the trial that justified the promotion, and rollback only at whole-EVOLVE-BLOCK grain (§14.1). v1.1 closes this with two schemas.
-
-*The tactic-lineage record gives every tactic a version DAG: tactic_id, parent_version, the mutation_operator applied (one of the 22 in §16), a gepa_trace_ref to the optimization run that proposed it, a trial_ref to the promotion trial, and the verdict (promoted / rejected / rolled_back). The prompt-trial record is the A/B evidence behind each verdict: candidate vs incumbent version, the task sample evaluated, per-axis Pareto deltas (verifier pass rate, cost, latency, charter conformance), the 0.05-signal-threshold decision (§11.1), and a rollback token.*
-
-**Technical detail:** See [A.37](#appendix-a37).
-
-Three rules are normative:
-
-1. Every mutation that lands in an EVOLVE-BLOCK MUST mint a `tactic-lineage/1` record, kernel-signed into the persona's evolution log and the global LineageGraph exactly as skill mutations are. The kernel's role is **signing only** — no new kernel responsibility.
-2. Every promotion MUST reference a `prompt-trial/1` record; a promotion without one is refused at the §13 confirmation gate.
-3. Rollback becomes **per-tactic**: reverting one DAG edge restores that tactic's prior version without touching sibling tactics in the same EVOLVE-BLOCK. Whole-block rollback (§14.1) remains available as the coarse safety path.
-
-`soul.state.json` gains an OPTIONAL `tactic_lineage_ref` pointer to the persona's DAG head ([`02_PERSONA.md §3.2`](02_PERSONA.md#32-personaenvelope--the-body-side-contract-envelope4)) — additive, no `soul-state/6` version bump.
-
-**Honest limit.** Lineage records *which* operator produced *which* version under *which* trial; it does not explain why a tactic works. Dead branches (rejected / rolled-back versions) accrete; their retention policy is open (OQ-PERSONA-7, [`02_PERSONA.md §13a`](02_PERSONA.md#13a-open-questions)).
-
-**Criteria:** A-GF-TLR-1 … A-GF-TLR-4. See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
-
-### 14.3a Tactic-citation events — usage, not mutation (ADR-0081)
-
-ADR-0080 specified habit reinforcement as "read from the existing tactic-lineage citations", but `tactic-lineage/1` records **mutations** — one record per EVOLVE-BLOCK mutation, with no entry when a promoted tactic merely *fires* in accepted work. Reinforcement read from it was uncomputable: a tactic mutated once and then used in two hundred accepted tasks had exactly one lineage record. ADR-0081 supersedes that sentence of ADR-0080 and adds the missing usage event.
-
-*A [tactic citation](12_GLOSSARY.md#t) (`tactic-citation/1`) is the per-acceptance usage event: minted by the kernel at AnswerPackage acceptance ([`03_TASKS.md §5`](03_TASKS.md#5-answerpackage)), it lists the tactic ids extracted from the GEPA trace `tactic` field (A.22), each anchored to the tactic's current `tactic-lineage/1` version. It is signed and lineage-anchored; §14.2a/A.42 habit reinforcement reads these events.*
-
-**Technical detail:** See [A.43](#appendix-a43).
-
-Three rules are normative:
-
-1. **Minted at acceptance only.** A `tactic-citation/1` MUST be minted only when an AnswerPackage finalizes in a successful-acceptance status (A.34 bucket); unaccepted work reinforces nothing.
-2. **Attribution is explicitly approximate.** The tactic list is **trace-extracted** (the GEPA trace `tactic` field), not a verified causal claim that each listed tactic produced the acceptance; the extraction method is recorded on the event and is **judge-confirmable on audit**. Consumers (habit reinforcement) MUST treat citations as exposure evidence, never as promotion evidence — the §15 corroboration rules are untouched.
-3. **Lineage-anchored.** Each cited tactic ref carries the `(tactic_id, version)` pair current in the §14.3 DAG at mint, so a later rollback can identify exactly which version earned which reinforcement.
-
-**Criteria:** A-GF-HAB-1 (reinforcement reads tactic-citation events). See [`11_DESIGN_CRITERIA.md §9a`](11_DESIGN_CRITERIA.md#6-global-discovery-and-coordination).
-
-## 15. Anti-Goodhart for signal corroboration
-
-Anti-Goodhart rule for soft signals.
-
-*Tactic promotion rules vary by mode. Convergent/Divergent modes: verified outcome alone or judged outcome alone suffice. Relational/Pedagogic/Performative modes: engagement signal alone never promotes; user feedback alone does not promote; judged outcome plus user feedback promotes; engagement plus user feedback plus audit clearance promotes with a note. Universal: reflection alone never promotes -- it must await corroboration.*
-
-**Technical detail:** See [A.29](#appendix-a29).
-
-The kernel's audit pass clears recent interactions for known anti-patterns (dependency cultivation, sycophancy, manipulation language) before engagement-signal-driven promotion. Audit clearance is the **Goodhart canary** at evolution layer.
-
-## 16. Mutation operators (22 total)
-
-*Twenty-two mutation operators span four groups: core (9: tactic_propose, tactic_retire, skill_synthesise, skill_compose, meta_prompt_mutate, crossover, fork_clone, fork_compose, retire_proposal), relational/evolution (6: relational_style_propose, mode_proficiency_update, reflection_synthesise, trust_signal_apply, consolidation, forgetting), domain emergence (5: probe_initiate, knowledge_ingest, recipe_infer, convention_propose, cross_domain_transfer), and v1.0 additions (2: project_role_propose, domain_skill_propose).*
-
-**Technical detail:** See [A.30](#appendix-a30).
-
-All gated by kernel checks, signed, lineage-linked, rate-limited per persona per task.
-
-## 16a. MeasurementFact + UncertaintyEnvelope
-
-Per the design goals ("numerical data summarisation, uncertainty as first-class, statistical reproducibility"), numerical claims are currently free-form ProvenFacts — a bare float carries no uncertainty, no calibration trace, no replication context. For any measurement-heavy domain (any field where a number with uncertainty is load-bearing — physics, chemistry, biology, engineering, clinical care, manufacturing QA), this hides exactly the structure that matters. v1.0 promotes uncertainty to first-class with two schemas.
-
-### 16a.1 UncertaintyEnvelope
-
-*The UncertaintyEnvelope schema wraps a numerical measurement with its statistical distribution (gaussian, lognormal, uniform bounded, interval only, empirical samples, or custom), central value, standard deviation, sample list, confidence interval bounds, systematic error floor, calibration chain reference, and KindRegistry-resolved units. Distribution kinds are mathematical shapes, not domain categories -- math is universal across domains.*
-
-**Technical detail:** See [A.31](#appendix-a31).
-
-**Mathematical primitive vs. domain primitive.** The Literal here lists *mathematical distribution shapes*, not domain categories — substrate purity is preserved because math is universal across domains. Domain-specific quantity meanings (T1, transmittance, blood glucose) live in `units_kind` which is KindRegistry-resolved.
-
-### 16a.2 MeasurementFact
-
-*The MeasurementFact schema records what was measured (KindRegistry-resolved quantity kind), the value (a typed reference to an UncertaintyEnvelope -- bare floats are refused at admission), what instrument was used, the measurement protocol, when and where the measurement was taken, calibration provenance (whether calibration was expired at measurement time), replication status (single observation through blind replicated), external attestation references, and a cross-reference to a legacy ProvenFact.*
-
-**Technical detail:** See [A.32](#appendix-a32).
-
-### 16a.3 Composition rules
-
-*Four J4 rules govern measurement admission: J4-MEASUREMENT requires an UncertaintyEnvelope for VERIFIER_ACCEPT grade (bare floats are capped at PANEL grade). J4-CALIBRATION caps expired-calibration measurements at PANEL grade and refuses measurements from out-of-tolerance/quarantined/decommissioned instruments. J4-REPLICATION reads trust uplift from ReplicatedAttestation. J4-UNITS requires units_kind to resolve in KindRegistry at admission.*
-
-**Technical detail:** See [A.33](#appendix-a33).
-
-### 16a.4 Aggregation and statistical reproducibility
-
-When N MeasurementFact entries describe replications of the same `quantity_kind` over disjoint conditions, the kernel exposes a **read-only aggregation view**.
-
-*The aggregate_measurements function takes a list of MeasurementFact references and a KindRegistry-resolved aggregation kind, and returns a combined UncertaintyEnvelope. The aggregator is a persona-authored skill; the substrate provides the view and signing, not the algorithm. Aggregated views carry a reproducibility class: fully reproducible (all legs have protocol, calibration, and disjoint-instrument replication), partially reproducible, single observation only, or underspecified (missing calibration or protocol, capped at PANEL grade).*
-
-**Technical detail:** See [A.34](#appendix-a34).
-
-The reproducibility class itself is computed by a classifier in INV-6 rotation; the kernel signs the classifier identity for audit reproducibility.
-
-### 16a.5 Honest limits
-
-1. **Aggregation algorithms are persona-authored.** The substrate provides the view + signing; the algorithm is a Skill (Voyager class C) the domain catalogs. Different domains may prefer different aggregators for the same `quantity_kind`.
-
-2. **Uncertainty type-mismatch.** Combining a `gaussian` envelope with an `interval_only` envelope requires policy. The aggregator MUST declare its policy (e.g., conservative bounds intersection); the substrate enforces only that the policy is *signed and declared*, not which policy is correct.
-
-3. **Systematic floor opacity.** `systematic_error_floor` is operator/instrument-declared; the substrate cannot independently verify it. Lineage records the declaration source so audit can challenge.
-
-4. **No statistical theorem proving.** The substrate does not validate that an aggregation respects, e.g., the central limit theorem's preconditions. Personas may import formal verification of statistical claims via `lean_verify` or equivalent in domains that catalog such tools.
-
-## 16b. DerivationProvenanceEdge — memory-to-contribution provenance
-
-The 7-scope memory tagging (§5) carries `org_id` (and other scopes) on every `KnowledgeRef`, episodic memory entry, semantic fact, K-line, lesson, and proven fact. `06_DOMAIN §11.1 RISK A-E` filters *named-artifact* transfers across scopes (e.g., a `CrossDomainTransfer` carrying an artifact id refuses if the artifact's `org_id` differs from the target). What `§11.1` does **not** cover is the case where a persona *consults* a scope-tagged memory during normal retrieval (per §7 hybrid retrieval) and then *contributes derived work* in a different scope — the derived contribution carries no edge back to the consulted source, and the RISK filter has nothing to act on at contribution time.
-
-For single-tenant deployments this is a non-issue (everything is one tenant). For multi-tenant deployments (`01_KERNEL §2.4.3` `PrincipalAttribution.multi_principal_attribution_enabled = True`), the substrate must trace which scope-tagged memories *materially shaped* each contribution, so audit can answer "did this joint-project artefact derive from one principal's internal memory in a way the other principal could not have predicted?"
-
-`DerivationProvenanceEdge` (DPE) is the substrate-shape edge that records this. It is **soft-bound** — it does not block retrieval and does not refuse contribution — but is visible in `EnvironmentLineage` and queryable through standard graph traversal.
-
-*The DerivationProvenanceEdge schema links a contribution event to each consulted memory, recording the contribution's signed event id and kind, the contributing persona, the consulted memory's id and scope tags (snapshot at consultation time), the persona-declared influence kind (direct quote, paraphrased, structural basis, negative example, or background context), influence strength (0 to 1), and the retrieval span id for replay. A companion DerivationProvenancePolicy schema sets enforcement mode per environment or project: off, opportunistic, mandatory for cross-principal, or mandatory for all. The admission rule resolves the policy on each contribution event mint and, in mandatory modes, refuses cross-principal contributions that lack a corresponding DPE.*
-
-**Technical detail:** See [A.35](#appendix-a35).
-
-**Lineage.** Each DPE is appended to the contribution's hosting `EnvironmentLineage` as `DERIVATION_PROVENANCE_EDGE_DECLARED`. Graph traversal from a contribution to its consulted memories runs `MATCH (c)-[r:DerivationProvenanceEdge]->(m)` against the lineage's edge log. Cross-principal audit queries follow the existing per-env query path (no new index required).
-
-**Composition with `§11.1` RISK E.** RISK E mitigates explicit cross-org artifact transfer (`org_share_policy per artifact`); DPEs mitigate implicit cross-org *derivation*. Together they cover both directions: an explicit transfer with no DPE has `RISK E` to refuse it; an implicit derivation with no transfer has DPE enforcement to surface it. Neither is a hard guarantee against information leakage (the tacit-recall limit below); both raise the cost of un-audited cross-principal flow.
-
-**Honest limits.**
-
-1. **Tacit recall is untraceable.** A persona who internalises a fact through repeated retrieval and later contributes from "memory" without an explicit retrieval call leaves no DPE. The substrate cannot inspect persona cognition; it can only inspect the retrieval pipeline. Operators should pair DPE enforcement with frequent in-context recall checkpoints when cross-principal sensitivity is high.
-2. **Persona-declared influence is not adversarially robust.** A persona could declare `influence_kind = "background_context"` for a derivation that was structurally a `direct_quote`. The lineage records the declaration; downstream audit may challenge. Substrate is robust against accidental mis-attribution, not against deliberate misrepresentation.
-3. **Retrieval-span scope is limited to v1.0 OTel coverage.** Memories retrieved through non-standard paths (a Skill that bypasses the §7 pipeline; an MCP tool that fetches memory directly) may not produce a span the policy can inspect. Operators tightening enforcement should also restrict bypass paths.
-4. **No automatic redaction of cross-principal contributions.** When DPE enforcement refuses a contribution, the persona must explicitly re-author without the cross-principal memory OR emit the DPE and accept the lineage record. The substrate does not auto-redact (auto-redaction would be a domain-shaped choice; substrate stays domain-neutral per C4).
-
-**Design criteria.** A-DP1 (DPE schema mints cleanly), A-DP2 (opportunistic mode: contribution proceeds with or without DPE), A-DP3 (mandatory_for_cross_principal: cross-principal consultation without DPE refuses), A-DP4 (mandatory_for_cross_principal: same-principal consultation proceeds without DPE), A-DP5 (DPE graph traversal finds all consulted memories for a contribution), A-DP6 (background_context with influence_strength = 0 admitted with audit record).
-
-## 17. Cost and latency
-
-*Retrieval pipeline total latency target is at most 250 ms p95, with individual stage budgets ranging from 5 ms (fusion) to 100 ms (graph retrieval). Memory operations target at most 50 ms for hot tier, 100 ms for warm, 500 ms for cold, with consolidation running overnight or on idle. Prompt evolution costs $1-10 per persona per GEPA cycle and $5-30 per MIPROv2 cold-start tactic. Reflection latencies range from 200 ms per task to minutes per project. Cache hit rate target is at least 80% on layers 1-2, yielding approximately 10x cost savings at scale.*
-
-**Technical detail:** See [A.36](#appendix-a36).
-
-## 18. Risks & known limitations
-
-Per [`SPEC_CONVENTIONS.md §7`](SPEC_CONVENTIONS.md#7-risks--known-limitations).
-
-| ID | Risk | Severity | Likelihood | Mitigation | Target release |
-|----|------|----------|------------|------------|----------------|
-| R-KNOWLEDGE-1 | Retrieval is the bottleneck at scale. Multi-scope tag filtering across millions of entries × 7 tags × 4 tiers × top-K requires fast vector stores; cost grows with corpus. | High | High | Tiered index (HOT in-mem; WARM SSD; COLD object store); pre-filtered shards per persona; A-TX14 latency targets. | v1.0 (tiers); v1.1 (sharding). |
-| R-KNOWLEDGE-2 | Per-persona projection cost at envelope mint. First envelope slower; cache mitigates subsequent. | Medium | High | Per-task persona-context cache; A-TX9 design criterion; prompt layers 1-2 cacheable per Anthropic `cache_control`. | v1.0 (cache); v1.1 (warm-up policy). |
-| R-KNOWLEDGE-3 | Cross-tier confusion at ontology boundaries. Skill spans Capability + Knowledge; ProvenFact spans Product + Knowledge. | Low | Low | Five-tier ontology with explicit dual-tier markers (A-TX1, A-TX2); query APIs handle both. | v1.0 (resolved). |
-| R-KNOWLEDGE-4 | Standards alignment by convention, not enforcement. Adapter authors must follow `09_PROTOCOLS.md §8` mappings for interoperability. | Medium | Medium | Documented mapping tables plus signed live cross-adapter parity evidence under A-P10; incompatible adapters remain visibly unavailable. | v1.0 (docs); v1.1 (live enforcement evidence). |
-| R-KNOWLEDGE-5 | GEPA + MIPROv2 evolution cost. $1–10 per persona per cycle. | Medium | High | Operator-tunable cadence; per-persona evolution budget; reflection gating. | v1.0 (budgets). |
-| R-KNOWLEDGE-6 | Reflection latency. Per-task 200 ms; per-session seconds; per-project minutes. | Low | High | Async post-task reflection; ROI improves as track record builds; per-tier reflection windows. | v1.0 (async). |
-| R-KNOWLEDGE-7 | Cross-encoder reranker quality. Off-the-shelf models may miss domain-specific patterns. | Medium | Medium | Domain operators may fine-tune; rerank stage is replaceable; rubric-judged retrieval audits. | v1.1 (fine-tune surface). |
-| R-KNOWLEDGE-8 | Memory consolidation is batch. In-task consolidation infeasible; in-moment reasoning relies on Tier 1+2 only. | Low | High | Explicit query path for Tier 3 + Archive; consolidation cadence operator-tunable; lineage replay for cold facts. | v1.0 (baseline). |
-| R-KNOWLEDGE-9 | Graph + presence overhead at scale. Every ambient event as a graph node may explode storage. | High | Medium | Pruning policy per tier; ambient-event tier transitions; per-env retention cap. | v1.0 (pruning); v1.1 (auto-tuning). |
-| R-KNOWLEDGE-10 | GEPA reliability. Genetic search can produce regressions on non-stationary signals. | High | Medium | Anti-degradation safeguards (`02_PERSONA §9`); rollback discipline; human review gate for high-stakes domains; A-P16 design criterion. | v1.0 (rollback); v1.1 (deeper anti-degradation). |
-| R-KNOWLEDGE-11 | MeasurementFact + UncertaintyEnvelope rely on bridge calibration. Stale calibrations propagate wrong uncertainty. | High | Medium | CalibrationChain provenance (`§16a`); calibration interval enforcement at MeasurementFact admission; A-GF-MF design criterion. | v1.0 (provenance); v1.1 (auto-renewal warnings). |
-
-## 18a. Open questions
-
-Per [`SPEC_CONVENTIONS.md §8`](SPEC_CONVENTIONS.md#8-open-questions).
-
-| ID | Question | Owner | Resolves into |
-|----|----------|-------|---------------|
-| OQ-KNOWLEDGE-1 | Adapter conformance enforcement (R-KNOWLEDGE-4): docs-only, CI harness, or both? v1.1 ships harness — what's the test surface? | — | v1.1 harness design. |
-| OQ-KNOWLEDGE-2 | Cross-encoder reranker fine-tuning (R-KNOWLEDGE-7): per-domain weights, or per-persona personalisation? Trade-off: storage cost vs retrieval precision. | — | v1.1 fine-tune scheme. |
-| OQ-KNOWLEDGE-3 | Memory consolidation cadence: per-task, per-session, per-cohort sweep, or driven by retrieval-rate signals? v1.0 ships batch; v1.1 may add adaptive. | — | v1.1 cadence policy. |
-| OQ-KNOWLEDGE-4 | Graph-memory pruning policy (R-KNOWLEDGE-9): time-based, importance-based, retrieval-frequency-based, or composite? | — | v1.1 pruning. |
-| OQ-KNOWLEDGE-5 | GEPA + MIPROv2 budget per persona (R-KNOWLEDGE-5): operator-tunable, or per-persona experiential-floor / community-standing-scaled? | Prompt engineers | v1.1 budget policy. |
-| OQ-KNOWLEDGE-6 | MeasurementFact + UncertaintyEnvelope: do we ship a small standard library of common uncertainty distributions (Gaussian, lognormal, uniform, Student's t), or leave to per-domain plugins? | Domain curators | v1.1 distribution library. |
-| OQ-KNOWLEDGE-7 | Hierarchical Graph Memory (`§7`): what's the canonical node-merge protocol when two personas independently observe the same entity? Currently one-shot dedup; would semantic clustering help? | — | v1.2 cluster merge. |
-
-## 19. Design criteria
-
-```text
-A-TX1   Five-tier ontology: every entity classified exactly once.
-A-TX2   Skill spans Capability + Knowledge; retrievable via both
-        find_skill (knowledge) and tool listing (capability) APIs.
-A-TX3   Four tool classes (kernel-native, domain-required,
-        persona-learned, human-bridged) composable; allowed_tools
-        intersection works.
-A-TX4   Lesson vs Reflective vs ProvenFact: distinct lifecycles
-        and indexing; promotion from reflective → Lesson signed.
-A-TX5   K-line / Skill / ProvenFact distinction enforced.
-A-TX6   Seven-scope memory tagging; retrieval composes scope context.
-A-TX7   Retrieval score formula deterministic; tie-breaking documented.
-A-TX8   Cross-scope transferable flag enables retrieval; anti-leakage
-        blocks differing user_id.
-A-TX9   Per-persona projection: same task, two personas, different
-        envelope context.
-A-TX10  MCP alignment: every v1.0 tool invokable as MCP tool.
-A-TX11  A2A alignment: PersonaCard projects to AgentCard with
-        skills[], project_summary, env_summary populated.
-A-TX12  Anthropic cache_control: layers 1-2 cacheable=True;
-        cache hit rate ≥ 80% at runtime.
-A-TX13  OTel: spans with personaos.* on every kernel operation;
-        cross-boundary propagation.
-A-TX14  Retrieval latency: hot ≤ 50 ms, warm ≤ 100 ms,
-        multi-scope composition ≤ 100 ms p95.
-A-TX15  Adapter compat: all 12 adapters accept v1.0 envelopes;
-        ignore unknown fields; prior-shape outputs.
-A-TX16  GEPA produces Pareto-improving tactic candidates within
-        10 rollouts.
-A-TX17  MIPROv2 cold-start: converges within 50 Bayesian iterations.
-A-TX18  Reflection promotion: requires M=5 future tasks corroboration.
-A-TX19  Anti-degradation: MAP-Elites diversity (v1.3+) prevents
-        homogenisation.
-A-TX20  Hierarchical Graph Memory: Tier 1 topic + Tier 2 events +
-        Tier 3 subgraph; replay reproducible.
-A-TX21  K-line / Skill / ProvenFact / Lesson distinction matrix
-        enforced; each entity classified by exactly one origin and
-        tier-dual flag.
-A-TX22  Reflection retrieval: top-K lessons fetched at envelope-mint
-        via vector_index with tier+provenance filter; rendered into
-        LAYER 4 of 5-layer prompt assembly.
-A-TX23  Lesson → Tactic promotion: ≥ N=5 citations across ≥ M=3
-        distinct tasks triggers tactic_propose; operationality +
-        charter-conformance gate; kernel signs.
-A-TX24  Per-channel tactic evolution: separate EVOLVE-BLOCK regions
-        for blackboard, DM, provenfacts, candidatetable, goalstack,
-        ambient_stream, presence; signal corroboration per channel.
-A-TX25  Per-channel cosine-similarity check refuses paraphrase
-        within same channel; allows similar trigger in different
-        channels.
-```
-
-## 20. Where to read next
-
-- Persona that uses knowledge: [`02_PERSONA.md`](02_PERSONA.md)
-- Project where knowledge is applied: [`04_PROJECT.md`](04_PROJECT.md)
-- Domain (knowledge ingestion + tool discovery): [`06_DOMAIN.md`](06_DOMAIN.md)
-- Protocols (MCP for retrieval): [`09_PROTOCOLS.md`](09_PROTOCOLS.md)
-
-## Technical Appendix
-
-The appendices below contain the full technical schemas, data structures, diagrams, and specification tables referenced throughout this document. Each appendix is referenced from the section where it applies.
-
-### A.1 Five-tier ontology listing
-
-<a id="appendix-a1"></a>
-
-```text
-1. COORDINATION TIER  — where work happens, who does it
-   Environment, Project, Task, Cohort, OpenProblem, Milestone
-
-2. PRODUCT TIER       — what is produced
-   Artefact, ArtifactBundle, ProvenFact, Conjecture, Reflection,
-   InternalCredit, ExternalCitation, StructuredFeedback
-
-3. CAPABILITY TIER    — what is used to act
-   Tool (4 classes), Skill (Voyager; both Capability + Knowledge),
-   Tactic (EVOLVE-BLOCK), Meta-prompt, Rubric, VerifierRecipe,
-   JudgePanelTemplate
-
-4. KNOWLEDGE TIER     — what is read to inform
-   Memory (episodic/semantic/reflective), Lesson, K-line, KnowledgeRef,
-   StandardRef, NotationConvention, AmbientEvent, ProvenFact (dual)
-
-5. CONTEXT TIER       — state about who/where/relationship
-   Persona, RelationshipRecord, ProjectMember, EnvironmentMembership,
-   Obligation, Disagreement, PeerReview, Consent/Boundary,
-   PresenceState, MoodState, AttentionBudget, DomainContext,
-   ConversationThread
-```
-
-### A.2 Eight knowledge artefact types
-
-<a id="appendix-a2"></a>
-
-```text
-TACTIC               EVOLVE-BLOCK heuristic in SOUL.md
-                     "When X happens, do Y."
-                     Per-persona; signed mutations.
-
-SKILL                Voyager-style executable code in soul.state.json
-                     skill_library. Both Capability (runs) and Knowledge
-                     (learned).
-
-TOOL (ToolArtifact)  Promoted code via FSM:
-                     PROPOSED → SANDBOXED → VERIFIED → PROMOTED → REVOKED
-                     Four classes (§5.5):
-                       A. kernel-native (mcp__personaos__*)
-                       B. domain-required (in DomainContext)
-                       C. persona-learned (Voyager; per-persona)
-                       D. human-bridged (BridgeAsset; v1.0)
-
-RUBRIC (RubricBundle) Judgment criteria with dimensions and weights.
-                     Used by JudgePanel for PANEL_ACCEPT pathway.
-
-LESSON               Work-pattern reflection.
-                     About: a tactic or pattern that worked.
-                     Structure: trigger / action / rationale / base_confidence /
-                                citations.
-                     Indexed globally; retrievable via find_lesson.
-
-K-LINE               Topology + skill replay pattern.
-                     "Tasks like X have been solved by team Y + skill Z."
-                     Historian persona authors.
-                     Used at orient time for fast-path replay —
-                     requires τ-match AND the §13a calibration gate
-                     (graduated System-2 verification ramp below
-                     min-sample; ADR-0078/0081).
-
-PROVENFACT           Verified statement.
-                     Author: kernel (on verifier verdict).
-                     Structure: statement + evidence + verifier_id +
-                                provenance.
-                     CRDT G-set; task-scope, project-scope, env-scope.
-                     Both Product AND Knowledge tier.
-
-META-PROMPT          Tactic-generation template.
-                     Operator-curated in v1.0; auto-mutated in v1.3+.
-```
-
-### A.3 Three memory types
-
-<a id="appendix-a3"></a>
-
-```text
-EPISODIC          Raw events with timestamp, context, counterparty,
-                  mood, original wording.
-                  e.g., "On 2026-05-12, user01ABC said 'I'm exhausted'
-                  before asking about migration."
-                  Decay: τ-half-life by usage_frequency ×
-                         emotional_weight × recency.
-
-SEMANTIC          Consolidated facts and lessons abstracted from
-                  episodics.
-                  No raw quotes; facts and consents.
-                  e.g., "user01ABC tends to work tired on Tuesdays.
-                  He prefers concrete examples to abstractions."
-                  Decay: only on contradiction; otherwise persistent.
-
-REFLECTIVE        Park-style higher-level inferences.
-                  e.g., "I have been most useful to user01ABC when
-                  I stop falsifying and ask about state first."
-                  Decay: only via explicit retirement.
-
-The §4a λ staircase quantifies the EPISODIC row only (ADR-0081):
-for semantic and reflective memories λ = 0 — their decay paths above
-are unchanged by the formula; ProvenFacts never decay (§2.1).
-```
-
-### A.4 Consolidation pipeline and importance weighting
-
-<a id="appendix-a4"></a>
-
-```text
-event happens
-    ▼
-episodic memory written (always; timestamped; signed)
-    ▼
-PERIODIC SWEEP (kernel: hourly or on idle)
-    ▼
-semantic consolidation
-    LLM-summarise N episodics about same counterparty/topic
-    drop original quotes; keep facts and consents
-    ▼
-REFLECTIVE CONSOLIDATION (weekly or after K tasks)
-    LLM-reflect over recent semantics
-    generate higher-level inferences about self/others/work
-    each reflection signed; counts toward Reflector mode credit
-```
-
-```python
-def importance(memory):
-    return (
-        memory.verifier_signal_count * 0.4 +
-        memory.cross_reference_count * 0.3 +
-        memory.salience_score        * 0.2 +
-        memory.recency_score         * 0.1
-    )
-
-# Nightly batch:
-for memory in tier:
-    if memory.tier == "RECENT" and memory.age > RECENT_TTL:
-        memory.tier = "WARM"
-    elif memory.tier == "WARM" and memory.importance() < FORGET_THRESHOLD:
-        memory.tier = "COLD"   # essentially forgotten
-        emit_signed(MEMORY_DEMOTED)
-    elif memory.tier == "COLD" and memory.importance() < ARCHIVE_THRESHOLD:
-        memory.tier = "ARCHIVE"
-```
-
-### A.5 Lesson dataclass
-
-<a id="appendix-a5"></a>
-
-```python
-@dataclass(frozen=True)
-class Lesson:
-    schema: Literal["lesson/1"]
-    id: str
-    persona_id: str
-    authored_at_task: str             # task_id
-    role_at_authoring: str            # role_slot
-    fingerprint: bytes                # embed(triggering task)
-    trigger: str                      # measurable trigger
-    action: str                       # measurable action
-    rationale: str                    # one-line "why"
-    base_confidence: float            # (cited_in_accepted + 1) /
-                                      # (cited + 2)
-    citations: list[str]              # task_ids that cited this lesson
-    parent_lineage: list[str]         # lessons it derives from
-    signed: bytes
-```
-
-### A.6 Lesson retrieval at envelope-mint
-
-<a id="appendix-a6"></a>
-
-```python
-candidate_lessons = vector_index.search(
-    embedding = embed(task.statement + task.invariant_set),
-    filter    = {tier: ["RECENT", "WARM"], min_provenance: 0.3},
-    k         = 8,
-)
-```
-
-### A.7 Lesson to Tactic promotion gate
-
-<a id="appendix-a7"></a>
-
-```text
-1. Citation threshold met (N≥5, M≥3 distinct tasks).
-2. Operationality check passes (02_PERSONA.md §8):
-   - measurable trigger
-   - measurable action
-   - no contradiction with active ProvenFacts
-   - not cosine-similar paraphrase of existing tactic
-3. Charter-conformance check passes (v1.0 §14.1).
-4. Kernel emits PROPOSED tactic_propose mutation; persona signs.
-5. EVOLVE-BLOCK admits the tactic; future envelopes carry it as command.
-```
-
-### A.8 Four memory tiers
-
-<a id="appendix-a8"></a>
-
-```text
-RECENT   (0-14 days)     provenance ≥ 0.6   weight 1.0
-WARM     (14-90 days)    provenance ≥ 0.3   weight 0.7
-COLD     (90 d - 1 yr)   provenance ≥ 0.1   weight 0.3
-ARCHIVE  (> 1 yr)        any                 weight 0.05
-```
-
-### A.9 ScopeTags dataclass and cross-scope flags
-
-<a id="appendix-a9"></a>
-
-```python
-@dataclass
-class ScopeTags:
-    user_id: str | None             # which user (privacy-bounded)
-    persona_id: str                  # whose memory it is
-    session_id: str | None           # session-bound (rare for knowledge)
-    project_id: str | None           # project-scoped
-    environment_id: str | None       # env-scoped
-    app_id: str | None               # deployment-scoped
-    org_id: str | None               # organisation-scoped
-    relationship_id: str | None      # — pair-scoped
-                                     # memory tied to a
-                                     # PersonaRelationshipEdge
-                                     # (02_PERSONA §11.4); null for
-                                     # non-pair memories
-```
-
-```text
-cross_project_transferable: bool
-cross_env_transferable: bool
-cross_persona_transferable: bool
-cross_domain_transferable: bool
-cross_relationship_transferable: bool  joint memory survives
-                                                  edge `ended`; default
-                                                  false
-```
-
-### A.10 Unified provenance score formula
-
-<a id="appendix-a10"></a>
-
-```text
-provenance_score = base_confidence × age_decay × verifier_consistency × usage_signal
-
-where:
-  base_confidence       initial trust at creation
-  age_decay             1 / (1 + days_since_created/half_life)
-  verifier_consistency  ratio of verified vs contradicted uses
-  usage_signal          log1p(times_cited_in_successful_work)
-```
-
-### A.11 SupersessionCascade and CascadeAffectedClaim schemas
-
-<a id="appendix-a11"></a>
-
-```python
-@dataclass
-class SupersessionCascade:
-    schema: str = "supersession-cascade/1"
-    cascade_id: str                           # ULID
-    superseded_ref_id: str                    # KnowledgeRef that was
-                                              # superseded
-    superseding_ref_id: str                   # KnowledgeRef that
-                                              # supersedes it
-    triggered_at: datetime
-
-    # DISCOUNT FACTORS
-    direct_discount: float = 0.5              # provenance_score *= 0.5
-                                              # for claims citing the
-                                              # superseded ref directly
-    transitive_discount: float = 0.25         # for claims citing claims
-                                              # that cite the superseded
-                                              # ref (depth 2+)
-    max_cascade_depth: int = 3                # prevent unbounded graph
-                                              # traversal
-
-    # AFFECTED CLAIMS (populated by kernel on execution)
-    affected_claims: list[CascadeAffectedClaim] = field(
-        default_factory=list
-    )
-    affected_count: int = 0
-
-    # RATE LIMITING
-    # Max 1 cascade per KnowledgeRef per 24h window; prevents
-    # cascade storms when multiple supersession events fire
-    # for the same ref in rapid succession.
-    rate_limit_window_hours: int = 24
-
-    signed_by: bytes = b""
-
-
-@dataclass
-class CascadeAffectedClaim:
-    schema: str = "cascade-affected-claim/1"
-    claim_ref: str                            # ProvenFact, ProposedKind,
-                                              # VerifierRecipe, etc.
-    claim_kind: str                           # "proven_fact",
-                                              # "proposed_kind", etc.
-    prior_provenance_score: float
-    discounted_provenance_score: float
-    cascade_depth: int                        # 1 = direct, 2+ =
-                                              # transitive
-    status: Literal["discounted",
-                     "re_confirmed",
-                     "further_downgraded"] = "discounted"
-    re_evaluated_by: str | None = None        # persona_id if manually
-                                              # re-evaluated
-    re_evaluated_at: datetime | None = None
-```
-
-### A.12 Retrieval admission and ordering
-
-<a id="appendix-a12"></a>
-
-```text
-signed records
-    → authority / consent / scope gate
-    → exact hot IDs and graph/reference expansion
-    → optional compatible real-vector similarity
-    → persona-observed utility and recency ordering
-    → bounded prompt projection with provenance retained
-```
-
-### A.13 Retrieval composition formula
-
-<a id="appendix-a13"></a>
-
-There is no universal semantic score. Authorization is Boolean. Exact links and references are structural. Utility is the persona's signed observation. Recency is mechanical. Vector similarity is present only with compatible real provider vectors.
-
-### A.14 Stage-aware ranking weights
-
-<a id="appendix-a14"></a>
-
-Promotion stage is carried into the prompt as signed provenance. The substrate excludes tombstoned material but does not translate stage into semantic truth or relevance.
-
-### A.15 Hierarchical Graph Memory tiers
-
-<a id="appendix-a15"></a>
-
-```text
-TIER 1: GLOBAL TOPIC ASSOCIATIVE NETWORK
-  Entity-level graph of domain concepts.
-  Persistent across all projects + envs in deployment.
-  Updated nightly via community detection over recent ambient streams.
-  Used for: cross-domain transfer queries, novelty checks, broad
-            topic exploration.
-  
-  Example: "power_electronics" topic node connects to: "buck", "boost",
-  "flyback", "controller", "feedback_compensation", "thermal", "EMI",
-  ... Edges weighted by co-occurrence in verified outcomes.
-
-TIER 2: LOCAL EVENT PROGRESSION GRAPHS
-  Per-project + per-env subgraphs.
-  Entity-level: artifacts, conjectures, obligations, members.
-  Temporal edges: "preceded_by", "caused_by", "responded_to",
-                  "co-edited_with".
-  Relationship edges: "contradicts", "supports", "extends", "cites".
-  Used for: multi-hop reasoning ("the conjecture's evidence chain"),
-            temporal queries ("what changed in this env over the last
-            month?"), causal reasoning.
-
-TIER 3: PER-MEMBERSHIP OBSERVATION SUBGRAPH
-  Each persona's view of project + env.
-  Filtered by observation surface + role + charter.
-  Kernel-composed at envelope mint.
-  Used for: persona-specific situational awareness.
-```
-
-### A.16 Per-persona retrieval composition (build_persona_view)
-
-<a id="appendix-a16"></a>
-
-```python
-def build_persona_view(persona, task, project, env):
-    membership_project = project.members.get(persona.persona_id)
-    membership_env = env.members.get(persona.persona_id)
-    surface = membership_env.observation_surface if membership_env else None
-    
-    return PersonaProjectedView(
-        # Filtered project state
-        open_problems_summary = filter_by_role(
-            project.open_problems, role=membership_project.role,
-            relevance_to=task.fingerprint
-        ),
-        active_obligations_self = [
-            o for o in project.obligations
-            if o.obligor_persona_id == persona.persona_id
-        ],
-        active_obligations_owed_to_self = [
-            o for o in project.obligations
-            if o.obligee == persona.persona_id
-        ],
-        active_disagreements_relevant = [
-            d for d in project.disagreements
-            if persona.persona_id in d.positions_held_by_any
-        ],
-        relevant_conjectures = [
-            c for c in project.conjectures
-            if persona.persona_id in c.contributors
-            or persona.persona_id in c.assigned_proof_gaps
-        ],
-        open_peer_reviews_self_is_author = ...,
-        open_peer_reviews_self_is_reviewer = ...,
-        
-        # Filtered ambient (env)
-        recent_ambient_summary = condense(
-            env.ambient_event_stream.recent(),
-            filter=surface,
-            relevance_to=task.fingerprint
-        ),
-        other_present_members = [
-            MemberSummary(m) for m in env.members.values()
-            if m.persona_id != persona.persona_id
-            and m.observable_to(persona)
-        ],
-        
-        # Persona's OWN memory
-        relevant_memory = retrieve(
-            scope_context={
-                "persona_id": persona.persona_id,
-                "project_id": project.project_id if project else None,
-                "environment_id": env.environment_id if env else None,
-            },
-            relevance_to=task.fingerprint,
-            top_k=20
-        ),
-        
-        # Shared substrate
-        relevant_proven_facts = retrieve_proven_facts(
-            scopes=["project", "env"],
-            relevance_to=task.fingerprint,
-            top_k=15
-        ),
-        relevant_conventions = (env.conventions | project.conventions),
-        
-        # Operational state
-        attention_budget_remaining = persona.attention_budget.in_env(env),
-        energy_remaining = membership_env.presence_state.energy_remaining,
-        active_mode = task.active_mode,
-        active_pathway = task.acceptance_pathway,
-    )
-```
-
-### A.17 Two personas, same project, different views
-
-<a id="appendix-a17"></a>
-
-```text
-VOLT'S VIEW:
-  active_mode = experimenter
-  pathway = VERIFIER_ACCEPT
-  obligations_self: 3 (topology, BOM, EMI compliance)
-  recent_ambient: design_v3 in draft; Volt's edits yesterday
-  relevant_conjectures: phase margin claim (Volt proposed; challenged)
-  relevant_memory: Volt's lessons from prior buck designs;
-                    skill: buck_compensation_type2
-  open_problems_shown: topology selection, EMI compliance
-
-SAGE'S VIEW:
-  active_mode = historian
-  pathway = INTERACTIVE (Sage informs)
-  obligations_self: 1 (literature survey by Thursday)
-  recent_ambient: design_v3 + cited Vishay AN-1234 yesterday
-  relevant_conjectures: same compensation conjecture (Sage's lens:
-                          prior art)
-  relevant_memory: Sage's lessons from compensating power designs;
-                    K-lines on compensation design problems
-  open_problems_shown: same skeleton; Sage observes all
-```
-
-### A.18 Persona's own curation categories
-
-<a id="appendix-a18"></a>
-
-```text
-Personal episodic memory       persona writes (consent-gated for user
-                                involving); kernel signs
-Personal semantic memory       kernel-consolidated from episodics;
-                                persona may request consolidation
-Personal reflective memory     Reflector mode produces; confirmed by
-                                future signals
-Skill library                  persona-authored via skill_synthesise
-                                / skill_compose
-Tactic EVOLVE-BLOCK            mutation operators; signal-weighted
-                                promotion
-Mode proficiencies             update_mode_proficiency operator
-Personal goals                 persona-proposed; charter-checked
-Observation surface evolution  persona-proposed via env admin
-```
-
-### A.19 ScopedKnowledgeQuery schema and admission rules
-
-<a id="appendix-a19"></a>
-
-```python
-@dataclass
-class ScopedKnowledgeQuery:
-    schema: str = "scoped-knowledge-query/1"
-    query_id: str
-    requested_by: str                            # caller persona / operator /
-                                                 # external surface
-
-    # Scope spec — explicit subset of ScopeTags (§5).  Each set field
-    # narrows the query; null fields are unconstrained.
-    scope: ScopeTags
-
-    # Type + tier filters
-    type_filter: list[str] | None                # type axis values (§5)
-    tier_filter: list[Literal[
-        "RECENT", "WARM", "COLD", "ARCHIVE"]] | None
-
-    # Cross-scope inclusions
-    include_cross_project_transferable: bool = False
-    include_cross_env_transferable: bool = False
-    include_cross_persona_transferable: bool = False
-    include_cross_domain_transferable: bool = False
-    include_cross_relationship_transferable: bool = False
-
-    # Result shape
-    top_k: int = 50
-    return_provenance: bool = True               # include unified provenance
-                                                 # score (§6) per entry
-    return_lineage_refs: bool = False            # include LineageGraph
-                                                 # back-refs (audit use)
-
-    # Admission
-    requires_consent_check: bool = True          # honour user consent /
-                                                 # operator policy on
-                                                 # scope-tagged memories
-    signed_by: bytes
-```
-
-```text
-1. CONSENT GATE
-   For any scope tag containing a user_id, the kernel runs the
-   §11 consent check before returning entries (memory transparency
-   is consent-gated; sharing with non-self callers requires the
-   user's may_share_with_other_personas consent).
-
-2. SCOPE INTERSECTION
-   The returned set is the strict intersection of scope tags
-   supplied.  Empty-scope queries are refused (null scope ≠ empty
-   scope — omit the field to leave it unconstrained).
-
-3. CROSS-SCOPE FLAGS HONOURED
-   include_cross_*_transferable expands the result set only to
-   entries that carry the matching cross-flag (§5 promotion).
-   The substrate never returns an entry whose cross-flag is False
-   under a cross-scope inclusion request.
-
-4. RELATIONSHIP SCOPE
-   scope.relationship_id (§5) returns entries
-   tagged with that relationship_id — the pair-scoped memory
-   carved out in PersonaRelationshipEdge (02_PERSONA §11.4)
-   co-signed summaries and joint-event reflections.  Both pair
-   members may query the same relationship_id; non-pair callers
-   require operator scope.
-```
-
-### A.20 Five-layer prompt assembly
-
-<a id="appendix-a20"></a>
-
-```text
-LAYER 1 (FROZEN; cacheable=True)
-  - Persona identity (SOUL.md frozen sections)
-  - Charter
-  - Voice + style
-  - Primary disposition
-
-LAYER 2 (EVOLVABLE; per EVOLVE-BLOCK; cacheable=True if stable)
-  - Evolved tactics
-  - Communication style preferences
-  - Mode-specific patterns
-
-LAYER 3 (CONTEXTUAL; cacheable=False)
-  - Project context block
-  - Env context block
-  - Relationship context block
-  - Mood + presence state
-
-LAYER 4 (RETRIEVED; cacheable=False)
-  - Own memory (top-K)
-  - Relevant skills / lessons / K-lines
-  - Domain knowledge (top-K)
-  - Recent ambient events
-
-LAYER 5 (TASK; cacheable=False)
-  - Task statement
-  - Acceptance pathway hint
-  - Active mode hint
-  - Output schema constraints
-```
-
-### A.21 GEPA overview
-
-<a id="appendix-a21"></a>
-
-```text
-GEPA (Genetic-Pareto, 2025):
-  - Reflects on execution traces (reasoning paths, tool outputs,
-    compiler errors)
-  - Uses natural language feedback to evolve prompts
-  - Multi-objective Pareto search across:
-      verifier pass rate
-      cost
-      latency
-      charter conformance
-  - Outperforms MIPROv2 by 10%, GRPO by 20%, 35× fewer rollouts
-```
-
-### A.22 v1.0 GEPA integration
-
-<a id="appendix-a22"></a>
-
-```python
-class GEPA:
-    def optimize(self, persona, evolve_block_section, observed_failures):
-        # 1. Gather execution traces from recent task lineages
-        traces = collect_traces(persona, recent_tasks=100)
-        
-        # 2. Extract per trace:
-        feedback = []
-        for trace in traces:
-            feedback.append({
-                "tactic": trace.tactic,
-                "outcome": trace.outcome,
-                "signal_weight": signal_weight(trace.outcome.kind),
-                "natural_language_reflection": reflector_mode.reflect(trace),
-            })
-        
-        # 3. GEPA mutates the EVOLVE-BLOCK
-        proposed_tactics = gepa.evolve(
-            current=evolve_block_section,
-            traces=traces,
-            feedback=feedback,
-            objectives=[
-                "verifier pass rate ↑",
-                "cost ↓",
-                "latency ↓",
-                "charter conformance ≥ 0.95",
-                "identity expression ↑",   # separate Pareto axis;
-                                           # never weighted-summed (§11.1b)
-            ],
-            pareto_front=True,
-            rollouts=10,  # GEPA is sample-efficient
-        )
-        
-        # 4. Promote candidates that improve Pareto front
-        for tactic in proposed_tactics:
-            if tactic.improves_pareto(current, signal_threshold=0.05):
-                kernel.propose_tactic_mutation(
-                    persona, tactic,
-                    operator="dspy_gepa@v3",
-                    evidence=feedback
-                )
-```
-
-### A.23 MIPROv2 two-phase overview
-
-<a id="appendix-a23"></a>
-
-```text
-PHASE 1 (PROPOSAL):
-  Generate K=12 instruction candidates per tactic / skill
-  (LLM-generated; cost-bounded).
-
-PHASE 2 (BAYESIAN OPTIMIZATION):
-  Bayesian search over (instruction, demonstration) combinations.
-  Each combination tested against held-out signals.
-  Best candidate becomes new tactic.
-```
-
-### A.24 v1.0 MIPROv2 integration
-
-<a id="appendix-a24"></a>
-
-```python
-class MIPROv2:
-    def optimize_tactic(self, persona, tactic_id):
-        candidates = []
-        for k in range(12):
-            instruction = llm.propose_instruction(
-                base_tactic=tactic,
-                feedback=recent_traces,
-                charter=persona.charter,
-            )
-            candidates.append(instruction)
-        
-        demos = select_demos(persona.skill_library, tactic, n=4)
-        
-        best = bayesian_optimize(
-            candidates=candidates,
-            demos=demos,
-            objective_fn=lambda cfg: hold_out_eval(persona, cfg),
-            iterations=50,
-        )
-        return best
-```
-
-### A.25 Reflection-driven refinement schedule and confirmation
-
-<a id="appendix-a25"></a>
-
-```text
-SCHEDULE:
-  - every N tasks (default 20): per-persona task-level reflection
-  - per-session at boundary: synthesize patterns
-  - at project milestones: project-level reflection
-  - at multi-project horizon: cross-project insight
-
-OUTPUTS:
-  - candidate tactic mutations (handed to GEPA)
-  - candidate skill promotions
-  - candidate charter refinement (NOT auto-applied; operator review)
-  - meta-prompts (template updates)
-
-CONFIRMATION:
-  Candidates MARKED, not auto-promoted.
-  Promotion requires:
-    - signal confirmation over next M tasks (M ≥ 5)
-    - charter conformance check
-    - cross-persona similarity audit (anti-collapse)
-    - sign-off by kernel + operator (if material)
-```
-
-### A.26 Per-persona evolution cycle
-
-<a id="appendix-a26"></a>
-
-```text
-EVOLUTION CYCLE:
-
-task → outcome → signal extraction
-    ▼
-GEPA reflects → proposes tactic mutations
-    ▼
-confirmation gate (signal corroboration over time)
-    ▼
-promoted into EVOLVE-BLOCK
-    ▼
-next envelope mint uses new tactics
-    ▼
-(cycle continues)
-```
-
-### A.27 Anti-degradation safeguards
-
-<a id="appendix-a27"></a>
-
-```text
-MAP-Elites (v1.3+)         Tactic archive maintains diverse cells.
-
-Diversity penalty           weight *= (1 - max_cosine_to_recent_children)
-in parent sampling          Disfavours parents with similar children.
-
-Cross-persona audit         Every N tasks: pairwise similarity.
-                            If converged > τ, roll back.
-
-Charter conformance scan    ≥ 0.95 across sampled actions.
-                            Else CHARTER_DRIFT_DETECTED.
-
-Voice consistency scan      ≥ 0.9 vs declared voice.
-                            Else VOICE_DRIFT_DETECTED.
-
-Refusal rate                in expected range; outliers flagged.
-
-REINSTATEMENT
-  If evolution degrades, kernel rolls back to previous EVOLVE-BLOCK
-  version (signed signature; tactic_retire operator).
-```
-
-### A.28 Per-channel tactic evolution blocks and mutation rules
-
-<a id="appendix-a28"></a>
-
-```text
-EVOLVE-BLOCK: communication.blackboard    [scope=team_clinic]
-  - tactics about broadcast: when to write events, addressing,
-    threading, summarisation cadence.
-
-EVOLVE-BLOCK: communication.directmessage [scope=persona_pair]
-  - tactics about direct messaging: when to DM vs broadcast,
-    target selection, back-pressure handling.
-
-EVOLVE-BLOCK: communication.provenfacts   [scope=project]
-  - tactics about CRDT writes: assertion phrasing, evidence-attachment
-    discipline, when to propose vs cite.
-
-EVOLVE-BLOCK: communication.candidatetable [scope=task]
-  - tactics about candidate authoring: dimension addressing, when to
-    RESAMPLE_REQUEST vs propose new candidate.
-
-EVOLVE-BLOCK: communication.goalstack     [scope=task]
-  - tactics about goal-mediated coordination: when to push sub-goals,
-    pop completion, observe pressure.
-```
-
-```text
-EVOLVE-BLOCK: communication.ambient_stream [scope=env]
-  - tactics about ambient event emission: cadence, summarisation,
-    cross-env link assertions.
-
-EVOLVE-BLOCK: communication.presence       [scope=env]
-  - tactics about presence updates: when to enter, when to depart,
-    energy-budget signalling.
-```
-
-```text
-1. Measurable trigger (the line says WHEN).
-2. Measurable action (the line says WHAT).
-3. No contradiction with ProvenFacts in the same scope.
-4. No cosine-similar paraphrase of an existing tactic in the
-   same channel block.
-5. Signed mutation, lineage-linked.
-6. Per-channel signal corroboration:
-   - blackboard tactics signal-weighted by addressed-persona acceptance
-     of subsequent events.
-   - DM tactics signal-weighted by reply latency + recipient acceptance.
-   - ProvenFacts tactics signal-weighted by CRDT-merge acceptance.
-   - CandidateTable tactics signal-weighted by acceptance pathway result.
-```
-
-### A.29 Anti-Goodhart tactic promotion rules
-
-<a id="appendix-a29"></a>
-
-```text
-TACTIC PROMOTION (into EVOLVE-BLOCK):
-
-Convergent / Divergent modes:
-  - verified outcome alone (weight ≥ 1.0) → promote.
-  - judged outcome alone (weight ≥ 0.7) → promote.
-
-Relational / Pedagogic / Performative modes:
-  - verified outcome alone → promote (rare).
-  - judged outcome + user feedback → promote.
-  - user feedback alone → DO NOT PROMOTE (insufficient diversity).
-  - engagement signal alone → DO NOT PROMOTE under any circumstance.
-  - engagement + user feedback + audit clearance → PROMOTE WITH NOTE.
-
-Universal:
-  - reflection alone → do not promote; awaiting corroboration.
-```
-
-### A.30 Mutation operators listing (22 total)
-
-<a id="appendix-a30"></a>
-
-```text
-Core (9):
-  tactic_propose       tactic_retire        skill_synthesise
-  skill_compose        meta_prompt_mutate   crossover
-  fork_clone           fork_compose         retire_proposal
-
-Relational/evolution (6):
-  relational_style_propose   mode_proficiency_update
-  reflection_synthesise      trust_signal_apply
-  consolidation              forgetting
-
-Domain emergence (5):
-  probe_initiate             knowledge_ingest
-  recipe_infer               convention_propose
-  cross_domain_transfer
-
-v1.0 (2):
-  project_role_propose       domain_skill_propose
-```
-
-### A.31 UncertaintyEnvelope schema
-
-<a id="appendix-a31"></a>
-
-```python
-@dataclass
-class UncertaintyEnvelope:
-    schema: str = "uncertainty-envelope/1"
-    envelope_id: str
-
-    # Substrate-shape Literal: these are mathematical distribution shapes,
-    # NOT domain categories.  Math is universal; the substrate may name
-    # them.  Additional shapes proposable via ProposedFactKind →
-    # MetaRegistry promotion (e.g. heavy-tailed, multi-modal).
-    distribution_kind: Literal["gaussian",
-                                 "lognormal",
-                                 "uniform_bounded",
-                                 "interval_only",
-                                 "empirical_samples",
-                                 "custom_kind"]
-    custom_distribution_kind: str | None    # KindRegistry-resolved when
-                                            # distribution_kind = "custom_kind"
-
-    central_value: float
-
-    # Distribution-specific fields; only the relevant ones are populated.
-    std_dev: float | None
-    samples: list[float] | None             # for empirical
-    interval_low: float | None              # for uniform_bounded / interval_only
-    interval_high: float | None
-    confidence_level: float | None          # e.g. 0.95 for CI / coverage interval
-
-    # Systematic error floor — "we cannot measure below this regardless
-    # of statistical noise".  Calibration-driven.
-    systematic_error_floor: float | None
-    calibration_chain_ref: str | None       # CalibrationChain (04_PROJECT §26a.7)
-
-    units_kind: str                         # KindRegistry-resolved unit
-                                            # (substrate names no units;
-                                            # operator / domain catalog).
-                                            # Examples (illustrative): "us",
-                                            # "MHz", "kPa", "mg/dL", "kg".
-
-    signed_by: bytes
-```
-
-### A.32 MeasurementFact schema
-
-<a id="appendix-a32"></a>
-
-```python
-@dataclass
-class MeasurementFact:
-    schema: str = "measurement-fact/1"
-    fact_id: str
-    proposed_by_persona_id: str
-    proposed_at: datetime
-    domain_id: str
-
-    # WHAT was measured.  Substrate names no quantities.
-    quantity_kind: str                      # KindRegistry-resolved
-                                            # quantity_kind (06_DOMAIN §7.6).
-                                            # Examples (illustrative, NOT
-                                            # substrate enums) per-domain:
-                                            #   "qubit_t1"
-                                            #   "transmittance_at_wavelength"
-                                            #   "blood_glucose_concentration"
-                                            #   "tensile_strength"
-                                            #   "switching_frequency"
-
-    value: UncertaintyEnvelopeRef           # MUST be a typed reference to
-                                            # an UncertaintyEnvelope (16a.1);
-                                            # admission validates the ref
-                                            # resolves and the envelope's
-                                            # schema is "uncertainty-envelope/1".
-                                            # A bare-float claim for the same
-                                            # quantity is REFUSED at admission
-                                            # — file the claim as a plain
-                                            # ProvenFact instead, which downstream
-                                            # J4 treats at PANEL-grade.
-
-    # WITH WHAT was it measured
-    measurement_instrument_ref: str | None  # InstrumentAsset ref
-                                            # (04_PROJECT §26a.7);
-                                            # None when no specific
-                                            # instrument applies (e.g.,
-                                            # theoretical bound)
-    measurement_protocol_ref: str           # ArtifactBundle ref describing
-                                            # how the measurement was taken
-    measurement_taken_at: datetime
-    measurement_location_ref: str | None    # where (lab id, site)
-
-    # Calibration provenance — derived from the instrument's chain
-    calibration_expired_at_measurement: bool = False
-                                            # set True when the instrument's
-                                            # next_calibration_due was past
-                                            # at measurement_taken_at; the
-                                            # MeasurementFact is admissible
-                                            # but downstream J4 caps at
-                                            # PANEL-grade
-    calibration_chain_ref: str | None       # the chain in effect at
-                                            # measurement time
-
-    # Replication status — links to §5.6.1 ReplicatedAttestation when
-    # the measurement has been replicated
-    replication_status: Literal["single_observation",
-                                  "replicated_same_instrument",
-                                  "replicated_disjoint_instruments",
-                                  "blind_replicated"]
-    replicated_attestation_ref: str | None  # ReplicatedAttestation ref
-
-    # External attestation (engineer stamp / lab director sign-off)
-    external_attestation_refs: list[str]    # ExternalAttestation refs
-                                            # (04_PROJECT §26a.3)
-
-    # Cross-reference to plain ProvenFact for legacy queries
-    backed_proven_fact_ref: str | None
-
-    signed_by: bytes
-```
-
-### A.33 MeasurementFact composition rules (J4)
-
-<a id="appendix-a33"></a>
-
-```text
-J4-MEASUREMENT  Any candidate output whose claim is a numerical
-                measurement MUST be backed by a MeasurementFact with
-                a non-degenerate UncertaintyEnvelope to be admissible
-                at VERIFIER_ACCEPT grade.  A bare-float claim is
-                admissible only at PANEL_ACCEPT grade (judges weigh
-                the absence of declared uncertainty).
-
-J4-CALIBRATION  When measurement_instrument_ref is set:
-                  - if calibration_expired_at_measurement = True:
-                    PANEL-grade max; never VERIFIER-grade
-                  - if instrument.current_operational_state ∈
-                    {out_of_tolerance, quarantined, decommissioned}:
-                    REFUSAL at admission (no MeasurementFact admitted)
-
-J4-REPLICATION  Trust uplift on a MeasurementFact is read from its
-                ReplicatedAttestation (when present) per the uplift
-                schedule in 06_DOMAIN §5.6.1.  No replication ⇒
-                trust capped by base attestation chain.
-
-J4-UNITS        units_kind MUST resolve in KindRegistry at admission.
-                Unresolved units emit `units_kind_unresolved` refusal;
-                this prevents unit ambiguity from poisoning aggregation.
-```
-
-### A.34 Aggregation view and reproducibility classes
-
-<a id="appendix-a34"></a>
-
-```python
-def aggregate_measurements(fact_refs: list[str],
-                            aggregation_kind: str) -> UncertaintyEnvelope:
-    """
-    aggregation_kind resolves against KindRegistry.aggregation_kinds.
-    Substrate names no aggregations.  Examples (illustrative):
-      "weighted_mean", "median_with_iqr", "meta_analysis_random_effects",
-      "best_estimate_with_systematic_floor".
-    
-    The aggregator is a persona-authored skill registered against the
-    KindRegistry entry; substrate provides the view, not the algorithm.
-    """
-    ...
-```
-
-```text
-reproducibility_class             criteria
-─────────────────────             ─────────
-  fully_reproducible              all constituents have
-                                  measurement_protocol_ref + calibration_chain
-                                  + replicated_disjoint_instruments
-  partially_reproducible           ≥ 1 leg replicated; calibration present
-  single_observation_only          no replication; one calibrated measurement
-  underspecified                   missing calibration OR protocol;
-                                   PANEL-grade max
-```
-
-### A.35 DerivationProvenanceEdge, DerivationProvenancePolicy, and admission rule
-
-<a id="appendix-a35"></a>
-
-```python
-@dataclass
-class DerivationProvenanceEdge:
-    schema: str = "derivation-provenance-edge/1"
-    edge_id: str
-
-    # SOURCE — the contribution event that this edge originates from.
-    # Any signed event that produces a new artefact, K-line, lesson,
-    # ProjectItem, ProvenFact, OutcomeFeedback, or PeerReview turn
-    # MAY emit DPE(s) per consulted memory.
-    contribution_event_ref: str                  # signed event id
-    contribution_event_kind: str                 # KindRegistry-resolved
-                                                 # against derivation_event_kinds
-                                                 # (MetaRegistry seeds:
-                                                 # "artifact_minted",
-                                                 # "kline_authored",
-                                                 # "project_item_proposed",
-                                                 # "proven_fact_authored",
-                                                 # "peer_review_turn_authored").
-    contribution_persona_id: str                 # who authored the contribution
-
-    # TARGET — the memory that materially shaped the contribution.
-    # MAY be any retrievable memory: KnowledgeRef, episodic memory entry,
-    # semantic fact, K-line, lesson, ProvenFact, StandardRef.
-    consulted_memory_ref: str                    # the source memory id
-    consulted_memory_scope_tags: ScopeTags       # snapshot of the source's
-                                                 # ScopeTags at consultation
-                                                 # time (so audit answers
-                                                 # "was the source org-tagged
-                                                 # at the moment of consultation")
-
-    # INFLUENCE — substrate-shape, persona-declared.  The persona
-    # who authored the contribution declares the influence kind at edge
-    # mint time.  No automated discovery is attempted (a persona who
-    # recalled something tacitly cannot have it tagged — see honest limits).
-    influence_kind: Literal["direct_quote",      # source text appears verbatim
-                            "paraphrased",       # source claim restated
-                            "structural_basis",  # source's method / structure used
-                            "negative_example",  # source rejected; informs by contrast
-                            "background_context"]
-    influence_strength: float                    # 0..1; persona-declared
-
-    # RETRIEVAL CONTEXT — the retrieval call that surfaced the memory.
-    # When the retrieval went through §7 hybrid pipeline, the call is
-    # OTel-spanned; the span id is recorded here for replay.
-    retrieval_span_id: str | None                # null when the consultation
-                                                 # was through in-context recall
-                                                 # rather than retrieval call
-
-    drafted_at: datetime
-    signed_by: bytes                             # contribution_persona_id's kernel
-
-
-@dataclass
-class DerivationProvenancePolicy:
-    schema: str = "derivation-provenance-policy/1"
-    policy_id: str
-    bound_to_env_id: str | None
-    bound_to_project_id: str | None
-
-    # Whether DPEs are mandatory or opportunistic.  Single-tenant envs default
-    # to opportunistic (no enforcement); multi-tenant envs default to
-    # mandatory_for_cross_principal (the substrate refuses to mint a
-    # contribution that consulted a memory tagged with a different
-    # principal_attribution_id without an accompanying DPE).
-    enforcement_mode: Literal["off",
-                              "opportunistic",
-                              "mandatory_for_cross_principal",
-                              "mandatory_all"]
-
-    # Soft-bind on retrieval: when a memory is retrieved that would trigger
-    # mandatory DPE on derivation, the kernel adds a span attribute marking
-    # the memory; the persona's body sees the marker but is not blocked.
-    soft_bind_attribute_kind: str = "dpe_required_on_derivation"
-
-    declared_at: datetime
-    declared_by_operator_id: str
-    signed_by: bytes
-```
-
-```text
-On contribution event mint (artifact_minted, kline_authored, etc.):
-  1. Resolve the env's DerivationProvenancePolicy (or default per env type).
-  2. If enforcement_mode = "off": no DPE check; proceed.
-  3. If enforcement_mode = "opportunistic": persona may emit DPEs; no
-     enforcement.
-  4. If enforcement_mode = "mandatory_for_cross_principal":
-       a. Inspect the contribution event's retrieval span list (OTel) for
-          memories returned during the authoring session.
-       b. For any memory whose ScopeTags include a principal_attribution_id
-          (or org_id under operator policy mapping) DIFFERENT from the
-          contribution's own principal_attribution_id:
-            REFUSE the contribution event unless the persona has emitted
-            a DerivationProvenanceEdge naming that memory, with refusal
-            kind `dpe_required_for_cross_principal_derivation`.
-       c. The persona may reply with influence_kind = "background_context"
-          and influence_strength = 0 — substrate accepts the declaration
-          but the lineage carries it for audit.
-  5. If enforcement_mode = "mandatory_all":
-       Step 4 applies regardless of cross-principal status.
-```
-
-### A.36 Cost and latency targets
-
-<a id="appendix-a36"></a>
-
-```text
-RETRIEVAL PIPELINE
-Stage 1 structured filter (100K corpus)              ≤ 10 ms p95
-Stage 2 vector retrieval (top-K=50)                  ≤ 50 ms p95
-Stage 3 graph retrieval (2-hop)                       ≤ 100 ms p95
-Stage 4 fusion (RRF)                                  ≤ 5 ms
-Stage 5 cross-encoder rerank                          ≤ 50 ms
-Stage 6 persona composition                            ≤ 30 ms
-TOTAL retrieval latency p95                           ≤ 250 ms
-
-MEMORY OPERATIONS
-Hot-tier retrieval (RECENT, 100K entries)             ≤ 50 ms p95
-Warm-tier retrieval (WARM, 1M entries)                ≤ 100 ms p95
-Cold-tier retrieval (full-corpus)                      ≤ 500 ms p95
-Memory consolidation batch                             overnight / idle
-
-PROMPT EVOLUTION
-GEPA per-mutation cycle                                ~$1-10 / persona
-                                                        / cycle
-MIPROv2 cold-start tactic generation                  ~$5-30 per tactic
-Reflection latency (per-task)                          ≤ 200 ms
-Reflection latency (per-session)                       seconds
-Reflection latency (per-project)                       minutes
-
-CACHE HIT RATE (cache_control on layers 1-2)
-Target                                                  ≥ 80%
-Cost amortisation vs uncached                         ~10× savings
-                                                        at scale
-```
-
-### A.37 TacticLineageRecord + PromptTrialRecord schemas
-
-<a id="appendix-a37"></a>
-
-```python
-@dataclass
-class TacticLineageRecord:
-    schema: str = "tactic-lineage/1"
-    record_id: str
-    tactic_id: str                     # stable across versions
-    version: int                       # monotonic per tactic_id
-    parent_version: int | None         # null for a tactic's first version
-    channel: str                       # EVOLVE-BLOCK channel (§14.2)
-    mutation_operator: str             # one of the 22 (§16), or "seed"
-                                       # for domain seed-tactic adoption
-                                       # roots (06_DOMAIN A.1; ADR-0081)
-    gepa_trace_ref: str | None         # GEPA / MIPROv2 optimization run id
-    trial_ref: str | None              # prompt-trial/1 record id
-    verdict: Literal["promoted",
-                     "rejected",
-                     "rolled_back"]
-    minted_at: datetime
-    signed_by: bytes                   # kernel signature — signing only
-
-
-@dataclass
-class PromptTrialRecord:
-    schema: str = "prompt-trial/1"
-    trial_id: str
-    candidate_ref: str                 # (tactic_id, version) under trial
-    incumbent_ref: str | None          # currently promoted version;
-                                       # null on cold-start
-    task_sample_refs: list[str]        # task lineage ids evaluated
-    pareto_deltas: dict[str, float]    # per-axis: verifier_pass_rate,
-                                       # cost, latency, charter_conformance
-                                       # (open dict — additive axes admissible)
-    decision: Literal["promote", "reject"]
-    decision_threshold: float = 0.05   # the §11.1 signal threshold
-    rollback_token: str                # consumed by per-tactic rollback
-                                       # (reverts exactly one DAG edge)
-    evaluated_at: datetime
-    signed_by: bytes
-```
-
-### A.38 Cohort migration seed shape
-
-<a id="appendix-a38"></a>
-
-```text
-COHORT MIGRATION (cohort-migration/1, STANDARDISED seed shape):
-
-trigger: body / model-family upgrade proposes a new gepa_cohort_id
-
-  1. SEED     MIPROv2 cold-start (§12) for the new cohort draws its
-              Phase-1 instruction candidates from the prior cohort's
-              Pareto front (proposal priors), not from charter alone.
-  2. SHADOW   Candidates shadow-evaluated against the persona's last
-              100 task traces (the §11.1 trace window) before any live
-              traffic; per-axis scores compared to the prior front.
-  3. GATE     Swap admissible iff no axis regresses beyond the
-              operator-tunable tolerance (default 0.05).
-  4. RETAIN   Prior cohort retained as rollback target for the
-              retention window (default 30 days); rollback re-binds
-              gepa_cohort_id; identity blocks 0-4 untouched.
-
-All four steps emit kernel-signed records to the persona's evolution
-log; the playbook references cohorts, it does not own them.
-```
-
-### A.39 IdentityRubric + IdentityExpressionScore schemas
-
-<a id="appendix-a39"></a>
-
-```python
-@dataclass
-class IdentityRubric:
-    schema: str = "identity-rubric/1"
-    rubric_id: str
-    persona_id: str
-    soul_major_version: int            # the SOUL version derived from
-    derived_from_blocks: list[int]     # always [0, 1, 2, 3, 4] (frozen)
-    criteria: dict[str, str]           # criterion id -> check text,
-                                       # derived MECHANICALLY:
-                                       #   OCEAN priors -> framing criteria
-                                       #     (e.g. openness 0.9 ->
-                                       #      "exploratory framing preserved")
-                                       #   disposition -> stance criteria
-                                       #     (e.g. falsifier_leaning ->
-                                       #      "direct-challenge phrasing
-                                       #       retained")
-                                       #   voice block -> register / lexicon
-                                       #     checks
-    derivation_fn_ref: str             # deterministic derivation function id;
-                                       # signed so audit can replay
-    minted_at: datetime                # initial mint at the birth ceremony
-                                       # (02_PERSONA §7.1/A.20 step 5);
-                                       # operator-triggered backfill job
-                                       # for pre-ADR-0073 personas — until
-                                       # a rubric exists the identity axis
-                                       # is absent, never blocking
-                                       # (§11.1b rule 5, ADR-0081)
-    signed_by: bytes                   # re-signed ONLY on SOUL major bump
-
-
-@dataclass
-class IdentityExpressionScore:
-    schema: str = "identity-expression/1"
-    score_id: str
-    candidate_ref: str                 # (tactic_id, version) under evaluation
-    rubric_ref: str                    # identity-rubric/1 id
-    judge_ensemble: list[str]          # ≥ 3 judges, INV-6 rotation
-    per_criterion: dict[str, float]    # criterion id -> 0..1
-    score: float                       # ensemble median, 0..1
-    pareto_axis_separate: bool = True  # MUST remain a separate axis (§11.1b);
-                                       # weighted-sum collapse is refused
-    evaluated_at: datetime
-    signed_by: bytes
-```
-
-### A.40 CalibrationRecord + BeliefRevisionRecord + DualProcessGate schemas
-
-<a id="appendix-a40"></a>
-
-```python
-@dataclass
-class CalibrationRecord:
-    schema: str = "calibration-record/1"
-    record_id: str
-    persona_id: str
-    domain_id: str                     # one record per persona × domain
-    brier_score: float                 # rolling Brier-style score in [0, 1]
-                                       # over (stated confidence, verified
-                                       # outcome) pairs; 0 = perfectly
-                                       # calibrated
-    window_size: int = 50              # rolling window of verified outcomes
-    n_outcomes: int                    # verified outcomes accumulated
-    min_sample: int = 10               # below this the record conditions
-                                       # nothing; fast-path firings run
-                                       # under the graduated System-2
-                                       # verification ramp (§13a rule 4,
-                                       # ADR-0081) instead of the τ_cal gate
-    bias_direction: Literal[
-        "overconfident",
-        "underconfident",
-        "calibrated"]                  # summary used by the §13a rule-2
-                                       # rendering conditioner
-    updated_at: datetime               # updated ONLY on hard verifier
-                                       # verdicts (§13a rule 1)
-    signed_by: bytes
-
-
-@dataclass
-class BeliefRevisionRecord:
-    schema: str = "belief-revision/1"
-    revision_id: str
-    persona_id: str
-    prior_assertion_ref: str           # the invalidated claim / signed
-                                       # AnswerPackage the persona made
-    cascade_ref: str                   # SupersessionCascade id (§6.3/§6.3a)
-    superseding_ref: str               # the KnowledgeRef that changed it
-    revision_note: str                 # reflective "I believed X;
-                                       # evidence Y changed it" — stored as
-                                       # reflective memory; retrievable as
-                                       # layer-4 prompt material (§10)
-    shareable_in_relationships: bool = True   # under standard consent gates
-    minted_at: datetime
-    signed_by: bytes
-
-
-@dataclass
-class DualProcessGate:
-    schema: str = "dual-process-gate/1"
-    persona_id: str
-    # System 1 (K-line fast path, §2.1 orient-time replay) fires iff
-    # BOTH thresholds clear; otherwise System 2 (full deliberation —
-    # the ordinary collaborative round loop).  A gate over existing
-    # machinery; no new reasoning engine.
-    tau_match: float = 0.80            # minimum K-line match score
-    tau_cal: float = 0.85              # minimum domain calibration
-                                       # (1 − brier_score); enforced at
-                                       # n_outcomes ≥ min_sample
-    # Graduated ramp below min_sample (ADR-0081): a τ-matched fast path
-    # MAY fire while n_outcomes < min_sample, but the kernel MUST
-    # schedule System-2 verification of the replayed result on a sampled
-    # fraction that steps down with n — from s2_fraction_at_n0 at n = 0
-    # to steady_state_spot_check at n = min_sample.  No cliff: the
-    # latency/cost saving is earned as the calibration evidence accrues.
-    s2_fraction_at_n0: float = 1.0
-    steady_state_spot_check: float = 0.05
-    decisions_logged: bool = True      # each fast-path admission/refusal
-                                       # and each ramp-scheduled System-2
-                                       # verification is a signed lineage
-                                       # event
-```
-
-### A.41 SelfNarrative schema
-
-<a id="appendix-a41"></a>
-
-```python
-@dataclass
-class SelfNarrative:
-    schema: str = "self-narrative/1"
-    narrative_id: str
-    persona_id: str
-    narrative_text: str                # ≤ 300 tokens — hard cap; a longer
-                                       # narrative refuses the mint (§3.3)
-    citations: dict[str, list[str]]    # claim id -> episodic/reflective
-                                       # memory lineage refs; a claim with
-                                       # an empty ref list refuses the mint
-                                       # (anti-confabulation, §3.3 rule 3)
-    consolidation_run_ref: str         # the §3.1 reflective sweep that
-                                       # minted this version
-    supersedes_ref: str | None         # prior narrative version (append-
-                                       # only chain; history retained)
-    coherence_scan_ref: str            # IdentityCoherenceInvariant pass
-                                       # (02_PERSONA §9.1)
-    voice_score: float                 # must clear the ≥ 0.9 floor (§14.1)
-    renderable: bool                   # False until BOTH gates pass; a
-                                       # non-renderable narrative is a draft
-    minted_at: datetime
-    signed_by: bytes                   # kernel signature — signing only
-```
-
-### A.42 Habit strength on tactics
-
-<a id="appendix-a42"></a>
-
-```text
-HABIT STRENGTH (OPTIONAL per-tactic field, §14.2a; reinforced from the
-signed tactic-citation/1 usage events of §14.3a — ADR-0081):
-
-  habit_strength ∈ [0, 1], default 0 (absent field ≡ 0)
-
-  reinforcement:  on each tactic-citation/1 event naming the tactic
-                  (minted at AnswerPackage acceptance, §14.3a):
-                    habit_strength += reinforcement_step × (1 − habit_strength)
-                  seed reinforcement_step = 0.05
-  decay:          habit_strength × exp(−λ_habit × Δt_since_last_citation)
-                  seed λ_habit = 0.01 / day (the §4a exponential shape)
-
-MUTATION-PRESSURE BIAS (consumed by the §16 operators at proposal time):
-
-  p_mutate(tactic) ∝ max(0.1, 1 − habit_strength)   # floor 0.1 — a
-                                                     # habituated tactic is
-                                                     # deprioritized, NEVER
-                                                     # immutable
-  identity-axis-initiated proposals (§11.1b) use floor 0.5 (ADR-0081):
-  p_mutate(tactic) ∝ max(0.5, 1 − habit_strength)   # identity pressure
-                                                     # reaches habits at most
-                                                     # ~2× slower, not ~10×
-  habit_threshold = 0.7 (operator-tunable): tactics at or above it are
-  "habits" (resist mutation pressure); tactics far below it rank as
-  preferred mutation candidates.
-
-CLAMPS (normative, §14.2a):
-  habit_strength NEVER vetoes per-tactic rollback (§14.3), whole-block
-  rollback (§14.1), or any mutation driven by a §14.1 floor breach
-  (charter conformance, voice consistency, refusal range).
-```
-
-### Appendix A.43 TacticCitation schema
-
-<a id="appendix-a43"></a>
-
-**TacticCitation dataclass definition (schema tactic-citation/1)** (referenced from §14.3a)
-
-```python
-@dataclass
-class TacticCitation:
-    schema: str = "tactic-citation/1"
-    citation_id: str
-    persona_id: str
-    answer_ref: str                    # the accepted AnswerPackage
-                                       # (answer/5) this usage rode on;
-                                       # minted only on a successful-
-                                       # acceptance status (§14.3a rule 1)
-    tactic_refs: list[str]             # "tactic_id@version" refs, anchored
-                                       # to the §14.3 tactic-lineage/1 DAG
-                                       # at mint (rule 3)
-    extraction_method: str = "gepa_trace_tactic_field"
-                                       # attribution is trace-extracted and
-                                       # explicitly approximate; judge-
-                                       # confirmable on audit (rule 2)
-    minted_at: datetime
-    signed_by: bytes                   # kernel signature — signing only
-```
+# 08 — Persona-Owned Knowledge, Memory, and Skills
+
+Knowledge in PersonaOS is signed material a persona can inspect and navigate.
+It is not a host-selected prompt layer, relevance ranking, behavior program, or
+automatic claim of expertise.
+
+This document is a clean break from ranked retrieval, fixed memory tiers,
+importance/fitness scores, decay formulae, host consolidation schedules,
+prompt-optimization pipelines, top-K selection, and substrate-authored tactic
+promotion.
+
+## 1. One opaque knowledge/capability authoring path
+
+The model-visible `author_persona_knowledge` action admits one opaque signed
+persona-owned record per invocation. The persona supplies only:
+
+- required `metadata`, an arbitrary bounded canonical JSON object; and
+- optional `refs`, a bounded set of distinct exact record-reference strings.
+
+The current mechanical storage envelope permits at most 262,144 canonical JSON
+bytes and nesting depth 64 for `metadata`. `refs` accepts one exact string or at
+most 32 distinct exact strings, each at most 500 UTF-8 bytes. These are
+content-neutral allocation/integrity bounds, not knowledge kinds or behavior
+selectors.
+
+Persona identity and any nonempty environment/task bindings come only from
+authenticated dispatch context or exact optional public bindings; absent
+optional context remains empty. Model-authored values never create authority.
+The record is persisted as the
+existing `personaos-persona-state-record/1` with exact fields `schema`,
+`record_id`, `persona_id`, `environment_id`, `task_id`, `record_kind`,
+`content`, `evidence_refs`, `issued_at`, `signing_key_id`, and `signed_by`.
+`record_kind` is the fixed mechanical routing value `persona_knowledge`; it does
+not classify the content semantically.
+
+Memory, lesson, skill, experience, self-context, fragment, capability, or gap
+are meanings a persona may express in `content`; they are not protocol variants,
+creation stages, or a closed kind taxonomy. Other durable stores such as memory
+and mutable brain fragments retain their own exact boundaries; the generic
+persona-state record is not imposed as a universal wrapper over them.
+
+Open `content` and exact `evidence_refs` are persona-authored. Content may
+describe a name,
+interface, method, derivation, relationship among records, or anything else,
+but none of those is a required or reserved semantic field. In particular,
+there is no required operation enum, parent-skill shape, synthesized-skill
+payload, composition list, rationale, evidence category, review state,
+disposition, promotion status, or score.
+
+The substrate verifies canonical bounds, signatures, authenticated context,
+authority, hashes, references, visibility, consent, revocation, and replay.
+It does not decide whether a body is true, important, relevant, a lesson, a
+profession, a capability, a derivation, or evidence of expertise. If a persona
+combines or derives material, that meaning and the cited relationships remain
+inside its one opaque authored record; the host does not require a second
+finalization record. A later record may cite an earlier one, but does not
+rewrite its bytes or acquire automatic supersession semantics.
+
+## 2. Complete unranked inventories
+
+For each authorized view, the substrate exposes a bounded paginated inventory
+of every visible record identity and exact metadata needed to request it. The
+inventory declares snapshot identity, observed count, page/cursor boundaries,
+and whether capture was truncated. Pagination never silently substitutes a
+small prefix for the complete set.
+
+For append-derived inventories, observed count and cursor positions refer to
+authoritative append positions rather than distinct payloads. Equal record
+bytes at different positions and redundant cross-scope observations remain
+separately navigable. A separate unique-identity view may normalize only with
+explicit duplicate accounting and raw-page navigation.
+
+Inventory order may be lexical, append order, or another stable mechanical
+transport order. That order has no relevance meaning. The substrate provides
+no:
+
+- relevance, similarity, quality, confidence, provenance, importance, decay,
+  fitness, or usefulness score;
+- embedding-selected, stage-selected, role-selected, or task-selected subset;
+- top-K cut, reranker, recommendation, “best memory,” or preferred skill;
+- keyword, regular-expression, filename, extension, profession, prompt, or
+  domain-vocabulary selector; or
+- hidden summary that replaces omitted exact identities.
+
+The same rule applies to local memories, inherited records, environment
+knowledge, peer-visible metadata, public discovery, and tool/skill registries.
+
+## 3. Persona navigation
+
+The persona chooses how to navigate from the exact inventories available in an
+ordinary wake. It may request a body by exact reference, issue an authorized
+search or external query, follow provenance, inspect a peer's public metadata,
+ask another persona, send or receive an exact record reference, obtain a body
+under current access/consent authority, author another opaque record citing it,
+invoke an authorized tool, or ignore the material.
+
+These choices may occur in any order and may be interleaved with ordinary task,
+identity, population, communication, artifact, and workspace actions. The
+kernel supplies no fixed exploration phase, retrieval stage, gap-first rule,
+teacher choice, action sequence, or definition of enough knowledge.
+
+An action receipt proves that the exact action occurred and records its effects.
+It does not prove that the chosen material was relevant or that the persona
+learned from it.
+
+## 4. Memory
+
+A memory is an authored signed record, not a hidden mutation of provider
+context. Its authority and visibility come from exact consent, scope, and
+lineage. Personal, task, environment, public, and shared memories may coexist;
+none is automatically promoted over another.
+
+The runtime does not automatically decay, reinforce, consolidate, summarize,
+rank, retrieve, inject, or delete memories based on elapsed time, frequency,
+emotion, model scores, task words, or behavior outcomes. A persona may author a
+summary, lesson, correction, relationship, self-narrative, or superseding memory
+as an explicit signed action and cite the source records on which it relied.
+
+Memory omission from a bounded model carrier does not revoke the record.
+Truncation is explicit and the exact inventory remains navigable. Retention and
+deletion follow authenticated authority, privacy policy, and lifecycle rules,
+not an inferred importance score.
+
+## 5. Persona-owned capability material and executable tools
+
+A persona-owned capability claim is ordinary opaque `content` in a signed
+`personaos-persona-state-record/1`. Its transport surface exposes only exact
+identity, author/context, body hash/reference and byte facts, evidence refs,
+time, signing key/signature, and visibility/access authority. Any name,
+description, interface assertion, method, relationship to other material, or
+claim of capability is opaque persona-authored content rather than a required
+substrate field.
+
+Executable tool inventory entries are separate. They expose exact descriptors,
+input/output schemas, effect annotations, provider bindings, and current
+authority because those facts are required for safe dispatch. A capability
+record cannot manufacture or alter that authority.
+
+Metadata visibility or receipt of a reference does not disclose private bytes,
+mount a tool, grant execution authority, or confer expertise. Personas share
+record references through ordinary signed `persona_message`; body access still
+requires exact visibility/consent policy. There is no dedicated team-skill
+catalogue, skill-transfer request/disposition, or conflict-resolution workflow.
+
+The persona may inspect, communicate, share refs, obtain authorized bodies,
+acquire or provision tools, verify, author, relate, invoke, or decline material
+through ordinary signed actions. The substrate neither chooses one nor decides
+that a task requires one. It does not require `synthesise`, `compose`, `select`,
+review, promotion, transfer, or conflict resolution before accepting an
+otherwise valid opaque authored record. A
+successful invocation records exact provider, descriptor, arguments or their
+authorized binding, terminal result, effects, and artifact provenance; it does
+not become a quality or competence score.
+
+## 6. Practice, learning, and brain evolution
+
+The runtime may retain exact signed practice facts already produced by actions:
+who acted, under which authority, what descriptor was used, what terminal
+result occurred, which bytes changed, and which records were cited. These are
+facts, not automatic competence credit.
+
+A persona may use those facts to author opaque reusable material or an
+experience statement through `author_persona_knowledge`. Changed
+characteristics or public identity evolution use their separate exact identity
+action. The persona may also decide that no durable change is warranted. There
+is no substrate experience taxonomy, profession ladder, habit-strength formula,
+promotion threshold, optimizer, identity-expression score, or mandatory
+reflection schedule.
+
+Mutable brain-fragment evolution uses one
+`brain-evolution-decision/1` persona-authored claim. It binds exact `id`,
+`persona_id`, open `operations`, `operation_hashes`, `evidence_refs`,
+`source_fragment_refs`, `situation_hash`, `environment_id`, `task_id`,
+`authority_scope`, open `decision_payload`, `decision_hash`,
+`owner_signing_key_id`, `owner_signature`, and `created_at`. Exact preimages
+provide mechanical integrity. The substrate requires no semantic operation
+vocabulary and does not interpret the payload as review, synthesis,
+composition, or promotion.
+
+`brain-evolution-application/1` is only the mechanical application receipt. It
+binds exact `id`, `persona_id`, `decision_id`, `decision_hash`,
+`operation_hashes`, `changed_fragment_ids`, `rollback_fragments`,
+`resulting_fragments`, `authority_scope`, `environment_id`, `task_id`,
+`applied_at`, and `application_hash`. Each rollback entry carries the exact
+prior fragment payload or an explicit absent marker, together with the relevant
+preimage/operation hash. It does not author meaning or judge the change. These two
+schemas apply to mutable brain-fragment evolution; they are not a universal
+wrapper imposed on every memory, lesson, skill, or other durable write path.
+
+Inherited material supplied to a newborn is a bounded exact signed inventory or
+set of exact refs/access grants. The newborn retains independent authorship and
+may inspect, obtain authorized bodies, cite, author another record, or ignore
+it. Parent evidence does not assign a role or make the newborn an expert.
+
+## 7. Self-context and model carriers
+
+Model carriers contain bounded exact verified situation facts and the exact
+record identities or bodies that the persona explicitly navigated to under
+current authority. Mechanical compaction preserves identities, provenance,
+pagination/truncation facts, and the ability to request omitted bodies.
+
+The whole-prompt `personaos-prompt-source-manifest/1` declares exact source
+total, returned count, cursor/next cursor, omitted count/hash, and completeness.
+Per-source projections retain exact record/page totals, hashes, cursors, and
+omission/truncation counts. No memory, skill, knowledge, or capability source
+receives semantic priority or a larger allocation because of its label or body.
+
+The host does not assemble a hidden five-layer prompt, rewrite the persona's
+principles, optimize instructions against a score, select demonstrations, or
+inject a task-specific capability recommendation. Provider framing required for
+wire safety and action schemas remains distinguishable from persona-authored
+content and carries no semantic workflow.
+
+A provider response may propose new authored records only through the same
+ordinary signed actions as any other change. Free text in a response does not
+silently mutate memory, skills, identity, or future prompts.
+
+## 8. Capability-gap meaning is optional and opaque
+
+A persona may describe a perceived capability gap inside one generic opaque
+knowledge record, cite it from another record/message, revise its own view by
+authoring another record, or never express one. There is no dedicated gap
+appraisal, navigation, revision, resolution, notice, active-state, or lifecycle
+action. The substrate does not derive a gap from a task, memory, inventory,
+filename, tool outcome, prompt, or domain reference.
+
+Gap-like content does not narrow an inventory, rank candidates, require
+sharing, select a teacher/tool, gate work or completion, or schedule a wake. A
+note, memory, or later knowledge record cannot mechanically open or close a gap
+merely by mentioning it.
+
+## 9. Privacy and public discovery
+
+Public discovery may expose only exact metadata whose owner and policy authorize
+public visibility. It never publishes private memory or sealed knowledge bodies.
+Discovery carriers preserve author, subject, policy, content hash, expiry,
+signature chain, and current revocation status.
+
+Remote or internet material is untrusted input until an authorized persona
+chooses to inspect or acquire it and exact provenance is retained. Source hosts,
+URLs, package managers, commands, libraries, professions, and search queries are
+open persona choices rather than kernel vocabulary.
+
+## 10. Plural domain references
+
+Every eligible record may bind zero, one, or many exact signed `domain_refs`.
+The set is unranked and has no primary member. References supply navigable
+context only; they do not assign a profession, import a prompt, select memories,
+grant a capability, choose a tool, or determine task completion.
+
+## 11. Replay and conflict
+
+Replay reconstructs immutable records, visibility, revocation, and explicit
+supersession lineage. Concurrent authored records are preserved unless exact
+policy authority rejects one. The substrate does not semantically merge prose,
+choose a winning belief, or collapse divergent persona views into a synthetic
+consensus.
+
+Content-addressed bodies may be deduplicated mechanically without merging their
+distinct authorship, consent, scope, or causal references.
+
+## 12. Removed compatibility surface
+
+There is no compatibility path for fixed memory tiers, nightly consolidation,
+importance decay, unified provenance scores, hierarchical retrieval ranking,
+stage-aware weights, top-K selection, prompt-layer assembly, required
+skill-synthesis/skill-composition shapes, parent-skill gates, semantic
+proposal/review/promotion lifecycles, GEPA/MIPRO-style host optimization,
+mutation-operator catalogues, tactic promotion gates, identity-expression
+scores, team-skill catalogues, skill-transfer/conflict ceremonies, dedicated
+capability-gap workflows, habit-strength reducers, or automatic memory-to-prompt injection.
+Historical records using those schemas may remain opaque bytes but confer no
+current selection or behavior authority.
+
+## 13. Design criteria
+
+1. Inventories are exact, complete within explicit pagination bounds, and
+   unranked.
+2. Personas—not the substrate—navigate, interpret, acquire, transfer, and use
+   knowledge, memories, skills, and tools.
+3. Receipts preserve facts and provenance without awarding relevance, quality,
+   competence, or expertise.
+4. Generic knowledge/capability authorship creates one opaque signed
+   `personaos-persona-state-record/1`; no semantic synthesis, composition,
+   review, transfer, conflict, or promotion ceremony is required.
+5. Memory and skill privacy follow exact consent and policy authority.
+6. Domain references are plural, optional, and non-semantic to the kernel.

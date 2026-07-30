@@ -1,156 +1,137 @@
 ---
-title: PersonaOS v1.0 Addendum - Persona Brain Fragments and Active Agent Specs
+title: PersonaOS — Persona-Owned Brain Fragments
 status: Proposed
-audience: [implementers, memory engineers, prompt engineers, research]
-normative: partially
 ---
 
-# 20 - Persona Brain Fragments and Active Agent Specs
+# 20 — Persona-Owned Brain Fragments
 
-This addendum defines the mutable prompt-learning substrate for personas. The
-problem it addresses is narrow but load-bearing: PersonaOS can record experience,
-but recorded experience does not reliably become active future behavior unless it
-is retrieved, compiled, used, evaluated, and revised.
+A brain fragment is optional persona-authored reusable material. The substrate
+stores, verifies, inventories, and transports fragments; it does not retrieve,
+rank, activate, compile, review, promote, or rewrite them based on task meaning.
 
-The substrate must not hardcode domains, artifact contracts, tool choices, or
-task-specific rules. Learned behavior belongs to the persona. The runtime stores,
-signs, retrieves, logs, reviews, and rolls back.
+This addendum is a clean break from semantic BrainCompile, active-agent specs,
+utility counters, activation-cue matching, diversity selection, fixed edit
+lifecycles, and host-assembled prompt programs.
 
-## 1. Problem
+## 1. Exact opaque fragment record
 
-Flat memories and prompt notes are passive. They can preserve a lesson, but they
-do not guarantee that the lesson reaches the next model call in the right form.
-For long-lived personas, this creates the wrong learning shape: a persona may
-observe repeated failures or opportunities, but still act as if those experiences
-never happened.
+`brain-fragment/1` is one persona-owned signed record. Its substrate-visible
+contract is mechanical: stable identity, owner persona, version and explicit
+supersession/preimage lineage, visibility/consent and authority scope, bounded
+open body and metadata, author-selected exact references, zero or more unranked
+`domain_refs`, hashes/byte bounds/times, signing-key identity, and signature.
 
-The missing mechanism is an active compile path:
+The body and metadata are opaque. There is no required fragment kind, label,
+activation/deactivation cue, abstraction level, summary, keyword, embedding,
+status vocabulary, affordance class, or semantic link type. A persona may write
+those ideas inside its open material, but the substrate neither interprets nor
+acts on them.
 
-1. store persona-authored operating fragments;
-2. retrieve the relevant fragments for the current situation;
-3. compile them into a per-turn agentic operating spec;
-4. log which fragments influenced behavior;
-5. update fragments from evidence after the turn.
+The substrate validates bytes, authority, references, access, consent, exact
+preimages, and lineage. It does not interpret the body as an instruction,
+decide when it applies, measure utility, or claim that it changed behavior.
 
-## 2. Core Records
+## 2. Exact unranked inventory
 
-`brain-fragment/1` is the durable source of truth. Each fragment is a small
-persona-owned agentic instruction. Runtime-owned fields are limited to identity,
-versioning, status, signatures, timestamps, lineage, and usage counters.
-Persona-owned fields include:
+Every authorized persona view exposes a bounded paginated complete inventory of
+visible fragment identities and exact metadata. Pages bind snapshot/hash,
+observed count, cursor, and explicit truncation.
 
-- `body`;
-- `activation_cues`;
-- `deactivation_cues`;
-- `labels`;
-- `links`;
-- `evidence_refs`;
-- `source_refs`;
-- `affordance_refs`;
-- `change_summary`.
+Ordering is stable mechanical transport order only. There is no semantic
+retrieval, embedding similarity, relevance score, helped/hurt count, recency
+weight, hot set, graph expansion, diversity selector, top-K, recommendation, or
+host-selected active subset.
 
-`situation-capsule/1` is the neutral state packet used for compile: task text,
-environment id, phase, active pathway/mode, artifact refs, peer refs, available
-affordance refs, pressure refs, failure refs, resume refs, and budget refs.
+## 3. Persona navigation and use
 
-`active-agent-spec/1` is the per-turn operating spec compiled from selected
-fragments. Its active prompt material is the selected persona-authored fragment
-text. The substrate may record selected fragment ids, hashes, timestamps, and
-opaque section metadata, but it must not impose fixed prompt sections or a
-runtime-owned behavioral taxonomy. If a persona wants recurring operating
-concepts, it authors them inside its own fragments.
+During an ordinary wake, a persona may inspect a fragment by exact reference,
+cite it, request its body under access authority, author a new or superseding
+fragment, transfer it with consent, explicitly bind it to an action/model
+carrier, or ignore it.
 
-`brain-compile/1` records the situation hash, candidate fragment ids, selected
-fragment ids, active spec hash, and timestamp.
+The exact persona-authored binding—not task words or host retrieval—determines
+which fragment bodies may be included in a later carrier. The carrier preserves
+fragment identity, content hash, provenance, and truncation facts. Provider
+framing does not join fragments into new instructions or impose sections.
 
-`brain-edit-proposal/1`, `brain-review/1`, and `brain-promotion/1` record the
-evidence-backed edit lifecycle.
+Using a fragment does not automatically prove influence, learning, competence,
+quality, or completion. Exact citations establish only that the persona chose
+to bind the record.
 
-## 3. BrainCompile
+## 4. Persona-authored evolution decision
 
-BrainCompile runs before a meaningful persona model call. It must not send the
-whole brain to the model. It builds candidates through bounded retrieval:
+An owned fragment change is authorized by one signed
+`brain-evolution-decision/1`. Its exact fields are `id`, `persona_id`, open
+`operations`, `operation_hashes`, `evidence_refs`, `source_fragment_refs`,
+`situation_hash`, `environment_id`, `task_id`, `authority_scope`, bounded open
+`decision_payload`, `decision_hash`, `owner_signing_key_id`, `owner_signature`,
+and `created_at`.
 
-- hard filters: owning persona or allowed lineage, active status, valid
-  signature, readable scope;
-- semantic retrieval over persona-authored fragment material;
-- hot-set retrieval from the current environment;
-- artifact, tool, MCP, skill, pressure, and failure refs;
-- bounded one-hop or two-hop expansion over persona-authored links;
-- utility prior from helped/hurt counts;
-- diversity selection to avoid duplicate fragments.
+Operation bodies are open persona-authored data apart from exact mechanical
+preimage bindings needed to prevent stale or unauthorized mutation. The
+substrate defines no required create/supersede/split/merge/review/synthesize/
+compose/promote vocabulary and no semantic fields within `decision_payload`.
+One valid decision is admitted directly; there is no preliminary proposal,
+review, disposition, or promotion record.
 
-The selected fragments are compiled into `active-agent-spec/1`. The runtime may
-join or frame selected persona-authored bodies, but it must not create prompt
-instructions, domain-specific instructions, artifact requirements, tool choices,
-or fixed behavioral categories. The compile record is persisted so later success
-or failure can credit the selected fragments.
+Applying the exact decision produces `brain-evolution-application/1`, a
+mechanical receipt with exact `id`, `persona_id`, `decision_id`,
+`decision_hash`, `operation_hashes`, `changed_fragment_ids`,
+`rollback_fragments`, `resulting_fragments`, `authority_scope`,
+`environment_id`, `task_id`, `applied_at`, and `application_hash`. The receipt
+makes no authored claim and does not judge the edit. Every rollback entry
+contains the exact prior fragment payload or an explicit absent marker plus its
+exact preimage/operation hash, so reversal evidence does not rely on semantic
+reconstruction.
 
-## 4. BrainEdit
+There is no evidence threshold, rollback score, operational-change rubric, or
+automatic edit at feedback, failure, tool, artifact, pause, or budget
+boundaries. Historical signed revisions remain auditable under retention and
+consent policy. Supersession never rewrites prior bytes.
 
-Durable fragment edits happen only at evidence boundaries, such as user feedback,
-verifier result, artifact diff, tool trace, peer critique, failure, accepted
-progress, pause/resume, or budget exhaustion.
+## 5. Tools, skills, memories, and domains
 
-BrainEdit proposals may create, update, split, merge, retire, link, unlink, or
-adjust fragment cues and refs. A proposal must cite evidence and describe an
-operational change. Vague updates that do not affect future behavior are not
-promoted.
+Fragments may cite exact affordance, skill, memory, knowledge, artifact, peer,
+or `domain_refs`. References are navigable context only. They do not mount a
+tool, disclose a private body, grant access, derive gap state, select a teacher,
+assign a role, or change another action schema.
 
-BrainReview checks that the proposal is evidence-grounded, preserves frozen
-identity, never deletes signed work-state lineage, and does not claim unavailable
-tools or MCPs as available. The latest verified persona work-state revision is the
-current human-facing snapshot. Its commitments remain active until the persona
-authors an explicit transition; assumptions and uncertainties remain authored
-context, not host-scored pressure. Earlier frames, evidence refs, and learning
-history remain auditable. Accepted proposals are promoted as signed fragment
-versions; rejected proposals remain auditable.
+Only current exact action descriptors and authority determine which tools are
+available. Fragment prose cannot claim or manufacture a capability.
 
-## 5. Tools, MCP, Skills
+## 6. Empty by default
 
-Available tools, MCP servers, command affordances, and learned skills are exposed
-to BrainCompile as neutral capability manifests. Fragments may reference those
-capabilities through `affordance_refs`, but the persona decides whether to
-inspect, use, provision, register, or ignore them.
+A new persona has no runtime-authored fragments. Birth `genesis_context`, task
+intent, tool traces, messages, and receipts remain separate exact evidence and
+do not become fragments automatically.
 
-Tool success and failure traces feed back into BrainEdit, allowing personas to
-learn when a capability helped or hurt.
+The repository and runtime provide schemas, storage, inventories, and ordinary
+actions only. They ship no default domain/task/tool/team fragment library,
+prompt sections, activation cues, labels, roles, workflows, semantic operation
+catalogue, or behavioral content.
 
-## 6. Empty By Default
+## 7. Causality and completion
 
-A new persona brain starts with no runtime-authored prompt fragments. Contexts,
-episodes, traces, peer messages, artifacts, tool receipts, and feedback are
-evidence. They do not become active prompt fragments unless a persona proposes
-or applies a fragment edit through the signed brain tools.
+A fragment, edit, missing fragment, citation, or host belief that learning would
+help does not schedule cognition. Later work requires an authentic causal
+delivery and resource authority.
 
-This avoids the bootstrap trap where the substrate appears to "teach" the
-persona by preloading fixed lessons. The substrate exposes records and edit
-mechanics; the persona decides what, if anything, should become reusable prompt
-material.
+Fragments and their use do not complete objectives, change work-note semantics,
+gate capability, or establish expertise. Quiescence remains nonterminal.
 
-The repository must not ship a default fragment library, domain fragment set,
-tool-use fragment set, or task-specific starter fragments. Examples in design
-prose are illustrative only; they are not initial state. Runtime
-code may create empty signed storage, retrieval indexes, compile records, and
-tool schemas, but it must not author fragment bodies, activation cues,
-deactivation cues, labels, or prompt sections on behalf of the persona.
+## 8. Removed compatibility surface
 
-## 7. Risks and Controls
+There is no live compatibility for `situation-capsule/1`,
+`active-agent-spec/1`, semantic `brain-compile/1`, selected-fragment prompts,
+activation/deactivation cue matching, utility/recency/diversity scoring,
+fixed mutation operators, BrainReview/BrainPromotion gates, or automatic
+trace-to-fragment updates.
 
-| Risk | Control |
-|---|---|
-| Prompt drift | Signed versions, reviews, rollback. |
-| Generic self-improvement fluff | Require operational edits with evidence refs. |
-| Memory bloat | Split, merge, retire, utility counters, bounded retrieval. |
-| Retrieval miss | Use exact hot IDs, links, references, persona-observed utility, recency, and only real provider vectors when supplied. |
-| Tool hallucination | Only runtime capability manifests count as available. |
-| Overfitting | Promote risky edits only after review or repeated evidence. |
-| Conflicting fragments | Preserve links and expose conflicts during compile. |
+## 9. Design criteria
 
-## 8. Design criteria
-
-Live evidence must show signed fragment lineage, bounded graph/reference retrieval,
-BrainCompile activation provenance, persona-authored edits affecting later work,
-and honest refusal of unauthorized or unavailable-tool edits. Runtime source must
-contain no domain-word, artifact-contract, profession, filename, or task-regex
-branch that authors fragment meaning or chooses behavior for the persona.
+1. Fragments are optional opaque persona-authored signed records.
+2. Inventories are complete within explicit pagination bounds and unranked.
+3. Personas explicitly navigate, bind, transfer, and revise fragments through
+   open signed decisions.
+4. The host never assembles a behavioral prompt from task semantics.
+5. Fragments grant no capability, expertise, continuation, or completion.
