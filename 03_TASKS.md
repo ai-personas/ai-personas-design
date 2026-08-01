@@ -173,6 +173,16 @@ Conflicts preserve every exact path/hash alternative. Only an authorized signed
 resolution chooses or synthesizes bytes; the substrate does not resolve a
 conflict from file type, role, task text, or model prose.
 
+A delivered external artifact is active disposition pressure only until an
+exact persona-authorized lifecycle action accounts for that same request,
+receipt, destination, and content hash. Later situation projections compact a
+uniquely matched resolved delivery into a content-bound disposition reference;
+the immutable request and receipt remain available through their authenticated
+inspection surface. This join never examines the prompt, provider, filename,
+media meaning, task text, or bytes, and ambiguity retains the original pressure
+instead of guessing. A resolved delivery must not consume later model calls by
+presenting itself as perpetually unhandled.
+
 ## 7. Causal continuation
 
 Another persona decision exists only through an exact causal event, such as:

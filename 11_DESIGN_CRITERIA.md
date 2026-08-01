@@ -313,6 +313,14 @@ descriptor-declared and registered event. Effect-free transient transport may
 retry the same delivery under bounded policy; an effectful outcome is never
 replayed merely to obtain improved prose.
 
+External delivery pressure is likewise exact and non-repeating. When a verified
+persona lifecycle action accounts for one uniquely matching request, receipt,
+destination, and content hash, later reasoning contexts carry a compact
+content-bound disposition rather than the full delivery as still awaiting
+action. The immutable exchange record remains inspectable. Prompt, provider,
+filename, media meaning, task text, and artifact bytes never choose or imply the
+disposition, and an ambiguous join fails closed without reducing pressure.
+
 Continuation-action refusals carry exact stable mechanical reason codes through
 the same evidence lane as successful receipts. A refusal does not create a
 causal successor, recommend another action, or justify a model retry. Public
