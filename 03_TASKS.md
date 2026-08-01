@@ -37,6 +37,30 @@ each later signed amendment. The newest carrier does not replace, summarize, or
 reinterpret an older principal event. Every retained entry remains bound to its
 own signature, content hash, task generation, and causal predecessor.
 
+The model-turn transport carries the complete current intent and complete
+verified ancestry in a dedicated exact authority lane. Uniform paging of
+optional situation sources never clips, prefixes, reorders, or competes with
+that lane. Task intake and model-turn construction enforce the same byte and
+record bounds; if the complete authority lane cannot fit, admission is refused
+before cognition instead of presenting an omitted or summarized requirement.
+
+Current agency uses a second exact, content-bound navigation lane. It carries
+the complete leased action catalogue, the complete mechanically observed
+execution-name index, the verified current population/replication authority,
+and every current workspace file path. These components are selected only by
+closed schema identity and content hash, never by task words, roles, filename
+suffixes, domain labels, rankings, or recommendations. Large append-only
+activity histories remain independently hash-bound and pageable; they cannot
+displace present actions, peers, population bounds, executables, or files.
+
+A resumed environment reconstructs project references from reciprocal verified
+project and environment lineage. A mutable projection field is not routing or
+prompt authority. Repeating a persona-signed request for an identical already
+verified topology is an idempotent observation, while any differing name,
+membership role, or target remains an explicit conflict. A verified outstanding
+persona schedule is an event-driven continuation even while no model call is
+running; quiescence and completion remain distinct states.
+
 The signed `run-model-pool/1` in that authority is an unordered ceiling, never
 a preferred-model list. Task text cannot order its members. If more than one
 body remains mechanically callable before an exact matching signed

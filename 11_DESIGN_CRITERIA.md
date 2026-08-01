@@ -89,6 +89,28 @@ summarize the original principal bytes. If the complete exact ancestry exceeds
 its mechanical carrier bound, the amendment is refused before execution rather
 than silently omitting or summarizing an older principal event.
 
+The current intent and verified ancestry occupy their own complete prompt
+authority lane. Generic uniform source projection applies only to the remaining
+situation facts. Intake and prompt construction share the exact carrier bound,
+so a task that fits durable storage but not cognition transport cannot be
+silently admitted with a truncated principal instruction.
+
+The prompt preserves one complete mechanical navigation authority alongside
+the principal lane: every currently leased action descriptor, every exact name
+in the execution-capability index, verified roster/birth/replication authority,
+and every current workspace file path. Its construction and bounds are
+content-neutral. No task token, regular expression, domain role, preferred
+tool, preferred team size, filename type, ranking, or recommendation may choose
+what survives transport. Append-only contribution and learning histories use
+hash-bound pages outside this present-navigation lane.
+
+Project presence on resume is reduced from reciprocal signed topology, not a
+disposable environment attribute. The model-visible environment state includes
+the complete verified project-id set and exact topology event references. A
+signed scheduled trigger that still verifies against its persona, environment,
+task, run pool, and execution authority is reported as a bound event-driven
+handoff rather than as an unbound or completed task.
+
 When a resource event resumes work, the exact same signed event and content
 hash are offered concurrently to **every active environment member** under the
 same bounded resource pool. Each member receives its own delivery carrier and
