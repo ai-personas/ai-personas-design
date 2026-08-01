@@ -75,6 +75,16 @@ bytes at different positions and redundant cross-scope observations remain
 separately navigable. A separate unique-identity view may normalize only with
 explicit duplicate accounting and raw-page navigation.
 
+`inspect_persona_learning_history` continues the exact hash-bound inventory
+already carried into an ordinary wake. It exposes retained turn-effect
+episodes, exact brain evolution receipts, and persona-authored state records in
+mechanical order with total, page, omission, and cursor evidence. It does not
+select a lesson, interpret an outcome, grant expertise, or create a wake.
+Persona-authored state has its own exact append-ordered cursor so its later
+records remain navigable as execution evidence grows. Its original task binding
+remains evidence while owner-authorized state can inform later tasks in the same
+environment.
+
 Inventory order may be lexical, append order, or another stable mechanical
 transport order. That order has no relevance meaning. The substrate provides
 no:
@@ -163,6 +173,12 @@ The runtime may retain exact signed practice facts already produced by actions:
 who acted, under which authority, what descriptor was used, what terminal
 result occurred, which bytes changed, and which records were cited. These are
 facts, not automatic competence credit.
+
+Each sealed ordinary turn may contribute a signed `brain-episode/1` effect
+receipt. A later authorized wake exposes those episodes through the bounded
+learning-history carrier, and the persona can continue the same exact inventory
+through `inspect_persona_learning_history`. Recording or exposing an episode
+does not itself change a brain fragment or schedule reflection.
 
 A persona may use those facts to author opaque reusable material or an
 experience statement through `author_persona_knowledge`. Changed

@@ -83,6 +83,12 @@ capability records, and unsettled causal events. It does not mint replacement
 personas because process memory was lost. A prior persona resumes only when its
 signed durable state verifies; failure is explicit.
 
+Every amendment and continuation also restores the complete verified signed
+principal-intent ancestry in causal order. The latest prompt cannot replace or
+summarize the original principal bytes. If the complete exact ancestry exceeds
+its mechanical carrier bound, the amendment is refused before execution rather
+than silently omitting or summarizing an older principal event.
+
 When a resource event resumes work, the exact same signed event and content
 hash are offered concurrently to **every active environment member** under the
 same bounded resource pool. Each member receives its own delivery carrier and
@@ -129,6 +135,12 @@ signed payload to the exact content hash and byte length. Renderer selection
 begins from those verified bytes and signed MIME authority. Suffixes, declared
 roles, and safe byte inspection may detect a mismatch or choose a conservative
 fallback, but cannot silently replace the signed declaration.
+
+That declaration continues to describe the same unchanged exact bytes across
+later task amendments when persona, environment, path, hash, length, and access
+authority still match. Its task/action binding remains original provenance; a
+new current task identifier does not invalidate it. Changed bytes require a new
+signed declaration and cannot borrow MIME from an older path revision.
 
 Renderers load lazily and support the strongest safe view available for text,
 Markdown, source, structured data, raster and vector images, PDF and office
@@ -179,6 +191,18 @@ provenance. They do not prove expertise, professional quality, semantic
 relevance, or that a particular workflow was followed. Reusable learning,
 experience, and identity evolution arise only through explicit persona-authored
 signed records, not automatic host credit.
+
+Sealed turn-effect episodes are included in the exact bounded history visible
+on later authorized wakes. `inspect_persona_learning_history` pages that same
+hash-bound inventory without semantic selection. `apply_brain_evolution`
+exposes the exact fragment storage operations and open persona-authored fields
+needed to turn cited experience into future persona-owned material; neither
+action creates competence credit or continuation.
+
+The persona-authored state lane has an independent exact append-order cursor,
+so later records remain reachable as execution receipts accumulate. An exact
+original task binding remains provenance, not a visibility fence: owner-
+authorized state can remain navigable on later tasks in the same environment.
 
 The runtime contains no task word, profession word, executable name, filename,
 extension, media type, prompt, regular expression, domain label, or hard-coded
@@ -246,6 +270,12 @@ authority. Status reports, gap-like authored content, population records, identi
 scores, retry prose, note fields, and host-derived “more work possible” signals
 do not create calls.
 
+`goal_progress` is an observational append even when its open status text says
+work remains. Its receipt explicitly reports that objective acceptance was not
+changed and no causal successor was enqueued. A persona that wants another
+turn authors a separate exact wake or another action whose descriptor declares
+a causal delivery.
+
 Each persona call is bound to an authenticated `run-model-pool/1`, which is an
 unordered ceiling. An exact matching signed `persona-model-choice/1` supplies
 persona-authored model order and reasoning effort for that causal generation.
@@ -260,6 +290,13 @@ it. An asynchronous result creates a later delivery only through its exact
 descriptor-declared and registered event. Effect-free transient transport may
 retry the same delivery under bounded policy; an effectful outcome is never
 replayed merely to obtain improved prose.
+
+Continuation-action refusals carry exact stable mechanical reason codes through
+the same evidence lane as successful receipts. A refusal does not create a
+causal successor, recommend another action, or justify a model retry. Public
+schemas, descriptor bindings, and transport-injected actor/task/run/wake
+authority remain consistent so the persona is not asked to invent host-owned
+credentials.
 
 When no causal delivery remains, the task is **quiescent**. Quiescence is
 nonterminal and means only that nothing is currently scheduled. It does not
@@ -286,6 +323,12 @@ cannot recommend, rank, pre-hide, or choose a task interpretation, workflow,
 population action, model, tool, skill, collaborator, artifact, or next action.
 A bound that branches on task words, profession/role, prompt, filename, media,
 authored note/knowledge content, or desired output fails this criterion.
+
+Process-local callbacks, capture handles, and transport capabilities are
+authority, not evidence. They are stripped before an action observation enters
+any canonical communication, memory, learning-history, or turn-effect record;
+only exact public inputs, outputs, descriptors, receipts, and effects may be
+signed or later shown to a persona.
 
 ## 3. Plural domain references
 

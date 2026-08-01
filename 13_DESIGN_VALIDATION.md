@@ -94,8 +94,14 @@ unchanged to every current active member. Per-recipient replay is idempotent.
 **Required outcome:** prior persona identities resume; best-so-far bytes remain;
 no replacement persona, new task, or coordinator poll is minted.
 
+The resumed carrier exposes the complete verified principal-intent ancestry in
+causal order: original signed bytes followed by signed amendments. A latest
+amendment never silently replaces the original request; an over-bound exact
+ancestry is refused before execution rather than truncated or summarized.
+
 **Failure:** only the prior owner resumes; a status flag creates a call; grant
-duplicates a settled delivery; missing identity fields block resume.
+duplicates a settled delivery; missing identity fields block resume; the
+original principal intent survives only as a host summary.
 
 ## 5.1 Ambiguous first model call
 
@@ -190,6 +196,10 @@ Opening a row fetches and hash-verifies bytes before lazy loading its renderer.
 sniffing may detect mismatch or choose a conservative fallback but never replace
 signed MIME. Unknown/malformed bytes receive honest download/technical UI.
 
+An unchanged path/hash/length retains its valid signed declaration after a task
+amendment, with the original task/action shown as publication provenance. Once
+the bytes change, that older declaration no longer supplies MIME.
+
 **Failure:** path hides extension; renderer trusts suffix; supported content is
 shown only as binary; identity media appears as task output without signed role.
 
@@ -239,6 +249,13 @@ The persona navigates by exact reference, obtains consent for any private
 knowledge body, shares refs through ordinary signed messaging, and may invoke
 `author_persona_knowledge` to persist one
 `personaos-persona-state-record/1` with opaque content and exact refs.
+Sealed `brain-episode/1` turn-effect receipts appear in the next authorized
+history carrier; `inspect_persona_learning_history` continues its exact
+hash-bound pages. The persona may cite those receipts in a brain evolution
+operation whose mechanical storage fields are fully described by the action.
+The separate persona-authored-state page has its own exact cursor, and retained
+owner state remains navigable across later tasks in the same environment while
+preserving its original task provenance.
 
 **Required outcome:** omission/truncation is explicit; provenance and consent
 survive ref sharing and authorized body access; durable evolution has persona
@@ -296,9 +313,9 @@ coordinator, action, or relevance order.
 
 ## 12.2 Mechanical admission boundary
 
-**Input:** a persona chooses one exact declared action while task text also
-suggests several other plausible tools, artifacts, collaborators, and
-population choices.
+**Input:** a persona chooses one exact declared continuation action while task
+text also suggests several other plausible tools, artifacts, collaborators,
+and population choices.
 
 **Trace:** admission reads only canonical bounds, signatures/hashes, exact
 scope, membership/consent/access, preimages, replay/idempotency, current leases
@@ -308,11 +325,14 @@ physical authority. Current signed policy supplies bound values.
 **Required outcome:** the chosen effect is admitted or refused on those facts.
 No alternative is ranked, recommended, invoked, or hidden, and no bound value
 is inferred from task, role, prompt, note, knowledge, filename, MIME, or desired
-artifact semantics.
+artifact semantics. A refusal is retained with an exact stable reason code but
+does not create a successor. Process-local capture or transport authority is
+absent from every canonical signed observation and later learning page.
 
 **Failure:** a refusal routes to another tool/model/action; a task classifier
 changes a limit; a safety policy assigns a profession/role; capacity becomes a
-team-size recommendation.
+team-size recommendation; a private capture handle crosses the evidence
+boundary; transport drops the refusal reason and encourages blind retries.
 
 ## 13. Plural domain references
 

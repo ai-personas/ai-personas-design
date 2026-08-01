@@ -48,6 +48,14 @@ conservative download/technical fallback.
 MIME declares format, not semantic quality, artifact role, authorship,
 professional sufficiency, or completion.
 
+A verified declaration remains authoritative for its exact bytes across later
+task amendments or continuations while persona, environment, path, content
+hash, and byte length are unchanged and its access authority remains valid. Its
+signed task/action fields continue to identify the original publication
+provenance; a newer current task identifier does not erase that MIME evidence.
+Changed bytes require a new matching signed declaration and never inherit an
+older declaration by path or extension.
+
 ## 3. Open roles, kinds, and bundles
 
 Artifact roles, kind labels, bundle descriptions, relationships, and package
@@ -199,3 +207,5 @@ authority.
 5. Renderers are safe, format-aware, and lazy.
 6. Domain references are plural and non-semantic to the kernel.
 7. Artifact state never substitutes for objective acceptance.
+8. An unchanged exact byte revision retains valid signed format provenance
+   across task continuation; changed bytes require new signed authority.

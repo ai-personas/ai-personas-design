@@ -31,6 +31,12 @@ authority, and exact references. It does not infer a task class, profession,
 domain, objective decomposition, role, required artifact, quality rubric, tool,
 team size, prompt, or completion rule from the intent text.
 
+A task amendment or continuation preserves the complete verified principal-
+intent ancestry in causal order, including the original signed intent bytes and
+each later signed amendment. The newest carrier does not replace, summarize, or
+reinterpret an older principal event. Every retained entry remains bound to its
+own signature, content hash, task generation, and causal predecessor.
+
 The signed `run-model-pool/1` in that authority is an unordered ceiling, never
 a preferred-model list. Task text cannot order its members. If more than one
 body remains mechanically callable before an exact matching signed
@@ -158,6 +164,13 @@ Every authentic successor is retained independently. Several may coexist. The
 runtime does not choose one as a representative next stage or treat plural
 successors as conflict.
 
+An attempted continuation action that is mechanically refused returns an exact
+stable reason code in its ordinary action evidence. The refusal proves only
+that the attempted effect was not admitted; it does not create a successor,
+recommend an alternative, or authorize a retry. Transport-injected task, actor,
+run, wake, and lease bindings must agree with the public action schema and the
+signed descriptor rather than becoming hidden model-authored fields.
+
 Work-note prose, gap-like knowledge content, a population action, successful invocation,
 artifact declaration, unchanged/changed workspace, score, objective statement,
 HTTP status, and model claim do not create continuation.
@@ -236,6 +249,12 @@ Effect-free transient provider/transport failure may retry the exact carrier
 under bounded policy. Deterministic malformed requests are not infrastructure
 outages. An effectful or uncertain turn is never replayed to obtain nicer
 terminal prose.
+
+Process-local capture handles, transport capabilities, callbacks, and other
+host-only authority are removed before action observations enter a canonical
+communication, memory, learning-history, or turn-effect record. Signed evidence
+contains exact public inputs, outputs, descriptors, receipts, and effects, never
+a reusable private runtime capability.
 
 No host-generated status poll, readiness repair, identity completion call,
 capability appraisal, population appraisal, completion appraisal, or automatic
