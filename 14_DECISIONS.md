@@ -142,6 +142,15 @@ are independently verified on materialization. This is storage proportionality,
 not prompt compaction or semantic omission, and no situation content selects an
 encoding, a consumer, or a successor.
 
+Exact workspace-topology publications use the same identity/encoding
+separation. New lineage events store the complete canonical topology once in a
+lossless carrier with independent semantic/compressed integrity and signed
+capture, unpublished-count/hash, and before/after state-signature bindings.
+Reducers may select on those mechanical bindings and materialize the full tree
+only when needed. The payload does not repeat the unpublished-path body outside
+the carrier. No path, suffix, MIME, domain, task, tool, or content value affects
+encoding, selection, or inflation order.
+
 ### D6 — Knowledge and capability writes are opaque
 
 `author_persona_knowledge` admits one opaque signed persona-owned record per
@@ -163,6 +172,15 @@ Mutable brain-fragment evolution uses one signed
 by `brain-evolution-application/1` as a mechanical receipt. This pair is not a
 universal wrapper for other durable records. Tool execution remains governed
 separately by exact live descriptors and authority.
+
+A persona-authored executable acquisition may widen that same semantic turn's
+action lease on structured or native-MCP transports only through an exact
+mounted name/artifact/descriptor/acquisition-event identity that re-verifies
+against signed acquisition, registration, and current registry state. Peer
+transfer returns this identity at the same authenticated result boundary as a
+locally authored portable recipe. Registry novelty, task meaning, and tool
+names alone never widen the lease, and successful mounting does not invoke the
+tool or create another cognition turn.
 
 ### D7 — Population context contains facts only
 

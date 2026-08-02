@@ -323,6 +323,15 @@ applied. Later cognition can inspect the retained exact body. Receipts preserve
 exact provider, action, result, and byte effects. Gap-like content is optional
 and has no dedicated lifecycle or readiness/continuation semantics.
 
+On both structured-tool and native-MCP model transports, let a persona acquire
+one previously absent executable body and continue within the same semantic
+turn. The next provider completion must expose that descriptor only after the
+sealed result's mounted name/artifact/hash/event tuple verifies against the
+signed acquisition, later registration, and current environment registry. The
+persona may then invoke it without a synthetic wake. A concurrent mount by
+another actor, a nested result that omits the tuple, a failed acquisition, or
+any mismatched tuple must leave the original frozen lease unchanged.
+
 Before any semantic interpretation, every task observes the same descriptor
 identities, ordering, and generic navigation actions. A persona may use an
 already present executable without acquisition, acquire a verified peer or
@@ -673,6 +682,19 @@ identity, canonical JSON, trailing stream bytes, or declared output bound; each
 case must fail closed. Compression choice varying by task/domain/tool/path
 content, work states binding the compressed representation, or eager inflation
 of the complete history fails.
+
+Accumulate `ENV_WORKSPACE_PUBLISHED` events whose exact before/after persona and
+environment snapshots contain hundreds of entries and conflicts. New events
+must store one `personaos-exact-workspace-topology-storage/1` carrier rather
+than the expanded topology plus a second unpublished-path body. The carrier
+must bind semantic and compressed hashes/sizes, capture flags, the exact
+unpublished count/hash, and each source/result state signature. Cold structural
+selection may read only those signed summary bindings. Materializing an
+addressed publication must reproduce the original canonical topology bytes.
+Mutate compressed bytes/hash/size, semantic hash/size, any summary field,
+canonical JSON, stream termination, trailing bytes, or the output bound; every
+mutation must fail closed. Selecting compression or materialization from a task
+word, domain, path, suffix, MIME, tool, artifact type, or persona identity fails.
 
 Construct persona and environment workspaces whose union contains hundreds of
 distinct exact paths and several differing records for shared paths. Make the

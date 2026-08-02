@@ -250,6 +250,17 @@ ordered summary inventory plus exact-id, JSON-pointer, and byte-window reads.
 No field in either action expresses a domain, profession, task match, preferred
 provider, required capability, teacher, curriculum, or expertise award.
 
+A successful executable acquisition returns the exact mounted tool name,
+artifact id, descriptor hash, and acquisition-lineage event id into its sealed
+effect receipt. Before another completion inside that same semantic turn, the
+runtime may widen the frozen action lease only when those four values rejoin one
+current signed acquisition, one later signed registration, and one current
+environment descriptor. This applies equally to structured and native-MCP
+provider lanes. An unrelated concurrent registry change, name-only result,
+failed acquisition, opaque knowledge body, or unverified nested result cannot
+widen the lease. The acquired mechanism may then be invoked immediately if the
+persona chooses it; the substrate neither invokes it nor schedules a turn.
+
 ### 2.3 Receipts and retry
 
 Every authenticated action receives one kernel-signed terminal outcome bound to
@@ -698,6 +709,25 @@ binding before use. Truncated output, trailing compressed data, noncanonical
 JSON, hash mismatch, or decompression beyond the bound fails closed. No task,
 domain, role, filename, tool, action, note, or body value changes encoding,
 admission, or lazy-read order.
+
+Each new `ENV_WORKSPACE_PUBLISHED` event likewise retains its complete canonical
+`personaos-exact-workspace-topology-publication/1` through
+`personaos-exact-workspace-topology-storage/1`. The signed storage carrier binds
+the semantic and compressed hashes and sizes, capture/exact-publication flags,
+unpublished-topology count and hash, and all four before/after workspace-state
+signatures. A reducer may inspect those exact mechanical summary fields without
+inflating the repeated file-state bodies. Once a publication is selected, the
+consumer bounded-decompresses it and verifies the canonical round trip, both
+hash/size pairs, every summary binding, schema, stream end, and absence of
+trailing bytes before using any topology entry. The publication payload carries
+the unpublished-topology body only inside this exact semantic object; it does
+not duplicate that list beside the carrier. Direct historical topology objects
+remain audit bytes but confer no shortcut around the same verification.
+
+Topology encoding and materialization order never inspect task, domain, role,
+path, suffix, MIME, tool, artifact, or content meaning. Compression is storage
+proportionality only and cannot choose work, skills, tools, participants,
+publication semantics, or a successor.
 
 The persona authors open note content, optional causal references, and its
 causal disposition. The disposition is either an exact deliberate
