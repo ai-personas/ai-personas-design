@@ -110,6 +110,15 @@ competence, or task-match scores. There is no top-K, semantic reranker,
 keyword/regex selector, profession filter, domain-selected subset, or “best
 tool” field.
 
+A cold persona need not guess a registry's private capability vocabulary before
+it can navigate that registry. An empty MCP capability filter returns the
+complete access-authorized candidate inventory in deterministic hash order;
+exact capability identifiers optionally apply equality filtering. Each
+unfiltered row carries the descriptor's own exact capability identifiers, so a
+persona can select one candidate and author an exact acquisition intent. The
+signed discovery evidence records whether a filter was applied. Empty filtering
+never selects, recommends, mounts, or invokes a candidate.
+
 When the provider supports native MCP tools, `tools/list` exposes every exact
 leased action under its real name with its complete persona-facing description,
 input schema, and structural annotations in the signed action-index order.
@@ -634,8 +643,12 @@ per-record carrier bound, participates in later same-environment Layer-4 pages.
 Its original task remains provenance rather than a visibility fence. Oversized
 or out-of-page records retain exact hashes and cursors instead of receiving a
 host summary. This is accumulated persona-authored knowledge, not an active
-brain tactic: brain-fragment evolution and binding remain separate explicit
-persona decisions.
+brain tactic: brain-fragment evolution and binding remain distinct explicit
+persona decisions and signed records. They may be carried in one authenticated
+evolution action only when the persona supplies the separate exact
+`bind_changed_fragments.carrier_scope_refs`; omission leaves changed fragments
+catalogued and unbound. The substrate never derives that request from authored
+content.
 
 The ordinary cognition carrier includes a fixed append-position suffix of
 exact verified owner-authored records and their opaque bodies. It declares the

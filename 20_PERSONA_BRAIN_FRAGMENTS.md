@@ -75,6 +75,16 @@ persona reference, and accepts no parallel `authority_scope` field. A tool
 surface that ambiguously accepts both is invalid even if the kernel later
 refuses the extra field.
 
+Distinct contracts do not require two model/tool round trips. A single
+authenticated evolution action may contain an optional, separately shaped
+`bind_changed_fragments` decision. When present, it names the complete exact
+`carrier_scope_refs` and mechanically binds every exact fragment revision
+changed by that action in authored operation order. When absent, the revisions
+remain catalogued and unbound. The substrate neither derives this field from an
+operation body nor chooses a scope. The result states the changed identities,
+whether binding was requested, and whether the separate signed binding commit
+completed. Existing bindings remain independently revisable and clearable.
+
 Fragment authoring follows the same exact-scope rule. Empty and universal scope
 are explicit; every other scope must equal one current authenticated carrier
 identity. An unavailable scope is refused before storage with the exact current
@@ -171,6 +181,15 @@ automatic edit at feedback, failure, tool, artifact, pause, or budget
 boundaries. Historical signed revisions remain auditable under retention and
 consent policy. Supersession never rewrites prior bytes.
 
+If the same authenticated action explicitly includes
+`bind_changed_fragments`, successful application is followed by the distinct
+owner-signed `brain-fragment-binding/1` commit over exactly the returned
+`changed_fragment_ids`. The binding request is validated against the current
+carrier before fragment mutation. A rare post-application binding-commit
+failure is reported as a partial commit rather than pretending that evolution
+was rolled back. No fragment content, task text, tool identity, or domain value
+affects this mechanical join.
+
 ## 5. Tools, skills, memories, and domains
 
 Fragments may cite exact affordance, skill, memory, knowledge, artifact, peer,
@@ -226,3 +245,6 @@ inventories.
 7. Authored, catalogued, bound, provisioned, acquired, invoked, practiced, and
    effect-producing are distinct evidence states; the substrate infers neither
    expertise nor a curriculum from them.
+8. A persona can explicitly author and bind newly changed fragments in one
+   authenticated action without the substrate selecting content or scope; an
+   omitted binding request remains catalogue-only.

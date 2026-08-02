@@ -340,11 +340,21 @@ source. Repeating the run with different task text, domain references,
 extensions, persona traits, or artifacts changes choices and receipts only; it
 does not change substrate routing.
 
+Begin with a persona that knows no registry-specific capability identifier.
+An unfiltered discovery page must expose every access-authorized candidate in
+stable hash order, including exact descriptor-declared capability identifiers,
+with signed totals/cursors and no selection. The persona may select one row and
+one of its advertised exact identifiers for acquisition without repeating
+discovery through a semantic query. Supplying an exact identifier instead must
+produce the equality-filtered inventory. Neither mode may read task prose or
+rank candidates.
+
 **Failure:** top-K or score chooses a tool; task words cause any named tool; a gap
 narrows the catalog, selects a teacher, or schedules another call; use grants
 expertise automatically; metadata advertises an unfetchable body; a central
 rendezvous becomes the transfer path; fetched source mounts without independent
 verification; the action catalogue changes with domain/task/format vocabulary;
+the registry is unnavigable until the persona guesses a hidden exact identifier;
 or the acquisition disappears from later cognition.
 
 ## 8. Emergent engineering artifact
@@ -460,6 +470,12 @@ Sealed `brain-episode/1` turn-effect receipts appear in the next authorized
 history carrier; `inspect_persona_learning_history` continues its exact
 hash-bound pages. The persona may cite those receipts in a brain evolution
 operation whose mechanical storage fields are fully described by the action.
+In the same invocation the persona may explicitly supply
+`bind_changed_fragments.carrier_scope_refs`. The runtime validates those exact
+current scopes before applying the evolution, then binds precisely the returned
+changed fragment identities through a distinct signed binding record. Omitting
+the field stores catalogue-only revisions. Altering operation prose, task,
+domain, file names, or capability names must not change either path.
 The separate persona-authored-state page has its own exact cursor, and retained
 owner state remains navigable across later tasks in the same environment while
 preserving its original task provenance.
@@ -502,6 +518,9 @@ schema that rejects a valid current signed action and makes the actor's learning
 or tool history appear empty also fails. Retaining knowledge that can thereafter
 be reached only by a multi-action cursor ritual—and never participates in an
 ordinary later cognition inventory—also fails longitudinal continuity.
+An evolution action that explicitly requests binding but silently leaves its
+changed fragments unbound, or one that infers binding/scope from authored
+content, also fails.
 
 Run an arbitrary persona-authored host command whose shell launcher starts one
 or more longer-lived child executables. The signed completion must retain the

@@ -292,6 +292,15 @@ match mode; it must not silently require one record to contain every independent
 query value. Exact identifier lookup remains separately available, and neither
 mode recommends or invokes a result.
 
+Remote MCP registry navigation also has a cold-start path: omitting exact
+capability identifiers pages every access-authorized descriptor in stable
+hash order and exposes each descriptor's own exact capability identifiers.
+Supplying identifiers applies an equality filter only. The signed evidence says
+which mode was used, and an acquisition still requires a persona-selected exact
+candidate plus an exact capability intent that the selected descriptor
+advertises. The runtime cannot require a persona to guess an unseen registry
+vocabulary, and it cannot turn unfiltered browsing into selection.
+
 An append-derived inventory binds an exact snapshot, absolute positions, total,
 returned and omitted counts, and continuation cursor. Equal payloads at
 different authoritative append positions remain separately navigable. If one
@@ -372,6 +381,15 @@ then includes the exact body under mechanical count/byte bounds with explicit
 omissions. No task words, embeddings, role labels, domain names, utility score,
 or host prompt template selects it. Revising the same binding to an empty exact
 set removes it without a host-defined lifecycle vocabulary.
+
+One authenticated `apply_brain_evolution` invocation may also carry the
+separately shaped optional `bind_changed_fragments` decision. It must contain
+the persona's exact current carrier scopes; when present it binds exactly all
+revisions returned by that evolution application, and when absent it binds
+nothing. This reduces a causal authoring/binding boundary to one model/tool
+round trip without collapsing the two signed records or letting the substrate
+interpret the authored body. The result distinguishes catalogue-only success,
+complete binding, and partial commit.
 
 An authored fragment scope is either empty, universal, or one exact identity in
 the authenticated current carrier. A syntactically valid but unavailable scope

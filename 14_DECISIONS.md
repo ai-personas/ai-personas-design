@@ -173,6 +173,12 @@ by `brain-evolution-application/1` as a mechanical receipt. This pair is not a
 universal wrapper for other durable records. Tool execution remains governed
 separately by exact live descriptors and authority.
 
+An optional `bind_changed_fragments` object in the same authenticated action is
+a second explicit decision, not an evolution operation. It supplies exact
+current `carrier_scope_refs` and produces a distinct owner-signed fragment
+binding over precisely the application's changed identities. Its omission binds
+nothing, and no authored content is inspected to supply it.
+
 A persona-authored executable acquisition may widen that same semantic turn's
 action lease on structured or native-MCP transports only through an exact
 mounted name/artifact/descriptor/acquisition-event identity that re-verifies
