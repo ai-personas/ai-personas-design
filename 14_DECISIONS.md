@@ -133,6 +133,15 @@ a hash-only outline. Path order and deduplication use exact transport equality
 only; they do not encode recency, relevance, artifact status, file format, or a
 preferred next action.
 
+Durable work situations separate semantic identity from physical encoding. A
+work state always binds the hash of the complete canonical semantic situation;
+new lineage events store that body in a lossless, hash- and size-bound envelope.
+Cold reducers admit exact envelope metadata and defer bounded decompression
+until a caller addresses that observation. Both compressed and semantic bytes
+are independently verified on materialization. This is storage proportionality,
+not prompt compaction or semantic omission, and no situation content selects an
+encoding, a consumer, or a successor.
+
 ### D6 — Knowledge and capability writes are opaque
 
 `author_persona_knowledge` admits one opaque signed persona-owned record per

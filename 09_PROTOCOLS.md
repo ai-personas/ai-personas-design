@@ -683,6 +683,22 @@ observed-situation and append lineage, and one explicit signed
 authored claim. They do not extract commitments, blockers, stages,
 requirements, votes, readiness, or next actions from the note.
 
+Each new `PERSONA_WORK_SITUATION_OBSERVED` event retains the complete canonical
+`personaos-persona-work-situation/1` body through
+`personaos-persona-work-situation-storage/1`. The storage envelope carries the
+semantic content hash and canonical size, exact persona/environment/task scope,
+package-state signature, compression identity, compressed hash/size, and the
+lossless encoded bytes. Compression changes storage representation only: work
+states continue to bind the SHA-256 of the uncompressed canonical situation.
+Cold replay verifies the event chain and exact envelope scope/hash metadata
+without inflating every historical body. A consumer inflates only the exact
+addressed observation under a mechanical output bound, then verifies canonical
+round-trip bytes, both hashes, both sizes, scope, schema, and package-state
+binding before use. Truncated output, trailing compressed data, noncanonical
+JSON, hash mismatch, or decompression beyond the bound fails closed. No task,
+domain, role, filename, tool, action, note, or body value changes encoding,
+admission, or lazy-read order.
+
 The persona authors open note content, optional causal references, and its
 causal disposition. The disposition is either an exact deliberate
 `no_successor` record or one exact `immediate_wake` request with persona-authored

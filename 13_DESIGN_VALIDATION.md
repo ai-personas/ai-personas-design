@@ -660,6 +660,20 @@ records consuming the mission projection fails. Vary task words, roles, paths,
 tool names, and component sizes; manifest ordering and inline disposition must
 remain unchanged.
 
+Persist that large semantic situation through
+`personaos-persona-work-situation-storage/1`. The signed envelope must be
+smaller when the lossless encoding permits, while its `content_hash` remains
+the hash of the exact uncompressed canonical
+`personaos-persona-work-situation/1`. Restart with many historical situations:
+cold authority replay must read their exact scope/hash/package bindings without
+inflating every body. Lazy materialization of one addressed situation must
+reproduce the original canonical bytes exactly. Mutate the encoded bytes,
+compressed hash/size, semantic hash/size, scope, package signature, compression
+identity, canonical JSON, trailing stream bytes, or declared output bound; each
+case must fail closed. Compression choice varying by task/domain/tool/path
+content, work states binding the compressed representation, or eager inflation
+of the complete history fails.
+
 Construct persona and environment workspaces whose union contains hundreds of
 distinct exact paths and several differing records for shared paths. Make the
 old path-plus-record representation exceed the navigation carrier bound while
