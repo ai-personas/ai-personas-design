@@ -286,6 +286,13 @@ capability/tool receipts and host-command receipts need not reuse one actor
 field name, and a projection may not drop valid command evidence by assuming
 that they do.
 
+The presentation verifier implements the current closed action-authority
+schema exactly, including the dispatch-descriptor hash and the bounded array of
+opaque declared replication-effect descriptors. It verifies descriptor shape,
+action identity, hashes, actor key, and signature without assigning meaning to
+an effect kind. An unsupported older envelope fails visibly; it is not guessed,
+silently adapted, or used as a reason to discard a valid current envelope.
+
 The bounded carrier includes a content-neutral append frontier for sealed
 turn-effect episodes so an oversized earlier receipt cannot make the causal tip
 opaque. It declares exact source count/range/hash and compactly groups repeated

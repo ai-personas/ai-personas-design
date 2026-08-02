@@ -333,13 +333,19 @@ silently turn them into one event.
 
 **Required outcome:** omission/truncation is explicit; provenance and consent
 survive ref sharing and authorized body access; durable evolution has persona
-authorship. No semantic name, interface, parent-skill, synthesis/composition,
-catalogue, transfer, conflict, review, or promotion shape is required.
+authorship. The UI admits a current persona-signed action only after validating
+the exact closed authority shape, reconstructing its action identity, and
+checking its hashes and actor signature. Opaque declared replication effects
+are shape-checked but never semantically interpreted. No semantic name,
+interface, parent-skill, synthesis/composition, catalogue, transfer, conflict,
+review, or promotion shape is required.
 
 **Failure:** host retrieves top-K, ranks relevance, injects a hidden prompt,
 automatically consolidates/decays memory, chooses a teacher, requires a
 synthesize/compose lifecycle, awards expertise, or lets one oversized earlier
-record erase all observable causal effects from the next wake.
+record erase all observable causal effects from the next wake. A stale client
+schema that rejects a valid current signed action and makes the actor's learning
+or tool history appear empty also fails.
 
 Author one opaque fragment, bind its exact signed revision to the current
 persona plus task or environment carrier, and deliver a later ordinary wake.
