@@ -66,6 +66,15 @@ removes a current persona from route authorization.
 may work, communicate, use tools, author identity, or do nothing. No repair wake
 or narrow identity menu is synthesized.
 
+For every current action row, compare the prompt description bytes with the
+authenticated registry descriptor. The same content-blind window applies to
+all rows, ordinary descriptions fit completely, and any oversized row declares
+that it is incomplete and remains inspector-addressable. Repeat after renaming
+actions, changing task/domain words, and changing prior-use counts; the byte
+allocation and ordering cannot change. A birth, acquisition, evolution,
+execution, or successor mechanism whose ordinary description is consistently
+cut before its effect is visible fails practical action discovery.
+
 If authenticated user intent requires a person-like portrait grounded in
 persona-authored characteristics, the exact requirement appears as principal
 intent. The persona chooses how to satisfy it. Any portrait declaration binds
@@ -274,6 +283,13 @@ capacity, consent, ReplicationBound, resources, and per-proposal idempotency.
 Admitted newborns receive independent provenance v3/wake v4 records and
 invitations.
 
+Restart after restoring one or more active personas, then inspect
+`replication-bound/2` and attempt another bounded admission. The signed bound
+contains limits/authority but no declaration-time population, window, or depth
+counter. Admission samples the verified live counters and evaluates the
+post-act values. A stale zero embedded in a newly signed bound while live
+population is non-zero, or admission using that stale declaration value, fails.
+
 **Required outcome:** no separate need/action record is required; both distinct
 proposals may be admitted within mechanical bounds, while replay of either
 exact proposal cannot mint twice. Context fields create no identity claims.
@@ -340,12 +356,15 @@ every omission remains hash/cursor-bound. No task word, domain label, score, or
 host-authored summary selects one, and merely returning a record does not turn
 it into an active tactic or an expertise credential.
 
-The carrier's turn-effect append frontier exposes the causal tip even when an
-older exact episode is larger than the prompt allocation. Its source total,
-suffix range, omitted prefix, hashes, action-invocation occurrence accounting,
-and byte deltas are mechanically checkable against the raw page. Equal or
-nested duplicate receipts remain counted and addressable; compaction cannot
-silently turn them into one event.
+The carrier's turn-effect append-frontier reference exposes the causal tip even
+when an older exact episode is larger than the prompt allocation. Its source
+total, suffix range, omitted prefix, frontier/manifest hashes, and record counts
+are mechanically checkable against the raw page. The separate exact usage
+inventory preserves occurrence accounting, and the bounded failed-result
+suffix preserves corrective feedback. Equal or nested duplicate receipts
+remain counted and inspector-addressable; prompt compaction cannot silently
+turn them into one event or repeat recent action-name trails as a substitute for
+experience bodies.
 
 **Required outcome:** omission/truncation is explicit; provenance and consent
 survive ref sharing and authorized body access; durable evolution has persona
@@ -518,6 +537,18 @@ duplicate total, source ranges, and raw-page navigation remain visible.
 hidden without a missing-event count; “important” fields or speakers receive
 more bytes; a prompt claims complete after truncation; pagination chooses a
 coordinator, action, or relevance order.
+
+Repeat an ordinary wake after enough work-state, action, workspace, population,
+and learning history exists to make the durable current-mission situation much
+larger than any one prompt lane. The prompt must contain one complete
+`personaos-current-persona-mission-situation-facts/3` manifest, the exact task
+facts, and one copy of each independently verified live navigation component.
+Reconstruct every manifest hash and byte count against the durable situation.
+The same action catalogue or historical work-state body appearing again inside
+the mission carrier, recursive prior-situation copies, or depth-limit pointer
+records consuming the mission projection fails. Vary task words, roles, paths,
+tool names, and component sizes; manifest ordering and inline disposition must
+remain unchanged.
 
 ## 12.2 Mechanical admission boundary
 

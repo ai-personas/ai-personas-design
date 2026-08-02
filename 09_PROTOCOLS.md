@@ -110,6 +110,16 @@ competence, or task-match scores. There is no top-K, semantic reranker,
 keyword/regex selector, profession filter, domain-selected subset, or “best
 tool” field.
 
+The current action catalogue carries every exact action identifier and applies
+one identical content-blind description window to every registry or
+persona-authored descriptor. Ordinary registry descriptions fit whole in that
+window. Any oversized description carries an explicit incomplete flag and its
+exact descriptor remains available from the authenticated inspector. The
+window cannot vary by action name, task, role, domain, prior use, tool, or
+inferred importance. A catalogue that repeatedly cuts descriptions before
+their effect, acquisition, or successor mechanics are visible is addressable
+but not practically navigable and is non-conformant.
+
 ### 2.2 Persona navigation
 
 A persona may inspect an exact descriptor, use an already mounted action,
@@ -351,6 +361,17 @@ task field, persona, role, message, tool, memory, schema kind, or record whose
 prose appears important. Manifests make every omitted source/window navigable
 without silently replacing it with a host summary.
 
+A canonical situation assembled from sources already present in dedicated
+prompt lanes enters this stage only through
+`personaos-current-persona-mission-situation-facts/3`: exact situation/lineage
+identity, canonical size, a complete field/type/hash/size/schema manifest, and
+the exact task facts needed for continuation-context binding. The prompt does
+not re-inline the joined environment, package, team, resource, action,
+population, workspace, learning, capability, identity, or work-state bodies.
+This is equality-preserving transport deduplication, not semantic omission: the
+component preimages remain in their independently verified lanes and the full
+situation remains bound by its durable content hash.
+
 All totals are cardinalities of the bound source snapshot, not counts after an
 undisclosed payload deduplication. Cursor movement follows the declared order
 exactly and preserves every distinct source position.
@@ -473,6 +494,16 @@ record content, tool identity, outcome, quality, or similarity signal. Carrying
 the exact suffix is continuity of persona-authored experience; it neither
 selects a lesson nor grants expertise, activates a tactic, recommends a tool,
 or schedules behaviour.
+
+General learning-history and turn-effect pages use compact prompt references:
+source/page/frontier hashes, exact totals and ranges, continuation cursor,
+record counts, and explicit non-inline state. Their complete hash-only rows and
+effect records remain available from the authenticated history inspector.
+Repeating the same historical action-name trail on every wake consumes the
+actor's navigation carrier without exposing the retained bodies and can anchor
+new cognition to an old transport pattern. Compacting that repetition is a
+mechanical equality-preserving projection; persona-authored state bodies keep
+their independent exact append-frontier lane.
 
 The current content-neutral storage envelope is 262,144 canonical JSON bytes
 and nesting depth 64 for `metadata`; `refs` accepts one exact string or at most

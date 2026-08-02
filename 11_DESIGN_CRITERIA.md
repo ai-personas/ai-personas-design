@@ -114,7 +114,8 @@ silently admitted with a truncated principal instruction.
 
 The prompt preserves one complete mechanical navigation authority alongside
 the principal lane: every currently leased action identity with a uniform
-fixed-length description preview and required-input/effect shape, every exact
+content-blind description window, explicit completeness flag, and
+required-input/effect shape, every exact
 name in the execution-capability index, verified roster/birth/replication
 authority, every current workspace file path, exact current identity/readiness
 state, zero-inclusive capability-acquisition state, and the hash-bound
@@ -125,6 +126,13 @@ construction and bounds are content-neutral. No task token, regular expression,
 domain role, preferred tool, preferred team size, filename type, ranking, or
 recommendation may choose what survives transport. Append-only contribution
 and exact learning bodies remain independently pageable.
+
+The uniform description window is large enough to carry ordinary current
+registry descriptions whole. Oversized descriptions remain explicitly
+incomplete and inspector-addressable. A mechanically complete action identity
+whose description is always cut before the action's effect, successor,
+acquisition, or application mechanics are visible does not satisfy practical
+navigation.
 
 Direct task/resource delivery and every event-driven wake construct this same
 navigation authority from the same seven live sources. An event-wake path may
@@ -142,6 +150,20 @@ bind different canonical preimages. Validation must verify the compact rows
 against the projection hash while retaining the source hash as the address of
 the independently inspectable descriptors; equating the two would reject every
 nontrivial projection.
+
+The durable current-mission situation is not a second copy of those same live
+lanes. `personaos-current-persona-mission-situation-facts/3` carries its exact
+situation and lineage identities, canonical size, and a complete mechanically
+ordered component manifest whose rows bind every field name, type, hash, byte
+length, schema when present, and inline disposition. The exact task facts stay
+inline because caller-authored continuation context participates in the signed
+model-choice scope. Environment, package, team, resource, population,
+workspace, learning, action, capability, identity, and work-state bodies use
+their existing dedicated lanes and inspectors rather than being recursively
+copied through the mission join. No field meaning determines manifest order or
+inline admission, and the full signed situation remains durable by its exact
+hash. A pointer-heavy bounded projection of a repeated full situation is not a
+valid substitute: it consumes cognition bytes while obscuring current choices.
 
 Project presence on resume is reduced from reciprocal signed topology, not a
 disposable environment attribute. The model-visible environment state includes
@@ -354,13 +376,16 @@ action identity, hashes, actor key, and signature without assigning meaning to
 an effect kind. An unsupported older envelope fails visibly; it is not guessed,
 silently adapted, or used as a reason to discard a valid current envelope.
 
-The bounded carrier includes a content-neutral append frontier for sealed
-turn-effect episodes so an oversized earlier receipt cannot make the causal tip
-opaque. It declares exact source count/range/hash and compactly groups repeated
-copies of the same authenticated action invocation with their occurrence
-positions. This is fixed log-position projection, not task-, role-, outcome-,
-quality-, utility-, or vocabulary-based retrieval; full raw records and
-duplicates remain cursor-navigable.
+The bounded carrier includes a content-neutral reference to the append frontier
+for sealed turn-effect episodes so an oversized earlier receipt cannot make the
+causal tip opaque. It declares exact source count/range/hash, manifest hash and
+record count, plus a bounded exact suffix of authenticated failed-result
+observations. The complete manifest/effect page remains available from the
+authenticated inspector, while the separate exact usage inventory carries
+mechanical invocation counts. This is fixed log-position projection, not task-,
+role-, outcome-, quality-, utility-, or vocabulary-based retrieval. Repeating
+the same recent action-name list on every wake is not learning content and may
+not crowd out the current action meanings or persona-authored state bodies.
 
 Large canonical observation bodies are persisted once behind verified
 content-addressed references. Communication, ambient routing, notification,

@@ -159,6 +159,12 @@ proposal/action identity, signatures, resources, and idempotency. It does not
 judge why replication is useful, infer a niche or role, score fitness, choose a
 parent, or author a birth.
 
+`replication-bound/2` signs declared limits and authority only. Live
+population, rate-window, and ancestry-depth counters are sampled from current
+verified state at each admission check. They are not copied into the
+long-lived bound: a declaration-time counter becomes stale after restoration
+or any admitted effect and cannot be presented as current population authority.
+
 ## 7. Resource authority and model calls
 
 Every model call consumes one exact causal carrier under an exact resource/model
