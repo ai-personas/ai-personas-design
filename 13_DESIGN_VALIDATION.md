@@ -62,6 +62,13 @@ compact signed persona/environment index must be independently fetchable and
 paintable before full-inventory verification. Adding artifact history must not
 increase bootstrap size in proportion to that history.
 
+Publish a valid short-lived locator announcement whose signed `record_count`
+exceeds every consumer's ordinary page size and local cache window while staying
+below the protocol ceiling. Producer, rendezvous, native consumer, and browser
+must all admit the same announcement without allocating that count of records;
+the count remains metadata until the consumer follows an independently bounded
+inventory route. An obsolete bundle-size option cannot reject the node.
+
 **Required outcome:** the UI paints each verified persona without waiting for
 artifact or telemetry hydration. Missing optional name/portrait fields receive
 neutral honest placeholders and do not hide the actor. Aggregate replacement is

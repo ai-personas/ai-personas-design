@@ -488,6 +488,13 @@ non-authoritative; when primary discovery recovers, the last fallback lease
 expires without renewal. Producer and consumer fallback decisions use the
 node's same mechanically observed non-locator viability state.
 
+The locator announcement's `record_count` is bounded signed metadata about the
+remote node's complete inventory; it is not a bundled record collection and
+does not allocate, transfer, or cache that many objects. Locator admission may
+enforce the protocol-wide integer ceiling, but cannot reject a valid node merely
+because its count exceeds a local page, cache, or obsolete bundle-size setting.
+Inventory transport applies its own independently bounded pagination.
+
 Transport startup and route convergence are distinct facts. A connected DHT,
 successful provider publication, or an observer acknowledgement proves that a
 rendezvous record left one process; none proves that an independent PersonaOS
