@@ -119,6 +119,31 @@ invoker is non-conformant because it hides every actual choice behind a second
 model selection problem and makes the advertised action count differ from the
 provider-visible surface.
 
+Process recovery has a transport-readiness boundary. Durable wakes, schedules,
+birth deliveries, invitations, external requests, and startup budget recovery
+may be verified while a node is constructed, but no model-bearing replay is
+enqueued until the adapter's complete current action surface is callable. An
+advertised catalogue without its corresponding native descriptors is not a
+weaker valid turn: it is pre-admission state and spends no model resource.
+Readiness is mechanical adapter state and cannot vary by task text, domain,
+persona, action name, prior use, or inferred need.
+
+Historical replay is not a serving prerequisite. After transport admission, one
+identity-neutral recovery worker reconciles the exact durable outboxes while the
+already-bound listener serves the last current, verified discovery generation.
+Heartbeat clocks do not independently replay those same lanes until recovery
+has crossed its durable boundary. The recovery state is observable, but it
+cannot hide, relabel, rank, or delay an otherwise current persona projection.
+Failure leaves the exact outboxes retryable; it does not replace them with a
+host-authored summary or select which task should matter.
+
+Persona discovery verification observes the same per-persona atomic snapshot
+boundary as identity evolution. A publisher cannot read a new evolution-chain
+head with an old SOUL or identity signature and turn that transient write state
+into a signed generation that omits the actor. Snapshot locking is per identity
+and content-blind; unrelated personas still verify concurrently, and task,
+profile, capability, and domain content cannot affect admission.
+
 When an adapter requires an in-prompt structured catalogue, it carries every
 exact action identifier and applies one identical content-blind description
 window to every registry or persona-authored descriptor. Ordinary registry
@@ -463,9 +488,27 @@ non-authoritative; when primary discovery recovers, the last fallback lease
 expires without renewal. Producer and consumer fallback decisions use the
 node's same mechanically observed non-locator viability state.
 
+Transport startup and route convergence are distinct facts. A connected DHT,
+successful provider publication, or an observer acknowledgement proves that a
+rendezvous record left one process; none proves that an independent PersonaOS
+consumer resolved, dialed, authenticated, and consumed a route. Producer-side
+suppression therefore requires current independently verified peer discovery,
+not publication visibility alone. A consumer gives direct and peer routes one
+bounded first-contact opportunity, uses the locator only while it still has no
+verified usable route, and continues decentralized reconciliation afterward.
+Neither timeout nor connected generic peer count is identity authority.
+
 Cached signed indexes may accelerate rendering but do not extend leases or
 preserve omitted identities. Every warm read re-verifies signatures, current
 master authority, expiry, visibility, subject bindings, hashes, and revocation.
+
+The well-known bootstrap is a bounded routing document, not an inventory. It
+advertises exact aggregate counts and URLs for the compact signed identity index
+and complete signed provider inventory, but does not embed record summaries.
+Consequently first-contact transfer size does not grow with task, telemetry, or
+artifact history. A consumer may paint the verified identity index while the
+complete inventory is still transferring; only the complete inventory can
+authorize retirement or claim aggregate convergence.
 
 ## 6. Artifacts and explicit signed MIME
 

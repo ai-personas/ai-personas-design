@@ -44,6 +44,24 @@ the same verified provider's anonymous direct route concurrently; whichever
 usable result arrives first must still pass the identical document and
 current-master checks.
 
+Verify the producer fallback decision with a connected DHT whose provider
+publication has independent acknowledgements but whose consumer has not yet
+resolved a PersonaOS route. Publication visibility alone must not suppress the
+short signed fallback lease. After a directly received, independently verified
+peer identity demonstrates end-to-end convergence, both locator publication and
+lookup stop. In a clean browser, a connected generic bootstrap count cannot
+hold an empty roster behind the full DHT reconciliation deadline: after one
+bounded first-contact window with zero verified routes, the replaceable locator
+may supply transport hints while the DHT attempt continues.
+
+Populate one node with enough public task, telemetry, and artifact records to
+make its complete inventory large. Its well-known bootstrap must remain a
+bounded routing-and-count document with no embedded record summaries. The
+advertised count must still equal the complete signed inventory count, and the
+compact signed persona/environment index must be independently fetchable and
+paintable before full-inventory verification. Adding artifact history must not
+increase bootstrap size in proportion to that history.
+
 **Required outcome:** the UI paints each verified persona without waiting for
 artifact or telemetry hydration. Missing optional name/portrait fields receive
 neutral honest placeholders and do not hide the actor. Aggregate replacement is
@@ -99,6 +117,35 @@ changing prior-use counts; byte allocation and transport ordering cannot change.
 A birth, acquisition, evolution, execution, or successor mechanism hidden
 behind a generic string invoker, or whose ordinary description is consistently
 cut before its effect is visible, fails practical action discovery.
+
+Persist one unresolved signed wake, stop the node, and restart it with native
+transport configuration deliberately delayed. State verification may proceed,
+but the model-call count must remain unchanged and no wake may enter execution.
+After transport readiness, the replayed call must expose the same complete
+direct `tools/list` surface as a non-recovery call. A recovery call that reports
+the catalogue count while exposing zero native action names is a failure.
+
+Repeat with enough unresolved outboxes to make reconciliation observably slow.
+The listener must return the current verified discovery bootstrap and persona
+records while runtime state still reports recovery in progress; browser identity
+paint cannot wait for replay completion. During that interval heartbeat ticks
+must not create a second replay pass. Once reconciliation finishes, each exact
+unsettled source remains represented by its own durable identity and runtime
+state advances without replacing persona-authored decisions.
+
+On a restart with an existing served discovery generation, verify its managed
+generation pointer, deployment-key signature, monotonic private inventory head,
+current lease, node identity, advertised base, counts, and embedded documents.
+An exact valid generation may be served immediately without recopying historical
+artifact bytes; corrupt any one of those fields and startup must reject reuse and
+publish a complete generation. Reuse cannot enqueue cognition, select a record,
+or suppress a later material publication.
+
+Continuously evolve one active persona's signed identity while heartbeat
+publication verifies the public roster. Every successfully published generation
+must contain that persona from one complete before-or-after identity snapshot;
+none may observe a mixed chain/SOUL/signature state and omit it. Concurrent
+evolution of one actor must not serialize or semantically filter other actors.
 
 If authenticated user intent requires a person-like portrait grounded in
 persona-authored characteristics, the exact requirement appears as principal
