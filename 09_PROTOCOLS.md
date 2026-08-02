@@ -458,6 +458,26 @@ schema/snapshot/metadata/record-manifest hashes, source totals, page and
 omission/cursor facts, projected/omitted/truncated record counts, exact per-
 record hashes and byte lengths, and the byte bound.
 
+The generic latest-event page cannot stand in for a peer's current work-state
+head because any later signed event may mechanically replace it.
+`personaos-active-peer-work-state-heads/1` is an independent hash-bound snapshot
+of one latest verified `personaos-persona-work-state/4` per other active
+membership. It binds the exact active-peer membership identity set, acting
+persona, task/environment scope, signed work-state bytes and hashes, missing-
+head coverage, omissions, and selection basis. The selector compares only
+verified membership, append revision, authored timestamp, and immutable record
+ID. It does not inspect task text or any note, role, action, capability,
+artifact, filename, tool, or domain value.
+
+That snapshot occupies its own content-neutral prompt-authority window, so a
+large unrelated source set cannot reduce every peer's open work to a hash. If
+the exact snapshot itself exceeds the window,
+`personaos-active-peer-work-state-prompt-projection/1` preserves its source
+metadata and record-manifest hashes, exact counts/cursors/omissions, and per-
+record truncation evidence. The lane is evidence only; it does not authorize a
+successor, infer completion, rank peers, or let one member's disposition close
+or suppress another member's work.
+
 ### 4.3 Exact uniform prompt-source manifest
 
 If the entire prompt exceeds its byte carrier, the runtime uses
@@ -886,6 +906,9 @@ Current cutover records include:
   `personaos-coordination-prompt-event-page/1`;
 - `personaos-active-peer-latest-signed-contributions/2` and
   `personaos-active-peer-contribution-prompt-projection/1`;
+- `personaos-active-peer-work-state-head/1`,
+  `personaos-active-peer-work-state-heads/1`, and
+  `personaos-active-peer-work-state-prompt-projection/1`;
 - `personaos-peer-activity-lineage-snapshot/2`,
   `personaos-verified-peer-lineage-event/1`, and
   `personaos-communication-routed-wake-delivery-snapshot/1`;

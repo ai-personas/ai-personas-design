@@ -67,7 +67,7 @@ completion.
 
 ## 3. Mechanical surfaces and the observation-binding fact
 
-`personaos-persona-work-state-surface/3` exposes each verified append with its
+`personaos-persona-work-state-surface/4` exposes each verified append with its
 exact note, authorship, signature/hash, append metadata, causal references, and
 observation binding. `semantic_interpretation_performed` remains false.
 
@@ -93,6 +93,15 @@ materialization, and quiescence facts. It has no required persona roster,
 population aggregate, agreement rule, vote, or semantic outcome field. Any
 mechanically last-per-persona view is an unranked convenience; complete note
 history remains separately navigable.
+
+During an active turn, `personaos-active-peer-work-state-heads/1` gives the
+acting persona one separate latest signature-verified head per other active
+membership. This prevents a newer generic message/action event or uniform
+prompt-byte pressure from hiding the peer's current authored note. Latest means
+only highest verified append revision with timestamp and immutable ID as exact
+ties; it is not a relevance, readiness, quality, leadership, or completion
+ranking. The bounded projection reports every omission and grants no causal
+successor.
 
 ## 4. No note settlement or reclassification
 

@@ -62,6 +62,25 @@ coverage and page omissions. Its bounded
 `personaos-active-peer-contribution-prompt-projection/1` retains source hashes,
 totals, cursors, omissions, and per-record projection evidence.
 
+Generic latest-event coverage does not substitute for current work-state
+coverage: a peer may sign a later message, action, or publication after its work
+note. `personaos-active-peer-work-state-heads/1` therefore carries one exact
+latest verified `personaos-persona-work-state/4` head for each other active
+membership in a separate prompt-authority lane. The snapshot binds the exact
+membership set, acting persona, task/environment scope, head and missing-head
+counts, omissions, signatures, content hashes, and the selection basis
+`latest_verified_revision_per_active_peer_membership`. Selection compares only
+verified membership, revision, authored timestamp, and immutable record ID; it
+does not read a note, task, role, action, artifact, tool, or domain.
+
+The dedicated lane has a content-neutral byte bound independent of uniform
+situation-source allocation. If its exact page exceeds that bound,
+`personaos-active-peer-work-state-prompt-projection/1` retains the source
+snapshot/metadata/record-manifest hashes, total/page/cursor/omission facts, and
+per-record projection evidence. A peer head remains an authored claim: this lane
+grants neither a wake nor completion, and one persona's disposition cannot
+suppress another active member's visible signed state.
+
 If other prompt sources also exceed the carrier,
 `personaos-uniform-prompt-source-stage/1` and its
 `personaos-prompt-source-manifest/1` preserve exact source totals, cursors,

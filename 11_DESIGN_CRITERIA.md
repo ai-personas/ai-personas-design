@@ -169,6 +169,18 @@ against the projection hash while retaining the source hash as the address of
 the independently inspectable descriptors; equating the two would reject every
 nontrivial projection.
 
+Every ordinary active-member turn also receives a distinct, mechanically
+bounded active-peer work-state authority. It carries one latest signature-
+verified work-state head per other current membership plus exact missing-head,
+page, cursor, and omission evidence. A later generic peer event may not displace
+that head, and the uniform situation-source budget may not consume its entire
+window. Membership, append revision, authored timestamp, and immutable record
+ID are the only selection inputs. No work-note content, task text, role,
+artifact, capability, action, filename, tool, or domain value may affect
+admission or ordering. The authority is visible evidence only: it grants no
+successor or completion semantics, and one peer's `no_successor` cannot suppress
+the signed open state or independent causal choices of another active peer.
+
 The durable current-mission situation is not a second copy of those same live
 lanes. `personaos-current-persona-mission-situation-facts/3` carries its exact
 situation and lineage identities, canonical size, and a complete mechanically
