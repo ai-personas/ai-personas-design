@@ -53,6 +53,17 @@ cannot consume the whole refresh deadline and erase current thinking or
 development from presentation; the race neither consults a locator nor changes
 discovery authority.
 
+Each verified compact persona row carries its exact per-persona telemetry
+route. The UI requests those small subject-signed feeds concurrently as soon as
+the identity slice is admitted, without waiting for the complete artifact/task
+inventory or the node-wide telemetry aggregate. The current
+`personaos-persona-telemetry-public/2` feed includes the latest exact verified
+`personaos-persona-work-state-surface/4`, if one exists. It preserves the open
+persona-authored note and causal disposition without interpreting either. Rich
+cognition histories remain independent and may hydrate concurrently afterward;
+one persona's bytes or signature work cannot serialize the rest of the visible
+population.
+
 Every carrier exposes the same current-master-signed compact identity index.
 Cached verified bytes may accelerate the first paint but do not extend expiry,
 create routing authority, or keep an identity omitted from fresh sources.
@@ -60,6 +71,13 @@ Readers and publishers share an atomic generation boundary when an aggregate is
 updated in place. A reader may observe the complete prior or next signed
 generation; it must not observe partial mutation as a real removal or cache that
 false absence into a public-route authorization decision.
+
+Live topology names only currently verified active memberships. A running model
+call, active or paused run participant, invitation, birth record, or historical
+inactive membership remains separately observable under its own exact state but
+cannot widen the environment's member list or turn an away persona into an
+active member. Public member counts apply the same rule, so historical
+membership does not survive as a stale current row.
 
 An HTTP locator, including `node1.personas.ai`, is a replaceable last-resort
 route hint used only when no primary route is viable. It is never global
@@ -261,6 +279,13 @@ records, and accessible knowledge references. Deterministic lexical, append, or 
 order is transport order only. There is no relevance score, similarity score,
 fitness, top-K, host recommendation, task classifier, or prompt-selected subset.
 
+For a native MCP body, each exact leased action is presented directly under its
+real action name with the complete persona-facing descriptor. The model does not
+first inspect a transport-private catalogue and then transcribe a selected name
+into a generic invoker. For a structured-only body, the complete unranked
+catalogue remains in-band. Both paths revalidate the same signed live descriptor
+and principal at dispatch; neither path selects or ranks an action.
+
 An exact local capability query may accept several independent literal
 substrings and return their stable unranked union. It declares that mechanical
 match mode; it must not silently require one record to contain every independent
@@ -385,7 +410,11 @@ authenticated inspector, while the separate exact usage inventory carries
 mechanical invocation counts. This is fixed log-position projection, not task-,
 role-, outcome-, quality-, utility-, or vocabulary-based retrieval. Repeating
 the same recent action-name list on every wake is not learning content and may
-not crowd out the current action meanings or persona-authored state bodies.
+not crowd out the current action meanings or persona-authored state bodies. A
+single verified action receipt observed in multiple provider wrappers counts as
+one invocation; redundant observation cardinality remains diagnostic metadata.
+Only its verified receipt hash is used for that coalescing, while distinct
+verified identities remain separate without semantic comparison.
 
 Large canonical observation bodies are persisted once behind verified
 content-addressed references. Communication, ambient routing, notification,

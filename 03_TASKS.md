@@ -44,14 +44,18 @@ that lane. Task intake and model-turn construction enforce the same byte and
 record bounds; if the complete authority lane cannot fit, admission is refused
 before cognition instead of presenting an omitted or summarized requirement.
 
-Current agency uses a second exact, content-bound navigation lane. It carries
-the complete leased action catalogue, the complete mechanically observed
-execution-name index, the verified current population/replication authority,
-and every current workspace file path. These components are selected only by
-closed schema identity and content hash, never by task words, roles, filename
-suffixes, domain labels, rankings, or recommendations. Large append-only
-activity histories remain independently hash-bound and pageable; they cannot
-displace present actions, peers, population bounds, executables, or files.
+Current agency uses exact, content-bound navigation authority. On a native-tool
+adapter, every complete leased action descriptor is a first-class provider tool
+under its real action name; the prompt does not duplicate that catalogue behind
+an inspector/invoker carrier. On a structured-only adapter, the same complete
+unranked catalogue remains in the navigation lane. The lane also carries the
+complete mechanically observed execution-name index, the verified current
+population/replication authority, and every current workspace file path. These
+components are selected only by closed schema identity and content hash, never
+by task words, roles, filename suffixes, domain labels, rankings, or
+recommendations. Large append-only activity histories remain independently
+hash-bound and pageable; they cannot displace present actions, peers,
+population bounds, executables, or files.
 
 A resumed environment reconstructs project references from reciprocal verified
 project and environment lineage. A mutable projection field is not routing or
@@ -91,7 +95,8 @@ or assign a role merely to consume it.
 ## 3. Ordinary persona decision surface
 
 Every ordinary funded wake exposes the complete currently authorized action
-catalog and bounded exact situation facts. Population, identity, public-card,
+surface—direct exact native descriptors or the structured catalogue—and
+bounded exact situation facts. Population, identity, public-card,
 communication, memory, skill, knowledge, capability, tool, artifact, workspace,
 work-note, scheduling, and task actions coexist on that surface whenever their
 mechanical authority is valid.

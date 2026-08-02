@@ -110,15 +110,31 @@ competence, or task-match scores. There is no top-K, semantic reranker,
 keyword/regex selector, profession filter, domain-selected subset, or “best
 tool” field.
 
-The current action catalogue carries every exact action identifier and applies
-one identical content-blind description window to every registry or
-persona-authored descriptor. Ordinary registry descriptions fit whole in that
-window. Any oversized description carries an explicit incomplete flag and its
-exact descriptor remains available from the authenticated inspector. The
-window cannot vary by action name, task, role, domain, prior use, tool, or
-inferred importance. A catalogue that repeatedly cuts descriptions before
-their effect, acquisition, or successor mechanics are visible is addressable
-but not practically navigable and is non-conformant.
+When the provider supports native MCP tools, `tools/list` exposes every exact
+leased action under its real name with its complete persona-facing description,
+input schema, and structural annotations in the signed action-index order.
+`tools/call` dispatches that same name through the existing principal- and
+descriptor-bound node boundary. A generic catalogue inspector plus string-based
+invoker is non-conformant because it hides every actual choice behind a second
+model selection problem and makes the advertised action count differ from the
+provider-visible surface.
+
+When an adapter requires an in-prompt structured catalogue, it carries every
+exact action identifier and applies one identical content-blind description
+window to every registry or persona-authored descriptor. Ordinary registry
+descriptions fit whole in that window. Any oversized description carries an
+explicit incomplete flag and its exact descriptor remains independently
+addressable. The window cannot vary by action name, task, role, domain, prior
+use, tool, or inferred importance. A catalogue that repeatedly cuts
+descriptions before their effect, acquisition, or successor mechanics are
+visible is addressable but not practically navigable and is non-conformant.
+
+The adapter verifies native provider events against the exact Cartesian surface
+of current server identity and leased action names. A result counts as an
+authenticated action only when the node receipt binds that same direct name and
+environment. Transport wrappers around one backend observation are coalesced by
+their exact mechanical observation identity before experience accounting; they
+never become repeated practice merely because several routers retained them.
 
 ### 2.2 Persona navigation
 
@@ -184,6 +200,15 @@ the action identity and exact effects. A successful receipt proves only what
 ran, which provider/descriptor ran it, its terminal result, and which bytes or
 records changed. It does not prove semantic relevance, artifact quality,
 independent review, competence, or expertise.
+
+The turn-effect collector retains the first observation of each independently
+verified receipt hash in source order. Repeated appearances of that exact hash
+through nested transport envelopes or cumulative model observations are
+reported as redundant transport observations, not additional invocations or
+practice. Coalescing reads only the already-verified cryptographic identity; it
+does not inspect an action name, arguments, response, path, format, domain, or
+task. Two distinct verified receipt identities are never merged merely because
+their action or result content is equal.
 
 The same causal delivery may retry only when an exact authenticated terminal
 result permits retry and the complete observation proves no durable, external,
@@ -629,6 +654,16 @@ trigger for population/tool behavior.
 Prompt, message, memory, skill-body, artifact, and user content remain redacted
 unless exact access and consent authority permits disclosure.
 
+`personaos-persona-telemetry-public/2` is the small, current-master-signed
+per-persona presentation feed. In addition to bounded public presence, model
+status, activity, and verified communication routes, it carries either an empty
+object or that persona's latest exact verified public
+`personaos-persona-work-state-surface/4`. The nested note retains its persona
+signature and remains an authored claim; the outer feed adds transport freshness
+and route/subject authority only. The feed does not select a note by vocabulary,
+infer a next action, judge readiness, or acquire completion semantics. Independent
+persona feeds may be transferred and verified concurrently.
+
 ## 13. Schema registry and clean-break versioning
 
 Every live boundary schema has one current registered version. Removed fields or
@@ -649,6 +684,7 @@ Current cutover records include:
   `personaos-persona-causal-disposition/1`,
   `personaos-persona-work-note-state/1`, and
   `personaos-work-state-evidence/1`;
+- `personaos-persona-telemetry-public/2`;
 - `personaos-persona-birth-proposal/5` and
   `personaos-persona-birth-proposal-record/2`;
 - `personaos-persona-birth-causal-action-context/1`;

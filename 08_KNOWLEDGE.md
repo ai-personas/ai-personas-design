@@ -99,9 +99,11 @@ sealed turn-effect lane. The frontier is a fixed suffix by authoritative append
 position, not a relevance result: it exposes exact episode identities, action
 invocation identities and occurrence counts, terminal effect hashes, and
 workspace byte deltas while binding every compact projection to the signed raw
-episode. Repeated nested copies of one authenticated receipt may be represented
-by one invocation row plus exact occurrence positions and source hashes; the raw
-history page preserves the original cardinality. The frontier declares its
+episode. Repeated authoritative invocations may be represented by one invocation
+row plus exact occurrence positions and source hashes. Repeated transport
+wrappers around one backend observation are first coalesced by exact mechanical
+observation identity and do not increase occurrence count or practice evidence.
+The raw history page preserves authoritative source cardinality. The frontier declares its
 source total, included range, omitted prefix, and full-manifest hash. This
 causal-tip view is additional to the complete cursor-navigable inventory and
 does not replace it.
@@ -161,7 +163,12 @@ teacher choice, action sequence, or definition of enough knowledge.
 
 An action receipt proves that the exact action occurred and records its effects.
 It does not prove that the chosen material was relevant or that the persona
-learned from it.
+learned from it. One cryptographically verified receipt identity contributes
+one action occurrence even when a provider carries that same receipt through
+several nested wrappers or cumulative observations. The capture surface reports
+those redundant sightings separately, but they do not become additional
+practice. Distinct verified receipt identities remain distinct regardless of
+equal action names, arguments, result bytes, paths, or task meaning.
 
 ## 4. Memory
 

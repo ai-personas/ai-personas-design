@@ -53,27 +53,52 @@ that makes a still-current persona route return 404. A slow peer document read
 also cannot consume the direct-route deadline and leave already published
 persona thinking or development falsely empty.
 
-**Failure:** stale rows survive because of cache; one slow peer blocks first
+Immediately after compact identity admission, fetch every visible persona's
+exact signed telemetry link concurrently while delaying neither the identity
+paint nor other personas behind one slow subject. When a persona has authored a
+work state, its small v2 feed must render the exact note and causal disposition
+before the larger aggregate telemetry and cognition histories finish. The
+browser continues to show the note as that persona's claim beside independently
+verified mechanical run state; neither note vocabulary nor `no_successor`
+becomes completion.
+
+Compare the live environment membership list and count with verified active
+membership lineage while one non-member is calling a model, one invited persona
+is pending, and one former member is inactive. All three remain visible through
+their truthful independent states, but none is projected as a current member.
+Run participation and model-call fields may name them only under those exact
+meanings and never repair or widen membership.
+
+**Failure:** stale rows survive because of cache; one slow peer or one large
+persona cognition document blocks first
 paint; `node1.personas.ai` becomes authority; missing portrait blocks discovery;
 the provider hedge bypasses signature verification; or a refresh transiently
-removes a current persona from route authorization.
+removes a current persona from route authorization. It also fails when a model
+call, invitation, paused run, or inactive historical record inflates the live
+member list or count.
 
 ## 3. Optional identity evolution
 
 **Input:** an active persona has no display name, biography, or portrait.
 
-**Trace:** an ordinary wake includes the complete action catalog. The persona
-may work, communicate, use tools, author identity, or do nothing. No repair wake
-or narrow identity menu is synthesized.
+**Trace:** an ordinary wake includes the complete action surface. A native MCP
+adapter exposes every real leased action directly; a structured-only adapter
+includes the complete catalogue. The persona may work, communicate, use tools,
+author identity, or do nothing. No repair wake or narrow identity menu is
+synthesized.
 
-For every current action row, compare the prompt description bytes with the
-authenticated registry descriptor. The same content-blind window applies to
-all rows, ordinary descriptions fit completely, and any oversized row declares
-that it is incomplete and remains inspector-addressable. Repeat after renaming
-actions, changing task/domain words, and changing prior-use counts; the byte
-allocation and ordering cannot change. A birth, acquisition, evolution,
-execution, or successor mechanism whose ordinary description is consistently
-cut before its effect is visible fails practical action discovery.
+For native MCP, compare `tools/list` against the signed action index and every
+authenticated registry descriptor: exact names, descriptions, schemas,
+annotations, count, and order must match, and provider events must use those
+direct names. For structured transport, compare every action row's prompt
+description bytes with the authenticated registry descriptor. The same
+content-blind window applies to all rows, ordinary descriptions fit completely,
+and any oversized row declares that it is incomplete and remains independently
+addressable. Repeat after renaming actions, changing task/domain words, and
+changing prior-use counts; byte allocation and transport ordering cannot change.
+A birth, acquisition, evolution, execution, or successor mechanism hidden
+behind a generic string invoker, or whose ordinary description is consistently
+cut before its effect is visible, fails practical action discovery.
 
 If authenticated user intent requires a person-like portrait grounded in
 persona-authored characteristics, the exact requirement appears as principal
@@ -371,10 +396,14 @@ when an older exact episode is larger than the prompt allocation. Its source
 total, suffix range, omitted prefix, frontier/manifest hashes, and record counts
 are mechanically checkable against the raw page. The separate exact usage
 inventory preserves occurrence accounting, and the bounded failed-result
-suffix preserves corrective feedback. Equal or nested duplicate receipts
-remain counted and inspector-addressable; prompt compaction cannot silently
-turn them into one event or repeat recent action-name trails as a substitute for
-experience bodies.
+suffix preserves corrective feedback. Carry one valid receipt through several
+nested provider wrappers and cumulative observations: capture must report the
+source and redundant-observation counts but the turn-effect episode and usage
+inventory must contain one occurrence for that verified receipt hash. Two
+distinct verified receipt hashes with otherwise equal action/result fields must
+remain two occurrences. Prompt compaction cannot silently collapse distinct
+events or repeat recent action-name trails as a substitute for experience
+bodies.
 
 **Required outcome:** omission/truncation is explicit; provenance and consent
 survive ref sharing and authorized body access; durable evolution has persona
