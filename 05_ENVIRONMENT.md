@@ -54,6 +54,26 @@ Concurrent publications retain authorship. Peer bytes do not become another
 actor's effects. Conflicts preserve all exact alternatives until an authorized
 signed resolution chooses or synthesizes bytes.
 
+A conflicted authored revision and a later editing baseline are separate
+mechanical states. Once the conflicting head, merge preimage, exact alternatives,
+and preservation manifest are durably bound, the disposable worktree for a
+later turn starts at current shared HEAD. The displaced authored head remains
+reachable through an immutable ref and the conflict remains open. Refreshing
+that baseline neither adopts the environment alternative nor resolves the
+conflict; it only prevents historical branch divergence from hiding current peer
+work or making later calls rediscover it.
+
+An authenticated resolution applies only the alternatives committed by the
+exact conflict reference to the then-current shared tree. It does not replay an
+unrelated cumulative persona branch. Both the pre-resolution shared head and
+the preserved authored head remain recoverable, and the resulting complete tree
+is verified before a persona-signed resolution claim can close the conflict.
+
+This protocol has no migration or compatibility path for abbreviated heads,
+archive-projection commits, or branches produced by an earlier conflict
+lifecycle. A live conflict must bind exact full object identities and begin on
+this lifecycle; incompatible state is refused and a fresh environment is used.
+
 ## 5. Resources and model calls
 
 Environment resource pools provide exact call/byte/time/tool/payment or other

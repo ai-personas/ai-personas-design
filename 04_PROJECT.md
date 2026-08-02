@@ -56,6 +56,12 @@ meaning or quality.
 Conflicts retain every exact alternative until an authorized persona-authored
 resolution selects or synthesizes bytes.
 
+The retained conflict head is not reused as every later editing baseline. A
+later leased turn begins from current shared HEAD while immutable refs and the
+signed conflict preimage keep all alternatives recoverable and unresolved. A
+resolution applies only the exact selected alternatives, never the cumulative
+stale branch.
+
 ## 5. Coordination and review
 
 Messages, invitations, reviews, requests, publications, and schedules are

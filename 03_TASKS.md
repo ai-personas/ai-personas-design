@@ -178,16 +178,22 @@ Conflicts preserve every exact path/hash alternative. Only an authorized signed
 resolution chooses or synthesizes bytes; the substrate does not resolve a
 conflict from file type, role, task text, or model prose.
 
+Preserved conflict state does not pin later cognition to a stale worktree. Once
+the exact authored head and preservation preimage are retained, each later turn
+starts from current shared HEAD while the conflict remains open. This baseline
+refresh selects no bytes and changes no resolution claim.
+
 The immutable conflict reference commits the complete exact alternatives,
 merge heads, and unmerged index. Inspection exposes those bytes for judgment
 and also returns complete minimal resolution requests. The persona authors the
 conflict reference, one mechanical resolution kind, and optional open rationale;
 it does not retype a large hash preimage already committed by that reference.
-For a persona-branch choice, the workspace layer applies the exact selected
-branch alternatives to the merge index, verifies every selected byte, commits
-the merge, and retains recoverable pre-merge refs before the persona signs the
-full resolution claim and resulting tree. Merely retrying the same unresolved
-merge is not a resolution mechanism.
+For a persona-alternative choice, the workspace layer applies only the exact
+selected alternatives to current shared HEAD, verifies every selected byte and
+the resulting tree, commits any changed paths, and retains recoverable prior
+refs before the persona signs the full resolution claim. It does not merge the
+unrelated cumulative branch. Merely retrying the same unresolved merge is not a
+resolution mechanism.
 
 A delivered external artifact is active disposition pressure only until an
 exact persona-authorized lifecycle action accounts for that same request,

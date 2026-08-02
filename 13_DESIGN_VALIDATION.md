@@ -611,6 +611,17 @@ retype every nested path/hash, accepting a transcription mismatch, or retrying
 an unchanged Git merge until budget is exhausted fails. A non-owner choice is
 refused without changing the conflict.
 
+Before resolving that conflict, deliver another ordinary turn to its owner
+after peers have advanced shared HEAD. The new leased worktree must start from
+that current shared revision while the authored conflict head remains reachable,
+every preserved alternative still verifies, and the conflict stays open. The
+persona must see current peer files without searching other worktrees or nested
+preservation archives. Treating the baseline refresh as environment adoption,
+discarding the authored head, projecting the archive into another authored
+commit, replaying the cumulative stale branch, or hiding later peer work fails.
+An abbreviated historical head or archive-projection branch must be rejected,
+not normalized, migrated, or silently accepted as a current conflict preimage.
+
 Run successful and failed caller-selected host commands using both direct argv
 and a shell wrapper. The public development surface must join exact signed
 started/completed receipts, count the observed top-level executable, success,

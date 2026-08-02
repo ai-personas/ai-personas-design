@@ -548,6 +548,11 @@ next-action meaning; omitted records remain explicitly navigable.
 Shared workspace effects remain attributable. A persona's leased worktree is
 settled before peer-arriving bytes are merged into it, so another member's
 publication cannot be credited as the current actor's tool use or artifact.
+After a conflicted turn is exactly preserved, the next leased editing baseline
+is current shared HEAD while the authored head and open alternative preimage
+remain immutable. Baseline refresh has no resolution authority and cannot replay
+the cumulative branch; an authenticated later choice stages only its exact
+committed alternatives on the current tree.
 
 ### C-OP-10 — Model calls purchase persona decisions
 

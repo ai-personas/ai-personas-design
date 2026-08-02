@@ -160,6 +160,18 @@ Concurrent conflicts preserve every exact path/hash alternative. Only an
 authorized signed resolution chooses or synthesizes bytes. The substrate does
 not choose from filenames, extensions, MIME, role claims, or task semantics.
 
+Conflict evidence is not an editing baseline. After exact signed conflict
+evidence and immutable Git heads are retained, a later leased turn observes the
+current shared workspace while the unresolved alternatives remain independently
+navigable. This content-neutral baseline refresh does not close, supersede, or
+choose an alternative. It prevents cumulative stale branches and preservation
+archives from becoming coordination latency or repeated model work.
+
+If the owner later chooses preserved persona alternatives, the workspace layer
+stages only those exact path/object bindings on current shared HEAD, verifies the
+index and resulting tree, and retains both prior heads. It never replays the
+whole historical persona branch as an implicit semantic choice.
+
 ## 6. Knowledge and skill coordination
 
 Visible peer persona-knowledge/tool metadata appears in complete bounded
