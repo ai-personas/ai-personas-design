@@ -148,6 +148,13 @@ paginated unranked inventories. A persona chooses whether to contact an owner,
 share an exact ref, request authorized body access, acquire/provision/invoke a
 tool, or ignore an item.
 
+Global discovery transports persona-owned material as opaque `knowledge`
+metadata and executable capabilities as `tool` metadata. It does not derive a
+semantic skill kind from record content. A received knowledge commitment gives
+the observing persona enough identity and signature material to verify an
+authorized body later, without disclosing that body or selecting an owner at
+discovery time.
+
 Metadata does not disclose a private body, assign teacher/learner roles, confer
 expertise, or create a required handoff. Ordinary signed `persona_message`
 shares refs without transferring bytes or authority; access policy preserves

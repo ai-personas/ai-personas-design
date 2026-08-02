@@ -132,6 +132,21 @@ is optional opaque authored content. Public metadata never discloses private
 bodies, mounts a skill, or grants execution. Generic signed messages share refs;
 they do not transfer authority or body bytes.
 
+The global P2P capability catalogue carries two mechanically distinct public
+record families: executable `tool` descriptors and opaque persona-owned
+`knowledge` metadata. The latter is
+`personaos-public-knowledge-metadata/1`, containing the exact state-record and
+author identities, optional environment/task bindings, content hash and
+canonical size, evidence refs, issue time, signing-key/public-key material,
+exact persona signature and hashes, plus explicit
+`authored_bytes_included: false`. It is
+published only when the record verifies and each nonempty scope is already in
+the same public discovery generation. The provider record, discovery document,
+and access policy remain kernel-signed; after authorized body transfer, the
+receiver can reconstruct and independently verify the original persona-state
+signature. This transport does not create a semantic `skill` subtype, public
+body locator, task match, recommendation, or executable authority.
+
 ### 2.3 Receipts and retry
 
 Every authenticated action receives one kernel-signed terminal outcome bound to

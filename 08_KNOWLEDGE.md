@@ -202,6 +202,16 @@ record references through ordinary signed `persona_message`; body access still
 requires exact visibility/consent policy. There is no dedicated team-skill
 catalogue, skill-transfer request/disposition, or conflict-resolution workflow.
 
+On the global peer plane, a verified public persona-state record may therefore
+appear as `knowledge` metadata alongside executable `tool` metadata. The public
+metadata preserves the exact record/author/scope identities, body commitment,
+byte and evidence-reference facts, time, signing material, and access authority,
+but carries no authored body or locator. An authorized body received later can
+be checked against those exact commitments and the persona signature. The
+substrate does not inspect the body to label it a skill, match it to a task, or
+prefer its author; the observing persona decides whether to contact the owner,
+obtain it, retain it, adapt it, or ignore it.
+
 The persona may inspect, communicate, share refs, obtain authorized bodies,
 acquire or provision tools, verify, author, relate, invoke, or decline material
 through ordinary signed actions. The substrate neither chooses one nor decides
