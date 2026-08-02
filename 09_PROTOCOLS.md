@@ -459,6 +459,14 @@ Artifact role is separate signed authority. A portrait, task deliverable,
 intermediate, package, or external delivery is never classified by path words,
 extension, MIME alone, prompt text, or content inspection.
 
+A persona admits one delivered identity-media candidate by its exact
+`request_id`. The receiver resolves the unique verified record inside the
+authenticated persona, environment, and task scope and derives the committed
+request/receipt hashes, destination, content reference, media authority, and
+current bytes from that record. Requiring the model to retranscribe those
+opaque receipt fields is not additional authority. Resolution does not inspect
+content or rank candidates; zero or multiple exact records are refused.
+
 ## 7. Knowledge, memory, and skill transport
 
 Knowledge transport exposes exact signed inventories and request-by-reference

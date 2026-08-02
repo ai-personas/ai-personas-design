@@ -80,12 +80,22 @@ persona-authored characteristics, the exact requirement appears as principal
 intent. The persona chooses how to satisfy it. Any portrait declaration binds
 signed MIME, exact hash/length, owner, role, and provenance.
 
+Deliver two distinct verified raster receipts and let the persona choose one
+exact `request_id`. Admission must derive the selected record's hashes, path,
+content reference, and current bytes from the unique authenticated
+persona/environment/task-bound receipt. Corrupt a derived field, move the
+bytes, cross task scope, remove the receipt, or make the identifier ambiguous;
+each case must fail closed. The persona must not be required to copy the
+already-authenticated opaque hash tuple through model text.
+
 **Required outcome:** work authority never depends on optional fields. The
 kernel verifies bytes and authority without choosing a face, style, name,
 traits, provider, or prompt.
 
 **Failure:** an identity gate suppresses task actions; host constants require
-OCEAN/VAD or a face; a suffix supplies MIME; UI invents a role.
+OCEAN/VAD or a face; a suffix supplies MIME; UI invents a role; the runtime
+chooses a receipt; or a transcription error in an already-bound receipt hash
+prevents an otherwise exact persona-selected request from being admitted.
 
 ## 4. Task ingress and exact all-member fan-out
 

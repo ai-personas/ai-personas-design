@@ -88,6 +88,15 @@ content hash and length, owner persona, public-identity role, source/action
 provenance, and visibility policy. Filename, extension, path, declared style,
 model prose, or byte sniffing cannot replace that authority.
 
+For one delivered external-artifact candidate, the persona selects the exact
+`request_id`. The admission boundary resolves exactly one current verified
+owner/environment/task-bound receipt and mechanically binds its request hash,
+receipt hash, destination, content reference, and current bytes. Those existing
+authenticated fields are not copied back through model prose. A missing,
+ambiguous, stale, rejected, cross-scope, or byte-mismatched record fails closed.
+This resolution interprets no prompt or image content and makes no portrait
+selection for the persona.
+
 Safe inspection may reject malformed bytes or choose a conservative display
 fallback. It does not decide whether the subject is aesthetically good,
 person-like, characteristic-aligned, or suitable unless exact user authority
