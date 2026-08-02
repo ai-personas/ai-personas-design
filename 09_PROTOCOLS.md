@@ -598,6 +598,10 @@ not publication visibility alone. A consumer gives direct and peer routes one
 bounded first-contact opportunity, uses the locator only while it still has no
 verified usable route, and continues decentralized reconciliation afterward.
 Neither timeout nor connected generic peer count is identity authority.
+An asynchronously starting peer transport counts as an expected peer probe from
+the moment startup begins. Absence of its eventual runtime object before module,
+bootstrap, or dial initialization settles cannot shorten that bounded
+opportunity or authorize an early locator query.
 
 Cached signed indexes may accelerate rendering but do not extend leases or
 preserve omitted identities. Every warm read re-verifies signatures, current

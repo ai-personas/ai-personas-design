@@ -53,6 +53,11 @@ lookup stop. In a clean browser, a connected generic bootstrap count cannot
 hold an empty roster behind the full DHT reconciliation deadline: after one
 bounded first-contact window with zero verified routes, the replaceable locator
 may supply transport hints while the DHT attempt continues.
+Begin the browser discovery pass while its transport commons and peer module are
+still loading. The in-flight startup is an expected peer probe: the locator must
+remain untouched until that probe completes or the same bounded first-contact
+deadline expires. A temporarily absent runtime transport object is not a failed
+probe and must not collapse the window to the shorter generic cold grace.
 
 Populate one node with enough public task, telemetry, and artifact records to
 make its complete inventory large. Its well-known bootstrap must remain a
