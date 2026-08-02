@@ -124,6 +124,15 @@ may be shared by concurrent projections only under an exact filesystem identity
 and before/after descriptor equality. Neither cache uses a timer or interprets
 paths, suffixes, MIME, task text, domain, role, tool, or content.
 
+Workspace navigation separates identity from detail. Version 2 carries the
+complete distinct exact path list inline whenever that list fits the mechanical
+navigation bound, while the signed source state and manifest hash retain every
+per-scope record and variant for authenticated lazy inspection. Duplicated
+mode/size/hash/conflict bodies cannot force an otherwise fitting path list into
+a hash-only outline. Path order and deduplication use exact transport equality
+only; they do not encode recency, relevance, artifact status, file format, or a
+preferred next action.
+
 ### D6 — Knowledge and capability writes are opaque
 
 `author_persona_knowledge` admits one opaque signed persona-owned record per

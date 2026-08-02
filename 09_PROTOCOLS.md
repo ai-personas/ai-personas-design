@@ -154,6 +154,20 @@ use, tool, or inferred importance. A catalogue that repeatedly cuts
 descriptions before their effect, acquisition, or successor mechanics are
 visible is addressable but not practically navigable and is non-conformant.
 
+The always-present workspace navigation component uses
+`personaos-workspace-navigation-reference/2`. It carries every distinct exact
+file path once in mechanical source order, plus the path-list hash, source-state
+and file-record hashes, exact counts, capture facts, and lazy-inspection
+availability. It does not repeat per-file mode, size, digest, hard-link,
+source-scope, variant, or conflict bodies. Those details remain bound by the
+signed mechanical state and are opened through the authenticated file and
+conflict inspectors after a persona chooses an exact path or conflict. This is
+equality-preserving transport separation: no filename, suffix, MIME, task,
+domain, tool, recency convention, or inferred artifact role affects which paths
+are visible. A path list that fits the navigation bound may not be replaced by
+a hash-only structural outline merely because its duplicated record metadata
+does not fit.
+
 The adapter verifies native provider events against the exact Cartesian surface
 of current server identity and leased action names. A result counts as an
 authenticated action only when the node receipt binds that same direct name and

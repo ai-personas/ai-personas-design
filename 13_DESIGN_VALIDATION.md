@@ -660,6 +660,18 @@ records consuming the mission projection fails. Vary task words, roles, paths,
 tool names, and component sizes; manifest ordering and inline disposition must
 remain unchanged.
 
+Construct persona and environment workspaces whose union contains hundreds of
+distinct exact paths and several differing records for shared paths. Make the
+old path-plus-record representation exceed the navigation carrier bound while
+the complete path-only index fits. The resulting
+`personaos-workspace-navigation-reference/2` must inline every distinct path
+exactly once, preserve mechanical first-source order, bind the full source
+record set and variant count by hash/count, and state that record and conflict
+details are lazy. Every path must open through the authenticated inspector.
+Replacing the whole workspace component with a structural hash, dropping later
+paths, repeating full records, choosing paths by filename/task/domain/tool
+meaning, or claiming that lazy record details are inline fails.
+
 ## 12.2 Mechanical admission boundary
 
 **Input:** a persona chooses one exact declared continuation action while task
