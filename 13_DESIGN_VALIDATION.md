@@ -172,14 +172,27 @@ bytes, cross task scope, remove the receipt, or make the identifier ambiguous;
 each case must fail closed. The persona must not be required to copy the
 already-authenticated opaque hash tuple through model text.
 
+Expose two external-realization providers with different model/media tuples and
+different optional constraint vocabularies. Their verified inventory and the
+live action schema must carry each exact closed constraint contract and bind it
+to the corresponding tuple without ranking either provider. Omit every optional
+constraint and verify the request remains valid; then submit one advertised
+constraint, one unknown field, and one field copied from the other provider.
+Only the first two valid shapes may reach durable outbox reservation. Change a
+provider contract after inventory projection and verify dispatch fails closed
+before external work begins.
+
 **Required outcome:** work authority never depends on optional fields. The
 kernel verifies bytes and authority without choosing a face, style, name,
-traits, provider, or prompt.
+traits, provider, prompt, or provider-specific constraint vocabulary. No
+persona-authored constraint is accepted and then ignored.
 
 **Failure:** an identity gate suppresses task actions; host constants require
 OCEAN/VAD or a face; a suffix supplies MIME; UI invents a role; the runtime
 chooses a receipt; or a transcription error in an already-bound receipt hash
-prevents an otherwise exact persona-selected request from being admitted.
+prevents an otherwise exact persona-selected request from being admitted. A
+vague open constraints object, cross-provider tuple menu, hidden provider
+default, or ignored constraint also fails.
 
 ## 4. Task ingress and exact all-member fan-out
 

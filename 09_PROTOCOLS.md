@@ -623,6 +623,23 @@ scope, artifact role, and zero or more `domain_refs` inside its signed payload.
 MIME authority travels with the bytes through publication, discovery, fetch,
 cache, and rendering.
 
+An external-realization provider is actionable only when its current verified
+inventory publishes the exact eligible model IDs, media types, action
+capabilities, provider identity, and a bounded closed JSON schema for optional
+persona-authored output constraints. The complete schema and its hash are part
+of the inventory hash. The live action descriptor projects every current
+provider contract without ranking or choosing one; with multiple providers it
+preserves the provider/model/media/constraint relationship rather than exposing
+independent menus that can form an invalid tuple.
+
+At dispatch the selected provider republishes the same contract and validates
+the exact request before an outbox reservation or external action exists.
+Missing contracts, changed hashes, unknown fields, duplicated top-level choice
+fields, and values outside the advertised schema fail closed. An adapter may
+not silently ignore a persona-authored constraint. Provider-specific vocabulary
+belongs only to the provider contract; the kernel does not infer it from task,
+prompt, persona, domain, filename, media, or prior behavior.
+
 Filename and extension are presentation metadata. Byte sniffing and a suffix
 may detect a mismatch or select a safe fallback, but cannot silently overwrite
 the signed MIME declaration. A renderer verifies content hash, length, MIME,
