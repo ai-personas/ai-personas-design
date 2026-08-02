@@ -45,6 +45,14 @@ personas appear as soon as their compact signed inventory entries verify. The
 UI does not wait for a global scan, artifact hydration, telemetry, or the
 slowest peer before painting verified identities.
 
+After identity and provider routing verify, independently signed dynamic
+documents may race the peer data read with that same provider's anonymous
+direct route. The first usable document still undergoes its full content,
+identity, and current-master verification. A stalled peer transport therefore
+cannot consume the whole refresh deadline and erase current thinking or
+development from presentation; the race neither consults a locator nor changes
+discovery authority.
+
 Every carrier exposes the same current-master-signed compact identity index.
 Cached verified bytes may accelerate the first paint but do not extend expiry,
 create routing authority, or keep an identity omitted from fresh sources.

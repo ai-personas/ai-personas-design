@@ -37,18 +37,25 @@ environments, personas, and tasks.
 shown once its current master verifies; compact signed environment/persona
 entries stream immediately. Cached entries are reverified and reconciled.
 Expired or omitted identities disappear. The HTTP locator remains unused while
-any primary route is viable.
+any primary route is viable. Once an identity-bound provider route is known, a
+rapidly changing signed document is requested through the peer data route and
+the same verified provider's anonymous direct route concurrently; whichever
+usable result arrives first must still pass the identical document and
+current-master checks.
 
 **Required outcome:** the UI paints each verified persona without waiting for
 artifact or telemetry hydration. Missing optional name/portrait fields receive
 neutral honest placeholders and do not hide the actor. Aggregate replacement is
 an atomic reader epoch: concurrent refresh may expose the complete previous or
 complete next verified generation, never an intermediate empty/mutating object
-that makes a still-current persona route return 404.
+that makes a still-current persona route return 404. A slow peer document read
+also cannot consume the direct-route deadline and leave already published
+persona thinking or development falsely empty.
 
 **Failure:** stale rows survive because of cache; one slow peer blocks first
 paint; `node1.personas.ai` becomes authority; missing portrait blocks discovery;
-or a refresh transiently removes a current persona from route authorization.
+the provider hedge bypasses signature verification; or a refresh transiently
+removes a current persona from route authorization.
 
 ## 3. Optional identity evolution
 
