@@ -37,6 +37,16 @@ each later signed amendment. The newest carrier does not replace, summarize, or
 reinterpret an older principal event. Every retained entry remains bound to its
 own signature, content hash, task generation, and causal predecessor.
 
+Public amendment intake is asynchronous by default: after exact admission it
+returns the new run identity and poll surface before any persona model work can
+delay the HTTP response. Synchronous execution is an explicit caller choice.
+The exact pair of prior-run identity and submitted amendment bytes is one
+content-addressed admission identity. Concurrent or retried identical requests
+converge on the same run; differing bytes remain distinct amendments. A caller
+that wants only to add resources uses the resource-grant surface rather than
+replaying an amendment. Fresh lifecycles provide no duplicate-amendment
+compatibility path.
+
 The model-turn transport carries the complete current intent and complete
 verified ancestry in a dedicated exact authority lane. Uniform paging of
 optional situation sources never clips, prefixes, reorders, or competes with
