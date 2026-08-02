@@ -85,6 +85,28 @@ records remain navigable as execution evidence grows. Its original task binding
 remains evidence while owner-authorized state can inform later tasks in the same
 environment.
 
+An ordinary wake also carries a bounded, hash-bound append frontier for the
+sealed turn-effect lane. The frontier is a fixed suffix by authoritative append
+position, not a relevance result: it exposes exact episode identities, action
+invocation identities and occurrence counts, terminal effect hashes, and
+workspace byte deltas while binding every compact projection to the signed raw
+episode. Repeated nested copies of one authenticated receipt may be represented
+by one invocation row plus exact occurrence positions and source hashes; the raw
+history page preserves the original cardinality. The frontier declares its
+source total, included range, omitted prefix, and full-manifest hash. This
+causal-tip view is additional to the complete cursor-navigable inventory and
+does not replace it.
+
+Large exact observations are stored once as canonical content-addressed bytes.
+Subsequent signed events carry the exact hash, byte length, encoding, and
+verified content reference rather than embedding the observation again.
+Inline-versus-referenced storage is chosen only by a fixed byte bound. Ambient
+routing carries a signed reference to the source lineage event, not another
+copy of its payload. Authorized inspection may materialize the exact referenced
+bytes lazily and must reverify the hash and length. Field names, task meaning,
+media type, profession, tool identity, and outcome do not affect this storage
+decision.
+
 Inventory order may be lexical, append order, or another stable mechanical
 transport order. That order has no relevance meaning. The substrate provides
 no:
@@ -100,6 +122,12 @@ no:
 The same rule applies to local memories, inherited records, environment
 knowledge, peer-visible metadata, public discovery, and tool/skill registries.
 
+A fixed append-position frontier of signed effect receipts is not a recency
+weight or selected active subset. It is a current log boundary: every retained
+position remains in the complete inventory, the suffix rule is invariant to
+record content, and no record receives inferred importance or behavioral
+authority.
+
 ## 3. Persona navigation
 
 The persona chooses how to navigate from the exact inventories available in an
@@ -108,6 +136,14 @@ search or external query, follow provenance, inspect a peer's public metadata,
 ask another persona, send or receive an exact record reference, obtain a body
 under current access/consent authority, author another opaque record citing it,
 invoke an authorized tool, or ignore the material.
+
+Catalogue presence, persona-authored retention, exact carrier binding,
+capability provisioning, tool acquisition, tool invocation, observed practice,
+and artifact effects remain separate evidence stages. None implies any other,
+and none independently certifies expertise. Over time a persona can build an
+evidence chain across those stages through its own signed choices and repeated
+work. The substrate exposes that chain without assigning a curriculum,
+profession, level, utility score, or next action.
 
 These choices may occur in any order and may be interleaved with ordinary task,
 identity, population, communication, artifact, and workspace actions. The

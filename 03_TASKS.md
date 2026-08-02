@@ -173,6 +173,17 @@ Conflicts preserve every exact path/hash alternative. Only an authorized signed
 resolution chooses or synthesizes bytes; the substrate does not resolve a
 conflict from file type, role, task text, or model prose.
 
+The immutable conflict reference commits the complete exact alternatives,
+merge heads, and unmerged index. Inspection exposes those bytes for judgment
+and also returns complete minimal resolution requests. The persona authors the
+conflict reference, one mechanical resolution kind, and optional open rationale;
+it does not retype a large hash preimage already committed by that reference.
+For a persona-branch choice, the workspace layer applies the exact selected
+branch alternatives to the merge index, verifies every selected byte, commits
+the merge, and retains recoverable pre-merge refs before the persona signs the
+full resolution claim and resulting tree. Merely retrying the same unresolved
+merge is not a resolution mechanism.
+
 A delivered external artifact is active disposition pressure only until an
 exact persona-authorized lifecycle action accounts for that same request,
 receipt, destination, and content hash. Later situation projections compact a
@@ -182,6 +193,14 @@ inspection surface. This join never examines the prompt, provider, filename,
 media meaning, task text, or bytes, and ambiguity retains the original pressure
 instead of guessing. A resolved delivery must not consume later model calls by
 presenting itself as perpetually unhandled.
+
+An unresolved request registers one finite terminal-receipt successor rather
+than a polling loop. Its delivery preserves the exact causal scope and the same
+transferred signed budget that funded the request; a transport worker may not
+replace that scope with an ambient allowance or reject it merely because the
+actor thread's process-local context is absent. Replayed receipt delivery
+deduplicates against the exact request/terminal event and cannot multiply model
+calls.
 
 ## 7. Causal continuation
 
@@ -230,6 +249,14 @@ Acceptance comes only from exact authority and evidence declared by the
 authenticated principal or an explicitly authorized verifier. Examples may
 include a principal's signed acceptance, an authorized verifier receipt bound
 to exact current bytes, or a principal-declared materialization condition.
+
+When the principal declares that materialized output is required, that exact
+causal requirement reaches the ordinary persona action loop. The loop may
+finish only after authenticated action effects or changed bytes satisfy the
+mechanical condition; prose alone cannot bypass it. This propagation does not
+choose a file format, executable, profession, workflow, minimum team, or
+semantic quality threshold. Those remain principal intent and persona action,
+while objective acceptance remains separately authoritative.
 
 The substrate may verify:
 

@@ -41,10 +41,14 @@ any primary route is viable.
 
 **Required outcome:** the UI paints each verified persona without waiting for
 artifact or telemetry hydration. Missing optional name/portrait fields receive
-neutral honest placeholders and do not hide the actor.
+neutral honest placeholders and do not hide the actor. Aggregate replacement is
+an atomic reader epoch: concurrent refresh may expose the complete previous or
+complete next verified generation, never an intermediate empty/mutating object
+that makes a still-current persona route return 404.
 
 **Failure:** stale rows survive because of cache; one slow peer blocks first
-paint; `node1.personas.ai` becomes authority; missing portrait blocks discovery.
+paint; `node1.personas.ai` becomes authority; missing portrait blocks discovery;
+or a refresh transiently removes a current persona from route authorization.
 
 ## 3. Optional identity evolution
 
@@ -94,14 +98,52 @@ unchanged to every current active member. Per-recipient replay is idempotent.
 **Required outcome:** prior persona identities resume; best-so-far bytes remain;
 no replacement persona, new task, or coordinator poll is minted.
 
+The operator grant is appended once as an identity-bound signed adjustment to
+the paused run's existing budget ledger before the recovery carrier is
+delivered. The recovery model call spends from that same ledger. Any remaining
+headroom is therefore valid authority for a persona-authored immediate or
+scheduled causal wake, including after restart; retrying the same resource
+event cannot multiply the adjustment.
+
 The resumed carrier exposes the complete verified principal-intent ancestry in
 causal order: original signed bytes followed by signed amendments. A latest
 amendment never silently replaces the original request; an over-bound exact
 ancestry is refused before execution rather than truncated or summarized.
 
+A same-task budget resume records `TASK_RESOURCE_RESUMED` rather than copying
+the original `TASK_RESOURCE_RECEIVED` entry. A later principal amendment follows
+and verifies the exact `resumed_from_run` chain until it reaches the most recent
+principal-intent entry; mechanical resume hops do not add duplicate intent
+records. Event lookup uses the verified exact-kind lineage index and detaches
+only candidate events rather than copying every unrelated large payload.
+
+A native model action that emits a signed causal child across a transport
+worker binds that child to the identical process-local budget and exact pool.
+The child is admitted through an event-local scope, never the shared run scope;
+after restart it needs its signed recovery descriptor, exact lifecycle lease,
+and the verified resumed grant. Invitation, communication, membership, birth,
+and lifecycle reducers use exact-kind indexes and original append positions.
+
+Interrupt once after a finite run's last signed spend and causal-tree drain but
+before its initial `running` shell is replaced. With no live run/event present,
+the scanner verifies the exact signed pool, grant, and zero-headroom ledger,
+offers that same run as `budget_exhausted`, and hides its older resume source.
+It does not edit the shell or enqueue cognition until signed resource evidence
+arrives.
+
 **Failure:** only the prior owner resumes; a status flag creates a call; grant
-duplicates a settled delivery; missing identity fields block resume; the
-original principal intent survives only as a host summary.
+duplicates a settled delivery; the recovery call runs but its persona-authored
+wake is rejected against the exhausted pre-grant pool; fresh budget exists only
+as process memory; missing identity fields block resume; the original principal
+intent survives only as a host summary. An amendment that works before a budget
+resume but is refused afterward for a missing original-task field, a cyclic or
+ambiguous predecessor, or a full-lineage copy on every resume hop also fails.
+A scheduled/native-model child rejected solely because the transport worker
+lacks the actor thread's ambient context, a child budget placed in the shared
+run scope, or a hot exchange reducer detaching every unrelated artifact also
+fails. A drained zero-headroom run stranded forever because its last published
+presentation still says `running`, or resuming its older predecessor, also
+fails.
 
 ## 5.1 Ambiguous first model call
 
@@ -221,9 +263,27 @@ proposals may be admitted within mechanical bounds, while replay of either
 exact proposal cannot mint twice. Context fields create no identity claims.
 Each newborn independently accepts membership.
 
+Repeat with execution interrupted immediately after an admitted outcome is
+durable but before the first wake outbox is persisted. On the next exact
+resource recovery, the substrate reconstructs one wake for the same newborn,
+reuses one exact matching lease if it was already appended, and publishes the
+deterministic consent invitation. The recovered wake may spend only the resumed
+run ledger and must remain valid when the proposal originated in a scheduled
+or native-model action.
+
+Materialize name, characteristics, and avatar in separate signed revisions
+while that invitation is unresolved. Exactly one ordinary invitation delivery
+may result; mutable identity-state hashes remain evidence and cannot create
+three delivery identities. Restart/resource replay may redeliver once for its
+distinct exact recovery event, but repeated handling of that event must
+deduplicate and membership must still require the newborn's signed response.
+
 **Failure:** admission requires a semantic need or recruitment ceremony; fixed
 fields assign a role; a score admits birth; replication is inferred from an
-action name; birth creates membership.
+action name; birth creates membership. A permanently unnamed admitted identity,
+a replacement newborn for the same proposal, a duplicate lifecycle lease after
+a crash boundary, or widening the recovered child into shared run authority
+also fails.
 
 ## 11. Exact population context
 
@@ -257,6 +317,13 @@ The separate persona-authored-state page has its own exact cursor, and retained
 owner state remains navigable across later tasks in the same environment while
 preserving its original task provenance.
 
+The carrier's turn-effect append frontier exposes the causal tip even when an
+older exact episode is larger than the prompt allocation. Its source total,
+suffix range, omitted prefix, hashes, action-invocation occurrence accounting,
+and byte deltas are mechanically checkable against the raw page. Equal or
+nested duplicate receipts remain counted and addressable; compaction cannot
+silently turn them into one event.
+
 **Required outcome:** omission/truncation is explicit; provenance and consent
 survive ref sharing and authorized body access; durable evolution has persona
 authorship. No semantic name, interface, parent-skill, synthesis/composition,
@@ -264,7 +331,103 @@ catalogue, transfer, conflict, review, or promotion shape is required.
 
 **Failure:** host retrieves top-K, ranks relevance, injects a hidden prompt,
 automatically consolidates/decays memory, chooses a teacher, requires a
-synthesize/compose lifecycle, or awards expertise.
+synthesize/compose lifecycle, awards expertise, or lets one oversized earlier
+record erase all observable causal effects from the next wake.
+
+Author one opaque fragment, bind its exact signed revision to the current
+persona plus task or environment carrier, and deliver a later ordinary wake.
+The later carrier must include the exact body and binding evidence without any
+semantic query. Supersede the fragment without revising the binding: the stale
+binding must be omitted with an exact revision-change reason. Revise the same
+binding to the new reference and the new body must appear. Revise it to an empty
+set and no body may appear. Any automatic note-to-fragment conversion, task-word
+matching, hidden active subset, unsigned binding, or silent stale replay fails.
+Repeat with an ordinary signed record whose normalized verified prompt
+projection (exact source record hash, binding/fragment identities, complete
+authored body, and binding/fragment material) exceeds the unselected inventory's
+per-record line cap but fits within the Layer-4 total byte bound. It must still
+be carried; applying the smaller line cap twice and silently making normal
+bindings unusable fails. The signed compile must separately retain the complete
+source record and signatures, bind both full and prompt record hashes, and reject
+any projection that is not the exact mechanical transform of that source. The
+byte bound must measure prompt bytes, not repeated cryptographic audit material.
+Bind the same exact fragment revision through multiple
+bindings: its body must render once and every mechanically collapsed duplicate
+must appear as `duplicate_fragment_revision` omission evidence. Page the exact
+binding inventory, then reuse one binding id with an empty fragment set; the
+next carrier must omit that cleared binding without the substrate choosing a
+replacement.
+
+Attempt the same authoring operation with a syntactically valid scope that is
+not one of the authenticated carrier's exact identities. Persistence must be
+refused and the exact admissible scope references returned. Retry with one of
+those identities, then compile a later wake: the fragment must be catalogued
+and, after the persona authors a valid binding, included in the matching
+carrier. Accepting a generic semantic scope that is permanently absent from the
+catalogue is a failure.
+
+After authoring a fragment, attempt binding with the fragment-only
+`authority_scope` field copied into the binding arguments and omit the owner
+persona from `carrier_scope_refs`. The closed binding contract must refuse the
+undeclared field before dispatch and must describe the exact owner-reference
+requirement. A valid retry using only `carrier_scope_refs` with the exact owner
+plus any desired current carrier identities must bind successfully.
+
+Across multiple wakes, record a mixture of retained fragments, binding
+revisions, generic action receipts, capability provisioning/acquisition, tool
+invocations, peer exchanges, and workspace byte effects. The public projection
+must keep those stages distinct, signature/hash bound, bounded, and scoped to
+public authority. It must not infer a degree, profession, competence level,
+quality ranking, preferred method, or required next action. A single success
+presented as mastery, or a catalogue entry presented as a used skill, fails.
+
+On a later wake with at least one bound fragment, revise or add a binding during
+the same model turn. The turn-effect receipt must still carry the kernel-signed
+`brain-compile/4` references admitted before that turn, while the next turn
+compiles from the newer current state. Marking the earlier compile unavailable
+merely because post-turn state changed fails the causal audit.
+
+Create an ordinary concurrent workspace conflict with several exact
+alternatives. Inspection must return the complete paged preimage and minimal
+exact requests for each supported mechanical choice. Choose the persona branch
+using only the immutable conflict ref, listed choice, and optional rationale.
+The resolver must retain recoverable pre-merge refs, apply the selected persona
+bytes to the index, verify them, commit once, sign the complete alternative
+preimage and resulting tree, and close the conflict. Requiring the model to
+retype every nested path/hash, accepting a transcription mismatch, or retrying
+an unchanged Git merge until budget is exhausted fails. A non-owner choice is
+refused without changing the conflict.
+
+Run successful and failed caller-selected host commands using both direct argv
+and a shell wrapper. The public development surface must join exact signed
+started/completed receipts, count the observed top-level executable, success,
+time, and command hash, and label the shell wrapper only as the shell. Parsing
+the shell text to claim an inner tool, counting a start without its terminal
+receipt, or replacing receipt evidence with an inferred profession fails.
+Repeat with command receipts whose exact actor field is `persona_id` while
+capability receipts use their separately declared caller/author fields. Both
+must project for the verified actor; applying one event family's field name to
+all families and silently hiding the command is a failure.
+
+Query the local capability inventory with several independent literal fragments
+whose matches occur in different records. The response must declare an
+any-fragment literal mode and return the stable unranked union under its normal
+bound. Requiring every fragment in one record, ranking the union, or treating a
+match as acquisition/use fails.
+
+Repeat a large collaboration history until an observation crosses the inline
+byte bound. The canonical body must exist once in verified content-addressed
+storage; downstream communication, ambient, notification, action-turn, and
+post-effect events contain exact references and bounded manifests. Verify that
+growth is proportional to newly authored bytes rather than the cumulative
+prior situation. A missing body, hash mismatch, semantic field filtering, or
+recursive payload multiplication fails.
+
+Publish many contribution snapshots whose source work-state situations contain
+large prompt carriers. The current population snapshot must contain compact
+signed contribution references and remain linear in the number and current
+work-note bytes. Recursively copied prior situations, missing source hashes or
+signatures, or loss of the independently addressable full surface fails.
 
 For any append-derived inventory in this walk, equal payloads at different
 authoritative append positions remain distinct page records with exact total,
@@ -375,6 +538,13 @@ upgraded to semantic acceptance.
 
 **Failure:** HTTP 200, artifact count, member consensus, active-gap absence,
 score, or unchanged bytes establishes completion.
+
+If principal intent includes an exact materialization condition, trace that
+condition into the persona action loop. A text-only response must remain
+insufficient until authenticated effects or changed bytes meet the mechanical
+condition. Hard-coding a format, tool, profession, workflow, or content word in
+that gate, or treating the mechanical condition as substantive acceptance,
+fails.
 
 ## 16. Static contradiction audit
 

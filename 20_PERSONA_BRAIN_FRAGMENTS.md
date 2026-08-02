@@ -42,6 +42,10 @@ retrieval, embedding similarity, relevance score, helped/hurt count, recency
 weight, hot set, graph expansion, diversity selector, top-K, recommendation, or
 host-selected active subset.
 
+The fixed append frontier for sealed turn-effect receipts is a separate causal
+log projection, not fragment retrieval. It does not bind, activate, rank, or
+select any brain fragment.
+
 ## 3. Persona navigation and use
 
 During an ordinary wake, a persona may inspect a fragment by exact reference,
@@ -53,6 +57,76 @@ The exact persona-authored binding—not task words or host retrieval—determin
 which fragment bodies may be included in a later carrier. The carrier preserves
 fragment identity, content hash, provenance, and truncation facts. Provider
 framing does not join fragments into new instructions or impose sections.
+
+`brain-fragment-binding/1` is the exact signed decision record. Its fields are
+`id`, `persona_id`, `version`, exact `fragment_refs`, exact
+`carrier_scope_refs`, `evidence_refs`, bounded open `binding_payload`,
+`prior_hash`, `binding_hash`, `owner_signing_key_id`, `owner_signature`,
+`created_at`, and `updated_at`. Every fragment reference binds the current
+fragment id, content hash, version, signing key, and signature. Every carrier
+scope reference must be an exact identity already present in the authenticated
+current persona/environment/task/cohort carrier, and the owner persona identity
+must be among them. The host does not infer scope from body text.
+
+Fragment authoring and fragment binding have distinct closed mechanical
+contracts. `authority_scope` belongs only to the authored fragment revision;
+`carrier_scope_refs` is the complete binding scope, must include the exact owner
+persona reference, and accepts no parallel `authority_scope` field. A tool
+surface that ambiguously accepts both is invalid even if the kernel later
+refuses the extra field.
+
+Fragment authoring follows the same exact-scope rule. Empty and universal scope
+are explicit; every other scope must equal one current authenticated carrier
+identity. An unavailable scope is refused before storage with the exact current
+scope references exposed to the author. It is never stored as a semantic alias
+that later compiles silently exclude.
+
+Reusing a binding id creates a signed next revision bound to the complete prior
+record. The new exact fragment set replaces the old set; an empty set is an
+explicit unbinding. There is no host-defined enable/disable vocabulary.
+
+`brain-compile/4` binds both the non-activating catalogue page and the current
+`brain-fragment-binding-carrier/2`. A binding participates only when its exact
+scope is a subset of the current carrier and its owner signature still verifies.
+Each claimed fragment reference must byte-match the current signed revision.
+Stale, unavailable, over-count, and over-byte records are named in exact
+omission evidence. Admitted records are ordered only by binding identity and
+the fragment position authored inside that binding. They precede the unselected
+inventory because that precedence is the persona's signed selection, not a host
+relevance judgment.
+
+The kernel signs the exact compile before the model turn. Prompt admission
+still verifies every selected binding and fragment against current storage.
+After admission, that immutable signature lets the turn-effect receipt preserve
+what the turn actually saw even if the same turn authors a newer fragment or
+binding revision before effect capture. Recomputing the pre-turn carrier from
+post-turn state, and thereby erasing causal learning evidence whenever learning
+occurs, is forbidden.
+
+A selected carrier retains two hash-bound representations. Its audit record
+carries the exact binding and fragment references, signatures and hashes, the
+complete authored fragment body, and all binding/fragment material. Its prompt
+record is a deterministic field projection of that audit record: it carries the
+exact source-record hash, binding/fragment ids, hashes and versions, complete
+opaque authored body and metadata, scope, evidence and source references, and
+the open binding payload, while omitting duplicated public signatures. The
+kernel-signed compile binds both record lists and the runtime rejects any prompt
+projection that cannot be reproduced byte-for-byte from its full signed source.
+The carrier byte window measures the material actually rendered to the model;
+otherwise repeated audit signatures can crowd later learning out without adding
+usable knowledge. Repeated bindings of the same exact fragment revision collapse
+mechanically to one visible projection, with every duplicate represented in
+exact omission evidence. The smaller generic per-record cap for unselected
+inventory entries does not apply to a selected record. A selected prompt record
+that exceeds the total carrier bound is omitted explicitly while its omission
+continues to name the exact full source record.
+
+`list_brain_fragment_bindings` exposes the owner's exact hash-bound binding
+inventory without activating it. Reusing a `binding_id` replaces its signed
+fragment set; an empty set clears that exact binding. This lets a persona curate
+a growing active repertoire instead of allowing old duplicate bindings to crowd
+newer experience out of a finite carrier. Revision and clearing remain explicit
+persona choices, not host relevance, recency, profession, or domain rules.
 
 Using a fragment does not automatically prove influence, learning, competence,
 quality, or completion. Exact citations establish only that the persona chose
@@ -73,6 +147,14 @@ substrate defines no required create/supersede/split/merge/review/synthesize/
 compose/promote vocabulary and no semantic fields within `decision_payload`.
 One valid decision is admitted directly; there is no preliminary proposal,
 review, disposition, or promotion record.
+
+Within each open operation, `fragment_id` is the sole reserved caller-visible
+storage key. Omitting it allocates a new stable identity; supplying an existing
+identity replaces that fragment with a new exact version bound to its current
+preimage. All remaining authored keys and values become the complete opaque
+body unchanged. The substrate does not merge fields, parse an operation word,
+interpret a tombstone, or infer links. A decision may revise a given identity at
+most once so every operation binds one unambiguous preimage.
 
 Applying the exact decision produces `brain-evolution-application/1`, a
 mechanical receipt with exact `id`, `persona_id`, `decision_id`,
@@ -125,7 +207,10 @@ There is no live compatibility for `situation-capsule/1`,
 `active-agent-spec/1`, semantic `brain-compile/1`, selected-fragment prompts,
 activation/deactivation cue matching, utility/recency/diversity scoring,
 fixed mutation operators, BrainReview/BrainPromotion gates, or automatic
-trace-to-fragment updates.
+trace-to-fragment updates. Deprecated semantic brain-context/note actions, raw
+episode injection, and K-line injection are not present in the persona-visible
+registry or prompt path; exact histories remain navigable through their neutral
+inventories.
 
 ## 9. Design criteria
 
@@ -135,3 +220,9 @@ trace-to-fragment updates.
    open signed decisions.
 4. The host never assembles a behavioral prompt from task semantics.
 5. Fragments grant no capability, expertise, continuation, or completion.
+6. A signed exact binding is replayed into later matching carriers, or its exact
+   mechanical omission is visible; authored knowledge cannot disappear behind
+   a permanently empty host-selected compile.
+7. Authored, catalogued, bound, provisioned, acquired, invoked, practiced, and
+   effect-producing are distinct evidence states; the substrate infers neither
+   expertise nor a curriculum from them.

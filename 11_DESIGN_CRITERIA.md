@@ -48,6 +48,10 @@ slowest peer before painting verified identities.
 Every carrier exposes the same current-master-signed compact identity index.
 Cached verified bytes may accelerate the first paint but do not extend expiry,
 create routing authority, or keep an identity omitted from fresh sources.
+Readers and publishers share an atomic generation boundary when an aggregate is
+updated in place. A reader may observe the complete prior or next signed
+generation; it must not observe partial mutation as a real removal or cache that
+false absence into a public-route authorization decision.
 
 An HTTP locator, including `node1.personas.ai`, is a replaceable last-resort
 route hint used only when no primary route is viable. It is never global
@@ -119,6 +123,23 @@ coordinator, representative, role, or preferred recipient. Fan-out provides an
 opportunity to act; it does not mean the task is incomplete, complete, or that
 every recipient must call a model.
 
+A causal descendant created by a native model action retains the exact signed
+run/pool binding and the identical process-local budget object even when the
+action crosses a transport worker. That authority remains event-local and is
+never inserted into the run-wide inheritable scope. It is not serialized:
+restart delivery still requires the descendant's signed recovery descriptor,
+one exact positive lifecycle lease, and a separately verified resource grant.
+Hot recovery and collaboration reducers select exact event kinds and preserve
+their original append positions; they do not detach an entire lineage merely
+to find a lease, invitation, communication, membership edge, or birth outcome.
+
+An initially published `running` shell is presentation, not durable liveness.
+If no process-local run/event remains and the exact kernel-signed pool's finite
+grant has zero headroom in its verified adjustment ledger, that same run is
+offered as an interrupted budget pause and supersedes its older resume source.
+No task or output content participates, and this reconciliation neither changes
+the shell nor calls a model; only later signed resource evidence can resume it.
+
 ### C-OP-5 — Human-facing work notes are claims, not completion state
 
 The persona view may lead with the most recently appended exact persona-
@@ -183,6 +204,12 @@ records, and accessible knowledge references. Deterministic lexical, append, or 
 order is transport order only. There is no relevance score, similarity score,
 fitness, top-K, host recommendation, task classifier, or prompt-selected subset.
 
+An exact local capability query may accept several independent literal
+substrings and return their stable unranked union. It declares that mechanical
+match mode; it must not silently require one record to contain every independent
+query value. Exact identifier lookup remains separately available, and neither
+mode recommends or invokes a result.
+
 An append-derived inventory binds an exact snapshot, absolute positions, total,
 returned and omitted counts, and continuation cursor. Equal payloads at
 different authoritative append positions remain separately navigable. If one
@@ -221,6 +248,51 @@ exposes the exact fragment storage operations and open persona-authored fields
 needed to turn cited experience into future persona-owned material; neither
 action creates competence credit or continuation.
 
+A persona may convert its own cited experience into an opaque fragment and bind
+an exact signed revision to exact current carrier identities. The binding is a
+separate owner decision: retaining a note or receipt never activates it. A later
+matching carrier verifies the binding, current fragment preimage, and scope,
+then includes the exact body under mechanical count/byte bounds with explicit
+omissions. No task words, embeddings, role labels, domain names, utility score,
+or host prompt template selects it. Revising the same binding to an empty exact
+set removes it without a host-defined lifecycle vocabulary.
+
+An authored fragment scope is either empty, universal, or one exact identity in
+the authenticated current carrier. A syntactically valid but unavailable scope
+is refused before persistence and the exact available carrier identities are
+returned so the persona can revise its own choice. The substrate must never
+accept a semantic alias such as a generic persona, task, profession, or domain
+label and then silently omit that supposedly learned material from every later
+compile.
+
+Public presentation may project the verified evidence chain—authored fragment,
+current exact binding, observed action identities and counts, persona-authored
+acquisition/provisioning, invocation receipts, and exact completed host-command
+receipt pairs. A host-command projection exposes only the mechanically observed
+top-level executable identity, attempt/success counts, time, and command hash;
+it does not parse a shell program to infer tools. It labels those facts as
+development evidence, not an expertise award, education credential, quality
+score, or inferred profession. Bodies outside public authority remain absent.
+The actor join follows the exact field declared by each signed event family;
+capability/tool receipts and host-command receipts need not reuse one actor
+field name, and a projection may not drop valid command evidence by assuming
+that they do.
+
+The bounded carrier includes a content-neutral append frontier for sealed
+turn-effect episodes so an oversized earlier receipt cannot make the causal tip
+opaque. It declares exact source count/range/hash and compactly groups repeated
+copies of the same authenticated action invocation with their occurrence
+positions. This is fixed log-position projection, not task-, role-, outcome-,
+quality-, utility-, or vocabulary-based retrieval; full raw records and
+duplicates remain cursor-navigable.
+
+Large canonical observation bodies are persisted once behind verified
+content-addressed references. Communication, ambient routing, notification,
+action-turn, and post-effect records refer to that exact body or its signed
+source event rather than recursively embedding prior situations. Reducers that
+need a small event family use the verified exact-kind index and retain original
+append positions; they do not detach and copy the unrelated lineage.
+
 The persona-authored state lane has an independent exact append-order cursor,
 so later records remain reachable as execution receipts accumulate. An exact
 original task binding remains provenance, not a visibility fence: owner-
@@ -242,6 +314,18 @@ opaque exact `effect_kind`. The descriptor is mechanical ReplicationBound
 authority only; the substrate never derives it from an action name, arguments,
 task text, role, executable, prompt, or domain vocabulary.
 
+When the live registry is compacted for a bounded persona carrier, these exact
+replication-effect descriptors remain attached to the corresponding action row;
+a name/description-only projection is insufficient population authority.
+
+Population context transports compact signed contribution references, not the
+entire prior situation embedded inside every work-state surface. Each reference
+retains exact persona/environment/task/work-state/note identities, hashes,
+signatures, causal refs, supersession state, and the current authored work note.
+The full signed surface remains independently addressable. Repeated population
+publication therefore grows with new contributions rather than recursively
+copying all earlier situation carriers.
+
 A persona may choose an authorized population action during any ordinary wake.
 One admitted `personaos-persona-birth-proposal/5` produces only its exactly
 declared bounded effect and invitation. The newborn independently accepts or
@@ -250,6 +334,23 @@ membership, action, wake and run bindings, capacity, consent, integrity,
 replication bounds, and per-proposal idempotency; it does not judge a need,
 invent a role, choose characteristics, assign expertise, or require a team
 size.
+
+Identity admission and first-wake durability are separate commit boundaries.
+If execution stops between them, exact resource recovery may reconstruct only
+the missing outbox of that already-admitted identity from its one signed
+proposal, one signed admitted outcome, persisted provenance, and exact run/pool
+binding. Recovery reuses the same persona and any exact prior lifecycle lease,
+publishes the deterministic consent invitation, and treats `genesis_context`
+as opaque bytes. It never admits a replacement birth or derives a role, need,
+workflow, or capability choice from that content.
+
+An unresolved invitation becomes deliverable when the addressed persona has a
+materialized identity. Its ordinary delivery identity is bound to the exact
+invitation, addressed persona, and environment—not to mutable name,
+characteristic, or avatar revisions. Those revisions remain evidence on the
+delivery but cannot each spend another invitation turn. Restart/resource
+replay is a separate exact causal opportunity and is deduplicated by its replay
+event; neither delivery form accepts membership automatically.
 
 No birth is a valid emergent outcome. Multiple births are also possible when
 distinct persona-authored proposals and mechanical bounds permit them.
