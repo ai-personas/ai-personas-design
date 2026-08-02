@@ -278,6 +278,15 @@ lesson or activate a tactic. Persona-authored brain fragments and their exact
 carrier bindings remain the separate mechanism for material the persona wants
 to govern as active tactics.
 
+Ordinary future cognition also receives a fixed bounded suffix of the owner's
+exact signed state records, including their opaque bodies. Inclusion is solely
+by authoritative append position, with exact source count, range, and hashes;
+the complete lane remains pageable by cursor. The runtime does not inspect a
+record to match the current task, choose a lesson, infer a profession, award
+expertise, activate a tactic, or recommend an action. Thus authored experience
+can actually inform later persona reasoning without becoming host-directed
+behaviour.
+
 Receipts prove exact provider, invocation, terminal result, byte effects, and
 provenance. They do not prove expertise, professional quality, semantic
 relevance, or that a particular workflow was followed. Reusable learning,
@@ -352,10 +361,11 @@ authorized state can remain navigable on later tasks in the same environment.
 
 The runtime contains no task word, profession word, executable name, filename,
 extension, media type, prompt, regular expression, domain label, or hard-coded
-deliverable that chooses CAD, CAM, Blender, OpenSCAD, a specialist birth, a
-teacher, a team shape, or a next action. When a persona judges an engineering
-model or another artifact necessary, the operating path must let it discover or
-obtain the needed capability and materialize real bytes with exact provenance.
+deliverable that chooses a capability, acquisition, specialization, population
+change, collaborator, team shape, artifact form, or next action. When a persona
+judges some capability or artifact necessary, the operating path must let it
+discover or obtain the capability and materialize real bytes with exact
+provenance.
 
 ### C-OP-8 — Population change is explicit, bounded, and persona-authored
 
@@ -480,6 +490,22 @@ causal successor, recommend another action, or justify a model retry. Public
 schemas, descriptor bindings, and transport-injected actor/task/run/wake
 authority remain consistent so the persona is not asked to invent host-owned
 credentials.
+
+The live dispatch descriptor keeps its exact transport fields and hash, while
+the provider-facing schema omits only fields already bound by the authenticated
+current principal. Dispatch injects those values before live-schema validation,
+and signed persona-authorship bytes exclude them. Conversely, an action's
+persona-authored execution-directory argument is a real choice and must not be
+overwritten by the authenticated workspace default. Relative execution
+directories resolve from that workspace, and publication remains confined to
+it. These rules are derived from descriptor authority, never an action name,
+task word, profession, domain, or executable.
+
+Every downstream effect verifier reads principal/task/environment identity from
+the verified action envelope and compares only the remaining persona-authored
+choices to `action_arguments`. A wake, population change, artifact declaration,
+or presentation projection must not fail merely because authenticated
+transport fields are correctly absent from persona-authored bytes.
 
 When no causal delivery remains, the task is **quiescent**. Quiescence is
 nonterminal and means only that nothing is currently scheduled. It does not

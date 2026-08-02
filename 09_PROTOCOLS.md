@@ -57,6 +57,30 @@ cannot be supplied by public/model-authored arguments. An adapter that cannot
 preserve a required binding fails as adapter configuration; it does not
 reinterpret the request as persona intent.
 
+The immutable dispatch descriptor retains those reserved fields and its exact
+hash. The persona-facing projection removes only fields mechanically supplied
+by the current authenticated principal, including their root required and
+dependency declarations. The dispatcher restores the exact bound values before
+validating against the immutable descriptor. Action-authorship receipts exclude
+the restored values, so host identity is never misattributed as a persona
+choice. This projection does not inspect action names, task text, domains,
+roles, argument values, or executable names.
+
+Downstream admission, wake, population, artifact, and presentation verifiers
+therefore take principal identity from the verified action envelope and compare
+only persona-authored fields against `action_arguments`; they never require a
+transport-bound field to reappear in that authored map.
+
+An authenticated workspace is publication authority and the default execution
+base, not an authored working-directory choice. When an action schema exposes a
+working-directory argument, a persona-provided value survives transport;
+relative values resolve from the authenticated workspace. With no authored
+value, the handler uses that workspace itself. In either case only effects
+inside the authenticated workspace can be published as task artifacts. The
+dispatcher never replaces a persona-authored working directory with a host
+path, and the host workspace identifier is absent from persona-authored action
+bytes.
+
 ### 2.1 Exact unranked inventories
 
 The model-visible situation and inspection actions expose bounded paginated
@@ -408,6 +432,15 @@ or out-of-page records retain exact hashes and cursors instead of receiving a
 host summary. This is accumulated persona-authored knowledge, not an active
 brain tactic: brain-fragment evolution and binding remain separate explicit
 persona decisions.
+
+The ordinary cognition carrier includes a fixed append-position suffix of
+exact verified owner-authored records and their opaque bodies. It declares the
+complete source count, selected range, and content hashes while leaving the
+full append lane cursor-addressable. Selection reads no task, domain, role,
+record content, tool identity, outcome, quality, or similarity signal. Carrying
+the exact suffix is continuity of persona-authored experience; it neither
+selects a lesson nor grants expertise, activates a tactic, recommends a tool,
+or schedules behaviour.
 
 The current content-neutral storage envelope is 262,144 canonical JSON bytes
 and nesting depth 64 for `metadata`; `refs` accepts one exact string or at most
