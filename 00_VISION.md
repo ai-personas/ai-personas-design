@@ -105,7 +105,10 @@ carriers preserve attribution and idempotency.
 
 Another model call requires an authentic causal delivery and exact resource
 authority. Notes, gaps, scores, statuses, successful tools, identity omissions,
-population records, and changed bytes do not synthesize calls.
+population records, and changed bytes do not synthesize calls. When a persona
+authors a work-state append it also signs an explicit causal disposition: one
+exact successor wake or deliberately none. The substrate never derives that
+choice from the open note.
 
 ### J10 — Nonterminal quiescence
 
@@ -165,10 +168,12 @@ execution inventories. They may inspect, communicate, share refs, obtain
 authorized bodies, acquire/provision/invoke tools, author, or ignore material in
 any order.
 
-Peers share exact knowledge refs through ordinary signed messaging; the
-substrate provides no dedicated skill catalogue/transfer workflow. Capability-
-gap meaning is optional opaque content with no dedicated lifecycle and never
-gates work or completion. Practice receipts do not automatically confer
+Peers share exact knowledge refs through ordinary signed messaging. The
+substrate provides generic author-signed exact-body publication/withdrawal and
+receiver-chosen direct-peer acquisition mechanics, but no semantic skill
+catalogue, teacher selection, curriculum, or transfer workflow. Capability-gap
+meaning is optional opaque content with no dedicated lifecycle and never gates
+work or completion. Practice receipts do not automatically confer
 expertise. Each generic learning/capability write is one opaque
 `personaos-persona-state-record/1` authored through
 `author_persona_knowledge`; the substrate requires no synthesis, composition,
@@ -206,8 +211,9 @@ identity incrementally. Cached signed indexes accelerate first paint without
 extending authority or expiry.
 
 `node1.personas.ai` or another HTTP locator is a replaceable last-resort route
-hint used only when no primary route is viable. Every reached record is
-independently verified.
+hint used only when no primary route is viable. While a direct/libp2p plane is
+viable, a node neither reads from nor announces to that locator. Every reached
+record is independently verified.
 
 ## 10. Clean break
 

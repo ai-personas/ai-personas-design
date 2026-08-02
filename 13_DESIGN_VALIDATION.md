@@ -36,10 +36,10 @@ environments, personas, and tasks.
 **Trace:** local, direct, DHT/rendezvous, and gossip routes race. Each node is
 shown once its current master verifies; compact signed environment/persona
 entries stream immediately. Cached entries are reverified and reconciled.
-Expired or omitted identities disappear. The consumer does not query the HTTP
-locator while any primary route is viable; public nodes may still renew their
-short self-signed fallback leases. Once an identity-bound provider route is known, a
-rapidly changing signed document is requested through the peer data route and
+Expired or omitted identities disappear. The node neither queries nor announces
+to the HTTP locator while any primary route is viable; any earlier fallback
+lease expires without renewal. Once an identity-bound provider route is known,
+a rapidly changing signed document is requested through the peer data route and
 the same verified provider's anonymous direct route concurrently; whichever
 usable result arrives first must still pass the identical document and
 current-master checks.
@@ -207,13 +207,21 @@ inspect, communicate/share exact refs, obtain authorized bodies, search,
 acquire/provision/invoke tools, author opaque knowledge, or ignore items in any
 order.
 
-**Required outcome:** receipts preserve exact provider, action, result, and byte
-effects. Gap-like content is optional and has no dedicated lifecycle or
-readiness/continuation semantics.
+**Required outcome:** an owner may explicitly publish or withdraw one exact
+body. Catalogue metadata contains author/provider-verified commitments but not
+the body. A receiver's exact record/hash choice fetches directly from the signed
+peer, verifies the author and provider independently, and retains the envelope.
+Executable bodies mount only after their opaque portable recipe passes setup,
+build, smoke, and declared verification; other bodies are not automatically
+applied. Later cognition can inspect the retained exact body. Receipts preserve
+exact provider, action, result, and byte effects. Gap-like content is optional
+and has no dedicated lifecycle or readiness/continuation semantics.
 
 **Failure:** top-K or score chooses a tool; task words cause CAD/Blender; a gap
 narrows the catalog, selects a teacher, or schedules another call; use grants
-expertise automatically.
+expertise automatically; metadata advertises an unfetchable body; a central
+rendezvous becomes the transfer path; fetched source mounts without independent
+verification; or the acquisition disappears from later cognition.
 
 ## 8. Emergent engineering artifact
 
@@ -549,18 +557,28 @@ cross-domain record is refused solely for plurality.
 
 ## 14. Quiescence and later resume
 
-**Input:** no causal delivery remains, although personas could plausibly improve
-the result and a work note says “continue.”
+**Input:** a persona authors arbitrary open work-note content and signs the
+work-state causal disposition `no_successor`; no other causal delivery remains.
 
 **Trace:** the task projects quiescent with preserved artifacts and notes. No
 model call is scheduled. Later, an authenticated peer/resource/principal event
 arrives and resumes the same task.
 
 **Required outcome:** quiescence is nonterminal and separate from acceptance.
-The later exact event, not prior prose, creates the new carrier.
+The signed disposition makes the absence of a successor attributable without
+interpreting note content. The later exact event, not prior prose, creates the
+new carrier. In the companion trace, the same open note with an authored
+`immediate_wake` disposition must register and deliver exactly one successor,
+including exact bound model-input paths when supplied. Repeat that companion
+trace with one selected path created by another action in the same provider
+turn: request admission must not race the producer. The successor observes the
+settled byte size/hash at delivery, or carries an exact resolution failure,
+without interpreting the path or format.
 
-**Failure:** host polls because improvement is possible; “continue” creates a
-wake; quiescence is shown as complete; later event starts a replacement task.
+**Failure:** host polls because improvement is possible; a note word creates or
+suppresses a wake; the explicit disposition is lost; one disposition creates
+multiple successors; quiescence is shown as complete; later event starts a
+replacement task.
 
 ## 15. Objective acceptance
 

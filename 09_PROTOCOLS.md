@@ -139,13 +139,33 @@ record families: executable `tool` descriptors and opaque persona-owned
 author identities, optional environment/task bindings, content hash and
 canonical size, evidence refs, issue time, signing-key/public-key material,
 exact persona signature and hashes, plus explicit
-`authored_bytes_included: false`. It is
+`authored_bytes_included: false`. An optional current author-signed publication
+commitment carries the exact structural source identity, canonical body hash and
+size, publication/withdrawal value, rationale, action invocation, time, key, and
+signature. It is
 published only when the record verifies and each nonempty scope is already in
 the same public discovery generation. The provider record, discovery document,
 and access policy remain kernel-signed; after authorized body transfer, the
 receiver can reconstruct and independently verify the original persona-state
-signature. This transport does not create a semantic `skill` subtype, public
-body locator, task match, recommendation, or executable authority.
+signature. Discovery does not carry the body or an arbitrary locator. Under a
+current publication and public-read grant, the publication id mechanically
+derives a bounded peer-body route whose provider-signed envelope binds the
+exact discovery record and publication. This transport does not create a
+semantic `skill` subtype, task match, recommendation, or executable authority.
+
+`acquire_global_capability` accepts only an exact current verified catalogue
+record id and its expected body/envelope hashes. It fetches the derived route
+from that record's signed peer base, rejects a changed network origin, consults
+no central rendezvous fallback, and independently verifies the provider key,
+host identity, author key, publication signature, source identity, sizes, and
+hashes. The exact authenticated action and verified envelope are retained in
+signed environment lineage. Structural executable-tool bodies are passed as
+opaque portable recipes through the ordinary provisioning and verification
+boundary; structural persona-state bodies are retained without automatic
+application. `inspect_acquired_capabilities` exposes a complete mechanically
+ordered summary inventory plus exact-id, JSON-pointer, and byte-window reads.
+No field in either action expresses a domain, profession, task match, preferred
+provider, required capability, teacher, curriculum, or expertise award.
 
 ### 2.3 Receipts and retry
 
@@ -390,15 +410,12 @@ Discovery proves where verified bytes may be found; it does not grant access,
 membership, execution, truth, expertise, or relevance.
 
 An HTTP locator, including `node1.personas.ai`, is a replaceable last-resort
-first-contact hint. It is consulted only when no primary route is viable and
-stops being relied on once a primary PersonaOS route verifies. Locator leases
-are short, signed, source-scoped, and non-authoritative.
-
-A public node may renew its own self-signed locator lease while its primary
-routes are healthy. Publishing that replaceable availability hint is not a
-locator lookup and grants no returned data or authority to the publisher.
-Consumer reads remain suppressed until their own direct/P2P plane is not
-viable; producer publication and consumer dependence are separate states.
+first-contact hint. A node reads from or announces to it only when no primary
+route is viable, and stops both operations once a primary PersonaOS route
+verifies. Locator leases are short, signed, source-scoped, and
+non-authoritative; when primary discovery recovers, the last fallback lease
+expires without renewal. Producer and consumer fallback decisions use the
+node's same mechanically observed non-locator viability state.
 
 Cached signed indexes may accelerate rendering but do not extend leases or
 preserve omitted identities. Every warm read re-verifies signatures, current
@@ -501,13 +518,26 @@ authority as other media.
 
 ## 10. Work notes, completion, and quiescence
 
-`personaos-persona-work-state/3` carries a bounded open `work_note` and exact
-observed-situation and append lineage. Protocols preserve it as one immutable
+`personaos-persona-work-state/4` carries a bounded open `work_note`, exact
+observed-situation and append lineage, and one explicit signed
+`personaos-persona-causal-disposition/1`. Protocols preserve it as one immutable
 authored claim. They do not extract commitments, blockers, stages,
-requirements, votes, readiness, or next actions from it.
+requirements, votes, readiness, or next actions from the note.
 
-The persona authors only open note content and optional causal references;
-record identity, revision, and prior-record pointer are substrate-derived append
+The persona authors open note content, optional causal references, and its
+causal disposition. The disposition is either an exact deliberate
+`no_successor` record or one exact `immediate_wake` request with persona-authored
+opaque kind/payload and optional exact model-input paths. The signed request
+binds the persona's path choices, not a speculative pre-settlement file read.
+Only successor delivery—after the current persona turn has settled—observes
+each selected path's exact size and hash and reports any unavailable or changed
+bytes. This remains mechanical and performs no filename, extension, MIME, or
+format inference. A generic selected file is not coerced into an image-only
+provider attachment; it remains available through the authenticated workspace
+and ordinary persona-selected inspection/execution tools. Media-specific native
+attachments require their own independently verified carrier. The disposition
+is never derived from note content. Record
+identity, revision, and prior-record pointer are substrate-derived append
 integrity. `bound_to_latest_observation` reports only equality between two exact
 situation hashes. Protocols expose no note defer, settlement, pending, current,
 stale, replacement, or invalidation semantics. Earlier verified appends remain
@@ -518,9 +548,11 @@ declared by principal intent. Work notes, gap-like authored content, population 
 artifact counts, HTTP status, scores, and model prose do not complete work.
 
 Continuation requires an actual signed delivery, message, armed future receipt,
-persona-authored wake/schedule, or another explicit causal event. With no such
-event pending, the state is quiescent. Quiescence is nonterminal and may be
-resumed by any later authorized event.
+persona-authored wake/schedule (including the work-state disposition), or
+another explicit causal event. With no such event pending, the state is
+quiescent. Quiescence is nonterminal and may be resumed by any later authorized
+event. A signed `no_successor` is an attributable causal choice, not objective
+acceptance or a claim that no refinement is possible.
 
 ## 11. Framework adapter contract
 
@@ -573,8 +605,9 @@ no current authority merely because their signatures once verified.
 Current cutover records include:
 
 - `personaos-persona-work-situation/1`,
-  `personaos-persona-work-state/3`,
-  `personaos-persona-work-state-surface/3`,
+  `personaos-persona-work-state/4`,
+  `personaos-persona-work-state-surface/4`,
+  `personaos-persona-causal-disposition/1`,
   `personaos-persona-work-note-state/1`, and
   `personaos-work-state-evidence/1`;
 - `personaos-persona-birth-proposal/5` and

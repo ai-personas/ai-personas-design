@@ -66,10 +66,10 @@ route hint used only when no primary route is viable. It is never global
 authority or an availability dependency. Source-scoped reconciliation and
 signed expiry remove stale records.
 
-Public nodes renew their short self-signed fallback leases independently of
-whether those nodes need to consume the locator. A healthy primary route
-suppresses locator reads, not publication of the non-authoritative route that
-a different, disconnected consumer may need as its last resort.
+A node renews a short self-signed fallback lease only while its own primary
+plane is not viable. A healthy primary route suppresses both locator reads and
+producer announcements; disconnected consumers independently enter fallback
+from their own observed state. Earlier leases expire without renewal.
 
 ### C-OP-3 — Identity is optional evolution, never work admission
 
@@ -260,6 +260,21 @@ item in any order they choose. A perceived gap is optional meaning inside opaque
 persona-authored knowledge, without a dedicated record/action/lifecycle.
 Expressing, revising, or omitting it never gates work, completion, identity,
 action visibility, or another wake.
+
+Body availability is never inferred from catalogue membership. One generic
+persona-signed publication/withdrawal action must bind an exact owned source and
+its canonical bytes. Discovery carries that commitment rather than the body.
+When current policy grants public read, a protocol-derived peer route may serve
+one provider-signed exact-body envelope. Acquisition requires the receiving
+persona's separately authenticated exact record/hash choice, performs a direct
+peer fetch without a central fallback, and independently verifies provider,
+author, source, size, and hashes. It then retains the exact acquisition.
+Executable structural bodies traverse the same opaque provision/smoke/declared-
+verification boundary as locally authored recipes; non-executable structural
+bodies have no automatic behavioral effect. Later cognition can navigate every
+retained acquisition by exact id and content window. No task, domain, role,
+filename, extension, MIME value, capability label, or tool name participates in
+publication, selection, transfer, retention, or application.
 
 `author_persona_knowledge` admits one signed
 `personaos-persona-state-record/1` per invocation. Authenticated context supplies
@@ -457,9 +472,22 @@ do not create calls.
 
 `goal_progress` is an observational append even when its open status text says
 work remains. Its receipt explicitly reports that objective acceptance was not
-changed and no causal successor was enqueued. A persona that wants another
-turn authors a separate exact wake or another action whose descriptor declares
-a causal delivery.
+changed and no causal successor was enqueued. A work-state append must carry a
+separate explicit persona-authored causal disposition in the same signed action:
+either deliberately no successor or one exact immediate wake. The disposition
+is not inferred from the open note, and neither choice establishes objective
+acceptance. Other actions create later turns only when their descriptor declares
+and registers a causal delivery.
+
+Optional successor model-input paths are exact persona-authored selections.
+Their byte observations occur at successor delivery after all current-turn
+effects settle, not while potentially concurrent tool calls are still running.
+The delivery record binds size and content hash or exposes exact resolution
+failure. Path selection and delivery never infer a file kind or choose a
+renderer, tool, or workflow. A generic path must not be sent blindly through an
+image-only provider input; exact workspace navigation remains available for all
+formats, while a native media attachment requires separate verified media
+authority.
 
 Each persona call is bound to an authenticated `run-model-pool/1`, which is an
 unordered ceiling. An exact matching signed `persona-model-choice/1` supplies

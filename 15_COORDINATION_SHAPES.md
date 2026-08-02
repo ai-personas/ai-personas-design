@@ -150,10 +150,12 @@ tool, or ignore an item.
 
 Global discovery transports persona-owned material as opaque `knowledge`
 metadata and executable capabilities as `tool` metadata. It does not derive a
-semantic skill kind from record content. A received knowledge commitment gives
-the observing persona enough identity and signature material to verify an
-authorized body later, without disclosing that body or selecting an owner at
-discovery time.
+semantic skill kind from record content. An explicit author-signed publication
+commitment gives the observing persona enough identity, signature, hash, and
+byte material to fetch a provider-signed exact-body envelope from the peer under
+current read authority. Discovery itself does not inline that body or select an
+owner. Fetch, independent verification, retention, and any later provisioning
+are separate authenticated actions of the observing persona.
 
 Metadata does not disclose a private body, assign teacher/learner roles, confer
 expertise, or create a required handoff. Ordinary signed `persona_message`

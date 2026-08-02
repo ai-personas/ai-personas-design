@@ -199,18 +199,57 @@ record cannot manufacture or alter that authority.
 Metadata visibility or receipt of a reference does not disclose private bytes,
 mount a tool, grant execution authority, or confer expertise. Personas share
 record references through ordinary signed `persona_message`; body access still
-requires exact visibility/consent policy. There is no dedicated team-skill
-catalogue, skill-transfer request/disposition, or conflict-resolution workflow.
+requires exact visibility/consent policy. A persona may separately sign an
+exact publication or withdrawal decision for one body it owns. That generic
+decision binds the source identity, canonical body hash and size, environment,
+task provenance, rationale, and authenticated action. It neither creates a
+semantic skill type nor publishes any other private material. There is no team-
+skill catalogue, teacher selection, skill-transfer request/disposition, or
+conflict-resolution workflow.
 
 On the global peer plane, a verified public persona-state record may therefore
 appear as `knowledge` metadata alongside executable `tool` metadata. The public
 metadata preserves the exact record/author/scope identities, body commitment,
-byte and evidence-reference facts, time, signing material, and access authority,
-but carries no authored body or locator. An authorized body received later can
-be checked against those exact commitments and the persona signature. The
-substrate does not inspect the body to label it a skill, match it to a task, or
-prefer its author; the observing persona decides whether to contact the owner,
-obtain it, retain it, adapt it, or ignore it.
+byte and evidence-reference facts, time, signing material, access authority,
+and any current author-signed publication decision. The catalogue does not
+inline the body or accept an arbitrary body locator. When both author
+publication and public-read authority are current, a protocol-derived route may
+serve a provider-signed envelope containing those exact bytes. The envelope
+binds the provider kernel, discovery record, author publication, body hash, and
+body size. A receiving persona explicitly chooses one exact record and expected
+hashes, fetches it from that record's signed peer base rather than a rendezvous
+fallback, and independently verifies both signatures and all bindings before
+retention. The substrate does not inspect the body to label it a skill, match it
+to a task, or prefer its author.
+
+A verified executable-tool body may carry its exact portable setup, build,
+implementation, interpreter, environment, schema, declared effects, and
+verification recipe. Acquisition reruns those opaque steps and mounts nothing
+unless provisioning, smoke execution, and every author-declared verification
+command succeed. A verified opaque state body is retained without automatic
+application. Later cognition receives a small exact acquisition inventory and
+may open any retained body by exact id, JSON pointer, and byte window. Catalogue
+presence, body publication, acquisition, provisioning, mounting, invocation,
+practice, authored learning, brain evolution, and expertise claims therefore
+remain distinct evidence states.
+
+The capability plane is source-plural. Exact local execution inventory,
+persona-published peer bodies, signed registry candidates, and a persona-authored
+portable provisioning recipe are independent routes through the same ordinary
+action boundary. A recipe's setup/build/source choices may name any reachable
+package manager, source host, library, command, or interpreter; those values are
+opaque authored bytes, not a kernel catalogue. No particular executable,
+profession, file format, provider, or internet source is privileged or required.
+Network reachability is an execution fact, not permission to trust fetched
+material: the persona still chooses the source and the resulting acquisition
+retains exact receipts and verification outcomes.
+
+The zero-inclusive capability-acquisition observation joins both transport
+planes without collapsing them: local registry/provision/mount/invocation
+counts and verified global publication/acquisition/outcome/body-kind counts are
+reported independently from signed lineage. Empty counts remain visible. This
+is causal memory, not a deficiency detector, curriculum, recommendation,
+domain classifier, or automatic reason to acquire or invoke anything.
 
 The persona may inspect, communicate, share refs, obtain authorized bodies,
 acquire or provision tools, verify, author, relate, invoke, or decline material
