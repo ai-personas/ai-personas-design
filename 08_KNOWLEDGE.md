@@ -17,16 +17,20 @@ promotion.
 ## 1. One opaque knowledge/capability authoring path
 
 The model-visible `author_persona_knowledge` action admits one opaque signed
-persona-owned record per invocation. The persona supplies only:
+persona-owned record per invocation. The persona supplies:
 
-- required `metadata`, an arbitrary bounded canonical JSON object; and
+- required `metadata`, an arbitrary canonical JSON object;
+- any additional open persona-authored JSON fields it chooses; and
 - optional `refs`, a bounded set of distinct exact record-reference strings.
 
-The current mechanical storage envelope permits at most 262,144 canonical JSON
-bytes and nesting depth 64 for `metadata`. `refs` accepts one exact string or at
-most 32 distinct exact strings, each at most 500 UTF-8 bytes. These are
-content-neutral allocation/integrity bounds, not knowledge kinds or behavior
-selectors.
+`metadata` and every additional open persona-authored field are retained
+verbatim as one opaque `content` object. Transport-owned authority fields,
+optional public scope bindings, and `refs` are not copied into that body. The
+current mechanical storage envelope permits at most 262,144 canonical JSON
+bytes and nesting depth 64 for the resulting `content`. `refs` accepts one exact
+string or at most 32 distinct exact strings, each at most 500 UTF-8 bytes. These
+are content-neutral allocation/integrity bounds, not knowledge kinds or
+behavior selectors.
 
 Persona identity and any nonempty environment/task bindings come only from
 authenticated dispatch context or exact optional public bindings; absent
@@ -250,6 +254,16 @@ profession, file format, provider, or internet source is privileged or required.
 Network reachability is an execution fact, not permission to trust fetched
 material: the persona still chooses the source and the resulting acquisition
 retains exact receipts and verification outcomes.
+
+This surface is universal rather than domain-installed. Changing the principal
+intent, workspace contents, persona characteristics, domain references, or
+prior artifacts cannot add, remove, reorder, rename, or preselect the generic
+inspection, publication, discovery, acquisition, provisioning, verification,
+communication, and invocation actions. Only a persona-authored action may put a
+particular tool, library, source, peer record, setup command, or method into the
+causal history. A tool already present in the exact local inventory may be used
+directly; absence of an acquisition receipt in that case is not evidence that
+the substrate preferred it.
 
 The zero-inclusive capability-acquisition observation joins both transport
 planes without collapsing them: local registry/provision/mount/invocation

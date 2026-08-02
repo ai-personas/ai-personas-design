@@ -204,6 +204,13 @@ unchanged to every current active member. Per-recipient replay is idempotent.
 **Required outcome:** prior persona identities resume; best-so-far bytes remain;
 no replacement persona, new task, or coordinator poll is minted.
 
+If restart has already queued ordinary historical deliveries for a member, the
+authenticated resource carrier reaches the head of that member's serialized
+mailbox first and presents the exact pending delivery batch in its current-state
+facts. FIFO remains unchanged within each transport class. This ordering may
+not inspect task text, artifact bytes, identity prose, domain labels, filenames,
+extensions, professions, or tool names.
+
 The operator grant is appended once as an identity-bound signed adjustment to
 the paused run's existing budget ledger before the recovery carrier is
 delivered. The recovery model call spends from that same ledger. Any remaining
@@ -296,8 +303,9 @@ invalid.
 
 ## 7. Optional capability navigation
 
-**Input:** a persona encounters unfamiliar work and may or may not describe a
-perceived gap inside opaque knowledge content.
+**Input:** personas encounter several unrelated tasks over time and may or may
+not describe perceived gaps inside opaque knowledge content. None of the task
+domains or useful tools are known to the substrate.
 
 **Trace:** exact paginated unranked inventories expose local execution, mounted
 tools, verified peer/public metadata, memories, and skills. The persona may
@@ -315,11 +323,20 @@ applied. Later cognition can inspect the retained exact body. Receipts preserve
 exact provider, action, result, and byte effects. Gap-like content is optional
 and has no dedicated lifecycle or readiness/continuation semantics.
 
-**Failure:** top-K or score chooses a tool; task words cause CAD/Blender; a gap
+Before any semantic interpretation, every task observes the same descriptor
+identities, ordering, and generic navigation actions. A persona may use an
+already present executable without acquisition, acquire a verified peer or
+registry body, or author a portable recipe that names a previously unseen
+source. Repeating the run with different task text, domain references,
+extensions, persona traits, or artifacts changes choices and receipts only; it
+does not change substrate routing.
+
+**Failure:** top-K or score chooses a tool; task words cause any named tool; a gap
 narrows the catalog, selects a teacher, or schedules another call; use grants
 expertise automatically; metadata advertises an unfetchable body; a central
 rendezvous becomes the transfer path; fetched source mounts without independent
-verification; or the acquisition disappears from later cognition.
+verification; the action catalogue changes with domain/task/format vocabulary;
+or the acquisition disappears from later cognition.
 
 ## 8. Emergent engineering artifact
 
@@ -665,6 +682,48 @@ absent from every canonical signed observation and later learning page.
 changes a limit; a safety policy assigns a profession/role; capacity becomes a
 team-size recommendation; a private capture handle crosses the evidence
 boundary; transport drops the refusal reason and encourages blind retries.
+
+## 12.3 Bounded verified hot path
+
+**Input:** a long-lived environment contains many large model, artifact,
+communication, work-state, and telemetry events. Several exact causal wakes
+share one remaining finite call, and the process restarts while historical
+deliveries are pending.
+
+**Trace:** verify each complete signed lineage generation, then obtain topology
+and source authority through exact event-kind indexes. Copy only the bodies
+consumed by that structural reduction. Extend work-state and other append-only
+verified prefixes by authoritative append identity instead of replaying every
+prior prefix for every projected row. Check cancellation, exact run/pool
+binding, source-event binding, and atomic budget authority before constructing
+the heavyweight current-mission situation. Transport the signed resource-return
+carrier ahead of ordinary historical rows while preserving FIFO order within
+each transport class.
+
+For generic collaboration lookup, retain structural signed-envelope candidates
+with their exact event hash, append position, scalar task bindings, and JSON
+path; apply the existing persona-authority verifier only to those candidates.
+For unchanged regular workspace files, single-flight the digest under an exact
+filesystem identity that includes device, inode, mode, size, link count, and
+nanosecond modification/change times; validate the descriptor again after the
+read. Historical work rows retain compact signed observation authorities and
+load a full situation only when its exact reference is dereferenced.
+
+**Required outcome:** the first funded persona turn becomes eligible without
+work proportional to unrelated payload bytes or to the square of retained
+history. Every used record still belongs to a completely verified chain; cache
+reuse changes no content, cardinality, order, or authority. Competing wakes that
+lose the finite call retain their exact causal identity for later resource
+recovery. Event-kind indexing, prefix caching, and mailbox precedence remain
+unchanged when task words, domain, filenames, formats, persona traits, and
+available tools change.
+
+**Failure:** an indexed projection skips full-chain verification; a cache hides
+an append or survives a changed chain; unrelated payloads are repeatedly deep
+copied into a structural projection; an unfunded replay builds the entire
+mission prompt before failing; resource recovery waits behind the rows whose
+execution it funds; or optimization introduces a task, domain, tool, role,
+format, capability, population, or completion classifier.
 
 ## 13. Plural domain references
 

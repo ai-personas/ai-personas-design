@@ -56,6 +56,13 @@ resource pool. Per-recipient carriers preserve independent leases,
 deduplication, and settlement. The substrate selects no coordinator, owner,
 role, reviewer, or representative.
 
+Within each serialized persona mailbox, an authenticated resource-resume
+carrier has mechanical transport precedence over previously queued ordinary
+restart-replay rows. Its current-state carrier includes the exact pending
+causal-delivery batch, so replay cannot strand the budget authority needed to
+settle that backlog. Ordering reads only the verified wake kind and never task,
+persona, tool, artifact, profession, filename, or content meaning.
+
 ### D3 — Work notes are open claims
 
 `personaos-persona-work-state/3` contains a bounded open `work_note` with exact
@@ -100,11 +107,29 @@ The generic peer and routed-wake snapshots use the shared hash-bound pager with
 `record_order: "exact_input_order"`, `duplicate_records_preserved: true`, exact
 page/omission spans, and no automatic or semantic selection.
 
+An append-derived projection may retain an exact verified prefix or source
+cursor and may use an exact event-kind index after the complete signed lineage
+generation verifies. It then copies only the event bodies the declared
+structural reduction consumes. The cache key is causal scope plus authoritative
+append identity; later appends extend rather than replace the prefix. This is a
+verification optimization only: it cannot rank, discard, reinterpret, or make
+one payload semantically more important than another, and a changed or invalid
+chain fails closed.
+
+A lineage may also index every structurally signed mapping candidate by exact
+event hash, append position, scalar scope bindings, and JSON path. The index
+does not decide that the candidate is persona-authored communication; the
+ordinary authority verifier makes that decision. Unchanged regular-file hashes
+may be shared by concurrent projections only under an exact filesystem identity
+and before/after descriptor equality. Neither cache uses a timer or interprets
+paths, suffixes, MIME, task text, domain, role, tool, or content.
+
 ### D6 — Knowledge and capability writes are opaque
 
 `author_persona_knowledge` admits one opaque signed persona-owned record per
-invocation. It stores canonical persona-authored `metadata` and optional exact
-`refs` in `personaos-persona-state-record/1`, with authenticated
+invocation. It stores required canonical persona-authored `metadata` and every
+additional open persona-authored JSON field verbatim as opaque `content`, plus
+optional exact `refs`, in `personaos-persona-state-record/1`, with authenticated
 persona and any exact optional environment/task bindings, plus mechanical
 `record_kind: "persona_knowledge"`. The substrate defines no shared semantic
 kind taxonomy and requires no name, description, interface, parent-skill
@@ -167,6 +192,22 @@ actions do not synthesize calls.
 With no pending delivery, the task/persona is quiescent. Quiescence is
 nonterminal and does not mean complete, ready, sufficient, abandoned, failed,
 or converged.
+
+Finite execution authority is checked before constructing workspace,
+population, learning, collaboration, identity, or other heavyweight prompt
+projections. An authenticated wake that loses the shared-budget race is retained
+as the same causal delivery; it does not spend CPU rebuilding context merely to
+discover that no call is authorized. A signed resource-return carrier precedes
+ordinary historical mailbox rows and may mechanically batch their exact
+references. This ordering chooses no task action, tool, role, capability,
+collaborator, birth, or disposition.
+
+The resource carrier first exists as a deterministic signed durable batch
+outbox. Its ordered recipient identities and exact wake hashes survive process
+exit. A recipient settles only by producing a persona-signed cognitive intent
+bound to that wake; startup replays only the exact unsettled subset. Recovery
+cannot mint another causal event, model pool, budget grant, persona, or semantic
+choice.
 
 ### D12 — Objective acceptance is explicit authority
 

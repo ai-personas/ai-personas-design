@@ -161,6 +161,17 @@ environment. Transport wrappers around one backend observation are coalesced by
 their exact mechanical observation identity before experience accounting; they
 never become repeated practice merely because several routers retained them.
 
+Verified append-only lineages may maintain structural projections alongside the
+full event bodies. An exact-kind projection retains append positions; a signed-
+envelope candidate projection retains only the event authority, exact content
+hash, scalar scope bindings, candidate path, and detached mapping that exposes
+a structural signature carrier. The candidate projection does not interpret or
+admit the mapping. The ordinary signature, owner, visibility, and scope verifier
+still decides whether it contributes. Complete-chain verification precedes
+projection reads, and append identity is the cache generation. These indexes
+may not inspect schemas for semantic meaning or branch on task, domain, persona,
+role, action, tool, filename, format, or payload prose.
+
 ### 2.2 Persona navigation
 
 A persona may inspect an exact descriptor, use an already mounted action,
@@ -169,6 +180,13 @@ obtain an authorized body, search an authorized registry or internet source,
 acquire or provision a tool, author one opaque knowledge record, invoke a tool,
 delegate, or ignore the inventory. Those are ordinary signed actions and may
 occur in any persona-authored order.
+
+The complete generic navigation surface is leased before the task is
+interpreted and remains identical across unrelated intents. There is no
+host-side prerequisite that first recognizes a gap, profession, domain, file
+type, expected artifact, or known executable. Search queries, registry choices,
+peer references, package/source locations, provisioning recipes, verification
+commands, and invocations appear only in persona-authored action arguments.
 
 A capability gap is optional meaning a persona may express in opaque knowledge
 content. There is no dedicated gap action or lifecycle. Expressing, revising,
@@ -311,6 +329,16 @@ Each recipient receives its own signed delivery carrier and deduplication/
 settlement identity, but all carriers bind the same source event. A recipient
 may act, communicate, schedule itself, or make no call. Fan-out has no objective
 completion meaning and does not require identical behavior.
+
+Before any recipient carrier enters a process-local mailbox, the kernel appends
+one `personaos-resource-wake-batch-outbox/2` whose deterministic identity binds
+the exact resource event, run, environment, task, model-pool scope, and ordered
+recipient carrier identities and hashes. Startup and heartbeat reduction accept
+only a completely verified outbox generation and re-enqueue only its exact
+unsettled carriers. One `personaos-resource-wake-settlement/1` is appended only
+after the recipient's persona-signed cognitive intent verifies against that
+carrier. Process exit before settlement therefore loses no wake; repeated replay
+cannot mint a new causal event, pool, grant, recipient, or action choice.
 
 An exact source-effect fence may delay delivery until the source actor's
 workspace and action effects settle. That ordering examines only signed source,
@@ -552,10 +580,13 @@ that owner's ordinary future-cognition inventory. Admission there is by verified
 owner, environment visibility, content-address order, and declared mechanical
 count/byte bounds only; it is not a host-selected lesson or an expertise award.
 
-`author_persona_knowledge` accepts only persona-authored bounded canonical
-`metadata` and optional distinct exact `refs`. Authenticated dispatch supplies
-persona identity and verifies any optional environment/task binding. One
-invocation persists one signed existing
+`author_persona_knowledge` accepts required persona-authored canonical
+`metadata`, any additional open persona-authored JSON fields, and optional
+distinct exact `refs`. The complete open authored body is retained verbatim as
+opaque `content`; transport authority, public scope bindings, and refs remain
+separate envelope fields. Authenticated dispatch supplies persona identity and
+verifies any optional environment/task binding. One invocation persists one
+signed existing
 `personaos-persona-state-record/1` with exact `schema`, `record_id`,
 `persona_id`, `environment_id`, `task_id`, mechanical
 `record_kind: "persona_knowledge"`, opaque `content`, `evidence_refs`,
