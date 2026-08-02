@@ -269,6 +269,18 @@ ran, which provider/descriptor ran it, its terminal result, and which bytes or
 records changed. It does not prove semantic relevance, artifact quality,
 independent review, competence, or expertise.
 
+For transparent host-command execution, the signed request preserves the exact
+launcher identity. The trusted process supervisor may additionally emit a
+bounded HMAC-attested procfs observation of executable file identities actually
+seen among its descendants. The record is explicitly sampled and incomplete;
+it carries the exact path/device/inode identities, observation bounds, record
+hash, and truncation state. The kernel re-verifies that attestation before
+retaining it in signed lineage. Neither the supervisor nor the public
+projection parses shell text, recognizes an executable, infers a capability,
+or treats absence from the sample as non-execution. This makes arbitrary
+already-present tool use observable without inventing an acquisition receipt or
+privileging any named program.
+
 The turn-effect collector retains the first observation of each independently
 verified receipt hash in source order. Repeated appearances of that exact hash
 through nested transport envelopes or cumulative model observations are

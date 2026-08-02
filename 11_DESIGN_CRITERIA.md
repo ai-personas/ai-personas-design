@@ -385,8 +385,10 @@ Public presentation may project the verified evidence chain—authored fragment,
 current exact binding, observed action identities and counts, persona-authored
 acquisition/provisioning, invocation receipts, and exact completed host-command
 receipt pairs. A host-command projection exposes only the mechanically observed
-top-level executable identity, attempt/success counts, time, and command hash;
-it does not parse a shell program to infer tools. It labels those facts as
+launcher and any HMAC-verified sampled descendant executable identities,
+attempt/success counts, time, and command hash. Sampling is explicitly
+incomplete, so absence proves nothing; the projection does not parse a shell
+program to infer tools. It labels those facts as
 development evidence, not an expertise award, education credential, quality
 score, or inferred profession. Bodies outside public authority remain absent.
 The actor join follows the exact field declared by each signed event family;

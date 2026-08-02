@@ -503,6 +503,17 @@ or tool history appear empty also fails. Retaining knowledge that can thereafter
 be reached only by a multi-action cursor ritual—and never participates in an
 ordinary later cognition inventory—also fails longitudinal continuity.
 
+Run an arbitrary persona-authored host command whose shell launcher starts one
+or more longer-lived child executables. The signed completion must retain the
+exact launcher plus every descendant executable identity actually observed by
+the bounded supervisor sample, with the sample marked incomplete and bound to
+the guarded-command hash. Change every executable name and task/domain input:
+the mechanism and ordering must remain identical. A forged observation, changed
+record hash, mismatched command hash, or unsigned supervisor line must be
+ignored. Parsing shell text, recognizing a named program, claiming an
+unobserved child ran, turning local use into an acquisition, or treating an
+absent short-lived child as evidence of non-use fails.
+
 Author one opaque fragment, bind its exact signed revision to the current
 persona plus task or environment carrier, and deliver a later ordinary wake.
 The later carrier must include the exact body and binding evidence without any

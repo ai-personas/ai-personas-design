@@ -290,6 +290,23 @@ There is no compatibility or migration path for:
 Historical records may remain as opaque audit bytes. They confer no current
 authority or behavior.
 
+### D15 — Local executable use is observed, not inferred
+
+An exact command request identifies its launcher. Because shell workflows can
+start arbitrary child programs, launcher-only presentation is insufficient
+evidence of what was actually observed. The transparent supervisor therefore
+samples descendant procfs executable identities under fixed count/time bounds,
+HMAC-attests the exact path/device/inode records and guarded-command hash, and
+marks the result incomplete. The kernel verifies and retains that observation;
+public presentation may expose conservative basenames and counts from the
+signed lineage.
+
+The sample is neither command parsing nor a tool catalogue. It names no
+preferred executable, performs no task/domain matching, creates no acquisition
+or expertise credit, and makes no negative claim about children that were too
+short-lived to observe. Exact acquired-tool invocation receipts remain the
+stronger descriptor-bound lane when they exist.
+
 ## Consequences
 
 Emergence is attributable: useful births, communication, learned skills, tool
