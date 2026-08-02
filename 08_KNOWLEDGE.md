@@ -61,6 +61,15 @@ inside its one opaque authored record; the host does not require a second
 finalization record. A later record may cite an earlier one, but does not
 rewrite its bytes or acquire automatic supersession semantics.
 
+Authoring the record is also the persona's explicit decision to retain it for
+later cognition. Every verified same-environment `persona_knowledge` record
+therefore joins the owner's ordinary Layer-4 candidate inventory on later
+turns. That inventory is content-address ordered, unranked, and mechanically
+count/byte bounded; records outside the current page remain exact and
+cursor-addressable. This does not make the record true, relevant, active as a
+tactic, or evidence of competence. Persona-authored brain fragments and their
+exact bindings remain a separate mechanism for active tactics.
+
 ## 2. Complete unranked inventories
 
 For each authorized view, the substrate exposes a bounded paginated inventory
@@ -325,7 +334,10 @@ skill-synthesis/skill-composition shapes, parent-skill gates, semantic
 proposal/review/promotion lifecycles, GEPA/MIPRO-style host optimization,
 mutation-operator catalogues, tactic promotion gates, identity-expression
 scores, team-skill catalogues, skill-transfer/conflict ceremonies, dedicated
-capability-gap workflows, habit-strength reducers, or automatic memory-to-prompt injection.
+capability-gap workflows, habit-strength reducers, or host-selected automatic
+memory-to-prompt injection. Mechanically returning every eligible record to an
+unranked owner inventory is continuity of the persona's explicit authoring
+decision, not a semantic retrieval policy.
 Historical records using those schemas may remain opaque bytes but confer no
 current selection or behavior authority.
 

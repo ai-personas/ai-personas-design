@@ -36,8 +36,9 @@ environments, personas, and tasks.
 **Trace:** local, direct, DHT/rendezvous, and gossip routes race. Each node is
 shown once its current master verifies; compact signed environment/persona
 entries stream immediately. Cached entries are reverified and reconciled.
-Expired or omitted identities disappear. The HTTP locator remains unused while
-any primary route is viable. Once an identity-bound provider route is known, a
+Expired or omitted identities disappear. The consumer does not query the HTTP
+locator while any primary route is viable; public nodes may still renew their
+short self-signed fallback leases. Once an identity-bound provider route is known, a
 rapidly changing signed document is requested through the peer data route and
 the same verified provider's anonymous direct route concurrently; whichever
 usable result arrives first must still pass the identical document and
@@ -324,6 +325,13 @@ The separate persona-authored-state page has its own exact cursor, and retained
 owner state remains navigable across later tasks in the same environment while
 preserving its original task provenance.
 
+On the next ordinary wake, each verified persona-authored knowledge record also
+enters the owner's content-addressed Layer-4 candidate inventory. Exact bodies
+that fit the ordinary per-record and page bounds are available to cognition;
+every omission remains hash/cursor-bound. No task word, domain label, score, or
+host-authored summary selects one, and merely returning a record does not turn
+it into an active tactic or an expertise credential.
+
 The carrier's turn-effect append frontier exposes the causal tip even when an
 older exact episode is larger than the prompt allocation. Its source total,
 suffix range, omitted prefix, hashes, action-invocation occurrence accounting,
@@ -345,7 +353,9 @@ automatically consolidates/decays memory, chooses a teacher, requires a
 synthesize/compose lifecycle, awards expertise, or lets one oversized earlier
 record erase all observable causal effects from the next wake. A stale client
 schema that rejects a valid current signed action and makes the actor's learning
-or tool history appear empty also fails.
+or tool history appear empty also fails. Retaining knowledge that can thereafter
+be reached only by a multi-action cursor ritual—and never participates in an
+ordinary later cognition inventory—also fails longitudinal continuity.
 
 Author one opaque fragment, bind its exact signed revision to the current
 persona plus task or environment carrier, and deliver a later ordinary wake.
@@ -393,6 +403,20 @@ must keep those stages distinct, signature/hash bound, bounded, and scoped to
 public authority. It must not infer a degree, profession, competence level,
 quality ranking, preferred method, or required next action. A single success
 presented as mastery, or a catalogue entry presented as a used skill, fails.
+
+Construct a seven-component navigation carrier in which the complete action
+identity/preview rows and complete execution-capability exact-name index each
+fit their neutral component share, while larger unrelated components do not.
+Both compact indexes must remain inline and every opaque identifier must be
+present exactly once; full descriptors/provenance remain lazily inspectable.
+Replacing either fitting index with only its field counts and hashes because a
+wrapper duplicated summaries or counts fails. Selection by identifier text,
+task prose, registry position, or inferred usefulness also fails.
+
+Verify the projected action rows against their own projection hash and preserve
+the distinct full-descriptor source hash. A verifier that requires those two
+hashes to be equal, thereby discarding the compact catalogue it just built,
+fails.
 
 On a later wake with at least one bound fragment, revise or add a binding during
 the same model turn. The turn-effect receipt must still carry the kernel-signed

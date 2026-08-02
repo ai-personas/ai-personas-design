@@ -355,6 +355,12 @@ first-contact hint. It is consulted only when no primary route is viable and
 stops being relied on once a primary PersonaOS route verifies. Locator leases
 are short, signed, source-scoped, and non-authoritative.
 
+A public node may renew its own self-signed locator lease while its primary
+routes are healthy. Publishing that replaceable availability hint is not a
+locator lookup and grants no returned data or authority to the publisher.
+Consumer reads remain suppressed until their own direct/P2P plane is not
+viable; producer publication and consumer dependence are separate states.
+
 Cached signed indexes may accelerate rendering but do not extend leases or
 preserve omitted identities. Every warm read re-verifies signatures, current
 master authority, expiry, visibility, subject bindings, hashes, and revocation.
@@ -380,8 +386,11 @@ extension, MIME alone, prompt text, or content inspection.
 
 Knowledge transport exposes exact signed inventories and request-by-reference
 access as specified in [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md). It performs no
-automatic retrieval, ranking, summarization, decay, consolidation, prompt
-injection, or behavior selection.
+semantic retrieval, ranking, summarization, decay, consolidation, or behavior
+selection. An exact record that a persona explicitly authors as knowledge joins
+that owner's ordinary future-cognition inventory. Admission there is by verified
+owner, environment visibility, content-address order, and declared mechanical
+count/byte bounds only; it is not a host-selected lesson or an expertise award.
 
 `author_persona_knowledge` accepts only persona-authored bounded canonical
 `metadata` and optional distinct exact `refs`. Authenticated dispatch supplies
@@ -391,6 +400,14 @@ invocation persists one signed existing
 `persona_id`, `environment_id`, `task_id`, mechanical
 `record_kind: "persona_knowledge"`, opaque `content`, `evidence_refs`,
 `issued_at`, `signing_key_id`, and `signed_by`.
+
+The verified record, including its opaque content when it fits the ordinary
+per-record carrier bound, participates in later same-environment Layer-4 pages.
+Its original task remains provenance rather than a visibility fence. Oversized
+or out-of-page records retain exact hashes and cursors instead of receiving a
+host summary. This is accumulated persona-authored knowledge, not an active
+brain tactic: brain-fragment evolution and binding remain separate explicit
+persona decisions.
 
 The current content-neutral storage envelope is 262,144 canonical JSON bytes
 and nesting depth 64 for `metadata`; `refs` accepts one exact string or at most
@@ -463,7 +480,9 @@ Adapters may translate PersonaOS records to external SDK, CLI, MCP, A2A, or
 model-provider wire shapes. Translation must preserve:
 
 - exact identity, task, environment, membership, and resource authority;
-- complete live action descriptors and their reserved bindings;
+- every live action identity in ordinary navigation, a uniform bounded
+  descriptor preview, and authenticated lazy access to each complete descriptor
+  and its reserved bindings;
 - explicit effect annotations, including replication effects;
 - exact input attachments and verified local-byte bindings;
 - signed MIME, artifact role, content hash, length, and provenance;

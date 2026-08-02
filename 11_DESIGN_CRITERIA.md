@@ -66,6 +66,11 @@ route hint used only when no primary route is viable. It is never global
 authority or an availability dependency. Source-scoped reconciliation and
 signed expiry remove stale records.
 
+Public nodes renew their short self-signed fallback leases independently of
+whether those nodes need to consume the locator. A healthy primary route
+suppresses locator reads, not publication of the non-authoritative route that
+a different, disconnected consumer may need as its last resort.
+
 ### C-OP-3 — Identity is optional evolution, never work admission
 
 Persona continuity is established by keys, signed lineage, lifecycle, and
@@ -108,13 +113,35 @@ so a task that fits durable storage but not cognition transport cannot be
 silently admitted with a truncated principal instruction.
 
 The prompt preserves one complete mechanical navigation authority alongside
-the principal lane: every currently leased action descriptor, every exact name
-in the execution-capability index, verified roster/birth/replication authority,
-and every current workspace file path. Its construction and bounds are
-content-neutral. No task token, regular expression, domain role, preferred
-tool, preferred team size, filename type, ranking, or recommendation may choose
-what survives transport. Append-only contribution and learning histories use
-hash-bound pages outside this present-navigation lane.
+the principal lane: every currently leased action identity with a uniform
+fixed-length description preview and required-input/effect shape, every exact
+name in the execution-capability index, verified roster/birth/replication
+authority, every current workspace file path, exact current identity/readiness
+state, zero-inclusive capability-acquisition state, and the hash-bound
+manifests and cursors of the persona's retained learning. Exact action
+descriptors and history bodies remain behind their authenticated inspectors and
+cursors; the navigation lane neither selects nor activates one. Its
+construction and bounds are content-neutral. No task token, regular expression,
+domain role, preferred tool, preferred team size, filename type, ranking, or
+recommendation may choose what survives transport. Append-only contribution
+and exact learning bodies remain independently pageable.
+
+Direct task/resource delivery and every event-driven wake construct this same
+navigation authority from the same seven live sources. An event-wake path may
+not silently fall back to the older four-source carrier. If the combined lane
+crosses its byte bound, every component receives the same mechanical byte
+opportunity; an oversized component becomes a hash-bound structural index.
+Component meaning, task prose, field words, and record contents never decide
+which whole lane disappears. A mechanically compact complete-identity index
+that fits its equal share must remain inline: duplicating counts or summaries in
+its wrapper may not push all action or execution-capability names behind a
+hash-only outline.
+
+The complete-descriptor catalogue hash and the compact prompt-projection hash
+bind different canonical preimages. Validation must verify the compact rows
+against the projection hash while retaining the source hash as the address of
+the independently inspectable descriptors; equating the two would reject every
+nontrivial projection.
 
 Project presence on resume is reduced from reciprocal signed topology, not a
 disposable environment attribute. The model-visible environment state includes
@@ -243,11 +270,21 @@ interface, parent-skill relation, synthesize/compose operation, rationale,
 review, transfer, conflict, disposition, promotion, or score. A persona may
 express and cite any such meaning inside open content.
 
+That explicit authored record joins the owner's ordinary future-cognition
+inventory. Exact same-environment records compete in one content-addressed,
+unranked, mechanically count/byte-bounded Layer-4 page; the original task id is
+provenance, not a later-task exclusion rule. The substrate does not infer a
+lesson or activate a tactic. Persona-authored brain fragments and their exact
+carrier bindings remain the separate mechanism for material the persona wants
+to govern as active tactics.
+
 Receipts prove exact provider, invocation, terminal result, byte effects, and
 provenance. They do not prove expertise, professional quality, semantic
 relevance, or that a particular workflow was followed. Reusable learning,
 experience, and identity evolution arise only through explicit persona-authored
-signed records, not automatic host credit.
+signed records, not automatic host credit. Returning those exact records to the
+author's future unranked inventory is continuity of their choice, not a
+competence judgment.
 
 Sealed turn-effect episodes are included in the exact bounded history visible
 on later authorized wakes. `inspect_persona_learning_history` pages that same
