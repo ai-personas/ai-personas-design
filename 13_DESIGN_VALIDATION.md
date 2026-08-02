@@ -742,6 +742,42 @@ changes a limit; a safety policy assigns a profession/role; capacity becomes a
 team-size recommendation; a private capture handle crosses the evidence
 boundary; transport drops the refusal reason and encourages blind retries.
 
+## 12.2a Exact media attachment join
+
+**Input:** a persona signs an immediate disposition selecting several current
+workspace paths. Some exact byte identities have verified persona-authored MIME
+declarations, some are undeclared or changed, and the callable adapter set
+advertises a bounded set of input modalities.
+
+**Required outcome:** successor delivery resolves every selected path without
+filename or content inference. Only exact path/size/hash declarations whose MIME
+top-level equals an adapter-advertised modality become native attachments.
+Every other resolved path remains visible as ordinary workspace evidence and
+does not reject the turn. The router excludes adapters unable to carry the
+admitted attachment modality without selecting among the remaining bodies.
+
+**Failure:** suffix or byte sniffing supplies MIME; the runtime chooses a
+different path, converts a format, interprets task/domain meaning, attaches
+undeclared bytes, sends every selected file through one provider lane, or lets
+one incompatible path suppress all successor cognition.
+
+## 12.2b Finite-edge continuation preservation
+
+**Input:** the current model call consumes the final signed run unit, then the
+persona appends a signed work state whose separate causal disposition is an
+immediate wake with exact optional model-input paths.
+
+**Required outcome:** the append succeeds and reports `waiting_resource`. The
+signed work state is durable continuation authority, but no trigger, call,
+reservation, ambient pool, or hidden headroom is minted. On a later exact signed
+resource recovery, the current verified work state and then-current selected
+byte identities are presented to that persona under the recovered shared pool.
+
+**Failure:** the committed disposition is returned as a generic failed action;
+the run appears semantically done; the substrate grants an extra call; the
+selected bytes are observed before the prior turn settles; or recovery drops
+the authored disposition and model-input selection.
+
 ## 12.3 Bounded verified hot path
 
 **Input:** a long-lived environment contains many large model, artifact,

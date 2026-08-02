@@ -129,6 +129,14 @@ resource event, authenticated peer message, armed future receipt,
 persona-authored wake, or another protocol-defined stimulus. Text such as
 “continue,” “blocked,” “ready,” or “done” creates no edge.
 
+The work-state action's separate signed causal disposition is action authority,
+not meaning inferred from `work_note`. When an immediate disposition is signed
+at the finite resource boundary, the immutable work-state record preserves that
+exact choice as `waiting_resource`; it is not itself an executable wake and
+does not allocate a call. A later signed resource-recovery edge presents the
+verified state unchanged and supplies the execution authority. This does not
+settle, reopen, or reclassify the note.
+
 When no causal delivery is pending, the run is **quiescent**. Quiescence is
 nonterminal: it says only that nothing is presently scheduled. It does not mean
 the objective is complete, abandoned, sufficient, or incapable of further
@@ -181,7 +189,8 @@ or semantics.
    values.
 3. Append metadata orders records but never replaces or reclassifies them.
 4. `bound_to_latest_observation` is hash-equality evidence only.
-5. Notes never determine objective completion, readiness, continuation,
-   capability, population, identity, or settlement.
+5. Note content never determines objective completion, readiness, continuation,
+   capability, population, identity, or settlement; the separately signed
+   causal disposition remains exact action authority only.
 6. Quiescence is a nonterminal absence of pending causal delivery.
 7. Human presentation distinguishes authored claims from verified facts.

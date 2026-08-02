@@ -229,6 +229,15 @@ recommend an alternative, or authorize a retry. Transport-injected task, actor,
 run, wake, and lease bindings must agree with the public action schema and the
 signed descriptor rather than becoming hidden model-authored fields.
 
+One boundary case is not represented as a contradictory refusal: when a signed
+work-state action explicitly carries an immediate disposition but the current
+finite call has consumed the last run unit, that signed work state is durable
+pending continuation authority. It is not an armed or executable successor and
+allocates no resource. The action reports the exact `waiting_resource` delivery
+state. A later independently authorized resource event delivers the current
+work state back to its author under the recovered shared pool; only that event
+creates executable call authority.
+
 Work-note prose, gap-like knowledge content, a population action, successful invocation,
 artifact declaration, unchanged/changed workspace, score, objective statement,
 HTTP status, and model claim do not create continuation.
@@ -238,6 +247,11 @@ HTTP status, and model claim do not create continuation.
 Budget exhaustion pauses affected pending deliveries and preserves their exact
 event, task, model pool, workspace binding, and best-so-far bytes. It is not
 semantic completion or failure.
+
+Resource recovery also presents each active persona's latest verified work
+state. If its exact disposition selected model-input paths, resolution occurs
+against current bytes at this new delivery, after the prior turn settled. No
+stale pre-exhaustion byte observation is reused.
 
 A later exact resource grant resumes the original task generation. One signed
 resource event fans out unchanged to all active members under the same bounded

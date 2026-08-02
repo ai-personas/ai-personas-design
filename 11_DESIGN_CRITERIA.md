@@ -540,10 +540,20 @@ Their byte observations occur at successor delivery after all current-turn
 effects settle, not while potentially concurrent tool calls are still running.
 The delivery record binds size and content hash or exposes exact resolution
 failure. Path selection and delivery never infer a file kind or choose a
-renderer, tool, or workflow. A generic path must not be sent blindly through an
-image-only provider input; exact workspace navigation remains available for all
-formats, while a native media attachment requires separate verified media
-authority.
+renderer, tool, or workflow. A generic path must not be sent blindly through a
+provider input. Native attachment admission requires equality among the exact
+selected path/size/hash, an already-verified persona-authored MIME declaration,
+and a modality mechanically advertised by a callable adapter. Nonmatching paths
+remain exact workspace observations and do not poison the turn. No filename,
+extension, task, content, body preference, conversion, or host format list may
+supply the join.
+
+If the same signed work-state action reaches the exact finite budget boundary,
+its immediate disposition remains durable `waiting_resource` authority without
+arming or funding a wake. Later signed resource recovery presents the verified
+state and resolves its selected bytes at that later delivery. The recovery
+event—not note prose, disposition vocabulary, or substrate optimism—supplies
+the next call authority.
 
 Each persona call is bound to an authenticated `run-model-pool/1`, which is an
 unordered ceiling. An exact matching signed `persona-model-choice/1` supplies

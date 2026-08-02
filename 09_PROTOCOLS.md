@@ -748,12 +748,16 @@ opaque kind/payload and optional exact model-input paths. The signed request
 binds the persona's path choices, not a speculative pre-settlement file read.
 Only successor delivery—after the current persona turn has settled—observes
 each selected path's exact size and hash and reports any unavailable or changed
-bytes. This remains mechanical and performs no filename, extension, MIME, or
-format inference. A generic selected file is not coerced into an image-only
-provider attachment; it remains available through the authenticated workspace
-and ordinary persona-selected inspection/execution tools. Media-specific native
-attachments require their own independently verified carrier. The disposition
-is never derived from note content. Record
+bytes. This remains mechanical and performs no filename, extension, task, or
+content inference. Delivery joins the selected path/size/hash to an already
+verified persona-authored artifact declaration. It then compares the exact
+declared MIME top-level token with the unordered modalities mechanically
+advertised by callable model adapters. Only an exact compatible join enters a
+provider-native attachment lane. Undeclared, changed, unresolved, or
+transport-incompatible bytes remain ordinary authenticated workspace
+observations and cannot fail or suppress the whole successor. The runtime does
+not choose a path, infer MIME, inspect pixels, prefer a body, or translate one
+format into another. The disposition is never derived from note content. Record
 identity, revision, and prior-record pointer are substrate-derived append
 integrity. `bound_to_latest_observation` reports only equality between two exact
 situation hashes. Protocols expose no note defer, settlement, pending, current,
@@ -770,6 +774,17 @@ another explicit causal event. With no such event pending, the state is
 quiescent. Quiescence is nonterminal and may be resumed by any later authorized
 event. A signed `no_successor` is an attributable causal choice, not objective
 acceptance or a claim that no refinement is possible.
+
+If the persona signs an `immediate_wake` disposition after the finite run's last
+call has already been charged, the signed work-state record remains exact
+pending continuation authority but is not an executable wake and does not mint,
+borrow, reserve, or enqueue a call. The action reports `waiting_resource`
+instead of contradicting its already-committed disposition with a generic
+failure. A later independently signed resource-recovery event presents that
+same verified work state and its selected model-input paths to the persona. The
+resource event supplies the new call authority; the note text and disposition
+do not. A resource-paused run with this authority is not reported as semantic
+completion or ordinary no-successor quiescence.
 
 ## 11. Framework adapter contract
 
