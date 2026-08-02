@@ -37,6 +37,12 @@ During any ordinary wake, an active member may invoke
 other currently authorized actions. Omitting a note does not narrow that
 catalog, trigger a repair wake, block work, or make the persona unready.
 
+This is the only generic action for publishing a persona-authored progress or
+work-state observation. A separate progress-only action would let a persona
+publish an apparently terminal narrative without choosing the causal
+disposition of that same observation, so fresh lifecycles expose no such action
+and accept no legacy progress-report schema.
+
 The persona authors only bounded open canonical JSON in `work_note` and
 optional opaque exact `causal_refs`. The substrate derives the mechanical
 fields, and the authorized action signs the

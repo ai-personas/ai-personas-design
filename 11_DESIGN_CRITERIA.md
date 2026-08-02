@@ -561,14 +561,14 @@ authority. Status reports, gap-like authored content, population records, identi
 scores, retry prose, note fields, and host-derived “more work possible” signals
 do not create calls.
 
-`goal_progress` is an observational append even when its open status text says
-work remains. Its receipt explicitly reports that objective acceptance was not
-changed and no causal successor was enqueued. A work-state append must carry a
-separate explicit persona-authored causal disposition in the same signed action:
+There is no causally incomplete progress-report action. A persona that chooses
+to publish a bounded open work note must use `record_persona_work_state`, whose
+same signed action requires one explicit persona-authored causal disposition:
 either deliberately no successor or one exact immediate wake. The disposition
 is not inferred from the open note, and neither choice establishes objective
 acceptance. Other actions create later turns only when their descriptor declares
-and registers a causal delivery.
+and registers a causal delivery. Earlier progress-only actions and records have
+no compatibility or migration path in a fresh lifecycle.
 
 Optional successor model-input paths are exact persona-authored selections.
 Their byte observations occur at successor delivery after all current-turn
