@@ -34,6 +34,14 @@ The signature covers MIME, hash, length, owner/scope, role, domain references,
 and provenance. A changed byte body, MIME, role, or scope is a new signed
 revision—not presentation metadata.
 
+An artifact body has a strictly positive byte length. A zero-length regular
+file remains exact workspace and command-attempt evidence, including its path,
+hash, producer receipt, terminal result, and error output, but it is not counted
+or advertised as a materialized artifact. This is a content-neutral carrier
+invariant: it does not inspect filenames, extensions, MIME, task text, tool
+names, professions, prompts, or file contents. A persona may replace the path
+with byte-bearing content and author a declaration for those new exact bytes.
+
 ## 2. Explicit signed MIME
 
 `mime_type` is the authoritative format declaration bound to exact bytes. The
@@ -209,3 +217,5 @@ authority.
 7. Artifact state never substitutes for objective acceptance.
 8. An unchanged exact byte revision retains valid signed format provenance
    across task continuation; changed bytes require new signed authority.
+9. Zero-length workspace files remain visible as attempt evidence but never
+   masquerade as materialized artifact bodies.

@@ -81,6 +81,13 @@ dispatcher never replaces a persona-authored working directory with a host
 path, and the host workspace identifier is absent from persona-authored action
 bytes.
 
+Command execution preserves terminal status, diagnostics, and changed-path
+evidence even when a producer leaves a zero-length file. Capture and artifact
+projection admit only positive-length byte carriers as materialized outputs;
+the empty path remains workspace/receipt evidence and is neither erased nor
+presented as a usable artifact. This admission rule is mechanical and does not
+branch on path, extension, MIME, task, domain, executable, or authored prose.
+
 ### 2.1 Exact unranked inventories
 
 The model-visible situation and inspection actions expose bounded paginated
