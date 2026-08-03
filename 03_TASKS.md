@@ -67,6 +67,15 @@ recommendations. Large append-only activity histories remain independently
 hash-bound and pageable; they cannot displace present actions, peers,
 population bounds, executables, or files.
 
+A mechanical nesting-depth guard must not rewrite a compact canonical subtree
+inside a signed or hash-bound observation. If such a subtree fits the declared
+content-neutral byte bound, it is carried exactly regardless of nesting depth.
+If it does not fit, the projection carries an explicit content hash, canonical
+size, omission state, and independently addressable source rather than altered
+bytes beside the source's unchanged hash. This applies equally to successful
+and failed action results, persona-authored retained state, peer contributions,
+and every other schema; field names and result meaning never affect the rule.
+
 A resumed environment reconstructs project references from reciprocal verified
 project and environment lineage. A mutable projection field is not routing or
 prompt authority. Repeating a persona-signed request for an identical already

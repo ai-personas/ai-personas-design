@@ -743,6 +743,29 @@ records consuming the mission projection fails. Vary task words, roles, paths,
 tool names, and component sizes; manifest ordering and inline disposition must
 remain unchanged.
 
+Place a compact canonical action-result observation and persona-authored state
+below the situation projection's ordinary nesting-depth guard, with each
+enclosing frontier bound by its exact supplied hash. The compact subtrees must
+remain byte-identical and every enclosing hash must still verify in the next
+persona carrier. A depth marker replacing a boolean, error body, receipt,
+fragment, or other compact leaf—and thereby causing the recent-effect or
+learning frontier to disappear—fails. Repeat with an actually oversized deep
+subtree: it must become an explicit hash/size/omission reference under the same
+byte-only rule, never a field-name- or outcome-selected summary.
+Applying a generic diagnostic-field scrub after the closed observation has
+been hash-bound must likewise preserve the verified carrier exactly; it may
+sanitize only before hashing or reject the whole unverified carrier, never
+delete a nested field while retaining the old hash.
+
+For live emergence validation, submit the exact principal request as the task
+event. Do not replace it with an operator-authored expansion that names desired
+population changes, professions, tools, formats, workflows, missing evidence,
+or expected stopping behaviour. Such an expansion is ordinary prompt authority
+and therefore cannot demonstrate that the observed choices emerged from the
+persona. Amendments are valid only when they are exact principal-authored input;
+the report must distinguish behaviour requested by those bytes from behaviour
+independently authored by a persona.
+
 Persist that large semantic situation through
 `personaos-persona-work-situation-storage/1`. The signed envelope must be
 smaller when the lossless encoding permits, while its `content_hash` remains
