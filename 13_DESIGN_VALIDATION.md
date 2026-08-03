@@ -644,6 +644,15 @@ retype every nested path/hash, accepting a transcription mismatch, or retrying
 an unchanged Git merge until budget is exhausted fails. A non-owner choice is
 refused without changing the conflict.
 
+Also inspect a one-character-mistyped opaque reference as the owning persona.
+The substrate must not prefix-match or choose a likely conflict. The failure
+must return the caller's exact mechanically projected open-reference inventory
+and minimal retry request in the same tool result, allowing an exact retry in
+the same cognition turn. A non-owner inspection must return the exact owner
+identity while withholding alternatives and resolution authority. Returning
+only an unrecoverable generic error and consuming later model turns to
+rediscover the reference fails.
+
 Also materialize pending shared-workspace bytes before a persona merge and
 force a pre-merge working-tree refusal. The pending bytes must first be bound to
 neutral environment history, and a failure with no unmerged index must remain

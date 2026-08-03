@@ -213,6 +213,12 @@ merge heads, and unmerged index. Inspection exposes those bytes for judgment
 and also returns complete minimal resolution requests. The persona authors the
 conflict reference, one mechanical resolution kind, and optional open rationale;
 it does not retype a large hash preimage already committed by that reference.
+An unknown or mistyped opaque reference is never prefix-matched, guessed, or
+silently repaired by the substrate. Its authenticated inspection response
+returns the exact current open-reference inventory owned by the caller, with
+minimal inspection requests, so the persona can retry without spending another
+turn rediscovering host state. A known non-owner reference instead returns its
+exact owner identity without granting inspection or resolution authority.
 Every publication lane, including an exact authorized-file publication, must
 emit that same complete preservation evidence when it encounters a real
 conflict. A later signed observation with the identical branch and exact
