@@ -59,13 +59,23 @@ adapter, every complete leased action descriptor is a first-class provider tool
 under its real action name; the prompt does not duplicate that catalogue behind
 an inspector/invoker carrier. On a structured-only adapter, the same complete
 unranked catalogue remains in the navigation lane. The lane also carries the
-complete mechanically observed execution-name index, the verified current
-population/replication authority, and every current workspace file path. These
-components are selected only by closed schema identity and content hash, never
-by task words, roles, filename suffixes, domain labels, rankings, or
-recommendations. Large append-only activity histories remain independently
-hash-bound and pageable; they cannot displace present actions, peers,
-population bounds, executables, or files.
+mechanically observed execution inventory, verified current population/
+replication authority, and current workspace state. These components are
+selected only by closed schema identity and content hash, never by task words,
+roles, filename suffixes, domain labels, rankings, or recommendations. If the
+combined carrier crosses its content-neutral byte bound, the fewest components
+needed are replaced by hash-bound structural indexes in descending canonical-
+byte reduction order. Their ordinary authenticated inspectors remain leased;
+the host does not choose a useful executable, peer, file, or action to retain.
+Large append-only activity histories remain independently hash-bound and
+pageable; they cannot displace current population and navigation authority.
+
+One small exact action-usage component remains separate from both the catalogue
+and retained-learning body. It joins current action identifiers to exact zero-
+inclusive receipt observations by string equality, allowing the persona to
+observe repetition or non-use for itself even when either larger source is
+structurally indexed. Counts never cause the runtime to rank, recommend,
+suppress, or invoke an action.
 
 A mechanical nesting-depth guard must not rewrite a compact canonical subtree
 inside a signed or hash-bound observation. If such a subtree fits the declared
@@ -100,6 +110,15 @@ The ingress event and every later task-resume resource event are offered
 concurrently to **every active environment member**. Each delivery binds the
 same exact source-event bytes and hash, task, environment, principal intent,
 resource pool, and workspace observation.
+
+A same-task resume additionally binds one kernel-signed
+`personaos-prior-run-resume-observation/1`. It carries the immediately prior
+run identity and exact terminal status, content-bound continuation state,
+verified persona-authored work-state evidence, and a mechanically projected
+materialized-file reference. The prior observation occupies an independent
+prompt lane; generic raw-event compaction cannot replace it with only the
+resume event hash. Its words and values grant neither completion nor a
+successor—they are visible causal evidence for each recipient's own decision.
 
 Each member receives its own carrier, lease, deduplication identity, and
 settlement record. The kernel does not select a coordinator, owner, lead,
@@ -268,15 +287,23 @@ successors as conflict.
 
 A finite persona-authored immediate or scheduled wake is executable only when
 its arm transition atomically transfers a complete bounded turn allowance from
-the exact current causal budget. The signed marker binds the reservation hash,
-per-fire call cap, persona, environment, task, request, run, and model pool. A
-bounded recurrence prepays one independent allowance for every declared fire;
-an unbounded recurrence requires explicitly unlimited authority. The arm append
-encloses the exact reservation, and an append failure returns the uncommitted
-transfer. A successful result therefore means the future work is durably armed
-and funded, not merely that a timer was recorded.
+the exact signed causal run ledger. The currently delivered event-local
+allowance pays only for that already-admitted turn; recursively debiting its
+remaining transport headroom would make a valid chain stop independently of the
+run grant. Arming a new successor therefore debits the same exact run ledger at
+arm time, while delivery still spends only the independently prepaid successor.
+The signed marker binds the reservation hash, per-fire call cap, persona,
+environment, task, request, run, and model pool. A bounded recurrence prepays
+one independent allowance for every declared fire; an unbounded recurrence
+requires explicitly unlimited authority. The arm append encloses the exact
+reservation, and an append failure returns the uncommitted transfer. A
+successful result therefore means the future work is durably armed and funded,
+not merely that a timer was recorded.
 
-When the trigger fires, the kernel claims exactly one reserved allowance by
+One allowance is the bounded transport envelope for a single semantic turn:
+at most one attempted call per eligible signed-pool body. Tool exchanges remain
+inside that admitted provider turn and do not justify speculative extra model
+turns. When the trigger fires, the kernel claims exactly one reserved allowance by
 joining the signed arm transition, the signed fired transition, and its exact
 ambient carrier. Each fire can claim at most once and the claim count cannot
 exceed the prepaid bound. Finite scheduled work never falls back to whatever

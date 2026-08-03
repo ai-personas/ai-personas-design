@@ -65,7 +65,7 @@ which fragment bodies may be included in a later carrier. The carrier preserves
 fragment identity, content hash, provenance, and truncation facts. Provider
 framing does not join fragments into new instructions or impose sections.
 
-`brain-fragment-binding/1` is the exact signed decision record. Its fields are
+`brain-fragment-binding/2` is the exact signed current-head decision record. Its fields are
 `id`, `persona_id`, `version`, exact `fragment_refs`, exact
 `carrier_scope_refs`, `evidence_refs`, bounded open `binding_payload`,
 `prior_hash`, `binding_hash`, `owner_signing_key_id`, `owner_signature`,
@@ -90,7 +90,9 @@ changed by that action in authored operation order. When absent, the revisions
 remain catalogued and unbound. The substrate neither derives this field from an
 operation body nor chooses a scope. The result states the changed identities,
 whether binding was requested, and whether the separate signed binding commit
-completed. Existing bindings remain independently revisable and clearable.
+completed. Each successful binding contains the complete fragment set the
+persona currently chooses for every carrier where that exact scope is eligible.
+Existing binding records remain independently inspectable and revisable.
 
 Fragment authoring follows the same exact-scope rule. Empty and universal scope
 are explicit; every other scope must equal one current authenticated carrier
@@ -99,16 +101,24 @@ scope references exposed to the author. It is never stored as a semantic alias
 that later compiles silently exclude.
 
 Reusing a binding id creates a signed next revision bound to the complete prior
-record. The new exact fragment set replaces the old set; an empty set is an
-explicit unbinding. There is no host-defined enable/disable vocabulary.
+record. Omitting an id creates another signed head. For one carrier, the
+mechanically latest valid eligible head—ordered only by exact authored time,
+version, binding id, and binding hash—is the complete current set and supersedes
+all older eligible heads. The older bytes remain immutable history and are not
+unioned into the prompt. An empty current head is an explicit unbinding. An
+ineligible task-scoped head cannot suppress a still-eligible head in another
+task. There is no host-defined enable/disable vocabulary, semantic recency
+score, or fragment-body inspection in head resolution.
 
-`brain-compile/4` binds both the non-activating catalogue page and the current
-`brain-fragment-binding-carrier/2`. A binding participates only when its exact
-scope is a subset of the current carrier and its owner signature still verifies.
+`brain-compile/5` binds both the non-activating catalogue page and the current
+`brain-fragment-binding-carrier/3`. A binding is eligible only when its exact
+scope is a subset of the current carrier and its owner signature still verifies;
+only the mechanically latest eligible signed head participates.
 Each claimed fragment reference must byte-match the current signed revision.
 Stale, unavailable, over-count, and over-byte records are named in exact
-omission evidence. Admitted records are ordered only by binding identity and
-the fragment position authored inside that binding. They precede the unselected
+omission evidence. An invalid fragment in the current head is omitted and does
+not silently resurrect an older head. Admitted records are ordered only by the
+fragment position authored inside the selected binding. They precede the unselected
 inventory because that precedence is the persona's signed selection, not a host
 relevance judgment.
 
@@ -138,12 +148,13 @@ inventory entries does not apply to a selected record. A selected prompt record
 that exceeds the total carrier bound is omitted explicitly while its omission
 continues to name the exact full source record.
 
-`list_brain_fragment_bindings` exposes the owner's exact hash-bound binding
-inventory without activating it. Reusing a `binding_id` replaces its signed
-fragment set; an empty set clears that exact binding. This lets a persona curate
-a growing active repertoire instead of allowing old duplicate bindings to crowd
-newer experience out of a finite carrier. Revision and clearing remain explicit
-persona choices, not host relevance, recency, profession, or domain rules.
+`list_brain_fragment_bindings` exposes the owner's exact hash-bound historical
+binding inventory without activating it. Reusing a `binding_id` revises that
+record; omitting it authors a new head; an empty newest eligible head clears the
+current set. This lets a persona curate a changing repertoire instead of making
+every lesson ever bound a permanent simultaneous system instruction. Current-
+head resolution is append mechanics, not host relevance, profession, domain,
+utility, or fragment-content ranking.
 
 Every successful binding action returns a compact
 `personaos-brain-fragment-binding-carrier-effect/1` projection computed from the
@@ -200,7 +211,7 @@ consent policy. Supersession never rewrites prior bytes.
 
 If the same authenticated action explicitly includes
 `bind_changed_fragments`, successful application is followed by the distinct
-owner-signed `brain-fragment-binding/1` commit over exactly the returned
+owner-signed `brain-fragment-binding/2` commit over exactly the returned
 `changed_fragment_ids`. The binding request is validated against the current
 carrier before fragment mutation. A rare post-application binding-commit
 failure is reported as a partial commit rather than pretending that evolution
@@ -240,7 +251,9 @@ gate capability, or establish expertise. Quiescence remains nonterminal.
 ## 8. Removed compatibility surface
 
 There is no live compatibility for `situation-capsule/1`,
-`active-agent-spec/1`, semantic `brain-compile/1`, selected-fragment prompts,
+`active-agent-spec/1`, semantic `brain-compile/1`, unsigned
+`brain-compile/3`, accumulated-head `brain-compile/4`,
+`brain-fragment-binding/1`, `brain-fragment-binding-carrier/2`, selected-fragment prompts,
 activation/deactivation cue matching, utility/recency/diversity scoring,
 fixed mutation operators, BrainReview/BrainPromotion gates, or automatic
 trace-to-fragment updates. Deprecated semantic brain-context/note actions, raw

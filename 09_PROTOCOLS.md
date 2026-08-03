@@ -160,6 +160,29 @@ into a signed generation that omits the actor. Snapshot locking is per identity
 and content-blind; unrelated personas still verify concurrently, and task,
 profile, capability, and domain content cannot affect admission.
 
+The public lifecycle card binds its generation to the latest verified canonical
+FSM transition, not to the tail of the persona's general evolution log. Work,
+learning, communication, tool, profile, and other non-lifecycle observations may
+continue appending without rotating discovery authority or making an active
+actor disappear while an aggregate is assembled. The complete evolution chain
+still verifies; the transition anchor merely separates lifecycle identity from
+ordinary experiential change. A later lifecycle transition rotates the anchor
+immediately. This selection is derived only from exact registered
+`from_state`/`to_state` pairs and their canonical event kind; record prose,
+task/domain content, action names, and inferred meaning never participate.
+
+The generic artifact-locator guard treats the exact PersonaCard and lifecycle
+envelope fields of a persona discovery document as opaque identity protocol
+units. Each envelope still passes its independent signature, schema, identity,
+and record-binding verifier before publication, and none of its open values is
+automatically dereferenced as a transport capability. Persona-authored
+characteristic or provenance vocabulary therefore cannot make an otherwise
+valid persona disappear merely because an arbitrary key resembles a locator.
+Malformed envelopes, identity fields on another record kind, and locators on
+the surrounding discovery document remain subject to the ordinary fail-closed
+scan. This exemption is structural and does not inspect, rank, or special-case
+the persona-authored body.
+
 When an adapter requires an in-prompt structured catalogue, it carries every
 exact action identifier and applies one identical content-blind description
 window to every registry or persona-authored descriptor. Ordinary registry
@@ -171,10 +194,13 @@ descriptions before their effect, acquisition, or successor mechanics are
 visible is addressable but not practically navigable and is non-conformant.
 
 The always-present workspace navigation component uses
-`personaos-workspace-navigation-reference/2`. It carries every distinct exact
+`personaos-workspace-navigation-reference/3`. It carries every distinct exact
 file path once in mechanical source order, plus the path-list hash, source-state
 and file-record hashes, exact counts, capture facts, and lazy-inspection
-availability. It does not repeat per-file mode, size, digest, hard-link,
+availability. It also carries the complete groups of distinct paths whose
+regular-file observations have exactly equal size and SHA-256. This exposes
+repeated byte identity without choosing a canonical copy, deletion, or
+artifact meaning. It does not otherwise repeat per-file mode, size, digest, hard-link,
 source-scope, variant, or conflict bodies. Those details remain bound by the
 signed mechanical state and are opened through the authenticated file and
 conflict inspectors after a persona chooses an exact path or conflict. This is
@@ -222,6 +248,14 @@ A capability gap is optional meaning a persona may express in opaque knowledge
 content. There is no dedicated gap action or lifecycle. Expressing, revising,
 resolving, or omitting that meaning never changes another descriptor's schema,
 action visibility, completion, or wake authority.
+
+The navigation carrier also includes
+`personaos-action-usage-navigation-reference/1`: an exact identifier-equality
+join between the current leased action set and the retained turn-effect usage
+inventory. It preserves zero-use identifiers and exact observed receipt counts
+even when the larger catalogue or learning component becomes a structural
+index. The join is descriptive evidence only; the host does not infer novelty,
+waste, usefulness, expertise, a missing action, or a next step from any count.
 
 Public persona-owned knowledge metadata exposes exact record identity,
 author/context, body hash/reference and byte facts, evidence refs, time,
@@ -404,6 +438,20 @@ settlement identity, but all carriers bind the same source event. A recipient
 may act, communicate, schedule itself, or make no call. Fan-out has no objective
 completion meaning and does not require identical behavior.
 
+For a same-task run resume, `personaos-task-resource-resumed/2` also binds one
+`personaos-prior-run-resume-observation/1` built from the immediately preceding
+persisted run. It retains the exact prior run/environment/task/persona ids and
+status, the content-bound prior continuation state, exact verified
+`personaos-work-state-evidence/1` when available, and a hash-bound materialized-
+file reference. Component and whole-observation hashes are kernel-signed with
+the resume event. The observation is a distinct bounded prompt lane, not a raw
+event payload: event de-duplication may compact the surrounding wake context,
+but may not erase this evidence. Oversize components are converted only by
+canonical-byte reduction to content-addressed structural indexes. No note,
+status, filename, extension, task word, role, domain, or tool influences that
+projection, and none of the carried values authorizes acceptance or continued
+work.
+
 Before any recipient carrier enters a process-local mailbox, the kernel appends
 one `personaos-resource-wake-batch-outbox/2` whose deterministic identity binds
 the exact resource event, run, environment, task, model-pool scope, and ordered
@@ -489,7 +537,7 @@ record hashes and byte lengths, and the byte bound.
 The generic latest-event page cannot stand in for a peer's current work-state
 head because any later signed event may mechanically replace it.
 `personaos-active-peer-work-state-heads/1` is an independent hash-bound snapshot
-of one latest verified `personaos-persona-work-state/4` per other active
+of one latest verified `personaos-persona-work-state/5` per other active
 membership. It binds the exact active-peer membership identity set, acting
 persona, task/environment scope, signed work-state bytes and hashes, missing-
 head coverage, omissions, and selection basis. The selector compares only
@@ -505,6 +553,18 @@ metadata and record-manifest hashes, exact counts/cursors/omissions, and per-
 record truncation evidence. The lane is evidence only; it does not authorize a
 successor, infer completion, rank peers, or let one member's disposition close
 or suppress another member's work.
+
+Current open-input availability occupies another independent bounded lane.
+`personaos-open-input-prompt-authority/1` selects only exact environment/task
+equality and the protocol's explicit `open` state. Each reference carries the
+request identity, signer/append authority, contribution identities/source kinds,
+counts and hashes, mechanical owner-precedence state, and the exact
+`inspect_open_inputs` delivery action. Request wording, response contracts,
+candidate values, evidence bodies, and rationales are never inlined in this
+lane. A persona therefore knows that signed input is available and may
+deliberately inspect or ignore it, while a public HTTP body cannot become
+ambient model instruction. The lane selects no responder, interpretation,
+candidate, acceptance, or successor.
 
 ### 4.3 Exact uniform prompt-source manifest
 
@@ -821,9 +881,9 @@ ordinary persona-content-authenticated environment observation path. See
 
 ## 10. Work notes, completion, and quiescence
 
-`personaos-persona-work-state/4` carries a bounded open `work_note`, exact
+`personaos-persona-work-state/5` carries a bounded open `work_note`, exact
 observed-situation and append lineage, and one explicit signed
-`personaos-persona-causal-disposition/1`. Protocols preserve it as one immutable
+`personaos-persona-causal-disposition/2`. Protocols preserve it as one immutable
 authored claim. They do not extract commitments, blockers, stages,
 requirements, votes, readiness, or next actions from the note.
 
@@ -863,9 +923,12 @@ proportionality only and cannot choose work, skills, tools, participants,
 publication semantics, or a successor.
 
 The persona authors open note content, optional causal references, and its
-causal disposition. The disposition is either an exact deliberate
-`no_successor` record or one exact `immediate_wake` request with persona-authored
-opaque kind/payload and optional exact model-input paths. The signed request
+causal disposition. Both disposition variants carry a non-empty, bounded,
+exact persona-authored rationale. The substrate verifies and retains those bytes
+for human, peer, and later-self inspection but does not interpret, score, agree
+with, or derive any action from them. The disposition is either an exact
+deliberate `no_successor` record or one exact `immediate_wake` request with
+persona-authored opaque kind/payload and optional exact model-input paths. The signed request
 binds the persona's path choices, not a speculative pre-settlement file read.
 `immediate_wake` enqueues a successor now and spends another finite-run call
 slot; no opaque kind, payload key, or note value turns it into a condition or a
@@ -961,11 +1024,24 @@ unless exact access and consent authority permits disclosure.
 per-persona presentation feed. In addition to bounded public presence, model
 status, activity, and verified communication routes, it carries either an empty
 object or that persona's latest exact verified public
-`personaos-persona-work-state-surface/4`. The nested note retains its persona
+`personaos-persona-work-state-surface/5`. The nested note retains its persona
 signature and remains an authored claim; the outer feed adds transport freshness
 and route/subject authority only. The feed does not select a note by vocabulary,
 infer a next action, judge readiness, or acquire completion semantics. Independent
 persona feeds may be transferred and verified concurrently.
+
+`personaos-live-telemetry/1` is a current-state index rather than a second copy
+of complete history. It retains the full aggregate counters and mechanically
+bounded append-order tails for spans, interactions, model events, and current
+calls, with exact source/retained counts and completeness flags. Complete run
+audit snapshots and signed lineage remain independently addressable. The public
+aggregate and per-entity documents are projected and signed once per exact live
+generation; anonymous reads reuse that content-hash-bound projection instead of
+rescanning lineage. An active-call row carries only a bounded baseline reference
+and exact counts. The complete workspace baseline stays process-local causal
+authority for authenticated effects and is never serialized into every public
+poll. No retention, caching, or compaction decision may inspect task, persona,
+domain, tool, path, event prose, or inferred importance.
 
 ## 13. Schema registry and clean-break versioning
 
@@ -982,9 +1058,9 @@ no current authority merely because their signatures once verified.
 Current cutover records include:
 
 - `personaos-persona-work-situation/1`,
-  `personaos-persona-work-state/4`,
-  `personaos-persona-work-state-surface/4`,
-  `personaos-persona-causal-disposition/1`,
+  `personaos-persona-work-state/5`,
+  `personaos-persona-work-state-surface/5`,
+  `personaos-persona-causal-disposition/2`,
   `personaos-persona-work-note-state/1`, and
   `personaos-work-state-evidence/1`;
 - `personaos-persona-telemetry-public/2`;

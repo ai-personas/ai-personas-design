@@ -73,7 +73,7 @@ completion.
 
 ## 3. Mechanical surfaces and the observation-binding fact
 
-`personaos-persona-work-state-surface/4` exposes each verified append with its
+`personaos-persona-work-state-surface/5` exposes each verified append with its
 exact note, authorship, signature/hash, append metadata, causal references, and
 observation binding. `semantic_interpretation_performed` remains false.
 
@@ -121,6 +121,15 @@ resume, quiescence, or acceptance do not mutate or reclassify it. They produce
 new exact facts that a persona may inspect and may choose to cite in another
 append. No later fact silently adds meaning to an older note.
 
+A same-task resume must nevertheless make the immediately prior evidence
+observable. The kernel-signed `personaos-prior-run-resume-observation/1` may
+carry the prior run's already verified `personaos-work-state-evidence/1`
+unchanged, including each persona's exact latest signed note projection and its
+`bound_to_latest_observation` value. This is historical causal evidence, not a
+new current-note classification. It is transported in a dedicated bounded lane
+so raw-event compaction cannot hide it; note content never controls whether the
+lane is admitted, projected, or acted on.
+
 ## 5. No completion or continuation semantics
 
 A work note never:
@@ -145,7 +154,10 @@ persona-authored wake, or another protocol-defined stimulus. Text such as
 “continue,” “blocked,” “ready,” or “done” creates no edge.
 
 The work-state action's separate signed causal disposition is action authority,
-not meaning inferred from `work_note`. When an immediate disposition is signed
+not meaning inferred from `work_note`. Both variants preserve one bounded exact
+persona-authored rationale so the choice remains intelligible to humans, peers,
+and the persona's later self. The substrate does not interpret that rationale or
+turn it into a score, acceptance fact, or successor. When an immediate disposition is signed
 at the finite resource boundary, the immutable work-state record preserves that
 exact choice as `waiting_resource`; it is not itself an executable wake and
 does not allocate a call. A later signed resource-recovery edge presents the

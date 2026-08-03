@@ -22,6 +22,12 @@ For each walk, trace:
 6. human presentation of verified facts versus authored claims; and
 7. every actual causal successor or nonterminal quiescence.
 
+When a fresh environment has an authenticated principal charter, inspect the
+actual model carrier as well as durable environment storage. Every exact charter
+entry and its verified aggregate hash must occupy the dedicated principal
+authority lane. A hash-only, uniformly staged, or partially projected charter
+does not establish that the persona observed those requirements.
+
 The walk fails if the kernel selects behavior through a task word, profession,
 role, prompt, score, regular expression, filename, extension, MIME, domain
 label, gap-like authored content, population size, work-note key, or fixed stage.
@@ -163,6 +169,25 @@ publication verifies the public roster. Every successfully published generation
 must contain that persona from one complete before-or-after identity snapshot;
 none may observe a mixed chain/SOUL/signature state and omit it. Concurrent
 evolution of one actor must not serialize or semantically filter other actors.
+Append ordinary signed work, learning, communication, tool-use, and activity
+records throughout the publication. The lifecycle-card transition hash and
+issued time must remain bound to the latest canonical FSM transition, while the
+whole evolution chain continues to verify and every active persona remains in
+the compact identity index and environment topology. Then perform an actual
+lifecycle transition: only that transition must rotate the lifecycle anchor.
+Binding lifecycle identity to the general evolution-log tail, or dropping a
+persona because an unrelated observation arrived between mint and verification,
+is a failure.
+
+Vary the opaque keys and nested values of a valid persona-signed characteristic
+profile across several discovery generations, including values whose spelling
+incidentally resembles transport or storage vocabulary. The persona record must
+remain present because the exact PersonaCard envelope is independently verified
+and its body is never automatically dereferenced. Move the same unverified value
+outside that envelope, attach the envelope to a non-persona record, or corrupt an
+envelope signature or binding: the ordinary artifact guard or identity verifier
+must fail closed. Selecting visibility by substrings or inferred meaning inside
+the persona-authored profile fails.
 
 Separately make that persona's optional public-profile or PersonaCard projection
 temporarily unavailable while its SOUL, identity key, lifecycle chain, and ACTIVE
@@ -259,6 +284,26 @@ and verifies the exact `resumed_from_run` chain until it reaches the most recent
 principal-intent entry; mechanical resume hops do not add duplicate intent
 records. Event lookup uses the verified exact-kind lineage index and detaches
 only candidate events rather than copying every unrelated large payload.
+
+Inspect the actual model carrier after one run records explicit unfinished work
+and ends with no successor, then resume that exact task without amendment. The
+new `personaos-task-resource-resumed/2` event must bind a verified
+`personaos-prior-run-resume-observation/1` whose predecessor id equals
+`resumed_from_run`, whose status is byte-for-byte the prior status, and whose
+component hashes cover the prior continuation state and verified work-state
+evidence. The prompt must contain that observation in its independent lane,
+including the authored note while it fits the neutral bound. Seeing only the
+surrounding event hash is a failure. The lane remains evidence only: the host
+must not infer that an unfinished note requires a call or that a completion-like
+note suppresses one.
+
+Repeat with a very large action and executable inventory. The navigation
+authority must fit its generic byte bound by replacing the fewest components
+that yield the largest canonical-byte reduction, with lexical identity as the
+only tie break. Native action schemas and authenticated inspectors remain
+available. Changing task words, artifact extensions, domain labels, persona
+roles, tool names, or note values without changing component sizes cannot alter
+the projection decision.
 
 Use a task-entry baseline with more records than the bounded presentation page,
 then resume twice. The first resume action may contain explicit omission
@@ -655,7 +700,9 @@ presented as mastery, or a catalogue entry presented as a used skill, fails.
 Construct a seven-component navigation carrier in which the complete action
 identity/preview rows and complete execution-capability exact-name index each
 fit their neutral component share, while larger unrelated components do not.
-Both compact indexes must remain inline and every opaque identifier must be
+Execution-capability name pages must be ordinary bounded JSON arrays of exact
+strings, not JSON-array text double-encoded inside strings; both their item and
+byte limits are fixed independently of content. Both compact indexes must remain inline and every opaque identifier must be
 present exactly once; full descriptors/provenance remain lazily inspectable.
 Replacing either fitting index with only its field counts and hashes because a
 wrapper duplicated summaries or counts fails. Selection by identifier text,
@@ -668,9 +715,21 @@ fails.
 
 On a later wake with at least one bound fragment, revise or add a binding during
 the same model turn. The turn-effect receipt must still carry the kernel-signed
-`brain-compile/4` references admitted before that turn, while the next turn
+`brain-compile/5` references admitted before that turn, while the next turn
 compiles from the newer current state. Marking the earlier compile unavailable
 merely because post-turn state changed fails the causal audit.
+
+Author several valid binding heads over successive turns, including an older
+head whose opaque body advocates quiescence and a newer complete head that does
+not include it. `brain-fragment-binding-carrier/3` must select exactly the
+mechanically latest eligible signed head and preserve the older refs as
+superseded history. It must not union the heads, rank or inspect their bodies,
+or let an old binding-id sort order fill the finite prompt window before the
+new head. Repeat in another task where the newest task-scoped head is
+ineligible: the mechanically latest still-eligible head remains current there.
+An empty newest eligible head clears the carrier; an invalid ref in that head
+is explicit omission evidence and never causes silent fallback to obsolete
+instructions.
 
 Create an ordinary concurrent workspace conflict with several exact
 alternatives. Inspection must return the complete paged preimage and minimal
@@ -861,10 +920,14 @@ Construct persona and environment workspaces whose union contains hundreds of
 distinct exact paths and several differing records for shared paths. Make the
 old path-plus-record representation exceed the navigation carrier bound while
 the complete path-only index fits. The resulting
-`personaos-workspace-navigation-reference/2` must inline every distinct path
+`personaos-workspace-navigation-reference/3` must inline every distinct path
 exactly once, preserve mechanical first-source order, bind the full source
 record set and variant count by hash/count, and state that record and conflict
-details are lazy. Every path must open through the authenticated inspector.
+details are lazy. It must also expose every exact repeated-byte-identity group
+formed solely by equal size and SHA-256 across distinct paths, with complete
+counts and a group hash. This is duplicate-byte evidence only: it must not
+infer which file is canonical, redundant, obsolete, or meaningful. Every path
+must open through the authenticated inspector.
 Replacing the whole workspace component with a structural hash, dropping later
 paths, repeating full records, choosing paths by filename/task/domain/tool
 meaning, or claiming that lazy record details are inline fails.
@@ -915,7 +978,8 @@ one incompatible path suppress all successor cognition.
 
 **Input:** the current model call consumes the final signed run unit, then the
 persona appends a signed work state whose separate causal disposition is an
-immediate wake with exact optional model-input paths.
+immediate wake with an exact non-empty authored rationale and exact optional
+model-input paths. Repeat with `no_successor` and a different authored rationale.
 
 **Required outcome:** the append succeeds and reports `waiting_resource`. The
 signed work state is durable continuation authority, but no trigger, call,
@@ -926,7 +990,9 @@ byte identities are presented to that persona under the recovered shared pool.
 **Failure:** the committed disposition is returned as a generic failed action;
 the run appears semantically done; the substrate grants an extra call; the
 selected bytes are observed before the prior turn settles; or recovery drops
-the authored disposition and model-input selection.
+the authored rationale, disposition, or model-input selection. A missing or
+empty rationale being accepted, either rationale being interpreted to choose an
+edge, or requiring a rationale only for one variant also fails.
 
 ## 12.3 Bounded verified hot path
 
@@ -962,6 +1028,19 @@ lose the finite call retain their exact causal identity for later resource
 recovery. Event-kind indexing, prefix caching, and mailbox precedence remain
 unchanged when task words, domain, filenames, formats, persona traits, and
 available tools change.
+
+Make the live call baseline contain many exact files and accumulate more spans
+and interactions than the current live windows. The public/current status size
+must remain bounded: active-call telemetry contains the baseline hash, scope,
+capture facts, and mechanical file counts but not the full file inventory; the
+trusted same-process action boundary still receives and verifies the complete
+baseline. Live telemetry carries exact source/retained counts and a mechanical
+append-order tail while complete run/lineage history remains independently
+addressable. Publishing a generation must populate the same content-hash cache
+used by the first anonymous GET, so the first viewer does not repeat lineage
+projection and entity fan-out. Dropping the full causal baseline from action
+admission, leaking it into public status, filtering history by event meaning, or
+rebuilding the same public generation once per viewer fails.
 
 **Failure:** an indexed projection skips full-chain verification; a cache hides
 an append or survives a changed chain; unrelated payloads are repeatedly deep
@@ -1239,15 +1318,22 @@ fire for one finite case.
 execution marker, the signed fired transition and ambient snapshot, the single
 claim event, and the event-local durable spend ledger. For a bounded recurrence,
 observe one independent claim per fire up to the prepaid limit. Replay an exact
-fire and race unrelated shared-run spend against delivery.
+fire and race unrelated shared-run spend against delivery. From inside one
+successfully delivered finite event, author another one-shot successor and
+observe a new arm-time debit against the same run ledger rather than an attempt
+to reserve from the child event allowance.
 
 **Required outcome:** finite arming atomically removes the full declared
-successor allowance before reporting success. Append failure refunds the
+successor allowance before reporting success. The allowance contains at most
+one attempted provider call per eligible signed-pool body; tool exchanges do
+not preallocate unrelated semantic turns. Append failure refunds the
 unpersisted transfer. Insufficient funding creates no trigger. A finite fire
 executes from its exact reservation even when the shared run later reaches
-zero; replay does not mint or spend a second claim. A finite unbounded
-recurrence is refused, while an explicitly unlimited recurrence uses only its
-signed per-event cap. Restart changes none of these identities or outcomes.
+zero; replay does not mint or spend a second claim. A successor authored during
+that turn is independently prepaid from the same run ledger at arm time. A
+finite unbounded recurrence is refused, while an explicitly unlimited
+recurrence uses only its signed per-event cap. Restart changes none of these
+identities or outcomes.
 
 **Failure:** the UI reports an unfunded timer as armed; delivery depends on
 incidental shared-run headroom; another fire reuses a prior claim; a bounded

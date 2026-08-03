@@ -95,6 +95,14 @@ invoke `inspect_open_inputs` to read the preserved body and its provenance.
 This keeps public HTTP transport from becoming an ambient prompt-injection
 lane while leaving persona agency intact.
 
+Every later turn also receives a bounded content-free availability index for
+the exact task's currently open requests. It includes request/contribution
+identities, signer and append facts, source kinds, counts, hashes, precedence
+state, and the `inspect_open_inputs` delivery action, but no question, response
+contract, candidate value, evidence body, or rationale. This prevents a missed
+or previously unfunded wake from making signed input undiscoverable while
+preserving deliberate inspection and the same prompt-injection boundary.
+
 ## 4. Inspection and disposition
 
 `inspect_open_inputs` returns exact verified requests, candidates, and

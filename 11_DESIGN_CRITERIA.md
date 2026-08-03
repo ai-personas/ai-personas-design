@@ -58,7 +58,7 @@ route. The UI requests those small subject-signed feeds concurrently as soon as
 the identity slice is admitted, without waiting for the complete artifact/task
 inventory or the node-wide telemetry aggregate. The current
 `personaos-persona-telemetry-public/2` feed includes the latest exact verified
-`personaos-persona-work-state-surface/4`, if one exists. It preserves the open
+`personaos-persona-work-state-surface/5`, if one exists. It preserves the open
 persona-authored note and causal disposition without interpreting either. Rich
 cognition histories remain independent and may hydrate concurrently afterward;
 one persona's bytes or signature work cannot serialize the rest of the visible
@@ -130,26 +130,34 @@ summarize the original principal bytes. If the complete exact ancestry exceeds
 its mechanical carrier bound, the amendment is refused before execution rather
 than silently omitting or summarizing an older principal event.
 
-The current intent and verified ancestry occupy their own complete prompt
-authority lane. Generic uniform source projection applies only to the remaining
-situation facts. Intake and prompt construction share the exact carrier bound,
-so a task that fits durable storage but not cognition transport cannot be
-silently admitted with a truncated principal instruction.
+The current intent, verified ancestry, and exact principal-authenticated
+environment charter occupy complete prompt authority lanes. Generic uniform
+source projection applies only to the remaining situation facts. A charter may
+also remain in the durable environment situation as evidence, but that copy is
+not a substitute for the complete principal-authority carrier. Intake and
+prompt construction share the exact carrier bounds, so a task or charter that
+fits durable storage but not cognition transport cannot be silently admitted
+with a truncated principal instruction.
 
-The prompt preserves one complete mechanical navigation authority alongside
-the principal lane: every currently leased action identity with a uniform
-content-blind description window, explicit completeness flag, and
-required-input/effect shape, every exact
-name in the execution-capability index, verified roster/birth/replication
-authority, every current workspace file path, exact current identity/readiness
-state, zero-inclusive capability-acquisition state, and the hash-bound
-manifests and cursors of the persona's retained learning. Exact action
-descriptors and history bodies remain behind their authenticated inspectors and
-cursors; the navigation lane neither selects nor activates one. Its
-construction and bounds are content-neutral. No task token, regular expression,
-domain role, preferred tool, preferred team size, filename type, ranking, or
-recommendation may choose what survives transport. Append-only contribution
-and exact learning bodies remain independently pageable.
+The prompt preserves one content-bound mechanical navigation authority
+alongside the principal lane. Its sources are the complete current action
+surface, execution-capability inventory, verified roster/birth/replication
+authority, current workspace state, exact identity/readiness state,
+zero-inclusive capability-acquisition state, and retained-learning manifests.
+Native provider tools remain complete action authority, and every large source
+remains independently inspectable. A distinct exact
+`personaos-action-usage-navigation-reference/1` mechanically joins every
+current action identifier to its zero-inclusive retained receipt counts, so an
+oversized action catalogue or learning history cannot hide repeated or never-
+observed mechanisms. It grants no recommendation or expertise. When the joined
+lane exceeds its generic byte bound, the runtime replaces the fewest components
+needed, choosing only the largest canonical-byte reduction and using lexical
+component identity to break a tie. Each replacement preserves schema, source
+hash and size, field structure, collection counts, and small scalar leaves. The
+navigation lane neither selects nor activates an action, tool, peer, or file.
+No task token,
+regular expression, domain role, preferred tool, preferred team size, filename
+type, ranking, or recommendation may choose what survives transport.
 
 The uniform description window is large enough to carry ordinary current
 registry descriptions whole. Oversized descriptions remain explicitly
@@ -161,13 +169,22 @@ navigation.
 Direct task/resource delivery and every event-driven wake construct this same
 navigation authority from the same seven live sources. An event-wake path may
 not silently fall back to the older four-source carrier. If the combined lane
-crosses its byte bound, every component receives the same mechanical byte
-opportunity; an oversized component becomes a hash-bound structural index.
+crosses its byte bound, the byte-reduction rule above applies identically.
 Component meaning, task prose, field words, and record contents never decide
-which whole lane disappears. A mechanically compact complete-identity index
-that fits its equal share must remain inline: duplicating counts or summaries in
-its wrapper may not push all action or execution-capability names behind a
-hash-only outline.
+which component becomes a structural index. Redundant source copies are
+removed after the verified navigation carrier is rebuilt, so duplicated
+catalogues cannot consume cognition merely because the host repeated them.
+
+Every same-task resume also preserves an independent exact prior-run evidence
+lane. `personaos-task-resource-resumed/2` signs a bounded
+`personaos-prior-run-resume-observation/1` that includes the predecessor run's
+exact status, continuation state, verified persona-authored work-state evidence,
+and materialized-file reference. Its whole and component hashes must verify,
+and its persona/environment/task bindings must match the resumed task. The
+generic event projector may reduce the surrounding wake context to an event
+pointer, but must keep this prior-run lane separately visible. The lane performs
+no semantic interpretation and grants no completion, readiness, population,
+tool, or successor authority.
 
 The complete-descriptor catalogue hash and the compact prompt-projection hash
 bind different canonical preimages. Validation must verify the compact rows
@@ -211,12 +228,15 @@ handoff rather than as an unbound or completed task.
 For finite authority, “bound” additionally requires an exact durable
 reservation enclosed by the signed arm transition. The reservation prepays a
 complete per-fire turn allowance and a bounded claim count before the trigger
-can be reported as armed. A fired carrier claims one allowance by exact signed
-arm/fire/ambient identity; it may not reopen the shared run ledger or depend on
-headroom left by unrelated work. A bounded recurrence prepays every declared
-fire. An unbounded recurrence is admissible only under explicitly unlimited
-run authority and remains narrowed by its signed per-event cap. No schedule
-purpose or task/domain vocabulary participates in this funding decision.
+can be reported as armed. A successor authored during a delivered event debits
+the same exact signed run ledger at its own arm transition; it does not
+recursively consume the event-local allowance that funded the current turn. A
+fired carrier claims one allowance by exact signed arm/fire/ambient identity;
+delivery may not reopen the shared run ledger or depend on headroom left by
+unrelated work. A bounded recurrence prepays every declared fire. An unbounded
+recurrence is admissible only under explicitly unlimited run authority and
+remains narrowed by its signed per-event cap. No schedule purpose or
+task/domain vocabulary participates in this funding decision.
 
 When a resource event resumes work, the exact same signed event and content
 hash are offered concurrently to **every active environment member** under the
@@ -603,8 +623,10 @@ There is no causally incomplete progress-report action. A persona that chooses
 to publish a bounded open work note must use `record_persona_work_state`, whose
 same signed action requires one explicit persona-authored causal disposition:
 either deliberately no successor or one exact immediate wake. The disposition
-is not inferred from the open note, and neither choice establishes objective
-acceptance. Other actions create later turns only when their descriptor declares
+includes a bounded exact persona-authored rationale under either choice. That
+rationale is visible evidence of the choice, not substrate-interpreted meaning,
+a score, or an automatic edge. The disposition is not inferred from the open
+note, and neither choice establishes objective acceptance. Other actions create later turns only when their descriptor declares
 and registers a causal delivery. Earlier progress-only actions and records have
 no compatibility or migration path in a fresh lifecycle.
 

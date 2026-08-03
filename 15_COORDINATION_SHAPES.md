@@ -65,7 +65,7 @@ totals, cursors, omissions, and per-record projection evidence.
 Generic latest-event coverage does not substitute for current work-state
 coverage: a peer may sign a later message, action, or publication after its work
 note. `personaos-active-peer-work-state-heads/1` therefore carries one exact
-latest verified `personaos-persona-work-state/4` head for each other active
+latest verified `personaos-persona-work-state/5` head for each other active
 membership in a separate prompt-authority lane. The snapshot binds the exact
 membership set, acting persona, task/environment scope, head and missing-head
 counts, omissions, signatures, content hashes, and the selection basis
@@ -185,12 +185,14 @@ and registered an event that was actually delivered. Coordination prose and
 successful receipts alone have no wake authority.
 
 A finite immediate or scheduled wake additionally has no arm authority until
-its complete bounded successor allowance has been atomically transferred. A
-bounded recurrence prepays every declared fire. At delivery, each fired event
-claims its own exact allowance from signed arm/fire/ambient lineage and never
-borrows leftover shared-run capacity. Explicitly unlimited schedules retain a
-generic signed per-event cap. These mechanics inspect no authored purpose or
-domain content.
+its complete bounded successor allowance has been atomically transferred from
+the exact signed run ledger. A delivered event's local allowance funds its
+current provider turn; any new successor it authors performs a new arm-time
+debit against that same run ledger. A bounded recurrence prepays every declared
+fire. At delivery, each fired event claims its own exact allowance from signed
+arm/fire/ambient lineage and never borrows leftover shared-run capacity.
+Explicitly unlimited schedules retain a generic signed per-event cap. These
+mechanics inspect no authored purpose or domain content.
 
 ## 5. Workspace coordination
 
