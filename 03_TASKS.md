@@ -54,6 +54,13 @@ that lane. Task intake and model-turn construction enforce the same byte and
 record bounds; if the complete authority lane cannot fit, admission is refused
 before cognition instead of presenting an omitted or summarized requirement.
 
+A newly admitted task with no exact environment or project address forms a
+fresh environment. An actor's existing membership, including a sole active
+membership, is not implicit routing authority for unrelated principal intent.
+Environment reuse requires an exact principal-supplied target or authenticated
+causal resume/amendment authority. This routing rule is independent of task,
+charter, persona, domain, arrival order, and concurrent worker timing.
+
 Current agency uses exact, content-bound navigation authority. On a native-tool
 adapter, every complete leased action descriptor is a first-class provider tool
 under its real action name; the prompt does not duplicate that catalogue behind

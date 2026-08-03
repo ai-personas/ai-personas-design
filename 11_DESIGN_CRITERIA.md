@@ -139,11 +139,33 @@ prompt construction share the exact carrier bounds, so a task or charter that
 fits durable storage but not cognition transport cannot be silently admitted
 with a truncated principal instruction.
 
+Charter projection binds two different preimages explicitly: the hash of the
+complete signed charter record and the hash of its exact ordered text. The
+former proves environment/version/parent/rule/signing context; the latter
+proves the text bytes transported to cognition. A verifier compares each hash
+only with its own preimage. Comparing charter text with the complete signed-
+record hash would silently remove every valid non-empty charter and therefore
+fails this criterion.
+
+The exact current-call and successor-call resource observations occupy one
+small, content-bound causal-resource authority lane immediately after the
+principal and charter lanes. It exposes only mechanical budget and deadline
+runway, whole/component hashes, and byte facts. It does not interpret remaining
+headroom as a reason to continue or stop, select a causal disposition, or create
+a model call. Byte-identical copies are removed from the uniform situation
+remainder only after this lane is constructed.
+
 The prompt preserves one content-bound mechanical navigation authority
 alongside the principal lane. Its sources are the complete current action
 surface, execution-capability inventory, verified roster/birth/replication
 authority, current workspace state, exact identity/readiness state,
 zero-inclusive capability-acquisition state, and retained-learning manifests.
+Version 2 begins with an exact component manifest in carrier construction
+order. Each row exposes component identity, schema, hash, canonical byte size,
+and whether its body is a structural index before any potentially large
+component body. The order is declared non-semantic and grants no preference;
+it prevents an actor from consuming an opaque large body merely to discover
+which navigation sources were actually transported.
 Native provider tools remain complete action authority, and every large source
 remains independently inspectable. A distinct exact
 `personaos-action-usage-navigation-reference/1` mechanically joins every
@@ -174,6 +196,15 @@ Component meaning, task prose, field words, and record contents never decide
 which component becomes a structural index. Redundant source copies are
 removed after the verified navigation carrier is rebuilt, so duplicated
 catalogues cannot consume cognition merely because the host repeated them.
+
+Learning is captured once before compilation and remains one immutable source
+snapshot for the whole semantic turn. A bounded compile capsule may index or
+omit bytes from that snapshot, but it does not replace the source used by the
+substantive carrier. The later carrier preserves the complete frozen retained-
+learning state, including persona-authored records and the zero-inclusive
+action-use inventory. A compile-opened detail joins it only by exact snapshot
+identity. This preservation performs no task, domain, action, outcome, or
+authored-content interpretation.
 
 Every same-task resume also preserves an independent exact prior-run evidence
 lane. `personaos-task-resource-resumed/2` signs a bounded
@@ -630,6 +661,14 @@ note, and neither choice establishes objective acceptance. Other actions create 
 and registers a causal delivery. Earlier progress-only actions and records have
 no compatibility or migration path in a fresh lifecycle.
 
+The provider-facing causal-disposition input is one flat object whose kind is
+drawn from the complete exact kind set in lexical order. It is not a branch-
+ordered union with one fully formed outcome appearing before another. The
+descriptor declares the lexical order non-semantic, describes the fields valid
+for each kind, and leaves the authenticated dispatcher to verify the chosen
+exact shape. Provider schema presentation therefore does not silently make
+quiescence or continuation the default.
+
 Optional successor model-input paths are exact persona-authored selections.
 Their byte observations occur at successor delivery after all current-turn
 effects settle, not while potentially concurrent tool calls are still running.
@@ -707,6 +746,11 @@ evidence mechanism named by the task. The kernel does not derive it from work
 notes, gap-like authored content, population size, artifact count, unchanged bytes,
 scores, HTTP success, or model prose.
 
+The public task-entry projection names a successfully verified actor turn
+`verified_intent`, not `completed`. Transport success proves that an authentic
+persona decision and its effects were observed; it says nothing about objective
+acceptance, sufficiency, convergence, or remaining work.
+
 ### C-OP-11 — Mechanical bounds never become semantic selectors
 
 The substrate may refuse an attempted declared effect using canonical parsing
@@ -759,30 +803,7 @@ no host-selected primary domain, inferred profession, or semantic reduction
 from domain membership to a role, tool, workflow, completion rule, or action
 surface. Empty and cross-domain contexts are valid.
 
-## 4. Current house-task intent
-
-The current authenticated principal intent asks for a high-quality four-bedroom
-house design comparable to serious human architectural/civil-engineering work
-and improved through collaboration where useful.
-
-The personas—not the substrate—choose the package and means. Human inspection
-should be able to find, when the personas judge them appropriate:
-
-- a coherent brief and explicit assumptions;
-- dimensioned spatial information;
-- editable CAD/BIM or other machine-usable geometry;
-- readable drawings or rendered views;
-- structural, site, services, safety, and unresolved professional inputs;
-- calculations, schedules, or specifications supporting decisions;
-- coordination, review, and revision provenance; and
-- honest limitations, jurisdiction dependencies, and next professional actions.
-
-This list is task-specific authenticated intent. It is not embedded in runtime
-prompts, selectors, regular expressions, birth admission, tool routing,
-identity formation, or completion substrate. The exact intent bytes survive
-every resume and fan out with the exact resource event to every active member.
-
-## 5. No executable test substrate
+## 4. No executable test substrate
 
 The repositories contain no unit, integration, canary, benchmark, or
 performance-test suite and no running test process. Operating-path review uses
