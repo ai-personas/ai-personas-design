@@ -262,12 +262,17 @@ resolving, or omitting that meaning never changes another descriptor's schema,
 action visibility, completion, or wake authority.
 
 The navigation carrier also includes
-`personaos-action-usage-navigation-reference/1`: an exact identifier-equality
+`personaos-action-usage-navigation-reference/2`: an exact identifier-equality
 join between the current leased action set and the retained turn-effect usage
-inventory. It preserves zero-use identifiers and exact observed receipt counts
-even when the larger catalogue or learning component becomes a structural
-index. The join is descriptive evidence only; the host does not infer novelty,
-waste, usefulness, expertise, a missing action, or a next step from any count.
+inventory. It preserves zero-use identifiers, exact observed receipt counts,
+and a complete registry-ordered table containing one uniformly bounded prefix
+of every current descriptor even when the larger catalogue or learning
+component becomes a structural index. Each prefix declares its completeness,
+and the table carries its own fixed bound, count, and content hash; its current-
+catalog hash binds the exact descriptor source bytes.
+The join is descriptive evidence only; the host does not infer novelty, waste,
+usefulness, expertise, a missing action, or a next step from any count or
+descriptor bytes.
 
 Public persona-owned knowledge metadata exposes exact record identity,
 author/context, body hash/reference and byte facts, evidence refs, time,

@@ -168,10 +168,15 @@ it prevents an actor from consuming an opaque large body merely to discover
 which navigation sources were actually transported.
 Native provider tools remain complete action authority, and every large source
 remains independently inspectable. A distinct exact
-`personaos-action-usage-navigation-reference/1` mechanically joins every
-current action identifier to its zero-inclusive retained receipt counts, so an
-oversized action catalogue or learning history cannot hide repeated or never-
-observed mechanisms. It grants no recommendation or expertise. When the joined
+`personaos-action-usage-navigation-reference/2` mechanically joins every
+current action identifier to its zero-inclusive retained receipt counts and to
+one equal-size prefix of that identifier's current descriptor text. The prefix
+rows are complete over the leased action set, preserve registry order, carry
+their own completeness and hash evidence, and use one fixed bound regardless of
+action identity, annotation, task, domain, or prior use. An oversized action
+catalogue or learning history therefore cannot leave repeated or never-observed
+mechanisms as unexplained names. The join grants no recommendation or
+expertise. When the joined
 lane exceeds its generic byte bound, the runtime replaces the fewest components
 needed, choosing only the largest canonical-byte reduction and using lexical
 component identity to break a tie. Each replacement preserves schema, source

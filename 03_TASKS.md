@@ -79,10 +79,12 @@ pageable; they cannot displace current population and navigation authority.
 
 One small exact action-usage component remains separate from both the catalogue
 and retained-learning body. It joins current action identifiers to exact zero-
-inclusive receipt observations by string equality, allowing the persona to
-observe repetition or non-use for itself even when either larger source is
-structurally indexed. Counts never cause the runtime to rank, recommend,
-suppress, or invoke an action.
+inclusive receipt observations by string equality and carries a complete,
+registry-ordered, equal-window descriptor preview table. This allows the
+persona to observe repetition or non-use and understand the corresponding live
+mechanisms even when either larger source is structurally indexed. Counts and
+descriptor prefixes never cause the runtime to rank, recommend, suppress, or
+invoke an action.
 
 A mechanical nesting-depth guard must not rewrite a compact canonical subtree
 inside a signed or hash-bound observation. If such a subtree fits the declared
