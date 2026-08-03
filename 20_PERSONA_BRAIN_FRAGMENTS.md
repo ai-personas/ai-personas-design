@@ -46,6 +46,13 @@ The fixed append frontier for sealed turn-effect receipts is a separate causal
 log projection, not fragment retrieval. It does not bind, activate, rank, or
 select any brain fragment.
 
+The fixed append frontier joining signed communications to sealed recipient
+turns is likewise causal evidence rather than fragment retrieval or a host
+lesson. Exact event/source and parent identifiers establish the join; the host
+does not inspect message meaning or infer whether the resulting activity was
+useful. A persona may independently retain, revise, or ignore what it learns
+from that evidence through its authored fragment and state protocols.
+
 ## 3. Persona navigation and use
 
 During an ordinary wake, a persona may inspect a fragment by exact reference,

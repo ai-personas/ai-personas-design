@@ -145,9 +145,52 @@ Messages, schedules, invitations, external receipts, and persona-authored wakes
 create independent causal edges. Multiple edges may coexist. The kernel neither
 collapses them into a workflow nor chooses a winner.
 
+When an exact verified persona communication is the carrier for a semantic
+turn, any communication the recipient independently authors in that turn binds
+the carrier's exact communication id and authority hash as its parent. Those
+transport-authenticated ancestry fields are not model transcription fields.
+Binding them does not require a response, select a recipient, interpret either
+payload, prevent a broadcast, or make a companion in a delivery batch less
+visible. For a mechanically batched FIFO delivery, the carrier remains the one
+causal predecessor of the turn and companions remain additional signed context.
+A missing parent may not silently manufacture a new root conversation.
+
+Message delivery cost is part of the generic action effect: every addressed
+recipient gets an independently eligible causal wake under the same finite run
+authority, and an empty-recipient broadcast expands that effect to every active
+peer. This effect must be visible in the action descriptor. The substrate may
+not infer that a message should instead be a tracked open-input request, rewrite
+the route, deduplicate payload meaning, or suppress a persona-authored delivery.
+
+Later cognition receives a mechanically derived causal-successor receipt for
+each signed communication. It joins the communication-lineage event to sealed
+recipient turns by exact event source reference and joins response
+communications by exact signed parent id/hash. The receipt exposes eligible and
+observed recipients, child model turns, action identifiers, byte-delta and
+effect-hash counts, failures, and child-message fan-out. It does not label the
+expansion helpful, wasteful, complete, expert, successful, relevant, or
+preferred. A persona may interpret that evidence and change its future conduct;
+the host may not use message text, task words, role labels, filenames, formats,
+tool meanings, or domains to score or steer it.
+
+Each record retains the exact already-verified communication authority, not
+only its payload hash. A separate self-authored frontier filters those records
+by exact author id and append position and is preserved before the room-wide
+frontier under fixed prompt bounds. This lets a persona compare the choice it
+actually signed with the causal expansion that followed, while the substrate
+still assigns no utility, maturity, expertise, or preferred next action.
+
 An action result creates a later turn only when its exact descriptor declared
 and registered an event that was actually delivered. Coordination prose and
 successful receipts alone have no wake authority.
+
+A finite immediate or scheduled wake additionally has no arm authority until
+its complete bounded successor allowance has been atomically transferred. A
+bounded recurrence prepays every declared fire. At delivery, each fired event
+claims its own exact allowance from signed arm/fire/ambient lineage and never
+borrows leftover shared-run capacity. Explicitly unlimited schedules retain a
+generic signed per-event cap. These mechanics inspect no authored purpose or
+domain content.
 
 ## 5. Workspace coordination
 
@@ -155,6 +198,16 @@ Each member's worktree remains leased through capture, publication, and
 settlement. Shared-environment publications retain exact author/action/time
 provenance. A peer's bytes cannot be credited as the current actor's tool use,
 practice, artifact, or review.
+
+A verified workspace publication is live shared state, not a causal successor.
+It remains in the signed ambient stream, environment lineage, current workspace,
+and later ordinary-wake context, but it does not route an
+`observation_available` wake or spend another model call. If the author wants a
+peer to act now, the author independently chooses a descriptor-declared causal
+action such as a message, schedule, invitation, or persona-authored wake. This
+boundary is determined from the exact protocol effect; the substrate does not
+inspect task text, authored payload meaning, paths, formats, tools, roles, or
+domains to decide whether state should wake somebody.
 
 Concurrent conflicts preserve every exact path/hash alternative. Only an
 authorized signed resolution chooses or synthesizes bytes. The substrate does

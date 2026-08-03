@@ -72,6 +72,12 @@ updated in place. A reader may observe the complete prior or next signed
 generation; it must not observe partial mutation as a real removal or cache that
 false absence into a public-route authorization decision.
 
+An active persona whose SOUL, identity key, and lifecycle chain still verify
+remains in every complete public roster generation. A concurrently unavailable
+or invalid optional name, characteristics, avatar, or rich PersonaCard
+projection fails closed as that optional profile material; it cannot remove the
+verified lifecycle identity or delay the other compact rows.
+
 Live topology names only currently verified active memberships. A running model
 call, active or paused run participant, invitation, birth record, or historical
 inactive membership remains separately observable under its own exact state but
@@ -201,6 +207,16 @@ the complete verified project-id set and exact topology event references. A
 signed scheduled trigger that still verifies against its persona, environment,
 task, run pool, and execution authority is reported as a bound event-driven
 handoff rather than as an unbound or completed task.
+
+For finite authority, “bound” additionally requires an exact durable
+reservation enclosed by the signed arm transition. The reservation prepays a
+complete per-fire turn allowance and a bounded claim count before the trigger
+can be reported as armed. A fired carrier claims one allowance by exact signed
+arm/fire/ambient identity; it may not reopen the shared run ledger or depend on
+headroom left by unrelated work. A bounded recurrence prepays every declared
+fire. An unbounded recurrence is admissible only under explicitly unlimited
+run authority and remains narrowed by its signed per-event cap. No schedule
+purpose or task/domain vocabulary participates in this funding decision.
 
 When a resource event resumes work, the exact same signed event and content
 hash are offered concurrently to **every active environment member** under the
@@ -447,6 +463,23 @@ single verified action receipt observed in multiple provider wrappers counts as
 one invocation; redundant observation cardinality remains diagnostic metadata.
 Only its verified receipt hash is used for that coalescing, while distinct
 verified identities remain separate without semantic comparison.
+
+The carrier independently exposes a fixed append-position causal-successor
+frontier for signed persona communications. Exact communication event and
+parent identifiers join to exact source references in sealed recipient turns;
+the result preserves recipients with and without an observed turn, child model
+turns, action identifiers, byte-delta counts, failures, effect hashes, and
+parented child-communication fan-out. Message content, task or role vocabulary,
+tool meaning, paths, formats, domains, and outcome text never participate in
+capture, joining, projection, or admission. The host makes no usefulness,
+credit, competence, quality, or next-action inference from this evidence.
+
+A second frontier applies exact author-identifier equality before the same
+append-position rule. It retains the current persona's exact verified
+communication authority with the joined downstream evidence and is protected
+ahead of the room-wide frontier under content-neutral prompt bounds. This
+prevents unrelated traffic from evicting all of the persona's own
+decision-to-outcome history without ranking, interpreting, or rewarding it.
 
 Large canonical observation bodies are persisted once behind verified
 content-addressed references. Communication, ambient routing, notification,

@@ -266,6 +266,25 @@ Every authentic successor is retained independently. Several may coexist. The
 runtime does not choose one as a representative next stage or treat plural
 successors as conflict.
 
+A finite persona-authored immediate or scheduled wake is executable only when
+its arm transition atomically transfers a complete bounded turn allowance from
+the exact current causal budget. The signed marker binds the reservation hash,
+per-fire call cap, persona, environment, task, request, run, and model pool. A
+bounded recurrence prepays one independent allowance for every declared fire;
+an unbounded recurrence requires explicitly unlimited authority. The arm append
+encloses the exact reservation, and an append failure returns the uncommitted
+transfer. A successful result therefore means the future work is durably armed
+and funded, not merely that a timer was recorded.
+
+When the trigger fires, the kernel claims exactly one reserved allowance by
+joining the signed arm transition, the signed fired transition, and its exact
+ambient carrier. Each fire can claim at most once and the claim count cannot
+exceed the prepaid bound. Finite scheduled work never falls back to whatever
+shared run headroom happens to remain at delivery time. An explicitly unlimited
+run instead receives the signed generic per-event cap. None of these operations
+reads the schedule purpose, task text, domain, role, tool, filename, or payload
+meaning.
+
 An attempted continuation action that is mechanically refused returns an exact
 stable reason code in its ordinary action evidence. The refusal proves only
 that the attempted effect was not admitted; it does not create a successor,
@@ -281,6 +300,12 @@ allocates no resource. The action reports the exact `waiting_resource` delivery
 state. A later independently authorized resource event delivers the current
 work state back to its author under the recovered shared pool; only that event
 creates executable call authority.
+
+The same truthfulness applies before a wake arm exists. If a finite action
+cannot prepay its requested future fire set, the action is refused with exact
+resource evidence and creates no trigger. The UI and later cognition may show
+the authored work state as waiting for resources, but may not show an unfunded
+timer as an armed continuation.
 
 Work-note prose, gap-like knowledge content, a population action, successful invocation,
 artifact declaration, unchanged/changed workspace, score, objective statement,
@@ -314,20 +339,36 @@ include a principal's signed acceptance, an authorized verifier receipt bound
 to exact current bytes, or a principal-declared materialization condition.
 
 When the principal declares that materialized output is required, that exact
-causal requirement reaches the ordinary persona action loop. The loop may
-finish only after authenticated action effects or changed bytes satisfy the
-mechanical condition; prose alone cannot bypass it. This propagation does not
-choose a file format, executable, profession, workflow, minimum team, or
-semantic quality threshold. Those remain principal intent and persona action,
-while objective acceptance remains separately authoritative.
+causal requirement reaches the ordinary persona action loop. The run cannot
+satisfy that objective until authenticated action effects and a published byte
+delta against the exact task-entry baseline satisfy the mechanical condition;
+prose alone cannot bypass it. One environment-wide baseline is captured before
+the all-member ingress fan-out, with an exact private-worktree preimage for every
+addressed member. It is not owned by a lead or output persona. Before published
+evidence exists, an enforcing action turn may require bytes that differ from
+that actor's exact preimage. As parallel turns proceed, every action boundary
+may observe the current signed environment publication state; the first exact
+task-bound publication by any authenticated member satisfies the shared run
+condition and releases the remaining per-turn gates. This release chooses no
+winner and credits tool use only to the actual author.
+
+Once the run-level condition is verified, a causal descendant is not assigned
+a fresh byte quota merely because the same signed contract remains in its
+ancestry: communication, coordination, learning, population, and capability
+actions may settle without manufacturing another file. Releasing the per-turn
+gate is not semantic completion and does not suppress any persona's choice to
+continue materializing or self-wake. This propagation does not choose a file
+format, executable, profession, workflow, minimum team, or semantic quality
+threshold. Those remain principal intent and persona action, while objective
+acceptance remains separately authoritative.
 
 The complete task-entry workspace baseline is closed enforcement state. It is
 verified in full wherever the byte gate is evaluated, but it is not replayed as
 an equal-share situation source on every model turn. The model-facing carrier
 uses a dedicated, causally ordered materialization lane containing the exact
-baseline hash, source-state signature, owner and file counts, the current
-mechanical outcome summary, and a hash-bound page of exact current delta
-path/size/hash records. Fixed byte and page bounds may project that page with
+baseline hash, environment source-state signature, member-preimage and file
+counts, the current mechanical outcome summary, and a hash-bound page of exact
+current delta path/size/hash records. Fixed byte and page bounds may project that page with
 explicit totals, cursors, omissions and manifests; they may not select records
 from task words, paths, suffixes, media types, tools, domains, roles or content.
 The full baseline remains available to enforcement and durable audit rather

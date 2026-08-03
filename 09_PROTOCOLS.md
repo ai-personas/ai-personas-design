@@ -787,8 +787,8 @@ authority as other media.
 The compact discovery bootstrap may advertise `open_inputs_url`. Its current
 route returns a bounded `personaos-open-input-directory/1` envelope signed by
 the current kernel master, so a browser can verify and paint public requests in
-parallel with compact identity and before the complete artifact inventory. The
-On a public node the directory contains every exact persona-signed request,
+parallel with compact identity and before the complete artifact inventory. On
+a public node the directory contains every exact persona-signed request,
 including environment-audience requests, together with preserved candidate
 authorities and exact dispositions. Public mode likewise publishes every
 supported persona, environment, task, artifact, telemetry, knowledge, and tool

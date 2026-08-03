@@ -120,6 +120,31 @@ source total, included range, omitted prefix, and full-manifest hash. This
 causal-tip view is additional to the complete cursor-navigable inventory and
 does not replace it.
 
+An ordinary wake also carries a separate fixed append-position frontier that
+joins each verified signed persona communication to the sealed recipient turns
+whose exact source references name that communication event. The join exposes
+the exact author, recipients, communication ancestry, observed recipient-turn
+identities, model-turn count, invoked action identifiers, changed-path count,
+effect-evidence hashes, failures, and causally parented child communications.
+It also exposes addressed recipients for which no sealed child turn is yet
+observed. Inclusion and joining use only signed event identity, parent identity,
+recipient identity, source-reference equality, and append position. The
+substrate does not read either message body, task prose, tool meaning, paths,
+formats, roles, domains, or outcomes; it assigns no value, credit, expertise,
+fitness, recommendation, or suppression. This evidence lets each persona judge
+for itself what its prior communication choices actually expanded into.
+
+The same capture also exposes a separate persona-authored causal frontier. It
+filters the verified communication/effect records only by exact
+`authored_by == current_persona_id` equality and then retains a fixed append
+suffix. Its records carry the exact verified communication authority alongside
+the recipient-turn effects, so the author can correlate its actual opaque
+choice with its consequences rather than learning from a payload hash alone.
+This self-authored lane is admitted before the room-wide causal frontier under
+generic prompt bounds; traffic from other members therefore cannot erase all
+of the persona's own recent experience. It makes no semantic selection,
+utility inference, competence award, recommendation, or automatic action.
+
 Large exact observations are stored once as canonical content-addressed bytes.
 Subsequent signed events carry the exact hash, byte length, encoding, and
 verified content reference rather than embedding the observation again.

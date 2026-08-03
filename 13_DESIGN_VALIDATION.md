@@ -164,6 +164,13 @@ must contain that persona from one complete before-or-after identity snapshot;
 none may observe a mixed chain/SOUL/signature state and omit it. Concurrent
 evolution of one actor must not serialize or semantically filter other actors.
 
+Separately make that persona's optional public-profile or PersonaCard projection
+temporarily unavailable while its SOUL, identity key, lifecycle chain, and ACTIVE
+state remain valid. Every complete generation must retain a minimal signed
+lifecycle record for the persona, mark unavailable profile fields pending, and
+omit only the unverifiable optional data. Restoring the optional projection may
+enrich the same persona identity; it must not appear as a death and rebirth.
+
 If authenticated user intent requires a person-like portrait grounded in
 persona-authored characteristics, the exact requirement appears as principal
 intent. The persona chooses how to satisfy it. Any portrait declaration binds
@@ -1032,6 +1039,63 @@ Missing, conflicting, hash-mismatched, cross-task, or cross-environment copies
 fail closed; silently projecting an empty baseline after changed bytes exist
 fails.
 
+## 15.1 Run materialization versus descendant turns
+
+**Input:** require one materialized outcome for a multi-persona run. Capture one
+environment baseline and every addressed member's exact private-worktree
+preimage before parallel fan-out. Let one authenticated persona action create
+and publish a positive-length byte delta while another root turn remains live,
+then deliver an exact signed persona message and an explicit self-wake under
+the same inherited run contract.
+
+**Trace:** verify that every root receives the same baseline hash and that its
+own same-turn comparison uses only its exact member preimage. Before the first
+verified publication, observe the action-loop byte gate. At every parallel
+action boundary and later wake, join the current exact environment delta to its
+signed task/workspace publication evidence. Keep the principal's run
+requirement and baseline in the causal carrier throughout.
+
+**Required outcome:** any authenticated member's exact task-bound publication
+satisfies the shared run condition; no lead or output actor is selected. A still
+live parallel turn observes that publication and releases its byte gate, and
+the later per-turn materialization gate remains false. Each persona may still
+choose any available action, including further materialization, but a message,
+coordination record, learning act, population act, capability act, or no further
+action can settle without a fabricated file. Tool/work attribution remains
+bound to the actual author. This release does not establish semantic completion
+or suppress a later wake.
+
+**Failure:** each root receives a persona-owned run baseline; every parallel or
+descendant turn is forced to write bytes; another actor's stale private bytes
+release a gate; an inherited message becomes a new output quota; a model claim
+releases the gate; unpublished or unchanged bytes release it; the run contract
+is removed or rewritten; or the join branches on task text, authored payload,
+filename, suffix, MIME, tool, role, domain, or artifact meaning.
+
+## 15.2 Workspace publication is observable but noncausal
+
+**Input:** in a multi-persona environment, let one authenticated action change
+and publish workspace bytes without authoring a message, schedule, invitation,
+persona wake, or other descriptor-declared successor. Repeat once with a
+persona message in the same action.
+
+**Trace:** retain the signed communication-turn observation, ambient record,
+workspace publication, author/action/time provenance, and current-state
+projection. Inspect the exact routed-wake outbox and finite run budget. On the
+second action, separately inspect the message descriptor and its exact delivery
+receipts.
+
+**Required outcome:** the workspace state is visible immediately and on every
+later authentic wake, but creates zero routed wakes and consumes zero successor
+model calls. The independently authored message creates exactly the recipient
+wakes declared by its descriptor; the workspace publication creates no
+companion wake for those recipients or for unaddressed peers.
+
+**Failure:** workspace changes fan out `observation_available` calls; a host
+coordinator chooses peers from filenames, MIME, task or message content, role,
+domain, or tool use; suppressing the state event hides the new bytes or their
+provenance; or a message loses its independently declared causal deliveries.
+
 ## 16. Signed open input and guarded response transport
 
 **Input:** one active persona publishes a public generic request with an open
@@ -1071,6 +1135,101 @@ role/tool/workflow; or resolving the request completes the task.
 Repeat with unrelated task text, response shapes, persona characteristics,
 domains, tools, and artifact formats. The same action catalog, signatures,
 transport, ordering rule, and security boundary must apply unchanged.
+
+## 16.1 Causal persona-message ancestry
+
+**Input:** deliver one exact signed persona communication to an active member
+under a finite multi-persona run. In the resulting turn, let the recipient
+independently choose whether to publish no message, a direct message, or a
+broadcast. Repeat with two FIFO-batched communications and with an authority
+payload too large for inline model projection.
+
+**Trace:** verify the carrier wake, environment-lineage event, persona
+signature, exact communication id, and authority hash before model dispatch.
+Hide the carrier id/hash from the provider-facing action schema and inject them
+only if `persona_message` is actually selected. Retain every batched companion
+as signed context. Observe the exact recipient wake count and the shared causal
+run accounting for direct and broadcast delivery.
+
+**Required outcome:** every message authored on the incoming-message turn names
+the exact carrier id/hash as its parent, including when the opaque authority
+body is omitted from the prompt. No action is forced and the persona's exact
+payload and recipient list are unchanged. The action descriptor exposes that
+each recipient becomes independently wake-eligible and that an empty-recipient
+broadcast reaches every active peer.
+
+**Failure:** a reply becomes a parentless root; a model must transcribe the
+causal identifiers; a companion is hidden or chosen by payload meaning; the
+host selects, rewrites, or suppresses a route; semantic duplicate detection is
+used; or broadcast fan-out is concealed from the actor.
+
+## 16.2 Retrospective communication effects
+
+**Input:** let a persona author direct and broadcast communications under a
+finite multi-persona run. Let some recipients perform model turns with several
+generic actions, workspace byte changes, one failed action, no byte change on
+another turn, and one parented follow-up communication. Leave at least one
+eligible recipient undelivered because finite run authority is exhausted. Then
+deliver a later ordinary wake.
+
+**Trace:** verify each communication authority and environment-lineage event,
+then join only exact event source references from signed recipient-turn
+receipts. Join follow-up communications only by exact parent id and authority
+hash. Inspect the fixed append-position causal-successor frontier in both the
+learning carrier and persona-navigation authority.
+
+**Required outcome:** the later wake exposes exact recipient eligibility,
+observed and unobserved recipients, child turn/model counts and identities,
+action identifiers, byte-delta counts, failure evidence, effect hashes, and
+child-message fan-out. Every record and frontier is hash-bound, append-bounded,
+and remains independently inspectable. The projection explicitly states that
+no semantic interpretation, ranking, utility inference, expertise award, or
+automatic selection occurred.
+
+**Failure:** the next wake sees only the sender's action receipt; delivery and
+downstream work cannot be causally joined; a recipient or failed/zero-delta turn
+is silently hidden; message text, task vocabulary, role, filename, format, tool
+meaning, domain, or outcome affects the join or inclusion; or the host scores,
+credits, suppresses, retries, or schedules an action from the derived evidence.
+
+Repeat in a busy environment where other personas append more communications
+than the global frontier window after the current persona's choice. The
+persona-authored frontier must still retain a fixed suffix selected only by
+exact author-id equality and append position. Its record must include the exact
+verified communication authority as well as the downstream effect join.
+
+**Failure:** room traffic evicts every self-authored choice; only a payload hash
+is available to correlate with outcomes; or any message/body/task/tool/domain
+meaning changes inclusion, ordering, allocation, or a subsequent action.
+
+## 16.3 Prepaid scheduled-wake execution
+
+**Input:** during a finite causal turn, author a one-shot wake while enough
+exact budget remains for one complete bounded successor. Repeat with
+insufficient headroom, with a bounded recurrence, with an unbounded recurrence,
+and with an explicitly unlimited run. Stop and restart the node between arm and
+fire for one finite case.
+
+**Trace:** inspect the shared run ledger before and after arming, the signed
+`SCHEDULED_TRIGGER_ARMED` transition, its exact embedded reservation and
+execution marker, the signed fired transition and ambient snapshot, the single
+claim event, and the event-local durable spend ledger. For a bounded recurrence,
+observe one independent claim per fire up to the prepaid limit. Replay an exact
+fire and race unrelated shared-run spend against delivery.
+
+**Required outcome:** finite arming atomically removes the full declared
+successor allowance before reporting success. Append failure refunds the
+unpersisted transfer. Insufficient funding creates no trigger. A finite fire
+executes from its exact reservation even when the shared run later reaches
+zero; replay does not mint or spend a second claim. A finite unbounded
+recurrence is refused, while an explicitly unlimited recurrence uses only its
+signed per-event cap. Restart changes none of these identities or outcomes.
+
+**Failure:** the UI reports an unfunded timer as armed; delivery depends on
+incidental shared-run headroom; another fire reuses a prior claim; a bounded
+recurrence reserves fewer turns than it advertises; restart mints capacity; or
+schedule purpose, task words, roles, domains, tool names, paths, formats, or
+payload meaning affect funding or admission.
 
 ## 17. Static contradiction audit
 
