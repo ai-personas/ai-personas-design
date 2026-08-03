@@ -213,6 +213,13 @@ merge heads, and unmerged index. Inspection exposes those bytes for judgment
 and also returns complete minimal resolution requests. The persona authors the
 conflict reference, one mechanical resolution kind, and optional open rationale;
 it does not retype a large hash preimage already committed by that reference.
+Every publication lane, including an exact authorized-file publication, must
+emit that same complete preservation evidence when it encounters a real
+conflict. A later signed observation with the identical branch and exact
+stage/blob unmerged index but no new preservation preimage is only a repeated
+mechanical observation of the already-open conflict: it cannot replace or
+invalidate the earlier complete authority, create another conflict, or count as
+resolution. A differing or otherwise incomplete record fails closed.
 For a persona-alternative choice, the workspace layer applies only the exact
 selected alternatives to current shared HEAD, verifies every selected byte and
 the resulting tree, commits any changed paths, and retains recoverable prior

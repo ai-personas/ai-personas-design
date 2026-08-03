@@ -651,6 +651,15 @@ a non-conflict mechanical observation. Emitting an incomplete conflict event,
 poisoning the append-only conflict projection, or asking a persona to inspect a
 state hash as though it were a conflict reference fails.
 
+After preserving a real conflict, retry its publication through an exact
+authorized-file lane. That lane must either reuse the complete exact
+preservation or expose an identical-unmerged-index repeat as a non-authoritative
+observation of the existing conflict. The conflict projection must stay valid,
+retain exactly one open immutable conflict reference, and return that reference
+to its owner for inspection. Replacing it with the workspace-state hash,
+creating a second conflict, dropping alternatives or merge heads, or allowing a
+partial repeat to poison the complete earlier evidence fails.
+
 Before resolving that conflict, deliver another ordinary turn to its owner
 after peers have advanced shared HEAD. The new leased worktree must start from
 that current shared revision while the authored conflict head remains reachable,
