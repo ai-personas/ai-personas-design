@@ -334,6 +334,14 @@ The full baseline remains available to enforcement and durable audit rather
 than competing with principal intent, population, capabilities and current
 progress in the prompt.
 
+A resource-resume carrier and its private continuation state preserve that
+complete verified baseline preimage. A bounded task-entry or UI projection may
+summarize or page it, but that presentation can never be copied back as resume
+authority. If a presentation compactor replaces records with an omission
+marker, the exact baseline remains unchanged in the signed carrier and durable
+continuation state; treating the compacted value as the next resume baseline
+and stranding a funded task fails closed.
+
 The substrate may verify:
 
 - exact signatures, keys, scopes, and causal precedence;

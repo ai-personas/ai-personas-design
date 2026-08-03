@@ -253,6 +253,14 @@ principal-intent entry; mechanical resume hops do not add duplicate intent
 records. Event lookup uses the verified exact-kind lineage index and detaches
 only candidate events rather than copying every unrelated large payload.
 
+Use a task-entry baseline with more records than the bounded presentation page,
+then resume twice. The first resume action may contain explicit omission
+metadata for display, while its signed resource carrier and private successor
+state retain the complete verified baseline. The second resume must execute
+from that exact preimage. Copying a presentation sentinel such as `truncated`
+back into closed resume authority, invalidating its baseline hash, and returning
+`materialized_outcome_baseline_unavailable` despite funded current state fails.
+
 A native model action that emits a signed causal child across a transport
 worker binds that child to the identical process-local budget and exact pool.
 The child is admitted through an event-local scope, never the shared run scope;
