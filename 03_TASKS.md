@@ -197,6 +197,12 @@ Conflicts preserve every exact path/hash alternative. Only an authorized signed
 resolution chooses or synthesizes bytes; the substrate does not resolve a
 conflict from file type, role, task text, or model prose.
 
+Before a branch merge, any pending bytes already materialized in the shared
+workspace are committed as neutral environment history. A failed merge is
+attested as a conflict only when Git produced a non-empty exact unmerged index;
+a dirty-worktree refusal or other pre-merge obstruction remains a mechanical
+failure and must not create a conflict reference or preservation authority.
+
 Preserved conflict state does not pin later cognition to a stale worktree. Once
 the exact authored head and preservation preimage are retained, each later turn
 starts from current shared HEAD while the conflict remains open. This baseline

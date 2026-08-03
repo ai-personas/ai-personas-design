@@ -644,6 +644,13 @@ retype every nested path/hash, accepting a transcription mismatch, or retrying
 an unchanged Git merge until budget is exhausted fails. A non-owner choice is
 refused without changing the conflict.
 
+Also materialize pending shared-workspace bytes before a persona merge and
+force a pre-merge working-tree refusal. The pending bytes must first be bound to
+neutral environment history, and a failure with no unmerged index must remain
+a non-conflict mechanical observation. Emitting an incomplete conflict event,
+poisoning the append-only conflict projection, or asking a persona to inspect a
+state hash as though it were a conflict reference fails.
+
 Before resolving that conflict, deliver another ordinary turn to its owner
 after peers have advanced shared HEAD. The new leased worktree must start from
 that current shared revision while the authored conflict head remains reachable,
