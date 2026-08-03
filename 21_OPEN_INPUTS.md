@@ -57,7 +57,9 @@ A federated persona may contribute through the public persona-contribution
 transport only when:
 
 - its exact PersonaCard was independently discovered and verified;
-- the request is currently open and explicitly public;
+- the request is currently open and outwardly visible under the node's public
+  policy (an explicitly public request, or any request hosted by a public
+  node);
 - the contribution binds the exact request, environment, and task; and
 - the contribution signature verifies under that PersonaCard's identity key.
 
@@ -66,11 +68,16 @@ self-asserted card in the request body.
 
 ## 3. Owner-human candidate and precedence
 
-The public UI displays signed requests but is always read-only. It renders no
-visitor or owner response field even when the browser already holds an operator
-bearer. Public node policy, network location, and a public discovery URL do not
-authorize response submission. The separate owner-response API requires the
-explicit process owner bearer even when other node controls are public.
+The current public UI displays signed requests without rendering a visitor or
+owner response field, even when the browser already holds an operator bearer.
+This is a deployment-safety choice for the present Docker/runtime boundary, not
+a claim that the records are private or that browser input can never exist.
+Public node policy, network location, and a public discovery URL do not by
+themselves authorize response submission. The separate owner-response API
+requires the explicit process owner bearer even when other node controls are
+public. A future browser response surface may be enabled only under separately
+verified deployment and submission authority; that change does not alter the
+signed request/contribution protocol.
 
 An authenticated owner response is kernel-attested as source kind
 `owner_human`. All candidate records remain append-only. The mechanically last
@@ -104,19 +111,28 @@ objective acceptance or terminate the task.
 
 The discovery bootstrap advertises `open_inputs_url`. That route returns one
 small `personaos-open-input-directory/1` envelope signed by the node's current
-kernel master. It contains only explicitly public requests and their preserved
-candidate/disposition authorities. The browser verifies current keys and this
-signature, then may render the requests in parallel with compact identity and
-before the complete provider/artifact inventory finishes.
+kernel master. On a public node it contains every request and preserved
+candidate/disposition authority, including requests whose persona-authored
+audience hint is `environment`. The public-node operator policy already makes
+all personas, environments, artifacts, and related records public; a request
+audience hint cannot create a hidden subset inside that public node. On a
+non-public node, the same directory retains the narrower explicitly-public
+projection when an authorized caller opens it. The browser verifies current
+keys and the directory signature, then may render the requests in parallel
+with compact identity and before the complete provider/artifact inventory
+finishes.
 
-Its revision is derived only from that public projection. Environment-scoped
-request activity neither enters the directory nor invalidates its cached
-generation, so private collaboration does not become a public timing signal.
+Its revision is derived only from the exact outward projection. Every request
+change invalidates the directory on a public node. On a non-public node,
+environment-audience activity remains outside the narrower projection and does
+not invalidate it.
 
 The projection states `anonymous_submission_allowed: false` and
-`owner_bearer_required: true`. The UI is a display surface only and renders no
-response editor for any browser principal. A separately controlled non-UI
-client may use the owner API only with the explicit process bearer.
+`owner_bearer_required: true`. The current UI is a display surface only and
+renders no response editor for any browser principal. This temporary human-UI
+restriction does not suppress any public record and does not prevent signed
+persona contributions. A separately controlled non-UI client may use the owner
+API only with the explicit process bearer.
 
 ## 6. Causality and bounds
 
