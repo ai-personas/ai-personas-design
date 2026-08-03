@@ -184,6 +184,14 @@ bounded policy. Deterministic malformed requests are not infrastructure
 outages. Effectful or uncertain turns are never replayed to obtain improved
 prose.
 
+A provider result that reaches the strict response boundary but cannot be
+decoded against its advertised structured-output carrier is an effect-free
+schema violation: no persona action has been dispatched. The same persona,
+model, causal carrier, descriptors, and schema may receive one mechanical
+reformat attempt, charged as another call to the same finite run. A second
+failure is dropped as malformed output. This retry does not add repair prose,
+choose a different action, substitute another model, or replay an effect.
+
 ### 7.1 Exact model ceiling and persona choice
 
 `run-model-pool/1` is a signed per-run unordered ceiling. Canonical sorting of

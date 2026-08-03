@@ -352,9 +352,14 @@ acquire/provision/invoke tools, author opaque knowledge, or ignore items in any
 order.
 
 **Required outcome:** an owner may explicitly publish or withdraw one exact
-body. Catalogue metadata contains author/provider-verified commitments but not
-the body. A receiver's exact record/hash choice fetches directly from the signed
-peer, verifies the author and provider independently, and retains the envelope.
+body for a non-public node's narrower exchange. On an operator-declared public
+node, every verified in-scope body instead receives an explicitly kernel-signed
+public-scope authority when no current persona publication exists; it is never
+labelled persona-authored. Catalogue metadata contains exact
+author/source/provider commitments while the body remains on its bounded signed
+route rather than inline. A receiver's exact record/hash choice fetches directly
+from the signed peer, verifies the source evidence and provider independently,
+and retains the envelope.
 Executable bodies mount only after their opaque portable recipe passes setup,
 build, smoke, and declared verification; other bodies are not automatically
 applied. Later cognition can inspect the retained exact body. Receipts preserve
@@ -531,9 +536,11 @@ catalogue before any loopback gossip is received. The second persona must see th
 record only after the local compact provider generation, manifest, provider,
 document, policy, author publication, and signatures verify. It may acquire the
 exact record through the normal signed route if it chooses. Repeat without the
-publication flag: the record remains durable for its owner and does not appear in
-the peer catalogue. A task word, domain label, authored body, or population count
-must not change either result.
+publication flag. On a non-public node the record remains durable for its owner
+and absent from the peer catalogue; on an operator-declared public node it
+appears with a kernel-signed `operator_public_node_scope` authority and the exact
+body route, never a fabricated persona publication. A task word, domain label,
+authored body, or population count must not change either result.
 
 The carrier's turn-effect append-frontier reference exposes the causal tip even
 when an older exact episode is larger than the prompt allocation. Its source
@@ -604,6 +611,23 @@ must appear as `duplicate_fragment_revision` omission evidence. Page the exact
 binding inventory, then reuse one binding id with an empty fragment set; the
 next carrier must omit that cleared binding without the substrate choosing a
 replacement.
+
+Fill the finite carrier with valid persona-selected records, then bind another
+exact revision through both the composite evolution action and the standalone
+binding action. Each result must expose the same compact carrier-effect
+projection as a subsequent compile: exact requested revisions present or
+absent, count/byte pressure, omission reasons, mechanical ordering, and hashes.
+Reporting only binding success while the requested revision is omitted fails.
+Automatically evicting, ranking, or replacing another fragment also fails.
+
+Return a provider-admitted structured result whose open-object argument carrier
+contains invalid JSON. No action may dispatch from that result. With remaining
+run authority, the exact same persona/model/carrier/schema receives one and
+only one budget-accounted mechanical reformat attempt and emits a schema-
+violation observation. A valid second result proceeds normally; another invalid
+result is dropped. Silently losing the first peer turn, retrying without a
+second budget claim, changing action/model/context, or attempting a third call
+fails.
 
 Attempt the same authoring operation with a syntactically valid scope that is
 not one of the authenticated carrier's exact identities. Persistence must be

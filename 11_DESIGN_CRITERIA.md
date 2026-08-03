@@ -417,7 +417,12 @@ revisions returned by that evolution application, and when absent it binds
 nothing. This reduces a causal authoring/binding boundary to one model/tool
 round trip without collapsing the two signed records or letting the substrate
 interpret the authored body. The result distinguishes catalogue-only success,
-complete binding, and partial commit.
+complete binding, and partial commit. A successful binding also returns the
+exact mechanically recomputed finite-carrier effect: requested revisions
+present or absent, current count/byte use, and omission records. Binding
+durability is never presented as prompt admission. The substrate does not use
+that pressure to rank fragments or revise a binding; any curation remains a
+later exact persona decision.
 
 An authored fragment scope is either empty, universal, or one exact identity in
 the authenticated current carrier. A syntactically valid but unavailable scope

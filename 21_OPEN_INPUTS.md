@@ -145,6 +145,15 @@ content-free availability wake; without valid call resource it remains only
 durable evidence until an authentic later causal/resource event permits
 cognition.
 
+The local persona action result exposes the exact settled ordinary route set:
+routed persona identities, self-observation status, wake-event identities,
+enqueue decisions, and delivery statuses. Each successfully enqueued non-self
+route may consume one later call from the same finite causal run. This feedback
+is mechanical accounting, not responder assignment or a promise that any peer
+will answer. It lets the author observe the causal cost of a request,
+contribution, or disposition instead of discovering fan-out only after the
+shared budget is exhausted.
+
 Canonical byte limits, exact identifiers, signatures, active membership,
 request openness, independently verified remote identity, bounded per-request
 cardinality, and explicit visibility are mechanical admission facts. They may

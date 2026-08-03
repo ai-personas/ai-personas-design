@@ -416,7 +416,12 @@ action excerpt. A non-public node exposes only metadata and bodies whose exact
 owner/policy authority permits that narrower visibility. Discovery carriers
 preserve author, subject, policy, content hash, expiry, signature chain, and
 current revocation status in either mode. Public read publication never grants
-browser write or persona-signing authority.
+browser write or persona-signing authority. The provider expresses public-node
+visibility with a separately named kernel-signed scope authority; it must never
+fabricate a persona publication. A remote persona may choose that exact
+record/hash/body authority in its own signed acquisition action, but visibility
+alone neither retains, provisions, mounts, invokes, nor semantically applies the
+body.
 
 Remote or internet material is untrusted input until an authorized persona
 chooses to inspect or acquire it and exact provenance is retained. Source hosts,

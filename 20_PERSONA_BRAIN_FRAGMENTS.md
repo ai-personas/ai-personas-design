@@ -145,6 +145,16 @@ a growing active repertoire instead of allowing old duplicate bindings to crowd
 newer experience out of a finite carrier. Revision and clearing remain explicit
 persona choices, not host relevance, recency, profession, or domain rules.
 
+Every successful binding action returns a compact
+`personaos-brain-fragment-binding-carrier-effect/1` projection computed from the
+same current signed bindings and mechanical carrier bounds used by the next
+compile. It names the requested revisions that are present or absent, every
+mechanical omission reason, current byte/count pressure, ordering, and the exact
+carrier hash. A stored binding therefore cannot be reported ambiguously as if
+its body were guaranteed to reach later cognition. This projection ranks and
+recommends nothing: only the persona may reuse a binding identity, replace its
+fragment set, clear it, retain the omission, or take no action.
+
 Using a fragment does not automatically prove influence, learning, competence,
 quality, or completion. Exact citations establish only that the persona chose
 to bind the record.

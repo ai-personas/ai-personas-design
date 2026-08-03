@@ -246,10 +246,15 @@ published only when the record verifies and each nonempty scope is already in
 the same public discovery generation. The provider record, discovery document,
 and access policy remain kernel-signed; after authorized body transfer, the
 receiver can reconstruct and independently verify the original persona-state
-signature. Discovery does not carry the body or an arbitrary locator. Under a
-current publication and public-read grant, the publication id mechanically
-derives a bounded peer-body route whose provider-signed envelope binds the
-exact discovery record and publication. This transport does not create a
+signature. A non-public node does not carry the body or an arbitrary locator
+without that current persona publication. On an operator-declared public node,
+the signed bridge/access policy instead yields an exact kernel-signed
+`operator_public_node_scope` body authority for every verified in-scope record
+that lacks a current persona publication. The authority id mechanically derives
+a bounded peer-body route whose provider-signed envelope binds the exact
+discovery record, source evidence, body hash/size, and either persona
+publication or public-node scope. The latter is visibly not persona-authored and
+does not impersonate author consent. This transport does not create a
 semantic `skill` subtype, task match, recommendation, or executable authority.
 
 `author_persona_knowledge` may carry the optional exact
@@ -263,7 +268,7 @@ publication or withdrawal decision.
 Catalogue input is the exact union of independently verified received P2P
 envelopes and the node's own current signed public provider index. The latter is
 expanded back into provider envelopes and passes the same generation, manifest,
-host, document, access-policy, publication, and signature checks. This local
+host, document, access-policy, body-authority, and signature checks. This local
 provider-index path prevents a co-resident persona from depending on loopback
 gossip; it introduces no rank, relevance match, or automatic acquisition.
 
@@ -271,8 +276,9 @@ gossip; it introduces no rank, relevance match, or automatic acquisition.
 record id and its expected body/envelope hashes. It fetches the derived route
 from that record's signed peer base, rejects a changed network origin, consults
 no central rendezvous fallback, and independently verifies the provider key,
-host identity, author key, publication signature, source identity, sizes, and
-hashes. The exact authenticated action and verified envelope are retained in
+host identity, source evidence, persona-publication or kernel public-scope
+signature, source identity, sizes, and hashes. The exact authenticated action
+and verified envelope are retained in
 signed environment lineage. Structural executable-tool bodies are passed as
 opaque portable recipes through the ordinary provisioning and verification
 boundary; structural persona-state bodies are retained without automatic
