@@ -906,6 +906,15 @@ suppresses a wake; the explicit disposition is lost; one disposition creates
 multiple successors; quiescence is shown as complete; later event starts a
 replacement task.
 
+Repeat with one active member. That member publishes an open-input request and
+then authors `no_successor`. The request remains public and inspectable, but it
+must not echo into a self-wake, manufacture a responder, or spend another model
+call. Repeat with a different active member present: that peer receives the
+signed observation and may contribute independently; an actual signed
+contribution then creates its own later causal observation. Tool descriptors
+must state these consequences without selecting whether the author should
+quiesce, wake, communicate, invite, or birth.
+
 ## 15. Objective acceptance
 
 **Input:** current bytes exist, model and tool calls succeeded, one note says
@@ -925,6 +934,26 @@ condition into the persona action loop. A text-only response must remain
 insufficient until authenticated effects or changed bytes meet the mechanical
 condition. Hard-coding a format, tool, profession, workflow, or content word in
 that gate, or treating the mechanical condition as substantive acceptance,
+fails.
+
+Populate the task-entry workspace with hundreds of files, then change and
+publish a small mechanically distinct set during the task. On every subsequent
+persona turn, the full baseline must still verify inside the closed causal
+contract, while the provider-facing prompt carries only its exact hash/count
+reference and a hash-bound current-delta page in a dedicated lane immediately
+after principal intent. Each inlined delta path/size/hash must reconstruct from
+the current workspace and baseline. The full baseline reappearing in the
+uniform situation stage, current delta being reduced to counts with no
+navigable exact records, or record admission/order changing with task, domain,
+role, filename, suffix, MIME, tool, or byte content fails.
+
+Repeat through an asynchronous initial task and an amendment. The exact
+task-entry baseline is persisted as run authority before the first turn and
+must be the same verified baseline used at quiescent finalization. An ingress
+action that retains only the baseline hash may bind the persisted full copy,
+but finalization must not look only for a full copy inside that action record.
+Missing, conflicting, hash-mismatched, cross-task, or cross-environment copies
+fail closed; silently projecting an empty baseline after changed bytes exist
 fails.
 
 ## 16. Signed open input and guarded response transport

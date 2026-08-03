@@ -293,6 +293,19 @@ choose a file format, executable, profession, workflow, minimum team, or
 semantic quality threshold. Those remain principal intent and persona action,
 while objective acceptance remains separately authoritative.
 
+The complete task-entry workspace baseline is closed enforcement state. It is
+verified in full wherever the byte gate is evaluated, but it is not replayed as
+an equal-share situation source on every model turn. The model-facing carrier
+uses a dedicated, causally ordered materialization lane containing the exact
+baseline hash, source-state signature, owner and file counts, the current
+mechanical outcome summary, and a hash-bound page of exact current delta
+path/size/hash records. Fixed byte and page bounds may project that page with
+explicit totals, cursors, omissions and manifests; they may not select records
+from task words, paths, suffixes, media types, tools, domains, roles or content.
+The full baseline remains available to enforcement and durable audit rather
+than competing with principal intent, population, capabilities and current
+progress in the prompt.
+
 The substrate may verify:
 
 - exact signatures, keys, scopes, and causal precedence;

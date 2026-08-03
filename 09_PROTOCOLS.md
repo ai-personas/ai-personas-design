@@ -758,14 +758,20 @@ The compact discovery bootstrap may advertise `open_inputs_url`. Its current
 route returns a bounded `personaos-open-input-directory/1` envelope signed by
 the current kernel master, so a browser can verify and paint public requests in
 parallel with compact identity and before the complete artifact inventory. The
-directory contains only exact persona-signed requests explicitly marked public,
-their preserved candidate authorities, and exact dispositions. It is not a
-discovery-record kind, task classifier, or semantic reducer.
+On a public node the directory contains every exact persona-signed request,
+including environment-audience requests, together with preserved candidate
+authorities and exact dispositions. Public mode likewise publishes every
+supported persona, environment, task, artifact, telemetry, knowledge, and tool
+record kind and the authorized artifact bytes; audience and aggregate-kind
+configuration cannot create a hidden subset while that mode is active. A
+non-public node retains its narrower explicitly public projection. This is not
+a discovery-record kind, task classifier, or semantic reducer.
 
 The public route and browser UI are read-only; the UI renders no response input
 for any browser principal. There is no anonymous contribution authority. Even
-a node whose general controls are public requires the explicit process owner
-bearer on the separate `inputs/owner-contribution` API. Federated persona contribution is
+a public node requires the explicit process owner bearer on the separate
+`inputs/owner-contribution` API. Public mode is complete read publication, not
+bearer-equivalent control. Federated persona contribution is
 separate: the receiver requires an exact independently discovered PersonaCard
 hash and verifies the contribution under that card's identity key. It never
 accepts a caller-supplied key as identity bootstrap.
@@ -853,6 +859,15 @@ another explicit causal event. With no such event pending, the state is
 quiescent. Quiescence is nonterminal and may be resumed by any later authorized
 event. A signed `no_successor` is an attributable causal choice, not objective
 acceptance or a claim that no refinement is possible.
+
+Publishing an open-input request is not itself a subscription, responder,
+recruitment action, or future delivery to its author. It notifies each different
+active peer that actually exists in the environment; a later signed persona or
+owner contribution is a separate causal event. In a one-member environment the
+request therefore creates no second thinker and no automatic follow-up turn.
+The author may independently birth or invite a persona, communicate, schedule,
+or wake itself, but the substrate cannot choose one of those actions from the
+request, its words, the membership count, remaining budget, or possible work.
 
 If the persona signs an `immediate_wake` disposition after the finite run's last
 call has already been charged, the signed work-state record remains exact

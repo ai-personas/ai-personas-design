@@ -74,10 +74,11 @@ This is a deployment-safety choice for the present Docker/runtime boundary, not
 a claim that the records are private or that browser input can never exist.
 Public node policy, network location, and a public discovery URL do not by
 themselves authorize response submission. The separate owner-response API
-requires the explicit process owner bearer even when other node controls are
-public. A future browser response surface may be enabled only under separately
-verified deployment and submission authority; that change does not alter the
-signed request/contribution protocol.
+requires the explicit process owner bearer. Public access is read publication,
+not bearer-equivalent task, budget, stop, or owner-input control. A future
+browser response surface may be enabled only under separately verified
+deployment and submission authority; that change does not alter the signed
+request/contribution protocol.
 
 An authenticated owner response is kernel-attested as source kind
 `owner_human`. All candidate records remain append-only. The mechanically last
@@ -132,7 +133,8 @@ The projection states `anonymous_submission_allowed: false` and
 renders no response editor for any browser principal. This temporary human-UI
 restriction does not suppress any public record and does not prevent signed
 persona contributions. A separately controlled non-UI client may use the owner
-API only with the explicit process bearer.
+API, task intake, resource grants, and stop controls only with the explicit
+process bearer.
 
 ## 6. Causality and bounds
 
