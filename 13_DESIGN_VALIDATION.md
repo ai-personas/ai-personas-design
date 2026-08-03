@@ -58,6 +58,11 @@ still loading. The in-flight startup is an expected peer probe: the locator must
 remain untouched until that probe completes or the same bounded first-contact
 deadline expires. A temporarily absent runtime transport object is not a failed
 probe and must not collapse the window to the shorter generic cold grace.
+The hosted shell arms that decision concurrently with local/IPFS probing so an
+empty roster is not held behind unrelated probe timeouts. In the current browser
+profile the complete no-route opportunity is at most 400 milliseconds; a viable
+verified direct/P2P route suppresses the locator immediately, and P2P
+reconciliation continues after fallback first contact.
 
 Populate one node with enough public task, telemetry, and artifact records to
 make its complete inventory large. Its well-known bootstrap must remain a
@@ -505,6 +510,16 @@ every omission remains hash/cursor-bound. No task word, domain label, score, or
 host-authored summary selects one, and merely returning a record does not turn
 it into an active tactic or an expertise credential.
 
+Have one persona author a knowledge record with its explicit same-action peer
+publication choice, then let a second persona on the same node inspect the global
+catalogue before any loopback gossip is received. The second persona must see the
+record only after the local compact provider generation, manifest, provider,
+document, policy, author publication, and signatures verify. It may acquire the
+exact record through the normal signed route if it chooses. Repeat without the
+publication flag: the record remains durable for its owner and does not appear in
+the peer catalogue. A task word, domain label, authored body, or population count
+must not change either result.
+
 The carrier's turn-effect append-frontier reference exposes the causal tip even
 when an older exact episode is larger than the prompt allocation. Its source
 total, suffix range, omitted prefix, frontier/manifest hashes, and record counts
@@ -896,6 +911,11 @@ interpreting note content. The later exact event, not prior prose, creates the
 new carrier. In the companion trace, the same open note with an authored
 `immediate_wake` disposition must register and deliver exactly one successor,
 including exact bound model-input paths when supplied. Repeat that companion
+trace with an opaque payload that describes a future condition: the successor
+still enqueues immediately and consumes its call authority; the substrate does
+not interpret that payload as a wait. A persona that wants no call before a new
+independent event instead authors `no_successor`, and that later event remains
+able to wake it through its own authority. Repeat the companion
 trace with one selected path created by another action in the same provider
 turn: request admission must not race the producer. The successor observes the
 settled byte size/hash at delivery, or carries an exact resolution failure,
@@ -979,6 +999,12 @@ contains no response editor for any browser principal. The authenticated owner
 candidate is considered first and all persona candidates remain visible. No candidate is marked correct
 or accepted. Any active persona may sign a request disposition, which closes
 only the request lifecycle.
+
+On the same public node, inspect persona development and every other supported
+public read surface. Every verified in-scope retained knowledge body and all
+persona/environment/task/artifact/workspace/message/telemetry/tool/open-input
+data is readable without a bearer. Neither browser gains an input editor or
+write authority.
 
 **Failure:** public node policy or network position permits submission; a
 self-supplied key/card establishes persona authority; HTTP response content

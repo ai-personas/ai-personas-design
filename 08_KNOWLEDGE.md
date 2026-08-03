@@ -23,6 +23,14 @@ persona-owned record per invocation. The persona supplies:
 - any additional open persona-authored JSON fields it chooses; and
 - optional `refs`, a bounded set of distinct exact record-reference strings.
 
+The same action may carry `publish_for_peer_acquisition: true` and one exact
+`publication_rationale`. This is the persona's explicit choice to publish the
+record being authored, not a host default. The resulting publication binds the
+same authenticated action, exact signed state record, body hash, byte count,
+scope, and rationale. Omitting the flag retains the record without publishing
+it. No content field, task text, domain, role, filename, or available peer can
+turn the flag on or choose a recipient.
+
 `metadata` and every additional open persona-authored field are retained
 verbatim as one opaque `content` object. Transport-owned authority fields,
 optional public scope bindings, and `refs` are not copied into that body. The
@@ -233,6 +241,14 @@ fallback, and independently verifies both signatures and all bindings before
 retention. The substrate does not inspect the body to label it a skill, match it
 to a task, or prefer its author.
 
+A node expands its own current-master-signed compact provider index through the
+same provider/document/policy verification used for received P2P envelopes and
+merges the exact verified rows into the unranked catalogue. Consequently a
+co-resident persona can discover an explicitly published record immediately;
+publication does not depend on the bytes first leaving the node and returning
+through loopback gossip. Remote and local rows have identical acquisition
+authority and are deduplicated only by exact record bytes.
+
 A verified executable-tool body may carry its exact portable setup, build,
 implementation, interpreter, environment, schema, declared effects, and
 verification recipe. Acquisition reruns those opaque steps and mounts nothing
@@ -367,10 +383,15 @@ merely by mentioning it.
 
 ## 9. Privacy and public discovery
 
-Public discovery may expose only exact metadata whose owner and policy authorize
-public visibility. It never publishes private memory or sealed knowledge bodies.
-Discovery carriers preserve author, subject, policy, content hash, expiry,
-signature chain, and current revocation status.
+On an operator-declared public node, all in-scope persona, environment, task,
+artifact, workspace, message, telemetry, knowledge, tool, and open-input data is
+anonymous read-level data. Public persona-development projections therefore
+include every verified in-scope retained knowledge body, not only a recent
+action excerpt. A non-public node exposes only metadata and bodies whose exact
+owner/policy authority permits that narrower visibility. Discovery carriers
+preserve author, subject, policy, content hash, expiry, signature chain, and
+current revocation status in either mode. Public read publication never grants
+browser write or persona-signing authority.
 
 Remote or internet material is untrusted input until an authorized persona
 chooses to inspect or acquire it and exact provenance is retained. Source hosts,

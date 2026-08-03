@@ -245,6 +245,21 @@ derives a bounded peer-body route whose provider-signed envelope binds the
 exact discovery record and publication. This transport does not create a
 semantic `skill` subtype, task match, recommendation, or executable authority.
 
+`author_persona_knowledge` may carry the optional exact
+`publish_for_peer_acquisition` decision and `publication_rationale`. When true,
+one invocation retains the signed opaque state record and, on successful
+publication verification, commits the publication bound to that same
+authenticated action. When absent or false, no publication is derived. The
+existing `publish_capability_body` action remains available for a later
+publication or withdrawal decision.
+
+Catalogue input is the exact union of independently verified received P2P
+envelopes and the node's own current signed public provider index. The latter is
+expanded back into provider envelopes and passes the same generation, manifest,
+host, document, access-policy, publication, and signature checks. This local
+provider-index path prevents a co-resident persona from depending on loopback
+gossip; it introduces no rank, relevance match, or automatic acquisition.
+
 `acquire_global_capability` accepts only an exact current verified catalogue
 record id and its expected body/envelope hashes. It fetches the derived route
 from that record's signed peer base, rejects a changed network origin, consults
@@ -582,6 +597,12 @@ non-authoritative; when primary discovery recovers, the last fallback lease
 expires without renewal. Producer and consumer fallback decisions use the
 node's same mechanically observed non-locator viability state.
 
+The source-checkout and production launchers configure the replaceable default
+locator unless the operator explicitly selects `off`, `none`, or `disabled`.
+Configuration is not use: producer and consumer runtime gates still prevent any
+locator read or announcement while an independently verified PersonaOS direct or
+P2P route is viable.
+
 The locator announcement's `record_count` is bounded signed metadata about the
 remote node's complete inventory; it is not a bundled record collection and
 does not allocate, transfer, or cache that many objects. Locator admission may
@@ -669,7 +690,9 @@ count/byte bounds only; it is not a host-selected lesson or an expertise award.
 
 `author_persona_knowledge` accepts required persona-authored canonical
 `metadata`, any additional open persona-authored JSON fields, and optional
-distinct exact `refs`. The complete open authored body is retained verbatim as
+distinct exact `refs`. It may also carry the separate exact peer-publication
+boolean and rationale described above. Those transport controls are excluded
+from opaque content. The complete open authored body is retained verbatim as
 opaque `content`; transport authority, public scope bindings, and refs remain
 separate envelope fields. Authenticated dispatch supplies persona identity and
 verifies any optional environment/task binding. One invocation persists one
@@ -831,6 +854,11 @@ causal disposition. The disposition is either an exact deliberate
 `no_successor` record or one exact `immediate_wake` request with persona-authored
 opaque kind/payload and optional exact model-input paths. The signed request
 binds the persona's path choices, not a speculative pre-settlement file read.
+`immediate_wake` enqueues a successor now and spends another finite-run call
+slot; no opaque kind, payload key, or note value turns it into a condition or a
+subscription for future evidence. `no_successor` creates no self-successor, but
+a later independently delivered event can still wake the persona through that
+event's own causal authority.
 Only successor delivery—after the current persona turn has settled—observes
 each selected path's exact size and hash and reports any unavailable or changed
 bytes. This remains mechanical and performs no filename, extension, task, or
