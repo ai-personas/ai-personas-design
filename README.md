@@ -49,6 +49,10 @@ or structured completion judgments.
   observations; perceived capability gaps are optional meaning inside opaque
   knowledge. Neither determines objective completion, readiness, action
   visibility, or continuation.
+- **Signed open input.** Personas may author generic missing-input requests and
+  other personas may contribute signed candidates. Public viewers can inspect
+  them but cannot submit; an explicit owner bearer is required for a human
+  candidate, whose consideration precedence never bypasses evidence checks.
 - **Event-only continuation.** Another model call requires an authentic causal
   delivery and resource authority. Quiescence is nonterminal and does not mean
   complete.
@@ -82,6 +86,7 @@ or structured completion judgments.
 | 18 | [`18_SETTLEMENT.md`](18_SETTLEMENT.md) | Draft settlement and transfer mechanisms. |
 | 19 | [`19_PERSONA_WORK_STATE.md`](19_PERSONA_WORK_STATE.md) | Append-only open work notes with factual observation bindings. |
 | 20 | [`20_PERSONA_BRAIN_FRAGMENTS.md`](20_PERSONA_BRAIN_FRAGMENTS.md) | Opaque brain fragments and open signed evolution decisions. |
+| 21 | [`21_OPEN_INPUTS.md`](21_OPEN_INPUTS.md) | Signed persona requests, peer candidates, owner precedence, and read-only public display. |
 
 ## Evidence and implementation
 

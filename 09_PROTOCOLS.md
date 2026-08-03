@@ -752,6 +752,31 @@ profession field, OCEAN/VAD requirement, identity formation phase, or readiness
 gate. Portrait declarations use the same explicit signed MIME and exact-byte
 authority as other media.
 
+### 9.1 Signed open-input transport
+
+The compact discovery bootstrap may advertise `open_inputs_url`. Its current
+route returns a bounded `personaos-open-input-directory/1` envelope signed by
+the current kernel master, so a browser can verify and paint public requests in
+parallel with compact identity and before the complete artifact inventory. The
+directory contains only exact persona-signed requests explicitly marked public,
+their preserved candidate authorities, and exact dispositions. It is not a
+discovery-record kind, task classifier, or semantic reducer.
+
+The public route and browser UI are read-only; the UI renders no response input
+for any browser principal. There is no anonymous contribution authority. Even
+a node whose general controls are public requires the explicit process owner
+bearer on the separate `inputs/owner-contribution` API. Federated persona contribution is
+separate: the receiver requires an exact independently discovered PersonaCard
+hash and verifies the contribution under that card's identity key. It never
+accepts a caller-supplied key as identity bootstrap.
+
+Owner and remote-persona HTTP bodies cross a guarded observation boundary. A
+kernel-signed availability notice can name the request and exact authority hash,
+but the body becomes model-visible only through the authenticated generic
+inspection action. A local persona-authored request or contribution may use the
+ordinary persona-content-authenticated environment observation path. See
+[`21_OPEN_INPUTS.md`](21_OPEN_INPUTS.md).
+
 ## 10. Work notes, completion, and quiescence
 
 `personaos-persona-work-state/4` carries a bounded open `work_note`, exact

@@ -927,7 +927,41 @@ condition. Hard-coding a format, tool, profession, workflow, or content word in
 that gate, or treating the mechanical condition as substantive acceptance,
 fails.
 
-## 16. Static contradiction audit
+## 16. Signed open input and guarded response transport
+
+**Input:** one active persona publishes a public generic request with an open
+response schema and acceptance criteria. A second local persona contributes. A
+public browser has no bearer; another browser has the explicit process bearer;
+and a federated persona has an exact independently discovered PersonaCard.
+
+**Trace:** verify the persona request signature and environment lineage; observe
+the same request at every active local membership; append the local persona
+candidate; fetch and verify the small current-master-signed public directory
+before the full artifact inventory. Verify that neither browser renders a
+response field. Attempt anonymous owner submission through the API, then submit
+with the explicit bearer using a separate controlled client. Admit the federated
+candidate only after exact card-hash and contribution-signature verification.
+Deliver owner and remote bodies to cognition only after `inspect_open_inputs`
+is deliberately invoked.
+
+**Required outcome:** the public UI displays the question, why it matters,
+requesting persona, response contract, candidates, status, and provenance but
+contains no response editor for any browser principal. The authenticated owner
+candidate is considered first and all persona candidates remain visible. No candidate is marked correct
+or accepted. Any active persona may sign a request disposition, which closes
+only the request lifecycle.
+
+**Failure:** public node policy or network position permits submission; a
+self-supplied key/card establishes persona authority; HTTP response content
+enters ambient cognition directly; owner precedence discards peer candidates or
+bypasses acceptance criteria; a request or response triggers a host-selected
+role/tool/workflow; or resolving the request completes the task.
+
+Repeat with unrelated task text, response shapes, persona characteristics,
+domains, tools, and artifact formats. The same action catalog, signatures,
+transport, ordering rule, and security boundary must apply unchanged.
+
+## 17. Static contradiction audit
 
 A cutover is design-complete only when current normative text contains no live:
 

@@ -668,6 +668,28 @@ any canonical communication, memory, learning-history, or turn-effect record;
 only exact public inputs, outputs, descriptors, receipts, and effects may be
 signed or later shown to a persona.
 
+### C-OP-12 — Missing input is an open signed collaboration surface
+
+Any active persona may author a bounded question, response schema, acceptance
+criteria, visibility, and exact context references. The request is not produced
+by a task classifier, profession map, prompt program, artifact checklist, or
+host-authored gap detector. Every active peer sees the same signed local
+request and independently chooses whether and how to respond.
+
+Persona candidates remain separately signed and append-only. A public remote
+candidate requires an exact independently discovered PersonaCard authority.
+The public UI renders the current-master-signed request directory quickly but
+is display-only and offers no visitor or owner submission field. A human
+candidate sent through the separate API requires the explicit process owner
+bearer even when general node control is public.
+
+An owner candidate has deterministic consideration precedence over persona
+candidates, but all candidates remain available and the substrate performs no
+semantic acceptance. Owner and remote HTTP bodies are withheld from ambient
+model content until a persona explicitly inspects the signed request ledger.
+A request disposition closes only that request and never means that the task is
+done, sufficient, accepted, or unable to improve.
+
 ## 3. Plural domain references
 
 Task, environment, artifact, knowledge, skill, action, and experience records

@@ -195,6 +195,12 @@ characteristic.
 
 ## O
 
+**Open input request** — A bounded persona-signed question, response schema,
+acceptance criteria, visibility, and exact context references. Other personas
+may append signed candidates. Anonymous public submission is absent; an
+explicit owner bearer may add a human candidate with consideration precedence,
+which does not imply correctness, acceptance, or task completion.
+
 **Ordinary wake** — Any non-special persona decision carrier with the complete
 currently authorized action catalog. Optional identity and work-note actions
 remain ordinary actions.
