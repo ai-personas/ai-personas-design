@@ -141,6 +141,15 @@ A birth, acquisition, evolution, execution, or successor mechanism hidden
 behind a generic string invoker, or whose ordinary description is consistently
 cut before its effect is visible, fails practical action discovery.
 
+Exercise a native semantic turn that authors more actions than an adapter's
+former private default while remaining below the deployment's generic runaway
+ceiling. The runtime loop, issued capability, provider-visible lease, accepted
+receipts, and remaining authority must agree on one exact bound. Repeat through
+a different provider adapter and after changing action names, task/domain text,
+prior-use counts, and descriptor order. An adapter that stops accepting actions
+before the common bound, silently widens it, or treats exhaustion as completion
+fails this criterion.
+
 Persist one unresolved signed wake, stop the node, and restart it with native
 transport configuration deliberately delayed. State verification may proceed,
 but the model-call count must remain unchanged and no wake may enter execution.

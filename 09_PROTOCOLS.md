@@ -147,6 +147,16 @@ invoker is non-conformant because it hides every actual choice behind a second
 model selection problem and makes the advertised action count differ from the
 provider-visible surface.
 
+The provider-native capability lease preserves the runtime's exact mechanical
+action envelope for the semantic turn. A deployment may impose one finite,
+content-neutral runaway ceiling, but that ceiling has one authority source
+shared by the runtime loop, capability issuer, and provider adapter. An adapter
+cannot silently substitute a smaller default. Any caller-authorized narrowing
+is exact and observable before the call; it never depends on action identity,
+task or domain content, prior use, inferred quality, or provider convention.
+Reaching the ceiling removes further action authority without converting the
+turn into completion or selecting a successor.
+
 Process recovery has a transport-readiness boundary. Durable wakes, schedules,
 birth deliveries, invitations, external requests, and startup budget recovery
 may be verified while a node is constructed, but no model-bearing replay is

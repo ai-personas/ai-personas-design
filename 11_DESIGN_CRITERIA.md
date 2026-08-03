@@ -370,6 +370,15 @@ into a generic invoker. For a structured-only body, the complete unranked
 catalogue remains in-band. Both paths revalidate the same signed live descriptor
 and principal at dispatch; neither path selects or ranks an action.
 
+The action-count authority is equally transport-independent. Runtime iteration,
+node-issued capability, and provider-native lease use the same exact
+content-neutral semantic-turn ceiling. Provider adapters do not carry private
+smaller defaults that prematurely revoke an otherwise authorized turn. An exact
+caller-authorized lower bound may be carried as mechanical input, but it is
+observable and cannot be derived from task, action, domain, tool, artifact,
+identity, outcome, or authored-content semantics. The bound limits runaway
+execution only; it never requires activity or implies completion.
+
 An exact local capability query may accept several independent literal
 substrings and return their stable unranked union. It declares that mechanical
 match mode; it must not silently require one record to contain every independent
