@@ -735,6 +735,15 @@ choices to `action_arguments`. A wake, population change, artifact declaration,
 or presentation projection must not fail merely because authenticated
 transport fields are correctly absent from persona-authored bytes.
 
+Exact in-workspace regular-file paths explicitly declared as command outputs
+have bounded byte preimages captured without following links. Successful
+execution commits the producer bytes unchanged. Unsuccessful execution restores
+pre-existing declared bytes or removes newly created non-directory entries and
+records the mechanical outcome. An unprotectable declared preimage refuses
+launch rather than risking silent truncation. The mechanism does not inspect a
+command, executable, path meaning, extension, MIME, task, domain, or output
+content, and it does not claim rollback of undeclared or external effects.
+
 When no causal delivery remains, the task is **quiescent**. Quiescence is
 nonterminal and means only that nothing is currently scheduled. It does not
 mean complete, ready, abandoned, converged, failed, or incapable of further

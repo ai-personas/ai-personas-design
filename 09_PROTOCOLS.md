@@ -88,6 +88,18 @@ the empty path remains workspace/receipt evidence and is neither erased nor
 presented as a usable artifact. This admission rule is mechanical and does not
 branch on path, extension, MIME, task, domain, executable, or authored prose.
 
+When a caller explicitly declares an in-workspace regular-file output, the
+execution boundary captures a bounded descriptor-safe byte preimage before
+launch. A successful terminal result leaves the producer's output untouched.
+An unsuccessful result atomically restores a pre-existing declared file or
+removes a newly created non-directory entry, and signs the exact restoration
+outcome. If the preimage cannot be captured without following links, exceeding
+its bound, or accepting an ambiguous file identity, execution is refused before
+launch. This transaction covers only the exact declared paths: it neither
+interprets them nor claims to undo arbitrary undeclared or external effects.
+Failure evidence remains in the signed execution receipt even when the damaged
+declared path is restored.
+
 ### 2.1 Exact unranked inventories
 
 The model-visible situation and inspection actions expose bounded paginated

@@ -219,3 +219,7 @@ authority.
    across task continuation; changed bytes require new signed authority.
 9. Zero-length workspace files remain visible as attempt evidence but never
    masquerade as materialized artifact bodies.
+10. An unsuccessful execution cannot silently replace a pre-existing explicitly
+    declared output with partial bytes: bounded exact preimages are restored or
+    newly created non-directory output entries are removed, while the signed
+    attempt receipt remains evidence. This protection reads no artifact meaning.
