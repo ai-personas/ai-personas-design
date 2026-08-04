@@ -205,6 +205,13 @@ the surrounding discovery document remain subject to the ordinary fail-closed
 scan. This exemption is structural and does not inspect, rank, or special-case
 the persona-authored body.
 
+The access policy on a persona discovery record names that exact persona as
+both subject and owner. The hosting kernel signs and serves the transport
+record, but hosting authority does not transfer ownership to the bootstrap
+persona or any other co-resident identity. Receivers bind the independently
+persona-signed PersonaCard, the persona identity key, the kernel-signed record,
+and this exact subject/owner policy before admitting a federated persona.
+
 When an adapter requires an in-prompt structured catalogue, it carries every
 exact action identifier and applies one identical content-blind description
 window to every registry or persona-authored descriptor. Ordinary registry
@@ -683,6 +690,23 @@ rendezvous, and gossip may operate concurrently. Each verified node,
 environment, persona, skill/tool metadata record, and artifact manifest is
 streamed as soon as its independent signature and authority checks succeed.
 Consumers do not wait for a complete global scan or the slowest responder.
+
+Because gossip delivery is ephemeral, unchanged-inventory refresh is fair over
+the complete canonical record set. A publisher cannot repeat one fixed record
+as its permanent heartbeat: a subscriber arriving after the original burst
+would then be unable to discover every other identity and capability. A new
+topic subscriber prompts an immediate bounded refresh, and successive refresh
+pages advance without interpreting record kind, label, content, task, domain,
+or capability meaning.
+
+Any verified peer-bound record may bootstrap a source-scoped read of that same
+provider's complete signed inventory. The peer and anonymous direct transports
+may race; both results require the identical current-master, generation,
+manifest, document-hash, provider-peer, policy, and expiry checks. A complete
+newer generation atomically replaces that source's prior cache generation so
+signed omissions remove stale records. Fair peer gossip remains an independent
+convergence path when the direct route is unavailable. Neither path consults
+or depends on the replaceable HTTP locator.
 
 Discovery records include exact subject, provider, content hash, visibility,
 policy, expiry, revocation, signature chain, and reachable content locators.

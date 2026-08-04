@@ -70,6 +70,19 @@ profile the complete no-route opportunity is at most 400 milliseconds; a viable
 verified direct/P2P route suppresses the locator immediately, and P2P
 reconciliation continues after fallback first contact.
 
+Start a peer only after another publisher's initial full gossip burst has
+finished, with the publisher holding multiple independently signed kinds and a
+prior receiver cache holding an omitted record from an older generation. The
+late peer must not receive one permanent canonical record on every interval.
+Its subscription prompts a bounded refresh; successive unchanged refreshes
+advance fairly across the complete canonical set. Receipt of any verified
+peer-bound record may race a complete signed inventory hydration from that same
+provider. Admission verifies the current master, provider peer, inventory
+generation and manifest, every document hash and signature, policy, and expiry
+before atomically replacing that source generation. The older signed omission
+disappears. Disable the direct route and verify fair peer refresh still
+converges without contacting the fallback locator.
+
 Populate one node with enough public task, telemetry, and artifact records to
 make its complete inventory large. Its well-known bootstrap must remain a
 bounded routing-and-count document with no embedded record summaries. The
@@ -204,6 +217,13 @@ state remain valid. Every complete generation must retain a minimal signed
 lifecycle record for the persona, mark unavailable profile fields pending, and
 omit only the unverifiable optional data. Restoring the optional projection may
 enrich the same persona identity; it must not appear as a death and rebirth.
+
+Publish two active personas from one host, including an identity that is not the
+bootstrap persona. For each persona, require the access-policy subject and owner,
+PersonaCard subject and signing key, lifecycle subject, discoverable-record DID,
+and canonical identifier to bind to that exact persona. Substituting the host's
+bootstrap persona as owner for the other identity must fail federation; using
+the exact non-bootstrap identity must admit it without changing host authority.
 
 If authenticated user intent requires a person-like portrait grounded in
 persona-authored characteristics, the exact requirement appears as principal

@@ -45,6 +45,15 @@ personas appear as soon as their compact signed inventory entries verify. The
 UI does not wait for a global scan, artifact hydration, telemetry, or the
 slowest peer before painting verified identities.
 
+Late peer subscribers converge on the complete current signed inventory rather
+than the single lexically first or otherwise fixed record. Unchanged gossip
+uses content-neutral fair bounded pages, advances across the canonical set, and
+starts a bounded refresh immediately when a new subscription is observed. Any
+verified record can initiate a complete source-scoped inventory hydration from
+that same provider; successful hydration atomically replaces the previous
+source generation and removes its signed omissions. Direct hydration and fair
+peer refresh do not query the fallback locator.
+
 After identity and provider routing verify, independently signed dynamic
 documents may race the peer data read with that same provider's anonymous
 direct route. The first usable document still undergoes its full content,
@@ -77,6 +86,12 @@ remains in every complete public roster generation. A concurrently unavailable
 or invalid optional name, characteristics, avatar, or rich PersonaCard
 projection fails closed as that optional profile material; it cannot remove the
 verified lifecycle identity or delay the other compact rows.
+
+Every public persona record is policy-owned by its exact subject persona. A
+kernel or bootstrap persona may host and sign the discovery carrier without
+becoming owner of later-born or co-resident identities. Federation admits the
+record only when its subject, policy owner, identity key, PersonaCard, and
+canonical persona identifier all bind to the same persona.
 
 Live topology names only currently verified active memberships. A running model
 call, active or paused run participant, invitation, birth record, or historical
