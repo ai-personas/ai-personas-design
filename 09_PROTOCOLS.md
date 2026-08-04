@@ -927,6 +927,20 @@ and compact signed card verify. Optional public name, description,
 characteristics, portrait, and style may be absent or later revised without
 changing persona identity or work authority.
 
+The always-present population navigation lane is a uniform projection of those
+already verified cards, not a second card format. Each row retains the exact
+persona identifier, public name, persona-authorship flags, complete opaque
+characteristic mapping and its hash, optional public description/capability and
+portrait references when present, and the signed-card authority hash required
+to author a remote invitation. The source snapshot hash, ordered page-record
+hash, page/omission/cursor facts, and a hash of the projected rows bind the
+projection to the full discovery page. Repeated signature and identity
+provenance stays behind authenticated `discover_personas` inspection. A large
+card body may therefore be lazy without making the whole roster an opaque
+structural index. Projection is identical for every admitted row and cannot
+inspect task, domain, role, tool, characteristic keys or values, or authored
+names to rank, omit, or select a persona.
+
 Presentation requirements come only from exact authenticated principal/user
 intent. The protocol has no default person-like portrait, name grammar,
 profession field, OCEAN/VAD requirement, identity formation phase, or readiness

@@ -234,6 +234,24 @@ and canonical identifier to bind to that exact persona. Substituting the host's
 bootstrap persona as owner for the other identity must fail federation; using
 the exact non-bootstrap identity must admit it without changing host authority.
 
+Populate one discovery page with cards whose complete signature, avatar, and
+characteristic provenance exceeds the ordinary navigation component bound.
+The cognition carrier must still expose one unranked row per admitted card with
+its exact persona id, public name, persona-authorship flags, complete opaque
+characteristics and hash, optional public summary/portrait references, and the
+signed-card authority hash usable for an invitation. Verify the source snapshot,
+ordered page-record, projected-row, and component hashes, then retrieve one full
+signed card through `discover_personas`. Collapsing the whole population to
+field hashes, selecting a smaller roster by task/content, or losing invitation
+authority is a failure.
+
+With zero prior acquisitions, expose a nonempty verified global capability
+provider. The ordinary carrier must report provider/verified/body/host counts
+and the exact verified-record-manifest hash while retaining zero acquired
+records. Repeat with an unavailable provider and with an observed empty
+provider. Those three states must remain distinct without inlining record
+metadata, choosing a record, or creating an acquisition action.
+
 If authenticated user intent requires a person-like portrait grounded in
 persona-authored characteristics, the exact requirement appears as principal
 intent. The persona chooses how to satisfy it. Any portrait declaration binds
