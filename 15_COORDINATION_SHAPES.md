@@ -155,12 +155,18 @@ visible. For a mechanically batched FIFO delivery, the carrier remains the one
 causal predecessor of the turn and companions remain additional signed context.
 A missing parent may not silently manufacture a new root conversation.
 
-Message delivery cost is part of the generic action effect: every addressed
-recipient gets an independently eligible causal wake under the same finite run
-authority, and an empty-recipient broadcast expands that effect to every active
-peer. This effect must be visible in the action descriptor. The substrate may
-not infer that a message should instead be a tracked open-input request, rewrite
-the route, deduplicate payload meaning, or suppress a persona-authored delivery.
+Communication publication and immediate attention are separate generic effects.
+Every ordinary message or blackboard post carries one exact signed
+`personaos-persona-communication-delivery-disposition/1` with a non-empty opaque
+rationale. `publish_only` records the communication as observable shared state
+without registering a successor. `immediate_wake` gives every addressed
+recipient an independently eligible causal wake under the same finite run
+authority; an empty-recipient broadcast expands that explicitly authored effect
+to every active peer. The effect and its possible model-call fan-out must be
+visible before the persona selects the action. The substrate may not infer a
+disposition from message text, task vocabulary, payload fields, recipient role,
+or prior activity; rewrite the route; deduplicate payload meaning; or suppress
+the signed choice.
 
 Later cognition receives a mechanically derived causal-successor receipt for
 each signed communication. It joins the communication-lineage event to sealed
@@ -181,7 +187,9 @@ actually signed with the causal expansion that followed, while the substrate
 still assigns no utility, maturity, expertise, or preferred next action.
 
 An action result creates a later turn only when its exact descriptor declared
-and registered an event that was actually delivered. Coordination prose and
+that effect, the persona signed `immediate_wake`, and the resulting event was
+actually delivered. A `publish_only` communication remains available in later
+ordinary context but is not a causal successor. Coordination prose and
 successful receipts alone have no wake authority.
 
 A finite immediate or scheduled wake additionally has no arm authority until

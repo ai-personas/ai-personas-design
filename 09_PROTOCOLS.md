@@ -494,6 +494,18 @@ personas choose which to use. The kernel verifies delivery and visibility; it
 does not summarize, vote, infer a coordinator, assign a recipient by role, or
 turn prose into population or completion state.
 
+Ordinary communication also separates durable publication from immediate
+attention. The persona signs one
+`personaos-persona-communication-delivery-disposition/1` with exact kind
+`publish_only` or `immediate_wake` and an opaque non-empty rationale. That
+choice is bound beside the persona's opaque provenance in
+`personaos-persona-communication-provenance/2`. `publish_only` creates no
+recipient successor. `immediate_wake` routes the signed event to every exact
+recipient and spends finite causal resources only when the wake is delivered.
+Message text, task/domain words, filenames, tools, roles, prior success, and
+payload keys never select or alter the disposition. An absent or malformed
+disposition fails closed instead of defaulting to a wake.
+
 ### 4.1 Exact resume fan-out
 
 When a resource event resumes an environment task, the exact signed event bytes
@@ -1167,6 +1179,8 @@ Current cutover records include:
   `personaos-persona-work-note-state/1`, and
   `personaos-work-state-evidence/1`;
 - `personaos-persona-telemetry-public/2`;
+- `personaos-persona-communication-provenance/2` and
+  `personaos-persona-communication-delivery-disposition/1`;
 - `personaos-persona-birth-proposal/5` and
   `personaos-persona-birth-proposal-record/2`;
 - `personaos-persona-birth-causal-action-context/1`;

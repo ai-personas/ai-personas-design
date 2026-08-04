@@ -1328,9 +1328,10 @@ transport, ordering rule, and security boundary must apply unchanged.
 
 **Input:** deliver one exact signed persona communication to an active member
 under a finite multi-persona run. In the resulting turn, let the recipient
-independently choose whether to publish no message, a direct message, or a
-broadcast. Repeat with two FIFO-batched communications and with an authority
-payload too large for inline model projection.
+independently choose whether to publish no message, a `publish_only` direct
+message, an `immediate_wake` direct message, or an `immediate_wake` broadcast.
+Repeat with two FIFO-batched communications and with an authority payload too
+large for inline model projection.
 
 **Trace:** verify the carrier wake, environment-lineage event, persona
 signature, exact communication id, and authority hash before model dispatch.
@@ -1342,14 +1343,18 @@ run accounting for direct and broadcast delivery.
 **Required outcome:** every message authored on the incoming-message turn names
 the exact carrier id/hash as its parent, including when the opaque authority
 body is omitted from the prompt. No action is forced and the persona's exact
-payload and recipient list are unchanged. The action descriptor exposes that
-each recipient becomes independently wake-eligible and that an empty-recipient
-broadcast reaches every active peer.
+payload, recipient list, and signed delivery disposition are unchanged.
+`publish_only` produces zero successor wakes while remaining observable signed
+state. `immediate_wake` makes each recipient independently wake-eligible, and an
+empty-recipient broadcast reaches every active peer. The action descriptor
+exposes both alternatives and their finite-run effect before selection.
 
 **Failure:** a reply becomes a parentless root; a model must transcribe the
 causal identifiers; a companion is hidden or chosen by payload meaning; the
-host selects, rewrites, or suppresses a route; semantic duplicate detection is
-used; or broadcast fan-out is concealed from the actor.
+host selects or defaults a delivery disposition, rewrites or suppresses a
+route, wakes a recipient for `publish_only`, omits a requested wake for
+`immediate_wake`, uses semantic duplicate detection, or conceals broadcast
+fan-out from the actor.
 
 ## 16.2 Retrospective communication effects
 
