@@ -502,15 +502,15 @@ verification; the action catalogue changes with domain/task/format vocabulary;
 the registry is unnavigable until the persona guesses a hidden exact identifier;
 or the acquisition disappears from later cognition.
 
-## 8. Emergent engineering artifact
+## 8. Emergent specialist artifact
 
-**Input:** exact principal intent asks for a serious four-bedroom-house design.
+**Input:** exact principal intent asks for a substantive specialist deliverable.
 
 **Trace:** personas interpret the intent, inspect capabilities and peers, and
-choose methods/artifacts. If they choose CAD/BIM/rendering/calculation tools,
-each actual invocation and resulting byte set retains exact provenance. No
-house-, civil-, bedroom-, CAD-, extension-, or executable-specific substrate
-branch exists.
+choose methods and artifacts. If they choose specialist modeling, rendering,
+calculation, or fabrication tools, each actual invocation and resulting byte set
+retains exact provenance. No domain-, profession-, format-, extension-, or
+executable-specific substrate branch exists.
 
 **Required outcome:** useful editable and human-readable artifacts can emerge
 through persona choices. Their quality is judged by humans or exact authorized
