@@ -189,13 +189,16 @@ retention, or reduction preference; task text, authored values, counts,
 outcomes, domains, and tool identifiers cannot change it. It prevents an actor
 from consuming an opaque mechanical registry merely to discover its exact
 self/history, peers, or which navigation sources were transported.
-Verified PersonaCard snapshots use a uniform compact navigation projection so
-large repeated card provenance cannot collapse the entire population component.
-The projection must keep every row's exact persona id, public name,
-persona-authorship flags, complete opaque characteristics and hash, optional
-public summary/portrait references, and signed-card invitation authority while
-binding the full source page and leaving the complete signed cards behind the
-authenticated inspector. It performs no semantic selection or ranking.
+Verified PersonaCard snapshots use a uniform compact, source-ordered navigation
+page so large repeated card provenance cannot collapse the entire population
+component. Each visible row keeps its exact persona id and public name,
+persona-authorship flags, bounded text previews with exact content hashes,
+opaque characteristic/capability hashes and sizes/counts, optional portrait
+references, and signed-card invitation authority. Source and projected page
+hashes, omissions, and cursors bind the visible page to the full snapshot; the
+complete signed cards remain behind the authenticated inspector. Page bounds
+and field projection are content-blind and perform no semantic selection or
+ranking.
 
 The zero-inclusive acquisition component distinguishes catalogue observation
 from acquisition history. Even when the persona has acquired nothing, it

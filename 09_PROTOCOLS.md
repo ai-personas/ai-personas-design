@@ -928,16 +928,18 @@ characteristics, portrait, and style may be absent or later revised without
 changing persona identity or work authority.
 
 The always-present population navigation lane is a uniform projection of those
-already verified cards, not a second card format. Each row retains the exact
-persona identifier, public name, persona-authorship flags, complete opaque
-characteristic mapping and its hash, optional public description/capability and
-portrait references when present, and the signed-card authority hash required
-to author a remote invitation. The source snapshot hash, ordered page-record
-hash, page/omission/cursor facts, and a hash of the projected rows bind the
-projection to the full discovery page. Repeated signature and identity
-provenance stays behind authenticated `discover_personas` inspection. A large
-card body may therefore be lazy without making the whole roster an opaque
-structural index. Projection is identical for every admitted row and cannot
+already verified cards, not a second card format. Each source-ordered navigation
+page retains the exact persona identifier and public name, persona-authorship
+flags, bounded public text previews with exact hashes and byte counts,
+characteristic/capability hashes and sizes/counts, optional portrait references,
+and the signed-card authority hash required to author a remote invitation. Large
+opaque characteristic mappings, capability summaries, signatures, and identity
+provenance stay behind authenticated `discover_personas` inspection. The source
+snapshot and ordered page-record hashes, navigation page/omission/cursor facts,
+and projected-row hash bind the lazy page to the full discovery snapshot. A
+large or growing population can therefore expose an exact first page and exact
+continuation cursor without making the whole roster an opaque structural index.
+Projection and page limits are identical for every admitted row and cannot
 inspect task, domain, role, tool, characteristic keys or values, or authored
 names to rank, omit, or select a persona.
 

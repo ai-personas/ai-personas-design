@@ -234,16 +234,17 @@ and canonical identifier to bind to that exact persona. Substituting the host's
 bootstrap persona as owner for the other identity must fail federation; using
 the exact non-bootstrap identity must admit it without changing host authority.
 
-Populate one discovery page with cards whose complete signature, avatar, and
-characteristic provenance exceeds the ordinary navigation component bound.
-The cognition carrier must still expose one unranked row per admitted card with
-its exact persona id, public name, persona-authorship flags, complete opaque
-characteristics and hash, optional public summary/portrait references, and the
-signed-card authority hash usable for an invitation. Verify the source snapshot,
-ordered page-record, projected-row, and component hashes, then retrieve one full
-signed card through `discover_personas`. Collapsing the whole population to
-field hashes, selecting a smaller roster by task/content, or losing invitation
-authority is a failure.
+Populate one discovery snapshot with enough maximum-size cards to exceed the
+ordinary navigation component bound. The cognition carrier must still expose a
+source-ordered, unranked navigation page with each row's exact persona id and
+public name, persona-authorship flags, bounded text previews and exact hashes,
+opaque characteristic/capability hashes and sizes/counts, optional portrait
+references, and signed-card authority usable for an invitation. Verify source
+snapshot, complete source-page record, projected-row, omission, cursor, and
+component hashes; follow the exact continuation cursor; then retrieve one full
+signed card through `discover_personas`. Collapsing the whole population to a
+field-only structural index, selecting rows by task/content, silently omitting
+the continuation cursor, or losing invitation authority is a failure.
 
 With zero prior acquisitions, expose a nonempty verified global capability
 provider. The ordinary carrier must report provider/verified/body/host counts
