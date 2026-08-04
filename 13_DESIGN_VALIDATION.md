@@ -236,15 +236,16 @@ the exact non-bootstrap identity must admit it without changing host authority.
 
 Populate one discovery snapshot with enough maximum-size cards to exceed the
 ordinary navigation component bound. The cognition carrier must still expose a
-source-ordered, unranked navigation page with each row's exact persona id and
-public name, persona-authorship flags, bounded text previews and exact hashes,
+dedicated source-ordered, unranked population page with each row's exact persona
+id and public name, persona-authorship flags, bounded text previews and exact hashes,
 opaque characteristic/capability hashes and sizes/counts, optional portrait
 references, and signed-card authority usable for an invitation. Verify source
 snapshot, complete source-page record, projected-row, omission, cursor, and
 component hashes; follow the exact continuation cursor; then retrieve one full
 signed card through `discover_personas`. Collapsing the whole population to a
 field-only structural index, selecting rows by task/content, silently omitting
-the continuation cursor, or losing invitation authority is a failure.
+the continuation cursor, allowing unrelated navigation-component growth to
+replace the population page, or losing invitation authority is a failure.
 
 With zero prior acquisitions, expose a nonempty verified global capability
 provider. The ordinary carrier must report provider/verified/body/host counts

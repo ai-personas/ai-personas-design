@@ -927,10 +927,12 @@ and compact signed card verify. Optional public name, description,
 characteristics, portrait, and style may be absent or later revised without
 changing persona identity or work authority.
 
-The always-present population navigation lane is a uniform projection of those
-already verified cards, not a second card format. Each source-ordered navigation
-page retains the exact persona identifier and public name, persona-authorship
-flags, bounded public text previews with exact hashes and byte counts,
+The always-present population authority is a dedicated provider lane containing
+a uniform projection of those already verified cards, not a second card format.
+It does not share a reduction budget with action, execution, workspace, or
+learning catalogues. Each source-ordered navigation page retains the exact
+persona identifier and public name, persona-authorship flags, bounded public
+text previews with exact hashes and byte counts,
 characteristic/capability hashes and sizes/counts, optional portrait references,
 and the signed-card authority hash required to author a remote invitation. Large
 opaque characteristic mappings, capability summaries, signatures, and identity

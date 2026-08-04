@@ -189,10 +189,11 @@ retention, or reduction preference; task text, authored values, counts,
 outcomes, domains, and tool identifiers cannot change it. It prevents an actor
 from consuming an opaque mechanical registry merely to discover its exact
 self/history, peers, or which navigation sources were transported.
-Verified PersonaCard snapshots use a uniform compact, source-ordered navigation
-page so large repeated card provenance cannot collapse the entire population
-component. Each visible row keeps its exact persona id and public name,
-persona-authorship flags, bounded text previews with exact content hashes,
+Verified PersonaCard snapshots use a dedicated uniform compact, source-ordered
+provider lane so large repeated card provenance and unrelated catalogue growth
+cannot collapse the population authority. Each visible row keeps its exact
+persona id and public name, persona-authorship flags, bounded text previews with
+exact content hashes,
 opaque characteristic/capability hashes and sizes/counts, optional portrait
 references, and signed-card invitation authority. Source and projected page
 hashes, omissions, and cursors bind the visible page to the full snapshot; the
