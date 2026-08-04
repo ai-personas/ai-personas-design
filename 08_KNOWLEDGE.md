@@ -278,7 +278,12 @@ A verified executable-tool body may carry its exact portable setup, build,
 implementation, interpreter, environment, schema, declared effects, and
 verification recipe. Acquisition reruns those opaque steps and mounts nothing
 unless provisioning, smoke execution, and every author-declared verification
-command succeed. A verified opaque state body is retained without automatic
+command succeed. Smoke execution uses one exact persona-authored public input
+object that satisfies the tool's declared transport envelope; the canonical
+object travels through the same stdin and process-environment argument channels
+used by ordinary invocation, in the authenticated workspace. The substrate
+neither invents an empty call nor derives example values from argument names.
+A verified opaque state body is retained without automatic
 application. Later cognition receives a small exact acquisition inventory and
 may open any retained body by exact id, JSON pointer, and byte window. Catalogue
 presence, body publication, acquisition, provisioning, mounting, invocation,

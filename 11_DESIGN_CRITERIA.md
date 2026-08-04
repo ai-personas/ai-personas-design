@@ -311,6 +311,14 @@ coordinator, representative, role, or preferred recipient. Fan-out provides an
 opportunity to act; it does not mean the task is incomplete, complete, or that
 every recipient must call a model.
 
+A finite run that reaches quiescence with no remaining call headroom is a
+resumable checkpoint, not an artifact-publication exception. Its exact current
+workspace generation is signed and published as best-so-far evidence under the
+`budget_exhausted` status, just as an unbound quiescent continuation publishes
+its current generation. Neither checkpoint claims semantic completion, and
+neither may leave a stale `running` shell or partial manifest as the public
+authority merely because its status is non-success.
+
 A causal descendant created by a native model action retains the exact signed
 run/pool binding and the identical process-local budget object even when the
 action crosses a transport worker. That authority remains event-local and is
@@ -450,9 +458,12 @@ author, source, size, and hashes. It then retains the exact acquisition.
 Executable structural bodies traverse the same opaque provision/smoke/declared-
 verification boundary as locally authored recipes; non-executable structural
 bodies have no automatic behavioral effect. Later cognition can navigate every
-retained acquisition by exact id and content window. No task, domain, role,
-filename, extension, MIME value, capability label, or tool name participates in
-publication, selection, transfer, retention, or application.
+retained acquisition by exact id and content window. Smoke uses an exact
+persona-authored public input object, delivered as canonical JSON through the
+ordinary invocation ABI in the authenticated workspace; the substrate supplies
+only authenticated call context and never fabricates semantic values. No task,
+domain, role, filename, extension, MIME value, capability label, or tool name
+participates in publication, selection, transfer, retention, or application.
 
 `author_persona_knowledge` admits one signed
 `personaos-persona-state-record/1` per invocation. Authenticated context supplies
@@ -770,6 +781,14 @@ overwritten by the authenticated workspace default. Relative execution
 directories resolve from that workspace, and publication remains confined to
 it. These rules are derived from descriptor authority, never an action name,
 task word, profession, domain, or executable.
+
+An exported run may deliver a later authenticated causal wake whose task binding
+remains exact while its raw run-scoped mission binding is empty. Active-call
+verification must compare that empty binding exactly. Once admitted, every
+task-bound handler derives its effective mission scope only as `mission_task_id`
+when present or the same authenticated `task_id` otherwise. It must not refuse
+ordinary task/workspace actions merely because the earlier run has exported,
+and it must not select another task or recover one from content.
 
 Every downstream effect verifier reads principal/task/environment identity from
 the verified action envelope and compares only the remaining persona-authored

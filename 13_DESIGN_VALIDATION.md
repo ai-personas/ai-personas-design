@@ -163,6 +163,15 @@ prior-use counts, and descriptor order. An adapter that stops accepting actions
 before the common bound, silently widens it, or treats exhaustion as completion
 fails this criterion.
 
+Deliver a later task-bound causal wake after its originating run has exported,
+with an exact authenticated task and an intentionally empty raw mission binding.
+Capability issuance and active-call comparison must preserve the empty value.
+Ordinary execution, workspace inspection, capability acquisition, communication,
+and persona-authored successor actions must then receive the same task as their
+effective mission scope. Refusing those actions solely because the old run no
+longer supplies a mission id, selecting a different task, or deriving one from
+task/content semantics fails this criterion.
+
 Persist one unresolved signed wake, stop the node, and restart it with native
 transport configuration deliberately delayed. State verification may proceed,
 but the model-call count must remain unchanged and no wake may enter execution.
@@ -356,6 +365,13 @@ offers that same run as `budget_exhausted`, and hides its older resume source.
 It does not edit the shell or enqueue cognition until signed resource evidence
 arrives.
 
+Before and after restart, verify that the quiescent `budget_exhausted` result
+binds, signs, and publishes the exact current workspace file generation and
+replaces the earlier `running` presentation. The same projection path must work
+for a quiescent unbound continuation. A status-specific guard that accepts one
+resumable checkpoint but rejects the other, leaving a stale or partial public
+artifact generation, fails.
+
 **Failure:** only the prior owner resumes; a status flag creates a call; grant
 duplicates a settled delivery; the recovery call runs but its persona-authored
 wake is rejected against the exhausted pre-grant pool; fresh budget exists only
@@ -444,8 +460,11 @@ route rather than inline. A receiver's exact record/hash choice fetches directly
 from the signed peer, verifies the source evidence and provider independently,
 and retains the envelope.
 Executable bodies mount only after their opaque portable recipe passes setup,
-build, smoke, and declared verification; other bodies are not automatically
-applied. Later cognition can inspect the retained exact body. Receipts preserve
+build, smoke, and declared verification. The smoke call must receive the exact
+persona-authored public input object through both ordinary canonical-JSON
+argument channels in the authenticated workspace; a substituted empty object,
+schema-derived example, or filename/tool-specific fixture fails validation.
+Other bodies are not automatically applied. Later cognition can inspect the retained exact body. Receipts preserve
 exact provider, action, result, and byte effects. Gap-like content is optional
 and has no dedicated lifecycle or readiness/continuation semantics.
 

@@ -71,6 +71,15 @@ therefore take principal identity from the verified action envelope and compare
 only persona-authored fields against `action_arguments`; they never require a
 transport-bound field to reappear in that authored map.
 
+A causal wake can remain bound to an authenticated task after the originating
+run has exported, so its raw run-scoped mission identity may legitimately be
+empty. Capability admission and active-call comparison preserve that empty value
+exactly. After the action crosses the authenticated boundary, task-bound handlers
+use the already-bound task identity as the effective mission scope when no
+separate mission identity exists. This does not select, rewrite, or infer a task;
+it keeps the same task's later event-driven work capable of ordinary execution,
+acquisition, communication, and successor actions.
+
 An authenticated workspace is publication authority and the default execution
 base, not an authored working-directory choice. When an action schema exposes a
 working-directory argument, a persona-provided value survives transport;
@@ -353,7 +362,11 @@ and verified envelope are retained in
 signed environment lineage. Structural executable-tool bodies are passed as
 opaque portable recipes through the ordinary provisioning and verification
 boundary; structural persona-state bodies are retained without automatic
-application. `inspect_acquired_capabilities` exposes a complete mechanically
+application. The recipe binds an exact persona-authored smoke input object;
+acquisition carries its canonical JSON through the same stdin and environment
+channels as a mounted call and uses authenticated workspace authority. The
+protocol never substitutes an empty invocation or synthesizes argument values.
+`inspect_acquired_capabilities` exposes a complete mechanically
 ordered summary inventory plus exact-id, JSON-pointer, and byte-window reads.
 No field in either action expresses a domain, profession, task match, preferred
 provider, required capability, teacher, curriculum, or expertise award.
