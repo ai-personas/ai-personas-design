@@ -194,18 +194,19 @@ choose a different action, substitute another model, or replay an effect.
 
 ### 7.1 Exact model ceiling and persona choice
 
-`run-model-pool/1` is a signed per-run unordered ceiling. Canonical sorting of
-its model IDs is serialization, not preference. `persona-model-choice/1` is the
-persona-signed exact order and reasoning effort for one persona, environment,
-task/candidate/mission task, run, pool hash, and situation generation.
+`run-model-pool/2` is a signed per-run unordered ceiling with a distinct
+principal-selected `bootstrap_model_id` contained in that ceiling. Canonical
+sorting of its model IDs is serialization, not preference. Before a matching
+signed choice exists, only that bootstrap body may receive substantive
+cognition. `persona-model-choice/1` is the persona-signed exact order and
+reasoning effort for one persona, environment, task/candidate/mission task, run,
+pool hash, and situation generation.
 
-Before a matching signed choice exists, a substantive call is admitted only if
-current mechanical eligibility leaves exactly one callable body. More than one
-eligible body is unresolved authority and fails closed. Registry or provider
-insertion order, lexical order, a default client, price/tier heuristics, and a
-host-selected bootstrap body cannot break the tie. A principal-authorized exact
-one-body pool is unambiguous; later fallbacks follow only the matching signed
-persona choice and remain subject to mechanical admission.
+Registry or provider insertion order, lexical order, a default client,
+price/tier heuristics, and a host-selected bootstrap body cannot replace the
+signed bootstrap. A one-body pool is structurally unambiguous; later fallbacks
+follow only the matching signed persona choice and remain subject to mechanical
+admission.
 
 ## 8. Workspace isolation and settlement
 
@@ -338,6 +339,7 @@ reduction or admission.
 6. Objective acceptance is exact authority, never substrate inference.
 7. Quiescence is nonterminal.
 8. Mechanical bounds may refuse declared effects but never select behavior.
-9. An ambiguous multi-model pool cannot acquire a host-chosen bootstrap order.
+9. A multi-model pool cannot acquire a host-chosen bootstrap; the bootstrap is
+   explicit principal authority and never model-set order.
 10. Pagination preserves exact append positions, cardinality, and duplicate
     accounting.

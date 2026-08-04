@@ -276,10 +276,10 @@ Replication is never inferred from action names or content.
 **Resource event** — Exact authenticated grant or budget/lifecycle event. On
 resume it fans out unchanged to all active members under the same pool.
 
-**Run model pool** — `run-model-pool/1`, the signed unordered set of model IDs
-authorized as the ceiling for one exact run. Canonical sorting is serialization,
-not preference; an ambiguous first call requires a matching persona model
-choice or fails closed.
+**Run model pool** — `run-model-pool/2`, the signed unordered set of model IDs
+authorized as the ceiling for one exact run plus a distinct principal-selected
+bootstrap member. Canonical sorting is serialization, not preference; the
+bootstrap applies only until a matching persona model choice exists.
 
 **Routed wake delivery snapshot** —
 `personaos-communication-routed-wake-delivery-snapshot/1`, an exact

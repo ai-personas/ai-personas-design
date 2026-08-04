@@ -176,22 +176,27 @@ surface, execution-capability inventory, verified roster/birth/replication
 authority, current workspace state, exact identity/readiness state,
 zero-inclusive capability-acquisition state, and retained-learning manifests.
 Version 2 begins with an exact component manifest in carrier construction
-order. Each row exposes component identity, schema, hash, canonical byte size,
-and whether its body is a structural index before any potentially large
-component body. The order is declared non-semantic and grants no preference;
-it prevents an actor from consuming an opaque large body merely to discover
-which navigation sources were actually transported.
+order. The closed provider-wire order is identity, learning, population,
+capability acquisition, workspace, execution inventory, action catalogue, and
+action usage. Each row exposes component identity, schema, hash, canonical byte
+size, and whether its body is a structural index before any potentially large
+component body. The order is declared non-semantic and grants no action,
+retention, or reduction preference; task text, authored values, counts,
+outcomes, domains, and tool identifiers cannot change it. It prevents an actor
+from consuming an opaque mechanical registry merely to discover its exact
+self/history, peers, or which navigation sources were transported.
 Native provider tools remain complete action authority, and every large source
 remains independently inspectable. A distinct exact
-`personaos-action-usage-navigation-reference/2` mechanically joins every
-current action identifier to its zero-inclusive retained receipt counts and to
-one equal-size prefix of that identifier's current descriptor text. The prefix
-rows are complete over the leased action set, preserve registry order, carry
-their own completeness and hash evidence, and use one fixed bound regardless of
-action identity, annotation, task, domain, or prior use. An oversized action
-catalogue or learning history therefore cannot leave repeated or never-observed
-mechanisms as unexplained names. The join grants no recommendation or
-expertise. When the joined
+`personaos-action-usage-navigation-reference/3` mechanically joins every
+current action identifier to its zero-inclusive retained receipt counts. The
+rows are complete over the leased action set, preserve registry order, and carry
+their own completeness and hash evidence. When native action transport does not
+already carry the complete descriptors, each row also uses one fixed descriptor
+prefix bound regardless of action identity, annotation, task, domain, or prior
+use. Native transport omits only those duplicate text bytes and declares that
+fact in the join. An oversized action catalogue or learning history therefore
+cannot leave repeated or never-observed mechanisms as unexplained names. The
+join grants no recommendation or expertise. When the joined
 lane exceeds its generic byte bound, the runtime replaces the fewest components
 needed, choosing only the largest canonical-byte reduction and using lexical
 component identity to break a tie. Each replacement preserves schema, source
@@ -216,6 +221,15 @@ Component meaning, task prose, field words, and record contents never decide
 which component becomes a structural index. Redundant source copies are
 removed after the verified navigation carrier is rebuilt, so duplicated
 catalogues cannot consume cognition merely because the host repeated them.
+
+The exact verified same-run model transport inventory is not left inside the
+uniform situation stage behind navigation. It has a dedicated early lane after
+principal/charter and causal-resource authority. Verification binds the exact
+run, signed pool generation, unordered-set declaration, principal bootstrap,
+unique model identities, equality with the signed model ceiling, bootstrap
+equality/membership, and inventory hash. Only then may its byte-identical
+situation copy be removed. Lane construction performs no selection, ordering,
+scoring, recommendation, or invocation of a model.
 
 Learning is captured once before compilation and remains one immutable source
 snapshot for the whole semantic turn. A bounded compile capsule may index or
@@ -718,14 +732,13 @@ state and resolves its selected bytes at that later delivery. The recovery
 event—not note prose, disposition vocabulary, or substrate optimism—supplies
 the next call authority.
 
-Each persona call is bound to an authenticated `run-model-pool/1`, which is an
-unordered ceiling. An exact matching signed `persona-model-choice/1` supplies
-persona-authored model order and reasoning effort for that causal generation.
-Before such a choice exists, substantive cognition may begin only if mechanical
-admission leaves exactly one callable model. Two or more eligible bodies fail
-closed; provider/registry/configuration order, lexical order, a default client,
-cost/tier heuristics, or a host-selected bootstrap model cannot decide for the
-persona.
+Each persona call is bound to an authenticated `run-model-pool/2`, which binds
+an unordered ceiling and a separate principal-selected bootstrap body. An exact
+matching signed `persona-model-choice/1` supplies persona-authored model order
+and reasoning effort for that causal generation. Before such a choice exists,
+substantive cognition may begin only with that bootstrap body. Provider,
+registry, configuration, lexical, default-client, cost, or tier ordering cannot
+decide for the persona.
 
 Action results return to the current persona decision when the transport permits
 it. An asynchronous result creates a later delivery only through its exact

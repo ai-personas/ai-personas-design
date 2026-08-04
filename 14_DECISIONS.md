@@ -261,16 +261,16 @@ unchanged bytes cannot substitute.
 
 ### D13 — Model transport has exact persona-authored order
 
-`run-model-pool/1` is a signed unordered per-run ceiling. Canonical model-ID
-sorting does not rank it. `persona-model-choice/1` supplies the persona-signed
+`run-model-pool/2` is a signed unordered per-run ceiling with one distinct
+principal-selected bootstrap member. Canonical model-ID sorting does not rank
+it. `persona-model-choice/1` supplies the persona-signed
 ordered model/reasoning-effort pairs for one exact persona, environment,
 task/candidate/mission task, run, pool hash, and situation generation.
 
-Without a matching choice, substantive cognition is admitted only when exact
-mechanical checks leave one callable body. Two or more eligible bodies fail
-closed. Provider, registry, configuration, lexical, default-client, cost, or
-tier ordering cannot supply bootstrap authority, and the host cannot choose a
-model merely to ask it which model the persona would choose.
+Without a matching choice, substantive cognition is admitted only to the signed
+bootstrap body. Provider, registry, configuration, lexical, default-client,
+cost, or tier ordering cannot supply bootstrap authority, and the host cannot
+choose a model merely to ask it which model the persona would choose.
 
 ### D14 — Clean break
 

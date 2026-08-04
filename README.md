@@ -56,10 +56,10 @@ or structured completion judgments.
 - **Event-only continuation.** Another model call requires an authentic causal
   delivery and resource authority. Quiescence is nonterminal and does not mean
   complete.
-- **Persona-authored model order.** `run-model-pool/1` is an unordered ceiling;
-  `persona-model-choice/1` supplies exact signed order and reasoning effort.
-  More than one eligible bootstrap body fails closed instead of falling back to
-  provider or configuration order.
+- **Persona-authored model order.** `run-model-pool/2` binds an unordered
+  ceiling and a separate principal-selected bootstrap body;
+  `persona-model-choice/1` may later supply exact signed order and reasoning
+  effort. Provider or configuration order never becomes routing authority.
 
 ## Reading order
 

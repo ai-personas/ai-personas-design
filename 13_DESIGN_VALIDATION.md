@@ -370,26 +370,35 @@ fails. A drained zero-headroom run stranded forever because its last published
 presentation still says `running`, or resuming its older predecessor, also
 fails.
 
-## 5.1 Ambiguous first model call
+## 5.1 Exact first model-call authority
 
-**Input:** an exact signed `run-model-pool/1` contains several models, no
-matching signed `persona-model-choice/1` exists for the current generation, and
-mechanical admission leaves two bodies callable.
+**Input:** an exact signed `run-model-pool/2` contains several models, names one
+of them as the principal-selected bootstrap, and no matching signed
+`persona-model-choice/1` exists for the current generation.
 
 **Trace:** the pool verifies as an unordered ceiling. The runtime checks exact
 scope, pool hash, current persona key, resources, client/transport availability,
 and any existing matching choice without reading task or persona prose.
 
-**Required outcome:** substantive routing fails closed. Registry/provider/
-configuration insertion order, canonical lexical order, a default client,
-price/tier heuristics, or a host-selected choice-authoring call cannot break the
-tie. If exact admission instead leaves one body, that unique body may bootstrap;
-later multi-body order and reasoning effort require the matching signed persona
-choice.
+**Required outcome:** only the signed bootstrap body receives substantive
+cognition. Registry/provider/configuration insertion order, canonical lexical
+order, a default client, price/tier heuristics, or a host-selected
+choice-authoring call cannot substitute another body. A multi-body request that
+omits the bootstrap fails before intake; later multi-body order and reasoning
+effort require the matching signed persona choice.
 
-**Failure:** the first registered/provider model receives cognition; a hidden
-default authors the choice; pool ordering is treated as preference; task words
-or role select the model.
+**Failure:** the first registered/provider model receives cognition instead of
+the signed bootstrap; a hidden default authors the choice; pool ordering is
+treated as preference; task words or role select the model. A malformed pool
+repeatedly records provider-infrastructure failures instead of being refused at
+intake, or an amendment retry with changed model authority replays the earlier
+run, also fails.
+
+Repeat amendment intake with identical prior-run and text bytes but different
+explicit model ceilings, bootstrap bodies, call grants, outcome-evidence floors,
+or authenticated submitters. Each distinct full request authority must receive a
+distinct content-addressed admission identity; only an exact full replay may
+converge on an existing run.
 
 ## 6. Open work notes
 

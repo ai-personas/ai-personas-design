@@ -279,14 +279,17 @@ resolving, or omitting that meaning never changes another descriptor's schema,
 action visibility, completion, or wake authority.
 
 The navigation carrier also includes
-`personaos-action-usage-navigation-reference/2`: an exact identifier-equality
+`personaos-action-usage-navigation-reference/3`: an exact identifier-equality
 join between the current leased action set and the retained turn-effect usage
 inventory. It preserves zero-use identifiers, exact observed receipt counts,
-and a complete registry-ordered table containing one uniformly bounded prefix
-of every current descriptor even when the larger catalogue or learning
-component becomes a structural index. Each prefix declares its completeness,
-and the table carries its own fixed bound, count, and content hash; its current-
-catalog hash binds the exact descriptor source bytes.
+and a complete registry-ordered table over every current identifier. When the
+provider does not carry native action descriptors, each row includes one
+uniformly bounded descriptor prefix even if the larger catalogue or learning
+component becomes a structural index. When native action transport already
+carries the complete descriptors, the table retains the identifiers and usage
+join but omits duplicate descriptor text and records that transport explicitly.
+The table carries its own bound, count, and content hash; its current-catalog
+hash binds the exact descriptor source bytes.
 The join is descriptive evidence only; the host does not infer novelty, waste,
 usefulness, expertise, a missing action, or a next step from any count or
 descriptor bytes.
@@ -407,10 +410,12 @@ experience actions do not automatically schedule cognition.
 
 ### 2.4 Signed model ceiling and persona-authored order
 
-`run-model-pool/1` is the signed unordered per-run ceiling. Its signed fields
-are exactly `schema`, `run_id`, `available_model_ids`, `minted_at`,
-`signing_key_id`, and `signed_by`; the model IDs are duplicate-free and sorted
-for canonical signing, and `pool_hash` is derived from the signing payload.
+`run-model-pool/2` is the signed unordered per-run ceiling plus one distinct
+principal-selected bootstrap body. Its signing payload contains exactly
+`schema`, `run_id`, `available_model_ids`, `bootstrap_model_id`, `minted_at`,
+and `signing_key_id`; the detached signature is `signed_by`. The model IDs are
+duplicate-free and sorted for canonical signing, the bootstrap names one member
+of that set, and `pool_hash` is derived from the signing payload.
 Canonical serialization order conveys no preference.
 
 `persona-model-choice/1` is the persona-signed choice for one exact generation.
@@ -423,12 +428,22 @@ effort pairs in `ordered_choices`, `authored_at`, `signing_key_id`, and
 scope, signature, current persona key, and pool generation must verify.
 
 A matching choice supplies order and reasoning effort. In its absence, the
-first substantive call may proceed only when current mechanical admission
-leaves exactly one callable model. If two or more remain, routing fails closed.
+first substantive call uses only the exact signed bootstrap body.
 Provider/registry/configuration insertion order, canonical sort order, default
 clients, cost/tier heuristics, and a host-selected choice-authoring transport
-are not authority to break the tie. A signed exact one-model pool is the normal
-unambiguous bootstrap; declared fallbacks follow only a matching persona choice.
+are not bootstrap authority. A signed exact one-model pool is structurally
+unambiguous; declared fallbacks follow only a matching persona choice.
+
+The ordinary cognition carrier exposes the exact
+`personaos-model-transport-inventory/1` in a dedicated early authority lane.
+The lane verifies exact run and pool bindings, unordered-set semantics,
+principal bootstrap provenance, unique model identities, exact equality with
+the signed model ceiling, bootstrap equality/membership, and the whole
+inventory hash before an identical situation-source copy may be removed. Its
+provider-wire position precedes the potentially much larger navigation and
+staged-situation lanes. This is transport visibility only: the lane cannot
+create a choice, reorder the unordered ceiling, select a body, or turn
+transport observations into a recommendation.
 
 ## 3. Explicit replication-effect descriptors
 
@@ -1126,7 +1141,7 @@ Current cutover records include:
   `personaos-birth-identity-wake/4`;
 - `brain-evolution-decision/1` and
   `brain-evolution-application/1`;
-- `run-model-pool/1` and `persona-model-choice/1`;
+- `run-model-pool/2` and `persona-model-choice/1`;
 - `personaos-persona-state-record/1` with mechanical
   `record_kind: "persona_knowledge"`;
 - `personaos-coordination-context/3`,

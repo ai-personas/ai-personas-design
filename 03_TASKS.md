@@ -40,11 +40,16 @@ own signature, content hash, task generation, and causal predecessor.
 Public amendment intake is asynchronous by default: after exact admission it
 returns the new run identity and poll surface before any persona model work can
 delay the HTTP response. Synchronous execution is an explicit caller choice.
-The exact pair of prior-run identity and submitted amendment bytes is one
-content-addressed admission identity. Concurrent or retried identical requests
-converge on the same run; differing bytes remain distinct amendments. A caller
-that wants only to add resources uses the resource-grant surface rather than
-replaying an amendment. Fresh lifecycles provide no duplicate-amendment
+The exact prior-run identity, submitted amendment bytes, authenticated
+submitter, and explicitly supplied execution authority form one
+content-addressed admission identity. Execution authority includes the exact
+submitted model ceiling, its bootstrap member, model-call grant, and
+outcome-evidence floor, including whether each optional value was omitted.
+Concurrent or retried requests with the same full identity converge on the same
+run. A change to any member creates a distinct amendment; it must never replay a
+run admitted under different authority merely because the prose is unchanged.
+A caller that wants only to add resources uses the resource-grant surface rather
+than replaying an amendment. Fresh lifecycles provide no duplicate-amendment
 compatibility path.
 
 The model-turn transport carries the complete current intent and complete
@@ -76,11 +81,32 @@ byte reduction order. Their ordinary authenticated inspectors remain leased;
 the host does not choose a useful executable, peer, file, or action to retain.
 Large append-only activity histories remain independently hash-bound and
 pageable; they cannot displace current population and navigation authority.
+An exact situation-source snapshot may be removed from the uniform remainder
+only after canonical-byte equality proves that a non-indexed navigation
+component already carries that same snapshot.
+
+The provider wire uses one closed component-identity order: identity, retained
+learning, population, capability acquisition, workspace, execution inventory,
+action catalogue, and action-usage history. This order changes neither
+admission nor the byte-reduction rule and grants no action or component semantic
+priority. It ensures that the actor can encounter its exact self, experience,
+and peers before traversing large mechanical registries; task prose, authored
+content, counts, outcomes, domains, and tool names cannot alter the order.
+
+The exact same-run model transport inventory occupies a separate early
+authority lane before navigation and the uniformly staged situation remainder.
+It is admitted only after its run, signed pool hash, unordered-set declaration,
+principal bootstrap authority, unique model identities, exact equality with the
+signed model ceiling, bootstrap equality/membership, and whole-inventory hash
+verify. The byte-identical staged copy is then removed.
+This lane exposes available bodies and observed transport facts but does not
+select, order, score, recommend, or invoke a body.
 
 One small exact action-usage component remains separate from both the catalogue
 and retained-learning body. It joins current action identifiers to exact zero-
 inclusive receipt observations by string equality and carries a complete,
-registry-ordered, equal-window descriptor preview table. This allows the
+registry-ordered, equal-window descriptor preview table when those descriptors
+are not already present in the native action transport. This allows the
 persona to observe repetition or non-use and understand the corresponding live
 mechanisms even when either larger source is structurally indexed. Counts and
 descriptor prefixes never cause the runtime to rank, recommend, suppress, or
@@ -103,12 +129,21 @@ membership role, or target remains an explicit conflict. A verified outstanding
 persona schedule is an event-driven continuation even while no model call is
 running; quiescence and completion remain distinct states.
 
-The signed `run-model-pool/1` in that authority is an unordered ceiling, never
-a preferred-model list. Task text cannot order its members. If more than one
-body remains mechanically callable before an exact matching signed
-`persona-model-choice/1` exists, substantive model routing fails closed; a
-provider registry, configuration order, default client, or host bootstrap call
-cannot choose on the persona's behalf.
+The signed `run-model-pool/2` in that authority contains an unordered ceiling
+and a distinct principal-selected bootstrap body inside that ceiling. It is
+never a preferred-model list, and task text cannot order its members. Before an
+exact matching signed `persona-model-choice/1` exists, only that bootstrap body
+may receive substantive cognition. Provider registry, configuration order,
+default clients, health ordering, or a host bootstrap call cannot choose on the
+persona's behalf.
+
+When a newly minted run has no matching persona-signed choice yet, its signed
+bootstrap authority must name one exact member of the ceiling before persona
+cognition starts. Omitting it from a multi-body request is unresolved authority,
+not provider downtime: intake refuses before creating a retrying run. A
+single-body ceiling is structurally unambiguous and may use its sole member as
+the bootstrap. A later multi-body order still requires the matching persona
+signature.
 
 Empty, one-domain, and cross-domain task contexts are valid. There is no
 host-selected primary domain.
@@ -461,10 +496,11 @@ signature verification, workspace sync, MIME verification, fan-out,
 deduplication, settlement, and public rendering are mechanical and consume no
 model call.
 
-The call also requires an authenticated `run-model-pool/1`. A matching signed
+The call also requires an authenticated `run-model-pool/2`. A matching signed
 `persona-model-choice/1` supplies persona-authored model order and reasoning
-effort for its exact causal generation. Without one, only a mechanically unique
-callable body may bootstrap cognition. An ambiguous pool is refused; refusal
+effort for its exact causal generation. Without one, only the separately signed
+principal bootstrap body may receive cognition. A pool lacking that authority
+is refused; refusal
 does not trigger a host-selected choice-authoring call or fallback.
 
 Effect-free transient provider/transport failure may retry the exact carrier

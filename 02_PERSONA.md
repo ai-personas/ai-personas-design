@@ -122,12 +122,12 @@ missing public field.
 Exact action prerequisites are enforced only at dispatch. They do not create a
 host-authored workflow, phase, recommendation, or required next action.
 
-Model identity follows the same boundary. `run-model-pool/1` supplies only an
-exact signed unordered ceiling; a matching `persona-model-choice/1` records the
-persona's order and reasoning effort for one exact causal generation. If no
-choice exists and more than one model remains mechanically callable, the call
-fails closed instead of treating provider, registry, configuration, or lexical
-order as persona intent.
+Model identity follows the same boundary. `run-model-pool/2` supplies an exact
+signed unordered ceiling plus a distinct principal-selected bootstrap body; a
+matching `persona-model-choice/1` records the persona's order and reasoning
+effort for one exact causal generation. If no choice exists, only that bootstrap
+body is eligible. Provider, registry, configuration, or lexical order never
+becomes persona intent.
 
 ## 5. Evolution through authored evidence
 
