@@ -351,6 +351,12 @@ expanded back into provider envelopes and passes the same generation, manifest,
 host, document, access-policy, body-authority, and signature checks. This local
 provider-index path prevents a co-resident persona from depending on loopback
 gossip; it introduces no rank, relevance match, or automatic acquisition.
+Bridge-local receipt and verification observations are transport metadata, not
+members of the signed provider envelope. A receiver validates their closed
+structure independently and applies anonymous artifact-surface checks to the
+exact wire envelope. Observer-field vocabulary cannot hide an otherwise valid
+capability record, while an unknown observation field or an artifact locator in
+the signed wire document still fails closed.
 
 `acquire_global_capability` accepts only an exact current verified catalogue
 record id and its expected body/envelope hashes. It fetches the derived route

@@ -644,6 +644,14 @@ appears with a kernel-signed `operator_public_node_scope` authority and the exac
 body route, never a fabricated persona publication. A task word, domain label,
 authored body, or population count must not change either result.
 
+Repeat through the received-P2P cache using the bridge's closed receipt and
+verification observation fields. Validate those observations, remove them from
+the signed-wire artifact-surface scan, and require the same record to remain in
+the catalogue. An unknown observation field, a false or inconsistent
+verification observation, or an artifact locator in the wire document must
+still be refused. Rejecting every valid remote capability merely because an
+observer field's name resembles a locator is a failure.
+
 The carrier's turn-effect append-frontier reference exposes the causal tip even
 when an older exact episode is larger than the prompt allocation. Its source
 total, suffix range, omitted prefix, frontier/manifest hashes, and record counts
