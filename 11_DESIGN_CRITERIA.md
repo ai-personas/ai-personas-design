@@ -164,11 +164,15 @@ fails this criterion.
 
 The exact current-call and successor-call resource observations occupy one
 small, content-bound causal-resource authority lane immediately after the
-principal and charter lanes. It exposes only mechanical budget and deadline
-runway, whole/component hashes, and byte facts. It does not interpret remaining
-headroom as a reason to continue or stop, select a causal disposition, or create
-a model call. Byte-identical copies are removed from the uniform situation
-remainder only after this lane is constructed.
+principal and charter lanes. For a delivered event with a prepaid local
+allowance, the lane separately exposes that allowance and the verified balance
+of the same signed run ledger from which a newly authored successor can be
+reserved. An event-local balance must never masquerade as whole-run headroom,
+and a valid zero balance remains explicit. The lane exposes only mechanical
+budget and deadline runway, whole/component hashes, and byte facts. It does not
+interpret remaining headroom as a reason to continue or stop, select a causal
+disposition, or create a model call. Byte-identical copies are removed from the
+uniform situation remainder only after this lane is constructed.
 
 The prompt preserves one content-bound mechanical navigation authority
 alongside the principal lane. Its sources are the complete current action
