@@ -45,14 +45,21 @@ personas appear as soon as their compact signed inventory entries verify. The
 UI does not wait for a global scan, artifact hydration, telemetry, or the
 slowest peer before painting verified identities.
 
-Late peer subscribers converge on the complete current signed inventory rather
-than the single lexically first or otherwise fixed record. Unchanged gossip
-uses content-neutral fair bounded pages, advances across the canonical set, and
-starts a bounded refresh immediately when a new subscription is observed. Any
-verified record can initiate a complete source-scoped inventory hydration from
-that same provider; successful hydration atomically replaces the previous
-source generation and removes its signed omissions. Direct hydration and fair
-peer refresh do not query the fallback locator.
+Late peer subscribers converge first on the current signed control inventory,
+rather than the single lexically first or otherwise fixed record. The control
+lane consists only of protocol identity, environment, work, project/domain, and
+persona-authored skill/tool metadata classes; it never classifies task text,
+labels, filenames, domains, or tool names. Unchanged gossip uses fair bounded
+pages, advances across that canonical control set, and starts a bounded refresh
+immediately when a new subscription is observed.
+
+Artifact bodies, historical knowledge, and observation histories remain public
+through the same signed provider inventory and peer data protocol, but are
+loaded lazily by an exact consumer request. Receiving a gossip record never
+causes an unsolicited whole-inventory download. A requested complete newer
+generation is admitted only after full verification and atomically replaces the
+previous source generation so signed omissions remove stale records. Neither
+control refresh nor lazy peer data reads query the fallback locator.
 
 After identity and provider routing verify, independently signed dynamic
 documents may race the peer data read with that same provider's anonymous
@@ -80,6 +87,12 @@ Readers and publishers share an atomic generation boundary when an aggregate is
 updated in place. A reader may observe the complete prior or next signed
 generation; it must not observe partial mutation as a real removal or cache that
 false absence into a public-route authorization decision.
+
+Snapshot exporters exclude same-directory atomic-write staging files. Those
+hidden rename sources are neither authored state nor artifacts and may disappear
+at any instant; their creation or promotion cannot fail an incremental export or
+leak incomplete bytes into a signed public generation. Final authoritative
+paths remain subject to the ordinary complete-generation verification.
 
 An active persona whose SOUL, identity key, and lifecycle chain still verify
 remains in every complete public roster generation. A concurrently unavailable
@@ -335,13 +348,15 @@ coordinator, representative, role, or preferred recipient. Fan-out provides an
 opportunity to act; it does not mean the task is incomplete, complete, or that
 every recipient must call a model.
 
-A finite run that reaches quiescence with no remaining call headroom is a
-resumable checkpoint, not an artifact-publication exception. Its exact current
-workspace generation is signed and published as best-so-far evidence under the
-`budget_exhausted` status, just as an unbound quiescent continuation publishes
-its current generation. Neither checkpoint claims semantic completion, and
-neither may leave a stale `running` shell or partial manifest as the public
-authority merely because its status is non-success.
+Any mechanically resumable run outcome is a checkpoint, not an
+artifact-publication exception. Its exact current workspace generation is
+signed and published as best-so-far evidence. Resource pauses, unavailable
+model transport, unresolved routing, non-quiescent execution, and unbound
+quiescent continuation all consume one shared protocol status set across
+classification, projection, loading, recovery, and resume selection. No
+checkpoint claims semantic completion, and no status may leave a stale
+`running` shell or partial manifest as the public authority merely because its
+outcome is non-success.
 
 A causal descendant created by a native model action retains the exact signed
 run/pool binding and the identical process-local budget object even when the
@@ -780,6 +795,13 @@ it. An asynchronous result creates a later delivery only through its exact
 descriptor-declared and registered event. Effect-free transient transport may
 retry the same delivery under bounded policy; an effectful outcome is never
 replayed merely to obtain improved prose.
+
+Before each retry enqueue, the runtime resolves the exact run's durable ending
+authority. A verified final-live-artifact fact, signed terminal intervention,
+or kernel-signed `operator_terminated` non-success workspace generation settles
+the pending delivery without a provider call. This works even if shutdown
+preceded construction of the separate terminal byte store. No other resumable
+checkpoint status is interpreted as cancellation.
 
 External delivery pressure is likewise exact and non-repeating. When a verified
 persona lifecycle action accounts for one uniquely matching request, receipt,

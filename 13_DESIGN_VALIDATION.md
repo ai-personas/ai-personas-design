@@ -70,18 +70,23 @@ profile the complete no-route opportunity is at most 400 milliseconds; a viable
 verified direct/P2P route suppresses the locator immediately, and P2P
 reconciliation continues after fallback first contact.
 
-Start a peer only after another publisher's initial full gossip burst has
-finished, with the publisher holding multiple independently signed kinds and a
-prior receiver cache holding an omitted record from an older generation. The
-late peer must not receive one permanent canonical record on every interval.
-Its subscription prompts a bounded refresh; successive unchanged refreshes
-advance fairly across the complete canonical set. Receipt of any verified
-peer-bound record may race a complete signed inventory hydration from that same
-provider. Admission verifies the current master, provider peer, inventory
-generation and manifest, every document hash and signature, policy, and expiry
-before atomically replacing that source generation. The older signed omission
-disappears. Disable the direct route and verify fair peer refresh still
-converges without contacting the fallback locator.
+Start a peer only after another publisher's initial gossip burst has finished,
+with the publisher holding multiple independently signed control records and a
+large artifact/knowledge/observation history. The late peer must not receive one
+permanent canonical record on every interval. Its subscription prompts a
+bounded refresh; successive unchanged refreshes advance fairly across the
+canonical control set. Persona, environment, work, and skill/tool metadata
+become visible without transferring the payload history.
+
+Observe several control records while the complete provider inventory exceeds
+the receiver's cache bound. No received control record may trigger an
+unsolicited full-inventory fetch, and repeated gossip must not create a
+download/evict/download loop. Then explicitly request the complete inventory.
+Admission verifies the current master, provider peer, inventory generation and
+manifest, every document hash and signature, policy, and expiry before
+atomically replacing that source's prior complete generation. The older signed
+omission disappears. Disable the anonymous direct route and verify the explicit
+read can use peer data without contacting the fallback locator.
 
 Populate one node with enough public task, telemetry, and artifact records to
 make its complete inventory large. Its well-known bootstrap must remain a
@@ -194,6 +199,14 @@ An exact valid generation may be served immediately without recopying historical
 artifact bytes; corrupt any one of those fields and startup must reject reuse and
 publish a complete generation. Reuse cannot enqueue cognition, select a record,
 or suppress a later material publication.
+
+While incremental publication copies a run into its staging generation, update
+persona state repeatedly through its same-directory atomic writer. The copy may
+contain either complete final state generation but must never include the hidden
+rename source, fail because that temporary disappears, or expose a partial JSON
+document. Repeat the same overlap during a served-root migration. A staging
+filename becoming public evidence or aborting an otherwise valid export fails
+this criterion.
 
 Continuously evolve one active persona's signed identity while heartbeat
 publication verifies the public roster. Every successfully published generation
@@ -385,12 +398,22 @@ offers that same run as `budget_exhausted`, and hides its older resume source.
 It does not edit the shell or enqueue cognition until signed resource evidence
 arrives.
 
-Before and after restart, verify that the quiescent `budget_exhausted` result
-binds, signs, and publishes the exact current workspace file generation and
-replaces the earlier `running` presentation. The same projection path must work
-for a quiescent unbound continuation. A status-specific guard that accepts one
-resumable checkpoint but rejects the other, leaving a stale or partial public
-artifact generation, fails.
+Before and after restart, verify that every mechanically resumable result binds,
+signs, and publishes the exact current workspace file generation and replaces
+the earlier `running` presentation. Exercise at least a depleted resource
+grant, an unavailable model transport, an unresolved route, an open causal
+tree, and a quiescent unbound continuation. Each must use the same checkpoint
+status authority through classification, projection, loading, recovery, and
+resume selection. A status-specific guard that accepts one resumable checkpoint
+but rejects another, leaving a stale or partial public artifact generation,
+fails.
+
+Leave an effect-free model-transport failure pending, then retire its run and
+publish a kernel-signed `operator_terminated` non-success workspace generation
+without constructing the separate final-live-artifact store. On heartbeat and
+after restart, the retry is settled from that exact signed authority and makes
+no further provider call. Repeat with a resumable non-success status and verify
+that it is not misclassified as cancellation.
 
 **Failure:** only the prior owner resumes; a status flag creates a call; grant
 duplicates a settled delivery; the recovery call runs but its persona-authored

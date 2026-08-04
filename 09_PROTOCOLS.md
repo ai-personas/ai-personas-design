@@ -423,6 +423,14 @@ communication, scheduled, successful, or uncertain effect. The host does not
 rewrite arguments or select a replacement action. Effectful or uncertain
 outcomes are never replayed merely to obtain better prose.
 
+A retry also rechecks its run authority before every enqueue. A verified final
+live-artifact fact, signed terminal intervention, or kernel-signed
+`operator_terminated` non-success workspace generation ends that authority and
+settles the retry without another provider call. The latter remains sufficient
+when shutdown occurred before the separate final-live-artifact store was
+constructed. Other non-success best-so-far generations remain resumable and do
+not acquire cancellation meaning from their status.
+
 A descriptor-declared asynchronous result creates a later turn only through its
 exact registered event. Successful tool, population, capability, identity, or
 experience actions do not automatically schedule cognition.
@@ -732,27 +740,33 @@ cursor namespace is `communication-routed-wakes` and its page size is 64.
 ## 5. Global discovery and distribution
 
 Local routes, configured direct peers, libp2p/Kademlia provider discovery,
-rendezvous, and gossip may operate concurrently. Each verified node,
-environment, persona, skill/tool metadata record, and artifact manifest is
-streamed as soon as its independent signature and authority checks succeed.
-Consumers do not wait for a complete global scan or the slowest responder.
+rendezvous, and gossip may operate concurrently. Verified node, environment,
+persona, work, project/domain, and persona-authored skill/tool metadata records
+form a compact control lane and stream as soon as their independent signature
+and authority checks succeed. This protocol classification never examines task
+text, labels, filenames, domains, tool names, prompt content, or authored
+payloads. Consumers do not wait for a complete global scan, artifact history,
+or the slowest responder.
 
 Because gossip delivery is ephemeral, unchanged-inventory refresh is fair over
-the complete canonical record set. A publisher cannot repeat one fixed record
-as its permanent heartbeat: a subscriber arriving after the original burst
-would then be unable to discover every other identity and capability. A new
-topic subscriber prompts an immediate bounded refresh, and successive refresh
-pages advance without interpreting record kind, label, content, task, domain,
-or capability meaning.
+the canonical control record set. A publisher cannot repeat one fixed record as
+its permanent heartbeat: a subscriber arriving after the original burst would
+then be unable to discover every other identity and capability. A new topic
+subscriber prompts an immediate bounded refresh, and successive refresh pages
+advance without interpreting label, content, task, domain, tool name, or
+capability meaning.
 
-Any verified peer-bound record may bootstrap a source-scoped read of that same
-provider's complete signed inventory. The peer and anonymous direct transports
-may race; both results require the identical current-master, generation,
-manifest, document-hash, provider-peer, policy, and expiry checks. A complete
-newer generation atomically replaces that source's prior cache generation so
-signed omissions remove stale records. Fair peer gossip remains an independent
-convergence path when the direct route is unavailable. Neither path consults
-or depends on the replaceable HTTP locator.
+Artifact manifests and bodies, persona-owned historical knowledge, and
+observation histories remain in the same public signed provider inventory and
+are addressed through the peer data protocol. A consumer requests those bytes
+lazily when it needs the complete inventory, a page, or an exact record; gossip
+receipt itself never starts a whole-inventory fetch. Peer and anonymous direct
+transports may race for an explicitly requested read, and both results require
+the identical current-master, generation, manifest, document-hash,
+provider-peer, policy, and expiry checks. A complete newer generation atomically
+replaces that source's prior complete cache generation so signed omissions
+remove stale records. Neither route consults or depends on the replaceable HTTP
+locator.
 
 Discovery records include exact subject, provider, content hash, visibility,
 policy, expiry, revocation, signature chain, and reachable content locators.
@@ -1078,6 +1092,15 @@ another explicit causal event. With no such event pending, the state is
 quiescent. Quiescence is nonterminal and may be resumed by any later authorized
 event. A signed `no_successor` is an attributable causal choice, not objective
 acceptance or a claim that no refinement is possible.
+
+Every mechanically resumable checkpoint uses one projection protocol. After
+the task-entry causal tree settles, a resource pause, unavailable model
+transport, unresolved route, or unbound continuation publishes the exact
+current workspace generation as signed best-so-far evidence without granting
+completion authority. The checkpoint classifier, publisher, loader, and resume
+selector consume the same protocol status set. One component cannot accept a
+checkpoint that another component rejects and thereby leave an earlier
+`running` shell as the public state.
 
 Publishing an open-input request is not itself a subscription, responder,
 recruitment action, or future delivery to its author. It notifies each different
