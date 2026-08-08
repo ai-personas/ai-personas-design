@@ -974,10 +974,12 @@ and compact signed card verify. Optional public name, description,
 characteristics, portrait, and style may be absent or later revised without
 changing persona identity or work authority.
 
-The always-present population authority is a dedicated provider lane containing
-a uniform projection of those already verified cards, not a second card format.
-It does not share a reduction budget with action, execution, workspace, or
-learning catalogues. Each source-ordered navigation page retains the exact
+The always-present population authority is a dedicated navigation component
+carried at its closed component-identity position on the provider wire,
+containing a uniform projection of those already verified cards, not a second
+card format. It does not share a reduction budget with action, execution,
+workspace, or learning catalogues and is never replaced by a structural
+index. Each source-ordered navigation page retains the exact
 persona identifier and public name, persona-authorship flags, bounded public
 text previews with exact hashes and byte counts,
 characteristic/capability hashes and sizes/counts, optional portrait references,

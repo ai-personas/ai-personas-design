@@ -31,6 +31,18 @@ authority, and exact references. It does not infer a task class, profession,
 domain, objective decomposition, role, required artifact, quality rubric, tool,
 team size, prompt, or completion rule from the intent text.
 
+Explicit principal authority is one optional intake object with exactly these
+optional members: `acceptance_condition` (opaque canonical JSON chosen by the
+principal, bounded in bytes, never interpreted by the substrate),
+`verifier_descriptor` (exactly `verifier_key_id` and `scope`, both exact
+strings), `verifier_receipt_constitutes_acceptance` (exact boolean, valid only
+with a supplied descriptor, absent means false), and `deadline_epoch_seconds`
+(absolute integer epoch seconds). Intake records this as one declaration with
+an explicit per-member supplied/omitted marker and a content hash for each
+supplied member; the declaration travels unchanged inside the task-resource
+fan-out authority. Recording it validates shape and bounds only — it schedules
+nothing and infers nothing.
+
 A task amendment or continuation preserves the complete verified principal-
 intent ancestry in causal order, including the original signed intent bytes and
 each later signed amendment. The newest carrier does not replace, summarize, or
