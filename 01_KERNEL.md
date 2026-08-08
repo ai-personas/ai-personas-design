@@ -249,7 +249,7 @@ OCEAN/VAD, or portrait-prompt constant.
 
 ## 11. Work notes and capability-gap meaning
 
-`personaos-persona-work-state/3` carries an optional bounded open `work_note`
+`personaos-persona-work-state/5` carries an optional bounded open `work_note`
 with exact lineage and causal references. The kernel validates mechanics and
 does not interpret keys or values. Notes never cover requirements, vote on
 completion, determine readiness, schedule continuation, or change authority.

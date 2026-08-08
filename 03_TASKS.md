@@ -214,9 +214,8 @@ artifact, revise identity, invite or birth another persona, review work,
 schedule itself, leave a work note, or do none of those things. Choices may be
 interleaved and revised as new evidence arrives.
 
-The runtime contains no built-in CAD, CAM, Blender, OpenSCAD, engineering,
-software-job, electronics, mathematics, house, document, or other domain
-recipe. Personas may still discover and use those capabilities because exact
+The runtime contains no built-in task, profession, format, tool, or domain
+recipe. Personas may still discover and use needed capabilities because exact
 unranked inventories and ordinary navigation actions make them reachable.
 
 Receipts record what was actually invoked, produced, transferred, or learned.
@@ -226,7 +225,7 @@ completion.
 ## 5. Work notes and capability gaps
 
 An active member may optionally author
-`personaos-persona-work-state/3`. Its `work_note` is bounded open canonical JSON
+`personaos-persona-work-state/5`. Its `work_note` is bounded open canonical JSON
 bound to one exact observed situation, with exact provenance and append
 lineage. It is the persona's claim, not task state.
 
@@ -250,6 +249,14 @@ retain exact author, action, provider/tool, byte, and settlement provenance.
 Every artifact declaration binds explicit signed `mime_type`, content hash,
 byte length, role, scope, and complete `domain_refs`. A filename or extension
 does not supply MIME or role authority.
+
+Current task and public projections must rejoin each declaration to the exact
+current path/hash/length and its verified action/publication lineage. The
+persona carrier exposes the bounded complete declaration authority before the
+general workspace remainder. If several valid declarations bind the same exact
+bytes but disagree on authored media claims, the projection preserves the
+alternatives as explicit declaration ambiguity and selects no MIME from that
+channel.
 
 Concurrent member work remains attributable. A participant's worktree is
 leased through action capture, publication, and settlement. Peer publications
@@ -488,6 +495,14 @@ termination, or other explicitly declared authority can create its corresponding
 terminal state. Budget exhaustion remains a pause unless that authority says
 otherwise.
 
+A persona's signed `no_successor` remains attributable but represents the
+current mechanical frontier only when its exact observed situation—or a
+kernel-signed isolated-disposition settlement—rejoins the current workspace
+state signature. Later exact state does not invalidate the historical record,
+but it makes that terminal-frontier binding visibly unbound until the persona
+independently authors another disposition. This fact neither schedules the
+persona nor implies that more work is semantically required.
+
 ## 11. Model-call economy
 
 A model call requires one authentic causal delivery, a current persona/lifecycle
@@ -528,6 +543,8 @@ Human-facing task state distinguishes verified facts from authored claims:
 - exact causal events and pending/settled carriers;
 - persona-authored note appends labelled by author, append time, exact observed
   situation, and factual observation-hash binding; and
+- each persona's exact causal disposition, terminal-frontier binding or
+  re-authorship fact, and the unranked aggregate disposition frontier; and
 - explicit acceptance, pause, cancellation, or quiescence facts.
 
 It never relabels quiescence as done, a singleton note as team consensus, an
@@ -557,3 +574,5 @@ bytes may remain opaque lineage but carry no current task authority.
 8. Quiescence is nonterminal.
 9. Model selection comes from exact persona choice or an unambiguous one-body
    admission, never task semantics or provider order.
+10. Public task state distinguishes historical persona dispositions from those
+    bound to the current exact mechanical frontier.

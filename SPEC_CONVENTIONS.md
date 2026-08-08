@@ -7,7 +7,7 @@ status: Stable
 
 > **Reader guide.** This is the style guide for v1.0 spec documents — how they are formatted, how normative language works, and how schemas and cross-references are written. Read this if you are *writing or reviewing* v1.0 docs. Skip it if you are only *reading* the spec — the conventions are applied consistently, so you can absorb them by example. **No prerequisites.**
 
-This document defines the formatting, normative-language, and structural conventions that all v1.0 design documents (`00_VISION.md` … `13_DESIGN_VALIDATION.md`) follow. It is itself non-normative for system behaviour but **normative for documentation** — any v1.0 design document that diverges from these conventions is a documentation defect.
+This document defines the formatting, normative-language, and structural conventions that all v1.0 design documents (`00_VISION.md` … `21_OPEN_INPUTS.md`) follow. It is itself non-normative for system behaviour but **normative for documentation** — any v1.0 design document that diverges from these conventions is a documentation defect.
 
 ## 1. Front matter
 
@@ -58,12 +58,12 @@ The audience field MUST list one or more values from the registered set below. N
 | auditors | External or compliance auditors. |
 | operators | Deployment owners, SREs, those setting deployment policy. |
 | research | Researchers studying or building on PersonaOS. |
-| persona authors | Authors of `SOUL.md` files and persona-seed contributors. |
+| persona authors | Authors of persona-owned identity, state, and reusable material. |
 | project leads | Owners of project-workspace environments. |
-| environment authors | Authors of `EnvironmentBlueprint` instances. |
-| domain curators | Holders of the `DomainCurator` role; gate domain promotion. |
-| artifact authors | Authors producing artifacts under verifier recipes. |
-| memory engineers | Engineers tuning memory tiers, retrieval, consolidation. |
+| environment authors | Authors of authenticated environment descriptions and policy. |
+| domain curators | Authors or owners of independently signed open domain records. |
+| artifact authors | Authors of exact signed artifact declarations and evidence. |
+| memory engineers | Engineers implementing persona-owned knowledge, fragments, and exact carriers. |
 | persona-runtime engineers | Authors preserving exact model carriers, action descriptors, and persona-authored records without semantic host selection. |
 | integrators | Engineers wiring v1.0 into Claude Code / OpenAI SDK / LangGraph / etc. |
 | security auditors | Auditors specifically reviewing key custody, signing, threat model. |
@@ -193,11 +193,11 @@ All schemas in v1.0 MUST be expressed in **one** of three canonical forms:
 2. **JSON Schema** (preferred for wire-format and inter-agent contracts).
 3. **TypeScript `interface`** (acceptable for protocol payloads where TS is idiomatic).
 
-The form is implied by the code-fence language (`python`, `json`, `typescript`) and explicitly stated in the registry's `Form` column ([`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry)).
+The form is implied by the code-fence language (`python`, `json`, `typescript`) and explicitly stated with the current schema when needed; clean-break versioning is defined in [`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry-and-clean-break-versioning).
 
 Each schema declaration MUST include:
 
-- A **`schema` field** carrying a version string of the form `<name>/<integer>` (e.g. `schema: str = "soul-state/6"`, `"schema": "domain-context/2"`). The field name is `schema` (not `schema_version`); the value carries both the registry name and the integer version.
+- A **`schema` field** carrying a version string of the form `<name>/<integer>` (e.g. `schema: str = "personaos-open-input-request/1"`, `"schema": "brain-fragment/1"`). The field name is `schema` (not `schema_version`); the value carries both the registry name and the integer version.
 - A one-line purpose statement immediately above or below the schema block (markdown prose; not part of the schema itself).
 - A list of fields with type + units + nullability.
 - Cross-reference to the doc section that defines its lifecycle (where applicable).
@@ -218,8 +218,8 @@ Two forms are conformant; authors MAY choose either per schema, but SHOULD NOT m
 
 ```python
 @dataclass(kw_only=True)
-class SoulState:
-    schema: str = "soul-state/6"
+class OpenInputRequest:
+    schema: str = "personaos-open-input-request/1"
     # ...required and optional fields below...
 ```
 
@@ -229,8 +229,8 @@ When using Form A together with non-defaulted (required) fields, the dataclass M
 
 ```python
 @dataclass
-class DomainContext:
-    schema: Literal["domain-context/2"]
+class BrainFragment:
+    schema: Literal["brain-fragment/1"]
     # ...required and optional fields below...
 ```
 
@@ -238,15 +238,15 @@ Form B is preferred when the schema string is treated as a discriminant for stat
 
 **Snippet convention.** Schema declarations throughout the v1.0 corpus are illustrative pseudo-Python — the snippets describe the *shape* of each entity, not its literal implementation. Authors typeset Form A snippets with the bare `@dataclass` decorator for visual brevity; an implementer translating any Form A snippet into executable Python MUST add `kw_only=True` (or restructure to place defaulted fields after non-defaulted ones) to satisfy Python's argument-ordering rule. Form B snippets translate verbatim.
 
-Either form satisfies the §4 "`schema` field" requirement. INV-10 (in [`00_VISION.md §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10)) enforces that the kernel MUST refuse any message whose `schema` value is not registered in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry).
+Either form satisfies the §4 "`schema` field" requirement. INV-10 (in [`00_VISION.md §4`](00_VISION.md#4-inherited-kernel-invariants-inv-1inv-10)) enforces that the kernel MUST refuse any message whose `schema` value is not current under [`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry-and-clean-break-versioning).
 
 ### 4.3 Schema scope
 
-The `schema` field is REQUIRED on every entity that crosses a process, signing, or persistence boundary — i.e. anything that lands on the wire (A2A / MCP / blackboard / queue), in a signed lineage event, or in a long-lived store (memory tiers, soul.state.json, ProjectLineage). Internal kernel value-types that exist only within a single in-process call (e.g. transient FSM-state containers like `Candidate`, evaluator return types, stack-allocated record types) are exempt and MAY omit the field; such types MUST NOT appear in [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry).
+The `schema` field is REQUIRED on every entity that crosses a process, signing, or persistence boundary — i.e. anything that lands on the wire (A2A / MCP / blackboard / queue), in signed lineage, or in a long-lived current store. Internal kernel value-types that exist only within a single in-process call (for example bounded parser results or stack-allocated record types) are exempt and MAY omit the field; such types MUST NOT be advertised as current wire schemas.
 
 ### 4.4 Schema registry
 
-Schema version registry: see [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry) for the master table. Adding or modifying a schema MUST be accompanied by a registry entry per [`09_PROTOCOLS.md §7.13`](09_PROTOCOLS.md#713-adding-or-modifying-schemas).
+Current schema records and clean-break versioning rules are in [`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry-and-clean-break-versioning). Adding or modifying a live boundary schema MUST update that current registry and MUST NOT add a compatibility mapper for the retired version.
 
 ## 5. Diagrams
 

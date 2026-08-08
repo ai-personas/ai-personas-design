@@ -379,14 +379,25 @@ provider, required capability, teacher, curriculum, or expertise award.
 
 A successful executable acquisition returns the exact mounted tool name,
 artifact id, descriptor hash, and acquisition-lineage event id into its sealed
-effect receipt. Before another completion inside that same semantic turn, the
-runtime may widen the frozen action lease only when those four values rejoin one
-current signed acquisition, one later signed registration, and one current
-environment descriptor. This applies equally to structured and native-MCP
-provider lanes. An unrelated concurrent registry change, name-only result,
-failed acquisition, opaque knowledge body, or unverified nested result cannot
-widen the lease. The acquired mechanism may then be invoked immediately if the
-persona chooses it; the substrate neither invokes it nor schedules a turn.
+effect receipt as `personaos-mounted-tool-identity/1`. That exact tuple is
+preserved through authenticated direct dispatch, provider-native observation
+capture, the action-effect receipt, and any same-turn provider-tool refresh.
+Parsed model-visible result text, an unbound provider event, or a caller-supplied
+lookalike cannot create mounted identity authority.
+
+Before another completion inside that same semantic turn, the runtime may widen
+the frozen action lease only when those four values rejoin one current signed
+acquisition, one later signed registration, and one current environment
+descriptor. The refreshed descriptor must expose the same artifact and
+descriptor identities. A same-named pre-existing host/native tool or a
+same-named descriptor with a different artifact, hash, or lineage never absorbs,
+renames, or substitutes for the acquired mechanism; conflicting exact mounted
+identities leave the lease unchanged. This applies equally to structured and
+native-MCP provider lanes. An unrelated concurrent registry change, name-only
+result, failed acquisition, opaque knowledge body, or unverified nested result
+cannot widen the lease. The acquired mechanism may then be invoked immediately
+if the persona chooses it; the substrate neither invokes it nor schedules a
+turn.
 
 ### 2.3 Receipts and retry
 
@@ -850,6 +861,16 @@ may detect a mismatch or select a safe fallback, but cannot silently overwrite
 the signed MIME declaration. A renderer verifies content hash, length, MIME,
 scope, and access before lazy loading the applicable parser.
 
+Current persona, discovery, and public projections rejoin declarations to exact
+current environment/path/hash/length and verified action/publication lineage.
+The persona carrier preserves the complete bounded declaration set in
+mechanical order. If multiple verified declarations for the same exact bytes
+disagree on authored media claims, the public protocol emits
+`personaos-artifact-declaration-ambiguity/1` and the declaration channel supplies
+no selected MIME. Only separate independently verified exact-byte format
+authority may type those bytes; otherwise transport and rendering use the
+opaque fallback.
+
 Artifact role is separate signed authority. A portrait, task deliverable,
 intermediate, package, or external delivery is never classified by path words,
 extension, MIME alone, prompt text, or content inspection.
@@ -1007,6 +1028,13 @@ but the body becomes model-visible only through the authenticated generic
 inspection action. A local persona-authored request or contribution may use the
 ordinary persona-content-authenticated environment observation path. See
 [`21_OPEN_INPUTS.md`](21_OPEN_INPUTS.md).
+
+Every prompt availability page and authenticated inspector binds the exact
+`personaos-open-input-causal-task-authority/1` derived from verified principal
+ancestry and current authenticated scope. That authority preserves requests
+created on earlier causal task identities without copying or rebinding them.
+The dispatcher supplies it outside model-authored arguments, and exact task
+membership plus open protocol state are the only selection facts.
 
 ## 10. Work notes, completion, and quiescence
 
@@ -1227,6 +1255,18 @@ Current cutover records include:
 - `personaos-active-peer-work-state-head/1`,
   `personaos-active-peer-work-state-heads/1`, and
   `personaos-active-peer-work-state-prompt-projection/1`;
+- `personaos-persona-disposition-frontier-settlement/1`,
+  `personaos-persona-disposition-frontier/1`, and
+  `personaos-terminal-disposition-frontier/1`;
+- `personaos-open-input-causal-task-authority/1`,
+  `personaos-open-input-prompt-authority/2`, and
+  `personaos-open-input-prompt-projection/2`;
+- `personaos-current-artifact-declaration-authority/1`,
+  `personaos-current-artifact-declaration-prompt-projection/1`, and
+  `personaos-artifact-declaration-ambiguity/1`;
+- `personaos-mounted-tool-identity/1`;
+- `personaos-brain-evolution-prior-binding-selection/1` and
+  `personaos-brain-fragment-binding-carrier-effect/1`;
 - `personaos-peer-activity-lineage-snapshot/2`,
   `personaos-verified-peer-lineage-event/1`, and
   `personaos-communication-routed-wake-delivery-snapshot/1`;

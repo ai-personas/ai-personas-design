@@ -520,6 +520,15 @@ persona may then invoke it without a synthetic wake. A concurrent mount by
 another actor, a nested result that omits the tuple, a failed acquisition, or
 any mismatched tuple must leave the original frozen lease unchanged.
 
+Repeat on a provider-native lane while a different host descriptor already has
+the same tool name. Native observation capture and the sealed action-effect
+receipt must preserve the acquired artifact, descriptor, and lineage identities
+without collapsing them into the pre-existing descriptor. A name-only parsed
+result, forged result text, mismatched descriptor annotation, or two conflicting
+mounted identities must not widen the lease. A later invocation must dispatch
+only through the exact descriptor whose mounted identity rejoined current
+signed authority.
+
 Before any semantic interpretation, every task observes the same descriptor
 identities, ordering, and generic navigation actions. A persona may use an
 already present executable without acquisition, acquire a verified peer or
@@ -559,9 +568,9 @@ executable-specific substrate branch exists.
 through persona choices. Their quality is judged by humans or exact authorized
 verifiers, not assumed from filenames or tool names.
 
-**Failure:** host prompt mandates a package; SVG/STL existence is equated with
+**Failure:** host prompt mandates a package; file existence is equated with
 quality; an invocation is credited without bytes; a prose claim substitutes for
-a model.
+an artifact.
 
 ## 9. Artifact MIME and lazy rendering
 
@@ -580,8 +589,20 @@ An unchanged path/hash/length retains its valid signed declaration after a task
 amendment, with the original task/action shown as publication provenance. Once
 the bytes change, that older declaration no longer supplies MIME.
 
+Publish two independently valid persona declarations for the same exact
+environment/path/hash/length, first with identical authored media claims and
+then with different MIME or metadata claims. The persona carrier must preserve
+the complete bounded declaration authority in mechanical order. The compact
+public projection may normalize the identical claim but must emit explicit
+declaration ambiguity for the disagreement, including proof identities and
+distinct claim hashes. It must not select by recency, author, extension,
+filename, role, or content sniffing; absent separate exact-byte format authority,
+rendering must use the opaque fallback.
+
 **Failure:** path hides extension; renderer trusts suffix; supported content is
-shown only as binary; identity media appears as task output without signed role.
+shown only as binary despite unambiguous current signed MIME; identity media
+appears as task output without signed role; or one conflicting declaration is
+silently presented as authoritative.
 
 ## 10. Persona-authored birth
 
@@ -764,6 +785,20 @@ must appear as `duplicate_fragment_revision` omission evidence. Page the exact
 binding inventory, then reuse one binding id with an empty fragment set; the
 next carrier must omit that cleared binding without the substrate choosing a
 replacement.
+
+Begin with a valid current binding containing several independently authored
+fragment identities. In one later authenticated evolution action, revise one of
+those identities and add another while requesting `bind_changed_fragments` with
+the same exact carrier scope. The substrate must freeze the prior binding before
+mutation, carry every still-valid unchanged identity in authored order, resolve
+the revised identity to its new exact revision, append the new identity in
+operation order, and expose carried, changed, omitted, and complete sets in the
+result. Repeat with a different scope: only that action's changed identities may
+seed the new complete set. Repeat with the standalone binding action and an
+explicit empty set: exact replacement and clearing must remain possible. Losing
+unchanged fragments on ordinary same-scope evolution, carrying them across a
+scope change, silently resurrecting a stale ref, or inspecting fragment meaning
+to choose the set fails.
 
 Fill the finite carrier with valid persona-selected records, then bind another
 exact revision through both the composite evolution action and the standalone
@@ -1195,10 +1230,22 @@ turn: request admission must not race the producer. The successor observes the
 settled byte size/hash at delivery, or carries an exact resolution failure,
 without interpreting the path or format.
 
+After a verified `no_successor`, change the exact workspace or latest observed
+situation without authoring another persona disposition. The historical work
+state must remain visible, while its per-persona disposition frontier becomes
+`superseded_or_unbound` and the aggregate names that persona as requiring
+re-authorship before the old disposition can represent current state. Repeat
+with an isolated disposition authored after all other effects in the same turn:
+the kernel-signed settlement may bind it to the settled situation and workspace
+signature. Public task state must distinguish terminal dispositions, currently
+bound frontiers, and re-authorship facts without scheduling a call or treating
+any count as acceptance.
+
 **Failure:** host polls because improvement is possible; a note word creates or
 suppresses a wake; the explicit disposition is lost; one disposition creates
 multiple successors; quiescence is shown as complete; later event starts a
-replacement task.
+replacement task; or a historical `no_successor` is presented as covering newer
+exact state.
 
 Repeat with one active member. That member publishes an open-input request and
 then authors `no_successor`. The request remains public and inspectable, but it
@@ -1324,6 +1371,16 @@ candidate only after exact card-hash and contribution-signature verification.
 Deliver owner and remote bodies to cognition only after `inspect_open_inputs`
 is deliberately invoked.
 
+Continue the same principal intent through one or more authenticated causal
+amendments while leaving an earlier request open. The later carrier must bind a
+hash-verified, ordered, duplicate-free causal task authority derived from the
+complete principal-intent ancestry. Its content-free availability page and the
+authenticated inspector must still expose the earlier request under its
+original task identity. Contribution and disposition must append against that
+original request rather than copying or rebinding it. Supplying extra task ids
+through model arguments, raw transport fields, a shared environment, or similar
+text must not expand the authority.
+
 **Required outcome:** the public UI displays the question, why it matters,
 requesting persona, response contract, candidates, status, and provenance but
 contains no response editor for any browser principal. The authenticated owner
@@ -1341,7 +1398,9 @@ write authority.
 self-supplied key/card establishes persona authority; HTTP response content
 enters ambient cognition directly; owner precedence discards peer candidates or
 bypasses acceptance criteria; a request or response triggers a host-selected
-role/tool/workflow; or resolving the request completes the task.
+role/tool/workflow; a causal amendment hides an earlier open request; caller
+fields widen the causal task family; or resolving the request completes the
+task.
 
 Repeat with unrelated task text, response shapes, persona characteristics,
 domains, tools, and artifact formats. The same action catalog, signatures,
@@ -1464,11 +1523,21 @@ A cutover is design-complete only when current normative text contains no live:
 - ranked/top-K memory, skill, tool, candidate, or population selection;
 - structured work readiness or capability-gap lifecycle/completion gate;
 - work-note defer, settlement, current, or stale classification;
+- a historical persona disposition presented as bound to a newer exact
+  mechanical frontier;
 - required birth-need/action staging or fixed genesis fields;
 - inferred artifact MIME or singular primary domain;
+- automatic selection among conflicting valid exact-byte artifact declarations;
 - inferred replication effect;
+- name-only or parsed-text mounted-tool identity, or collapse of distinct
+  same-named native descriptors;
+- composite same-scope evolution that discards valid unchanged bound fragments;
+- open-input visibility limited to only the latest member of authenticated
+  causal task ancestry;
 - semantic admission bounds or refusal-driven action selection;
 - provider/registry/default ordering as bootstrap model authority;
+- live domain stage/trust/requirement/harvest registries or legacy
+  tactic/lesson/K-line prompt injectors;
 - paging that silently deduplicates authoritative append positions; or
 - equation of quiescence with a terminal outcome.
 

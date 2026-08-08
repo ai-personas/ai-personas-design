@@ -230,7 +230,7 @@ than selecting semantically important activity.
 **PersonaCard** — Compact signed public projection of a persona. Optional
 persona-authored display fields may be absent without hiding the actor.
 
-**Persona work note** — Optional `personaos-persona-work-state/3` record whose
+**Persona work note** — Optional `personaos-persona-work-state/5` record whose
 bounded open `work_note` has no substrate semantics. Notes are immutable signed
 appends; revision/prior-record metadata orders them without replacement,
 current/stale, or settlement meaning. A note cannot complete an objective or

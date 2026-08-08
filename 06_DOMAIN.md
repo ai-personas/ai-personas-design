@@ -179,6 +179,21 @@ MetaRegistry promotion, fixed kind families, kinship scoring, singular
 `domain_id` selection, or primary-domain completion hooks. Historical bytes may
 remain opaque audit records but confer no current selection or policy authority.
 
+Clean-break implementation means those concepts are absent from current domain
+storage, hydration, kernel calls, action descriptors, prompt construction,
+discovery projection, and public task state—not merely disabled by a flag or
+wrapped by a generic name. A current domain manager stores and verifies open
+records, exact material, plural references, and mechanical access/lineage only.
+It exposes no stage transition, trust update, requirement derivation, probe,
+harvest, promotion, or semantic registry method for another live subsystem to
+call.
+
+A store carrying an obsolete semantic-policy schema is not migrated or coerced
+into current cognition. It fails current-mode admission. If retained for audit,
+its bytes remain in a separate opaque historical surface and never populate a
+domain object, action catalogue, prompt carrier, policy decision, ranking, or
+completion projection.
+
 ## 13. Design criteria
 
 1. Domain context is optional, exact, signed, and open.
@@ -188,3 +203,5 @@ remain opaque audit records but confer no current selection or policy authority.
 5. Personas navigate domain knowledge, skills, and tools explicitly.
 6. Domain labels never select behavior, policy, MIME, roles, teams, or
    completion.
+7. Removed semantic domain engines have no live storage, hydration, call, or
+   prompt path; historical bytes remain audit-only.

@@ -46,7 +46,7 @@ and accept no legacy progress-report schema.
 The persona authors only bounded open canonical JSON in `work_note` and
 optional opaque exact `causal_refs`. The substrate derives the mechanical
 fields, and the authorized action signs the
-`personaos-persona-work-state/3` envelope with the persona identity key. It
+`personaos-persona-work-state/5` envelope with the persona identity key. It
 contains:
 
 - `work_state_id`, `persona_id`, `environment_id`, and `task_id`;
@@ -54,6 +54,7 @@ contains:
 - substrate-derived `note_id`, integer `revision`, and
   `supersedes_work_state_ref`;
 - the exact open `work_note` and `causal_refs`; and
+- the separately shaped exact signed `causal_disposition`; and
 - `authored_at`, signing-key identity, and signature.
 
 Records are immutable and append-only. `revision` is only a mechanically
@@ -108,6 +109,37 @@ only highest verified append revision with timestamp and immutable ID as exact
 ties; it is not a relevance, readiness, quality, leadership, or completion
 ranking. The bounded projection reports every omission and grants no causal
 successor.
+
+### 3.1 Terminal disposition frontier
+
+`no_successor` is terminal only for the exact causal choice represented by its
+signed work state. It is never task acceptance, and it describes the current
+mechanical frontier only while it remains bound to the latest verified
+situation and current workspace-state signature. A later workspace publication,
+observation, membership revision, or other authenticated state change leaves
+the signed disposition intact as history but can make that frontier binding
+false.
+
+When a persona authors `no_successor` in an isolated disposition action after
+other effects from the same provider turn have settled, the kernel may append
+`personaos-persona-disposition-frontier-settlement/1`. It binds the exact work
+state and content hash, persona/environment/task, authored and settled situation
+hashes, settled situation event, workspace-state signature, source wake, action
+identity, and exact effect counts. It verifies that this isolated action added
+the disposition and no independent effect; it does not interpret the note or
+manufacture agreement.
+
+`personaos-work-state-evidence/1` exposes, for every mechanically latest
+signature-verified active-member revision, the complete disposition, direct or
+settled binding kind, source and observed workspace signatures, frontier
+situation hash, and one of `bound`, `superseded_or_unbound`, or
+`not_terminal_disposition`. Its aggregate
+`personaos-terminal-disposition-frontier/1` lists exact persona identities and
+counts for authored terminal dispositions, dispositions bound to the current
+frontier, and dispositions that would require persona re-authorship before they
+could represent that frontier. “Re-authorship required” grants no wake or model
+call and does not require the persona to act; it states only that an older
+`no_successor` cannot be presented as covering newer exact state.
 
 ## 4. No note settlement or reclassification
 
@@ -191,6 +223,13 @@ state. They also show the task and exact observed situation, causal references,
 signature/provenance, and the factual observation-hash binding. Technical hashes
 and replay counters may remain in a secondary inspector.
 
+The interface also shows the persona's authored causal disposition separately
+from its frontier status. A bound `no_successor`, a historical unbound
+`no_successor`, an immediate successor, and an absent disposition must be
+visually distinct. Aggregate task presentation may state how many active
+members have terminal dispositions bound to current exact state, but it may not
+call that count consensus, acceptance, completeness, readiness, or a vote.
+
 The interface never labels a note current, stale, deferred, pending settlement,
 settled, ready, or complete. If no note exists, it says so plainly without
 inventing a summary, role, thought, activity, accomplishment, or completion
@@ -221,3 +260,6 @@ or semantics.
    causal disposition remains exact action authority only.
 6. Quiescence is a nonterminal absence of pending causal delivery.
 7. Human presentation distinguishes authored claims from verified facts.
+8. Terminal disposition visibility binds exact signed choices to the current
+   mechanical frontier; later state cannot silently inherit an older
+   `no_successor`, and an unbound disposition grants no automatic wake.

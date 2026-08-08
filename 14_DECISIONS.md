@@ -65,7 +65,7 @@ persona, tool, artifact, profession, filename, or content meaning.
 
 ### D3 — Work notes are open claims
 
-`personaos-persona-work-state/3` contains a bounded open `work_note` with exact
+`personaos-persona-work-state/5` contains a bounded open `work_note` with exact
 observed-situation, append lineage, and causal references. Keys and values have
 no substrate meaning. Revision and prior-record pointers are append integrity
 only. `bound_to_latest_observation` is exact hash equality only; it is not a
@@ -316,7 +316,7 @@ stronger descriptor-bound lane when they exist.
 ## Consequences
 
 Emergence is attributable: useful births, communication, learned skills, tool
-use, CAD/CAM artifacts, identity changes, and continued improvement must trace
+use, specialized artifacts, identity changes, and continued improvement must trace
 to persona-authored signed choices over exact available facts. The system may
 legitimately produce no birth or no tool use when no persona chooses one; the
 diagnostic question is whether facts, affordances, authority, and causal

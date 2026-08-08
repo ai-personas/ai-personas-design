@@ -85,14 +85,27 @@ refuses the extra field.
 Distinct contracts do not require two model/tool round trips. A single
 authenticated evolution action may contain an optional, separately shaped
 `bind_changed_fragments` decision. When present, it names the complete exact
-`carrier_scope_refs` and mechanically binds every exact fragment revision
-changed by that action in authored operation order. When absent, the revisions
-remain catalogued and unbound. The substrate neither derives this field from an
-operation body nor chooses a scope. The result states the changed identities,
-whether binding was requested, and whether the separate signed binding commit
-completed. Each successful binding contains the complete fragment set the
-persona currently chooses for every carrier where that exact scope is eligible.
-Existing binding records remain independently inspectable and revisable.
+`carrier_scope_refs`. Before mutating any fragment, the substrate freezes the
+exact referenced binding head, or the mechanically current eligible head when
+no binding id was supplied. If that verified head has the same exact scope, its
+still-valid fragment identities are carried forward in authored order and the
+revisions changed by this action are mechanically upserted in operation order.
+If the scope differs or no valid head exists, the new complete set begins with
+only the changed identities. Duplicate identities collapse by exact id; fragment
+bodies, task text, domain values, action names, and claimed utility never
+participate.
+
+When `bind_changed_fragments` is absent, the revisions remain catalogued and
+unbound. The substrate neither derives this field from an operation body nor
+chooses a scope. The result states the prior binding preimage, carried, omitted,
+changed, and resulting complete identities, whether binding was requested, and
+whether the separate signed binding commit completed. Each successful binding
+contains the complete fragment set the persona currently chooses for every
+carrier where that exact scope is eligible. A persona uses the separate
+`bind_brain_fragments` action when it intends exact replacement or an empty
+clear; ordinary cumulative evolution cannot silently erase unchanged retained
+material. Existing binding records remain independently inspectable and
+revisable.
 
 Fragment authoring follows the same exact-scope rule. Empty and universal scope
 are explicit; every other scope must equal one current authenticated carrier
@@ -211,12 +224,16 @@ consent policy. Supersession never rewrites prior bytes.
 
 If the same authenticated action explicitly includes
 `bind_changed_fragments`, successful application is followed by the distinct
-owner-signed `brain-fragment-binding/2` commit over exactly the returned
-`changed_fragment_ids`. The binding request is validated against the current
-carrier before fragment mutation. A rare post-application binding-commit
-failure is reported as a partial commit rather than pretending that evolution
-was rolled back. No fragment content, task text, tool identity, or domain value
-affects this mechanical join.
+owner-signed `brain-fragment-binding/2` commit. The binding request and any
+same-scope prior head are validated and frozen before fragment mutation. The
+commit's complete set is the verified carried-forward identities followed by
+the returned `changed_fragment_ids`, with the changed identities resolving to
+their new exact revisions. Invalid or stale prior identities are named as
+omissions rather than resurrected or guessed. A different scope has no prior
+carry-forward authority and commits only the changed identities. A rare
+post-application binding-commit failure is reported as a partial commit rather
+than pretending that evolution was rolled back. No fragment content, task text,
+tool identity, or domain value affects this mechanical join.
 
 ## 5. Tools, skills, memories, and domains
 
@@ -276,5 +293,8 @@ inventories.
    effect-producing are distinct evidence states; the substrate infers neither
    expertise nor a curriculum from them.
 8. A persona can explicitly author and bind newly changed fragments in one
-   authenticated action without the substrate selecting content or scope; an
-   omitted binding request remains catalogue-only.
+   authenticated action without the substrate selecting content or scope. An
+   unchanged exact scope carries its valid prior selection forward and upserts
+   changed revisions; a changed scope begins with changed revisions only; an
+   omitted binding request remains catalogue-only; and explicit replacement or
+   clearing remains a separate persona-authored binding decision.

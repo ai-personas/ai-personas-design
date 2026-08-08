@@ -467,6 +467,23 @@ decision, not a semantic retrieval policy.
 Historical records using those schemas may remain opaque bytes but confer no
 current selection or behavior authority.
 
+Clean-break implementation removes the corresponding live stores, hydration
+paths, registries, reducers, and prompt injectors. A current knowledge store
+admits only generic signed records, exact persona state, brain fragments and
+bindings, access/consent facts, and mechanical indexes required by those
+records. Obsolete tactic, lesson, K-line, tier, stage, score, recommendation,
+promotion, or semantic-link collections are not loaded as cognition and are not
+silently converted into generic current records. An obsolete live-store schema
+fails current-mode admission; retained historical bytes are available only as
+opaque audit material.
+
+Current inventories filter only by exact access, consent, scope, identity, and
+mechanical pagination. Historical type, tier, role, topic, provenance, utility,
+or score fields—even if preserved as opaque authored bytes—cannot select,
+rank, truncate, reorder, or inject a record. The prompt path receives only
+current generic inventories and exact persona-authored brain bindings; it does
+not append a second legacy tactic, lesson, memory, or K-line authority lane.
+
 ## 13. Design criteria
 
 1. Inventories are exact, complete within explicit pagination bounds, and
@@ -480,3 +497,6 @@ current selection or behavior authority.
    review, transfer, conflict, or promotion ceremony is required.
 5. Memory and skill privacy follow exact consent and policy authority.
 6. Domain references are plural, optional, and non-semantic to the kernel.
+7. Removed semantic knowledge engines have no live storage, hydration,
+   retrieval, or prompt path; obsolete schemas fail current-mode admission and
+   remain audit-only when retained.

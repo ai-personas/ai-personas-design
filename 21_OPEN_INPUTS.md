@@ -96,19 +96,43 @@ This keeps public HTTP transport from becoming an ambient prompt-injection
 lane while leaving persona agency intact.
 
 Every later turn also receives a bounded content-free availability index for
-the exact task's currently open requests. It includes request/contribution
-identities, signer and append facts, source kinds, counts, hashes, precedence
-state, and the `inspect_open_inputs` delivery action, but no question, response
-contract, candidate value, evidence body, or rationale. This prevents a missed
-or previously unfunded wake from making signed input undiscoverable while
-preserving deliberate inspection and the same prompt-injection boundary.
+currently open requests in its exact authenticated causal task family. It
+includes request/contribution identities, original task identity, signer and
+append facts, source kinds, counts, hashes, precedence state, and the
+`inspect_open_inputs` delivery action, but no question, response contract,
+candidate value, evidence body, or rationale. This prevents a missed or
+previously unfunded wake, amendment, or resume from making signed input
+undiscoverable while preserving deliberate inspection and the same
+prompt-injection boundary.
+
+### 3.1 Causal task authority
+
+The kernel derives `personaos-open-input-causal-task-authority/1` from the
+complete verified principal-intent ancestry and the authenticated current and
+mission task scope. It binds the exact environment, mission task, an ordered
+duplicate-free list of causal task identities, its count, the complete
+principal-intent authority hash, a content hash of the authority itself, and
+`semantic_interpretation_performed: false`. Ordering is oldest verified causal
+ancestor first, followed by any authenticated current scope not already
+present. Task prose, request content, persona role, domain, and model output
+cannot add, remove, or reorder an identity.
+
+An open request remains attached to the exact task on which its author created
+it. A later causal amendment or resume does not copy, rewrite, or re-sign that
+request. Instead, a later carrier may expose its content-free availability when
+the request's original task identity is a member of the verified causal
+authority. Contribution and disposition actions preserve that original request
+and task binding. A model-supplied task list, raw caller field, common
+environment alone, or text similarity cannot expand this authority.
 
 ## 4. Inspection and disposition
 
 `inspect_open_inputs` returns exact verified requests, candidates, and
-dispositions for the authenticated task. It exposes append order and the
-mechanical preferred candidate, explicitly stating that semantic acceptance
-was not performed.
+dispositions for the authenticated causal task family. The dispatcher restores
+the verified causal authority from hidden authenticated context; persona or
+caller arguments cannot widen it. Inspection exposes each request's original
+task identity, append order, and the mechanical preferred candidate, explicitly
+stating that semantic acceptance was not performed.
 
 `resolve_open_input` lets an active persona sign either `resolved` or
 `withdrawn`, with an optional exact selected contribution, rationale, and
@@ -168,3 +192,8 @@ cardinality, and explicit visibility are mechanical admission facts. They may
 refuse an already chosen effect. They never inspect task, question, response,
 persona characteristic, role, domain, filename, executable, or prompt content
 to select behavior.
+
+An invalid, incomplete, duplicated, over-bound, or hash-mismatched causal task
+authority fails closed. A valid bounded authority selects requests only by
+exact task identity membership and open protocol state. It grants no responder,
+answer, correctness, acceptance, continuation, or completion authority.

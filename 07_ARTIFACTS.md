@@ -64,6 +64,36 @@ provenance; a newer current task identifier does not erase that MIME evidence.
 Changed bytes require a new matching signed declaration and never inherit an
 older declaration by path or extension.
 
+### 2.1 Current exact-byte declaration authority
+
+Every prompt, task, discovery, and public artifact projection re-resolves
+declaration authority against the bytes currently present. The join key is the
+exact environment, canonical path, content hash, and byte length, followed by
+verification of the declaring persona action, declaration event, publication
+lineage, signing authority, and current access. A declaration for prior bytes,
+a declaration whose action cannot be rejoined, or mutable cached presentation
+metadata supplies no current format authority.
+
+The persona carrier exposes the complete bounded current declaration set in
+stable mechanical path/proof order. It preserves the declaring persona,
+original task/action provenance, authored title, role/kind label, MIME,
+metadata, hashes, and exact omission or paging facts. This is an early
+authority lane so a copied or regenerated path cannot hide the declaration
+evidence behind a large general workspace inventory. The ordering and byte
+window inspect no authored value and select no primary artifact.
+
+More than one valid persona may declare the same exact bytes. If their authored
+title, role/kind label, MIME, or metadata disagree, the substrate publishes
+`personaos-artifact-declaration-ambiguity/1` with the exact byte identity,
+declaration proof identities, and distinct claim hashes. It does not choose the
+newest author, preferred persona, filename interpretation, or apparently safer
+claim. The declaration channel then supplies no MIME to rendering; a separate
+independently verified exact-byte delivery authority may still supply its own
+format, otherwise the bytes remain `application/octet-stream` with an honest
+download/technical fallback. Exactly identical claim bodies may be normalized
+mechanically for a compact public view without merging their distinct signed
+history.
+
 ## 3. Open roles, kinds, and bundles
 
 Artifact roles, kind labels, bundle descriptions, relationships, and package
@@ -71,10 +101,9 @@ structure are bounded open persona-authored records. Personas may group related
 files, describe dependencies, designate a primary view, cite a source model,
 publish derivatives, or leave artifacts unbundled.
 
-The substrate reserves no role such as primary, supporting, verification report,
-test plan, drawing, CAD, review, or deliverable. If authored, those labels remain
-claims. The kernel does not choose a package recipe from task/domain words,
-filename, extension, MIME, executable, profession, prompt, or regular expression.
+The substrate reserves no artifact role. If authored, role labels remain claims.
+The kernel does not choose a package recipe from task/domain words, filename,
+extension, MIME, executable, profession, prompt, or regular expression.
 
 Identity media and task artifacts remain separate only through exact signed role
 and scope authority. A portrait is never counted or shown as task output merely
@@ -88,9 +117,8 @@ render further views. The ordinary action catalog and exact unranked capability
 inventories make these choices reachable.
 
 Each actual tool/action receipt records exact descriptor/provider, terminal
-result, byte effects, and causal provenance. Invoking Blender, OpenSCAD, a CAD
-tool, renderer, compiler, converter, or verifier does not automatically establish
-quality, expertise, artifact role, or completion.
+result, byte effects, and causal provenance. Invoking any particular tool does
+not automatically establish quality, expertise, artifact role, or completion.
 
 Directly model-authored, code-generated, converted, compiled, and externally
 realized bytes remain distinguishable when the signed action chain establishes
@@ -223,3 +251,6 @@ authority.
     declared output with partial bytes: bounded exact preimages are restored or
     newly created non-directory output entries are removed, while the signed
     attempt receipt remains evidence. This protection reads no artifact meaning.
+11. Current projections rejoin declarations to exact current bytes, expose all
+    bounded authority to personas, and represent conflicting valid claims as
+    ambiguity without MIME inference or automatic alternative selection.

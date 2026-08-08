@@ -94,7 +94,7 @@ accepted. Later authenticated events may resume the same settlement context.
 
 ### 7.1 Work notes never enter settlement
 
-A `personaos-persona-work-state/3` record is an immutable append-only authored
+A `personaos-persona-work-state/5` record is an immutable append-only authored
 observation. It is not an unsettled workspace/action effect, invoice, delivery,
 or counterparty obligation. No settlement lane defers, pends, reconciles,
 settles, closes, reopens, or reclassifies a note.
