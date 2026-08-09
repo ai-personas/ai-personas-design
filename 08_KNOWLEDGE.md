@@ -335,6 +335,24 @@ who acted, under which authority, what descriptor was used, what terminal
 result occurred, which bytes changed, and which records were cited. These are
 facts, not automatic competence credit.
 
+That retention includes one exact mechanical join across repeated executions of
+the same descriptor. The runtime already holds, per execution, the terminal
+result and the content hashes of the input bytes that execution observed; the
+join reports how many distinct input-byte states were observed, how many
+distinct terminal results were observed, whether the terminal result varied
+across those states, and the exact content hashes grounding both counts.
+Identity is byte identity: equal input hashes are one observed state and equal
+terminal results are one observed result, whatever the descriptor, path,
+format, tool, task, or domain.
+
+This is a fact about the executions, never a judgement of a check's
+correctness, adequacy, or the quality of what it checks. A descriptor whose
+terminal result never varied is not thereby wrong, and one whose result varied
+is not thereby sound. The join grants no wake, no credit, no acceptance, and no
+completion, and recommends nothing. No execution is performed to obtain it: it
+is a join over receipts the runtime already holds, and it is absent when those
+receipts are absent.
+
 Each sealed ordinary turn may contribute a signed `brain-episode/1` effect
 receipt. A later authorized wake exposes those episodes through the bounded
 learning-history carrier, and the persona can continue the same exact inventory
@@ -346,8 +364,26 @@ experience statement through `author_persona_knowledge`. Changed
 characteristics or public identity evolution use their separate exact identity
 action. The persona may also decide that no durable change is warranted. There
 is no substrate experience taxonomy, profession ladder, habit-strength formula,
-promotion threshold, optimizer, identity-expression score, or mandatory
-reflection schedule.
+promotion threshold, host-authored optimizer, identity-expression score, or
+mandatory reflection schedule. The substrate scores no semantic quality and
+ranks or recommends no tactic, action, or tool.
+
+That prohibition binds the host, not the actor. A persona may run its own
+evolution loop over its own authored tactics, keyed only to that persona's own
+exact executed outcomes and the exact acceptance and frontier facts already
+recorded. Its variation operator acts on persona-authored material only. Its
+retention rule is non-dominance over exact recorded outcome dimensions — a
+candidate is retained unless another is at least equal on every dimension and
+better on one — never a host quality score, threshold, or ordering. An outcome
+dimension may only be an exact recorded mechanical fact, such as executed
+terminal results, the discrimination counts above, declared-acceptance state,
+or byte deltas; a model self-report or an authored prose claim is not an
+outcome dimension. The substrate supplies no tactic vocabulary, no seed
+content, no domain examples, no mutation catalogue, and no schedule, and a
+persona may decline the loop entirely. What the loop produces is ordinary
+persona-authored material admitted through the existing signed authoring and
+brain-evolution actions; it acquires no selection authority those same bytes
+would not otherwise have.
 
 Mutable brain-fragment evolution uses one
 `brain-evolution-decision/1` persona-authored claim. It binds exact `id`,
@@ -500,3 +536,9 @@ not append a second legacy tactic, lesson, memory, or K-line authority lane.
 7. Removed semantic knowledge engines have no live storage, hydration,
    retrieval, or prompt path; obsolete schemas fail current-mode admission and
    remain audit-only when retained.
+8. Discrimination across repeated executions of one descriptor is an exact
+   mechanical join over retained receipts; it judges no check and grants no
+   wake, credit, acceptance, or completion.
+9. Tactic evolution is persona-owned and declinable, keyed to that persona's
+   own exact recorded outcomes and retained by non-dominance over exact
+   mechanical dimensions rather than any host score or ranking.
