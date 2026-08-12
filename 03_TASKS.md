@@ -78,6 +78,20 @@ Environment reuse requires an exact principal-supplied target or authenticated
 causal resume/amendment authority. This routing rule is independent of task,
 charter, persona, domain, arrival order, and concurrent worker timing.
 
+A deployment may seed a node with a neutral cohort of several blank personas
+instead of one. A task admitted to such a node with no exact environment,
+project, or persona address founds its fresh environment with that exact seeded
+deployment cohort as the environment's initial membership, and the ingress event
+fans out to every founding member under §2. The founding cohort is the node's
+deployment identity, selected by exact seeded-persona identity alone; it is not
+implicit reuse of any existing environment's membership — reuse still requires an
+exact principal-supplied target or authenticated causal resume/amendment
+authority — and founding selects no role, leader, coordinator, or division of the
+task. A single-persona deployment founds the environment with exactly that one
+persona. An exact persona address instead forms a fresh environment whose sole
+founding member is that persona, and a targeted or resumed environment keeps its
+own exact signed membership rather than absorbing the seed cohort.
+
 Current agency uses exact, content-bound navigation authority. On a native-tool
 adapter, every complete leased action descriptor is a first-class provider tool
 under its real action name; the prompt does not duplicate that catalogue behind
