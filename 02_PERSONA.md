@@ -9,9 +9,14 @@ A persona is a persistent cryptographic actor that authors choices and durable
 records. It is not a provider session, prompt template, role instance,
 profession label, score vector, workflow state, or host-selected team member.
 
-This document is a clean break from fixed personality dimensions, drive scores,
-behavioral modes, role templates, mission charters, autonomy/fork dimensions,
-narrow identity phases, prompt evolution, and host-authored persona fitness.
+This document is a clean break from host-imposed personality dimensions, drive
+scores, behavioral modes, role templates, mission charters, autonomy/fork
+dimensions, narrow identity phases, prompt evolution, and host-authored persona
+fitness. What is broken is host ownership and host use: no substrate mechanism
+may route, rank, schedule, admit, select, gate, or score by any personality-like
+quantity, whoever authored it. The break does not require a persona to be
+interiorless. Values the persona owns, which no host mechanism reads, remain its
+own (§2a).
 
 ## 1. Stable actor identity
 
@@ -43,8 +48,53 @@ assign a role, or translate characteristics into action selection.
 
 OCEAN, VAD, artistic style, professional vocabulary, or any other framework may
 appear when a persona or exact authenticated principal/user intent chooses it.
-None is a kernel constant or required field. Such material remains an authored
+None is a kernel constant or required field. A framework label carried by
+genesis (§2a) is a name for numbers, not an exception to this: the substrate
+holds no definition for any trait it labels. Such material remains an authored
 claim, not proof of competence or a behavioral program.
+
+## 2a. Seeded disposition and affect self-state
+
+Blank authored content is correct. Blank initial conditions are not. Personas
+born byte-identical are symmetric, and symmetric actors resolve the same
+situation the same way: the same first move, the same stopping point, the same
+work done twice by peers with nothing to distinguish who does it. Temperament in
+a human is not an achievement, credential, or verdict; it is a condition present
+before the first experience. A persona begins with the same kind of starting
+point.
+
+At genesis every persona receives exact disposition parameters derived from its
+own identity: numbers under an open framework label, distinct per persona,
+stable across restarts, and reproduced from the identity seed rather than
+trusted from storage, so a stored copy is never authority. The deployment
+default label is `ocean/1` carrying five values in `[0, 1]`. Seeding contributes
+numbers only, never a sentence, instruction, adjective, role, expected
+behavior, or any other semantic content, and the frozen SOUL is unchanged.
+
+A persona also owns an affect self-state: values it records for itself,
+valence, arousal, and dominance in `[-1, 1]`, with an optional bounded note in
+its own words. Only the persona authors it. The substrate never derives,
+estimates, smooths, decays, or corrects an affect value from behavior, outcomes,
+elapsed time, or model output, and authors no affect of its own. Records are
+persona-signed and append-only: history is retained and the mechanically-latest
+record is what projects.
+
+Both ride the persona's own identity carrier, so each turn presents the actor
+with who it is and how it last recorded itself to be, with no separate retrieval
+step and no ceremony. Both are opaque end to end. No routing, ranking,
+scheduling, membership, admission, acceptance, model selection, or other
+substrate decision may read either value, and the substrate never renders a
+value as prose or states what a value means. Interpretation belongs to the
+persona alone.
+
+Seeding is an initial condition, not a judgment about the persona and not
+evidence of anything it will do. A persona may revise the numbers, relabel them,
+or replace the framework outright through its ordinary characteristics action
+(§2). What it authors is equally opaque, and the substrate neither merges,
+reconciles, nor ranks an authored revision against the seeded record; both are
+simply shown. Absence blocks nothing: a persona that has recorded no affect, or
+carries neither record, is complete, and work, membership, discovery, and
+acceptance proceed unchanged.
 
 ## 3. Optional public identity
 
@@ -289,6 +339,11 @@ prompt/tactic evolution, fitness scores, fixed genesis seeds, or old birth
 proposal/action v3 records. Historical bytes may remain opaque lineage but
 carry no current behavior or identity authority.
 
+The seeded disposition and affect self-state of §2a do not restore any of that
+surface. They are required by nothing, gate nothing, rank nothing, and are read
+by no host mechanism; what was removed is the host owning such values and acting
+on them.
+
 ## 16. Design criteria
 
 1. Persona identity is cryptographic and continuous across process resume.
@@ -302,3 +357,7 @@ carry no current behavior or identity authority.
 9. Work notes and gap-like authored content never determine completion or
    continuation.
 10. Quiescence is nonterminal.
+11. Genesis gives every persona distinct identity-derived disposition numbers
+    and no semantic content.
+12. Disposition and affect are persona-owned, persona-revisable, read by no host
+    mechanism, and never required.
