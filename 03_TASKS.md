@@ -435,6 +435,18 @@ deduplication while preserving the common event identity.
 Concurrent grants and replays are idempotent by exact authority. They cannot
 duplicate a settled delivery, mint a new task, or manufacture another persona.
 
+On resume of a task, the continuation evidence also includes one exact
+mechanical fact about bytes: an ordered per-run list of the materialized-output
+signatures (content hash and file count) recorded across the verified causal
+task family, the count of how many of those runs produced identical materialized
+output, and how many of the most-recent runs share the newest output signature.
+The run set is derived only from the verified principal-intent ancestry, so no
+caller or model value can widen it; a run whose signature does not resolve is
+omitted rather than fabricated, and fewer than two resolvable runs leave the
+fact absent. It is a count over content hashes, never a judgment that repetition
+is good or bad; it grants no wake or authority, selects no action, and the
+persona may act on it or not.
+
 ## 9. Objective acceptance
 
 Acceptance comes only from exact authority and evidence declared by the
