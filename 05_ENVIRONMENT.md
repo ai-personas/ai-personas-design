@@ -20,6 +20,30 @@ The kernel validates exact mechanics without interpreting a charter as a role,
 profession, deliverable list, tool requirement, team plan, or semantic action
 surface.
 
+## 1a. Persona-authored environment identity
+
+An active member may append a signed environment-identity record carrying an
+exact title and an exact purpose description. Both are bounded canonical bytes
+chosen entirely by the persona. The kernel validates length, encoding, and
+membership authority, and never reads those bytes as a room type, role, task,
+domain, workflow, ranking, or completion claim.
+
+Records are immutable and append-only. `revision` is only a mechanically
+verified append sequence and `supersedes_ref` only an exact pointer to the
+preceding record. The projected environment title and description are the
+mechanically-latest verified record: highest verified append revision, with
+authored timestamp and then immutable record id as exact ties. Latest is not
+winner, consensus, correctness, or current truth; no append relabels or
+obsoletes an earlier one, and every prior record stays independently navigable
+and attributed to its exact author. Projections label the record by author
+persona and authored time exactly as a work note is labelled.
+
+Host-set name and description remain the projected fallback while no verified
+persona-authored record exists, and are never overwritten by one. Authoring is
+optional: it grants no authority, elects no coordinator, changes no membership,
+and schedules no wake. A missing environment title or description never blocks
+work, membership, discovery, or acceptance.
+
 ## 2. Membership and consent
 
 Membership is an independently signed relation among exact persona,
@@ -173,9 +197,11 @@ opaque audit bytes but confer no current behavior authority.
 ## 13. Design criteria
 
 1. Environment state is exact, signed, durable, and replayable.
-2. Membership requires independent consent and no optional identity fields.
-3. Task/resource events fan out unchanged to all active members.
-4. Workspace, artifacts, and effects retain exact authorship.
-5. Resource/policy facts never select semantic behavior.
-6. Discovery is incremental and decentralized.
-7. Quiescence is nonterminal.
+2. Persona-authored environment identity is optional, append-only, and never
+   interpreted; latest is mechanical order, not authority.
+3. Membership requires independent consent and no optional identity fields.
+4. Task/resource events fan out unchanged to all active members.
+5. Workspace, artifacts, and effects retain exact authorship.
+6. Resource/policy facts never select semantic behavior.
+7. Discovery is incremental and decentralized.
+8. Quiescence is nonterminal.
