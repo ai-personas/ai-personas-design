@@ -182,13 +182,57 @@ same exact source-event bytes and hash, task, environment, principal intent,
 resource pool, and workspace observation.
 
 A same-task resume additionally binds one kernel-signed
-`personaos-prior-run-resume-observation/1`. It carries the immediately prior
+`personaos-prior-run-resume-observation/2`. It carries the immediately prior
 run identity and exact terminal status, content-bound continuation state,
 verified persona-authored work-state evidence, and a mechanically projected
 materialized-file reference. The prior observation occupies an independent
 prompt lane; generic raw-event compaction cannot replace it with only the
 resume event hash. Its words and values grant neither completion nor a
 successor—they are visible causal evidence for each recipient's own decision.
+
+The `/2` observation additionally binds the task-family situation as exact
+ledger facts, because a re-invocation is itself causal evidence the recipient
+must be able to perceive:
+
+- `task_family_invocation_ordinal` — this run's position (1-based) in the
+  verified causal task family (the same verified principal-intent ancestry
+  that scopes verifier receipts).
+- `family_run_records` — a newest-bounded array of per-prior-run exact
+  records: run identity, initiation instant (epoch seconds), the instant of
+  the newest verified event attributed to the run, model turns delivered
+  (derived from the run's own signed budget ledger, with an explicit
+  recorded/unrecorded flag; `null` when the ledger records no charges),
+  authored-action counts by exact action name (count-bounded with an
+  explicit omitted-count member), declared-artifact count, and budget
+  granted/spent. Only the immediately prior run carries a terminal status
+  (the observation core's `prior_run_status`); earlier family runs bind no
+  terminal status or settlement instant, because no verified lineage event
+  records one — the record set states only what verified events prove.
+  Every count is derived only from verified signed lineage events, with
+  attribution bounded to each run's verified append window and an explicit
+  unattributed-event count for anything outside every window; a run whose
+  events cannot be verified appears only as an explicit unverifiable
+  marker with `null` members, never as invented counts — and `null`
+  (unknown) is never rendered as zero (known-none).
+- `resume_carried_principal_amendment: false` — the structural fact that a
+  same-task resume carries no new principal text (an amendment mints a new
+  task identity and never travels this lane).
+- `family_acceptance_events_recorded` and
+  `family_verifier_receipts_recorded` — exact counts over the verified causal
+  family from the same verified acceptance and receipt readers. Zero is
+  stated as zero: "no acceptance has ever been recorded for this family" is
+  an exact ledger state, and under a silent principal it is the ordinary
+  state of a standing deliverable. Stating it is not appraisal — suppressing
+  it renders delivered-but-never-accepted indistinguishable from closed.
+
+The whole observation stays byte-bounded: bounded arrays declare their
+omitted counts, and when even the bounded family members cannot fit, the
+lane keeps the immediately-prior-run core and replaces the family members
+with one explicit declared-overflow member — never a silent truncation. No
+member ranks runs, computes ages or deltas, labels any state stale or
+stagnant, or infers that anything remains to be done or is finished. The
+substrate states instants, counts, ordinals, and ledger states; every
+conclusion is the recipient's.
 
 Each member receives its own carrier, lease, deduplication identity, and
 settlement record. The kernel does not select a coordinator, owner, lead,

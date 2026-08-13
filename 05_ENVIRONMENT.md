@@ -74,6 +74,12 @@ The environment stores exact integrated workspace revisions and per-persona
 worktree bindings. Every turn lease preserves task, source event, persona,
 entry revision, byte capture, action effects, publication, and settlement.
 
+Every projected workspace file row binds `modified_epoch_seconds` — the exact
+filesystem modification instant of the captured bytes. Together with the
+carrier's present-moment fact this makes an artifact's age perceivable to the
+recipient; the row itself carries no age arithmetic, freshness label, or
+ordering by recency.
+
 Concurrent publications retain authorship. Peer bytes do not become another
 actor's effects. Conflicts preserve all exact alternatives until an authorized
 signed resolution chooses or synthesizes bytes.

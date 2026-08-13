@@ -483,6 +483,36 @@ staged-situation lanes. This is transport visibility only: the lane cannot
 create a choice, reorder the unordered ceiling, select a body, or turn
 transport observations into a recommendation.
 
+### 2a. Present-moment fact
+
+Every ordinary cognition carrier binds one kernel-signed
+`personaos-present-moment/1` in a dedicated early authority lane:
+
+```json
+{
+  "schema": "personaos-present-moment/1",
+  "observed_epoch_seconds": "<int: node clock at carrier assembly>",
+  "observed_utc": "<ISO-8601 UTC rendering of the same instant>",
+  "semantic_interpretation_performed": false
+}
+```
+
+A clock reading is environmental ground truth of the same kind every human
+actor holds; withholding it is sensory deprivation, not neutrality. Without a
+present instant, durably bound timestamps elsewhere in the situation (file
+modification instants, prior-run instants, deadline instants) are mutually
+ordered but not locatable — an actor cannot distinguish work finished moments
+ago from work finished days ago, and cannot choose a future wake instant
+against a known now.
+
+The lane states one instant and interprets nothing: it carries no age, no
+staleness, no elapsed-time arithmetic, no schedule, and no recommendation.
+Both members must render the same instant; a carrier whose two renderings
+disagree, or whose lane is absent or malformed, fails verification closed.
+The instant is the assembly-time reading of the node clock — the substrate
+does not warrant clock accuracy, only that the reading is the one the node
+held and signed at assembly.
+
 ## 3. Explicit replication-effect descriptors
 
 Any action capable of new actor materialization declares a signed bounded
@@ -538,7 +568,7 @@ may act, communicate, schedule itself, or make no call. Fan-out has no objective
 completion meaning and does not require identical behavior.
 
 For a same-task run resume, `personaos-task-resource-resumed/2` also binds one
-`personaos-prior-run-resume-observation/1` built from the immediately preceding
+`personaos-prior-run-resume-observation/2` built from the immediately preceding
 persisted run. It retains the exact prior run/environment/task/persona ids and
 status, the content-bound prior continuation state, exact verified
 `personaos-work-state-evidence/1` when available, and a hash-bound materialized-
