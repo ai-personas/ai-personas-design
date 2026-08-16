@@ -483,6 +483,50 @@ staged-situation lanes. This is transport visibility only: the lane cannot
 create a choice, reorder the unordered ceiling, select a body, or turn
 transport observations into a recommendation.
 
+### 2.5 Persona-authored verifier receipts
+
+`author_verifier_receipt` is an ordinary authenticated persona action,
+catalogued, leased, and funded like every other member of the action surface;
+task content never installs or removes it. One invocation authors one verifier
+receipt over exactly:
+
+- `scope` — the exact declared verifier scope string;
+- `inputs` — one opaque bounded canonical object the substrate never reads,
+  carried verbatim with its exact content hash; the executed
+  counter-evidence join itself is the host-sealed digest intersection of
+  [`03_TASKS.md §9`](03_TASKS.md#9-objective-acceptance) invariant (iii);
+- `terminal_result` — the closed boolean member `accepted`, plus optional
+  opaque notes the substrate never reads;
+- the hardened preimage members — `environment_id`, `task_id`, `run_id`,
+  `scope`, `signer_persona_id`, `signer_key_id`, `intake_declaration_hash`,
+  `declared_verifier_descriptor_hash`, `adjudicated_publication_event_id`,
+  `adjudicated_publication_event_hash`, `published_workspace_state_signature`,
+  `inputs_hash`, `terminal_result`, and `authored_at_epoch_seconds`,
+  serialized under a byte-prefix domain separator as
+  `personaos-persona-verifier-receipt/1`; and
+- the persona identity-key signature over that preimage.
+
+Transport-injected persona, environment, task, and run bindings must equal the
+corresponding signed preimage members rather than becoming hidden
+model-authored fields. A binding mismatch, an unauthenticated or unfunded
+turn, an unregistered or non-current signing key, a malformed member set, and
+an unresolvable adjudicated-publication reference are each refused with an
+exact stable reason code; every ambiguity fails closed. Success and refusal
+alike create no continuation, wake, or successor.
+
+A settled invocation is recorded as event kind
+`PERSONA_VERIFIER_RECEIPT_AUTHORED` under
+`personaos-persona-verifier-receipt-record/1`. The record's
+`signature_scheme` member distinguishes `"domain-separated-bound-preimage/1"`
+from the legacy `"open-canonical-preimage/1"`, and it carries the era stamps
+`receipt_authority_contract` `"persona-disjoint/1"` and
+`terminal_verdict_contract` `"closed-boolean/1"`. Whether a recorded
+receipt carries acceptance authority is decided entirely on the read side by
+the declared verifier authority and the mechanical invariants of
+[`03_TASKS.md §9`](03_TASKS.md#9-objective-acceptance); recording proves
+authorship, not acceptance. Records authored under earlier schemas keep their
+recorded authority unchanged.
+
 ### 2a. Present-moment fact
 
 Every ordinary cognition carrier binds one kernel-signed
@@ -1343,3 +1387,14 @@ of a signature.
     persona choice.
 12. Append paging preserves exact positions, cardinality, and duplicate
     accounting.
+13. Persona-authored verdicts are signed key facts that enter acceptance only
+    through declared verifier authority and mechanical invariants.
+
+## 16. Open questions
+
+- **OQ-PROTOCOLS-1** — Staged resumable capability provisioning: persist the
+  provisioning staging directory keyed by recipe hash, record a per-build-step
+  completion receipt, and let a later funded turn resume the remaining steps
+  before smoke execution, verification, and freeze. This changes acquisition
+  semantics — mutable cross-turn state, partial-failure receipts, per-stage
+  budget accounting — and is deferred.

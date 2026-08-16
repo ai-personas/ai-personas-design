@@ -34,8 +34,11 @@ team size, prompt, or completion rule from the intent text.
 Explicit principal authority is one optional intake object with exactly these
 optional members: `acceptance_condition` (opaque canonical JSON chosen by the
 principal, bounded in bytes, never interpreted by the substrate),
-`verifier_descriptor` (exactly `verifier_key_id` and `scope`, both exact
-strings), `verifier_receipt_constitutes_acceptance` (exact boolean, valid only
+`verifier_descriptor` (exactly one of three exact member sets, every member an
+exact string: {`verifier_key_id`, `scope`}; {`kind`, `verifier_key_id`,
+`scope`} with `kind` exactly `"exact-key/1"`; or {`kind`, `scope`} with `kind`
+exactly `"registered-persona-identity/1"`; any other member set is refused),
+`verifier_receipt_constitutes_acceptance` (exact boolean, valid only
 with a supplied descriptor, absent means false), `deadline_epoch_seconds`
 (absolute integer epoch seconds), `unaccepted_rewake_count` and
 `unaccepted_rewake_interval_s` (both exact positive integers, valid only when
@@ -433,6 +436,16 @@ is retried, revised, or ignored remains entirely the persona's decision.
 Sealing a failure receipt or mounting a capability still creates no
 continuation by itself; only the armed descriptor does.
 
+Exact authenticated acceptance retires exactly the governed carriers — the two
+sealed-failure replay stimulus classes above and the §1 principal-declared
+unaccepted re-wake bound — and nothing else. It neither cancels a
+persona-authored armed wake nor confiscates the remaining signed run ledger;
+every already-prepaid fire stays funded and deliverable, and any funded
+post-acceptance turn may arm a further bounded successor under the ordinary
+arm-time transfer rule below. Standing improvement after acceptance therefore
+exists exactly where a persona authored it or a principal declared it; the
+substrate implements no refinement loop, round counter, or convergence test.
+
 A finite persona-authored immediate or scheduled wake is executable only when
 its arm transition atomically transfers a complete bounded turn allowance from
 the exact signed causal run ledger. The currently delivered event-local
@@ -447,6 +460,19 @@ requires explicitly unlimited authority. The arm append encloses the exact
 reservation, and an append failure returns the uncommitted transfer. A
 successful result therefore means the future work is durably armed and funded,
 not merely that a timer was recorded.
+
+Explicitly unlimited authority is the signed run budget grant whose closed
+`budget_mode` member is exactly `"unlimited"`. It exists only when the
+authenticated principal's intake names no finite model-call allocation: a
+positive integer allocation creates a finite grant, an absent allocation
+member creates the unlimited grant, and any other value is refused. The grant
+is recorded as a signed lineage fact before any spend; it is never inferred
+from schedule shape, task content, model identity, elapsed time, or exhaustion
+of another grant. An unlimited grant removes only the finite run ledger: the
+signed generic per-event call cap, the signed exact per-class fire bound, and
+declared deadline/stop authority survive unchanged. Under a finite grant an
+unbounded recurrence is refused with exact resource evidence and creates no
+trigger.
 
 One allowance is the bounded transport envelope for a single semantic turn:
 at most one attempted call per eligible signed-pool body. Tool exchanges remain
@@ -592,10 +618,77 @@ acceptance authority rather than interpreted. Receipts recorded before the
 contract existed keep their recorded authority unchanged; the contract does
 not rewrite, reclassify, or invalidate an already-verified receipt.
 
+A currently registered persona identity key is a valid declared verifier key.
+Verifier authority binds to exact signing-key facts — the declared key
+identity or registration predicate, scope, current registration, and signature
+verification — never to a species of key holder. Where principal intent
+requires independent review, that independence is likewise established by
+exact reviewer identity and the declared acceptance mechanism
+([`04_PROJECT.md §5`](04_PROJECT.md#5-coordination-and-review)), not by which
+kind of actor holds the key.
+
+A persona-authored verifier receipt enters lineage only through the signed
+`author_verifier_receipt` action
+([`09_PROTOCOLS.md §2.5`](09_PROTOCOLS.md#25-persona-authored-verifier-receipts))
+inside an ordinary funded turn. The action mechanically binds the exact
+environment, task, run, scope, intake declaration, and adjudicated publication
+it speaks about; it is refused outside an authenticated turn; and it creates
+no continuation, wake, or successor. No other ingress exists: prose in a note,
+artifact, or message never becomes a verifier receipt.
+
+A predicate-mode declaration names a registration predicate instead of one
+key: a `verifier_descriptor` whose exact member set is `{kind, scope}` with
+`kind` exactly `"registered-persona-identity/1"`. The declaration schema is
+unchanged; the descriptor's `kind` member is itself the era-visible marker,
+and a reader that predates it refuses the whole declaration rather than
+misreading it. Under that declaration a receipt extends into acceptance only
+when three mechanical invariants all hold: (i) the receipt signature verifies
+over the hardened preimage against a currently registered persona identity
+key; (ii) the signing key has zero authorship edges to the delivered bytes —
+an exact size/sha256 identity join over the signed authorship claims: the
+run family's `ENV_WORKSPACE_PUBLISHED` records and `ARTIFACT_DECLARED`
+records return no intersection with the adjudicated delivered identities for
+that signer. Turn-effect byte deltas are deliberately not authorship edges:
+byte identity cannot distinguish independent re-derivation of the same bytes
+from authorship, and an executed counter-check that captured the delivered
+bytes must not disable the very receipt it evidences; and (iii) the signer
+holds executed counter-evidence — the host-sealed executed-effect digests of
+the signer's own authenticated turns intersect the adjudicated publication's
+digest set. Each invariant is a signature, hash, or exact join over
+already-signed records; none reads file content, verdict prose, tool
+identity, or task text. A receipt failing any invariant is recorded as a
+fact and carries no acceptance authority; unknown or ambiguous authorship
+fails closed.
+
+Invariant (ii) is the self-acceptance exclusion: a key with an authorship edge
+into the delivered bytes cannot extend those bytes into acceptance, whatever
+its terminal result says. The refusal is a recorded fact about the receipt,
+never a substrate appraisal of the work.
+
+Predicate-mode verdicts rest on the hardened preimage contract. A recorded
+receipt carries two era members beside `terminal_verdict_contract`
+`"closed-boolean/1"` above: `receipt_authority_contract`
+`"persona-disjoint/1"` — receipts recorded under it submit every
+persona-identity-key signer to the invariants — and `signature_scheme`,
+`"domain-separated-bound-preimage/1"` for a signature over the hardened
+preimage versus `"open-canonical-preimage/1"` for the legacy open form,
+which retains acceptance authority only for non-persona keys of the
+exact-key declaration. The signed preimage
+binds the exact run, byte-state, and declaration hashes it adjudicates;
+[`09_PROTOCOLS.md §2.5`](09_PROTOCOLS.md#25-persona-authored-verifier-receipts)
+defines the exact member set. A signature over fewer members carries no
+verdict under the predicate declaration. Receipts recorded before this
+contract keep their recorded authority unchanged, under the same era rule as
+the terminal-verdict contract.
+
 Principal intent may ask for open-ended improvement. Personas decide what
 comparisons, measurements, exploration, review, or further work are useful and
 may author causal wakes for them. The host does not implement a universal
-refinement loop, epsilon, convergence test, or round counter.
+refinement loop, epsilon, convergence test, or round counter. Acceptance of
+one exact byte state does not terminate that authority: personas may keep or
+newly arm bounded causal wakes from the remaining prepaid allowance under §7,
+and a later acceptance is a new exact authority fact over the then-current
+bytes.
 
 ## 10. Quiescence and terminal authority
 
@@ -665,7 +758,9 @@ Human-facing task state distinguishes verified facts from authored claims:
 - exact verifier verdict facts — each recorded terminal verdict with its
   verifier identity and closed `accepted` boolean, where a rejection remains a
   fact about the verifier's exact signed result, never a substrate appraisal
-  of the work, and zero recorded verdicts is stated as zero; and
+  of the work, zero recorded verdicts is stated as zero, and a predicate-mode
+  verdict additionally records which of its mechanical invariants held, as
+  exact booleans; and
 - explicit acceptance, pause, cancellation, or quiescence facts.
 
 It never relabels quiescence as done, a singleton note as team consensus, an
@@ -697,3 +792,19 @@ bytes may remain opaque lineage but carry no current task authority.
    admission, never task semantics or provider order.
 10. Public task state distinguishes historical persona dispositions from those
     bound to the current exact mechanical frontier.
+
+## 15. Risks & known limitations
+
+| ID | Risk | Severity | Likelihood | Mitigation | Target release |
+|----|------|----------|------------|------------|----------------|
+| TASKS-R1 | Predicate-mode verifier collusion / rubber-stamping: a distinct persona key can execute minimal counter-evidence and sign `accepted: true`. The §9 invariants price acceptance in executed evidence and forbid self-acceptance; they cannot make verification rigorous. | High | Medium | Behavioral by design: principal charter text carries withhold/deficiency norms; population and economic dynamics ([`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md), [`17_ECONOMY.md`](17_ECONOMY.md)) carry selection pressure; the §12 projection records which invariants held so a principal can audit cheap verdicts. | Open (behavioral) |
+
+## 16. Open questions
+
+- **OQ-TASKS-1** — Should the executed counter-evidence join (§9 invariant
+  (iii)) require a minimum causal depth — a joined execution receipt
+  post-dating the adjudicated byte state — or does the preimage's
+  publication-hash binding suffice?
+- **OQ-TASKS-2** — Should a future intake schema require an explicit
+  affirmative unlimited member instead of deriving the unlimited grant from
+  member absence (§7)?

@@ -290,6 +290,11 @@ presence, body publication, acquisition, provisioning, mounting, invocation,
 practice, authored learning, brain evolution, and expertise claims therefore
 remain distinct evidence states.
 
+A verified executable-tool body follows the same public-read authority as any
+other body: on a node without the operator-declared public read scope its
+discovery record is metadata-only, and remote acquisition of the body fails
+closed rather than substituting an unverified source.
+
 The capability plane is source-plural. Exact local execution inventory,
 persona-published peer bodies, signed registry candidates, and a persona-authored
 portable provisioning recipe are independent routes through the same ordinary
@@ -542,3 +547,13 @@ not append a second legacy tactic, lesson, memory, or K-line authority lane.
 9. Tactic evolution is persona-owned and declinable, keyed to that persona's
    own exact recorded outcomes and retained by non-dominance over exact
    mechanical dimensions rather than any host score or ranking.
+
+## 14. Risks & known limitations
+
+| ID | Risk | Severity | Likelihood | Mitigation | Target release |
+|----|------|----------|------------|------------|----------------|
+| KNOW-R1 | The cross-node tool commons is inert without the operator-declared public read scope: a single-node deployment loses no capability (local inventory, provisioning, and invocation are unaffected), but a federation without that scope silently loses tool exchange. | Medium | Medium | The operator deployment recipe states the public-access choice explicitly, so absent tool exchange is a visible configuration fact rather than a silent default. | Open |
+
+## 15. Open questions
+
+None currently tracked. New entries take IDs of the form `OQ-KNOW-<n>`.

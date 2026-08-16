@@ -235,3 +235,12 @@ intent.
 
 An HTTP 200, model claim, score, mocked scenario, test fixture, stale run, or
 file named after an outcome cannot establish that the live system worked.
+
+## 12. Risks & known limitations
+
+Root register for cross-document risks (those touching two or more documents).
+The owning document carries the authoritative row.
+
+| ID | Risk | Severity | Likelihood | Mitigation | Target release |
+|----|------|----------|------------|------------|----------------|
+| TASKS-R1 | Predicate-mode verifier collusion / rubber-stamping: a distinct persona key can execute minimal counter-evidence and sign `accepted: true`; the mechanical invariants price acceptance in executed evidence and forbid self-acceptance but cannot make verification rigorous. Owned by [`03_TASKS.md §15`](03_TASKS.md#15-risks--known-limitations); touches [`09_PROTOCOLS.md`](09_PROTOCOLS.md), [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md), [`17_ECONOMY.md`](17_ECONOMY.md). | High | Medium | Behavioral by design: principal charter text carries withhold/deficiency norms; population and economic dynamics carry selection pressure; the task projection records which invariants held so cheap verdicts are auditable. | Open (behavioral) |
