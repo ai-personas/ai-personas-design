@@ -665,6 +665,19 @@ into the delivered bytes cannot extend those bytes into acceptance, whatever
 its terminal result says. The refusal is a recorded fact about the receipt,
 never a substrate appraisal of the work.
 
+The invariants carry a perceivability duty: an invariant a candidate cannot
+mechanically see is an invariant it can only guess at. Under a predicate-mode
+declaration the acceptance projection therefore always carries the
+adjudicated-delivery page — the exact byte identities (opaque path, size,
+sha256) of the latest admitted publication, its publication event identity,
+and its publisher — in the acceptance facts, the dedicated prompt lane, and
+every `author_verifier_receipt` reply, before any receipt exists. The page is
+pure carriage of already-verified identity rows; the first live predicate run
+demonstrated why it is load-bearing: three disjoint signers re-derived the
+package deterministically yet authored seventeen non-extending receipts,
+because the exact digest set their sealed captures had to intersect was
+recorded but nowhere perceivable.
+
 Predicate-mode verdicts rest on the hardened preimage contract. A recorded
 receipt carries two era members beside `terminal_verdict_contract`
 `"closed-boolean/1"` above: `receipt_authority_contract`

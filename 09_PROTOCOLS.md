@@ -514,6 +514,14 @@ an unresolvable adjudicated-publication reference are each refused with an
 exact stable reason code; every ambiguity fails closed. Success and refusal
 alike create no continuation, wake, or successor.
 
+The reply reports the recorded receipt's exact acceptance posture — whether
+it qualified, the stable refusal code when it did not, and whether acceptance
+now extends — and always carries the adjudicated-delivery page (the exact
+byte identities of the latest admitted publication, per
+[`03_TASKS.md §9`](03_TASKS.md#9-objective-acceptance)): a refusal is only
+repairable in-loop when the same reply that names the refusal also names the
+exact bytes a qualifying receipt must have executed against.
+
 A settled invocation is recorded as event kind
 `PERSONA_VERIFIER_RECEIPT_AUTHORED` under
 `personaos-persona-verifier-receipt-record/1`. The record's
