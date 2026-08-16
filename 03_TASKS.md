@@ -678,6 +678,18 @@ package deterministically yet authored seventeen non-extending receipts,
 because the exact digest set their sealed captures had to intersect was
 recorded but nowhere perceivable.
 
+The same duty covers the improvement ratchet. "Not acceptance-worthy if it
+only matches evidence classes already accepted" is a counterparty judgement
+the substrate never scores — but its comparison set is a recorded fact, so
+the projection carries the accepted-evidence baseline: for every acceptance
+so far, the exact delivered byte identities its signer held sealed executed
+evidence of. A candidate verifier judging a successor delivery can therefore
+compare mechanically whether the new delivery and its own counter-evidence
+include any identity absent from every prior acceptance's evidenced set,
+instead of guessing what an earlier round already proved. The baseline is
+empty until the first acceptance exists; the substrate still records any
+verdict either way.
+
 Predicate-mode verdicts rest on the hardened preimage contract. A recorded
 receipt carries two era members beside `terminal_verdict_contract`
 `"closed-boolean/1"` above: `receipt_authority_contract`
