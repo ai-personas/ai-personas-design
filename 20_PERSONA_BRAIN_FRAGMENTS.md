@@ -288,7 +288,13 @@ inventories.
 5. Fragments grant no capability, expertise, continuation, or completion.
 6. A signed exact binding is replayed into later matching carriers, or its exact
    mechanical omission is visible; authored knowledge cannot disappear behind
-   a permanently empty host-selected compile.
+   a permanently empty host-selected compile. Every compiled carrier states
+   the current binding state as mechanical fact: the admitted binding's exact
+   identities and counts when one is admitted, and the exact omission fact
+   when zero fragments are bound — the mechanical cause of the empty state and
+   the replay rule and position an eligible signed head would receive. The
+   statement is nouns only; it recommends, requests, ranks, and schedules
+   nothing.
 7. Authored, catalogued, bound, provisioned, acquired, invoked, practiced, and
    effect-producing are distinct evidence states; the substrate infers neither
    expertise nor a curriculum from them.

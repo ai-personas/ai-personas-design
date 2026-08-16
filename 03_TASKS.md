@@ -36,12 +36,20 @@ optional members: `acceptance_condition` (opaque canonical JSON chosen by the
 principal, bounded in bytes, never interpreted by the substrate),
 `verifier_descriptor` (exactly `verifier_key_id` and `scope`, both exact
 strings), `verifier_receipt_constitutes_acceptance` (exact boolean, valid only
-with a supplied descriptor, absent means false), and `deadline_epoch_seconds`
-(absolute integer epoch seconds). Intake records this as one declaration with
+with a supplied descriptor, absent means false), `deadline_epoch_seconds`
+(absolute integer epoch seconds), `unaccepted_rewake_count` and
+`unaccepted_rewake_interval_s` (both exact positive integers, valid only when
+supplied together), and `require_authenticated_effect_provenance` (exact
+boolean, absent means false). Intake records this as one declaration with
 an explicit per-member supplied/omitted marker and a content hash for each
 supplied member; the declaration travels unchanged inside the task-resource
 fan-out authority. Recording it validates shape and bounds only — it schedules
-nothing and infers nothing.
+nothing and infers nothing. A declared re-wake bound is no exception: intake
+still schedules nothing. The bound becomes executable only through §7's
+prepaid finite-recurrence path, with every declared fire independently prepaid
+from the exact signed run ledger at arm time; each armed fire is held while
+the run it re-wakes has not produced its terminal result, and the whole bound
+is cancelled by exact authenticated acceptance.
 
 A task amendment or continuation preserves the complete verified principal-
 intent ancestry in causal order, including the original signed intent bytes and
@@ -406,6 +414,25 @@ Every authentic successor is retained independently. Several may coexist. The
 runtime does not choose one as a representative next stage or treat plural
 successors as conflict.
 
+Two stimulus classes are protocol-defined instances of the final bullet, not
+new implicit successors. The sealed-turn-failure replay carrier re-delivers
+the exact reference to a prior sealed turn-failure receipt to the persona that
+authored the failed turn. The tool-mount correlation carrier delivers,
+together, the exact reference to a sealed capability-mount receipt and the
+exact reference to a prior sealed turn-failure receipt recorded under the same
+environment and task. Each is executable only as a descriptor-declared event
+whose authority has actually been armed: one-shot, prepaid from the exact
+signed run grant at arm time under the same ledger rule as any finite wake,
+bounded by a signed exact per-class fire cap and a mechanically increasing
+minimum re-arm interval, held un-fired while the run it is bound to remains
+live, and cancelled by exact authenticated acceptance. The carrier payload
+contains exact record references only — never repaired arguments, a retry
+instruction, a diagnosis, or new prose. Delivery gives the persona one
+ordinary wake with its complete authorized action catalogue; whether anything
+is retried, revised, or ignored remains entirely the persona's decision.
+Sealing a failure receipt or mounting a capability still creates no
+continuation by itself; only the armed descriptor does.
+
 A finite persona-authored immediate or scheduled wake is executable only when
 its arm transition atomically transfers a complete bounded turn allowance from
 the exact signed causal run ledger. The currently delivered event-local
@@ -523,6 +550,17 @@ The full baseline remains available to enforcement and durable audit rather
 than competing with principal intent, population, capabilities and current
 progress in the prompt.
 
+When the principal supplies `require_authenticated_effect_provenance` as true,
+the mechanical condition additionally requires that each satisfying delta
+record join to a signed execution receipt through that receipt's
+`captured_output_hashes`, sealed under host authority: the exact published
+path, content hash, and byte length must equal a captured output entry in an
+authenticated action receipt of the same run. Bytes whose hashes join no such
+receipt do not satisfy the floor, whatever their authored provenance prose.
+The join compares only exact path, hash, and length equality; it reads no file
+content, filename meaning, tool identity, or task text. When the member is
+absent or false, the ordinary published byte delta suffices unchanged.
+
 A resource-resume carrier and its private continuation state preserve that
 complete verified baseline preimage. A bounded task-entry or UI projection may
 summarize or page it, but that presentation can never be copied back as resume
@@ -544,6 +582,15 @@ The substrate may verify:
 It does not infer substantive sufficiency from work notes, gap-like content,
 member count, roles, file count, filenames, a successful tool call, stable
 bytes, model confidence, a score, or prose saying “done.”
+
+A verifier receipt extends into objective acceptance only under the named
+`terminal_verdict_contract`: its terminal result carries the closed boolean
+member `accepted`. Exactly true extends into acceptance under the declared
+verifier authority; exactly false records a rejection fact; a terminal result
+without the exact boolean member carries no verdict and is refused as
+acceptance authority rather than interpreted. Receipts recorded before the
+contract existed keep their recorded authority unchanged; the contract does
+not rewrite, reclassify, or invalidate an already-verified receipt.
 
 Principal intent may ask for open-ended improvement. Personas decide what
 comparisons, measurements, exploration, review, or further work are useful and
@@ -612,9 +659,13 @@ Human-facing task state distinguishes verified facts from authored claims:
 - current artifacts, formats, provenance, conflicts, and render availability;
 - exact causal events and pending/settled carriers;
 - persona-authored note appends labelled by author, append time, exact observed
-  situation, and factual observation-hash binding; and
+  situation, and factual observation-hash binding;
 - each persona's exact causal disposition, terminal-frontier binding or
-  re-authorship fact, and the unranked aggregate disposition frontier; and
+  re-authorship fact, and the unranked aggregate disposition frontier;
+- exact verifier verdict facts — each recorded terminal verdict with its
+  verifier identity and closed `accepted` boolean, where a rejection remains a
+  fact about the verifier's exact signed result, never a substrate appraisal
+  of the work, and zero recorded verdicts is stated as zero; and
 - explicit acceptance, pause, cancellation, or quiescence facts.
 
 It never relabels quiescence as done, a singleton note as team consensus, an

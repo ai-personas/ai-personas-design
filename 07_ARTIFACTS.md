@@ -205,6 +205,25 @@ consumers use their own authorized access.
 Cache and replication cannot extend expiry, visibility, or authority. A stale
 locator or mismatch fails closed and remains visible as a technical failure.
 
+### 9.1 Export-summary accounting
+
+An export summary is a mechanical accounting record, not a quality claim. It
+must account for exactly the signed expected file count: every file the signed
+export authority declares is either verified present with matching exact
+content hash and byte length or named in exact rejection evidence, and those
+two totals sum to the signed count. The accounting assigns no meaning to paths
+or bytes — it never classifies a file by name, extension, MIME, task text,
+tool provenance, or content. A summary that cannot account for the signed
+count fails closed as an unverified export; it is never rounded, partially
+accepted, or silently repaired.
+
+Same-directory atomic-write staging files are outside the accounted set. Those
+hidden rename sources are neither authored state nor artifacts and may
+disappear at any instant; their creation or promotion cannot fail an
+incremental export or leak incomplete bytes into a signed public generation.
+Final authoritative paths remain subject to the ordinary complete-generation
+verification.
+
 ## 10. Plural domain references
 
 Artifacts may cite zero or more exact signed `domain_refs`. The array is
@@ -254,3 +273,6 @@ authority.
 11. Current projections rejoin declarations to exact current bytes, expose all
     bounded authority to personas, and represent conflicting valid claims as
     ambiguity without MIME inference or automatic alternative selection.
+12. An export summary accounts for exactly the signed expected file count,
+    assigns no meaning to paths or bytes, and fails closed when it cannot;
+    transient atomic-write staging files never fail an incremental export.

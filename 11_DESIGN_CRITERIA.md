@@ -92,7 +92,10 @@ Snapshot exporters exclude same-directory atomic-write staging files. Those
 hidden rename sources are neither authored state nor artifacts and may disappear
 at any instant; their creation or promotion cannot fail an incremental export or
 leak incomplete bytes into a signed public generation. Final authoritative
-paths remain subject to the ordinary complete-generation verification.
+paths remain subject to the ordinary complete-generation verification. An
+export summary that cannot account for exactly the signed expected file count
+fails closed as an unverified export; the accounting assigns no meaning to
+paths or bytes.
 
 An active persona whose SOUL, identity key, and lifecycle chain still verify
 remains in every complete public roster generation. A concurrently unavailable
@@ -795,6 +798,16 @@ it. An asynchronous result creates a later delivery only through its exact
 descriptor-declared and registered event. Effect-free transient transport may
 retry the same delivery under bounded policy; an effectful outcome is never
 replayed merely to obtain improved prose.
+
+The sealed-turn-failure replay carrier and the tool-mount correlation carrier
+obey the same economy. Each is descriptor-declared, prepaid one-shot from the
+exact signed run grant at arm time, bounded by a signed exact fire cap and a
+mechanically increasing re-arm interval, held un-fired while its bound run
+remains live, and cancelled by exact authenticated acceptance. Their payloads
+are exact record references only. Delivery purchases one ordinary persona
+decision with the complete action catalogue; the host repairs no arguments,
+diagnoses nothing, and retries nothing on the persona's behalf. Sealing a
+failure receipt or mounting a capability creates no call by itself.
 
 Before each retry enqueue, the runtime resolves the exact run's durable ending
 authority. A verified final-live-artifact fact, signed terminal intervention,

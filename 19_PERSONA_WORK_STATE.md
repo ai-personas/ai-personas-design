@@ -185,6 +185,19 @@ resource event, authenticated peer message, armed future receipt,
 persona-authored wake, or another protocol-defined stimulus. Text such as
 “continue,” “blocked,” “ready,” or “done” creates no edge.
 
+The protocol-defined stimuli include the sealed-turn-failure replay carrier
+and the tool-mount correlation carrier defined in
+[`03_TASKS.md §7`](03_TASKS.md#7-causal-continuation). Each is
+descriptor-declared, prepaid one-shot from the exact signed run grant at arm
+time, bounded by a signed exact fire cap and a mechanically increasing re-arm
+interval, held un-fired while its bound run remains live, cancelled by exact
+authenticated acceptance, and carries exact record references only. Neither
+carrier reads a work note or is created by one: a note that describes a
+failure, a blocker, or a newly mounted tool arms nothing, and an unbound
+terminal disposition under §3.1 likewise arms neither carrier and grants no
+wake. Delivery leaves every choice — including doing nothing — with the
+persona.
+
 The work-state action's separate signed causal disposition is action authority,
 not meaning inferred from `work_note`. Both variants preserve one bounded exact
 persona-authored rationale so the choice remains intelligible to humans, peers,

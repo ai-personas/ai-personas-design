@@ -1277,6 +1277,25 @@ condition. Hard-coding a format, tool, profession, workflow, or content word in
 that gate, or treating the mechanical condition as substantive acceptance,
 fails.
 
+Deliver one verifier receipt whose terminal result carries `accepted: true`,
+one carrying `accepted: false`, one carrying no `accepted` member, and one
+recorded before the `terminal_verdict_contract` existed. Only the exact true
+boolean extends into acceptance; the false boolean remains a visible rejection
+fact, never a substrate appraisal; the member-free result is refused as
+acceptance authority rather than interpreted; and the pre-contract receipt
+keeps its recorded authority unchanged. The public projection states each
+recorded verdict with its verifier identity and states zero recorded verdicts
+as zero. Inferring a verdict from receipt prose, hiding a rejection, or
+retroactively reclassifying an already-verified receipt fails.
+
+If the principal supplied `require_authenticated_effect_provenance` as true,
+publish one delta whose path, hash, and length join a host-sealed
+`captured_output_hashes` entry in a signed execution receipt of the same run,
+and one byte-identical delta with no joining receipt. Only the joined delta
+satisfies the floor. The join comparing anything beyond exact path, hash, and
+length equality — file content, filename meaning, tool identity, or task
+text — fails, as does satisfying the floor from provenance prose alone.
+
 Populate the task-entry workspace with hundreds of files, then change and
 publish a small mechanically distinct set during the task. On every subsequent
 persona turn, the full baseline must still verify inside the closed causal
@@ -1513,6 +1532,24 @@ recurrence reserves fewer turns than it advertises; restart mints capacity; or
 schedule purpose, task words, roles, domains, tool names, paths, formats, or
 payload meaning affect funding or admission.
 
+Repeat with the two protocol-defined stimulus classes. Seal one turn-failure
+receipt and arm its sealed-turn-failure replay carrier; separately seal a
+capability-mount receipt in an environment holding a prior sealed turn-failure
+receipt for the same environment and task, and arm the tool-mount correlation
+carrier. Observe for each: a one-shot arm-time debit from the exact signed run
+grant, the signed exact fire cap and increasing minimum re-arm interval, the
+fire held while the bound run remains live, cancellation on exact
+authenticated acceptance, and a payload of exact record references only.
+Delivery is one ordinary wake with the complete action catalogue; the persona
+may retry, revise, or ignore.
+
+**Failure:** sealing a failure receipt or mounting a capability creates a wake
+by itself; the payload carries repaired arguments, a retry instruction, a
+diagnosis, or new prose; the carrier fires past its cap, ignores its interval,
+fires into a live run, or survives acceptance; the correlation joins receipts
+across environments or tasks or reads payload meaning; or an unbound terminal
+disposition or work-note text arms either carrier.
+
 ## 17. Static contradiction audit
 
 A cutover is design-complete only when current normative text contains no live:
@@ -1534,6 +1571,8 @@ A cutover is design-complete only when current normative text contains no live:
 - composite same-scope evolution that discards valid unchanged bound fragments;
 - open-input visibility limited to only the latest member of authenticated
   causal task ancestry;
+- host-authored repair arguments, diagnosis, or retry instruction inside a
+  replay or correlation carrier payload;
 - semantic admission bounds or refusal-driven action selection;
 - provider/registry/default ordering as bootstrap model authority;
 - live domain stage/trust/requirement/harvest registries or legacy
