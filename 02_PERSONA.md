@@ -96,15 +96,16 @@ simply shown. Absence blocks nothing: a persona that has recorded no affect, or
 carries neither record, is complete, and work, membership, discovery, and
 acceptance proceed unchanged.
 
-Both-simply-shown covers birth identity too: a persona whose characteristics
-were causally materialized at birth may still adopt a mutable sidecar
-supplement. The frozen birth record is never replaced or shadowed — the two are
-separate slots with separate authority labels, and every identity projection
-that carries one carries the other when both exist. Interiority also rides the
-persona's own identity carrier every turn: the genesis disposition numbers and
-the latest self-recorded affect appear beside the SOUL as canonical data, so
-each turn presents the actor with who it is and how it last recorded itself to
-be, without a value ever being rendered as prose or read by any mechanism.
+Birth-materialized characteristics remain frozen: exactly one characteristics
+slot exists today, so a sidecar revision over a birth-authored profile would
+destroy the frozen bytes rather than sit beside them, and the substrate
+refuses it. A true beside-the-birth supplement — a genuinely separate slot,
+both records carried with their own authority labels — is a named open
+extension, not current behavior. Interiority does ride the persona's own
+identity carrier every turn: the genesis disposition numbers and the latest
+self-recorded affect appear beside the SOUL as canonical data, so each turn
+presents the actor with who it is and how it last recorded itself to be,
+without a value ever being rendered as prose or read by any mechanism.
 
 ## 2b. Structural turn self-products
 
