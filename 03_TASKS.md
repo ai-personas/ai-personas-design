@@ -690,6 +690,13 @@ instead of guessing what an earlier round already proved. The baseline is
 empty until the first acceptance exists; the substrate still records any
 verdict either way.
 
+Repetition is likewise a recorded fact: each qualification row and each
+receipt-action reply carries how many receipts that signer has accumulated
+under the same refusal code. The substrate never interprets the repetition
+— distilling a repeated failure into a durable lesson is persona work,
+carried by the persona-owned brain-fragment surface — it only refuses to
+let the repetition stay invisible.
+
 Predicate-mode verdicts rest on the hardened preimage contract. A recorded
 receipt carries two era members beside `terminal_verdict_contract`
 `"closed-boolean/1"` above: `receipt_authority_contract`
