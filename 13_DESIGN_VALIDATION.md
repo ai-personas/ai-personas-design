@@ -1550,6 +1550,30 @@ fires into a live run, or survives acceptance; the correlation joins receipts
 across environments or tasks or reads payload meaning; or an unbound terminal
 disposition or work-note text arms either carrier.
 
+## 16.4 Structural self-products and carried interiority
+
+**Input:** in a live environment, one persona authors a turn whose output
+includes a bounded `distillation` string and an `affect` mapping; a second
+turn by the same persona in a different environment authors neither; a third
+turn authors an oversize distillation and an out-of-range affect component.
+
+**Trace:** the parser admits the bounded members verbatim and refuses the
+malformed ones into the invalid-optional-fields observation; settlement
+persists exactly one persona-signed fragment per authored distillation
+(deterministic id; a retried settlement duplicates nothing) and one appended
+affect record; a kernel-signed distillation event lands in the task lineage;
+the second turn's compile carries the fragment body into the other
+environment's system prompt and its identity carrier shows the genesis
+disposition numbers and the recorded affect beside the SOUL; a head the
+persona itself re-curated between turns keeps its pruning after the next
+settlement rebind, and the rebind's evolution record carries
+`automatic_selection: true`.
+
+**Pass:** persistence and carriage are byte-exact and persona-signed; absence
+persists nothing and blocks nothing; refusal is structural, never semantic; no
+substrate mechanism reads any carried value; the turn settles even when
+persistence fails.
+
 ## 17. Static contradiction audit
 
 A cutover is design-complete only when current normative text contains no live:

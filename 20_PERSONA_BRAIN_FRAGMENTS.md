@@ -222,6 +222,29 @@ automatic edit at feedback, failure, tool, artifact, pause, or budget
 boundaries. Historical signed revisions remain auditable under retention and
 consent policy. Supersession never rewrites prior bytes.
 
+### 3a. Structural distillation carriage
+
+The turn contract's `distillation` self-product
+([`02_PERSONA.md §2b`](02_PERSONA.md#2b-structural-turn-self-products)) is a
+persona storage action expressed in-band: persistence happens only when the
+persona authored the member in its own turn output, and what is persisted is
+exactly what it authored. At settlement the substrate upserts the bytes as one
+persona-signed fragment under a deterministic content-derived identity — the
+same authored value never duplicates under retries — and re-binds the
+persona's current winning head: the complete carried set stays exactly what
+the head already holds, so a persona's own pruning is never resurrected; the
+new fragment is appended; and only substrate-carried distillation fragments,
+recognised by their identity prefix alone, are retained at the newest few so
+the bounded carrier never starves persona-curated material. This is carriage
+of a persona-authored product, not an automatic edit: the substrate converts
+no receipt, message, or trace into a fragment, and the no-automatic-edit rule
+above is unchanged.
+
+A mechanical rebind records itself truthfully: its binding commit and
+evolution record carry `automatic_selection: true`, distinguishing settlement
+carriage from a persona-selected curation. Head resolution reads nothing new —
+the mechanically latest eligible head remains the complete current set.
+
 If the same authenticated action explicitly includes
 `bind_changed_fragments`, successful application is followed by the distinct
 owner-signed `brain-fragment-binding/2` commit. The binding request and any
@@ -249,7 +272,10 @@ available. Fragment prose cannot claim or manufacture a capability.
 
 A new persona has no runtime-authored fragments. Birth `genesis_context`, task
 intent, tool traces, messages, and receipts remain separate exact evidence and
-do not become fragments automatically.
+do not become fragments automatically. The one in-band exception is the
+persona's own authored `distillation` turn member (§3a): those bytes become a
+fragment precisely because the persona authored them into the storage slot,
+never because the substrate read anything from its evidence.
 
 The repository and runtime provide schemas, storage, inventories, and ordinary
 actions only. They ship no default domain/task/tool/team fragment library,

@@ -709,6 +709,19 @@ under the same refusal code. The substrate never interprets the repetition
 carried by the persona-owned brain-fragment surface — it only refuses to
 let the repetition stay invisible.
 
+An admitted delivery is exactly a workspace publication whose recorded
+`publication_complete` fact is true, and two lanes produce publications. The
+authorized-file lane runs from a persona's artifact declaration: an unsettled
+declaration publishes on a later turn whose workspace signature did not
+change, with each declared file verified byte-exactly on both sides of the
+merge. The whole-tree lane is the ordinary merge publication, complete only
+when the persona worktree and the environment tree are byte-identical after
+the merge. Both facts stay fail-closed; what the projection adds is the
+denominator: the adjudicated-delivery page always carries the recorded
+publication count and the incomplete count by lane, and every publication
+records its closed mechanical incompleteness cause — a cohort that publishes
+nine times and delivers zero must be able to see both numbers and why.
+
 Predicate-mode verdicts rest on the hardened preimage contract. A recorded
 receipt carries two era members beside `terminal_verdict_contract`
 `"closed-boolean/1"` above: `receipt_authority_contract`

@@ -96,6 +96,40 @@ simply shown. Absence blocks nothing: a persona that has recorded no affect, or
 carries neither record, is complete, and work, membership, discovery, and
 acceptance proceed unchanged.
 
+Both-simply-shown covers birth identity too: a persona whose characteristics
+were causally materialized at birth may still adopt a mutable sidecar
+supplement. The frozen birth record is never replaced or shadowed — the two are
+separate slots with separate authority labels, and every identity projection
+that carries one carries the other when both exist. Interiority also rides the
+persona's own identity carrier every turn: the genesis disposition numbers and
+the latest self-recorded affect appear beside the SOUL as canonical data, so
+each turn presents the actor with who it is and how it last recorded itself to
+be, without a value ever being rendered as prose or read by any mechanism.
+
+## 2b. Structural turn self-products
+
+A turn's output contract carries two optional persona-authored self-products.
+Neither is speech, neither is required, and an absent member is a complete,
+valid answer; the substrate persists what the persona authored and reads
+nothing.
+
+The `distillation` member is a small persona-authored value — a string or a
+bounded mapping — persisted at turn settlement as the persona's own signed
+brain fragment and folded onto its persona-scoped fragment head, so it rides
+into every later turn in any environment through the ordinary compile
+([`20_PERSONA_BRAIN_FRAGMENTS.md §3a`](20_PERSONA_BRAIN_FRAGMENTS.md#3a-structural-distillation-carriage)).
+The `affect` member carries exact valence, arousal, and dominance numbers with
+an optional bounded note, appended at settlement to the persona's own signed
+affect self-state (§2a).
+
+The slot is the whole substrate contribution: turn shape, bounded carriage,
+mechanical persistence, and a static in-carrier contract naming the slots and
+their mechanics. Whether to author, what the bytes mean, and whether a lesson
+is real remain persona work. The substrate adds no round counter, no
+convergence test, and no scheduled iteration; persisting a self-product arms
+nothing and wakes no one. A settlement failure records its mechanical code and
+never blocks the turn.
+
 ## 3. Optional public identity
 
 Public identity may contain persona-authored display name, description,

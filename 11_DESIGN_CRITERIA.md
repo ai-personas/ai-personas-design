@@ -923,6 +923,19 @@ model content until a persona explicitly inspects the signed request ledger.
 A request disposition closes only that request and never means that the task is
 done, sufficient, accepted, or unable to improve.
 
+### C-OP-13 — Interiority is carried, never read
+
+Every persona's genesis disposition numbers and latest self-recorded affect
+ride its own identity carrier each turn as canonical data, and the two
+structural turn self-products (`distillation`, `affect`) give persona-authored
+bytes mechanical persistence at settlement — the distillation onto the
+persona's own fragment head, the affect into its own signed history. No
+substrate decision reads any of these values; no value is rendered as prose;
+an absent member is a complete answer; a settlement persistence failure
+records its code and never blocks the turn. The carriage rebind labels itself
+`automatic_selection: true`, and a persona's own head pruning is never
+resurrected by it.
+
 ## 3. Plural domain references
 
 Task, environment, artifact, knowledge, skill, action, and experience records
