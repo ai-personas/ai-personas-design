@@ -486,6 +486,18 @@ run instead receives the signed generic per-event cap. None of these operations
 reads the schedule purpose, task text, domain, role, tool, filename, or payload
 meaning.
 
+Unscheduled same-run coordination is the one deliberate exception: a wake a
+persona addresses to another member inside the same funded run rides the
+requesting turn's remaining slice when that slice can still fund it, and
+otherwise falls through to the run's own root grant, whose ordinary funding
+gate decides. The child claim never enters the shared scope table either
+way. Without the fall-through, the producer→verifier request — the exact
+edge acceptance depends on — dies unfunded whenever the requesting turn has
+already spent its slice, while the run's grant sits unspent; two live
+missions demonstrated precisely that starvation. Prepaid scheduled fires
+and terminal callbacks keep their exact claims and never touch run
+headroom.
+
 An attempted continuation action that is mechanically refused returns an exact
 stable reason code in its ordinary action evidence. The refusal proves only
 that the attempted effect was not admitted; it does not create a successor,
