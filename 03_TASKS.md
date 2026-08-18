@@ -721,6 +721,20 @@ denominator: the adjudicated-delivery page always carries the recorded
 publication count and the incomplete count by lane, and every publication
 records its closed mechanical incompleteness cause — a cohort that publishes
 nine times and delivers zero must be able to see both numbers and why.
+The WHERE is stated with the same posture: an incomplete whole-tree
+publication carries a bounded `signature_mismatch_paths` sample (path plus
+closed side-state — `differs`, `persona_only`, `environment_only` — with an
+overflow count), and the adjudicated page carries the latest such sample, so
+a producer whose thousand-file merge broke byte-identity sees exactly which
+paths broke it rather than a flat cause string. The page also carries a
+bounded `recent_admitted_publications` summary — event id, identity count,
+top-level roots, publisher — because the adjudication target is the
+verifier's own free choice among admitted publications, and choosing well
+requires seeing what each one actually carries: a program environment that
+admits only legacy subtrees and single evidence files while the current
+package rides the failing whole-tree lane was, live, a structurally
+unclosable acceptance loop that no page stated. Both members are
+observations; the substrate still selects nothing.
 
 The same zero-explicit posture governs the acceptance loop's own denominators.
 The acceptance facts carry, beside the adjudicated rows: a **per-member
