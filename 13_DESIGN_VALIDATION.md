@@ -1596,6 +1596,51 @@ surface; a reader that hard-refuses on a doc member recoverable from lineage;
 a snapshot writer that drops empty members silently; an operating-path
 `except: pass` with no trace; `count: 0` emitted from a failed read.
 
+## 16.6 Operating-loop audit (the full checklist, applied per change AND per session)
+
+The 2026-08 walk-away arc showed that auditing only the paths a live incident
+touched finds one masked blocker per round. Any change to the operating loop —
+and any session resuming work on it — audits ALL of the following, not just
+the seam the current symptom lives on:
+
+**The four seams (every mechanism crossing one is checked on both sides):**
+1. *judgment↔page* — every refusal's inputs are on the page beside it;
+2. *lineage↔snapshot* — every transport-doc member a reader requires is
+   either recovered from signed lineage or refused loudly; writers keep
+   required-but-empty members and stamp completeness;
+3. *interface↔execution* — mutations are queue-shaped with durable intents;
+   no interface thread runs mission work; housekeeping never starves under a
+   held lock;
+4. *mechanism↔trace* — every operating-path swallow leaves a counter, state
+   member, or durable event (`record_degraded_read` is the floor, not the
+   ceiling); faults carry `fault_class` so substrate failures are never
+   minted as persona refusals.
+
+**Fail-open polarity (authority must not widen on failure):**
+- an unreadable admission input REFUSES (budget, membership, binding checks);
+- a failed cancellation PROBE never fabricates a cancellation (work continues
+  under its own deadline, counted);
+- an unparseable deadline or stop authority is EXPIRED (counted);
+- an unreadable response ledger never retires signed standing authority;
+- release paths (leases, claims, holds) sit in `finally`, with a bounded
+  reaper converting any residual leak from permanent to bounded.
+
+**The growth class (worked-small-dies-big):**
+- no hot path re-verifies or re-copies a full chain when a verified prefix or
+  a kind-index bounds the work to new events;
+- every projection consumed at a clock (heartbeat, telemetry, discovery
+  rebuild, HTTP GET) is memoized on the generation it derives from;
+- every process-lifetime map is released at its object's terminal boundary or
+  capped, and the cap is a stated fact;
+- any deliberate O(N) cost on an operator interface is stated in
+  09_PROTOCOLS §12a.
+
+**The ledger rule:** work items discovered but not fixed in a round are
+written to `docs/OPERATING_AUDIT_LEDGER.md` in the code repo — class, status,
+trace mechanism — in the same change. A round that leaves an unledgered known
+gap is incomplete; a later round that finds a gap that was known and
+unledgered treats that as a process failure, not a discovery.
+
 ## 17. Static contradiction audit
 
 A cutover is design-complete only when current normative text contains no live:

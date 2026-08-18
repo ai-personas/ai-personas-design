@@ -1314,6 +1314,22 @@ before responding; per C-OP-14 the cost is a stated contract:
 - `/a2a` skill invocations run synchronously under the caller's signed card
   authority; skill duration is the caller's exposure.
 
+The lineage read path is bounded, not the lineage file: verification of one
+appended suffix is O(new events) (the parent-hash chain makes a verified
+suffix on a verified prefix equivalent to a full pass), kind-filtered reads
+copy only selected records, and hot kernel-internal projections read a
+no-copy view. What remains unbounded is the durable JSONL file itself: there
+is no rotation or compaction, and the dormant snapshot/segmentation layer is
+the designed seam for introducing it. Disk growth is therefore a stated
+operator retention fact — an operator retiring an environment archives its
+lineage file whole; nothing in the substrate truncates one.
+
+One acknowledged scheduling residue: when a TaskRuntime and a persona
+supervisor race for the same persona's turn, the losing TaskRuntime contender
+is recorded and abandoned — its work item is not requeued by the substrate.
+The requeue authority stays with the caller that submitted it; the recorded
+contention fact is the visibility.
+
 ## 13. Schema registry and clean-break versioning
 
 Every live boundary schema has one current registered version. Removed fields or

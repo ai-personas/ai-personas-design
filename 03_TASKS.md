@@ -736,6 +736,21 @@ package rides the failing whole-tree lane was, live, a structurally
 unclosable acceptance loop that no page stated. Both members are
 observations; the substrate still selects nothing.
 
+Each lane's reachability condition is itself byte-honest. Whole-tree
+identity is *byte* identity (05_ENVIRONMENT §4): the instant-stripped
+file/symlink/device rows, directories implied by contents — so a long-lived
+multi-writer environment reaches it whenever its writers' bytes have merged,
+not only in the impossible case of identical materialization instants. The
+authorized-file lane is the incremental mechanism, reachable exactly when
+unsettled declarations exist and the publisher's workspace signature is
+unchanged since capture — and because the signature is the byte form, a
+branch fast-forward or re-materialization no longer counts as change.
+Per-file declarations carry no count ceiling: an N-file package is N
+declarations and one quiet turn. After a publisher's own merge, the
+publisher's worktree fast-forwards under its own turn lease (its lease
+serializes exactly that settlement); only peer worktrees defer to their own
+turns.
+
 The same zero-explicit posture governs the acceptance loop's own denominators.
 The acceptance facts carry, beside the adjudicated rows: a **per-member
 verifier-eligibility observation** — for each registered active member, the

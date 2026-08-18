@@ -80,6 +80,18 @@ carrier's present-moment fact this makes an artifact's age perceivable to the
 recipient; the row itself carries no age arithmetic, freshness label, or
 ordering by recency.
 
+The modification instant is an observation *of* the captured bytes, never a
+byte difference. Workspace **byte identity** — the state signature and the
+per-path publication diff — binds the instant-stripped row form, and covers
+file, symlink, and device rows only: directories are implied by their
+observable contents (an empty directory cannot travel the publication channel,
+and a directory's link count moves with children outside the observable walk).
+Two trees holding identical bytes are identical regardless of when or how each
+was materialized. Rows keep the instant as an observation member. Surfaces the
+publication channel structurally cannot carry (`external-artifacts/requests/`,
+git metadata, conflict preserves, package staging) are excluded from the
+identity walk symmetrically with staging.
+
 Concurrent publications retain authorship. Peer bytes do not become another
 actor's effects. Conflicts preserve all exact alternatives until an authorized
 signed resolution chooses or synthesizes bytes.
@@ -127,6 +139,16 @@ or history; an unnamed role, an empty policy, or a policy entirely outside
 the pool falls back to the principal-signed bootstrap member exactly as
 before. Every selection remains recorded with its strategy on the model-call
 record.
+
+Activating a wider catalogue is a two-lever operator action, both levers
+authenticated and neither implicit: (1) submit or resume a run whose
+`available_model_ids` names the wider pool — a resume may widen the pool
+relative to its predecessor because the resume authority is the same
+principal authority that funded the run; (2) optionally declare the
+role→model preference (deployment configuration) so role-attributed turns
+order inside that pool. A deployment whose runs are submitted single-model
+keeps both levers inert by construction; nothing in the substrate widens a
+pool on its own.
 
 Budget exhaustion pauses exact pending carriers and preserves best-so-far
 state. A later signed resource event resumes the same task through all-member
