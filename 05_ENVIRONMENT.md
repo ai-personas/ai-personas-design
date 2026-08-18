@@ -116,6 +116,18 @@ choice supplies model order for its exact generation; without one, more than
 one mechanically callable body fails closed rather than using environment,
 provider, or registry order.
 
+One deployment-policy exception exists, and it is operator authority, not
+substrate inference: the environment model registry may carry an
+**operator-declared role→model preference** — an ordered model-id list per
+exact role string. It supplies the default ordering ONLY for a turn whose
+attributed role string it names, only inside the signed run-pool ceiling,
+and only until a persona-signed model choice exists, which always supersedes
+it. The registry never derives a role from persona characteristics, content,
+or history; an unnamed role, an empty policy, or a policy entirely outside
+the pool falls back to the principal-signed bootstrap member exactly as
+before. Every selection remains recorded with its strategy on the model-call
+record.
+
 Budget exhaustion pauses exact pending carriers and preserves best-so-far
 state. A later signed resource event resumes the same task through all-member
 fan-out. Status ticks, heartbeats, and headroom alone do not schedule cognition.

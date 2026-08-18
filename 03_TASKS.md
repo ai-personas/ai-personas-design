@@ -722,6 +722,26 @@ publication count and the incomplete count by lane, and every publication
 records its closed mechanical incompleteness cause — a cohort that publishes
 nine times and delivers zero must be able to see both numbers and why.
 
+The same zero-explicit posture governs the acceptance loop's own denominators.
+The acceptance facts carry, beside the adjudicated rows: a **per-member
+verifier-eligibility observation** — for each registered active member, the
+mechanical booleans (identity key registered; authorship edge present or
+absent over the adjudicated publication) with the eligible count, so a cohort
+whose collaboration has saturated authorship edges can see that the eligible
+pool has shrunk to one member, or to none, instead of discovering it one
+refused receipt at a time (the substrate still never assigns a verifier); a
+**principal-wake denominator** — fires funded, consumed, and remaining on the
+declared unaccepted-rewake ladder, with exhaustion and pause stated, so the
+difference between "the principal's funded pressure is still waking us" and
+"we are alone on self-armed wakes" is a visible fact; a **per-delivered-file
+evidence contrast** on the counter-evidence measurement — each delivered
+path/digest row states directly whether the signer holds host-sealed executed
+evidence of those exact bytes; and the **publication-staleness fact** — a
+receipt binds one exact publication, and when that publication is no longer
+the latest admitted one, the measurement names both event ids and the
+non-latest binding outright. Acceptance authority itself is unchanged and
+remains per exact byte-state.
+
 Dependency closure is part of byte-reproducibility. A delivery whose
 regeneration or verification depends on capability state outside the
 delivered bytes — an interpreter, engine, or library the executing host must
