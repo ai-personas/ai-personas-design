@@ -283,6 +283,30 @@ object that satisfies the tool's declared transport envelope; the canonical
 object travels through the same stdin and process-environment argument channels
 used by ordinary invocation, in the authenticated workspace. The substrate
 neither invents an empty call nor derives example values from argument names.
+A provisioning recipe declares either one complete callable tool surface
+(source, source name, interpreter, transport schema, smoke input) or none of
+those five members. The surfaceless form is a **library-only acquisition**:
+the sealed content-addressed generation produced by its setup/build steps is
+itself the acquired capability. No tool mounts and nothing smoke-executes;
+the persona-authored verification commands remain required and run as the
+recorded proof, with the freshly sealed generation's executable and Python
+site directories threaded onto the verification legs' search paths exactly
+as they are for every later execution by any member of the environment.
+Partial surfaces are refused. A library-only recipe whose sealed generation
+contains zero files is refused rather than recorded: an installer that finds
+its requirement already satisfied on the host exits successfully and leaves
+the generation empty, so the empty tree is the mechanical tell that no
+capability bytes were acquired and that any passing verification ran against
+host state instead. A same-author re-acquisition under an existing mounted
+name supersedes the mounted generation, keeping the superseded artifact as
+recorded history; a cross-author claim on a mounted name is refused.
+Provisioning refusals carry per-step failure detail — exact step kind,
+index, return code, and bounded output — so one failing command is
+mechanically distinguishable from a wrong recipe, and the environment's
+verified generations stay perceivable each turn: the acquisition observation
+reports registered artifacts, artifacts without generations, generations
+verified, and generations failing re-verification as closed counts.
+
 A verified opaque state body is retained without automatic
 application. Later cognition receives a small exact acquisition inventory and
 may open any retained body by exact id, JSON pointer, and byte window. Catalogue
@@ -553,6 +577,8 @@ not append a second legacy tactic, lesson, memory, or K-line authority lane.
 | ID | Risk | Severity | Likelihood | Mitigation | Target release |
 |----|------|----------|------------|------------|----------------|
 | KNOW-R1 | The cross-node tool commons is inert without the operator-declared public read scope: a single-node deployment loses no capability (local inventory, provisioning, and invocation are unaffected), but a federation without that scope silently loses tool exchange. | Medium | Medium | The operator deployment recipe states the public-access choice explicitly, so absent tool exchange is a visible configuration fact rather than a silent default. | Open |
+| KNOW-R2 | Dual-interpreter hosts make one command name resolve to different capability sets: a survey against the search-path default and an execution against an absolute path can disagree about whether a library exists, so a persona's evidence is host-honest yet contradictory (observed live: a package present under the default interpreter's user site was missing under the absolute-path sibling, and installing would have been a no-op). | Medium | High on multi-runtime hosts | Provenance rows in the execution-capability inventory carry exact absolute paths; the empty-generation refusal converts host-satisfied installer no-ops into a visible fact; interpreter pinning and library-only sealed generations both remain persona choices the evidence records. | Open (host deployment fact) |
+| KNOW-R3 | Externally-managed host interpreters (marker-file protected) refuse in-place package installs; the substrate has no handling for that refusal class and must not add one — auto-forcing an override would mutate operator-owned host state. | Low here (no marker on the current host); High on OS-managed Python deployments | A provisioning recipe that installs into its own sealed `$PREFIX` generation never touches the host interpreter's site and is immune by construction; the refusal, where it occurs, surfaces verbatim in per-step failure detail. | Open (document, never auto-override) |
 
 ## 15. Open questions
 

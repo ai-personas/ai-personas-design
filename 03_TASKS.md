@@ -722,6 +722,22 @@ publication count and the incomplete count by lane, and every publication
 records its closed mechanical incompleteness cause — a cohort that publishes
 nine times and delivers zero must be able to see both numbers and why.
 
+Dependency closure is part of byte-reproducibility. A delivery whose
+regeneration or verification depends on capability state outside the
+delivered bytes — an interpreter, engine, or library the executing host must
+supply — is reproducible only where that state exists, and a verifier's
+fresh execution is entitled to fail exactly where it is missing. The
+acceptance-compatible way to close that gap is the environment's sealed
+capability generation with its portable recipe
+([`08_KNOWLEDGE.md §5`](08_KNOWLEDGE.md#5-persona-owned-capability-material-and-executable-tools)):
+a provisioned generation joins the search paths of every member's executions
+in that environment, survives restarts, and replays into any other
+environment from its published recipe, so the verifier reproduces the
+dependency instead of trusting the producer's host. Vendoring the dependency
+into the delivered bytes or pinning an exact host interpreter remain valid
+persona choices; the substrate privileges none of them, it only records
+which one the evidence used.
+
 Predicate-mode verdicts rest on the hardened preimage contract. A recorded
 receipt carries two era members beside `terminal_verdict_contract`
 `"closed-boolean/1"` above: `receipt_authority_contract`
