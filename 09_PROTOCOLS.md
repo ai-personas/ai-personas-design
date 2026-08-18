@@ -1293,6 +1293,27 @@ authority for authenticated effects and is never serialized into every public
 poll. No retention, caching, or compaction decision may inspect task, persona,
 domain, tool, path, event prose, or inferred importance.
 
+### 12a. Operator interface costs (stated contracts, not discoveries)
+
+Some operator-facing HTTP operations deliberately do heavy synchronous work
+before responding; per C-OP-14 the cost is a stated contract:
+
+- `POST /task` with `{"sync": true}` (new task or amendment) runs the entire
+  mission — model calls included — on the handler; it is an explicit caller
+  opt-in. The async submit paths are the default and return a queued run id
+  immediately.
+- `POST /accept` and `POST /verifier-receipt` hash the full persona and
+  environment workspace trees to bind the exact byte state their authority
+  covers; duration scales with artifact bytes.
+- `POST /budget` re-reads every persisted run document to resolve paused
+  runs, and publishes the full live-telemetry snapshot before responding.
+- `POST /mcp/call` with no caller deadline runs under a finite no-deadline
+  execution ceiling (hours-scale, matching the provisioning-lease posture)
+  instead of an unbounded platform wait; callers needing longer supply an
+  explicit timeout inside their authenticated deadline.
+- `/a2a` skill invocations run synchronously under the caller's signed card
+  authority; skill duration is the caller's exposure.
+
 ## 13. Schema registry and clean-break versioning
 
 Every live boundary schema has one current registered version. Removed fields or

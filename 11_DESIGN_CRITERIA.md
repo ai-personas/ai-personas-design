@@ -936,6 +936,21 @@ records its code and never blocks the turn. The carriage rebind labels itself
 `automatic_selection: true`, and a persona's own head pruning is never
 resurrected by it.
 
+### C-OP-14 — Observability fails closed
+
+Authority in this substrate fails closed; observability is held to the same
+standard. An absent, failed, skipped, or degraded mechanism is a stated
+mechanical fact on a perceivable surface — a page member, a closed count, a
+durable event, or an availability boolean. Silence is never a valid failure
+mode. Concretely: a judgment's refusal rides beside the exact fact-join it
+was computed from; a transport snapshot never silently omits a member its
+readers require, and its readers treat signed lineage as the recoverable
+authority behind any absent member; unavailability is never rendered as zero
+or empty (an unreadable roster is `available: false`, not `count: 0`); a
+swallowed exception on an operating path leaves at least a closed counter.
+This criterion adds no authority anywhere — it forbids only the silent
+continuation of a degraded mechanism.
+
 ## 3. Plural domain references
 
 Task, environment, artifact, knowledge, skill, action, and experience records

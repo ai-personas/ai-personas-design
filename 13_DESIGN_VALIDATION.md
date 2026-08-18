@@ -1574,6 +1574,28 @@ persists nothing and blocks nothing; refusal is structural, never semantic; no
 substrate mechanism reads any carried value; the turn settles even when
 persistence fails.
 
+## 16.5 Observability fails closed (C-OP-14)
+
+**Input:** any change introducing (a) a new refusal code in a judgment, (b) a
+new transport-snapshot member some reader requires, (c) a new `except` that
+continues past a failure on an operating path, or (d) a new count/emptiness
+member derived from a fallible read.
+
+**Trace:** (a) the surface that carries the refusal also carries the exact
+fact-join members the judgment consumed — verified by reading the refusal row
+beside the page; (b) the snapshot writer's completeness member names the new
+member, and the reader either recovers it from signed lineage (exactly one
+verified match) or refuses — never silently defaults; (c) the swallow leaves
+a closed counter, a state member, or a durable event that a reader can reach
+without process introspection; (d) the member is accompanied by an
+availability boolean whenever the read can fail, so unavailability is never
+rendered as zero.
+
+**Refusal shapes:** a refusal whose cited facts are on no perceivable
+surface; a reader that hard-refuses on a doc member recoverable from lineage;
+a snapshot writer that drops empty members silently; an operating-path
+`except: pass` with no trace; `count: 0` emitted from a failed read.
+
 ## 17. Static contradiction audit
 
 A cutover is design-complete only when current normative text contains no live:
