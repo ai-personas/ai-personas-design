@@ -122,7 +122,7 @@ false.
 
 When a persona authors `no_successor` in an isolated disposition action after
 other effects from the same provider turn have settled, the kernel may append
-`personaos-persona-disposition-frontier-settlement/2`. It binds the exact work
+`personaos-persona-disposition-frontier-settlement/3`. It binds the exact work
 state and content hash, persona/environment/task, authored and settled situation
 hashes, settled situation event, workspace-state signature, source wake, action
 identity, and exact effect counts. It verifies that this isolated action added
@@ -131,11 +131,26 @@ manufacture agreement.
 
 An action whose signed descriptor declares no effect, and which carries no
 acquisition or remote-mount provenance, adds no independent effect and so does
-not by itself prevent the settlement. The record states the exact authenticated
-action count together with the identities of the effect-free actions it
-admitted and their manifest hash, so the count it signs is re-derivable rather
-than asserted. `/1` stated a count it could not justify and is retired under the
-clean break in `09_PROTOCOLS.md` §13.
+not by itself prevent the settlement.
+
+The subject of "no independent effect" is the isolated disposition ACTION, not
+the whole turn. An effect-bearing action that PRECEDED the disposition in the
+same provider turn is recorded, not counted against it: the persona authored the
+disposition knowing what it had just done, and the settlement binds the
+post-effect workspace signature. An effect-bearing action that FOLLOWS the
+disposition, a channel carrying no ordering evidence, an armed future stimulus,
+and a response publication that enqueued a peer wake each prevent the
+settlement.
+
+The record states the exact authenticated action count together with the
+identities of both the effect-free actions and the preceding effect-bearing
+actions it admitted, and their manifest hashes, so the count it signs is
+re-derivable rather than asserted — every authenticated action in the turn is
+the disposition, an admitted effect-free action, or an admitted preceding one.
+`/1` stated a count it could not justify; `/2` asserted the stricter "sole
+effect-bearing action in the turn" and so refused the very scenario
+`13_DESIGN_VALIDATION.md` exercises. Both are retired under the clean break in
+`09_PROTOCOLS.md` §13.
 
 `personaos-work-state-evidence/1` exposes, for every mechanically latest
 signature-verified active-member revision, the complete disposition, direct or
