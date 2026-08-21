@@ -1376,7 +1376,7 @@ Current cutover records include:
 - `personaos-active-peer-work-state-head/1`,
   `personaos-active-peer-work-state-heads/1`, and
   `personaos-active-peer-work-state-prompt-projection/1`;
-- `personaos-persona-disposition-frontier-settlement/1`,
+- `personaos-persona-disposition-frontier-settlement/2`,
   `personaos-persona-disposition-frontier/1`, and
   `personaos-terminal-disposition-frontier/1`;
 - `personaos-open-input-causal-task-authority/1`,
