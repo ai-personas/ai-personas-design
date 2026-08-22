@@ -418,3 +418,153 @@ not conceal active actors because optional presentation fields are absent.
 - [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md)
 - [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)
 - [`19_PERSONA_WORK_STATE.md`](19_PERSONA_WORK_STATE.md)
+
+## ADR-0086 — Conformance of carriage, admission, attribution, and settlement
+
+**Status:** Proposed; awaiting operator review.
+
+**Decision:** Six mechanical clarifications, each an exact-fact rule the
+substrate can enforce without reading task meaning. They correct measured
+divergences between deployed behavior and this design's existing statements;
+none grants the host a semantic choice it does not already lack.
+
+### D1 — The navigation byte bound is signed operator policy
+
+The content-neutral byte bound on the joined navigation lane is deployment
+authority: one exact signed policy value, validated at boot, echoed on the
+status surface, never derived from task meaning (J3). An implementation
+constant is not policy authority. The default a deployment ships must admit
+the lane into the smallest context window among bodies its runs commonly
+declare, so that structural indexing (03_TASKS §1) is the exceptional path —
+not permanently disabled by an oversized bound, and not unconditional through
+an undersized one. The equal-window descriptor preview table inside the
+action-usage component is carried exactly when descriptors are not otherwise
+present in the turn transport: when the complete catalogue rides whole in the
+same carrier, or the native tool transport already names every descriptor,
+the table's rows may be reduced to their identity join without violating
+03_TASKS §1, because the descriptors are demonstrably present elsewhere in
+the same admitted carrier. Duplicate carriage of identical descriptor bytes
+inside one carrier is waste, not fidelity; canonical-byte equality remains
+the only deduplication authority.
+
+### D2 — Context fit is mechanical admission, not preference
+
+A pool body whose admitted context window cannot carry the exact current
+carrier plus its declared output reserve is mechanically infeasible for that
+turn — the same class of fact as a missing transport. Admission excludes it
+exactly as it excludes a body without the required tool transport, with a
+recorded per-body reason. Selection authority is unchanged: among the bodies
+mechanical admission leaves, order still comes only from a matching
+persona-signed choice or the signed bootstrap member, and when admission
+leaves exactly one body, J7's existing rule already authorizes it. Feasibility
+is not a tier, cost, quality, or capability judgment: the predicate reads
+byte counts and the body's advertised window, nothing else. The fit
+computation must count every part of the transported request, including any
+structured-output grammar or tool schema payload, not messages alone.
+A deterministic oversized-request refusal is still not an infrastructure
+outage; replaying an identical carrier into a body already proven infeasible
+for it is forbidden — the replay either re-enters admission (which may now
+leave a different body) or refuses with the exact fact. Retired with this
+decision: any dormant context-compression pipeline; summarizing a carrier to
+fit remains forbidden (C-OP-4 refuses instead).
+
+### D3 — Turns carry exact purpose and role attribution
+
+Every model call carries a purpose token from a closed mechanical vocabulary
+derived only from facts already in scope at call construction — the wake
+carrier kind, the turn phase, and pre-membership state — and a role string
+taken only from exact signed facts. Both are attribution: they select
+nothing, and the router's existing rule that purpose and role never choose a
+body is unchanged. Their purpose is truthful telemetry and the already-
+designed operator role→model preference (05_ENVIRONMENT §5), which is
+unreachable while every turn carries an empty role. A single constant literal
+applied to all turns is not attribution.
+
+### D4 — Post-intake verifier kind
+
+A fourth verifier descriptor member set is added:
+{`kind`, `scope`} with `kind` exactly `"registered-persona-identity-post-intake/1"`.
+Its receipts extend into acceptance only when the three invariants of
+`registered-persona-identity/1` hold and one further exact join holds: the
+signing persona's active membership in the adjudicated environment has
+`joined_at` strictly later than the task's intake event time, both read from
+kernel-signed records. This is a property of exact recorded facts, not of a
+species of key holder. The acceptance projection under this kind must carry
+the intake epoch it joins against, before any receipt exists (perceivability
+duty). Existing kinds and already-recorded receipts are untouched; the new
+`kind` string is its own era marker. This resolves OQ-TASKS-1's sibling case
+by decision rather than reinterpretation.
+
+### D5 — Outcome co-occurrence facts; distilled fragments are evolvable
+
+The principal-outcome fact recorded at acceptance, rejection, and deadline
+gains one member: the exact identifiers of fragments that were bound in the
+kernel-signed compiles of the same task lineage inside the adjudicated causal
+window, as `co_occurring_bound_fragment_ids`. This is a mechanical
+co-occurrence join over two already-signed record families on one lineage —
+the same shape as the execution discrimination join — and it grants no
+credit, score, ranking, wake, or recommendation; interpreting co-occurrence
+remains persona work. The outcome schema revision follows the live-registry
+rule with no compatibility mapper.
+
+The `brainfrag-distill-` namespace exclusion inside brain-evolution
+application is lifted for the owner: a persona may apply a valid signed
+evolution decision to its own distillation-born fragments exactly as to any
+other fragment it owns. The exclusion made the persona-owned evolution loop
+(08_KNOWLEDGE §6) structurally impossible for the only fragments personas
+author in ordinary turns; ownership, signature, and preimage checks already
+guard the edit. Substrate-performed distillation rebinds keep recording
+`automatic_selection: true`; nothing here adds a substrate editor.
+
+### D6 — Prepaid re-wake settlement is idempotent and refunds at retirement
+
+The unaccepted re-wake prepayment mint is idempotent over the exact key
+(environment, task, run, trigger): re-materializing the same declared bound —
+after a restart, resume, or re-arm — reuses the durable reservation instead
+of debiting again, and a duplicate mint attempt returns the existing record.
+At terminal settlement of the governed run — acceptance retiring the bound,
+or the declared fire set exhausting — every prepaid, unfired allowance is
+refunded to the exact run ledger by a kernel-signed event, as 09_PROTOCOLS
+§13 already names. Escrow verification at fire time binds against the
+reservation's frozen identity, not a live-recomputed pool state. A signer's
+executed counter-evidence seal recorded in the same turn as its publication
+sync satisfies the executed-after join when the seal's host time is not
+earlier than the sync's, under the kernel's monotonic event order; requiring
+a strictly later turn made single-turn honest review structurally impossible.
+Authorship-edge refusals must carry the exact edge facts they joined on, so
+the refused signer can see which identities collided rather than guessing.
+
+## Consequences
+
+- Local-model deployments admit turns their bodies can actually serve;
+  oversized carriers reduce structurally instead of dying in refusal loops.
+- The operator role→model lever and per-purpose telemetry become real.
+- A principal can make post-intake review mechanically enforceable instead of
+  verifier-manual.
+- Personas gain outcome co-occurrence facts and an evolvable fragment corpus;
+  whether they use either remains their choice.
+- Re-wake escrow survives restarts without double-debit and returns unspent
+  allowances at settlement.
+
+## Alternatives rejected
+
+- Host fallback preference on provider failure: selection by tier/cost/order
+  remains forbidden; only mechanical admission may narrow bodies.
+- Summarizing or compressing an oversized carrier to fit: C-OP-4 refuses
+  instead; structural indexing is the only reduction.
+- A substrate-scored outcome→fragment credit: co-occurrence is a noun;
+  influence claims stay persona work.
+- A completeness-claim action: work notes never vote on completion; delivery
+  remains the mechanical publication fact.
+- Per-task semantic purposes (e.g. "design", "review" chosen from content):
+  the vocabulary derives only from carrier mechanics, never task words.
+
+## Validation references
+
+- [`03_TASKS.md`](03_TASKS.md)
+- [`05_ENVIRONMENT.md`](05_ENVIRONMENT.md)
+- [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md)
+- [`09_PROTOCOLS.md`](09_PROTOCOLS.md)
+- [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md)
+- [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)
+- [`20_PERSONA_BRAIN_FRAGMENTS.md`](20_PERSONA_BRAIN_FRAGMENTS.md)
