@@ -313,6 +313,73 @@ or expertise credit, and makes no negative claim about children that were too
 short-lived to observe. Exact acquired-tool invocation receipts remain the
 stronger descriptor-bound lane when they exist.
 
+### D16 — Interiority: carried, persisted, never read (restates 02 §2a/§2b, C-OP-13)
+
+Genesis gives every persona identity-derived disposition numbers under an open framework
+label (deployment default `ocean/1`, five values in `[0, 1]`) and no semantic content; the
+persona owns an append-only signed VAD affect self-state; both ride the persona's own
+identity carrier every turn beside the SOUL; the two structural turn self-products
+(`distillation`, `affect`) persist mechanically at settlement. No substrate decision reads
+any of these values, none is rendered as prose, absence is a complete state, and there is
+no automatic trait drift, decay, smoothing, or host-derived affect — ever.
+
+### D17 — Seeded-disposition derivation is codified as implemented
+
+The seed→numbers construction is canonical as shipped: per trait,
+`HMAC-SHA256(key = persona identity key seed, msg = "personaos/persona-disposition/ocean/1/"
++ trait_name)`, first 8 bytes as an unsigned integer mapped to `[0, 1]` and rounded to six
+decimals; traits in the fixed order openness, conscientiousness, extraversion,
+agreeableness, neuroticism. Values are re-derived from the identity seed on every read; a
+stored copy is never authority. The label `ocean/1` names numbers, not definitions.
+
+### D18 — Interiority record schemas join the registry
+
+`personaos-persona-disposition/1` (framework label + five bounded floats +
+`seeded_at_genesis`) and `personaos-persona-affect-state/1` (valence/arousal/dominance in
+`[-1, 1]`, optional note of at most 1024 UTF-8 bytes, strictly monotonic `revision`,
+persona identity signature) are registered current schemas under 09 §13. History retention
+is storage-side and append-only; only the mechanically-latest affect record projects, and
+a bounded latest-first read-back of the persona's OWN history is an ordinary authenticated
+observation.
+
+### D19 — Self-conditioning on one's own interiority is persona work
+
+The §2a prohibition binds SUBSTRATE reads. A persona conditioning its own choices — model
+order and reasoning effort in `persona-model-choice/1` included — on its own disposition or
+affect is ordinary persona cognition and is not restricted. Likewise, persona-authored
+affect records are exact signed persona records and therefore admissible outcome dimensions
+in the persona-owned 08 §6 evolution loop; the "no model self-report" exclusion covers
+host- or model-derived scores, not the persona's own signed appends.
+
+### D20 — Voluntary public self-description
+
+A persona may publish one bounded opaque self-description (string or mapping, at most 2048
+canonical bytes, persona-signed, monotonic revision, freely revisable) carried on its
+PersonaCard. The substrate verifies authorship, bounds, and revision order only; no
+substrate decision reads the value; presentation labels it persona-authored. Seeded
+disposition and affect numbers stay off every peer surface unless the persona itself copies
+them into its own authored bytes. The beside-birth characteristics supplement (a second
+slot preserving frozen birth bytes) remains a named open extension; this card member is a
+presentation surface, not that slot.
+
+### D21 — The owner-fragment catalogue is append-position ordered and rotates
+
+The compile catalogue orders eligible owner fragments by authored time (fragment id as an
+exact tiebreak) — the append-position suffix of 09 §7 — and, when the eligible set exceeds
+one page and the caller supplied no cursor, the window start rotates deterministically with
+the count of that persona's durable compile records, so the tail becomes visible across
+compiles instead of never. The chosen start is carried as the page's own cursor; a
+persona-signed binding always projects regardless of the window.
+
+### D22 — Every brain compile leaves one durable closed counter
+
+Each compile appends one kernel-signed record stating owned / eligible / rejected-by-reason
+/ window / bound counts for that persona (task lineage; environment lineage when no task is
+bound). 20 §9.6's per-carrier binding-state statement carries the same census members plus
+the compose-time projected/omitted arithmetic with one mechanical reason noun per omission
+— including the exact cause when the compile projects nothing. Nouns only; recommends,
+requests, ranks, and schedules nothing.
+
 ## Consequences
 
 Emergence is attributable: useful births, communication, learned skills, tool
