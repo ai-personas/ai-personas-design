@@ -1351,6 +1351,17 @@ Current cutover records include:
   `personaos-persona-work-note-state/1`, and
   `personaos-work-state-evidence/1`;
 - `personaos-persona-telemetry-public/2`;
+- `personaos-persona-disposition/1` and `personaos-persona-affect-state/1`
+  (interiority records, D18: carried on the persona's own identity carrier,
+  read by no substrate decision);
+- `persona-self-publication/1` (D20: voluntary bounded persona-signed public
+  self-description on the PersonaCard);
+- `personaos-brain-compile-record/1` (D22: one durable closed counter per
+  compile) and `brain-fragment-catalogue-page/2` (D21: append-position order
+  with deterministic rotation);
+- `personaos-unaccepted-rewake-prepayment/1` (C-OP-4: every declared re-wake
+  fire prepaid at the signed arm transition; per-fire escrow release and
+  retirement refund are kernel-signed environment events);
 - `personaos-persona-communication-provenance/2` and
   `personaos-persona-communication-delivery-disposition/1`;
 - `personaos-persona-birth-proposal/5` and
