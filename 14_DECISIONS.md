@@ -421,7 +421,7 @@ not conceal active actors because optional presentation fields are absent.
 
 ## ADR-0086 — Conformance of carriage, admission, attribution, and settlement
 
-**Status:** Proposed; awaiting operator review.
+**Status:** Accepted (operator approval 2026-08-22); clean-break, no compatibility mappers.
 
 **Decision:** Six mechanical clarifications, each an exact-fact rule the
 substrate can enforce without reading task meaning. They correct measured
