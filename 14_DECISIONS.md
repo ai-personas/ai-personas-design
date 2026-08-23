@@ -568,3 +568,110 @@ the refused signer can see which identities collided rather than guessing.
 - [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md)
 - [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md)
 - [`20_PERSONA_BRAIN_FRAGMENTS.md`](20_PERSONA_BRAIN_FRAGMENTS.md)
+
+## ADR-0087 — Mission conclusion authority
+
+**Status:** Accepted (operator approval 2026-08-23); guidance + mechanical
+facts, no substrate semantic change.
+
+**Decision:** Every mission submission resolves one of exactly three
+conclusion shapes.  The choice is principal authority, recorded in the intake
+declaration; the substrate executes it and never selects it.
+
+| Shape | Mechanism | Use when |
+| --- | --- | --- |
+| **Operator-gated** (default) | `verifier_receipt_constitutes_acceptance: false`; qualified accepts accumulate on the acceptance page (`/9` receipt-currency rows); the operator concludes with `POST /accept` when satisfied | Missions whose "good enough" is a judgment call; first runs of a new mission class |
+| **Auto-closure** | `verifier_receipt_constitutes_acceptance: true`; the first qualified accept binding the latest admitted publication extends acceptance and terminates the mission | Missions with a crisp, checkable acceptance condition and trusted verifier eligibility |
+| **Deadline-bounded** | Either shape above plus `deadline_epoch_seconds`; at the deadline the best-so-far posture stands and the run closes | Time-boxed missions; prevents post-accept polish from consuming unbounded budget |
+
+**Mechanical facts added this round (already shipped):** the acceptance page
+carries per-receipt `adjudicated_publication_event_id` +
+`bound_publication_is_latest_admitted` and page counters
+`accepts_binding_latest_publication` / `accepts_binding_stale_publication`.
+Live motivation: two funded missions ended with qualified accepts binding
+earlier publications while cohorts kept improving complete ones —
+"accepted, then changed" was indistinguishable from "accepted, done", and no
+shape had been chosen, so nothing ever concluded.
+
+**Non-goals:** no auto-acceptance by default; no wake or model call is created
+by conclusion facts; the operator's `/accept` remains record-only terminal
+authority under owner-bearer trust.
+
+## ADR-0088 — Knowledge continuity across deployments
+
+**Status:** Draft for review (2026-08-23).
+
+**Problem:** every deployment root mints fresh persona identities, so all
+accumulated cognition -- brain fragments, distillations, soul evolution --
+dies whenever an operator starts the next experiment directory.  Measured
+across 2026-08-22/23: four mission classes, six cohorts, zero lessons
+carried between them; each cohort relearned the same round-one facts
+(simulate, do not assert; open delivered drawings; verify listings live).
+The learning loop's write and read sides now work within one node; this ADR
+removes the last structural amnesia.
+
+**Decision:** a persona's knowledge store is exportable and importable as an
+exact signed unit.
+
+1. **Export**: one operator-surface action produces a signed bundle per
+   persona: knowledge store bytes (brain fragments with signatures,
+   bindings, evolution decisions/applications, memory entries), soul state,
+   and a manifest binding every member to its source kernel identity.
+2. **Import**: booting a node may adopt a bundle: personas are minted with
+   NEW identities in the new root, and every imported record is re-signed by
+   the new identity with an exact `continuity_of` provenance pointer to the
+   source record id + source kernel id.  Signatures of the SOURCE are carried
+   verbatim inside the provenance member -- history stays verifiable without
+   trusting the destination.
+3. **What never transfers**: model-call budgets, credentials, run grants,
+   acceptance events.  Cognition transfers; authority does not.
+4. **Purity unchanged**: import is mechanical re-signing of exact bytes;
+   nothing reads content, ranks, or curates.  Curation remains the
+   persona's own evolution actions after arrival.
+5. **Operator surface**: `--adopt-knowledge-bundle <path>` at boot;
+   bundles produced by `ai-personas export-persona`.
+
+**Non-goals:** cross-node live federation of cognition (discovery already
+covers presence); automatic migration (always explicit operator action);
+merging two cohorts' fragments automatically (a persona adopts only its own
+bundle).
+
+## ADR-0089 — Cohort-drafted acceptance contracts
+
+**Status:** Draft for review (2026-08-23). Amends the intent recorded in
+03_TASKS §9 / D12: acceptance CONTRACT drafting is cohort authority;
+acceptance GRANT remains principal authority (owner-bearer `/accept`), or
+auto-extends when the intake declared
+`verifier_receipt_constitutes_acceptance: true`.
+
+**Problem:** mission quality pressure was being authored by the principal as
+ever-longer acceptance conditions -- measured across 2026-08-22/23 as an
+escalating spoon-feeding pattern (the house condition reached ~5.6 KB of
+domain clauses). The knowledge those clauses encode ("manufacture ready means
+real device models, not behavioral sources") already exists inside the model
+bodies; what cohorts lacked was pressure structure and memory, not domain
+instruction.
+
+**Decision:**
+
+1. New signed persona action `author_task_acceptance_contract`: one bounded
+   canonical byte string per task family, supersession chain by append, owner
+   = authoring persona, visible to every member through the same lane the
+   principal's condition occupies today, labelled `source:
+   persona_drafted` vs `principal_supplied`.
+2. Cohorts converge on a contract like any coordination artifact (blackboard,
+   work states, peer wake); the substrate records authorship and currency,
+   interprets nothing.
+3. Principal contributions ride the existing owner-contribution path and are
+   OPTIONAL guidance -- a human is a participant who may guide, never a
+   required author.  One-sentence missions with no condition and no guidance
+   are first-class.
+4. Verifier receipts join against whichever contract version is current at
+   adjudication time, whoever drafted it; the executed-evidence floor and the
+   generation ratchet apply unchanged.
+5. Terminal grant unchanged: operator-bearer `/accept`, or auto-extension
+   under the declared boolean.  Conclusion shapes per ADR-0087.
+
+**Non-goals:** no substrate-authored conditions; no ranking between
+principal-supplied and persona-drafted contracts; no requirement that a
+contract exist before work starts.
