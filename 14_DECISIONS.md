@@ -675,3 +675,37 @@ instruction.
 **Non-goals:** no substrate-authored conditions; no ranking between
 principal-supplied and persona-drafted contracts; no requirement that a
 contract exist before work starts.
+
+## ADR-0090 — Identity evolution is persona-authored application
+
+**Status:** Draft for review (2026-08-23). Amends D17's scope: the seeded
+disposition remains the birth state; drift from it becomes earned history
+through the same signed decision/application machinery fragments already use.
+
+**Problem:** OCEAN dispositions and soul sections are frozen at genesis by
+absence of mechanism -- `apply_brain_evolution` mutates fragments only, and
+the soul `evolution_log` records turn attendance with competence credit
+permanently false.  Twelve personas across four mission classes: zero
+identity movement of any kind.  Uniqueness exists by seed; character depth
+has no path.
+
+**Decision (shape a -- reuse the existing loop):**
+
+1. `apply_brain_evolution` accepts one new target kind:
+   `identity_section`.  The decision preimage names exactly one soul section
+   key and carries the new bounded markdown body; ownership, signature,
+   versioning, idempotency, and audit rules are identical to fragment
+   applications.  One application = one section write + `soul_version`
+   increment.
+2. Disposition deltas ride the same gate but are bounded: each application
+   may move one trait by at most ±0.1, must cite its evidence refs, and the
+   full disposition lineage (seed + every delta) stays in the signed record
+   so "earned vs seeded" is always mechanically separable.
+3. The substrate verifies authority/shape/signature only; whether becoming
+   more conscientious is wise remains the persona's problem.
+4. Practice entries stay in their own lane with competence credit false;
+   identity change happens only through applications that carry evidence.
+
+**Non-goals:** substrate-driven personality adaptation; automatic drift from
+turn behavior; any path that writes identity without a signed evolution
+decision.
