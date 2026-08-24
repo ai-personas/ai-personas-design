@@ -709,3 +709,65 @@ has no path.
 **Non-goals:** substrate-driven personality adaptation; automatic drift from
 turn behavior; any path that writes identity without a signed evolution
 decision.
+
+## ADR-0091 — Principal-inputs scoping
+
+**Status:** Draft (2026-08-24). Formalizes the ADR-0089 boundary.
+
+A principal input is one of: a task sentence, optional guidance prose,
+conclusion-shape policy (ADR-0087), resource grants, and terminal grant.
+Nothing else is expected, and absence of everything but the sentence is
+first-class.  Cohort-drafted acceptance contracts carry the quality bar; the
+generation ratchet carries the difficulty curve.  A principal who writes
+domain clauses into a condition is not forbidden — it is redundant by
+design, and its measured cost (condition-length escalation without depth:
+2026-08-22/23 house runs) is recorded here so the pattern is visible.
+
+## ADR-0092 — Knowledge-suffix rotation contract
+
+**Status:** Draft (2026-08-24).
+
+The owner-record knowledge suffix rides each carrier under a byte bound.
+Rotation rules: (1) content-blind — eviction order is append-position
+oldest-first regardless of content; (2) continuation cursors are exact —
+every evicted span is summarized as `{count, first_id, last_id,
+evicted_bytes}` beside the retained window; (3) no silent loss — an omitted
+span is retrievable through the authenticated inspector by exact cursor;
+(4) the bound is deployment policy (D1 family), never derived from lane
+content.
+
+## ADR-0093 — Ratchet preimage member
+
+**Status:** Draft (2026-08-24). Implements the ledger note.
+
+The hardened verifier-receipt preimage gains
+`executed_capability_generation_refs` — the sorted capability-generation
+hashes the receipt's own sealed executions joined.  Absent member = empty
+set for pre-ratchet receipts (era marker, no mapper).  The acceptance-page
+ratchet comparison then intersects this member against the accepted
+baseline with kernel-re-verified hashes only, closing "advisory page fact"
+into signed preimage truth.
+
+## ADR-0094 — Newborn first-wake funding
+
+**Status:** Draft (2026-08-24).
+
+Birth proposals must enclose a first-wake allowance from the proposal's own
+resources: admission prepays it into escrow exactly like ADR-0086 D6 rewake
+fires, released on the newborn's first delivered wake.  Admission without
+the enclosed allowance refuses at birth rather than stranding an unfunded
+specialist.  This removes "born specialist idles" (gap-report G4) without
+any substrate coaching.
+
+## ADR-0095 — Contract convergence etiquette
+
+**Status:** Draft (2026-08-24). Companion to ADR-0089.
+
+Convergence mechanics for cohort-drafted contracts, all persona-authored:
+(1) any member may author a draft (the action exists); (2) supersession
+chains are linear by pointer — two competing heads resolve by whichever the
+next adjudication actually joins, and losing heads stay navigable history;
+(3) no quorum mechanism exists or is needed — the contract that governs is
+simply the newest one a verifier joined at adjudication time; (4) etiquette
+is learned, not encoded: peers withhold against work that ignores an
+obvious draft, which teaches drafting-before-building faster than any rule.
