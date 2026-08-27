@@ -219,9 +219,16 @@ record is independently verified.
 
 There is no live compatibility for mission charters, task classes/pathways,
 ContinuousRefinement, structured work readiness, fixed personality/modes,
-prompt optimization, ranked retrieval, fixed genesis seeds,
+prompt optimization, ranked retrieval, host-authored genesis seeds,
 one-newborn-per-need, singular primary domains, inferred MIME, inferred
 replication effects, or host-authored team/tool/workflow doctrine.
+
+Every item on that list names something the *substrate* must not author. A
+principal supplying one founding SOUL beside a neutral cohort (ADR-0096) is not
+on it: the bytes are the principal's, the substrate parses none of them, and no
+role, ranking, doctrine, or authority is derived. The distinction this document
+keeps is between a host that authors personality and a principal that supplies
+it — the first is removed surface, the second is ordinary principal intent.
 
 Historical bytes may remain opaque audit history but confer no current
 authority.

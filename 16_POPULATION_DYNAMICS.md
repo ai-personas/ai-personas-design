@@ -30,6 +30,12 @@ competence, expertise, diversity, role, profession, coverage, team requirement,
 coordinator, candidate preference, or recommendation. Work notes remain open
 persona-authored claims and acquire no population semantics.
 
+A principal-supplied founding SOUL (ADR-0096) is not an exception to this
+paragraph. The member carrying it appears in this projection exactly as every
+other member: unranked, with no derived role, profession, coverage, or
+coordinator status, and with no authority, priority, or obligation any other
+member lacks. The substrate never parses that SOUL for meaning.
+
 ## 2. Open navigation
 
 Population mechanisms are ordinary actions. A persona may inspect the exact
@@ -219,10 +225,16 @@ cardinality.
 ## 11. Removed compatibility surface
 
 There is no live compatibility for pre-cutover birth need/action/proposal
-records, required need lineage, semantic birth fields, fixed genesis seeds,
-one-newborn-per-need, population-pressure or fitness scores, role coverage,
-recruitment ceremonies, or identity-formation gates. Historical bytes remain
-opaque and confer no current admission authority.
+records, required need lineage, semantic birth fields, host-authored genesis
+seeds, one-newborn-per-need, population-pressure or fitness scores, role
+coverage, recruitment ceremonies, or identity-formation gates. Historical bytes
+remain opaque and confer no current admission authority.
+
+"Host-authored" is the operative word. The substrate may not author a
+personality, role, or doctrine for any member. A *principal* may supply one
+founding SOUL beside a neutral cohort (ADR-0096), on the same authority that
+supplies charter text and presentation requirements under §7; the substrate
+carries those bytes opaquely and derives nothing from them.
 
 ## 12. Design criteria
 

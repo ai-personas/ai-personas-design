@@ -771,3 +771,55 @@ next adjudication actually joins, and losing heads stay navigable history;
 simply the newest one a verifier joined at adjudication time; (4) etiquette
 is learned, not encoded: peers withhold against work that ignores an
 obvious draft, which teaches drafting-before-building faster than any rule.
+
+## ADR-0096 — Principal-supplied founding soul
+
+**Status:** Draft (2026-08-27). Narrows the `16 §11` clean break; companion to
+the TASKS-R1 behavioral mitigation.
+
+A deployment may seed a neutral cohort of `N` blank members **plus one member
+whose SOUL the principal supplies**. Previously the two were mutually
+exclusive: an authored SOUL forced the single-persona path, because a seed
+count is "a mechanical bootstrap fact, not authority to author roles."
+
+The exclusion was correct about the *substrate* and wrong about the
+*principal*. `16 §7` already admits principal-supplied presentation
+requirements; `16 §6` already admits that anything a parent communicates at
+genesis rides in opaque `genesis_context`; `00_VISION §12` TASKS-R1 already
+names principal charter text as a mitigation the substrate cannot supply. A
+founding SOUL is the same authority arriving at the same boundary one moment
+earlier — at cohort seeding rather than at first task or at birth.
+
+What this does **not** create, and what implementations must keep true:
+
+1. No substrate-derived role. The kernel never parses the authored SOUL for
+   meaning, and derives no profession, coverage, competence, coordinator, or
+   team requirement from it. It is opaque bytes with a stable signer.
+2. No ranking. `16 §1`'s population projection stays unranked and role-free;
+   the authored member appears exactly as any other member.
+3. No authority. The authored member holds no capability, priority, wake, veto,
+   acceptance, or resource authority that any other member lacks. It cannot
+   assign, subordinate, or coordinate a peer.
+4. No obligation. No peer must read, answer, or act on what it says. Every
+   other member may ignore it entirely, and quiescence stays nonterminal.
+5. No inheritance. Newborns receive seeded disposition numbers as always; the
+   authored SOUL confers no expertise or semantic seed on anyone.
+
+**Why the exception is worth its cost.** Every turn carries dedicated lanes for
+artifacts, verdicts and their deficiencies, open-input availability, budget,
+and the action catalogue. No lane carries capability inventory, learning
+history, or execution discrimination. Measured consequence (house-e1,
+2026-08-27): the population monitored artifact quality rigorously — a member
+refused to certify its own work, the society birthed an independent verifier,
+and its invented criterion propagated to the population's rubber-stamper —
+while the platform dimension went unmonitored by anyone. 14 of 72 actions were
+used; tool acquisition, open inputs, and brain evolution were untouched; 78
+distillations produced 0 applications; 23 consecutive executions were
+verification with zero bytes written. The alternative to one authored member is
+one new prompt lane per mechanism, forever, each of them host-authored
+navigation — a larger violation of the same principle, paid indefinitely.
+
+**Falsifier.** If the authored member increases verdict volume while production
+metrics stay at zero, the premise is wrong: the gap is not visibility of the
+platform dimension, and this ADR should be reverted rather than extended. The
+2026-08-27 baseline is recorded above precisely so that comparison is possible.

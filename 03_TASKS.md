@@ -98,8 +98,12 @@ deployment identity, selected by exact seeded-persona identity alone; it is not
 implicit reuse of any existing environment's membership — reuse still requires an
 exact principal-supplied target or authenticated causal resume/amendment
 authority — and founding selects no role, leader, coordinator, or division of the
-task. A single-persona deployment founds the environment with exactly that one
-persona. An exact persona address instead forms a fresh environment whose sole
+task. Founding remains role-free even when the principal supplies one founding
+SOUL beside the neutral cohort (ADR-0096): the substrate selects nothing from
+those bytes, fans the ingress event out to every founding member identically,
+and grants that member no leadership, coordination, priority, or division
+authority. A single-persona deployment founds the environment with exactly that
+one persona. An exact persona address instead forms a fresh environment whose sole
 founding member is that persona, and a targeted or resumed environment keeps its
 own exact signed membership rather than absorbing the seed cohort.
 
