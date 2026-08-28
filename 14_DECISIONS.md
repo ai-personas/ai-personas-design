@@ -823,3 +823,37 @@ navigation — a larger violation of the same principle, paid indefinitely.
 metrics stay at zero, the premise is wrong: the gap is not visibility of the
 platform dimension, and this ADR should be reverted rather than extended. The
 2026-08-27 baseline is recorded above precisely so that comparison is possible.
+
+**Measured, 2026-08-27/28 — two runs, premise NOT yet tested.** house-e2 (100
+calls, with the authenticated-effect-provenance floor) and house-e3 (500 calls,
+no floor, steward the only behavioural difference from the baseline) both ran to
+budget exhaustion. All three runs converged: exec change rate 24% / 22% / 22%,
+and tool acquisition, applied brain evolutions, and `request_open_input` at
+**0 in every run including the no-steward baseline**. The steward cost 49% and
+29% of authored actions respectively.
+
+Those runs do not bear on this ADR's premise, because the authored SOUL had two
+defects that prevented the member from doing the job:
+
+1. *It could not state a conclusion.* Its charter forbade "direct, assign,
+   coordinate, or supervise anyone's work" and its posture section said "I state
+   the observation and stop there", so all 58 of its house-e3 observations ended
+   "I make no claim about design quality" — including "0 environment MCP tools
+   and 0 capability generations". It never said the environment was not
+   acquiring capability. Nothing in §1/§11 or `00_VISION §10` required that:
+   those bind the SUBSTRATE against authoring role or doctrine, while one
+   persona telling another something is ordinary message traffic.
+2. *It spoke where nobody listens.* Blackboard posts against non-author
+   inspects: e1 20/4, e2 33/2, e3 70/**0**. In house-e3 no peer inspected the
+   board once in 500 model calls, and the steward sent zero `persona_message`s
+   while waking itself 35 times. house-e1 — the only run in which a standard
+   propagated between personas — carried 59 messages. **Influence travels over
+   `persona_message` in this substrate; the blackboard is write-only.**
+
+This is a finding about carriage rather than about stewardship, and it applies
+to any persona that assumes publication reaches peers. The SOUL is revised
+(v2: names the shortfall, prefers `persona_message` with `immediate_wake`,
+weighs the wake cost) and one further run is warranted before the falsifier is
+applied. If that run names shortfalls, reaches peers, and still leaves the three
+compounding metrics at zero, the premise is refuted on its own terms and this
+ADR should be reverted rather than iterated a fourth time.
