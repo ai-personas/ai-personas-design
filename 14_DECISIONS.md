@@ -774,6 +774,43 @@ obvious draft, which teaches drafting-before-building faster than any rule.
 
 ## ADR-0096 — Principal-supplied founding soul
 
+**Status:** REJECTED on measured evidence (2026-08-28). The mechanism
+(`--founding-soul`) remains implemented and tested; **no shipped SOUL uses it**.
+The premise below was tested across three SOUL generations and five live runs and
+did not hold. The record is retained because the negative result is the value.
+
+**Why rejected.** Three generations — v1 whose charter forbade it from stating a
+conclusion, v2 that could state one and reached peers by `immediate_wake`, v3
+carrying nine explicit standing requirements — produced identical behaviour: name
+an absence while there is nothing, then certify success once there is something.
+In house-e4 it sent 23 messages after the first success and named none of the four
+gaps then true. In house-e5, nine messages after first success, **zero** gap
+notices, closing by citing *"19 checks verified:true"* over a file containing
+`ck(7.5<=7.75 and 10.5>=10)` — literal arithmetic that cannot fail, and exactly
+what its own charter calls "a bare true is not a check."
+
+**What did work, measured.** house-e5 produced the first engineering-grade
+artifacts of the series on the smallest budget (100 calls): a verifier catching
+6/6 injected defects across egress, structural capacity, zoning setbacks and
+energy, with correct code values including a units fix to the IRC 44-inch sill
+limit. Its cause was collision, not instruction — `verify_complete.py` was written
+by **three** personas across 83 actions with three workspace conflict resolutions,
+at a 16% collision rate against 0.8–2.6% in every other run. Separately, the four
+archived environments that acquired tools at 3–4 per 100 calls (against 0.00 for
+e1/e2/e3) carried an acceptance condition whose first three clauses are
+domain-neutral — one source of truth, checks stating value/threshold/source/
+pass-fail, constructed-not-embedded — and those make a tool structurally
+necessary.
+
+**The design conclusion.** Practice requirements belong in the principal's
+acceptance condition, where they demonstrably move behaviour, not in a member's
+SOUL, where three generations moved nothing. What a member *says* about practice
+does not sustain practice.
+
+---
+
+**Original draft follows, unchanged.**
+
 **Status:** Draft (2026-08-27). Narrows the `16 §11` clean break; companion to
 the TASKS-R1 behavioral mitigation.
 
