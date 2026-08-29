@@ -951,9 +951,10 @@ authors nothing.
 **Problem.** e11 proved the loop's perception layer whole and its action
 layer undiscoverable. The two levers that make a verifier receipt qualify —
 declaring a delivered path in `output_files` (mints the captured digest that
-IS executed counter-evidence) and binding `adjudicated_publication_event_id`
-to the exact publication the signer's evidence covers — existed, worked, and
-were stated nowhere any persona reads; eleven receipts died on currency and
+IS executed counter-evidence, intersected against the CURRENT cumulative
+delivered snapshot — a re-publish retires evidence only for the paths it
+changed) and the sync-fact-plus-post-sync-execution route — existed, worked,
+and were stated nowhere any persona reads; eleven receipts died on currency and
 four personas rationally quiesced. `record_persona_model_choice` was
 surfaced, correctly gated, listed as never-tried every turn — and its entire
 description was the string `persona-model-choice/1`; zero calls in eleven
