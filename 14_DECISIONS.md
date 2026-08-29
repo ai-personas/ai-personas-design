@@ -894,3 +894,49 @@ weighs the wake cost) and one further run is warranted before the falsifier is
 applied. If that run names shortfalls, reaches peers, and still leaves the three
 compounding metrics at zero, the premise is refuted on its own terms and this
 ADR should be reverted rather than iterated a fourth time.
+
+## ADR-0097 — Cohort contracts confer verifier authority
+
+**Status:** Accepted (2026-08-29). The consumption side of ADR-0089/0095,
+which had been carriage-only.
+
+**Problem, measured.** Nine live runs. Whenever the principal supplied no
+verifier descriptor (house-e8/e9: task = 22 characters, nothing else), every
+`author_verifier_receipt` was refused `verifier_predicate_not_declared` and
+nothing could ever be adjudicated by anyone — the no-hardcoding architecture
+was structurally unexecutable. The lane the design prescribed as the cure was
+locked shut by a chain of silent defects: the drafting action carried no
+action-surface annotation (unreachable, 8 runs); its failures sealed
+`failure_reason: ""` (92% of action refusals were prose the token boundary
+strips); the contract event landed in the environment lineage while its only
+reader walks the task lineages; that reader crashed on two separate tuple
+unpacks and had never once run to completion; and even a landed contract
+conferred nothing, because receipt qualification consulted only the principal
+intake declaration.
+
+**Decision.** Resolution precedence for the verifier predicate, stated once:
+
+1. the principal's intake declaration, when supplied — unchanged, and always
+   wins;
+2. else the cohort's acceptance contract: at authoring time the NEWEST
+   contract in the causal task family (what the verifier joins), at
+   qualification time the EXACT contract the receipt's signed preimage scope
+   names (`cohort-contract:<contract event id>`) — ADR-0095's "the contract
+   that governs is the one the verifier joined", made mechanical;
+3. else refuse exactly as before. Zero-inclusive; the substrate interprets no
+   condition text.
+
+The synthesized declaration is deterministic over the exact contract event, so
+both sites agree byte-for-byte; it carries the existing
+`registered-persona-identity-post-intake/1` kind, so every independence check
+(authorship edges, executed counter-evidence, post-intake membership) applies
+unchanged. The receipt preimage schema is untouched — the scope field already
+rides signed (ADR-0093). Per ADR-0089 the acceptance GRANT stays principal
+authority: the synthesized declaration fixes
+`verifier_receipt_constitutes_acceptance: false`, so a cohort can qualify
+verdicts and never extend one into acceptance by itself.
+
+**Division of labor this completes:** the principal supplies the task; the
+cohort authors its own acceptance pressure (ADR-0089's stated cure for
+condition spoon-feeding); the substrate provides mechanics and visibility and
+authors nothing.
