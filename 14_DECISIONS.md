@@ -940,3 +940,128 @@ verdicts and never extend one into acceptance by itself.
 cohort authors its own acceptance pressure (ADR-0089's stated cure for
 condition spoon-feeding); the substrate provides mechanics and visibility and
 authors nothing.
+
+## ADR-0098 — Substrate self-description: a mechanic described nowhere is a defect
+
+- Status: accepted (2026-08-29)
+- Drives: the tool-description mechanics sentences; the learning-lane
+  distillation/evolution join; equal byte bounds on the acceptance and
+  artifact carrier lanes; blackboard body slimming (speech over plumbing)
+
+**Problem.** e11 proved the loop's perception layer whole and its action
+layer undiscoverable. The two levers that make a verifier receipt qualify —
+declaring a delivered path in `output_files` (mints the captured digest that
+IS executed counter-evidence) and binding `adjudicated_publication_event_id`
+to the exact publication the signer's evidence covers — existed, worked, and
+were stated nowhere any persona reads; eleven receipts died on currency and
+four personas rationally quiesced. `record_persona_model_choice` was
+surfaced, correctly gated, listed as never-tried every turn — and its entire
+description was the string `persona-model-choice/1`; zero calls in eleven
+runs. The distillation ledger (`39 recorded`), the carried-head cap (newest
+3), and the evolvability of distill fragments were three true facts in three
+components with no join. This is Lock 1's sibling one layer up: reachability
+was fixed; advertisement was not.
+
+**Decision.** A tool's description states the tool's own mechanics — its
+evidence semantics, its delivery semantics, the exact facts a consumer of
+its records will demand. This is self-description, not coaching: the same
+class of text as "condition_text must be non-empty", carrying no task or
+domain content and no imperative addressed to the work. Facts that only
+function joined ride adjacently in one component (nouns, with the existing
+`content_read_action`-style cross-reference precedent). And carrier lanes
+are bounded on equal terms: a lane that judges (acceptance/receipts) gets
+the same hash-bound page treatment as a lane that makes (artifacts) — a
+prompt whose largest lane is its judgment lane trains judgment.
+
+## ADR-0099 — Sender-funded wake transfer: coordination is payable by the coordinator
+
+- Status: accepted (2026-08-29)
+- Drives: `reserve_persona_wake_transfer` + `WakeFundingTransferBudget`
+  (event_budget); the `persona_message` arm-time funding stage; event-local
+  descendant binding; the admission refuse-not-fallthrough set
+
+**Problem.** A prepaid event pool's descendants may never reach run-root
+headroom (C-OP-4: a prepaid finite claim is the declared ceiling for its
+whole deferred subtree). Correct — and it made every scheduled-turn persona
+structurally mute as a waker: in e11 the steward's every directed
+`immediate_wake` died `execution_scope_unfunded` from minute 2 while the
+run's grant sat unspent. Trigger arming has owned the doctrinally correct
+answer all along (an arm-time debit against the signed run ledger, with a
+conserved fallback transfer from the sender's own claim);
+`persona_message` was the one successor-authoring action without that stage.
+
+**Decision.** Every `immediate_wake` publication authored from a prepaid
+event turn runs the same arm-time funding resolution at publication:
+unlimited grant → per-event cap, no debit; finite grant → durable run-ledger
+debit (`allocation × candidates`); else a conserved transfer from the
+sender's own remaining claim (retained 1 then 0); else refuse with a stated
+token (`wake_transfer_unfunded:sender_headroom` / `:run_ledger_headroom` /
+`:funding_source_unavailable`). Per-recipient event-local sub-pools carved
+from one atomic debit; never the shared run table; a drained transfer
+refuses rather than borrowing root; unused units settle back durably.
+Automatic, not opt-in — the measured failure is precisely that the sender
+cannot know it must do anything — and safe to automate because every branch
+conserves and fails closed. A funding refusal never blocks publication.
+Conservation, not minting: no declared ceiling widens on any path.
+
+## ADR-0100 — A refusal must not destroy the payload: pending delivery
+
+- Status: accepted (2026-08-29)
+- Drives: `PERSONA_COMMUNICATION_CARRIED` carriage marks; the
+  `pending_persona_communication_authority` carrier lane; the
+  `inspect_persona_communications` read action; carrier schema /16
+
+**Problem.** A directed message's text reached a recipient only on the wake
+it caused. A wake refused by the economy, dropped by dedupe, or lost to a
+crash after enqueue destroyed the payload: e11's corrective requests
+("provide the final acceptance-qualified receipt") evaporated, and message
+history additionally transited a projection that dropped exactly `payload`
+and `provenance`. C-OP-14 covered refusals stating themselves; it did not
+yet cover refusals preserving what they refused.
+
+**Decision.** Presentation, not delivery status, is the fact of record. The
+kernel appends a signed carriage mark only after a provider response exists,
+once per communication actually included in that turn's carrier; the
+PENDING predicate is the mark's absence, per recipient, independent of every
+delivery status — so economy refusals, dedupe drops, publish-only
+dispositions, and crash-lost wakes all heal through one lane. Pending
+messages ride a bounded newest-window lane directly after the wake-context
+lane ("first the message that woke you, then the messages that could not"),
+whole-record omission counted and cursor-reachable. At-least-once
+presentation: a failed mark re-presents; duplicates are stated; loss is
+impossible.
+
+## ADR-0101 — Disposition neutrality by ordered evidence; spend visible, not priced
+
+- Status: accepted (2026-08-29)
+- Drives: the sealed `workspace_signature_at_action`; the ordered workspace
+  blocker; wake-enqueuing publications recorded-not-blocking;
+  `run_call_spend_census` in the resource lane
+
+**Problem.** The one economic gradient the substrate expressed pointed away
+from construction: a pure-read turn settled `no_successor` in one turn,
+while a workspace-mutating or peer-waking turn paid +1 turn of successor
+machinery. All 74 tools price at 0.0, so nothing else distinguishes a build
+from a file read; measured behavior followed the gradient exactly.
+
+**Decision.** Neutrality comes from ordering evidence, never from free
+turns. (a) The `no_successor` disposition action host-computes the
+workspace signature at its own instant, sealed into its receipt; the
+settlement census blocks only on a POST-disposition change and fails closed
+to the whole-turn diff when the seal is absent — a construction turn now
+settles exactly like an inspection turn, granting no wake and no call.
+(b) A wake-enqueuing response publication is recorded (bound by hash into
+the settlement, its funding settled at authoring time per ADR-0099) instead
+of blocking: `no_successor` scopes, by the tool's own text, to no
+SELF-successor. (c) Pre-disposition armed future stimuli continue to block
+(deferred: the recurrence surface is the largest behavioral change and the
+dominant asymmetry is already removed). Rejected, with reasons recorded:
+implicit/free successor machinery (violates funds-before-work and
+no-automatic-action); symmetric read taxation (burns the scarcity that
+caused the failure); per-action pricing (no denomination exists, and
+relative pricing of work kinds is domain judgment in code). In its place,
+one content-blind observable: `run_call_spend_census` totals the signed
+ledger's spend composition — direct debits, refunds, top-ups, settlement
+releases — in the same early lane as `llm_calls_remaining`, so "the grant
+sat unspent while every prepaid slice starved" is a readable fact for the
+personas, the steward, and the operator alike.
