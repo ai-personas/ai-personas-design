@@ -1066,3 +1066,49 @@ ledger's spend composition — direct debits, refunds, top-ups, settlement
 releases — in the same early lane as `llm_calls_remaining`, so "the grant
 sat unspent while every prepaid slice starved" is a readable fact for the
 personas, the steward, and the operator alike.
+
+## ADR-0102 — Window-adaptive carriers; model-assisted compaction with exactness pointers
+
+- Status: accepted (2026-08-29)
+- Drives: `deployment_policy.carrier_byte_budget()/lane_scale()/scaled_lane_bytes()`;
+  every carrier lane bound resolving through the one scale; the assembly-end
+  global fit stage; `personaos-model-compacted-projection/1`
+
+**Problem.** Context size is a per-provider/model fact, but seventeen carrier
+lanes shipped as fixed byte constants summing to ~9.9× a 32k-token window in
+the worst case, and only the navigation lane ever read the declared pool
+floor. A locally served 32k body could not carry one persona turn no matter
+which single lane an operator tuned (measured: 68 debited calls, zero
+authored actions), and the practical ~93KB carriers of an ordinary run left
+no headroom for growth.
+
+**Decision.** Fit is a standing invariant, not an error path, enforced in
+two tiers every turn:
+
+1. *Mechanical, free.* One deployment-wide scale — the smallest admitted
+   window's byte budget (window minus output and system reserves, at the
+   adapters' own ~4-bytes-per-token discipline) over the shipped worst-case
+   lane sum — resolves every default lane bound, each with a stated floor so
+   no lane vanishes. The assembly-end fit stage then makes the SUM true:
+   largest non-authority lane first, the situation stage restages at tighter
+   caps and observation lanes fall to whole-lane structural indexes
+   (existence + hash + read action, fetchable, never silently truncated).
+2. *Model-assisted, priced honestly.* Where mechanical bounding would
+   reduce a bulky observation lane (blackboard history, collaboration
+   heads, peer work states, the situation stage) to a bare hash, the SAME
+   pool body may compress it instead. The substrate authors only the
+   mechanical instruction; the output is never trusted as authority — the
+   record is labeled `model_interpretation: true` with the interpreting
+   body implied by the turn, carries the exact `source_value_hash` and byte
+   count, keeps the lane's read action as the exactness pointer, and is
+   memoized per (lane, source hash, target) so an unchanged lane costs
+   zero calls on later turns. A failed or unavailable compaction falls
+   back to the structural index; the turn never blocks on it. Compaction
+   spend rides the turn's own budget under a stated purpose and is visible
+   in the spend census.
+
+**The authority line, stated once:** principal intent and charter bytes,
+contract text, acceptance rows and refusal codes, resource facts, and
+directed speech are never scaled below their floors, never indexed away,
+and never model-compacted. They ride exactly, or the transport refuses
+with the exact byte fact — a statement, never a silent truncation.
