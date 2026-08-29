@@ -1112,3 +1112,78 @@ contract text, acceptance rows and refusal codes, resource facts, and
 directed speech are never scaled below their floors, never indexed away,
 and never model-compacted. They ride exactly, or the transport refuses
 with the exact byte fact — a statement, never a silent truncation.
+
+## ADR-0103 — Tool arguments ride as real grammar on schema-to-grammar transports
+
+On a transport whose response schema compiles into a sampling grammar
+(llama.cpp `response_format: json_schema`), the multi-tool argument union is
+one `oneOf` variant per leased tool, each carrying the tool's ORIGINAL input
+schema verbatim (only `pattern` is stripped — one tool's regex has broken a
+whole grammar, measured). The grammar itself then enforces every declared
+constraint at sampling time — root and nested `required`, enums, closedness —
+and open roots stay genuinely open. Measured on the release body: 73 tools,
+56KB schema, 72 prompt tokens, and sampling forced the exact
+`delivery_disposition` shape a 27B body had omitted on every carrier-shape
+attempt.
+
+Strict CLI response dialects keep the composition-free one-string carrier
+(they reject `oneOf` below the root); the operator escape hatch for exotic
+converters is `PERSONAOS_TOOL_ARGS_TRANSPORT=carrier`, stated, never
+inferred. Server-side validation walks declared subtrees so a nested miss is
+named by dotted path (`delivery_disposition.kind`) on every transport. Under
+navigation byte pressure the action catalogue reduces to a names-and-gist
+projection, never to a nameless structural index: on grammar transports the
+schema text never enters the model's context, so that catalogue is the only
+semantic channel the action surface has.
+
+## ADR-0104 — The publication footrace is a stated fact on the acceptance page
+
+A qualified receipt bound to a non-latest admitted publication carries the
+exact changed-path delta to the latest one — added/changed/removed counts and
+a bounded path list, computed mechanically between the two publications'
+recorded merged-main commits. No acceptance semantics change: binding stays
+by publication event identity; the substrate states the delta so verifiers
+can re-receipt exactly the delta and settle verdicts can distinguish
+"unverified package" from "files appended after the last receipt". Observed
+need: a settle with 19 qualified receipts and 0 binding the final
+publication, because a 3-file publish landed 90 seconds after the newest
+receipt and the budget died mid-race.
+
+## ADR-0105 — Role attribution defaults to the turn purpose; choices outlive their run
+
+The role half of ADR-0086 D3, made reachable: a model request whose role is
+unset adopts the turn's purpose token — attribution derived from exact signed
+wake facts, varying per turn, so it is not "a single constant literal applied
+to all turns". An explicitly passed role always wins; the purpose vocabulary
+IS the reachable role vocabulary until a richer signed role fact exists. This
+makes the operator role→model preference matchable (e.g. route
+`carrier_compaction` turns to a small local body). Selection authority is
+unchanged: role and purpose still choose nothing by themselves.
+
+The persona-model-choice match scope drops `run_id` and `run_model_pool_hash`
+(the hash bakes in run id and minted-at, so a successor run of the same task
+chain could never match, and boot-restored choices were unmatchable by
+construction). Both stay RECORDED on the signed choice as exact provenance.
+Ceiling authority is preserved where it belongs: a choice naming any body
+outside the CURRENT run's signed available set never matches.
+
+## ADR-0106 — Continuity completes; the sandbox states its egress
+
+ADR-0088's export half ships: `ai-personas export-persona` boots the node
+against a state root, hydrates signed state exactly as a serving boot would,
+writes the bundle(s), and exits. Import creates the binding it previously
+only counted: fragment ids are content-derived and mapped source→destination,
+the source's newest binding is reproduced onto the destination's current
+winning head (never displacing it), and every count reported is truthful —
+including `skipped_binding_refs` for refs that did not survive the transfer.
+
+The provisioning mechanism state additionally carries one boot-time sandbox
+egress probe — the pip index host the sandbox's pip would actually use, its
+HTTP status, and the probe time (host only; an index URL may embed
+credentials) — plus the interpreter version. These are mechanical deployment
+constants exactly like the tool-site writability facts beside them: they name
+no package, tool, or source-host preference and read identically for a task
+that needs nothing. Observed need: the index answered 200 from every live
+run's host while nothing anywhere stated the sandbox has network, so a
+model's default "sandboxes are offline" prior made never trying the mechanism
+the rational read.
