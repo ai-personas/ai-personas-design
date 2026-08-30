@@ -466,7 +466,17 @@ outage; replaying an identical carrier into a body already proven infeasible
 for it is forbidden — the replay either re-enters admission (which may now
 leave a different body) or refuses with the exact fact. Retired with this
 decision: any dormant context-compression pipeline; summarizing a carrier to
-fit remains forbidden (C-OP-4 refuses instead).
+fit remains forbidden (C-OP-4 refuses instead). *[Amended by ADR-0102 tier 2
+and ADR-0107: a LABELED lossy model compaction with the exact source hash,
+byte count, and the lane's read action as the exactness pointer is not the
+silent summarization this clause forbids — the ban on unlabeled, pointer-free
+summarization stands. ADR-0107 additionally
+satisfies "count every part of the transported request" by measurement on
+transports that publish a window: the density ledger joins the exact
+transmitted characters against the provider's count of the whole request it
+served (grammar-compiled tool schemas occupy no window tokens there, and the
+one hosted lane that ships a native tools array publishes no window, so it
+is never window-gated and never feeds the ledger).]*
 
 ### D3 — Turns carry exact purpose and role attribution
 
@@ -551,7 +561,9 @@ the refused signer can see which identities collided rather than guessing.
 - Host fallback preference on provider failure: selection by tier/cost/order
   remains forbidden; only mechanical admission may narrow bodies.
 - Summarizing or compressing an oversized carrier to fit: C-OP-4 refuses
-  instead; structural indexing is the only reduction.
+  instead; structural indexing is the only reduction. *[Amended by ADR-0102
+  tier 2: a labeled, source-hashed, pointer-carrying model compaction is now
+  an admitted reduction between restaging and the structural index.]*
 - A substrate-scored outcome→fragment credit: co-occurrence is a noun;
   influence claims stay persona work.
 - A completeness-claim action: work notes never vote on completion; delivery
@@ -1086,8 +1098,9 @@ no headroom for growth.
 two tiers every turn:
 
 1. *Mechanical, free.* One deployment-wide scale — the smallest admitted
-   window's byte budget (window minus output and system reserves, at the
-   adapters' own ~4-bytes-per-token discipline) over the shipped worst-case
+   window's byte budget (window minus output and system reserves, at a
+   bytes-per-token value that ADR-0107 demotes to a pre-measurement seed:
+   provider-counted tokens supersede it from the first observation) over the shipped worst-case
    lane sum — resolves every default lane bound, each with a stated floor so
    no lane vanishes. The assembly-end fit stage then makes the SUM true:
    largest non-authority lane first, the situation stage restages at tighter
@@ -1187,3 +1200,103 @@ that needs nothing. Observed need: the index answered 200 from every live
 run's host while nothing anywhere stated the sandbox has network, so a
 model's default "sandboxes are offline" prior made never trying the mechanism
 the rational read.
+
+## ADR-0107 — Measured windows: carrier budgets learn from provider-counted tokens
+
+- Status: accepted (2026-08-30)
+- Drives: `deployment_policy.record_carrier_density_observation()/
+  carrier_density_bytes_per_token()/measured_token_estimate()/
+  carrier_output_reserve_tokens()`; the assembly fit budget and every
+  transport admission gate resolving through that one conversion; the
+  adapter `/tokenize` capability probe; the first-call refit
+  (`MODEL_CONTEXT_REFIT`); `personaos-continuation-fit/1`
+
+**Problem.** ADR-0102's tier-1 budget converted the window to bytes through
+a constant, and the transport admission gates used two DIFFERENT constants
+(2.5 and 4 bytes/token — plus a third, 4-halved, deriving the navigation
+default). Live at an 81,920-token window the 2.5-derived budget said
+197,120 bytes "fits" while real carriers tokenized at ~2.31 B/token:
+three turns died on the provider's own refusal ("request (85,491 tokens)
+exceeds the available context size (81,920 tokens)"), ten follow-on calls
+burned against the exhausted causal budget, and the ADR-0102 ladder never
+engaged because its gate lied. Meanwhile every truth arrived and was
+discarded: `usage.prompt_tokens` on all 38 successes was never parsed, the
+refusal's own measured count survived only as a truncated reason string,
+and the serving tokenizer's exact-count endpoint was never called. At 32k
+the same constant erred the OTHER way (live density 2.64–3.57), silently
+over-squeezing every carrier. In-turn continuation appends re-entered no
+fit discipline at all, so a fitted carrier grew past the window mid-turn
+(measured: 94,797 tokens). No constant is right at every scale, because
+density is a property of the carrier mix and the tokenizer — a fact the
+deployment can only measure.
+
+**Decision.** The byte↔token conversion is a measured, per-boot fact; a
+constant may only seed it.
+
+1. *Usage is read, always.* Every completion response's provider-counted
+   `prompt_tokens`/`completion_tokens` (any wire shape) is parsed into the
+   result and recorded on the model event beside the exact transmitted
+   `request_bytes`. A context refusal's stated counts are parsed the same
+   way. Model events carry these facts for EVERY lane; the LEDGER
+   observation is recorded adapter-side and only by a body that publishes
+   its window — a hosted lane's density and completion lengths say nothing
+   about the local pool the budget serves. The public telemetry projection
+   carries the counts too (content-free mechanical facts — they make
+   density and generation rate observable without one byte of carrier
+   content).
+2. *The budget learns.* The deployment keeps the observed density floor
+   (minimum bytes/token) and the largest observed completion. The carrier
+   byte budget is the pool floor minus the learned output reserve, times
+   the density floor — recomputed whenever either fact moves, in BOTH
+   directions: it shrinks where measurement proves overflow and grows where
+   measurement proves headroom. Before the first observation the seed
+   reproduces the prior shipped arithmetic exactly. The invented system
+   reserve exists only in the seed regime: in the measured regime every
+   consumer subtracts the EXACT system-prompt size at its own call site
+   (template framing needs no reserve at all — the ledger's token side is
+   the provider's count of the whole served request, so framing lives
+   inside the ratio).
+   Junk observations are refused with stated reasons (below a minimum byte
+   size they measure the template, not the mix; outside a physical sanity
+   envelope the two counts describe different requests).
+3. *One conversion, one unit.* Every admission gate and the fit budget
+   resolve through the same bytes→tokens helper, and every byte count is
+   the same unit: raw transported characters (prompt plus system), exactly
+   the unit the ledger joins against provider counts. Two gates that
+   disagree about what a byte is worth — or measure different bytes, as the
+   escaped-framed-JSON gate did against the raw-byte budget — re-create
+   this failure class by construction.
+4. *Exact counting where served.* Where the transport exposes its own
+   tokenizer (`POST /tokenize` at the origin root — llama.cpp, vLLM), the
+   admission gate consults it and prefers the exact count; the capability
+   is probed once, its absence stated as a degraded read, transient
+   failures leave it re-probeable. The estimate path remains for transports
+   that serve no count.
+5. *Overflow feeds back.* A deterministic context refusal on the FIRST call
+   of a turn phase (no served response, so no effects) records its measured
+   density, re-enters the fit stage once under the corrected budget — the
+   ADR-0102 ladder now actually engages — and redispatches once, stated as
+   `MODEL_CONTEXT_REFIT` with before/after bytes and the parsed counts.
+   The refit carrier must be strictly smaller or the retry is refused:
+   ADR-0086 D2's ban on replaying an identical carrier stands. A refusal
+   after any served call is never replayed — effects may exist. The charged
+   redispatch is the exact parallel of 01_KERNEL §7's charged mechanical
+   reformat attempt.
+6. *Continuations re-enter the fit discipline.* An appended tool-result
+   payload respects the same learned budget as the opening carrier: over
+   the remaining headroom, its largest members reduce through the bounded
+   open projection (source fingerprint, stated truncation) and the squeeze
+   is stated in the payload as `personaos-continuation-fit/1`; when
+   per-member floors cannot reach the cap, the payload collapses to one
+   stated record that keeps the ok/error census and the content hash —
+   never a silent truncation, never unbounded growth, never an overshoot.
+
+Rejected, with reasons recorded: re-tuning the constant (the round that
+produced this ADR began as exactly that — 2.5→2.2 with a safety fraction —
+and was refused as the same disease: an open-loop number standing in for a
+measurement the system already receives every turn); refunding the burned
+call instead of preventing the burn (funds-before-work stands; the fix is
+that the second identical burn cannot happen); a persistent cross-boot
+density store (a boot's first turns run one conservative seed regime and
+converge within one observation; persisted calibration can go stale against
+a swapped model or tokenizer without any event saying so).

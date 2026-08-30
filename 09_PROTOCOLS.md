@@ -1406,7 +1406,11 @@ Current cutover records include:
   `personaos-prompt-source-manifest/1`,
   `personaos-prompt-staged-source/1`,
   `personaos-prompt-source-omission/1`, and
-  `personaos-prompt-source-truncation/1`; and
+  `personaos-prompt-source-truncation/1`;
+- `personaos-carrier-fit/1`,
+  `personaos-carrier-lane-structural-index/1`,
+  `personaos-model-compacted-projection/1` (ADR-0102), and
+  `personaos-continuation-fit/1` (ADR-0107); and
 - `personaos-replication-effect-descriptor/1`.
 
 ## 14. Key custody
