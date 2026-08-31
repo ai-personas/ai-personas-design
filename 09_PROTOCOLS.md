@@ -1419,7 +1419,11 @@ Current cutover records include:
   `personaos-brain-fragment-body-projection/1` (ADR-0108);
 - `personaos-receipt-execution-binding/2` (envelope resolution + cited-kind
   census) and `personaos-cohort-acceptance-mint-observation/2` (pre-append
-  conditions on the kernel-signed receipt payload) (ADR-0109); and
+  conditions on the kernel-signed receipt payload) (ADR-0109);
+- `personaos-receipt-execution-binding/3` (terminal_result scan +
+  STARTED-pair grounding; invented caps removed) and
+  `personaos-cohort-acceptance-mint-observation/3` (publication-currency
+  condition) (ADR-0110); and
 - `personaos-replication-effect-descriptor/1`.
 
 ## 14. Key custody

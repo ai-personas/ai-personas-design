@@ -1514,3 +1514,117 @@ successor facts, folded in as addendum rather than a new ADR:
   demanding realization-grade outcomes) is recorded as the experiment ladder:
   pure re-run, then cognition import, then operator bars — one variable per
   run.
+
+## ADR-0110 — Certified means examined; voids refuse; bounds are measured, declared, or absent
+
+- **Status:** accepted (2026-08-31)
+- **Context:** the e34 pair — the first controlled tier A/B (identical task,
+  build, 8-persona cohort with a three-seed control arm; only the model body
+  differs) — settled 200/200 both arms. The audit found the ADR-0109
+  machinery working (envelope binding carried all four luna mints; stated
+  declines landed in lineage; anchors resolve 100%; the deliberate-lesson
+  exemption held clean under 27 live trims) and, beneath it, a defect class
+  the machinery had made visible for the first time: **acceptance was
+  certifying deliveries the verifier never examined** (8 of 12 receipts and
+  3 of 4 mints adjudicated a stale publication — the adjudicated row is
+  "latest admitted at authoring instant," a moving target eight publishing
+  personas outrun; the steward derived the exact staleness fact by hand and
+  was ignored). Around it: structural acts silently voided (19 of 23 posts
+  in the qwen arm landed `text:""` under invented argument keys and were
+  cited as evidence; five artifact declarations landed as content-free
+  shells); the authoring gate destroyed three receipts by collapsing an
+  unreadable run index into "this run never existed"; atomic-commit actions
+  (wakes, receipts, work states) produced authored events with zero terminal
+  observations because both dispatchers discarded the post-commit persisted
+  identity; and the auto-distillation channel manufactured a quiescence
+  flywheel (34 of 45 turn-slot fragments the same "do no more work" recital;
+  one seed re-minted the identical paragraph eight times).
+- **Decisions (mechanical):**
+  1. *Publication currency is the mint's sixth join.* The signer's
+     host-sealed executed counter-evidence must intersect the CURRENT
+     delivered surface's digests (the newest whole-tree snapshot row, else
+     the adjudicated row — the same surface the read-side qualification
+     and the receipt reply measure, so the three can never disagree), or
+     the sync disjunct must hold (a kernel-signed publication-sync fact
+     for the exact adjudicated id+hash plus a sealed executed receipt
+     after that instant — parity with persona acceptance, so
+     log-capturing verifiers are not starved; the disjunct counts only
+     when the adjudicated row IS the current surface, so an
+     explicitly-requested older publication can never sync-qualify). Unreadable currency
+     declines under its own code (`signer_evidence_unresolvable`), never as
+     absence. Mint-observation schema /3; the disposition schema is never
+     bumped (recorded history stays admissible).
+  2. *The binder's recall is complete and uncapped.* Citations are read
+     from `terminal_result` as well as `inputs`; a cited STARTED grounds
+     through its COMPLETED pair exactly as a cited AUTHORED grounds through
+     its envelope back-pointer (launch-not-run parity in every lane);
+     binding schema /3. The invented 64-citation, 8-resolution and
+     16-census caps are gone — the citing member's own transported size is
+     the bound; the id gate is the protocol-exact `event:` + 26-char form.
+  3. *Content-bearing structural acts refuse the silent void.* A blackboard
+     post whose body resolves empty after alias folding, and an artifact
+     declaration whose artifact_ref AND content_ref both resolve empty,
+     refuse loudly, naming the recognized fields and every received key —
+     the live evidence showed the loud-refusal path teaching correctly and
+     the silent-void path swallowing the corrected intent.
+  4. *Unreadable is never absent at the authoring gate.* The run-index read
+     states its availability; a failed read refuses as
+     `run_index_unreadable` (retryable) without judging the named run; a
+     genuine absence states the mismatched member and the recorded runs in
+     full. Ambiguity refusals carry ledger tokens
+     (`ambiguous_execution_forms`, `argv_args_ambiguous`, `cwd_ambiguous`).
+  5. *Atomic actions record terminal observations.* Both dispatchers carry
+     the post-commit persisted identity into the effect recorder; all seven
+     atomic-commit tools (wakes, receipts, work states, capability acts)
+     now close their authored events. Refused atomic actions stay
+     unpersisted by design.
+  6. *The carriage carries no duplicates and no invented counts.* A
+     body-identical duplicate of a currently-carried fragment records but
+     does not bind, stating `duplicate_of`; the newest-3 and marked-16
+     count caps, the 128-fragment head refusal, and the 8,192-byte inner
+     page budget are all removed — every distinct fragment binds, and what
+     rides each prompt is bounded by the ADR-0107 measured carrier
+     arithmetic alone, with the compile's existing omission statedness.
+- **THE STANDING RULE (operator directive): no artificial constraints.**
+  Every bound is measured (ADR-0107 window arithmetic), authority-declared
+  (task budgets, operator ceilings, supplied deadlines), protocol-exact
+  (sha256 64-hex, `sha256:`+64=71, ULID 26, `event:`+26, OS argv limits),
+  or absent. Removed this round on touched surfaces: the 32KB receipt
+  member gate (both layers), the cooldown-pacing 3600s clamp, the refusal
+  truncations (`[:120]`/`[:60]`/`[:16]` list slices), the binder caps, the
+  fragment count caps and head refusal, the 128-fragment bind gate, the
+  inner page budget. **Queued inventory (all INVENTED, replacement =
+  lane-scaling from the measured carrier budget unless noted):** the
+  prompt-lane MAX_BYTES family (256K carrier / 64K×5 / 48K / 32K / 24K /
+  16K), page and collection limits (schedule 16, conflict pages 8/16,
+  ladder rows 8, batch 8, ancestry 128, receipt page 32, situation items
+  100 / 320K chars, resume observation 48K, identity sections 64/20K,
+  sealed-generation entries 32), `_EXEC_CAPTURE_RESULT_JSON_BYTES = 650`,
+  the 64-receipt per-signer lane bound (replacement: authority-declared),
+  the 32/64MB model-input caps, `_NO_DEADLINE_EXECUTION_CEILING_S = 7200`
+  (replacement: the measured time axis llama.cpp already reports), and the
+  router's `MAX_MODEL_QUOTA_COOLDOWN_S = 7 days` — retry pacing now
+  follows the provider's DECLARED retry-after horizon unclamped, and that
+  seven-day constant is the one remaining guard between a misreported
+  declaration and a week-long stall; it is named here as the declared
+  bound of record until the inventory replaces it.
+  KEPT as non-artificial: `PRINCIPAL_TASK_DEADLINE_MAX_EPOCH_SECONDS`
+  (ISO-9999 representability, protocol-exact) and every operator-declared
+  ceiling.
+- **Doctrine verdict (three controlled runs):** no souled/unsouled
+  separation on any doctrine-targeted behavior — seeds authored 42% of
+  receipts, half the mints, the only latest-publication-bound mint, the
+  sharpest lessons and withholds; the richest-souled personas contributed
+  least on exactly their souls' axes. Soul iteration stops; souls stay as
+  shipped. The levers that remain are mechanical statedness and
+  task-authority bars.
+- **The bars experiment (e36, queued):** operator-supplied
+  `acceptance_condition` + `unaccepted_rewake` at POST /task, with outcome
+  bars (one deliverable of record; geometry-verified rooms with openings
+  cut in the solid; one source of truth across artifacts; format-validity
+  or stated non-fabricability; a structural screen at stated assumed basis;
+  grounded quantities; currency-bound acceptance). It tests the audit's
+  standing conclusion: capability acquisition (CAD-class tools, engineering
+  sims) never emerges because no bar ever prices an outcome the current
+  toolbox cannot cheaply produce — the cohort's own contracts price
+  process, whichever tier writes them.
