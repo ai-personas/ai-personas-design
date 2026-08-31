@@ -1397,3 +1397,40 @@ constraint on adjudication); coercing births or model choices (surfaces
 are delivered and read is free; absence is a finding about gradients, not
 gates); auto-terminating runs on cohort acceptance (personas keep authoring
 their own dispositions; quiescence follows visibility).
+
+### ADR-0108 addendum (2026-08-31, from the first live run on the build)
+
+The run validated the decision set by counterfactual and exposed four
+successor facts, folded in as addendum rather than a new ADR:
+
+1. *Carry carries what is written.* The loop's carry stage worked and all
+   ten distilled fragments were situational status snapshots; the influence
+   stage had no subject, and one frozen snapshot anchored a stale claim its
+   author repeated after the evidence changed. Doctrine (not machinery) now
+   names the gradient: a fragment records what would change the next
+   attempt; a status restatement is noise wearing permanence; a memory that
+   disagrees with present evidence is revised, not obeyed.
+2. *Execution-bound receipts contained a fabrication.* A synthetic-sine
+   "verdict" over a simulation that never ran was broadcast bar-clearing;
+   the receipt doctrine refused to sign without executed counter-evidence
+   and no acceptance was minted. The cost surfaced as a mutual-parking
+   deadlock (every persona's anti-noise rule waiting on another); doctrine
+   gains its counterpart: staging is not verifying, a fact computable from
+   readable bytes is never waited for, parking requires that no own action
+   advances the work.
+3. *The contract authoring result hands the receipt scope.* Two kernel
+   event ids sharing a timestamp prefix let a wrong pointer propagate into
+   38 records; the result now carries `receipt_scope:
+   "cohort-contract:event:…"` verbatim. Statedness additions of the same
+   kind: open-input refusals carry a mechanical key diff against the
+   requester's own response_schema; resolutions state whether any
+   contribution binds; a bare 64-hex content reference canonicalizes, and
+   BOTH signed-args verifiers compare through one canonicalizer with the
+   transport-computed disjunct admitted (review-caught: the recorded
+   canonical form otherwise diverged from the signed bare form and
+   declarations silently dropped from settlement).
+4. *Every cohort member carries doctrine.* Seeded neutrals ran on empty
+   souls while four of the audit's pathologies were theirs; a minimal
+   work-discipline collaborator soul (executions over restatements, claimed
+   results name their execution, no placeholder posted as an answer,
+   structural acts fill fields) closes the asymmetry operator-side.
