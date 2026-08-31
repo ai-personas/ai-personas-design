@@ -1410,7 +1410,13 @@ Current cutover records include:
 - `personaos-carrier-fit/1`,
   `personaos-carrier-lane-structural-index/1`,
   `personaos-model-compacted-projection/1` (ADR-0102), and
-  `personaos-continuation-fit/1` (ADR-0107); and
+  `personaos-continuation-fit/1` (ADR-0107);
+- `personaos-receipt-execution-binding/1`,
+  `personaos-authoring-refusal-observation/1`,
+  `personaos-cohort-acceptance-disposition/1`,
+  `personaos-cohort-acceptance-mint-observation/1`,
+  `personaos-sandbox-executable-inventory-probe/1`, and
+  `personaos-brain-fragment-body-projection/1` (ADR-0108); and
 - `personaos-replication-effect-descriptor/1`.
 
 ## 14. Key custody

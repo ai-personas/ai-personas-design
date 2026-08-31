@@ -1300,3 +1300,100 @@ that the second identical burn cannot happen); a persistent cross-boot
 density store (a boot's first turns run one conservative seed regime and
 converge within one observation; persisted calibration can go stale against
 a swapped model or tokenizer without any event saying so).
+
+## ADR-0108 — Learning that reads itself back; receipts that bind executions; cohort acceptance recorded
+
+- Status: accepted (2026-08-31)
+- Drives: the prompt-compile verifier's producer-shape agreement and the
+  `kernel.prompt_compile_refused` degraded read;
+  `personaos-receipt-execution-binding/1` on every verifier receipt;
+  `PERSONA_AUTHORING_REFUSED` lineage observations;
+  `personaos-cohort-acceptance-disposition/1` /
+  `TASK_COHORT_ACCEPTANCE_RECORDED` and the `cohort_accepted` terminal
+  state; `personaos-sandbox-executable-inventory-probe/1`; contract
+  live-set statedness at authoring; the command/cmd argv alias and the
+  transport-computed `content_ref` declaration mode
+
+**Problem.** A four-run audit (two bodies × two domains, ~700 calls, zero
+transport failures) found the learning loop's first four stages working —
+122/122 distillations became durable signed fragments and bindings tracked
+them — while the fifth did not run: fragment bodies reached zero of 1,693
+prompt-facing blobs, per-persona system prompts were byte-constant across
+whole runs, and three live incidents showed a lesson bound at the exact
+moment its own prohibition was violated. Root cause: the compile producer
+ships tuples in-process, the prompt verifier demanded lists, and every
+compile carrying bodies was refused `fragment_body_projection_invalid` —
+silently, because the refusal reached only an in-carrier absence code.
+Separately, verification integrity split cleanly on one mechanical fact:
+all 9 receipts of the two weaker runs carried `inputs: {}` while asserting
+computed values that appear in no execution output (one attested a
+59,659-byte sealed result where the file on disk is 259 bytes of parse
+error; another accepted "2,600 sf" that nothing ever computed while honest
+sums said 2,612, out of band); all 29 receipts of the two stronger runs
+carried resolvable execution bindings. Contracts drifted unsuperseded
+(three concurrent inconsistent contracts in one run; a basis swap that
+orphaned the executable validator in another), receipt refusals never
+reached lineage, and no ownerless task could ever record acceptance — the
+kernel's disposition ledger read zero in all four runs while "accepted"
+lived in persona prose.
+
+**Decision.**
+
+1. *Carry is conformance, not choice.* The compiled fragment-body page
+   (already produced and verified under its own byte budget) renders into
+   the persona system prompt; §20.3's clause that the binding "determines
+   which fragment bodies may be included in a later carrier" is now true on
+   the wire. A verifier refusal of a supplied compile is a degraded read,
+   countable, in addition to its in-carrier absence code. Producer and
+   verifier accept each other's exact in-process shapes; the agreement is
+   pinned by tests that cross no serialization boundary.
+2. *A receipt states its own grounding.* Every verifier receipt's
+   kernel-signed event carries a mechanical join from the receipt's
+   `inputs` to execution events by the same signer
+   (`personaos-receipt-execution-binding/1`): key-name-blind id scan,
+   lineage resolution, signer match. `execution_bound: false` refuses
+   nothing and states everything; the persona-signed preimage is unchanged
+   so every recorded receipt stays verifiable.
+3. *Authoring refusals reach lineage.* A refused receipt or contract
+   authoring appends one bounded `PERSONA_AUTHORING_REFUSED` observation —
+   the class that previously survived only when a persona narrated its own
+   refusal into a lesson.
+4. *The live contract set is stated at authoring.* A new contract names the
+   coexisting live contracts and whether it supersedes; coexistence is
+   never refused, and never again silent.
+5. *Cohort acceptance is recordable.* When a receipt closes an acceptance
+   contract under five mechanical joins — live unsuperseded contract bound
+   by scope; current adjudicated publication; `execution_bound: true`;
+   signer authorship-edge exactly absent; terminal result accepted — the
+   kernel mints `TASK_COHORT_ACCEPTANCE_RECORDED` (task scope). The
+   projection reports the distinct terminal state `cohort_accepted`, which
+   never claims and never outranks owner acceptance; the disposition states
+   its standing on its face (cohort-decided, not externally certified). An
+   unbound chain can never mint, structurally excluding the
+   fabricated-number path. Unmet conditions are returned as stated facts;
+   the mint never blocks the receipt.
+6. *The inventory is a stated deployment fact.* Following ADR-0106's
+   argument exactly — nothing stated the sandbox has network, so never
+   trying was rational — a boot probe records the executable-inventory
+   COUNTS and the read action (no names, no versions, no ranking): four
+   runs on a host with full professional toolchains produced zero installs
+   and, on the weaker body, zero capability inspections, with one cohort
+   spending shell turns on `which`.
+7. *Two frictions with live failure counts close.* `command_exec` accepts
+   the argv array under `command`/`cmd` (21 refusals — the same alias class
+   as timeout/argv); a local `declare_artifact` whose current bytes the
+   transport verified may omit `content_ref` — the transport computes,
+   verifies, and records the digest with `content_ref_source:
+   "declaration_transport_computed"` (5 refusals plus one run's
+   zero-declaration cascade into receipt preimage failures). Conflict
+   inspection names its owner; capability paging states its bound.
+
+Rejected, with reasons recorded: raising the auto-distill retention window
+(canon-intended "newest few" protects persona-curated bindings; the remedy
+is curation, which requires carry first); requiring execution bindings on
+receipts (persona-authored contracts already demand execution where the
+cohort wants it; a substrate requirement would be a tool-provenance
+constraint on adjudication); coercing births or model choices (surfaces
+are delivered and read is free; absence is a finding about gradients, not
+gates); auto-terminating runs on cohort acceptance (personas keep authoring
+their own dispositions; quiescence follows visibility).
