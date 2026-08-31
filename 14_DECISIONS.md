@@ -1434,3 +1434,83 @@ successor facts, folded in as addendum rather than a new ADR:
    work-discipline collaborator soul (executions over restatements, claimed
    results name their execution, no placeholder posted as an answer,
    structural acts fill fields) closes the asymmetry operator-side.
+
+## ADR-0109 — The audit closes its own instruments: envelope recall, stated declines, curated memory survives, paced retries
+
+- **Status:** accepted (2026-08-31)
+- **Context:** the first luna pair on the ADR-0108 build (e33 circuit + house)
+  produced the project's first fourteen kernel-recorded cohort acceptances and a
+  forensic audit of both runs. Every ADR-0108 mechanism held (scope handover
+  23/23 + 12/12; refusals durable and adaptive 13/13; the deadlock signature
+  dead; zero context overflows). What the audit found instead was a layer of
+  instrument defects — places where the substrate measured honestly but too
+  narrowly, or computed a fact and let it evaporate — plus the round's central
+  behavioral finding: **the cohort's own first-minute contract acts as a
+  ceiling that overrides soul doctrine**, so verification compounds (66% of
+  budget after the last design mutation; eleven of thirteen acceptances over
+  byte-identical design content) while the deliverable freezes.
+- **Decisions (mechanical):**
+  1. *Receipt execution binding resolves the action envelope.* Live receipts
+     cited real same-signer rc=0 executions by their `PERSONA_ACTION_*`
+     envelope ids; the scan resolved only raw exec kinds, so seven receipts
+     read unbound and three accepted receipts were wrongly declined minting.
+     The scan (binding schema /2) now grounds a cited `PERSONA_ACTION_COMPLETED`
+     whose `action_name` is an execution, grounds a cited AUTHORED id only
+     through its COMPLETED back-pointer (launch-not-run parity), collapses the
+     doubled `event:event:` prefix, and states a `cited_non_execution_kinds`
+     census so an unbound receipt names what was actually cited.
+  2. *A declined mint states itself in lineage.* The five mint conditions are
+     receipt-event-independent, so they are evaluated before the receipt append
+     and ride the kernel-signed receipt payload (`cohort_acceptance_mint`,
+     observation schema /2, `mint_eligible` + every unmet condition). The
+     persona-signed preimage is untouched. Sibling statedness: the open-input
+     projection derives `resolution_selected_contribution_id_present` (the
+     record payload is strict-signed on both layers and stays untouched);
+     acceptance projections state `cohort_acceptance_publication_stale` — a
+     cohort-accepted task whose delivery moved past its last acceptance is a
+     stated fact, never a reopened closure (noise publications would otherwise
+     hold every task open).
+  3. *Deliberately authored memory survives the recency trim.* Both live runs:
+     the explicit `author_brain_fragment` channel produced the genuine lessons,
+     then the newest-N cap let kernel-automatic turn-slot status snapshots
+     evict them (four near-duplicate settle notes displaced a persona's two
+     reusable failure+fix lessons). The explicit channel now marks its
+     fragments (`persona_action_authored`, mechanical provenance, never
+     content) and the trim exempts them exactly like evolved fragments — the
+     cap's own stated purpose. Fragment anchors canonicalize to one `event:`
+     prefix (every live fragment carried an unresolvable doubled ref).
+  4. *Failure facts tell the truth at the edges.* An rc=0 execution refused on
+     an `expected_stdout` mismatch is coded `expected_stdout_mismatch`, not
+     `exec_exit_nonzero` (a live persona had to diagnose the mislabel in a
+     brain fragment); authoring-refusal observations default `reason_code` to
+     the error token and `stage` to the refusing gate instead of empty strings.
+  5. *Retries pace to the provider's stated horizon.* A quota-dead provider
+     cost 44 empty scheduler turns over 41 minutes because transport backoff
+     capped at 30s against a multi-hour cooldown the router already knew. The
+     router states `all_models_cooldown_remaining()`; the retry keeps its exact
+     replayable wake and simply waits out the horizon (bounded 1h per hop).
+- **Decisions (doctrine, domain-free):** steward v10 — a limitation stated
+  twice is a bar owed to the contract (supersede or record why out of scope; a
+  pre-work contract is provisional); a check that reads none of the delivered
+  bytes verifies nothing; verification that changes nothing records nothing.
+  builder v6 — at each stage's edge ask what instrument the stage needs (the
+  exploration dual of the anti-hoarding clause; presence-probed-and-idle tools
+  are exercised before their stage closes); a tool's warning is a finding at
+  exit 0; create and verify in separate executions; changed work that needs a
+  counterparty is announced with a wake. collaborators v2 — the byte-reading
+  check test, verification economy with evidence-log hygiene (logs live in the
+  persona workspace; cite executions by id instead of re-publishing regenerated
+  logs — six personas' regenerated timing-noise log was the run's largest
+  merge-conflict source at 16.3% of all actions), and the instrument-reach
+  clause.
+- **Consequences:** the three wrongly-declined acceptances become mintable on
+  fresh receipts; declined mints and stale acceptances are auditable from
+  lineage alone; the learning loop's best records can no longer be evicted by
+  its noisiest; the exploration gap (twelve advertised acquisition affordances,
+  zero invocations, a fully-installed consuming-tool suite presence-probed
+  only) is addressed at the doctrinal layer where the evidence located it —
+  the substrate preconditions were all present and stated. The contract-ceiling
+  finding's task-authority lever (an operator-supplied `acceptance_condition`
+  demanding realization-grade outcomes) is recorded as the experiment ladder:
+  pure re-run, then cognition import, then operator bars — one variable per
+  run.
