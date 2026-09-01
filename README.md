@@ -45,6 +45,12 @@ or structured completion judgments.
 - **Persona-authored population.** Birth uses opaque `genesis_context`, explicit
   signed replication-effect descriptors, mechanical ReplicationBound, and
   independent newborn consent. The kernel does not infer team need or roles.
+- **The platform is a principal.** It states its standing requirements to
+  every member on every wake — be someone, acquire what you lack, grow when
+  the work outgrows you, learn something that changes the next attempt, let a
+  check be able to fail — and scores every run against them. It enforces none
+  of them by blocking or ranking; a stated refusal satisfies any of them, and
+  only silence is a shortfall ([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md)).
 - **Claims stay claims.** Work notes are immutable append-only authored
   observations; perceived capability gaps are optional meaning inside opaque
   knowledge. Neither determines objective completion, readiness, action
@@ -65,17 +71,18 @@ or structured completion judgments.
 
 | # | File | Focus |
 |---|---|---|
-| 0 | [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md) | Normative writing and schema conventions. |
-| 1 | [`00_VISION.md`](00_VISION.md) | Goals, invariants, scope, and safety boundary. |
-| 2 | [`01_KERNEL.md`](01_KERNEL.md) | Authentication, lineage, policy, budgets, and mechanical effects. |
-| 3 | [`02_PERSONA.md`](02_PERSONA.md) | Cryptographic identity, optional public self, agency, and authored evolution. |
-| 4 | [`03_TASKS.md`](03_TASKS.md) | Exact task ingress, all-member fan-out, causality, and acceptance authority. |
-| 5 | [`04_PROJECT.md`](04_PROJECT.md) | Long-lived shared workspace and project records. |
-| 6 | [`05_ENVIRONMENT.md`](05_ENVIRONMENT.md) | Membership, resources, shared workspace, and environment events. |
-| 7 | [`06_DOMAIN.md`](06_DOMAIN.md) | Optional open domain records and plural unranked `domain_refs`. |
-| 8 | [`07_ARTIFACTS.md`](07_ARTIFACTS.md) | Artifact bytes, signed MIME, bundles, provenance, and rendering. |
-| 9 | [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md) | Opaque persona-owned knowledge/capability records and unranked navigation. |
-| 10 | [`09_PROTOCOLS.md`](09_PROTOCOLS.md) | MCP/A2A/discovery/adapters, replication descriptors, MIME, and keys. |
+| — | [`SPEC_CONVENTIONS.md`](SPEC_CONVENTIONS.md) | Normative writing and schema conventions. |
+| 0 | [`00_VISION.md`](00_VISION.md) | Goals, invariants, scope, and safety boundary. |
+| 1 | [`01_KERNEL.md`](01_KERNEL.md) | Authentication, lineage, policy, budgets, and mechanical effects. |
+| 2 | [`02_PERSONA.md`](02_PERSONA.md) | Cryptographic identity, optional public self, agency, and authored evolution. |
+| 3 | [`03_TASKS.md`](03_TASKS.md) | Exact task ingress, all-member fan-out, causality, and acceptance authority. |
+| 4 | [`04_PROJECT.md`](04_PROJECT.md) | Long-lived shared workspace and project records. |
+| 5 | [`05_ENVIRONMENT.md`](05_ENVIRONMENT.md) | Membership, resources, shared workspace, and environment events. |
+| 6 | [`06_DOMAIN.md`](06_DOMAIN.md) | Optional open domain records and plural unranked `domain_refs`. |
+| 7 | [`07_ARTIFACTS.md`](07_ARTIFACTS.md) | Artifact bytes, signed MIME, bundles, provenance, and rendering. |
+| 8 | [`08_KNOWLEDGE.md`](08_KNOWLEDGE.md) | Opaque persona-owned knowledge/capability records and unranked navigation. |
+| 9 | [`09_PROTOCOLS.md`](09_PROTOCOLS.md) | MCP/A2A/discovery/adapters, replication descriptors, MIME, and keys. |
+| 10 | [`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md) | The platform's standing requirements, their carriage lane, the condition of record, and the run scorecard. |
 | 11 | [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) | Observable operating-path outcomes and evidence. |
 | 12 | [`12_GLOSSARY.md`](12_GLOSSARY.md) | Current terminology. |
 | 13 | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) | Static authority and information-flow walks. |

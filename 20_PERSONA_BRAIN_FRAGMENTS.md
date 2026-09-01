@@ -219,7 +219,10 @@ reconstruction.
 
 There is no evidence threshold, rollback score, operational-change rubric, or
 automatic edit at feedback, failure, tool, artifact, pause, or budget
-boundaries. Historical signed revisions remain auditable under retention and
+boundaries. The prepaid post-run distillation wake
+([`10_PLATFORM_REQUIREMENTS.md §3` P-3](10_PLATFORM_REQUIREMENTS.md#3-requirements-on-the-platform))
+schedules one funded moment at a run's settle point; it performs no edit and
+carries no suggestion. Historical signed revisions remain auditable under retention and
 consent policy. Supersession never rewrites prior bytes.
 
 ### 3a. Structural distillation carriage

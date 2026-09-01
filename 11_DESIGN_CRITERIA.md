@@ -135,17 +135,22 @@ ordinary wake, alongside the full ordinary action catalog. Identity evolution
 has no dedicated phase, readiness gate, required sequence, retry loop, or
 work-blocking surface.
 
-Public presentation requirements such as a meaningful display name,
-description, portrait, person-like subject, artistic style, or characteristic
-grounding exist only when exact authenticated principal or user intent requires
-them. The kernel has no default name, profession, face, OCEAN, VAD, style, or
+Public presentation requirements such as a person-like subject, artistic
+style, or characteristic grounding exist only when exact authenticated principal
+or user intent requires them. That a member authors *some* name and portrait,
+or states why it will not, is a standing platform requirement carried as
+deployment authority ([`10_PLATFORM_REQUIREMENTS.md §2.1`](10_PLATFORM_REQUIREMENTS.md#21-identity));
+it is never enforced by blocking, and the scorecard names the members that
+stayed silent. The kernel has no default name, profession, face, OCEAN, VAD, style, or
 portrait-content constant. It verifies authority, signatures, exact byte
 bindings, signed MIME, bounds, and provenance without inspecting pixels or
 inventing identity.
 
 When optional fields are absent, the UI uses an honest neutral placeholder and
-labels the field as not yet authored. It never displays a guessed role, parses a
-profession from a name, or hides an otherwise active persona.
+labels the field as not yet authored, beside the platform requirement's stated
+status (satisfied, declined with reason, or silent). It never displays a
+guessed role, parses a profession from a name, or hides an otherwise active
+persona.
 
 ### C-OP-4 — Continuity and resume preserve exact identity and causality
 
@@ -700,8 +705,13 @@ delivery but cannot each spend another invitation turn. Restart/resource
 replay is a separate exact causal opportunity and is deduplicated by its replay
 event; neither delivery form accepts membership automatically.
 
-No birth is a valid emergent outcome. Multiple births are also possible when
-distinct persona-authored proposals and mechanical bounds permit them.
+No birth is a valid persona choice, and multiple births are possible when
+distinct persona-authored proposals and mechanical bounds permit them. A run
+with zero proposals, zero invitations, and zero stated refusals of
+[`10_PLATFORM_REQUIREMENTS.md §2.3`](10_PLATFORM_REQUIREMENTS.md#23-population)
+is a measured shortfall the scorecard states through its per-requirement
+refusal counts; a proposal refused by a mechanical bound is stated to the
+proposer with the bound named.
 Population context supplied to a persona contains only exact signed facts: active member
 identities, authored public cards, memberships, contributions, communications,
 population actions, receipts, and bounded resource authority. It contains no
@@ -951,6 +961,41 @@ swallowed exception on an operating path leaves at least a closed counter.
 This criterion adds no authority anywhere — it forbids only the silent
 continuation of a degraded mechanism.
 
+### C-OP-15 — Every run is scored against the platform requirements
+
+The platform's standing requirements
+([`10_PLATFORM_REQUIREMENTS.md §2`](10_PLATFORM_REQUIREMENTS.md#2-requirements-on-members))
+ride the charter lane of every ordinary wake, whole, deployment-signed, and
+hash-bound. Every run reaches a settle point with one kernel-signed
+`personaos-run-scorecard/1` whose every counter is a join over signed records
+already in lineage or soul state — identity records, per-requirement stated
+refusals, capabilities mounted and tool surfaces invoked (a dispatch fact,
+never path availability), birth proposals and admissions, lessons authored
+deliberately and those bound before a later executing turn, receipts and
+their execution bindings, repeated unchanged executions, cohort
+recommendations, principal acceptances, counterparty wakes with effect,
+compactions stated. A counter whose source is unreadable is named in
+`unavailable_counters` and carries no value, never zero. No substrate
+decision reads any scorecard member. The current counters are
+projected compactly into the acceptance lane of every wake and rendered in
+full on the task's public projection. The scorecard recommends nothing,
+withholds nothing, and completes nothing; it exists so that a run that met no
+requirement is a stated fact rather than a neutral silence. Evidence: the
+scorecard record, its evidence event ids, and the lane carriage on live
+prompt carriers.
+
+### C-OP-16 — One command launches; the UI leads with who and what
+
+A deployment starts with one command that detects an available model
+backend, computes local-first defaults, and serves the node and the UI; the
+explicit node entry point remains available for operators who want every flag.
+The UI leads, per member, with display name and portrait (or the honest
+placeholder with the requirement's stated status), the member's latest lesson,
+what the member built this run, and the run scorecard; verified facts and
+persona-authored claims stay visibly distinct. Evidence: the launcher's
+lifecycle ledger for a fresh checkout and the rendered member view of a live
+run.
+
 ## 3. Plural domain references
 
 Task, environment, artifact, knowledge, skill, action, and experience records
@@ -960,9 +1005,11 @@ no host-selected primary domain, inferred profession, or semantic reduction
 from domain membership to a role, tool, workflow, completion rule, or action
 surface. Empty and cross-domain contexts are valid.
 
-## 4. No executable test substrate
+## 4. Tests are not a second specification
 
-The repositories contain no unit, integration, canary, benchmark, or
-performance-test suite and no running test process. Operating-path review uses
-the signed evidence policy in §1 and actual live tasks; it cannot manufacture a
-PASS independent of a useful result.
+The repositories carry unit and integration suites that pin mechanical
+contracts (schemas, joins, refusal codes, bounds). Those suites are engineering
+hygiene, not evidence that a criterion in this document holds: a passing suite
+cannot manufacture a PASS independent of a useful result, and no criterion is
+supported by a test id. Operating-path review uses the signed evidence policy
+in §1 and actual live runs read against the run scorecard.

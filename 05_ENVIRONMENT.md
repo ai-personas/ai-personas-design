@@ -20,6 +20,17 @@ The kernel validates exact mechanics without interpreting a charter as a role,
 profession, deliverable list, tool requirement, team plan, or semantic action
 surface.
 
+Every environment also carries the deployment's standing platform
+requirements ([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md)),
+recorded once as `personaos-platform-requirements/1` at environment creation,
+signed by the deployment's policy signing key — the same authority that signs
+the ReplicationBound; a record signed by any other key, the node key included,
+is refused — and carried whole in the charter lane of every ordinary wake as a
+labelled block before any principal charter. The two are never merged into one text; each
+carries its own hashes. The requirements contain no task, domain, profession,
+tool, format, or workflow word, and the kernel interprets them exactly as it
+interprets a charter: not at all.
+
 ## 1a. Persona-authored environment identity
 
 An active member may append a signed environment-identity record carrying an

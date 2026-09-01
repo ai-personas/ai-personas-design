@@ -34,16 +34,21 @@ team size, prompt, or completion rule from the intent text.
 Explicit principal authority is one optional intake object with exactly these
 optional members: `acceptance_condition` (opaque canonical JSON chosen by the
 principal, bounded in bytes, never interpreted by the substrate),
-`verifier_descriptor` (exactly one of three exact member sets, every member an
+`verifier_descriptor` (exactly one of four exact member sets, every member an
 exact string: {`verifier_key_id`, `scope`}; {`kind`, `verifier_key_id`,
-`scope`} with `kind` exactly `"exact-key/1"`; or {`kind`, `scope`} with `kind`
-exactly `"registered-persona-identity/1"`; any other member set is refused),
+`scope`} with `kind` exactly `"exact-key/1"`; {`kind`, `scope`} with `kind`
+exactly `"registered-persona-identity/1"`; or {`kind`, `scope`,
+`capability_generation_ref`} with `kind` exactly `"principal-capability/1"`
+([`10_PLATFORM_REQUIREMENTS.md §6.3`](10_PLATFORM_REQUIREMENTS.md#63-principal-declared-verification-capability));
+any other member set is refused),
 `verifier_receipt_constitutes_acceptance` (exact boolean, valid only
 with a supplied descriptor, absent means false), `deadline_epoch_seconds`
 (absolute integer epoch seconds), `unaccepted_rewake_count` and
 `unaccepted_rewake_interval_s` (both exact positive integers, valid only when
-supplied together), and `require_authenticated_effect_provenance` (exact
-boolean, absent means false). Intake records this as one declaration with
+supplied together), `require_authenticated_effect_provenance` (exact
+boolean, absent means false), and `post_run_distillation_reservation_per_member`
+(exact non-negative integer of model calls reserved per active member for the
+§7 post-run distillation wake; absent means one). Intake records this as one declaration with
 an explicit per-member supplied/omitted marker and a content hash for each
 supplied member; the declaration travels unchanged inside the task-resource
 fan-out authority. Recording it validates shape and bounds only — it schedules
@@ -421,18 +426,35 @@ Every authentic successor is retained independently. Several may coexist. The
 runtime does not choose one as a representative next stage or treat plural
 successors as conflict.
 
-Two stimulus classes are protocol-defined instances of the final bullet, not
-new implicit successors. The sealed-turn-failure replay carrier re-delivers
-the exact reference to a prior sealed turn-failure receipt to the persona that
-authored the failed turn. The tool-mount correlation carrier delivers,
-together, the exact reference to a sealed capability-mount receipt and the
-exact reference to a prior sealed turn-failure receipt recorded under the same
-environment and task. Each is executable only as a descriptor-declared event
-whose authority has actually been armed: one-shot, prepaid from the exact
-signed run grant at arm time under the same ledger rule as any finite wake,
-bounded by a signed exact per-class fire cap and a mechanically increasing
-minimum re-arm interval, held un-fired while the run it is bound to remains
-live, and cancelled by exact authenticated acceptance. The carrier payload
+Three stimulus classes are protocol-defined instances of the final bullet,
+not new implicit successors. The sealed-turn-failure replay carrier
+re-delivers the exact reference to a prior sealed turn-failure receipt to the
+persona that authored the failed turn. The tool-mount correlation carrier
+delivers, together, the exact reference to a sealed capability-mount receipt
+and the exact reference to a prior sealed turn-failure receipt recorded under
+the same environment and task. The **post-run distillation wake**
+(`personaos-post-run-distillation-wake/1`,
+[`10_PLATFORM_REQUIREMENTS.md §4.4`](10_PLATFORM_REQUIREMENTS.md#44-the-post-run-distillation-wake))
+delivers, to each member active at the run's settle point (§10), the exact
+references to the settle record, the run scorecard, and the acceptance facts.
+Its funding is reserved at intake from the exact signed run grant — the
+principal's `post_run_distillation_reservation_per_member` (§1), one call per
+member absent a declaration, zero permitted — and stated on the ledger; a
+member admitted after intake receives the wake only when unreserved headroom
+covers it, and the scorecard names the settle-point members no reservation
+covers; a member that departs before the settle point returns its reservation
+to the run ledger. Under an unlimited grant no reservation exists and every
+settle-point member receives the wake under the ordinary per-event cap. It is
+not retired by acceptance, because the settle point is one of its triggers;
+it fires at most once per member per run. Each of the two replay classes is
+executable only as a descriptor-declared event whose authority has actually
+been armed: one-shot, prepaid from the exact signed run grant at arm time
+under the same ledger rule as any finite wake, bounded by a signed exact
+per-class fire cap and a mechanically increasing minimum re-arm interval, held
+un-fired while the run it is bound to remains live, and cancelled by exact
+authenticated acceptance. The post-run distillation wake shares the
+descriptor, prepayment, and one-shot rules and is triggered by the settle
+point rather than cancelled by acceptance. The carrier payload
 contains exact record references only — never repaired arguments, a retry
 instruction, a diagnosis, or new prose. Delivery gives the persona one
 ordinary wake with its complete authorized action catalogue; whether anything
@@ -442,7 +464,8 @@ continuation by itself; only the armed descriptor does.
 
 Exact authenticated acceptance retires exactly the governed carriers — the two
 sealed-failure replay stimulus classes above and the §1 principal-declared
-unaccepted re-wake bound — and nothing else. It neither cancels a
+unaccepted re-wake bound — and nothing else; the post-run distillation wake is
+triggered by the settle point acceptance produces, not retired by it. It neither cancels a
 persona-authored armed wake nor confiscates the remaining signed run ledger;
 every already-prepaid fire stays funded and deliverable, and any funded
 post-acceptance turn may arm a further bounded successor under the ordinary
@@ -548,12 +571,55 @@ deduplication while preserving the common event identity.
 Concurrent grants and replays are idempotent by exact authority. They cannot
 duplicate a settled delivery, mint a new task, or manufacture another persona.
 
+Resume follows causality. A paused mission resumes only on an authentic causal
+delivery — a principal event, a resource grant, a ladder fire, a peer delivery,
+or a persona-authored wake. A node heartbeat, sweep, or housekeeping pass is
+not a delivery: it MUST NOT re-queue a mission whose members have all authored
+`no_successor` and for which no authentic delivery is pending. Re-queuing such
+a mission manufactures work that
+[`00_VISION.md §3` J9](00_VISION.md#j9--event-only-continuation) forbids, and
+the live cost was measured (seventeen re-queues, ~144 calls of quiescence
+recitals, 2026-09-01). Whether a mission is settled is a fact about pending
+deliveries, never about any acceptance state.
+
 ## 9. Objective acceptance
 
 Acceptance comes only from exact authority and evidence declared by the
 authenticated principal or an explicitly authorized verifier. Examples may
 include a principal's signed acceptance, an authorized verifier receipt bound
 to exact current bytes, or a principal-declared materialization condition.
+
+**The condition of record.** When the principal supplies an
+`acceptance_condition`, it is the condition of record for the task. Every
+cohort acceptance contract authored for the task MUST bind
+`principal_condition_hash`; a receipt scoped to a contract inherits that
+binding, and the acceptance mint reads it from the contract event already
+among its joins. A cohort contract MAY add bars; its text is carried beside
+the principal's and never replaces it. The verifier declaration synthesised
+from a cohort contract under ADR-0097
+(`personaos-cohort-contract-verifier-declaration/2`) MUST inherit every
+supplied principal member and MAY supply only the verifier predicate the
+principal left absent. A receipt scoped to a contract that does not bind the
+principal's condition hash carries no acceptance standing and states so on its
+face. When the principal supplies no condition there is no condition of
+record: each live contract adjudicates its own text, every receipt's standing
+names the contract it joined, and `principal_condition_hash` is absent, never
+empty. The condition of record is the latest supplied `acceptance_condition`
+in the task's causal ancestry; the kernel binds its hash on every contract
+authored while it exists, and a contract bound to an earlier hash or to none
+keeps standing only for receipts recorded before the amendment that changed
+it — the same era rule the terminal-verdict contract uses below. The
+substrate still interprets no condition text; it binds hashes.
+
+**Cohort acceptance is a recommendation.** A cohort acceptance record is the
+cohort's signed recommendation over an exact byte state. It closes no task,
+retires no principal carrier, settles no paused mission, and cancels no
+ladder; the substrate reports it as the distinct fact `cohort_recommended`.
+A task closes by acceptance only through exact authenticated principal
+acceptance, a receipt qualified under a principal-declared verifier descriptor
+whose `verifier_receipt_constitutes_acceptance` is true, or another
+principal-declared mechanism
+([`10_PLATFORM_REQUIREMENTS.md §6`](10_PLATFORM_REQUIREMENTS.md#6-acceptance-interplay)).
 
 When the principal declares that materialized output is required, that exact
 causal requirement reaches the ordinary persona action loop. The run cannot
@@ -831,6 +897,27 @@ termination, or other explicitly declared authority can create its corresponding
 terminal state. Budget exhaustion remains a pause unless that authority says
 otherwise.
 
+A run's **settle point** is distinct from a terminal state and is reached at
+the earlier of two facts: an explicit terminal state as above, or the J9
+settle fact — every active member's latest disposition is `no_successor`,
+bound or unbound (a later publication unbinds a parked disposition and
+schedules no one; the settle record counts the unbound), and no authentic
+causal delivery is pending (a budget-exhausted run with nothing pending is
+settled, though paused). The fact is evaluated on the append that completes
+it — the last parking disposition, the exhaustion pause, or the terminal
+event — never by a sweep. At the settle point the kernel signs the run's
+settle record (`personaos-run-settle-record/1`,
+[`10_PLATFORM_REQUIREMENTS.md §4.5`](10_PLATFORM_REQUIREMENTS.md#45-the-settle-record))
+and the run scorecard
+([`10_PLATFORM_REQUIREMENTS.md §5`](10_PLATFORM_REQUIREMENTS.md#5-the-run-scorecard))
+and delivers the prepaid post-run distillation wakes (§7), once per run.
+Those wakes are turns of the settled run, not a resume: the settle record
+stands, their turns are recorded after it, a successor a member arms from one
+continues the run under the ordinary arm-time transfer rule, and the run is
+scored once. A later authentic delivery that resumes the task opens a new
+task generation, which settles again. The settle point creates no terminal
+state, closes nothing, and is read by no other substrate decision.
+
 A persona's signed `no_successor` remains attributable but represents the
 current mechanical frontier only when its exact observed situation—or a
 kernel-signed isolated-disposition settlement—rejoins the current workspace
@@ -867,7 +954,9 @@ a reusable private runtime capability.
 
 No host-generated status poll, readiness repair, identity completion call,
 capability appraisal, population appraisal, completion appraisal, or automatic
-reflection call exists.
+reflection call exists beyond the three protocol-defined prepaid stimulus
+classes of §7, each of which delivers exact references and one ordinary wake
+and prescribes nothing.
 
 ## 12. Public projection
 
@@ -887,7 +976,10 @@ Human-facing task state distinguishes verified facts from authored claims:
   of the work, zero recorded verdicts is stated as zero, and a predicate-mode
   verdict additionally records which of its mechanical invariants held, as
   exact booleans; and
-- explicit acceptance, pause, cancellation, or quiescence facts.
+- explicit acceptance, pause, cancellation, or quiescence facts; and
+- the run scorecard
+  ([`10_PLATFORM_REQUIREMENTS.md §5`](10_PLATFORM_REQUIREMENTS.md#5-the-run-scorecard)),
+  in full, with each counter's evidence references.
 
 It never relabels quiescence as done, a singleton note as team consensus, an
 artifact title as independent review, or model/tool success as objective

@@ -1023,14 +1023,15 @@ been hash-bound must likewise preserve the verified carrier exactly; it may
 sanitize only before hashing or reject the whole unverified carrier, never
 delete a nested field while retaining the old hash.
 
-For live emergence validation, submit the exact principal request as the task
-event. Do not replace it with an operator-authored expansion that names desired
-population changes, professions, tools, formats, workflows, missing evidence,
-or expected stopping behaviour. Such an expansion is ordinary prompt authority
-and therefore cannot demonstrate that the observed choices emerged from the
-persona. Amendments are valid only when they are exact principal-authored input;
-the report must distinguish behaviour requested by those bytes from behaviour
-independently authored by a persona.
+For live validation, submit the exact principal request as the task event,
+with whatever acceptance condition the principal chooses to state. The
+platform's standing requirements ride every wake regardless. The report MUST
+distinguish three things: behaviour a platform requirement or principal bar
+asked for (the platform working), behaviour beyond what was asked (emergence),
+and requirements met by neither satisfaction nor stated refusal (the measured
+shortfall). An operator-authored condition that names desired outcomes is
+ordinary principal authority and valid input; what it cannot do is count as
+emergence evidence for the behaviour it named.
 
 Persist that large semantic situation through
 `personaos-persona-work-situation-storage/1`. The signed envelope must be
@@ -1532,7 +1533,8 @@ recurrence reserves fewer turns than it advertises; restart mints capacity; or
 schedule purpose, task words, roles, domains, tool names, paths, formats, or
 payload meaning affect funding or admission.
 
-Repeat with the two protocol-defined stimulus classes. Seal one turn-failure
+Repeat with the two replay stimulus classes (the third, the post-run
+distillation wake, is walked in §18). Seal one turn-failure
 receipt and arm its sealed-turn-failure replay carrier; separately seal a
 capability-mount receipt in an environment holding a prior sealed turn-failure
 receipt for the same environment and task, and arm the tool-mount correlation
@@ -1647,7 +1649,9 @@ A cutover is design-complete only when current normative text contains no live:
 
 - mission charter or refinement reducer;
 - task classifier, phase graph, keyword/regex selector, or prompt program;
-- required fixed personality/public identity field;
+- admission-gating public identity field;
+- cohort acceptance presented as a closing or terminal state;
+- a heartbeat, sweep, or housekeeping pass presented as a causal delivery;
 - ranked/top-K memory, skill, tool, candidate, or population selection;
 - structured work readiness or capability-gap lifecycle/completion gate;
 - work-note defer, settlement, current, or stale classification;
@@ -1673,3 +1677,68 @@ A cutover is design-complete only when current normative text contains no live:
 
 This audit is performed by reading current design text and checking diffs. It is
 not an executable unit, integration, canary, or performance test.
+
+## 18. Platform requirements, condition of record, and scorecard
+
+Walk (ADR-0112). A deployment starts a node; the environment is created; a
+principal posts a task with an `acceptance_condition` and no verifier
+descriptor.
+
+1. **Carriage.** Inspect the environment lineage: the
+   `personaos-platform-requirements/1` record MUST verify under the
+   deployment's policy signing key and MUST be refused under any other.
+   Inspect the actual model carrier of the first ordinary wake of every
+   member: the text MUST occupy the charter lane whole, labelled, with both
+   its record hash and its ordered-text hash; a principal charter, when present, is a second labelled
+   block in the same lane. Inspect a wake after the situation has grown past
+   the measured window: the lane is unchanged and the task lanes precede every
+   inventory (P-2). A hash-only or paged requirements block fails.
+2. **Condition of record.** A member authors a cohort acceptance contract.
+   Inspect the contract event: it MUST bind `principal_condition_hash`.
+   Inspect the synthesised verifier declaration (/2): it MUST carry the
+   principal's `acceptance_condition` hash and every other supplied principal
+   member; the contract's text rides beside it. A receipt scoped to a contract
+   that binds no principal hash MUST carry no acceptance standing and MUST
+   state so on its face; the frozen receipt and mint records gain no member.
+3. **Cohort recommendation.** Three qualifying receipts accept. Inspect the
+   task projection: `cohort_recommended` is stated; the task is not closed;
+   the principal ladder is not cancelled; the resume state is unchanged.
+   Inspect a heartbeat after every member authored `no_successor`: nothing
+   re-queues (J9). A principal acceptance then closes; a ladder fire before it
+   wakes the owner as declared.
+4. **Principal capability.** Repeat with `verifier_descriptor`
+   `{kind: "principal-capability/1", scope, capability_generation_ref}` naming
+   an existing sealed generation's manifest hash and
+   `verifier_receipt_constitutes_acceptance: true`. A receipt whose sealed
+   executed evidence includes no execution whose joined-generation rows name
+   that hash MUST carry no acceptance standing; one that does, and passes the
+   three invariants, MUST extend into acceptance. A same-named generation with
+   a different manifest hash MUST NOT satisfy the descriptor.
+5. **Scorecard.** At the settle point (every member parked, nothing pending,
+   or an explicit terminal state) inspect the `personaos-run-scorecard/1`
+   event: every counter joins to named evidence ids; an unreadable source is
+   named in `unavailable_counters`; `refusals_stated_by_requirement` carries
+   one row per requirement id; the projection in the acceptance lane of the
+   last wake carries the same counters. Inspect a member that authored no name
+   and no `personaos-platform-requirement-refusal/1` for R-ID-1:
+   `unnamed_members` counts it and the UI shows the placeholder with status
+   *silent*. Inspect a budget-exhausted run with every member parked: it is
+   settled and scored though paused.
+6. **Funded moment.** At the settle point each member active there receives
+   at most one prepaid post-run distillation wake carrying exact references to
+   the settle record, the scorecard, and the acceptance facts; the ledger
+   shows the reservation made at intake under
+   `post_run_distillation_reservation_per_member`; a member admitted after
+   intake with no unreserved headroom is named in
+   `post_run_distillation_members_unreached`; a member that authors nothing in
+   that wake leaves a settled turn and no further call; the settle record
+   stands and the run is not scored again. Repeat with a principal-capability
+   descriptor: a verifier whose only execution after the mount is an unrelated
+   command has joined the generation on its path and MUST NOT satisfy the
+   descriptor; one whose evidence includes an environment-tool invocation
+   dispatched to the named surface MUST.
+
+The walk fails on any silent omission: a requirements block absent from a
+carrier with no stated omission, a receipt without the principal hash that
+still mints, a heartbeat that re-queues, a counter rendered as zero when its
+source was unreadable.

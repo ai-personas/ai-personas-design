@@ -85,6 +85,13 @@ authority and receive no compatibility mapper.
 surface verified nodes, environments, and personas quickly before heavier data
 loads.
 
+**Condition of record** — The acceptance condition every verifier receipt
+and cohort contract of a task adjudicates against: the principal's supplied
+`acceptance_condition`, bound by hash on every cohort contract. A cohort
+contract may add bars and never replaces it. When the principal supplies no
+condition there is no condition of record; each live contract adjudicates its
+own text and every receipt's standing names the contract it joined.
+
 **Content hash** — Exact cryptographic digest binding a record or byte body.
 
 **Coordination lineage snapshot** —
@@ -94,6 +101,12 @@ requested/verified/unverified scope totals, cursor range, omissions,
 completeness, and mechanical ordering.
 
 ## D
+
+**Deployment** — The operator authority that launches a node and signs its
+policy records: the ReplicationBound, the environment model registry, and the
+`personaos-platform-requirements/1` record. A deployment is a principal, not
+a host: it states what it requires and authors no task, domain, profession,
+tool, or workflow doctrine.
 
 **Discovery** — Concurrent transport of independently verifiable location and
 record metadata. Discovery does not grant trust, membership, access, relevance,
@@ -114,7 +127,9 @@ primary domain and no implied profession, tool, prompt, or workflow.
 
 **Emergent behavior** — Persona-authored navigation and effects produced from
 exact facts and available actions without host task-word, score, regex, prompt,
-role, team, or tool selectors.
+role, team, or tool selectors. Behaviour a platform requirement asked for is
+the platform working; behaviour beyond what was asked is emergence; a run with
+neither is a measured shortfall.
 
 **Environment** — Signed membership, resource, workspace, policy, and causal
 scope in which personas may collaborate.
@@ -248,6 +263,13 @@ appends; revision/prior-record metadata orders them without replacement,
 current/stale, or settlement meaning. A note cannot complete an objective or
 schedule work.
 
+**Platform requirement** — One signed standing statement in
+[`10_PLATFORM_REQUIREMENTS.md §2`](10_PLATFORM_REQUIREMENTS.md#2-requirements-on-members),
+carried by the deployment to every member on every ordinary wake in the
+charter lane. A member may satisfy it, decline it with a stated reason, or
+ignore it; only silence is a shortfall. Contains no task, domain, profession,
+tool, format, or workflow word.
+
 **Plural domain references** — Zero-or-more exact signed `domain_refs` on
 eligible records, transported without ranking or primary-domain selection.
 
@@ -292,6 +314,11 @@ resume it fans out unchanged to all active members under the same pool.
 authorized as the ceiling for one exact run plus a distinct principal-selected
 bootstrap member. Canonical sorting is serialization, not preference; the
 bootstrap applies only until a matching persona model choice exists.
+
+**Run scorecard** — `personaos-run-scorecard/1`, the kernel-signed per-run
+count of what a run did against the platform requirements, computed from
+signed records only and read by no substrate decision. A count, not a reward,
+price, or completion judgement.
 
 **Routed wake delivery snapshot** —
 `personaos-communication-routed-wake-delivery-snapshot/1`, an exact

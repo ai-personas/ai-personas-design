@@ -37,11 +37,17 @@ behavior.
 PersonaOS does not guarantee that a model will make a good choice, that a team
 will form, that a particular tool will be used, or that an artifact will meet a
 professional standard. It preserves the conditions for those outcomes to
-emerge and the evidence needed to judge them honestly.
+emerge and the evidence needed to judge them honestly. It does state, as
+deployment authority, what it requires of every member
+([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md)) and it scores
+every run against those requirements; a run that meets none of them is a
+measured shortfall, not a neutral outcome.
 
 The kernel is not a task classifier, planner, coordinator, profession registry,
 prompt optimizer, relevance ranker, psychology engine, team allocator,
-completion judge, or automatic improvement loop.
+completion judge, or automatic improvement loop. It schedules one prepaid
+distillation moment per member per run and carries whatever the persona
+writes there; it optimizes nothing.
 
 ## 3. Invariants
 
@@ -105,10 +111,16 @@ carriers preserve attribution and idempotency.
 
 Another model call requires an authentic causal delivery and exact resource
 authority. Notes, gaps, scores, statuses, successful tools, identity omissions,
-population records, and changed bytes do not synthesize calls. When a persona
+population records, and changed bytes do not synthesize calls, beyond the
+three protocol-defined prepaid stimulus classes below. When a persona
 authors a work-state append it also signs an explicit causal disposition: one
 exact successor wake or deliberately none. The substrate never derives that
-choice from the open note.
+choice from the open note. Three stimulus classes are protocol-defined
+deliveries, each descriptor-declared, prepaid at arm time, and one-shot: the
+sealed-turn-failure replay, the tool-mount correlation, and the post-run
+distillation wake ([`03_TASKS.md §7`](03_TASKS.md#7-causal-continuation)).
+A heartbeat, sweep, or housekeeping pass is not a causal delivery and resumes
+nothing.
 
 ### J10 — Nonterminal quiescence
 
@@ -121,7 +133,12 @@ task.
 Objective acceptance comes only from exact authenticated principal acceptance,
 an explicitly authorized verifier bound to current evidence, or another
 principal-declared mechanism. Model prose, work notes, gaps, scores, member
-count, filenames, and tool success do not complete work.
+count, filenames, and tool success do not complete work. When the principal
+supplies an acceptance condition it is the condition of record: every verifier
+receipt and cohort contract of the task adjudicates against it, a cohort
+contract may add bars and never replaces it, and a cohort's own acceptance
+record is a recommendation that closes nothing
+([`10_PLATFORM_REQUIREMENTS.md §6`](10_PLATFORM_REQUIREMENTS.md#6-acceptance-interplay)).
 
 ## 4. Emergence boundary
 
@@ -146,9 +163,13 @@ UI-derived status, and protocol adapters.
 
 ## 5. Identity and human presentation
 
-Public name, description, characteristics, portrait, and style are optional
-persona-authored evolution during ordinary wakes. Missing fields never block
-discovery or work.
+Public name, description, characteristics, portrait, and style are
+persona-authored evolution during ordinary wakes: optional to admission,
+required by the platform. The platform requires each member to author a name
+and portrait, or state why it will not, before the run settles
+([`10_PLATFORM_REQUIREMENTS.md §2.1`](10_PLATFORM_REQUIREMENTS.md#21-identity));
+missing fields still never block discovery or work, and the UI shows the
+honest placeholder beside the requirement's stated status.
 
 Person-like portraits, meaningful names, artistic styles, OCEAN/VAD grounding,
 or other presentation requirements apply only when exact authenticated
@@ -223,12 +244,17 @@ prompt optimization, ranked retrieval, host-authored genesis seeds,
 one-newborn-per-need, singular primary domains, inferred MIME, inferred
 replication effects, or host-authored team/tool/workflow doctrine.
 
-Every item on that list names something the *substrate* must not author. A
-principal supplying one founding SOUL beside a neutral cohort (ADR-0096) is not
-on it: the bytes are the principal's, the substrate parses none of them, and no
-role, ranking, doctrine, or authority is derived. The distinction this document
-keeps is between a host that authors personality and a principal that supplies
-it — the first is removed surface, the second is ordinary principal intent.
+Every item on that list names something the *substrate* must not author: a
+task, domain, profession, tool, or workflow doctrine. Two things are not on it.
+A principal supplying one founding SOUL beside a neutral cohort (ADR-0096) is
+ordinary principal intent: the bytes are the principal's, the substrate parses
+none of them, and no role, ranking, or authority is derived. The platform's
+standing requirements ([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md))
+are deployment authority: authored once, carried to every member identically
+in the charter lane, parsed by the substrate for nothing, and containing no
+task, domain, profession, tool, format, or workflow word. The distinction this
+document keeps is between a host that authors personality or task doctrine and
+a principal — a deployment is one — that states what it requires.
 
 Historical bytes may remain opaque audit history but confer no current
 authority.
@@ -237,8 +263,10 @@ authority.
 
 The design succeeds only through real operating-path evidence: current signed
 state, exact causal events, action/tool receipts, workspace bytes, artifact
-provenance and rendering, and acceptance by the authority named in principal
-intent.
+provenance and rendering, acceptance by the authority named in principal
+intent, and the signed run scorecard
+([`10_PLATFORM_REQUIREMENTS.md §5`](10_PLATFORM_REQUIREMENTS.md#5-the-run-scorecard))
+read against the platform requirements.
 
 An HTTP 200, model claim, score, mocked scenario, test fixture, stale run, or
 file named after an outcome cannot establish that the live system worked.
@@ -251,4 +279,5 @@ The owning document carries the authoritative row.
 | ID | Risk | Severity | Likelihood | Mitigation | Target release |
 |----|------|----------|------------|------------|----------------|
 | TASKS-R1 | Predicate-mode verifier collusion / rubber-stamping: a distinct persona key can execute minimal counter-evidence and sign `accepted: true`; the mechanical invariants price acceptance in executed evidence and forbid self-acceptance but cannot make verification rigorous. Owned by [`03_TASKS.md §15`](03_TASKS.md#15-risks--known-limitations); touches [`09_PROTOCOLS.md`](09_PROTOCOLS.md), [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md), [`17_ECONOMY.md`](17_ECONOMY.md). | High | Medium | Behavioral by design: principal charter text carries withhold/deficiency norms; population and economic dynamics carry selection pressure; the task projection records which invariants held so cheap verdicts are auditable. | Open (behavioral) |
+| PLAT-R1 | Requirements satisfied by labels: a counter moved by a placeholder name, a no-op capability mount, or a status restated as a lesson. Owned by [`10_PLATFORM_REQUIREMENTS.md §8`](10_PLATFORM_REQUIREMENTS.md#8-risks--known-limitations); touches [`03_TASKS.md`](03_TASKS.md), [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md). | High | High | Counters join executed or byte-changing facts where one exists; label-only counters are shown beside the bytes they name; the principal, not the scorecard, accepts. | Current |
 | OPS-R1 | Silent observability degradation: a mechanism degrades — a fact absent from the page that refuses on it, a snapshot missing a member its reader demands, a housekeeping sweep skipped, an exception swallowed, unavailability rendered as zero — and the system keeps operating with the degradation invisible until a live mission deadlocks on it. Fifteen live incidents in the 2026-08 walk-away arc were this one class. Owned by [`11_DESIGN_CRITERIA.md` C-OP-14](11_DESIGN_CRITERIA.md); validated by [`13_DESIGN_VALIDATION.md §16.5`](13_DESIGN_VALIDATION.md). | High | High (before C-OP-14) | Structural: refusals carry their fact-join; snapshot readers are lineage-first and writers state completeness; operating-path swallows leave closed counters; fallible reads carry availability booleans. | Mitigated (C-OP-14 enforced 2026-08) |

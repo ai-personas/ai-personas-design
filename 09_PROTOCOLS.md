@@ -770,9 +770,18 @@ truncation cannot claim completeness.
 
 Source IDs and uniform byte division are content-neutral resource mechanics,
 not semantic priority. The substrate does not reserve more prompt space for a
-task field, persona, role, message, tool, memory, schema kind, or record whose
-prose appears important. Manifests make every omitted source/window navigable
-without silently replacing it with a host summary.
+persona, role, message, tool, memory, schema kind, or record whose prose
+appears important. The exceptions are the authority lanes, and they are
+exceptions of *authority*, not of importance: the principal's exact intent and
+ancestry, the condition of record, the platform requirements with any
+principal charter, and the current scorecard occupy complete floored lanes
+that precede every inventory
+([`11_DESIGN_CRITERIA.md` C-OP-4](11_DESIGN_CRITERIA.md#c-op-4--continuity-and-resume-preserve-exact-identity-and-causality),
+[`10_PLATFORM_REQUIREMENTS.md §3` P-2](10_PLATFORM_REQUIREMENTS.md#3-requirements-on-the-platform)).
+Wrapper hashes of inventory rows are not carried in the model-facing
+carrier — they are inspectable — while the authority lanes' own binding
+hashes (record hash and ordered-text hash) stay, as C-OP-4 requires. Manifests make every omitted source/window navigable without
+silently replacing it with a host summary.
 
 A canonical situation assembled from sources already present in dedicated
 prompt lanes enters this stage only through
@@ -1342,6 +1351,13 @@ MIME, or undeclared replication effects.
 Historical bytes may remain in archival lineage as opaque records. They acquire
 no current authority merely because their signatures once verified.
 
+Two families are **frozen** at their current versions by ADR-0112:
+`personaos-receipt-execution-binding/4` and
+`personaos-cohort-acceptance-mint-observation/4`. No further version of either
+is registered; a new mechanical fact about a receipt or a mint rides its own
+observation record or is not recorded. The freeze exists because four versions
+in four days measured no change in what the adjudicated work was.
+
 Current cutover records include:
 
 - `personaos-persona-work-situation/1`,
@@ -1430,12 +1446,34 @@ Current cutover records include:
   `personaos-principal-acceptance-prompt-authority/10` (cohort branch),
   `personaos-bound-brain-fragment-prompt/2` (wrapper hashes dropped), and
   `personaos-capability-acquisition-summary/1` (ADR-0111); and
+- `personaos-platform-requirements/1` (the deployment-signed standing
+  requirements, recorded at environment creation, carried whole in the
+  charter lane), `personaos-platform-requirement-refusal/1` (a member's
+  signed refusal of one requirement, bound to the text version declined),
+  `personaos-run-settle-record/1` (the kernel-signed statement that a run
+  reached its settle point, written on the completing append),
+  `personaos-run-scorecard/1` (one kernel-signed count per run at the settle
+  point, projected compactly into the acceptance lane),
+  `personaos-post-run-distillation-wake/1` (the third protocol-defined
+  stimulus class: one prepaid one-shot delivery per member per run carrying
+  exact references only), `personaos-cohort-contract-verifier-declaration/2`
+  (inherits every supplied principal member; fills only the absent verifier
+  predicate), `personaos-principal-acceptance-prompt-authority/11`
+  (`cohort_recommended` replaces the closing branch; the scorecard projection
+  rides beside), the `verifier_descriptor` kind `principal-capability/1`
+  (member set `{kind, scope, capability_generation_ref}`), the contract
+  member `principal_condition_hash` on `TASK_ACCEPTANCE_CONTRACT_AUTHORED`
+  (the frozen receipt and mint families gain nothing), the intake member
+  `post_run_distillation_reservation_per_member`, and the task projection
+  fact `cohort_recommended` (ADR-0112); and
 - `personaos-replication-effect-descriptor/1`.
 
 ## 14. Key custody
 
-Master, kernel, environment, task/action, and persona keys remain separate
-authority scopes. Public verification material includes exact key identity,
+Master, kernel, environment, task/action, persona, and deployment-policy keys
+remain separate authority scopes; the deployment-policy key signs the
+ReplicationBound, the environment model registry, and the
+`personaos-platform-requirements/1` record, and nothing else. Public verification material includes exact key identity,
 issuer/parent authority, validity interval, rotation, and revocation. A key may
 sign only records authorized for its scope.
 

@@ -127,8 +127,9 @@ The slot is the whole substrate contribution: turn shape, bounded carriage,
 mechanical persistence, and a static in-carrier contract naming the slots and
 their mechanics. Whether to author, what the bytes mean, and whether a lesson
 is real remain persona work. The substrate adds no round counter, no
-convergence test, and no scheduled iteration; persisting a self-product arms
-nothing and wakes no one. A settlement failure records its mechanical code and
+convergence test, and no scheduled iteration beyond the three protocol-defined
+prepaid stimulus classes of [`03_TASKS.md §7`](03_TASKS.md#7-causal-continuation);
+persisting a self-product arms nothing and wakes no one. A settlement failure records its mechanical code and
 never blocks the turn.
 
 ## 3. Optional public identity
@@ -148,6 +149,12 @@ compact signed card verify. Missing public fields do not:
 
 During any ordinary wake, the persona may author, revise, remove, or leave
 unchanged public identity alongside all other currently authorized actions.
+Public identity is optional to admission and required by the platform: each
+member authors a display name and, where a portrait channel exists, a
+portrait — or states why it will not — before the run settles
+([`10_PLATFORM_REQUIREMENTS.md §2.1`](10_PLATFORM_REQUIREMENTS.md#21-identity)).
+The requirement is carried as signed deployment authority and measured on the
+run scorecard; it blocks nothing, and a stated refusal satisfies it.
 
 ### 3.1 Presentation requirements come from exact user authority
 
@@ -163,8 +170,10 @@ signatures, scope, signed MIME, content hash, byte length, dimensions/bounds,
 owner, and publication provenance.
 
 If an optional field is absent, a UI displays an honest neutral placeholder and
-“not authored” status. It does not guess a role, generate a name, reuse another
-persona's portrait, or pretend an emblem is persona-authored identity.
+“not authored” status beside the platform requirement's stated status
+(satisfied, declined with reason, or silent). It does not guess a role,
+generate a name, reuse another persona's portrait, or pretend an emblem is
+persona-authored identity.
 
 ### 3.2 Portrait byte authority
 

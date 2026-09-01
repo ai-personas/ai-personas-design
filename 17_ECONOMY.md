@@ -19,7 +19,10 @@ economic meaning.
 
 Resource abundance or scarcity does not create population pressure, select a
 tool, rank a persona, assign a role, schedule cognition, or determine objective
-completion.
+completion. The run scorecard
+([`10_PLATFORM_REQUIREMENTS.md §5`](10_PLATFORM_REQUIREMENTS.md#5-the-run-scorecard))
+is a signed count of recorded facts, not a reward, fitness, price, or
+reputation.
 
 ## 2. Persona-authored constructs
 

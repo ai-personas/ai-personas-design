@@ -43,8 +43,14 @@ visible PersonaCard inventory, communicate, invite an existing persona, author
 one or more birth proposals directly, do unrelated work, or take no population
 action.
 
-There is no required need claim, appraisal, discovery, search, scorecard,
-communication, recruitment-exhaustion, or proposal sequence. Discovery returns
+There is no required need claim, appraisal, discovery, search,
+communication, recruitment-exhaustion, or proposal sequence. The platform
+does state, as authority text in the charter lane, that a member who judges
+the work to exceed the cohort proposes a birth or invitation or states why not
+([`10_PLATFORM_REQUIREMENTS.md §2.3`](10_PLATFORM_REQUIREMENTS.md#23-population));
+that statement adds no field to this projection and ranks nothing in it. A
+proposal refused by a mechanical bound is stated to the proposer with the
+refusing bound named; it never fails silently. Discovery returns
 exact visibility-authorized PersonaCards in bounded paginated unranked transport
 order and performs no semantic match, ranking, role assignment, invitation, or
 birth fallback.
@@ -231,10 +237,14 @@ coverage, recruitment ceremonies, or identity-formation gates. Historical bytes
 remain opaque and confer no current admission authority.
 
 "Host-authored" is the operative word. The substrate may not author a
-personality, role, or doctrine for any member. A *principal* may supply one
-founding SOUL beside a neutral cohort (ADR-0096), on the same authority that
-supplies charter text and presentation requirements under §7; the substrate
-carries those bytes opaquely and derives nothing from them.
+personality or role for any member, and no task, domain, profession, tool, or
+workflow doctrine. A *principal* may supply one founding SOUL beside a neutral
+cohort (ADR-0096), on the same authority that supplies charter text and
+presentation requirements under §7; the substrate carries those bytes opaquely
+and derives nothing from them. The platform's standing requirements
+([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md)) are deployment
+authority on that same footing: carried to every member identically, parsed
+for nothing, and free of every word this section removes.
 
 ## 12. Design criteria
 

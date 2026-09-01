@@ -287,7 +287,18 @@ A provisioning recipe declares either one complete callable tool surface
 (source, source name, interpreter, transport schema, smoke input) or none of
 those five members. The surfaceless form is a **library-only acquisition**:
 the sealed content-addressed generation produced by its setup/build steps is
-itself the acquired capability. No tool mounts and nothing smoke-executes;
+itself the acquired capability. A generation's identity is its **generation
+manifest hash** (`sha256:` over the sealed generation manifest); every
+host-sealed execution receipt of the environment records the manifest hashes
+of the generations on that execution's search path as its **joined
+generations** — availability on the path is the recorded fact, never that an
+import resolved from it, and never use. Use of a generation that mounts a
+tool surface is a separate recorded fact: an environment-tool invocation
+dispatched to that surface
+([`09_PROTOCOLS.md §2.2`](09_PROTOCOLS.md#22-persona-navigation)).
+A principal-declared verification capability names the generation by its
+exact manifest hash and is satisfied only by that dispatch fact
+([`10_PLATFORM_REQUIREMENTS.md §6.3`](10_PLATFORM_REQUIREMENTS.md#63-principal-declared-verification-capability)). No tool mounts and nothing smoke-executes;
 the persona-authored verification commands remain required and run as the
 recorded proof, with the freshly sealed generation's executable and Python
 site directories threaded onto the verification legs' search paths exactly
@@ -408,8 +419,12 @@ dimension may only be an exact recorded mechanical fact, such as executed
 terminal results, the discrimination counts above, declared-acceptance state,
 or byte deltas; a model self-report or an authored prose claim is not an
 outcome dimension. The substrate supplies no tactic vocabulary, no seed
-content, no domain examples, no mutation catalogue, and no schedule, and a
-persona may decline the loop entirely. What the loop produces is ordinary
+content, no domain examples, no mutation catalogue, and no schedule beyond one
+prepaid post-run distillation wake per member per run
+([`10_PLATFORM_REQUIREMENTS.md §3` P-3](10_PLATFORM_REQUIREMENTS.md#3-requirements-on-the-platform))
+— a funded moment carrying exact references to the run's settle record,
+scorecard, and acceptance facts, in which the persona authors whatever it
+authors, including nothing — and a persona may decline the loop entirely. What the loop produces is ordinary
 persona-authored material admitted through the existing signed authoring and
 brain-evolution actions; it acquires no selection authority those same bytes
 would not otherwise have.

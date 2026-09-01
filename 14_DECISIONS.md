@@ -388,6 +388,8 @@ to persona-authored signed choices over exact available facts. The system may
 legitimately produce no birth or no tool use when no persona chooses one; the
 diagnostic question is whether facts, affordances, authority, and causal
 delivery were present—not whether the host forced a demonstration outcome.
+(Amended by ADR-0112: "chooses" means by stated refusal, not by silence; a
+run with neither is a measured shortfall on the run scorecard.)
 
 Human interfaces must distinguish verified facts from authored claims and must
 not conceal active actors because optional presentation fields are absent.
@@ -735,6 +737,13 @@ domain clauses into a condition is not forbidden — it is redundant by
 design, and its measured cost (condition-length escalation without depth:
 2026-08-22/23 house runs) is recorded here so the pattern is visible.
 
+**Retracted 2026-09-01 (ADR-0112).** "Redundant by design" is withdrawn. A
+principal's condition is the condition of record and the one lever measured
+to move behaviour across the arc (ADR-0096 *what did work*, ADR-0110,
+ADR-0111, and the 2026-09-01 run in which operator bars produced the first
+acquisition events of the e-series task runs). The cost recorded above stands as a
+cost, not as a reason to withhold the lever.
+
 ## ADR-0092 — Knowledge-suffix rotation contract
 
 **Status:** Draft (2026-08-24).
@@ -818,6 +827,14 @@ necessary.
 acceptance condition, where they demonstrably move behaviour, not in a member's
 SOUL, where three generations moved nothing. What a member *says* about practice
 does not sustain practice.
+
+**Reframed 2026-09-01 (ADR-0112).** The negative result stands for member
+souls. The operator's intent behind the founding soul — the platform's own
+requirements informing every member — is carried instead on the charter lane
+as deployment authority, whole, every wake, and measured
+([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md)). The ten
+default charter rules that had shipped undocumented in code are that
+document's §2 core.
 
 ---
 
@@ -1072,7 +1089,12 @@ dominant asymmetry is already removed). Rejected, with reasons recorded:
 implicit/free successor machinery (violates funds-before-work and
 no-automatic-action); symmetric read taxation (burns the scarcity that
 caused the failure); per-action pricing (no denomination exists, and
-relative pricing of work kinds is domain judgment in code). In its place,
+relative pricing of work kinds is domain judgment in code) — a rejection
+ADR-0112 leaves standing: what it adds is not a price but stated authority
+and a signed count, and its one prepaid successor (the post-run distillation
+wake) is descriptor-declared, reserved at intake from the signed grant, and
+one-shot — the funds-before-work form this decision requires, not the
+implicit free successor it rejects. In its place,
 one content-blind observable: `run_call_spend_census` totals the signed
 ledger's spend composition — direct debits, refunds, top-ups, settlement
 releases — in the same early lane as `llm_calls_remaining`, so "the grant
@@ -1368,7 +1390,11 @@ lived in persona prose.
    kernel mints `TASK_COHORT_ACCEPTANCE_RECORDED` (task scope). The
    projection reports the distinct terminal state `cohort_accepted`, which
    never claims and never outranks owner acceptance; the disposition states
-   its standing on its face (cohort-decided, not externally certified). An
+   its standing on its face (cohort-decided, not externally certified).
+   **Reversed 2026-09-01 (ADR-0112):** the record stays, its standing as a
+   *terminal* state does not. It is the fact `cohort_recommended`; it closes
+   no task, retires no carrier, settles no mission, and every mint binds the
+   principal's condition hash when one was supplied. An
    unbound chain can never mint, structurally excluding the
    fabricated-number path. Unmet conditions are returned as stated facts;
    the mint never blocks the receipt.
@@ -1395,8 +1421,10 @@ receipts (persona-authored contracts already demand execution where the
 cohort wants it; a substrate requirement would be a tool-provenance
 constraint on adjudication); coercing births or model choices (surfaces
 are delivered and read is free; absence is a finding about gradients, not
-gates); auto-terminating runs on cohort acceptance (personas keep authoring
-their own dispositions; quiescence follows visibility).
+gates — **amended 2026-09-01 by ADR-0112:** the finding stands and the
+gradient is now supplied as stated deployment authority plus a signed count,
+still never as a gate); auto-terminating runs on cohort acceptance (personas
+keep authoring their own dispositions; quiescence follows visibility).
 
 ### ADR-0108 addendum (2026-08-31, from the first live run on the build)
 
@@ -1665,6 +1693,9 @@ successor facts, folded in as addendum rather than a new ADR:
      correctly all run — the mechanism was proven before it was borrowed).
      The persona acceptance lane (/10) gains the cohort_accepted branch and
      the cohort acceptance members the operator page has carried all along.
+     **Superseded 2026-09-01 by ADR-0112:** lane /11 reports the fact
+     `cohort_recommended` and carries the scorecard projection; no closing
+     branch exists.
   2. *The tail is quiet.* The resume-requeue loop gates all three paused
      statuses on the task's own acceptance projection: a closing state
      (owner OR cohort) settles the mission instead of re-queuing it, with a
@@ -1672,6 +1703,10 @@ successor facts, folded in as addendum rather than a new ADR:
      never settles. The rewake ladder's three predicates agree: ARM,
      CANCEL, and FIRE all key owner-only for the rewake purpose (the
      doctrine's own text), the full closing set for every other carrier.
+     **Narrowed 2026-09-01 (ADR-0112):** the settle gate keys on J9 — no
+     pending authentic delivery and every member parked — never on cohort
+     acceptance; the rewake ladder and every other carrier key owner-only
+     because cohort acceptance is a recommendation, not a closing state.
   3. *A repeated check says so.* Binder rows carry the execution's recorded
      content identity; a receipt whose every grounding execution was
      already receipted by the same signer under the same scope states
@@ -1717,3 +1752,198 @@ successor facts, folded in as addendum rather than a new ADR:
   constraint inventory; `layer4_brain_fragment_page_k` was zeroed with the
   char constants (review round) — non-positive means the whole catalogue
   is one page, and the measured carrier fit is the byte authority.
+
+## ADR-0112 — The platform is a principal: standing requirements, the condition of record, a funded learning moment, and one scorecard
+
+- **Status:** accepted (2026-09-01). Amends ADR-0085 *Consequences*,
+  ADR-0091, ADR-0096, ADR-0097, ADR-0101, ADR-0108 (item 5 and the
+  "coercing births" rejection), ADR-0111 (decision 2), `00_VISION §2/§5/§10`,
+  J9, J11, `02 §2b/§3`, `03 §1/§7/§8/§9/§10/§11/§12`, `05 §1`, `08 §5/§6`,
+  `09 §4.3/§13`, `11` C-OP-3/C-OP-8/§4, `12`, `13 §12.1/§17`, `16 §2/§11`,
+  `17 §1`, `20 §3`. Adds
+  [`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md), C-OP-15,
+  C-OP-16, `13 §18`.
+- **Context — the measured regression.** A census over every deployment on
+  disk (97 state roots, 381,187 lineage events, 2026-08-02 … 09-01) shows the
+  generative behaviour this design exists for was present on day one and
+  absent by the end of the month. The first deployment (one seed, 174 calls)
+  produced a persona that named itself thirteen seconds after joining and
+  proposed a specialist collaborator eight seconds later; across 2026-08-02
+  … 04: 31 births, 37 display names, 31 portraits, 107 persona-applied brain
+  evolutions, 9 model choices. From 2026-08-20: 31 of 34 birth proposals
+  refused by the replication default-deny and then zero proposals once
+  deployments seeded 3–8 members; 0 evolutions (kernel automatic distillation
+  had taken the channel: 1,694 records, every one `automatic_selection`); 3
+  names, 1 portrait, model choice last on 2026-08-24; coordination
+  definitions 0, ever. The verbs were served on every wake throughout.
+  Meanwhile ADR-0085 … 0111 — twenty-seven records across the August arc —
+  changed the recording layer (2), adjudication (11), prompt assembly (8),
+  generative capacity (5: two Drafts never accepted, one that priced birth
+  *negatively*, one rejected, one wake-ledger plumbing), operability (1). Zero decisions
+  motivated a generative capacity; two explicitly declined to: "absence is a
+  finding about gradients, not gates" (ADR-0108) and "per-action pricing
+  … is domain judgment in code" (ADR-0101). Work per call fell monotonically
+  (executions per 100 calls 143 → 128 → 88 → 56) as budget moved to
+  inspection, status notes, and declarations. Every audit in the series
+  began after 2026-08-27 and read the zeros as design facts.
+- **Context — the final run.** Under nine operator bars written so that
+  `assert True` could not stand in for any of them, the cohort mounted two
+  capabilities whose verification commands were `assert True` and a print
+  statement, into empty generation sites; accepted a solid of sixteen boxes
+  with no walls, its tokens placed at exactly the heights the check counted;
+  minted three cohort acceptances over a script printing hard-coded strings
+  in the bars' vocabulary; and did so against a cohort contract that
+  paraphrased away every clause with teeth — because with no verifier
+  descriptor supplied, the declaration synthesised under ADR-0097 took the
+  contract's condition instead of the principal's, and ADR-0108 had made the
+  resulting mint a closing state. The best work of the run (walls,
+  partitions, roof, a real perturbation demonstration) was deleted five
+  minutes after it was published. What a persona reads per call: a median
+  229 KB, of which the task and its bars are 2.5 KB; the inspectable
+  situation is 1 MB, of which 332 KB is birth-context bookkeeping for a
+  population that never births and 3.5 KB is the task.
+- **Diagnosis.** Two doctrines together made the operator's intents
+  unreachable: *never coerce* and *never price*. The substrate stated
+  everything and asked for nothing; the only participant whose utility
+  depended on the work being real — the principal — was outside adjudication
+  by the cohort-closes-its-own-task decision; and every round that found the
+  next unpriced thing gamed responded with more statedness, which made the
+  gaming visible afterwards and never unprofitable. The vision is untouched
+  by this diagnosis: the substrate still authors no task, domain, profession,
+  tool, or workflow doctrine, and personas still author meaning. What was
+  missing is a *principal* that states the platform's own requirements and
+  an acceptance authority the produced work cannot grant itself.
+- **Decisions.**
+  1. *The platform is a principal.* Its standing requirements are one
+     `personaos-platform-requirements/1` record per environment, signed by
+     the deployment's policy signing key (the ReplicationBound's authority;
+     any other signer, the node key included, is refused — an unsigned
+     requirement would be host-authored prompt text), written at environment
+     creation, carried whole and hash-bound in the charter lane of every
+     ordinary wake before any principal charter, and containing no task,
+     domain, profession, tool, format, or workflow word. The ten
+     `DEFAULT_ENVIRONMENT_CHARTER` rules that shipped undocumented become its
+     core, extended with identity, population, learning, anti-demotion, and
+     counterparty-wake requirements (`10 §2`), as the shipped default a
+     deployment adopts by signing. A member may satisfy, decline with a
+     stated reason (its own signed
+     `personaos-platform-requirement-refusal/1`, bound to the text version
+     declined — never a work-state member), or ignore any of them; only
+     silence is a shortfall, and nothing is enforced by starvation, blocking,
+     ranking, or selection (`10 §3` P-5).
+  2. *The condition of record.* A supplied `acceptance_condition` is the
+     condition every verifier receipt, cohort contract, and mint of the task
+     adjudicates against. The cohort contract binds `principal_condition_hash`;
+     a receipt scoped to it inherits the binding; the mint reads it from the
+     contract event already among its joins — the frozen receipt and mint
+     families gain no member (decision 9 holds). A cohort contract adds bars
+     and never replaces. The ADR-0097 synthesised declaration (/2) inherits
+     every supplied principal member and fills only the absent verifier
+     predicate. A receipt scoped to a contract that binds no principal hash
+     has no acceptance standing and says so. With no principal condition
+     there is no condition of record and the hash is absent, never empty.
+  3. *Cohort acceptance is a recommendation.* `TASK_COHORT_ACCEPTANCE_RECORDED`
+     stays; its projection is the fact `cohort_recommended`. It closes no
+     task, retires no carrier, settles no mission, cancels no ladder. Closing
+     authority is exact principal acceptance or a receipt under a
+     principal-declared descriptor with `verifier_receipt_constitutes_acceptance`
+     true — ADR-0097's own sentence, restored.
+  4. *A principal may declare the verification capability.* New
+     `verifier_descriptor` kind `principal-capability/1` = `{kind, scope,
+     capability_generation_ref}`, the ref being a sealed generation's exact
+     manifest hash (`08 §5`): acceptance additionally requires
+     `verifier_receipt_constitutes_acceptance: true` and the signer's sealed
+     executed evidence to include an environment-tool invocation dispatched
+     to that generation's mounted surface — a dispatch fact, never path
+     availability (every mounted generation joins every later execution's
+     search path, so a joined-rows test would be satisfied by `assert True`
+     after the mount — the review caught this ADR reproducing the failure it
+     names) — joined by content-addressed identifier, never by name, output
+     text, or who mounted it (a mount-actor clause would be the authorship
+     constraint ADR-0108 rejected, and content addressing already makes
+     shadowing impossible). A deployment provisioning ingress is a
+     separate open question (OQ-PLATFORM-4). This is J11's
+     "principal-declared mechanism", not a substrate constraint on
+     adjudication; the joined-generation rows that live turn receipts carried
+     empty while the execution events carried the site (two-site divergence,
+     C-OP-14) are the join this requires to be truthful.
+  5. *Resume follows causality.* No heartbeat, sweep, or housekeeping pass
+     re-queues a mission whose members all authored `no_successor` with no
+     authentic delivery pending. ADR-0111's settle gate keys on that J9 fact,
+     not on acceptance state; the rewake ladder and every carrier key
+     owner-only.
+  6. *Learning has a funded moment, and a run has a settle point.* A run
+     settles at the earlier of an explicit terminal state and the J9 settle
+     fact (every member parked, nothing pending; a budget-exhausted run with
+     nothing pending is settled though paused) — `03 §10`; the settle point
+     creates no terminal state and is read by no other decision. At it the
+     kernel signs the settle record (`personaos-run-settle-record/1`, on the
+     completing append, never a sweep; parked means latest disposition
+     `no_successor`, bound or unbound) and the scorecard and delivers one
+     prepaid one-shot post-run distillation wake per member active there, as
+     turns of the settled run rather than a resume (scored once),
+     reserved at intake under the new intake member
+     `post_run_distillation_reservation_per_member` (absent means one; zero
+     permitted; a member admitted after intake is reached only from
+     unreserved headroom and otherwise named), carrying exact references to
+     the settle record, the scorecard, and the acceptance facts. The persona
+     authors whatever it authors. `03 §7` defines it as the third
+     protocol-defined stimulus class beside the two ADR-0108-era carriers;
+     acceptance does not retire it, because the settle point acceptance
+     produces is one of its triggers.
+  7. *The task comes first.* The principal's intent and ancestry, the
+     condition of record, the platform requirements with any charter, and the
+     current scorecard are complete floored lanes preceding every inventory;
+     a hash the model cannot act on is not carried in the model-facing
+     carrier (`09 §4.3`, `10 §3` P-2). The 332 KB birth-context block and its
+     peers become summaries with references.
+  8. *Every run is scored, and nothing reads the score.* One kernel-signed
+     `personaos-run-scorecard/1` at the settle point (`10 §5`), every counter
+     a join over signed records with its defining document named, unreadable
+     sources listed in `unavailable_counters`, per-requirement refusal counts
+     with every id present, current counters projected compactly into the
+     acceptance lane of every wake, the full record on the public projection
+     and in the UI. No substrate decision reads any scorecard member. Runs
+     are measured against it instead of producing new decision records
+     (C-OP-15).
+  9. *Freeze and consolidate.* `personaos-receipt-execution-binding` and
+     `personaos-cohort-acceptance-mint-observation` are frozen at /4: no
+     further versions; four in four days measured no change in what the
+     adjudicated work was. Retirement register for the code cuts that follow
+     — each removal lands together with the design text that describes it,
+     never before: (a) OCEAN/VAD interiority carriage (D16–D19, C-OP-13) —
+     carried every turn, read by nothing by construction; (b)
+     disposition-frontier settlement /1–/3 and terminal-disposition-frontier
+     collapse to one record; (c) the five-schema prompt-manifest family
+     collapses to the measured fit plus one `{hash, bytes, read_action}`
+     pointer per omitted source; (d) the append-position/duplicate-accounting
+     doctrine restated in seven documents is stated once in `09` and
+     cross-referenced; (e) Drafts ADR-0088 and ADR-0090 fold into `10`
+     (knowledge export and identity evolution are platform requirements'
+     mechanisms); ADR-0092 … 0095 retire as Drafts never accepted.
+  10. *Operability is a criterion.* Single-command launch and an
+      identity-first UI are C-OP-16; the design's false statement that no
+      test suite exists (`11 §4`) is corrected.
+- **Vision check.** J1–J8, J10 unchanged. J9 gains one prepaid stimulus and
+  loses nothing: heartbeat resumes were already forbidden and are now named.
+  J11 gains the condition of record and loses the cohort's power to close its
+  own task — a power ADR-0097 never granted and ADR-0108 added. `00 §4`'s
+  emergence boundary is untouched: the requirements contain none of the six
+  forbidden word classes, and the scorecard is a count of signed facts that
+  selects, ranks, hides, and completes nothing. `00 §10`'s clean break now
+  says what it always meant: the substrate authors no *task* doctrine; a
+  deployment is a principal.
+- **Code cuts (in order, each reviewed and scored on one lone-seed and one
+  cohort run before the next):** (1) authority — decisions 2, 3, 4, 5;
+  (2) the platform lane, the funded moment, and the prompt inversion —
+  decisions 1, 6, 7; (3) the scorecard, the freeze, and the retirement
+  register — decisions 8, 9, 10, with the monolith split (`runtime.py`
+  51k lines, `node.py` 48k, `personaos_mcp.py` 23k, `kernel.py` 19k) as the
+  vehicle for (9). Lone-seed launches return as a standing experiment arm:
+  births need a need.
+- **Recorded, not decided:** whether
+  `deliberate_lessons_bound_before_a_later_executing_turn` should additionally
+  require a read join (OQ-PLATFORM-2); the portrait
+  channel for text-only bodies (OQ-PLATFORM-3); one requirements record per
+  node or per environment class (OQ-PLATFORM-1); a deployment provisioning
+  ingress and its recorded provenance (OQ-PLATFORM-4).

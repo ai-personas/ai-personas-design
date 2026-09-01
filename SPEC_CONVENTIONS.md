@@ -373,6 +373,7 @@ v1.0 documents are versioned as a set. The version field in front matter MUST eq
 | 07 | `07_ARTIFACTS.md` | Yes | Implementers | 12 min |
 | 08 | `08_KNOWLEDGE.md` | Yes | Implementers, memory engineers | 18 min |
 | 09 | `09_PROTOCOLS.md` | Yes | Implementers, integrators | 14 min |
+| 10 | `10_PLATFORM_REQUIREMENTS.md` | Yes | Implementers, operators, persona authors | 10 min |
 | 11 | `11_DESIGN_CRITERIA.md` | Yes (defines current user-intent and operating-path criteria) | Implementers, operators, auditors | 8 min |
 | 12 | `12_GLOSSARY.md` | Documentation-normative | All | 6 min |
 | 13 | `13_DESIGN_VALIDATION.md` | No (validation log) | Reviewers, auditors | 8 min |
