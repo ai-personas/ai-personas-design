@@ -396,12 +396,25 @@ class RunScorecard:
     compactions_stated: int               # turn records carrying a compaction statement (ADR-0102/0107)
     # refusals and availability
     refusals_stated_by_requirement: tuple[tuple[str, int], ...]   # (requirement_id, count), every id present
-    unavailable_counters: tuple[str, ...] # counter names whose source was unreadable (C-OP-14)
+    unavailable_counters: tuple[str, ...] # counter names whose source was unreadable or not durably recorded (C-OP-14); those members are absent
     # provenance
+    unnamed_member_ids: tuple[str, ...]
+    identity_refusal_window_exempt: bool  # a stated R-ID-1 refusal persists across runs; other refusals count in-window
+    communication_carrier_kinds_seen: dict[str, int]   # the carrier kinds the wake join saw, so its basis is inspectable
+    unreadable_sources: tuple[str, ...]   # "<scope>:<record kind>" of every source that failed to read
     evidence_event_ids: tuple[str, ...]
-    computed_at: str
+    run_started_at: str                   # the run grant's instant; "" when unreadable (window left open)
+    settled_at: str
+    read_by_substrate_decision: bool      # always False; pinned
     record_hash: str
 ```
+
+The record rides the task lineage as `RUN_SCORECARD_RECORDED`
+(`personaos-run-scorecard-record/1`: environment/task/run ids, the record,
+its hash). Two counters are unavailable in the first implementation and say
+so: `compactions_stated` (no durable per-turn compaction statement exists yet;
+P-6 names the target) and `capability_gap_limits_stated` (03 §5 keeps gap
+meaning opaque; no structured member exists to join).
 
 One-line purpose: one kernel-signed count of what the run did against §2,
 computed from signed records only, never from content. Every counter is a
@@ -434,8 +447,10 @@ defining section, and the join is stated here:
   settle-point members; *post_run_distillation_members_unreached* — the
   settle-point members no reservation covers. Both are joins at signing time;
   delivery itself is recorded on each wake's own event.
-- *counterparty_wakes_with_effect* — immediate-wake deliveries whose woken
-  turn recorded a workspace publication or an artifact declaration.
+- *counterparty_wakes_with_effect* — wake carriages (carrier kind
+  `wake_context`) after which the recipient recorded a workspace publication
+  or an artifact declaration before its next carriage; batch or pending-lane
+  carriage never counts, whatever follows it.
 - *compactions_stated* — turn records carrying a durable compaction
   statement.
 - *refusals_stated_by_requirement* — one row per requirement id in the

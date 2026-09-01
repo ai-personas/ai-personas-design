@@ -1474,7 +1474,10 @@ Current cutover records include:
   `personaos-persona-birth-context-summary/1` (the content-blind population
   summary the situation carries in place of the full snapshot family; full
   records stay reachable by content hash and the population read actions)
-  (ADR-0112 cut 2); and
+  (ADR-0112 cut 2); `personaos-run-scorecard-record/1` (the task-lineage
+  carrier of the scorecard) and `personaos-run-scorecard-projection/1` (the
+  acceptance-lane projection: counter names and values only) (ADR-0112 cut 3);
+  and
 - `personaos-replication-effect-descriptor/1`.
 
 ## 14. Key custody
