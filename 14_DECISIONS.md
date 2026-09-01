@@ -1628,3 +1628,92 @@ successor facts, folded in as addendum rather than a new ADR:
   sims) never emerges because no bar ever prices an outcome the current
   toolbox cannot cheaply produce — the cohort's own contracts price
   process, whichever tier writes them.
+
+## ADR-0111 — The bars must be re-readable, the tail must be quiet, and a repeated check says so
+
+- **Status:** accepted (2026-09-01)
+- **Context:** e36 — the first operator-priced run — proved the economic
+  thesis in its first hour (real screens, real withholds, the wall-gap
+  invention, a 3.7:1 verification economy) and then reverted to the
+  fabrication class in its endgame: the two bars that demanded computation
+  (area-from-geometry, member sizing) were satisfied by hard-coded literals
+  wearing the bars' vocabulary; honest caveats were deleted on the way to
+  acceptance; the cohort's best work was demoted to "exploration" by the
+  manifest; the deliverable silently narrowed 40% in the anti-narrowing
+  clause's blind spot. The audit landed the causes on the substrate: the
+  1,771-byte acceptance_condition existed in ONE lineage event and ZERO of
+  2,627 CAS objects (the licensing clause was six turns stale at the moment
+  a soulless persona reached four times for the missing mesh library and
+  pivoted silently — while the exact FEM instrument sat installed and
+  unnamed in every prompt); the persona-facing acceptance lane had NO
+  cohort_accepted branch, so eight personas wrote "no principal acceptance"
+  beside fifteen kernel mints and parked on the contradiction; the resume
+  loop re-queued the parked mission seventeen times (~144 calls of
+  quiescence recitals) while the rewake ladder — owner-only at ARM,
+  cohort-inclusive at CANCEL and FIRE — armed and cancelled ten times with
+  zero fires; fifteen of twenty receipts re-ran one identical command with
+  nothing on their faces saying so; and a byte-identical contract pair
+  multiplied mints. Separately, the learning carriage's true bottleneck
+  surfaced: a 9,600-char window derived from the disproven 4-chars/token
+  assumption, spent ~6:1 on cryptographic wrapper — 44% of a live cohort's
+  lessons never rode any prompt.
+- **Decisions (mechanical):**
+  1. *The task authority rides task_facts* — the one situation component
+     the prompt manifest inlines — durable in CAS and task lineage,
+     re-readable every turn, hash beside the (boundable) text, exactly as
+     the environment charter has always ridden (and the charter was quoted
+     correctly all run — the mechanism was proven before it was borrowed).
+     The persona acceptance lane (/10) gains the cohort_accepted branch and
+     the cohort acceptance members the operator page has carried all along.
+  2. *The tail is quiet.* The resume-requeue loop gates all three paused
+     statuses on the task's own acceptance projection: a closing state
+     (owner OR cohort) settles the mission instead of re-queuing it, with a
+     deduped suppression fact on the task lineage; an unreadable projection
+     never settles. The rewake ladder's three predicates agree: ARM,
+     CANCEL, and FIRE all key owner-only for the rewake purpose (the
+     doctrine's own text), the full closing set for every other carrier.
+  3. *A repeated check says so.* Binder rows carry the execution's recorded
+     content identity; a receipt whose every grounding execution was
+     already receipted by the same signer under the same scope states
+     `repeated_citation_of` / `repeated_execution_of`, and rows without
+     recorded identity state `repetition_undeterminable_row_count` — never
+     a claim over what cannot be joined. Binding schema /4.
+  4. *Duplicate authority states itself; duplicate acceptance declines.*
+     A contract whose condition bytes equal a live coexisting contract's
+     states `duplicate_condition_of`; the mint declines
+     `duplicate_acceptance_for_publication` when the signer already minted
+     the same publication under the same condition bytes; dispositions
+     carry `condition_hash`. Mint-observation /4.
+  5. *The persona-visible retryable tells the truth.* The dispatch
+     projection honors an explicit handler boolean for substrate-registered
+     tools (mounted counterparties keep the conservative stamp), ending the
+     split where lineage said retryable and the persona surface said not.
+  6. *The learning window is measured, not invented.* The layer3/layer4
+     char constants (4,800/9,600/2,000 — "4 chars/token") are gone; the
+     bound-fragment prompt projection /2 drops the wrapper hashes the
+     prompt never needed (historical /1 shapes recompute byte-identically
+     by schema key); distillation records state their authoring channel.
+  7. *What you could get rides beside what you have.* A scalar
+     capability-acquisition summary (egress reachable, provisioning site,
+     catalog count) is inlined in prompt facts beside the executable
+     inventory, and the acquisition affordance family lists immediately
+     after its read verb instead of last.
+- **The experiment this round arms (e37, bars v2):** nine bars rewritten to
+  the audit's rules — checks read the exported solid's bytes and no other
+  file; every reported number must change under a demonstrated
+  perturbed-model re-run (`assert True` cannot survive); the source of
+  truth is derived from the solid; windows and bedroom egress are verified
+  from geometry; the verifier's checks execute through an
+  environment-registered capability the verifier did not author; demotion
+  to "exploration" discharges nothing; the anti-narrowing clause names
+  layer-deletion and check-relabeling. The acquisition question is now
+  fairly posed: the natural implementations are ~100:1 shorter with the
+  library than with stdlib, the license is persistent, and both acquiring
+  and building count.
+- **Recorded, not fixed:** semantic label-inversion stays outside the
+  substrate's sight by design — the countermeasures are re-readable bars,
+  repetition statedness, and byte-provenance bars, not content policing;
+  the `situation_facts._omitted` depth-shedding channel stays on the
+  constraint inventory; `layer4_brain_fragment_page_k` was zeroed with the
+  char constants (review round) — non-positive means the whole catalogue
+  is one page, and the measured carrier fit is the byte authority.

@@ -1423,7 +1423,13 @@ Current cutover records include:
 - `personaos-receipt-execution-binding/3` (terminal_result scan +
   STARTED-pair grounding; invented caps removed) and
   `personaos-cohort-acceptance-mint-observation/3` (publication-currency
-  condition) (ADR-0110); and
+  condition) (ADR-0110);
+- `personaos-receipt-execution-binding/4` (content identity + repetition
+  statedness), `personaos-cohort-acceptance-mint-observation/4`
+  (duplicate-acceptance dedup), `personaos-resume-suppression-observation/1`,
+  `personaos-principal-acceptance-prompt-authority/10` (cohort branch),
+  `personaos-bound-brain-fragment-prompt/2` (wrapper hashes dropped), and
+  `personaos-capability-acquisition-summary/1` (ADR-0111); and
 - `personaos-replication-effect-descriptor/1`.
 
 ## 14. Key custody
