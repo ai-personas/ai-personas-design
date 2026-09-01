@@ -338,7 +338,12 @@ class RunSettleRecord:
     parked_members: tuple[str, ...]       # members whose latest disposition is no_successor
     parked_dispositions_unbound: int      # parked dispositions whose frontier no longer binds current bytes
     pending_deliveries: int               # 0 by construction for "all_parked_nothing_pending"
-    budget_state: str                     # "live" | "exhausted" | "unlimited"
+    retry_registry_consulted: bool        # the node's causal-delivery retry registry was read (J9 settle requires it)
+    budget_state: str                     # "live" | "exhausted" | "paused_checkpoint" | "unlimited"
+    post_run_distillation_members_funded: tuple[str, ...]     # settle-point members whose reservation released
+    post_run_distillation_members_unreached: tuple[str, ...]  # settle-point members no reservation covers
+    post_run_distillation_members_departed: tuple[str, ...]   # reserved members gone before the settle point (refunded)
+    post_run_distillation_calls_per_member: int
     completing_event_id: str              # the append that completed the settle fact
     record_hash: str
 ```

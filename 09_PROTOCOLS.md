@@ -1464,8 +1464,17 @@ Current cutover records include:
   (member set `{kind, scope, capability_generation_ref}`), the contract
   member `principal_condition_hash` on `TASK_ACCEPTANCE_CONTRACT_AUTHORED`
   (the frozen receipt and mint families gain nothing), the intake member
-  `post_run_distillation_reservation_per_member`, and the task projection
-  fact `cohort_recommended` (ADR-0112); and
+  `post_run_distillation_reservation_per_member`, the task projection fact
+  `cohort_recommended`, `personaos-platform-requirements-prompt/1` (the lane
+  block), `personaos-post-run-distillation-reservation/1` (the intake
+  reservation, recorded on the environment lineage with the signed pool
+  record the settle point re-verifies), `personaos-post-run-distillation-prepayment/1`
+  (its run-ledger escrow), `personaos-post-run-distillation-wakes-armed/1`
+  (the settle point's per-member arm/fail/unreached statement), and
+  `personaos-persona-birth-context-summary/1` (the content-blind population
+  summary the situation carries in place of the full snapshot family; full
+  records stay reachable by content hash and the population read actions)
+  (ADR-0112 cut 2); and
 - `personaos-replication-effect-descriptor/1`.
 
 ## 14. Key custody

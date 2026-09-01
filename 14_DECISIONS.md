@@ -1936,7 +1936,10 @@ successor facts, folded in as addendum rather than a new ADR:
 - **Code cuts (in order, each reviewed and scored on one lone-seed and one
   cohort run before the next):** (1) authority — decisions 2, 3, 4, 5;
   (2) the platform lane, the funded moment, and the prompt inversion —
-  decisions 1, 6, 7; (3) the scorecard, the freeze, and the retirement
+  decisions 1, 6, 7 (the deployment-policy key is minted and signs the
+  requirements record in this cut; the ReplicationBound and the model
+  registry, kernel-signed today, migrate to it in cut 3 — until then 09 §14's
+  "signs the ReplicationBound" is the target state, stated here); (3) the scorecard, the freeze, and the retirement
   register — decisions 8, 9, 10, with the monolith split (`runtime.py`
   51k lines, `node.py` 48k, `personaos_mcp.py` 23k, `kernel.py` 19k) as the
   vehicle for (9). Lone-seed launches return as a standing experiment arm:
