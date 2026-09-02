@@ -2018,8 +2018,17 @@ successor facts, folded in as addendum rather than a new ADR:
   built this run and the run's scorecard, and lets a declined portrait state
   the member's own reason. Review found the settle point racing (now one
   lock), the escrow refund not crash-idempotent (now deterministically named)
-  and the fit gate not owned by the arm (now installed there). Nothing under
-  this ADR remains owed; the public UI deploy is the operator's call.
+  and the fit gate not owned by the arm (now installed there). The e40
+  scoring run on the final build exercised the whole chain live — settle at
+  the operator's terminal state, one scorecard, eight funded distillation
+  wakes, eight escrow releases at the fire gate with deterministic adjustment
+  ids — and surfaced two more gaps, both closed: the scorecard's window
+  opened at the settling generation's grant (every counter 0 after a resume;
+  it now opens at the task's first grant), and an operator-stopped run leaves
+  its run document incomplete so no public task record is exported for it
+  (the environment record now carries the scorecards; the missing task record
+  of a stopped run is recorded, not fixed). Nothing under this ADR remains
+  owed; the public UI deploy is the operator's call.
 - **Recorded, not decided:** the settle point when a budget exhausts with
   successors still owed (OQ-PLATFORM-5, observed on e39); whether
   `deliberate_lessons_bound_before_a_later_executing_turn` should additionally

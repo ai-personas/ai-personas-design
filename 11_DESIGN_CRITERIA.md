@@ -987,9 +987,13 @@ placeholder with the requirement's stated status), the member's latest lesson,
 what the member built this run, and the run scorecard; verified facts and
 persona-authored claims stay visibly distinct. Evidence: the launcher's
 lifecycle ledger for a fresh checkout and the rendered member view of a live
-run. The public records the view reads are kernel-signed siblings of the task
-and persona records — `personaos-public-run-scorecard/1` (counters only;
-unavailable counters by name, rendered as not measurable, never 0) and
+run. The public records the view reads are kernel-signed siblings of the task,
+environment and persona records — `personaos-public-run-scorecard/1` (counters
+only; unavailable counters by name, rendered as not measurable, never 0; on
+the task record of the settling run, and as `run_scorecards` — the newest
+settle of every task the environment granted a run to — on the environment
+record, which persists when a stopped run's own task record cannot be
+exported) and
 `personaos-public-identity-requirement-status/1` (a member's own stated
 refusal of R-ID-1: its reason, cut at 600 UTF-16 units with the cut marked,
 and the claim hash of the exact record) — and "what the member built" joins on

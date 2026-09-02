@@ -418,7 +418,7 @@ class RunScorecard:
     communication_carrier_kinds_seen: dict[str, int]   # the carrier kinds the wake join saw, so its basis is inspectable
     unreadable_sources: tuple[str, ...]   # "<scope>:<record kind>" of every source that failed to read
     evidence_event_ids: tuple[str, ...]
-    run_started_at: str                   # the run grant's instant; "" when unreadable (window left open)
+    run_started_at: str                   # the task's first run grant (the run family's start): a resume mints a new run id, and a window opened at the settling generation alone counted seconds of an hour's work; the settling run's own grant when no family grant names the task; "" when unreadable (window left open)
     settled_at: str
     read_by_substrate_decision: bool      # always False; pinned
     record_hash: str
