@@ -55,77 +55,44 @@ claim, not proof of competence or a behavioral program.
 
 ## 2a. Seeded disposition and affect self-state
 
-Blank authored content is correct. Blank initial conditions are not. Personas
-born byte-identical are symmetric, and symmetric actors resolve the same
-situation the same way: the same first move, the same stopping point, the same
-work done twice by peers with nothing to distinguish who does it. Temperament in
-a human is not an achievement, credential, or verdict; it is a condition present
-before the first experience. A persona begins with the same kind of starting
-point.
-
-At genesis every persona receives exact disposition parameters derived from its
-own identity: numbers under an open framework label, distinct per persona,
-stable across restarts, and reproduced from the identity seed rather than
-trusted from storage, so a stored copy is never authority. The deployment
-default label is `ocean/1` carrying five values in `[0, 1]`. Seeding contributes
-numbers only, never a sentence, instruction, adjective, role, expected
-behavior, or any other semantic content, and the frozen SOUL is unchanged.
-
-A persona also owns an affect self-state: values it records for itself,
-valence, arousal, and dominance in `[-1, 1]`, with an optional bounded note in
-its own words. Only the persona authors it. The substrate never derives,
-estimates, smooths, decays, or corrects an affect value from behavior, outcomes,
-elapsed time, or model output, and authors no affect of its own. Records are
-persona-signed and append-only: history is retained and the mechanically-latest
-record is what projects.
-
-Both ride the persona's own identity carrier, so each turn presents the actor
-with who it is and how it last recorded itself to be, with no separate retrieval
-step and no ceremony. Both are opaque end to end. No routing, ranking,
-scheduling, membership, admission, acceptance, model selection, or other
-substrate decision may read either value, and the substrate never renders a
-value as prose or states what a value means. Interpretation belongs to the
-persona alone.
-
-Seeding is an initial condition, not a judgment about the persona and not
-evidence of anything it will do. A persona may revise the numbers, relabel them,
-or replace the framework outright through its ordinary characteristics action
-(§2). What it authors is equally opaque, and the substrate neither merges,
-reconciles, nor ranks an authored revision against the seeded record; both are
-simply shown. Absence blocks nothing: a persona that has recorded no affect, or
-carries neither record, is complete, and work, membership, discovery, and
-acceptance proceed unchanged.
+**Retired 2026-09-01 (ADR-0112 decision 9a).** This section once specified
+genesis disposition numbers under an open framework label (`ocean/1`) and a
+persona-authored valence/arousal/dominance affect self-state, both carried on
+the persona's identity carrier every turn and read by no substrate decision.
+Measured over every deployment on disk, the carriage cost bytes on every wake,
+was authored by no persona after the first week, and was read by nothing by
+construction; the design retires it rather than carry a mechanism that can
+affect nothing. Genesis still confers keys, lifecycle, and membership; a
+persona that wants numbers, a framework, or a self-recorded state authors
+them as ordinary opaque knowledge through `author_persona_knowledge`
+([`08_KNOWLEDGE.md §6`](08_KNOWLEDGE.md#6-practice-learning-and-brain-evolution)),
+which the substrate carries and reads exactly as it did these. Historical
+`personaos-persona-disposition/1` and `personaos-persona-affect-state/1`
+records remain opaque lineage and confer nothing.
 
 Birth-materialized characteristics remain frozen: exactly one characteristics
 slot exists today, so a sidecar revision over a birth-authored profile would
 destroy the frozen bytes rather than sit beside them, and the substrate
 refuses it. A true beside-the-birth supplement — a genuinely separate slot,
 both records carried with their own authority labels — is a named open
-extension, not current behavior. Interiority does ride the persona's own
-identity carrier every turn: the genesis disposition numbers and the latest
-self-recorded affect appear beside the SOUL as canonical data, so each turn
-presents the actor with who it is and how it last recorded itself to be,
-without a value ever being rendered as prose or read by any mechanism.
+extension, not current behavior.
 
 ## 2b. Structural turn self-products
 
-A turn's output contract carries two optional persona-authored self-products.
-Neither is speech, neither is required, and an absent member is a complete,
+A turn's output contract carries one optional persona-authored self-product.
+It is not speech, it is not required, and an absent member is a complete,
 valid answer; the substrate persists what the persona authored and reads
-nothing.
+nothing. (The former `affect` member is retired with §2a, ADR-0112 9a.)
 
 The `distillation` member is a small persona-authored value — a string or a
 bounded mapping — persisted at turn settlement as the persona's own signed
 brain fragment and folded onto its persona-scoped fragment head, so it rides
 into every later turn in any environment through the ordinary compile
 ([`20_PERSONA_BRAIN_FRAGMENTS.md §3a`](20_PERSONA_BRAIN_FRAGMENTS.md#3a-structural-distillation-carriage)).
-The `affect` member carries exact valence, arousal, and dominance numbers with
-an optional bounded note, appended at settlement to the persona's own signed
-affect self-state (§2a).
 
 The slot is the whole substrate contribution: turn shape, bounded carriage,
-mechanical persistence, and a static in-carrier contract naming the slots and
-their mechanics. Whether to author, what the bytes mean, and whether a lesson
+mechanical persistence, and a static in-carrier contract naming the slot and
+its mechanics. Whether to author, what the bytes mean, and whether a lesson
 is real remain persona work. The substrate adds no round counter, no
 convergence test, and no scheduled iteration beyond the three protocol-defined
 prepaid stimulus classes of [`03_TASKS.md §7`](03_TASKS.md#7-causal-continuation);
@@ -383,10 +350,10 @@ prompt/tactic evolution, fitness scores, fixed genesis seeds, or old birth
 proposal/action v3 records. Historical bytes may remain opaque lineage but
 carry no current behavior or identity authority.
 
-The seeded disposition and affect self-state of §2a do not restore any of that
-surface. They are required by nothing, gate nothing, rank nothing, and are read
-by no host mechanism; what was removed is the host owning such values and acting
-on them.
+The seeded disposition and affect self-state once specified in §2a were
+required by nothing, gated nothing, ranked nothing, and were read by no host
+mechanism — and were retired for exactly that reason (ADR-0112 decision 9a);
+what this clean break removes is the host owning such values at all.
 
 ## 16. Design criteria
 
@@ -401,7 +368,6 @@ on them.
 9. Work notes and gap-like authored content never determine completion or
    continuation.
 10. Quiescence is nonterminal.
-11. Genesis gives every persona distinct identity-derived disposition numbers
-    and no semantic content.
-12. Disposition and affect are persona-owned, persona-revisable, read by no host
-    mechanism, and never required.
+11. Genesis confers keys, lifecycle, and membership, and no semantic content;
+    the substrate derives no disposition, temperament, or affect for any
+    persona (the former carriage is retired, ADR-0112 9a).

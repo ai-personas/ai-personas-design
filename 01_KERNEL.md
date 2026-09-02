@@ -113,13 +113,7 @@ work-note fields, population size, scores, embeddings, prior tool use, or
 missing public identity.
 
 Stable lexical/append ordering is transport order only. Pagination and
-truncation are explicit and cannot masquerade as a complete inventory. An
-append-derived page binds one snapshot and absolute append positions; equal
-record bytes at different positions remain separate records. Redundant
-observations of one exact signed identity across source scopes also remain in
-the raw page. A separately labelled derived unique-identity view may normalize
-them only under a declared exact equivalence rule, with duplicate cardinality,
-source ranges, and raw-page navigation retained.
+truncation are explicit and cannot masquerade as a complete inventory. The append-position and duplicate-accounting rule for every paginated inventory is stated once in [`09_PROTOCOLS.md §2.1`](09_PROTOCOLS.md#21-exact-unranked-inventories) and applies here unchanged.
 
 ## 5. Action descriptors and effects
 

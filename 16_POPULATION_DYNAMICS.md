@@ -168,10 +168,10 @@ There is no host-injected `parent_experience_context`. Anything the parent
 chooses to communicate at genesis is already inside its bounded opaque
 `genesis_context`; the substrate adds no inherited expertise or semantic seed.
 
-Genesis does include the newborn's seeded disposition numbers, derived from the
-newborn's own identity exactly as for any other persona (`02_PERSONA §2a`): an
-initial condition carrying numbers only, never inherited expertise, parent
-values, or semantic seed.
+Genesis confers keys, lifecycle, and membership only. The former seeded
+disposition numbers are retired ([`02_PERSONA.md §2a`](02_PERSONA.md#2a-seeded-disposition-and-affect-self-state),
+ADR-0112 decision 9a); a newborn inherits no expertise, parent values, or
+semantic seed, and carries no substrate-derived temperament either.
 
 Birth creates a distinct actor and causal wake, not environment membership,
 task acceptance, role, expertise, or required public identity. The exact

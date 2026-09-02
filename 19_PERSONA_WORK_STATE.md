@@ -153,14 +153,18 @@ effect-bearing action in the turn" and so refused the very scenario
 `09_PROTOCOLS.md` §13.
 
 `personaos-work-state-evidence/1` exposes, for every mechanically latest
-signature-verified active-member revision, the complete disposition, direct or
-settled binding kind, source and observed workspace signatures, frontier
-situation hash, and one of `bound`, `superseded_or_unbound`, or
-`not_terminal_disposition`. Its aggregate
-`personaos-terminal-disposition-frontier/1` lists exact persona identities and
-counts for authored terminal dispositions, dispositions bound to the current
-frontier, and dispositions that would require persona re-authorship before they
-could represent that frontier. “Re-authorship required” grants no wake or model
+signature-verified active-member revision, one `personaos-disposition-frontier/2`
+row (`projection_kind: "persona"`): the complete disposition, direct or settled binding
+kind, source and observed workspace signatures, frontier situation hash, and
+one of `bound`, `superseded_or_unbound`, or `not_terminal_disposition`. Its
+aggregate is the same schema with `projection_kind: "aggregate"`: exact persona
+identities and counts for authored terminal dispositions, dispositions bound
+to the current frontier, and dispositions that would require persona
+re-authorship before they could represent that frontier. (ADR-0112 decision
+9b collapsed the former per-persona `personaos-persona-disposition-frontier/1`
+and aggregate `personaos-terminal-disposition-frontier/1` projections into this
+one record; the settlement EVENT `…-frontier-settlement/3` is a different kind
+of thing — a kernel-signed claim about one isolated action — and stands.) “Re-authorship required” grants no wake or model
 call and does not require the persona to act; it states only that an older
 `no_successor` cannot be presented as covering newer exact state.
 

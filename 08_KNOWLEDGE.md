@@ -90,11 +90,7 @@ inventory declares snapshot identity, observed count, page/cursor boundaries,
 and whether capture was truncated. Pagination never silently substitutes a
 small prefix for the complete set.
 
-For append-derived inventories, observed count and cursor positions refer to
-authoritative append positions rather than distinct payloads. Equal record
-bytes at different positions and redundant cross-scope observations remain
-separately navigable. A separate unique-identity view may normalize only with
-explicit duplicate accounting and raw-page navigation.
+The append-position and duplicate-accounting rule for every paginated inventory is stated once in [`09_PROTOCOLS.md §2.1`](09_PROTOCOLS.md#21-exact-unranked-inventories) and applies here unchanged.
 
 `inspect_persona_learning_history` continues the exact hash-bound inventory
 already carried into an ordinary wake. It exposes retained turn-effect

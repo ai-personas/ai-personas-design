@@ -1367,9 +1367,6 @@ Current cutover records include:
   `personaos-persona-work-note-state/1`, and
   `personaos-work-state-evidence/1`;
 - `personaos-persona-telemetry-public/2`;
-- `personaos-persona-disposition/1` and `personaos-persona-affect-state/1`
-  (interiority records, D18: carried on the persona's own identity carrier,
-  read by no substrate decision);
 - `persona-self-publication/1` (D20: voluntary bounded persona-signed public
   self-description on the PersonaCard);
 - `personaos-brain-compile-record/1` (D22: one durable closed counter per
@@ -1403,9 +1400,11 @@ Current cutover records include:
 - `personaos-active-peer-work-state-head/1`,
   `personaos-active-peer-work-state-heads/1`, and
   `personaos-active-peer-work-state-prompt-projection/1`;
-- `personaos-persona-disposition-frontier-settlement/3`,
-  `personaos-persona-disposition-frontier/1`, and
-  `personaos-terminal-disposition-frontier/1`;
+- `personaos-persona-disposition-frontier-settlement/3` and
+  `personaos-disposition-frontier/2` (one projection record for both the
+  per-persona rows and the aggregate, ADR-0112 9b; the former
+  `personaos-persona-disposition-frontier/1` and
+  `personaos-terminal-disposition-frontier/1` are retired);
 - `personaos-open-input-causal-task-authority/1`,
   `personaos-open-input-prompt-authority/2`, and
   `personaos-open-input-prompt-projection/2`;

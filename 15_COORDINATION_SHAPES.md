@@ -37,12 +37,7 @@ snapshot cursor range, omission count, completeness, transport ordering, and
 snapshot hash. It also counts active members lacking an authenticated event.
 
 Within each authoritative source lineage, paging counts absolute append
-positions. Equal event bytes at different positions remain distinct records.
-The same signed event redundantly observed through multiple requested scopes
-remains present in the raw page. A separately labelled exact unique-event view
-may normalize it, but its duplicate total, source-scope append ranges, and raw-
-page navigation remain explicit; normalization never silently changes source
-cardinality.
+positions. The append-position and duplicate-accounting rule for every paginated inventory is stated once in [`09_PROTOCOLS.md §2.1`](09_PROTOCOLS.md#21-exact-unranked-inventories) and applies here unchanged.
 
 Requested, verified, and unverified scope totals are separate. A failed scope
 makes snapshot completeness false. Event-projection completeness and zero

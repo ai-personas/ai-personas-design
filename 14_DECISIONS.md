@@ -315,6 +315,10 @@ stronger descriptor-bound lane when they exist.
 
 ### D16 — Interiority: carried, persisted, never read (restates 02 §2a/§2b, C-OP-13)
 
+**Retired 2026-09-01 (ADR-0112 decision 9a):** the disposition and affect
+carriage is removed with its schemas and actions; the `distillation`
+self-product and its persistence stand. D16–D19 remain as history.
+
 Genesis gives every persona identity-derived disposition numbers under an open framework
 label (deployment default `ocean/1`, five values in `[0, 1]`) and no semantic content; the
 persona owns an append-only signed VAD affect self-state; both ride the persona's own
@@ -613,7 +617,11 @@ authority under owner-bearer trust.
 
 ## ADR-0088 — Knowledge continuity across deployments
 
-**Status:** Draft for review (2026-08-23).
+**Status:** Accepted as implemented (`ai-personas export-persona` /
+`--adopt-knowledge-bundle`); status regularized 2026-09-02 and folded into
+[`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md) as the mechanism
+by which a lesson (R-LRN) travels across deployments (ADR-0112 decision 9e).
+Original draft follows.
 
 **Problem:** every deployment root mints fresh persona identities, so all
 accumulated cognition -- brain fragments, distillations, soul evolution --
@@ -692,9 +700,11 @@ contract exist before work starts.
 
 ## ADR-0090 — Identity evolution is persona-authored application
 
-**Status:** Draft for review (2026-08-23). Amends D17's scope: the seeded
-disposition remains the birth state; drift from it becomes earned history
-through the same signed decision/application machinery fragments already use.
+**Status:** Retired 2026-09-02 (ADR-0112 decision 9e) — a Draft never
+accepted; its subject (the seeded disposition) is itself retired (9a), and
+the persona-authored identity path it wanted is what
+[`10_PLATFORM_REQUIREMENTS.md §2.1`](10_PLATFORM_REQUIREMENTS.md#21-identity)
+now asks for through the existing identity actions. Original draft follows.
 
 **Problem:** OCEAN dispositions and soul sections are frozen at genesis by
 absence of mechanism -- `apply_brain_evolution` mutates fragments only, and
@@ -746,7 +756,10 @@ cost, not as a reason to withhold the lever.
 
 ## ADR-0092 — Knowledge-suffix rotation contract
 
-**Status:** Draft (2026-08-24).
+**Status:** Retired 2026-09-02 (ADR-0112 decision 9e) — a Draft never
+accepted and never implemented; the learning window it rationed is unbounded
+since ADR-0111 (the measured carrier fit is the byte authority). Original
+draft follows.
 
 The owner-record knowledge suffix rides each carrier under a byte bound.
 Rotation rules: (1) content-blind — eviction order is append-position
@@ -759,7 +772,9 @@ content.
 
 ## ADR-0093 — Ratchet preimage member
 
-**Status:** Draft (2026-08-24). Implements the ledger note.
+**Status:** Accepted as implemented (the receipt preimage carries the
+executed-capability-generation ratchet); status regularized 2026-09-02
+(ADR-0112 decision 9e).
 
 The hardened verifier-receipt preimage gains
 `executed_capability_generation_refs` — the sorted capability-generation
@@ -771,7 +786,11 @@ into signed preimage truth.
 
 ## ADR-0094 — Newborn first-wake funding
 
-**Status:** Draft (2026-08-24).
+**Status:** Retired 2026-09-02 (ADR-0112 decision 9e) — a Draft never
+accepted and never implemented; it would have priced birth negatively, the
+opposite of what ADR-0112 asks (a birth is a stated requirement, R-POP-1, and
+the newborn's first wake is funded like any member's from the run grant).
+Original draft follows.
 
 Birth proposals must enclose a first-wake allowance from the proposal's own
 resources: admission prepays it into escrow exactly like ADR-0086 D6 rewake
@@ -782,7 +801,12 @@ any substrate coaching.
 
 ## ADR-0095 — Contract convergence etiquette
 
-**Status:** Draft (2026-08-24). Companion to ADR-0089.
+**Status:** Retired 2026-09-02 (ADR-0112 decision 9e) — persona-side
+etiquette, never accepted; what survives of it is mechanical (ADR-0097's
+"the contract that governs is the one the verifier joined", ADR-0108's live
+contract set stated at authoring, ADR-0111's duplicate-condition statedness)
+and the platform requirements' R-WRK/R-COORD statements. Original draft
+follows.
 
 Convergence mechanics for cohort-drafted contracts, all persona-authored:
 (1) any member may author a draft (the action exists); (2) supersession
@@ -868,8 +892,9 @@ What this does **not** create, and what implementations must keep true:
    assign, subordinate, or coordinate a peer.
 4. No obligation. No peer must read, answer, or act on what it says. Every
    other member may ignore it entirely, and quiescence stays nonterminal.
-5. No inheritance. Newborns receive seeded disposition numbers as always; the
-   authored SOUL confers no expertise or semantic seed on anyone.
+5. No inheritance. Newborns receive no expertise or semantic seed from the
+   authored SOUL (the seeded disposition numbers this item once named are
+   retired, ADR-0112 9a).
 
 **Why the exception is worth its cost.** Every turn carries dedicated lanes for
 artifacts, verdicts and their deficiencies, open-input availability, budget,
@@ -1913,8 +1938,10 @@ successor facts, folded in as addendum rather than a new ADR:
      — each removal lands together with the design text that describes it,
      never before: (a) OCEAN/VAD interiority carriage (D16–D19, C-OP-13) —
      carried every turn, read by nothing by construction; (b)
-     disposition-frontier settlement /1–/3 and terminal-disposition-frontier
-     collapse to one record; (c) the five-schema prompt-manifest family
+     the disposition-frontier PROJECTIONS collapse to one record
+     (`personaos-disposition-frontier/2`, per-persona rows and the aggregate
+     under one schema, discriminated by `projection_kind`; the settlement event /3 stands — an event and a
+     projection are different things, and /1–/2 were already retired); (c) the five-schema prompt-manifest family
      collapses to the measured fit plus one `{hash, bytes, read_action}`
      pointer per omitted source; (d) the append-position/duplicate-accounting
      doctrine restated in seven documents is stated once in `09` and

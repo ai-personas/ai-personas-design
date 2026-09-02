@@ -1554,6 +1554,10 @@ disposition or work-note text arms either carrier.
 
 ## 16.4 Structural self-products and carried interiority
 
+**Partially retired 2026-09-01 (ADR-0112 decision 9a):** the `affect`
+member, the affect self-state, and the carried disposition numbers no longer
+exist; the walk below stands for the `distillation` self-product only.
+
 **Input:** in a live environment, one persona authors a turn whose output
 includes a bounded `distillation` string and an `affect` mapping; a second
 turn by the same persona in a different environment authors neither; a third

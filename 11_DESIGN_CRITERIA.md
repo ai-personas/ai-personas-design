@@ -478,13 +478,7 @@ candidate plus an exact capability intent that the selected descriptor
 advertises. The runtime cannot require a persona to guess an unseen registry
 vocabulary, and it cannot turn unfiltered browsing into selection.
 
-An append-derived inventory binds an exact snapshot, absolute positions, total,
-returned and omitted counts, and continuation cursor. Equal payloads at
-different authoritative append positions remain separately navigable. If one
-signed identity is redundantly observed through several source scopes, the raw
-page retains every observation. A separate exact unique-identity view must
-expose duplicate counts/ranges and raw-page navigation rather than silently
-reduce cardinality.
+The append-position and duplicate-accounting rule for every paginated inventory is stated once in [`09_PROTOCOLS.md §2.1`](09_PROTOCOLS.md#21-exact-unranked-inventories) and applies here unchanged.
 
 Personas may inspect, communicate/share exact refs, obtain authorized bodies,
 search, acquire/provision/experiment with/invoke tools, author opaque reusable
@@ -935,16 +929,15 @@ done, sufficient, accepted, or unable to improve.
 
 ### C-OP-13 — Interiority is carried, never read
 
-Every persona's genesis disposition numbers and latest self-recorded affect
-ride its own identity carrier each turn as canonical data, and the two
-structural turn self-products (`distillation`, `affect`) give persona-authored
-bytes mechanical persistence at settlement — the distillation onto the
-persona's own fragment head, the affect into its own signed history. No
-substrate decision reads any of these values; no value is rendered as prose;
-an absent member is a complete answer; a settlement persistence failure
-records its code and never blocks the turn. The carriage rebind labels itself
-`automatic_selection: true`, and a persona's own head pruning is never
-resurrected by it.
+**Retired 2026-09-01 (ADR-0112 decision 9a).** The disposition-number and
+affect carriage this criterion covered is removed. What remains of it is the
+`distillation` structural self-product ([`02_PERSONA.md §2b`](02_PERSONA.md#2b-structural-turn-self-products),
+[`20_PERSONA_BRAIN_FRAGMENTS.md §3a`](20_PERSONA_BRAIN_FRAGMENTS.md#3a-structural-distillation-carriage)):
+persona-authored bytes persisted mechanically at settlement onto the
+persona's own fragment head, read by no substrate decision, absent as a
+complete answer, a persistence failure recorded and never blocking; the
+carriage rebind labels itself `automatic_selection: true` and never
+resurrects a persona's own head pruning.
 
 ### C-OP-14 — Observability fails closed
 

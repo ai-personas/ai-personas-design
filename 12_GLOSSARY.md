@@ -16,11 +16,6 @@ authorized verifier that may accept an objective under declared evidence. Work
 notes, model prose, scores, population size, and tool success are not acceptance
 authority.
 
-**Affect self-state** — Persona-authored valence/arousal/dominance numbers in
-`[-1, 1]` with an optional bounded note, appended only by the persona itself,
-shown back beside the SOUL, and read by no substrate mechanism
-([`02_PERSONA.md §2a`](02_PERSONA.md#2a-seeded-disposition-and-affect-self-state)).
-
 **Action catalog** — The complete currently authorized unranked inventory of
 actions exposed to a persona during an ordinary wake. Exact dispatch
 prerequisites do not turn it into a host-selected workflow.
@@ -326,12 +321,6 @@ input-order/cardinality page of qualifying routed wake result mappings, with no
 representative selection or duplicate collapse.
 
 ## S
-
-**Seeded disposition** — Genesis disposition numbers under an open framework
-label (deployment default `ocean/1`), derived per persona from its own identity
-seed, born-distinct by construction, re-derived on every read, shown beside the
-SOUL, and read by no substrate decision
-([`02_PERSONA.md §2a`](02_PERSONA.md#2a-seeded-disposition-and-affect-self-state)).
 
 **Signed MIME authority** — Signature binding among exact media bytes/hash,
 length, `mime_type`, owner/scope, and role. Suffixes and byte sniffing may only
