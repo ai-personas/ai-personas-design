@@ -2005,10 +2005,12 @@ successor facts, folded in as addendum rather than a new ADR:
   by diffing the catalogue before and after); review had found the move would
   otherwise have refused every action record signed across the deploy. The
   traceability ledger counts citing lines rather than files, so a split moves
-  no counter. Still owed under this ADR: the fire-gate
-  escrow release for the distillation wake, the durable per-turn compaction
-  statement (P-6, so `compactions_stated` becomes available), and the
-  C-OP-16 member view.
+  no counter. Landed 2026-09-02: the distillation wake's escrow is released
+  at its fire gate with a kernel-signed marker per (run, member) (10 §4.4);
+  the settle point is evaluated on a member's parking disposition as well as
+  on the run's terminal status (03 §10); every turn effect receipt carries
+  `personaos-turn-compaction-statement/1`, so `compactions_stated` is a join
+  (P-6). Still owed under this ADR: the C-OP-16 member view.
 - **Recorded, not decided:** the settle point when a budget exhausts with
   successors still owed (OQ-PLATFORM-5, observed on e39); whether
   `deliberate_lessons_bound_before_a_later_executing_turn` should additionally

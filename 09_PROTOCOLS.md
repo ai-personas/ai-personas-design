@@ -1512,7 +1512,10 @@ Current cutover records include:
   block), `personaos-post-run-distillation-reservation/1` (the intake
   reservation, recorded on the environment lineage with the signed pool
   record the settle point re-verifies), `personaos-post-run-distillation-prepayment/1`
-  (its run-ledger escrow), `personaos-post-run-distillation-wakes-armed/1`
+  (its run-ledger escrow), `personaos-post-run-distillation-escrow-release/1`
+  (one member's reservation released at its wake's fire, 10 §4.4),
+  `personaos-turn-compaction-statement/1` (P-6, on every turn effect
+  receipt), `personaos-post-run-distillation-wakes-armed/1`
   (the settle point's per-member arm/fail/unreached statement), and
   `personaos-persona-birth-context-summary/1` (the content-blind population
   summary the situation carries in place of the full snapshot family; full

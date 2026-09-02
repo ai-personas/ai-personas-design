@@ -323,6 +323,16 @@ protocol-defined stimulus class ([`03_TASKS.md §7`](03_TASKS.md#7-causal-contin
 It carries no instruction, diagnosis, suggestion, or prose; delivery gives the
 persona one ordinary wake with its complete action catalogue.
 
+The member's reservation stays in escrow until the wake fires. At the fire
+gate the kernel releases exactly that member's `per_member` calls to the run
+ledger and appends `personaos-post-run-distillation-escrow-release/1`
+(environment, task, run, member, trigger, `llm_calls`) on the environment
+lineage — one kernel-signed marker per (run, member), from which every later
+accounting re-derives; a re-gated fire finds its marker and releases nothing.
+A release at arm would have let a wake that never fired hand its calls to
+whichever turn came next. Only a reserved member who departed before the
+settle point refunds at the settle point itself.
+
 ### 4.5 The settle record
 
 ```python
@@ -340,7 +350,7 @@ class RunSettleRecord:
     pending_deliveries: int               # 0 by construction for "all_parked_nothing_pending"
     retry_registry_consulted: bool        # the node's causal-delivery retry registry was read (J9 settle requires it)
     budget_state: str                     # "live" | "exhausted" | "paused_checkpoint" | "unlimited"
-    post_run_distillation_members_funded: tuple[str, ...]     # settle-point members whose reservation released
+    post_run_distillation_members_funded: tuple[str, ...]     # settle-point members whose wake is armed; the reservation releases at its fire (§4.4)
     post_run_distillation_members_unreached: tuple[str, ...]  # settle-point members no reservation covers
     post_run_distillation_members_departed: tuple[str, ...]   # reserved members gone before the settle point (refunded)
     post_run_distillation_calls_per_member: int
@@ -411,10 +421,15 @@ class RunScorecard:
 
 The record rides the task lineage as `RUN_SCORECARD_RECORDED`
 (`personaos-run-scorecard-record/1`: environment/task/run ids, the record,
-its hash). Two counters are unavailable in the first implementation and say
-so: `compactions_stated` (no durable per-turn compaction statement exists yet;
-P-6 names the target) and `capability_gap_limits_stated` (03 §5 keeps gap
-meaning opaque; no structured member exists to join).
+its hash). One counter is unavailable in the current implementation and says
+so: `capability_gap_limits_stated` (03 §5 keeps gap meaning opaque; no
+structured member exists to join). `compactions_stated` joins the
+`personaos-turn-compaction-statement/1` every turn effect receipt carries
+(P-6): `compacted`, the carrier-fit record when the whole carrier was squeezed
+to the measured window (lanes, mechanical mode, model compactions) and the
+prompt-source stage's counts (staged, omitted, truncated, pointers carried and
+short) — byte facts only; a run whose receipts predate the statement names the
+counter unavailable rather than counting zero.
 
 One-line purpose: one kernel-signed count of what the run did against §2,
 computed from signed records only, never from content. Every counter is a
@@ -451,8 +466,10 @@ defining section, and the join is stated here:
   `wake_context`) after which the recipient recorded a workspace publication
   or an artifact declaration before its next carriage; batch or pending-lane
   carriage never counts, whatever follows it.
-- *compactions_stated* — turn records carrying a durable compaction
-  statement.
+- *compactions_stated* — turn effect receipts whose durable compaction
+  statement records a compaction (a lane squeezed, a source omitted or
+  truncated); a statement that nothing was compacted is still a statement and
+  is not counted.
 - *refusals_stated_by_requirement* — one row per requirement id in the
   carried record, count of `personaos-platform-requirement-refusal/1`
   records for it this run, zero included.
