@@ -1989,11 +1989,19 @@ successor facts, folded in as addendum rather than a new ADR:
   prompt lane; `a1de426b`), `wake_carriers.py` (the three prepaid stimulus
   classes, the distillation reservation and wake, the settle point;
   `15a654e9`), with `lanes.py` naming the lanes so source pins, purity scans,
-  and test replacements read the kernel as one. Still owed under this ADR:
-  the fire-gate escrow release for the distillation wake, the durable
-  per-turn compaction statement (P-6, so `compactions_stated` becomes
-  available), the C-OP-16 member view, and the same split for `node.py`
-  (48k lines) and the MCP bridge (23k).
+  and test replacements read the kernel as one. The three giant classes
+  followed the same day as mixin splits, each method byte-identical and
+  composed back into its class, with a support module per class so no lane
+  imports the class's module: `PersonaNode` → nine lanes under `node_lanes/`
+  plus `node_support.py` (node.py 48,062 → 8,119 lines; `53092795`),
+  `PersonaOSMCPBridge` → eleven lanes under `protocols/mcp_lanes/` plus
+  `personaos_mcp_support.py` (23,463 → 1,803; `1a4f005d`), `Kernel` → seven
+  lanes under `kernel_lanes/` plus `kernel_support.py` (18,735 → 1,915;
+  `fa13e6f4`); `lanes.py` names every group so pins, purity scans and test
+  replacements cover the lanes. Still owed under this ADR: the fire-gate
+  escrow release for the distillation wake, the durable per-turn compaction
+  statement (P-6, so `compactions_stated` becomes available), and the
+  C-OP-16 member view.
 - **Recorded, not decided:** the settle point when a budget exhausts with
   successors still owed (OQ-PLATFORM-5, observed on e39); whether
   `deliberate_lessons_bound_before_a_later_executing_turn` should additionally
