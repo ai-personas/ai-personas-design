@@ -1778,6 +1778,14 @@ successor facts, folded in as addendum rather than a new ADR:
   char constants (review round) — non-positive means the whole catalogue
   is one page, and the measured carrier fit is the byte authority.
 
+**P-7 done 2026-09-02** (after e45/e46 showed cohorts that never reached for
+the tools they had): the execution-capability inventory carries each tool's
+own self-description (08 §5), the capability-acquisition summary rides beside
+the platform lane every turn (`personaos-capability-acquisition-summary/1`,
+09 §13), and the acquisition actions follow the inventory read action in the
+catalogue. Statedness only: no ranking, no recommendation, no domain words.
+
+
 ## ADR-0112 — The platform is a principal: standing requirements, the condition of record, a funded learning moment, and one scorecard
 
 - **Status:** accepted (2026-09-01). Amends ADR-0085 *Consequences*,

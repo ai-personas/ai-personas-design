@@ -239,6 +239,25 @@ workspace named, exactly as declared outputs outside it are never captured.
 (Live, 2026-09-02: an absolute working directory of the host checkout was
 admitted, a run's only design was written there, and no peer could read it.)
 
+The execution-capability inventory a persona pages through states, for
+each executable and each Python distribution, its exact identifier, its
+provenance and — where the owning package states one — the tool's own
+one-line self-description, verbatim and bounded: a distribution's
+`Summary` metadata, the owning Debian package's description, a console
+script's distribution summary. Those sentences are authored by the tool's
+makers, never by this host; the substrate ranks none of them and omits the
+member when no package states one. (First local-model runs, 2026-09-02: a
+cohort with a 2D frame solver and a mesh library in its inventory hand-rolled
+STL parsing and never touched them — the inventory it read carried names and
+paths only.) Beside the task, every turn also carries the
+capability-acquisition summary (`personaos-capability-acquisition-summary/1`,
+[`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry)): whether the
+provisioning site and the package index are reachable, the inventory's record
+counts and read action, what this environment has provisioned, verified and
+registered, and the exact acquisition action names — counts and probes, no
+recommendation. In the action catalogue the acquisition actions follow the
+inventory read action.
+
 Executable tool inventory entries are separate. They expose exact descriptors,
 input/output schemas, effect annotations, provider bindings, and current
 authority because those facts are required for safe dispatch. A capability

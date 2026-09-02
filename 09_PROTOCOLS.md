@@ -1515,7 +1515,13 @@ Current cutover records include:
   (its run-ledger escrow), `personaos-post-run-distillation-escrow-release/1`
   (one member's reservation released at its wake's fire, 10 §4.4),
   `personaos-turn-compaction-statement/1` (P-6, on every turn effect
-  receipt), `personaos-public-run-scorecard/1` and
+  receipt), `personaos-capability-acquisition-summary/1` (ADR-0111 P-7, done
+  2026-09-02: the per-turn statement of the acquisition surface beside the
+  platform lane — provisioning-site and package-index probes, inventory record
+  counts and read action, environment counts of provisioned/verified/
+  registered capabilities, the acquisition action names; the execution-
+  capability inventory records gain the additive member `self_description`
+  with `provenance.self_description_source`, 08 §5), `personaos-public-run-scorecard/1` and
   `personaos-public-identity-requirement-status/1` (C-OP-16: kernel-signed
   siblings of the public task and persona records; counters only, and a
   member's own stated refusal; the environment record and the member's persona
