@@ -231,6 +231,14 @@ description, interface assertion, method, relationship to other material, or
 claim of capability is opaque persona-authored content rather than a required
 substrate field.
 
+An execution is an act of the persona in its own authenticated workspace: a
+working directory a persona names is resolved under that workspace, and one
+that resolves outside it — an operator's live-artifact root, the host's own
+checkout, another member's workspace — is refused with the authenticated
+workspace named, exactly as declared outputs outside it are never captured.
+(Live, 2026-09-02: an absolute working directory of the host checkout was
+admitted, a run's only design was written there, and no peer could read it.)
+
 Executable tool inventory entries are separate. They expose exact descriptors,
 input/output schemas, effect annotations, provider bindings, and current
 authority because those facts are required for safe dispatch. A capability

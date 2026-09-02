@@ -353,6 +353,8 @@ class RunSettleRecord:
     parked_dispositions_unbound: int      # parked dispositions whose frontier no longer binds current bytes
     pending_deliveries: int               # 0 by construction for "all_parked_nothing_pending"
     retry_registry_consulted: bool        # the node's causal-delivery retry registry was read (J9 settle requires it)
+    parked_by_exhaustion_member_ids: tuple[str, ...]   # members whose owed successor the exhausted grant could not fund (settle_cause budget_exhausted)
+    unfunded_pending_deliveries: int      # deliveries left pending at an exhaustion settle, stated never hidden
     budget_state: str                     # "live" | "exhausted" | "paused_checkpoint" | "unlimited" | "no_headroom_observed" (a parking append measures the ledger; when it funds nothing more, that is stated rather than inferred exhausted)
     post_run_distillation_members_funded: tuple[str, ...]     # settle-point members whose wake is armed; the reservation releases at its fire (§4.4)
     post_run_distillation_members_unreached: tuple[str, ...]  # settle-point members no reservation covers
@@ -612,7 +614,13 @@ the task is not closed by the party that produced it.
   may mount a sealed generation directly (today only persona-authored actions
   provision, [`08_KNOWLEDGE.md §5`](08_KNOWLEDGE.md#5-persona-owned-capability-material-and-executable-tools)),
   and what its recorded provenance would be.
-- **OQ-PLATFORM-5** — The settle point when a budget exhausts while successors
+- **OQ-PLATFORM-5 — CLOSED 2026-09-02 (03 §10):** the exhaustion pause is a
+  completing append; owed successors and pending deliveries are parked by
+  exhaustion, stated on the settle record, and the run settles with cause
+  `budget_exhausted`. Observed live on e45 (local Qwen, 120/120 spent, all
+  eight members parked, one delivery still pending, no settle for 20 minutes
+  and a heartbeat resume queued for a grant that never came). Original
+  question kept for the record — The settle point when a budget exhausts while successors
   are still owed. Under [`03_TASKS.md §10`](03_TASKS.md#10-quiescence-and-terminal-authority)
   the J9 fact requires every active member's latest disposition to be
   `no_successor`; a run whose last funded turn ends with successors declared

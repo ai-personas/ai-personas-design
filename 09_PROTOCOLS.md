@@ -1494,7 +1494,7 @@ Current cutover records include:
   charter lane), `personaos-platform-requirement-refusal/1` (a member's
   signed refusal of one requirement, bound to the text version declined),
   `personaos-run-settle-record/1` (the kernel-signed statement that a run
-  reached its settle point, written on the completing append),
+  reached its settle point, written on the completing append; additive members 2026-09-02: `parked_by_exhaustion_member_ids` and `unfunded_pending_deliveries`, stated when the settle cause is `budget_exhausted` (03 §10)),
   `personaos-run-scorecard/1` (one kernel-signed count per run at the settle
   point, projected compactly into the acceptance lane),
   `personaos-post-run-distillation-wake/1` (the third protocol-defined

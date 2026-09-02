@@ -903,9 +903,17 @@ settle fact — every active member's latest disposition is `no_successor`,
 bound or unbound (a later publication unbinds a parked disposition and
 schedules no one; the settle record counts the unbound), and no authentic
 causal delivery is pending (a budget-exhausted run with nothing pending is
-settled, though paused). The fact is evaluated on the append that completes
-it — the last parking disposition, the exhaustion pause, or the terminal
-event — never by a sweep. At the settle point the kernel signs the run's
+settled, though paused). The exhaustion pause is itself a completing append:
+a run whose signed grant is exhausted can fund neither the successor a member
+still owes nor a delivery still pending to it, so at that append those are
+**parked by exhaustion** — the settle record names the members parked by
+exhaustion and counts the deliveries left unfunded, the run settles with
+cause `budget_exhausted`, and the prepaid post-run wakes fire from their own
+escrow (which the exhausted grant never held); a later grant opens a new
+generation that settles again. The fact is evaluated on the append that
+completes it — the last parking disposition, the exhaustion pause, or the
+terminal event — never by a sweep, and a heartbeat never re-queues a run that
+already carries its settle record. At the settle point the kernel signs the run's
 settle record (`personaos-run-settle-record/1`,
 [`10_PLATFORM_REQUIREMENTS.md §4.5`](10_PLATFORM_REQUIREMENTS.md#45-the-settle-record))
 and the run scorecard

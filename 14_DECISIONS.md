@@ -2037,6 +2037,28 @@ successor facts, folded in as addendum rather than a new ADR:
   member view between runs; the scan now admits exactly the two closed
   member-view shapes (09 §13, C-OP-16 — by shape, so the wire path and
   post-rotation exports hold too), and a 0.2.1 cut carries the fix.
+  **2026-09-02, first full run on a local model (e45, Qwen3.8-27B, 120
+  calls):** the substrate held (statedness, receipts, two provisioned
+  capabilities, five deliberate lessons, six self-adopted names) but four
+  substrate gaps cost the run its outcome, each fixed in the 0.2.2 cut: (1)
+  the exhaustion pause never settled the run — all eight members parked, one
+  delivery pending, no grant coming — so the funded learning moment never
+  came; the pause is now a completing append and the settle states what it
+  parked by exhaustion (OQ-PLATFORM-5 closed, 03 §10, 10 §4.5). (2) An
+  executor admitted an absolute working directory outside the persona's
+  workspace (the host's own checkout): the run's only house design was
+  written there and no peer could read it; both executors now refuse a cwd
+  outside the authenticated workspace, naming it (08 §5). (3) A refusal's
+  diagnosis — the members it recognises and the ones it received — never
+  crossed the turn boundary (only its slug reached lineage), so 22 of 27
+  refusals were the same invented argument name; the failure tokens now carry
+  those member names, and a recipe refusal names the undeclared members it
+  received. (4) The carrier-window refusal quoted a figure below the window
+  it said was exceeded; it now states the reserve and the exact limit.
+  Model-tier, recorded not fixed: the model invented the text member's name
+  22 times against a stated schema and once against its own lesson; nobody
+  ran the CAD tool three probes had found; the cohort spent its budget
+  deciding who would export and then parked on that member.
 - **Recorded, not decided:** the settle point when a budget exhausts with
   successors still owed (OQ-PLATFORM-5, observed on e39); whether
   `deliberate_lessons_bound_before_a_later_executing_turn` should additionally
