@@ -2059,6 +2059,17 @@ successor facts, folded in as addendum rather than a new ADR:
   22 times against a stated schema and once against its own lesson; nobody
   ran the CAD tool three probes had found; the cohort spent its budget
   deciding who would export and then parked on that member.
+  **Same day, luna (e46, gpt-5.6-luna, 120 calls, fresh root):** all eight
+  members named themselves within 25 s, 50 distillations (34 deliberate,
+  248 bindings, two traceable behaviour changes), emergent lanes without
+  any operator input, 176 executions, 21 declared artifacts, a deliverable
+  of record — a 14×10×2.8 m massing shell with real interior walls and door
+  gaps, non-manifold on one edge, no roof or structure — and no verifier
+  receipt (bar 9 impossible: every member authored into the shared
+  workspace and the one registered capability was an empty site). The
+  cohort's own audit said NOT ACCEPTED. One more substrate gap surfaced and
+  was fixed (0.2.3): the platform-requirement refusal action lacked the
+  atomic-commit marker, so no persona could state its refusal of R-ID-1.
 - **Recorded, not decided:** the settle point when a budget exhausts with
   successors still owed (OQ-PLATFORM-5, observed on e39); whether
   `deliberate_lessons_bound_before_a_later_executing_turn` should additionally
