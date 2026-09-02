@@ -1980,10 +1980,20 @@ successor facts, folded in as addendum rather than a new ADR:
   register: (a) interiority carriage retired (`9a5dc4f1`), (b) one
   `personaos-disposition-frontier/2` (`62a11f34`), (d) and (e) design-only,
   (c) the prompt-manifest family collapsed to `personaos-prompt-source-stage/2`
-  plus `personaos-prompt-source-pointer/1` (2026-09-02). Still owed under this
-  ADR: the monolith split, the fire-gate escrow release for the distillation
-  wake, the durable per-turn compaction statement (P-6, so
-  `compactions_stated` becomes available), and the C-OP-16 member view.
+  plus `personaos-prompt-source-pointer/1` (2026-09-02, `08955e6e`). The
+  monolith split landed the same day as three mechanical, byte-identical
+  moves out of `runtime.py` (52,828 → 41,271 lines) with every name
+  re-exported: `prompt_carrier.py` (the stage, its projections, the
+  model-visible views; `ce92188e`), `acceptance.py` (task authority,
+  qualification, receipts, publication joins, the acceptance projections and
+  prompt lane; `a1de426b`), `wake_carriers.py` (the three prepaid stimulus
+  classes, the distillation reservation and wake, the settle point;
+  `15a654e9`), with `lanes.py` naming the lanes so source pins, purity scans,
+  and test replacements read the kernel as one. Still owed under this ADR:
+  the fire-gate escrow release for the distillation wake, the durable
+  per-turn compaction statement (P-6, so `compactions_stated` becomes
+  available), the C-OP-16 member view, and the same split for `node.py`
+  (48k lines) and the MCP bridge (23k).
 - **Recorded, not decided:** the settle point when a budget exhausts with
   successors still owed (OQ-PLATFORM-5, observed on e39); whether
   `deliberate_lessons_bound_before_a_later_executing_turn` should additionally
