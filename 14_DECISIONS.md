@@ -1998,7 +1998,14 @@ successor facts, folded in as addendum rather than a new ADR:
   `personaos_mcp_support.py` (23,463 → 1,803; `1a4f005d`), `Kernel` → seven
   lanes under `kernel_lanes/` plus `kernel_support.py` (18,735 → 1,915;
   `fa13e6f4`); `lanes.py` names every group so pins, purity scans and test
-  replacements cover the lanes. Still owed under this ADR: the fire-gate
+  replacements cover the lanes. The bridge re-homes its lane methods'
+  `__module__` and `__qualname__` after composition, so the
+  `personaosImplementationIdentity` every tool advertises — and the dispatch
+  descriptor hash the kernel checks — is unchanged for all 72 tools (verified
+  by diffing the catalogue before and after); review had found the move would
+  otherwise have refused every action record signed across the deploy. The
+  traceability ledger counts citing lines rather than files, so a split moves
+  no counter. Still owed under this ADR: the fire-gate
   escrow release for the distillation wake, the durable per-turn compaction
   statement (P-6, so `compactions_stated` becomes available), and the
   C-OP-16 member view.
