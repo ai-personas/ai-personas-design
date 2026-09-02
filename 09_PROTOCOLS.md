@@ -1520,7 +1520,7 @@ Current cutover records include:
   siblings of the public task and persona records; counters only, and a
   member's own stated refusal; the environment record and the member's persona
   record carry the scorecards as `run_scorecards`, one per task, newest settle
-  first; the anonymous artifact-surface scan admits these documents by verification alone — a member whose every document verifies as an exact kernel-master-signed document of its schema is removed from the scan copy, a member carrying one that does not verify stays in the fail-closed scan, and the published bytes are unchanged either way),
+  first; the anonymous artifact-surface scan admits these two documents by exact closed shape alone — every member is an integer counter, a bounded identifier, a hash, a signature, or the bounded refusal text, so the shape cannot carry a locator; an extra, missing, or mistyped member falls back into the fail-closed scan; the rule is the same for a peer scanning the wire envelope and for a historical export after a key rotation, and a reader verifies the kernel-master signature itself before trusting the numbers),
   `personaos-post-run-distillation-wakes-armed/1`
   (the settle point's per-member arm/fail/unreached statement), and
   `personaos-persona-birth-context-summary/1` (the content-blind population

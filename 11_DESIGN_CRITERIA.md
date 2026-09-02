@@ -1000,7 +1000,7 @@ refusal of R-ID-1: its reason, cut at 600 UTF-16 units with the cut marked,
 and the claim hash of the exact record) — and "what the member built" joins on
 the persona's own signed `artifact_declaration` already exported on the
 artifact record, never on the run's access owner
-([`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry)). The signed siblings pass the anonymous artifact-surface scan by verification only, never by member name: the scan copy drops exactly the members whose every document verifies as kernel-master-signed, and an unverified one stays in the fail-closed scan (the first live settle showed a scorecard counter name reading as a malformed locator map, which blanked every persona record that carried a scorecard).
+([`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry)). The signed siblings pass the anonymous artifact-surface scan by exact closed shape only, never by member name or by signature: the scanner admits exactly the two typed shapes (which cannot carry a locator), an extra, missing, or mistyped member falls back into the fail-closed scan, and the reader verifies the signature (the first live settle showed a scorecard counter name reading as a malformed locator map, which blanked every persona record that carried a scorecard; a signature-based exemption would have left the federation path and post-rotation exports blank).
 
 ## 3. Plural domain references
 

@@ -2034,9 +2034,9 @@ successor facts, folded in as addendum rather than a new ADR:
   found the anonymous artifact-surface scan rejecting every persona and
   environment record that carried a scorecard (a counter named
   `identity_records_authored` read as a malformed locator map), blanking the
-  member view between runs; the scan now strips exactly the member-view
-  documents that verify as kernel-master-signed (09 §13, C-OP-16), and a
-  0.2.1 cut carries the fix.
+  member view between runs; the scan now admits exactly the two closed
+  member-view shapes (09 §13, C-OP-16 — by shape, so the wire path and
+  post-rotation exports hold too), and a 0.2.1 cut carries the fix.
 - **Recorded, not decided:** the settle point when a budget exhausts with
   successors still owed (OQ-PLATFORM-5, observed on e39); whether
   `deliberate_lessons_bound_before_a_later_executing_turn` should additionally
