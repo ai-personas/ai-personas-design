@@ -1518,8 +1518,9 @@ Current cutover records include:
   receipt), `personaos-public-run-scorecard/1` and
   `personaos-public-identity-requirement-status/1` (C-OP-16: kernel-signed
   siblings of the public task and persona records; counters only, and a
-  member's own stated refusal; the environment record carries the scorecards
-  as `run_scorecards`, one per task, newest settle first),
+  member's own stated refusal; the environment record and the member's persona
+  record carry the scorecards as `run_scorecards`, one per task, newest settle
+  first),
   `personaos-post-run-distillation-wakes-armed/1`
   (the settle point's per-member arm/fail/unreached statement), and
   `personaos-persona-birth-context-summary/1` (the content-blind population
