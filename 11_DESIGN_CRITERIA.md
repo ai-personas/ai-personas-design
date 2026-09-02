@@ -987,7 +987,13 @@ placeholder with the requirement's stated status), the member's latest lesson,
 what the member built this run, and the run scorecard; verified facts and
 persona-authored claims stay visibly distinct. Evidence: the launcher's
 lifecycle ledger for a fresh checkout and the rendered member view of a live
-run.
+run. The public records the view reads are kernel-signed siblings of the task
+and persona records — `personaos-public-run-scorecard/1` (counters only;
+unavailable counters by name, rendered as not measurable, never 0) and
+`personaos-public-identity-requirement-status/1` (a member's own stated
+refusal of R-ID-1, the first 600 characters of its reason with the claim hash
+of the exact record) — and the signed persona-to-artifact-to-run edge on the
+artifact projection ([`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry)).
 
 ## 3. Plural domain references
 

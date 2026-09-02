@@ -331,7 +331,11 @@ lineage — one kernel-signed marker per (run, member), from which every later
 accounting re-derives; a re-gated fire finds its marker and releases nothing.
 A release at arm would have let a wake that never fired hand its calls to
 whichever turn came next. Only a reserved member who departed before the
-settle point refunds at the settle point itself.
+settle point refunds at the settle point itself. The release refuses a member
+the reservation never covered, and names its refund adjustment
+deterministically from (environment, task, run, member), so a release
+re-attempted after a crash between the refund and its marker finds its own
+credit on the signed ledger instead of adding a second one.
 
 ### 4.5 The settle record
 
@@ -349,12 +353,13 @@ class RunSettleRecord:
     parked_dispositions_unbound: int      # parked dispositions whose frontier no longer binds current bytes
     pending_deliveries: int               # 0 by construction for "all_parked_nothing_pending"
     retry_registry_consulted: bool        # the node's causal-delivery retry registry was read (J9 settle requires it)
-    budget_state: str                     # "live" | "exhausted" | "paused_checkpoint" | "unlimited"
+    budget_state: str                     # "live" | "exhausted" | "paused_checkpoint" | "unlimited" | "no_headroom_observed" (a parking append measures the ledger; when it funds nothing more, that is stated rather than inferred exhausted)
     post_run_distillation_members_funded: tuple[str, ...]     # settle-point members whose wake is armed; the reservation releases at its fire (§4.4)
     post_run_distillation_members_unreached: tuple[str, ...]  # settle-point members no reservation covers
     post_run_distillation_members_departed: tuple[str, ...]   # reserved members gone before the settle point (refunded)
     post_run_distillation_calls_per_member: int
     completing_event_id: str              # the append that completed the settle fact
+    completing_event_kind: str            # "lineage_event", or "work_state_id" when a parking disposition's event could not be found and its work-state id stands in (stated)
     record_hash: str
 ```
 
@@ -362,7 +367,7 @@ One-line purpose: the kernel-signed statement that a run reached its settle
 point ([`03_TASKS.md §10`](03_TASKS.md#10-quiescence-and-terminal-authority)),
 written on the append that completes the fact — the last parking disposition,
 the exhaustion pause with nothing pending, or the terminal event — never by a
-sweep. It creates no terminal state and is read by no other substrate
+sweep, and under one lock, so two completing appends that race settle once. It creates no terminal state and is read by no other substrate
 decision; the scorecard and the post-run wakes reference it.
 
 ## 5. The run scorecard

@@ -1515,7 +1515,11 @@ Current cutover records include:
   (its run-ledger escrow), `personaos-post-run-distillation-escrow-release/1`
   (one member's reservation released at its wake's fire, 10 §4.4),
   `personaos-turn-compaction-statement/1` (P-6, on every turn effect
-  receipt), `personaos-post-run-distillation-wakes-armed/1`
+  receipt), `personaos-public-run-scorecard/1` and
+  `personaos-public-identity-requirement-status/1` (C-OP-16: kernel-signed
+  siblings of the public task and persona records; counters only, and a
+  member's own stated refusal, verbatim),
+  `personaos-post-run-distillation-wakes-armed/1`
   (the settle point's per-member arm/fail/unreached statement), and
   `personaos-persona-birth-context-summary/1` (the content-blind population
   summary the situation carries in place of the full snapshot family; full
