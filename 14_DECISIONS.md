@@ -2011,8 +2011,9 @@ successor facts, folded in as addendum rather than a new ADR:
   on the run's terminal status (03 §10); every turn effect receipt carries
   `personaos-turn-compaction-statement/1`, so `compactions_stated` is a join
   (P-6). The C-OP-16 member view landed the same day: the node exports the
-  scorecard and the identity-refusal status as kernel-signed siblings and the
-  artifact edge on the projection; the UI (branch `member-view`) verifies
+  scorecard and the identity-refusal status as kernel-signed siblings; the
+  artifact join reads the persona's own signed declaration already on the
+  record; the UI (branch `member-view`) verifies
   each field-exactly, leads with the latest lesson, shows what the member
   built this run and the run's scorecard, and lets a declined portrait state
   the member's own reason. Review found the settle point racing (now one
