@@ -457,8 +457,13 @@ record identities or bodies that the persona explicitly navigated to under
 current authority. Mechanical compaction preserves identities, provenance,
 pagination/truncation facts, and the ability to request omitted bodies.
 
-The whole-prompt `personaos-prompt-source-manifest/1` declares exact source
-total, returned count, cursor/next cursor, omitted count/hash, and completeness.
+The whole-prompt `personaos-prompt-source-stage/2` declares exact source
+total, staged/omitted/truncated counts, source-manifest hash, continuation
+cursor, and completeness; a truncated source's entry states its own
+truncation and how to page the rest, and every source not carried at all is
+one `personaos-prompt-source-pointer/1` naming the source's identity, byte
+facts, and the declared read action with its reachability stated
+([`09_PROTOCOLS.md §4.3`](09_PROTOCOLS.md#43-exact-uniform-prompt-source-stage-and-pointers)).
 Per-source projections retain exact record/page totals, hashes, cursors, and
 omission/truncation counts. No memory, skill, knowledge, or capability source
 receives semantic priority or a larger allocation because of its label or body.

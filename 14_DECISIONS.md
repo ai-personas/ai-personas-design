@@ -1942,8 +1942,11 @@ successor facts, folded in as addendum rather than a new ADR:
      (`personaos-disposition-frontier/2`, per-persona rows and the aggregate
      under one schema, discriminated by `projection_kind`; the settlement event /3 stands — an event and a
      projection are different things, and /1–/2 were already retired); (c) the five-schema prompt-manifest family
-     collapses to the measured fit plus one `{hash, bytes, read_action}`
-     pointer per omitted source; (d) the append-position/duplicate-accounting
+     collapses to `personaos-prompt-source-stage/2` — content first at one
+     measured allocation — plus one `personaos-prompt-source-pointer/1` per
+     omitted source (identity, bytes, the declared read action with its
+     reachability stated from carried arguments); truncated entries state
+     their own truncation and read action; (d) the append-position/duplicate-accounting
      doctrine restated in seven documents is stated once in `09` and
      cross-referenced; (e) Drafts ADR-0088 and ADR-0090 fold into `10`
      (knowledge export and identity evolution are platform requirements'
@@ -1971,7 +1974,18 @@ successor facts, folded in as addendum rather than a new ADR:
   51k lines, `node.py` 48k, `personaos_mcp.py` 23k, `kernel.py` 19k) as the
   vehicle for (9). Lone-seed launches return as a standing experiment arm:
   births need a need.
-- **Recorded, not decided:** whether
+- **Implementation status (2026-09-02):** cut 1 landed 2026-09-01
+  (`882a9a77`), cut 2 the same day (`1089c6ea`), cut 3a — the scorecard, the
+  freeze pins, the signer migration — 2026-09-01 (`82eb7d23`). Retirement
+  register: (a) interiority carriage retired (`9a5dc4f1`), (b) one
+  `personaos-disposition-frontier/2` (`62a11f34`), (d) and (e) design-only,
+  (c) the prompt-manifest family collapsed to `personaos-prompt-source-stage/2`
+  plus `personaos-prompt-source-pointer/1` (2026-09-02). Still owed under this
+  ADR: the monolith split, the fire-gate escrow release for the distillation
+  wake, the durable per-turn compaction statement (P-6, so
+  `compactions_stated` becomes available), and the C-OP-16 member view.
+- **Recorded, not decided:** the settle point when a budget exhausts with
+  successors still owed (OQ-PLATFORM-5, observed on e39); whether
   `deliberate_lessons_bound_before_a_later_executing_turn` should additionally
   require a read join (OQ-PLATFORM-2); the portrait
   channel for text-only bodies (OQ-PLATFORM-3); one requirements record per

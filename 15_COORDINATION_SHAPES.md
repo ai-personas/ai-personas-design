@@ -77,11 +77,13 @@ grants neither a wake nor completion, and one persona's disposition cannot
 suppress another active member's visible signed state.
 
 If other prompt sources also exceed the carrier,
-`personaos-uniform-prompt-source-stage/1` and its
-`personaos-prompt-source-manifest/1` preserve exact source totals, cursors,
-returned and omitted counts, manifest hashes, truncation evidence, and a
-continuation cursor. Content-hash ordering, append order, latest-per-member
-coverage, and uniform byte division are mechanical transport policies only;
+`personaos-prompt-source-stage/2` preserves exact source totals, cursors,
+staged/omitted/truncated counts, the source-manifest hash, and a continuation
+cursor, with one `personaos-prompt-source-pointer/1` per source it does not
+carry at all; truncated entries state their own truncation and read action.
+Content-hash ordering, append order, latest-per-member coverage, whole-first
+equal-share byte division, and reachable-first pointer carriage are
+mechanical transport policies only;
 none is semantic priority, relevance, leadership, or a next-action choice.
 
 The generic peer view is `personaos-peer-activity-lineage-snapshot/2`; despite

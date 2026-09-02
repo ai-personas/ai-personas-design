@@ -590,6 +590,18 @@ the task is not closed by the party that produced it.
   may mount a sealed generation directly (today only persona-authored actions
   provision, [`08_KNOWLEDGE.md §5`](08_KNOWLEDGE.md#5-persona-owned-capability-material-and-executable-tools)),
   and what its recorded provenance would be.
+- **OQ-PLATFORM-5** — The settle point when a budget exhausts while successors
+  are still owed. Under [`03_TASKS.md §10`](03_TASKS.md#10-quiescence-and-terminal-authority)
+  the J9 fact requires every active member's latest disposition to be
+  `no_successor`; a run whose last funded turn ends with successors declared
+  and no calls left therefore never settles, and the funded learning moment
+  and the scorecard wait for a grant that may never come. e39 (cut 2 scoring,
+  2026-09-01) ended exactly so: budget 60/60 spent, members not all parked,
+  `RUN_SETTLED` absent. Candidates: treat exhaustion with a resource-grant
+  ingress still open as *parked by exhaustion* (a stated disposition kind, so
+  the settle fact stays a fact about dispositions); or leave the run unsettled
+  by design and let the scorecard state `settle_pending: exhausted`. Either
+  way the answer must be recorded, never inferred by a sweep.
 
 ## 10. Design criteria
 

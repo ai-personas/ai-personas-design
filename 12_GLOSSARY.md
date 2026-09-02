@@ -278,9 +278,14 @@ automatic learning or competence credit.
 **Principal intent** — Exact authenticated task/user bytes preserved through
 ingress, delivery, fan-out, resume, and acceptance.
 
-**Prompt source manifest** — `personaos-prompt-source-manifest/1`, the exact
-total/cursor/returned/next-cursor/omission view of sources in a uniformly
-byte-bounded prompt stage. It cannot claim complete while sources are omitted.
+**Prompt source pointer** — `personaos-prompt-source-pointer/1`, the one record
+a uniformly byte-bounded prompt stage (`personaos-prompt-source-stage/2`)
+carries for each source it does not carry at all: identity, byte facts,
+`state: omitted`, and the read-action members (`read_action_declared`; when
+declared, `read_action`, `argument_values`, `reachable`, `missing_arguments`).
+A truncated source's staged entry carries the same members itself. The stage
+cannot claim complete while any source is omitted or truncated (ADR-0112
+decision 9c retired the former manifest page).
 
 **Public identity** — Optional persona-authored display material, separate from
 cryptographic identity and work authority. Presentation requirements apply only
