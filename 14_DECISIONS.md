@@ -2029,6 +2029,14 @@ successor facts, folded in as addendum rather than a new ADR:
   (the environment record now carries the scorecards; the missing task record
   of a stopped run is recorded, not fixed). Nothing under this ADR remains
   owed; the public UI deploy is the operator's call.
+  **2026-09-02, deployed and cut:** UI member view on `main` (GitHub Pages),
+  public cut PersonaOS 0.2.0. First live settle on a local Qwen3.8-27B node
+  found the anonymous artifact-surface scan rejecting every persona and
+  environment record that carried a scorecard (a counter named
+  `identity_records_authored` read as a malformed locator map), blanking the
+  member view between runs; the scan now strips exactly the member-view
+  documents that verify as kernel-master-signed (09 §13, C-OP-16), and a
+  0.2.1 cut carries the fix.
 - **Recorded, not decided:** the settle point when a budget exhausts with
   successors still owed (OQ-PLATFORM-5, observed on e39); whether
   `deliberate_lessons_bound_before_a_later_executing_turn` should additionally
