@@ -1785,6 +1785,8 @@ the platform lane every turn (`personaos-capability-acquisition-summary/1`,
 09 §13), and the acquisition actions follow the inventory read action in the
 catalogue. Statedness only: no ranking, no recommendation, no domain words.
 
+**Third run the same day (e48, qwen on 0.2.4):** two engineering capabilities acquired in seventeen minutes after a refusal named the recipe's members; executions joined the generations; still no inventory read and no geometry. One more schema statement followed: a content-bearing action declares its content member required (09 §13 preamble).
+
 
 ## ADR-0112 — The platform is a principal: standing requirements, the condition of record, a funded learning moment, and one scorecard
 

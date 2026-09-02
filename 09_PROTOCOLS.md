@@ -1383,6 +1383,18 @@ is recorded and abandoned — its work item is not requeued by the substrate.
 The requeue authority stays with the caller that submitted it; the recorded
 contention fact is the visibility.
 
+A content-bearing action declares its content member **required** in its
+input schema. The schema is the exact wire contract a grammar-constrained
+body decodes against, so a required member is emitted at decode time, while
+an optional one invites an invented name. Measured on one local model
+(2026-09-02): the message action, whose schema requires its payload, landed
+every call; the blackboard post, which required only its disposition, was
+refused fifteen times in twenty-five for members named `text_title`,
+`content_markdown` and the like — each refusal named the recognised member
+and the model still invented another. The blackboard post now requires
+`text`; older aliases remain accepted as open fields but are no longer
+advertised as alternatives.
+
 ## 13. Schema registry and clean-break versioning
 
 Every live boundary schema has one current registered version. Removed fields or
