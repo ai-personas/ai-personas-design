@@ -2087,3 +2087,77 @@ catalogue. Statedness only: no ranking, no recommendation, no domain words.
   channel for text-only bodies (OQ-PLATFORM-3); one requirements record per
   node or per environment class (OQ-PLATFORM-1); a deployment provisioning
   ingress and its recorded provenance (OQ-PLATFORM-4).
+- **2026-09-03, fourth pass (e48/e48b, Qwen3.8-27B on 0.2.4/0.2.5):** the
+  0.2.5 schema rule held live (16 posts, 0 refused; 15 of 25 refused the
+  run before); the exhaustion settle, the funded moment and the run-scoped
+  resume gate ran end to end twice; the remaining funded wake turns
+  survived a node restart. Three observability gaps found on the member
+  view and fixed: (1) a member whose distillations are bare texts published
+  every lesson with an empty body and no reason, so the card led with
+  nothing — a text body now travels verbatim inside the public bounds and an
+  omitted body states the bound it failed (`personaos-persona-agentic-
+  development/4`); (2) no surface carried a run's live model-call spend —
+  the exported run document freezes its arithmetic at export time, once per
+  completed turn — so the live feed now carries each run's signed balance
+  (`personaos-live-run-budget/1` on `personaos-environment-telemetry-
+  public/2`); (3) "more productive next time" was not measurable — the
+  scorecard counted only lessons authored inside the window — so
+  `lessons_bound_from_outside_this_task` counts the fragments a run's compiles
+  bound that this task did not author inside its window (10 §5). `capability_gap_limits_stated` is not a
+  read failure but a placeholder with no structured source (10 §5, 03 §5);
+  the worked example that showed it as 0 is corrected, and the UI no longer
+  calls it "source unreadable". Recorded, not decided: whether R-CAP-1's
+  "states the capability gap as a limit" should get a structured action so
+  the counter can measure (03 §5 keeps gap meaning opaque today); and what
+  a member carries between environments — a generation is environment-bound
+  by construction and no fact tells a member in a later environment what it
+  provisioned before (ADR-0113 proposal).
+
+## ADR-0113 — What a member carries between environments is its recipe, stated and replayable
+
+**Status:** accepted 2026-09-03, implemented the same day (impl commit noted in 13 §18).
+
+**Context.** e48/e48b (2026-09-02, Qwen3.8-27B): in the first house task the
+cohort provisioned two library generations (trimesh, ezdxf, shapely,
+pyclipper; trimesh, numpy) at +17 and +26 minutes. The second task on the
+same eight personas founded a new environment; neither generation existed
+there, no fact said so, and the cohort made zero acquisition attempts in 55
+minutes. The design already said the carry is recipe replay (03 §9: a
+generation "replays into any other environment from its published recipe"),
+but that route needs a deliberate publication in the first environment and a
+discovery-plane read in the second, and nothing in the per-turn facts named
+what the member had built before. The environment binding of a generation
+is enforced three times over in code and is sound; the gap is statedness
+and one affordance.
+
+**Decision.**
+1. The per-turn acquisition summary states the member's own prior tool
+   artifacts across the environments it belongs to on this node, current or
+   away, by identifier only (`member_prior_tool_artifacts`, 08 §5, 09 §13).
+   No ranking, no description, no claim of use; the newest sixteen with the
+   cut count stated; an environment whose artifacts could not be read is
+   named, and a table that could not be read at all is stated as unreadable
+   rather than empty.
+2. `replay_provisioning_recipe` re-runs one of the member's own recorded
+   recipes into the current environment through the same admission every
+   acquisition passes (setup, build, smoke, verification), producing a sealed
+   generation of this environment; nothing is copied and nothing mounts
+   unverified. Refused exactly when the member is not the author, not a
+   member of the source environment, names this environment as the source,
+   or the artifact carries no verification commands (a refusal is stated in
+   the action result, like every refusal). Every provisioning attempt,
+   succeeded or failed, is recorded as a member-signed claim bound to the
+   authenticated action (`personaos-capability-recipe-replay/1`); the replay
+   runs through the recipe action's own MCP-layer admission, so acquisition
+   readers count it.
+3. Publication and global acquisition remain the route between nodes and
+   between members; a generation stays environment-bound.
+
+**Consequences.** R-CAP-2's "rebuilding it unsurveyed is not work" now has a
+survey to stand on; the scorecard's `capabilities_mounted` counts a replayed
+generation like any other. Not decided: carrying acquired capability across
+nodes without publication (out of scope by 03 §9), and whether the survey
+should extend to artifacts other members authored in shared environments
+(today it is the member's own, because only the author's recipe replay is
+attributable without a publication).
+

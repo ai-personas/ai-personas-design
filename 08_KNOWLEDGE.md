@@ -341,6 +341,34 @@ verified generations stay perceivable each turn: the acquisition observation
 reports registered artifacts, artifacts without generations, generations
 verified, and generations failing re-verification as closed counts.
 
+**What a member carries between environments (ADR-0113).** A generation is
+bound to the environment that built it, on purpose: the environment is the
+unit of shared execution, and a generation from another environment is
+refused at registration, enumeration and dispatch. What a member carries is
+its own recipe. Two facts make that carry real rather than a rebuild from
+memory (R-CAP-2): the per-turn acquisition summary lists the member's prior
+tool artifacts — every artifact the member authored in another environment
+it belongs to on this node, current or away, as `source_environment_id`,
+`source_ref`, the artifact's own capability name, its recipe hash, and
+whether it carries a tool surface, with no ranking and no claim of use — and
+`replay_provisioning_recipe(source_environment_id, source_ref, rationale,
+task_id)` re-runs one of them here: the recorded setup, build and
+verification steps pass through the same admission every acquisition
+passes, the result is a sealed generation of this environment, nothing is
+copied and nothing mounts unverified. The replay is refused exactly, before anything
+runs, when the member did not author the artifact, is not a member of its
+environment, names this environment as the source, or the artifact carries
+no verification commands — a refusal is stated in the action result like
+every refusal — and it passes through the same MCP-layer admission the
+recipe action runs (name collision before provisioning, the signed
+acquisition intent and receipt, the attrition counter and the mount-replay
+correlation), so every reader that counts acquisitions sees a replay. Every
+provisioning attempt, succeeded or failed, is recorded
+(`personaos-capability-recipe-replay/1`, on this environment's lineage):
+the member-signed claim of source and outcome, bound to the authenticated
+action that requested it. Publication and global
+acquisition remain the route between nodes and between members.
+
 A verified opaque state body is retained without automatic
 application. Later cognition receives a small exact acquisition inventory and
 may open any retained body by exact id, JSON pointer, and byte window. Catalogue

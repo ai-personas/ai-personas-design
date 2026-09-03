@@ -1508,7 +1508,25 @@ Current cutover records include:
   `personaos-run-settle-record/1` (the kernel-signed statement that a run
   reached its settle point, written on the completing append; additive members 2026-09-02: `parked_by_exhaustion_member_ids` and `unfunded_pending_deliveries`, stated when the settle cause is `budget_exhausted` (03 §10)),
   `personaos-run-scorecard/1` (one kernel-signed count per run at the settle
-  point, projected compactly into the acceptance lane),
+  point, projected compactly into the acceptance lane; additive counter
+  2026-09-03: `lessons_bound_from_outside_this_task`, 10 §5),
+  `personaos-capability-acquisition-summary/1` additive members 2026-09-03
+  (ADR-0113): `member_prior_tool_artifacts` — the member's own tool
+  artifacts in its other environments on this node, by
+  `source_environment_id`/`source_ref`/capability name/recipe hash/tool
+  surface/membership, the newest sixteen — stated whenever the summary is
+  built for a member, with `member_prior_tool_artifacts_truncated_count`
+  when the bound cut rows, `member_prior_tool_artifacts_unreadable_environment_ids`
+  naming environments whose artifacts could not be read, and
+  `member_prior_tool_artifacts_unreadable: true` in place of the list when
+  the environment table itself could not be read), `replay_action`, and
+  `replay_provisioning_recipe` appended to `acquisition_actions`;
+  `personaos-capability-recipe-replay/1` (the member-signed record of one
+  replay attempt on the receiving environment's lineage,
+  `CAPABILITY_RECIPE_REPLAYED`: a persona-signed claim — persona, source
+  environment and ref, source and replayed recipe hashes, manifest hash,
+  ok/error, rationale, the authenticated action id — with `claim_hash`,
+  `signing_key_id` and `persona_signature`),
   `personaos-post-run-distillation-wake/1` (the third protocol-defined
   stimulus class: one prepaid one-shot delivery per member per run carrying
   exact references only), `personaos-cohort-contract-verifier-declaration/2`
@@ -1540,10 +1558,33 @@ Current cutover records include:
   record carry the scorecards as `run_scorecards`, one per task, newest settle
   first; the anonymous artifact-surface scan admits these two documents by exact closed shape alone — every member is an integer counter, a bounded identifier, a hash, a signature, or the bounded refusal text, so the shape cannot carry a locator; an extra, missing, or mistyped member falls back into the fail-closed scan; the rule is the same for a peer scanning the wire envelope and for a historical export after a key rotation, and a reader verifies the kernel-master signature itself before trusting the numbers),
   `personaos-post-run-distillation-wakes-armed/1`
-  (the settle point's per-member arm/fail/unreached statement), and
+  (the settle point's per-member arm/fail/unreached statement),
   `personaos-persona-birth-context-summary/1` (the content-blind population
   summary the situation carries in place of the full snapshot family; full
-  records stay reachable by content hash and the population read actions)
+  records stay reachable by content hash and the population read actions),
+  `personaos-persona-agentic-development/4` (2026-09-03: the member's public
+  projection of its own brain fragments inside the public cognition document;
+  a fragment body — a mapping or a bare text, both admitted by the
+  distillation action — travels verbatim inside the public reader's bounds,
+  and one the projection cannot carry states `body_omitted_reason` naming the
+  bound it failed (`over_byte_bound`, `over_text_bound`, `not_public_exact`,
+  `empty_text`, `not_mapping_or_text`; a fragment whose signature does not
+  verify is not published at all) beside
+  `body_included: false`; the member view's lesson lead reads this
+  projection), `personaos-environment-telemetry-public/2` (2026-09-03: the
+  redacted per-environment live feed gains `run_budgets`), and
+  `personaos-live-run-budget/1` (one run's signed model-call balance read at
+  the live-telemetry cadence — `granted`, `remaining`, `spent_net` from the
+  same signed fold the resume inventory uses, memoized on a generation peek;
+  `available: false` when the grant or ledger does not verify; counts only,
+  never task text, so the row may ride the redacted tier; carried on the
+  operator live aggregate and, projected through the closed allowlist, on
+  each public environment document in ascending run-document order (the
+  newest eight; the last row is the newest balance) — the anonymous
+  aggregate `/1` is unchanged — because the exported run document freezes
+  its arithmetic at export time and a viewer had no current spend at all;
+  the balance is the resume inventory's own memoized kind-scoped read, so a
+  quiet ledger folds nothing)
   (ADR-0112 cut 2); `personaos-run-scorecard-record/1` (the task-lineage
   carrier of the scorecard) and `personaos-run-scorecard-projection/1` (the
   acceptance-lane projection: counter names and values only) (ADR-0112 cut 3);

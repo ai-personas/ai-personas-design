@@ -985,7 +985,15 @@ explicit node entry point remains available for operators who want every flag.
 The UI leads, per member, with display name and portrait (or the honest
 placeholder with the requirement's stated status), the member's latest lesson,
 what the member built this run, and the run scorecard; verified facts and
-persona-authored claims stay visibly distinct. Evidence: the launcher's
+persona-authored claims stay visibly distinct. The latest lesson is the
+member's newest brain fragment carried verbatim — a mapping or a bare text
+inside the public bounds — and a fragment the projection cannot carry says
+which bound it failed rather than showing an empty body without a reason
+(`personaos-persona-agentic-development/4`, 09 §13). The run's live
+model-call balance rides the environment's live feed
+(`personaos-live-run-budget/1` on `personaos-environment-telemetry-public/2`)
+so a viewer sees spend while the run runs; the exported run document's
+arithmetic is frozen at export time and never was a live surface. Evidence: the launcher's
 lifecycle ledger for a fresh checkout and the rendered member view of a live
 run. The public records the view reads are kernel-signed siblings of the task,
 environment and persona records — `personaos-public-run-scorecard/1` (counters

@@ -114,7 +114,9 @@ reading; the grouping carries no order or priority.
   the capability gap as a limit with its reason. Narrowing the deliverable or
   relabelling a check is neither.
 - **R-CAP-2 — Recording what is already installed where execution happens is
-  work; rebuilding it unsurveyed is not.**
+  work; rebuilding it unsurveyed is not.** The survey includes what the
+  member itself built in its other environments on this node (08 §5,
+  ADR-0113): stated every turn by identifier, replayable by one action.
 - **R-CAP-3 — An acquisition nothing draws on has compounded nothing.** A
   mounted tool surface no member ever invokes, and a library generation no
   execution ever resolves from, are counted on the scorecard as unused.
@@ -400,6 +402,7 @@ class RunScorecard:
     # learning  (source: 20 §3a distillation self-products; 20 §3 compile bindings)
     lessons_authored_deliberately: int    # distillations the persona authored as an action, not the automatic slot
     deliberate_lessons_bound_before_a_later_executing_turn: int
+    lessons_bound_from_outside_this_task: int  # fragments a compile of this run bound that this task did not author inside the window
     repeated_refusals_without_lesson: int
     post_run_distillation_wakes_funded: int          # intake reservations × settle-point members
     post_run_distillation_members_unreached: tuple[str, ...]  # settle-point members no reservation covers
@@ -464,7 +467,17 @@ defining section, and the join is stated here:
   fragments bound in a compile of a later turn of the same persona in which
   at least one execution was recorded (the automatic slot binds every
   distillation, so only deliberate fragments can carry this count; a binding
-  that no executing turn ever carried counts for nothing).
+  that no executing turn ever carried counts for nothing);
+  *lessons_bound_from_outside_this_task* — the distinct fragments an in-window
+  compile of this task bound whose distillation record is not on this task
+  inside the window: what a member brought with it from an earlier run or
+  from another task, the mechanical measure of "more productive next time".
+  Counted per fragment however many compiles bound it, over the compile
+  record's bound ids (the writer caps them at 32 per compile); a fragment
+  this task authored inside the window never counts; the window's left
+  bound is the task family's first grant, so a resumed generation's own
+  lessons are inside it, and when that bound is unreadable the counter is
+  unavailable rather than a number (additive member 2026-09-03).
 - *post_run_distillation_wakes_funded* — the intake reservations that cover
   settle-point members; *post_run_distillation_members_unreached* — the
   settle-point members no reservation covers. Both are joins at signing time;
@@ -579,7 +592,8 @@ with no walls; all three cohort acceptances rested on a script printing
 hard-coded strings; the mints bound a cohort paraphrase that dropped every
 bar with teeth. Under this document the same run scores, at the settle point
 its budget exhaustion and eight parked members produce: `capabilities_mounted
-2, tool_surfaces_invoked 2, capability_gap_limits_stated 0, unnamed_members 8,
+2, tool_surfaces_invoked 2, capability_gap_limits_stated not measurable (§5),
+unnamed_members 8,
 birth_proposals_authored 0, lessons_authored_deliberately 6,
 receipts_repeating_unchanged_executions ≥1, cohort_recommendations 0,
 principal_acceptances 0`, every `refusals_stated_by_requirement` row zero.
