@@ -1510,6 +1510,29 @@ Current cutover records include:
   `personaos-run-scorecard/1` (one kernel-signed count per run at the settle
   point, projected compactly into the acceptance lane; additive counter
   2026-09-03: `lessons_bound_from_outside_this_task`, 10 §5),
+  `personaos-pending-persona-communication/1` cursor rule 2026-09-03: the
+  prompt lane shows a member the messages it was never shown; the read action
+  serves the complete set with whole bodies. Those are two sequences, so a
+  cursor names which one it addresses in its namespace and is honoured only by
+  that projection, and a cursor is bound to the message sequence (the ordered
+  authority hashes) rather than to one rendering of it — a body stubbed in the
+  prompt and served whole by the action is the same snapshot. Measured
+  2026-09-03 (e50): every prompt-minted cursor was refused as
+  `cursor_snapshot_mismatch` for any member with one carried message, and five
+  members re-issued the identical read over fifteen minutes. Both paged lanes
+  answer a cursor refusal the same way: the reason by name, the recovery
+  ("read again with no cursor"), and `retryable: true`, because a stale cursor
+  is recoverable and an unreadable lane is not.
+  `ARTIFACT_DECLARED` additive members 2026-09-03: `role_also_claimed_by`
+  (the live declarations on the same task claiming the exact same role over
+  different content, newest eight: artifact id, persona, content ref, title)
+  and `role_coexisting_claim_count`, present only when another claim exists
+  and carried on the action result as well as the record. The join is string
+  equality on the role the member chose: the substrate never reads what a
+  role means, never refuses a claim, and never chooses between claims — it
+  states the coexistence, as ADR-0111 P4 states an identical contract
+  condition. Measured 2026-09-03 (e50): seven declarations claimed one role
+  across five contents by four members and nothing said so;
   `personaos-capability-acquisition-summary/1` additive members 2026-09-03
   (ADR-0113): `member_prior_tool_artifacts` — the member's own tool
   artifacts in its other environments on this node, by
