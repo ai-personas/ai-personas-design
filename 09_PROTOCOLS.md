@@ -1524,15 +1524,25 @@ Current cutover records include:
   ("read again with no cursor"), and `retryable: true`, because a stale cursor
   is recoverable and an unreadable lane is not.
   `ARTIFACT_DECLARED` additive members 2026-09-03: `role_also_claimed_by`
-  (the live declarations on the same task claiming the exact same role over
-  different content, newest eight: artifact id, persona, content ref, title)
-  and `role_coexisting_claim_count`, present only when another claim exists
-  and carried on the action result as well as the record. The join is string
-  equality on the role the member chose: the substrate never reads what a
-  role means, never refuses a claim, and never chooses between claims — it
-  states the coexistence, as ADR-0111 P4 states an identical contract
-  condition. Measured 2026-09-03 (e50): seven declarations claimed one role
-  across five contents by four members and nothing said so;
+  (the other declarations on the same task claiming the exact same role,
+  newest eight, each with artifact id, persona, content ref, title,
+  `declared_by_this_persona`, `declaration_state` — a declaration still
+  awaiting its bytes is a claim on the role — and `content_comparable: false`
+  when a missing content reference on either side made the same-claim
+  comparison impossible), `role_coexisting_claim_count` (the TRUE total, not
+  the truncated one), `role_coexisting_claims_omitted`,
+  `role_claims_observed_at` and `role_claim_selection_performed: false`.
+  Present only when another claim exists, and carried on the action result as
+  well as the record. The join is string equality on the role the member
+  chose: the substrate never reads what a role means, never refuses a claim,
+  and — having no supersede relation between declarations — never calls one
+  stale or chooses between them; a member's own earlier claim is one of them
+  and says so. It states the coexistence, as ADR-0111 P4 states an identical
+  contract condition. The statement is an observation with an instant: when a
+  pending declaration later settles, the members do not ride the new record,
+  because no one measured them then. Measured 2026-09-03 (e50): seven
+  declarations claimed one role across five contents by four members and
+  nothing said so;
   `personaos-capability-acquisition-summary/1` additive members 2026-09-03
   (ADR-0113): `member_prior_tool_artifacts` — the member's own tool
   artifacts in its other environments on this node, by
