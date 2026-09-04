@@ -2112,6 +2112,15 @@ catalogue. Statedness only: no ranking, no recommendation, no domain words.
   a member carries between environments — a generation is environment-bound
   by construction and no fact tells a member in a later environment what it
   provisioned before (ADR-0113 proposal).
+- **2026-09-04, structural review (`reviews/2026-09-04-why-it-keeps-patching.md`,
+  13 §19):** the fix log since 2026-08-28 classified (225 items: 56 percent
+  statedness, 28 percent two-site divergence); the six mechanisms that
+  manufacture patches measured (589 refusal sites in 61 shapes; 22 cursor-
+  minting lanes with 3 acceptors; 16 memo schemes; 61 hand-kept UI field
+  lists; observability keyed to cause; tests that cross no seam); two live
+  UI drifts of 27 and 19 days found; the program that would end the series
+  proposed as six structural changes and five document changes. Recorded
+  here as a finding; every decision in it is owed to a future ADR.
 
 ## ADR-0113 — What a member carries between environments is its recipe, stated and replayable
 

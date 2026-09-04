@@ -1746,3 +1746,17 @@ The walk fails on any silent omission: a requirements block absent from a
 carrier with no stated omission, a receipt without the principal hash that
 still mints, a heartbeat that re-queues, a counter rendered as zero when its
 source was unreadable.
+
+## 19. Structural review, 2026-09-04 — why it keeps needing patches
+
+Seven independent audits over code, design, tests and every run root, after a
+week in which each live run produced a new correct local fix. Verdict: the
+design states the right rules; the rules have no carrier in code. Of 225 fix
+items since 2026-08-28, 56 percent are statedness defects and 28 percent are
+two sites implementing one projection differently, and both classes continued
+at the same rate after their rules were written. The full review, its evidence
+tables, the six structural changes that would end the series, and the design
+documents that should become contracts are in
+`reviews/2026-09-04-why-it-keeps-patching.md`. Nothing in it is decided; the
+owner decides.
+
