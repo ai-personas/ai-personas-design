@@ -883,6 +883,26 @@ result whose `persona_wake_delivery.enqueued` is true and whose `wake_event` is
 a mapping. Its snapshot identity binds persona, environment, and task; its
 cursor namespace is `communication-routed-wakes` and its page size is 64.
 
+### 4.5 Cursor contract
+
+Every paged lane mints its cursors in a namespace of its own, and a cursor
+is honoured only by the projection whose namespace it names. Where one source
+is projected twice — a prompt lane that shows a member what it was never
+shown, and a read action that serves the complete set with whole bodies —
+those are two sequences, so a cursor names which one it addresses and is
+honoured only by that projection. A cursor is bound to the sequence it pages
+(the ordered authority hashes) rather than to one rendering of it: a body
+stubbed in the prompt and served whole by the action is the same snapshot, so
+a changed rendering never invalidates a cursor and a changed sequence always
+does. Every paged lane answers a cursor refusal the same way: the reason by
+name, the recovery ("read again with no cursor"), and `retryable: true`,
+because a stale cursor is recoverable and an unreadable lane is not.
+`personaos-pending-persona-communication/1` is the lane this contract was
+first stated for; a namespace as a row of `registry/cursors.yaml` — its
+sequence-identity rule, read action, required arguments and invalidating
+transition — and the contract's extension to every lane are ADR-0115 dec 2
+(S6).
+
 ## 5. Global discovery and distribution
 
 Local routes, configured direct peers, libp2p/Kademlia provider discovery,
@@ -1348,6 +1368,21 @@ authority for authenticated effects and is never serialized into every public
 poll. No retention, caching, or compaction decision may inspect task, persona,
 domain, tool, path, event prose, or inferred importance.
 
+`personaos-environment-telemetry-public/2`, the redacted per-environment live
+feed, carries `run_budgets`: for each run one `personaos-live-run-budget/1`,
+the run's signed model-call balance read at the live-telemetry cadence —
+`granted`, `remaining` and `spent_net` from the same signed fold the resume
+inventory uses, memoized on a generation peek, so a quiet ledger folds
+nothing, and `available: false` when the grant or ledger does not verify. It
+carries counts only, never task text, so the row may ride the redacted tier.
+It rides the operator live aggregate and, projected under its row's reader
+policy (§13.2), each public environment document in ascending run-document
+order — the newest eight, an `unstated` row of `registry/bounds.yaml`
+(ADR-0114 dec 4), the last row the newest balance — while the anonymous
+aggregate `/1` is unchanged. The feed exists because the exported run
+document freezes its arithmetic at export time and never was a live surface
+([`11_DESIGN_CRITERIA.md` C-OP-16](11_DESIGN_CRITERIA.md#c-op-16--one-command-launches-the-ui-leads-with-who-and-what)).
+
 `personaos-node-status-public/1` is a node's own status document and a
 sibling of the public telemetry family above. It carries counts, presence and
 availability facts about the node — whether reads and discovery are public
@@ -1395,6 +1430,23 @@ the designed seam for introducing it. Disk growth is therefore a stated
 operator retention fact — an operator retiring an environment archives its
 lineage file whole; nothing in the substrate truncates one.
 
+The same retention fact covers what a turn read. Every lane of
+`personaos-persona-turn-prompt-carrier/19` (the navigation lane per component)
+and every outcome-lifecycle snapshot is stored content-addressed and
+compressed, referenced from the turn's carrier observation by content hash;
+the observation lands on every turn — a turn with no action is a record, not
+a skip — and a store refusal is stated on the lane row and never drops the
+observation. The stored lanes and snapshots are exact-access material under
+§12's disclosure rule — never a public tier, redacted or anonymous — and their
+disk growth is the operator retention fact stated above: nothing in the
+substrate compacts or truncates them. A lane cannot exceed the carrier it
+rode, so there is no oversize case; its bound is `carrier_lane_bytes:
+measured — the ADR-0107 carrier window`, a `registry/bounds.yaml` row from
+S7. The operator thinking surface (`personaos-persona-thinking/3`, registered
+`rendered`, tier `operator`) is the interface of this section that serves the
+material; the member through which it references the stored lanes is
+registered on its row when that row is decided.
+
 One acknowledged scheduling residue: when a TaskRuntime and a persona
 supervisor race for the same persona's turn, the losing TaskRuntime contender
 is recorded and abandoned — its work item is not requeued by the substrate.
@@ -1415,6 +1467,112 @@ advertised as alternatives.
 
 ## 13. Schema registry and clean-break versioning
 
+This section names the registry of record (§13.1), the three record classes
+and the reader policy each fixes (§13.2), the producer assertion and the tool
+that diffs code against the rows (§13.3), the clean-break rule with its
+freezes and retirements (§13.4), and the rendered registry (§13.5).
+
+### 13.1 The registry is a file
+
+The registry of record is `registry/schemas.yaml` with `registry/types.yaml`
+in this repository; the rendered registry (`registry/SCHEMAS.md`, §13.5) is
+generated from it and is never edited by hand. One row per schema id — every
+id that appears in code, on the wire, in lineage, in a store, or in a prompt,
+in-process value types included
+([`SPEC_CONVENTIONS.md §4.3`](SPEC_CONVENTIONS.md#43-schema-scope)). The seed
+shape of a row is `id`, `class` (§13.2), `class_decided_by`, `status`
+(`current`, `frozen`, `retired`), `tiers` (the surfaces the record rides),
+`owner` (the section that defines the record, an ADR decision until that
+section is written, or `registry` when the row is the definition), `members`
+(`required` and `optional`, each typed from the closed vocabulary of
+`registry/types.yaml`, with `empty_when` naming the one condition under which
+a required member is the empty string) and `notes` (what the row must say
+that its members do not). The members beyond the seed shape — `decided_by`,
+`rows` (members that are arrays of independently checkable rows),
+`read_action` and `cursor_namespace` where the record is paged (§4.5),
+`emitters`, and each member's bound as a named row of `registry/bounds.yaml`
+(ADR-0114 dec 4, from S7) — are filled from the stage that decides the row.
+`tools/registry.py check` refuses a schema id in code with no row, a row with
+no id, and a producer whose members differ from its row where the row has one
+emitter; every producer's assertion (§13.3) is enforced from S2's kernel
+commit, and a bound with no row is refused from S7. From S2's kernel commit
+the code's schema table is generated from the rows with status `current` or
+`frozen`; id-string validation stays what it is (INV-10, allocation-free). A
+mounted tool family registers as one row; its descriptors register at runtime
+under that family, never as rows of their own.
+
+### 13.2 Record classes and reader policies
+
+A record is registered in one of three classes, and its class names the
+policy every reader of it applies.
+
+**`exact` → signed-closed.** The member set is the contract: the producer
+asserts present == registered before signing; a reader refuses a record whose
+set is not exactly the registered set for its version. For records whose hash
+or signature preimage *is* the set (bindings, preimages, pages, the frozen
+families), an unknown member would silently change the identity, so the set
+is closed at both ends and every change is a version.
+
+**`open` → verify-open.** The signature already covers every present member.
+A reader verifies it, checks every *registered* member for type and bound,
+and admits an unregistered member as opaque bytes: never rendered, never
+dereferenced, never read by a substrate decision, re-exported byte-exact, and
+counted on the read result as `unregistered_members`. Additive members need
+no version and no reader change.
+
+**`rendered` → render-closed.** A document that exists to be displayed or
+read into a prompt is rendered member by member: a registered member renders
+under its type; an unregistered member is neither displayed nor interpolated;
+a required member that is absent renders the placeholder with the reason. A
+renderer is render-closed whatever the class of the record it renders.
+
+**Row arrays degrade per element.** A member registered as rows is checked
+per row; a failing row is replaced by a stated stub (index, reason code) and
+the rest are admitted; the array is refused only when it is not an array or
+exceeds its bound.
+
+**Anonymous surfaces stay fail-closed.** The two hazards — a locator reaching
+an anonymous reader, and content reaching a tier not cleared for it — are
+properties of a member, not of a set. On a `public_anonymous` surface
+admission is therefore per member: a registered member by its registered
+type, an unregistered member by the generic scan, never by signature or
+producer alone (a signature-based exemption would leave the federation path
+and post-rotation exports blank). A registered member is never read by its
+key text, and opaque is not unscanned: an unregistered member on an anonymous
+surface is admitted only when the scan admits it. The locator rule also
+binds the producer: an emitter for a `public_anonymous` tier runs the same
+per-member predicate the anonymous scan runs and refuses to sign a document
+any member of which the scan would refuse (§13.3). So a registered counter can
+no longer read as a locator map, and an unregistered member can no longer
+smuggle one. The rule is the same for a peer scanning the wire envelope and
+for a historical export after a key rotation, and a reader verifies the
+signature itself before trusting the members.
+
+A row seeded before any reader was generated from it carries
+`class_decided_by: seed`; the adversarial review of the first stage that
+generates a reader from the row decides its class, and the seed count never
+grows after S2.
+
+### 13.3 Producers assert; the tool diffs
+
+Every emitter of a registered record asserts before signing or returning:
+present ⊆ registered, required ⊆ present, each member inside its type and
+bound, and, for a `public_anonymous` tier, each member admitted by the
+anonymous scan's per-member rule (§13.2). A failed assertion is a substrate
+refusal
+([`11_DESIGN_CRITERIA.md` C-OP-14](11_DESIGN_CRITERIA.md#c-op-14--observability-fails-closed))
+and nothing is signed; a refused signing of a public record is stated in
+lineage as `PUBLIC_RECORD_EXPORT_REFUSED` carrying the refusal record.
+`tools/registry.py` is the one tool over the rows: `seed` writes a row for
+every id found in code; `check` refuses code that disagrees with the rows — a
+schema id with no row, a row with no id, a producer whose members differ from
+its row; `emit` writes the generated tables the code and the interface read,
+with the registry hash in their header; `render` writes `registry/SCHEMAS.md`
+and the line between the §13.5 markers. Generated artifacts are committed; the hash is how a reviewer knows which registry they
+were cut from.
+
+### 13.4 Clean break, freezes, retirements
+
 Every live boundary schema has one current registered version. Removed fields or
 semantics require a new version; old messages are refused at current live
 boundaries. This cutover deliberately provides no compatibility or migration
@@ -1432,217 +1590,25 @@ is registered; a new mechanical fact about a receipt or a mint rides its own
 observation record or is not recorded. The freeze exists because four versions
 in four days measured no change in what the adjudicated work was.
 
-Current cutover records include:
+Adding a member to an `open` record registers it first and bumps nothing.
+Removing, retyping or re-bounding a member, or adding one to an `exact`
+record, is a new version; additive members stop forcing bumps on UI-read and
+`rendered` records. A retired version's row stays with `status: retired`; no
+current reader accepts it and no reader accepts two versions. A frozen
+family's rows stay with `status: frozen` and register no further version.
 
-- `personaos-persona-work-situation/1`,
-  `personaos-persona-work-state/5`,
-  `personaos-persona-work-state-surface/5`,
-  `personaos-persona-causal-disposition/2`,
-  `personaos-persona-work-note-state/1`, and
-  `personaos-work-state-evidence/1`;
-- `personaos-persona-telemetry-public/2`;
-- `persona-self-publication/1` (D20: voluntary bounded persona-signed public
-  self-description on the PersonaCard);
-- `personaos-brain-compile-record/1` (D22: one durable closed counter per
-  compile) and `brain-fragment-catalogue-page/2` (D21: append-position order
-  with deterministic rotation);
-- `personaos-unaccepted-rewake-prepayment/1` (C-OP-4: every declared re-wake
-  fire prepaid at the signed arm transition; per-fire escrow release and
-  retirement refund are kernel-signed environment events);
-- `personaos-persona-communication-provenance/2` and
-  `personaos-persona-communication-delivery-disposition/1`;
-- `personaos-persona-birth-proposal/5` and
-  `personaos-persona-birth-proposal-record/2`;
-- `personaos-persona-birth-causal-action-context/1`;
-- `personaos-persona-birth-action-identity/1` as a deterministic ID preimage,
-  not signed birth authority;
-- `personaos-persona-birth-membership-binding/1` and
-  `personaos-verified-persona-birth-context-snapshot/1`;
-- `personaos-persona-birth-provenance/3` and
-  `personaos-birth-identity-wake/4`;
-- `brain-evolution-decision/1` and
-  `brain-evolution-application/1`;
-- `run-model-pool/2` and `persona-model-choice/1`;
-- `personaos-persona-state-record/1` with mechanical
-  `record_kind: "persona_knowledge"`;
-- `personaos-coordination-context/3`,
-  `personaos-coordination-lineage-snapshot/1`,
-  `personaos-coordination-prompt-projection/1`, and
-  `personaos-coordination-prompt-event-page/1`;
-- `personaos-active-peer-latest-signed-contributions/2` and
-  `personaos-active-peer-contribution-prompt-projection/1`;
-- `personaos-active-peer-work-state-head/1`,
-  `personaos-active-peer-work-state-heads/1`, and
-  `personaos-active-peer-work-state-prompt-projection/1`;
-- `personaos-persona-disposition-frontier-settlement/3` and
-  `personaos-disposition-frontier/2` (one projection record for both the
-  per-persona rows and the aggregate, ADR-0112 9b; the former
-  `personaos-persona-disposition-frontier/1` and
-  `personaos-terminal-disposition-frontier/1` are retired);
-- `personaos-open-input-causal-task-authority/1`,
-  `personaos-open-input-prompt-authority/2`, and
-  `personaos-open-input-prompt-projection/2`;
-- `personaos-current-artifact-declaration-authority/1`,
-  `personaos-current-artifact-declaration-prompt-projection/1`, and
-  `personaos-artifact-declaration-ambiguity/1`;
-- `personaos-mounted-tool-identity/1`;
-- `personaos-brain-evolution-prior-binding-selection/1` and
-  `personaos-brain-fragment-binding-carrier-effect/1`;
-- `personaos-peer-activity-lineage-snapshot/2`,
-  `personaos-verified-peer-lineage-event/1`, and
-  `personaos-communication-routed-wake-delivery-snapshot/1`;
-- `personaos-prompt-source-stage/2` and `personaos-prompt-source-pointer/1`
-  (ADR-0112 9c; the former `…-uniform-prompt-source-stage/1`,
-  `…-prompt-source-manifest/1`, `…-prompt-staged-source/1`,
-  `…-prompt-source-omission/1`, and `…-prompt-source-truncation/1` are
-  retired);
-- `personaos-carrier-fit/1`,
-  `personaos-carrier-lane-structural-index/1`,
-  `personaos-model-compacted-projection/1` (ADR-0102), and
-  `personaos-continuation-fit/1` (ADR-0107);
-- `personaos-receipt-execution-binding/1`,
-  `personaos-authoring-refusal-observation/1`,
-  `personaos-cohort-acceptance-disposition/1`,
-  `personaos-cohort-acceptance-mint-observation/1`,
-  `personaos-sandbox-executable-inventory-probe/1`, and
-  `personaos-brain-fragment-body-projection/1` (ADR-0108);
-- `personaos-receipt-execution-binding/2` (envelope resolution + cited-kind
-  census) and `personaos-cohort-acceptance-mint-observation/2` (pre-append
-  conditions on the kernel-signed receipt payload) (ADR-0109);
-- `personaos-receipt-execution-binding/3` (terminal_result scan +
-  STARTED-pair grounding; invented caps removed) and
-  `personaos-cohort-acceptance-mint-observation/3` (publication-currency
-  condition) (ADR-0110);
-- `personaos-receipt-execution-binding/4` (content identity + repetition
-  statedness), `personaos-cohort-acceptance-mint-observation/4`
-  (duplicate-acceptance dedup), `personaos-resume-suppression-observation/1`,
-  `personaos-principal-acceptance-prompt-authority/10` (cohort branch),
-  `personaos-bound-brain-fragment-prompt/2` (wrapper hashes dropped), and
-  `personaos-capability-acquisition-summary/1` (ADR-0111); and
-- `personaos-platform-requirements/1` (the deployment-signed standing
-  requirements, recorded at environment creation, carried whole in the
-  charter lane), `personaos-platform-requirement-refusal/1` (a member's
-  signed refusal of one requirement, bound to the text version declined),
-  `personaos-run-settle-record/1` (the kernel-signed statement that a run
-  reached its settle point, written on the completing append; additive members 2026-09-02: `parked_by_exhaustion_member_ids` and `unfunded_pending_deliveries`, stated when the settle cause is `budget_exhausted` (03 §10)),
-  `personaos-run-scorecard/1` (one kernel-signed count per run at the settle
-  point, projected compactly into the acceptance lane; additive counter
-  2026-09-03: `lessons_bound_from_outside_this_task`, 10 §5),
-  `personaos-pending-persona-communication/1` cursor rule 2026-09-03: the
-  prompt lane shows a member the messages it was never shown; the read action
-  serves the complete set with whole bodies. Those are two sequences, so a
-  cursor names which one it addresses in its namespace and is honoured only by
-  that projection, and a cursor is bound to the message sequence (the ordered
-  authority hashes) rather than to one rendering of it — a body stubbed in the
-  prompt and served whole by the action is the same snapshot. Measured
-  2026-09-03 (e50): every prompt-minted cursor was refused as
-  `cursor_snapshot_mismatch` for any member with one carried message, and five
-  members re-issued the identical read over fifteen minutes. Both paged lanes
-  answer a cursor refusal the same way: the reason by name, the recovery
-  ("read again with no cursor"), and `retryable: true`, because a stale cursor
-  is recoverable and an unreadable lane is not.
-  `ARTIFACT_DECLARED` additive members 2026-09-03: `role_also_claimed_by`
-  (the other declarations on the same task claiming the exact same role,
-  newest eight — an `unstated` row of `registry/bounds.yaml` (ADR-0114 dec 4;
-  rows seeded at S2) — each with artifact id, persona, content ref, title,
-  `declared_by_this_persona`, `declaration_state` — a declaration still
-  awaiting its bytes is a claim on the role — and `content_comparable: false`
-  when a missing content reference on either side made the same-claim
-  comparison impossible), `role_coexisting_claim_count` (the TRUE total, not
-  the truncated one), `role_coexisting_claims_omitted`,
-  `role_claims_observed_at` and `role_claim_selection_performed: false`.
-  Present only when another claim exists, and carried on the action result as
-  well as the record. The join is string equality on the role the member
-  chose: the substrate never reads what a role means, never refuses a claim,
-  and — having no supersede relation between declarations — never calls one
-  stale or chooses between them; a member's own earlier claim is one of them
-  and says so. It states the coexistence, as ADR-0111 P4 states an identical
-  contract condition. The statement is an observation with an instant: when a
-  pending declaration later settles, the members do not ride the new record,
-  because no one measured them then. Measured 2026-09-03 (e50): seven
-  declarations claimed one role across five contents by four members and
-  nothing said so;
-  `personaos-capability-acquisition-summary/1` additive members 2026-09-03
-  (ADR-0113): `member_prior_tool_artifacts` — the member's own tool
-  artifacts in its other environments on this node, by
-  `source_environment_id`/`source_ref`/capability name/recipe hash/tool
-  surface/membership, the newest sixteen — stated whenever the summary is
-  built for a member, with `member_prior_tool_artifacts_truncated_count`
-  when the bound cut rows, `member_prior_tool_artifacts_unreadable_environment_ids`
-  naming environments whose artifacts could not be read, and
-  `member_prior_tool_artifacts_unreadable: true` in place of the list when
-  the environment table itself could not be read), `replay_action`, and
-  `replay_provisioning_recipe` appended to `acquisition_actions`;
-  `personaos-capability-recipe-replay/1` (the member-signed record of one
-  replay attempt on the receiving environment's lineage,
-  `CAPABILITY_RECIPE_REPLAYED`: a persona-signed claim — persona, source
-  environment and ref, source and replayed recipe hashes, manifest hash,
-  ok/error, rationale, the authenticated action id — with `claim_hash`,
-  `signing_key_id` and `persona_signature`),
-  `personaos-post-run-distillation-wake/1` (the third protocol-defined
-  stimulus class: one prepaid one-shot delivery per member per run carrying
-  exact references only), `personaos-cohort-contract-verifier-declaration/2`
-  (inherits every supplied principal member; fills only the absent verifier
-  predicate), `personaos-principal-acceptance-prompt-authority/11`
-  (`cohort_recommended` replaces the closing branch; the scorecard projection
-  rides beside), the `verifier_descriptor` kind `principal-capability/1`
-  (member set `{kind, scope, capability_generation_ref}`), the contract
-  member `principal_condition_hash` on `TASK_ACCEPTANCE_CONTRACT_AUTHORED`
-  (the frozen receipt and mint families gain nothing), the intake member
-  `post_run_distillation_reservation_per_member`, the task projection fact
-  `cohort_recommended`, `personaos-platform-requirements-prompt/1` (the lane
-  block), `personaos-post-run-distillation-reservation/1` (the intake
-  reservation, recorded on the environment lineage with the signed pool
-  record the settle point re-verifies), `personaos-post-run-distillation-prepayment/1`
-  (its run-ledger escrow), `personaos-post-run-distillation-escrow-release/1`
-  (one member's reservation released at its wake's fire, 10 §4.4),
-  `personaos-turn-compaction-statement/1` (P-6, on every turn effect
-  receipt), `personaos-capability-acquisition-summary/1` (ADR-0111 P-7, done
-  2026-09-02: the per-turn statement of the acquisition surface beside the
-  platform lane — provisioning-site and package-index probes, inventory record
-  counts and read action, environment counts of provisioned/verified/
-  registered capabilities, the acquisition action names; the execution-
-  capability inventory records gain the additive member `self_description`
-  with `provenance.self_description_source`, 08 §5), `personaos-public-run-scorecard/1` and
-  `personaos-public-identity-requirement-status/1` (C-OP-16: kernel-signed
-  siblings of the public task and persona records; counters only, and a
-  member's own stated refusal; the environment record and the member's persona
-  record carry the scorecards as `run_scorecards`, one per task, newest settle
-  first; the anonymous artifact-surface scan admits these two documents by exact closed shape alone — every member is an integer counter, a bounded identifier, a hash, a signature, or the bounded refusal text, so the shape cannot carry a locator; an extra, missing, or mistyped member falls back into the fail-closed scan; the rule is the same for a peer scanning the wire envelope and for a historical export after a key rotation, and a reader verifies the kernel-master signature itself before trusting the numbers — the scan sentence is retired by ADR-0114 dec 2, at its acceptance: admission on the anonymous surface becomes per member, by registered type),
-  `personaos-post-run-distillation-wakes-armed/1`
-  (the settle point's per-member arm/fail/unreached statement),
-  `personaos-persona-birth-context-summary/1` (the content-blind population
-  summary the situation carries in place of the full snapshot family; full
-  records stay reachable by content hash and the population read actions),
-  `personaos-persona-agentic-development/4` (2026-09-03: the member's public
-  projection of its own brain fragments inside the public cognition document;
-  a fragment body — a mapping or a bare text, both admitted by the
-  distillation action — travels verbatim inside the public reader's bounds,
-  and one the projection cannot carry states `body_omitted_reason` naming the
-  bound it failed (`over_byte_bound`, `over_text_bound`, `not_public_exact`,
-  `empty_text`, `not_mapping_or_text`; a fragment whose signature does not
-  verify is not published at all) beside
-  `body_included: false`; the member view's lesson lead reads this
-  projection), `personaos-environment-telemetry-public/2` (2026-09-03: the
-  redacted per-environment live feed gains `run_budgets`), and
-  `personaos-live-run-budget/1` (one run's signed model-call balance read at
-  the live-telemetry cadence — `granted`, `remaining`, `spent_net` from the
-  same signed fold the resume inventory uses, memoized on a generation peek;
-  `available: false` when the grant or ledger does not verify; counts only,
-  never task text, so the row may ride the redacted tier; carried on the
-  operator live aggregate and, projected through the closed allowlist, on
-  each public environment document in ascending run-document order (the
-  newest eight — an `unstated` row of `registry/bounds.yaml` (ADR-0114 dec 4;
-  rows seeded at S2); the last row is the newest balance) — the anonymous
-  aggregate `/1` is unchanged — because the exported run document freezes
-  its arithmetic at export time and a viewer had no current spend at all;
-  the balance is the resume inventory's own memoized kind-scoped read, so a
-  quiet ledger folds nothing)
-  (ADR-0112 cut 2); `personaos-run-scorecard-record/1` (the task-lineage
-  carrier of the scorecard) and `personaos-run-scorecard-projection/1` (the
-  acceptance-lane projection: counter names and values only) (ADR-0112 cut 3);
-  and
-- `personaos-replication-effect-descriptor/1`.
+### 13.5 Registry
+
+The rendered registry is `registry/SCHEMAS.md`: one line per schema id — id,
+class, status, tiers, owner, who decided the class, and the read action or
+cursor namespace where the record is paged — generated from the rows by
+`tools/registry.py render` and never edited by hand. The line between the
+markers below is written by the same tool and names the registry hash and
+the row count it rendered.
+
+<!-- registry:schemas:begin -->
+See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1209 rows; registry sha256 c19d30aa5f1cbc0d6e314fe1367b5f4e4e2ff8b17e73e8fe8e11ceebabb5eb91).
+<!-- registry:schemas:end -->
 
 ## 14. Key custody
 

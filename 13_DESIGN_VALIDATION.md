@@ -1874,6 +1874,17 @@ nothing to record is written `—`:
   generations; still no inventory read and no geometry · changed: a
   content-bearing action declares its content member required (09 §13
   preamble; commit `3f9eab71`) · recorded-not-decided: — · ADR-0111
+- **2026-09-03** · run: e50 · build/model: — (fix commit `5b761677`);
+  gpt-5.6-luna · measured: seven declarations claimed one role across five
+  contents by four members and nothing said so · changed: `ARTIFACT_DECLARED`
+  gains the additive members `role_also_claimed_by` and its companions — the
+  true total, the omitted count, the observation instant,
+  `role_claim_selection_performed: false` — present only when another claim
+  exists and carried on the action result as well as the record (03 §6; the
+  member set is the row) — a coexistence statement patterned on ADR-0111's
+  identical-condition statement and decided by no ADR of its own; relocated
+  here from the 09 §13 cutover list at S2 · recorded-not-decided: — ·
+  ADR-0111
 - **2026-09-05** · run: — (arms the next luna run) · build/model: — ·
   measured: — · changed: operator bars v3 — the e37 bar-9 clause's
   registration route and "did not author" withdrawn as operator authority,
@@ -1938,6 +1949,15 @@ nothing to record is written `—`:
   view deployed on `main`; public cut 0.2.0 (`c6cbf8c0`); the scan admits
   exactly the two closed member-view shapes (`e1696cf4`), cut 0.2.1 ·
   recorded-not-decided: — · ADR-0112
+- **2026-09-02** · run: the first live settle on a local model node ·
+  build/model: 0.2.0 → 0.2.1; Qwen3.8-27B · measured: a scorecard counter
+  name (`identity_records_authored`) read by the anonymous artifact-surface
+  scan as a malformed locator map, which blanked every persona record that
+  carried a scorecard (the entry above) · changed: the closed-shape admission
+  of the two member-view documents (`e1696cf4`) — the rule C-OP-16 carried
+  with this incident as its reason until S2, when the per-member admission
+  rule of 09 §13.2 replaced it and the incident moved here; the federation
+  reason stays in C-OP-16 · recorded-not-decided: — · ADR-0112
 - **2026-09-02** · run: e45 (first full run on a local model) · build/model:
   0.2.1 → 0.2.2; Qwen3.8-27B, 120 calls · measured: the substrate held
   (statedness, receipts, two provisioned capabilities, five deliberate
@@ -1958,6 +1978,14 @@ nothing to record is written `—`:
   decisions (`70cb0222`; cut 0.2.2) — OQ-PLATFORM-5, first observed on e39,
   closed (10 §9) ·
   recorded-not-decided: the model-tier facts · ADR-0112
+- **2026-09-02** · run: e45 · build/model: 0.2.1 → 0.2.2; Qwen3.8-27B ·
+  measured: at the exhaustion settle every member was parked and one delivery
+  was pending with no grant coming (the e45 entry above) · changed:
+  `personaos-run-settle-record/1` gains the additive members
+  `parked_by_exhaustion_member_ids` and `unfunded_pending_deliveries`, stated
+  when the settle cause is `budget_exhausted` (03 §10, 10 §4.5; `70cb0222`,
+  cut 0.2.2); relocated here from the 09 §13 cutover list at S2 ·
+  recorded-not-decided: — · ADR-0112
 - **2026-09-02** · run: e46 · build/model: 0.2.2 → 0.2.3; gpt-5.6-luna, 120
   calls, fresh root · measured: all eight members named themselves within 25
   s, 50 distillations (34 deliberate, 248 bindings, two traceable behaviour
@@ -1986,6 +2014,20 @@ nothing to record is written `—`:
   calls it "source unreadable" · recorded-not-decided: a structured
   gap-limit action (decided by ADR-0116 dec 4); what a member carries
   between environments (decided by ADR-0113) · ADR-0112
+- **2026-09-03** · run: e48 / e48b · build/model: 0.2.4 → 0.2.5;
+  Qwen3.8-27B · measured: — (the e48 / e48b entry above) · changed: the three
+  0.2.5 decisions by schema (`fd871189`): `personaos-persona-agentic-development/4`
+  — a fragment body, mapping or bare text, travels verbatim inside the public
+  reader's bounds, and an omitted body states `body_omitted_reason` (the row's
+  enum: `over_byte_bound`, `over_text_bound`, `not_public_exact`, `empty_text`,
+  `not_mapping_or_text`) beside `body_included: false`, a fragment whose
+  signature does not verify being not published at all (11 C-OP-16);
+  `personaos-environment-telemetry-public/2` gains `run_budgets`, one
+  `personaos-live-run-budget/1` per run read at the live-telemetry cadence,
+  the newest eight in ascending run-document order (09 §12);
+  `personaos-run-scorecard/1` gains the additive counter
+  `lessons_bound_from_outside_this_task` (10 §5); relocated here from the 09
+  §13 cutover list at S2 · recorded-not-decided: — · ADR-0112
 - **2026-09-04** · run: — (structural review, §19,
   `reviews/2026-09-04-why-it-keeps-patching.md`) · build/model: 0.2.8 ·
   measured: 225 fix items since 2026-08-28 — 56 percent statedness, 28
@@ -2035,8 +2077,39 @@ nothing to record is written `—`:
   doctrine; 09 §6 and §12 own the two status records (commit: the design
   commit that lands this entry) · recorded-not-decided: — · ADR-0114
 
+- **2026-09-05** · run: — · build/model: — · measured: — · changed: the S2
+  design push in this repository — 09 §13.1–13.5 replace the cutover list
+  (§13.5 points at the generated `registry/SCHEMAS.md`; §13.1 scopes what
+  `check` refuses today, from S2's kernel commit, and from S7); 09 §4.5
+  seeded with the cursor contract; the `ARTIFACT_DECLARED` coexistence
+  statement and its `unstated` bound re-homed in 03 §6; the re-wake
+  prepayment's escrow events in 03 §7; the distillation reservation record in
+  10 §4.4; the birth-context summary in 16 §10; the environment live feed and
+  `personaos-live-run-budget/1` in 09 §12; the `self_description` member
+  names in 08 §5; the C-OP-16 closed-shape sentence replaced by the
+  per-member admission rule, plus the `body_omitted_reason` enum sentence and
+  the `run_scorecards` order; SPEC §4 (fourth canonical form), §4.1, §4.4,
+  §13 index (`registry/` row) and §14.5; nine glossary terms; the stale
+  `#13-schema-registry` anchors in 08 and 11; the cutover list's dated notes
+  journaled above under ADR-0111, ADR-0112 and ADR-0115; ADR-0114 dec 1–3 are
+  enacted at S2's kernel commit, where the status flips · recorded-not-decided:
+  — · ADR-0114
+
 ### ADR-0115
 
+- **2026-09-03** · run: e50 · build/model: — (fix commit `54430684`);
+  gpt-5.6-luna · measured: every prompt-minted
+  `personaos-pending-persona-communication/1` cursor was refused as
+  `cursor_snapshot_mismatch` for any member with one carried message, and five
+  members re-issued the identical read over fifteen minutes (restated in the
+  2026-09-05 entry below) · changed: the pending-communication cursor rule at
+  one site — the prompt lane and the read action are two sequences, each with
+  its own namespace, a cursor is honoured only by the projection its namespace
+  names, its snapshot is bound to the ordered authority hashes rather than to
+  one rendering, and the lane answers a cursor refusal with the reason by
+  name, the recovery and `retryable: true` (`54430684`); the rule is the seed
+  of 09 §4.5 from S2, relocated there from the 09 §13 cutover list ·
+  recorded-not-decided: — · ADR-0115
 - **2026-09-05** · run: — (the tree, measured by the refusal and cursor
   audits for the program) · build/model: 0.2.8 · measured: 762 `"ok": False`
   sites in the kernel, 592 under the protocol layer; `retryable` defaulted
@@ -2095,3 +2168,15 @@ nothing to record is written `—`:
   shape, a document rendered as a status while stating nothing · changed: —
   (the two-member form is retired at S0's kernel commit, ADR-0116 dec 3) ·
   recorded-not-decided: — · ADR-0116
+- **2026-09-05** · run: — · build/model: — · measured: — · changed: dec 2
+  enacted at S4's kernel commit — every lane of
+  `personaos-persona-turn-prompt-carrier/19` stored content-addressed and
+  compressed (per component for the navigation lane), the carrier observation
+  landed on every turn, `prompt_carrier_observation_hash` on
+  `personaos-turn-effect-receipt/1`, outcome-lifecycle snapshots stored
+  through the same path; in this repository 09 §12a states the material's
+  tier, its reference by content hash, its retention and the
+  `carrier_lane_bytes` bound (a `registry/bounds.yaml` row from S7), and 20
+  §3 names the receipt member; the thinking surface's lane-manifest member
+  deferred to S2's registry · recorded-not-decided: compaction of stored
+  lanes · ADR-0116

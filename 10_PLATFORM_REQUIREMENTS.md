@@ -325,6 +325,11 @@ protocol-defined stimulus class ([`03_TASKS.md §7`](03_TASKS.md#7-causal-contin
 It carries no instruction, diagnosis, suggestion, or prose; delivery gives the
 persona one ordinary wake with its complete action catalogue.
 
+The reservation itself is `personaos-post-run-distillation-reservation/1`,
+recorded at intake on the environment lineage together with the signed pool
+record the settle point re-verifies; its run-ledger escrow is
+`personaos-post-run-distillation-prepayment/1`.
+
 The member's reservation stays in escrow until the wake fires. At the fire
 gate the kernel releases exactly that member's `per_member` calls to the run
 ledger and appends `personaos-post-run-distillation-escrow-release/1`

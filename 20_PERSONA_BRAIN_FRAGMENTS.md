@@ -137,9 +137,11 @@ relevance judgment.
 
 The kernel signs the exact compile before the model turn. Prompt admission
 still verifies every selected binding and fragment against current storage.
-After admission, that immutable signature lets the turn-effect receipt preserve
-what the turn actually saw even if the same turn authors a newer fragment or
-binding revision before effect capture. Recomputing the pre-turn carrier from
+After admission, that immutable signature lets the turn-effect receipt
+(`personaos-turn-effect-receipt/1`) preserve what the turn actually saw — it
+carries `prompt_carrier_observation_hash`, the hash of the turn's carrier
+observation, or the reason none was available — even if the same turn authors
+a newer fragment or binding revision before effect capture. Recomputing the pre-turn carrier from
 post-turn state, and thereby erasing causal learning evidence whenever learning
 occurs, is forbidden.
 

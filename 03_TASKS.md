@@ -348,6 +348,26 @@ bytes but disagree on authored media claims, the projection preserves the
 alternatives as explicit declaration ambiguity and selects no MIME from that
 channel.
 
+A declaration is also a claim on the role it names, and the current
+projection states every coexisting claim rather than choosing among them.
+`ARTIFACT_DECLARED` carries the other declarations on the same task that claim
+the exact same role — the members are the `ARTIFACT_DECLARED` row of the
+registry, `role_also_claimed_by` among them, with the true total stated rather
+than the truncated one and `role_claim_selection_performed: false` — present
+only when another claim exists, and carried on the action result as well as
+the record. The list is bounded at the newest eight — an `unstated` row of
+`registry/bounds.yaml` (ADR-0114 dec 4), a bound with no measured or declared
+provenance, held until its replacement is measured. The join is string equality on the role the member chose: the
+substrate never reads what a role means, never refuses a claim, and — having
+no supersede relation between declarations — never calls one stale or chooses
+between them; a member's own earlier claim is one of them and says so; a
+declaration still awaiting its bytes is a claim on the role; and when a
+missing content reference on either side makes the same-claim comparison
+impossible, the row says so instead of guessing. It states the coexistence,
+as ADR-0111 states an identical contract condition. The statement is an
+observation with an instant: when a pending declaration later settles, the
+members do not ride the new record, because no one measured them then.
+
 Concurrent member work remains attributable. A participant's worktree is
 leased through action capture, publication, and settlement. Peer publications
 may advance the shared environment, but they do not appear retroactively as the
@@ -483,7 +503,11 @@ arm time, while delivery still spends only the independently prepaid successor.
 The signed marker binds the reservation hash, per-fire call cap, persona,
 environment, task, request, run, and model pool. A bounded recurrence prepays
 one independent allowance for every declared fire; an unbounded recurrence
-requires explicitly unlimited authority. The arm append encloses the exact
+requires explicitly unlimited authority. For the declared unaccepted re-wake
+bound the prepayment is `personaos-unaccepted-rewake-prepayment/1`, and each
+fire's escrow release and the bound's retirement refund are kernel-signed
+environment events
+([`11_DESIGN_CRITERIA.md` C-OP-4](11_DESIGN_CRITERIA.md#c-op-4--continuity-and-resume-preserve-exact-identity-and-causality)). The arm append encloses the exact
 reservation, and an append failure returns the uncommitted transfer. A
 successful result therefore means the future work is durably armed and funded,
 not merely that a timer was recorded.

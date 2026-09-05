@@ -2031,7 +2031,7 @@ and one affordance.
 **Decision.**
 1. The per-turn acquisition summary states the member's own prior tool
    artifacts across the environments it belongs to on this node, current or
-   away, by identifier only (`member_prior_tool_artifacts`, 08 §5, 09 §13).
+   away, by identifier only (`member_prior_tool_artifacts`, 08 §5; its row in `registry/schemas.yaml`).
    No ranking, no description, no claim of use; the newest sixteen with the
    cut count stated (an `unstated` row of `registry/bounds.yaml` from S2,
    ADR-0114 dec 4); an environment whose artifacts could not be read is
@@ -2150,7 +2150,7 @@ one site. The cursor audit found the cursor rule implemented per lane: many
 mint sites over literal namespaces, few acceptors, several grammars, and
 read-action refusals that lose the word "cursor"; on one run every
 prompt-minted pending-communication cursor was refused as
-`cursor_snapshot_mismatch` and members re-issued the identical read (09 §13)
+`cursor_snapshot_mismatch` and members re-issued the identical read (13 §20; the rule now lives in 09 §4.5)
 (measured: 13 §20, ADR-0115). Both are the class the standing rule names: one
 rule, many sites, no carrier.
 
@@ -2226,7 +2226,7 @@ cannot make.
    code, refused-call count, active call ages; and projected as
    `run_progress` rows on `personaos-environment-telemetry-public/2`, read
    at the live-telemetry cadence (the `personaos-live-run-budget/1`
-   precedent, 09 §13) so a multi-hour stall is a continuously perceivable
+   precedent, 09 §12) so a multi-hour stall is a continuously perceivable
    surface (C-OP-14) without a new integer or a lineage append per tick.
    Wakes nobody; read by no decision. The sink's exhaustion classification
    is honoured at every seam (never laundered into retryable); every fire

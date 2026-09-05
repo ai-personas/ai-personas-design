@@ -226,7 +226,10 @@ and outcome records in exact absolute lineage append order. Its page binds
 snapshot hash, exact total/cardinality, cursor/range, omissions, and source
 verification evidence. Equal payloads at distinct lineage positions remain
 distinct records; no semantic or content-based deduplication changes
-cardinality.
+cardinality. The situation carries `personaos-persona-birth-context-summary/1`
+in place of that family: a content-blind summary of the population; the full
+records stay reachable by content hash and through the population read
+actions.
 
 ## 11. Removed compatibility surface
 

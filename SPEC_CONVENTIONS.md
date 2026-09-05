@@ -187,11 +187,12 @@ Sub-sections use `##` (top-level), `###` (one nesting), `####` (rare; only where
 
 ## 4. Schemas
 
-All schemas in v1.0 MUST be expressed in **one** of three canonical forms:
+All schemas in v1.0 MUST be expressed in **one** of three canonical prose forms, and every schema id MUST have the fourth form, its registry row:
 
 1. **Python `@dataclass`** (preferred for kernel-side entities; reflects the reference implementation).
 2. **JSON Schema** (preferred for wire-format and inter-agent contracts).
 3. **TypeScript `interface`** (acceptable for protocol payloads where TS is idiomatic).
+4. **Registry row** (`registry/schemas.yaml`, [`09_PROTOCOLS.md §13.1`](09_PROTOCOLS.md#131-the-registry-is-a-file)): the form of record for every id; the three prose forms are illustrations that MUST agree with the row.
 
 The form is implied by the code-fence language (`python`, `json`, `typescript`) and explicitly stated with the current schema when needed; clean-break versioning is defined in [`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry-and-clean-break-versioning).
 
@@ -209,6 +210,7 @@ Each schema declaration MUST include:
 | Python `@dataclass` | One of the two forms below (§4.2). |
 | JSON Schema instance | A `"schema": "<name>/<n>"` property in the document. |
 | TypeScript `interface` | `readonly schema: "<name>/<n>";`. |
+| Registry row | The row's `id` is the `<name>/<n>` value; `schema` is a member of every row and is not repeated. |
 
 ### 4.2 Python `@dataclass` schema-field forms
 
@@ -246,7 +248,7 @@ The `schema` field is REQUIRED on every entity that crosses a process, signing, 
 
 ### 4.4 Schema registry
 
-Current schema records and clean-break versioning rules are in [`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry-and-clean-break-versioning). Adding or modifying a live boundary schema MUST update that current registry and MUST NOT add a compatibility mapper for the retired version.
+Current schema records and clean-break versioning rules are in [`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry-and-clean-break-versioning). Adding or modifying a live boundary schema MUST add or change a row in `registry/schemas.yaml` and regenerate; MUST NOT edit the generated table; MUST NOT add a compatibility mapper for the retired version.
 
 ## 5. Diagrams
 
@@ -363,6 +365,7 @@ v1.0 documents are versioned as a set. The version field in front matter MUST eq
 |---|------|-----------|----------|-----------|
 | — | `README.md` | No | All | 4 min |
 | — | `SPEC_CONVENTIONS.md` (this file) | Documentation-normative | Authors, reviewers | 6 min |
+| — | `registry/` (the YAML registries of record: `schemas.yaml`, `types.yaml`, `refusals.yaml`, …, and the generated `SCHEMAS.md`) | Documentation-normative (the form of record for every schema id, reason code and bound; rendered into `registry/SCHEMAS.md` by `tools/registry.py`, [`09_PROTOCOLS.md §13.5`](09_PROTOCOLS.md#135-registry)) | Implementers, reviewers | — |
 | 00 | `00_VISION.md` | Partially (invariants are normative; narrative is not) | All | 12 min |
 | 01 | `01_KERNEL.md` | Yes | Implementers | 14 min |
 | 02 | `02_PERSONA.md` | Yes | Implementers, persona authors | 18 min |
@@ -387,7 +390,7 @@ A v1.0 document is **conformant** to these conventions when:
 2. Normative claims use RFC 2119 keywords in ALL CAPS per §2.
 3. Section structure carries the three §3.1 bookends (`## 0. Status & scope`, `## Risks & known limitations`, `## Open questions`). Any deviation from the §3.2 ten-section skeleton is documented in `## 0. Status & scope` per §3.3.
 4. H2 headings use integer numbering per §3.4; letter suffixes are permitted only when they match Pattern A (lowercase patch insertion) or Pattern B (uppercase structural pillars). Forbidden mixed-case (`## 11Ab.`), numeric-letter (`## 11a1.`), and arbitrary alphabetic (`## 11x.`) forms are absent.
-5. Schemas declare a `schema` field with `<name>/<integer>` value per §4 and appear either in the [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry) headline catalogue (broadly load-bearing schemas) or in the generated registry produced by the schema-extractor CI job (narrower schemas). The two together form the authoritative registry for INV-10 runtime version checks per [`09_PROTOCOLS.md §7`](09_PROTOCOLS.md#7-schema-registry).
+5. Schemas declare a `schema` field with `<name>/<integer>` value per §4 and are rows of `registry/schemas.yaml`, rendered into `registry/SCHEMAS.md` by `tools/registry.py` ([`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry-and-clean-break-versioning) §13.5). The rows are the authoritative registry for INV-10 runtime version checks per [`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry-and-clean-break-versioning).
 6. Cross-references use one of the three forms in §6.1: prose inline references use the anchored form `[`file.md §N`](file.md#anchor)` with non-empty anchor fragments; tabular registry cells and cross-reference indexes MAY use the visible-only form (`[`file.md §N`](file.md)`); top-level "see also" entries MAY use the document-only form (`[`file.md`](file.md)`). Mixed forms (visible text names a section but the URL has neither anchor nor visible match) are non-conformant.
 7. Risks (§7 six-column table) and Open Questions (§8 with `OQ-<doc>-<n>` IDs) are present, or `N/A` is explicitly justified in `## 0. Status & scope`.
 8. Normative claims with corresponding design criteria cite current

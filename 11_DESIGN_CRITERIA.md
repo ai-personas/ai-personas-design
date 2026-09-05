@@ -989,7 +989,12 @@ persona-authored claims stay visibly distinct. The latest lesson is the
 member's newest brain fragment carried verbatim — a mapping or a bare text
 inside the public bounds — and a fragment the projection cannot carry says
 which bound it failed rather than showing an empty body without a reason
-(`personaos-persona-agentic-development/4`, 09 §13). The run's live
+(`personaos-persona-agentic-development/4`, 09 §13). An omitted body states
+`body_omitted_reason` beside `body_included: false`, one value of the
+`body_omitted_reason` enum of the `personaos-persona-agentic-development/4`
+row of the registry — `over_byte_bound`, `over_text_bound`, `not_public_exact`,
+`empty_text`, `not_mapping_or_text` — and a fragment whose signature does not
+verify is not published at all. The run's live
 model-call balance rides the environment's live feed
 (`personaos-live-run-budget/1` on `personaos-environment-telemetry-public/2`)
 so a viewer sees spend while the run runs; the exported run document's
@@ -998,8 +1003,9 @@ lifecycle ledger for a fresh checkout and the rendered member view of a live
 run. The public records the view reads are kernel-signed siblings of the task,
 environment and persona records — `personaos-public-run-scorecard/1` (counters
 only; unavailable counters by name, rendered as not measurable, never 0; on
-the task record of the settling run, and as `run_scorecards` — the newest
-settle of every task in the member's environments — on the environment
+the task record of the settling run, and as `run_scorecards` — one per task,
+the newest settle of every task in the member's environments, newest settle
+first — on the environment
 record and on the member's own persona record, the one record that outlives
 a stopped run: task records end with their runs and environment records
 leave the export once no task is live in them) and
@@ -1008,7 +1014,13 @@ refusal of R-ID-1: its reason, cut at 600 UTF-16 units with the cut marked,
 and the claim hash of the exact record) — and "what the member built" joins on
 the persona's own signed `artifact_declaration` already exported on the
 artifact record, never on the run's access owner
-([`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry)). The signed siblings pass the anonymous artifact-surface scan by exact closed shape only, never by member name or by signature: the scanner admits exactly the two typed shapes (which cannot carry a locator), an extra, missing, or mistyped member falls back into the fail-closed scan, and the reader verifies the signature (the first live settle showed a scorecard counter name reading as a malformed locator map, which blanked every persona record that carried a scorecard; a signature-based exemption would have left the federation path and post-rotation exports blank). *Retired by ADR-0114 dec 2, at its acceptance: admission on the anonymous surface becomes per member — a registered member by its registered type, an unregistered member by the generic scan, never by signature or producer; the parenthetical reason stands.*
+([`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry-and-clean-break-versioning)).
+The signed siblings are admitted on the anonymous surface as every document
+is, per member — a registered member by its registered type, an unregistered
+member by the generic scan, never by signature or producer alone
+([`09_PROTOCOLS.md §13.2`](09_PROTOCOLS.md#132-record-classes-and-reader-policies);
+a signature-based exemption would leave the federation path and post-rotation
+exports blank).
 
 ## 3. Plural domain references
 

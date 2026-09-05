@@ -1,0 +1,2 @@
+registry/*.yaml text eol=lf
+registry/SCHEMAS.md text eol=lf

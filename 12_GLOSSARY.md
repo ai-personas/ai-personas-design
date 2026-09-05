@@ -49,6 +49,12 @@ persona-authored claim whose operations and decision payload are open data. It
 has no substrate-required semantic edit, review, synthesis, composition, or
 promotion vocabulary.
 
+**Bound row** — One row of `registry/bounds.yaml`: a bound the substrate
+applies, with its provenance (measured, declared, protocol-exact, absent, or
+unstated with its replacement and queue date); named by
+[`09_PROTOCOLS.md §13.1`](09_PROTOCOLS.md#131-the-registry-is-a-file), decided
+by ADR-0114 dec 4.
+
 **Bound to latest observation** — A factual equality between a note's exact
 `situation_hash` and the latest observed-situation hash at projection time. It
 does not mean current, fresh, relevant, valid, sufficient, settled, or complete;
@@ -80,6 +86,11 @@ authority and receive no compatibility mapper.
 surface verified nodes, environments, and personas quickly before heavier data
 loads.
 
+**Completing append** — A signed append at which a run's settle point is
+evaluated and its settle record written; the closed set of completing appends
+is owned by [`03_TASKS.md §10`](03_TASKS.md#10-quiescence-and-terminal-authority)
+(rows of `registry/completing_appends.yaml`, ADR-0114 dec 6).
+
 **Condition of record** — The acceptance condition every verifier receipt
 and cohort contract of a task adjudicates against: the principal's supplied
 `acceptance_condition`, bound by hash on every cohort contract. A cohort
@@ -94,6 +105,10 @@ own text and every receipt's standing names the contract it joined.
 one viewer's verified collaboration context. It exposes exact scope ranges,
 requested/verified/unverified scope totals, cursor range, omissions,
 completeness, and mechanical ordering.
+
+**Cursor namespace** — The name a paged lane gives its own cursor sequence, so
+that a cursor is honoured only by the projection that minted it;
+[`09_PROTOCOLS.md §4.5`](09_PROTOCOLS.md#45-cursor-contract).
 
 ## D
 
@@ -154,6 +169,13 @@ host-injected parent-experience context exists.
 persona-authored birth authority. It binds exact action/persona/environment/task
 and causal-carrier evidence plus bounded opaque `genesis_context`; idempotency
 is per exact proposal. No need or separate birth-action record is required.
+
+**Guard** — The mechanical check that enforces one design criterion, named per
+criterion in
+[`11_DESIGN_CRITERIA.md §4`](11_DESIGN_CRITERIA.md#4-tests-are-not-a-second-specification)
+(rows of
+`registry/guards.yaml`, ADR-0114 dec 5); a criterion with none is marked
+convention.
 
 ## I
 
@@ -298,6 +320,21 @@ does not mean complete, ready, sufficient, abandoned, failed, or converged.
 
 ## R
 
+**Reader policy** — The policy every reader of a record applies, fixed by the
+record's class: signed-closed, verify-open, or render-closed;
+[`09_PROTOCOLS.md §13.2`](09_PROTOCOLS.md#132-record-classes-and-reader-policies).
+
+**Record class** — One of `exact`, `open`, `rendered`: a registry row's
+statement of how the record's member set is contracted, and hence the reader
+policy it fixes;
+[`09_PROTOCOLS.md §13.2`](09_PROTOCOLS.md#132-record-classes-and-reader-policies).
+
+**Registry row** — One entry of `registry/schemas.yaml`: the form of record
+for a schema id — its class, status, tiers, owner, members and read action —
+from which `registry/SCHEMAS.md` (09 §13.5) and the code's tables are
+generated;
+[`09_PROTOCOLS.md §13.1`](09_PROTOCOLS.md#131-the-registry-is-a-file).
+
 **ReplicationBound** — Charter-class mechanical limit on declared replication
 effects, such as population/rate/depth/cosign bounds. It does not decide why a
 birth is useful.
@@ -309,6 +346,11 @@ Replication is never inferred from action names or content.
 
 **Resource event** — Exact authenticated grant or budget/lifecycle event. On
 resume it fans out unchanged to all active members under the same pool.
+
+**Run journal** — [`13_DESIGN_VALIDATION.md §20`](13_DESIGN_VALIDATION.md#20-run-journal):
+the dated measurements, run observations and implementation status, kept
+under the ADR id they measure; a journal entry decides nothing, since
+[`14_DECISIONS.md`](14_DECISIONS.md) records decisions.
 
 **Run model pool** — `run-model-pool/2`, the signed unordered set of model IDs
 authorized as the ceiling for one exact run plus a distinct principal-selected
@@ -340,6 +382,12 @@ no dedicated skill-transfer lifecycle.
 **Situation facts** — Bounded exact task, environment, member, workspace,
 artifact, resource, inventory, and causal facts supplied without host
 interpretation.
+
+**Substrate refusal** — The record a substrate check produces when it refuses
+an effect or a signing — the reason by name, its recovery and whether it is
+retryable — stated on a perceivable surface rather than swallowed
+([`11_DESIGN_CRITERIA.md` C-OP-14](11_DESIGN_CRITERIA.md#c-op-14--observability-fails-closed);
+its one record form `personaos-substrate-refusal/1` is ADR-0115 dec 1).
 
 **Supersession** — Explicit signed lineage from an immutable older record to a
 new record. It does not rewrite history or imply semantic improvement.
