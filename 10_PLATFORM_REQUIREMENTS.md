@@ -395,7 +395,8 @@ class RunScorecard:
     library_generations_on_an_executing_path: int  # surfaceless generations named in ≥1 execution's joined rows
     capability_gap_limits_stated: int     # work states naming a capability gap as a limit
     capability_acquisition_attempts: int  # acquisition attempts by the three acquisition verbs: refused + succeeded + outcome unrecorded (08 §5 receipts and generations; 09 §13 recipe-replay claims; C-OP-10 refusals)
-    capability_acquisition_refused: int   # of those attempts, the ones the substrate refused (a refusal record per attempt)
+    capability_acquisition_refused: int   # of those attempts, the ones a substrate refusal record ended
+    capability_acquisition_outcome_unrecorded: int  # ok generations no outcome record names (a receipt append that raised, or one that landed after settled_at); the bound on the attempt total's over-count
     # population  (source: 16 §3 proposals, 16 §5 admissions and bound refusals)
     birth_proposals_authored: int
     births_admitted: int
@@ -463,7 +464,19 @@ defining section, and the join is stated here:
   generation with no outcome record counted as refused);
   *capability_acquisition_refused* — of those, the attempts a substrate
   refusal record ended: zero installs with zero refusals is then a number,
-  not an absence;
+  not an absence. The refusal record is the dispatcher's
+  `PERSONA_ACTION_FAILED` observation of the acquisition action, written for
+  a refusal at any stage of a dispatch whose authored action persisted; a
+  dispatch whose authoring record did not persist leaves no observation and
+  is counted in no member of this record — a stated limit of the counter,
+  never a zero — so the counter is a lower bound on refusals;
+  *capability_acquisition_outcome_unrecorded* — sealed generations no
+  outcome record names (a receipt append that raised after the generation
+  was sealed, or one that landed after `settled_at`); a generation, its
+  receipt and its refusal cannot be paired from their members alone, so
+  this member is the stated bound on the attempt total's over-count and
+  `capability_acquisition_attempts − capability_acquisition_outcome_unrecorded`
+  is the exact count of attempts that left an outcome record;
   *library_generations_on_an_executing_path* — surfaceless generations whose
   manifest hash appears in the joined-generation rows of at least one
   execution receipt. The second is a dispatch fact; the third is only path

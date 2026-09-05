@@ -2253,7 +2253,8 @@ cannot make.
    without its availability; R-ID-1's "where a portrait channel exists" (10
    §2.1, 02 §3) is the row the member reads. — accepted at S0.
 4. Scorecard members `acceptance_contracts_authored`,
-   `capability_acquisition_attempts` and `capability_acquisition_refused`
+   `capability_acquisition_attempts`, `capability_acquisition_refused` and
+   `capability_acquisition_outcome_unrecorded`
    (10 §5; flat counters inside the open `counters` map, so no reader
    changes) — accepted at S0; `unavailable_counter_reasons` (a new
    top-level member) — accepted at S2; no structured gap-limit action
