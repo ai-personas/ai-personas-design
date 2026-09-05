@@ -246,6 +246,12 @@ and derives nothing from them. The platform's standing requirements
 authority on that same footing: carried to every member identically, parsed
 for nothing, and free of every word this section removes.
 
+A founding SOUL is principal text on the charter's footing and is not a lever
+of this design: three controlled runs measured no separation on any
+doctrine-targeted behaviour (ADR-0110), shipped SOULs stay as shipped, and no
+later decision revises a SOUL to move a scorecard counter; the levers that
+remain are mechanical statedness and task-authority bars.
+
 ## 12. Design criteria
 
 1. Proposal v5 is the only persona-authored birth authority.

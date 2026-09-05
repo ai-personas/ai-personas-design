@@ -1,6 +1,6 @@
 ---
 title: PersonaOS — Design Validation Walks
-status: Stable
+status: Living
 ---
 
 # 13 — Design Validation
@@ -9,6 +9,9 @@ These are static design walks, not executable tests and not behavioral scores.
 A walk can establish that authority and information flow are specified without
 contradiction. It cannot prove that a model will make a good decision or that an
 artifact meets professional expectations.
+
+§20 is the run journal: dated measurements, run observations and implementation
+status, referenced by ADR id; a journal entry decides nothing.
 
 ## 1. Validation method
 
@@ -1643,9 +1646,12 @@ the seam the current symptom lives on:
 
 **The ledger rule:** work items discovered but not fixed in a round are
 written to `docs/OPERATING_AUDIT_LEDGER.md` in the code repo — class, status,
-trace mechanism — in the same change. A round that leaves an unledgered known
-gap is incomplete; a later round that finds a gap that was known and
-unledgered treats that as a process failure, not a discovery.
+trace mechanism — in the same change; a ledger row for a gap whose class has
+a registered carrier (ADR-0114 dec 5) names the corpus row that will refuse
+the recurrence — the corpus row is the fix, the ledger row is the record
+until it lands. A round that leaves an unledgered known gap is incomplete; a
+later round that finds a gap that was known and unledgered treats that as a
+process failure, not a discovery.
 
 ## 17. Static contradiction audit
 
@@ -1760,3 +1766,316 @@ documents that should become contracts are in
 `reviews/2026-09-04-why-it-keeps-patching.md`. Nothing in it is decided; the
 owner decides.
 
+## 20. Run journal
+
+§20 is the run journal: dated measurements, run observations and
+implementation status, referenced by ADR id. A journal entry decides nothing;
+a decision a run changes is a new ADR or an amendment marked as one in
+[`14_DECISIONS.md`](14_DECISIONS.md), whose preamble states the split. Entries
+accrete under the ADR they measure, oldest first, and are never rewritten; an
+entry that corrects an earlier one says which. The per-decision "implemented
+at S<n>, commit <hash>" lines of ADR-0114, ADR-0115 and ADR-0116 live here,
+never in 14. `S0` … `S8` are the stages of the carrier program that followed
+§19, as the acceptance lines of those three ADRs name them; an ADR's status
+flips at the kernel commit of the first stage that enacts any of its
+decisions.
+
+| Stage | Goal | Ends in |
+|---|---|---|
+| S0 | Unblock verification, design foundation, operator tooling | cut 0.2.9 |
+| S1 | Tests that cross the seams | one reviewed kernel commit, no cut |
+| S2 | One registry generating both readers; the acceptance lane | cut 0.2.10 |
+| S3 | One progress observable; exhaustion honoured on every path | cut 0.2.11 |
+| S4 | The carrier a persona saw is recoverable per turn; the lifecycle store stops growing | cut 0.2.12 |
+| S5 | One refusal record, registry-backed | cut 0.2.13 |
+| S6 | A cursor contract owned by the pager | cut 0.2.14 |
+| S7 | One verified-read memo, one text-bound table | cut 0.2.15 |
+| S8 | Close: guards, completing appends, the standing rule | cut 0.2.16 |
+
+**Entry form.** Every entry carries these fields in this order; a field with
+nothing to record is written `—`:
+
+`date` · `run` · `build/model` · `measured` · `changed` (commit, doc:line) ·
+`recorded-not-decided` · `ADR`
+
+### ADR-0108
+
+- **2026-08-31** · run: the first live run on the ADR-0108 build (not named
+  in the record) · build/model: — · measured: the loop's carry stage worked
+  and all ten distilled fragments were situational status snapshots; the
+  influence stage had no subject, and one frozen snapshot anchored a stale
+  claim its author repeated after the evidence changed. A synthetic-sine
+  "verdict" over a simulation that never ran was broadcast bar-clearing; the
+  receipt doctrine refused to sign without executed counter-evidence and no
+  acceptance was minted; the cost surfaced as a mutual-parking deadlock
+  (every persona's anti-noise rule waiting on another). Two kernel event ids
+  sharing a timestamp prefix let a wrong pointer propagate into 38 records.
+  Seeded neutrals ran on empty souls while four of the audit's pathologies
+  were theirs. Review-caught: without one canonicalizer admitting the
+  transport-computed disjunct, the recorded canonical form diverged from the
+  signed bare form and declarations silently dropped from settlement ·
+  changed: the four items of the ADR-0108 addendum (14) ·
+  recorded-not-decided: — · ADR-0108
+
+### ADR-0110
+
+- **2026-08-31** · run: three controlled runs (the ADR names the e34 pair —
+  identical task, build and 8-persona cohort with a three-seed control arm,
+  only the model body differing; the third is not named in the record) ·
+  build/model: — · measured: no souled/unsouled separation on any
+  doctrine-targeted behaviour — seeds authored 42% of receipts, half the
+  mints, the only latest-publication-bound mint, the sharpest lessons and
+  withholds; the richest-souled personas contributed least on exactly their
+  souls' axes · changed: the doctrine verdict (14, ADR-0110; carrier 16 §11)
+  · recorded-not-decided: — · ADR-0110
+- **2026-08-31** · run: — · build/model: — · measured: the queued inventory
+  of invented bounds at the standing rule's adoption (all INVENTED,
+  replacement = lane-scaling from the measured carrier budget unless noted):
+  the prompt-lane MAX_BYTES family (256K carrier / 64K×5 / 48K / 32K / 24K /
+  16K), page and collection limits (schedule 16, conflict pages 8/16, ladder
+  rows 8, batch 8, ancestry 128, receipt page 32, situation items 100 / 320K
+  chars, resume observation 48K, identity sections 64/20K, sealed-generation
+  entries 32), `_EXEC_CAPTURE_RESULT_JSON_BYTES = 650`, the 64-receipt
+  per-signer lane bound (replacement: authority-declared), the 32/64MB
+  model-input caps, `_NO_DEADLINE_EXECUTION_CEILING_S = 7200` (replacement:
+  the measured time axis the local model server already reports), and the
+  router's `MAX_MODEL_QUOTA_COOLDOWN_S = 7 days` — retry pacing follows the
+  provider's DECLARED retry-after horizon unclamped, and that seven-day
+  constant is the one remaining guard between a misreported declaration and
+  a week-long stall · changed: — (the inventory becomes rows of
+  `registry/bounds.yaml` at S2, ADR-0114 dec 4) · recorded-not-decided: — ·
+  ADR-0110
+- **2026-08-31** · run: e36 (armed, not yet run) · build/model: — ·
+  measured: — · changed: operator-supplied `acceptance_condition` +
+  `unaccepted_rewake` at POST /task, with outcome bars (one deliverable of
+  record; geometry-verified rooms with openings cut in the solid; one source
+  of truth across artifacts; format-validity or stated non-fabricability; a
+  structural screen at stated assumed basis; grounded quantities;
+  currency-bound acceptance) · recorded-not-decided: the experiment tests
+  the audit's standing conclusion — capability acquisition never emerges
+  because no bar ever prices an outcome the current toolbox cannot cheaply
+  produce; the cohort's own contracts price process, whichever tier writes
+  them · ADR-0110
+
+### ADR-0111
+
+- **2026-09-02** · run: e45, e46 · build/model: 0.2.2 / 0.2.3; Qwen3.8-27B
+  and gpt-5.6-luna · measured: cohorts never reached for the tools they had
+  · changed: the ADR-0111 round's proposal P7 (acquisition-surface
+  statedness parity) done — the execution-capability inventory carries each
+  tool's own self-description (08 §5), the capability-acquisition summary
+  rides beside the platform lane every turn
+  (`personaos-capability-acquisition-summary/1`, 09 §13), and the
+  acquisition actions follow the inventory read action in the catalogue
+  (commit `01fbe199`) · recorded-not-decided: — · ADR-0111
+- **2026-09-02** · run: e48 (third run the same day) · build/model: 0.2.4;
+  Qwen3.8-27B · measured: two engineering capabilities acquired in seventeen
+  minutes after a refusal named the recipe's members; executions joined the
+  generations; still no inventory read and no geometry · changed: a
+  content-bearing action declares its content member required (09 §13
+  preamble; commit `3f9eab71`) · recorded-not-decided: — · ADR-0111
+- **2026-09-05** · run: — (arms the next luna run) · build/model: — ·
+  measured: — · changed: operator bars v3 — the e37 bar-9 clause's
+  registration route and "did not author" withdrawn as operator authority,
+  leaving the substrate-checked half (14, ADR-0111 e37 note); luna runs use
+  bars v3 at 200 calls, qwen runs keep bars v2 at 120 (owner decision
+  2026-09-05) · recorded-not-decided: — · ADR-0111
+
+### ADR-0112
+
+- **2026-09-01** · run: — · build/model: — · measured: — · changed: cut 1,
+  authority (`882a9a77`); cut 2, the platform lane, the funded moment and
+  the prompt inversion (`1089c6ea`); cut 3a, the scorecard, the freeze pins
+  and the signer migration (`82eb7d23`) · recorded-not-decided: — ·
+  ADR-0112
+- **2026-09-02** · run: e40 (scoring run on the final build) · build/model:
+  — · measured: the whole chain ran live — settle at the operator's terminal
+  state, one scorecard, eight funded distillation wakes, eight escrow
+  releases at the fire gate with deterministic adjustment ids — and surfaced
+  two gaps, both closed: the scorecard's window opened at the settling
+  generation's grant (every counter 0 after a resume; it now opens at the
+  task's first grant), and an operator-stopped run leaves its run document
+  incomplete so no public task record is exported for it (the environment
+  record now carries the scorecards) · changed: retirement register (a)
+  interiority carriage retired (`9a5dc4f1`), (b) one
+  `personaos-disposition-frontier/2` (`62a11f34`), (c) the prompt-manifest
+  family collapsed to `personaos-prompt-source-stage/2` plus
+  `personaos-prompt-source-pointer/1` (`08955e6e`), (d) and (e) design-only;
+  the monolith split as three mechanical, byte-identical moves out of
+  `runtime.py` (52,828 → 41,271 lines) with every name re-exported —
+  `prompt_carrier.py` (`ce92188e`), `acceptance.py` (`a1de426b`),
+  `wake_carriers.py` (`15a654e9`), with `lanes.py` naming the lanes; the
+  three giant classes as mixin splits, each method byte-identical —
+  `PersonaNode` → nine lanes plus `node_support.py` (48,062 → 8,119 lines;
+  `53092795`), `PersonaOSMCPBridge` → eleven lanes plus
+  `personaos_mcp_support.py` (23,463 → 1,803; `1a4f005d`), `Kernel` → seven
+  lanes plus `kernel_support.py` (18,735 → 1,915; `fa13e6f4`); the bridge
+  re-homes its lane methods' `__module__` and `__qualname__` after
+  composition so the implementation identity every tool advertises — and
+  the dispatch descriptor hash the kernel checks — is unchanged for all 72
+  tools (verified by diffing the catalogue; review had found the move would
+  otherwise refuse every action record signed across the deploy); the
+  traceability ledger counts citing lines rather than files, so a split
+  moves no counter; the distillation wake's escrow released at its fire
+  gate with a kernel-signed marker per (run, member) (10 §4.4); the settle
+  point evaluated on a member's parking disposition as well as the run's
+  terminal status (03 §10); `personaos-turn-compaction-statement/1` on
+  every turn effect receipt so `compactions_stated` is a join (P-6); the
+  C-OP-16 member view — the node exports the scorecard and the
+  identity-refusal status as kernel-signed siblings, the artifact join reads
+  the persona's own signed declaration, the UI verifies each field exactly,
+  leads with the latest lesson, shows what the member built this run and
+  the run's scorecard, and lets a declined portrait state the member's own
+  reason (`90dffe2a`, `fa7e8418`); review found the settle point racing (now
+  one lock), the escrow refund not crash-idempotent (now deterministically
+  named) and the fit gate not owned by the arm (now installed there) ·
+  recorded-not-decided: the missing task record of a stopped run · ADR-0112
+- **2026-09-02** · run: the first live settle on a local model node ·
+  build/model: 0.2.0; Qwen3.8-27B · measured: the anonymous artifact-surface
+  scan rejected every persona and environment record that carried a
+  scorecard (a counter named `identity_records_authored` read as a malformed
+  locator map), blanking the member view between runs · changed: UI member
+  view deployed on `main`; public cut 0.2.0 (`c6cbf8c0`); the scan admits
+  exactly the two closed member-view shapes (`e1696cf4`), cut 0.2.1 ·
+  recorded-not-decided: — · ADR-0112
+- **2026-09-02** · run: e45 (first full run on a local model) · build/model:
+  0.2.1 → 0.2.2; Qwen3.8-27B, 120 calls · measured: the substrate held
+  (statedness, receipts, two provisioned capabilities, five deliberate
+  lessons, six self-adopted names) but four substrate gaps cost the run its
+  outcome: (1) the exhaustion pause never settled the run — all eight
+  members parked, one delivery pending, no grant coming — so the funded
+  learning moment never came; (2) an executor admitted an absolute working
+  directory outside the persona's workspace (the host's own checkout): the
+  run's only house design was written there and no peer could read it; (3)
+  a refusal's diagnosis — the members it recognises and the ones it received
+  — never crossed the turn boundary (only its slug reached lineage), so 22
+  of 27 refusals were the same invented argument name; (4) the
+  carrier-window refusal quoted a figure below the window it said was
+  exceeded. Model-tier: the model invented the text member's name 22 times
+  against a stated schema and once against its own lesson; nobody ran the
+  CAD tool three probes had found; the cohort spent its budget deciding who
+  would export and then parked on that member · changed: the four 0.2.2
+  decisions (`70cb0222`; cut 0.2.2) — OQ-PLATFORM-5, first observed on e39,
+  closed (10 §9) ·
+  recorded-not-decided: the model-tier facts · ADR-0112
+- **2026-09-02** · run: e46 · build/model: 0.2.2 → 0.2.3; gpt-5.6-luna, 120
+  calls, fresh root · measured: all eight members named themselves within 25
+  s, 50 distillations (34 deliberate, 248 bindings, two traceable behaviour
+  changes), emergent lanes without any operator input, 176 executions, 21
+  declared artifacts, a deliverable of record — a 14×10×2.8 m massing shell
+  with real interior walls and door gaps, non-manifold on one edge, no roof
+  or structure — and no verifier receipt (bar 9 impossible: every member
+  authored into the shared workspace and the one registered capability was
+  an empty site); the cohort's own audit said NOT ACCEPTED · changed: the
+  platform-requirement refusal action gains the atomic-commit marker it
+  lacked, so a persona can state its refusal of R-ID-1 (`68641967`; cut
+  0.2.3) · recorded-not-decided: — · ADR-0112
+- **2026-09-03** · run: e48 / e48b (fourth pass) · build/model: 0.2.4 /
+  0.2.5; Qwen3.8-27B · measured: the 0.2.5 schema rule held live (16 posts,
+  0 refused; 15 of 25 refused the run before); the exhaustion settle, the
+  funded moment and the run-scoped resume gate ran end to end twice; the
+  remaining funded wake turns survived a node restart. Three observability
+  gaps on the member view: (1) a member whose distillations are bare texts
+  published every lesson with an empty body and no reason, so the card led
+  with nothing; (2) no surface carried a run's live model-call spend — the
+  exported run document freezes its arithmetic at export time, once per
+  completed turn; (3) "more productive next time" was not measurable — the
+  scorecard counted only lessons authored inside the window · changed: the
+  three 0.2.5 decisions (`fd871189`; cut 0.2.5); the worked example that
+  showed `capability_gap_limits_stated` as 0 corrected, and the UI no longer
+  calls it "source unreadable" · recorded-not-decided: a structured
+  gap-limit action (decided by ADR-0116 dec 4); what a member carries
+  between environments (decided by ADR-0113) · ADR-0112
+- **2026-09-04** · run: — (structural review, §19,
+  `reviews/2026-09-04-why-it-keeps-patching.md`) · build/model: 0.2.8 ·
+  measured: 225 fix items since 2026-08-28 — 56 percent statedness, 28
+  percent two-site divergence; the six mechanisms that manufacture patches:
+  589 refusal sites in 61 shapes, 22 cursor-minting lanes with 3 acceptors,
+  16 memo schemes, 61 hand-kept UI field lists (the review's count; the
+  program's re-measure is 53 lists in `discovery.js` and 15 in the `.mjs`
+  modules), observability keyed to cause, tests that cross no seam; two live UI drifts of 27 and 19 days ·
+  changed: — · recorded-not-decided: the six structural changes and five
+  document changes the review proposed (decided by ADR-0114, ADR-0115,
+  ADR-0116) · ADR-0112
+
+### ADR-0113
+
+- **2026-09-03** · run: e48 / e48b (the finding) · build/model: 0.2.4 /
+  0.2.5; Qwen3.8-27B · measured: in the first task the cohort provisioned
+  two library generations at +17 and +26 minutes; the second task on the
+  same eight personas founded a new environment where neither generation
+  existed, no fact said so, and the cohort made zero acquisition attempts in
+  55 minutes · changed: implemented the same day — the per-turn survey
+  `member_prior_tool_artifacts`, the `replay_provisioning_recipe` action and
+  `personaos-capability-recipe-replay/1` (`7ace3c59`) · recorded-not-decided:
+  — · ADR-0113
+
+### ADR-0114
+
+- **2026-09-05** · run: — (the tree, measured by the review's UI-contract
+  audit and re-measured for the program) · build/model: 0.2.8 · measured:
+  the project view broken since 2026-08-08 — the UI reads a `status` member
+  of `personaos-public-project-topology/1` the node never emits; the
+  operator thinking drawer blank since 2026-08-16 — the UI reads
+  `personaos-persona-thinking/2` where the node emits `/3`; the project
+  export read as `/2` in three places against `/3` in six; the vendored UI
+  shell's release record names a stale manifest because the vendored assets
+  were edited directly; the code's schema registry holds 526 ids against 803
+  in use; 288 exact-shape checks; 53 hand-kept field lists in
+  `discovery.js` and 15 in the `.mjs` modules, and 38 version pins, none
+  generated · changed: — (S0 seeds the five
+  rows of `registry/schemas.yaml` these records need; S2 generates both
+  readers) · recorded-not-decided: — · ADR-0114
+- **2026-09-05** · run: — · build/model: — · measured: — · changed: dec 7
+  implemented at S0 in this repository — §20 created; the
+  decision/measurement split of ADR-0108 addendum, ADR-0110, ADR-0111,
+  ADR-0112 and ADR-0113; ADR-0114, ADR-0115 and ADR-0116 proposed;
+  `registry/types.yaml`, `registry/schemas.yaml` (five rows) and
+  `registry/refusals.yaml` (two rows) seeded; 16 §11 carries the soul
+  doctrine; 09 §6 and §12 own the two status records (commit: the design
+  commit that lands this entry) · recorded-not-decided: — · ADR-0114
+
+### ADR-0115
+
+- **2026-09-05** · run: — (the tree, measured by the refusal and cursor
+  audits for the program) · build/model: 0.2.8 · measured: 762 `"ok": False`
+  sites in the kernel, 592 under the protocol layer; `retryable` defaulted
+  per site; `failure_reason` in four shapes; 81 percent of refusals reach
+  lineage as a slug and six as nothing; a sentence used as a slug and a
+  substrate traceback carried as `error_slug=traceback` with the exception
+  surviving nowhere (e50); 33 cursor mint sites over 21 literal namespaces,
+  three acceptors, five cursor grammars; eight read-action refusals lose the
+  word "cursor"; on e50 every prompt-minted pending-communication cursor was
+  refused as `cursor_snapshot_mismatch` for any member with one carried
+  message, and five members re-issued the identical read over fifteen
+  minutes · changed: — (S5 and S6) · recorded-not-decided: — · ADR-0115
+
+### ADR-0116
+
+- **2026-09-05** · run: e50 · build/model: 0.2.8; gpt-5.6-luna · measured:
+  15 h 13 min from the last funded call to `RUN_SETTLED`, with 11,432
+  lineage records (26.5 MB), 4,206 content-addressed objects (732 MB) and
+  716 outcome-lifecycle snapshots (1.78 GB) written for zero persona
+  appends; 865 empty turn observations (no `model_id`) and 182 more after
+  the settle; the provider's exhaustion answer laundered to a retryable
+  reason at four fold sites; the outbox replay capped at 30 s with no
+  attempt cap and no cooldown; the node's status document reported the
+  default call timeout on a node launched with 3600 s and an empty
+  `active_model` (the id lives in the model list); the provider listed by
+  id with no availability, no portrait delivered on any root of this host
+  since 2026-08-04, zero `EXTERNAL_ARTIFACT_REQUEST_AUTHORED` this week;
+  `capability_gap_limits_stated` unavailable (`no_structured_source`) on all
+  12 scorecards; the per-turn prompt carrier never persisted and its
+  observation skipped on turns with no action · changed: — (dec 3 at S0's
+  kernel commit; dec 1 at S3; dec 2 at S4; dec 4 at S2) ·
+  recorded-not-decided: whether a refused call spends (17 §1); the emblem
+  for text-only bodies (OQ-PLATFORM-3) · ADR-0116
+- **2026-09-05** · run: — (the tree) · build/model: 0.2.8 · measured: a node
+  that has not built its public status answers an anonymous `/status` read
+  with a two-member `personaos-node-status-public/1` (`schema`, `node_id`),
+  and the public surface answers a fulfillment status it could not build
+  with `{schema, status_unavailable}` (plus `detail` for the operator) —
+  fallback forms the registry rows admit only as stated fallbacks: a C-OP-14
+  shape, a document rendered as a status while stating nothing · changed: —
+  (the two-member form is retired at S0's kernel commit, ADR-0116 dec 3) ·
+  recorded-not-decided: — · ADR-0116

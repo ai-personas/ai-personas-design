@@ -1,0 +1,233 @@
+# registry/refusals.yaml — the reason-code rows of
+# `personaos-substrate-refusal/1` (14_DECISIONS.md ADR-0115 dec 1). A reason
+# code with no row cannot be built.
+#
+# Row shape
+#   reason_code           the token; the refusal record's `reason_code`
+#   stage                 input | admission | authority | resource | transport
+#                         | execution | persistence | projection
+#   retryable             true only when the identical call may succeed later
+#                         with no change by the caller
+#   retryable_decided_by  row | judged_at_site (distinct from the refusal
+#                         record's own `retryable_provenance` member)
+#   recovery              a registered mechanical-precondition token naming
+#                         what makes the identical call admissible, or `none`
+#   fault_class           caller | substrate | provider | unknown
+#   owner                 the 00–12 section that defines the refusing rule
+#   is                    what the code means, in the owner's words
+#   rename_candidate      the stage that may rename a token whose name carries
+#                         a provider product (the live emitter uses the token
+#                         until then)
+#
+# S0 seeds every code the provider-availability path can emit today: the
+# substrate's own availability rows, the helper-pinning codes and the
+# authentication-status codes the external-realization provider states through
+# its availability probe. S5 fills the file and does not re-home them.
+registry: refusals
+owner: registry
+rows:
+  - reason_code: provider_availability_undeclared
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: substrate
+    owner: "09_PROTOCOLS.md §6"
+    is: >-
+      The provider declares no availability probe, so it is stated unavailable
+      rather than skipped.
+  - reason_code: provider_availability_probe_failed
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: substrate
+    owner: "09_PROTOCOLS.md §6"
+    is: >-
+      The provider's availability probe raised; the failed probe is the stated
+      fact and no provider detail is carried.
+  - reason_code: provider_availability_reason_unstated
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: substrate
+    owner: "09_PROTOCOLS.md §6"
+    is: >-
+      The provider stated itself unavailable with a reason that is not an exact
+      reason-code token, so the reason is stated as unstated.
+  - reason_code: provider_availability_unavailable
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: substrate
+    owner: "09_PROTOCOLS.md §6"
+    is: >-
+      An availability wait on a request whose provider reason is not an exact
+      reason-code token; the wait state carries this token in its place.
+  - reason_code: codex_imagegen_helper_unavailable
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The provider's helper is not present on this node, so the provider is
+      listed with `available: false`; the identical call cannot succeed until an
+      operator supplies the helper.
+  - reason_code: codex_imagegen_helper_source_untrusted
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The helper found on this node fails its trust check — not a regular file,
+      not owned by the node's user or root, writable by others, not executable,
+      empty, or over the size bound — so the provider is listed with
+      `available: false`.
+  - reason_code: codex_imagegen_helper_absolute_path_required
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The operator configured a helper path that is not absolute; nothing is
+      pinned.
+  - reason_code: codex_imagegen_helper_expected_sha256_invalid
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The operator configured a helper digest that does not parse as one;
+      nothing is pinned.
+  - reason_code: codex_imagegen_helper_expected_sha256_required
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The operator configured a helper path without declaring its digest; a
+      redirected helper needs an independently provisioned digest.
+  - reason_code: codex_imagegen_helper_expected_sha256_mismatch
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The helper's computed digest differs from the digest the operator
+      declared; nothing is pinned until the two agree.
+  - reason_code: codex_imagegen_helper_sealed_exec_unavailable
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The host cannot hold the helper as a sealed image, or the sealed image
+      failed its checks, so the helper is not executed.
+  - reason_code: codex_imagegen_helper_source_changed
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The helper file changed while it was being read; nothing is pinned.
+  - reason_code: codex_imagegen_helper_snapshot_failed
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      Pinning the helper failed on a host error; nothing is pinned.
+  - reason_code: codex_imagegen_auth_status_failed
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The authentication-status probe failed — a non-zero exit, an oversize
+      answer, or an error the probe does not name — and one fixed code is
+      stated in place of any detail.
+  - reason_code: codex_imagegen_auth_status_timeout
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The authentication-status probe exceeded its declared timeout.
+  - reason_code: codex_imagegen_auth_status_invalid
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The authentication-status probe's answer was not the exact status record
+      the provider expects.
+  - reason_code: codex_imagegen_auth_status_noncanonical
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The authentication-status probe's answer was the expected record but not
+      its canonical rendering.
+  - reason_code: codex_imagegen_provider_closed
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The provider was closing when its availability was probed.
+  - reason_code: codex_chatgpt_oauth_unavailable
+    stage: resource
+    retryable: false
+    retryable_decided_by: row
+    recovery: none
+    fault_class: provider
+    owner: "09_PROTOCOLS.md §6"
+    rename_candidate: S5
+    is: >-
+      The authentication-status probe reported no current login, so the
+      provider is listed with `available: false` until a login exists.

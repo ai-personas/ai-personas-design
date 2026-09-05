@@ -394,6 +394,8 @@ class RunScorecard:
     tool_surfaces_invoked: int            # distinct mounted surfaces with ≥1 environment-tool invocation
     library_generations_on_an_executing_path: int  # surfaceless generations named in ≥1 execution's joined rows
     capability_gap_limits_stated: int     # work states naming a capability gap as a limit
+    capability_acquisition_attempts: int  # acquisition attempts by the three acquisition verbs: refused + succeeded + outcome unrecorded (08 §5 receipts and generations; 09 §13 recipe-replay claims; C-OP-10 refusals)
+    capability_acquisition_refused: int   # of those attempts, the ones the substrate refused (a refusal record per attempt)
     # population  (source: 16 §3 proposals, 16 §5 admissions and bound refusals)
     birth_proposals_authored: int
     births_admitted: int
@@ -407,6 +409,7 @@ class RunScorecard:
     post_run_distillation_wakes_funded: int          # intake reservations × settle-point members
     post_run_distillation_members_unreached: tuple[str, ...]  # settle-point members no reservation covers
     # checks and work  (source: 03 §9 receipts and execution bindings; 03 §7 turn receipts)
+    acceptance_contracts_authored: int    # cohort acceptance contracts authored on the task inside the window (03 §9)
     verifier_receipts: int
     execution_bound_receipts: int
     receipts_repeating_unchanged_executions: int
@@ -453,6 +456,14 @@ defining section, and the join is stated here:
   the environment during the run; *tool_surfaces_invoked* — mounted tool
   surfaces to which at least one environment-tool invocation of the run was
   dispatched ([`09_PROTOCOLS.md §2.2`](09_PROTOCOLS.md#22-persona-navigation));
+  *capability_acquisition_attempts* — the attempts the three acquisition
+  verbs made inside the window, joined by the sealed generation each outcome
+  record names so a generation, its receipt and its refusal or claim count as
+  one attempt (refused + succeeded + outcome unrecorded, never a
+  generation with no outcome record counted as refused);
+  *capability_acquisition_refused* — of those, the attempts a substrate
+  refusal record ended: zero installs with zero refusals is then a number,
+  not an absence;
   *library_generations_on_an_executing_path* — surfaceless generations whose
   manifest hash appears in the joined-generation rows of at least one
   execution receipt. The second is a dispatch fact; the third is only path
@@ -468,6 +479,10 @@ defining section, and the join is stated here:
   at least one execution was recorded (the automatic slot binds every
   distillation, so only deliberate fragments can carry this count; a binding
   that no executing turn ever carried counts for nothing);
+  *acceptance_contracts_authored* — the cohort acceptance contracts authored
+  on the task inside the window; beside *verifier_receipts* and
+  *cohort_recommendations* it makes where a cohort stops on the acceptance
+  path a number: contracts, receipts, mints;
   *lessons_bound_from_outside_this_task* — the distinct fragments an in-window
   compile of this task bound whose distillation record is not on this task
   inside the window: what a member brought with it from an earlier run or
@@ -528,7 +543,10 @@ hash on every contract authored while it exists (the persona supplies no
 hash). A contract bound to an earlier hash, or to none, keeps standing only
 for receipts recorded before the amendment that changed it — the era rule of
 [`03_TASKS.md §9`](03_TASKS.md#9-objective-acceptance) — and confers none
-after.
+after. A condition prices outcomes with values: it names no tool class, no
+author and no third-party origin — the principal's standing rule, which
+ADR-0112 dec 4 applies to the verifier descriptor's authorship clause; the
+substrate cannot enforce this on prose and does not try.
 
 ### 6.2 Cohort acceptance is a recommendation
 

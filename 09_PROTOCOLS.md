@@ -981,7 +981,9 @@ persona-authored output constraints. The complete schema and its hash are part
 of the inventory hash. The live action descriptor projects every current
 provider contract without ranking or choosing one; with multiple providers it
 preserves the provider/model/media/constraint relationship rather than exposing
-independent menus that can form an invalid tuple.
+independent menus that can form an invalid tuple. A provider is listed on the
+node status and in the inventory only with its availability and reason
+(`providers` rows); it is never listed present without them.
 
 At dispatch the selected provider republishes the same contract and validates
 the exact request before an outbox reservation or external action exists.
@@ -1346,6 +1348,22 @@ authority for authenticated effects and is never serialized into every public
 poll. No retention, caching, or compaction decision may inspect task, persona,
 domain, tool, path, event prose, or inferred importance.
 
+`personaos-node-status-public/1` is a node's own status document and a
+sibling of the public telemetry family above. It carries counts, presence and
+availability facts about the node — whether reads and discovery are public
+and which discovery kinds are served, how many public records it publishes,
+the state of its global-discovery peers, and the status records of its
+external-artifact exchange and fulfillment, each provider with its
+availability and reason (§6) — and never a locator, a path, a key, or task,
+persona, or artifact content. It is not environment authority and it is not
+the environment card or the node resume of
+[`05_ENVIRONMENT.md §9`](05_ENVIRONMENT.md#9-discovery-and-continuity): those
+describe an environment and its continuity; this document describes the node
+that serves them. Its registered members are its row in
+`registry/schemas.yaml`, rendered in
+[§13](#13-schema-registry-and-clean-break-versioning) from S2 (ADR-0114
+dec 1).
+
 ### 12a. Operator interface costs (stated contracts, not discoveries)
 
 Some operator-facing HTTP operations deliberately do heavy synchronous work
@@ -1525,7 +1543,8 @@ Current cutover records include:
   is recoverable and an unreadable lane is not.
   `ARTIFACT_DECLARED` additive members 2026-09-03: `role_also_claimed_by`
   (the other declarations on the same task claiming the exact same role,
-  newest eight, each with artifact id, persona, content ref, title,
+  newest eight — an `unstated` row of `registry/bounds.yaml` (ADR-0114 dec 4;
+  rows seeded at S2) — each with artifact id, persona, content ref, title,
   `declared_by_this_persona`, `declaration_state` — a declaration still
   awaiting its bytes is a claim on the role — and `content_comparable: false`
   when a missing content reference on either side made the same-claim
@@ -1589,7 +1608,7 @@ Current cutover records include:
   siblings of the public task and persona records; counters only, and a
   member's own stated refusal; the environment record and the member's persona
   record carry the scorecards as `run_scorecards`, one per task, newest settle
-  first; the anonymous artifact-surface scan admits these two documents by exact closed shape alone — every member is an integer counter, a bounded identifier, a hash, a signature, or the bounded refusal text, so the shape cannot carry a locator; an extra, missing, or mistyped member falls back into the fail-closed scan; the rule is the same for a peer scanning the wire envelope and for a historical export after a key rotation, and a reader verifies the kernel-master signature itself before trusting the numbers),
+  first; the anonymous artifact-surface scan admits these two documents by exact closed shape alone — every member is an integer counter, a bounded identifier, a hash, a signature, or the bounded refusal text, so the shape cannot carry a locator; an extra, missing, or mistyped member falls back into the fail-closed scan; the rule is the same for a peer scanning the wire envelope and for a historical export after a key rotation, and a reader verifies the kernel-master signature itself before trusting the numbers — the scan sentence is retired by ADR-0114 dec 2, at its acceptance: admission on the anonymous surface becomes per member, by registered type),
   `personaos-post-run-distillation-wakes-armed/1`
   (the settle point's per-member arm/fail/unreached statement),
   `personaos-persona-birth-context-summary/1` (the content-blind population
@@ -1613,7 +1632,8 @@ Current cutover records include:
   never task text, so the row may ride the redacted tier; carried on the
   operator live aggregate and, projected through the closed allowlist, on
   each public environment document in ascending run-document order (the
-  newest eight; the last row is the newest balance) — the anonymous
+  newest eight — an `unstated` row of `registry/bounds.yaml` (ADR-0114 dec 4;
+  rows seeded at S2); the last row is the newest balance) — the anonymous
   aggregate `/1` is unchanged — because the exported run document freezes
   its arithmetic at export time and a viewer had no current spend at all;
   the balance is the resume inventory's own memoized kind-scoped read, so a

@@ -1,0 +1,185 @@
+# registry/schemas.yaml — the registry of record for schema ids
+# (14_DECISIONS.md ADR-0114 dec 1). One row per id; 09_PROTOCOLS.md §13.5
+# (from S2) renders from this file, and the code repository vendors the
+# generated tables with this registry's hash.
+#
+# Row shape
+#   id                the schema id, `<name>/<integer>`
+#   class             exact | open | rendered — one reader policy each
+#                     (ADR-0114 dec 2)
+#   class_decided_by  `seed` until the adversarial review of the first stage
+#                     that generates a reader from the row decides it; the
+#                     seed count never grows after S2
+#   tiers             the surfaces the record rides:
+#                     public_anonymous | operator | prompt | lineage
+#   owner             the 00–12 section that defines the record, an ADR
+#                     decision until that section is written, or `registry`
+#   members           name → {type, required, item | key/value | members,
+#                     tiers?, empty_when?, is?}; types are rows of
+#                     registry/types.yaml; `empty_when` names the one
+#                     condition under which a required member is the empty
+#                     string (`available`, `unrecorded`);
+#                     `schema` (schema_id) is a member of every row and is
+#                     not repeated
+#   notes             what the row must say that its members do not
+#
+# S0 seeds exactly the five rows the first stage touches; S2 re-seeds the
+# remaining ids around them.
+registry: schemas
+owner: registry
+rows:
+  - id: personaos-public-project-topology/1
+    class: rendered
+    class_decided_by: seed
+    tiers: [public_anonymous]
+    owner: "04_PROJECT.md §10"
+    members:
+      project_id: {type: bounded_id, required: true}
+      environment_ids: {type: list, item: bounded_id, required: true}
+      primary_environment_id: {type: bounded_id, required: true}
+      members: {type: map, key: bounded_id, value: text, required: true, is: "persona id → role"}
+      project_creation_event_id: {type: bounded_id, required: true, is: "an `event:` id, or empty when not recorded"}
+      environment_creation_event_id: {type: bounded_id, required: true, is: "an `event:` id, or empty when not recorded"}
+      hosting_link_event_id: {type: bounded_id, required: true, is: "an `event:` id, or empty when not recorded"}
+      cross_verified: {type: bool, required: true}
+    notes: >-
+      Carried on the project discovery document beside
+      `project_topology_signature_hex` (signature_hex over this record).
+      There is no `status` member.
+
+  - id: personaos-project-export/3
+    class: rendered
+    class_decided_by: seed
+    tiers: [public_anonymous, operator]
+    owner: "04_PROJECT.md §10"
+    members:
+      project_id: {type: bounded_id, required: true}
+      name: {type: text, required: true}
+      created_by: {type: bounded_id, required: true}
+      environments: {type: list, item: bounded_id, required: true}
+      primary_environment_id: {type: bounded_id, required: true}
+      domain_refs: {type: list, item: bounded_id, required: true}
+      visibility_tier: {type: text, required: true}
+      members: {type: map, key: bounded_id, value: text, required: true, is: "persona id → role"}
+      bundle_id: {type: bounded_id, required: false}
+      current_bundle_id: {type: bounded_id, required: false}
+      artifact_manifest: {type: text, required: false}
+    notes: >-
+      The anonymous projection carries the required members only; the three
+      optional members ride the deep export when a bundle exists.
+
+  - id: personaos-persona-thinking/3
+    class: rendered
+    class_decided_by: seed
+    tiers: [operator]
+    owner: "ADR-0116 dec 2"
+    members:
+      generated_at: {type: iso_instant, required: true}
+      persona_id: {type: bounded_id, required: true}
+      name: {type: text, required: true}
+      lifecycle_state: {type: text, required: true}
+      brain_fragment_count: {type: integer, required: true}
+      brain_fragment_binding_count: {type: integer, required: true}
+      brain_evolution_decision_count: {type: integer, required: true}
+      brain_evolution_application_count: {type: integer, required: true}
+      brain_episode_count: {type: integer, required: true}
+      proven_facts: {type: list, item: text, required: true}
+      evolution_timeline:
+        type: list
+        required: true
+        item:
+          type: map
+          members:
+            kind: {type: text, required: true}
+            at: {type: iso_instant, required: true, empty_when: unrecorded}
+            mode: {type: text, required: false}
+            accepted: {type: bool, required: false}
+            task_id: {type: bounded_id, required: false}
+            mode_proficiency: {type: text, required: false}
+            reason: {type: text, required: false}
+      thinking_frame: {type: text, required: true, is: "the persona's current system frame; its bound is a registry/bounds.yaml row"}
+      tier: {type: text, required: true, is: "`operator`"}
+      recent_outputs:
+        type: list
+        required: true
+        item:
+          type: map
+          members:
+            kind: {type: text, required: true}
+            at: {type: iso_instant, required: true, empty_when: unrecorded}
+            text: {type: text, required: true}
+      current_work_state: {type: map, required: true, is: "the persona's latest `personaos-persona-work-state-surface/5` record bound to the latest observation, else its newest; empty when none"}
+      work_state_history: {type: list, item: map, required: true, is: "the persona's own `personaos-persona-work-state-surface/5` records, signature-verified; the count is a registry/bounds.yaml row"}
+    notes: >-
+      An operator interface of the 09_PROTOCOLS.md §12a family serving
+      exact-access material under §12; never anonymous, never redacted. The
+      owner paragraph is written into 09 §12a at S4 (ADR-0116 dec 2); until
+      then the decision owns the row.
+
+  - id: personaos-node-status-public/1
+    class: rendered
+    class_decided_by: seed
+    tiers: [public_anonymous]
+    owner: "09_PROTOCOLS.md §12"
+    members:
+      node_id: {type: bounded_id, required: true}
+      public_access: {type: bool, required: true}
+      public_discovery: {type: bool, required: true}
+      public_discovery_kinds: {type: list, item: text, required: true}
+      public_records: {type: integer, required: true}
+      global_discovery:
+        type: map
+        required: true
+        members:
+          enabled: {type: bool, required: true}
+          record_count: {type: integer, required: true}
+          peer_count: {type: integer, required: true}
+      external_artifact_requests: {type: map, required: true, is: "the `personaos-external-artifact-outbox-status/1` record (its row is seeded at S2)"}
+      external_artifact_fulfillment: {type: map, required: true, is: "the `personaos-external-artifact-fulfillment-status/1` record (the row below)"}
+      generated_at: {type: iso_instant, required: true}
+      read_access: {type: text, required: true}
+    notes: >-
+      Counts, presence and availability facts about the node; never a
+      locator, a path or a key. Fallback form the live node still answers
+      with before its public status is built: `schema` and `node_id` alone —
+      a document that renders as a status while stating nothing, retired at
+      S0's kernel commit (13 §20, ADR-0116).
+
+  - id: personaos-external-artifact-fulfillment-status/1
+    class: rendered
+    class_decided_by: seed
+    tiers: [public_anonymous, operator]
+    owner: "09_PROTOCOLS.md §6"
+    members:
+      event_driven: {type: bool, required: true}
+      startup_replay: {type: bool, required: true}
+      parallel_worker_limit: {type: integer, required: true, is: "an operator-declared ceiling"}
+      running_count: {type: integer, required: true}
+      scheduled_count: {type: integer, required: true}
+      state_counts: {type: map, key: text, value: integer, required: true}
+      providers:
+        type: list
+        required: true
+        tiers: [public_anonymous, operator, prompt]
+        item:
+          type: map
+          members:
+            provider_id: {type: bounded_id, required: true}
+            available: {type: bool, required: true}
+            reason_code: {type: reason_code, required: true, empty_when: available, is: "why `available` is false"}
+            checked_at: {type: iso_instant, required: true}
+      provider_selection: {type: text, required: true}
+      persona_authors_prompt_and_constraints: {type: bool, required: true}
+      persona_authors_provider_and_model_choice: {type: bool, required: true}
+      provider_or_model_ranked_by_substrate: {type: bool, required: true}
+      auto_admission: {type: bool, required: true}
+      requests: {type: list, item: map, required: false, tiers: [operator]}
+      status_unavailable: {type: bool, required: false, is: "present and true only in the fallback form, when the status could not be built"}
+      detail: {type: text, required: false, tiers: [operator], is: "emitted only by the fallback form, for the operator"}
+    notes: >-
+      `providers` rows replace `provider_ids` (ADR-0116 dec 3): a provider is
+      listed only with its availability and reason, and the same rows ride the
+      member's inventory beside the external-artifact request action. The
+      public form carries no path and no digest of a helper. Fallback form
+      when the status cannot be built: `schema` and `status_unavailable`
+      (plus `detail` for the operator) and no other member.

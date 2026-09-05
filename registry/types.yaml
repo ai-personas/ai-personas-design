@@ -1,0 +1,49 @@
+# registry/types.yaml — the value types a registry row may name.
+#
+# Part of the registry of record (14_DECISIONS.md ADR-0114 dec 1): this
+# repository is its home; the code repository vendors generated tables that
+# carry this registry's hash. A member of a schema row names exactly one of
+# these types; `list` and `map` name their element types in the row. A bound a
+# type mentions is a row of registry/bounds.yaml (ADR-0114 dec 4, from S2): no
+# integer
+# is stated here.
+#
+# Every row below was seeded before the first generated reader existed
+# (`decided_by: seed`); the adversarial review of the stage that first
+# generates a reader from it decides the row (ADR-0114 dec 2).
+registry: types
+owner: registry
+types:
+  - id: schema_id
+    is: "`<name>/<integer>` — the `schema` member every record carries (SPEC_CONVENTIONS.md §4)"
+    decided_by: seed
+  - id: bounded_id
+    is: "an identifier of bounded length; the bound is a registry/bounds.yaml row"
+    decided_by: seed
+  - id: sha256_text
+    is: "64 lowercase hexadecimal characters — protocol-exact"
+    decided_by: seed
+  - id: signature_hex
+    is: "the hexadecimal encoding of a signature under the record's declared signing key (09_PROTOCOLS.md §14); its length is protocol-exact for the key's algorithm"
+    decided_by: seed
+  - id: bool
+    is: "true or false; never a string, never absent where the row requires it"
+    decided_by: seed
+  - id: integer
+    is: "a JSON integer; a count is non-negative, and an unavailable count is stated as unavailable, never rendered as zero (11_DESIGN_CRITERIA.md C-OP-14)"
+    decided_by: seed
+  - id: iso_instant
+    is: "an ISO-8601 UTC rendering of one instant"
+    decided_by: seed
+  - id: reason_code
+    is: "the `reason_code` of a registry/refusals.yaml row — a token, never a sentence; the empty string only where the schema row states `empty_when` and that condition holds"
+    decided_by: seed
+  - id: text
+    is: "UTF-8 text; where a bound applies it is a registry/bounds.yaml row"
+    decided_by: seed
+  - id: list
+    is: "an ordered array; the row names `item`; on `open` rows the elements degrade per element (ADR-0114 dec 2)"
+    decided_by: seed
+  - id: map
+    is: "a string-keyed object; the row names `key` and `value`, or lists `members` when the keys are fixed"
+    decided_by: seed

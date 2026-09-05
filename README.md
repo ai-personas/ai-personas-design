@@ -85,8 +85,8 @@ or structured completion judgments.
 | 10 | [`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md) | The platform's standing requirements, their carriage lane, the condition of record, and the run scorecard. |
 | 11 | [`11_DESIGN_CRITERIA.md`](11_DESIGN_CRITERIA.md) | Observable operating-path outcomes and evidence. |
 | 12 | [`12_GLOSSARY.md`](12_GLOSSARY.md) | Current terminology. |
-| 13 | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) | Static authority and information-flow walks. |
-| 14 | [`14_DECISIONS.md`](14_DECISIONS.md) | The current clean-break architecture decision. |
+| 13 | [`13_DESIGN_VALIDATION.md`](13_DESIGN_VALIDATION.md) | Static authority and information-flow walks, and the run journal (§20). |
+| 14 | [`14_DECISIONS.md`](14_DECISIONS.md) | The current clean-break architecture decisions — decisions only; their measurements are journaled in 13 §20. |
 | 15 | [`15_COORDINATION_SHAPES.md`](15_COORDINATION_SHAPES.md) | Optional persona-authored coordination records. |
 | 16 | [`16_POPULATION_DYNAMICS.md`](16_POPULATION_DYNAMICS.md) | Exact population facts, opaque genesis, consent, and replication bounds. |
 | 17 | [`17_ECONOMY.md`](17_ECONOMY.md) | Draft persona-authored economic records under exact authority. |

@@ -10,6 +10,14 @@ personality, workflow, scoring, prompt, task-classification, mission,
 population, or tool-selection semantics is retired without migration and has no
 live normative force.
 
+Each ADR states context, decision, consequences, and what it does not decide,
+and lists the 00–12 text that carries each decision's normative force.
+Measurements, run observations, implementation status and dated fixes are
+journal entries in
+[`13_DESIGN_VALIDATION.md §20`](13_DESIGN_VALIDATION.md#20-run-journal),
+referenced by ADR id; a decision a run changes is a new ADR or an amendment
+marked as one.
+
 ## ADR-0085 — Semantic agency belongs to personas
 
 **Status:** Accepted; clean-break cutover.
@@ -824,6 +832,10 @@ obvious draft, which teaches drafting-before-building faster than any rule.
 The premise below was tested across three SOUL generations and five live runs and
 did not hold. The record is retained because the negative result is the value.
 
+**Status note:** the mechanism ships founding souls since ADR-0108 addendum 4;
+"no shipped SOUL uses it" is stale; the rejection stands for soul doctrine as
+a lever (ADR-0110).
+
 **Why rejected.** Three generations — v1 whose charter forbade it from stating a
 conclusion, v2 that could state one and reached peers by `immediate_wake`, v3
 carrying nine explicit standing requirements — produced identical behaviour: name
@@ -1454,39 +1466,28 @@ keep authoring their own dispositions; quiescence follows visibility).
 ### ADR-0108 addendum (2026-08-31, from the first live run on the build)
 
 The run validated the decision set by counterfactual and exposed four
-successor facts, folded in as addendum rather than a new ADR:
+successor facts, folded in as addendum rather than a new ADR; the run's
+measurements are journal entries in 13 §20 under ADR-0108:
 
-1. *Carry carries what is written.* The loop's carry stage worked and all
-   ten distilled fragments were situational status snapshots; the influence
-   stage had no subject, and one frozen snapshot anchored a stale claim its
-   author repeated after the evidence changed. Doctrine (not machinery) now
-   names the gradient: a fragment records what would change the next
-   attempt; a status restatement is noise wearing permanence; a memory that
-   disagrees with present evidence is revised, not obeyed.
-2. *Execution-bound receipts contained a fabrication.* A synthetic-sine
-   "verdict" over a simulation that never ran was broadcast bar-clearing;
-   the receipt doctrine refused to sign without executed counter-evidence
-   and no acceptance was minted. The cost surfaced as a mutual-parking
-   deadlock (every persona's anti-noise rule waiting on another); doctrine
-   gains its counterpart: staging is not verifying, a fact computable from
-   readable bytes is never waited for, parking requires that no own action
-   advances the work.
-3. *The contract authoring result hands the receipt scope.* Two kernel
-   event ids sharing a timestamp prefix let a wrong pointer propagate into
-   38 records; the result now carries `receipt_scope:
-   "cohort-contract:event:…"` verbatim. Statedness additions of the same
-   kind: open-input refusals carry a mechanical key diff against the
-   requester's own response_schema; resolutions state whether any
-   contribution binds; a bare 64-hex content reference canonicalizes, and
-   BOTH signed-args verifiers compare through one canonicalizer with the
-   transport-computed disjunct admitted (review-caught: the recorded
-   canonical form otherwise diverged from the signed bare form and
-   declarations silently dropped from settlement).
-4. *Every cohort member carries doctrine.* Seeded neutrals ran on empty
-   souls while four of the audit's pathologies were theirs; a minimal
-   work-discipline collaborator soul (executions over restatements, claimed
-   results name their execution, no placeholder posted as an answer,
-   structural acts fill fields) closes the asymmetry operator-side.
+1. *Carry carries what is written.* Doctrine (not machinery) names the
+   gradient: a fragment records what would change the next attempt; a
+   status restatement is noise wearing permanence; a memory that disagrees
+   with present evidence is revised, not obeyed.
+2. *Execution-bound receipts contained a fabrication.* Doctrine gains its
+   counterpart: staging is not verifying, a fact computable from readable
+   bytes is never waited for, parking requires that no own action advances
+   the work.
+3. *The contract authoring result hands the receipt scope.* The result
+   carries `receipt_scope: "cohort-contract:event:…"` verbatim. Statedness
+   additions of the same kind: open-input refusals carry a mechanical key
+   diff against the requester's own response_schema; resolutions state
+   whether any contribution binds; a bare 64-hex content reference
+   canonicalizes, and BOTH signed-args verifiers compare through one
+   canonicalizer with the transport-computed disjunct admitted.
+4. *Every cohort member carries doctrine.* A minimal work-discipline
+   collaborator soul (executions over restatements, claimed results name
+   their execution, no placeholder posted as an answer, structural acts
+   fill fields) closes the asymmetry operator-side.
 
 ## ADR-0109 — The audit closes its own instruments: envelope recall, stated declines, curated memory survives, paced retries
 
@@ -1541,7 +1542,9 @@ successor facts, folded in as addendum rather than a new ADR:
      cost 44 empty scheduler turns over 41 minutes because transport backoff
      capped at 30s against a multi-hour cooldown the router already knew. The
      router states `all_models_cooldown_remaining()`; the retry keeps its exact
-     replayable wake and simply waits out the horizon (bounded 1h per hop).
+     replayable wake and simply waits out the horizon (bounded 1h per hop —
+     **removed by ADR-0110**, the cooldown-pacing clamp in its removed list;
+     **completed on the manager path by ADR-0116 dec 1**).
 - **Decisions (doctrine, domain-free):** steward v10 — a limitation stated
   twice is a bar owed to the contract (supersede or record why out of scope; a
   pre-work contract is provisional); a check that reads none of the delivered
@@ -1646,41 +1649,17 @@ successor facts, folded in as addendum rather than a new ADR:
   member gate (both layers), the cooldown-pacing 3600s clamp, the refusal
   truncations (`[:120]`/`[:60]`/`[:16]` list slices), the binder caps, the
   fragment count caps and head refusal, the 128-fragment bind gate, the
-  inner page budget. **Queued inventory (all INVENTED, replacement =
-  lane-scaling from the measured carrier budget unless noted):** the
-  prompt-lane MAX_BYTES family (256K carrier / 64K×5 / 48K / 32K / 24K /
-  16K), page and collection limits (schedule 16, conflict pages 8/16,
-  ladder rows 8, batch 8, ancestry 128, receipt page 32, situation items
-  100 / 320K chars, resume observation 48K, identity sections 64/20K,
-  sealed-generation entries 32), `_EXEC_CAPTURE_RESULT_JSON_BYTES = 650`,
-  the 64-receipt per-signer lane bound (replacement: authority-declared),
-  the 32/64MB model-input caps, `_NO_DEADLINE_EXECUTION_CEILING_S = 7200`
-  (replacement: the measured time axis llama.cpp already reports), and the
-  router's `MAX_MODEL_QUOTA_COOLDOWN_S = 7 days` — retry pacing now
-  follows the provider's DECLARED retry-after horizon unclamped, and that
-  seven-day constant is the one remaining guard between a misreported
-  declaration and a week-long stall; it is named here as the declared
-  bound of record until the inventory replaces it.
+  inner page budget. The invented bounds of record are rows of
+  `registry/bounds.yaml` (ADR-0114 dec 4); the seven-day router cooldown
+  constant is the declared bound of record until its row replaces it.
   KEPT as non-artificial: `PRINCIPAL_TASK_DEADLINE_MAX_EPOCH_SECONDS`
   (ISO-9999 representability, protocol-exact) and every operator-declared
   ceiling.
-- **Doctrine verdict (three controlled runs):** no souled/unsouled
-  separation on any doctrine-targeted behavior — seeds authored 42% of
-  receipts, half the mints, the only latest-publication-bound mint, the
-  sharpest lessons and withholds; the richest-souled personas contributed
-  least on exactly their souls' axes. Soul iteration stops; souls stay as
-  shipped. The levers that remain are mechanical statedness and
-  task-authority bars.
-- **The bars experiment (e36, queued):** operator-supplied
-  `acceptance_condition` + `unaccepted_rewake` at POST /task, with outcome
-  bars (one deliverable of record; geometry-verified rooms with openings
-  cut in the solid; one source of truth across artifacts; format-validity
-  or stated non-fabricability; a structural screen at stated assumed basis;
-  grounded quantities; currency-bound acceptance). It tests the audit's
-  standing conclusion: capability acquisition (CAD-class tools, engineering
-  sims) never emerges because no bar ever prices an outcome the current
-  toolbox cannot cheaply produce — the cohort's own contracts price
-  process, whichever tier writes them.
+- **Doctrine verdict (three controlled runs; measured in 13 §20):** Soul
+  iteration stops; souls stay as shipped. The levers that remain are
+  mechanical statedness and task-authority bars. The normative carrier of
+  this verdict is 16 §11.
+- **The bars experiment:** e36 armed operator bars (13 §20).
 
 ## ADR-0111 — The bars must be re-readable, the tail must be quiet, and a repeated check says so
 
@@ -1748,6 +1727,7 @@ successor facts, folded in as addendum rather than a new ADR:
      projection honors an explicit handler boolean for substrate-registered
      tools (mounted counterparties keep the conservative stamp), ending the
      split where lineage said retryable and the persona surface said not.
+     **Subsumed by ADR-0115 dec 1.**
   6. *The learning window is measured, not invented.* The layer3/layer4
      char constants (4,800/9,600/2,000 — "4 chars/token") are gone; the
      bound-fragment prompt projection /2 drops the wrapper hashes the
@@ -1757,14 +1737,27 @@ successor facts, folded in as addendum rather than a new ADR:
      capability-acquisition summary (egress reachable, provisioning site,
      catalog count) is inlined in prompt facts beside the executable
      inventory, and the acquisition affordance family lists immediately
-     after its read verb instead of last.
+     after its read verb instead of last. Statedness only: no ranking, no
+     recommendation, no domain words; the inventory carries each tool's own
+     self-description (08 §5); a content-bearing action declares its content
+     member required (09 §13 preamble) — the ADR-0111 round's proposal P7
+     (`01fbe199`; runs in 13 §20).
 - **The experiment this round arms (e37, bars v2):** nine bars rewritten to
   the audit's rules — checks read the exported solid's bytes and no other
   file; every reported number must change under a demonstrated
   perturbed-model re-run (`assert True` cannot survive); the source of
   truth is derived from the solid; windows and bedroom egress are verified
   from geometry; the verifier's checks execute through an
-  environment-registered capability the verifier did not author; demotion
+  environment-registered capability the verifier did not author
+  [**Superseded 2026-09-05 (bars v3, operator authority):** the operator
+  withdraws both halves of that clause — the registration route as a
+  requirement it no longer prices (it named no tool class; the 10 §6.3 form
+  cannot bind on a fresh root) and "did not author" as the authorship
+  constraint the principal's standing rule (10 §6.1) and ADR-0112 dec 4
+  reject — leaving bar 9 as the substrate-checked half only: an
+  execution-bound receipt from a
+  verifier with no authorship edge over the CURRENT delivery (13 §20)];
+  demotion
   to "exploration" discharges nothing; the anti-narrowing clause names
   layer-deletion and check-relabeling. The acquisition question is now
   fairly posed: the natural implementations are ~100:1 shorter with the
@@ -1777,16 +1770,6 @@ successor facts, folded in as addendum rather than a new ADR:
   constraint inventory; `layer4_brain_fragment_page_k` was zeroed with the
   char constants (review round) — non-positive means the whole catalogue
   is one page, and the measured carrier fit is the byte authority.
-
-**P-7 done 2026-09-02** (after e45/e46 showed cohorts that never reached for
-the tools they had): the execution-capability inventory carries each tool's
-own self-description (08 §5), the capability-acquisition summary rides beside
-the platform lane every turn (`personaos-capability-acquisition-summary/1`,
-09 §13), and the acquisition actions follow the inventory read action in the
-catalogue. Statedness only: no ranking, no recommendation, no domain words.
-
-**Third run the same day (e48, qwen on 0.2.4):** two engineering capabilities acquired in seventeen minutes after a refusal named the recipe's members; executions joined the generations; still no inventory read and no geometry. One more schema statement followed: a content-bearing action declares its content member required (09 §13 preamble).
-
 
 ## ADR-0112 — The platform is a principal: standing requirements, the condition of record, a funded learning moment, and one scorecard
 
@@ -1984,147 +1967,53 @@ catalogue. Statedness only: no ranking, no recommendation, no domain words.
   51k lines, `node.py` 48k, `personaos_mcp.py` 23k, `kernel.py` 19k) as the
   vehicle for (9). Lone-seed launches return as a standing experiment arm:
   births need a need.
-- **Implementation status (2026-09-02):** cut 1 landed 2026-09-01
-  (`882a9a77`), cut 2 the same day (`1089c6ea`), cut 3a — the scorecard, the
-  freeze pins, the signer migration — 2026-09-01 (`82eb7d23`). Retirement
-  register: (a) interiority carriage retired (`9a5dc4f1`), (b) one
-  `personaos-disposition-frontier/2` (`62a11f34`), (d) and (e) design-only,
-  (c) the prompt-manifest family collapsed to `personaos-prompt-source-stage/2`
-  plus `personaos-prompt-source-pointer/1` (2026-09-02, `08955e6e`). The
-  monolith split landed the same day as three mechanical, byte-identical
-  moves out of `runtime.py` (52,828 → 41,271 lines) with every name
-  re-exported: `prompt_carrier.py` (the stage, its projections, the
-  model-visible views; `ce92188e`), `acceptance.py` (task authority,
-  qualification, receipts, publication joins, the acceptance projections and
-  prompt lane; `a1de426b`), `wake_carriers.py` (the three prepaid stimulus
-  classes, the distillation reservation and wake, the settle point;
-  `15a654e9`), with `lanes.py` naming the lanes so source pins, purity scans,
-  and test replacements read the kernel as one. The three giant classes
-  followed the same day as mixin splits, each method byte-identical and
-  composed back into its class, with a support module per class so no lane
-  imports the class's module: `PersonaNode` → nine lanes under `node_lanes/`
-  plus `node_support.py` (node.py 48,062 → 8,119 lines; `53092795`),
-  `PersonaOSMCPBridge` → eleven lanes under `protocols/mcp_lanes/` plus
-  `personaos_mcp_support.py` (23,463 → 1,803; `1a4f005d`), `Kernel` → seven
-  lanes under `kernel_lanes/` plus `kernel_support.py` (18,735 → 1,915;
-  `fa13e6f4`); `lanes.py` names every group so pins, purity scans and test
-  replacements cover the lanes. The bridge re-homes its lane methods'
-  `__module__` and `__qualname__` after composition, so the
-  `personaosImplementationIdentity` every tool advertises — and the dispatch
-  descriptor hash the kernel checks — is unchanged for all 72 tools (verified
-  by diffing the catalogue before and after); review had found the move would
-  otherwise have refused every action record signed across the deploy. The
-  traceability ledger counts citing lines rather than files, so a split moves
-  no counter. Landed 2026-09-02: the distillation wake's escrow is released
-  at its fire gate with a kernel-signed marker per (run, member) (10 §4.4);
-  the settle point is evaluated on a member's parking disposition as well as
-  on the run's terminal status (03 §10); every turn effect receipt carries
-  `personaos-turn-compaction-statement/1`, so `compactions_stated` is a join
-  (P-6). The C-OP-16 member view landed the same day: the node exports the
-  scorecard and the identity-refusal status as kernel-signed siblings; the
-  artifact join reads the persona's own signed declaration already on the
-  record; the UI (branch `member-view`) verifies
-  each field-exactly, leads with the latest lesson, shows what the member
-  built this run and the run's scorecard, and lets a declined portrait state
-  the member's own reason. Review found the settle point racing (now one
-  lock), the escrow refund not crash-idempotent (now deterministically named)
-  and the fit gate not owned by the arm (now installed there). The e40
-  scoring run on the final build exercised the whole chain live — settle at
-  the operator's terminal state, one scorecard, eight funded distillation
-  wakes, eight escrow releases at the fire gate with deterministic adjustment
-  ids — and surfaced two more gaps, both closed: the scorecard's window
-  opened at the settling generation's grant (every counter 0 after a resume;
-  it now opens at the task's first grant), and an operator-stopped run leaves
-  its run document incomplete so no public task record is exported for it
-  (the environment record now carries the scorecards; the missing task record
-  of a stopped run is recorded, not fixed). Nothing under this ADR remains
-  owed; the public UI deploy is the operator's call.
-  **2026-09-02, deployed and cut:** UI member view on `main` (GitHub Pages),
-  public cut PersonaOS 0.2.0. First live settle on a local Qwen3.8-27B node
-  found the anonymous artifact-surface scan rejecting every persona and
-  environment record that carried a scorecard (a counter named
-  `identity_records_authored` read as a malformed locator map), blanking the
-  member view between runs; the scan now admits exactly the two closed
-  member-view shapes (09 §13, C-OP-16 — by shape, so the wire path and
-  post-rotation exports hold too), and a 0.2.1 cut carries the fix.
-  **2026-09-02, first full run on a local model (e45, Qwen3.8-27B, 120
-  calls):** the substrate held (statedness, receipts, two provisioned
-  capabilities, five deliberate lessons, six self-adopted names) but four
-  substrate gaps cost the run its outcome, each fixed in the 0.2.2 cut: (1)
-  the exhaustion pause never settled the run — all eight members parked, one
-  delivery pending, no grant coming — so the funded learning moment never
-  came; the pause is now a completing append and the settle states what it
-  parked by exhaustion (OQ-PLATFORM-5 closed, 03 §10, 10 §4.5). (2) An
-  executor admitted an absolute working directory outside the persona's
-  workspace (the host's own checkout): the run's only house design was
-  written there and no peer could read it; both executors now refuse a cwd
-  outside the authenticated workspace, naming it (08 §5). (3) A refusal's
-  diagnosis — the members it recognises and the ones it received — never
-  crossed the turn boundary (only its slug reached lineage), so 22 of 27
-  refusals were the same invented argument name; the failure tokens now carry
-  those member names, and a recipe refusal names the undeclared members it
-  received. (4) The carrier-window refusal quoted a figure below the window
-  it said was exceeded; it now states the reserve and the exact limit.
-  Model-tier, recorded not fixed: the model invented the text member's name
-  22 times against a stated schema and once against its own lesson; nobody
-  ran the CAD tool three probes had found; the cohort spent its budget
-  deciding who would export and then parked on that member.
-  **Same day, luna (e46, gpt-5.6-luna, 120 calls, fresh root):** all eight
-  members named themselves within 25 s, 50 distillations (34 deliberate,
-  248 bindings, two traceable behaviour changes), emergent lanes without
-  any operator input, 176 executions, 21 declared artifacts, a deliverable
-  of record — a 14×10×2.8 m massing shell with real interior walls and door
-  gaps, non-manifold on one edge, no roof or structure — and no verifier
-  receipt (bar 9 impossible: every member authored into the shared
-  workspace and the one registered capability was an empty site). The
-  cohort's own audit said NOT ACCEPTED. One more substrate gap surfaced and
-  was fixed (0.2.3): the platform-requirement refusal action lacked the
-  atomic-commit marker, so no persona could state its refusal of R-ID-1.
+- **Implementation status:** the three code cuts, the retirement register,
+  the monolith split, the C-OP-16 member view, the public cuts and the runs
+  that scored them are journal entries in 13 §20 under this ADR, with every
+  commit, line count, cut number and run observation. Nothing under this
+  ADR remains owed. Decisions the runs added, each dated by the journal and
+  not here:
+  - The anonymous artifact-surface scan admits the two member-view documents
+    (09 §13, C-OP-16) by exact closed shape — by shape, so the wire path and
+    post-rotation exports hold too. **Retired by ADR-0114 dec 2 (S2):**
+    admission becomes per member, by registered type.
+  - The exhaustion pause is a completing append, and the settle states what
+    it parked by exhaustion (OQ-PLATFORM-5 closed, 03 §10, 10 §4.5).
+  - Both executors refuse a working directory outside the authenticated
+    workspace, naming it (08 §5).
+  - A failure token carries the member names its diagnosis recognised and
+    received, and a recipe refusal names the undeclared members it received.
+    **Subsumed by ADR-0115 dec 1.**
+  - The carrier-window refusal states the reserve and the exact limit.
+  - A text lesson body travels verbatim inside the public bounds, and an
+    omitted body states the bound it failed (`body_omitted_reason`,
+    `personaos-persona-agentic-development/4`).
+  - The live feed carries each run's signed model-call balance
+    (`personaos-live-run-budget/1` on
+    `personaos-environment-telemetry-public/2`).
+  - `lessons_bound_from_outside_this_task` counts the fragments a run's
+    compiles bound that this task did not author inside its window (10 §5).
+  - `capability_gap_limits_stated` is not a read failure but a placeholder
+    with no structured source (10 §5, 03 §5).
 - **Recorded, not decided:** the settle point when a budget exhausts with
-  successors still owed (OQ-PLATFORM-5, observed on e39); whether
+  successors still owed (OQ-PLATFORM-5 — closed by the exhaustion-pause
+  decision above; 10 §9 records the closure); whether
   `deliberate_lessons_bound_before_a_later_executing_turn` should additionally
-  require a read join (OQ-PLATFORM-2); the portrait
-  channel for text-only bodies (OQ-PLATFORM-3); one requirements record per
-  node or per environment class (OQ-PLATFORM-1); a deployment provisioning
-  ingress and its recorded provenance (OQ-PLATFORM-4).
-- **2026-09-03, fourth pass (e48/e48b, Qwen3.8-27B on 0.2.4/0.2.5):** the
-  0.2.5 schema rule held live (16 posts, 0 refused; 15 of 25 refused the
-  run before); the exhaustion settle, the funded moment and the run-scoped
-  resume gate ran end to end twice; the remaining funded wake turns
-  survived a node restart. Three observability gaps found on the member
-  view and fixed: (1) a member whose distillations are bare texts published
-  every lesson with an empty body and no reason, so the card led with
-  nothing — a text body now travels verbatim inside the public bounds and an
-  omitted body states the bound it failed (`personaos-persona-agentic-
-  development/4`); (2) no surface carried a run's live model-call spend —
-  the exported run document freezes its arithmetic at export time, once per
-  completed turn — so the live feed now carries each run's signed balance
-  (`personaos-live-run-budget/1` on `personaos-environment-telemetry-
-  public/2`); (3) "more productive next time" was not measurable — the
-  scorecard counted only lessons authored inside the window — so
-  `lessons_bound_from_outside_this_task` counts the fragments a run's compiles
-  bound that this task did not author inside its window (10 §5). `capability_gap_limits_stated` is not a
-  read failure but a placeholder with no structured source (10 §5, 03 §5);
-  the worked example that showed it as 0 is corrected, and the UI no longer
-  calls it "source unreadable". Recorded, not decided: whether R-CAP-1's
-  "states the capability gap as a limit" should get a structured action so
-  the counter can measure (03 §5 keeps gap meaning opaque today); and what
-  a member carries between environments — a generation is environment-bound
-  by construction and no fact tells a member in a later environment what it
-  provisioned before (ADR-0113 proposal).
-- **2026-09-04, structural review (`reviews/2026-09-04-why-it-keeps-patching.md`,
-  13 §19):** the fix log since 2026-08-28 classified (225 items: 56 percent
-  statedness, 28 percent two-site divergence); the six mechanisms that
-  manufacture patches measured (589 refusal sites in 61 shapes; 22 cursor-
-  minting lanes with 3 acceptors; 16 memo schemes; 61 hand-kept UI field
-  lists; observability keyed to cause; tests that cross no seam); two live
-  UI drifts of 27 and 19 days found; the program that would end the series
-  proposed as six structural changes and five document changes. Recorded
-  here as a finding; every decision in it is owed to a future ADR.
+  require a read join (OQ-PLATFORM-2); the portrait channel for text-only
+  bodies (OQ-PLATFORM-3); one requirements record per node or per environment
+  class (OQ-PLATFORM-1); a deployment provisioning ingress and its recorded
+  provenance (OQ-PLATFORM-4); whether R-CAP-1's "states the capability gap as
+  a limit" should get a structured action so the counter can measure (03 §5
+  keeps gap meaning opaque) — **decided by ADR-0116 dec 4:** no structured
+  action, and the counter states `no_structured_source`; what a member
+  carries between environments — decided by ADR-0113.
+- **Structural review:** 13 §19 and
+  `reviews/2026-09-04-why-it-keeps-patching.md` — recorded as a finding;
+  every decision in it is owed to ADR-0114, ADR-0115 and ADR-0116.
 
 ## ADR-0113 — What a member carries between environments is its recipe, stated and replayable
 
-**Status:** accepted 2026-09-03, implemented the same day (impl commit noted in 13 §18).
+**Status:** accepted 2026-09-03; implemented 2026-09-03 (13 §20).
 
 **Context.** e48/e48b (2026-09-02, Qwen3.8-27B): in the first house task the
 cohort provisioned two library generations (trimesh, ezdxf, shapely,
@@ -2144,7 +2033,8 @@ and one affordance.
    artifacts across the environments it belongs to on this node, current or
    away, by identifier only (`member_prior_tool_artifacts`, 08 §5, 09 §13).
    No ranking, no description, no claim of use; the newest sixteen with the
-   cut count stated; an environment whose artifacts could not be read is
+   cut count stated (an `unstated` row of `registry/bounds.yaml` from S2,
+   ADR-0114 dec 4); an environment whose artifacts could not be read is
    named, and a table that could not be read at all is stated as unreadable
    rather than empty.
 2. `replay_provisioning_recipe` re-runs one of the member's own recorded
@@ -2170,3 +2060,211 @@ should extend to artifacts other members authored in shared environments
 (today it is the member's own, because only the author's recipe replay is
 attributable without a publication).
 
+## ADR-0114 — Rules have carriers: the schema registry, its reader policies, the bound registry, the guards
+
+**Status:** proposed 2026-09-05. Amends 09 §13, §2.1, §4.3, §4.4; 10 §3 P-7,
+§4.5, §5; 11 §4 and every C-OP; 03 §10; SPEC §4, §4.4, §13, §14.5; the 14
+preamble. Retires the last sentence of C-OP-16, the artifact-surface scan
+sentence of 09 §13 (`personaos-public-run-scorecard/1` and
+`personaos-public-identity-requirement-status/1`) and ADR-0112's scan-rule
+bullet. The status flips to accepted at the kernel commit of the first stage
+that enacts any decision (S2; dec 7 is design-only and does not flip the
+status); per-decision implementation lines are journal entries in 13 §20.
+
+**Context.** The structural review (13 §19) found that the design states the
+right rules and the rules have no carrier in code, and that both defect
+classes — statedness, and two sites implementing one projection differently
+— continued at the same rate after their rules were written. The tree carries
+each rule at many sites: exact-shape checks, hand-kept field lists in the UI
+shell, version pins, bounders and UI constants with no provenance row, and a
+code registry naming a fraction of the ids in use while 09 §13 names fewer
+still; two live UI drifts were the visible cost (measured: 13 §20,
+ADR-0114). In the design itself 09 §13 is an accretion list
+carrying two contradictory reader policies (exact-closed for the member-view
+siblings, allowlist projection for the public documents), no bound registry
+exists, 11 §4 disclaims mechanical guards, 03 §10 lists the completing appends
+as an open set, and 14 had become a run journal. Each is a rule without a
+carrier; this ADR names the carriers.
+
+**Decision.**
+1. The registry of record is `registry/schemas.yaml` (+ `types.yaml`) in
+   this repository; 09 §13.5 renders from it; one row per id in code, wire,
+   lineage, store, prompt, in-process value type (SPEC §4.3) or mounted
+   family; a row's `owner` is the 00–12 section that defines the record, an
+   ADR decision until that section is written, or `registry` when the row is
+   the definition. — accepted at S2.
+2. Three classes, one reader policy each: `exact` signed-closed; `open`
+   verify-open (signature over every present member; unregistered members
+   opaque — never rendered, dereferenced or read by a decision; counted
+   `unregistered_members`); `rendered` render-closed; row arrays degrade per
+   element. On a `public_anonymous` surface admission is per member: a
+   registered member by its registered type, an unregistered member by the
+   generic scan, never by signature or producer — C-OP-16's reason stands
+   verbatim as the rationale (a signature-based exemption would leave the
+   federation path and post-rotation exports blank). A seed row's class is
+   `class_decided_by: seed`; the adversarial review of the first stage that
+   generates a reader from the row decides it, and the seed count never grows
+   after S2. — accepted at S2.
+3. Producers assert (present ⊆ registered, required ⊆ present, type and
+   bound per member, the anonymous per-member rule for public tiers); a
+   failed assertion is a substrate refusal, nothing is signed;
+   `tools/registry.py check|emit|render`; generated artifacts committed with
+   the registry hash. — accepted at S2.
+4. Every bound the substrate applies is a row of `registry/bounds.yaml` with
+   provenance ∈ {measured, declared, protocol-exact, absent,
+   unstated+replacement+queued_since}; `unstated` rows never grow; rows
+   seeded at S2, code takes rows at S7. — accepted at S7.
+5. Every C-OP names its guard or is marked convention
+   (`registry/guards.yaml`). — accepted at S8.
+6. Amends ADR-0112 dec 6 and 03 §10: the completing appends are the closed
+   set of rows in `registry/completing_appends.yaml`. — accepted at S8.
+7. 14 records decisions; 13 §20 journals. — accepted at S0.
+8. A memo of an unreadable read is a silent zero: the verified-read helper
+   never memoises a failed read (13 §16.5(d) corollary). — accepted at S7.
+
+**Consequences.** Additive members stop forcing bumps on UI-read and
+`rendered` records (09 §13 already bumps only for removed members or
+semantics; the bumps were forced by exact readers); 288 exact-shape checks
+become one verifier, and the 53 lists in `discovery.js` and 15 in the `.mjs`
+modules become one generated file. `S0` … `S8` are the stages
+of the program 13 §20 journals; a decision's "accepted at S<n>" line names
+the stage whose kernel commit enacts it, and the ADR's status flips at the
+first of them. Not decided: per-row text behaviour (recorded on the row's
+`decided_by`); memo eviction; the slug carriage's retirement date.
+
+## ADR-0115 — A refusal is a record; a cursor is a contract
+
+**Status:** proposed 2026-09-05. Amends 11 C-OP-10, C-OP-14; 13 §16.5; 09
+§2.1, §4.3, and a new §4.5. Subsumes ADR-0111 dec 5. Relocates the
+pending-communication cursor rule from 09 §13's cutover list into 09 §4.5 (a
+relocation, not a new decision). The status flips to accepted at S5;
+per-decision implementation lines are journal entries in 13 §20.
+
+**Context.** The refusal audit for the program found the refusal rule
+implemented per site: `"ok": False` built by hand at hundreds of sites with
+`retryable` defaulted at each, `failure_reason` in several shapes, most
+refusals reaching lineage as a slug and some as nothing, a sentence used as a
+slug, and a substrate traceback carried as a slug with the exception surviving
+nowhere; ADR-0111 dec 5 had closed the lineage/surface split of `retryable` at
+one site. The cursor audit found the cursor rule implemented per lane: many
+mint sites over literal namespaces, few acceptors, several grammars, and
+read-action refusals that lose the word "cursor"; on one run every
+prompt-minted pending-communication cursor was refused as
+`cursor_snapshot_mismatch` and members re-issued the identical read (09 §13)
+(measured: 13 §20, ADR-0115). Both are the class the standing rule names: one
+rule, many sites, no carrier.
+
+**Decision.**
+1. `personaos-substrate-refusal/1` = `{schema, ok:false, reason_code, stage ∈
+   {input, admission, authority, resource, transport, execution, persistence,
+   projection}, retryable, retryable_provenance, recovery,
+   recognized_members, received_members, missing_members, unknown_members
+   (names only), exception_type?, fault_class ∈ {caller, substrate, provider,
+   unknown}, refused_at, detail_ref?}` built by one `refuse(...)`, carried
+   unchanged to lineage and the persona surface; `reason_code` a row of
+   `registry/refusals.yaml`; `retryable` true only when the identical call
+   may succeed later with no change by the caller (stale cursor, cooldown,
+   lock, transient transport); `recovery` is a registered
+   mechanical-precondition token naming what makes the identical call
+   admissible, never an action recommendation (C-OP-10 gains the clause).
+   Distinct from `personaos-platform-requirement-refusal/1` (10 §4.3), which
+   is an answer. — accepted at S5.
+2. The cursor contract is owned by the pager (09 §4.5): a namespace is a row
+   of `registry/cursors.yaml` (schema, sequence-identity rule, read action,
+   required arguments and member paths, invalidating transition); sequence
+   identity mandatory (a rendering is never an identity); one grammar,
+   protocol-exact; no mint for an unregistered namespace (the lane states
+   `total_count`, `cursor_offered: false`); stale or foreign →
+   `cursor_snapshot_mismatch` / `cursor_offset_outside_snapshot` (retryable,
+   recovery `read_again_without_cursor`); both read-action tables generated
+   from rows. — accepted at S6.
+3. Guards: the registry walk, the refusal corpus, the dispatch harness. —
+   accepted at S6.
+
+**Consequences.** One refusal record, one builder, one token registry: the
+persona-visible `retryable` and the lineage `retryable` are the same member
+of the same record, so the split ADR-0111 dec 5 closed at one site cannot
+reopen at another; a reason code without a row cannot be built; a cursor a
+member is handed means something when it is handed back, and a lane that
+cannot honour one says so instead of minting it. Not decided: per-site
+`retryable` where the row says `judged_at_site`; whether `detail_ref` is ever
+populated; page sizes (today's 64 and 1..128 are `unstated` rows).
+
+## ADR-0116 — A run states its own progress; a turn states what it carried; a channel states its absence; a run is counted where it was silent
+
+**Status:** proposed 2026-09-05. Completes ADR-0109 dec 5; decides what
+ADR-0112 recorded and did not decide (a structured gap-limit action); amends
+10 §5, 09 §6, §12, §12a. The status flips to accepted at S0's kernel commit
+(dec 3); per-decision implementation lines are journal entries in 13 §20.
+
+**Context.** On one run, hours passed from the last funded call to
+`RUN_SETTLED` while lineage records, content-addressed objects and
+outcome-lifecycle snapshots were written for zero persona appends, and no
+surface said the run was stalled or why; turn observations carried no model
+id, before and after the settle; the provider's exhaustion answer was
+laundered into a retryable reason at every fold site, so every retry path
+fired into a cooldown the router already knew; the per-turn prompt carrier
+was never persisted and its observation was skipped on turns with no action,
+so what a member read on a given turn is unrecoverable; the node's status
+document reported a default call timeout on a node launched with another and
+listed the external-realization provider by id with no availability, while
+no portrait had been delivered and no external-artifact request authored;
+and `capability_gap_limits_stated` was unavailable on every scorecard with no
+structured source, by design (03 §5 keeps gap meaning opaque) (measured: 13
+§20, ADR-0116). Each is an absence with no carrier: a stall no record states, a carrier no record
+keeps, a channel no record says is missing, a count no record admits it
+cannot make.
+
+**Decision.**
+1. `RUN_PROGRESS_STALL_OBSERVED` (`personaos-run-progress-stall/1`, class
+   `open`) at the heartbeat for every run and every paused row: appended at
+   protocol-exact or declared instants only (router cooldown entry and
+   expiry, retry-registry change, the declared model-call timeout, the
+   exhaustion pause) with seconds since the last persona-authored append,
+   unparked members and dispositions, pending deliveries from both
+   registries, cooldown remaining, streak and last refusal by registered
+   code, refused-call count, active call ages; and projected as
+   `run_progress` rows on `personaos-environment-telemetry-public/2`, read
+   at the live-telemetry cadence (the `personaos-live-run-budget/1`
+   precedent, 09 §13) so a multi-hour stall is a continuously perceivable
+   surface (C-OP-14) without a new integer or a lineage append per tick.
+   Wakes nobody; read by no decision. The sink's exhaustion classification
+   is honoured at every seam (never laundered into retryable); every fire
+   path consults the one cooldown. Refused calls are counted, zero spend, on
+   the ledger and the observable — a current fact; whether a refused call
+   spends is recorded, not decided (17 §1 and 03 §11 name no rule). —
+   accepted at S3.
+2. Each lane of `personaos-persona-turn-prompt-carrier/19` is stored
+   content-addressed under the hash the turn observation carries; the
+   observation lands on every turn (`action_observation_count: 0` is a
+   record, not a skip); lanes reference (lane, hash, bytes, `stored`,
+   `store_refusal`). Bound row `carrier_lane_bytes: measured — the ADR-0107
+   carrier window; a lane cannot exceed the carrier it rode`, so no oversize
+   case exists; a store refusal is stated and never drops the observation.
+   Tier: the thinking surface is an operator interface of the 09 §12a family
+   serving exact-access material under 09 §12's disclosure rule;
+   `personaos-persona-thinking/3` is registered `rendered`, tier `operator`,
+   never anonymous or redacted; retention is the 09 §12a operator retention
+   fact. — accepted at S4.
+3. `personaos-external-artifact-fulfillment-status/1` carries `providers`
+   rows `{provider_id, available, reason_code, checked_at}` in place of
+   `provider_ids`, on the node status and in the member's inventory beside
+   the external-artifact request action; a provider is never listed present
+   without its availability; R-ID-1's "where a portrait channel exists" (10
+   §2.1, 02 §3) is the row the member reads. — accepted at S0.
+4. Scorecard members `acceptance_contracts_authored`,
+   `capability_acquisition_attempts` and `capability_acquisition_refused`
+   (10 §5; flat counters inside the open `counters` map, so no reader
+   changes) — accepted at S0; `unavailable_counter_reasons` (a new
+   top-level member) — accepted at S2; no structured gap-limit action
+   (03 §5 keeps gap meaning opaque); `capability_gap_limits_stated` stays
+   unavailable with reason `no_structured_source`.
+
+**Consequences.** A stall is a record and a surface, not a log line; a turn's
+carrier is recoverable by hash; a channel's absence is a row a member can
+read and refuse against (R-ID-1); the three counters make authored contracts,
+acquisition attempts and unmeasurable counters visible on the scorecard
+nothing reads (ADR-0112 dec 8 holds). ADR-0109 dec 5's manager path is
+complete: the manager reads the node's one cooldown and the one `unstated`
+attempts row. Not decided: the emblem for text-only bodies (OQ-PLATFORM-3
+stays open); compaction of stored lanes.

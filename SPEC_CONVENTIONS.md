@@ -35,7 +35,7 @@ depends_on: <optional — list of files that MUST be read first>
 | Draft | Under active authorship; expect changes. |
 | Proposed | Complete; awaiting review. |
 | Stable | Reviewed and accepted; changes require version bump. |
-| Living | Append-only catalog / validation log; entries accrete without supersession. Used only for `13_DESIGN_VALIDATION.md`. |
+| Living | Append-only catalog, validation log, or run journal (13 §20); entries accrete without supersession. Used only for `13_DESIGN_VALIDATION.md`. |
 | Superseded | Replaced; consult `supersedes` reverse link in successor. |
 
 ### 1.2 `normative` values
@@ -376,8 +376,8 @@ v1.0 documents are versioned as a set. The version field in front matter MUST eq
 | 10 | `10_PLATFORM_REQUIREMENTS.md` | Yes | Implementers, operators, persona authors | 10 min |
 | 11 | `11_DESIGN_CRITERIA.md` | Yes (defines current user-intent and operating-path criteria) | Implementers, operators, auditors | 8 min |
 | 12 | `12_GLOSSARY.md` | Documentation-normative | All | 6 min |
-| 13 | `13_DESIGN_VALIDATION.md` | No (validation log) | Reviewers, auditors | 8 min |
-| 14 | `14_DECISIONS.md` | No (ADR catalog) | Reviewers, auditors, research | 10 min |
+| 13 | `13_DESIGN_VALIDATION.md` | No (validation log and run journal) | Reviewers, auditors | 8 min |
+| 14 | `14_DECISIONS.md` | No (ADR catalog; decisions only, 14 preamble) | Reviewers, auditors, research | 10 min |
 
 ## 14. Compliance
 
