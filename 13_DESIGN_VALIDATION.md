@@ -2070,6 +2070,22 @@ nothing to record is written `—`:
   kernel commit; dec 1 at S3; dec 2 at S4; dec 4 at S2) ·
   recorded-not-decided: whether a refused call spends (17 §1); the emblem
   for text-only bodies (OQ-PLATFORM-3) · ADR-0116
+- **2026-09-05** · run: e49 (two environments) and e50 · build/model: 5b761677
+  + the uncommitted S0 tree · measured: the scorecard inspector, run by the
+  test suite over the live roots under `lineage_read_only=True` at
+  02:20:00–02:31:46Z, appended six kernel-signed
+  `CAPABILITY_GENERATION_VERIFIED` records to the tail of each of three
+  environment chains (18 records, signed with each root's own seed) because
+  the read-only flag suppressed only the `.corrupt` rename and guarded no
+  append and no torn-tail rewrite — the ADR-0114 dec 8 class realised on the
+  evidence itself · changed: `LineageLog(read_only=True)` refuses every append
+  by a stated error and never rewrites a torn tail (`torn_tail_unrecovered`
+  is stated with the count of complete records read); no lock file is
+  created under read-only; the inspector's tests digest every file under
+  `runs/` before and after; the 18 records stay in place (removal is the
+  operator's decision; they are the chains' tails and alter no persona-
+  authored fact) · recorded-not-decided: whether the 18 records are
+  truncated · ADR-0114
 - **2026-09-05** · run: — (the tree) · build/model: 0.2.8 · measured: a node
   that has not built its public status answers an anonymous `/status` read
   with a two-member `personaos-node-status-public/1` (`schema`, `node_id`),
