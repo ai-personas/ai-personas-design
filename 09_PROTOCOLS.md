@@ -16,14 +16,15 @@ schemas.
 
 ## 1. Protocol invariants
 
-1. Every authority-bearing record is canonical, bounded, signed, replayable,
+1. Every authority-bearing record is canonical, signed, replayable,
    and bound to exact subjects and scopes.
 2. Descriptors declare mechanics and effects explicitly. The runtime never
    derives them from names, prose, arguments, prompts, task words, filenames,
    extensions, executables, professions, regular expressions, media types, or
    domain vocabulary.
-3. Inventories are complete within explicit pagination/truncation bounds and
-   unranked. Stable ordering is transport order only. Append-derived pages
+3. Inventories are complete and unranked. Pages state their exact omissions
+   and continuation; a presentation window does not cap durable inventory.
+   Stable ordering is transport order only. Append-derived pages
    preserve absolute positions and cardinality, including equal records at
    distinct positions.
 4. Personas choose actions. Protocol adapters neither recommend nor sequence
@@ -44,7 +45,7 @@ MCP carries tools, resources, the generic `author_persona_knowledge` action, and
 visibility-authorized persona-owned knowledge metadata. A live tool descriptor exposes:
 
 - exact action identity and descriptor hash;
-- exact bounded input and output schemas;
+- exact input and output schemas;
 - provider and authorization bindings;
 - read-only, workspace, owner, task, external-event, and other mechanical
   effect annotations when applicable;
@@ -97,17 +98,13 @@ the empty path remains workspace/receipt evidence and is neither erased nor
 presented as a usable artifact. This admission rule is mechanical and does not
 branch on path, extension, MIME, task, domain, executable, or authored prose.
 
-When a caller explicitly declares an in-workspace regular-file output, the
-execution boundary captures a bounded descriptor-safe byte preimage before
-launch. A successful terminal result leaves the producer's output untouched.
-An unsuccessful result atomically restores a pre-existing declared file or
-removes a newly created non-directory entry, and signs the exact restoration
-outcome. If the preimage cannot be captured without following links, exceeding
-its bound, or accepting an ambiguous file identity, execution is refused before
-launch. This transaction covers only the exact declared paths: it neither
-interprets them nor claims to undo arbitrary undeclared or external effects.
-Failure evidence remains in the signed execution receipt even when the damaged
-declared path is restored.
+Execution does not roll back workspace changes after a nonzero exit, deadline,
+or cancellation. Partial, changed, and empty files remain available for the
+persona to inspect and repair. Declaring an output selects bytes for capture;
+it does not give the substrate authority to erase or restore that path. A caller
+that needs atomic replacement can stage its output and rename it after its own
+checks pass. The signed receipt records execution status and observed changes,
+without treating failure artifacts as a successful task outcome.
 
 ### 2.1 Exact unranked inventories
 
@@ -147,6 +144,13 @@ persona can select one candidate and author an exact acquisition intent. The
 signed discovery evidence records whether a filter was applied. Empty filtering
 never selects, recommends, mounts, or invokes a candidate.
 
+Synchronous acquisition intents and receipts remain signed lineage and ambient
+evidence and return directly to the caller. Recording them does not route
+another persona wake. Peers observe the shared capability inventory and may use
+the installed capability; an authored message or other independently admitted
+stimulus carries any request for further work. Recipe replay has the same
+notification behavior as first acquisition.
+
 When the provider supports native MCP tools, `tools/list` exposes every exact
 leased action under its real name with its complete persona-facing description,
 input schema, and structural annotations in the signed action-index order.
@@ -155,6 +159,75 @@ descriptor-bound node boundary. A generic catalogue inspector plus string-based
 invoker is non-conformant because it hides every actual choice behind a second
 model selection problem and makes the advertised action count differ from the
 provider-visible surface.
+
+A transport may remove duplicate prompt descriptions and input summaries only
+when every eligible body receives their exact descriptor and argument indexes
+through its model-visible serializer. Action identities, declared effects and
+usage observations remain in the prompt catalogue. A grammar-only or unknown
+transport keeps its prompt descriptions: enforcing a schema does not establish
+that the model sees its descriptions. Navigation reduction retains verifiable
+component hashes and a recoverable reference to the original context.
+
+The Responses native-function serializer names that evidence source
+`responses.tools`; the explicit structured-envelope serializer names
+`responses.text.format.json_schema`. Native function arguments preserve open
+objects and optional members without a nested JSON-string carrier. Authenticated
+action results retain their complete captured stdout/stderr and exact authored
+arguments across subsequent requests. Observation alone does not replace their
+content with receipts. Under measured context pressure, the current persona may
+summarize authenticated results using the same model, persona system context,
+scope and signed budget. Previously read results are considered first. When a
+new result cannot otherwise fit, the persona's compactor can perform its first
+read. The summary remains labeled as lossy model interpretation and references
+an ordered archive of the exact results. Already-observed history is summarized
+together, so each small result does not impose a permanent provenance envelope.
+A later digest can read the preceding digest alongside new results; its archive
+retains that preceding record and the chain back to every original result.
+Unchanged history is carried forward rather than rebuilt from its originals.
+
+Exact storage does not impose a fixed ceiling on the canonical value or its
+compressed blob. The signed record's declared sizes and content hashes bind
+recovery; decoding stops when those declared sizes are exceeded. A caller may
+provide an explicit read allowance, and the verified-byte cache may evict large
+entries, without making those bytes unavailable from durable storage. Situation
+and workspace-topology records follow the same rule.
+
+Candidate-package capture, materialization and export recovery likewise impose
+no fixed file-count, reference-count or per-file byte quota. Valid text/binary
+content, durable workspace references, and their complete path/parent evidence
+remain recoverable. Relative paths, runtime reference authority, source identity
+and exact byte hashes still verify before materialization. Recovery metadata is
+durable evidence, not a bounded prompt preview; truncating it may hide a later
+revision or conflicting parent. Model-window limits affect presentation and
+compaction, not which files the package can contain.
+
+Compaction must read the whole source. A source exceeding the measured request
+allowance is carried in consecutive Unicode-safe segments, each with exact byte
+offsets, the total source size and the preceding persona-authored digest. Every
+source byte must reach that persona's model before a complete digest exists.
+The result states its source segment count. Each request includes the current
+persona system context and debits the same signed grant. Neither source nor
+summary is cut to a character prefix.
+
+The digest's allowance includes its serialized provenance record and any exact
+source reference added by the continuation. The model receives the remaining
+UTF-8 allowance for JSON-encoded text, including quotes and escapes. Enclosing
+metadata must not invalidate an otherwise compliant digest. The history digest
+uses the space left by exact neighboring fields. If protected task context alone
+exceeds the available background space, no background model summary can make
+that fit. That pass
+retains the protected bytes and mechanical read indexes without invoking the
+model for summaries it would subsequently discard.
+
+If a background digest must become a structural read index, that index retains
+the original evidence's identity and size. Hashing the digest or another index
+would name different bytes from those returned by the lane's read action.
+
+The context fitter may reduce background observations. Failed, incomplete or
+oversized compaction preserves the source and can refuse continuation; it cannot
+silently replace it with a hash or replay prior effects. Failures between model
+requests retain their mechanical status and underlying `model_call_reason_code`
+beside the turn's `reason_code`; only the turn reason governs replay policy.
 
 The provider-native capability lease preserves the runtime's exact mechanical
 action envelope for the semantic turn. A deployment may impose one finite,
@@ -331,7 +404,7 @@ without that current persona publication. On an operator-declared public node,
 the signed bridge/access policy instead yields an exact kernel-signed
 `operator_public_node_scope` body authority for every verified in-scope record
 that lacks a current persona publication. The authority id mechanically derives
-a bounded peer-body route whose provider-signed envelope binds the exact
+a peer-body route whose provider-signed envelope binds the exact
 discovery record, source evidence, body hash/size, and either persona
 publication or public-node scope. The latter is visibly not persona-authored and
 does not impersonate author consent. This transport does not create a
@@ -359,13 +432,18 @@ capability record, while an unknown observation field or an artifact locator in
 the signed wire document still fails closed.
 
 `acquire_global_capability` accepts only an exact current verified catalogue
-record id and its expected body/envelope hashes. It fetches the derived route
-from that record's signed peer base, rejects a changed network origin, consults
-no central rendezvous fallback, and independently verifies the provider key,
+record id and its expected body/envelope hashes. An HTTP(S) base uses the
+derived route and rejects a changed network origin. A record without that
+HTTP(S) route uses its verified libp2p peer id and addresses to read the exact
+envelope hash. This native reader owns no listener or persistent discovery
+state and uses no HTTP or central rendezvous fallback. Both paths read the
+complete body without a fixed byte ceiling and independently verify the provider key,
 host identity, source evidence, persona-publication or kernel public-scope
-signature, source identity, sizes, and hashes. The exact authenticated action
-and verified envelope are retained in
-signed environment lineage. Structural executable-tool bodies are passed as
+signature, source identity, sizes, and hashes. The verified catalogue retains
+the exact signed document access policy and document public key, so acquisition
+can recheck the source's current read scope and expiry before provisioning.
+The exact authenticated action and verified envelope are retained in signed
+environment lineage. Structural executable-tool bodies are passed as
 opaque portable recipes through the ordinary provisioning and verification
 boundary; structural persona-state bodies are retained without automatic
 application. The recipe binds an exact persona-authored smoke input object;
@@ -376,6 +454,26 @@ protocol never substitutes an empty invocation or synthesizes argument values.
 ordered summary inventory plus exact-id, JSON-pointer, and byte-window reads.
 No field in either action expresses a domain, profession, task match, preferred
 provider, required capability, teacher, curriculum, or expertise award.
+
+A structurally incomplete callable-tool or library recipe reports
+`capability_recipe_shape_invalid` at the recipe stage before provisioning.
+Verification failures may retain `exception_type` with its explicit
+`exception_type_source`: `python_traceback_stderr` for a complete traceback
+from failed, non-timeout, non-refused, non-truncated child stderr, or
+`verification_executor` for a caught local executor exception. The exact
+diagnostic remains in the hash-covered receipt and permitted diagnostic
+projection. Its type or text grants no policy or execution authority.
+
+New verified acquisition receipts also remain in the acquiring persona's signed
+evolution history. Their owner can inspect the retained exact bodies from another
+authenticated environment; `retention_scope` is `persona`, while the response's
+`environment_id` states the current read context. Original acquisition, source,
+task and environment identities remain provenance. Earlier receipts held only
+in the current environment lineage remain readable there without scanning other
+private logs or inventing a backfill. Cross-deployment reads additionally require
+the signed `/2` continuity adoption and the original recipient's signature.
+Reading or retaining these bodies does not bind a brain fragment, activate a
+method, or mount a tool generation in the destination environment.
 
 A successful executable acquisition returns the exact mounted tool name,
 artifact id, descriptor hash, and acquisition-lineage event id into its sealed
@@ -406,6 +504,11 @@ the action identity and exact effects. A successful receipt proves only what
 ran, which provider/descriptor ran it, its terminal result, and which bytes or
 records changed. It does not prove semantic relevance, artifact quality,
 independent review, competence, or expertise.
+
+An HTTP `replication_kind_uncovered` refusal retains its exact native error,
+reason and HTTP 409 status, and explicitly reports `ok: false` and
+`retryable: false`. Missing replication authority is not a transient transport
+failure and the refusal grants no retry or successor.
 
 For transparent host-command execution, the signed request preserves the exact
 launcher identity. The trusted process supervisor may additionally emit a
@@ -441,6 +544,34 @@ settles the retry without another provider call. The latter remains sufficient
 when shutdown occurred before the separate final-live-artifact store was
 constructed. Other non-success best-so-far generations remain resumable and do
 not acquire cancellation meaning from their status.
+
+The exact signed run-intervention reader is shared with scheduled-carrier
+firing, wake preparation and provider transport. Post-run distillation is
+subject to an operator stop even though it can run after ordinary completion
+or acceptance. A stopped run releases no distillation escrow and schedules no
+new provider call on restart. The same persona remains usable under a new run.
+
+Persona/session resume through `/intervene` signs the exact three-member
+preimage `resume`, `intervention_ts` and `intervention_binding`. The resume
+target is the persona id or `session:<id>`; the timestamp comes from the first
+selected current intervention. The binding is the canonical content hash of
+the exact persona id, session id, requested authority and all current
+intervention records that authority may clear. User authority selects its
+current session stop; operator authority selects the persona-targeted override
+and self-stop; persona authority selects its self-stop. Each selected entry
+retains its exact target and full stored record, so the timestamp alone cannot
+substitute for either half of a combined stop. Absent records are omitted.
+
+The HTTP signer and kernel verifier share this preimage and the intervention
+lock. A changed selected record, gate set or target invalidates an earlier
+signature before gate removal. Bearer requests without a supplied signature
+compute and sign the current binding; caller-supplied signatures are verified
+against that same current state, including when a bearer is also present.
+The former two-member signing preimage is refused. The binding is not a new
+HTTP request field or lineage-event member, and the resume reason remains an
+event annotation outside this preimage. Run-target interventions are excluded;
+terminal abort/terminate gates retain their existing refusal semantics. Persona
+resume grants no run resume, successor or new funding.
 
 A descriptor-declared asynchronous result creates a later turn only through its
 exact registered event. Successful tool, population, capability, identity, or
@@ -607,6 +738,164 @@ Message text, task/domain words, filenames, tools, roles, prior success, and
 payload keys never select or alter the disposition. An absent or malformed
 disposition fails closed instead of defaulting to a wake.
 
+A committed immediate communication or invitation can reach its recipient
+while the author continues a model/tool turn. Admission checks the recipient's
+own serial turn lease and the event's funding and mission boundary; it does not
+wait for the author's whole turn to finish. Completed command effects are
+published at their existing action boundary. Message delivery proves only that
+the recipient can observe currently published evidence, not that unfinished or
+conflicted work has become shared. Run settlement still waits for all applicable
+turns and causal deliveries to close.
+
+Child preparation carries the exact parent's signed recovery descriptor before
+persisting or enqueueing the wake. It does not independently convert that
+deadline from monotonic to wall-clock time. Recomputing it can create a different
+signed millisecond value for the same live boundary; exact admission must not
+need a tolerance to repair that mismatch. A contradictory descriptor is refused.
+
+Remote message and recruitment exchange can carry their signed bodies over
+native private peer routes. `/personaos/private-federation/1.0.0` carries message
+and invitation bodies; `/personaos/private-federation/control/1.0.0` reserves
+separate capacity for admission, receipt, response and membership exchanges.
+Each operation maps to one configured local federation POST handler. A peer
+cannot supply a forwarding URL, bearer token or arbitrary local path. HTTP(S)
+remains the existing compatibility transport.
+
+The caller independently resolves the current signed persona card, provider
+inventory and pinned peer key before exchange. The helper checks the actual
+authenticated Noise peer and requested host kernel. Private sessions bind that
+peer, a random session id, operation and complete body hash and size. Short
+frames resume by exact offset after a lost acknowledgement or renewed circuit;
+the receiver verifies the complete bytes before invoking the ordinary signed
+application handler. Response bytes have their own exact hash and size checks.
+Frame, session, stream and deadline bounds constrain transport resources;
+they do not impose an aggregate authored-body byte ceiling. The transport
+neither publishes private correspondence in discovery or public blob caches
+nor grants membership, funding, wake or carriage authority.
+
+Remote invitation exchange carries signed invitation, response and membership
+packages. An inviter with an HTTP URL continues to produce
+`personaos-federated-persona-invitation/1`. Without that URL it produces `/2`,
+whose inviter-persona signature additionally binds both exact signed card
+authorities and kernel identities. `/2` contains no URLs or peer addresses.
+Its first receipt still requires an independently verified exact source card,
+the exact local target identity and current publication visibility. Responses
+and memberships retain their existing `/1` schemas and bind the original
+target card hash. A later route may use a refreshed verified card under the
+same key and kernel without rewriting the retained invitation; key or kernel
+changes refuse that reuse.
+
+The invitation acknowledgement separates `stored`, `wake_enqueued`
+and `carried`. Storage preserves one exact verified source event. Enqueueing
+means the recipient's local listener accepted that source under its existing
+authority; it does not establish a completed model request. Only the exact
+fitted invitation context in a completed provider request permits the durable
+`personaos-federated-persona-invitation-carriage/1` observation. That observation
+binds the package, source event, recipient, environment, wake and carrier hashes
+and grants no new wake authority. Receipt-time independently verified author
+card and key evidence is retained under signed local lineage, so replay can
+reverify the source even when discovery caches are empty.
+
+Identical redelivery, startup and heartbeat may retry an invitation that is
+stored but has no accepted wake attempt, under the existing listener and
+cooldown. Once accepted, its exact signed wake and subsequent signed supervisor
+execution record are retained as
+`personaos-federated-persona-invitation-delivery-state/1`. A lost queue or failed
+provider attempt then reports `waiting_authorized_turn`; replay does not issue
+a fresh execution grant. Unusable or revoked source authority reports
+`authority_unavailable`.
+
+An independently authorized recipient turn can include
+`personaos-pending-federated-persona-invitations/1` with exact pending bodies.
+Only the full fitted body in a completed provider request permits carriage;
+the original invitation remains the source event, while the wake and
+environment identify the current carrier. Verified carriage survives restart.
+Sender `delivered` requires an exact package acknowledgement plus enqueue or
+carriage, rather than storage alone. Invitation response and membership still
+require their own signed decisions. Copying the invitation's environment
+requires a separate owner export and destination import; the invitation itself
+supplies neither.
+
+Environment-member remote messages use
+`personaos-federated-persona-communication/1` between a host and an
+accepted remote member. The exact package binds the persona-signed
+communication, source event, both signed persona cards, accepted membership,
+recipient and source dispatch scope. Fresh admission binds the recipient's
+signed nonce request to the current host membership. Member-to-host replies
+retain the exact admitted parent message. Neither direction copies the source
+workspace or grants source task, budget, membership or execution authority in
+the recipient's local environment.
+
+Direct correspondence outside shared environment membership uses
+`persona_message(delivery_scope="direct")` and the distinct persona-signed
+`personaos-persona-direct-communication/1`. The default `environment` scope
+retains the member contract. Direct authorship requires the caller's actual
+authenticated local environment and task, and explicit nonempty recipients.
+Its `environment_id` always names the author's local environment; a reply
+retains its own environment while binding the exact admitted parent id and
+authority hash and addressing only that parent's author. These rules also
+apply to direct correspondence between personas on the same kernel.
+
+The recipient explicitly controls first admission through
+`set_persona_message_policy`. Each
+`personaos-persona-inbox-policy/1` is signed by that persona and continues its
+exact retained local policy revision and predecessor hash.
+`inspect_persona_message_policy` returns only the authenticated owner's current
+policy. The existing `access-policy/1` binds `subject_kind="persona_inbox"`,
+`subject_id="persona-inbox:<persona_id>"` and that exact owner. Its
+`access-grant/1` entries permit only `persona_message` submission to that inbox,
+for explicit persona ids, peer-kernel ids or an explicit public choice, with
+optional expiry. These submission grants supply no body-reading, publication,
+membership or wake authority. No retained policy means a closed inbox. Empty
+persona and kernel arrays with `allow_public=false` withdraw future admission.
+Discovery visibility and sender-supplied policy are never recipient consent.
+
+The source kernel seals each direct authority, exact source event, both signed
+persona cards and actual dispatch scope in
+`personaos-federated-direct-persona-communication/1`. HTTP and native peer
+transport carry the same package. Before first receipt, the recipient uses the
+existing signed admission request and a fresh nonce to obtain
+`personaos-direct-persona-communication-admission/1`. This proof binds the
+request and package to the source's current ownership of the exact unrevoked
+author. It grants no recipient consent. Current signed inbox policy is checked
+independently, under the same lock as policy replacement, before appending the
+accepted body.
+
+The recipient's signed inbox record retains the exact policy and its hash,
+the policy decision time `admitted_at`, and the origin request and proof.
+Historical verification checks that retained policy at the admission time;
+later grant expiry or replacement does not retract an already accepted body.
+Current key and ownership checks still apply. Identical redelivery reuses the
+same verified inbox event, while equivocal authority or package identity is
+refused. Direct correspondence uses the existing receipt, acknowledgement,
+retry, exact inspection and carriage contracts below.
+
+The signed remote receipt distinguishes `stored`, `wake_enqueued` and `carried`.
+An admitted `publish_only` message reports `published_without_successor` until
+carried. An admitted direct or remote `immediate_wake` reports
+`execution_scope_unfunded`: its exact body is stored, but the remote execution
+scope has no local funding and no wake is enqueued. A separately funded local
+turn may carry the recipient's exact message. The resulting signed carriage
+observation and source publication are returned in the receipt;
+`wake_enqueued` remains false. A remote receipt additionally requires
+`authority_carried_in_full` to be true; a local presentation marker or hash stub
+is insufficient. Remote carriage proves that exact bytes reached a
+completed provider request, without proving a semantic answer or granting a
+successor.
+
+`inspect_persona_communications` accepts an exact `communication_id` and
+`authority_hash` together to retrieve the complete signed authority for its
+authenticated recipient, independently of the ambient or inspection page size.
+Exact selection cannot combine with a cursor. Ordinary cursor requests retain
+history paging. A returned inspection body counts toward remote carriage only
+after that full body appears in a completed provider request.
+
+Signed outbound packages, inbound verification, carriage and receipt
+acknowledgements are durable. Transfer or acknowledgement failure may retry the
+same exact package or receipt after restart. Verified carriage can resend its
+receipt without another model request. Receipt acceptance binds the package
+and receipt hashes; storage alone does not become a carriage assertion.
+
 ### 4.1 Exact resume fan-out
 
 When a resource event resumes an environment task, the exact signed event bytes
@@ -674,6 +963,12 @@ The context carries the exact events plus
 latest authenticated event for each active member. That latter view is an
 additional exact inventory, not a representative selection and not a claim
 that older contributions are less important.
+
+A signed action invocation is the author's private execution record. Its
+signature authenticates the arguments but grants no peer access to them.
+Communication and capability publication provide their own audience and access
+authority. Peer coordination admits that separately verified content; it does
+not infer broadcast consent from an invocation's missing recipient field.
 
 When the complete context exceeds a provider carrier, one
 `personaos-coordination-prompt-projection/1` contains a
@@ -748,6 +1043,42 @@ ambient model instruction. The lane selects no responder, interpretation,
 candidate, acceptance, or successor.
 
 ### 4.3 Exact uniform prompt-source stage and pointers
+
+`personaos-persona-turn-prompt-carrier/20` carries a recipient's communication
+history in `persona_communication_history_authority`. It uses the existing
+complete-message sequence and read cursor, retaining exact `carried` flags;
+`total_count` counts history and `pending_count` counts messages without a
+carriage mark. Presenting a message does not erase context needed to act on it.
+
+Before each tool-result continuation, the runtime re-reads that history, open
+inputs, collaboration and blackboard records, peer work-state heads, acceptance
+observations, and the node clock. These observations retain the same verified
+persona, environment and causal task scope. They grant no new action lease,
+budget, wake, or model request. The resulting request uses the existing measured
+window fitting, with exact tool results preserved.
+
+The system is rendered from the persona's current signed self-context before
+that fit. Changed own fragment or binding records are compiled again under
+the original scope; unchanged records reuse their verified compile. This
+admits same-turn character revisions and learning without another model call
+or a new task, permission, budget or wake (02 §2a; 20 §3).
+
+Carrier serialization preserves the declared lane order and all string bytes,
+using compact JSON separators. Fitting counts the serialized UTF-8 bytes,
+including the current `carrier_fit` statement itself; its `final_bytes` is
+that whole carrier size. The system and exact tool-result continuation spend
+from the same measured window. No fixed metadata reserve or minimum allowance
+can create space beyond it. A model summary that still cannot fit can fall
+back to the existing structural index, without another summarization call.
+
+Carriage marks join only exact message identities in the fitted request to the
+recipient's still-pending signed records, after a provider response exists.
+Tool-only responses count; a refused request, an omitted record, or a terminal
+reply that was never received does not. A mark proves presentation, not that the
+persona acted on a request or completed it, and does not cancel a funded wake.
+Completed continuations retain their exact prompt and system through the
+existing content-addressed observation sequence, alongside their carrier lane
+hashes and system hash. The opening observation and compile remain unchanged.
 
 If the entire prompt exceeds its byte carrier, the runtime uses
 `personaos-prompt-source-stage/2`. It binds original/current byte bounds,
@@ -872,10 +1203,11 @@ not host-selected activity fields. Each binds exactly `schema`, `record_ref`,
 `scope`/`scope_id`, `actor_ref` with exact `kind`/`id`,
 `peer_author_persona_ids`, `authenticated_content_count`,
 `authenticated_content`, `event_authority_hash`, `event_authority_bytes`,
-`event_authority_complete`, `event_authority_max_bytes`, and
-`event_authority`. Authority bodies are carried exactly through 65,536
-canonical bytes; beyond that, the body is an explicit `{content_hash,
-content_bytes, omitted: true}` pointer.
+`event_authority_complete: false`, and `event_authority_inlined: false`.
+Only independently verified content visible to this viewer is inlined. The
+enclosing audit event remains hash-addressed: it can contain private invocation
+arguments, another recipient's message, or unshared audit context. A persona
+actor tag alone does not authorize a peer to read that payload.
 
 `personaos-communication-routed-wake-delivery-snapshot/1` uses exactly the
 shared page fields. It retains, in exact input order, each original routed
@@ -922,6 +1254,16 @@ subscriber prompts an immediate bounded refresh, and successive refresh pages
 advance without interpreting label, content, task, domain, tool name, or
 capability meaning.
 
+An unchanged heartbeat may reuse the provider inventory only while its signed
+lease is fresh and its last successfully signed peer, route set and running
+state still match the bridge. A changed peer or advertised route set prompts
+republishing; a failed update remains pending for the next status or heartbeat.
+Reordered or duplicate equivalent addresses do not create a new publication.
+The publisher rechecks its captured binding before recording success, and
+shutdown invalidates reuse without waiting on publication locks. Reachability
+refresh updates the existing signed bootstrap projection; it conveys no new
+access or event authority.
+
 Artifact manifests and bodies, persona-owned historical knowledge, and
 observation histories remain in the same public signed provider inventory and
 are addressed through the peer data protocol. A consumer requests those bytes
@@ -934,10 +1276,39 @@ replaces that source's prior complete cache generation so signed omissions
 remove stale records. Neither route consults or depends on the replaceable HTTP
 locator.
 
+Owner-authorized environment copies use the same native peer JSON/blob
+transport for the signed publication, declared environment-owned object closure and fresh
+availability challenge. The compact share reference grants no import or
+disclosure authority. Source-owner export, current public disclosure,
+independently pinned source identity and destination-owner import are separate
+checks under [`05_ENVIRONMENT.md §9`](05_ENVIRONMENT.md#9-discovery-and-continuity).
+
+Owner-authorized persona copies use that transport for the exact signed `/2`
+continuity bundle and any admitted avatar raster. Verified source avatar absence
+has an empty raster inventory; it is complete only when the destination also
+has no avatar state or admission history. Source export is private by
+default; public reads require a separate explicit expiring owner grant. Import
+requires an independently pinned source kernel key and the exact already
+registered destination persona. Fresh signed availability challenges precede
+the transfer, follow closure verification and run again before durable adoption.
+Cached bytes cannot replace current source disclosure or destination consent.
+The complete presentation and rollback contract is
+[`ADR-0088`](14_DECISIONS.md#adr-0088--knowledge-continuity-across-deployments).
+
 Discovery records include exact subject, provider, content hash, visibility,
 policy, expiry, revocation, signature chain, and reachable content locators.
 Discovery proves where verified bytes may be found; it does not grant access,
 membership, execution, truth, expertise, or relevance.
+
+Private federation route resolution reads the pinned peer key registry, its
+current signed complete inventory, then the registry again. The route binds the
+exact card authority hash, persona and host keys, peer, inventory generation and
+manifest, and the earliest applicable expiry. Local revocation, withdrawal,
+changed keys or cache generations, cancellation and deadline expiry refuse the
+route. A URL-less card requires a URL-less signed provider document base; HTTP
+card/base bindings remain exact. These retained provider proofs occupy a
+private route cache and contain no correspondence body. The resolver performs
+no HTTP fallback and supplies no membership or environment authority.
 
 An HTTP locator, including `node1.personas.ai`, is a replaceable last-resort
 first-contact hint. A node reads from or announces to it only when no primary
@@ -953,12 +1324,13 @@ Configuration is not use: producer and consumer runtime gates still prevent any
 locator read or announcement while an independently verified PersonaOS direct or
 P2P route is viable.
 
-The locator announcement's `record_count` is bounded signed metadata about the
+The locator announcement's `record_count` is signed metadata about the
 remote node's complete inventory; it is not a bundled record collection and
-does not allocate, transfer, or cache that many objects. Locator admission may
-enforce the protocol-wide integer ceiling, but cannot reject a valid node merely
-because its count exceeds a local page, cache, or obsolete bundle-size setting.
-Inventory transport applies its own independently bounded pagination.
+does not allocate, transfer, or cache that many objects. Native admission imposes
+no cardinality ceiling; browser readers still require exact safe integers.
+A local page, cache or obsolete bundle-size setting cannot exclude a valid node.
+Pagination and declared deadlines bound individual reads. An incomplete scan
+states that fact and retains its source cursor for a later refresh.
 
 Transport startup and route convergence are distinct facts. A connected DHT,
 successful provider publication, or an observer acknowledgement proves that a
@@ -969,6 +1341,60 @@ not publication visibility alone. A consumer gives direct and peer routes one
 bounded first-contact opportunity, uses the locator only while it still has no
 verified usable route, and continues decentralized reconciliation afterward.
 Neither timeout nor connected generic peer count is identity authority.
+For NAT traversal, a node requesting a circuit without an explicit relay starts
+relay discovery through connected peers and the DHT, seeking peers that
+advertise a browser transport. Only a successfully
+negotiated reservation yields an advertised circuit address; a bootstrap hint
+alone does not establish relay service. The provider, public-data and event
+protocols permit limited relay connections and reuse an open authenticated peer
+connection, preferring an unlimited connection after an upgrade. Relay duration
+and byte limits remain the relay operator's transport authority. A reservation,
+publication acknowledgement, and independent application read remain separate
+observations.
+Browser consumers support secure WebSockets, WebRTC-direct, and
+certificate-pinned WebTransport when dialing a relay's advertised address.
+They filter unsupported first-hop transports before applying provider address
+and dial-attempt bounds, so native-only routes cannot crowd out browser routes.
+Transport support alone does not prove that the route is reachable.
+Public byte transfers size each chunk to the current circuit allowance,
+including encoding and framing overhead, and resume by exact content hash and
+offset after renewal. Concurrent reads share the connection's allowance.
+A timed-out range gets two further request attempts at the same hash and byte
+offset, with brief cancellable backoff. A successful range renews that recovery
+allowance; a permanently stalled range still fails. Withdrawal, malformed
+responses and caller cancellation do not trigger recovery, and the completed
+body must pass its content hash before document verification.
+The public-data JSON request may state `max_inline_bytes`; an oversized public
+document is then represented by its SHA-256 and `total_size`, and uses the same
+byte-chunk protocol. This snapshot remains bound to its admitted path, current
+master and public projection generation on every read. A withdrawal or changed
+access state invalidates the snapshot; a cache entry supplies no new authority.
+Only complete hash-verified bytes enter the ordinary document signature checks.
+The bridge's HTTP inventory loader likewise reads complete JSON without a fixed
+aggregate byte ceiling. Inventory cardinality may grow with the published node.
+HTTP validators and signed expiry govern cache reuse; a large response still
+must pass the same schema, generation, manifest, key and signature checks.
+Within one immutable refresh, aliases may reuse their completed verification
+against that exact generation and key set. Shared document objects need one
+signed-path traversal per projection; this reuse never crosses a later refresh
+or key change. Inventory verification yields to transport I/O and observes
+cancellation after the HTTP bytes arrive, so a large population cannot defer
+peer handshakes or shutdown until every signature has been checked.
+Concurrent discovery attempts share a pending inventory transfer until it
+settles. A scan deadline bounds its observer wait; it does not discard an
+independently progressing transfer, whose result must still pass current
+authority and inventory checks before admission.
+The browser retains a JSON read's scheduling priority through any content-hash
+chunk transfer. Keys, compact identities and opened files precede queued
+inventory chunks; inventory completion precedes repeated optional background
+refreshes. Reads of equal priority continue to alternate chunks and each peer
+keeps its own relay allowance. Scheduling never changes verification or access.
+Shared anonymous peer snapshots use the peer reader's request deadlines; time
+waiting in that queue or transferring a progressing body is not a separate
+whole-document timeout. A viewer may stop waiting independently without
+cancelling another viewer's shared read. Direct HTTP retains its own deadline.
+Closed event streams release their subscriptions immediately. Reconnection
+signals a resync so clients refetch and verify current state after a gap.
 An asynchronously starting peer transport counts as an expected peer probe from
 the moment startup begins. Absence of its eventual runtime object before module,
 bootstrap, or dial initialization settles cannot shorten that bounded
@@ -985,6 +1411,28 @@ Consequently first-contact transfer size does not grow with task, telemetry, or
 artifact history. A consumer may paint the verified identity index while the
 complete inventory is still transferring; only the complete inventory can
 authorize retirement or claim aggregate convergence.
+
+Once the peer-bound provider and current master key are verified, the consumer
+starts the public invalidation stream without waiting for that full inventory.
+Each invalidation still requires its own signature, peer, kernel and sequence
+checks; each fetched live snapshot separately verifies its node, run and access
+policy. Opening a stream does not authorize inventory retirement or convergence.
+
+A current-master-signed public environment feed can supply its observed run IDs
+to the existing live-artifact read route before the historical inventory arrives.
+The consumer rechecks the feed's freshness, exact route, subject and current key
+on every automatic probe; source invalidation or key rotation during that check
+refuses the probe. The feed supplies no artifact access authority. Each returned
+snapshot still requires its own node/run binding, current signature and public
+read policy, and opened bytes must match the signed file hash. Older environment
+feeds with the run-budget projection may supply their latest retained run; full
+task records continue to provide the separately verified historical view.
+
+The native relay reads each complete local discovery event before emitting its
+content-free invalidation. A total source-frame byte cutoff must not disconnect
+that source as the signed inventory grows. Peer invalidations keep their own
+small message shape and subscriber queues; source content never becomes browser
+authority merely by passing through the relay.
 
 ## 6. Artifacts and explicit signed MIME
 
@@ -1017,6 +1465,15 @@ Filename and extension are presentation metadata. Byte sniffing and a suffix
 may detect a mismatch or select a safe fallback, but cannot silently overwrite
 the signed MIME declaration. A renderer verifies content hash, length, MIME,
 scope, and access before lazy loading the applicable parser.
+
+The UI may group identical path/hash/length copies within one exact node,
+environment and run. Each copy retains its own workspace metadata and body
+route; differing hashes stay separately openable. Counts and byte totals use
+the same current file projection for that environment. A newer published file
+generation must not inherit byte totals from an older live capture. Holding a
+file in a worktree or owning its access policy is not authorship: persona file
+attribution comes from the verified declaration, and inherited worktree contents
+are labelled as captures.
 
 Current persona, discovery, and public projections rejoin declarations to exact
 current environment/path/hash/length and verified action/publication lineage.
@@ -1084,6 +1541,10 @@ record content, tool identity, outcome, quality, or similarity signal. Carrying
 the exact suffix is continuity of persona-authored experience; it neither
 selects a lesson nor grants expertise, activates a tactic, recommends a tool,
 or schedules behaviour.
+The navigation projection preserves this verified body page. Replacing it with
+only counts and hashes before measuring prompt fit would erase the retained
+experience even in an otherwise empty window. Actual prompt pressure may still
+reduce or page the source with explicit omissions.
 
 General learning-history and turn-effect pages use compact prompt references:
 source/page/frontier hashes, exact totals and ranges, continuation cursor,
@@ -1095,10 +1556,13 @@ new cognition to an old transport pattern. Compacting that repetition is a
 mechanical equality-preserving projection; persona-authored state bodies keep
 their independent exact append-frontier lane.
 
-The current content-neutral storage envelope is 262,144 canonical JSON bytes
-and nesting depth 64 for `metadata`; `refs` accepts one exact string or at most
-32 distinct exact strings of at most 500 UTF-8 bytes each. These limits protect
-parsing/storage and carry no semantic knowledge or capability taxonomy.
+The storage envelope preserves complete canonical JSON `metadata` and exact,
+distinct references without fixed byte, nesting-depth, reference-count, or
+reference-length ceilings. The authenticated action retains that same complete
+body; a second size ceiling on its signed wrapper cannot veto the write.
+Result projection removes private capture bytes at every supported nesting
+level without rejecting an otherwise representable authored record. Canonical
+validity, signatures, scope and measured prompt fitting remain distinct checks.
 
 The protocol imposes no semantic kind taxonomy and no required name,
 description, interface, parent-skill, synthesis/composition operation,
@@ -1156,6 +1620,16 @@ intent. The protocol has no default person-like portrait, name grammar,
 profession field, OCEAN/VAD requirement, identity formation phase, or readiness
 gate. Portrait declarations use the same explicit signed MIME and exact-byte
 authority as other media.
+The browser resolves a portrait against its verified HTTP or libp2p provider.
+Peer routes compare the concrete protocol and host; opaque URL origins cannot
+substitute a different peer. Identity signatures, exact paths, image hashes,
+byte lengths, MIME and dimensions retain the same verification on either route.
+A portrait's shared peer transfer remains pending through circuit renewals until
+its complete bytes arrive or the transport fails. An HTTP attempt deadline does
+not expire that peer transfer. Cancelling a read removes its queued requests and
+aborts its active stream; an expired UI wait cannot leave duplicate transfers
+occupying the peer's allowance. Page closure and a verified alternate-route
+winner cancel their redundant reads through the same mechanism.
 
 ### 9.1 Signed open-input transport
 
@@ -1345,6 +1819,263 @@ trigger for population/tool behavior.
 Prompt, message, memory, skill-body, artifact, and user content remain redacted
 unless exact access and consent authority permits disclosure.
 
+The node event feed carries complete cognition documents in `persona_cognition`
+events after a provider response has finished. It does not animate provider token
+or word deltas. Public documents keep their exact
+`personaos-persona-public-cognition/3` shape and kernel signature; the browser
+performs the same verification for pushed and fetched documents. Persisted persona
+communication also changes the document revision, even when no later model call
+occurs. Content-free invalidation remains available to older readers; GET is a
+reconnection and older-node fallback. Provider-hidden reasoning is excluded.
+
+Completed `assistant_message` events in `personaos-provisional-cognition/1`
+may divide one response into indexed transport chunks. Each chunk's `sha256`
+and `utf8_bytes` describe that chunk's own UTF-8 text. The enclosing signed
+`personaos-persona-public-cognition/3` document covers the carried chunk set
+and metadata. A reader verifies each chunk, requires the complete ordered
+indices from zero through `chunk_count - 1`, then joins their exact text.
+
+Building one persona's public cognition document must not hold another
+persona's response behind a shared cache lock. Concurrent reads of the same
+persona may share its projection; a queued read rechecks the current generation
+and disclosure authority. The cache does not extend the lifetime of that
+authority or alter the signed document's observation time.
+
+The acquired-capability projection retains the provisioning receipt's exact
+`recipe_hash`: 64 lowercase hexadecimal SHA-256 characters. This field is not a
+`sha256:`-prefixed content-store reference. The browser validates that identity
+without rewriting the signed document; a valid acquisition must not hide the
+persona's messages, knowledge or methods.
+
+Communication payloads remain open JSON in this read path. A verified authored
+output supplies its exact text; otherwise a nonblank string `message` supplies
+the text, with canonical JSON of the complete payload as the fallback. Nested
+messages, arbitrary keys, arrays, and scalar payloads therefore remain visible.
+The browser binds this representation to the original persona-signed authority
+before display; projection does not add persona-authored prose or grant access.
+
+Authenticated owner responses in `personaos-persona-thinking/3` always include
+`federated_communications`, an exact verified received/sent correspondence list.
+Each row retains its signed communication, source event and available package,
+actual sender and recipient, source environment and its kernel, and local
+dispatch scope. A member reply keeps its original host environment and host
+kernel. Direct messages and replies retain each author's actual local
+environment and source kernel. A verified durable reply or direct source can
+appear before its outbox package exists; that row has a null package and empty
+package hash and makes no delivery or carriage claim. An unrouted direct source
+also leaves the recipient kernel empty until verified routing supplies it.
+The owner interface admits the distinct direct authority only with its exact
+connection, owner, recipient, source and available-package bindings; it does
+not render inbox-policy records as messages.
+
+Local authored-output rows additionally carry exact communication identity and
+authority hash when available, allowing the interface to recognize an already
+represented hosted outgoing message without comparing text or environment
+labels. Reading correspondence creates no local authored event, model request,
+wake or carriage observation. The owner revision changes with verified source
+records, ownership and key or revocation state; a refused authority clears the
+correspondence list. These owner revisions are separate from public cognition
+invalidation. Remote private bodies require their own disclosure authority to
+enter a public view; an owner read supplies none.
+
+Compact persona cards keep a visible place for the latest verified authored
+communication, with its sender and disclosed recipients. Newer action requests
+and kernel observations cannot displace that message. Complete plain message
+and model-response text remains available; structured messages show their prose
+and values. Authored cognition and complete provider responses retain their
+distinct labels. A signed action request does not prove execution or message
+delivery and must not be captioned as a completed effect.
+
+The same update selection applies before rendering, in per-persona retention and
+activity indexing. A command burst cannot erase the latest signed message at an
+earlier stage. Shared thoughts display their own authored time; refreshing the
+signed snapshot does not make older prose current. Lifecycle `ACTIVE` describes
+the persona's lifecycle, not availability for work. Current model activity uses
+the same fresh observation in the card and inspector. Unpublished counters are
+absent, not zero.
+The card's activity headline uses that observed state as well. Authored work
+notes remain separately labeled claims; neither a present nor an older note
+can replace an observed active call or resource pause with semantic acceptance.
+A fresh signed running summary establishes current activity even when detailed
+call rows have not arrived. An expired summary or old call detail cannot keep
+claiming current activity.
+
+Incoming activity updates surviving cards in place. A viewer can keep keyboard
+focus, open disclosures and verified portrait mounts while the live state or
+card order changes. A changed avatar descriptor, persona identity key or provider
+invalidates the mounted portrait; removed authority removes its card. Preserving
+an interaction never authorizes retaining content from a replaced authority.
+During a pointer press, defer sibling reordering until native click dispatch
+finishes. Text updates and authority removal still apply immediately; a release
+outside the control retains the browser's normal click-cancellation behavior.
+
+An initial display window limits rendering work, not access to admitted people
+or environments. Each explicit expansion can advance to the complete matching
+inventory, including entries arriving after a previous expansion. The control
+disappears when that inventory is exhausted. A hidden fixed display ceiling must
+not leave a working-looking expansion control that can no longer advance.
+Membership and activity enrichment follows that chosen window, including a
+displayed search result outside the initial feed prefix. Identity-only cards
+must not become permanently empty because a second fixed feed limit excludes
+their published evidence.
+
+The complete signed provider inventory is transferred before its normal hash,
+signature, policy and document-count checks. Render-cache sizes and a guessed
+byte contribution per record do not determine whether that inventory can be
+read. HTTP and peer readers have no fixed total inventory byte cutoff; chunk
+framing and transport deadlines remain separate. Concurrent peer invalidations
+share the entire pending reconciliation, including key and bootstrap reads,
+then a later invalidation may fetch the next generation.
+
+A verified peer may open its event watch before its first complete inventory
+enters the monitoring window. Ordinary discovery rebalancing preserves that
+existing watch while its matching kernel and route reconciliation is active.
+This does not promote the unadmitted inventory or open extra watches. Replaced
+authority, explicit retirement, and a replaced logical watch still invalidate
+the pending reader; completed or failed reconciliation releases the temporary
+retention, so ordinary monitoring selection can reclaim the watch.
+
+Already-admitted identities and file controls render without waiting for optional
+entity indexes, environment exports, or manifests. Those reads enrich the same
+cards as each finishes; an unavailable feed cannot block the rest of the view or
+its expansion controls. Overlapping reads of one route share a pending request
+through signature verification. A peer invalidation prevents later consumers
+from reusing the older in-flight response, then allows a fresh read after the
+pending request drains. Signed admission still rejects stale or conflicting
+inventory generations. Missing membership observations do not imply that a
+persona works alone or that an environment has never had participants.
+
+An explicitly connected private node serves `personaos-persona-thinking/3`,
+including current and completed call observations, only over the token-authorized
+read connection. The UI holds these documents separately from public discovery,
+peer gossip, and offline public history. Tokens use scoped Authorization headers,
+never URL parameters or browser storage. Disconnect aborts that connection and
+clears its private views. `/status` reports `X-PersonaOS-Read-Tier: operator` only
+for an accepted token; a public status response does not prove token acceptance.
+Its full projection includes environment identity, authored name and description,
+lifecycle, visibility, creation time, parent, and current member ids.
+Private cognition retains each message's author, audience, and environment along
+with its complete text. Connected persona profiles refresh while viewed and show
+the profile's characteristic fields without inventing missing character values.
+Connected environment file views use that node's signed live-workspace snapshots,
+joined by exact run, workspace, and environment identities. Private snapshots,
+signing registries, and downloaded bytes remain inside the connection; they never
+enter public discovery or body caches. Identical path/hash/size copies in one run
+share a file entry while retaining every workspace route. A preview checks the
+exact route, SHA-256, byte length, and current revision before rendering; navigation
+or disconnection cancels pending reads and releases its object URLs.
+
+Capturing a persona's worktree and merging it into the environment are separate
+facts. A verified workspace event can retain exact changed personal bytes even
+when its shared merge is incomplete. The source and post-merge personal hashes
+must agree with the retained bytes; no shared-publication success is inferred.
+The file provenance states whether those bytes are present in the environment,
+and the UI labels an unmerged personal copy in both its listing and preview.
+Deleting a personal file removes that personal capture without deleting a
+different shared version. Unsigned later filesystem changes cannot replace
+the retained bytes.
+
+Workspace capture and complete downloads impose no fixed file-count, workspace,
+run, or per-file byte ceiling. Exact bytes use the existing content-addressed
+store; their signed size and hash govern each read. A memory-cache budget or
+short inline preview cannot reduce the authoritative inventory or discard an
+otherwise valid capture. The peer reader follows the same complete inventory
+and exact-byte checks, including files beyond the initial display window.
+Artifact labels retain the complete signed file identity. A filesystem-valid
+relative path cannot lose its tail in export or become unreadable through the
+peer route merely because it exceeds a display-oriented character limit.
+File identities also preserve whitespace, Unicode and literal URL punctuation.
+Package materialization, manifests, native capture records and saved-file exports
+cannot trim a name or merge names that differ only in surrounding spaces. Public
+file links encode the filesystem path as a URL; HTTP and peer readers decode
+that URL once and bind the exact resulting name to its existing authority.
+Escaping a literal percent sequence does not authorize a traversal alias.
+Declared command outputs, transactional output transfer, workspace inspection
+and persona-selected model-input observations use the same exact file identity.
+Neither the workspace root nor a relative name is prose to trim. Inspection
+cannot reject a filesystem-valid name solely because of its character count;
+the existing no-follow file read, hash and scope checks still govern access.
+Capture read or storage failures state omitted counts and reasons and retry
+on a later verified publication. Such a snapshot cannot claim completeness.
+Opening an incomplete inventory with no readable files still shows that fact.
+
+Private event-driven exports retain their verified file bytes under
+`artifacts/operator-package/`, so a turn ending or the node restarting does not
+remove the operator's access to saved work. `GET /runs/{run}/artifacts` binds the
+export listing to the node, run, and environment and supplies an exact
+`/runs/{run}/artifacts/body?artifact_id=…&sha256=…` route for each readable file.
+That route requires the operator token independently of broad public-read settings,
+pins one export generation, refuses symlinks and noncanonical package paths, and
+checks byte length and hash before returning bytes. Direct GET and HEAD reads of
+operator-package and operator-package-conflicts paths also require the token.
+The connected UI labels these files as saved outputs with node-exported metadata;
+it does not promote the listing to a signed workspace snapshot. Saved and captured
+copies with the same node, environment, run, path, hash, and size share one entry
+while retaining their separate routes. Metadata changes invalidate pending previews.
+
+The live-artifact event inventory includes accepted, incomplete persona events and
+causal holds after the original task worker reaches an idle boundary. It uses the
+supervisor's same per-run counts as file-read admission, so later persona turns can
+stream their files without restarting the original worker. The operator status
+and stop endpoint use the same inventory, including later actor-owned work.
+Selecting a run records its signed stop before signalling its current actors;
+queued actors check that authority before handler entry. The initial worker's
+registry remains a record of task workers, and a later actor needs no synthetic
+worker entry to remain stoppable. Other runs retain their own cancellation
+signals. Saved status and disposition preserve the exact signed stop.
+
+A capture can remain readable between persona turns as a process-local
+`run_idle` observation at its existing visibility tier. Private captures require
+the operator token and never enter anonymous snapshot, body, inventory or event
+responses. An anonymous refusal does not evict the operator's valid capture.
+Native command publications retain their verified event
+authority without requiring a model call id; an accepted event still owns its
+run while completed tools settle between model requests. Idle retention verifies
+the signed run, owner, environment, visibility policy, and captured bytes. It
+also survives initial-worker cleanup after the actor callback has already frozen
+the generation; repeated cleanup cannot delete a still-verifiable capture. It
+does not recapture a later workspace or establish terminal completion. Each poll
+or event response signs the client's actual predecessor in `since_revision`
+while preserving the capture's revision, frozen time, and bytes. A new connection
+receives a baseline; an unchanged capture reports no file changes. Later turns
+continue on the same event stream, and membership or publication revocation
+removes access to the retained capture and its bodies.
+
+A non-success run export replaces its earlier task-entry cache within the same
+publication epoch after verifying its exact workspace authority. A workspace
+publication that began earlier cannot make a later callback restore `running`
+over the settled status and disposition. The exported run and resume state
+preserve that disposition without inferring semantic completion from file bytes.
+The foreground launcher propagates the node's shutdown exit status; process
+absence alone does not establish that a terminal export or graceful drain succeeded.
+The bridge stopper leaves time within the existing absolute shutdown deadline
+to kill and reap a process whose graceful stop stalls. A sent signal is not an
+observed exit. The node retains its writer lease and reports failure while any
+mutation surface remains undrained.
+
+Actor completion publishes aggregate discovery after its semantic lease closes,
+without repeating the handler's publication. When the HTTP listener is closing,
+the node skips intermediate public generations while retaining persona-state
+writes and final run exports. A registered task worker folds its closing actors'
+deferred evidence into that final export; an actor without such a worker keeps
+its own export responsibility. Closing does not require rescanning every archived
+run and installed tool merely to refresh an unavailable live feed. The next boot
+rebuilds the public aggregate before admitting work.
+
+`--private` is a publication boundary independent of network reachability. It
+requires token reads for the node's personas, environments, messages, and work,
+and suppresses anonymous entity discovery and public artifact publication, even
+if the launcher also supplied public-read defaults. A private P2P transport does
+not itself hide data, and a public transport does not itself authorize disclosure.
+The default launcher binds to loopback and grants public reads; private mode is
+explicit. Population has no launcher-imposed ceiling; an operator may supply one.
+The `--p2p` opt-in selects `nat_private` reachability, enabling the bridge's
+existing relay discovery and reservation path. HTTP binding follows `--lan`
+and `--expose`; `--expose` selects public reachability, and an explicit
+`--reachability-class` overrides the launcher default. Joining the DHT or
+requesting a relay does not establish a usable public route; that requires
+an observed connection.
+
 `personaos-persona-telemetry-public/2` is the small, current-master-signed
 per-persona presentation feed. In addition to bounded public presence, model
 status, activity, and verified communication routes, it carries either an empty
@@ -1354,6 +2085,23 @@ signature and remains an authored claim; the outer feed adds transport freshness
 and route/subject authority only. The feed does not select a note by vocabulary,
 infer a next action, judge readiness, or acquire completion semantics. Independent
 persona feeds may be transferred and verified concurrently.
+
+A retained work note may belong to an earlier task. Only a work-state surface
+whose `bound_to_latest_observation` is true takes precedence over the persona's
+newer model-call or task-scoped activity when choosing the displayed run
+lifecycle. An unbound note remains available as history and as a fallback when
+no later exact task binding is observed; it cannot make a newly running task
+appear resource-paused. A currently active model call keeps precedence.
+
+Public JSON transports retain numeric token spellings when parsing, relaying,
+caching and verifying existing signed documents. In particular, `14.0`, `14`,
+`-0.0` and exponent spellings keep their original canonical preimages. All
+JavaScript signature readers use the same canonicalizer and Unicode code-point
+key ordering. The parser keeps number-token metadata outside the document's
+JSON fields; the transport serializes those tokens back to ordinary JSON.
+Changing a numeric value invalidates the original signature. This does not
+rewrite persona-authored judgments, actions, communications, hashes or signed
+lineage, and adds no wire schema or authority.
 
 `personaos-live-telemetry/1` is a current-state index rather than a second copy
 of complete history. It retains the full aggregate counters and mechanically
@@ -1382,6 +2130,15 @@ order — the newest eight, an `unstated` row of `registry/bounds.yaml`
 aggregate `/1` is unchanged. The feed exists because the exported run
 document freezes its arithmetic at export time and never was a live surface
 ([`11_DESIGN_CRITERIA.md` C-OP-16](11_DESIGN_CRITERIA.md#c-op-16--one-command-launches-the-ui-leads-with-who-and-what)).
+
+The same environment feed carries the closed public `run_progress` projection
+of `personaos-run-progress-stall/1`: run and environment identifiers, registered
+codes, counts, seconds, and booleans, with provider answer text and member
+dispositions excluded. A reader accepts this registered extension and older `/2`
+feeds without it, while refusing unknown fields or rows for another environment.
+Whole-valued seconds are serialized as integers before signing so Python's
+`300.0` cannot disagree with JavaScript's `300` signing bytes. These observations
+do not alter the feed's freshness, signature, or exact-route requirements.
 
 `personaos-node-status-public/1` is a node's own status document and a
 sibling of the public telemetry family above. It carries counts, presence and
@@ -1431,7 +2188,7 @@ operator retention fact — an operator retiring an environment archives its
 lineage file whole; nothing in the substrate truncates one.
 
 The same retention fact covers what a turn read. Every lane of
-`personaos-persona-turn-prompt-carrier/19` (the navigation lane per component)
+`personaos-persona-turn-prompt-carrier/20` (the navigation lane per component)
 and every outcome-lifecycle snapshot is stored content-addressed and
 compressed, referenced from the turn's carrier observation by content hash;
 the observation lands on every turn — a turn with no action is a record, not
@@ -1492,6 +2249,9 @@ that its members do not). The members beyond the seed shape — `decided_by`,
 `read_action` and `cursor_namespace` where the record is paged (§4.5),
 `emitters`, and each member's bound as a named row of `registry/bounds.yaml`
 (ADR-0114 dec 4, from S7) — are filled from the stage that decides the row.
+Seeded emitter references identify the file and qualified scope, or the file
+alone for a module-level emitter. Line numbers are current diagnostics, not
+persisted seed identity, so an unrelated source edit does not change a row.
 `tools/registry.py check` refuses a schema id in code with no row, a row with
 no id, and a producer whose members differ from its row where the row has one
 emitter; every producer's assertion (§13.3) is enforced from S2's kernel
@@ -1607,7 +2367,7 @@ markers below is written by the same tool and names the registry hash and
 the row count it rendered.
 
 <!-- registry:schemas:begin -->
-See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1209 rows; registry sha256 c19d30aa5f1cbc0d6e314fe1367b5f4e4e2ff8b17e73e8fe8e11ceebabb5eb91).
+See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1251 rows; registry sha256 fed2b6d76a8fae45dd3a8200feedeb1a5ce7b32e60dc845efff2d240190c7783).
 <!-- registry:schemas:end -->
 
 ## 14. Key custody

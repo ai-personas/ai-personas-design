@@ -337,15 +337,19 @@ handoff rather than as an unbound or completed task.
 
 For finite authority, “bound” additionally requires an exact durable
 reservation enclosed by the signed arm transition. The reservation prepays a
-complete per-fire turn allowance and a bounded claim count before the trigger
+per-fire model entry attempt and a bounded claim count before the trigger
 can be reported as armed. A successor authored during a delivered event debits
 the same exact signed run ledger at its own arm transition; it does not
 recursively consume the event-local allowance that funded the current turn. A
 fired carrier claims one allowance by exact signed arm/fire/ambient identity;
-delivery may not reopen the shared run ledger or depend on headroom left by
-unrelated work. A bounded recurrence prepays every declared fire. An unbounded
+delivery may not reopen the shared run ledger to admit a spent entry or replay.
+Only the same authenticated active turn may spend its remaining prepaid units,
+then debit its exact signed run grant before additional actual model requests,
+including necessary compaction and tool-result continuations. That model-only
+view expires with the dispatch/lease and never propagates to tool capabilities
+or descendants. A bounded recurrence prepays every declared fire. An unbounded
 recurrence is admissible only under explicitly unlimited run authority and
-remains narrowed by its signed per-event cap. No schedule purpose or
+retains its signed per-event entry allowance and exact fire bound. No schedule purpose or
 task/domain vocabulary participates in this funding decision.
 
 When a resource event resumes work, the exact same signed event and content
@@ -725,6 +729,15 @@ signed authority and causal identity. Several successor edges may coexist. The
 runtime neither collapses them into one representative next step nor converts
 population prose into an action.
 
+An admitted peer communication or invitation is runnable while its author
+continues working. The recipient's own turns remain serialized, and existing
+funding and cancellation authority still apply. Waiting for the author's entire
+model/tool loop would prevent a peer from answering a review request during that
+loop. A real actor-pipeline check must show the peer reading published command
+output and returning an observation before the sender finishes.
+The child's signed recovery boundary equals its parent's even if wall-clock
+sampling changes during preparation; no new deadline or resource grant is minted.
+
 The complete verified collaboration source is hash-bound in
 `personaos-coordination-lineage-snapshot/1`. Any provider-bounded collaboration
 or whole-prompt projection exposes exact source totals, page/cursor ranges,
@@ -820,6 +833,13 @@ the pending delivery without a provider call. This works even if shutdown
 preceded construction of the separate terminal byte store. No other resumable
 checkpoint status is interpreted as cancellation.
 
+This stop authority also governs the scheduled post-run distillation path,
+before reservation release, wake admission and provider transport. Test both
+an already-armed trigger across node restart and a stop after work was admitted.
+The stopped run must reach no provider, while ordinary completion and a new run
+for the same persona retain their execution paths. Merely checking the paused
+run listing does not establish this property.
+
 External delivery pressure is likewise exact and non-repeating. When a verified
 persona lifecycle action accounts for one uniquely matching request, receipt,
 destination, and content hash, later reasoning contexts carry a compact
@@ -834,6 +854,20 @@ causal successor, recommend another action, or justify a model retry. Public
 schemas, descriptor bindings, and transport-injected actor/task/run/wake
 authority remain consistent so the persona is not asked to invent host-owned
 credentials.
+
+Reading a tool result does not erase it from the persona's next request. Exact
+authenticated output and authored arguments remain available until measured
+context pressure requires model compaction. Previously read results are
+considered first; the same persona's compactor may read a new result when it
+cannot otherwise fit. The complete source reaches that model under its existing
+scope and budget, in consecutive measured segments when necessary. A digest
+exists only after every source segment was read, retains an exact archival
+reference and remains labeled as lossy. It is reused while it fits the current
+allowance. Compaction failure cannot silently replace observations with receipts
+or replay actions. Both the initial task path and served causal-turn path refresh
+current signed character and learned fragments before the next request. A
+failure between requests retains its mechanical cause beside the turn's replay
+classification.
 
 The live dispatch descriptor keeps its exact transport fields and hash, while
 the provider-facing schema omits only fields already bound by the authenticated
@@ -951,6 +985,9 @@ readers require, and its readers treat signed lineage as the recoverable
 authority behind any absent member; unavailability is never rendered as zero
 or empty (an unreadable roster is `available: false`, not `count: 0`); a
 swallowed exception on an operating path leaves at least a closed counter.
+An already-recorded model failure retains its exact cause when a later loop
+guard also raises. A request cancelled by the mission boundary cannot become
+a provider outage through a second failure merge.
 This criterion adds no authority anywhere — it forbids only the silent
 continuation of a degraded mechanism.
 
@@ -982,11 +1019,31 @@ prompt carriers.
 A deployment starts with one command that detects an available model
 backend, computes local-first defaults, and serves the node and the UI; the
 explicit node entry point remains available for operators who want every flag.
+The foreground command reports a failed node shutdown through its exit status.
+Concurrent workspace publication preserves the run's verified stopped disposition
+in its export and resume state; an older task-entry cache cannot restore `running`.
 The UI leads, per member, with display name and portrait (or the honest
 placeholder with the requirement's stated status), the member's latest lesson,
 what the member built this run, and the run scorecard; verified facts and
-persona-authored claims stay visibly distinct. The latest lesson is the
-member's newest brain fragment carried verbatim — a mapping or a bare text
+persona-authored claims stay visibly distinct. Its verified self-description or
+character profile appears on the face; an absent description does not imply a
+neutral character. Files attributed through its own signed declaration are
+labelled as declared files. Personal worktree captures expand separately because
+they may contain inherited or shared work. The environment view groups identical
+path/content copies while preserving each source and every differing version;
+the complete file list stays reachable within the card. Explicit private node
+connections also show current character fields, routed messages, saved outputs,
+and captured workspace files; their profile and file state refreshes without entering public
+discovery or public history. A file delivered by a later persona turn appears
+through the event feed even after the original task worker is idle. Saved private
+exports remain available with the node's token after turn completion and restart;
+previews verify the export's exact bytes and keep their source distinct from signed
+workspace captures. Public captures retained between turns remain readable to
+new and existing connections, including after both actor and initial-worker
+cleanup; later turns update the same stream, and revoked
+environment membership removes access. An idle observation does not imply that
+the task is complete. The latest
+lesson is the member's newest brain fragment carried verbatim — a mapping or a bare text
 inside the public bounds — and a fragment the projection cannot carry says
 which bound it failed rather than showing an empty body without a reason
 (`personaos-persona-agentic-development/4`, 09 §13). An omitted body states

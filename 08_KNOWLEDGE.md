@@ -21,7 +21,7 @@ persona-owned record per invocation. The persona supplies:
 
 - required `metadata`, an arbitrary canonical JSON object;
 - any additional open persona-authored JSON fields it chooses; and
-- optional `refs`, a bounded set of distinct exact record-reference strings.
+- optional `refs`, distinct exact record-reference strings.
 
 The same action may carry `publish_for_peer_acquisition: true` and one exact
 `publication_rationale`. This is the persona's explicit choice to publish the
@@ -34,11 +34,11 @@ turn the flag on or choose a recipient.
 `metadata` and every additional open persona-authored field are retained
 verbatim as one opaque `content` object. Transport-owned authority fields,
 optional public scope bindings, and `refs` are not copied into that body. The
-current mechanical storage envelope permits at most 262,144 canonical JSON
-bytes and nesting depth 64 for the resulting `content`. `refs` accepts one exact
-string or at most 32 distinct exact strings, each at most 500 UTF-8 bytes. These
-are content-neutral allocation/integrity bounds, not knowledge kinds or
-behavior selectors.
+storage envelope preserves the complete canonical JSON `content`. `refs`
+accepts one exact string or a sequence of distinct exact strings. Fixed byte,
+nesting-depth, reference-count, and reference-length ceilings do not reject
+otherwise valid authored evidence. Exact serialization and available storage
+still have to succeed; later prompt fitting is a separate measured operation.
 
 Persona identity and any nonempty environment/task bindings come only from
 authenticated dispatch context or exact optional public bindings; absent
@@ -64,7 +64,7 @@ there is no required operation enum, parent-skill shape, synthesized-skill
 payload, composition list, rationale, evidence category, review state,
 disposition, promotion status, or score.
 
-The substrate verifies canonical bounds, signatures, authenticated context,
+The substrate verifies canonical validity, signatures, authenticated context,
 authority, hashes, references, visibility, consent, revocation, and replay.
 It does not decide whether a body is true, important, relevant, a lesson, a
 profession, a capability, a derivation, or evidence of expertise. If a persona
@@ -101,6 +101,12 @@ Persona-authored state has its own exact append-ordered cursor so its later
 records remain navigable as execution evidence grows. Its original task binding
 remains evidence while owner-authorized state can inform later tasks in the same
 environment.
+
+Raw execution traces without source-scope or publication authority belong only
+to their owner. Joining an environment does not disclose another member's
+traces, including traces from unrelated tasks. Shared experience travels through
+the separately authorized communication, effect, and knowledge records below;
+room membership is not an implicit publication decision.
 
 An ordinary wake also carries a bounded, hash-bound append frontier for the
 sealed turn-effect lane. The frontier is a fixed suffix by authoritative append
@@ -221,6 +227,13 @@ Truncation is explicit and the exact inventory remains navigable. Retention and
 deletion follow authenticated authority, privacy policy, and lifecycle rules,
 not an inferred importance score.
 
+`author_persona_memory` retains the complete canonical JSON body and its exact,
+distinct source references. Fixed record-byte, reference-count, or
+reference-length ceilings do not reject otherwise valid authored evidence.
+The owner signature, exact scope, and any retained supersession target remain
+required. Pagination and measured prompt fit govern later reads independently
+of durable storage.
+
 ## 5. Persona-owned capability material and executable tools
 
 A persona-owned capability claim is ordinary opaque `content` in a signed
@@ -336,6 +349,15 @@ capability bytes were acquired and that any passing verification ran against
 host state instead. A same-author re-acquisition under an existing mounted
 name supersedes the mounted generation, keeping the superseded artifact as
 recorded history; a cross-author claim on a mounted name is refused.
+
+Concurrent installations may add external hard links to a shared content
+object. Those links do not change a generation's bytes or intrinsic topology.
+If file metadata changes during hashing, the reader discards that observation
+and reads the complete file again without reusing its cached digest. A file
+that keeps changing is refused with its relative path. A stable reread binds
+the actual bytes and mode; it never treats a changed timestamp as permission
+to accept an old or partially read digest.
+
 Provisioning refusals carry per-step failure detail — exact step kind,
 index, return code, and bounded output — so one failing command is
 mechanically distinguishable from a wrong recipe, and the environment's
@@ -482,6 +504,13 @@ persona-authored material admitted through the existing signed authoring and
 brain-evolution actions; it acquires no selection authority those same bytes
 would not otherwise have.
 
+A turn-authored distillation retains the complete canonical JSON string or
+mapping as the persona's signed memory. Fixed byte, list, key-count, or nesting
+caps do not decide what the persona may remember. Subsequent model-window
+measurement and recoverable compaction govern how that memory reaches a prompt;
+they do not discard it during admission. Structural JSON validity and the exact
+owner, signature, and binding checks still apply.
+
 Mutable brain-fragment evolution uses one
 `brain-evolution-decision/1` persona-authored claim. It binds exact `id`,
 `persona_id`, open `operations`, `operation_hashes`, `evidence_refs`,
@@ -502,7 +531,7 @@ preimage/operation hash. It does not author meaning or judge the change. These t
 schemas apply to mutable brain-fragment evolution; they are not a universal
 wrapper imposed on every memory, lesson, skill, or other durable write path.
 
-Inherited material supplied to a newborn is a bounded exact signed inventory or
+Inherited material supplied to a newborn is an exact signed inventory or
 set of exact refs/access grants. The newborn retains independent authorship and
 may inspect, obtain authorized bodies, cite, author another record, or ignore
 it. Parent evidence does not assign a role or make the newborn an expert.

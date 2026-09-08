@@ -195,6 +195,111 @@ must not create a second replay pass. Once reconciliation finishes, each exact
 unsettled source remains represented by its own durable identity and runtime
 state advances without replacing persona-authored decisions.
 
+Load more signed people and environments than the initial display window. Keep
+expanding until every matching entry is visible, then admit another entry and
+verify it remains reachable. Exercise the rendered controls and exact production
+selection code beyond every former display ceiling. Complete expansion removes
+the control; incoming activity must not reset the viewer's chosen window.
+Verify membership and current activity for the expanded set, then select an
+entry outside the initial feed prefix and verify its enrichment. Use the same
+subject key from the rendered selection through the subsequent feed request.
+
+Deliver a signed message and thought, then enough action and model events to
+overflow both the global activity tape and per-persona history. Exercise
+retention, indexing and rendering together: the latest communication keeps its
+exact text, author and recipients. A later message replaces the older preview;
+re-fetching an older snapshot cannot reverse that order. Compare an active
+persona card with its inspector while an older idle detail remains cached.
+Both must use the fresh model observation, lifecycle must not imply availability,
+and omitted task counts must not become zero. Fetch a new signed snapshot that
+contains an older thought and verify that the thought retains its authored time.
+Supply an older work note claiming completion while a different run is active,
+then resource-paused. The card's activity line agrees with the observed state
+and leaves the note in its labeled authored-work section.
+Repeat with only a fresh signed running summary before detailed call rows arrive,
+then with an expired summary and an older cached call. The headline and badge
+must agree in both cases without inventing an unavailable model identity.
+
+Acquire a capability through the real provisioning action, then author a persona
+message and fetch the resulting signed public cognition. Both source and packaged
+browser readers must verify the document and retain the acquired capability and
+message. Its recipe identity is the exact bare SHA-256 hex from the receipt.
+A malformed digest or forged signature must still fail validation; accepting
+only synthetic prefixed recipe identities fails this criterion.
+
+Force a card reorder between native pointer-down and pointer-up. The pressed
+control remains in place while its text updates, its click reaches the same
+persona, and the requested order appears after release. Repeat with a release
+outside the control and require no click. Removing the subject's authority
+during the press removes its content immediately and cannot resurrect it after
+release. Exercise native state-preserving moves and the legacy insertion path.
+
+While a persona holds its turn workspace, publish a conflicting peer version,
+then have the author write and delete files through an actual command. Verify
+that the HTTP capture serves the author's exact changed bytes and omits its
+deleted file while the shared workspace retains the peer's versions. Repeat
+with a command that writes useful bytes before failing. The signed merge remains
+incomplete; the browser listing and preview state that the displayed file is a
+personal copy. Finish the turn and reopen the capture through a new connection.
+Repeat on a private node: the token authorizes the idle snapshot, body and event
+stream; anonymous reads and inventory never reveal them or evict the valid
+private capture. Leaving the environment revokes the retained routes.
+
+Stop a node while two actual bridges are exchanging signed peer records, and
+repeat the bridge stop with a real child that ignores SIGTERM. Both children
+must be observed reaped, and their listening ports closed, within the existing
+absolute deadline. A successful signal send or an immediate poll after a late
+SIGKILL does not prove a completed drain. If a mutation surface remains live,
+the node must retain its writer lease and propagate the failed shutdown.
+
+Publish more than 512 files and a file larger than 64 MiB through an actual
+command. Verify the complete signed inventory, a file beyond the old prefix,
+and every byte of the large file over HTTP and a real peer stream. Repeat
+through the packaged browser client. Public and connected private browser
+views must expose the complete list and a working full-file download after
+idle and fresh reload; frequent unchanged refreshes must preserve the file
+controls and scroll position. Withdraw publication after a peer body has been
+cached and require subsequent reads to fail.
+
+Write a filesystem-valid file path longer than 2,048 characters through the same
+command surface. Its signed artifact card and discovery label retain the complete
+path, and changing only its tail invalidates the signature. Read its exact bytes
+over HTTP, source and packaged peer clients, and public and connected private
+browser views after idle and fresh reload. An export failure, shortened identity,
+or transport-specific refusal fails validation.
+
+Repeat with whitespace, Unicode, `%`, `?`, `#`, and literal `%2e%2e` and `%2F`
+filename components. Create two differently sized files whose names differ only
+in surrounding spaces. Candidate-package materialization and recovery, native
+command hash records, saved links and live previews retain their distinct names
+and exact bytes. Read public saved and live files over HTTP and source/packaged
+peer clients; verify private live and saved files require the operator token.
+Also carry the distinct names through declared command capture, authenticated
+transactional output materialization, model-input byte observations and an
+actual persona workspace-inspection request. The later request must receive
+each exact body. Repeat with a workspace root ending in a space and retain
+the filesystem-valid deep path through inspection.
+GET and HEAD must still refuse traversal, encoded separators and alternate
+normalized spellings. A token authorizing one exact private path does not
+authorize a trimmed variant. Withdraw public authority after caching each body
+and require the next peer read to fail.
+
+Exercise the native adapter with more exact changed files than its inline
+preview contains, including deletion. Every exact change remains captured;
+bytes changed after the adapter observation are refused. Inject a source read
+failure and a content-store write failure, then clear each fault. The affected
+path is explicitly omitted, unrelated retained files remain available, and a
+later valid publication retries the missing bytes. A complete-looking prefix
+or an empty incomplete view without an explanation fails validation.
+
+After the final model request, retain an idle file snapshot while the run still
+owns its workspace. Publish a signed modification, addition or deletion without
+opening another model call. HTTP reads must immediately show the new capture,
+retain unrelated files, and preserve those bytes when the run unregisters.
+Repeat with public and token-protected reads. The obsolete idle snapshot must
+neither hide an added file nor evict the newly published bytes when its own
+hashes cease to match the current store.
+
 On a restart with an existing served discovery generation, verify its managed
 generation pointer, deployment-key signature, monotonic private inventory head,
 current lease, node identity, advertised base, counts, and embedded documents.
@@ -456,6 +561,12 @@ repeatedly records provider-infrastructure failures instead of being refused at
 intake, or an amendment retry with changed model authority replays the earlier
 run, also fails.
 
+Continue a real CLI task with `--continue RUN_ID` after it has installed a tool
+and produced a file. The continued model must execute that tool against the
+existing file in the same environment, with the earlier acceptance condition
+still in its request. No replacement installation is needed. Verify both public
+file reads and token-protected private reads after the continuation ends.
+
 Repeat amendment intake with identical prior-run and text bytes but different
 explicit model ceilings, bootstrap bodies, call grants, outcome-evidence floors,
 or authenticated submitters. Each distinct full request authority must receive a
@@ -513,6 +624,13 @@ schema-derived example, or filename/tool-specific fixture fails validation.
 Other bodies are not automatically applied. Later cognition can inspect the retained exact body. Receipts preserve
 exact provider, action, result, and byte effects. Gap-like content is optional
 and has no dedicated lifecycle or readiness/continuation semantics.
+
+Through both structured-tool and native-MCP transports, acquire and replay a
+library in environments containing a second persona. Preserve signed intent and
+receipt records in lineage and ambient history, and let the peer import and
+execute the installed library. Those synchronous records must not enqueue an
+extra peer turn. An explicit persona message must still reach its recipient and
+permit a response during the sender's continuing tool loop.
 
 On both structured-tool and native-MCP model transports, let a persona acquire
 one previously absent executable body and continue within the same semantic
@@ -615,7 +733,7 @@ proposal hashes.
 
 **Trace:** each live descriptor declares exact
 `personaosReplicationEffects`. Admission verifies proposal signatures, exact
-task/environment/membership/action/run/wake context, opaque context bounds,
+task/environment/membership/action/run/wake context, exact opaque context,
 capacity, consent, ReplicationBound, resources, and per-proposal idempotency.
 Admitted newborns receive independent provenance v3/wake v4 records and
 invitations.
@@ -631,6 +749,13 @@ population is non-zero, or admission using that stale declaration value, fails.
 proposals may be admitted within mechanical bounds, while replay of either
 exact proposal cannot mint twice. Context fields create no identity claims.
 Each newborn independently accepts membership.
+
+Repeat with parent context larger than 8 KiB and 256 KiB. Both the initial
+newborn model request and a request after node recovery must contain the
+complete attributed context when the model window can hold it, with the same
+verified ceremony and birth time. A large signed proposal must cross ordinary
+admission and wake binding. Invalid JSON or altered signed content still fails;
+context size alone must not reject or silently discard the parent's material.
 
 Repeat with execution interrupted immediately after an admitted outcome is
 durable but before the first wake outbox is persisted. On the next exact
@@ -674,6 +799,18 @@ team need, candidate ranking, or coordinator recommendation.
 receives practice receipts.
 
 **Trace:** complete paginated exact inventories are shown in mechanical order.
+Author a memory larger than the former 65,536-byte record ceiling and another
+with more than 64 source references through the actual model/tool boundary.
+Restart the node and read each complete record through the owner's inventory:
+the model must receive the original body, references, and valid signature.
+Changing a body invalidates its signature; supplying a peer identity cannot
+change the authenticated caller's private inventory.
+Repeat the knowledge-record path with content above 262,144 bytes, more than
+64 nested levels, and more than 32 references. Its signed action may exceed the
+former 512 KiB wrapper ceiling. Verify the complete record through authoring,
+restart and owner inspection, including its passage back through result
+projection. A projection refusal must not masquerade as a provider-server fault.
+
 The persona navigates by exact reference, obtains consent for any private
 knowledge body, shares refs through ordinary signed messaging, and may invoke
 `author_persona_knowledge` to persist one
@@ -924,6 +1061,15 @@ commit, replaying the cumulative stale branch, or hiding later peer work fails.
 An abbreviated historical head or archive-projection branch must be rejected,
 not normalized, migrated, or silently accepted as a current conflict preimage.
 
+During an actual served actor turn, hold the first model request open and let a
+peer publish a changed file. Two consecutive tool reads by the actor must see
+its original bytes; a later turn must see the peer update. Repeat when the
+actor exits with an exception: no workspace pin may remain, and later peer
+publication must reach its idle worktree. Separately capture an authored merge
+conflict during the active turn and verify that the actor's current branch
+still equals the preserved authored head. Archiving the correct old bytes
+while replacing the files being used by the active turn fails isolation.
+
 Run successful and failed caller-selected host commands using both direct argv
 and a shell wrapper. The public development surface must join exact signed
 started/completed receipts, count the observed top-level executable, success,
@@ -981,8 +1127,31 @@ The generic `personaos-peer-activity-lineage-snapshot/2` page declares
 `record_order: "exact_input_order"` and
 `duplicate_records_preserved: true`; its
 `personaos-verified-peer-lineage-event/1` rows retain exact source-scope and
-append cursors plus event authority. The routed-wake snapshot applies the same
+append cursors plus event authority hashes. Only audience-authorized signed
+content is inlined; the enclosing audit payload is not a peer publication.
+The routed-wake snapshot applies the same
 pager to every qualifying original delivery result.
+
+Publish 12,000 distinct signed environment records through the normal discovery
+exporter. The resulting 47,054,668-byte HTTP inventory (37,082,586 bytes in
+compact JSON) must load every record and its 24,000 signed lookup entries.
+A second read uses all four source HEAD validators and reuses that generation.
+Changing its signature and serving it without Content-Length must fail signature
+verification after the complete read. This verifies the bridge loader beyond
+the retired 32 MiB ceiling; it does not establish Internet reachability or
+browser rendering of a population of this size.
+
+Author private knowledge through the ordinary model action and start a later
+turn with no prior tool results. Its first provider request must contain the
+exact recent signed body, including whitespace and Unicode, while the active
+brain binding remains unchanged. Another member must receive neither that body
+nor the original private action arguments through coordination, activity or
+latest-peer pages. Place an addressed message and a room broadcast inside the
+same signed audit event with an unshared sibling field: the recipient receives
+both messages, another member receives only the broadcast, and neither receives
+the unshared sibling or enclosing payload. These cases pass through native,
+grammar and Responses model transports; they establish carriage and access,
+not useful learning by a live model.
 
 **Required outcome:** every omission is countable and hash-bound, every
 remaining window has an exact cursor, and no carrier claims completeness while
@@ -1747,6 +1916,14 @@ descriptor.
    command has joined the generation on its path and MUST NOT satisfy the
    descriptor; one whose evidence includes an environment-tool invocation
    dispatched to the named surface MUST.
+   Follow the real reservation, fire, supervisor and model-handler path to
+   the serialized provider request. Its current stimulus MUST retain the
+   exact `payload.protocol_references` from 10 §4.4 and the complete ordinary
+   action catalogue without declaring kernel content persona-authenticated.
+   A substituted source, recipient, environment, task or run pool MUST expose
+   no such references; arbitrary kernel prose MUST remain absent. Repeat for
+   chat and Responses transports. A signed run stop before fire, including
+   after restart, MUST prevent reservation release and provider dispatch.
 
 The walk fails on any silent omission: a requirements block absent from a
 carrier with no stated omission, a receipt without the principal hash that

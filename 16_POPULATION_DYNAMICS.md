@@ -63,7 +63,7 @@ Its exact signed fields are:
 - `schema`, `action_id`, and `proposal_id`;
 - `author_persona_id`, `environment_id`, and `task_id`;
 - `causal_action_context`;
-- bounded open `genesis_context`;
+- exact open `genesis_context`;
 - `issued_at`, `signing_key_id`, and `signed_by`.
 
 There is no separate need record, need ID, need lineage event, need hash, birth
@@ -88,8 +88,14 @@ derive semantic fields from it.
 
 ### 3.2 Opaque genesis context
 
-`genesis_context` is one bounded open canonical JSON mapping chosen by the
+`genesis_context` is one exact open canonical JSON mapping chosen by the
 persona. Its keys and values have no substrate meaning. It may be empty.
+
+Admission, ceremony verification and recovery preserve the complete mapping
+without separate byte, string, item-count or nesting ceilings. The newborn's
+Soul carries the complete context under explicit parent attribution; a larger
+context must not silently disappear from that section. Actual model context
+fitting remains separate from durable record validity.
 
 No context field automatically becomes a public/private identity claim,
 characteristic, principle, memory, skill, capability, profession, role, task
@@ -128,7 +134,7 @@ Admission verifies only exact mechanics:
 - current author key, persona, environment, task, and active membership;
 - proposal signature, exact fields, hash, and current schema;
 - exact `action_id`, `proposal_id`, and causal action/wake/run bindings;
-- bounded canonical `genesis_context` integrity;
+- exact canonical `genesis_context` integrity;
 - descriptor-declared replication effect and applicable ReplicationBound;
 - capacity, rate, depth, resource, host, and cosign authority where configured;
 - required consent and lifecycle authority; and
@@ -165,11 +171,11 @@ proposal hash, genesis context and hash, and causal-action-context hash. It
 contains no need fields and does not reinterpret the context.
 
 There is no host-injected `parent_experience_context`. Anything the parent
-chooses to communicate at genesis is already inside its bounded opaque
+chooses to communicate at genesis is already inside its exact opaque
 `genesis_context`; the substrate adds no inherited expertise or semantic seed.
 
-Genesis confers keys, lifecycle, and membership only. The former seeded
-disposition numbers are retired ([`02_PERSONA.md §2a`](02_PERSONA.md#2a-seeded-disposition-and-affect-self-state),
+Genesis confers keys and lifecycle. The former seeded
+disposition numbers are retired ([`02_PERSONA.md §2a`](02_PERSONA.md#2a-character-affect-and-age),
 ADR-0112 decision 9a); a newborn inherits no expertise, parent values, or
 semantic seed, and carries no substrate-derived temperament either.
 
@@ -259,7 +265,8 @@ remain are mechanical statedness and task-authority bars.
 
 1. Proposal v5 is the only persona-authored birth authority.
 2. Causal action context is exact mechanical evidence with no semantic fields.
-3. Genesis context is bounded opaque persona-authored JSON.
+3. Genesis context is exact opaque persona-authored JSON, without a separate
+   byte, string, item-count, or nesting ceiling.
 4. Admission verifies exact signatures, task/environment/membership/action
    bindings, capacity, consent, integrity, and per-proposal idempotency.
 5. Replication effects are explicit signed descriptor facts.

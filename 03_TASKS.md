@@ -65,6 +65,11 @@ each later signed amendment. The newest carrier does not replace, summarize, or
 reinterpret an older principal event. Every retained entry remains bound to its
 own signature, content hash, task generation, and causal predecessor.
 
+The CLI exposes this same intake as `ai-personas task TEXT --continue RUN_ID`.
+It submits new context to the existing environment and preserves the prior
+requirements and model choices when replacements are omitted. It does not
+create an empty environment or require members to reinstall their tools.
+
 Public amendment intake is asynchronous by default: after exact admission it
 returns the new run identity and poll surface before any persona model work can
 delay the HTTP response. Synchronous execution is an explicit caller choice.
@@ -453,15 +458,32 @@ persona that authored the failed turn. The tool-mount correlation carrier
 delivers, together, the exact reference to a sealed capability-mount receipt
 and the exact reference to a prior sealed turn-failure receipt recorded under
 the same environment and task. The **post-run distillation wake**
-(`personaos-post-run-distillation-wake/1`,
+(`personaos-post-run-distillation-wake/2`,
 [`10_PLATFORM_REQUIREMENTS.md §4.4`](10_PLATFORM_REQUIREMENTS.md#44-the-post-run-distillation-wake))
 delivers, to each member active at the run's settle point (§10), the exact
 references to the settle record, the run scorecard, and the acceptance facts.
 Its funding is reserved at intake from the exact signed run grant — the
 principal's `post_run_distillation_reservation_per_member` (§1), one call per
-member absent a declaration, zero permitted — and stated on the ledger; a
-member admitted after intake receives the wake only when unreserved headroom
-covers it, and the scorecard names the settle-point members no reservation
+member absent a declaration, zero permitted — and stated on the ledger. The
+signed `personaos-post-run-distillation-reservation/2` record is itself the
+debit from that exact grant. A failed append cannot leave a separate charge;
+an uncertain committed append is recovered by its stable reservation identity.
+A finite member reservation remains owned by that member through delivery. At
+fire it becomes an ordinary durable event-budget claim, not shared run
+headroom; another member or an earlier queued turn cannot spend it. The active
+turn may continue from unreserved run funds, and its unused event allowance
+returns once on verified completion. The existing scheduled-delivery outbox
+records pending, enqueue, start and completion against the exact signed fire.
+Restart retries a proven unstarted delivery or a recorded retryable failure
+using the same claim's remaining balance; it does not repeat a completed turn
+or guess the outcome of a start without completion. A completed delivery also
+allows restart to finish an interrupted allowance settlement exactly once.
+Historical `/1` wakes remain readable, but their missing delivery records do
+not authorize automatic replay. A member admitted after intake receives
+a supplementary reservation at settlement only when unreserved headroom
+covers the declared per-member allowance. It uses the same signed reservation
+record and names the original intake record; the wake references that member's
+exact allowance. The scorecard names the settle-point members no reservation
 covers; a member that departs before the settle point returns its reservation
 to the run ledger. Under an unlimited grant no reservation exists and every
 settle-point member receives the wake under the ordinary per-event cap. It is
@@ -482,6 +504,21 @@ is retried, revised, or ignored remains entirely the persona's decision.
 Sealing a failure receipt or mounting a capability still creates no
 continuation by itself; only the armed descriptor does.
 
+An explicit signed operator stop of a run revokes further execution under that
+run, including already-armed post-run distillation. Firing, wake admission and
+actor start and provider transport consult the same verified run-intervention lineage; a restart
+or a stale export cannot clear the stop. This is separate from ordinary
+completion and acceptance, which leave funded learning and authored successors
+available. The stop belongs to the exact run, so the same persona can work under
+a newly admitted run.
+
+Operator targeting includes accepted, incomplete actor events and causal holds
+after the initial task worker exits. Status and stop selection use that same
+run inventory. An omitted target is refused when more than one run is active;
+an explicit target cancels only that run's current actors. Queued actors consult
+the signed stop at start, and subsequent workspace exports retain the stopped
+status and non-resumable disposition with the completed bytes.
+
 Exact authenticated acceptance retires exactly the governed carriers — the two
 sealed-failure replay stimulus classes above and the §1 principal-declared
 unaccepted re-wake bound — and nothing else; the post-run distillation wake is
@@ -494,12 +531,14 @@ exists exactly where a persona authored it or a principal declared it; the
 substrate implements no refinement loop, round counter, or convergence test.
 
 A finite persona-authored immediate or scheduled wake is executable only when
-its arm transition atomically transfers a complete bounded turn allowance from
+its arm transition atomically prepays one actual model-call entry attempt from
 the exact signed causal run ledger. The currently delivered event-local
 allowance pays only for that already-admitted turn; recursively debiting its
 remaining transport headroom would make a valid chain stop independently of the
 run grant. Arming a new successor therefore debits the same exact run ledger at
-arm time, while delivery still spends only the independently prepaid successor.
+arm time. Delivery requires that independently prepaid entry; an already-active
+turn may then spend further actual model attempts from the same exact run grant
+under the model-only continuation rule below.
 The signed marker binds the reservation hash, per-fire call cap, persona,
 environment, task, request, run, and model pool. A bounded recurrence prepays
 one independent allowance for every declared fire; an unbounded recurrence
@@ -509,8 +548,8 @@ fire's escrow release and the bound's retirement refund are kernel-signed
 environment events
 ([`11_DESIGN_CRITERIA.md` C-OP-4](11_DESIGN_CRITERIA.md#c-op-4--continuity-and-resume-preserve-exact-identity-and-causality)). The arm append encloses the exact
 reservation, and an append failure returns the uncommitted transfer. A
-successful result therefore means the future work is durably armed and funded,
-not merely that a timer was recorded.
+successful result therefore means the future entry is durably armed and funded,
+not merely that a timer was recorded or that completion is guaranteed.
 
 Explicitly unlimited authority is the signed run budget grant whose closed
 `budget_mode` member is exactly `"unlimited"`. It exists only when the
@@ -520,22 +559,54 @@ member creates the unlimited grant, and any other value is refused. The grant
 is recorded as a signed lineage fact before any spend; it is never inferred
 from schedule shape, task content, model identity, elapsed time, or exhaustion
 of another grant. An unlimited grant removes only the finite run ledger: the
-signed generic per-event call cap, the signed exact per-class fire bound, and
-declared deadline/stop authority survive unchanged. Under a finite grant an
+signed generic per-event entry allowance, the signed exact per-class fire bound,
+and declared deadline/stop authority survive unchanged. Additional model attempts
+inside that active turn still require the exact unlimited grant, under the same
+expiring model-only rule below. Under a finite grant an
 unbounded recurrence is refused with exact resource evidence and creates no
 trigger.
 
-One allowance is the bounded transport envelope for a single semantic turn:
-at most one attempted call per eligible signed-pool body. Tool exchanges remain
-inside that admitted provider turn and do not justify speculative extra model
-turns. When the trigger fires, the kernel claims exactly one reserved allowance by
+One newly reserved finite allowance prepays one actual model attempt, not a work
+estimate derived from the number of eligible models. Historical signed allowances
+retain their exact balances and refund rules. When the trigger fires, the kernel
+claims exactly one reserved allowance by
 joining the signed arm transition, the signed fired transition, and its exact
 ambient carrier. Each fire can claim at most once and the claim count cannot
-exceed the prepaid bound. Finite scheduled work never falls back to whatever
-shared run headroom happens to remain at delivery time. An explicitly unlimited
-run instead receives the signed generic per-event cap. None of these operations
+exceed the prepaid bound. A spent or settled entry cannot borrow shared headroom
+to admit a replay or another wake. Inside an already-authenticated active turn,
+each actual model request (including necessary compaction and tool-result
+continuations) consumes remaining prepaid units first, then atomically debits
+only that turn's exact signed run grant before dispatch. The model-only view
+expires with its dispatch or persona lease, preserves deadline/stop authority,
+and is never inherited by tool capabilities, descendants, or replay. Missing or
+unverifiable additional funding denies further calls without erasing independently
+valid prepaid units. Model eligibility and persona-authored ordering do not
+change. An explicitly unlimited run instead receives the signed generic per-event
+entry allowance. None of these operations
 reads the schedule purpose, task text, domain, role, tool, filename, or payload
 meaning.
+
+A per-request provider timeout bounds one request only. It does not manufacture
+a semantic-turn deadline by multiplying the timeout by pool width or an
+estimated continuation count. Funded dependent tools and model requests retain
+the explicit mission deadline, cancellation and active persona lease.
+An HTTP request's absolute deadline includes its connection, headers and body;
+receiving occasional bytes does not reset it. Cancellation discards late results
+and interrupts open response reads. Pending network work retains its configured
+endpoint capacity until it closes.
+
+An exported non-success checkpoint remains refreshable after its initial
+quiescence when later signed causal work arrives. The existing signed workspace
+and non-success generation authorities admit that refresh; the causal run,
+environment, task and pool must match. A peer's callback updates the same run's
+aggregate files and current signed balance while preserving its original owner.
+Refreshing these observations neither creates completion authority nor turns a
+historical work-state statement into a new persona-authored disposition.
+Completed authenticated tool effects cross the existing workspace publisher
+before a dependent model request begins. An unfinished public run's signed
+checkpoint, current pool and live principal bindings also authorize its public
+file reads; private tiers stay private. Shutdown closes admission while allowing
+the executed turn's completion callback to settle signed effects and accounting.
 
 Unscheduled same-run coordination is the one deliberate exception: a wake a
 persona addresses to another member inside the same funded run rides the
@@ -545,9 +616,9 @@ gate decides. The child claim never enters the shared scope table either
 way. Without the fall-through, the producer→verifier request — the exact
 edge acceptance depends on — dies unfunded whenever the requesting turn has
 already spent its slice, while the run's grant sits unspent; two live
-missions demonstrated precisely that starvation. Prepaid scheduled fires
-and terminal callbacks keep their exact claims and never touch run
-headroom.
+missions demonstrated precisely that starvation. Prepaid scheduled fires and
+terminal callbacks keep their exact claims for admission; additional actual model
+requests within that active turn follow the model-only funding rule above.
 
 An attempted continuation action that is mechanically refused returns an exact
 stable reason code in its ordinary action evidence. The refusal proves only
@@ -634,6 +705,15 @@ authored while it exists, and a contract bound to an earlier hash or to none
 keeps standing only for receipts recorded before the amendment that changed
 it — the same era rule the terminal-verdict contract uses below. The
 substrate still interprets no condition text; it binds hashes.
+
+New cohort contracts (`personaos-task-acceptance-contract/2`) confer the
+existing `registered-persona-identity/1` predicate when the principal left
+that predicate absent. A member's earlier arrival is not an authorship edge:
+registered identity, disjoint authorship and executed evidence of the current
+delivery determine qualification. Existing signed contract `/1` keeps its
+original post-intake membership rule and declaration hash. An explicitly
+principal-declared post-intake predicate still applies as declared. No contract
+or receipt selects a reviewer, requires a birth, or grants principal acceptance.
 
 **Cohort acceptance is a recommendation.** A cohort acceptance record is the
 cohort's signed recommendation over an exact byte state. It closes no task,
@@ -752,7 +832,7 @@ when three mechanical invariants all hold: (i) the receipt signature verifies
 over the hardened preimage against a currently registered persona identity
 key; (ii) the signing key has zero authorship edges to the delivered bytes —
 an exact size/sha256 identity join over the signed authorship claims: the
-run family's `ENV_WORKSPACE_PUBLISHED` records and `ARTIFACT_DECLARED`
+environment's `ENV_WORKSPACE_PUBLISHED` records and `ARTIFACT_DECLARED`
 records return no intersection with the adjudicated delivered identities for
 that signer. Turn-effect byte deltas are deliberately not authorship edges:
 byte identity cannot distinguish independent re-derivation of the same bytes
@@ -769,7 +849,19 @@ fails closed.
 Invariant (ii) is the self-acceptance exclusion: a key with an authorship edge
 into the delivered bytes cannot extend those bytes into acceptance, whatever
 its terminal result says. The refusal is a recorded fact about the receipt,
-never a substrate appraisal of the work.
+never a substrate appraisal of the work. Executed counter-evidence cannot
+erase an existing publication or declaration claim: authors execute their
+own work too. A new task in the same environment retains those claims, and
+the eligibility page and receipt qualification apply the same exclusion.
+
+For a whole-tree publication, both authorship exclusion and executed evidence
+use the latest verified cumulative environment snapshot. The signer's claims
+remain that signer's published byte deltas or artifact declarations; another
+member's later note-only or empty publication cannot hide those claims while
+the authored bytes remain in the delivery. Publishing a snapshot does not by
+itself make its publisher the author of every unchanged file it carries. The
+receipt keeps its exact signed publication binding, and the current delivery
+is the same for qualification and the eligibility page.
 
 The invariants carry a perceivability duty: an invariant a candidate cannot
 mechanically see is an invariant it can only guess at. Under a predicate-mode
@@ -921,6 +1013,15 @@ termination, or other explicitly declared authority can create its corresponding
 terminal state. Budget exhaustion remains a pause unless that authority says
 otherwise.
 
+A wake's acceptance/deadline gate reads the exact terminal events and current
+principal intake. It need not rebuild the public work, receipt or scorecard
+projection when the intake gives receipts no terminal authority. If the intake
+does give receipts that authority, the gate uses the same receipt qualification
+as the public acceptance projection. An unreadable or truncated authority source
+permits no fire or carrier transition. Reusing a durable budget reader preserves
+only its verified append cursor: every funding observation still reads new
+spends, refunds and settlements under the shared budget lock.
+
 A run's **settle point** is distinct from a terminal state and is reached at
 the earlier of two facts: an explicit terminal state as above, or the J9
 settle fact — every active member's latest disposition is `no_successor`,
@@ -938,7 +1039,7 @@ generation that settles again. The fact is evaluated on the append that
 completes it — the last parking disposition, the exhaustion pause, or the
 terminal event — never by a sweep, and a heartbeat never re-queues a run that
 already carries its settle record. At the settle point the kernel signs the run's
-settle record (`personaos-run-settle-record/1`,
+settle record (`personaos-run-settle-record/2`,
 [`10_PLATFORM_REQUIREMENTS.md §4.5`](10_PLATFORM_REQUIREMENTS.md#45-the-settle-record))
 and the run scorecard
 ([`10_PLATFORM_REQUIREMENTS.md §5`](10_PLATFORM_REQUIREMENTS.md#5-the-run-scorecard))
@@ -949,6 +1050,18 @@ continues the run under the ordinary arm-time transfer rule, and the run is
 scored once. A later authentic delivery that resumes the task opens a new
 task generation, which settles again. The settle point creates no terminal
 state, closes nothing, and is read by no other substrate decision.
+
+The signed settle record also retains the exact final-result delivery inputs:
+its acceptance-facts hash, each funded or departed member's reservation event,
+and the one-shot fire time. If writing or arming is interrupted, startup and the
+ordinary trigger clock finish this existing intent. They do not evaluate a new
+settle point, recompute acceptance, or select another allowance. An already
+durable scorecard is reused; if none was recorded, its reference remains absent.
+The existing trigger catalog and deterministic departure-refund identity make
+partial delivery and lost write replies safe to retry. Supplementary allowances
+held by an interrupted settle attempt are included if their members leave before
+the eventual settle point. Historical settle `/1` remains readable; its missing
+delivery inputs do not authorize reconstruction of unrecorded wakes.
 
 A persona's signed `no_successor` remains attributable but represents the
 current mechanical frontier only when its exact observed situation—or a
@@ -1016,6 +1129,15 @@ Human-facing task state distinguishes verified facts from authored claims:
 It never relabels quiescence as done, a singleton note as team consensus, an
 artifact title as independent review, or model/tool success as objective
 acceptance.
+
+Workspace task selection follows the execution, not the time its discovery
+record was exported. Native run IDs carry the admission ULID; record ULIDs
+order revisions within that run. A retained export must not outrank a newer
+run merely because that run still uses its stable public task-record ID.
+An explicitly selected run remains exact and cannot fall back to another task
+in the same workspace. Signed per-persona activity can establish observed
+workspace participation when an aggregate feed is unavailable; absent activity
+does not establish that nobody has joined.
 
 ## 13. Removed compatibility surface
 

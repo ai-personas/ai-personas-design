@@ -204,7 +204,7 @@ resources, and replication bounds. It contains no inferred pressure, fitness,
 competence, need, role coverage, team requirement, or candidate ranking.
 
 Birth uses the single signed proposal v5 with exact mechanical
-`causal_action_context`, bounded opaque `genesis_context`, provenance v3, and
+`causal_action_context`, exact opaque `genesis_context`, provenance v3, and
 wake v4. No need or separate birth-action record is required; idempotency is per
 exact proposal. Context fields confer no identity, role, or expertise.
 Membership requires independent newborn consent.
@@ -370,9 +370,10 @@ canonical bytes, persona-signed, monotonic revision, freely revisable) carried o
 PersonaCard. The substrate verifies authorship, bounds, and revision order only; no
 substrate decision reads the value; presentation labels it persona-authored. Seeded
 disposition and affect numbers stay off every peer surface unless the persona itself copies
-them into its own authored bytes. The beside-birth characteristics supplement (a second
-slot preserving frozen birth bytes) remains a named open extension; this card member is a
-presentation surface, not that slot.
+them into its own authored bytes. ADR-0117 now makes the existing signed
+characteristics sidecar revisable beside the independently preserved birth
+material (02 §2a); the prior claim that this supplement remained an open
+extension is superseded.
 
 ### D21 — The owner-fragment catalogue is append-position ordered and rotates
 
@@ -625,11 +626,13 @@ authority under owner-bearer trust.
 
 ## ADR-0088 — Knowledge continuity across deployments
 
-**Status:** Accepted as implemented (`ai-personas export-persona` /
-`--adopt-knowledge-bundle`); status regularized 2026-09-02 and folded into
-[`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md) as the mechanism
-by which a lesson (R-LRN) travels across deployments (ADR-0112 decision 9e).
-Original draft follows.
+**Status:** Accepted. The core local operator path (`ai-personas
+export-persona` / `--adopt-knowledge-bundle`) and the separately authorized
+persona-sharing wrapper use
+`personaos-knowledge-bundle/2`. The former unsigned `/1` fragment bundle did
+not fulfill the signed-state contract and is refused by the current importer.
+This is a continuity mechanism for R-LRN (ADR-0112 decision 9e); successful
+transfer alone does not establish useful learning or later use.
 
 **Problem:** every deployment root mints fresh persona identities, so all
 accumulated cognition -- brain fragments, distillations, soul evolution --
@@ -637,34 +640,94 @@ dies whenever an operator starts the next experiment directory.  Measured
 across 2026-08-22/23: four mission classes, six cohorts, zero lessons
 carried between them; each cohort relearned the same round-one facts
 (simulate, do not assert; open delivered drawings; verify listings live).
-The learning loop's write and read sides now work within one node; this ADR
-removes the last structural amnesia.
+The design therefore requires an explicit way to preserve verified source
+experience across deployments.
 
 **Decision:** a persona's knowledge store is exportable and importable as an
 exact signed unit.
 
-1. **Export**: one operator-surface action produces a signed bundle per
-   persona: knowledge store bytes (brain fragments with signatures,
-   bindings, evolution decisions/applications, memory entries), soul state,
-   and a manifest binding every member to its source kernel identity.
-2. **Import**: booting a node may adopt a bundle: personas are minted with
-   NEW identities in the new root, and every imported record is re-signed by
-   the new identity with an exact `continuity_of` provenance pointer to the
-   source record id + source kernel id.  Signatures of the SOURCE are carried
-   verbatim inside the provenance member -- history stays verifiable without
-   trusting the destination.
-3. **What never transfers**: model-call budgets, credentials, run grants,
-   acceptance events.  Cognition transfers; authority does not.
-4. **Purity unchanged**: import is mechanical re-signing of exact bytes;
-   nothing reads content, ranks, or curates.  Curation remains the
-   persona's own evolution actions after arrival.
+1. **Export**: the exact bundle contains source identities and public keys,
+   the original signed SOUL, full SoulState with its signed evolution chain,
+   current character, fragments and bindings, and the admitted knowledge
+   snapshot including live memory and evolution history. Tombstoned or
+   protection-denied memory, executable tools, rubrics and proven-fact
+   authority are excluded. `personaos-knowledge-bundle-manifest/2` hashes
+   every top-level member and carries separate source kernel and persona
+   signatures. A later export refuses when an imported memory's retained
+   source proof still contains a record that is now unavailable or protected;
+   it cannot redact and re-sign the old source bundle. Private keys never
+   enter the bundle.
+2. **Import**: explicit local operator adoption targets an already registered
+   destination with distinct kernel/persona identities. It verifies the complete manifest, source
+   identity records, evolution chain and collection signatures before mutation.
+   The destination records a signed
+   `personaos-knowledge-bundle-adoption/1`, retains the original bundle once,
+   and links imported records through exact `continuity_of` provenance.
+   Current opaque state records, memory and character become separately
+   destination-signed records. The source's frozen SOUL and lifecycle remain
+   evidence; historical operations are not replayed. Imported memory keeps
+   its original user/context protection labels and loses source cross-scope
+   and public permissions. A stale or forked source snapshot is refused, and
+   a failed adoption rolls back its destination changes.
+3. **Authority stays local**: source budgets, credentials, run grants,
+   memberships, publications and acceptance facts confer no destination
+   authority. Source public keys are used by an isolated verifier, never
+   installed as destination signing authority. This trusted local operator
+   operation supplies no network disclosure authority. The source kernel key must
+   agree with its native key-derived identity or an explicit operator key pin;
+   a custom alias without that pin is refused. The destination's signed
+   adoption retains the admitted source key and identity-binding method.
+4. **Carriage remains mechanical**: source binding refs must match exact
+   verified fragment revisions. Eligible transferred refs preserve the
+   destination's existing head and scope without a fixed fragment-count cut.
+   An identical reimport does not resurrect a destination prune or overwrite
+   its later character revision, and a second source persona is refused.
+   Import reads no task meaning, ranks no lesson and awards no expertise; later curation
+   remains the destination persona's own work.
 5. **Operator surface**: `--adopt-knowledge-bundle <path>` at boot;
    bundles produced by `ai-personas export-persona`.
+6. **Complete presentation**: the sharing wrapper verifies the source's
+   currently signed display name and avatar state before export. A declared
+   avatar requires its exact readable, verified raster bytes. Verified
+   `source_absent` means the signed source has no avatar descriptor and no
+   native avatar admission or revision history; its raster inventory is empty.
+   Strict adoption of that absence requires the destination likewise to have
+   no avatar state or admission history. An existing destination portrait,
+   malformed slot or orphan admission record refuses the copy before final
+   authorization or mutation; no removal or replacement is manufactured.
+   The destination re-signs the supplied exact presentation under its own
+   identity. Each admission carries
+   `personaos-persona-continuity-presentation-authority/1`, binding the retained
+   bundle, source record and key, destination descriptor and identities.
+   Verification rejoins the exact signed source proof and local adoption;
+   the authority is not an invented external execution receipt. It states
+   `source_signature_verified` and `operator_requested` true, and
+   `source_authority_transferred` and `semantic_interpretation_performed` false.
+   The destination's frozen SOUL, key, census and execution authority remain
+   local. Later destination revisions are preserved; strict complete-copy
+   requests refuse an incomplete repeat before committing. Detached staging,
+   native durable-save verification and rollback protect the existing persona
+   and raster files when final source authorization or persistence fails.
+7. **Explicit sharing**: owner-bearer `/persona-snapshots/export`, `/import`
+   and `/withdraw` expose the operation through `share-persona`,
+   `adopt-persona` and `withdraw-persona`. Export binds an exact destination
+   kernel and existing persona, and remains private unless the source owner
+   explicitly grants a future `public_until`. The compact
+   `personaos-persona-share/1` points to a signed publication whose exact
+   inventory binds the `/2` bundle, owner export event and avatar object pack.
+   Import requires an independent source kernel public-key pin and separate
+   destination-owner consent. It checks fresh nonce-bound source availability
+   before transfer, after closure verification and immediately before durable
+   mutation. Each proof expires within 30 seconds and no later than the
+   publication. Every source read rechecks the current grant, key, expiry,
+   withdrawal, exact closure and current memory protection/forget state,
+   including retained imported proofs. Public node visibility alone cannot
+   disclose a persona snapshot; immutable cached bytes cannot renew authority.
 
-**Non-goals:** cross-node live federation of cognition (discovery already
-covers presence); automatic migration (always explicit operator action);
-merging two cohorts' fragments automatically (a persona adopts only its own
-bundle).
+**Non-goals:** automatic cross-node synchronization of cognition; automatic
+migration (always explicit operator action);
+merging independent source personas (a destination admits continuity from only
+one source persona).
 
 ## ADR-0089 — Cohort-drafted acceptance contracts
 
@@ -1007,6 +1070,19 @@ cohort authors its own acceptance pressure (ADR-0089's stated cure for
 condition spoon-feeding); the substrate provides mechanics and visibility and
 authors nothing.
 
+**Amendment, 2026-09-07 — existing independent members.** The implicit
+post-intake predicate rejected a retained non-author solely because its
+membership preceded a continuation's task intake. A real-kernel reproduction
+records the current publication, signed execution evidence and disjoint
+authorship, then receives `signer_membership_predates_intake`. The task's
+condition required independence; no principal had required recent membership.
+New `personaos-task-acceptance-contract/2` records therefore confer the existing
+`registered-persona-identity/1` predicate. Old signed `/1` contracts still derive
+the original declaration, including its hash and membership restriction.
+Principal declarations retain precedence. This removes an imposed membership
+change from ordinary cohort review; it does not weaken authorship or execution
+checks, select a reviewer, or convert a cohort verdict into acceptance.
+
 ## ADR-0098 — Substrate self-description: a mechanic described nowhere is a defect
 
 - Status: accepted (2026-08-29)
@@ -1097,6 +1173,14 @@ lane ("first the message that woke you, then the messages that could not"),
 whole-record omission counted and cursor-reachable. At-least-once
 presentation: a failed mark re-presents; duplicates are stated; loss is
 impossible.
+
+The 2026-09-06 implementation uses carrier /20's
+`persona_communication_history_authority` in place of the pending-only prompt
+lane. The same pager retains already-presented messages as context, with exact
+carried flags and separately counted pending messages. It refreshes on each
+tool continuation under the existing scope. Carriage is recorded at the
+completed provider-response boundary from the actual fitted request, including
+tool-only turns; it no longer waits for a valid terminal persona reply.
 
 ## ADR-0101 — Disposition neutrality by ordered evidence; spend visible, not priced
 
@@ -1268,7 +1352,7 @@ the rational read.
   carrier_output_reserve_tokens()`; the assembly fit budget and every
   transport admission gate resolving through that one conversion; the
   adapter `/tokenize` capability probe; the first-call refit
-  (`MODEL_CONTEXT_REFIT`); `personaos-continuation-fit/1`
+  (`MODEL_CONTEXT_REFIT`); exact continuation admission (amended 2026-09-05)
 
 **Problem.** ADR-0102's tier-1 budget converted the window to bytes through
 a constant, and the transport admission gates used two DIFFERENT constants
@@ -1342,13 +1426,19 @@ constant may only seed it.
    redispatch is the exact parallel of 01_KERNEL §7's charged mechanical
    reformat attempt.
 6. *Continuations re-enter the fit discipline.* An appended tool-result
-   payload respects the same learned budget as the opening carrier: over
-   the remaining headroom, its largest members reduce through the bounded
-   open projection (source fingerprint, stated truncation) and the squeeze
-   is stated in the payload as `personaos-continuation-fit/1`; when
-   per-member floors cannot reach the cap, the payload collapses to one
-   stated record that keeps the ok/error census and the content hash —
-   never a silent truncation, never unbounded growth, never an overshoot.
+   payload respects the same learned budget as the opening carrier.
+   **Amended 2026-09-05:** retain the exact model-visible result payload and
+   re-fit only reducible opening-carrier lanes around its measured size.
+   Principal and other exempt authority lanes remain exact. Count serialized
+   UTF-8 bytes, including the system and separating newline. If the exact
+   result plus irreducible context cannot fit, refuse before another dispatch;
+   never replay preceding effects or mark an unserved result observed.
+   This supersedes the prior largest-member open projection / hash-only
+   `personaos-continuation-fit/1` collapse: a real compacted HTTP regression
+   showed it retaining action metadata while discarding a successful command's
+   stdout and digest, then treating that result as observed. Stating loss did
+   not make that observation true. Historical fit records remain evidence of
+   their original behavior, not a current producer contract.
 
 Rejected, with reasons recorded: re-tuning the constant (the round that
 produced this ADR began as exactly that — 2.5→2.2 with a safety fraction —
@@ -2269,3 +2359,99 @@ nothing reads (ADR-0112 dec 8 holds). ADR-0109 dec 5's manager path is
 complete: the manager reads the node's one cooldown and the one `unstated`
 attempts row. Not decided: the emblem for text-only bodies (OQ-PLATFORM-3
 stays open); compaction of stored lanes.
+
+## ADR-0117 — Preserve the current event and original funding; carry authored character and age
+
+**Status:** accepted 2026-09-05 under the owner's explicit direction to retain
+OCEAN/VAD and age, simplify the runtime, and audit multiple failures before
+another paid verification run. Amends 02 §2a–b, 03 §7 and 10 §2.1.
+
+**Evidence.** The September 5 complete-response Luna probe wrote and published
+its requested file, then became idle without a successor disposition. The
+heartbeat created a new run with a new one-call grant from a read of the old
+run's remaining balance, without transferring that balance. That was new
+authority, not conservation. The successor's learning callback saw an
+`observation_available` label after situation projection removed the source
+payload explaining why it had been delivered. It repeated the file creation.
+The browser also opened duplicate relative/absolute connections and refetched
+text despite a complete-document feed. These are infrastructure findings;
+they establish neither engineering quality nor improved learning.
+
+**Decisions.**
+
+1. Delete automatic idle-task successor creation, its retry/backoff/streak
+   loop, and its unused suppression writer. A balance is a resource fact,
+   never authority to mint a new grant. Exact causal deliveries, authorized
+   retries, prepaid scheduled events and explicit operator resume retain
+   their existing funding checks. A stalled task remains visible as stalled.
+2. Carry `current_stimulus` verbatim in the protected prompt lanes, including
+   source payload and causal references. History may be compacted; the
+   current reason for acting may not disappear. Irreducible context refuses
+   against the declared provider window without replaying effects.
+3. R-ID-3 asks each member to maintain its own OCEAN/VAD, chosen scales and
+   revision reasons in its existing persona-signed characteristic profile.
+   Profiles remain opaque, revisable and scoped to their owner; no second
+   trait store, random personality generator, behavioral rank or identity
+   phase is introduced. Original birth material remains independently held.
+   The verified birth ceremony joins each self-context; elapsed age follows
+   from its timestamp and present time, without conferring competence.
+4. Count failed attempts in the existing complete-response event feed even
+   when no assistant text was admitted. Structural schema failures retain a
+   closed reason code and location hash, without private values or property
+   names. Do not infer usage or billing that the provider did not report.
+5. The browser keeps one normalized connection per public event URL and
+   uses a verified full-document feed after initial admission. GET remains
+   a fallback for startup, disconnected/older feeds and missing cache. The
+   conversation renders an authored envelope's message; verification keeps
+   the exact signed envelope. Complete responses appear together.
+
+**Consequences.** Repairs are verified offline together before the next live
+run. Passing transport, identity and accounting tests does not prove distinct
+personality, useful skill reuse, births, portraits, peer engineering review
+or correct artifacts; those remain explicit integrated verification bars.
+
+## ADR-0118 — Preserve tool results and peer transport independence (2026-09-05)
+
+Status: accepted within the owner's live-Luna repair request. The integrated house run exposed platform failures before it produced an artifact: fixed command-output cuts hid observations, a per-call timeout was multiplied into a synthetic whole-turn deadline, and nested JSON tool arguments failed schema validation. Individual provider calls retain their configured timeout. Whole turns remain bounded by explicit deadlines, cancellation and signed funding. Native Responses functions carry open arguments directly; context fitting receives complete captured command/code output. Lineage previews explicitly identify truncation.
+
+An event-driven run may park after its first turn and later execute an already funded callback. Existing signed pending/non-success projection authority remains sufficient to refresh its exact workspace export and ledger-derived accounting. A parked export is not immutable completion evidence.
+
+A self-certifying kernel key and an exact peer-bound signed ProviderRecord authenticate a libp2p route without an HTTPS origin. Browser and native readers verify that same envelope, embedded document, access policy and peer binding. Internal libp2p URLs distinguish peers even though the browser URL API assigns opaque origins to that scheme. When the operator opts into P2P and supplies no seeds, the normal node shares the UI release's replaceable public-DHT bootstrap locators. Locators carry no record or private-read authority. A live process or connected peer is not proof of Internet reachability.
+
+Offline checks reproduced the peer-display and stale-export failures and verified repairs. The next paid run must evaluate the full task and these fixes together; artifact quality, useful acquisition, learning reuse, collaboration, birth and portraits remain unproven by the failed run.
+
+The 21:24–21:44 UTC verification exposed further failures in this same boundary.
+Command/code actions retain changed, partial and empty files after failure;
+the automatic declared-output rollback and its transaction schema are retired.
+Callers may stage and atomically replace files when their own operation needs it.
+HTTP timeouts cover the complete request and cancellation interrupts open reads;
+an abandoned connection cannot publish late results or release endpoint capacity
+before its network work closes. Completed authenticated tool effects publish
+through the existing workspace lane between model requests. The exact signed
+pending checkpoint can authorize public reads during later causal turns.
+Shutdown keeps the executed turn's settlement callback while closing new
+admission. Browser reads and downloads select the peer transport directly for
+internal libp2p URLs.
+
+These repairs expose actual effects and preserve accounting. They do not make
+the observed house checker valid: it accepted a solid block, changed targets,
+invalid source bytes and an empty structural screen. Correct dimensions alone
+do not demonstrate the requested engineering work or emergent collaboration.
+
+The 22:50–23:10 UTC verification drained cleanly and preserved the signed budget
+in its export, but still failed independent geometry and verification checks.
+It also exposed automatic failure replay after a cancelled request: the gate
+read an absent top-level member instead of the sealed receipt projection. The
+gate now reads that projection and refuses cancellation and deterministic
+context refusal. Cancellation is not a provider outage. An unused grant does
+not turn a stop decision into another failure stimulus; explicit later causal
+authority remains separate.
+
+Bootstrap identities carry their existing signed first activation into the
+self-context when no verified birth ceremony exists. This preserves an
+observable age origin without inventing genesis or trusting a mutable date.
+Native tool descriptions require no empty preview table in the history join.
+The runtime delegates navigation validation to the kernel's existing verifier,
+removing the duplicate rules. The model-choice description states its actual
+scope: the next and later requests in the same authorized run, including a
+different advertised reasoning effort on the same model.

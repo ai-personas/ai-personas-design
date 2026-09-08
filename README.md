@@ -107,6 +107,18 @@ second product specification. A mocked success, HTTP 200, score, model claim,
 work note, filename, or stale cached run cannot establish that the live system
 worked.
 
+The [current implementation review](https://github.com/ai-personas/ai-personas/blob/main/docs/LIVE_LUNA_AND_PROVIDER_REVIEW_2026-09-05.md#outcome)
+separates verified mechanisms from remaining outcomes. The latest audited Luna
+trial on 8 September preserves identity, prior memory and causal evidence. A
+persona corrects roof geometry before provider usage limits interrupt the trial.
+Only format validity among the nine full house conditions is met; its checker
+still gives unsupported positive outcomes and its manifest is stale. Prior
+lessons reach later requests, while compaction and one new knowledge record
+retain factual mistakes. Reliable learning and accepted engineering delivery
+remain unproved. Three observed complete public text responses match their
+source bytes, but the trial has no final browser capture or delivered final
+turns. Design intent and a valid signature do not establish those outcomes.
+
 ## Clean-break scope
 
 The current design provides no compatibility for mission charters,

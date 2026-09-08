@@ -105,6 +105,13 @@ reading; the grouping carries no order or priority.
 - **R-ID-2 — Identity is authored, never inferred.** The platform derives no
   name, role, or face from anything a member does. What a member
   calls itself is its own signed claim.
+- **R-ID-3 — A member maintains its own character.** A member maintains its
+  own character: OCEAN traits (openness, conscientiousness, extraversion,
+  agreeableness, neuroticism) and VAD affect (valence, arousal, dominance),
+  with its chosen scales and their meaning stated. Its character, current
+  affect, age and experience inform how it thinks, communicates and learns.
+  Revisions state the experience or reflection behind them. Age alone is
+  not competence, and another member's character is not its own.
 
 ### 2.2 Capability
 
@@ -309,7 +316,7 @@ silence off the scorecard.
 ```python
 @dataclass
 class PostRunDistillationWake:
-    schema: str = "personaos-post-run-distillation-wake/1"
+    schema: str = "personaos-post-run-distillation-wake/2"
     environment_id: str
     task_id: str
     run_id: str
@@ -317,7 +324,7 @@ class PostRunDistillationWake:
     settle_record_event_id: str           # the run's settle record
     scorecard_event_id: str               # the personaos-run-scorecard/1 event
     acceptance_facts_hash: str            # the acceptance projection at the settle point
-    prepayment_event_id: str              # the intake-time reservation on the run ledger
+    prepayment_event_id: str              # exact intake or supplementary member reservation
 ```
 
 One-line purpose: the exact-reference-only payload of the third
@@ -325,31 +332,93 @@ protocol-defined stimulus class ([`03_TASKS.md §7`](03_TASKS.md#7-causal-contin
 It carries no instruction, diagnosis, suggestion, or prose; delivery gives the
 persona one ordinary wake with its complete action catalogue.
 
-The reservation itself is `personaos-post-run-distillation-reservation/1`,
-recorded at intake on the environment lineage together with the signed pool
-record the settle point re-verifies; its run-ledger escrow is
-`personaos-post-run-distillation-prepayment/1`.
+The model's current stimulus retains this exact reference-only value in
+`payload.protocol_references`. Projection verifies the signed wake, its local
+ambient source, recipient, environment, task, and original signed run/model
+pool before exposing those fields. Kernel provenance does not become persona
+authorship: `source_content_authenticated` remains false, and arbitrary source
+prose and the execution-capability record are absent from the model's content.
+Recording references in a scheduled trigger alone does not satisfy delivery;
+the serialized provider request must contain them.
+
+Version `/2` uses the existing signed scheduled-delivery outbox. The pending
+record precedes enqueue, the start record precedes actor execution, and the
+completion record follows verified execution. Startup recovers a fire that
+never reached delivery or a delivery with no recorded start. A recorded
+retryable model failure can retry within the original remaining allowance;
+failed attempts do not replenish it. Completed turns do not repeat. A signed
+start with no completion remains unresolved because its effects are unknown.
+Historical `/1` wakes are readable but do not acquire automatic replay from
+the absence of records that their implementation never wrote.
+
+The ordinary action catalogue does not override a signed operator stop of the
+exact run. A pending distillation wake checks that durable stop before releasing
+its reservation or firing, including after restart. A wake already in transit
+still checks it at admission and before provider transport. Completion or
+acceptance alone does not acquire this cancellation authority.
+
+The reservation is `personaos-post-run-distillation-reservation/2`. Its signed
+environment-lineage record includes the exact grant identity, signed model
+pool, members, per-member allowance and total reserved calls. The existing run
+ledger applies that record as the debit once. Checking available calls and
+appending the record share the existing budget lock; no separate debit or
+process-local reservation index is needed. A failed append leaves the balance
+intact, and retry after an uncertain committed append reuses the same record.
+
+Intake reserves the original roster. At settlement, each later member can
+receive a supplementary reservation from the remaining unreserved grant,
+using the same format and the declared per-member amount. A supplementary
+record names its intake reservation and exact recipient. It cannot spend an
+existing member's reservation, and an insufficient remainder leaves that
+member explicitly unreached. Declared zero and unlimited grants preserve their
+stated modes. Each wake's `prepayment_event_id` identifies its own reservation.
+
+Historical reservation `/1` and its embedded
+`personaos-post-run-distillation-prepayment/1` remain readable with their
+original separately recorded debit. Reading them does not apply another debit.
 
 The member's reservation stays in escrow until the wake fires. At the fire
-gate the kernel releases exactly that member's `per_member` calls to the run
-ledger and appends `personaos-post-run-distillation-escrow-release/1`
-(environment, task, run, member, trigger, `llm_calls`) on the environment
-lineage — one kernel-signed marker per (run, member), from which every later
-accounting re-derives; a re-gated fire finds its marker and releases nothing.
-A release at arm would have let a wake that never fired hand its calls to
-whichever turn came next. Only a reserved member who departed before the
-settle point refunds at the settle point itself. The release refuses a member
-the reservation never covered, and names its refund adjustment
-deterministically from (environment, task, run, member), so a release
-re-attempted after a crash between the refund and its marker finds its own
-credit on the signed ledger instead of adding a second one.
+gate the kernel appends `personaos-post-run-distillation-escrow-release/2`,
+binding the member's exact reservation to an ordinary
+`personaos-event-budget-reservation/1`. The exact signed fire claims that
+allowance through the existing event-budget ledger. Its remaining calls are
+available only to this recipient's wake. Admission verifies the original
+prepayment, member, trigger, fired source, claim and original run/model pool.
+Replay observes the same claim; it creates no new allowance. An incomplete or
+substituted claim cannot fall through to shared run funding.
+
+The transfer and idempotency check share the durable budget lock. Failure to
+append the transfer leaves the trigger due and its escrow intact. There is no
+refund-and-marker gap. The kernel installs this fire-time gate when it creates
+the environment manager, including restored managers; it does not depend on a
+new arm or a scheduler sweep before the first fire. The ordinary active-turn model view can use unreserved
+run funds after the entry allowance is spent; the reservation is not a cap on
+the work. Verified completion settles unused event calls back to the original
+run once. Reserved members who depart before settlement return their allowance
+through an existing signed refund with an identity bound to the settle event,
+reservation and member. Repeating recovery after a committed refund whose reply
+was lost cannot refund it again. This includes a supplementary allowance written
+by an earlier settle attempt that a concurrent semantic turn interrupted.
+A principal's larger declared allowance is represented
+exactly, without a catalogue-derived or fixed-size truncation.
+
+If completion was recorded but allowance settlement was interrupted, startup
+joins the completed delivery's ambient source to its enclosing signed
+`SCHEDULED_TRIGGER_FIRED` transition and existing first budget claim. The
+ordinary settlement verifier returns only the unused balance to the original
+run, once; recovery creates no claim and performs no additional model turn.
+
+Historical `/1` releases already refunded their calls to the shared ledger and
+keep that interpretation. They cannot also become member claims. The live
+failure motivating `/2` refunded three members together; one member spent all
+three calls and the other two never received the final-result prompt.
 
 ### 4.5 The settle record
 
 ```python
 @dataclass
 class RunSettleRecord:
-    schema: str = "personaos-run-settle-record/1"
+    schema: str = "personaos-run-settle-record/2"
     environment_id: str
     task_id: str
     run_id: str
@@ -367,6 +436,9 @@ class RunSettleRecord:
     post_run_distillation_members_unreached: tuple[str, ...]  # settle-point members no reservation covers
     post_run_distillation_members_departed: tuple[str, ...]   # reserved members gone before the settle point (refunded)
     post_run_distillation_calls_per_member: int
+    post_run_distillation_member_reservation_event_ids: dict[str, str]  # exact allowance for each funded or departed member
+    post_run_distillation_fires_at: str    # stable one-shot time, reused after interruption
+    acceptance_facts_hash: str            # observed at settlement; never recomputed by delivery recovery
     completing_event_id: str              # the append that completed the settle fact
     completing_event_kind: str            # "lineage_event", or "work_state_id" when a parking disposition's event could not be found and its work-state id stands in (stated)
     record_hash: str
@@ -378,6 +450,18 @@ written on the append that completes the fact — the last parking disposition,
 the exhaustion pause with nothing pending, or the terminal event — never by a
 sweep, and under one lock, so two completing appends that race settle once. It creates no terminal state and is read by no other substrate
 decision; the scorecard and the post-run wakes reference it.
+
+Version `/2` commits the delivery inputs with the settle fact. Startup and the
+ordinary clock may finish arming its missing one-shot wakes and returning its
+departed allowances. This is recovery of an already signed intent, not a new
+settlement or run generation. Existing trigger catalogs and completed delivery
+records prevent repeated turns; existing deterministic refund identities prevent
+repeated credits. Recovery uses the original acceptance-facts hash and any
+already recorded scorecard. If interruption preceded the scorecard write, the
+scorecard reference remains unavailable; recovery does not present a newly
+computed observation as the original one. A complete armed observation closes
+the arming work. Historical `/1` remains readable without automatic reconstruction
+of delivery inputs that version never recorded.
 
 ## 5. The run scorecard
 

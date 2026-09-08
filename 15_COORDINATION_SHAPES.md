@@ -206,6 +206,12 @@ settlement. Shared-environment publications retain exact author/action/time
 provenance. A peer's bytes cannot be credited as the current actor's tool use,
 practice, artifact, or review.
 
+The served actor pins its workspace before model work even when its supervisor
+already holds the semantic lease. Peer publication cannot change the files
+between that turn's tool calls. Capturing a conflict preserves the authored
+branch without resetting it; only a later turn refreshes the baseline. Pin
+release runs on both successful and exceptional exit.
+
 A verified workspace publication is live shared state, not a causal successor.
 It remains in the signed ambient stream, environment lineage, current workspace,
 and later ordinary-wake context, but it does not route an
@@ -231,6 +237,14 @@ If the owner later chooses preserved persona alternatives, the workspace layer
 stages only those exact path/object bindings on current shared HEAD, verifies the
 index and resulting tree, and retains both prior heads. It never replays the
 whole historical persona branch as an implicit semantic choice.
+
+The live choice is named `restore_preserved_persona_alternatives`: it replaces
+every named conflict path with the saved persona alternative, including when
+later shared edits exist. `adopt_current_environment` retains the current shared
+tree and refreshes the owner's branch from it. Both retain the conflict archive.
+The historical name `merge_resolved_persona_branch` remains readable in signed
+claims; new actions do not expose it because it did not describe restoration of
+conflict-time bytes. Neither choice synthesizes a merge or judges content quality.
 
 ## 6. Knowledge and skill coordination
 

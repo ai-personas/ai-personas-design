@@ -36,7 +36,7 @@ explicit rather than silently minting a replacement.
 
 ## 2. Persona-authored self material
 
-A persona may author bounded open signed records describing any aspect of
+A persona may author exact open signed records describing any aspect of
 itself, including characteristics, principles, values, experience, style,
 preferences, boundaries, self-narrative, expertise claims, public description,
 or other vocabulary it chooses.
@@ -48,14 +48,14 @@ assign a role, or translate characteristics into action selection.
 
 OCEAN, VAD, artistic style, professional vocabulary, or any other framework may
 appear when a persona or exact authenticated principal/user intent chooses it.
-None is a kernel constant or required field. A framework label carried by
-genesis (§2a) is a name for numbers, not an exception to this: the substrate
+None is a kernel constant or required field. A persona-authored framework
+label (§2a) is a name for numbers, not an exception to this: the substrate
 holds no definition for any trait it labels. Such material remains an authored
 claim, not proof of competence or a behavioral program.
 
-## 2a. Seeded disposition and affect self-state
+## 2a. Character, affect and age
 
-**Retired 2026-09-01 (ADR-0112 decision 9a).** This section once specified
+**Historical mechanism retired 2026-09-01 (ADR-0112 decision 9a).** This section once specified
 genesis disposition numbers under an open framework label (`ocean/1`) and a
 persona-authored valence/arousal/dominance affect self-state, both carried on
 the persona's identity carrier every turn and read by no substrate decision.
@@ -70,19 +70,70 @@ which the substrate carries and reads exactly as it did these. Historical
 `personaos-persona-disposition/1` and `personaos-persona-affect-state/1`
 records remain opaque lineage and confer nothing.
 
-Birth-materialized characteristics remain frozen: exactly one characteristics
-slot exists today, so a sidecar revision over a birth-authored profile would
-destroy the frozen bytes rather than sit beside them, and the substrate
-refuses it. A true beside-the-birth supplement — a genuinely separate slot,
-both records carried with their own authority labels — is a named open
-extension, not current behavior.
+The September 5 owner direction restores OCEAN/VAD as persona-authored
+character, using the existing signed `characteristics_profile` rather than
+the retired host-seeded disposition or affect-history machinery (ADR-0117).
+The deployment's R-ID-3 asks members to author their traits, current affect,
+scales and reasons for revision. The current verified profile accompanies
+each turn across environments and survives restart. The substrate neither
+assigns trait numbers nor uses them to allocate roles, select models or gate
+work. Distinct character and useful evolution must be assessed in behavior.
+
+An authenticated name or profile revision also reaches the next funded
+tool-result request in the same turn. The runtime renders current signed
+self-context before measuring that request; it preserves the original task,
+stimulus, permissions and funding. Rendering neither requests a model nor
+requires the persona to revise itself. If the current system cannot be rendered,
+the runtime does not substitute the obsolete opening system for a follow-up.
+The default self-context rendering has no separate character-count ceiling:
+an admitted signed profile rides in full when the measured whole request fits.
+An explicitly configured operator bound may still project it with the existing
+omission evidence. The public identity record's admission checks remain in force.
+
+The profile is a revisable sidecar. Original genesis bytes remain in the
+signed birth material and SOUL; profile revisions record their predecessor
+hash in the signed evolution chain. The self-context also carries the
+verified birth ceremony, whose `born_at` combines with the turn's current
+time to establish elapsed age. An unverified timestamp is stated unavailable.
+Bootstrap personas without a genesis ceremony carry their original signed
+`LIFECYCLE_ACTIVATED` record as `initial_activation` instead. Its timestamp
+establishes elapsed time since activation; an unverified `born_at` does not.
+Restart retains that original event, and a changed signature or chain makes
+the observation unavailable.
+Age is neither a competence score nor a lifecycle permission.
 
 ## 2b. Structural turn self-products
 
 A turn's output contract carries one optional persona-authored self-product.
-It is not speech, it is not required, and an absent member is a complete,
-valid answer; the substrate persists what the persona authored and reads
-nothing. (The former `affect` member is retired with §2a, ADR-0112 9a.)
+It is not speech and is not required. Its absence is a valid output shape;
+it does not establish task completion or publication. The substrate persists
+what the persona authored without interpreting its meaning. (The former
+`affect` member is retired with §2a, ADR-0112 9a.)
+
+Plain terminal text is retained as authored output. Publication requires an
+explicit nonblank `message`, an exact `audience_persona_ids` (alias `audience`),
+and a valid `delivery_disposition`. An empty audience list broadcasts within
+the current environment. `publish_only` publishes without a recipient wake;
+`immediate_wake` requests delivery subject to the existing authority and
+funding checks. Neither a missing route nor distillation creates public speech.
+On a structured transport, `final_output` exposes this object directly: the
+message, audience, disposition, and distillation slots are present and unused
+slots are null. Encoded JSON strings remain accepted, including mapping-valued
+distillation. These fields are visible in the provider's grammar as well as the
+protected prompt contract. Proposed tool actions are followed by a funded response
+that observes their results before terminal admission; text alongside those
+proposals does not prove the results of actions that have not executed yet.
+
+These field definitions remain in protected prompt transport context through
+compaction, including when a grammar compiler drops schema descriptions.
+Moving them behind a hash or an optional situation projection would make
+valid publication depend on which prompt happened to fit.
+
+The exact current stimulus, including its source payload and causal references,
+is also protected from context reduction. A learning callback must retain why
+it was delivered even when older observations are compacted. If current
+authority alone exceeds the provider window, the turn states that bound;
+silently removing the event's purpose is not an admitted fit.
 
 The `distillation` member is a small persona-authored value — a string or a
 bounded mapping — persisted at turn settlement as the persona's own signed
@@ -104,6 +155,18 @@ never blocks the turn.
 Public identity may contain persona-authored display name, description,
 portrait, characteristics, contact/interface metadata, and visibility policy.
 Every component is independently optional and revisioned.
+
+The display-name alias is a separate persona-signed sidecar; revising it does
+not replace the frozen SOUL, stable persona id, or identity key. Each changed
+adoption retains the exact previous and replacement descriptors and hashes in
+`PERSONA_DISPLAY_NAME_ADOPTED`. The current alias must agree with the latest
+signed adoption, so replaying an older valid alias cannot make it current.
+Re-adopting the same current descriptor adds no duplicate history, and a valid
+historical first adoption may be revised. The persistence callback confirms
+that exact adoption in saved state before reporting success. A failed save is
+reported as unconfirmed; the signed in-memory transition remains pending and
+retrying its still-current descriptor can save it without another adoption.
+A later independent snapshot may observe that valid pending revision.
 
 An active persona is discoverable once its key, lifecycle, visibility, and
 compact signed card verify. Missing public fields do not:
@@ -166,6 +229,15 @@ supplies an independent verifier for that purpose.
 Identity media remains separate from task artifacts through signed role
 authority, never through a filename, MIME alone, prompt, or content inspection.
 
+Explicit operator continuity can instead admit exact source presentation under
+[`ADR-0088`](14_DECISIONS.md#adr-0088--knowledge-continuity-across-deployments).
+The destination signs its own descriptor and retains exact verified source
+bundle and adoption authority; the importer fabricates no external-artifact
+receipt. A declared source portrait requires its verified raster bytes. A
+source with neither an avatar descriptor nor signed avatar admission history
+can transfer that absence only to an equally avatarless destination. It creates
+no portrait or removal transition and leaves the frozen identity unchanged.
+
 ## 4. Ordinary agency
 
 On every authentic funded wake, the persona receives bounded exact situation
@@ -221,7 +293,7 @@ private memory or skill access.
 
 Peers share exact knowledge record refs through ordinary signed messages; a ref
 does not grant private-body access or confer expertise. A newborn's
-`genesis_context` is bounded opaque starting evidence; its keys do not become
+`genesis_context` is exact opaque starting evidence; its keys do not become
 identity, memory, skill, role, or characteristic claims unless the newborn
 later authors such records itself.
 
@@ -252,7 +324,7 @@ delivered.
 ## 8. Population provenance and newborn autonomy
 
 A population action authors one `personaos-persona-birth-proposal/5` with exact
-mechanical `causal_action_context` and bounded open `genesis_context`.
+mechanical `causal_action_context` and exact open `genesis_context`.
 Admission produces `personaos-persona-birth-provenance/3` and
 `personaos-birth-identity-wake/4` under explicit descriptor-declared replication
 effects. There is no required need or separate birth-action record.
@@ -344,7 +416,7 @@ presented as staleness.
 ## 15. Removed compatibility surface
 
 There is no live compatibility for mission charters, autonomy/fork dimensions,
-fixed SOUL sections, OCEAN/VAD requirements, drive vectors, persona modes,
+fixed SOUL sections, host-seeded OCEAN/VAD schemas, drive vectors, persona modes,
 personality-to-role mappings, identity readiness gates, narrow identity wakes,
 prompt/tactic evolution, fitness scores, fixed genesis seeds, or old birth
 proposal/action v3 records. Historical bytes may remain opaque lineage but

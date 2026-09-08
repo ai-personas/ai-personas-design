@@ -138,9 +138,11 @@ the whole turn. An effect-bearing action that PRECEDED the disposition in the
 same provider turn is recorded, not counted against it: the persona authored the
 disposition knowing what it had just done, and the settlement binds the
 post-effect workspace signature. An effect-bearing action that FOLLOWS the
-disposition, a channel carrying no ordering evidence, an armed future stimulus,
-and a response publication that enqueued a peer wake each prevent the
-settlement.
+disposition, a channel carrying no ordering evidence, and a separately armed
+future self-stimulus each prevent the settlement. A response publication that
+enqueues a peer wake is recorded and hash-bound, not a blocker: `no_successor`
+means no self-successor, and peer-wake funding is settled at authoring time
+(ADR-0101 and ADR-0099).
 
 The record states the exact authenticated action count together with the
 identities of both the effect-free actions and the preceding effect-bearing

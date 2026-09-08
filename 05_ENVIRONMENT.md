@@ -107,6 +107,26 @@ Concurrent publications retain authorship. Peer bytes do not become another
 actor's effects. Conflicts preserve all exact alternatives until an authorized
 signed resolution chooses or synthesizes bytes.
 
+Successful branch synchronization captures the peer's exact full commit id
+under the environment lock. A newly emitted
+`personaos-workspace-publication-sync/1` binds that `synced_commit_id` to one
+admitted publication's own event id and hash, publisher, and workspace-state
+signature. Every file in that publication's verified, nonempty delivered
+`(path, size, SHA-256)` set must match a regular file in the captured commit;
+unrelated extra files are allowed. Exact commit, tree and blob reads ignore
+Git replacement references. Missing commit or file evidence preserves the
+observed synchronization but yields no publication association.
+
+The current admitted publication and earlier admitted publications in the
+exact task family are checked independently against the captured commit. A
+latest-publication mismatch does not prevent a matching older association.
+Publication order and Git ancestry alone establish no delivered-byte match.
+The fact describes that captured commit, with `grants_wake: false`; it does
+not assert the contents of a later worktree. Historical facts may omit
+`synced_commit_id` and keep their existing interpretation. The commit-bound
+check governs new fact emission; acceptance consumption, latest-admitted
+delivery carriage, branch settlement and retained signed history are unchanged.
+
 A conflicted authored revision and a later editing baseline are separate
 mechanical states. Once the conflicting head, merge preimage, exact alternatives,
 and preservation manifest are durably bound, the disposable worktree for a
@@ -116,11 +136,37 @@ that baseline neither adopts the environment alternative nor resolves the
 conflict; it only prevents historical branch divergence from hiding current peer
 work or making later calls rediscover it.
 
+The current turn keeps its existing workspace baseline through successive tool
+effects, capture and publication. Conflict preservation cannot reset that
+turn's authored branch. A served actor acquires the same workspace pin as an
+initial runtime turn before invoking its model work, including when its
+semantic turn lease was already acquired by the supervisor, and releases the
+pin on both successful and exceptional exit. Later-turn baseline refresh is
+not an exception to this current-turn isolation.
+
+When a completed action triggers workspace publication, its following model
+request carries that publication outcome alongside the action result. Command
+success and shared publication are separate facts: a preserved conflict remains
+an incomplete publication even if the command succeeded. The actor receives
+the signed source reference and conflict details through the existing result
+history and prompt-fitting path. Internal workspace checkpoint snapshots stay
+with the publisher; they are not another copy of the result. An unavailable
+publication observation is reported as unavailable. These facts neither select
+a conflict alternative nor require another model call.
+
 An authenticated resolution applies only the alternatives committed by the
 exact conflict reference to the then-current shared tree. It does not replay an
 unrelated cumulative persona branch. Both the pre-resolution shared head and
 the preserved authored head remain recoverable, and the resulting complete tree
 is verified before a persona-signed resolution claim can close the conflict.
+
+The action result returns the new verified resolution and its signed claim once,
+the mechanical merge, and current open-conflict status bound to the complete
+source-state hash. Earlier resolution claims and their full workspace manifests
+remain in signed lineage; they are not replayed with every later resolution.
+Current open alternatives remain available through their exact conflict refs
+and the existing inspector. This changes result carriage, not retained history,
+resolution authority, or the chosen bytes.
 
 This protocol has no migration or compatibility path for abbreviated heads,
 archive-projection commits, or branches produced by an earlier conflict
@@ -211,6 +257,66 @@ verifies; discovery does not wait for artifact or telemetry hydration.
 Process/node resume reconstructs the same exact memberships, workspace,
 resource/pending-event state, persona identities, memories, skills, notes, and
 communications from current signed records. It does not mint replacements.
+
+An explicit owner copy uses `personaos-environment-snapshot/1`. Its source
+kernel signature binds the source identities, capture time, exact environment,
+source-lineage, workspace and tool-recipe members, and the complete declared
+environment-owned object closure. Capture refuses a changing source. The
+snapshot retains source history, Git refs, worktrees and index objects, file
+bytes, directories, link relationships, modes and modification times. Source
+Git configuration, hooks and external filters are not installed or executed.
+
+The signed source-lineage member lists external dependencies separately:
+known private continuation or carrier references and references to other
+lineage scopes retain their exact identities without fetching those private
+bodies or foreign chains. Closure discovery follows declared native fields;
+it does not traverse arbitrary authored or provider JSON. A known private
+continuation or carrier body embedded in required source evidence refuses
+capture. When copying a previously imported environment, `prior_import`
+retains its entire locally signed import transaction and ancestor inventory.
+Import recursively verifies that ancestry as original history, without making
+the old export or import grant current authority for another copy.
+
+Source-owner export and destination-owner import are separate signed events
+bound to the same snapshot, source, destination kernel and fresh destination
+environment identity. The destination independently pins the source kernel
+key and supplies its own explicit policy. A private capture does not grant
+public access. Public sharing additionally requires source-owner disclosure
+authority with an expiry; a current signed publication binds the full inventory
+and exact destination. `personaos-environment-share/1` carries a compact
+publication descriptor and peer route, so the owner request size does not cap
+the copied inventory. The native peer transport fetches complete verified
+objects and checks a fresh source-signed availability challenge before copying
+and again before destination commit. Withdrawal, expiry or an unrelated object
+refuses the read or copy; cached bytes do not renew disclosure authority.
+
+Import stages and verifies every declared environment-owned member, both owner
+grants, original proofs, paths, links and Git object closure before making a
+destination live.
+The newly signed destination creation and import receipt, local import
+transaction and complete workspace are durable before one atomic environment
+directory commit. The receipt binds the source head, destination head and
+source workspace hash. After commit, incomplete activation is recoverable from
+the signed local transaction without contacting the source or creating duplicate
+events. A conflicting destination identity is refused.
+
+Startup runs import recovery before ordinary topology replay. It preserves
+committed and uncommitted destination workspace edits and current signed local
+membership after the source publication expires or is withdrawn. A missing,
+malformed or misdirected import record excludes its actual destination from
+ordinary adoption and reports a recovery refusal; a corrupt claimed identity
+cannot select another environment for exclusion. Unrelated environments remain
+available.
+
+The destination has its own environment identity, policy and new workspace
+head. Source memberships, triggers, resource records and registries remain
+passive history. Import supplies no source personas, private identity sidecars,
+kernel or persona private signing keys, live grants, model access, mounted tools,
+wakes or processes. Exact tool recipes remain available for separately
+authorized acquisition, local provisioning and smoke verification; an
+unavailable source executable remains
+unavailable. Persona knowledge adoption follows the separate signed continuity
+contract in [`14_DECISIONS.md ADR-0088`](14_DECISIONS.md#adr-0088--knowledge-continuity-across-deployments).
 
 Direct/local/P2P routes are primary. An HTTP locator is last-resort and never
 environment authority.

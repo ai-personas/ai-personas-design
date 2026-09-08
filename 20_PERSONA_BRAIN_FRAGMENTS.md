@@ -181,6 +181,17 @@ its body were guaranteed to reach later cognition. This projection ranks and
 recommends nothing: only the persona may reuse a binding identity, replace its
 fragment set, clear it, retain the omission, or take no action.
 
+Before a funded tool-result request, changes to the current persona's fragment
+or binding records trigger a new mechanical compile under the turn's existing
+scope. It verifies the current revisions and signatures, including a changed
+or cleared binding; private fragments outside that scope remain ineligible.
+Unchanged records reuse the existing compile and undergo ordinary rendering
+verification, without rotating the catalogue or creating another compile event.
+This refresh makes no model request. The turn receipt retains its opening
+compile, while completed follow-ups retain their exact system text alongside
+their prompt in the durable observation sequence (09 §4.3). Carriage proves
+presentation of those bytes, not successful use of a learned method.
+
 Using a fragment does not automatically prove influence, learning, competence,
 quality, or completion. Exact citations establish only that the persona chose
 to bind the record.
@@ -236,11 +247,12 @@ persona authored the member in its own turn output, and what is persisted is
 exactly what it authored. At settlement the substrate upserts the bytes as one
 persona-signed fragment under a deterministic content-derived identity — the
 same authored value never duplicates under retries — and re-binds the
-persona's current winning head: the complete carried set stays exactly what
-the head already holds, so a persona's own pruning is never resurrected; the
-new fragment is appended; and only substrate-carried distillation fragments,
-recognised by their identity prefix alone, are retained at the newest few so
-the bounded carrier never starves persona-curated material. This is carriage
+persona's current eligible winning head, preserving its scope. Valid carried
+identities remain, so a persona's own pruning is never resurrected, and the new
+fragment is appended unless its body is byte-identical to one already carried.
+When no eligible head exists, a persona-scoped head is created. There is no
+newest-N retention rule: exact scope, revisions and measured prompt fit determine
+later carriage, with omissions stated by the carrier. This is carriage
 of a persona-authored product, not an automatic edit: the substrate converts
 no receipt, message, or trace into a fragment, and the no-automatic-edit rule
 above is unchanged.
