@@ -119,7 +119,13 @@ independent receipt accepts the delivery. All six complete communication texts
 match native and DOM bytes. Final card states agree on budget exhaustion, while
 the original admitted-inventory export audit remains partial. The circuit
 retains four earlier repairs and a fresh reproduction, but its latest verification
-was interrupted by a controller reader defect. Reliable learning and accepted
+was interrupted by a controller reader defect. A subsequent queued resume
+failed before funding because validation stripped the saved text's final
+newline. The exact-text repair validates the unchanged archived document;
+a funded successor remains unverified. The house selected and acquired
+CadQuery/OCP, with no Blender, FreeCAD or VibeCAD use in the reviewed history.
+The circuit used ngspice and produced simulation artifacts; PCB, graphical
+schematic, BOM and manufacturing files remain absent. Reliable learning and accepted
 engineering delivery remain unproved. Design intent and a valid signature do
 not establish those outcomes.
 

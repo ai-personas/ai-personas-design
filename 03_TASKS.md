@@ -215,6 +215,11 @@ prompt lane; generic raw-event compaction cannot replace it with only the
 resume event hash. Its words and values grant neither completion nor a
 successor—they are visible causal evidence for each recipient's own decision.
 
+Persisted principal text retains every original UTF-8 byte, including leading
+and trailing whitespace. Resume validates its hash before delivery without
+normalizing the text; an expected public text projection cannot replace or
+repair conflicting full persisted copies.
+
 The `/2` observation additionally binds the task-family situation as exact
 ledger facts, because a re-invocation is itself causal evidence the recipient
 must be able to perceive:
