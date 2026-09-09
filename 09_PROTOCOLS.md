@@ -201,6 +201,12 @@ durable evidence, not a bounded prompt preview; truncating it may hide a later
 revision or conflicting parent. Model-window limits affect presentation and
 compaction, not which files the package can contain.
 
+Command capture inventories and selects all eligible files by default. An
+explicit empty file is valid content and retains its path and empty-byte hash
+through recovery; absent or malformed content is not an empty file. Helpers may
+honor a caller's explicit allowance, but ordinary execution and output transfer
+must not impose fixed byte or file-count defaults.
+
 Compaction must read the whole source. A source exceeding the measured request
 allowance is carried in consecutive Unicode-safe segments, each with exact byte
 offsets, the total source size and the preceding persona-authored digest. Every
