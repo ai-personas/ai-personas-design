@@ -28,6 +28,22 @@
 registry: schemas
 owner: registry
 rows:
+  - id: personaos-node-bootstrap-cohort/1
+    class: exact
+    class_decided_by: "16_POPULATION_DYNAMICS.md §11"
+    status: current
+    tiers: [lineage, operator]
+    owner: "16_POPULATION_DYNAMICS.md §11"
+    members:
+      required: [kernel_id, mode, basis, neutral_persona_ids, authored_founder_persona_ids]
+      optional: []
+    emitters: ["src/personaos/node_support.py:_node_bootstrap_cohort_payload"]
+    notes: >-
+      Kernel-signed ordered startup membership, durably recorded before new
+      founder snapshots. Missing verified actors and incomplete or invalid
+      declaration evidence refuse startup. Birth alone does not enroll an
+      actor in the default task cohort; no task or funding authority transfers.
+
   - id: personaos-knowledge-bundle/1
     class: open
     class_decided_by: "ADR-0088 revision 2026-09-07"
@@ -7572,7 +7588,8 @@ rows:
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
     members: unreviewed
-    emitters: ["src/personaos/environment/workspace.py:EnvironmentWorkspaceStore._ensure_environment",
+    emitters: ["src/personaos/environment/portability.py:_stage_workspace",
+      "src/personaos/environment/workspace.py:EnvironmentWorkspaceStore._ensure_environment",
       "src/personaos/runtime.py:TaskRuntime._ensure_environment_workspace"]
 
   - id: personaos-event-budget-adjustment/1
@@ -8545,10 +8562,10 @@ rows:
     class: open
     class_decided_by: seed
     status: current
-    tiers: [in_process]
+    tiers: [lineage]
     owner: "an ADR decision until that section is written"
     members: unreviewed
-    emitters: ["src/personaos/continuity.py:import_bundle_into_kernel"]
+    emitters: ["src/personaos/continuity.py:_import_fragment_carriage"]
 
   - id: personaos-learning-history-manifest-navigation-reference/1
     class: open
@@ -10326,12 +10343,13 @@ rows:
     class: open
     class_decided_by: seed
     status: current
-    tiers: [lineage]
+    tiers: [public_anonymous, lineage]
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: ["src/personaos/environment/manager.py:EnvironmentManager.publish_local_persona_invitation",
       "src/personaos/environment/manager.py:EnvironmentManager.publish_local_persona_invitation_response",
-      "src/personaos/environment/manager.py:EnvironmentManager.publish_local_persona_membership"]
+      "src/personaos/environment/manager.py:EnvironmentManager.publish_local_persona_membership",
+      "src/personaos/federation/communication.py:FederatedCommunication.publish_direct"]
 
   - id: personaos-persona-exchange-snapshot/1
     class: exact
@@ -13448,7 +13466,7 @@ rows:
       required: [authority_verified, source_kind, source_event_id, carrier_environment_id,
         remote_environment_id, invitation_package, automatic_response, automatic_membership]
       optional: []
-    emitters: ["src/personaos/federation/recruitment.py:FederatedRecruitment.verified_inbound_wake_context"]
+    emitters: ["src/personaos/federation/recruitment.py:FederatedRecruitment._invitation_context"]
 
   - id: personaos-verified-p2p-persona-cache-status/1
     class: rendered
@@ -14080,6 +14098,7 @@ rows:
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: ["src/personaos/protocols/libp2p_bridge.py:_normalise_provider_records",
+      "src/personaos/protocols/libp2p_bridge.py:_verified_current_peer_inventory",
       "src/personaos/protocols/libp2p_bridge.py:verified_public_capability_records_from_provider_index",
       "src/personaos/protocols/public_discovery.py:_provider_envelopes_for"]
 

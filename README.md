@@ -108,16 +108,20 @@ work note, filename, or stale cached run cannot establish that the live system
 worked.
 
 The [current implementation review](https://github.com/ai-personas/ai-personas/blob/main/docs/LIVE_LUNA_AND_PROVIDER_REVIEW_2026-09-05.md#outcome)
-separates verified mechanisms from remaining outcomes. The latest audited Luna
-trial on 8 September preserves identity, prior memory and causal evidence. A
-persona corrects roof geometry before provider usage limits interrupt the trial.
-Only format validity among the nine full house conditions is met; its checker
-still gives unsupported positive outcomes and its manifest is stale. Prior
-lessons reach later requests, while compaction and one new knowledge record
-retain factual mistakes. Reliable learning and accepted engineering delivery
-remain unproved. Three observed complete public text responses match their
-source bytes, but the trial has no final browser capture or delivered final
-turns. Design intent and a valid signature do not establish those outcomes.
+separates verified mechanisms from remaining outcomes. The latest 80-unit Luna
+house verification on 9 September completes its four funded final turns and
+shutdown. All 1,096 ordinary package files agree across publication, workspace
+and export. The selected inputs retain full feedback and bound lessons, and no
+compaction is observed among 80 signed native call IDs. Geometry is unchanged;
+only format validity among the nine full house conditions remains verified.
+The checker still has an incorrect room tolerance predicate, and no current
+independent receipt accepts the delivery. All six complete communication texts
+match native and DOM bytes. Final card states agree on budget exhaustion, while
+the original admitted-inventory export audit remains partial. The circuit
+retains four earlier repairs and a fresh reproduction, but its latest verification
+was interrupted by a controller reader defect. Reliable learning and accepted
+engineering delivery remain unproved. Design intent and a valid signature do
+not establish those outcomes.
 
 ## Clean-break scope
 

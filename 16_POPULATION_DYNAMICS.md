@@ -261,6 +261,29 @@ doctrine-targeted behaviour (ADR-0110), shipped SOULs stay as shipped, and no
 later decision revises a SOUL to move a scorecard counter; the levers that
 remain are mechanical statedness and task-authority bars.
 
+The node restores verified retained actors before resolving its ordered default
+task cohort. A fresh public launcher defaults to three neutral founders; the
+native entry point defaults to one. These defaults apply only to fresh state.
+An explicit `--seed-personas` count selects the neutral prefix, with declared
+founding SOULs in their supplied order. Runtime-born personas remain retained
+actors; their existence alone does not put them in the default task cohort.
+
+`NODE_BOOTSTRAP_COHORT_DECLARED` carries the exact
+`personaos-node-bootstrap-cohort/1` fact in the dedicated domain lineage:
+kernel identity, neutral or authored mode, declaration basis, and the ordered
+neutral and authored founder IDs. The kernel signs and durably appends that fact
+before persisting new founder snapshots. Startup refuses missing referenced
+actors and incomplete or invalid cohort evidence, preserving the evidence
+across repeated restarts. It does not recreate an unavailable founder from a
+neutral template or infer a smaller cohort after a partial snapshot write.
+
+Legacy state without that fact is unambiguous only when it contains one
+verified neutral founder and any other actors have positively verified birth
+evidence. Multiple neutral founders or authored founder order require a
+one-time explicit startup declaration. File order and absence of birth fields
+do not establish membership. This fact records startup membership only; it
+adds no roles, task authority, budget, or environment-membership decision.
+
 ## 12. Design criteria
 
 1. Proposal v5 is the only persona-authored birth authority.
