@@ -1240,8 +1240,8 @@ no headroom for growth.
 **Decision.** Fit is a standing invariant, not an error path, enforced in
 two tiers every turn:
 
-1. *Mechanical, free.* One deployment-wide scale — the smallest admitted
-   window's byte budget (window minus output and system reserves, at a
+1. *Mechanical, free.* One scale within the verified run pool — its smallest
+   known callable model window's byte budget (window minus output and system reserves, at a
    bytes-per-token value that ADR-0107 demotes to a pre-measurement seed:
    provider-counted tokens supersede it from the first observation) over the shipped worst-case
    lane sum — resolves every default lane bound, each with a stated floor so
@@ -1249,6 +1249,12 @@ two tiers every turn:
    largest non-authority lane first, the situation stage restages at tighter
    caps and observation lanes fall to whole-lane structural indexes
    (existence + hash + read action, fetchable, never silently truncated).
+   The active run's window is resolved from its current admitted clients,
+   falling back to that selected model's catalogue window. An unrelated
+   catalogue model cannot lower it. All-unknown pools impose no invented
+   window; work outside a run retains the ambient deployment floor. Nested
+   and concurrent run scopes remain isolated, and leaving a scope restores
+   its predecessor (amended 2026-09-09).
 2. *Model-assisted, priced honestly.* Where mechanical bounding would
    reduce a bulky observation lane (blackboard history, collaboration
    heads, peer work states, the situation stage) to a bare hash, the SAME

@@ -2283,6 +2283,15 @@ nothing to record is written `—`:
   verifier; it does not claim a full live project-view test. See
   [the regression](https://github.com/ai-personas/ai-personas/blob/main/tests/test_public_project_topology_ui.py)
   · recorded-not-decided: — · ADR-0114
+- **2026-09-09** · run: — (populated native UI fixture) · build/model: — ·
+  measured: the signed project topology verified, but its two internal
+  verification fields were discarded by record storage, leaving the drawer's
+  hosts and members unavailable · changed: retain both fields only after
+  verification and clear them on missing or invalid replacements. The extended
+  regression follows actual native project materialization through signing,
+  browser admission, storage and drawer rendering, including four refused
+  replacement forms and withdrawal. Remote record fields cannot supply the
+  internal verdict · recorded-not-decided: live network latency · ADR-0114
 
 ### ADR-0115
 
