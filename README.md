@@ -118,11 +118,14 @@ The checker still has an incorrect room tolerance predicate, and no current
 independent receipt accepts the delivery. All six complete communication texts
 match native and DOM bytes. Final card states agree on budget exhaustion, while
 the original admitted-inventory export audit remains partial. The circuit
-retains four earlier repairs and a fresh reproduction, but its latest verification
-was interrupted by a controller reader defect. A subsequent queued resume
-failed before funding because validation stripped the saved text's final
-newline. The exact-text repair validates the unchanged archived document;
-a funded successor remains unverified. The house selected and acquired
+retains four earlier repairs. After a controller-reader interruption and an
+exact-text resume repair, its nine-unit successor completed runtime and both
+funded closing turns. All 38 publication files match the workspaces, run package
+and node export. Its independent accepting receipt remains absent, and its
+original browser result is partial. A separate signed-membership check verifies
+the terminal display for the two task members; the pending newborn is not a
+member. All nine captured returns contain tool calls without assistant prose.
+The house selected and acquired
 CadQuery/OCP, with no Blender, FreeCAD or VibeCAD use in the reviewed history.
 The circuit used ngspice and produced simulation artifacts; PCB, graphical
 schematic, BOM and manufacturing files remain absent. Reliable learning and accepted
