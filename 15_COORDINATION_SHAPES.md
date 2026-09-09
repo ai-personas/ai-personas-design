@@ -112,6 +112,14 @@ actions. They may occur in any order and may overlap. The kernel enforces exact
 authorization, recipient/visibility scope, signatures, causal order, resources,
 workspace leases, and settlement without deciding meaning.
 
+The deployment's R-COORD-4 asks members to negotiate and revise their own
+arrangements as work and experience change. R-WRK-6 makes human participation in
+clarification optional: members can offer and examine working assumptions and
+continue within the principal's existing intent and authority (21 §4.1). These
+are exact signed requirement texts, not a scheduler or a prescribed team shape.
+Different arrangements may coexist; no request lifecycle imposes a leader,
+committee, fixed profession, serial handoff or compulsory consensus.
+
 ## 3. Open persona-authored coordination records
 
 A persona may author a bounded open coordination proposal or description and

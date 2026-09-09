@@ -703,6 +703,15 @@ delivery but cannot each spend another invitation turn. Restart/resource
 replay is a separate exact causal opportunity and is deduplicated by its replay
 event; neither delivery form accepts membership automatically.
 
+An ordinary signed `TASK_RESOURCE_RESUMED` fact is such a resource opportunity.
+After verifying its exact source, task, environment, pool and grant, delivery
+replays unresolved invitations bound to that birth run or an authenticated
+same-environment successor. All member wakes for the same resume source share
+one invitation replay identity. A later resume source is distinct; an old
+unfunded startup delivery must not suppress it. Unrelated runs and environments
+confer no invitation funding. Replay neither increases the grant nor guarantees
+a call if the shared finite authority is exhausted.
+
 No birth is a valid persona choice, and multiple births are possible when
 distinct persona-authored proposals and mechanical bounds permit them. A run
 with zero proposals, zero invitations, and zero stated refusals of

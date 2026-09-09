@@ -79,6 +79,23 @@ each turn across environments and survives restart. The substrate neither
 assigns trait numbers nor uses them to allocate roles, select models or gate
 work. Distinct character and useful evolution must be assessed in behavior.
 
+R-ID-3 also asks the persona to give its values practical meaning in its own
+preferences and to revisit current affect and preferences when experience
+changes their basis. R-CAP-4 asks it to compare the fit of plausible instruments
+and learn from bounded trials and peer experience (ADR-0119). These are exact
+deployment-signed requests. They introduce no host interpretation of trait
+values, prescribed difference between members, instrument assignment, or
+compulsory profile revision. Similar values may accompany different choices;
+different values may reasonably accompany the same choice.
+
+Evidence of character carriage is distinct from evidence of its use. A profile
+in the request proves availability. A persona's stated preference and the
+subsequent action expose its choice and claimed basis. Establishing that a
+trait caused a difference requires a comparison that accounts for the task,
+model, context, available capabilities and funding. A scripted response proves
+the transport and persistence path, not emergent behavior. Affect may change
+without a trait revision; a persona may also retain its values after reflection.
+
 An authenticated name or profile revision also reaches the next funded
 tool-result request in the same turn. The runtime renders current signed
 self-context before measuring that request; it preserves the original task,

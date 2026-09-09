@@ -2461,3 +2461,85 @@ The runtime delegates navigation validation to the kernel's existing verifier,
 removing the duplicate rules. The model-choice description states its actual
 scope: the next and later requests in the same authorized run, including a
 different advertised reasoning effort on the same model.
+
+## ADR-0119 — Authored character, capability fit and continued collaboration
+
+**Status:** accepted 2026-09-09 under the owner's direction to investigate and
+fix obstacles to characteristic-informed exploration, adaptation, learning and
+communication, including continued work from a short request without a required
+human clarification response. Amends 02 §2a, 10 §2.1–2.2 and §2.6–2.7, 15 §2,
+21 §3–4 and C-OP-8.
+
+**Evidence.** Review of 31,271 retained house event projections and 1,733
+independently reverified circuit envelopes found profile adoption and successful
+capability use, but little profile differentiation or revision. The four house
+personas each adopted one profile, all with high openness and conscientiousness;
+three captured continuation requests contain their exact current signed
+profiles. The circuit founder repeated its numeric values in its second
+adoption. Peer feedback led to specific numerical guard and manifest repairs in
+the circuit history. These facts establish availability and some collaboration,
+not a causal effect of character or an isolated memory benefit.
+
+The final circuit continuation also contains an admitted newborn with a pending
+invitation and a refused first model call because the causal grant was exhausted.
+An offline test through native birth, invitation, startup replay and ordinary
+resume reproduced a separate infrastructure gap: the resume handler never called
+invitation replay for `TASK_RESOURCE_RESUMED`. It only recognized
+`resource_recovered`; its delivery deduplication also recognized only that kind.
+Existing successor tests checked ancestry and source text, not a funded native
+resume reaching the newborn.
+
+The reviewed house and circuit histories contain no open-input requests or
+contributions. The house contains one coordination definition; the circuit
+contains none. The open-input protocol already permits a member to answer and
+resolve another member's question without an owner-human candidate. The more
+explicit continuation doctrine was present in optional example SOULs rather than
+the default requirement record. A real-node scripted test executes work while a
+question remains open, accepts a peer candidate and disposition, then carries
+that resolution to the original author. Another preserves different members'
+coordination proposals without selecting one. The design's open-only availability
+description was stale: the runtime already preserves resolved and withdrawn
+requests and signed persona-authored resolution rationales.
+
+**Decisions.**
+
+1. R-ID-3 asks members to give their values practical meaning in their own
+   preferences, include instrument choice, and revisit affect and preferences
+   when consequential experience changes their basis. R-CAP-4 asks for comparison
+   of plausible instruments, bounded exploration where uncertainty matters,
+   relevant peer experience, and an evidence-based decision to retain or change
+   an instrument. The earlier capability requirements emphasized acquisition
+   after a missing capability; they did not explicitly ask for this comparison.
+2. These are exact deployment-signed, declinable requirement texts. Existing
+   record versioning appends their new text hash at the next authorized intake
+   or resume. It preserves historical signed records and persona-owned profiles.
+   The substrate assigns no trait values, instrument, role, diversity target,
+   preference ranking, or mandatory revision; finite funding is unchanged.
+   R-WRK-6 also asks members to begin from a short request, offer and examine
+   candidates, state a working basis within the principal's intent and authority,
+   and continue without requiring a human answer. R-COORD-4 asks members to
+   negotiate and revise their own arrangements; it assigns no coordinator or
+   fixed shape. The action descriptions state the existing ability to contribute
+   and resolve without a human candidate, and 21 specifies continued work and
+   preservation of resolved-request visibility. Persona answers remain attributed
+   assumptions or claims, never fabricated human approval.
+3. After verifying an ordinary resume source and its task, environment, pool and
+   grant, replay pending invitations bound to its birth run or authenticated
+   same-environment predecessor. Deduplicate by the shared signed resume source,
+   so delivery to several current members creates one invitation opportunity.
+   Later resource sources remain distinct. No replay accepts membership, creates
+   another identity, increases a grant or borrows an unrelated grant.
+4. Assess carriage, authored rationale, actual choice, capability effectiveness,
+   behavioral differentiation and causal learning separately. A counter of
+   different actions, numerical traits or carried lessons proves none of the
+   later claims. Scripted provider responses test infrastructure only. Live
+   comparisons must report their task, model, context, capabilities and funding;
+   quality and useful adaptation remain to be measured under the revised texts.
+
+**Consequences.** A pending newborn can observe an invitation when an ordinary
+resume supplies usable authority. This removes one obstacle to collaboration,
+without guaranteeing a call after finite authority is exhausted. The requirements
+make the requested comparison and self-interpretation explicit, but their
+behavioral effectiveness is unproven by this offline repair. A fixed mapping from
+OCEAN values to instruments would violate persona ownership and would not
+establish that the chosen instrument was suitable.

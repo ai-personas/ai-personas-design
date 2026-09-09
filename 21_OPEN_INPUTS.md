@@ -95,14 +95,18 @@ invoke `inspect_open_inputs` to read the preserved body and its provenance.
 This keeps public HTTP transport from becoming an ambient prompt-injection
 lane while leaving persona agency intact.
 
-Every later turn also receives a bounded content-free availability index for
-currently open requests in its exact authenticated causal task family. It
+Every later turn also receives a bounded availability index for requests in its
+exact authenticated causal task family, including resolved and withdrawn
+requests. It
 includes request/contribution identities, original task identity, signer and
 append facts, source kinds, counts, hashes, precedence state, and the
-`inspect_open_inputs` delivery action, but no question, response contract,
-candidate value, evidence body, or rationale. This prevents a missed or
+`inspect_open_inputs` delivery action. A disposition also exposes its author,
+selected contribution identity and exact signed persona-authored resolution
+rationale. Questions, response contracts, candidate values and evidence bodies
+remain behind deliberate inspection. This prevents a missed or
 previously unfunded wake, amendment, or resume from making signed input
-undiscoverable while preserving deliberate inspection and the same
+or an already answered request undiscoverable while preserving deliberate
+inspection of candidate bodies and the same
 prompt-injection boundary.
 
 ### 3.1 Causal task authority
@@ -139,6 +143,30 @@ stating that semantic acceptance was not performed.
 evidence references. The selected contribution must already exist on that
 request. A disposition closes only this request lifecycle. It cannot establish
 objective acceptance or terminate the task.
+
+### 4.1 Optional human participation and continued work
+
+A short authenticated principal request is sufficient task intent; this protocol
+requires neither a complete specification nor a human clarification response.
+While a request is open, any active member may offer a candidate, including its
+author. Any active member may resolve it against an existing exact candidate or
+record another permitted disposition. No owner-human candidate is a prerequisite.
+Question publication and request openness MUST NOT themselves gate ordinary
+authorized work, membership, capability access or coordination actions.
+
+R-WRK-6 asks members to state the working basis they choose within the
+principal's intent and available authority, continue the work it permits, and
+retain its assumptions, authors and unresolved limits. A persona candidate or
+disposition remains attributed to that persona; it MUST NOT be represented as
+a human answer, principal approval, verified fact or objective task acceptance.
+Further principal direction follows its own authenticated authority. Members may
+revise their work in response; the host does not silently rewrite a closed
+request or infer that a candidate is correct.
+
+The substrate supplies no mandatory sequence of question, wait, vote, coordinator
+approval or human sign-off. The signed exchange exposes what members chose.
+Coordination arrangements and any independent responses remain the ordinary
+persona-owned actions of 15, not a workflow selected from the question's meaning.
 
 ## 5. Fast public projection
 
