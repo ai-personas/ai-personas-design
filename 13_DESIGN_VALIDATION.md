@@ -2272,6 +2272,18 @@ nothing to record is written `—`:
   enacted at S2's kernel commit, where the status flips · recorded-not-decided:
   — · ADR-0114
 
+- **2026-09-09** · run: — (native emitter to browser verifier regression) ·
+  build/model: — · measured: the topology field-list parity check passed,
+  while the actual browser verifier still rejected the native signed
+  nine-field document because a later predicate required `status` · changed:
+  removed that predicate without adding a schema field; the native document
+  now verifies and ten malformed, wrongly scoped or incorrectly signed
+  variants remain refused. The regression uses native publication and signing,
+  the shipped canonical JSON and signature code, and the actual topology
+  verifier; it does not claim a full live project-view test. See
+  [the regression](https://github.com/ai-personas/ai-personas/blob/main/tests/test_public_project_topology_ui.py)
+  · recorded-not-decided: — · ADR-0114
+
 ### ADR-0115
 
 - **2026-09-03** · run: e50 · build/model: — (fix commit `54430684`);
