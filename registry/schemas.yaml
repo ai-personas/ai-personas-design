@@ -8905,7 +8905,7 @@ rows:
     owner: "an ADR decision until that section is written"
     members:
       required: [requesting_persona_id, environment_id, task_id, mission_task_id, snapshot_hash,
-        cursor, next_cursor, total_records, provider_total_records,
+        cursor, next_cursor, total_records, provider_total_records, source_status, coverage,
         filtered_or_unverified_records, returned_records, omitted_before_page,
         remaining_records, records, source, central_rendezvous_consulted, selection_made,
         ranking_performed, implementation_bodies_disclosed, metadata_is_execution_authority,
@@ -9685,9 +9685,10 @@ rows:
     status: current
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/runtime.py:_complete_with_personaos_mcp_in_phase._authenticated_same_turn_mounted_tool_identities",
-      "src/personaos/runtime.py:_exact_mounted_tool_identity"]
+    members:
+      required: [source_kind, name, authority_ref, descriptor_hash, lineage_event_id]
+      optional: []
+    emitters: ["src/personaos/runtime.py:_exact_mounted_tool_identity"]
 
   - id: personaos-native-capability-use-receipt/1
     class: open

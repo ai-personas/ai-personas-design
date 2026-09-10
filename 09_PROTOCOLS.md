@@ -236,14 +236,33 @@ prior effects. Failures between model requests retain their mechanical status
 and underlying `model_call_reason_code` beside the turn's `reason_code`.
 
 The provider-native capability lease preserves the runtime's exact mechanical
-action envelope for the semantic turn. A deployment may impose one finite,
-content-neutral runaway ceiling, but that ceiling has one authority source
-shared by the runtime loop, capability issuer, and provider adapter. An adapter
-cannot silently substitute a smaller default. Any caller-authorized narrowing
-is exact and observable before the call; it never depends on action identity,
-task or domain content, prior use, inferred quality, or provider convention.
-Reaching the ceiling removes further action authority without converting the
-turn into completion or selecting a successor.
+action authority for the semantic turn. There is no implicit action-count,
+discovery-count, active-lease-count or lease-duration ceiling. Explicit caller
+limits are enforced exactly without a smaller adapter clamp. Each capability
+remains bound to its active provider call, current membership, selected descriptor
+hashes, cancellation and any configured deadline. Finite signed grants govern new
+model calls; repeated tool calls do not create model funding. Each requested
+invocation has its own identity, including identical calls within one response.
+Resource exhaustion is recorded separately from observed effects and an absent
+terminal response; it neither blames malformed authorship nor authorizes replay.
+
+Working context retains observed tool results, peer messages and ordinary authored
+response text across stateless provider requests. Duplicate reads reference a body
+only when it is still present in that same request. The persona may use
+`compact_context(source_ref, summary_text, target_bytes, rationale)` alongside
+ordinary actions to checkpoint previously presented working context without a
+separate model call. The source must match the exact recipient-owned offer. The
+checkpoint remains explicitly lossy, with a verified read of its complete source;
+new results in that batch remain exact. Adoption requires measured byte savings
+including summary output, its action receipt and feedback. This is a conservative
+processing proxy, not a monetary claim when cache discounts or prices are unknown.
+Measured window pressure can also invoke the existing funded same-persona
+compactor for working histories and shared observations. Required authority and
+current delivery stay exact; failure retains recoverable source evidence.
+Provider-reported input, output and cached-input token counts remain separate;
+missing cache usage is unknown, never zero. Whole-workflow accounting includes
+compaction, retrieval and retries. Dynamic clock fields follow stable context to
+allow provider prefix caching without assuming that a cache hit occurred.
 
 Process recovery has a transport-readiness boundary. Durable wakes, schedules,
 birth deliveries, invitations, external requests, and startup budget recovery
@@ -737,8 +756,9 @@ MCP registry discovery returns the complete current access-authorized inventory
 in hash order, with caller-selected pagination and optional exact capability-ID
 filters. Unfiltered candidates need no capability annotations. Acquisition checks
 the exact descriptor hashes, signed discovery evidence and persona-authored intent.
-After a successful verified mount, the next request admits that tool under the
-same causal budget. Registry descriptors preserve complete schemas and authored
+At each provider boundary the ordinary authorized environment surface is refreshed,
+including tools mounted by peers. Explicit caller allowlists remain restricted and
+each action batch uses its exact leased descriptors under the same causal budget. Registry descriptors preserve complete schemas and authored
 metadata; physical storage and explicit operator resource allowances still apply.
 
 `declare_artifact(files=[...])` hashes the chosen regular files and mechanically
@@ -769,7 +789,9 @@ fresh-start handling is an operator operation.
 ### 2a. Present-moment fact
 
 Every ordinary cognition carrier binds one kernel-signed
-`personaos-present-moment/1` in a dedicated early authority lane:
+`personaos-present-moment/1` in a dedicated authority lane after the stable
+request content, so a changing timestamp preserves the provider's cacheable
+prefix. Historical observations with the original early lane remain verifiable:
 
 ```json
 {
@@ -1144,19 +1166,18 @@ candidate, acceptance, or successor.
 ### 4.3 Exact uniform prompt-source stage and pointers
 
 `personaos-persona-turn-prompt-carrier/21` carries the recipient's newly pending
-communications in `persona_communication_history_authority`. Previously presented
-messages remain in the complete history and are available through ordinary reads.
-The persona may retain chosen content in its explicit fragment bindings. Historical
-carrier `/20` records keep their earlier full-history meaning.
+communications in `persona_communication_history_authority`. Within the semantic
+turn, presented messages remain working context until a recoverable persona-model
+checkpoint replaces them. Durable memory and fragment selection remain explicit
+persona choices. Historical carrier `/20` records retain their earlier meaning.
 
 Before each tool-result continuation, the runtime re-reads pending messages, open
 inputs, collaboration and blackboard records, peer work-state heads, acceptance
-observations, and the node clock. These observations retain the same verified
-persona, environment and causal task scope. They grant no new action lease,
-budget, wake, or model request. Shared historical bodies enter recipient-bound
-source references; pending messages and new action results enter the request.
-The resulting request uses the existing measured window fitting. Results already
-presented successfully move to their linked exact archive.
+observations, and the node clock. Current shared observations accompany the request
+within the same verified persona, environment and causal task scope. These reads
+grant no budget, wake or model call. Working history is retained and deduplicated;
+optional inventories remain available through recipient-bound source reads.
+Successful presentation does not by itself archive away working evidence.
 
 The system is rendered from the persona's current signed self-context before
 that fit. Changed own fragment or binding records are compiled again under
@@ -2486,7 +2507,7 @@ markers below is written by the same tool and names the registry hash and
 the row count it rendered.
 
 <!-- registry:schemas:begin -->
-See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1295 rows; registry sha256 80945192fb60648d5949f3e3cd89e375030a3694c196154194aee24589bca8cf).
+See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1295 rows; registry sha256 3de4ae0154ee6b275f2208a136c8faeb1928c879295de89af509a23fefb1919b).
 <!-- registry:schemas:end -->
 
 ## 14. Key custody

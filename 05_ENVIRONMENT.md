@@ -341,6 +341,17 @@ policy does not create a prompt, role, workflow, tool requirement, population
 action, or completion rule unless exact principal acceptance authority
 separately declares the latter.
 
+Attention measurements have no default admission quota. An explicit configured
+threshold still applies, while transfers conserve the lender's allocation.
+Deferred queues retain pending work by default; explicit queue policies remain
+operator choices. User-addressed wakes and proactive observations have no invented
+count quota. Signed funding, consent, cancellation and declared deadlines remain
+independent requirements. Transient delivery failures retain their original work
+and paced retry horizon, without permanent abandonment after eight attempts.
+Persona-authored context admissions, open record maps and evidence references have
+no fixed count ceiling. Paging reduces presentation cost while keeping complete
+source data accessible. No task words or authored record meanings select behavior.
+
 ## 11. Quiescence and lifecycle
 
 With no pending causal delivery, the environment/task is quiescent. Quiescence
