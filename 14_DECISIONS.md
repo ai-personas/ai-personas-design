@@ -2627,3 +2627,30 @@ v1 raw deltas are not reinterpreted as safe. The UI aggregates by call/message a
 sequence, reconciles with complete text and labels unavailable or interrupted
 streams. Existing signature, access, revocation and node-scoped cache rules apply
 to both drafts and completed output.
+
+**Operating-path findings, 2026-09-10.** Native environment export retains native
+ambient records and their original signatures rather than their compatibility
+lineage wrappers. Cold restoration preserves exact signed environment names,
+including whitespace; it does not relax subsequent lineage comparisons. Durable
+model history admits kernel-signed mutation receipts by actor kind and signing
+authority, not a display identifier. Claude print-mode transport reads the JSON
+result envelope and `structured_output`, retains complete reported cache-aware
+usage and classifies authentication/organization denials as 401/403. Completed
+authorization failures do not create automatic replay wakes. File-backed CLI
+input/output removes an unrelated output ceiling and permits timeout handling
+even when a child does not read stdin.
+
+The staged live evaluation demonstrated bound lesson carriage into later calls,
+a persona-originated newborn's independent consent and substantive review,
+signed peer copy/adoption with subsequent execution, public text before call
+completion and node-scoped private browser access. Both engineering packages
+still failed independent artifact checks. The revised house retained access
+defects. Live experience-grounded profile revision, generated/adopted portraits,
+reusable acquired capabilities, original-identity migration and functional
+second-provider execution remain open. Snapshot adoption preserves source
+evidence in an existing destination identity and does not move signing authority.
+OpenRouter credentials and Claude organization policy denied the attempted
+second provider. The runtime's
+`docs/PERSISTENT_PERSONAS_LIVE_2026-09-10.md` records the exact stages, versions,
+measurements, final accounting and limitations; signatures and tool success
+do not supersede those failures.
