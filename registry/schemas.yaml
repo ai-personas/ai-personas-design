@@ -28,6 +28,384 @@
 registry: schemas
 owner: registry
 rows:
+  - id: persona-learning-content/2
+    class: open
+    class_decided_by: "02 §2b; 09 §2"
+    status: current
+    tiers: [in_process, prompt]
+    owner: "02 §2b; 09 §2"
+    members:
+      required: [json_pointer, selected_content_hash, selected_canonical_size, offset_bytes,
+        next_offset_bytes, eof, content_complete, semantic_selection_performed]
+      optional: [ok, source_value_hash, source_content_ref, source_canonical_size,
+        expertise_awarded, content_value, content_text]
+    emitters: ["src/personaos/protocols/mcp_lanes/learning.py:BridgeLearningMixin.inspect_persona_learning_history",
+      "src/personaos/runtime.py:_persona_learning_content_facts"]
+    notes: >-
+      Authorized exact JSON-pointer selection with consecutive UTF-8 byte pages. Whole reads
+      contain content_value; partial reads contain content_text and a next byte offset. No
+      semantic ranking or silent truncation occurs.
+
+  - id: personaos-artifact-manifest/1
+    class: open
+    class_decided_by: "03 §9; 09 §2.5"
+    status: current
+    tiers: [lineage, operator, in_process]
+    owner: "03 §9; 09 §2.5"
+    members:
+      required: [files]
+      optional: []
+    emitters: []
+    notes: >-
+      An ordinary published artifact with a nonempty list of unique delivered file paths, byte
+      lengths and SHA-256 hashes. It grants no requirement coverage or acceptance by itself.
+
+  - id: personaos-artifact-review-execution/1
+    class: open
+    class_decided_by: "03 §9; 09 §2.5"
+    status: current
+    tiers: [lineage, operator, in_process]
+    owner: "03 §9; 09 §2.5"
+    members:
+      required: [snapshot, review_root, check_files, environment]
+      optional: [check_source, check_source_hash, input_integrity_verified, output_hashes,
+        output_change_census]
+    emitters: ["src/personaos/artifact_snapshots.py:prepare_snapshot_review",
+      "src/personaos/protocols/mcp_lanes/exec.py:BridgeExecMixin.command_exec"]
+    notes: >-
+      Execution binds the exact artifact snapshot and check sources. Inputs and checks are
+      separate from writable scratch/output directories. The existing signed execution event
+      remains the evidence authority.
+
+  - id: personaos-artifact-snapshot/1
+    class: exact
+    class_decided_by: "03 §9; 09 §2.5"
+    status: current
+    tiers: [lineage, operator, in_process]
+    owner: "03 §9; 09 §2.5"
+    members:
+      required: [environment_id, task_id, snapshot_ref, commit_id, manifest, files,
+        semantic_interpretation_performed, snapshot_hash]
+      optional: []
+    emitters: ["src/personaos/artifact_snapshots.py:resolve_artifact_snapshot"]
+    notes: >-
+      Resolved through an existing verified publication and immutable Git commit. Every
+      declared file matches the delivered bytes. Unrelated later files are outside this review
+      target.
+
+  - id: personaos-identity-handoff-consent/1
+    class: exact
+    class_decided_by: "09 §14.1"
+    status: current
+    tiers: [operator, lineage]
+    owner: "09 §14.1"
+    members:
+      required: [persona_id, preparation_hash, original_global_handle, previous_fence_hash,
+        signature]
+      optional: []
+    emitters: ["src/personaos/identity_handoff.py:IdentityHandoffs.authorize"]
+    notes: >-
+      The current source persona signs the exact destination preparation. An owner cannot
+      substitute for the authenticated persona action. Consent begins a drain; it is not a
+      fence certificate.
+
+  - id: personaos-identity-handoff-fence/1
+    class: exact
+    class_decided_by: "09 §14.1"
+    status: current
+    tiers: [operator, public_anonymous]
+    owner: "09 §14.1"
+    members:
+      required: [manifest_hash, source_fenced, preparation, consent, signature]
+      optional: []
+    emitters: ["src/personaos/identity_handoff.py:IdentityHandoffs.finalize"]
+    notes: >-
+      Source kernel certifies its durable execution and signing fence. Contains no private
+      state or historical message inventory. source_fenced must be true; the fence never
+      expires.
+
+  - id: personaos-identity-handoff-journal/1
+    class: exact
+    class_decided_by: "09 §14.1"
+    status: current
+    tiers: [operator]
+    owner: "09 §14.1"
+    members:
+      required: [persona_id, phase, preparation, history, signature]
+      optional: [consent, package, source_archives, retained_context_sources]
+    emitters: ["src/personaos/identity_handoff.py:IdentityHandoffs._persist"]
+    notes: >-
+      Private kernel-signed atomic local journal. Phases are prepared, draining, fenced,
+      admitting and active. Mandatory fields depend on phase. Invalid journals stop boot
+      before identity or worker restoration; recovery moves forward.
+
+  - id: personaos-identity-handoff-manifest/1
+    class: exact
+    class_decided_by: "09 §14.1"
+    status: current
+    tiers: [operator, in_process]
+    owner: "09 §14.1"
+    members:
+      required: [preparation, consent, state_hash, signature_index, signature]
+      optional: []
+    emitters: ["src/personaos/identity_handoff.py:IdentityHandoffs.finalize"]
+    notes: >-
+      Source-persona signature binds the complete final state and exact historical signature
+      index. The index grants verification only for its named key IDs, issuer keys and message
+      hashes.
+
+  - id: personaos-identity-handoff-package/1
+    class: exact
+    class_decided_by: "09 §14.1"
+    status: current
+    tiers: [operator, in_process]
+    owner: "09 §14.1"
+    members:
+      required: [state, proof, history]
+      optional: []
+    emitters: ["src/personaos/identity_handoff.py:IdentityHandoffs.finalize"]
+    notes: >-
+      Private owner transport of the exact signed bundle, original source runtime archive,
+      adopted portrait bytes and authorized context-source closure. No private keys,
+      destination membership or executable grants are transferred.
+
+  - id: personaos-identity-handoff-preparation/1
+    class: exact
+    class_decided_by: "09 §14.1"
+    status: current
+    tiers: [operator, in_process]
+    owner: "09 §14.1"
+    members:
+      required: [handoff_id, persona_id, source_kernel_id, source_kernel_public_key,
+        source_persona_public_key, source_epoch, destination_kernel_id,
+        destination_kernel_public_key, destination_persona_public_key, created_at, signature]
+      optional: []
+    emitters: ["src/personaos/identity_handoff.py:IdentityHandoffs.prepare"]
+    notes: >-
+      Destination-generated inert successor key, bound to the independently pinned source
+      authority. No identity registration or execution permission is conferred.
+
+  - id: personaos-identity-residency/1
+    class: exact
+    class_decided_by: "09 §14.1"
+    status: current
+    tiers: [public_anonymous, operator, in_process]
+    owner: "09 §14.1"
+    members:
+      required: [persona_id, original_global_handle, resident_kernel_id,
+        resident_persona_public_key, epoch, history]
+      optional: []
+    emitters: ["src/personaos/identity_handoff.py:IdentityHandoffs.public_residency"]
+    notes: >-
+      Public minimal fence chain retains the original DID on its current host. Every native
+      issuer, consent, fence, predecessor hash and successor pin verifies. Retained
+      descriptors may use a prior epoch key for presentation only.
+
+  - id: personaos-knowledge-bundle/3
+    class: exact
+    class_decided_by: "09 §7; 09 §14.1"
+    status: current
+    tiers: [operator, public_anonymous, in_process]
+    owner: "09 §7; 09 §14.1"
+    members:
+      required: [created_at, source_kernel_id, source_persona_id, source_public_keys, soul,
+        soul_state, knowledge, fragments, bindings, semantic_interpretation_performed, manifest,
+        historical_authority]
+      optional: []
+    emitters: ["src/personaos/continuity.py:export_persona_bundle"]
+    notes: >-
+      The complete /2 bundle plus prior handoff proofs. The existing manifest hashes
+      historical_authority too. Each admitted historical signature is limited to its exact
+      original issuer and message. Public transfer still requires explicit owner disclosure
+      through the existing sharing protocol.
+
+  - id: personaos-persona-context-source/1
+    class: exact
+    class_decided_by: "02 §2b; 09 §2"
+    status: current
+    tiers: [prompt, in_process, operator]
+    owner: "02 §2b; 09 §2"
+    members:
+      required: [persona_id, environment_id, task_id, kernel_id, membership_id,
+        source_reference, signing_key_id, signature]
+      optional: []
+    emitters: ["src/personaos/content_addressed.py:persona_context_source_reference"]
+    notes: >-
+      Kernel-signed recipient-bound reference into the existing exact CAS. Reads verify
+      recipient, issuer, membership and bytes. Raw hashes grant nothing. A committed handoff
+      can admit the exact owned closure, with fresh destination membership required.
+
+  - id: personaos-persona-distillation-record/2
+    class: open
+    class_decided_by: "02 §2b; 08 §6"
+    status: current
+    tiers: [lineage]
+    owner: "02 §2b; 08 §6"
+    members:
+      required: [persona_id, environment_id, task_id, phase, fragment_id, fragment_hash,
+        fragment_ref, anchor_event_id, automatic_selection, binding_changed, storage_reused,
+        persona_action_authored, semantic_interpretation_performed]
+      optional: []
+    emitters: ["src/personaos/kernel_lanes/learning.py:KernelLearningMixin.record_persona_distillation"]
+    notes: >-
+      Signed memory storage preserves authored/evolved content and storage idempotency.
+      binding_changed and automatic_selection are always false. Only explicit scoped binding
+      operations select later context.
+
+  - id: personaos-persona-turn-prompt-carrier/21
+    class: rendered
+    class_decided_by: "02 §2b; 09 §2"
+    status: current
+    tiers: [prompt]
+    owner: "02 §2b; 09 §2"
+    members: unreviewed
+    emitters: ["src/personaos/runtime.py:make_llm_body.communication_intent"]
+    notes: >-
+      Current authority, full verified adopted character, explicitly selected fragments,
+      current delivery/new outcomes and complete actions remain. Prior bodies and optional
+      inventories are accessible through authorized exact references. Native definitions are
+      counted once in whole-request admission; unpresented results survive failure/restart.
+      principal_task_authority retains the exact verified intake declaration, including
+      supplied acceptance conditions, verifier authority and deadlines, on every request.
+
+  - id: personaos-principal-acceptance-facts/11
+    class: open
+    class_decided_by: "03 §9; 09 §2.5"
+    status: current
+    tiers: [in_process, prompt]
+    owner: "03 §9; 09 §2.5"
+    members: unreviewed
+    emitters: ["src/personaos/acceptance.py:_principal_task_acceptance_projection_uncollected"]
+    notes: >-
+      Existing acceptance facts add exact review-target currency. Receipts bind manifest
+      files, check sources and execution. Changed delivered bytes require replacement review;
+      unrelated workspace changes do not. Requirement coverage and independent authorship
+      remain mandatory.
+
+  - id: personaos-task-acceptance-contract/3
+    class: open
+    class_decided_by: "03 §9; 09 §2.5"
+    status: current
+    tiers: [lineage]
+    owner: "03 §9; 09 §2.5"
+    members:
+      required: [source, author_persona_id, environment_id, task_id, condition_text,
+        superseded_contract_event_id, authored_at, persona_action_binding, condition_hash,
+        coexisting_live_contract_event_ids, coexisting_live_contract_count,
+        coexisting_live_contract_set_readable, duplicate_condition_contract_event_ids,
+        duplicate_condition_of, supersedes_declared, artifact_snapshot]
+      optional: [principal_condition_hash]
+    emitters: ["src/personaos/protocols/mcp_lanes/verification.py:BridgeVerificationMixin.author_task_acceptance_contract"]
+    notes: >-
+      Existing persona-authored condition of record binds a resolved artifact snapshot. Exact
+      principal requirements remain authoritative and cannot be weakened by omitting a
+      deliverable.
+
+  - id: personaos-turn-self-product-contract/2
+    class: open
+    class_decided_by: "02 §2b; 09 §2"
+    status: current
+    tiers: [prompt]
+    owner: "02 §2b; 09 §2"
+    members:
+      required: [emitted_as, distillation, semantic_interpretation_performed]
+      optional: []
+    emitters: ["src/personaos/llm/base.py:persona_turn_output_contract"]
+    notes: >-
+      The existing terminal output contract states that optional distillation stores memory
+      without selecting it. Explicit combined author-and-bind remains available. Publication
+      and routing consent are unchanged.
+
+  - id: persona-learning-content/1
+    class: open
+    class_decided_by: "02 §2b; 09 §2"
+    status: current
+    tiers: [in_process]
+    owner: "02 §2b; 09 §2"
+    members:
+      required: [source_value_hash, source_content_ref, source_canonical_size, json_pointer,
+        selected_content_hash, selected_canonical_size, semantic_selection_performed,
+        expertise_awarded, content_complete, content_manifest, manifest_complete,
+        caller_may_request_child_with_json_pointer]
+      optional: [content_value]
+    emitters: []
+    notes: >-
+      Historical whole-value/projection reader; /2 now exposes exact UTF-8 pages.
+
+  - id: personaos-persona-distillation-record/1
+    class: open
+    class_decided_by: "02 §2b; 08 §6"
+    status: current
+    tiers: [lineage]
+    owner: "02 §2b; 08 §6"
+    members:
+      required: [persona_id, environment_id, task_id, phase, fragment_id, fragment_hash,
+        anchor_event_id, binding_id, automatic_selection, persona_action_authored,
+        trimmed_distillation_ids, duplicate_of, semantic_interpretation_performed]
+      optional: []
+    emitters: []
+    notes: >-
+      Historical automatic-binding settlement event. Existing signed history remains readable; current storage-only events use /2.
+
+  - id: personaos-turn-self-product-contract/1
+    class: open
+    class_decided_by: "02 §2b; 09 §2"
+    status: current
+    tiers: [in_process]
+    owner: "02 §2b; 09 §2"
+    members:
+      required: [emitted_as, distillation, semantic_interpretation_performed]
+      optional: []
+    emitters: []
+    notes: >-
+      Historical contract with implicit memory selection. The current storage-only contract is /2.
+
+  - id: personaos-persona-turn-prompt-carrier/20
+    class: rendered
+    class_decided_by: "02 §2b; 09 §2"
+    status: current
+    tiers: [prompt]
+    owner: "02 §2b; 09 §2"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Historical eager history/inventory carrier. Current /21 preserves exact required context and authorized references without implicit memory selection.
+
+  - id: persona-card/5
+    class: rendered
+    class_decided_by: "09 §14.1"
+    status: current
+    tiers: [public_anonymous]
+    owner: "09 §14.1"
+    members:
+      required: [persona_id, name, description, soul_version, charter_hash, voice_hash,
+        soul_hash, kernel_provider, kernel_a2a_url, participation_status, avatar,
+        display_name_alias, identity_authority, characteristic_identity, self_publication,
+        capabilities_summary, visibility, federation_visibility, accepts_inbound_from,
+        rate_limit, expires_at, signing_key_id, signature, signed_by]
+      optional: [identity_residency]
+    emitters: ["src/personaos/identity/persona_card.py"]
+
+  - id: personaos-cohort-contract-verifier-declaration/2
+    class: open
+    class_decided_by: "03 §9; 09 §2.5"
+    status: current
+    tiers: [in_process]
+    owner: "03 §9; 09 §2.5"
+    members:
+      required: [declaration_source, verifier_descriptor_supplied, verifier_descriptor,
+        verifier_descriptor_hash, verifier_receipt_constitutes_acceptance,
+        cohort_contract_event_id, cohort_contract_condition_hash,
+        cohort_contract_author_persona_id, semantic_interpretation_performed,
+        principal_intake_declaration_hash, principal_intake_source_event_id,
+        principal_members_inherited, acceptance_condition_supplied, acceptance_condition,
+        acceptance_condition_hash, principal_condition_hash, deadline_supplied,
+        deadline_epoch_seconds, unaccepted_rewake_supplied, unaccepted_rewake_count,
+        unaccepted_rewake_interval_s, post_run_distillation_reservation_supplied,
+        post_run_distillation_reservation_per_member]
+      optional: [artifact_snapshot]
+    emitters: ["src/personaos/acceptance.py:5585"]
+
   - id: personaos-node-bootstrap-cohort/1
     class: exact
     class_decided_by: "16_POPULATION_DYNAMICS.md §11"
@@ -1255,29 +1633,6 @@ rows:
       (09 §13.4): no further version is registered; a new mechanical fact
       about a mint rides its own observation record or is not recorded.
 
-  - id: personaos-cohort-contract-verifier-declaration/2
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "ADR-0112"
-    members:
-      required: [declaration_source, verifier_descriptor_supplied, verifier_descriptor,
-        verifier_descriptor_hash, verifier_receipt_constitutes_acceptance,
-        cohort_contract_event_id, cohort_contract_condition_hash,
-        cohort_contract_author_persona_id, semantic_interpretation_performed,
-        principal_intake_declaration_hash, principal_intake_source_event_id,
-        principal_members_inherited, acceptance_condition_supplied, acceptance_condition,
-        acceptance_condition_hash, principal_condition_hash, deadline_supplied,
-        deadline_epoch_seconds, unaccepted_rewake_supplied, unaccepted_rewake_count,
-        unaccepted_rewake_interval_s, post_run_distillation_reservation_supplied,
-        post_run_distillation_reservation_per_member]
-      optional: []
-    emitters: ["src/personaos/acceptance.py:5585"]
-    notes: >-
-      Inherits every supplied principal member; fills only the absent verifier
-      predicate (ADR-0112 cut 2).
-
   - id: personaos-continuation-fit/1
     class: open
     class_decided_by: seed
@@ -2170,23 +2525,6 @@ rows:
       which retains presented messages and refreshes current observations
       during tool continuations.
 
-  - id: personaos-persona-turn-prompt-carrier/20
-    class: rendered
-    class_decided_by: seed
-    status: current
-    tiers: [prompt]
-    owner: "02 §2b; ADR-0116 decision 2; ADR-0117"
-    members: unreviewed
-    emitters: ["src/personaos/runtime.py:make_llm_body.communication_intent"]
-    notes: >-
-      current_stimulus carries the complete delivered event beside the turn
-      self-product contract. Both are exempt from history reduction and
-      model compaction; the provider window remains an exact admission bound.
-      persona_communication_history_authority preserves pending and presented
-      messages through the existing complete-message pager. Current peer,
-      blackboard, acceptance, input, and clock observations refresh on each
-      tool continuation without changing the task or action lease.
-
   - id: personaos-declared-output-transaction/1
     class: open
     class_decided_by: "09 §2"
@@ -2473,7 +2811,6 @@ rows:
         run_model_pool]
       optional: []
     emitters: ["src/personaos/resource_versions.py:persist_unfunded_resource_wait"]
-
 
   # === rows below this line are the output of tools/registry.py seed (S2, ADR-0114 dec 1) ===
   # Regenerated from the code on every run, in id order: a row here is
@@ -5299,21 +5636,6 @@ rows:
     emitters: ["src/personaos/federation/gossip_http.py:build_persona_card_announce_event",
       "src/personaos/federation/gossip_http.py:build_persona_card_revocation_event"]
 
-  - id: persona-card/5
-    class: rendered
-    class_decided_by: seed
-    status: current
-    tiers: [public_anonymous]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [persona_id, name, description, soul_version, charter_hash, voice_hash,
-        soul_hash, kernel_provider, kernel_a2a_url, participation_status, avatar,
-        display_name_alias, identity_authority, characteristic_identity, self_publication,
-        capabilities_summary, visibility, federation_visibility, accepts_inbound_from,
-        rate_limit, expires_at, signing_key_id, signature, signed_by]
-      optional: []
-    emitters: ["src/personaos/identity/persona_card.py"]
-
   - id: persona-characteristic-card/1
     class: rendered
     class_decided_by: seed
@@ -5387,20 +5709,6 @@ rows:
       required: [display_name, persona_id, identity_signing_key_id, identity_public_key_hex]
       optional: []
     emitters: ["src/personaos/identity/display_name.py:display_name_alias_candidate"]
-
-  - id: persona-learning-content/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [source_value_hash, source_content_ref, source_canonical_size, json_pointer,
-        selected_content_hash, selected_canonical_size, semantic_selection_performed,
-        expertise_awarded, content_complete, content_manifest, manifest_complete,
-        caller_may_request_child_with_json_pointer]
-      optional: [content_value]
-    emitters: ["src/personaos/runtime.py:_persona_learning_content_facts"]
 
   - id: persona-learning-history-detail/1
     class: open
@@ -6544,11 +6852,8 @@ rows:
     status: current
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
-    members:
-      required: [lane, content_hash, canonical_size, structurally_indexed,
-        semantic_interpretation_performed]
-      optional: [content_read_action, source_reference]
-    emitters: ["src/personaos/runtime.py:_carrier_lane_index_reference"]
+    members: unreviewed
+    emitters: []
 
   - id: personaos-cas-root/1
     class: open
@@ -10491,12 +10796,10 @@ rows:
     class: open
     class_decided_by: seed
     status: current
-    tiers: [lineage]
+    tiers: [in_process]
     owner: "an ADR decision until that section is written"
-    members:
-      required: [structural_turn_product, semantic_interpretation_performed]
-      optional: []
-    emitters: ["src/personaos/kernel_lanes/learning.py:KernelLearningMixin.record_persona_distillation"]
+    members: unreviewed
+    emitters: []
 
   - id: personaos-persona-distillation-fragment-id/1
     class: open
@@ -10518,19 +10821,6 @@ rows:
     members:
       required: [structural_turn_product, persona_action_authored, anchor_event_id,
         environment_id, task_id, semantic_interpretation_performed]
-      optional: []
-    emitters: ["src/personaos/kernel_lanes/learning.py:KernelLearningMixin.record_persona_distillation"]
-
-  - id: personaos-persona-distillation-record/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [lineage]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [persona_id, environment_id, task_id, phase, fragment_id, fragment_hash,
-        anchor_event_id, binding_id, automatic_selection, persona_action_authored,
-        trimmed_distillation_ids, duplicate_of, semantic_interpretation_performed]
       optional: []
     emitters: ["src/personaos/kernel_lanes/learning.py:KernelLearningMixin.record_persona_distillation"]
 
@@ -10875,13 +11165,9 @@ rows:
     status: current
     tiers: [operator]
     owner: "an ADR decision until that section is written"
-    members:
-      required: [generated_at, persona_id, name, soul_payload, soul_markdown,
-        identity_signed_by, identity_signature, lifecycle_state, model_inventory,
-        relationship_state, soul_state, knowledge, evolution, longitudinal_state,
-        cognitive_intent_state, persistence_note]
-      optional: []
-    emitters: ["src/personaos/node_lanes/persona_turns.py:NodePersonaTurnsMixin._persona_state_payload"]
+    members: unreviewed
+    emitters: ["src/personaos/identity_handoff.py:IdentityHandoffs._write_node_state",
+      "src/personaos/node_lanes/persona_turns.py:NodePersonaTurnsMixin._persona_state_payload"]
 
   - id: personaos-persona-telemetry-public/2
     class: rendered
@@ -11394,7 +11680,7 @@ rows:
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
     members: unreviewed
-    emitters: ["src/personaos/acceptance.py:_principal_task_acceptance_projection_uncollected"]
+    emitters: []
 
   - id: personaos-principal-acceptance-facts/2
     class: open
@@ -13546,17 +13832,6 @@ rows:
       optional: []
     emitters: ["src/personaos/node_lanes/persona_turns.py:NodePersonaTurnsMixin._handle_persona_wake_in_workspace.record_turn_effect_receipt"]
 
-  - id: personaos-turn-self-product-contract/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [emitted_as, distillation, semantic_interpretation_performed]
-      optional: []
-    emitters: ["src/personaos/llm/base.py:persona_turn_output_contract"]
-
   - id: personaos-turn-self-product-outcome/2
     class: open
     class_decided_by: seed
@@ -14012,11 +14287,7 @@ rows:
     status: current
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
-    members:
-      required: [ok, path, content_ref, file_observation, size_bytes, offset_bytes,
-        returned_bytes, next_offset_bytes, eof, requested_max_bytes, applied_max_bytes,
-        request_clamped_to_bound, semantic_interpretation_performed]
-      optional: [content_text, content_encoding, content_base64]
+    members: unreviewed
     emitters: ["src/personaos/protocols/mcp_lanes/workspace_artifacts.py:BridgeWorkspaceArtifactsMixin.inspect_workspace_file"]
 
   - id: personaos-workspace-hardlink-group/1

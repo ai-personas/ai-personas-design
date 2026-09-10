@@ -108,8 +108,7 @@ without treating failure artifacts as a successful task outcome.
 
 ### 2.1 Exact unranked inventories
 
-The model-visible situation and inspection actions expose bounded paginated
-complete inventories of:
+Authorized inspection actions expose paginated complete inventories of:
 
 - the local execution namespace;
 - the complete currently authorized action catalog;
@@ -160,30 +159,41 @@ invoker is non-conformant because it hides every actual choice behind a second
 model selection problem and makes the advertised action count differ from the
 provider-visible surface.
 
-A transport may remove duplicate prompt descriptions and input summaries only
-when every eligible body receives their exact descriptor and argument indexes
-through its model-visible serializer. Action identities, declared effects and
-usage observations remain in the prompt catalogue. A grammar-only or unknown
-transport keeps its prompt descriptions: enforcing a schema does not establish
-that the model sees its descriptions. Navigation reduction retains verifiable
-component hashes and a recoverable reference to the original context.
+The ordinary carrier (`personaos-persona-turn-prompt-carrier/21`) contains exact
+principal/platform/charter authority, current resource and transport authority,
+current verified self and selected fragments, the current delivery, and new
+action outcomes. Inventories, peer work, acceptance history and older evidence
+are available through compact, recipient-bound references. Their bodies are not
+automatically selected as working context.
 
-The Responses native-function serializer names that evidence source
-`responses.tools`; the explicit structured-envelope serializer names
-`responses.text.format.json_schema`. Native function arguments preserve open
-objects and optional members without a nested JSON-string carrier. Authenticated
-action results retain their complete captured stdout/stderr and exact authored
-arguments across subsequent requests. Observation alone does not replace their
-content with receipts. Under measured context pressure, the current persona may
-summarize authenticated results using the same model, persona system context,
-scope and signed budget. Previously read results are considered first. When a
-new result cannot otherwise fit, the persona's compactor can perform its first
-read. The summary remains labeled as lossy model interpretation and references
-an ordered archive of the exact results. Already-observed history is summarized
-together, so each small result does not impose a permanent provenance envelope.
-A later digest can read the preceding digest alongside new results; its archive
-retains that preceding record and the chain back to every original result.
-Unchanged history is carried forward rather than rebuilt from its originals.
+The complete authorized action set remains model-visible. Native tool definitions
+carry each descriptor once; a grammar-only or unknown transport keeps the ordinary
+action catalogue because grammar enforcement does not prove that descriptions
+enter context. Serializer evidence names `chat_completions.tools`,
+`responses.tools`, or `responses.text.format.schema`. Native function arguments
+preserve open objects and optional members without a nested JSON-string carrier.
+Whole-request admission includes tool definitions and exact UTF-8 self/prompt
+bytes, with provider framing and unreported token usage kept distinct.
+
+New authenticated action results retain their complete captured stdout/stderr and
+exact authored arguments. After a completed provider response, previously shown
+bodies move to an exact linked archive. The persona chooses what to retain through
+ordinary fragment authoring and scoped bindings, or reads a source again. Saving
+a memory alone does not select it. There is no mandatory planning call, context
+composition action, or separate composition store.
+
+`personaos-persona-context-source/1` binds the issuer, recipient, environment,
+task, source content reference and issued membership. `inspect_persona_learning_history`
+verifies the signature and current access before reading. A content hash alone is
+not read authority. Revocation or a replacement membership invalidates the old
+reference. Reads support exact JSON pointers and consecutive UTF-8 byte pages,
+including compressed sources; caller byte limits have no silent upper clamp.
+
+When a new result cannot fit, the current persona may summarize it using the
+existing funded compactor. The digest is labeled as lossy model interpretation,
+retains its exact archive and authorized source read, and does not replace any
+required authority. Only successful presentation retires pending communication;
+failed transport and unavailable archival storage never discard its source.
 
 Exact storage does not impose a fixed ceiling on the canonical value or its
 compressed blob. The signed record's declared sizes and content hashes bind
@@ -215,25 +225,13 @@ The result states its source segment count. Each request includes the current
 persona system context and debits the same signed grant. Neither source nor
 summary is cut to a character prefix.
 
-The digest's allowance includes its serialized provenance record and any exact
-source reference added by the continuation. The model receives the remaining
-UTF-8 allowance for JSON-encoded text, including quotes and escapes. Enclosing
-metadata must not invalidate an otherwise compliant digest. The history digest
-uses the space left by exact neighboring fields. If protected task context alone
-exceeds the available background space, no background model summary can make
-that fit. That pass
-retains the protected bytes and mechanical read indexes without invoking the
-model for summaries it would subsequently discard.
-
-If a background digest must become a structural read index, that index retains
-the original evidence's identity and size. Hashing the digest or another index
-would name different bytes from those returned by the lane's read action.
-
-The context fitter may reduce background observations. Failed, incomplete or
-oversized compaction preserves the source and can refuse continuation; it cannot
-silently replace it with a hash or replay prior effects. Failures between model
-requests retain their mechanical status and underlying `model_call_reason_code`
-beside the turn's `reason_code`; only the turn reason governs replay policy.
+The digest's allowance includes its serialized provenance and authorized source
+reference. The model receives the remaining UTF-8 allowance for JSON-encoded
+text, including quotes and escapes. Exact neighboring results, self and tool
+definitions consume the same request window. Failed, incomplete or oversized
+compaction retains the source and can refuse continuation; it cannot replay
+prior effects. Failures between model requests retain their mechanical status
+and underlying `model_call_reason_code` beside the turn's `reason_code`.
 
 The provider-native capability lease preserves the runtime's exact mechanical
 action envelope for the semantic turn. A deployment may impose one finite,
@@ -310,7 +308,7 @@ use, tool, or inferred importance. A catalogue that repeatedly cuts
 descriptions before their effect, acquisition, or successor mechanics are
 visible is addressable but not practically navigable and is non-conformant.
 
-The always-present workspace navigation component uses
+The inspectable workspace navigation component uses
 `personaos-workspace-navigation-reference/3`. It carries every distinct exact
 file path once in mechanical source order, plus the path-list hash, source-state
 and file-record hashes, exact counts, capture facts, and lazy-inspection
@@ -366,7 +364,7 @@ content. There is no dedicated gap action or lifecycle. Expressing, revising,
 resolving, or omitting that meaning never changes another descriptor's schema,
 action visibility, completion, or wake authority.
 
-The navigation carrier also includes
+The inspectable navigation record includes
 `personaos-action-usage-navigation-reference/3`: an exact identifier-equality
 join between the current leased action set and the retained turn-effect usage
 inventory. It preserves zero-use identifiers, exact observed receipt counts,
@@ -628,9 +626,11 @@ task content never installs or removes it. One invocation authors one verifier
 receipt over exactly:
 
 - `scope` — the exact declared verifier scope string;
-- `inputs` — one opaque bounded canonical object the substrate never reads,
-  carried verbatim with its exact content hash; the executed
-  counter-evidence join itself is the host-sealed digest intersection of
+- `inputs` — an exact canonical object carried with its content hash;
+  ordinary event citations and an optional `snapshot_ref` receive mechanical
+  identity joins. Its remaining content is opaque. The executed
+  counter-evidence join is the host-sealed digest intersection or exact
+  immutable-review execution of
   [`03_TASKS.md §9`](03_TASKS.md#9-objective-acceptance) invariant (iii);
 - `terminal_result` — the closed boolean member `accepted`, plus optional
   opaque notes the substrate never reads;
@@ -654,7 +654,7 @@ alike create no continuation, wake, or successor.
 The reply reports the recorded receipt's exact acceptance posture — whether
 it qualified, the stable refusal code when it did not, and whether acceptance
 now extends — and always carries the adjudicated-delivery page (the exact
-byte identities of the latest admitted publication, per
+byte identities of the exact adjudicated publication or manifest, per
 [`03_TASKS.md §9`](03_TASKS.md#9-objective-acceptance)): a refusal is only
 repairable in-loop when the same reply that names the refusal also names the
 exact bytes a qualifying receipt must have executed against.
@@ -671,6 +671,34 @@ the declared verifier authority and the mechanical invariants of
 [`03_TASKS.md §9`](03_TASKS.md#9-objective-acceptance); recording proves
 authorship, not acceptance. Records authored under earlier schemas keep their
 recorded authority unchanged.
+
+Immutable artifact review uses the existing actions. A `snapshot_ref` has
+`publication_event_id` and `manifest_path`; optional `publication_event_hash`
+and `manifest_sha256` pin their exact identities. The ordinary published JSON
+manifest has schema `personaos-artifact-manifest/1` and a nonempty `files` array
+of unique canonical paths with exact `size_bytes` and lowercase SHA-256 values.
+Resolution checks the manifest and all declared files against the signed task
+family publication and its original Git objects. It does not follow a mutable
+branch, replace ref, symlink or path outside that manifest.
+
+`command_exec(snapshot_ref=..., review_check_files=[...])` runs from separate
+scratch. The environment names `PERSONAOS_REVIEW_INPUTS`,
+`PERSONAOS_REVIEW_CHECKS`, `PERSONAOS_REVIEW_SCRATCH` and
+`PERSONAOS_REVIEW_OUTPUTS` locate exact input copies, declared check sources,
+temporary work and recorded outputs. Completed `artifact_review` evidence binds
+the snapshot, command and check hashes, input integrity and result. Its
+`review_output_ref` is readable through `inspect_workspace_file` by the owning
+persona under current environment and task authority. Output bytes are checked
+against the completed execution before return. They are not automatically
+published as candidate files.
+
+Contract `/3` binds an optional resolved `artifact_snapshot` while retaining the
+principal condition hash. A receipt's existing `inputs_hash` signature commits
+its snapshot reference and execution citations. Read-side qualification repeats
+those joins and compares only the declared delivery and manifest against the
+current published file identities. It retains ordinary authorship exclusion
+and requirement authority. Contract text and receipt counts have no separate
+invented quota; existing action, transport and causal resource authority apply.
 
 ### 2a. Present-moment fact
 
@@ -920,10 +948,10 @@ persisted run. It retains the exact prior run/environment/task/persona ids and
 status, the content-bound prior continuation state, exact verified
 `personaos-work-state-evidence/1` when available, and a hash-bound materialized-
 file reference. Component and whole-observation hashes are kernel-signed with
-the resume event. The observation is a distinct bounded prompt lane, not a raw
-event payload: event de-duplication may compact the surrounding wake context,
-but may not erase this evidence. Oversize components are converted only by
-canonical-byte reduction to content-addressed structural indexes. No note,
+the resume event. Current carrier `/21` exposes the historical observation through
+a recipient-bound source reference; exact current principal and resource authority
+remain in the request. Event de-duplication cannot erase the retained source.
+Oversize observation components retain their content-addressed read indexes. No note,
 status, filename, extension, task word, role, domain, or tool influences that
 projection, and none of the carried values authorizes acceptance or continued
 work.
@@ -1027,16 +1055,15 @@ verified membership, append revision, authored timestamp, and immutable record
 ID. It does not inspect task text or any note, role, action, capability,
 artifact, filename, tool, or domain value.
 
-That snapshot occupies its own content-neutral prompt-authority window, so a
-large unrelated source set cannot reduce every peer's open work to a hash. If
-the exact snapshot itself exceeds the window,
+Current carrier `/21` exposes that snapshot through an authorized source reference.
+The existing inspectable
 `personaos-active-peer-work-state-prompt-projection/1` preserves its source
 metadata and record-manifest hashes, exact counts/cursors/omissions, and per-
 record truncation evidence. The lane is evidence only; it does not authorize a
 successor, infer completion, rank peers, or let one member's disposition close
 or suppress another member's work.
 
-Current open-input availability occupies another independent bounded lane.
+Current open-input availability is also an inspectable source in carrier `/21`.
 `personaos-open-input-prompt-authority/1` selects only exact environment/task
 equality and the protocol's explicit `open` state. Each reference carries the
 request identity, signer/append authority, contribution identities/source kinds,
@@ -1050,18 +1077,20 @@ candidate, acceptance, or successor.
 
 ### 4.3 Exact uniform prompt-source stage and pointers
 
-`personaos-persona-turn-prompt-carrier/20` carries a recipient's communication
-history in `persona_communication_history_authority`. It uses the existing
-complete-message sequence and read cursor, retaining exact `carried` flags;
-`total_count` counts history and `pending_count` counts messages without a
-carriage mark. Presenting a message does not erase context needed to act on it.
+`personaos-persona-turn-prompt-carrier/21` carries the recipient's newly pending
+communications in `persona_communication_history_authority`. Previously presented
+messages remain in the complete history and are available through ordinary reads.
+The persona may retain chosen content in its explicit fragment bindings. Historical
+carrier `/20` records keep their earlier full-history meaning.
 
-Before each tool-result continuation, the runtime re-reads that history, open
+Before each tool-result continuation, the runtime re-reads pending messages, open
 inputs, collaboration and blackboard records, peer work-state heads, acceptance
 observations, and the node clock. These observations retain the same verified
 persona, environment and causal task scope. They grant no new action lease,
-budget, wake, or model request. The resulting request uses the existing measured
-window fitting, with exact tool results preserved.
+budget, wake, or model request. Shared historical bodies enter recipient-bound
+source references; pending messages and new action results enter the request.
+The resulting request uses the existing measured window fitting. Results already
+presented successfully move to their linked exact archive.
 
 The system is rendered from the persona's current signed self-context before
 that fit. Changed own fragment or binding records are compiled again under
@@ -1074,8 +1103,9 @@ using compact JSON separators. Fitting counts the serialized UTF-8 bytes,
 including the current `carrier_fit` statement itself; its `final_bytes` is
 that whole carrier size. The system and exact tool-result continuation spend
 from the same measured window. No fixed metadata reserve or minimum allowance
-can create space beyond it. A model summary that still cannot fit can fall
-back to the existing structural index, without another summarization call.
+can create space beyond it. Failed or oversized summarization retains its exact
+source and may refuse continuation; it cannot discard required authority or
+unpresented action results.
 
 Carriage marks join only exact message identities in the fitted request to the
 recipient's still-pending signed records, after a provider response exists.
@@ -1450,7 +1480,7 @@ cache, and rendering.
 
 An external-realization provider is actionable only when its current verified
 inventory publishes the exact eligible model IDs, media types, action
-capabilities, provider identity, and a bounded closed JSON schema for optional
+capabilities, provider identity, and a complete closed JSON schema for optional
 persona-authored output constraints. The complete schema and its hash are part
 of the inventory hash. The live action descriptor projects every current
 provider contract without ranking or choosing one; with multiple providers it
@@ -1458,6 +1488,15 @@ preserves the provider/model/media/constraint relationship rather than exposing
 independent menus that can form an invalid tuple. A provider is listed on the
 node status and in the inventory only with its availability and reason
 (`providers` rows); it is never listed present without them.
+
+No separate provider-schema byte cutoff may silently remove a configured provider.
+Likewise, provisioning stores complete authored descriptions. Model request
+admission and the adapter's actual transport limits determine whether those exact
+descriptors can be carried. Acquired-body reads accept positive caller-selected
+page and byte counts without an upper clamp or a JSON-pointer length quota.
+Remote MCP catalogue enumeration follows all pages under one deadline and current
+cancellation, detects cursor cycles, and has no total-tool or page-count ceiling.
+Each individual remote RPC still obeys its explicitly stated transport limits.
 
 At dispatch the selected provider republishes the same contract and validates
 the exact request before an outbox reservation or external action exists.
@@ -1795,9 +1834,9 @@ Adapters may translate PersonaOS records to external SDK, CLI, MCP, A2A, or
 model-provider wire shapes. Translation must preserve:
 
 - exact identity, task, environment, membership, and resource authority;
-- every live action identity in ordinary navigation, a uniform bounded
-  descriptor preview, and authenticated lazy access to each complete descriptor
-  and its reserved bindings;
+- every authorized action with its complete model-visible descriptor, through
+  native tools or the exact textual catalogue when grammar alone cannot convey it,
+  and authenticated access to its reserved bindings;
 - explicit effect annotations, including replication effects;
 - exact input attachments and verified local-byte bindings;
 - signed MIME, artifact role, content hash, length, and provenance;
@@ -1813,6 +1852,14 @@ framework offers a convenient abstraction.
 Provider cache controls may cache identical verified transport blocks. Cache
 status has no semantic authority and cannot determine which records or actions
 the persona sees.
+
+An operator may explicitly restrict the node's text models using
+`PERSONAOS_ALLOWED_MODEL_IDS`, a set of exact discovered model identities.
+The restriction applies before registry publication, context-window admission
+and signed run-pool construction, across all configured text-provider lanes.
+An empty or unknown set refuses boot; an unset restriction retains the full
+discovered catalogue. A task can narrow this ceiling but cannot broaden it.
+This operator authorization does not rank models or choose persona behavior.
 
 ## 12. Observability
 
@@ -2373,7 +2420,7 @@ markers below is written by the same tool and names the registry hash and
 the row count it rendered.
 
 <!-- registry:schemas:begin -->
-See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1273 rows; registry sha256 f2a248368b4ed0058d31b4f094271d59a76f2674c0979564d8f75512946fe657).
+See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1291 rows; registry sha256 1b66bee602a57f464d974b8dd96ee4262acb9c1a5a58eb2fb996a94de409fdab).
 <!-- registry:schemas:end -->
 
 ## 14. Key custody
@@ -2392,6 +2439,80 @@ bindings according to signed policy; it does not rewrite immutable history.
 Key custody implementation may use local encrypted storage, a cloud key service,
 or hardware security module. Storage choice cannot change the protocol meaning
 of a signature.
+
+### 14.1 Same-identity handoff
+
+Handoff moves one existing persona ID and original global handle into independent
+destination key custody. It reuses the signed knowledge bundle and durable node
+state. It never exports a private key or remints birth, profile, name, portrait,
+memory, fragment, binding or evolution records.
+
+1. The destination owner calls `POST /identity-handoffs/prepare` with the persona
+   ID, source kernel ID, pinned source kernel/persona public keys and source epoch.
+   The destination creates its own key and signs an inert preparation. An
+   existing different local handoff or registered identity is refused.
+2. Through an authenticated persona action, `authorize_identity_handoff` binds
+   the exact preparation, original global handle and prior fence hash to that
+   persona's consent. Owner authorization alone cannot supply this action. The
+   source journal enters `draining`: new turns are refused while leased work
+   settles. Live model calls, bound tools and managed process groups prevent
+   finalization.
+3. The source owner calls `POST /identity-handoffs/finalize` with the persona ID.
+   Under the state/evolution/admission/signing locks, the source verifies the
+   final signed bundle, copies adopted portrait bytes and owned context sources,
+   and signs a manifest of that exact state. Its historical signature index binds
+   issuer key, key ID and message hash for each verified record. The source
+   durably commits an execution/signing fence before producing a kernel-signed
+   fence certificate. That certificate binds the manifest hash, preparation and
+   persona consent. An unfinished drain returns an actionable refusal.
+4. The destination owner calls `POST /identity-handoffs/activate` with the full
+   package. The destination verifies the complete chain and state against its
+   exact local preparation, then commits `admitting`. Original records restore
+   under their historical issuers. Owned CAS and portrait bytes and the persona
+   state become durable before the journal commits `active` and admits work.
+
+Each private journal is kernel-signed and atomically persisted before worker
+startup. An interrupted admission recovers forward from committed state. A
+source fenced before its final certificate can complete the certificate using
+only the kernel key. A retry cannot change the destination or final state.
+Neither timeout, restart nor resetting a key's ordinary active status removes
+the source fence. Corrupt journal authority stops startup before restoring an
+actor. The fence covers turn admission, model dispatch, bound MCP execution and
+persona signing. No source relationship, tool grant, run budget or imported
+environment membership authorizes destination execution.
+
+Normal task intake rejects a nonresident target before creating an environment
+or scheduling work. Amendments and resumes retain their exact historical owner;
+they reject a nonresident owner before successor grants or member fan-out. HTTP
+target overrides require a fresh task and cannot be silently ignored by a
+continuation. New wakes are refused at enqueue. If handoff starts after a
+wake was queued, the existing turn-execution record reports
+`identity_residency_unavailable` and the delivery settles without acquiring a
+persona lease or entering a provider. Historical source runs remain exportable;
+they do not publish the departed actor as a current source resident. Current
+identity discovery belongs to the destination and its successor key.
+
+`personaos-knowledge-bundle/3` extends `/2` with the prior handoff proofs; its
+existing manifest binds that extra member. The shared historical verifier
+accepts only the exact certified message hashes under their original issuers.
+It grants no general authority to an old persona key or foreign kernel master.
+Original parent and kernel birth evidence can verify without moving the parent.
+Full source runtime records remain a private archive, exposed to that owner
+through ordinary context references. Only recipient-authorized context references
+with verified bytes enter the copied closure; a raw content hash is insufficient.
+Missing or revoked sources remain explicitly unavailable. Reading the admitted
+archive at the destination still requires current destination membership.
+
+`GET`/`HEAD /identity-handoffs/<persona_id>` exposes only
+`personaos-identity-residency/1` on a public node (or to its authenticated owner).
+It contains the original identity, current host/key/epoch and minimal signed
+fences. Private state and the historical message index are absent. A current
+persona card and discovery record carry this same residency proof. Anonymous
+readers verify native key-derived node identities, every consent and fence, and
+the current destination pin before accepting an original DID on another host.
+They can then verify retained public descriptors under their original keys.
+This public presentation check grants no historical action authority. Anonymous
+resolution of custom node aliases still requires an independently available pin.
 
 ## 15. Design criteria
 

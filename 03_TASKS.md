@@ -99,6 +99,23 @@ Environment reuse requires an exact principal-supplied target or authenticated
 causal resume/amendment authority. This routing rule is independent of task,
 charter, persona, domain, arrival order, and concurrent worker timing.
 
+Exact environment/persona addressing grants no membership. For an environment
+with neither members nor membership history, the authenticated local node owner
+may explicitly supply `admit_initial_member: true` on a newly funded task with
+both exact targets. The flag is an exact boolean, is unavailable to amendments
+and resumes, and cannot be combined with a project target. The persona must be
+active, locally resident and unfenced; the environment must be proposed, active
+or idle. A positive finite call grant and the owner's verified intake event are
+required. Validation runs before queueing and again under the membership lock.
+
+This reuses neutral first-member admission. `ENV_INITIAL_MEMBER_AUTHORIZED`
+binds the owner, intake event and hash, task text hash, task/run IDs, signed model
+pool hash, budget and exact persona/environment IDs. The membership cites that
+event. Current local model availability may be declared in the environment;
+imported records supply no executable tools or funding. Subsequent collaborators
+retain independent invitation/consent. The CLI exposes the same operation with
+`--target-persona-id`, `--target-env-id` and `--admit-initial-member`.
+
 A deployment may seed a node with a neutral cohort of several blank personas
 instead of one. A task admitted to such a node with no exact environment,
 project, or persona address founds its fresh environment with that exact seeded
@@ -860,19 +877,53 @@ own work too. A new task in the same environment retains those claims, and
 the eligibility page and receipt qualification apply the same exclusion.
 
 For a whole-tree publication, both authorship exclusion and executed evidence
-use the latest verified cumulative environment snapshot. The signer's claims
+use the exact adjudicated publication's verified cumulative snapshot. The signer's claims
 remain that signer's published byte deltas or artifact declarations; another
 member's later note-only or empty publication cannot hide those claims while
 the authored bytes remain in the delivery. Publishing a snapshot does not by
 itself make its publisher the author of every unchanged file it carries. The
-receipt keeps its exact signed publication binding, and the current delivery
-is the same for qualification and the eligibility page.
+receipt keeps its exact signed publication binding. An explicitly named
+publication is never replaced by the newest environment snapshot. Comparing
+that delivery's file identities against the current publication detects
+replacement or deletion; unrelated additions do not invalidate its review.
+
+An ordinary `personaos-artifact-manifest/1` JSON file can declare the delivered
+files as `files: [{path, size_bytes, sha256}]`. A `snapshot_ref` names its signed
+publication and manifest path, with optional exact publication and manifest
+hashes. This outer reference avoids a self-referential manifest hash. The
+publication supplies the immutable Git commit; the manifest and every declared
+file must match both the original Git objects and the signed publication.
+`author_task_acceptance_contract` can bind this reference in contract `/3`.
+The principal's exact condition of record remains binding: the manifest cannot
+relax it or establish that omitted deliverables meet the request.
+
+`inspect_workspace_file` and `command_exec` accept the same snapshot reference.
+Review execution materializes the declared files separately from the reviewer's
+scratch and output directories. Declared check-source files are copied exactly
+from the reviewer's workspace. Kernel-signed command events bind the snapshot,
+the complete command and environment, check-source hashes, input-integrity
+check, exit status and output hashes. Review output stays outside candidate
+publication unless the persona explicitly copies and publishes it.
+
+A manifest-scoped receipt cites its `snapshot_ref` and completed check event in
+the existing signed `inputs`. Qualification joins the exact contract, manifest,
+publication, signer, check source and completed execution. A failed check can
+ground a withholding verdict; it cannot ground an affirmative one. Authorship
+independence still applies. Manifest or delivered-file changes require review
+of the replacement. Acceptance facts `/11` state reviewed-delivery currency
+separately from whether the bound publication is the newest event.
+
+These joins establish which inputs and execution a verdict refers to. Functional
+coverage remains the verifier's work: source generation, dimensions, connectivity,
+circulation or other requested behavior must be tested by appropriate checks.
+An unchanged hash, a successful unrelated command or a manifest that leaves out
+required work does not by itself prove the principal's request was satisfied.
 
 The invariants carry a perceivability duty: an invariant a candidate cannot
 mechanically see is an invariant it can only guess at. Under a predicate-mode
 declaration the acceptance projection therefore always carries the
 adjudicated-delivery page — the exact byte identities (opaque path, size,
-sha256) of the latest admitted publication, its publication event identity,
+sha256) of the declared review target, its publication event identity,
 and its publisher — in the acceptance facts, the dedicated prompt lane, and
 every `author_verifier_receipt` reply, before any receipt exists. The page is
 pure carriage of already-verified identity rows; the first live predicate run

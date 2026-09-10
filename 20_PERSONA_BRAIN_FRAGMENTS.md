@@ -240,27 +240,23 @@ consent policy. Supersession never rewrites prior bytes.
 
 ### 3a. Structural distillation carriage
 
-The turn contract's `distillation` self-product
-([`02_PERSONA.md §2b`](02_PERSONA.md#2b-structural-turn-self-products)) is a
-persona storage action expressed in-band: persistence happens only when the
-persona authored the member in its own turn output, and what is persisted is
-exactly what it authored. At settlement the substrate upserts the bytes as one
-persona-signed fragment under a deterministic content-derived identity — the
-same authored value never duplicates under retries — and re-binds the
-persona's current eligible winning head, preserving its scope. Valid carried
-identities remain, so a persona's own pruning is never resurrected, and the new
-fragment is appended unless its body is byte-identical to one already carried.
-When no eligible head exists, a persona-scoped head is created. There is no
-newest-N retention rule: exact scope, revisions and measured prompt fit determine
-later carriage, with omissions stated by the carrier. This is carriage
-of a persona-authored product, not an automatic edit: the substrate converts
-no receipt, message, or trace into a fragment, and the no-automatic-edit rule
-above is unchanged.
+The turn contract's `distillation` member and the `author_brain_fragment`
+action persist exactly the persona's own authored bytes as a signed fragment.
+The deterministic identity reuses the same record on settlement retry and never
+overwrites a later persona-authored revision. Storage does not bind the new
+fragment, replace an existing head, or schedule a turn.
 
-A mechanical rebind records itself truthfully: its binding commit and
-evolution record carry `automatic_selection: true`, distinguishing settlement
-carriage from a persona-selected curation. Head resolution reads nothing new —
-the mechanically latest eligible head remains the complete current set.
+`personaos-persona-distillation-record/2` states storage and its provenance with
+`automatic_selection: false` and `binding_changed: false`. Historical `/1`
+records and existing valid heads retain their original meaning; there is no
+blanket reset or automatic re-adoption during upgrade.
+
+The persona uses the ordinary fragment body and ordered, scoped bindings as its
+working prompt. It may retain selected observations, instructions or summaries,
+read other evidence by exact reference, and append, remove, replace or clear its
+selected set. There is no separate composition record, memory tier, planner
+model, semantic retrieval policy or mandatory planning call. Unbound memories
+remain discoverable and do not become ambient model instructions.
 
 If the same authenticated action explicitly includes
 `bind_changed_fragments`, successful application is followed by the distinct

@@ -66,6 +66,14 @@ Optional persona public fields are never membership prerequisites. Missing
 name, portrait, description, characteristics, memory, skill, work note, or
 gap-like authored knowledge cannot block active membership or work.
 
+An imported snapshot preserves ancestry and files while starting with no local
+members or executable grants. A node owner may explicitly admit its first active
+local persona through the funded, exactly addressed task intake described in
+[`03_TASKS.md §1`](03_TASKS.md#1-task-intake). This founding exception requires an
+empty membership history and records `ENV_INITIAL_MEMBER_AUTHORIZED`; an exact
+target, snapshot import or identity handoff alone never grants membership.
+Later participants use the existing independently consented membership path.
+
 ## 3. Exact event fan-out
 
 Task-ingress and resource-resume events carry the same exact signed source bytes

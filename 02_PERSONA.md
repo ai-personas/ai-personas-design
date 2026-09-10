@@ -34,6 +34,23 @@ omitting any of them does not create a new persona. Process restart restores the
 same actor only when its exact signed state verifies; otherwise failure is
 explicit rather than silently minting a replacement.
 
+Moving the same actor to another node preserves its original global handle,
+persona ID, birth/activation, signed profile and complete admitted knowledge.
+The destination generates a successor key in its own custody. The persona
+consents to that exact destination; the source drains its work and durably
+fences both execution and signing before certifying the final state. The
+destination commits those records before activating. Restart recovers forward;
+elapsed time cannot reactivate the source. Existing knowledge-copy admission
+under a different recipient remains a separate operation.
+
+Historical signature verification is bound to the exact messages and issuers
+in the signed handoff, including original birth and descriptor signatures.
+It does not make a foreign kernel key a general local authority. Destination
+environment membership, tool execution permissions and resources require local
+admission. Original signed descriptors retain their bytes while public cards
+use the current key and carry the verified residency chain
+([09 §14.1](09_PROTOCOLS.md#141-same-identity-handoff)).
+
 ## 2. Persona-authored self material
 
 A persona may author exact open signed records describing any aspect of
@@ -171,11 +188,13 @@ it was delivered even when older observations are compacted. If current
 authority alone exceeds the provider window, the turn states that bound;
 silently removing the event's purpose is not an admitted fit.
 
-The `distillation` member is a small persona-authored value — a string or a
-bounded mapping — persisted at turn settlement as the persona's own signed
-brain fragment and folded onto its persona-scoped fragment head, so it rides
-into every later turn in any environment through the ordinary compile
+The `distillation` member is a persona-authored string or mapping persisted at
+turn settlement as the persona's own signed brain fragment. It does not change
+fragment selection. The persona chooses its working prompt through ordinary
+fragment authoring and binding, including the combined author-and-bind action
 ([`20_PERSONA_BRAIN_FRAGMENTS.md §3a`](20_PERSONA_BRAIN_FRAGMENTS.md#3a-structural-distillation-carriage)).
+The current contract is `personaos-turn-self-product-contract/2`; historical
+records retain the earlier contract's meaning.
 
 The slot is the whole substrate contribution: turn shape, bounded carriage,
 mechanical persistence, and a static in-carrier contract naming the slot and
@@ -276,8 +295,9 @@ no portrait or removal transition and leaves the frozen identity unchanged.
 
 ## 4. Ordinary agency
 
-On every authentic funded wake, the persona receives bounded exact situation
-facts and the complete currently authorized action catalog. Identity, task,
+On every authentic funded wake, the persona receives current verified self,
+its selected fragment bodies, exact authority and delivery, readable evidence
+references, and the complete currently authorized action surface. Identity, task,
 communication, memory, knowledge, skill, capability, tool, artifact, workspace,
 population, scheduling, and work-note actions coexist whenever their mechanical
 authority is valid.
@@ -318,9 +338,10 @@ signed action with exact lineage.
 
 ## 6. Memory, knowledge, and skills
 
-The persona sees bounded paginated complete unranked inventories of memories,
-knowledge references, skills, tools, and visible peer metadata. It navigates by
-exact reference and explicit action.
+The persona may inspect paginated complete unranked inventories of memories,
+knowledge references, skills, tools, and visible peer metadata. Its chosen fragment
+bindings supply working context. Historical bodies remain behind authorized
+references until it reads them or selects material to retain.
 
 The host does not retrieve top-K items, rank relevance, inject a hidden summary,
 decay memories, select a teacher, choose a skill, or assemble a behavioral

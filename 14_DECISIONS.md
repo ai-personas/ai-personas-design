@@ -2654,3 +2654,45 @@ second provider. The runtime's
 `docs/PERSISTENT_PERSONAS_LIVE_2026-09-10.md` records the exact stages, versions,
 measurements, final accounting and limitations; signatures and tool success
 do not supersede those failures.
+
+**Revised context and residency contract, 2026-09-10.** Later simplification
+removes automatic memory-to-binding updates and eager history expansion. Storage
+alone does not select working context. Existing valid bindings and historical
+records remain intact; personas select fragments with the existing ordered,
+scoped binding actions. Carrier `/21` retains exact self, authority, selected
+fragments, current delivery and new results. Older bodies remain behind signed,
+recipient-bound references with current access checks. The complete ordinary
+action catalogue remains visible, including on grammar-only transports.
+
+Immutable review extends existing publication, artifact, execution and receipt
+mechanisms with an ordinary manifest and exact snapshot reference. Receipt
+qualification binds the declared delivery, check source and completed execution;
+unrelated later files do not invalidate it. Functional adequacy remains a review
+judgment, not a hash or kernel classifier.
+
+Same-identity handoff uses destination-owned successor keys, persona-authored
+consent, a durable source signing/execution fence and forward recovery. Exact
+historical signature bindings preserve original identity, activation and self
+records without granting general foreign-key authority. Destination membership,
+funding and executable permissions still require local admission. Task intake,
+amendment/resume, wake admission, model dispatch, tools and signing all honor
+residency; historical source work remains readable after the move.
+
+The revised live cases demonstrate actual character changes in later requests,
+original-identity destination execution after restart, an authored and adopted
+generated portrait, native libp2p browser discovery and artifact download, and
+private-view clearing after actual token rotation. Fresh house, circuit and
+continued-house packages remain independently unaccepted; a focused circuit
+retest still fails both its correct and faulty controls. Useful autonomous
+capability acquisition and improvement attributable to learning remain unproven.
+The earlier newborn contribution retains its earlier version. Local Qwen provider
+execution is measured separately from Luna and retains resource failures and
+interrupted attempts. Current outcomes and exact evidence versions are recorded
+in the runtime's `docs/PERSISTENT_PERSONAS_REVISED_LIVE_2026-09-10.md`.
+
+The operator later stopped the Qwen experiment and requested Luna only. The
+same saved private node admits exactly `gpt-5.6-luna` through an explicit
+node-wide text-model ceiling. Qwen's ten attempts, including failed execution
+and uncertain interrupted outcomes, remain recorded. The subsequent five-call
+Luna correction attempt only inspects existing files; it does not resolve the
+house failures or establish functional second-family work.
