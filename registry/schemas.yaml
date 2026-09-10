@@ -222,6 +222,16 @@ rows:
   - id: personaos-persona-context-source/1
     class: exact
     class_decided_by: "02 §2b; 09 §2"
+    status: retired
+    tiers: [prompt, in_process, operator]
+    owner: "02 §2b; 09 §2"
+    members: unreviewed
+    emitters: []
+    notes: Retired nested access-record argument; only the current scalar CAS source_ref is admitted.
+
+  - id: personaos-persona-context-source/2
+    class: exact
+    class_decided_by: "02 §2b; 09 §2"
     status: current
     tiers: [prompt, in_process, operator]
     owner: "02 §2b; 09 §2"
@@ -231,7 +241,8 @@ rows:
       optional: []
     emitters: ["src/personaos/content_addressed.py:persona_context_source_reference"]
     notes: >-
-      Kernel-signed recipient-bound reference into the existing exact CAS. Reads verify
+      Kernel-signed recipient-bound access record stored in the existing exact CAS. A scalar
+      source_ref identifies this record and is validated before issuer dispatch. Reads verify
       recipient, issuer, membership and bytes. Raw hashes grant nothing. A committed handoff
       can admit the exact owned closure, with fresh destination membership required.
 
@@ -1133,7 +1144,7 @@ rows:
     owner: "09_PROTOCOLS.md §4"
     members:
       required: [ok, authority, authority_hash, delivery_evidence]
-      optional: [dispatch_environment_id, dispatch_task_id]
+      optional: [dispatch_environment_id, dispatch_task_id, reply_ref]
     emitters: ["src/personaos/protocols/mcp_lanes/communication.py:BridgeCommunicationMixin.persona_message"]
     notes: >-
       A remote reply additionally states its independently authorized local
@@ -1441,13 +1452,14 @@ rows:
   - id: brain-fragment-catalogue-page/2
     class: exact
     class_decided_by: seed
-    status: current
+    status: retired
     tiers: [lineage]
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: []
     notes: >-
       D21: append-position order with deterministic rotation.
+      Retired; current producers and readers use /3.
 
   - id: persona-self-publication/1
     class: open
@@ -1718,11 +1730,11 @@ rows:
   - id: personaos-mounted-tool-identity/1
     class: exact
     class_decided_by: seed
-    status: current
+    status: retired
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
     members: unreviewed
-    emitters: ["src/personaos/runtime.py:32331", "src/personaos/runtime.py:36981"]
+    emitters: []
     notes: >-
       Named without description in the 09 §13 cutover list retired from the
       canon on 2026-09-05 (a current cutover record).
@@ -2019,7 +2031,7 @@ rows:
   - id: personaos-post-run-distillation-wake/1
     class: rendered
     class_decided_by: seed
-    status: current
+    status: retired
     tiers: [prompt, lineage]
     owner: "ADR-0112"
     members:
@@ -2030,10 +2042,7 @@ rows:
       optional: []
     emitters: []
     notes: >-
-      Read compatibility only; new emitters use /2. Historical reference-only
-      final-result wakes remain readable. This version
-      wrote no durable delivery outbox, so absence of a start or completion does
-      not authorize automatic replay. Superseded by /2.
+      Retired; current producers and readers use /2.
 
   - id: personaos-post-run-distillation-wake/2
     class: rendered
@@ -2811,6 +2820,50 @@ rows:
         run_model_pool]
       optional: []
     emitters: ["src/personaos/resource_versions.py:persist_unfunded_resource_wait"]
+
+  - id: personaos-persona-causal-disposition/2
+    class: rendered
+    class_decided_by: seed
+    status: retired
+    tiers: [operator]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired in the current contract. Current causal dispositions use /3.
+
+  - id: personaos-capability-acquisition-verification/3
+    class: open
+    class_decided_by: seed
+    status: retired
+    tiers: [lineage]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired; current producers and readers use /4.
+
+  - id: personaos-principal-outcome-fact/1
+    class: open
+    class_decided_by: seed
+    status: retired
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired; current producers and readers use /3.
+
+  - id: personaos-principal-outcome-fact/2
+    class: open
+    class_decided_by: seed
+    status: retired
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired; current producers and readers use /3.
 
   # === rows below this line are the output of tools/registry.py seed (S2, ADR-0114 dec 1) ===
   # Regenerated from the code on every run, in id order: a row here is
@@ -6709,15 +6762,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/runtime.py:TaskRuntime._capability_acquisition_state"]
 
-  - id: personaos-capability-acquisition-verification/3
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [lineage]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
-
   - id: personaos-capability-acquisition-verification/4
     class: open
     class_decided_by: seed
@@ -9635,6 +9679,16 @@ rows:
       optional: []
     emitters: ["src/personaos/llm/router.py:ModelRouter.persona_model_transport_inventory"]
 
+  - id: personaos-mounted-tool-identity/2
+    class: exact
+    class_decided_by: seed
+    status: current
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: ["src/personaos/runtime.py:_complete_with_personaos_mcp_in_phase._authenticated_same_turn_mounted_tool_identities",
+      "src/personaos/runtime.py:_exact_mounted_tool_identity"]
+
   - id: personaos-native-capability-use-receipt/1
     class: open
     class_decided_by: seed
@@ -9757,6 +9811,17 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/node_lanes/public_surface.py:NodePublicSurfaceMixin.live_status"]
 
+  - id: personaos-node-policy/1
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members:
+      required: [state_contract, visibility, allowed_model_ids]
+      optional: []
+    emitters: ["src/personaos/node_policy.py:resolve_node_policy"]
+
   - id: personaos-node-routing-context-choice-binding/1
     class: exact
     class_decided_by: seed
@@ -9768,6 +9833,15 @@ rows:
         recorded_at, signing_key_id, signature_hex]
       optional: []
     emitters: ["src/personaos/node_lanes/model_calls.py:NodeModelCallsMixin.submit_routing_context_choice"]
+
+  - id: personaos-node-state/1
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: []
 
   - id: personaos-node-status/1
     class: rendered
@@ -10519,15 +10593,6 @@ rows:
       optional: []
     emitters: ["src/personaos/node_lanes/public_surface.py:NodePublicSurfaceMixin._persona_identity_card_reference"]
 
-  - id: personaos-persona-causal-disposition/2
-    class: rendered
-    class_decided_by: seed
-    status: current
-    tiers: [operator]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
-
   - id: personaos-persona-cognitive-intent-state/2
     class: open
     class_decided_by: seed
@@ -10720,8 +10785,8 @@ rows:
     owner: "an ADR decision until that section is written"
     members:
       required: [source_event_id, source_event_hash, communication_id, authority_hash,
-        authority, recipient_binding, persona_signature_verified, lineage_signature_verified,
-        semantic_interpretation_performed]
+        reply_ref, authority, recipient_binding, persona_signature_verified,
+        lineage_signature_verified, semantic_interpretation_performed]
       optional: []
     emitters: ["src/personaos/node_lanes/persona_turns.py:NodePersonaTurnsMixin._verified_persona_communication_wake_context"]
 
@@ -11888,24 +11953,6 @@ rows:
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: ["src/personaos/kernel_lanes/authority.py:KernelAuthorityMixin.record_principal_outcome_fact"]
-
-  - id: personaos-principal-outcome-fact/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
-
-  - id: personaos-principal-outcome-fact/2
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
 
   - id: personaos-principal-outcome-fact/3
     class: open

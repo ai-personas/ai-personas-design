@@ -182,8 +182,10 @@ ordinary fragment authoring and scoped bindings, or reads a source again. Saving
 a memory alone does not select it. There is no mandatory planning call, context
 composition action, or separate composition store.
 
-`personaos-persona-context-source/1` binds the issuer, recipient, environment,
-task, source content reference and issued membership. `inspect_persona_learning_history`
+`personaos-persona-context-source/2` binds the issuer, recipient, environment,
+task, source content reference and issued membership. Its signed record is stored in
+the existing CAS. The model receives and passes one scalar `source_ref`, whose shape
+and access record are validated before issuer or handoff dispatch. `inspect_persona_learning_history`
 verifies the signature and current access before reading. A content hash alone is
 not read authority. Revocation or a replacement membership invalidates the old
 reference. Reads support exact JSON pointers and consecutive UTF-8 byte pages,
@@ -479,19 +481,22 @@ the signed `/2` continuity adoption and the original recipient's signature.
 Reading or retaining these bodies does not bind a brain fragment, activate a
 method, or mount a tool generation in the destination environment.
 
-A successful executable acquisition returns the exact mounted tool name,
-artifact id, descriptor hash, and acquisition-lineage event id into its sealed
-effect receipt as `personaos-mounted-tool-identity/1`. That exact tuple is
+A successful executable or MCP acquisition returns the exact mounted tool name,
+source kind, authority reference, descriptor hash, and acquisition-lineage event
+id into its sealed effect receipt as `personaos-mounted-tool-identity/2`.
+An executable's authority reference is its artifact id; a remote MCP mount uses
+the signed acquisition intent's content hash and exact candidate hash. The tuple is
 preserved through authenticated direct dispatch, provider-native observation
 capture, the action-effect receipt, and any same-turn provider-tool refresh.
 Parsed model-visible result text, an unbound provider event, or a caller-supplied
 lookalike cannot create mounted identity authority.
 
 Before another completion inside that same semantic turn, the runtime may widen
-the frozen action lease only when those four values rejoin one current signed
-acquisition, one later signed registration, and one current environment
-descriptor. The refreshed descriptor must expose the same artifact and
-descriptor identities. A same-named pre-existing host/native tool or a
+the frozen action lease only when those values rejoin the current signed
+acquisition and descriptor. Executable tools require the later signed
+registration; MCP mounts require the matching successful signed receipt and
+current proxy annotations. The refreshed descriptor must expose the same
+authority and descriptor identities. A same-named pre-existing host/native tool or a
 same-named descriptor with a different artifact, hash, or lineage never absorbs,
 renames, or substitutes for the acquired mechanism; conflicting exact mounted
 identities leave the lease unchanged. This applies equally to structured and
@@ -699,6 +704,67 @@ those joins and compares only the declared delivery and manifest against the
 current published file identities. It retains ordinary authorship exclusion
 and requirement authority. Contract text and receipt counts have no separate
 invented quota; existing action, transport and causal resource authority apply.
+
+### 2.6 Current action and node admission contract
+
+The public action descriptor is the input validator: each built-in tool uses the
+same complete JSON Schema for native provider serialization and MCP dispatch.
+Nested mechanical shapes, exclusive alternatives and unknown fields are checked
+before execution. Opaque persona-authored JSON bodies remain opaque and exact.
+
+`command_exec` accepts exactly one of an `argv` array or a `script` string, with
+canonical `cwd`, `env`, `timeout_s` and `output_files` fields. `code_exec` accepts
+raw `code` and an `interpreter` argv array. Both use the same authenticated process,
+output capture, publication and immutable review machinery. Alternate command,
+working-directory, timeout and interpreter spellings are not current inputs.
+
+`persona_message(reply_ref=...)` resolves an exact visible pending communication,
+derives its verified parent identity and original delivery scope, and defaults
+the recipient to its author. A new message independently names `delivery_scope`
+and `addressed_to`. An incoming wake never silently parents an unrelated new
+message. Consent, routing, current membership and carried outcome checks still
+apply to both forms.
+
+`apply_brain_evolution` accepts authored operations and explicit fragment-binding
+choices. Persona action authority supplies signing; the model does not construct
+a `signed_decision` envelope. Internal signatures, exact self-state history,
+scoped bindings and current-version original-identity handoff remain verified.
+Operation targets and bodies remain opaque authored data; naming a target
+`identity_section` neither interprets trait names nor changes the persona's
+character. Identity mutation uses its separate explicit authenticated actions.
+
+MCP registry discovery returns the complete current access-authorized inventory
+in hash order, with caller-selected pagination and optional exact capability-ID
+filters. Unfiltered candidates need no capability annotations. Acquisition checks
+the exact descriptor hashes, signed discovery evidence and persona-authored intent.
+After a successful verified mount, the next request admits that tool under the
+same causal budget. Registry descriptors preserve complete schemas and authored
+metadata; physical storage and explicit operator resource allowances still apply.
+
+`declare_artifact(files=[...])` hashes the chosen regular files and mechanically
+materializes the ordinary signed artifact manifest through existing Git and
+lineage publication. It returns a ready `snapshot_ref`. Unselected personal
+branch files and conflicts remain outside that publication. Both execution tools
+can review a selected immutable snapshot. `author_verifier_receipt(execution_ref=...)`
+resolves the completed authenticated check and derives its exact snapshot, check
+source and output hashes before normal receipt qualification. These references
+add no candidate coordinator or separate acceptance authority.
+
+After verified membership admission, the next provider request re-enters the
+ordinary action surface with current workspace, membership, situation and task
+authority. It keeps the same causal budget, cancellation and writer fence; joining
+grants no model calls. Local `budget_exhausted`, including a wrapped cause, is a
+non-retryable local exhaustion outcome and never a model-server 500. Real attempted
+calls and unknown usage remain recorded independently of tool effects.
+
+A node persists `personaos-node-policy/1`, including the current
+`personaos-node-state/1` contract, visibility and global allowed model identities,
+before activating listeners. An omitted restart setting reuses that policy. A
+fresh node is private; public access requires explicit operator configuration.
+The model ceiling applies to text cognition, compaction, learning and external
+model-backed capabilities. Unsupported persisted state is refused before
+activation; there is no inferred legacy conversion or restart loop. Archive and
+fresh-start handling is an operator operation.
 
 ### 2a. Present-moment fact
 
@@ -1716,9 +1782,9 @@ membership plus open protocol state are the only selection facts.
 
 ## 10. Work notes, completion, and quiescence
 
-`personaos-persona-work-state/5` carries a bounded open `work_note`, exact
+`personaos-persona-work-state/5` carries an exact open `work_note`, exact
 observed-situation and append lineage, and one explicit signed
-`personaos-persona-causal-disposition/2`. Protocols preserve it as one immutable
+`personaos-persona-causal-disposition/3`. Protocols preserve it as one immutable
 authored claim. They do not extract commitments, blockers, stages,
 requirements, votes, readiness, or next actions from the note.
 
@@ -2420,7 +2486,7 @@ markers below is written by the same tool and names the registry hash and
 the row count it rendered.
 
 <!-- registry:schemas:begin -->
-See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1291 rows; registry sha256 1b66bee602a57f464d974b8dd96ee4262acb9c1a5a58eb2fb996a94de409fdab).
+See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1295 rows; registry sha256 80945192fb60648d5949f3e3cd89e375030a3694c196154194aee24589bca8cf).
 <!-- registry:schemas:end -->
 
 ## 14. Key custody
