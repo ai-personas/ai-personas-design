@@ -119,6 +119,25 @@ Restart retains that original event, and a changed signature or chain makes
 the observation unavailable.
 Age is neither a competence score nor a lifecycle permission.
 
+### Safe characteristic revisions
+
+`adopt_persona_characteristics` declares `mode`: `initialize` admits a complete
+profile only when none exists; `patch` preserves untouched keys; `replace`
+intentionally removes every omitted key. Revisions require the current
+`expected_profile_hash`. A conflict returns the current verified profile and hash
+without applying the request. Ordered patch operations are `set` (path and value)
+or `remove` (path only). Paths are nonempty lists of object keys through existing
+objects; arrays are replaced as values. The entire batch validates before commit.
+
+The complete result and signed predecessor binding commit in one atomic persona
+snapshot. A v2 revision receipt retains the authenticated action identity, request
+hash, explanation and experience references. Replaying that identity returns its
+original receipt without adding a revision, even after a later change or restart.
+The frozen identity and historical v1 profile/adoption preimages are unchanged.
+Profile admission imposes canonical JSON and authority requirements, not trait
+scales or arbitrary field, string, array, depth or profile-byte ceilings. Measured
+request capacity remains binding; an incompatible model must be reported.
+
 ## 2b. Structural turn self-products
 
 A turn's output contract carries one optional persona-authored self-product.

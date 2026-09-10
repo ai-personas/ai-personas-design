@@ -2543,3 +2543,87 @@ make the requested comparison and self-interpretation explicit, but their
 behavioral effectiveness is unproven by this offline repair. A fixed mapping from
 OCEAN values to instruments would violate persona ownership and would not
 establish that the chosen instrument was suitable.
+
+
+## ADR-0120 — Explicit characteristic revisions and persistent operating evidence
+
+**Status:** Accepted for implementation; live behavioral acceptance remains open.
+
+**Problem.** A VAD-only adoption replaced an entire profile, silently removing
+OCEAN and preferences. The action had no predecessor precondition and reported
+success even when its best-effort persistence failed. Existing signed profiles,
+knowledge bindings, actor mailboxes and provider contracts should be extended
+instead of adding a second personality or workflow engine.
+
+**Decisions.** Characteristic updates declare initialize, patch or replace.
+Revisions compare the current profile hash under the owner's evolution lock.
+Ordered object-key operations validate completely before an atomic staged
+snapshot publishes the resulting profile and signed v2 revision receipt.
+The receipt binds the predecessor and authored explanation/experience references;
+the authenticated action holds exact request bodies. Action replay is idempotent.
+Historical v1 signatures retain their original preimages and meaning. Profile
+contents remain opaque authored JSON; capacity comes from actual transport and
+resource authority. Character and learning are refreshed before later requests.
+
+**Evidence standard.** Infrastructure tests verify exact input bytes, authority,
+persistence and execution. Live evaluations must separately demonstrate useful
+work, applied learning, experience-grounded evolution, accepted collaboration,
+newborn contributions and generated/adopted portraits. A signature, exhausted
+budget, lower token total or recorded lesson is insufficient. Each new live task
+retains a 100-call ceiling including learning and text compaction. Unproven
+outcomes stay open in the runtime implementation/evidence ledger.
+
+**Continuing self and knowledge.** Incremental fragment binding declares append,
+remove or replace. Append retains independently valid bindings; a revised or
+revoked fragment does not silently become a newly adopted version. Unbound
+catalogue bodies are available through inspection and are not automatically
+inserted as adopted cognition. Current signed self-state is refreshed before
+every request. The one-call reserved learning wake carries verified own-turn
+receipts, changed artifact references, failed execution evidence, the factual
+scorecard and the latest attributed work notes before its first model request.
+
+**Calls and context.** Existing call IDs now bind durable attempt phases,
+causal/funding references, adapter-measured wire bytes where available, reported
+usage, timings and tool effects. Admission, provider attempts, tool calls and
+budget charges remain distinct. A started attempt without a terminal result is
+unknown after restart; absent usage is never zero. Bounded UI caches are readers
+of operating evidence, not the durable history. Compaction archives exact source
+history before summarization and records its source hashes and funded model use.
+The persona may request earlier compaction through `compact_context`; required
+authority, intent and current self-state remain exact. Failed archival or
+summarization retains the eligible history.
+
+**Reads and waiting.** Conditional read versions bind the complete returned
+content, exact resource reference and current authority scope. A successful
+unchanged read returns that fact; an authority change prevents reuse. Repeated
+read bodies are replaced only when the full matching body remains in the actual
+request, retaining chronological observations. Causal disposition v3 adds
+`wait_for_change` and `end_turn`; v2 records keep their prior meaning. Signed
+waits reuse existing funded scheduled triggers. Registration and recheck share
+the trigger lock, changed observations latch durably, and unchanged waits make
+zero model requests. Workspace observations bind the validated file descriptor's
+device, inode and modification/change times as well as bytes. Cancellation,
+revocation and restart preserve the existing authority gates. Unfunded waits
+remain pending for resource recovery. End-turn controls take effect only after
+the admitted batch and output capture, and do not accept the task.
+
+**Delivery and capabilities.** The existing direct/federated transport retains
+failed delivery attempts and exposes separate authored, stored, included-in-input
+and exact-parent-reply facts to the author. Missing receipts remain unknown;
+inspection cannot open an inbox or grant a wake. Model capability projections
+separate catalogue advertisements, adapter support and observed execution.
+Portrait requests expose the selected model's configured image path when one
+exists, then configured alternatives; the persona authors the request and adopts
+verified output through the existing resource policy. Tool inventories and
+filtered searches remain completely paginated. Requested workspace page sizes
+are honored. Managed-process output spills from a bounded memory buffer to disk,
+retaining all bytes for the process manager's lifetime with explicit storage
+failures. These are capacity fixes, not prescriptions for particular tools.
+
+**Public streaming.** Provisional cognition v2 identifies adapter-extracted
+shareable text. Structured output exposes only its shareable message field;
+reasoning, private learning and partial tool arguments are excluded. Historical
+v1 raw deltas are not reinterpreted as safe. The UI aggregates by call/message and
+sequence, reconciles with complete text and labels unavailable or interrupted
+streams. Existing signature, access, revocation and node-scoped cache rules apply
+to both drafts and completed output.

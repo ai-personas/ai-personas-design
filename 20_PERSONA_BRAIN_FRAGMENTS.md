@@ -347,3 +347,18 @@ inventories.
    changed revisions; a changed scope begins with changed revisions only; an
    omitted binding request remains catalogue-only; and explicit replacement or
    clearing remains a separate persona-authored binding decision.
+
+
+### Explicit incremental binding (ADR-0120)
+
+The direct binding action declares append, remove or replace. Append preserves
+current valid exact fragment revisions and adds the supplied ids. Remove unbinds
+the supplied ids. Replace supplies the complete set; the empty set unbinds all.
+Incremental updates preserve the current exact scope and refuse a scope change.
+Invalid or stale revisions are reported and never implicitly upgraded. Historical
+missing-mode actions retain their prior full-replacement meaning.
+
+Only the current verified binding carries adopted lesson bodies in the system
+prompt. Catalogue bodies remain available through explicit inspection; a parallel
+automatic catalogue-body lane must not reintroduce unbound lessons. No task
+semantics, value ranking or host-authored lesson selection participates.

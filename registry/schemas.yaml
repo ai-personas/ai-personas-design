@@ -2246,6 +2246,235 @@ rows:
       governs future fact emission and does not retroactively establish byte
       evidence for older facts or assert a later worktree's contents.
 
+  - id: persona-characteristics-revision/2
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [in_process]
+    owner: "02_PERSONA.md: Safe characteristic revisions"
+    members:
+      required: [persona_id, mode, request, request_hash, characteristics_profile,
+        characteristics_hash, previous_characteristics_hash, identity_signature_hex,
+        ts, kind, soul_version, parent_hash, signing_key_id, signed_by]
+      optional: []
+    emitters: ["src/personaos/identity/store.py:adopt_characteristics_profile"]
+
+  - id: personaos-context-compaction-observation/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [persona_id, target_bytes, summary, source_value_hash, source_reference]
+      optional: []
+    emitters: ["src/personaos/runtime.py:_model_compacted_projection"]
+
+  - id: personaos-model-call-attempt/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members: unreviewed
+    emitters: ["src/personaos/kernel_lanes/situations.py:KernelSituationsMixin.record_model_attempt"]
+
+  - id: personaos-model-call-history/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [operator, lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members: unreviewed
+    emitters: ["src/personaos/kernel_lanes/situations.py:KernelSituationsMixin.model_call_history",
+      "src/personaos/observability.py:project_model_call_history"]
+
+  - id: personaos-model-execution-capabilities/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [in_process]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [streaming, tool_invocation, image_generation, modalities_source, context_limit,
+        usage_reporting, observations_scope]
+      optional: []
+    emitters: ["src/personaos/environment/models.py:model_execution_capability_facts"]
+
+  - id: personaos-model-routing-observation/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [observed_at, observation]
+      optional: []
+    emitters: ["src/personaos/kernel_lanes/situations.py:KernelSituationsMixin.record_model_event"]
+
+  - id: personaos-model-tool-observation/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [model_call_id, action_invocation_id, persona_id, environment_id, task_id,
+        action_name, state, read_only, result_hash, observed_at]
+      optional: []
+    emitters: ["src/personaos/kernel_lanes/situations.py:KernelSituationsMixin.record_model_read_tool"]
+
+  - id: personaos-persona-causal-disposition/3
+    class: rendered
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [operator]
+    owner: "14_DECISIONS.md ADR-0120"
+    members: unreviewed
+    emitters: []
+
+  - id: personaos-persona-message-delivery-attempt/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [public_anonymous, lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [package_hash, authority_hash, communication_id, recipient_persona_id,
+        source_event_id, status, stage, error_type, reason_code, stored,
+        included_in_model_input]
+      optional: []
+    emitters: ["src/personaos/federation/communication.py:FederatedCommunication._deliver"]
+
+  - id: personaos-persona-message-outcomes/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [public_anonymous]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [persona_id, records, unknown_means, scope]
+      optional: []
+    emitters: ["src/personaos/federation/communication.py:FederatedCommunication.persona_message_outcomes"]
+
+  - id: personaos-persona-turn-control/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [in_process]
+    owner: "14_DECISIONS.md ADR-0120"
+    members: unreviewed
+    emitters: ["src/personaos/turn_control.py:seal_turn_control"]
+
+  - id: personaos-post-run-learning-evidence/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [operator]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [available]
+      optional: [reason]
+    emitters: ["src/personaos/node_lanes/model_calls.py:NodeModelCallsMixin._post_run_learning_evidence"]
+
+  - id: personaos-provisional-cognition/2
+    class: rendered
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [operator]
+    owner: "14_DECISIONS.md ADR-0120"
+    members: unreviewed
+    emitters: []
+
+  - id: personaos-requested-context-compaction/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [action_id, persona_id, task_id, environment_id, target_bytes, status,
+        required_exact_lanes_preserved]
+      optional: [source_reference, source_value_hash, summary, reason_code]
+    emitters: ["src/personaos/runtime.py:_complete_with_personaos_mcp_in_phase._tool_result_turn"]
+
+  - id: personaos-resource-change-condition/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [in_process]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [resources, context]
+      optional: []
+    emitters: ["src/personaos/resource_versions.py:resource_change_condition"]
+
+  - id: personaos-resource-read-reference/1
+    class: rendered
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [public_anonymous]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [server, tool, arguments, authority_scope_hash]
+      optional: []
+    emitters: ["src/personaos/resource_versions.py:versioned_read_result"]
+
+  - id: personaos-resource-unchanged/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [in_process]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [ok, unchanged, resource_version]
+      optional: []
+    emitters: ["src/personaos/resource_versions.py:versioned_read_result"]
+
+  - id: personaos-resource-version/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [in_process]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [resource_reference, content_hash, version]
+      optional: []
+    emitters: ["src/personaos/resource_versions.py:versioned_read_result"]
+
+  - id: personaos-resource-wait-observation/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members: unreviewed
+    emitters: ["src/personaos/resource_versions.py:_latch_resource_observation"]
+
+  - id: personaos-retained-resource-observation/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [ok, resource_version, unchanged, body_available_at_tool_result_index]
+      optional: []
+    emitters: ["src/personaos/resource_versions.py:deduplicate_retained_read_bodies"]
+
+  - id: personaos-unfunded-resource-wait/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [request_id, request_basis, resource_change_condition, continuation_authority,
+        run_model_pool]
+      optional: []
+    emitters: ["src/personaos/resource_versions.py:persist_unfunded_resource_wait"]
+
+
   # === rows below this line are the output of tools/registry.py seed (S2, ADR-0114 dec 1) ===
   # Regenerated from the code on every run, in id order: a row here is
   # defined by its one emitter and follows it. The rows above this line were
@@ -5478,7 +5707,7 @@ rows:
     class: open
     class_decided_by: seed
     status: current
-    tiers: [in_process]
+    tiers: [lineage]
     owner: "an ADR decision until that section is written"
     members:
       required: [source_wake_event_id, source_wake_dedupe_key]
@@ -6318,7 +6547,7 @@ rows:
     members:
       required: [lane, content_hash, canonical_size, structurally_indexed,
         semantic_interpretation_performed]
-      optional: [content_read_action]
+      optional: [content_read_action, source_reference]
     emitters: ["src/personaos/runtime.py:_carrier_lane_index_reference"]
 
   - id: personaos-cas-root/1
@@ -8512,9 +8741,7 @@ rows:
     status: current
     tiers: [operator]
     owner: "an ADR decision until that section is written"
-    members:
-      required: [delivery_key, causal_wake_event_id]
-      optional: []
+    members: unreviewed
     emitters: ["src/personaos/node_lanes/artifacts.py:NodeArtifactsMixin._enqueue_materialized_identity_invitation_wakes"]
 
   - id: personaos-invitation-response-wake-context/1
@@ -9991,10 +10218,10 @@ rows:
     class: rendered
     class_decided_by: seed
     status: current
-    tiers: [public_anonymous]
+    tiers: [operator]
     owner: "an ADR decision until that section is written"
     members: unreviewed
-    emitters: ["src/personaos/situation_sufficiency.py:_exact_causal_disposition"]
+    emitters: []
 
   - id: personaos-persona-cognitive-intent-state/2
     class: open
@@ -10405,12 +10632,7 @@ rows:
     status: current
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
-    members:
-      required: [persona_id, environment_id, task_id, candidate_task_id, mission_task_id,
-        self_wake_request, model_input_paths, model_input_observation_stage, source_action_name,
-        source_action_expected_arguments, source_action_required_argument_keys, run_id,
-        model_pool_hash, authenticated_action]
-      optional: []
+    members: unreviewed
     emitters: ["src/personaos/protocols/mcp_lanes/communication.py:BridgeCommunicationMixin._persona_immediate_wake_from_bound"]
 
   - id: personaos-persona-immediate-wake-result/2
@@ -10421,7 +10643,7 @@ rows:
     owner: "an ADR decision until that section is written"
     members:
       required: [ok, persona_id, environment_id, task_id, mission_task_id, wake_kind,
-        request_event_id, request_content_hash, request_signature_verified,
+        request_event_id, request_content_hash, trigger_id, request_signature_verified,
         model_input_path_count, model_input_observation_stage, causal_successor_registered,
         wake_enqueued, wake_enqueued_this_call, delivery_pending, delivery_error,
         delivery_evidence, idempotent_replay, automatic_continuation, persona_authored,
@@ -11696,8 +11918,7 @@ rows:
     tiers: [operator]
     owner: "an ADR decision until that section is written"
     members: unreviewed
-    emitters: ["src/personaos/llm/router.py:ModelRouter._observe_active_call_progress",
-      "src/personaos/node_lanes/model_calls.py:NodeModelCallsMixin._persona_thinking_projection._public_provisional_event"]
+    emitters: []
 
   - id: personaos-provisional-workspace-capture-evidence/1
     class: open
@@ -13792,8 +14013,8 @@ rows:
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
     members:
-      required: [ok, path, content_ref, size_bytes, offset_bytes, returned_bytes,
-        next_offset_bytes, eof, requested_max_bytes, applied_max_bytes,
+      required: [ok, path, content_ref, file_observation, size_bytes, offset_bytes,
+        returned_bytes, next_offset_bytes, eof, requested_max_bytes, applied_max_bytes,
         request_clamped_to_bound, semantic_interpretation_performed]
       optional: [content_text, content_encoding, content_base64]
     emitters: ["src/personaos/protocols/mcp_lanes/workspace_artifacts.py:BridgeWorkspaceArtifactsMixin.inspect_workspace_file"]
