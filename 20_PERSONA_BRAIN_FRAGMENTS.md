@@ -238,11 +238,12 @@ schedules one funded moment at a run's settle point; it performs no edit and
 carries no suggestion. Historical signed revisions remain auditable under retention and
 consent policy. Supersession never rewrites prior bytes.
 
-### 3a. Structural distillation carriage
+### 3a. Explicit authored memory
 
-The turn contract's `distillation` member and the `author_brain_fragment`
-action persist exactly the persona's own authored bytes as a signed fragment.
-The deterministic identity reuses the same record on settlement retry and never
+The existing `author_brain_fragment` action persists the persona's exact
+authored bytes as a signed fragment. The terminal `distillation` slot and its
+separate persistence path are retired. The deterministic identity reuses the
+same record on action retry and never
 overwrites a later persona-authored revision. Storage does not bind the new
 fragment, replace an existing head, or schedule a turn.
 
@@ -285,10 +286,10 @@ available. Fragment prose cannot claim or manufacture a capability.
 
 A new persona has no runtime-authored fragments. Birth `genesis_context`, task
 intent, tool traces, messages, and receipts remain separate exact evidence and
-do not become fragments automatically. The one in-band exception is the
-persona's own authored `distillation` turn member (§3a): those bytes become a
-fragment precisely because the persona authored them into the storage slot,
-never because the substrate read anything from its evidence.
+do not become fragments automatically. A persona stores reusable material
+through the explicit authoring actions (§3a), then chooses its binding. The
+substrate neither extracts a lesson from evidence nor stores terminal prose
+as a fragment.
 
 The repository and runtime provide schemas, storage, inventories, and ordinary
 actions only. They ship no default domain/task/tool/team fragment library,

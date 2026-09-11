@@ -713,12 +713,12 @@ confer no invitation funding. Replay neither increases the grant nor guarantees
 a call if the shared finite authority is exhausted.
 
 No birth is a valid persona choice, and multiple births are possible when
-distinct persona-authored proposals and mechanical bounds permit them. A run
-with zero proposals, zero invitations, and zero stated refusals of
-[`10_PLATFORM_REQUIREMENTS.md §2.3`](10_PLATFORM_REQUIREMENTS.md#23-population)
-is a measured shortfall the scorecard states through its per-requirement
-refusal counts; a proposal refused by a mechanical bound is stated to the
-proposer with the bound named.
+distinct persona-authored proposals and mechanical bounds permit them. The
+scorecard reports observed proposals, invitations, consent and funded
+participation. Absence establishes no runtime obligation or refusal. A
+proposal refused by a mechanical bound is stated to the proposer with the
+bound named. External evaluations may require a useful newborn contribution
+to establish that population growth has been demonstrated.
 Population context supplied to a persona contains only exact signed facts: active member
 identities, authored public cards, memberships, contributions, communications,
 population actions, receipts, and bounded resource authority. It contains no
@@ -972,15 +972,13 @@ done, sufficient, accepted, or unable to improve.
 
 ### C-OP-13 — Interiority is carried, never read
 
-**Retired 2026-09-01 (ADR-0112 decision 9a).** The disposition-number and
-affect carriage this criterion covered is removed. What remains of it is the
-`distillation` structural self-product ([`02_PERSONA.md §2b`](02_PERSONA.md#2b-structural-turn-self-products),
-[`20_PERSONA_BRAIN_FRAGMENTS.md §3a`](20_PERSONA_BRAIN_FRAGMENTS.md#3a-structural-distillation-carriage)):
-persona-authored bytes persisted mechanically at settlement onto the
-persona's own fragment head, read by no substrate decision, absent as a
-complete answer, a persistence failure recorded and never blocking; the
-carriage rebind labels itself `automatic_selection: true` and never
-resurrects a persona's own head pruning.
+**Retired (ADR-0112 decision 9a; ADR-0121).** The host-seeded disposition
+and affect carriage and the terminal `distillation` persistence path are
+removed. Current character state is persona-authored, and reusable memory
+uses explicit authoring, revision and binding actions
+([`02_PERSONA.md §2b`](02_PERSONA.md#2b-turn-output-and-explicit-memory-actions),
+[`20_PERSONA_BRAIN_FRAGMENTS.md §3a`](20_PERSONA_BRAIN_FRAGMENTS.md#3a-explicit-authored-memory)).
+Neither absence nor content creates a runtime obligation or semantic score.
 
 ### C-OP-14 — Observability fails closed
 
@@ -1000,28 +998,20 @@ a provider outage through a second failure merge.
 This criterion adds no authority anywhere — it forbids only the silent
 continuation of a degraded mechanism.
 
-### C-OP-15 — Every run is scored against the platform requirements
+### C-OP-15 — Every run reports observed facts
 
-The platform's standing requirements
-([`10_PLATFORM_REQUIREMENTS.md §2`](10_PLATFORM_REQUIREMENTS.md#2-requirements-on-members))
-ride the charter lane of every ordinary wake, whole, deployment-signed, and
-hash-bound. Every run reaches a settle point with one kernel-signed
-`personaos-run-scorecard/1` whose every counter is a join over signed records
-already in lineage or soul state — identity records, per-requirement stated
-refusals, capabilities mounted and tool surfaces invoked (a dispatch fact,
-never path availability), birth proposals and admissions, lessons authored
-deliberately and those bound before a later executing turn, receipts and
-their execution bindings, repeated unchanged executions, cohort
-recommendations, principal acceptances, counterparty wakes with effect,
-compactions stated. A counter whose source is unreadable is named in
-`unavailable_counters` and carries no value, never zero. No substrate
-decision reads any scorecard member. The current counters are
-projected compactly into the acceptance lane of every wake and rendered in
-full on the task's public projection. The scorecard recommends nothing,
-withholds nothing, and completes nothing; it exists so that a run that met no
-requirement is a stated fact rather than a neutral silence. Evidence: the
-scorecard record, its evidence event ids, and the lane carriage on live
-prompt carriers.
+The deployment's short charter
+([10 §2](10_PLATFORM_REQUIREMENTS.md#2-charter-for-members)) reaches each
+ordinary wake whole and signed. At settlement, one kernel-signed
+`personaos-run-scorecard/2` reports factual joins over identity actions,
+capability acquisition and invocation, population events, execution and
+acceptance, funded learning opportunities, peer-wake effects and compaction.
+Unreadable dependent counters are absent and explicitly named. The scorecard
+contains no per-rule declines, silence penalty or learning quota, and no
+substrate decision reads it. A memory write, bound fragment or invoked tool is
+not proof of useful learning. Compare actual outcomes over exact artifact bytes
+and independent checks. Evidence includes signed events, current request
+carriage and truthful public/operator presentation.
 
 ### C-OP-16 — One command launches; the UI leads with who and what
 
@@ -1032,7 +1022,7 @@ The foreground command reports a failed node shutdown through its exit status.
 Concurrent workspace publication preserves the run's verified stopped disposition
 in its export and resume state; an older task-entry cache cannot restore `running`.
 The UI leads, per member, with display name and portrait (or the honest
-placeholder with the requirement's stated status), the member's latest lesson,
+placeholder for absent, pending or unavailable presentation), the member's latest lesson,
 what the member built this run, and the run scorecard; verified facts and
 persona-authored claims stay visibly distinct. Its verified self-description or
 character profile appears on the face; an absent description does not imply a
@@ -1074,10 +1064,7 @@ the newest settle of every task in the member's environments, newest settle
 first — on the environment
 record and on the member's own persona record, the one record that outlives
 a stopped run: task records end with their runs and environment records
-leave the export once no task is live in them) and
-`personaos-public-identity-requirement-status/1` (a member's own stated
-refusal of R-ID-1: its reason, cut at 600 UTF-16 units with the cut marked,
-and the claim hash of the exact record) — and "what the member built" joins on
+leave the export once no task is live in them). "What the member built" joins on
 the persona's own signed `artifact_declaration` already exported on the
 artifact record, never on the run's access owner
 ([`09_PROTOCOLS.md §13`](09_PROTOCOLS.md#13-schema-registry-and-clean-break-versioning)).

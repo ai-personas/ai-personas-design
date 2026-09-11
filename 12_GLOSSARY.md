@@ -122,12 +122,12 @@ tool, or workflow doctrine.
 record metadata. Discovery does not grant trust, membership, access, relevance,
 or execution authority.
 
-**Distillation (turn self-product)** — An optional persona-authored turn-output
-member persisted at settlement as the persona's own signed brain fragment on
-its persona-scoped head, carried into every later turn in any environment. The
-substrate persists and carries; it never reads, scores, or requires the bytes
-([`02_PERSONA.md §2b`](02_PERSONA.md#2b-structural-turn-self-products),
-[`20_PERSONA_BRAIN_FRAGMENTS.md §3a`](20_PERSONA_BRAIN_FRAGMENTS.md#3a-structural-distillation-carriage)).
+**Distillation** — Persona-authored reusable material stored through explicit
+memory actions. The former terminal turn-output member is retired. The
+prepaid post-run distillation wake remains one optional funded learning
+opportunity, with the ordinary action catalogue and no required memory write
+([`20_PERSONA_BRAIN_FRAGMENTS.md §3a`](20_PERSONA_BRAIN_FRAGMENTS.md#3a-explicit-authored-memory),
+[`10_PLATFORM_REQUIREMENTS.md §4.4`](10_PLATFORM_REQUIREMENTS.md#44-the-post-run-distillation-wake)).
 
 **Domain reference (`domain_ref`)** — An exact signed reference to a domain
 record. Eligible entities carry zero or more unranked `domain_refs`; there is no
@@ -281,7 +281,7 @@ current/stale, or settlement meaning. A note cannot complete an objective or
 schedule work.
 
 **Platform requirement** — One signed standing statement in
-[`10_PLATFORM_REQUIREMENTS.md §2`](10_PLATFORM_REQUIREMENTS.md#2-requirements-on-members),
+[`10_PLATFORM_REQUIREMENTS.md §2`](10_PLATFORM_REQUIREMENTS.md#2-charter-for-members),
 carried by the deployment to every member on every ordinary wake in the
 charter lane. A member may satisfy it, decline it with a stated reason, or
 ignore it; only silence is a shortfall. Contains no task, domain, profession,

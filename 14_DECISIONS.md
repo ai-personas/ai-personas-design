@@ -2696,3 +2696,53 @@ node-wide text-model ceiling. Qwen's ten attempts, including failed execution
 and uncertain interrupted outcomes, remain recorded. The subsequent five-call
 Luna correction attempt only inspects existing files; it does not resolve the
 house failures or establish functional second-family work.
+
+## ADR-0121 — Short charter, exact corrective feedback and useful learning
+
+**Status:** Accepted (2026-09-11).
+
+**Context.** Existing persistent identities, memory, tools and communication did
+not establish useful learning. The measured failed campaign included misleading
+schema diagnostics and substantial repeated outer result metadata. A per-run
+lesson checklist rewarded visible rituals without showing that later work improved.
+
+**Decision.** Retire the unused pedagogy, credential, open-problem, settlement,
+semantic-depth, connector, graph and ingestion-processing frameworks and the
+unused prompt allocator. Preserve live access/rights primitives, persona state,
+workspace/project services, budget settlement and signed historical evidence.
+Replace the per-rule requirements with one deployment-signed charter. Retire the
+decline action, public decline status and ritual counters. Retire terminal
+`distillation`; the ordinary explicit brain actions author, revise and bind memory
+and may accompany end-turn control in one funded response.
+
+Central MCP validation retains branch-specific alternative constraints and exact
+instance/schema paths. Invalid arguments require caller changes, never identical
+replay. The same diagnosis crosses the recorded result and actual next provider
+request on native and structured transports. One shared model result projection
+preserves exact output, authored arguments, call identity, status and relevant
+effects; complete signed observations remain behind recipient-bound source reads.
+Only dispatcher-owned repeated metadata is reduced. Local and shared revisions,
+preserved conflicts and immutable snapshot review remain the existing workspace
+mechanisms; there is no new synchronization engine.
+
+Exact deduplication precedes compaction. Reuse current context fitting and the
+persona-authored checkpoint; do not add another summarizer or memory selector.
+Additional automatic early compaction requires conservative positive net savings
+including generation and cache loss. Unknown prices or caching are not monetary
+savings. The existing prepaid post-run opportunity retains the ordinary catalogue
+and requires no memory write. All paid calls remain in the original grant.
+
+**Verification and consequences.** Full operating-path tests must cover correction,
+peer review, contrary-evidence memory revision, restart/transfer, compaction,
+funding, newborn consent and privacy. Scripted provider responses establish
+mechanics and carriage only. Live acceptance separately requires independently
+correct work, controlled evidence of useful learning, useful capability use,
+peer feedback that changes work, persistent authored identity and useful newborn
+participation. Task evaluators and experimental memory ablations stay outside the
+platform. Missing behavior keeps the release on HOLD. No runtime quota, semantic
+teacher, role allocator, ranker, reward or workflow is introduced.
+
+**Normative carriage:** 02 §2b; 08 §12; 09 §2.3 and §4.3; 10 §2–5;
+11 C-OP-15/16; 18 §8; 20 §3a. Prior decisions and signed records retain their
+historical meaning. The implementation's evidence report records actual versions,
+checks, usage and release verdict; this decision does not claim those tests passed.

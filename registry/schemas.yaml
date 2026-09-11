@@ -315,13 +315,13 @@ rows:
   - id: personaos-turn-self-product-contract/2
     class: open
     class_decided_by: "02 §2b; 09 §2"
-    status: current
+    status: retired
     tiers: [prompt]
     owner: "02 §2b; 09 §2"
     members:
       required: [emitted_as, distillation, semantic_interpretation_performed]
       optional: []
-    emitters: ["src/personaos/llm/base.py:persona_turn_output_contract"]
+    emitters: []
     notes: >-
       The existing terminal output contract states that optional distillation stores memory
       without selecting it. Explicit combined author-and-bind remains available. Publication
@@ -361,7 +361,7 @@ rows:
   - id: personaos-turn-self-product-contract/1
     class: open
     class_decided_by: "02 §2b; 09 §2"
-    status: current
+    status: retired
     tiers: [in_process]
     owner: "02 §2b; 09 §2"
     members:
@@ -1895,12 +1895,11 @@ rows:
   - id: personaos-platform-requirement-refusal/1
     class: open
     class_decided_by: seed
-    status: current
+    status: retired
     tiers: [lineage]
     owner: "ADR-0112"
     members: unreviewed
-    emitters: ["src/personaos/protocols/mcp_lanes/verification.py:183",
-      "src/personaos/protocols/mcp_lanes/verification.py:232"]
+    emitters: []
     notes: >-
       A member's signed refusal of one requirement, bound to the text version
       declined (ADR-0112 cut 2).
@@ -1908,24 +1907,22 @@ rows:
   - id: personaos-platform-requirements-prompt/1
     class: rendered
     class_decided_by: seed
-    status: current
+    status: retired
     tiers: [prompt, lineage]
     owner: "ADR-0112"
     members: unreviewed
-    emitters: ["src/personaos/platform_requirements.py:387", "src/personaos/runtime.py:22320",
-      "src/personaos/runtime.py:38752", "src/personaos/runtime.py:39828"]
+    emitters: []
     notes: >-
       The platform-requirements lane block (ADR-0112 cut 2).
 
   - id: personaos-platform-requirements/1
     class: open
     class_decided_by: seed
-    status: current
+    status: retired
     tiers: [lineage]
     owner: "ADR-0112"
     members: unreviewed
-    emitters: ["src/personaos/platform_requirements.py:225",
-      "src/personaos/platform_requirements.py:365"]
+    emitters: []
     notes: >-
       The deployment-signed standing requirements, recorded at environment
       creation, carried whole in the charter lane (ADR-0112 cut 2).
@@ -2203,14 +2200,14 @@ rows:
   - id: personaos-public-identity-requirement-status/1
     class: exact
     class_decided_by: seed
-    status: current
+    status: retired
     tiers: [public_anonymous, operator]
     owner: "11_DESIGN_CRITERIA.md C-OP-16"
     members:
       required: [claim_hash, declared_at, declined, persona_id, reason, refusal_event_id,
         requirement_id, signature_hex, signing_key_id]
       optional: []
-    emitters: ["src/personaos/public_member_view.py:222"]
+    emitters: []
     notes: >-
       C-OP-16: kernel-signed siblings of the public task and persona records —
       counters only, and a member's own stated refusal; the environment record
@@ -2349,7 +2346,7 @@ rows:
   - id: personaos-run-scorecard/1
     class: open
     class_decided_by: seed
-    status: current
+    status: retired
     tiers: [in_process]
     owner: "10_PLATFORM_REQUIREMENTS.md §5"
     members:
@@ -2369,7 +2366,7 @@ rows:
         run_started_at, settled_at, evidence_event_ids, read_by_substrate_decision,
         semantic_interpretation_performed, unreadable_sources, record_hash]
       optional: []
-    emitters: ["src/personaos/run_scorecard.py:496"]
+    emitters: []
     notes: >-
       One kernel-signed count per run at the settle point, projected compactly
       into the acceptance lane (10 §5); additive counter 2026-09-03:
@@ -2864,6 +2861,822 @@ rows:
     emitters: []
     notes: >-
       Retired; current producers and readers use /3.
+  - id: aggregation-view/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: attestation-equivalence-policy/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [lineage]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: cascade-affected-claim/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [claim_ref, claim_kind, prior_provenance_score, discounted_provenance_score,
+        cascade_depth, status, re_evaluated_by, re_evaluated_at]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: credential-directory-ref/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: curriculum/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: embed-default/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: enrollment-binding/1
+    class: exact
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: escrow/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [escrow_ref, buyer_deposit, seller_deposit, release_condition]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: event-progression-graph/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [lineage]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: federated-knowledge-lookup-request/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [content_hash, requester_kernel_id, max_latency_seconds]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: federated-knowledge-lookup-response/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: federated-knowledge-pointer/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: graph-edge/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [src, dst, edge_kind, weight, attrs]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: graph-node/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [node_id, node_kind, label, attrs]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: handover/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [ceremony_id, title_id, transfer_kind, outgoing_custodian, incoming_custodian,
+        settlement_adapter_ref, escrow_ref, handoff_payload_cid, origin_fence_attestation,
+        cosign_quorum_ref, operator_authorisation, consent_attestation_ref, state]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: identity-binding/1
+    class: exact
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [soul_did, wallet_did, binding_vc, direction, revoked_at]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: knowledge-ingestion-stage-record/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [lineage]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: knowledge-ingestion/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [ingestion_id, ingested_by_persona_id, ingested_at, source_kind, source_ref,
+        source_publisher, publisher, license, licence, paywalled, paywall,
+        redistribution_allowed, content_hash, parsed_chunks, chunk_count, extracted_entities,
+        extracted_figures, extracted_tables, embedded_with, embedding_model, indexed_into,
+        index_targets, domain_id, persona_id, scope_tags, quality_tag, publisher_attestation,
+        attestation, ref_id, signed_by, signed, signing_key_id]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: knowledge-ref/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: knowledge-source-hit/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [source_ref, source_kind, title, score, metadata]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: learner-acknowledgement/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: learner-competency-attestation/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [lineage]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: learner-state-record/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [lineage]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: lease/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [lease_id, title_id, lessee, term_start, term_end, user_role_binding,
+        reencryption_policy, granted_access_level, copies, metered_payment_ref, state]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: lesson-plan/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: mastery-checkpoint/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: measurement-fact/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [fact_id, proposed_by_persona_id, proposed_at, domain_id, quantity_kind, value,
+        measurement_instrument_ref, measurement_protocol_ref, measurement_taken_at,
+        measurement_location_ref, calibration_expired_at_measurement, calibration_chain_ref,
+        replication_status, replicated_attestation_ref, replicated_attestation,
+        external_attestation_refs, backed_proven_fact_ref, signed_by]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: minor-learner-protection/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: observation-subgraph/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [lineage]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: onchain-title/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [nft_contract, token_id, token_bound_account, token_uri_cid,
+        authoritative_owner]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: open-problem/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: pedagogic-incident/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: peer-attestation-pool/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [lineage]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: persona-projected-view/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: persona-projected-view/2
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [view_id, persona_id, ordering, open_problems, relevant_memory,
+        shared_proven_facts, recent_ambient, active_pathway, active_mode]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: personaos-active-peer-contribution-prompt-projection/1
+    class: rendered
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [prompt]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: personaos-coordination-prompt-event-page/1
+    class: exact
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [prompt, lineage]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: personaos-coordination-prompt-projection/1
+    class: rendered
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [prompt]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: personaos-mcp-tool-input-rejection/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: personaos-persona-communication-context-stage-projection/1
+    class: rendered
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [prompt]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: personaos-persona-communication-intent/3
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [authored_output, intent, self_wake, delivery_disposition, mode,
+        routing_authored, audience_persona_ids, message, in_reply_to, basis_refs,
+        intended_effect, rationale, distillation]
+      optional: [persona_id, phase, open_fields, optional_communication_observation]
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: personaos-turn-self-product-outcome/2
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [lineage]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [persona_id, environment_id, task_id, slot_advertised, distillation_emitted,
+        distillation_persistence_attempted, distillation_persisted, distillation_refusal_code,
+        grants_wake, semantic_interpretation_performed]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: personaos-workspace-conflict-evidence-stage-projection/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [prompt]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: rate-limit-policy/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [max_per_second, burst, max_retries, base_backoff_s, max_backoff_s,
+        retryable_statuses]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: reencrypt/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [policy_id, conditions]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: replicated-attestation/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [lineage]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: royalty/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [payee_did, royalty_bps]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: scoped-knowledge-inventory/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [ordering, record_refs]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: scoped-knowledge-page/1
+    class: exact
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [query_id, snapshot_hash, ordering, cursor, next_cursor, total_records, results]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: scoped-knowledge-query/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: scoped-knowledge-query/2
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [query_id, requested_by, scope, include_cross_project_transferable,
+        include_cross_env_transferable, include_cross_persona_transferable,
+        include_cross_domain_transferable, include_cross_relationship_transferable, cursor,
+        page_size, return_lineage_refs, signed_by]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: settlement-adapter/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [adapter_kind, interface_methods]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: source-connector-ref/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [name, source_kind, base_url, requires_credentials, capabilities]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: supersession-cascade/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: teaching-authorisation/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: title/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [title_id, subject_kind, subject_id, subject_content_hash, custody_mode,
+        onchain_binding, availability_precondition, access_policy_ref, availability_policy_ref,
+        royalty_policy, consent_attestation_ref, lineage_head, signing_key_id, signed_by,
+        tokenization_mode, fractional_shares]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: topic-network/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: treasury-bound/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [spend_cap_per_window, rate_window_seconds, max_balance_ceiling,
+        large_move_threshold, required_cosigns_above_threshold, replay_nonce_window,
+        declared_at_deployment_charter_hash]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: treasury/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [treasury_id, bound_persona_id, tba_address, chain_binding_ref, custody_tier,
+        cosign_topology_ref, treasury_bound_ref]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: uncertainty-envelope/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members:
+      required: [envelope_id, distribution_kind, central_value, std_dev, samples, interval_low,
+        interval_high, confidence_level, systematic_error_floor, calibration_chain_ref,
+        units_kind, signed_by]
+      optional: []
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
+
+  - id: user-skill-instruction-agreement/1
+    class: open
+    class_decided_by: "ADR-0121 retirement"
+    status: retired
+    tiers: [in_process]
+    owner: "ADR-0121; retained historical schema"
+    members: unreviewed
+    emitters: []
+    notes: >-
+      Retired by ADR-0121 with its unused producer or superseded interface.
+      Historical signed payloads retain their meaning; no current emitter remains.
 
   # === rows below this line are the output of tools/registry.py seed (S2, ADR-0114 dec 1) ===
   # Regenerated from the code on every run, in id order: a row here is
@@ -2968,16 +3781,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/environment/ambient.py",
       "src/personaos/environment/ambient.py:AggregationRule.signing_payload"]
-
-  - id: aggregation-view/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/knowledge/depth.py",
-      "src/personaos/knowledge/depth.py:AggregationView.signing_payload"]
 
   - id: alert/1
     class: open
@@ -3133,16 +3936,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/environment/attention.py",
       "src/personaos/environment/attention.py:AttentionBudget.signing_payload"]
-
-  - id: attestation-equivalence-policy/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [lineage]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/credentials.py",
-      "src/personaos/credentials.py:AttestationEquivalencePolicy.signing_payload"]
 
   - id: availability-policy/1
     class: open
@@ -3519,18 +4312,6 @@ rows:
     emitters: ["src/personaos/knowledge/metacognition.py",
       "src/personaos/knowledge/metacognition.py:CalibrationRecord.signing_payload"]
 
-  - id: cascade-affected-claim/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [claim_ref, claim_kind, prior_provenance_score, discounted_provenance_score,
-        cascade_depth, status, re_evaluated_by, re_evaluated_at]
-      optional: []
-    emitters: ["src/personaos/knowledge/depth.py"]
-
   - id: charter-amendment/1
     class: open
     class_decided_by: seed
@@ -3752,16 +4533,6 @@ rows:
     members: unreviewed
     emitters: []
 
-  - id: credential-directory-ref/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/credentials.py",
-      "src/personaos/credentials.py:CredentialDirectoryRef.signing_payload"]
-
   - id: cross-kernel-dm-visibility/1
     class: open
     class_decided_by: seed
@@ -3781,16 +4552,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/identity/principal.py",
       "src/personaos/identity/principal.py:CrossTenancyAgreementRef.signing_payload"]
-
-  - id: curriculum/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/curriculum.py",
-      "src/personaos/pedagogy/curriculum.py:Curriculum.signing_payload"]
 
   - id: custody-policy/1
     class: open
@@ -4023,15 +4784,6 @@ rows:
     members: unreviewed
     emitters: []
 
-  - id: embed-default/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
-
   - id: endpoint-image-generation/1
     class: open
     class_decided_by: seed
@@ -4050,16 +4802,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/environment/attention.py",
       "src/personaos/environment/attention.py:EnergyModel.signing_payload"]
-
-  - id: enrollment-binding/1
-    class: exact
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/learner_state.py",
-      "src/personaos/pedagogy/learner_state.py:EnrollmentBinding.signing_payload"]
 
   - id: env-blueprint/1
     class: open
@@ -4336,17 +5078,6 @@ rows:
       optional: []
     emitters: ["src/personaos/environment/rules.py"]
 
-  - id: escrow/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [escrow_ref, buyer_deposit, seller_deposit, release_condition]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
-
   - id: event-aggregation-policy/1
     class: open
     class_decided_by: seed
@@ -4356,15 +5087,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/environment/ambient.py",
       "src/personaos/environment/ambient.py:EventAggregationPolicy.signing_payload"]
-
-  - id: event-progression-graph/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [lineage]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
 
   - id: exact-key/1
     class: open
@@ -4438,38 +5160,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/participants.py",
       "src/personaos/participants.py:ExternalCommitment.signing_payload"]
-
-  - id: federated-knowledge-lookup-request/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [content_hash, requester_kernel_id, max_latency_seconds]
-      optional: []
-    emitters: ["src/personaos/knowledge/ingestion.py"]
-
-  - id: federated-knowledge-lookup-response/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/knowledge/ingestion.py",
-      "src/personaos/knowledge/ingestion.py:FederatedKnowledgeLookupResponse.to_dict"]
-
-  - id: federated-knowledge-pointer/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/knowledge/ingestion.py",
-      "src/personaos/knowledge/ingestion.py:FederatedKnowledgePointer.signing_payload",
-      "src/personaos/knowledge/ingestion.py:FederatedKnowledgePointer.to_dict"]
 
   - id: federated-time-lock-generic/1
     class: open
@@ -4592,41 +5282,6 @@ rows:
       optional: []
     emitters: ["src/personaos/node.py:PersonaNode._maybe_reannounce_gossip"]
 
-  - id: graph-edge/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [src, dst, edge_kind, weight, attrs]
-      optional: []
-    emitters: ["src/personaos/knowledge/graphs.py"]
-
-  - id: graph-node/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [node_id, node_kind, label, attrs]
-      optional: []
-    emitters: ["src/personaos/knowledge/graphs.py"]
-
-  - id: handover/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [ceremony_id, title_id, transfer_kind, outgoing_custodian, incoming_custodian,
-        settlement_adapter_ref, escrow_ref, handoff_payload_cid, origin_fence_attestation,
-        cosign_quorum_ref, operator_authorisation, consent_attestation_ref, state]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
-
   - id: host-promotion/1
     class: open
     class_decided_by: seed
@@ -4650,17 +5305,6 @@ rows:
         bridge_validation_test, ladder_tier, capability, consent_scope, expires_at, signed_by]
       optional: []
     emitters: ["src/personaos/bridge.py"]
-
-  - id: identity-binding/1
-    class: exact
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [soul_did, wallet_did, binding_vc, direction, revoked_at]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
 
   - id: identity-coherence-invariant/1
     class: exact
@@ -4691,8 +5335,8 @@ rows:
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
     members: unreviewed
-    emitters: ["src/personaos/knowledge/ingestion.py",
-      "src/personaos/knowledge/ingestion.py:IngestionRightsPolicy.signing_payload"]
+    emitters: ["src/personaos/knowledge/access.py",
+      "src/personaos/knowledge/access.py:IngestionRightsPolicy.signing_payload"]
 
   - id: instrument-asset/1
     class: open
@@ -4742,53 +5386,6 @@ rows:
     members: unreviewed
     emitters: []
 
-  - id: knowledge-ingestion-stage-record/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [lineage]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/knowledge/ingestion.py",
-      "src/personaos/knowledge/ingestion.py:KnowledgeIngestionStageRecord.signing_payload"]
-
-  - id: knowledge-ingestion/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [ingestion_id, ingested_by_persona_id, ingested_at, source_kind, source_ref,
-        source_publisher, publisher, license, licence, paywalled, paywall,
-        redistribution_allowed, content_hash, parsed_chunks, chunk_count, extracted_entities,
-        extracted_figures, extracted_tables, embedded_with, embedding_model, indexed_into,
-        index_targets, domain_id, persona_id, scope_tags, quality_tag, publisher_attestation,
-        attestation, ref_id, signed_by, signed, signing_key_id]
-      optional: []
-    emitters: ["src/personaos/knowledge/ingestion.py"]
-
-  - id: knowledge-ref/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/knowledge/ingestion.py",
-      "src/personaos/knowledge/ingestion.py:KnowledgeRef.signing_payload"]
-
-  - id: knowledge-source-hit/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [source_ref, source_kind, title, score, metadata]
-      optional: []
-    emitters: ["src/personaos/knowledge/ingestion.py"]
-
   - id: knowledge-store/11
     class: open
     class_decided_by: seed
@@ -4797,58 +5394,6 @@ rows:
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: ["src/personaos/knowledge/store.py:KnowledgeStore.to_dict"]
-
-  - id: learner-acknowledgement/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/curriculum.py",
-      "src/personaos/pedagogy/curriculum.py:LearnerAcknowledgement.signing_payload"]
-
-  - id: learner-competency-attestation/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [lineage]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/attestation.py",
-      "src/personaos/pedagogy/attestation.py:LearnerCompetencyAttestation.signing_payload"]
-
-  - id: learner-state-record/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [lineage]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/learner_state.py",
-      "src/personaos/pedagogy/learner_state.py:LearnerStateRecord.signing_payload"]
-
-  - id: lease/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [lease_id, title_id, lessee, term_start, term_end, user_role_binding,
-        reencryption_policy, granted_access_level, copies, metered_payment_ref, state]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
-
-  - id: lesson-plan/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/curriculum.py",
-      "src/personaos/pedagogy/curriculum.py:LessonPlan.signing_payload"]
 
   - id: lifecycle-event/1
     class: open
@@ -4919,16 +5464,6 @@ rows:
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: []
-
-  - id: mastery-checkpoint/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/curriculum.py",
-      "src/personaos/pedagogy/curriculum.py:MasteryCheckpoint.signing_payload"]
 
   - id: maturity-inheritance-policy/1
     class: open
@@ -5198,21 +5733,6 @@ rows:
     emitters: ["src/personaos/protocols/mcp_lanes/capabilities.py:BridgeCapabilitiesMixin._restore_remote_proxy_mounts_from_lineage",
       "src/personaos/protocols/mcp_lanes/capabilities.py:BridgeCapabilitiesMixin.acquire_mcp_candidate"]
 
-  - id: measurement-fact/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [fact_id, proposed_by_persona_id, proposed_at, domain_id, quantity_kind, value,
-        measurement_instrument_ref, measurement_protocol_ref, measurement_taken_at,
-        measurement_location_ref, calibration_expired_at_measurement, calibration_chain_ref,
-        replication_status, replicated_attestation_ref, replicated_attestation,
-        external_attestation_refs, backed_proven_fact_ref, signed_by]
-      optional: []
-    emitters: ["src/personaos/knowledge/depth.py"]
-
   - id: media-kind/1
     class: open
     class_decided_by: seed
@@ -5333,16 +5853,6 @@ rows:
       optional: []
     emitters: ["src/personaos/projects/project.py"]
 
-  - id: minor-learner-protection/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/learner_state.py",
-      "src/personaos/pedagogy/learner_state.py:MinorLearnerProtection.signing_payload"]
-
   - id: model-access-context/1
     class: open
     class_decided_by: seed
@@ -5393,15 +5903,6 @@ rows:
     emitters: ["src/personaos/projects/obligations.py", "src/personaos/projects/project.py",
       "src/personaos/projects/project.py:Obligation.signing_payload"]
 
-  - id: observation-subgraph/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [lineage]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
-
   - id: observation-surface/1
     class: open
     class_decided_by: seed
@@ -5421,18 +5922,6 @@ rows:
     emitters: ["src/personaos/environment/observation.py",
       "src/personaos/environment/observation.py:ObservationSurface.signing_payload"]
 
-  - id: onchain-title/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [nft_contract, token_id, token_bound_account, token_uri_cid,
-        authoritative_owner]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
-
   - id: open-canonical-preimage/1
     class: exact
     class_decided_by: seed
@@ -5441,16 +5930,6 @@ rows:
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: []
-
-  - id: open-problem/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/projects/open_problems.py",
-      "src/personaos/projects/open_problems.py:OpenProblem.signing_payload"]
 
   - id: operator-blind-mode-declaration/1
     class: open
@@ -5554,26 +6033,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/projects/payment.py",
       "src/personaos/projects/payment.py:PaymentProposal.signing_payload"]
-
-  - id: pedagogic-incident/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/learner_state.py",
-      "src/personaos/pedagogy/learner_state.py:PedagogicIncidentReport.signing_payload"]
-
-  - id: peer-attestation-pool/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [lineage]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/credentials.py",
-      "src/personaos/credentials.py:PeerAttestationPool.signing_payload"]
 
   - id: peer-review/1
     class: open
@@ -5803,7 +6262,7 @@ rows:
     class: open
     class_decided_by: seed
     status: current
-    tiers: [prompt]
+    tiers: [in_process]
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: ["src/personaos/kernel_support.py:_bounded_learning_history",
@@ -5879,27 +6338,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/relationships/governance.py",
       "src/personaos/relationships/governance.py:PersonaPersonaBoundary.signing_payload"]
-
-  - id: persona-projected-view/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
-
-  - id: persona-projected-view/2
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [view_id, persona_id, ordering, open_problems, relevant_memory,
-        shared_proven_facts, recent_ambient, active_pathway, active_mode]
-      optional: []
-    emitters: ["src/personaos/knowledge/depth.py"]
 
   - id: persona-public-identity-authority/1
     class: exact
@@ -6109,15 +6547,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/llm/router.py",
       "src/personaos/llm/router.py:ModelActiveCall.to_payload"]
-
-  - id: personaos-active-peer-contribution-prompt-projection/1
-    class: rendered
-    class_decided_by: seed
-    status: current
-    tiers: [prompt]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
 
   - id: personaos-active-peer-latest-signed-contributions/2
     class: rendered
@@ -7359,25 +7788,6 @@ rows:
         omitted_event_count, authenticated_event_projection_complete, complete, snapshot_hash]
       optional: []
     emitters: ["src/personaos/runtime.py:TaskRuntime._lineage_coordination_context"]
-
-  - id: personaos-coordination-prompt-event-page/1
-    class: exact
-    class_decided_by: seed
-    status: current
-    tiers: [prompt, lineage]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/prompt_carrier.py:_prompt_coordination_context_projection"]
-
-  - id: personaos-coordination-prompt-projection/1
-    class: rendered
-    class_decided_by: seed
-    status: current
-    tiers: [prompt]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/prompt_carrier.py:_prompt_coordination_context_projection",
-      "src/personaos/prompt_carrier.py:_prompt_coordination_context_projection.projection_with_page"]
 
   - id: personaos-coordination-shape-task-resolution-record/1
     class: open
@@ -9496,13 +9906,16 @@ rows:
       optional: []
     emitters: ["src/personaos/llm/codex_cli.py:_bounded_mcp_result_text.omission_receipt"]
 
-  - id: personaos-mcp-tool-input-rejection/1
+  - id: personaos-mcp-tool-input-rejection/2
     class: open
     class_decided_by: seed
     status: current
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
-    members: unreviewed
+    members:
+      required: [ok, code, stage, tool, retryable, requires_argument_changes, fault_class,
+        input_schema_hash, received_members, violations]
+      optional: []
     emitters: ["src/personaos/protocols/mcp.py:MCPToolInputError.corrective_result"]
 
   - id: personaos-mcp-tools/1
@@ -9666,6 +10079,15 @@ rows:
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: ["src/personaos/prompt_carrier.py:_model_visible_continuation_tool_result"]
+
+  - id: personaos-model-tool-result/1
+    class: rendered
+    class_decided_by: seed
+    status: current
+    tiers: [prompt]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: ["src/personaos/prompt_carrier.py:_authenticated_tool_result"]
 
   - id: personaos-model-transport-inventory/1
     class: open
@@ -10627,20 +11049,11 @@ rows:
     emitters: ["src/personaos/runtime.py:TaskRuntime._append_persona_communication_turn_observation",
       "src/personaos/runtime.py:TaskRuntime._record_persona_response_publication_failure"]
 
-  - id: personaos-persona-communication-context-stage-projection/1
-    class: rendered
-    class_decided_by: seed
-    status: current
-    tiers: [prompt]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/prompt_carrier.py:_prompt_communication_context_stage_projection"]
-
   - id: personaos-persona-communication-context/3
     class: open
     class_decided_by: seed
     status: current
-    tiers: [prompt]
+    tiers: [in_process]
     owner: "an ADR decision until that section is written"
     members:
       required: [environment_id, persona_id, persona_exchange_snapshot,
@@ -10704,7 +11117,7 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/runtime.py:TaskRuntime._lineage_communication_delivery_records"]
 
-  - id: personaos-persona-communication-intent/3
+  - id: personaos-persona-communication-intent/4
     class: open
     class_decided_by: seed
     status: current
@@ -10713,7 +11126,7 @@ rows:
     members:
       required: [authored_output, intent, self_wake, delivery_disposition, mode,
         routing_authored, audience_persona_ids, message, in_reply_to, basis_refs,
-        intended_effect, rationale, distillation]
+        intended_effect, rationale]
       optional: [persona_id, phase, open_fields, optional_communication_observation]
     emitters: ["src/personaos/runtime.py:_persona_communication_intent_from_value"]
 
@@ -11212,7 +11625,7 @@ rows:
     members:
       required: [persona_id, semantic_interpretation_performed]
       optional: [available, distillations_authored]
-    emitters: ["src/personaos/runtime.py:_persona_self_product_ledger_facts"]
+    emitters: ["src/personaos/runtime.py:_persona_memory_inventory_facts"]
 
   - id: personaos-persona-self-wake-materialization/1
     class: open
@@ -11633,6 +12046,27 @@ rows:
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: ["src/personaos/environment/workspace.py:EnvironmentWorkspaceStore.begin_persona_turn_workspace_lease"]
+
+  - id: personaos-platform-requirements-prompt/2
+    class: rendered
+    class_decided_by: seed
+    status: current
+    tiers: [prompt, lineage]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: ["src/personaos/platform_requirements.py:platform_requirements_prompt_fact",
+      "src/personaos/runtime.py:TaskRuntime._run_persona_communication_cycle",
+      "src/personaos/runtime.py:make_llm_body.communication_intent"]
+
+  - id: personaos-platform-requirements/2
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [lineage]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: ["src/personaos/platform_requirements.py:_signing_payload",
+      "src/personaos/platform_requirements.py:record_platform_requirements"]
 
   - id: personaos-population-activity-history-reference/1
     class: open
@@ -13001,6 +13435,28 @@ rows:
       optional: []
     emitters: ["src/personaos/protocols/discovery_export.py:_write_runtime_audit_surfaces"]
 
+  - id: personaos-run-scorecard/2
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members:
+      required: [environment_id, task_id, run_id, settle_record_event_id, members,
+        identity_records_authored, capabilities_mounted, tool_surfaces_invoked,
+        library_generations_on_an_executing_path, capability_acquisition_attempts,
+        capability_acquisition_refused, capability_acquisition_outcome_unrecorded,
+        birth_proposals_authored, births_admitted, births_refused_by_bound,
+        invitations_authored, post_run_distillation_wakes_funded,
+        post_run_distillation_members_unreached, verifier_receipts, execution_bound_receipts,
+        receipts_repeating_unchanged_executions, cohort_recommendations,
+        acceptance_contracts_authored, principal_acceptances, counterparty_wakes_with_effect,
+        compactions_stated, communication_carrier_kinds_seen, unavailable_counters,
+        run_started_at, settled_at, evidence_event_ids, read_by_substrate_decision,
+        semantic_interpretation_performed, unreadable_sources, record_hash]
+      optional: []
+    emitters: ["src/personaos/run_scorecard.py:compute_run_scorecard"]
+
   - id: personaos-run-state/1
     class: open
     class_decided_by: seed
@@ -13880,18 +14336,16 @@ rows:
       optional: []
     emitters: ["src/personaos/node_lanes/persona_turns.py:NodePersonaTurnsMixin._handle_persona_wake_in_workspace.record_turn_effect_receipt"]
 
-  - id: personaos-turn-self-product-outcome/2
+  - id: personaos-turn-output-contract/1
     class: open
     class_decided_by: seed
     status: current
-    tiers: [lineage]
+    tiers: [in_process]
     owner: "an ADR decision until that section is written"
     members:
-      required: [persona_id, environment_id, task_id, slot_advertised, distillation_emitted,
-        distillation_persistence_attempted, distillation_persisted, distillation_refusal_code,
-        grants_wake, semantic_interpretation_performed]
+      required: [emitted_as, semantic_interpretation_performed]
       optional: []
-    emitters: ["src/personaos/runtime.py:TaskRuntime._record_persona_turn_self_products"]
+    emitters: ["src/personaos/llm/base.py:persona_turn_output_contract"]
 
   - id: personaos-unaccepted-rewake-escrow-release/1
     class: rendered
@@ -14257,15 +14711,6 @@ rows:
       required: [conflict_ref, alternatives]
       optional: []
     emitters: ["src/personaos/conflict_evidence.py:project_workspace_merge_conflict_state"]
-
-  - id: personaos-workspace-conflict-evidence-stage-projection/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [prompt]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
 
   - id: personaos-workspace-conflict-evidence/1
     class: rendered
@@ -14697,18 +15142,6 @@ rows:
       optional: []
     emitters: ["src/personaos/environment/proactive.py"]
 
-  - id: rate-limit-policy/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [max_per_second, burst, max_retries, base_backoff_s, max_backoff_s,
-        retryable_statuses]
-      optional: []
-    emitters: ["src/personaos/knowledge/connectors.py"]
-
   - id: reachability-profile/1
     class: rendered
     class_decided_by: seed
@@ -14718,17 +15151,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/protocols/reachability.py",
       "src/personaos/protocols/reachability.py:ReachabilityProfile.signing_payload"]
-
-  - id: reencrypt/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [policy_id, conditions]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
 
   - id: reference-standard-link/1
     class: open
@@ -14851,18 +15273,6 @@ rows:
       optional: []
     emitters: ["src/personaos/relationships/manager.py:RelationshipManager.record_social_event"]
 
-  - id: replicated-attestation/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [lineage]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/credentials.py",
-      "src/personaos/credentials.py:ReplicatedAttestation.signing_payload",
-      "src/personaos/knowledge/depth.py",
-      "src/personaos/knowledge/depth.py:ReplicatedAttestation.signing_payload"]
-
   - id: replication-bound/2
     class: open
     class_decided_by: seed
@@ -14924,17 +15334,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/protocols/custody.py",
       "src/personaos/protocols/custody.py:RotationSchedule.signing_payload"]
-
-  - id: royalty/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [payee_did, royalty_bps]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
 
   - id: rubric-dimension/1
     class: open
@@ -15012,57 +15411,8 @@ rows:
     status: current
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
-    members:
-      required: [persona_id, user_id, app_id, org_id, session_id, project_id, environment_id,
-        env_id, domain_id, relationship_id, cross_project_transferable, cross_env_transferable,
-        cross_persona_transferable, cross_domain_transferable, cross_relationship_transferable]
-      optional: []
-    emitters: ["src/personaos/knowledge/depth.py"]
-
-  - id: scoped-knowledge-inventory/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [ordering, record_refs]
-      optional: []
-    emitters: ["src/personaos/knowledge/depth.py:ScopedKnowledgeRetriever.query"]
-
-  - id: scoped-knowledge-page/1
-    class: exact
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [query_id, snapshot_hash, ordering, cursor, next_cursor, total_records, results]
-      optional: []
-    emitters: ["src/personaos/knowledge/depth.py"]
-
-  - id: scoped-knowledge-query/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: []
-
-  - id: scoped-knowledge-query/2
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [query_id, requested_by, scope, include_cross_project_transferable,
-        include_cross_env_transferable, include_cross_persona_transferable,
-        include_cross_domain_transferable, include_cross_relationship_transferable, cursor,
-        page_size, return_lineage_refs, signed_by]
-      optional: []
-    emitters: ["src/personaos/knowledge/depth.py"]
 
   - id: self-narrative/1
     class: open
@@ -15073,17 +15423,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/knowledge/narrative.py",
       "src/personaos/knowledge/narrative.py:SelfNarrative.signing_payload"]
-
-  - id: settlement-adapter/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [adapter_kind, interface_methods]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
 
   - id: settlement-binding/1
     class: exact
@@ -15142,17 +15481,6 @@ rows:
       "src/personaos/identity/soul.py:PersonaSeed._soul_frontmatter",
       "src/personaos/identity/soul.py:PersonaSeed.to_soul",
       "src/personaos/identity/soul.py:Soul.signing_payload"]
-
-  - id: source-connector-ref/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [name, source_kind, base_url, requires_credentials, capabilities]
-      optional: []
-    emitters: ["src/personaos/knowledge/connectors.py"]
 
   - id: staged-rollout-envelope/1
     class: open
@@ -15221,16 +15549,6 @@ rows:
       optional: []
     emitters: ["src/personaos/environment/ambient.py"]
 
-  - id: supersession-cascade/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/knowledge/depth.py",
-      "src/personaos/knowledge/depth.py:SupersessionCascade.signing_payload"]
-
   - id: task-environment-continuation/1
     class: open
     class_decided_by: seed
@@ -15266,16 +15584,6 @@ rows:
       optional: [event_id, signed]
     emitters: ["src/personaos/runtime.py:TaskRuntime._record_workspace_reuse"]
 
-  - id: teaching-authorisation/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/curriculum.py",
-      "src/personaos/pedagogy/curriculum.py:TeachingAuthorisation.signing_payload"]
-
   - id: telemetry-card/1
     class: open
     class_decided_by: seed
@@ -15296,20 +15604,6 @@ rows:
       required: [subscription_id, feed_id, subscriber_id, tier, active]
       optional: []
     emitters: ["src/personaos/protocols/telemetry_feed.py"]
-
-  - id: title/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [title_id, subject_kind, subject_id, subject_content_hash, custody_mode,
-        onchain_binding, availability_precondition, access_policy_ref, availability_policy_ref,
-        royalty_policy, consent_attestation_ref, lineage_head, signing_key_id, signed_by,
-        tokenization_mode, fractional_shares]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
 
   - id: tool-artifact/7
     class: open
@@ -15337,40 +15631,6 @@ rows:
       optional: []
     emitters: ["src/personaos/knowledge/artefacts.py"]
 
-  - id: topic-network/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: []
-
-  - id: treasury-bound/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [spend_cap_per_window, rate_window_seconds, max_balance_ceiling,
-        large_move_threshold, required_cosigns_above_threshold, replay_nonce_window,
-        declared_at_deployment_charter_hash]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
-
-  - id: treasury/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [treasury_id, bound_persona_id, tba_address, chain_binding_ref, custody_tier,
-        cosign_topology_ref, treasury_bound_ref]
-      optional: []
-    emitters: ["src/personaos/settlement.py"]
-
   - id: ucan-capability-grant/1
     class: open
     class_decided_by: seed
@@ -15380,19 +15640,6 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/protocols/capability.py",
       "src/personaos/protocols/capability.py:UcanCapabilityGrant.signing_payload"]
-
-  - id: uncertainty-envelope/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [envelope_id, distribution_kind, central_value, std_dev, samples, interval_low,
-        interval_high, confidence_level, systematic_error_floor, calibration_chain_ref,
-        units_kind, signed_by]
-      optional: []
-    emitters: ["src/personaos/knowledge/depth.py"]
 
   - id: user-boundary/1
     class: open
@@ -15475,16 +15722,6 @@ rows:
         operator_audit_signed_by]
       optional: []
     emitters: ["src/personaos/relationships/governance.py"]
-
-  - id: user-skill-instruction-agreement/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/pedagogy/learner_state.py",
-      "src/personaos/pedagogy/learner_state.py:UserSkillInstructionAgreement.signing_payload"]
 
   - id: user-stop/1
     class: open

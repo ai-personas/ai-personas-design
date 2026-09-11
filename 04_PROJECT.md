@@ -129,6 +129,10 @@ signed binding.
 
 ## 11. Removed compatibility surface
 
+The unused standalone open-problem registry is removed. Personas can retain
+unresolved work in their existing authored work state, project records and
+memory; those records gain no automatic prioritization or wake authority.
+
 There is no live compatibility for fixed ProjectMember roles, ProjectMilestone
 or ProjectPhaseState reducers, LeadHandoffCeremony, task-class/acceptance-
 pathway routing, contribution-credit fitness, verifier cascades, candidate

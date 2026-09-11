@@ -527,6 +527,19 @@ turn.
 
 ### 2.3 Receipts and retry
 
+Central MCP input validation emits `personaos-mcp-tool-input-rejection/2` with
+exact JSON instance/schema pointers and branch-specific `oneOf`, `anyOf` and
+`not` constraints. Missing members stay inside the alternative that requires
+them; mutually exclusive argument forms must not be flattened into a false
+required-field list. The diagnosis carries the admitted input-schema hash,
+received member names, `fault_class`, `requires_argument_changes` and
+`retryable: false`. Invalid arguments require caller changes, not replay of the
+same input. No independent field-count or diagnostic-string cuts are applied.
+The identical diagnostic survives signed result recording, HTTP/STDIO and the
+next actual provider request. Request-size, access and measured context limits
+remain in force.
+
+
 Every authenticated action receives one kernel-signed terminal outcome bound to
 the action identity and exact effects. A successful receipt proves only what
 ran, which provider/descriptor ran it, its terminal result, and which bytes or
@@ -1126,11 +1139,9 @@ semantic-interpretation/ranking facts. Its fixed selection basis means only
 active peers count nor interprets their content. Active members with no
 authenticated event remain visible in the context's exact missing-event total.
 
-If bodies on that page exceed the prompt carrier,
-`personaos-active-peer-contribution-prompt-projection/1` preserves source
-schema/snapshot/metadata/record-manifest hashes, source totals, page and
-omission/cursor facts, projected/omitted/truncated record counts, exact per-
-record hashes and byte lengths, and the byte bound.
+Bulky page bodies remain accessible through the existing recipient-bound
+exact source and shared pager. The retired per-page prompt projection is not
+another current allocation pipeline.
 
 The generic latest-event page cannot stand in for a peer's current work-state
 head because any later signed event may mechanically replace it.
@@ -1163,7 +1174,7 @@ deliberately inspect or ignore it, while a public HTTP body cannot become
 ambient model instruction. The lane selects no responder, interpretation,
 candidate, acceptance, or successor.
 
-### 4.3 Exact uniform prompt-source stage and pointers
+### 4.3 Current context, exact sources and compaction
 
 `personaos-persona-turn-prompt-carrier/21` carries the recipient's newly pending
 communications in `persona_communication_history_authority`. Within the semantic
@@ -1203,98 +1214,38 @@ Completed continuations retain their exact prompt and system through the
 existing content-addressed observation sequence, alongside their carrier lane
 hashes and system hash. The opening observation and compile remain unchanged.
 
-If the entire prompt exceeds its byte carrier, the runtime uses
-`personaos-prompt-source-stage/2`. It binds original/current byte bounds,
-exact `source_total`, source-byte total, full source-manifest hash,
-schema-record source total/hash, cursor range, content-hash source order, and
-the allocation policy. Each staged source retains
-its cursor/identity/hash/byte facts, projected value, projected byte count,
-and `projection_complete`.
+The unused uniform prompt allocator, source stages and private projection
+helpers are retired (ADR-0121). There is one current context fitter and the
+shared exact pager. Principal intent, the signed charter, current self,
+selected fragments and current stimulus remain protected. The complete
+authorized action catalogue remains visible through its actual transport.
 
-Content comes first, by byte facts alone (`allocation_policy:
-whole_first_equal_share_yielders`). The budget is the cap less the stage's
-own fixed bytes, measured on the widest stage the source set can produce.
-Sources that fit whole within an equal share take exactly their bytes, the
-share rising as whole sources are satisfied; the rest share the remaining
-bytes equally among as many sources, taken in content-hash order, as that
-share still yields content for. The count is found by a measured halving
-search: the fast path takes every source when the equal share yields them
-all; otherwise the search halves the count range, keeping counts whose share
-yields that many sources (breadth before depth: at very small caps this can
-carry several small whole sources rather than one partial large one). Yield
-need not be monotone in the count — projectors have plateaus — so the count
-settled on is a valid one near a boundary, not necessarily the largest; the
-stage's counts state which sources it carried. A source whose projector yields no content even given the whole
-remainder is a pointer; so is a projection that carries only identity (an
-open-value pointer, an inventory pointer), because the stage's pointer says
-more in fewer bytes; so is a projector's minimum shape that would overrun the
-remainder. Projectors measure their own bytes differently and some have
-minimum shapes, so the entries taken at a share may overrun the remainder;
-every source is then re-projected at a smaller share — entries that did not
-shrink and still exceed the share are floors kept at their own bytes, the
-rest share what is left, the share shrinking in proportion to the flexible
-overrun until the taken entries fit. Behind that, a measured search over the
-budget guarantees the fit should the accounting ever fall short. Never a
-reserve constant, never a pop that trades an entry for a larger pointer, never
-a choice by content; at caps where no share carries an entry the stage is
-pointers, stated. A truncated source needs no second record: its staged entry states
-`projection_complete: false` with projected and source bytes and carries the
-*read-action members* below. Every source the stage does not carry at all is
-exactly one `personaos-prompt-source-pointer/1`: the source's cursor,
-`source_id`, key, schema, exact bytes, `state: omitted`, and the same
-read-action members. A pointer whose read action is reachable — it carries
-the arguments the action requires — is the persona's only way to page a
-source the stage cannot carry, so its exact bytes are reserved before
-content. After the entries, the remaining bytes carry as many pointers as
-fit, reachable first (`pointer_order: reachable_first_then_source_cursor`, a
-protocol fact on the same footing as the fit-exempt authority lanes), then in
-content-hash order, shrunk from the end with the shortfall counted
-(`pointer_count`, `pointers_omitted_count`).
+One shared `personaos-model-tool-result/1` projection carries call identity,
+exact persona-authored arguments, output, status and relevant effects across
+native MCP and structured continuations. Dispatcher-owned descriptor and
+publication wrappers may be reduced only after the full observation has an
+authenticated, recipient-bound `audit_source` through the existing CAS and
+`inspect_persona_learning_history`. Tool output is opaque: stdout, stderr,
+partial results, file identities and failure details are not interpreted or
+trimmed by the projection. Capture protocol bytes retain their existing exact
+file-read lane. Unavailable archival leaves the full observation in context.
+Merge outcomes, preserved conflicts and local/shared revisions remain available;
+publication never implies that another persona's active worktree refreshed.
 
-The read-action members are `read_action_declared` — whether the substrate's
-declaration table names an action that pages the whole source; a statement
-about the table, never a claim that no action exists — and, when declared,
-`read_action`, `reachable` (true only when every argument the action requires
-is carried: by the visible projection when it keeps the values, else by
-`argument_values` copied verbatim from the source at the declared member
-path), and `missing_arguments` otherwise. The table maps protocol identifiers
-to an action and the exact member path of each required argument, and is
-pinned to the tools' registered input schemas. The stage reports staged, omitted, and truncated counts,
-`next_source_cursor`, and `complete`. (ADR-0112 decision 9c retired the former
-manifest page — a tenth of the budget spent describing the stage — and the
-separate omission and truncation evidence records.) A carrier with any
-omission or truncation cannot claim completeness.
+Deduplication replaces only identical verified read bodies with references to
+an exact body present in that same request. It preserves every distinct action
+and its chronology. The same lossless deduplication precedes the existing
+compaction callback. The full original remains archived; a replaced body never
+leaves a reference claiming it is still in context. Persona-authored checkpoints
+use the existing source offer and ordinary action; selected durable memory is a
+separate authored choice. Model summaries are explicitly lossy interpretations
+with exact source retrieval. A failed summary cannot silently erase evidence.
 
-Source IDs and uniform byte division are content-neutral resource mechanics,
-not semantic priority. The substrate does not reserve more prompt space for a
-persona, role, message, tool, memory, schema kind, or record whose prose
-appears important. The exceptions are the authority lanes, and they are
-exceptions of *authority*, not of importance: the principal's exact intent and
-ancestry, the condition of record, the platform requirements with any
-principal charter, and the current scorecard occupy complete floored lanes
-that precede every inventory
-([`11_DESIGN_CRITERIA.md` C-OP-4](11_DESIGN_CRITERIA.md#c-op-4--continuity-and-resume-preserve-exact-identity-and-causality),
-[`10_PLATFORM_REQUIREMENTS.md §3` P-2](10_PLATFORM_REQUIREMENTS.md#3-requirements-on-the-platform)).
-Wrapper hashes of inventory rows are not carried in the model-facing
-carrier — they are inspectable — while the authority lanes' own binding
-hashes (record hash and ordered-text hash) stay, as C-OP-4 requires. Pointers
-and page cursors make every omitted source or window navigable without
-silently replacing it with a host summary.
-
-A canonical situation assembled from sources already present in dedicated
-prompt lanes enters this stage only through
-`personaos-current-persona-mission-situation-facts/3`: exact situation/lineage
-identity, canonical size, a complete field/type/hash/size/schema manifest, and
-the exact task facts needed for continuation-context binding. The prompt does
-not re-inline the joined environment, package, team, resource, action,
-population, workspace, learning, capability, identity, or work-state bodies.
-This is equality-preserving transport deduplication, not semantic omission: the
-component preimages remain in their independently verified lanes and the full
-situation remains bound by its durable content hash.
-
-All totals are cardinalities of the bound source snapshot, not counts after an
-undisclosed payload deduplication. Cursor movement follows the declared order
-exactly and preserves every distinct source position.
+No extra automatic early summary call is justified by a large history alone.
+Conservative accounting must establish net savings including generation and
+lost caching. Unknown pricing/cache facts are reported as unknown; bytes and
+tokens are separate measurements, not money. A persona can author a checkpoint
+with its ordinary response, avoiding an extra summary call.
 
 ### 4.4 Exact peer lineage and routed-wake pages
 
@@ -2507,7 +2458,7 @@ markers below is written by the same tool and names the registry hash and
 the row count it rendered.
 
 <!-- registry:schemas:begin -->
-See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1295 rows; registry sha256 3de4ae0154ee6b275f2208a136c8faeb1928c879295de89af509a23fefb1919b).
+See `registry/SCHEMAS.md` (generated by `tools/registry.py render --write`; 1302 rows; registry sha256 6dbc8eaa6b591397c9a42b8bb8ab09c325a9dfa036af85ec73c578764be426a5).
 <!-- registry:schemas:end -->
 
 ## 14. Key custody

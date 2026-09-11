@@ -106,6 +106,11 @@ current/stale/settled label and the note bytes remain unchanged.
 
 ## 8. Removed compatibility surface
 
+The unused standalone settlement framework is deleted. Active run-budget
+settlement, descriptor-bound execution, artifact delivery, resource conservation
+and counterparty consent continue through their existing services. This document
+states those authority boundaries; it does not prescribe another settlement engine.
+
 There is no live compatibility for fixed delivery-versus-payment sequences,
 escrow/custody FSMs, mandatory panels/review stages, token/title recipes,
 settlement scores, treasury-to-population coupling, inferred persona transfer,

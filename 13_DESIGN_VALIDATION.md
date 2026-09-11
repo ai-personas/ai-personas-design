@@ -1724,33 +1724,26 @@ fires into a live run, or survives acceptance; the correlation joins receipts
 across environments or tasks or reads payload meaning; or an unbound terminal
 disposition or work-note text arms either carrier.
 
-## 16.4 Structural self-products and carried interiority
+## 16.4 Explicit memory and carried self-state
 
-**Partially retired 2026-09-01 (ADR-0112 decision 9a):** the `affect`
-member, the affect self-state, and the carried disposition numbers no longer
-exist; the walk below stands for the `distillation` self-product only.
+**Input:** in an authenticated turn, a persona authors and binds a fragment
+through ordinary actions. Later contrary evidence leads it to revise or unbind
+that material. The same persona starts another task, restarts, and enters a
+different environment. Another persona receives no access to its private body.
 
-**Input:** in a live environment, one persona authors a turn whose output
-includes a bounded `distillation` string and an `affect` mapping; a second
-turn by the same persona in a different environment authors neither; a third
-turn authors an oversize distillation and an out-of-range affect component.
+**Trace:** inspect the actual provider requests before and after the authored
+changes. The selected fragment body and current signed character state appear
+exactly once in their respective lanes. Revisions require the existing signed
+authoring and binding authorities; restart and environment transfer preserve
+those identities. An unbound or superseded body is absent from selected memory
+and its historical signed source remains inspectable by its owner. A write
+and `end_turn` in one response require no extra acknowledgement call.
 
-**Trace:** the parser admits the bounded members verbatim and refuses the
-malformed ones into the invalid-optional-fields observation; settlement
-persists exactly one persona-signed fragment per authored distillation
-(deterministic id; a retried settlement duplicates nothing) and one appended
-affect record; a kernel-signed distillation event lands in the task lineage;
-the second turn's compile carries the fragment body into the other
-environment's system prompt and its identity carrier shows the genesis
-disposition numbers and the recorded affect beside the SOUL; a head the
-persona itself re-curated between turns keeps its pruning after the next
-settlement rebind, and the rebind's evolution record carries
-`automatic_selection: true`.
-
-**Pass:** persistence and carriage are byte-exact and persona-signed; absence
-persists nothing and blocks nothing; refusal is structural, never semantic; no
-substrate mechanism reads any carried value; the turn settles even when
-persistence fails.
+**Pass:** persistence and carriage are byte-exact and persona-owned; contrary
+evidence can lead to an authored revision without a host correction rule.
+Terminal prose creates no memory. An empty post-run learning turn writes
+nothing and creates no additional call. Full action access and private-source
+authorization hold across all transitions.
 
 ## 16.5 Observability fails closed (C-OP-14)
 
@@ -1859,16 +1852,16 @@ not an executable unit, integration, canary, or performance test.
 
 ## 18. Platform requirements, condition of record, and scorecard
 
-Walk (ADR-0112). A deployment starts a node; the environment is created; a
+Walk (ADR-0112, updated by ADR-0121). A deployment starts a node; the environment is created; a
 principal posts a task with an `acceptance_condition` and no verifier
 descriptor.
 
 1. **Carriage.** Inspect the environment lineage: the
-   `personaos-platform-requirements/1` record MUST verify under the
+   `personaos-platform-requirements/2` record MUST verify under the
    deployment's policy signing key and MUST be refused under any other.
    Inspect the actual model carrier of the first ordinary wake of every
    member: the text MUST occupy the charter lane whole, labelled, with both
-   its record hash and its ordered-text hash; a principal charter, when present, is a second labelled
+   its record hash and its exact charter-text hash; a principal charter, when present, is a second labelled
    block in the same lane. Inspect a wake after the situation has grown past
    the measured window: the lane is unchanged and the task lanes precede every
    inventory (P-2). A hash-only or paged requirements block fails.
@@ -1893,16 +1886,12 @@ descriptor.
    that hash MUST carry no acceptance standing; one that does, and passes the
    three invariants, MUST extend into acceptance. A same-named generation with
    a different manifest hash MUST NOT satisfy the descriptor.
-5. **Scorecard.** At the settle point (every member parked, nothing pending,
-   or an explicit terminal state) inspect the `personaos-run-scorecard/1`
-   event: every counter joins to named evidence ids; an unreadable source is
-   named in `unavailable_counters`; `refusals_stated_by_requirement` carries
-   one row per requirement id; the projection in the acceptance lane of the
-   last wake carries the same counters. Inspect a member that authored no name
-   and no `personaos-platform-requirement-refusal/1` for R-ID-1:
-   `unnamed_members` counts it and the UI shows the placeholder with status
-   *silent*. Inspect a budget-exhausted run with every member parked: it is
-   settled and scored though paused.
+5. **Scorecard.** At settlement inspect `personaos-run-scorecard/2`: each
+   counter joins to exact evidence; unavailable sources and dependent counters
+   are named rather than zeroed. The current projection agrees with the record.
+   No per-rule refusal, unnamed-member penalty or memory-write quota remains.
+   An unauthored name or portrait receives an honest absence/pending/unavailable
+   placeholder. A budget-exhausted parked run is settled and scored though paused.
 6. **Funded moment.** At the settle point each member active there receives
    at most one prepaid post-run distillation wake carrying exact references to
    the settle record, the scorecard, and the acceptance facts; the ledger

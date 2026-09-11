@@ -504,8 +504,8 @@ persona-authored material admitted through the existing signed authoring and
 brain-evolution actions; it acquires no selection authority those same bytes
 would not otherwise have.
 
-A turn-authored distillation retains the complete canonical JSON string or
-mapping as the persona's signed memory. Fixed byte, list, key-count, or nesting
+A fragment authored through the explicit memory actions retains the complete
+authored body as the persona's signed memory. Fixed byte, list, key-count, or nesting
 caps do not decide what the persona may remember. Subsequent model-window
 measurement and recoverable compaction govern how that memory reaches a prompt;
 they do not discard it during admission. Structural JSON validity and the exact
@@ -549,7 +549,7 @@ cursor, and completeness; a truncated source's entry states its own
 truncation and how to page the rest, and every source not carried at all is
 one `personaos-prompt-source-pointer/1` naming the source's identity, byte
 facts, and the declared read action with its reachability stated
-([`09_PROTOCOLS.md §4.3`](09_PROTOCOLS.md#43-exact-uniform-prompt-source-stage-and-pointers)).
+([`09_PROTOCOLS.md §4.3`](09_PROTOCOLS.md#43-current-context-exact-sources-and-compaction)).
 Per-source projections retain exact record/page totals, hashes, cursors, and
 omission/truncation counts. No memory, skill, knowledge, or capability source
 receives semantic priority or a larger allocation because of its label or body.
@@ -619,6 +619,13 @@ Content-addressed bodies may be deduplicated mechanically without merging their
 distinct authorship, consent, scope, or causal references.
 
 ## 12. Removed compatibility surface
+
+The unused curriculum/pedagogy, credential catalogue, semantic-depth, connector,
+topic graph, knowledge graph and ingestion-pipeline implementations are removed.
+No current schema grants their former processing or selection authority. Live
+visibility, access-context and rights primitives remain in the shared access
+module; persisted exact knowledge references and authored memories are preserved.
+
 
 There is no compatibility path for fixed memory tiers, nightly consolidation,
 importance decay, unified provenance scores, hierarchical retrieval ranking,

@@ -90,20 +90,14 @@ records remain opaque lineage and confer nothing.
 The September 5 owner direction restores OCEAN/VAD as persona-authored
 character, using the existing signed `characteristics_profile` rather than
 the retired host-seeded disposition or affect-history machinery (ADR-0117).
-The deployment's R-ID-3 asks members to author their traits, current affect,
-scales and reasons for revision. The current verified profile accompanies
-each turn across environments and survives restart. The substrate neither
-assigns trait numbers nor uses them to allocate roles, select models or gate
-work. Distinct character and useful evolution must be assessed in behavior.
-
-R-ID-3 also asks the persona to give its values practical meaning in its own
-preferences and to revisit current affect and preferences when experience
-changes their basis. R-CAP-4 asks it to compare the fit of plausible instruments
-and learn from bounded trials and peer experience (ADR-0119). These are exact
-deployment-signed requests. They introduce no host interpretation of trait
-values, prescribed difference between members, instrument assignment, or
-compulsory profile revision. Similar values may accompany different choices;
-different values may reasonably accompany the same choice.
+The deployment's short charter asks members to develop their own character,
+including OCEAN traits and VAD affect on scales whose meaning they choose.
+The current verified profile accompanies each turn across environments and
+survives restart. The persona authors revisions and their basis. The substrate
+assigns no values and does not use them to allocate roles, models or work.
+Distinct character and useful evolution must be assessed in observed behavior;
+similar values may accompany different choices and different values may
+reasonably accompany the same choice.
 
 Evidence of character carriage is distinct from evidence of its use. A profile
 in the request proves availability. A persona's stated preference and the
@@ -155,55 +149,31 @@ Profile admission imposes canonical JSON and authority requirements, not trait
 scales or arbitrary field, string, array, depth or profile-byte ceilings. Measured
 request capacity remains binding; an incompatible model must be reported.
 
-## 2b. Structural turn self-products
+## 2b. Turn output and explicit memory actions
 
-A turn's output contract carries one optional persona-authored self-product.
-It is not speech and is not required. Its absence is a valid output shape;
-it does not establish task completion or publication. The substrate persists
-what the persona authored without interpreting its meaning. (The former
-`affect` member is retired with §2a, ADR-0112 9a.)
+The current `personaos-turn-output-contract/1` describes optional authored
+communication. Plain terminal text is retained. Publication requires a nonblank
+`message`, exact `audience_persona_ids` (alias `audience`) and valid
+`delivery_disposition`. An empty audience broadcasts in the environment;
+`publish_only` schedules no wake, while `immediate_wake` requires the existing
+authority and funding. Missing or invalid routes publish nothing.
 
-Plain terminal text is retained as authored output. Publication requires an
-explicit nonblank `message`, an exact `audience_persona_ids` (alias `audience`),
-and a valid `delivery_disposition`. An empty audience list broadcasts within
-the current environment. `publish_only` publishes without a recipient wake;
-`immediate_wake` requests delivery subject to the existing authority and
-funding checks. Neither a missing route nor distillation creates public speech.
-On a structured transport, `final_output` exposes this object directly: the
-message, audience, disposition, and distillation slots are present and unused
-slots are null. Encoded JSON strings remain accepted, including mapping-valued
-distillation. These fields are visible in the provider's grammar as well as the
-protected prompt contract. Proposed tool actions are followed by a funded response
-that observes their results before terminal admission; text alongside those
-proposals does not prove the results of actions that have not executed yet.
+Structured `final_output` may carry this object directly or an encoded string;
+unused communication fields may be null. These mechanics survive compaction
+and grammar transports that omit schema descriptions. Text accompanying proposed
+actions does not attest to their unexecuted results. An authenticated `end_turn`
+in the batch finishes after every admitted action and capture without another
+acknowledgement call.
 
-These field definitions remain in protected prompt transport context through
-compaction, including when a grammar compiler drops schema descriptions.
-Moving them behind a hash or an optional situation projection would make
-valid publication depend on which prompt happened to fit.
+The terminal `distillation` field and separate settlement persistence path are
+retired. Memory writes, revisions and selections use existing explicit
+brain-fragment actions ([20 §3a](20_PERSONA_BRAIN_FRAGMENTS.md#3a-explicit-authored-memory)).
+They may accompany `end_turn`. Saving a fragment does not select it for future
+context. Historical self-product records and current memories remain intact.
 
-The exact current stimulus, including its source payload and causal references,
-is also protected from context reduction. A learning callback must retain why
-it was delivered even when older observations are compacted. If current
-authority alone exceeds the provider window, the turn states that bound;
-silently removing the event's purpose is not an admitted fit.
-
-The `distillation` member is a persona-authored string or mapping persisted at
-turn settlement as the persona's own signed brain fragment. It does not change
-fragment selection. The persona chooses its working prompt through ordinary
-fragment authoring and binding, including the combined author-and-bind action
-([`20_PERSONA_BRAIN_FRAGMENTS.md §3a`](20_PERSONA_BRAIN_FRAGMENTS.md#3a-structural-distillation-carriage)).
-The current contract is `personaos-turn-self-product-contract/2`; historical
-records retain the earlier contract's meaning.
-
-The slot is the whole substrate contribution: turn shape, bounded carriage,
-mechanical persistence, and a static in-carrier contract naming the slot and
-its mechanics. Whether to author, what the bytes mean, and whether a lesson
-is real remain persona work. The substrate adds no round counter, no
-convergence test, and no scheduled iteration beyond the three protocol-defined
-prepaid stimulus classes of [`03_TASKS.md §7`](03_TASKS.md#7-causal-continuation);
-persisting a self-product arms nothing and wakes no one. A settlement failure records its mechanical code and
-never blocks the turn.
+The exact current stimulus, source payload and causal references are protected
+from reduction. A prepaid learning opportunity keeps those facts and the ordinary
+action catalogue. It requires no memory write and creates no new lesson quota.
 
 ## 3. Optional public identity
 
