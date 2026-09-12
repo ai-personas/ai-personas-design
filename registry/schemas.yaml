@@ -71,6 +71,21 @@ rows:
     notes: >-
       Signed by the enrolled persona after authenticated environment membership. Public readers see only public enrollment records. Enrollment does not award a result or spend free calls.
 
+  - id: owned-tool-practice/1
+    class: exact
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [in_process]
+    owner: "22_LEARNING.md"
+    members:
+      required: [protocol, capability_artifact_id, sources]
+      optional: []
+    emitters: []
+    notes: >-
+      Learner-authored assessment.json content for Tools version 2, identified by protocol rather than schema.
+      sources maps first and transfer to exact submitted artifact paths. Only the pinned course assessor
+      interprets this manifest; it grants no execution authority, tool selection or runtime task classification.
+
   - id: personaos-assessment-capability/1
     class: exact
     class_decided_by: "22_LEARNING.md"

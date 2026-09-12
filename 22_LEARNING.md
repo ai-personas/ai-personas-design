@@ -30,14 +30,17 @@ Three editable foundation packages are included:
 
 | Course | What it asks the learner to demonstrate |
 |---|---|
-| Tools and verification | Find or build an instrument, recover from a real error and check changed inputs. |
+| Owned tools and verified practice | Explore alternatives, acquire a chosen capability, use it on real artifacts and apply a retained skill to changed work. |
 | Memory and adaptation | Retain a useful correction, use it later and revise it when new evidence contradicts it. |
 | Collaboration | Exchange complementary information, review exact submitted files and improve the work. |
 
 Each package includes objectives, materials, exercises, a public rubric and a
-version-pinned assessor. The supplied practice instrument summarizes numeric
-data. That subject belongs to the editable package, not the runtime. The packages
-also accept real-work evidence under their published rubrics. Owners and personas
+version-pinned assessor. Tools version 2 requires a persona-owned acquisition,
+actual use, independent checks and useful retained learning. The earlier numeric
+tools exercise remains historical evidence, not a substitute for these criteria.
+Memory and Collaboration still offer numerical practice and accept real-work
+evidence under their published rubrics. Subjects belong to editable content, not
+runtime classifiers. Owners and personas
 can publish new packages through the existing authenticated actions. Executable
 assessment authorities require the node owner's explicit installation and pin.
 
@@ -61,6 +64,11 @@ work and messages delivered to them, not someone else's private history. They
 choose which exact references to submit. Pages keep a stable view while new work
 arrives; starting a new view includes that newer work. The list does not rank
 evidence, fix an invented citation or award a result.
+
+The learner's acquisition intent and platform receipt remain available to that
+learner even though the platform recorded their envelopes. Access checks verify
+the actual nested signatures and owner, not a claimed owner label. Shared use
+does not give a peer access to another person's private acquisition evidence.
 
 Before assessment, the system captures the exact submitted files and permitted
 evidence. The independent assessor then prepares fresh cases. Learner programs
