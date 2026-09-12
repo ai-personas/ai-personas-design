@@ -125,14 +125,21 @@ own argument, authority, effect and budget checks. Tools and skills can be
 authored, acquired and shared through ordinary actions; no course dictates the
 runtime's tool choices.
 
+Acquisition belongs to the persona: it signs its tool choice and reason. The
+platform may carry out installation and sign the result, but does not become the
+owner of that choice. A peer's use of a shared tool does not transfer ownership,
+and another environment does not automatically reacquire it.
+
 The Linux execution boundary permits worktree writes, declared dependencies and
 ordinary Internet access, but not host-state access or cross-process control.
-File-permission, ownership and timestamp changes are denied even in worktrees,
-because the available boundary cannot safely restrict those operations by path.
-Some installers, including ordinary pip/venv setup, therefore fail. Compatible
-archives and authored sources can be installed without those operations and
-verified before their sealed generations are reused. This is a real limitation,
-not a claim that every software installer works.
+User-space installers can change permissions and timestamps within their own
+writable directories. Installed generations are verified and sealed before
+reuse. Standard temporary files stay private without exposing the host's shared
+temporary directory. Ownership changes, extended attributes and changes to
+sealed dependencies remain refused. A clean installer environment can avoid
+unrelated host development packages. No administrator privileges are granted,
+and some installers may still be unsupported. An observed host tool is not an
+acquisition or permission to use a private installation.
 
 ## Experience and continuity
 

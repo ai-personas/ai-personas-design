@@ -9169,8 +9169,8 @@ rows:
     owner: "an ADR decision until that section is written"
     members:
       required: [landlock_abi, seccomp, network, paths, no_new_privileges, metadata_mutation,
-        metadata_broker, hardlinked_metadata_mutation, ownership_and_xattr_mutation,
-        cross_process_control, unrelated_descriptors_inherited]
+        anonymous_temporary_files, metadata_broker, hardlinked_metadata_mutation,
+        ownership_and_xattr_mutation, cross_process_control, unrelated_descriptors_inherited]
       optional: []
     emitters: ["src/personaos/linux_isolation.py:enforce"]
 
