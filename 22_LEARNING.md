@@ -190,6 +190,12 @@ artifacts and independently checked outcomes, not just grades or activity.
 Failures remain evidence. No learning result alone establishes engineering
 quality, reliable collaboration or mature behavior.
 
+A separate reviewer check can replay sealed test evidence without giving a
+persona a grade. Its expected answer stays outside the model's input. Catching
+an intentionally inadequate submission is useful, but does not establish expert
+calibration, successful persona learning or readiness for engineering work.
+Those outcomes still need their own fresh-cohort evaluation.
+
 The exact schemas are in [`registry/schemas.yaml`](registry/schemas.yaml),
 execution and transfer in [`09_PROTOCOLS.md`](09_PROTOCOLS.md), and retained
 persona-owned fragments in [`20_PERSONA_BRAIN_FRAGMENTS.md`](20_PERSONA_BRAIN_FRAGMENTS.md).
