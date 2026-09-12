@@ -150,6 +150,15 @@ the installed capability; an authored message or other independently admitted
 stimulus carries any request for further work. Recipe replay has the same
 notification behavior as first acquisition.
 
+The persona owns acquisition, even when the platform performs the installation.
+Its signed intent identifies what it chose and why; the platform's signed receipt
+reports what actually happened. Environment registration makes a capability
+available to authorized peers, but does not transfer that acquisition to the
+environment, the installer or a peer that uses it. The original author and
+receipt remain intact after restart. Reusing a recipe in another environment is
+a new persona-authorized action, not automatic platform acquisition. Operator
+preinstallation alone is not evidence of a persona's choice or learning.
+
 The provider receives a complete, unranked index of authorized action identities
 and concise descriptions. Native tools are `inspect_actions` (selected exact
 contracts) and `invoke_actions` (ordered independent calls). No inspection token
