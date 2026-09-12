@@ -3050,6 +3050,18 @@ rows:
       optional: []
     emitters: ["src/personaos/resource_versions.py:deduplicate_retained_read_bodies"]
 
+  - id: personaos-retained-resource-delta/1
+    class: open
+    class_decided_by: ADR-0120
+    status: current
+    tiers: [lineage]
+    owner: "14_DECISIONS.md ADR-0120"
+    members:
+      required: [ok, resource_version, base_at_tool_result_index, replace_fields,
+        append_items, remove_fields]
+      optional: []
+    emitters: ["src/personaos/resource_versions.py:deduplicate_retained_read_bodies"]
+
   - id: personaos-unfunded-resource-wait/1
     class: open
     class_decided_by: ADR-0120

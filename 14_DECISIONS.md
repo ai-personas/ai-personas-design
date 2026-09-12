@@ -2608,8 +2608,13 @@ summarization retains the eligible history.
 **Reads and waiting.** Conditional read versions bind the complete returned
 content, exact resource reference and current authority scope. A successful
 unchanged read returns that fact; an authority change prevents reuse. Repeated
-read bodies are replaced only when the full matching body remains in the actual
-request, retaining chronological observations. Causal disposition v3 adds
+read bodies are referenced only while they remain recoverable in the actual
+request, retaining chronological observations. A changed read may carry a
+smaller exact delta against the same resource/query/authority: removed and
+replaced fields and appended list items. Current content/version hashes must
+reconstruct exactly; this is lossless representation, not persona memory
+selection or a summary. A missing base, changed scope or non-saving encoding
+keeps the full body. Causal disposition v3 adds
 `wait_for_change` and `end_turn`; v2 records keep their prior meaning. Signed
 waits reuse existing funded scheduled triggers. Registration and recheck share
 the trigger lock, changed observations latch durably, and unchanged waits make
