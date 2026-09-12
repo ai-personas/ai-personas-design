@@ -585,6 +585,14 @@ pinned writable root before doing either operation. It never resumes a guest
 system call after merely checking a changeable pathname. Symlink escapes,
 cross-mount targets and metadata on non-directory hardlinks are refused, as are
 changes to host files, sealed dependencies, ownership and extended attributes.
+Standard C temporary files are supported without opening the host's shared
+`/tmp` directory. An anonymous-file request is fulfilled inside a pinned
+writable root and returned only after the file has no name. File delivery and
+the system-call response are atomic, so cancellation cannot leave an injected
+descriptor behind. Filesystems without anonymous creation use an empty,
+exclusive file that is unlinked before delivery. The resulting file has no
+group/other or executable permissions and cannot later be linked into a
+directory. No existing shared temporary file becomes readable or writable.
 The guard has no unrestricted fallback and does not grant root/system installs.
 Recipes still have to verify actual installed results. A native adapter is not
 considered isolated merely because it claims to support native command tools.
