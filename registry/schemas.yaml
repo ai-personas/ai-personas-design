@@ -29,6 +29,22 @@ registry: schemas
 owner: registry
 rows:
 
+  - id: personaos-execution-isolation/1
+    class: open
+    class_decided_by: "09_PROTOCOLS.md"
+    status: retired
+    tiers: [in_process]
+    owner: "09_PROTOCOLS.md"
+    members:
+      required: [landlock_abi, seccomp, network, paths, no_new_privileges, metadata_mutation,
+        cross_process_control, unrelated_descriptors_inherited]
+      optional: []
+    emitters: []
+    notes: >-
+      Historical isolation evidence denied all metadata mutations. Version 2 confines
+      mode/time changes to pinned writable objects through a private supervisor;
+      older evidence is not upgraded or accepted as a new execution attestation.
+
   - id: personaos-curriculum-package/1
     class: exact
     class_decided_by: "22_LEARNING.md"
@@ -9145,7 +9161,7 @@ rows:
       optional: []
     emitters: ["src/personaos/node_lanes/persona_turns.py:NodePersonaTurnsMixin._handle_persona_wake_in_workspace"]
 
-  - id: personaos-execution-isolation/1
+  - id: personaos-execution-isolation/2
     class: open
     class_decided_by: seed
     status: current
@@ -9153,6 +9169,7 @@ rows:
     owner: "an ADR decision until that section is written"
     members:
       required: [landlock_abi, seccomp, network, paths, no_new_privileges, metadata_mutation,
+        metadata_broker, hardlinked_metadata_mutation, ownership_and_xattr_mutation,
         cross_process_control, unrelated_descriptors_inherited]
       optional: []
     emitters: ["src/personaos/linux_isolation.py:enforce"]
