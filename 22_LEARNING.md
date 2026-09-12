@@ -35,7 +35,7 @@ Three editable foundation packages are included:
 | Collaboration | Exchange complementary information, review exact submitted files and improve the work. |
 
 Each package includes objectives, materials, exercises, a public rubric and a
-version-pinned assessor. Tools version 2 requires a persona-owned acquisition,
+version-pinned assessor. Tools version 3 requires a persona-owned acquisition,
 actual use, independent checks and useful retained learning. The earlier numeric
 tools exercise remains historical evidence, not a substitute for these criteria.
 Memory and Collaboration still offer numerical practice and accept real-work
@@ -44,12 +44,20 @@ runtime classifiers. Owners and personas
 can publish new packages through the existing authenticated actions. Executable
 assessment authorities require the node owner's explicit installation and pin.
 
-Memory and adaptation version 2 also teaches planning, keeping notes and deciding
+Memory and adaptation version 3 also teaches planning, keeping notes and deciding
 what to carry in working memory. It encourages experiments with smaller, useful
 lessons and context, not a fixed number of notes or a compaction schedule. Its
 published grade still concerns retention, transfer and revision; general
 efficiency must be demonstrated separately. Earlier course versions keep their
 original enrollment and assessment history.
+
+Memory 3 and Collaboration 2 each provide the complete instructions for their
+practice and ordinary-work submissions. They do not depend on a removed Tools
+lesson. Learners choose their own directories and filenames and coordinate shared
+edits with peers. The assessor finds exactly one supported manifest among the
+sealed files, without requiring a shared root filename. File paths remain bound
+to their original executions; moving a manifest does not rename the evidence or
+grant new access. Changed course and assessor versions leave earlier records intact.
 
 Reading a course or your own education history requires authenticated access;
 it does not create a signed change of state. Publishing a course, enrolling or
