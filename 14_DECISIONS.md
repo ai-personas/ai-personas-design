@@ -5,6 +5,14 @@ status: Stable
 
 # 14 — Architecture Decisions
 
+Current amendment, 12 September 2026: [Learning and working with personas](22_LEARNING.md)
+supersedes older passages below that retain founding-role presets, omit editable
+curricula, require all full tool schemas on every request, or describe unrestricted
+host execution. Those passages document earlier decisions, not current behavior.
+The present contracts use neutral startup, explicit participant selection,
+on-demand batched action contracts and independent evidence-bound assessment in
+ordinary funded environments. Terminal prose does not automatically save memory.
+
 This is the current decision surface. Earlier decision text that defined fixed
 personality, workflow, scoring, prompt, task-classification, mission,
 population, or tool-selection semantics is retired without migration and has no
@@ -325,7 +333,9 @@ stronger descriptor-bound lane when they exist.
 
 **Retired 2026-09-01 (ADR-0112 decision 9a):** the disposition and affect
 carriage is removed with its schemas and actions; the `distillation`
-self-product and its persistence stand. D16–D19 remain as history.
+self-product still persisted at that time. ADR-0121 also retired terminal
+`distillation`; current memory persistence uses explicit brain actions.
+D16–D19 remain as history.
 
 Genesis gives every persona identity-derived disposition numbers under an open framework
 label (deployment default `ocean/1`, five values in `[0, 1]`) and no semantic content; the
@@ -891,13 +901,15 @@ obvious draft, which teaches drafting-before-building faster than any rule.
 ## ADR-0096 — Principal-supplied founding soul
 
 **Status:** REJECTED on measured evidence (2026-08-28). The mechanism
-(`--founding-soul`) remains implemented and tested; **no shipped SOUL uses it**.
+(`--founding-soul`) was still implemented and tested at that date; no shipped
+SOUL then used it. Both startup SOUL options and shipped founding presets are
+now removed; [Learning and working](22_LEARNING.md) describes neutral bootstrap.
 The premise below was tested across three SOUL generations and five live runs and
 did not hold. The record is retained because the negative result is the value.
 
-**Status note:** the mechanism ships founding souls since ADR-0108 addendum 4;
-"no shipped SOUL uses it" is stale; the rejection stands for soul doctrine as
-a lever (ADR-0110).
+**Historical status update:** ADR-0108 addendum 4 subsequently shipped founding
+souls. That release state is also superseded. The rejection stands for soul
+doctrine as a lever (ADR-0110).
 
 **Why rejected.** Three generations — v1 whose charter forbade it from stating a
 conclusion, v2 that could state one and reached peers by `immediate_wake`, v3

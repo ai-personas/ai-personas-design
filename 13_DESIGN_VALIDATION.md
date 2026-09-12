@@ -150,17 +150,18 @@ author identity, or do nothing. No repair wake or narrow identity menu is
 synthesized.
 
 For native MCP, compare `tools/list` against the signed action index and every
-authenticated registry descriptor: exact names, descriptions, schemas,
-annotations, count, and order must match, and provider events must use those
-direct names. For structured transport, compare every action row's prompt
-description bytes with the authenticated registry descriptor. The same
+authenticated registry descriptor: every authorized identity must appear in the
+complete unranked index and its hash must match the exact inspectable contract.
+Invoke known actions without prior inspection and compare their individual
+receipts with direct dispatcher calls. For structured transport, compare every
+action row's prompt description bytes with the authenticated registry. The same
 content-blind window applies to all rows, ordinary descriptions fit completely,
 and any oversized row declares that it is incomplete and remains independently
 addressable. Repeat after renaming actions, changing task/domain words, and
 changing prior-use counts; byte allocation and transport ordering cannot change.
-A birth, acquisition, evolution, execution, or successor mechanism hidden
-behind a generic string invoker, or whose ordinary description is consistently
-cut before its effect is visible, fails practical action discovery.
+A birth, acquisition, evolution, execution or successor mechanism absent from
+the index, or whose description is cut before its effect is visible, fails
+practical action discovery. Full schemas need not be repeated in every request.
 
 Exercise a native semantic turn that authors more actions than an adapter's
 former private default while remaining below the deployment's generic runaway

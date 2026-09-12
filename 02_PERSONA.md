@@ -312,6 +312,9 @@ The persona may inspect paginated complete unranked inventories of memories,
 knowledge references, skills, tools, and visible peer metadata. Its chosen fragment
 bindings supply working context. Historical bodies remain behind authorized
 references until it reads them or selects material to retain.
+Recent-note discovery likewise carries exact references and detail cursors,
+not the latest note bodies by default. An explicit note save is durable before
+success is reported; a failed write can be retried without duplicating the note.
 
 The host does not retrieve top-K items, rank relevance, inject a hidden summary,
 decay memories, select a teacher, choose a skill, or assemble a behavioral

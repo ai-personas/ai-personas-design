@@ -191,8 +191,10 @@ any order.
 
 Peers share exact knowledge refs through ordinary signed messaging. The
 substrate provides generic author-signed exact-body publication/withdrawal and
-receiver-chosen direct-peer acquisition mechanics, but no semantic skill
-catalogue, teacher selection, curriculum, or transfer workflow. Capability-gap
+receiver-chosen direct-peer acquisition mechanics. Editable curriculum packages
+add learning materials and independent assessments to ordinary funded environments
+([learning overview](22_LEARNING.md)); the runtime does not select teachers,
+courses or tools for a persona. Capability-gap
 meaning is optional opaque content with no dedicated lifecycle and never gates
 work or completion. Practice receipts do not automatically confer
 expertise. Each generic learning/capability write is one opaque
@@ -246,9 +248,8 @@ replication effects, or host-authored team/tool/workflow doctrine.
 
 Every item on that list names something the *substrate* must not author: a
 task, domain, profession, tool, or workflow doctrine. Two things are not on it.
-A principal supplying one founding SOUL beside a neutral cohort (ADR-0096) is
-ordinary principal intent: the bytes are the principal's, the substrate parses
-none of them, and no role, ranking, or authority is derived. The platform's
+Founding-role presets and startup SOUL options are removed; fresh nodes start
+with three neutral identities unless a different count is declared. The platform's
 standing requirements ([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md))
 are deployment authority: authored once, carried to every member identically
 in the charter lane, parsed by the substrate for nothing, and containing no

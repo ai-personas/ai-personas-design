@@ -451,12 +451,12 @@ records, and accessible knowledge references. Deterministic lexical, append, or 
 order is transport order only. There is no relevance score, similarity score,
 fitness, top-K, host recommendation, task classifier, or prompt-selected subset.
 
-For a native MCP body, each exact leased action is presented directly under its
-real action name with the complete persona-facing descriptor. The model does not
-first inspect a transport-private catalogue and then transcribe a selected name
-into a generic invoker. For a structured-only body, the complete unranked
-catalogue remains in-band. Both paths revalidate the same signed live descriptor
-and principal at dispatch; neither path selects or ranks an action.
+Every authorized action appears in the complete unranked index. Batched
+`inspect_actions` returns its exact contract on demand; `invoke_actions` admits
+known calls without prior inspection. Native and structured transports revalidate
+the same signed live descriptor and principal at dispatch. A missing action,
+mandatory inspection ritual, ranked subset or batch authority bypass fails this
+criterion. Exact contracts, not independently written hints, drive validation.
 
 The action-count authority is equally transport-independent. Runtime iteration,
 node-issued capability, and provider-native lease use the same exact

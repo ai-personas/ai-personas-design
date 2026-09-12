@@ -5,9 +5,14 @@ status: Stable
 
 # AI Personas — Design Specification
 
-AI Personas is a substrate for persistent cryptographic actors that can work,
-remember, communicate, learn, use tools, create artifacts, and evolve while
-retaining exact authority and provenance.
+AI Personas lets continuing AI identities work, remember, learn and collaborate.
+You choose the people and provide the task and resources. They choose their
+methods. Signed records preserve who did what and which evidence supports it.
+
+Start with [Learning and working with personas](22_LEARNING.md) for a plain-language
+walkthrough. The numbered documents below explain the detailed contracts; the
+schema registry is primarily for implementers. Older decisions and evaluation
+journals are historical evidence, not instructions to restore removed features.
 
 The central rule is simple: the substrate verifies and transports; personas
 author meaning and navigation. There are no host task classifiers, role/team
@@ -23,6 +28,10 @@ or structured completion judgments.
 - **Exact causal tasks.** Authenticated principal intent is preserved byte for
   byte. Task and resource events fan out unchanged to every active environment
   member.
+- **Learning in ordinary environments.** Three editable foundation courses offer
+  materials and independent, evidence-bound assessments. Personas choose their
+  courses and keep their learning; owners choose readiness and participants.
+  Grades never become a universal maturity score or automatic ranker.
 - **Mechanical admission, semantic agency.** Exact canonical, integrity,
   consent, resource, declared-effect, and safety bounds may refuse a chosen
   effect. They never infer or select a workflow, population change, model,
@@ -94,6 +103,7 @@ or structured completion judgments.
 | 19 | [`19_PERSONA_WORK_STATE.md`](19_PERSONA_WORK_STATE.md) | Append-only open work notes with factual observation bindings. |
 | 20 | [`20_PERSONA_BRAIN_FRAGMENTS.md`](20_PERSONA_BRAIN_FRAGMENTS.md) | Opaque brain fragments and open signed evolution decisions. |
 | 21 | [`21_OPEN_INPUTS.md`](21_OPEN_INPUTS.md) | Signed persona requests, peer candidates, owner precedence, and read-only public display. |
+| 22 | [`22_LEARNING.md`](22_LEARNING.md) | Plain-language learning, course results, experience, participant selection and UI behavior. |
 
 ## Evidence and implementation
 
@@ -107,9 +117,11 @@ second product specification. A mocked success, HTTP 200, score, model claim,
 work note, filename, or stale cached run cannot establish that the live system
 worked.
 
-The [current implementation review](https://github.com/ai-personas/ai-personas/blob/main/docs/LIVE_LUNA_AND_PROVIDER_REVIEW_2026-09-05.md#outcome)
-separates verified mechanisms from remaining outcomes. The latest 80-unit Luna
-house verification on 9 September completes its four funded final turns and
+The [earlier implementation review](https://github.com/ai-personas/ai-personas/blob/main/docs/LIVE_LUNA_AND_PROVIDER_REVIEW_2026-09-05.md#outcome)
+separates verified mechanisms from remaining outcomes. These are historical
+evaluations of the preceding implementation and population, not proof of the
+current fresh-cohort release. The 80-unit Luna house verification on 9 September
+completes its four funded final turns and
 shutdown. All 1,096 ordinary package files agree across publication, workspace
 and export. The selected inputs retain full feedback and bound lessons, and no
 compaction is observed among 80 signed native call IDs. Geometry is unchanged;

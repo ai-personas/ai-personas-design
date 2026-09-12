@@ -30,11 +30,9 @@ competence, expertise, diversity, role, profession, coverage, team requirement,
 coordinator, candidate preference, or recommendation. Work notes remain open
 persona-authored claims and acquire no population semantics.
 
-A principal-supplied founding SOUL (ADR-0096) is not an exception to this
-paragraph. The member carrying it appears in this projection exactly as every
-other member: unranked, with no derived role, profession, coverage, or
-coordinator status, and with no authority, priority, or obligation any other
-member lacks. The substrate never parses that SOUL for meaning.
+Neutral founders and runtime-born personas appear in this projection without
+derived roles, professions or coordinator status. Founding-role presets are
+removed. Signed SOUL records retain identity, not leadership authority.
 
 ## 2. Open navigation
 
@@ -245,44 +243,29 @@ seeds, one-newborn-per-need, population-pressure or fitness scores, role
 coverage, recruitment ceremonies, or identity-formation gates. Historical bytes
 remain opaque and confer no current admission authority.
 
-"Host-authored" is the operative word. The substrate may not author a
-personality or role for any member, and no task, domain, profession, tool, or
-workflow doctrine. A *principal* may supply one founding SOUL beside a neutral
-cohort (ADR-0096), on the same authority that supplies charter text and
-presentation requirements under §7; the substrate carries those bytes opaquely
-and derives nothing from them. The platform's standing requirements
-([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md)) are deployment
-authority on that same footing: carried to every member identically, parsed
-for nothing, and free of every word this section removes.
-
-A founding SOUL is principal text on the charter's footing and is not a lever
-of this design: three controlled runs measured no separation on any
-doctrine-targeted behaviour (ADR-0110), shipped SOULs stay as shipped, and no
-later decision revises a SOUL to move a scorecard counter; the levers that
-remain are mechanical statedness and task-authority bars.
+The substrate does not author a personality or task role for any member.
+Founding presets and `--soul` / `--founding-soul` startup paths are removed.
+Personas author their later character, learning, presentation and genesis
+material through the ordinary mechanisms. Standing platform requirements
+remain explicit deployment authority, not hidden workflow selection.
 
 The node restores verified retained actors before resolving its ordered default
-task cohort. A fresh public launcher defaults to three neutral founders; the
-native entry point defaults to one. These defaults apply only to fresh state.
-An explicit `--seed-personas` count selects the neutral prefix, with declared
-founding SOULs in their supplied order. Runtime-born personas remain retained
+task cohort. Both launch paths default to three neutral founders. These defaults
+apply only to fresh state. An explicit `--seed-personas` count selects the neutral
+prefix. Runtime-born personas remain retained
 actors; their existence alone does not put them in the default task cohort.
 
 `NODE_BOOTSTRAP_COHORT_DECLARED` carries the exact
-`personaos-node-bootstrap-cohort/1` fact in the dedicated domain lineage:
-kernel identity, neutral or authored mode, declaration basis, and the ordered
-neutral and authored founder IDs. The kernel signs and durably appends that fact
+`personaos-node-bootstrap-cohort/2` fact in the dedicated domain lineage:
+kernel identity and the ordered persona IDs. The kernel signs and durably appends that fact
 before persisting new founder snapshots. Startup refuses missing referenced
 actors and incomplete or invalid cohort evidence, preserving the evidence
 across repeated restarts. It does not recreate an unavailable founder from a
 neutral template or infer a smaller cohort after a partial snapshot write.
 
-Legacy state without that fact is unambiguous only when it contains one
-verified neutral founder and any other actors have positively verified birth
-evidence. Multiple neutral founders or authored founder order require a
-one-time explicit startup declaration. File order and absence of birth fields
-do not establish membership. This fact records startup membership only; it
-adds no roles, task authority, budget, or environment-membership decision.
+There is no legacy founding-role import path. File order and absence of birth
+fields do not establish membership. This fact records startup membership only;
+it adds no roles, task authority, budget or environment-membership decision.
 
 ## 12. Design criteria
 

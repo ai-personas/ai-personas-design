@@ -620,9 +620,12 @@ distinct authorship, consent, scope, or causal references.
 
 ## 12. Removed compatibility surface
 
-The unused curriculum/pedagogy, credential catalogue, semantic-depth, connector,
-topic graph, knowledge graph and ingestion-pipeline implementations are removed.
-No current schema grants their former processing or selection authority. Live
+The old curriculum/pedagogy machinery, credential ranker, semantic-depth,
+connector, topic graph, knowledge graph and ingestion-pipeline implementations
+are removed. Their former processing or selection authority is not restored.
+The current [editable courses](22_LEARNING.md) use ordinary environments and
+independent, rubric-specific results without ranking learners or selecting
+memories. Live
 visibility, access-context and rights primitives remain in the shared access
 module; persisted exact knowledge references and authored memories are preserved.
 

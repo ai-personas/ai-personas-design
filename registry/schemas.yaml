@@ -28,6 +28,176 @@
 registry: schemas
 owner: registry
 rows:
+
+  - id: personaos-curriculum-package/1
+    class: exact
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [lineage, operator, public_anonymous]
+    owner: "22_LEARNING.md"
+    members:
+      required: [id, version, title, objectives, materials, exercises, rubric, assessment_capability, result_scale, successful_results, visibility, record_id, issued_at, issuer_id, signing_key_id, public_key, signature]
+      optional: []
+    emitters: []
+    notes: >-
+      Versioned authored course content. Its record_id is the package hash. The complete signed record is returned unchanged; catalog summaries without a schema are separately identified.
+
+  - id: personaos-curriculum-enrollment/1
+    class: rendered
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [lineage, operator, public_anonymous]
+    owner: "22_LEARNING.md"
+    members:
+      required: [persona_id, curriculum_id, version, package_hash, environment_id, task_id, visibility, record_id, issued_at, issuer_id, signing_key_id, public_key, signature]
+      optional: []
+    emitters: []
+    notes: >-
+      Signed by the enrolled persona after authenticated environment membership. Public readers see only public enrollment records. Enrollment does not award a result or spend free calls.
+
+  - id: personaos-assessment-capability/1
+    class: exact
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [lineage, operator]
+    owner: "22_LEARNING.md"
+    members:
+      required: [id, version, source, source_name, interpreter, timeout_s, source_hash, assessment_key_id, assessment_public_key, record_id, issued_at, issuer_id, signing_key_id, public_key, signature]
+      optional: []
+    emitters: []
+    notes: >-
+      Installed and signed by the node owner. Source and version are immutable under one capability identity; the derived assessment key stays outside learner authority.
+
+  - id: personaos-assessment-request/1
+    class: exact
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [lineage, operator, prompt]
+    owner: "22_LEARNING.md"
+    members:
+      required: [learner_id, curriculum_id, version, package_hash, rubric_hash, assessment_capability, environment_id, task_id, submission, submission_hash, execution_evidence, execution_evidence_hash, challenge_nonce, visibility, record_id, issued_at, issuer_id, signing_key_id, public_key, signature]
+      optional: []
+    emitters: []
+    notes: >-
+      Signed learner request with immutable submitted bytes and verified accessible evidence. Fresh challenge entropy follows the sealed submission. Browser education projections omit submission bodies.
+
+  - id: personaos-assessment-result/1
+    class: rendered
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [lineage, operator, public_anonymous]
+    owner: "22_LEARNING.md"
+    members:
+      required: [request_id, learner_id, package_hash, rubric_hash, submission_hash, execution_evidence_hash, challenge_nonce, assessment_capability, status, criteria, evidence, supersedes, correction_reason, record_id, issued_at, issuer_id, signing_key_id, public_key, signature]
+      optional: []
+    emitters: []
+    notes: >-
+      Only the package-pinned independent assessor can issue this result. Exact request bindings and each rubric criterion are verified. Corrections name the latest result; earlier results remain. Signature validity is not a general competence judgment.
+
+  - id: personaos-assessment-unavailable/1
+    class: rendered
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [lineage, operator, public_anonymous]
+    owner: "22_LEARNING.md"
+    members:
+      required: [request_id, learner_id, package_hash, status, reason, record_id, issued_at, issuer_id, signing_key_id, public_key, signature]
+      optional: []
+    emitters: []
+    notes: >-
+      A node-signed inability to perform assessment. Status is assessment_unavailable and never qualifies; it remains bound to the original request and learner.
+
+  - id: personaos-education-snapshot/1
+    class: exact
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [lineage, operator]
+    owner: "22_LEARNING.md"
+    members:
+      required: [persona_id, records]
+      optional: []
+    emitters: []
+    notes: >-
+      Private same-identity continuity collection. Every nested original signature, package/request binding and assessment authority is verified. Adoption by another persona does not transfer qualifications.
+
+  - id: personaos-assessment-submission/1
+    class: exact
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [lineage, operator, prompt]
+    owner: "22_LEARNING.md"
+    members:
+      required: [files]
+      optional: []
+    emitters: []
+    notes: >-
+      Sealed regular-file bytes. Each file has path, content_hash, size_bytes, body_base64 and executable. No symlink traversal or caller-supplied hash can substitute for the captured bytes.
+
+  - id: personaos-assessment-evidence-index/1
+    class: open
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [operator, prompt]
+    owner: "22_LEARNING.md"
+    members:
+      required: [rows, snapshot, total, next_offset]
+      optional: []
+    emitters: []
+    notes: >-
+      Combined references into the current task and environment's verified lineage accessible to the learner. Snapshot pins both physical append frontiers, including empty logs. Signed-time order and an optional literal event-kind filter do not rank relevance. Rows retain the exact original scope, identifier and signing-payload hash.
+
+  - id: personaos-assessment-execution/1
+    class: open
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [lineage, operator, public_anonymous]
+    owner: "22_LEARNING.md"
+    members:
+      required: [capability_record_id, source_hash, request_id, preparation_hash, phases, probes, findings, model_reviews, model_calls]
+      optional: []
+    emitters: []
+    notes: >-
+      Evidence inside the independently signed result. Assessor and learner probes are isolated. Any model reviews use the same allowed models and funded task lifetime, with charged calls recorded.
+
+  - id: personaos-persona-education/1
+    class: rendered
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [operator, public_anonymous]
+    owner: "22_LEARNING.md"
+    members:
+      required: [persona_id, enrollments, assessments, curricula, visibility, source_signatures_verified_by_node, verification_scope, record_id, issued_at, issuer_id, signing_key_id, public_key, signature]
+      optional: []
+    emitters: []
+    notes: >-
+      Current-node-signed read projection. Original enrollment and assessor-result signatures remain intact; rubric/request summaries explicitly attest source verification by the node. Public and authorized-private views are distinct.
+
+  - id: personaos-persona-directory/1
+    class: rendered
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [operator, public_anonymous]
+    owner: "22_LEARNING.md"
+    members:
+      required: [personas, ranked, visibility, record_id, issued_at, issuer_id, signing_key_id, public_key, signature]
+      optional: []
+    emitters: []
+    notes: >-
+      Current-node-signed complete unranked directory. Exact filters and browser selections are manual comparisons, not readiness scores or task submission authority.
+
+  - id: personaos-persona-experience/1
+    class: rendered
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [in_process, operator, public_anonymous]
+    owner: "22_LEARNING.md"
+    members:
+      required: [persona_id, visibility, summary, records, total_records, offset, limit, next_offset, source_generation, omitted_unverified_records, limits, record_id, issued_at, issuer_id, signing_key_id, public_key, signature]
+      optional: []
+    emitters: []
+    notes: >-
+      Factual page over original verified work receipts, signed by the current node at construction. Signed offset/limit bind the requested page. Counts do not imply causal learning or competence.
+
   - id: persona-learning-content/2
     class: open
     class_decided_by: "02 §2b; 09 §2"
@@ -204,7 +374,7 @@ rows:
   - id: personaos-knowledge-bundle/3
     class: exact
     class_decided_by: "09 §7; 09 §14.1"
-    status: current
+    status: retired
     tiers: [operator, public_anonymous, in_process]
     owner: "09 §7; 09 §14.1"
     members:
@@ -212,9 +382,9 @@ rows:
         soul_state, knowledge, fragments, bindings, semantic_interpretation_performed, manifest,
         historical_authority]
       optional: []
-    emitters: ["src/personaos/continuity.py:export_persona_bundle"]
+    emitters: []
     notes: >-
-      The complete /2 bundle plus prior handoff proofs. The existing manifest hashes
+      Historical /2 bundle plus prior handoff proofs, superseded by /5 with education. The manifest hashes
       historical_authority too. Each admitted historical signature is limited to its exact
       original issuer and message. Public transfer still requires explicit owner disclosure
       through the existing sharing protocol.
@@ -323,9 +493,8 @@ rows:
       optional: []
     emitters: []
     notes: >-
-      The existing terminal output contract states that optional distillation stores memory
-      without selecting it. Explicit combined author-and-bind remains available. Publication
-      and routing consent are unchanged.
+      Historical terminal output contract; no longer emitted or admitted. Terminal prose
+      does not save memory. Explicit persona-authored brain actions persist fragments.
 
   - id: persona-learning-content/1
     class: open
@@ -417,14 +586,14 @@ rows:
       optional: [artifact_snapshot]
     emitters: ["src/personaos/acceptance.py:5585"]
 
-  - id: personaos-node-bootstrap-cohort/1
+  - id: personaos-node-bootstrap-cohort/2
     class: exact
     class_decided_by: "16_POPULATION_DYNAMICS.md §11"
     status: current
     tiers: [lineage, operator]
     owner: "16_POPULATION_DYNAMICS.md §11"
     members:
-      required: [kernel_id, mode, basis, neutral_persona_ids, authored_founder_persona_ids]
+      required: [kernel_id, persona_ids]
       optional: []
     emitters: ["src/personaos/node_support.py:_node_bootstrap_cohort_payload"]
     notes: >-
@@ -452,7 +621,7 @@ rows:
   - id: personaos-knowledge-bundle/2
     class: exact
     class_decided_by: "14_DECISIONS.md ADR-0088"
-    status: current
+    status: retired
     tiers: [operator, public_anonymous, in_process]
     owner: "14_DECISIONS.md ADR-0088"
     members:
@@ -460,9 +629,9 @@ rows:
         soul_state, knowledge, fragments, bindings, semantic_interpretation_performed,
         manifest]
       optional: []
-    emitters: ["src/personaos/continuity.py:export_persona_bundle"]
+    emitters: []
     notes: >-
-      Exact operator export/import under a distinct registered destination
+      Historical operator export/import under a distinct registered destination
       identity. The separate persona-sharing wrapper permits public byte
       transfer only under current explicit source-owner disclosure authority,
       an independent source-key pin and destination-owner consent. The exact
@@ -1243,6 +1412,27 @@ rows:
       original hash. Current authoring emits /2 with the registered-persona
       predicate; no historical receipt is reinterpreted.
 
+  - id: personaos-persona-authored-state-append-frontier/2
+    class: open
+    class_decided_by: "22_LEARNING.md §Memory, character and tools"
+    status: current
+    tiers: [in_process]
+    owner: "22_LEARNING.md §Memory, character and tools"
+    members:
+      required: [persona_id, environment_id, chronological_order, source_total_count,
+        frontier_start, frontier_stop, frontier_count, omitted_before, records,
+        source_manifest_hash, source_snapshot_hash, exact_record_bodies_inlined,
+        automatic_selection, semantic_interpretation_performed,
+        ranking_or_recommendation_performed, expertise_awarded, frontier_hash]
+      optional: []
+    emitters: ["src/personaos/runtime.py:_learning_navigation_reference",
+      "src/personaos/runtime.py:_persona_authored_state_append_frontier"]
+    notes: >-
+      Recent append-order references only. Each row contains append_index,
+      record_ref, record_content_hash, record_content_bytes and a detail_cursor
+      bound to the complete authorized state snapshot. Bodies remain available
+      on explicit inspection; recency does not select notes for continuing use.
+
   - id: personaos-persona-authored-state-frontier-navigation-reference/1
     class: open
     class_decided_by: "09_PROTOCOLS.md §7"
@@ -1258,9 +1448,9 @@ rows:
         expertise_awarded, semantic_interpretation_performed, automatic_selection]
       optional: []
     notes: >-
-      Historical hash-only projection. Current cognition retains the verified
-      personaos-persona-authored-state-append-frontier/1 with its exact body page;
-      actual prompt fit controls any further reduction.
+      Historical navigation wrapper. Current cognition uses the verified
+      personaos-persona-authored-state-append-frontier/2 reference page;
+      exact note bodies are opened through owner-authorized detail cursors.
   - id: personaos-public-project-topology/1
     class: rendered
     class_decided_by: seed
@@ -5883,6 +6073,15 @@ rows:
     emitters: ["src/personaos/projects/project.py",
       "src/personaos/projects/project.py:NotationConvention.signing_payload"]
 
+  - id: numeric-summary/1
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: []
+
   - id: obligation-reassignment/1
     class: open
     class_decided_by: seed
@@ -6470,37 +6669,16 @@ rows:
       optional: []
     emitters: ["src/personaos/protocols/mcp_lanes/capabilities.py:BridgeCapabilitiesMixin._mount_env_mcp_artifact"]
 
-  - id: personaos-action-descriptor-restatement-manifest/1
+  - id: personaos-action-batch-result/1
     class: open
     class_decided_by: seed
     status: current
     tiers: [in_process]
     owner: "an ADR decision until that section is written"
     members:
-      required: [ok, rows_pending, rows_written, rows_failed, rows_already_present]
+      required: [tool, ok, results]
       optional: []
-    emitters: ["src/personaos/llm/descriptor_compaction.py:restate_missing_descriptors"]
-
-  - id: personaos-action-descriptor-restatement-source/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members:
-      required: [name, description]
-      optional: []
-    emitters: ["src/personaos/llm/descriptor_compaction.py:descriptor_source_hash"]
-
-  - id: personaos-action-descriptor-restatement/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/llm/descriptor_compaction.py:restate_missing_descriptors",
-      "src/personaos/llm/descriptor_compaction.py:verified_restatement"]
+    emitters: ["src/personaos/protocols/node_mcp_stdio.py:_call_tool"]
 
   - id: personaos-action-effect-capability-scope/1
     class: open
@@ -8041,6 +8219,16 @@ rows:
       optional: []
     emitters: ["src/personaos/runtime.py:TaskRuntime._append_persona_communication_turn_observation"]
 
+  - id: personaos-curricula/1
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [operator]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: ["src/personaos/node.py:PersonaNode.curricula_list",
+      "src/personaos/protocols/mcp_lanes/learning.py:BridgeLearningMixin.inspect_curricula"]
+
   - id: personaos-deferred-wake-delivery/2
     class: open
     class_decided_by: seed
@@ -8082,8 +8270,8 @@ rows:
     tiers: [operator]
     owner: "an ADR decision until that section is written"
     members:
-      required: [node_id, cognition_documents, public_discovery, live_artifact_visibility_tier,
-        generated_at]
+      required: [node_id, cognition_documents, cognition_mode, cognition_persona_ids,
+        artifact_documents, public_discovery, live_artifact_visibility_tier, generated_at]
       optional: []
     emitters: ["src/personaos/node.py:_make_handler.Handler._event_stream"]
 
@@ -8379,7 +8567,7 @@ rows:
     class: exact
     class_decided_by: seed
     status: current
-    tiers: [in_process]
+    tiers: [public_anonymous]
     owner: "an ADR decision until that section is written"
     members: unreviewed
     emitters: ["src/personaos/environment_identity.py:EnvironmentIdentityLedger.projection",
@@ -8867,6 +9055,15 @@ rows:
     members: unreviewed
     emitters: []
 
+  - id: personaos-execution-attestation/6
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [lineage]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: []
+
   - id: personaos-execution-capability-exact-name-index/3
     class: open
     class_decided_by: seed
@@ -8947,6 +9144,18 @@ rows:
         semantic_interpretation_performed]
       optional: []
     emitters: ["src/personaos/node_lanes/persona_turns.py:NodePersonaTurnsMixin._handle_persona_wake_in_workspace"]
+
+  - id: personaos-execution-isolation/1
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members:
+      required: [landlock_abi, seccomp, network, paths, no_new_privileges, metadata_mutation,
+        cross_process_control, unrelated_descriptors_inherited]
+      optional: []
+    emitters: ["src/personaos/linux_isolation.py:enforce"]
 
   - id: personaos-execution-supervisor-evidence/1
     class: open
@@ -9543,6 +9752,28 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/protocols/discovery_export.py:_project_current_well_known_keys",
       "src/personaos/protocols/well_known.py:publish_keys"]
+
+  - id: personaos-knowledge-bundle/4
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members:
+      required: [created_at, source_kernel_id, source_persona_id, source_public_keys, soul,
+        soul_state, knowledge, fragments, bindings, education,
+        semantic_interpretation_performed, manifest]
+      optional: []
+    emitters: ["src/personaos/continuity.py:export_persona_bundle"]
+
+  - id: personaos-knowledge-bundle/5
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: ["src/personaos/continuity.py:export_persona_bundle"]
 
   - id: personaos-knowledge-continuity-carriage/1
     class: open
@@ -10854,16 +11085,6 @@ rows:
         automatic_selection]
       optional: []
     emitters: ["src/personaos/kernel_support.py:_bounded_learning_history.minimal_frontier_projection"]
-
-  - id: personaos-persona-authored-state-append-frontier/1
-    class: open
-    class_decided_by: seed
-    status: current
-    tiers: [in_process]
-    owner: "an ADR decision until that section is written"
-    members: unreviewed
-    emitters: ["src/personaos/runtime.py:_learning_navigation_reference",
-      "src/personaos/runtime.py:_persona_authored_state_append_frontier"]
 
   - id: personaos-persona-authored-state-manifest-navigation-reference/1
     class: open
@@ -15770,3 +15991,12 @@ rows:
     members: unreviewed
     emitters: ["src/personaos/crdt.py", "src/personaos/crdt.py:VersionChain.resolve_conflict",
       "src/personaos/crdt.py:VersionResolution.as_dict"]
+
+  - id: work-evidence/1
+    class: open
+    class_decided_by: seed
+    status: current
+    tiers: [in_process]
+    owner: "an ADR decision until that section is written"
+    members: unreviewed
+    emitters: []

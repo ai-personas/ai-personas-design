@@ -114,31 +114,24 @@ pool hash, budget and exact persona/environment IDs. The membership cites that
 event. Current local model availability may be declared in the environment;
 imported records supply no executable tools or funding. Subsequent collaborators
 retain independent invitation/consent. The CLI exposes the same operation with
-`--target-persona-id`, `--target-env-id` and `--admit-initial-member`.
+`--persona ID`, `--target-env-id` and `--admit-initial-member`.
 
-A deployment may seed a node with a neutral cohort of several blank personas
-instead of one. A task admitted to such a node with no exact environment,
-project, or persona address founds its fresh environment with that exact seeded
-deployment cohort as the environment's initial membership, and the ingress event
-fans out to every founding member under §2. The founding cohort is the node's
-deployment identity, selected by exact seeded-persona identity alone; it is not
-implicit reuse of any existing environment's membership — reuse still requires an
-exact principal-supplied target or authenticated causal resume/amendment
-authority — and founding selects no role, leader, coordinator, or division of the
-task. Founding remains role-free even when the principal supplies one founding
-SOUL beside the neutral cohort (ADR-0096): the substrate selects nothing from
-those bytes, fans the ingress event out to every founding member identically,
-and grants that member no leadership, coordination, priority, or division
-authority. A single-persona deployment founds the environment with exactly that
-one persona. An exact persona address instead forms a fresh environment whose sole
-founding member is that persona, and a targeted or resumed environment keeps its
-own exact signed membership rather than absorbing the seed cohort.
+A fresh public task requires an exact nonempty `target_persona_ids` array. The
+CLI supplies it from repeated `--persona ID` options. The complete selection is
+validated before queueing; missing, duplicated, unavailable or conflicting IDs
+are refused, with no substitution. It establishes the fresh environment's roster.
+An existing or resumed environment retains its actual signed membership and
+delivers the complete task to those members. Internal library callers may use
+the recorded neutral cohort when no selection is supplied; public intake does
+not silently make that choice. Founding selects no role, leader or division of
+work. `learn` uses this same intake and execution path with a course catalog.
 
 Current agency uses exact, content-bound navigation authority. On a native-tool
-adapter, every complete leased action descriptor is a first-class provider tool
-under its real action name; the prompt does not duplicate that catalogue behind
-an inspector/invoker carrier. On a structured-only adapter, the same complete
-unranked catalogue remains in the navigation lane. The lane also carries the
+adapter, the complete unranked action index accompanies batched `inspect_actions`
+and `invoke_actions`. Exact descriptions and schemas are loaded on demand;
+inspection is never required before invoking a known action. Structured-only
+adapters retain the same complete action index. Every selected action uses its
+original contract, authority, receipts and resource accounting. The lane also carries the
 mechanically observed execution inventory, verified current population/
 replication authority, and current workspace state. These components are
 selected only by closed schema identity and content hash, never by task words,
@@ -576,8 +569,10 @@ not merely that a timer was recorded or that completion is guaranteed.
 Explicitly unlimited authority is the signed run budget grant whose closed
 `budget_mode` member is exactly `"unlimited"`. It exists only when the
 authenticated principal's intake names no finite model-call allocation: a
-positive integer allocation creates a finite grant, an absent allocation
-member creates the unlimited grant, and any other value is refused. The grant
+nonnegative integer allocation creates a finite grant, an absent allocation
+member creates the unlimited grant, and any other value is refused. A zero
+grant explicitly records that no model call is funded; it is not missing
+authority and cannot fund a wake. The grant
 is recorded as a signed lineage fact before any spend; it is never inferred
 from schedule shape, task content, model identity, elapsed time, or exhaustion
 of another grant. An unlimited grant removes only the finite run ledger: the
