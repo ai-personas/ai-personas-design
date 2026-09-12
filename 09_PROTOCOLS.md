@@ -574,7 +574,10 @@ privileging any named program.
 
 The Linux task and managed-process boundary permits the authenticated worktree,
 declared verified dependencies and system runtimes. Host private state and
-cross-process control remain inaccessible. Assessment programs run separately,
+cross-process control remain inaccessible. A platform Python installed elsewhere
+exposes only its executable, libraries, headers and environment configuration,
+not the whole installation directory or neighboring private files. Persona
+import settings cannot expand these read permissions. Assessment programs run separately,
 without network access or learner access to assessor authority. Ordinary
 user-space installers can set permissions and timestamps inside their own
 writable directories. A private supervisor opens the exact target beneath a
