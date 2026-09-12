@@ -237,6 +237,19 @@ content hash and length, owner persona, public-identity role, source/action
 provenance, and visibility policy. Filename, extension, path, declared style,
 model prose, or byte sniffing cannot replace that authority.
 
+For a local raster, the persona chooses its exact worktree-relative
+`artifact_ref` and observed SHA-256 `content_ref`. Admission requires that
+exact persona-signed choice in the authenticated owner, environment, task and
+invocation context. It reads a regular file inside the bound workspace and
+refuses noncanonical paths, symlinks and changed bytes. The signed identity
+transition retains `persona-avatar-workspace-selection/1`: owner, environment,
+task, signed-action identity and hash, path, content reference, length and
+authority hash. This records selection, not image creation, tool acquisition,
+an external provider or a delivery receipt. Public identity publishes the
+verified raster descriptor and hashes of private prompt/provenance, not the
+local path or private text. Retained bytes and source authority survive source
+file removal, restart and owned identity handoff.
+
 For one delivered external-artifact candidate, the persona selects the exact
 `request_id`. The admission boundary resolves exactly one current verified
 owner/environment/task-bound receipt and mechanically binds its request hash,

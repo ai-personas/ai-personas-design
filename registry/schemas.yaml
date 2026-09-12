@@ -29,6 +29,29 @@ registry: schemas
 owner: registry
 rows:
 
+  - id: persona-avatar-workspace-selection/1
+    class: exact
+    class_decided_by: "02_PERSONA.md §3.2"
+    status: current
+    tiers: [lineage, in_process]
+    owner: "02_PERSONA.md §3.2"
+    members:
+      persona_id: {type: bounded_id, required: true}
+      environment_id: {type: bounded_id, required: true}
+      task_id: {type: bounded_id, required: true}
+      action_id: {type: bounded_id, required: true}
+      action_hash: {type: text, required: true, is: "sha256: followed by 64 lowercase hexadecimal characters"}
+      artifact_ref: {type: text, required: true, is: "Exact canonical relative path inside the authenticated workspace; no symlink or parent traversal"}
+      content_ref: {type: text, required: true, is: "sha256: followed by 64 lowercase hexadecimal characters of the captured raster bytes"}
+      byte_length: {type: integer, required: true, is: "Positive exact byte length within the portrait raster bound"}
+      authority_hash: {type: text, required: true, is: "SHA-256 content reference of the complete record excluding authority_hash"}
+    emitters: ["src/personaos/protocols/mcp_lanes/population.py:BridgePopulationMixin.admit_persona_avatar"]
+    notes: >-
+      Admission verifies the original signed action and current regular-file bytes before retaining
+      this exact projection in signed identity evolution. It records a persona-owned local selection,
+      not authorship, tool acquisition or an external delivery. The projection reader validates its
+      structure and descriptor bindings; the signed identity chain supplies portable authority.
+
   - id: personaos-execution-isolation/1
     class: open
     class_decided_by: "09_PROTOCOLS.md"
