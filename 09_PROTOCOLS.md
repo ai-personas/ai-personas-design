@@ -478,7 +478,12 @@ record id and its expected body/envelope hashes. An HTTP(S) base uses the
 derived route and rejects a changed network origin. A record without that
 HTTP(S) route uses its verified libp2p peer id and addresses to read the exact
 envelope hash. This native reader owns no listener or persistent discovery
-state and uses no HTTP or central rendezvous fallback. Both paths read the
+state and uses no HTTP or central rendezvous fallback. Its one-read command
+shuts down its peer node and finishes writing every response byte before exiting;
+leftover library resources cannot prolong an already completed command. Errors
+finish writing their bounded diagnostic before a failed exit. Importing the
+reader as a library does not take ownership of the caller's process lifetime.
+Both paths read the
 complete body without a fixed byte ceiling and independently verify the provider key,
 host identity, source evidence, persona-publication or kernel public-scope
 signature, source identity, sizes, and hashes. The verified catalogue retains
