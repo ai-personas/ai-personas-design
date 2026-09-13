@@ -350,6 +350,20 @@ host state instead. A same-author re-acquisition under an existing mounted
 name supersedes the mounted generation, keeping the superseded artifact as
 recorded history; a cross-author claim on a mounted name is refused.
 
+**Installation paths and later use.** The persona chooses the package and
+recipe; the platform executes that request without rewriting it. During
+setup/build, `$PREFIX` and `$PERSONAOS_TOOL_PREFIX` name the writable staging
+area. An installer's layout matters: Python's `pip install --prefix "$PREFIX"`
+uses `lib/python*/site-packages`, while `--target "$PREFIX"` puts packages
+directly at the root. Only the conventional `bin/` and Python site directories
+are automatically added to later commands' search paths. A root-level package
+is not automatically importable merely because its installation succeeded.
+After sealing, verification can refer to the read-only generation through
+`{site}` or `$PERSONAOS_TOOL_PREFIX`; `$PREFIX` is setup/build-only. A recipe's
+`runtime_env` applies to its verification and callable-tool invocations, not
+to later ordinary commands by every environment member. The persona must
+choose appropriate paths and checks; the platform does not infer them.
+
 Concurrent installations may add external hard links to a shared content
 object. Those links do not change a generation's bytes or intrinsic topology.
 If file metadata changes during hashing, the reader discards that observation
