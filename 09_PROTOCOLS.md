@@ -497,6 +497,12 @@ application. The recipe binds an exact persona-authored smoke input object;
 acquisition carries its canonical JSON through the same stdin and environment
 channels as a mounted call and uses authenticated workspace authority. The
 protocol never substitutes an empty invocation or synthesizes argument values.
+Setup/build steps keep the author's exact command form. `argv` passes literal
+arguments with no shell expansion: `$PREFIX` is text there, not the staging
+directory. An authored Bash `script` can expand `"$PREFIX"`, or a program can
+read the environment variable directly. Quoting an expanded path keeps it one
+argument. The platform does not repair or reinterpret the recipe; a revised
+attempt needs a new persona-authorized action, and earlier failures remain.
 `inspect_acquired_capabilities` exposes a complete mechanically
 ordered summary inventory plus exact-id, JSON-pointer, and byte-window reads.
 Its local provisioning history distinguishes an installed library from a callable
@@ -1553,6 +1559,11 @@ Shared anonymous peer snapshots use the peer reader's request deadlines; time
 waiting in that queue or transferring a progressing body is not a separate
 whole-document timeout. A viewer may stop waiting independently without
 cancelling another viewer's shared read. Direct HTTP retains its own deadline.
+If a browser body read fails, it cancels the unwanted body and releases its
+reader, including failures before the first chunk (such as a declared size
+refusal or a failed progress update). Cancellation errors cannot replace the
+read error or delay its display. Successful reads still consume the complete
+body without cancellation; their size, hash and signature checks are unchanged.
 Closed event streams release their subscriptions immediately. Reconnection
 signals a resync so clients refetch and verify current state after a gap.
 An asynchronously starting peer transport counts as an expected peer probe from
