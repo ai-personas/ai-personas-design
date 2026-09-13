@@ -118,6 +118,15 @@ lessons were actually included in a later working context. A context containing
 no lesson is shown as empty. This helps the learner distinguish missing evidence
 from work that was assessed and found wanting.
 
+The reply also compares each submitted file with the execution records the
+learner selected. It distinguishes matching bytes, different bytes at the same
+path, and a path absent from those captures. It shows who actually invoked a
+tool, which can differ from the system that recorded the event. Matching bytes
+alone do not prove ownership, correct ordering, successful use or learning.
+Opening an earlier request or result shows these comparisons again, using the
+original sealed files rather than today's workspace. The learner can review a
+failure without requesting another assessment.
+
 The platform describes the chosen records; it does not find better evidence,
 repair a submission or change the assessor's decision. The learner can read
 each full record and choose what to do next. Original files, events and grades
