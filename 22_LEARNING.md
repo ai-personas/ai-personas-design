@@ -95,6 +95,12 @@ run in a separate workspace: they cannot change the assessor, its cases, signing
 keys or awarded results. The result binds the learner, package version, rubric,
 assessor, submitted bytes and execution evidence.
 
+The assessment reply includes the complete signed feedback and a reference to
+the sealed request. It does not repeat the submitted files and execution records.
+The learner can choose that reference to read the full original request. Nothing
+is summarized or removed from the stored evidence, and the reference gives no
+other person access to it.
+
 Restarting the node must also preserve the ability to assess new work, not just
 display old grades. An installed local assessor restores the same signing key
 and checks it against its recorded public identity before running. If that key
