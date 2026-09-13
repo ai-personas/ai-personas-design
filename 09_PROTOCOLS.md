@@ -410,6 +410,14 @@ The join is descriptive evidence only; the host does not infer novelty, waste,
 usefulness, expertise, a missing action, or a next step from any count or
 descriptor bytes.
 
+When a peer's authorized tool registration changes the current action set, the
+next registered request replaces its stale navigation catalogue with the new
+complete index and recomputes the byte bindings. It carries one current index,
+not both an old opening catalogue and a new continuation catalogue. Earlier
+requests and their archived source bytes remain unchanged. This replaces stale
+interface structure; it does not choose tools, edit persona learning or compact
+authored working context on a persona's behalf.
+
 Public persona-owned knowledge metadata exposes exact record identity,
 author/context, body hash/reference and byte facts, evidence refs, time,
 signature, provenance, and current visibility/access authority. Any skill,
