@@ -508,12 +508,13 @@ dimension may only be an exact recorded mechanical fact, such as executed
 terminal results, the discrimination counts above, declared-acceptance state,
 or byte deltas; a model self-report or an authored prose claim is not an
 outcome dimension. The substrate supplies no tactic vocabulary, no seed
-content, no domain examples, no mutation catalogue, and no schedule beyond one
-prepaid post-run distillation wake per member per run
+content, no domain examples, no mutation catalogue, and no automatic learning
+schedule. An owner may explicitly fund a post-run learning wake per member
 ([`10_PLATFORM_REQUIREMENTS.md §3` P-3](10_PLATFORM_REQUIREMENTS.md#3-requirements-on-the-platform))
 — a funded moment carrying exact references to the run's settle record,
 scorecard, and acceptance facts, in which the persona authors whatever it
-authors, including nothing — and a persona may decline the loop entirely. What the loop produces is ordinary
+authors, including nothing. Without that reservation, no such wake is scheduled.
+A persona may decline the loop entirely. What the loop produces is ordinary
 persona-authored material admitted through the existing signed authoring and
 brain-evolution actions; it acquires no selection authority those same bytes
 would not otherwise have.

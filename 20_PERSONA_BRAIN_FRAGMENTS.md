@@ -232,10 +232,10 @@ reconstruction.
 
 There is no evidence threshold, rollback score, operational-change rubric, or
 automatic edit at feedback, failure, tool, artifact, pause, or budget
-boundaries. The prepaid post-run distillation wake
+boundaries. An explicitly owner-funded post-run learning wake
 ([`10_PLATFORM_REQUIREMENTS.md §3` P-3](10_PLATFORM_REQUIREMENTS.md#3-requirements-on-the-platform))
-schedules one funded moment at a run's settle point; it performs no edit and
-carries no suggestion. Historical signed revisions remain auditable under retention and
+schedules a funded moment at a run's settle point; an absent reservation schedules
+none. It performs no edit and carries no suggestion. Historical signed revisions remain auditable under retention and
 consent policy. Supersession never rewrites prior bytes.
 
 ### 3a. Explicit authored memory
