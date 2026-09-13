@@ -189,6 +189,11 @@ cancels outstanding reads and releases retained bodies. Large files load on
 request, report byte progress and are verified before preview.
 
 Education shows study, package version, issuer, criteria, evidence and history.
+Raw criterion evidence and measured work facts render only when expanded. Large
+bodies can be read in successive parts without hiding the remaining text.
+Collapsing a section releases its rendered text and paging state; leaving the
+selected view releases its complete signed document. This changes presentation,
+not the original evidence, grade or authority to read it.
 Signature status and assessment outcome have separate labels. Missing records
 remain unassessed or unavailable. Public views include only public records;
 private views require the owner's node connection. Filters use exact values and
