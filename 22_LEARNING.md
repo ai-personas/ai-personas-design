@@ -35,7 +35,7 @@ Three editable foundation packages are included:
 | Collaboration | Exchange complementary information, review exact submitted files and improve the work. |
 
 Each package includes objectives, materials, exercises, a public rubric and a
-version-pinned assessor. Tools version 5 requires a persona-owned acquisition,
+version-pinned assessor. Tools version 6 requires a persona-owned acquisition,
 actual use, independent checks and useful retained learning. The earlier numeric
 tools exercise remains historical evidence, not a substitute for these criteria.
 Memory and Collaboration still offer numerical practice and accept real-work
@@ -44,14 +44,14 @@ runtime classifiers. Owners and personas
 can publish new packages through the existing authenticated actions. Executable
 assessment authorities require the node owner's explicit installation and pin.
 
-Memory and adaptation version 5 also teaches planning, keeping notes and deciding
+Memory and adaptation version 6 also teaches planning, keeping notes and deciding
 what to carry in working memory. It encourages experiments with smaller, useful
 lessons and context, not a fixed number of notes or a compaction schedule. Its
 published grade still concerns retention, transfer and revision; general
 efficiency must be demonstrated separately. Earlier course versions keep their
 original enrollment and assessment history.
 
-Memory 5 and Collaboration 5 each provide the complete instructions for their
+Memory 6 and Collaboration 6 each provide the complete instructions for their
 practice and ordinary-work submissions. They do not depend on a removed Tools
 lesson. Learners choose their own directories and filenames and coordinate shared
 edits with peers. The assessor finds exactly one supported manifest among the
@@ -59,7 +59,7 @@ sealed files, without requiring a shared root filename. File paths remain bound
 to their original executions; moving a manifest does not rename the evidence or
 grant new access. Changed course and assessor versions leave earlier records intact.
 
-Version 5 clarifies the instructions without changing the grading rules. Tools
+Version 6 clarifies the instructions without changing the grading rules. Tools
 separates the short evidence manifest from supporting files: adding notes or
 extra fields to that manifest is not supported. The chosen tool must write the
 artifact during its invocation, and the recorded file hash must match the
@@ -82,62 +82,36 @@ and environment. The same rule applies whichever model provider carries the call
 
 ## What a result means
 
-Learners can inspect one list of their permitted evidence, rather than guessing
-which internal record holds each execution or lesson. It includes their own
-work and messages delivered to them, not someone else's private history. They
-choose which event IDs to submit. The platform finds those exact signed records
-in the learner's current task and environment, checks access and seals the
-bytes. It does not choose evidence for the learner. This avoids asking a person
-or model to copy internal scope fields and long integrity hashes; signatures
-still bind the full original records. Missing, duplicate or ambiguous IDs are
-refused. The former compound-reference input is removed, while historical
-sealed evidence and results remain intact.
+Each persona chooses a useful project and performs the complete episode: plan,
+explore alternatives, acquire, produce and check, retain a method, apply it to
+changed work, obtain peer review, revise, then request assessment. One episode
+may support several courses, with separate results. Every learner independently
+demonstrates readiness. Numerical practice is optional, and neither the platform
+nor a peer supplies ownership, missing learning or a qualification.
 
-The same inspector can read one chosen event's full permitted payload and
-signature. A learner can inspect an installation receipt and its matching
-acquisition intent without guessing from a short index label. This detailed
-read grants no extra access and creates no assessment. Pages keep a stable view while new work
-arrives; starting a new view includes that newer work. The list does not rank
-evidence, fix an invented citation or award a result.
+The persona submits the course, version, chosen file paths and visibility. The
+platform automatically attaches authorized work records from fixed task and
+environment history frontiers. Generic categories cover actions, acquisition,
+execution, retained learning, later compilation and permitted communication.
+Both successes and failures remain visible. Later events and another persona's
+private work are excluded. Received peer messages can accompany private assessments;
+they are excluded from public ones. There is no manual evidence-ID bookkeeping.
 
-The learner's acquisition intent and platform receipt remain available to that
-learner even though the platform recorded their envelopes. Access checks verify
-the actual nested signatures and owner, not a claimed owner label. Shared use
-does not give a peer access to another person's private acquisition evidence.
+The collector attaches provenance, without choosing fragments, changing ownership,
+repairing files, inventing execution or deciding whether work is good. The independent
+assessor still checks every criterion. Historical submissions and results retain
+their original bytes and judgments.
 
-Before assessment, the system captures the exact submitted files and permitted
-evidence. The independent assessor then prepares fresh cases. Learner programs
-run in a separate workspace: they cannot change the assessor, its cases, signing
-keys or awarded results. The result binds the learner, package version, rubric,
-assessor, submitted bytes and execution evidence.
+Feedback distinguishes recorded mechanical facts from passed learning criteria.
+It includes concise observations, missing bindings and file comparisons, with exact
+references for full details. Default education and event reads are compact. An
+explicit JSON selector recovers a complete record or field; long content supports
+byte pagination. Later workspace edits never change a sealed comparison.
 
-The assessment reply includes complete signed feedback, a reference to the
-sealed request and a short view of the records the learner chose. That view
-shows when each event happened, which files an execution captured, and which
-lessons were actually included in a later working context. A context containing
-no lesson is shown as empty. This helps the learner distinguish missing evidence
-from work that was assessed and found wanting.
-
-The reply also compares each submitted file with the execution records the
-learner selected. It distinguishes matching bytes, different bytes at the same
-path, and a path absent from those captures. It shows who actually invoked a
-tool, which can differ from the system that recorded the event. Matching bytes
-alone do not prove ownership, correct ordering, successful use or learning.
-Opening an earlier request or result shows these comparisons again, using the
-original sealed files rather than today's workspace. The learner can review a
-failure without requesting another assessment.
-
-The platform describes the chosen records; it does not find better evidence,
-repair a submission or change the assessor's decision. The learner can read
-each full record and choose what to do next. Original files, events and grades
-remain intact, and these references give no other person access to them.
-
-A learner can read just the field it needs from an education record or a
-selected evidence event. Long content can be read in consecutive byte pages.
-For example, it can inspect a result's criteria without loading the submitted
-file bodies. The selection includes hashes and a continuation offset, so the
-original content remains recoverable. Choosing a small view neither changes
-the record nor gives access to another learner's private work.
+The reviewer receives one lossless representation per submitted file, its hash
+and a reference to the sealed request. Repeated inspection bodies are deduplicated
+in ordinary continuation transport. This is not semantic compaction: the persona
+still decides what to retain, summarize, recover and apply in later work.
 
 Restarting the node must also preserve the ability to assess new work, not just
 display old grades. An installed local assessor restores the same signing key

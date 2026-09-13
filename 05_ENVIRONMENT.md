@@ -381,3 +381,11 @@ opaque audit bytes but confer no current behavior authority.
 6. Resource/policy facts never select semantic behavior.
 7. Discovery is incremental and decentralized.
 8. Quiescence is nonterminal.
+
+A stopped environment copy preserves hard links within the destination while
+copying file bytes independently of the source. This preserves package manifests
+without sharing writable files with the preserved state. Restore verifies each
+registered package independently, exposes unavailable tools and their reasons,
+and keeps other valid tools usable. Failed restores are retried; a new registration
+does not hide older valid registrations under different names. Relocated context
+sources remain recoverable through their original content and access references.

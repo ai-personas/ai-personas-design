@@ -1320,19 +1320,20 @@ Curriculum, education and evidence-index reads use the same read-version path.
 The education read starts with an index of the learner's enrollments and
 assessment attempts. Current criterion statuses remain visible, with exact IDs
 for the latest result and every historical record. Evidence bodies and execution
-transcripts load only when the learner asks for a `record_id`; they are not
+transcripts load only when the learner asks for an explicit JSON selector on a `record_id`; they are not
 copied into every status check. The learner can inspect the original signed
 request, result, enrollment or correction. A past ID still returns the past
 record after a correction, never a replacement grade. These reads cannot expose
 another learner's records, select submission evidence or change a qualification.
 Stored history and the authorized browser education document remain complete.
-The assessment index exposes compact event IDs; a learner-selected ID can also
-request that event's exact permitted body and signature. Assessment requests
-name only the learner's selected IDs, never copied scope fields or payload
-hashes. Resolution stays within the authenticated current task/environment,
-verifies access and seals the complete signed records. It rejects missing,
-duplicate or ambiguous IDs and does not select evidence. See 22 for the learning
-contract; no ownership or grading rule is replaced by the compact index.
+The assessment index exposes compact event observations. Explicit JSON selectors
+recover each permitted signed body. Assessment requests name curriculum, version,
+submission paths and visibility. The platform attaches authorized generic work
+events at fixed task and environment frontiers, including failures and contradictions.
+It excludes later events, peer-private work and received peer messages from public
+submissions. No manual evidence-ID selection is required. It does not alter files,
+choose fragments, transfer ownership or grade the work. Historical seals remain
+unchanged. See 22 for the complete learning contract.
 
 This lossless encoding is not a summary or a relevance decision. It also
 precedes the existing compaction callback. Full originals remain archived;
