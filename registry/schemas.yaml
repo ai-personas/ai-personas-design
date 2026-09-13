@@ -1481,8 +1481,12 @@ rows:
       optional: []
     emitters: ["src/personaos/protocols/mcp_lanes/capabilities.py:BridgeCapabilitiesMixin.inspect_acquired_capabilities"]
     notes: >-
-      Separates the owner's retained peer bodies from executable generations
-      mounted in the current environment. retention_scope is persona; reading
+      Separates the owner's retained peer bodies from local provisioning history.
+      Local rows distinguish execution_mode (library_only or callable_tool),
+      currently_registered (latest exact signed registration), and callable_action
+      (an exact matching current bridge action or null). Unknown descriptor or
+      incomplete registration evidence is null, not false. Historical acquisitions
+      are not necessarily current actions. retention_scope is persona; reading
       across environments neither transfers source membership nor installs tools.
 
   - id: personaos-global-discovery-client/1
