@@ -389,3 +389,5 @@ registered package independently, exposes unavailable tools and their reasons,
 and keeps other valid tools usable. Failed restores are retried; a new registration
 does not hide older valid registrations under different names. Relocated context
 sources remain recoverable through their original content and access references.
+
+Independent assessment with no prescribed reviewer model uses the same authenticated persona-choice routing as ordinary work, learning and compaction. The admitted catalogue and spending limits still apply; bootstrap model labels do not rank or restrict subsequent persona choices. Independent system instructions and rubric authority stay separate from learner content.
