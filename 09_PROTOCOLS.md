@@ -1284,6 +1284,15 @@ list, late arrivals and shorter lists are complete field replacements, never
 guessed append-only history. The complete representation must be smaller than
 the full body or the full body stays. Every action and its chronology remain.
 Curriculum, education and evidence-index reads use the same read-version path.
+The education read starts with an index of the learner's enrollments and
+assessment attempts. Current criterion statuses remain visible, with exact IDs
+for the latest result and every historical record. Evidence bodies and execution
+transcripts load only when the learner asks for a `record_id`; they are not
+copied into every status check. The learner can inspect the original signed
+request, result, enrollment or correction. A past ID still returns the past
+record after a correction, never a replacement grade. These reads cannot expose
+another learner's records, select submission evidence or change a qualification.
+Stored history and the authorized browser education document remain complete.
 The assessment index exposes compact event IDs; a learner-selected ID can also
 request that event's exact permitted body and signature. Assessment requests
 name only the learner's selected IDs, never copied scope fields or payload
