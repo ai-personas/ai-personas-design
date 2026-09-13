@@ -190,6 +190,19 @@ rows:
   - id: personaos-assessment-evidence-index/1
     class: open
     class_decided_by: "22_LEARNING.md"
+    status: retired
+    tiers: [operator, prompt]
+    owner: "22_LEARNING.md"
+    members:
+      required: [rows, snapshot, total, next_offset]
+      optional: []
+    emitters: []
+    notes: >-
+      Historical compound-reference index. Superseded by version 2's compact selected IDs and exact on-demand detail. Earlier captured reads remain historical evidence; this is not a compatibility input path.
+
+  - id: personaos-assessment-evidence-index/2
+    class: open
+    class_decided_by: "22_LEARNING.md"
     status: current
     tiers: [operator, prompt]
     owner: "22_LEARNING.md"
@@ -198,7 +211,20 @@ rows:
       optional: []
     emitters: []
     notes: >-
-      Combined references into the current task and environment's verified lineage accessible to the learner. Snapshot pins both physical append frontiers, including empty logs. Signed-time order and an optional literal event-kind filter do not rank relevance. Rows retain the exact original scope, identifier and signing-payload hash.
+      Compact event IDs from the current task and environment's verified lineage accessible to the learner. Snapshot pins both physical append frontiers, including empty logs. Signed-time order and an optional literal event-kind filter do not rank relevance. Rows retain event_id, scope, event_kind, actor_id, timestamp and optional action_name, without repeated scope IDs or payload hashes. The learner selects IDs; the node seals the exact verified records, never choosing evidence or assigning meaning.
+
+  - id: personaos-assessment-evidence-detail/1
+    class: exact
+    class_decided_by: "22_LEARNING.md"
+    status: current
+    tiers: [operator, prompt]
+    owner: "22_LEARNING.md"
+    members:
+      required: [event, signature, public_key]
+      optional: []
+    emitters: []
+    notes: >-
+      One learner-selected event ID resolved unambiguously within the authenticated current task/environment. The complete signing payload, original signature and public key use the same verified-lineage and ownership checks as sealed assessment evidence. No peer-private acquisition, out-of-context lookup, automatic selection, grade or additional authority.
 
   - id: personaos-assessment-execution/1
     class: open

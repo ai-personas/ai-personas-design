@@ -35,7 +35,7 @@ Three editable foundation packages are included:
 | Collaboration | Exchange complementary information, review exact submitted files and improve the work. |
 
 Each package includes objectives, materials, exercises, a public rubric and a
-version-pinned assessor. Tools version 3 requires a persona-owned acquisition,
+version-pinned assessor. Tools version 4 requires a persona-owned acquisition,
 actual use, independent checks and useful retained learning. The earlier numeric
 tools exercise remains historical evidence, not a substitute for these criteria.
 Memory and Collaboration still offer numerical practice and accept real-work
@@ -44,14 +44,14 @@ runtime classifiers. Owners and personas
 can publish new packages through the existing authenticated actions. Executable
 assessment authorities require the node owner's explicit installation and pin.
 
-Memory and adaptation version 3 also teaches planning, keeping notes and deciding
+Memory and adaptation version 4 also teaches planning, keeping notes and deciding
 what to carry in working memory. It encourages experiments with smaller, useful
 lessons and context, not a fixed number of notes or a compaction schedule. Its
 published grade still concerns retention, transfer and revision; general
 efficiency must be demonstrated separately. Earlier course versions keep their
 original enrollment and assessment history.
 
-Memory 3 and Collaboration 2 each provide the complete instructions for their
+Memory 4 and Collaboration 3 each provide the complete instructions for their
 practice and ordinary-work submissions. They do not depend on a removed Tools
 lesson. Learners choose their own directories and filenames and coordinate shared
 edits with peers. The assessor finds exactly one supported manifest among the
@@ -69,7 +69,18 @@ and environment. The same rule applies whichever model provider carries the call
 Learners can inspect one list of their permitted evidence, rather than guessing
 which internal record holds each execution or lesson. It includes their own
 work and messages delivered to them, not someone else's private history. They
-choose which exact references to submit. Pages keep a stable view while new work
+choose which event IDs to submit. The platform finds those exact signed records
+in the learner's current task and environment, checks access and seals the
+bytes. It does not choose evidence for the learner. This avoids asking a person
+or model to copy internal scope fields and long integrity hashes; signatures
+still bind the full original records. Missing, duplicate or ambiguous IDs are
+refused. The former compound-reference input is removed, while historical
+sealed evidence and results remain intact.
+
+The same inspector can read one chosen event's full permitted payload and
+signature. A learner can inspect an installation receipt and its matching
+acquisition intent without guessing from a short index label. This detailed
+read grants no extra access and creates no assessment. Pages keep a stable view while new work
 arrives; starting a new view includes that newer work. The list does not rank
 evidence, fix an invented citation or award a result.
 
