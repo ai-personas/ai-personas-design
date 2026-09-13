@@ -239,6 +239,32 @@ rows:
     notes: >-
       Evidence inside the independently signed result. Assessor and learner probes are isolated. Any model reviews use the same allowed models and funded task lifetime, with charged calls recorded.
 
+  - id: personaos-education-index/1
+    class: open
+    class_decided_by: "09_PROTOCOLS.md"
+    status: current
+    tiers: [in_process, prompt]
+    owner: "09_PROTOCOLS.md"
+    members:
+      required: [ok, persona_id, enrollments, assessments]
+      optional: []
+    emitters: ["src/personaos/protocols/mcp_lanes/learning.py:BridgeLearningMixin.inspect_education"]
+    notes: >-
+      Authenticated learner-only education read. It keeps every attempt, current criterion statuses, latest_result_id and all history_ids, without full result evidence or assessor transcripts. Enrollments retain their exact signed records. This index neither chooses relevant evidence nor awards readiness. The learner selects a record ID for an exact detail read; the complete browser projection and stored history are unchanged.
+
+  - id: personaos-education-record/1
+    class: exact
+    class_decided_by: "09_PROTOCOLS.md"
+    status: current
+    tiers: [in_process, prompt]
+    owner: "09_PROTOCOLS.md"
+    members:
+      required: [ok, persona_id, record]
+      optional: []
+    emitters: ["src/personaos/protocols/mcp_lanes/learning.py:BridgeLearningMixin.inspect_education"]
+    notes: >-
+      One learner-selected original signed enrollment, assessment request, result, correction or unavailability record. The record keeps its exact bytes and signature; the enclosing read response is not a new signed grade. An older result ID never resolves to its correction, and knowing another learner's ID grants no access. No persona-authored mutation, evidence repair or acquisition ownership is created by this read.
+
   - id: personaos-persona-education/1
     class: rendered
     class_decided_by: "22_LEARNING.md"
