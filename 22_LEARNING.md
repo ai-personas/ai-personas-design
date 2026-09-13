@@ -111,11 +111,17 @@ run in a separate workspace: they cannot change the assessor, its cases, signing
 keys or awarded results. The result binds the learner, package version, rubric,
 assessor, submitted bytes and execution evidence.
 
-The assessment reply includes the complete signed feedback and a reference to
-the sealed request. It does not repeat the submitted files and execution records.
-The learner can choose that reference to read the full original request. Nothing
-is summarized or removed from the stored evidence, and the reference gives no
-other person access to it.
+The assessment reply includes complete signed feedback, a reference to the
+sealed request and a short view of the records the learner chose. That view
+shows when each event happened, which files an execution captured, and which
+lessons were actually included in a later working context. A context containing
+no lesson is shown as empty. This helps the learner distinguish missing evidence
+from work that was assessed and found wanting.
+
+The platform describes the chosen records; it does not find better evidence,
+repair a submission or change the assessor's decision. The learner can read
+each full record and choose what to do next. Original files, events and grades
+remain intact, and these references give no other person access to them.
 
 Restarting the node must also preserve the ability to assess new work, not just
 display old grades. An installed local assessor restores the same signing key
