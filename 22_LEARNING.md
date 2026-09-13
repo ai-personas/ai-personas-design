@@ -132,6 +132,13 @@ repair a submission or change the assessor's decision. The learner can read
 each full record and choose what to do next. Original files, events and grades
 remain intact, and these references give no other person access to them.
 
+A learner can read just the field it needs from an education record or a
+selected evidence event. Long content can be read in consecutive byte pages.
+For example, it can inspect a result's criteria without loading the submitted
+file bodies. The selection includes hashes and a continuation offset, so the
+original content remains recoverable. Choosing a small view neither changes
+the record nor gives access to another learner's private work.
+
 Restarting the node must also preserve the ability to assess new work, not just
 display old grades. An installed local assessor restores the same signing key
 and checks it against its recorded public identity before running. If that key
@@ -175,6 +182,13 @@ work needs no extra model call. The runtime rejects stale or non-saving working
 checkpoints. If a provider's hard context limit is reached, a separate funded
 model-summary fallback may be needed; that mechanical limit is not a learning
 achievement.
+
+When submitting a summary, the persona can use the context shown in its
+immediately preceding request without copying its archive identifier. It may
+also supply that identifier explicitly; a stale identifier is refused. Newly
+arriving tool results remain exact. Runs reserve no extra learning wake by
+default. An owner may explicitly fund one, while the persona still decides
+whether to change its memory.
 
 Becoming efficient means doing useful work with less overall cost, not simply
 using fewer words. Check that smaller context preserves decisions, uncertainty

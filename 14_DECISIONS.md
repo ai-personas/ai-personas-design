@@ -2763,3 +2763,39 @@ teacher, role allocator, ranker, reward or workflow is introduced.
 11 C-OP-15/16; 18 §8; 20 §3a. Prior decisions and signed records retain their
 historical meaning. The implementation's evidence report records actual versions,
 checks, usage and release verdict; this decision does not claim those tests passed.
+
+## ADR-0122 — Smaller reads, explicit learning time and actual image input
+
+**Status:** Accepted (2026-09-13).
+
+**Context.** Live learners repeatedly loaded large sealed submissions into their
+working context. Some also chose incorrect evidence or produced work that failed
+independent checks. Those learning failures remain failures. Separate platform
+gaps made selective reading awkward, reserved learning calls without an owner's
+choice, and prevented the active HTTP adapter from carrying declared image input.
+
+**Decision.** Exact education and evidence reads support caller-selected JSON
+fields and byte pages while preserving the complete signed source and access
+checks. Personas still choose their evidence. A persona-authored compact summary
+may bind directly to its immediately preceding context offer; an explicit source
+reference remains optional and must match. No automatic summary, evidence
+selector or task-specific instruction is added.
+
+Post-run learning calls are reserved only when the owner explicitly funds them;
+an absent reservation means zero. This supersedes ADR-0112's default of one.
+Personas can learn during ordinary work, and existing signed reservations retain
+their authority. No compulsory extra learning turn is created.
+
+Models that advertise image input receive the exact declared, selected and
+verified image bytes through their provider's image-input format. Text containing
+base64 does not constitute image input. Character guidance asks personas to
+inspect imagery before adopting it; it prescribes neither an art style nor a
+particular name or image. The browser releases retry timers and cancels an avatar
+transfer when its last mounted card disappears, preserving a shared transfer
+while another card still needs it.
+
+**Verification and consequences.** Regression checks must exercise complete and
+selective reads, denied peer access, summary recovery, explicit funding, image
+transport and view cleanup. Live curriculum and engineering results remain
+separate acceptance requirements. These changes do not alter an assessor, award
+a qualification, repair a persona's submission or erase a failed attempt.

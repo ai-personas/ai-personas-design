@@ -36,7 +36,7 @@ record* is the principal's acceptance condition (§6).
 
 The shipped default is this exact text:
 
-> You are a persistent AI persona. Develop your own name, presentation, and character, including OCEAN traits and VAD affect on scales whose meaning you choose. Pursue the principal’s intent through useful, checkable work. Let observed results inform what you remember, revise, discard, and apply. Choose and develop instruments and working arrangements; exchange evidence with others, and invite or propose new personas when you judge that useful. State consequential assumptions and unresolved limits. Continue within available authority without requiring a human answer. Choose when to act, communicate, wait, or finish.
+> You are a persistent AI persona. Develop your own name, presentation, and character, including OCEAN traits and VAD affect on scales whose meaning you choose. Express that character in your name, imagery and working choices; inspect the actual imagery before adopting it. Carry your character between tasks and explain changes prompted by experience. Pursue the principal’s intent through useful, checkable work. Let observed results inform what you remember, revise, discard, and apply. Choose and develop instruments and working arrangements; exchange evidence with others, and invite or propose new personas when you judge that useful. State consequential assumptions and unresolved limits. Continue within available authority without requiring a human answer. Choose when to act, communicate, wait, or finish.
 
 The deployment MAY sign a revised charter. The substrate MUST carry the
 signed text exactly; it MUST NOT interpret the text into roles, workflows,
@@ -50,8 +50,9 @@ tool assignments, trait values, quotas, rankings or additional admission gates.
   self-state, selected brain fragments and complete authorized action catalogue
   once per request. Bulky historical observations remain retrievable through
   authenticated references. Inventories cannot displace required context.
-- **P-3:** Reserve the existing single post-run learning opportunity at intake
-  and deliver it at settlement with the ordinary action catalogue (§4.4).
+- **P-3:** Reserve a post-run learning opportunity only when the principal
+  explicitly requests funding, and deliver it at settlement with the ordinary
+  action catalogue (§4.4). An absent reservation means zero additional calls.
   The persona may write, revise, bind, unbind or leave memory unchanged.
 - **P-4:** Record one factual scorecard at settlement. No admission, delivery,
   budget, routing, task closure or other substrate decision reads its counters.
@@ -117,6 +118,9 @@ One-line purpose: the exact-reference-only payload of the third
 protocol-defined stimulus class ([`03_TASKS.md §7`](03_TASKS.md#7-causal-continuation)).
 It carries no instruction, diagnosis, suggestion, or prose; delivery gives the
 persona one ordinary wake with its complete action catalogue.
+No such wake is reserved by default. Ordinary learning, fragment selection and
+context compaction remain persona choices during work. An explicit principal
+reservation funds this extra opportunity without requiring a memory change.
 
 The model's current stimulus retains this exact reference-only value in
 `payload.protocol_references`. Projection verifies the signed wake, its local

@@ -5,12 +5,15 @@ status: Stable
 
 # 00 — Vision
 
-PersonaOS supports persistent cryptographic actors that can navigate open work,
-remember, communicate, acquire capabilities, create artifacts, collaborate,
-reproduce within explicit bounds, and evolve through their own signed choices.
+AI Personas helps continuing AI identities learn and do useful work together.
+A persona carries its character and experience from one task to another. It
+can choose tools, keep lessons, consult peers, create outputs and revise its
+methods when evidence shows a better way.
 
-The substrate provides authority and mechanics. Personas provide meaning and
-behavior.
+You provide the task, participants and resources, and decide what counts as
+acceptable work. The platform preserves records and enforces those boundaries.
+The personas choose how to work. The detailed rules below explain how this
+division is implemented.
 
 ## 1. Goals
 
@@ -38,16 +41,16 @@ PersonaOS does not guarantee that a model will make a good choice, that a team
 will form, that a particular tool will be used, or that an artifact will meet a
 professional standard. It preserves the conditions for those outcomes to
 emerge and the evidence needed to judge them honestly. It does state, as
-deployment authority, what it requires of every member
-([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md)) and it scores
-every run against those requirements; a run that meets none of them is a
-measured shortfall, not a neutral outcome.
+deployment authority, its purpose charter to every member
+([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md)). Run records
+show observed actions and outcomes. They do not score checklist compliance
+or establish competence from counts.
 
 The kernel is not a task classifier, planner, coordinator, profession registry,
 prompt optimizer, relevance ranker, psychology engine, team allocator,
-completion judge, or automatic improvement loop. It schedules one prepaid
-distillation moment per member per run and carries whatever the persona
-writes there; it optimizes nothing.
+completion judge, or automatic improvement loop. Learning during work belongs
+to the persona. An owner may explicitly fund an additional learning wake after
+a run; the default reserves none.
 
 ## 3. Invariants
 
@@ -118,7 +121,7 @@ exact successor wake or deliberately none. The substrate never derives that
 choice from the open note. Three stimulus classes are protocol-defined
 deliveries, each descriptor-declared, prepaid at arm time, and one-shot: the
 sealed-turn-failure replay, the tool-mount correlation, and the post-run
-distillation wake ([`03_TASKS.md §7`](03_TASKS.md#7-causal-continuation)).
+distillation wake when explicitly funded ([`03_TASKS.md §7`](03_TASKS.md#7-causal-continuation)).
 A heartbeat, sweep, or housekeeping pass is not a causal delivery and resumes
 nothing.
 

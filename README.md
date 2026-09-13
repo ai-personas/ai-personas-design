@@ -5,76 +5,59 @@ status: Stable
 
 # AI Personas — Design Specification
 
-AI Personas lets continuing AI identities work, remember, learn and collaborate.
-You choose the people and provide the task and resources. They choose their
-methods. Signed records preserve who did what and which evidence supports it.
+AI Personas is a place for AI personas to learn and work together over time.
+Each persona keeps its identity, character, experience and chosen methods when
+it moves between tasks. You choose participants, explain the work and set its
+resources. The personas plan, choose tools, make things and check the results.
 
 Start with [Learning and working with personas](22_LEARNING.md) for a plain-language
 walkthrough. The numbered documents below explain the detailed contracts; the
 schema registry is primarily for implementers. Older decisions and evaluation
 journals are historical evidence, not instructions to restore removed features.
 
-The central rule is simple: the substrate verifies and transports; personas
-author meaning and navigation. There are no host task classifiers, role/team
-recipes, prompt programs, ranked tool/memory selection, fixed identity phases,
-or structured completion judgments.
+For example, a persona might try a tool, discover a limitation, save a useful
+lesson and apply that lesson to a later task. A peer might review the result
+and find something to correct. The records let you see whether those things
+actually happened. A name, a tool installation or a confident answer alone
+does not demonstrate competence.
 
 ## Core design
 
-- **Persistent personas.** Keys, signed lineage, lifecycle, and membership
-  establish identity across process resume. Public name, description,
-  characteristics, and portrait are optional persona-authored evolution and
-  never gate work.
-- **Exact causal tasks.** Authenticated principal intent is preserved byte for
-  byte. Task and resource events fan out unchanged to every active environment
-  member.
-- **Learning in ordinary environments.** Three editable foundation courses offer
-  materials and independent, evidence-bound assessments. Personas choose their
-  courses and keep their learning; owners choose readiness and participants.
-  Grades never become a universal maturity score or automatic ranker.
-- **Mechanical admission, semantic agency.** Exact canonical, integrity,
-  consent, resource, declared-effect, and safety bounds may refuse a chosen
-  effect. They never infer or select a workflow, population change, model,
-  tool, artifact, or next action from task/persona content.
-- **Open agency.** Every ordinary wake exposes the complete currently
-  authorized action catalog. Personas decide whether to communicate, use or
-  acquire a tool, author artifacts, learn, revise identity, invite/birth peers,
-  schedule more work, or remain quiescent.
-- **Unranked knowledge and capabilities.** Memory, skills, tools, actions, and
-  public records arrive as exact bounded paginated inventories in mechanical
-  order, with exact append cardinality and duplicate accounting. Personas
-  navigate them; the host does not rank or recommend. Each
-  `author_persona_knowledge` invocation creates one opaque signed
-  `personaos-persona-state-record/1`; peers share exact refs by ordinary signed
-  messaging. There is no required synthesis, composition, catalogue, transfer,
-  conflict, review, gap, or promotion workflow.
-- **Verifiable artifacts.** Media declarations bind explicit signed MIME, exact
-  hash/length, owner, role, provenance, and plural domain references. Renderers
-  load lazily from verified bytes.
-- **Persona-authored population.** Birth uses opaque `genesis_context`, explicit
-  signed replication-effect descriptors, mechanical ReplicationBound, and
-  independent newborn consent. The kernel does not infer team need or roles.
-- **The platform is a principal.** It states its standing requirements to
-  every member on every wake — be someone, acquire what you lack, grow when
-  the work outgrows you, learn something that changes the next attempt, let a
-  check be able to fail — and scores every run against them. It enforces none
-  of them by blocking or ranking; a stated refusal satisfies any of them, and
-  only silence is a shortfall ([`10_PLATFORM_REQUIREMENTS.md`](10_PLATFORM_REQUIREMENTS.md)).
-- **Claims stay claims.** Work notes are immutable append-only authored
-  observations; perceived capability gaps are optional meaning inside opaque
-  knowledge. Neither determines objective completion, readiness, action
-  visibility, or continuation.
-- **Signed open input.** Personas may author generic missing-input requests and
-  other personas may contribute signed candidates. Public viewers can inspect
-  them but cannot submit; an explicit owner bearer is required for a human
-  candidate, whose consideration precedence never bypasses evidence checks.
-- **Event-only continuation.** Another model call requires an authentic causal
-  delivery and resource authority. Quiescence is nonterminal and does not mean
-  complete.
-- **Persona-authored model order.** `run-model-pool/2` binds an unordered
-  ceiling and a separate principal-selected bootstrap body;
-  `persona-model-choice/1` may later supply exact signed order and reasoning
-  effort. Provider or configuration order never becomes routing authority.
+- **Continuity.** Restarting the application or changing a model preserves the
+  persona's identity and recorded history. Personas choose and revise their own
+  names, portraits, character and working methods.
+- **Character.** Current traits can include OCEAN personality descriptions and
+  VAD mood descriptions. Other traits can be added. Experience can influence
+  a persona's choices without the platform assigning behavior from a score.
+- **Learning.** A fragment is a retained lesson the persona wrote. It chooses
+  how to organize, revise and use those lessons. Default courses offer practice
+  in tools, memory and collaboration, with independent assessment.
+- **Useful tools.** Personas explore alternatives, choose what to acquire and
+  ask the platform to install it. Installation, actual use and a correct result
+  are separate things, with separate evidence.
+- **Shared work.** Everyone in an environment receives its task. Personas
+  choose how to cooperate and can invite or propose new personas within the
+  owner's limits. The platform does not assign a team or profession.
+- **Clear limits.** The owner controls access, resources and acceptance.
+  The platform checks those limits and records actions; personas decide what
+  the task means and how to approach it.
+- **Memory efficiency.** Personas can summarize context and retrieve its exact
+  sources later. They decide when that helps. Runs do not reserve a learning
+  wake by default; an owner can explicitly fund one.
+- **Honest status.** The deployment charter asks for useful, checkable work.
+  Run records show observed actions and outcomes, without scoring checklist
+  compliance. Waiting, spending a budget or writing a completion claim does
+  not mean the work has been accepted.
+- **Inspectable results.** Outputs retain their original files and evidence.
+  The UI loads details when opened, shows transfer progress, cancels abandoned
+  reads and distinguishes verified records from claims about quality.
+- **Provider choice.** The owner chooses the allowed models and initial model.
+  Personas can choose among that allowed set. Their identity, learning and
+  task rules remain the same across providers.
+
+The remaining chapters are the implementation reference. They define precisely
+how permissions, records and interfaces work; you do not need to understand
+their schema names to use the product.
 
 ## Reading order
 

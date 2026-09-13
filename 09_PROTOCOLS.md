@@ -258,9 +258,11 @@ terminal response; it neither blames malformed authorship nor authorizes replay.
 Working context retains observed tool results, peer messages and ordinary authored
 response text across stateless provider requests. Duplicate reads reference a body
 only when it is still present in that same request. The persona may use
-`compact_context(source_ref, summary_text, target_bytes, rationale)` alongside
+`compact_context(summary_text, target_bytes, rationale)` alongside
 ordinary actions to checkpoint previously presented working context without a
-separate model call. The source must match the exact recipient-owned offer. The
+separate model call. The node binds the summary to the immediately preceding
+recipient-owned offer. An optional explicit `source_ref` must match that same
+offer; it cannot select a stale or different source. The
 checkpoint remains explicitly lossy, with a verified read of its complete source;
 new results in that batch remain exact. Adoption requires measured byte savings
 including summary output, its action receipt and feedback. This is a conservative
@@ -272,6 +274,14 @@ Provider-reported input, output and cached-input token counts remain separate;
 missing cache usage is unknown, never zero. Whole-workflow accounting includes
 compaction, retrieval and retries. Dynamic clock fields follow stable context to
 allow provider prefix caching without assuming that a cache hit occurred.
+
+When a model explicitly advertises image input, a persona may select exact
+declared workspace images for a later wake. The model adapter carries their
+verified bytes as native image input. Ordinary JSON text or base64 file reads
+do not count as visual inspection. Image input and image generation are separate
+capabilities; neither permits an unapproved provider or model. Text-density
+estimates exclude image-bearing requests, whose actual token usage remains
+recorded.
 
 Process recovery has a transport-readiness boundary. Durable wakes, schedules,
 birth deliveries, invitations, external requests, and startup budget recovery

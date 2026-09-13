@@ -48,7 +48,7 @@ with a supplied descriptor, absent means false), `deadline_epoch_seconds`
 supplied together), `require_authenticated_effect_provenance` (exact
 boolean, absent means false), and `post_run_distillation_reservation_per_member`
 (exact non-negative integer of model calls reserved per active member for the
-§7 post-run distillation wake; absent means one). Intake records this as one declaration with
+§7 post-run distillation wake; absent means zero). Intake records this as one declaration with
 an explicit per-member supplied/omitted marker and a content hash for each
 supplied member; the declaration travels unchanged inside the task-resource
 fan-out authority. Recording it validates shape and bounds only — it schedules
@@ -478,8 +478,8 @@ the same environment and task. The **post-run distillation wake**
 delivers, to each member active at the run's settle point (§10), the exact
 references to the settle record, the run scorecard, and the acceptance facts.
 Its funding is reserved at intake from the exact signed run grant — the
-principal's `post_run_distillation_reservation_per_member` (§1), one call per
-member absent a declaration, zero permitted — and stated on the ledger. The
+principal's `post_run_distillation_reservation_per_member` (§1), zero calls
+absent an explicit declaration — and stated on the ledger. The
 signed `personaos-post-run-distillation-reservation/2` record is itself the
 debit from that exact grant. A failed append cannot leave a separate charge;
 an uncertain committed append is recovered by its stable reservation identity.

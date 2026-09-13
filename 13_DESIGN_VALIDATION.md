@@ -1893,8 +1893,9 @@ descriptor.
    No per-rule refusal, unnamed-member penalty or memory-write quota remains.
    An unauthored name or portrait receives an honest absence/pending/unavailable
    placeholder. A budget-exhausted parked run is settled and scored though paused.
-6. **Funded moment.** At the settle point each member active there receives
-   at most one prepaid post-run distillation wake carrying exact references to
+6. **Funded moment.** With an explicit owner-funded reservation, at the settle
+   point each member active there receives at most one prepaid post-run learning
+   wake carrying exact references to
    the settle record, the scorecard, and the acceptance facts; the ledger
    shows the reservation made at intake under
    `post_run_distillation_reservation_per_member`; a member admitted after
@@ -1906,6 +1907,8 @@ descriptor.
    command has joined the generation on its path and MUST NOT satisfy the
    descriptor; one whose evidence includes an environment-tool invocation
    dispatched to the named surface MUST.
+   Without an explicit reservation, all admitted calls remain available for
+   ordinary work and settlement schedules no extra learning call.
    Follow the real reservation, fire, supervisor and model-handler path to
    the serialized provider request. Its current stimulus MUST retain the
    exact `payload.protocol_references` from 10 §4.4 and the complete ordinary
