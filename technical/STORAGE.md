@@ -27,3 +27,7 @@ After explicit handoff, the source maintains durable outgoing deliveries for lat
 Model context includes the current run’s active action history, explicitly selected earlier actions and unread delivered action results. It does not automatically carry the identity’s entire execution history into a new task. The archive and `history.read` retain those earlier actions. This is work context selection, not a compaction interval or deletion policy.
 
 A compaction boundary belongs to the referenced action’s work run. Compacting one work item does not discard the active history of another. The persona-authored account and explicit selections persist; an empty account is allowed when the retained records carry the needed information.
+
+History pages reference earlier lookup results by action identity. They do not embed recursive copies of those results. Model context applies the same projection to previously retained lookup results, while exact action receipts remain archived and accessible through HTTP. `action.read` retrieves one preserved action. This removes redundant retrieval echoes without changing persona-authored notes, selections or compaction boundaries.
+
+Before selecting an image observation, the runtime verifies its digest and decodes the declared PNG, JPEG or WebP bytes. A failed decode remains a failed action and does not add an unusable image to subsequent model input.
