@@ -64,6 +64,6 @@ Trusted peers can exchange messages, exact artifact bytes and continuity bundles
 
 Continuity carries identity, character, selected context, documents, messages, pending inputs, requests, history and referenced files. The source pauses decisions; the imported identity starts paused on the destination. Host paths and installed tools still need checking. Provider credentials and node identity keys are not transferred as persona learning.
 
-An explicit handoff routes later replies from the original node to the destination, including new attachments. Delivery is durable and deduplicated. A partition does not prove that another machine has stopped acting, and other host programs may possess copies. The application does not claim distributed exclusivity.
+An explicit handoff routes later replies from the original node to the destination, including new attachments and the requests they answer. Both nodes need to be reachable until delivery finishes; pending deliveries survive a restart. The same input is not delivered twice. A partition does not prove that another machine has stopped acting, and other host programs may possess copies. The application does not claim distributed exclusivity.
 
 [Technical references](technical/README.md) explain implementation, generated interfaces and release matching. Acceptance claims must link to evidence from the matching runtime, design and UI revisions. The current rewrite is still undergoing its new acceptance campaign.
