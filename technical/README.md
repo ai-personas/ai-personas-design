@@ -9,3 +9,5 @@ SQLite transactions preserve record revisions, action identities, state transiti
 Providers implement discovery and decision calls. A provider returns advertised capabilities and measured usage without a model ranking. An external JSON provider bridge is available in addition to the Codex adapter. No persona identity is keyed to a provider session. See the generated API reference for exact request types.
 
 A decision containing only a progress summary records that account and continues the ordinary loop. Waiting requires the explicit `wait` operation; pause, submission and assessment also stop the corresponding run. Returned completed action results are already present in subsequent request history.
+
+Each model call records the event position before its input is assembled. When a run waits, the engine checks for later messages and completed host results, avoiding a lost wake-up when input arrives during the preceding model decision. Waiting on an active background job releases model execution and resumes when its result is recorded. Explicit pause and node shutdown stop this observation without cancelling the host job.
