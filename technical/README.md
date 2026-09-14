@@ -17,3 +17,5 @@ A model response is saved before its actions run. Each action identity derives f
 A failed action returns its receipt to the model before later actions from that decision run. The original response and the stopping action remain recorded. This prevents a dependent effect or a later wait from hiding an error the model has not yet seen; the next decision can correct the request or choose to wait.
 
 The typed Rust command enum supplies server validation, the provider decision schema, UI types and generated technical arguments. Browser lists use indexed pages and lightweight change events; viewers and expensive detail load only when opened. Original output and artifacts stream from files with byte ranges.
+
+Model inputs place historical actions before selected learning and newly delivered records. Identical current instructions echoed by historical run/work receipts refer to the current briefing instead of repeating it. Original receipts remain available unchanged. This removes redundant transport text; it is not persona-authored memory compaction or proof that a model will interpret every new fact correctly.
