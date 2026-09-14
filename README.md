@@ -14,7 +14,7 @@ Character includes OCEAN dispositions: openness, conscientiousness, extraversion
 
 Personas write their own learning. A retained fragment might be an observation, an explanation, a useful method, a program or a reminder about something that failed. They decide how to organize and retrieve it. There is no required fragment shape, learning quota or compaction schedule.
 
-A persona chooses the records, tools, messages, action results and image observations it carries into later decisions. It can search retained material, build its own retrieval tools or replace a long active history with a shorter account. The originals stay available. Useful learning is demonstrated when it helps the persona handle a later situation correctly, not merely when a note is saved.
+A persona chooses the records, tools, messages, action results and image observations it carries into later decisions. Its current work history accompanies those selections; earlier tasks’ command logs stay retrievable without being carried into every new task. It can search retained material, build its own retrieval tools or replace a long active history with a shorter account. The originals stay available. Useful learning is demonstrated when it helps the persona handle a later situation correctly, not merely when a note is saved.
 
 ## Shared places and useful work
 
