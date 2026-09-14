@@ -9,3 +9,5 @@ Installation is an ordinary directory containing binaries, UI assets and documen
 Release validation must check the installed binary, served UI, generated contract and documentation against the manifest. It must also inspect fresh live task evidence. A source build, a browser screenshot or a model's declaration alone does not establish all requested capabilities. The acceptance checklist retains failed and incomplete items until the matching new evidence supports them.
 
 Trusted peer identities and their last explicitly supplied addresses persist across restart. Later messages and transfers can reconnect after an idle connection closes. If a remote node changes its listening endpoint, supply its new peer address; the application does not claim automatic Internet discovery.
+
+The distribution includes runtime docs and their preserved acceptance evidence, so links from the installed README remain available. Evidence archives contain public-interface records, actual provider requests/results and immutable artifacts; they are documentation and are not imported as persona state.
