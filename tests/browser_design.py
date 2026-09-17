@@ -22,9 +22,9 @@ def document() -> str:
     base = ROOT / 'design'
     html = (base / 'index.html').read_text(encoding='utf-8')
     html = html.replace('<link rel="stylesheet" href="styles.css">', '<style>' + (base / 'styles.css').read_text(encoding='utf-8') + '</style>')
-    for name in ('state.js', 'app.js'):
+    for name in ('state.js', 'app.js', 'navigation.js'):
         html = html.replace(f'<script src="{name}" defer></script>', '')
-    scripts = ''.join('<script>' + (base / name).read_text(encoding='utf-8') + '</script>' for name in ('state.js', 'app.js'))
+    scripts = ''.join('<script>' + (base / name).read_text(encoding='utf-8') + '</script>' for name in ('state.js', 'app.js', 'navigation.js'))
     return html.replace('</body>', scripts + '</body>')
 
 
@@ -213,6 +213,16 @@ class DesignBrowser(unittest.TestCase):
         self.page.get_by_role('button', name='Reset preview', exact=True).click()
         self.route('work', 'Work')
         expect(self.page.locator('.work-row')).to_have_count(2)
+
+    def test_13_skip_link_preserves_the_current_route(self):
+        for route, title in [('work', 'Work'), ('personas', 'Personas'), ('workspace/house/3', 'Breeze House')]:
+            self.route(route, title)
+            previous = self.page.url
+            self.page.locator('.skip-link').focus()
+            self.page.keyboard.press('Enter')
+            self.assertEqual(self.page.url, previous)
+            expect(self.page.locator('#main')).to_be_focused()
+            expect(self.page.locator('h1')).to_have_text(title)
 
 
 if __name__ == '__main__':
