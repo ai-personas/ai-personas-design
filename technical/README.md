@@ -1,21 +1,42 @@
-# Implementation reference
+# Technical reading guide
 
-The runtime is new Rust code using SQLite, ordinary files, and libp2p. The UI is new TypeScript and Preact code. All three rewrite branches begin with empty source trees; no previous AI Personas implementation, persona data, fixtures, or passing result is a source for this release.
+[Plain-language introduction](../README.md) · [Implementation status](../STATUS.md) · [Glossary](../GLOSSARY.md)
 
-The runtime contract generates the HTTP reference, machine-readable schema, and TypeScript declarations. The release record pins the runtime, design, and UI revisions plus contract and distribution digests. Browser and integration clients use the same public HTTP interface.
+The sole target is the existing Rust `rewrite/design-first` branch. This is a modular-monolith design: Rust/Tokio/Axum, the existing SQLite store, immutable artifacts, direct HTTP inference adapters to implement, a supervised isolation boundary to implement, and the matching Preact UI. No other runtime branch supplies code or assumed guarantees.
 
-SQLite transactions preserve record revisions, action identities, state transitions, and event ordering. Files preserve command output, model request/response records, and content-addressed artifact bytes. WAL and a single owning node process coordinate database writes. These are application consistency measures, not a security boundary against other host programs.
+## One design, different levels of explanation
 
-Providers implement discovery and decision calls. A provider returns advertised capabilities and measured usage without a model ranking. An external JSON provider bridge is available in addition to the Codex adapter. No persona identity is keyed to a provider session. See the generated API reference for exact request types.
+| Document | Purpose |
+|---|---|
+| [SPEC.md](SPEC.md) | Canonical v1.2 requirements and invariants; complete behavior, records and guards |
+| [STORAGE.md](STORAGE.md) | Transactions, exact versions, asynchronous actions, recovery and wait semantics |
+| [PROVIDERS.md](PROVIDERS.md) | Direct inference, model independence, context and tool boundaries |
+| [UI.md](UI.md) | Six workspace views, status semantics, current read-only support and future integration |
+| [RELEASE.md](RELEASE.md) | Rust file mapping, milestones, migration, packaging and operations |
+| [ACCEPTANCE.md](ACCEPTANCE.md) | Mechanical M01–M26 and behavioral B01–B12 gates |
+| [API.md](API.md) | **Unchanged generated v1 interface**, not the proposed v2 authoring contract |
+| [House example](../examples/HOUSE.md) | Illustrative behavior, counterexamples and full multidisciplinary scope |
+| [Source register](../SOURCES.md) | Which attachment or pinned source supports each part |
 
-A decision containing only a progress summary records that account and continues the ordinary loop. Waiting requires an explicit `wait` operation. Submission preserves an immutable version and continues work. Assessment delivers findings to the owner and leaves the reviewer waiting. Pause stops further decisions without cancelling host jobs.
+The specification is normative for target behavior. The focused guides are explanatory cross-references. Existing executable functionality is described separately in the status page and generated v1 API. Do not turn proposed Rust names into untyped frontend commands before implementing and generating the backend contract.
 
-An identity has one active model decision at a time. Durable queued runs share that identity fairly. Inputs have an acknowledged cursor; work-specific inputs stay with their work, while general messages are delivered to the identity once, including messages arriving before its first task. Shared submitted versions and findings are delivered to the work’s contributors, including a peer waiting for those results. Waiting releases model execution. Unread inputs or completed jobs queue further decisions unless explicitly paused or cancelled.
+## The mechanical and semantic boundary
 
-A model response is saved before its actions run. Each action identity derives from the call and its position. Restart resumes the saved response and reuses completed results. An interrupted effect whose outcome cannot be established stays uncertain. No application-level mechanism can establish every effect of arbitrary programs on a shared host.
+```mermaid
+flowchart TB
+    P["Persona judgment: what matters and what to do"] --> C["Typed proposed command"]
+    C --> A["Admission transaction: identity, grants, versions, resources"]
+    A -->|"Denied"| D["Exact diagnostic returned to the persona"]
+    A -->|"Committed intent"| Q["Durable dispatch"]
+    Q --> E["HTTP inference or isolated authorized tool effect"]
+    E --> R["Receipt and durable input"]
+    R --> P
+```
 
-A failed action returns its receipt to the model before later actions from that decision run. The original response and the stopping action remain recorded. This prevents a dependent effect or a later wait from hiding an error the model has not yet seen; the next decision can correct the request or choose to wait.
+**In words:** cognition chooses an action. A transaction verifies permission and records its intent. Effects run outside the transaction. Their real outcomes return as evidence for another decision. The runtime enforces the contract without choosing a domain, profession or solution.
 
-The typed Rust command enum supplies server validation, the provider decision schema, UI types and generated technical arguments. Browser lists use indexed pages and lightweight change events; viewers and expensive detail load only when opened. Original output and artifacts stream from files with byte ranges.
+## Documentation checks
 
-Model inputs place historical actions before selected learning and newly delivered records. Identical current instructions echoed by historical run/work receipts refer to the current briefing instead of repeating it. Original receipts remain available unchanged. This removes redundant transport text; it is not persona-authored memory compaction or proof that a model will interpret every new fact correctly.
+`python3 scripts/check_docs.py` checks local Markdown paths/anchors, balanced fences, required coverage and preservation of the generated v1 API. It also extracts Mermaid blocks to `.qa/diagrams/`. The documentation workflow renders those blocks and uploads its check report and diagram images. This is documentation validation, not runtime or persona acceptance.
+
+All diagrams have an adjacent prose explanation. The prose remains usable when a reader's Markdown viewer cannot render Mermaid. The house example is deliberately not a universal workflow.

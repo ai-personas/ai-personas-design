@@ -1,33 +1,86 @@
-# Persistence and host execution
+# Persistence, execution and recovery
 
-The first-release contract is `ai-personas/1`. SQLite uses WAL, full synchronous writes and a process file lock. Earlier development databases must be opened with their matching build or retained while a fresh node is created; the first release has no compatibility migrations.
+[Technical guide](README.md) · [Canonical requirements](SPEC.md) · [Status](../STATUS.md)
 
-Records retain identity, kind, scope, monotonic revision, timestamps and extensible data. Immutable document versions have parent identities, and concurrent children survive. Character updates require the expected revision; a stale update produces a preserved conflict. OCEAN and VAD have typed ranges, absent unauthored values and persona-authored explanations. Partial updates preserve previously authored dimensions.
+This page explains target v1.2 semantics. The pinned v1 Rust store already uses SQLite, WAL, full synchronous writes, revisions, action identities, events, inbox records and FTS. That consistency machinery is a starting point, not proof of isolation, new funding/consent guarantees or completed v1.2 behavior.
 
-Indexed record summaries, owner/scope/status indexes and FTS5 provide cursor pages and text discovery. Record pages carry an event watermark under the same database read lock. Lightweight events identify changes rather than duplicating entire entities. Full records, revisions, action pages, call files and artifact bytes are loaded separately.
+## Keep the identities unambiguous
 
-Operations claim a stable identity before effects. Pure record changes and their results commit together. Host jobs have separate supervisor processes, process-start identities, output files and atomic receipts. A restart reconciles actual receipts and matching tracked processes. Unknown effects remain uncertain, with explicit evidence required for resolution; they are not blindly repeated.
+```mermaid
+flowchart TB
+    W["Work: the continuing need and mandate"] --> R["ExecutionRoot: one authorized and funded episode"]
+    R --> A["Participation run: persona A working on this need"]
+    R --> B["Participation run: persona B working on this need"]
+    R --> N["Birth reservation and limited bootstrap context"]
+    N --> C["Newborn's own initialization decision"]
+    C -->|"Only after membership consent"| P["Newborn participation run"]
+    R --> P
+```
 
-A model decision is saved before its actions. Each action identity derives from the call identity and position. After interruption, a saved decision continues from those identities before another model request. Existing outcomes are reused, interrupted operations retain uncertainty, and remaining actions are preserved. The model can inspect uncertainty and choose appropriate recovery.
+**In words:** the need persists across episodes. The root owns shared authorization and resource accounting; each participant has its own decision context. A newborn can initialize before membership, using a restricted context paid from that same root. A root is not a coordinating persona. Empty-string contexts never grant global access.
 
-One decision runs per persona on a node. Additional runs remain queued. General correspondence is a durable identity-level input, including before the first task; task messages, findings and responses retain their work association. Inputs have deduplication keys and acknowledgement cursors. Acknowledgement is explicit after delivery; failure or restart does not discard unread input. New messages, job results, peer transfer outcomes, assessment findings and outside responses can queue continuation. Paused work retains inputs without automatically resuming.
+Retain the existing 32-hex IDs and numeric revisions. Logical identity, immutable version and content digest are different things. Do not relabel an unsigned record or hash as a persona signature.
 
-Submissions preserve exact artifact and document identities. Findings apply to one immutable submission, and independent reviewers differ from contributors. Work activity, submitted-version count, outstanding requests and assessment counts remain separate facts. No work-level accepted or rejected flag overrides another contributor's activity. The owning run receives findings and continues through its ordinary decision loop.
+## One transactional admission boundary
 
-Requests contain an owner, run, work, purpose, instructions, expected evidence and attachments. Responses are separate immutable records. They can arrive after closure and remain visible with the request's status at reply. Replies change the unresolved request to answered, without resolving it; the UI distinguishes unanswered requests from replies awaiting owner assessment. The owner resolves them with a conclusion and evidence; an operator can cancel them.
+Extend `src/store.rs::Store::write`; do not introduce a second ledger beside it. The transaction must cover permission, relevant expected versions, actor/writer fences, resource and population reservations, record changes or job intents, heads, affected projections and outgoing events.
 
-Calls preserve full application requests, model responses, exact image references/digests, provider wire input, observed identity/usage, raw events and errors. Selection and compaction change active context while retaining original records. No global document or tool catalog is automatically included in every model request.
+Receipt lookup first checks access. Same operation identity and canonical payload returns the original receipt. Changed payload conflicts. Separate actors cannot retrieve each other's private action just by guessing an ID. Independent observations need not contend on one global work revision; a coupled assembly adoption must check its complete expected vector.
 
-Artifacts are immutable publications addressed by SHA-256. Inspection verifies the bytes because other shared-host programs can change files. Downloads support byte ranges. Uploads stream with declared size and digest, preserve operation identity and discard incomplete files. Browser disconnect does not cancel persona work; cancellation of an upload only closes that upload stream.
+No network request, installer or arbitrary tool runs inside the SQLite transaction. Do not retain a blocking store mutex across an asynchronous wait. Use committed effect intents and durable completion receipts. The actual implementation needs fault injection, not just a schema diagram.
 
-Continuity bundles include identity, versions, selected learning, references, messages, requests, pending inputs and acknowledgements, actions, calls, native files, artifacts, historical job output and receipts. The source pauses decisions, and the destination imports paused. Active host actions and owned peer transfers must finish or be cancelled before export. Transfer records retain their owner and work run; terminal states become durable inputs, including interruption discovered on restart. Received artifacts are included with retained transfer evidence, and a late transfer outcome can follow an explicit handoff with its verified bytes. Imported job handles are historical and cannot control source processes. Node identity keys and provider login credentials are not continuity data. Existing conflicts are retained, and nonportable host links are reported.
+## A launch receipt is not a result
 
-After explicit handoff, the source maintains durable outgoing deliveries for later input. The destination records a delivery notice before acknowledging transport, retrieves the preserved JSON envelope and any required parent request or submission, verifies attachments, and then supplies the input to the continuing identity. Both nodes must be reachable until retrieval completes. A transport acknowledgement means the notice is retained; the destination's delivery status establishes whether processing completed. JSON remains JSON within the CBOR transport, including nulls and empty arrays. Message transport receipts do not change authored message identity. Conflicting recorded action outcomes remain pending with both receipts preserved. Deduplication survives retries and restart. Routing is explicit application state; it does not establish distributed exclusivity or secrecy from host programs.
+The targeted static review of Rust `runtime.rs` and `jobs.rs` identified a same-decision race: `jobs::start` returns after spawn; `operate` marks `exec` running; `apply_decision` continues until a failed receipt; foreground waiting happens in a later `work_loop` entry. Publication can therefore capture old bytes while regeneration is pending. This is a source-path finding, not a reproduced run here.
 
-Model context includes the current run’s active action history, explicitly selected earlier actions and unread delivered action results. It does not automatically carry the identity’s entire execution history into a new task. The archive and `history.read` retain those earlier actions. This is work context selection, not a compaction interval or deletion policy.
+The required barrier is deliberately conservative. Persist the pending action and suppress the unapplied suffix of that saved decision. After the actual result arrives, a fresh funded decision selects the next actions using real evidence. Never replay the suppressed suffix after a crash. Independent work can be chosen in a new decision while a background job remains pending; guessed future IDs and unobserved outputs are not usable dependencies.
 
-A compaction boundary belongs to the referenced action’s work run. Compacting one work item does not discard the active history of another. The persona-authored account and explicit selections persist; an empty account is allowed when the retained records carry the needed information.
+The first regression uses a file that already exists plus a delayed writer. Testing only a new filename can hide the defect because early publication merely fails with “file missing.” Include successful, failed and uncertain jobs, cancellation and crash recovery.
 
-History pages reference earlier lookup results by action identity. They do not embed recursive copies of those results. Model context applies the same projection to previously retained lookup results, while exact action receipts remain archived and accessible through HTTP. `action.read` retrieves one preserved action. This removes redundant retrieval echoes without changing persona-authored notes, selections or compaction boundaries.
+## Waiting and feedback are separate
 
-Before selecting an image observation, the runtime verifies its digest and decodes the declared PNG, JPEG or WebP bytes. A failed decode remains a failed action and does not add an unusable image to subsequent model input.
+The baseline `wait` handler already checks newer inbox data transactionally. Keep it. Extend durable predicates to terminal-job waits, changed inputs and other relevant conditions, covering both result-before-registration and registration-before-result orderings.
+
+An in-memory wake is only a hint to recheck durable state. Deduplicating/coalescing wake hints must not remove an inbox event or a satisfied predicate. Critical authority changes and known blockers belong in the current context independently of ordinary history pagination.
+
+| Fact | Does not imply |
+|---|---|
+| Message delivered | Persona read or accepted it |
+| `input.acknowledge` recorded | Finding resolved |
+| Repair promised | Artifact changed |
+| Artifact changed | Check passed |
+| Check passed for one scope | Entire current work accepted |
+
+Unresolved findings retain accountable dispositions. A work summary cannot erase them.
+
+## Exact versions and final release
+
+```mermaid
+flowchart TB
+    C["Candidate assembly: exact input and artifact versions"] --> Q["Assessment: exact criteria, policy and checks"]
+    Q --> S{"Release transaction still matches current state?"}
+    S -->|"Yes"| F["Seal this exact release and its limitations"]
+    S -->|"No"| X["Revision conflict; recheck affected claims"]
+    F --> U["Later input or assembly change"]
+    U --> H["Old release remains history; new candidate needs applicable evidence"]
+```
+
+**In words:** do not build acceptance from separately fetched latest values. A release seals the mandate, criteria, assumptions, compatible assembly, review policy, applicable assessments and blocker dispositions together. If a relevant update wins the race, finalization conflicts. If release wins, a later update is a new candidate, not a rewrite of the old verdict.
+
+Review currentness uses an exact validation scope. Default to the whole assembly fingerprint when dependency coverage is uncertain. An asynchronous invalidation job must first mark the affected scope revalidation-pending so the UI never shows an old green result while processing is queued.
+
+## Recovery and effects
+
+Persist the model response before applying actions and bind operation identities to call plus ordinal. Preserve stop-on-first-failure, the pending-effect barrier and explicit yield/quiescence. Old workers cannot commit under a newer fence. Usage is recorded even when the late proposal is no longer adoptable.
+
+The outbox commits with state and delivers at least once; receivers deduplicate events. Unknown outside effects need destination idempotency or reconciliation before retry. A local action ID cannot guarantee exactly-once behavior at every remote site. Timeouts retain possible usage/exposure instead of issuing false refunds.
+
+Restart restores pending events, reservations, leases, jobs, transfers and unknown effects. It must not mint fresh budgets, infer success from a missing process, lose ownership or acknowledge unread inputs. Preserve the original error even if cleanup also fails.
+
+## Files, history and privacy
+
+Native files are untrusted candidates until published and adopted under scope. Preserve exact bytes and revisions; archive references avoid recursive history copies. Byte integrity is not technical correctness. Parse native/active content outside privileged node and UI origins.
+
+Search, summary, graph and event views enforce access. Private references and aggregate counts must not leak. Old data retains its actual unknown bindings. Retention/deletion applies to payloads and derived fragments, previews, indexes and backups; append-only audit is not permission to retain private content forever.
+
+`src/delivery.rs` mainly owns continuity-forwarding behavior. Extend local notifications where runtime/store admission already delivers them. This change is not a P2P rewrite and adds no distributed exclusive-identity guarantee.

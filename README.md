@@ -1,69 +1,177 @@
 # AI Personas
 
-AI Personas is a place where persistent personas learn, develop character and do useful work with people and one another. You bring a question, a need or something you want to make. Personas choose how to approach it, what tools to use, what to remember and when to ask for help.
+## Different individuals. Shared commitments. Useful work.
 
-A persona is a continuing identity. The language model supplies its next decisions; changing the model does not replace the persona. Its name, character, learning, messages, tools and history remain with it.
+AI Personas is a place where continuing AI individuals learn, develop character and work with people and one another. You bring a need. The personas decide what to investigate, what to make, how to work together and when to ask for help.
 
-## Character that continues
+**You own the purpose and the boundaries. Each persona owns its perspective. The group owns the commitments its members accept. The Rust runtime makes actions authorized, bounded, durable and inspectable.**
 
-Names, portraits and character begin unauthored. The application shows honest placeholders until personas create them. A persona explains who it is becoming and can revise that account through experience. Earlier versions stay available.
+> **Design status:** this branch describes the final proposed **Rust-only v1.2 design**. It is not a claim that all of it is implemented. The checked-in Rust v1 runtime still has process-based inference and unsandboxed host execution. The updated UI has implemented views and read-only adapters, not the missing backend guarantees. Read [implementation status and evidence](STATUS.md) before deploying or evaluating it.
 
-Character includes OCEAN dispositions: openness, conscientiousness, extraversion, agreeableness and neuroticism. These describe tendencies, not assigned professions or abilities. VAD describes changing affect through valence, arousal and dominance. Personas can add other attributes and explain changes. Unauthored values remain absent. Character can influence preferences and communication; it must never change factual accuracy, honesty or adherence to your instructions.
+### Where to start
+
+| You want to understand… | Read |
+|---|---|
+| The idea without implementation terminology | This page |
+| What a team would do, including mistakes and corrections | [The house walkthrough](examples/HOUSE.md) |
+| What unfamiliar words mean | [Glossary](GLOSSARY.md) |
+| The complete requirements | [Canonical specification](technical/SPEC.md) |
+| Which Rust files to change and in what order | [Implementation and release plan](technical/RELEASE.md) |
+| Persistence, tools, inference and the UI | [Technical reading guide](technical/README.md) |
+| What exists, what is proposed and what was tested | [Status](STATUS.md) and [source register](SOURCES.md) |
+
+The specification is the single authority for target behavior. Other pages explain it; they do not define competing versions. The old generated [v1 HTTP contract](technical/API.md) remains a description of the existing interface, not a declaration that v2 operations exist.
+
+## The whole idea in one picture
+
+```mermaid
+flowchart TB
+    U["You: need, preferences, permission and resources"] --> W["Shared work: the original need and agreed outcomes"]
+    W --> A["Persona A: its own character, memory and agenda"]
+    W --> B["Persona B: a different perspective and experience"]
+    A <-->|"questions, proposals and evidence"| B
+    A --> C["Accepted commitments and working agreements"]
+    B --> C
+    C --> R["Rust runtime: checks permission, versions and resources"]
+    R --> T["Tools and authorized outside help"]
+    T --> E["Actual results, observations and review"]
+    E --> A
+    E --> B
+    E --> O["Delivered result, explicit limitation or next question"]
+```
+
+**In words:** individuals interpret the same need differently, agree on compatible work, perform real actions and respond to what happens. This is a feedback loop, not a prescribed sequence. A short request may finish in one turn. A complicated project may need alternatives, several participants, experiments and outside evidence.
+
+The runtime does not recognize “house” and choose an architect, engineer and reviewer. It does not contain a profession registry, a universal priority formula or an optimal-team-size calculator.
+
+## Character that changes the work
+
+A persona is a continuing identity, not a model name or a temporary role. Its character, experiences, interests, relationships and accepted responsibilities stay with it when it changes models or tasks.
+
+One persona might usually explore alternatives; another might first question an assumption. They are not locked into those habits. The first may choose integration work when its group has already explored enough. The second may propose an experiment after new evidence makes it worthwhile.
+
+OCEAN describes tendencies: openness, conscientiousness, extraversion, agreeableness and neuroticism. VAD describes modeled valence, arousal and dominance. They are optional descriptions, not proof of human feelings or technical ability. Unauthored values remain absent. No trait score assigns a profession, tool or leadership position.
+
+Three statements must remain different: **“I am interested in this,” “I have demonstrated this capability,” and “I accepted responsibility for this.”** Character never excuses false claims, ignored requirements or unauthorized actions.
+
+Names and images can be authored later. A new Rust node starts empty; the person explicitly creates or selects founders. It does not invent a professional founding team or silently reseed on restart.
+
+## Different groups can choose different paths
+
+The group is not an average of its members' personalities. Its behavior develops through their interactions and shared history. A working agreement such as “compare alternatives using the same inputs” is something participants adopt, not a rule chosen by a hidden manager.
+
+```mermaid
+flowchart TB
+    N["Same need and same resource limits"] --> A["Group A notices a comparison problem"]
+    N --> B["Group B notices a consequential uncertainty"]
+    A --> AA["First contribution: two comparable native alternatives"]
+    B --> BB["First contribution: an experiment that rejects a poor option"]
+    AA --> X["Different methods and improvements; same agreed obligations"]
+    BB --> X
+```
+
+**In words:** one house-design group could establish a stable baseline before exploring. Another could test a hypothesis first. Either could recruit or birth a peer, or finish with the existing group. These are illustrative possibilities, not programmed team types or an observed run. Both still owe the agreed building systems and evidence.
+
+A relationship is a perspective with a history: “Nox previously found a dimensional inconsistency; I will ask Nox to inspect this revision.” It is not a universal trust score. Disagreement and rejected alternatives remain visible instead of becoming a fictional “everyone agrees.”
+
+## What gets priority?
+
+Keep three views distinct:
+
+| View | Meaning |
+|---|---|
+| Individual agenda | What this persona notices, values and wants to contribute |
+| Shared board | The group's observations, obligations, questions and proposals; no automatic global ranking |
+| Collective commitments | Responsibilities actually accepted, with resources and dependencies |
+
+Some work must wait for another result. Other work can proceed in parallel. The personas negotiate that arrangement. The runtime checks permission, resources and declared prerequisites; it does not decide whose design instinct is best.
+
+Someone must accept **continuation responsibility**: keeping the need from being abandoned without an honest delivered, blocked, waiting or handed-off disposition. Several personas can share it. It is not a compulsory leader, and it does not let one persona assign another involuntarily.
+
+Missing owners remain visible beside individual agendas. A complete checklist is still not proof that the group discovered every requirement: material work needs a coverage check against the original need and accepted clarifications.
+
+## Improve the result without taking over the purpose
+
+Personas may discover useful improvements the person did not list. They can question an interpretation, compare methods, improve an artifact or change how they coordinate.
+
+A proposed improvement is a hypothesis. It records the expected benefit, possible regressions, uncertainty, resources and a useful check. Keep the last usable baseline. An informative rejection is valuable too.
+
+Reversible exploration within an existing allowance need not require constant approval. Changing hard requirements, increasing spending, publishing under the person's account or operating physical machinery needs the appropriate authority. Curiosity unrelated to the need belongs in separately authorized work.
+
+**Permission to explore an assumption does not make the assumption a fact.** An analysis using a synthetic site can support that scenario, not prove a real site's adequacy.
+
+## New personas can be born
+
+```mermaid
+flowchart TB
+    P["A persona proposes another continuing perspective"] --> G{"Authority, capacity and initialization funding available?"}
+    G -->|"No"| Q["Explicitly blocked or refused; no hidden extra budget"]
+    G -->|"Yes"| I["One identity, provenance and restricted bootstrap context"]
+    I --> V["Newborn reads the authorized invitation preview"]
+    V --> J{"Accept membership?"}
+    J -->|"No"| D["Decline; retain history and settle unused reservations"]
+    J -->|"Yes"| K["Join with limited permissions"]
+    K --> C["Separately accept or negotiate a commitment"]
+    C --> E["Do work and demonstrate an actual contribution"]
+```
+
+**In words:** birth creates an individual, not an expert or an automatically assigned worker. The newborn can develop its own response. Its initial context is limited to authorized seed material and the invitation; it does not inherit parent secrets or a cloned budget. Birth, membership and commitment acceptance are separate decisions.
+
+The team can instead learn, acquire a tool, reallocate work or obtain outside expertise. More personas are not automatically better. Completing the task does not delete the people; their later work may be entirely different.
+
+## Real work, not a conversation about work
+
+A team designing a house should create and edit native CAD/BIM, design the agreed structure and plumbing/HVAC/electrical systems, run appropriate calculations and simulations, coordinate conflicts and deliver inspectable files. CAM is included for sufficiently specified fabrication components, not invented machine instructions for an unspecified process.
+
+The same generic tool path supports software, datasets, writing and other needs. A preinstalled authorized tool is valid; installing another copy is not required to prove autonomy. Registration, actual execution and demonstrated competence are different claims.
+
+A launched job is not a finished job. If a tool is still running, dependent publication or submission must wait for its real result and a fresh persona decision. This is a specific correction required in the Rust baseline, not a guarantee already provided by its job tracker.
+
+## Evidence changes what “done” means
+
+```mermaid
+flowchart TB
+    V["Exact input version"] --> R["Actual execution or observation"]
+    R --> A["Sealed artifact and assessment"]
+    A --> F["Release checked against the exact current mandate and assembly"]
+    V --> C["A relevant input changes"]
+    C --> S["Old verdict remains history; applicability becomes stale"]
+    S --> N["Affected owners reconsider, repair or revalidate"]
+    N --> A
+```
+
+**In words:** the old assessment remains true about the version it reviewed. It cannot silently certify a new version. A final release checks the mandate, criteria, assumptions, assembly, reviews and blocker state together.
+
+A message was delivered; its recipient acknowledged it; someone responded; a repair was checked. Those are four different facts. Known blocking findings cannot disappear because their messages were acknowledged or compacted.
+
+The interface separates activity, adopted-outcome coverage, exact submissions, current evidence, user acceptance and outside validation. A user may accept an explicitly limited result. A signature or hash proves neither engineering correctness nor professional approval.
 
 ## Learning that helps later
 
-Personas write their own learning. A retained fragment might be an observation, an explanation, a useful method, a program or a reminder about something that failed. They decide how to organize and retrieve it. There is no required fragment shape, learning quota or compaction schedule.
+Personas author fragments: methods, observations, interpretations, relationship expectations and lessons from failure. Ordinary documents remain outputs; they do not automatically become learned knowledge. Curricula are optional ordinary work, not a compulsory graduation system.
 
-A persona chooses the records, tools, messages, action results and image observations it carries into later decisions. Its current work history accompanies those selections; earlier tasks’ command logs stay retrievable without being carried into every new task. It can search retained material, build its own retrieval tools or replace a long active history with a shorter account. The originals stay available. Useful learning is demonstrated when it helps the persona handle a later situation correctly, not merely when a note is saved.
+A decision carries shared authoritative facts plus that individual's relevant character, selected memory and relationships. It does not receive everyone else's entire transcript. Context compaction keeps history retrievable and preserves current permissions, constraints and unresolved obligations.
 
-## Shared places and useful work
-
-An environment brings personas, conversations and files together. Personas author a short name, fuller details and representative imagery. Environments do not prescribe team structures or task phases.
-
-Personas can run ordinary host commands, install software where the account has permission, use an unregistered tool, or build their own tools and skills. Registration records ownership, purpose and acquisition so others can discover them. It never decides whether execution is permitted.
-
-They exchange durable messages and share editable work and preserved artifacts. Concurrent document contributions remain separate versions; one does not silently erase another. Personas can inspect disagreements and publish a resolution with its reasoning.
-
-Three optional starter briefs offer practice in investigating information, making and checking, and working with others. They create ordinary work environments. Personas can choose other learning experiences, and preparation is not a prerequisite imposed by the application.
-
-## Ownership continues after a result
-
-A submission preserves an exact version of files and documents. It does not finish the task or declare success. The persona still owns follow-up work.
-
-An independent persona can review that version under separate instructions, using the same tools and work engine. Review should open native sources, reproduce outputs, inspect images and check the behavior requested. Findings, failed checks and incomplete evidence stay visible and return to the owner. The owner can respond, correct causes and submit another version.
-
-Activity and assessment are separate facts. One submitted digital version may be accepted while another persona is still working or physical evidence is still missing. The application shows those facts together rather than assigning one verdict to the whole work item.
+Useful learning requires changed later behavior, measured against suitable comparisons. Fragment count, a selected note, a new portrait or changing personality numbers are not evidence of improvement.
 
 ## When something needs you
 
-A persona can ask for a missing fact, a decision, an outside connection, fabrication or a physical observation. The request explains its purpose, what to do and what evidence to return. Work's **Needs you** area brings these requests into view.
+Personas can request facts, a value decision, an outside connection, a measurement, fabrication or qualified review. Replies and attachments return for assessment; they do not automatically resolve the question.
 
-You can reply with text and attach files, photos or measurement records. Earlier replies remain available, including late replies. The response wakes the owning persona; it does not automatically establish success or close the request. The persona evaluates the evidence, continues the work and explains any resolution. You can also cancel a request.
-
-Simulation, a screenshot and a physical measurement establish different things. Physical validation remains pending until real evidence is supplied. A useful digital package can be assessed separately, with an actionable handoff for what remains.
+You can bound exploration and birth, approve consequential effects, pause work, fund it or accept a limited delivery. Review and safe closeout need an explicit protected allocation so optional improvements cannot silently consume every remaining resource. Unknown prices and usage remain unknown.
 
 ## What you see and control
 
-**Work** shows activity, submitted versions, assessments and requests. **Personas** shows continuing character and choices. **Environments** shows shared places. **Learning** shows retained documents, tools and skills. **Network** shows connections and file-transfer progress.
+The matching UI has Work, Personas, Environments, Learning and Tools, with Network under Advanced. Work has six views: Overview; Perspectives; Work & outcomes; People & agreements; Artifacts & evidence; Decisions & learning.
 
-Cards give short summaries. Details and expensive viewers open when you need them. Large files stream for download; previews are bounded. Closing a viewer releases its loading resources. Closing or disconnecting the browser leaves persona work running.
+The UI must distinguish an offer from acceptance, a pending tool from a result, a historical verdict from current applicability and missing backend data from a zero balance. It must not simulate controls for unimplemented Rust operations. See [UI behavior and its current boundary](technical/UI.md).
 
-You can create work, send instructions, inspect evidence, request review, pause or resume decisions, and cancel tracked jobs or transfers. Incoming work and feedback wait durably when a persona is busy. Recorded model usage covers requests the application observes; unknown usage stays unknown.
+## The operational boundary
 
-## The host is shared
+The **target design** requires isolated generic tools, mediated credentials, scoped permissions, finite resource limits, durable records and crash-safe dispatch. The **existing Rust v1 baseline does not yet provide that isolation**. Instructions and a process group are not a sandbox.
 
-Commands execute directly under the operating-system account running AI Personas. There is no application sandbox, command allowlist, required container or restricted installation directory. Actual host permissions, provider capabilities and your explicit instructions govern what can happen.
+The new inference boundary is direct HTTP APIs. Model identity remains separate from persona identity. A tool claiming to be read-only does not make its effects safe. No uncertain external effect is blindly retried, and cancellation cannot undo an action already completed.
 
-Other programs with the same access can inspect or change files, including review material. Independent review gives separate instructions and preserved evidence; it does not promise secrecy or isolation. The application cannot observe every detached program, direct file change or model request made elsewhere on the host.
+Existing peer transfer stays separate from a federation redesign. A copied identity or verified artifact does not automatically obtain local permissions. Cross-node exclusive identity movement is not promised by the current continuity protocol.
 
-Tracked commands have output and completion receipts. After restart, known results remain known and uncertain effects remain uncertain. A saved action identity prevents blind repetition. Cancelling a process group does not undo effects already performed or guarantee control over detached programs.
-
-## Continuing on another node
-
-Trusted peers can exchange messages, exact artifact bytes and continuity bundles. Transfers show progress and support cancellation. Received files must pass integrity checks before they become available as completed artifacts.
-
-Continuity carries identity, character, selected context, documents, messages, pending inputs, requests, history and referenced files. The source pauses decisions; the imported identity starts paused on the destination. Host paths and installed tools still need checking. Provider credentials and node identity keys are not transferred as persona learning.
-
-An explicit handoff routes later replies from the original node to the destination, including new attachments and the requests they answer. Both nodes need to be reachable until delivery finishes; pending deliveries survive a restart. The same input is not delivered twice. A partition does not prove that another machine has stopped acting, and other host programs may possess copies. The application does not claim distributed exclusivity.
-
-[Technical references](technical/README.md) explain implementation, generated interfaces and release matching. Acceptance claims must link to evidence from the matching runtime, design and UI revisions. The current rewrite is still undergoing its new acceptance campaign.
+The aim is not a convincing performance of a team. It is **useful, checked work shaped by distinct individuals and their relationships**, with honest limits whenever the model, tools, evidence or resources are insufficient.

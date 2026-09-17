@@ -1,0 +1,35 @@
+name: Rust design documentation
+on:
+  push:
+    branches: ['rewrite/design-first', 'docs/rust-v1.2-final-design']
+  pull_request:
+    branches: ['rewrite/design-first']
+permissions:
+  contents: read
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Test documentation checker
+        run: python3 -m unittest discover -s tests -v
+      - name: Check links, structure and unchanged v1 API
+        run: python3 scripts/check_docs.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated documentation renderer
+        run: npm install --no-save --prefix "$RUNNER_TEMP/design-mermaid" @mermaid-js/mermaid-cli@11.4.2
+      - name: Render every Mermaid diagram
+        run: python3 scripts/render_diagrams.py --mmdc "$RUNNER_TEMP/design-mermaid/node_modules/.bin/mmdc"
+      - name: Preserve documentation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rust-design-documentation-evidence
+          path: .qa/
+          include-hidden-files: true
+          if-no-files-found: warn
