@@ -1,68 +1,198 @@
-name: Rust design documentation
+name: Repository boundary correction
 on:
   push:
-    branches: ['rewrite/design-first', 'docs/rust-v1.2-final-design']
-  pull_request:
     branches: ['rewrite/design-first']
+    paths: ['.github/workflows/design-docs.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
-  documentation:
+  relocate:
+    if: github.repository == 'ai-personas/ai-personas-design' && github.ref == 'refs/heads/rewrite/design-first'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
-      - name: Test documentation checker
-        run: python3 -m unittest discover -s tests -v
-      - name: Check links, structure and unchanged v1 API
-        run: python3 scripts/check_docs.py
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Check the authored UI fixture and reference routes
+          fetch-depth: 2
+      - name: Require the inspected source without concurrent edits
         run: |
-          for file in design/*.js; do node --check "$file"; done
-          node --test tests/*.test.cjs
-      - name: Install isolated documentation renderer
-        run: npm install --no-save --prefix "$RUNNER_TEMP/design-mermaid" @mermaid-js/mermaid-cli@11.4.2
-      - name: Render every Mermaid diagram
-        run: python3 scripts/render_diagrams.py --mmdc "$RUNNER_TEMP/design-mermaid/node_modules/.bin/mmdc"
-      - name: Preserve documentation evidence
+          test "$(git rev-parse HEAD^)" = 9b1fd0a82ee4c5c6eb6f87aac4f2f9495f14d41d
+          git diff --exit-code 9b1fd0a82ee4c5c6eb6f87aac4f2f9495f14d41d -- . ':!.github/workflows/design-docs.yml'
+      - name: Update repository ownership and documentation links
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          design = Path.cwd()
+          (design/'.gitignore').write_text('.DS_Store\n')
+          (design/'AGENTS.md').write_text('''# Repository scope
+
+          This is `ai-personas/ai-personas-design`, branch `rewrite/design-first`.
+          It is documentation-only: architecture, requirements, design decisions,
+          acceptance plans, prose examples and source/evidence references.
+
+          Do not add Rust or Python implementation, verification scripts, executable
+          prototypes, UI screens, browser tests, build pipelines or packaged applications
+          here. Code fences describing contracts are documentation, not implementations.
+          `technical/core-gates.json` is a non-executable design/acceptance plan.
+
+          Implement actual backend changes in the existing Rust source on
+          `ai-personas/ai-personas:rewrite/design-first`. Keep its runtime tests, schema
+          generation, build/package tooling and development checks with that implementation.
+          UI components, styles, standalone screen fixtures and browser tests belong to
+          `ai-personas/ai-personas-ui:rewrite/design-first`.
+
+          Do not replace implementation work with another design document or helper test.
+          A design check is not a Rust build, a runtime regression or product acceptance.
+          Keep historical evidence and explicit limitations. Never publish private runtime
+          source or logs here. Do not merge another runtime branch into the Rust target.
+          See [repository ownership](REPOSITORIES.md) and [status](STATUS.md).
+          ''')
+          (design/'REPOSITORIES.md').write_text('''# Repository ownership and correction
+
+          All three targets use `rewrite/design-first`.
+
+          | Repository | Owns | Must not substitute for |
+          |---|---|---|
+          | [ai-personas](https://github.com/ai-personas/ai-personas/tree/rewrite/design-first) | Actual Rust backend, API/schema generation, persistence, providers, execution, runtime tests and development/build tools | Design prose or browser fixtures presented as runtime implementation |
+          | [ai-personas-design](https://github.com/ai-personas/ai-personas-design/tree/rewrite/design-first) | Architecture, requirements, decisions, acceptance plans, prose examples and provenance | Backend code, executable tools, UI screens or test pipelines |
+          | [ai-personas-ui](https://github.com/ai-personas/ai-personas-ui/tree/rewrite/design-first) | Preact components, styles, UI fixtures and browser tests | Backend authority, evidence or resource enforcement |
+
+          ## Corrected placement
+
+          The misplaced files were present in design commit
+          `9b1fd0a82ee4c5c6eb6f87aac4f2f9495f14d41d`. They remain recoverable in Git history.
+          No force-push or history rewrite is part of the correction.
+
+          | Former design path | Destination |
+          |---|---|
+          | `design/` | UI repository `design/`, including source-image and historical verification manifests |
+          | `tests/browser_design.py`, `tests/browser_reference.py`, `tests/*.test.cjs` | UI repository `tests/` |
+          | `scripts/` | Rust repository `tools/design_docs/scripts/` |
+          | `tests/test_core_contract.py`, `tests/test_docs.py` | Rust repository `tools/design_docs/tests/` |
+          | `.github/workflows/design-docs.yml` | Removed here; each code repository owns its own validation workflows |
+
+          The migrated screen scripts, styles, markup and tests are unchanged. A local
+          CommonJS package boundary in the UI repository preserves Node test loading
+          without changing the production UI's ESM package. Documentation links point to
+          the proper repositories. The prototype is still illustrative, not a backend.
+
+          The migrated helper scripts accept a separate design checkout. Their output
+          stays outside this documentation-only repository. The runtime helper tests do
+          not become Rust product code or proof of completed v1.2 functionality.
+
+          ## What implementation means
+
+          A backend requirement is implemented only by changes to the real Rust
+          contract/runtime/store/provider/job/API paths and relevant executed tests.
+          Adding types, a plan, a mock fixture or a test runner alone does not establish
+          that a feature is complete. The canonical specification remains
+          [technical/SPEC.md](technical/SPEC.md); [STATUS.md](STATUS.md) distinguishes
+          source observations and test evidence from that target.
+
+          This repository correction does not add new Rust feature behavior. Existing
+          Rust source at `c2b7d89a7d05f7f31e35d590ba39a3fcf80439fa` is preserved, including
+          the HTTP adapter and earlier barrier/context changes. Their reported limits
+          remain; this move is not a completed implementation or live acceptance campaign.
+          ''')
+          p=design/'README.md';t=p.read_text();t=t.replace('# AI Personas\n', '# AI Personas\n\n> **Documentation repository only.** Actual implementation belongs to the Rust\n> `ai-personas/ai-personas` branch `rewrite/design-first`. UI code and screens\n> belong to `ai-personas/ai-personas-ui`. See [repository ownership](REPOSITORIES.md).\n',1);t=t.replace('The checked-in Rust v1 runtime still has process-based inference and unsandboxed host execution.','The Rust source and its verification status live in the separate runtime repository; its newer HTTP inference increment does not supply the still-required containment and authority guarantees.');p.write_text(t)
+          p=design/'technical/UI.md';t=p.read_text().replace('[Interactive design](../design/index.html)', '[UI fixture source](https://github.com/ai-personas/ai-personas-ui/blob/rewrite/design-first/design/index.html)')
+          t=re.sub(r'\(\.\./design/([^)]*)\)',r'(https://github.com/ai-personas/ai-personas-ui/blob/rewrite/design-first/design/\1)',t)
+          t=t.replace('## ', '> Screen implementation and browser tests live in `ai-personas-ui`, not this documentation repository.\n\n## ',1);p.write_text(t)
+          p=design/'technical/README.md';t=p.read_text();t=t[:t.index('## Documentation checks')]+'''## Documentation checks
+
+          The executable tools now live in the Rust repository under `tools/design_docs`.
+          This repository contains no check scripts, browser fixture or build workflow.
+          From the runtime checkout, with a separate design checkout:
+
+          ```sh
+          export AI_PERSONAS_DESIGN_ROOT=/path/to/ai-personas-design
+          python3 tools/design_docs/scripts/check_core.py
+          python3 -m unittest discover -s tools/design_docs/tests -v
+          python3 tools/design_docs/scripts/check_docs.py
+          ```
+
+          Reports and Mermaid extraction go to the runtime checkout's `.qa/design-docs`,
+          not into these design documents. The checks cover repository placement, local
+          links/anchors, balanced fences, source IDs and unchanged generated v1 API bytes.
+          All diagrams have adjacent prose equivalents. Their rendering is documentation
+          validation, never runtime, model or engineering acceptance.
+
+          ## Core-only implementation checks
+
+          The acceptance plan retains 21 invariants, 25 non-UI mechanical gates and 12
+          behavioral gates; M14 remains explicitly deferred to UI integration. The
+          migrated validator checks plan consistency, not feature implementation.
+
+          Use `tools/design_docs/scripts/verify_rust_core.py` in the Rust repository on a
+          trusted disposable Linux host and an exact clean Rust checkout to run its
+          existing suites. The [core guide](CORE.md) supplies the command and evidence
+          limits. Logs remain private, outside the design and runtime repositories.
+          See [repository ownership](../REPOSITORIES.md).
+          ''';p.write_text(t)
+          p=design/'technical/CORE.md';t=p.read_text().replace('python3 scripts/check_core.py','export AI_PERSONAS_DESIGN_ROOT=/path/to/ai-personas-design\npython3 tools/design_docs/scripts/check_core.py').replace('python3 -m unittest discover -s tests -v','python3 -m unittest discover -s tools/design_docs/tests -v').replace('python3 scripts/check_docs.py','python3 tools/design_docs/scripts/check_docs.py').replace('Those commands validate documentation and helper behavior only. The existing documentation CI discovers the added Python tests without modifying UI code or its workflow.','Run those commands from the Rust repository. They validate documentation and helper behavior only. The tools and their tests no longer live in this documentation-only repository.').replace('/path/to/ai-personas-design/scripts/verify_rust_core.py','/path/to/ai-personas/tools/design_docs/scripts/verify_rust_core.py');t+='\n\nRepository placement is governed by [REPOSITORIES.md](../REPOSITORIES.md). The\nrelocation of helper code and screen fixtures is not a new Rust feature increment.\n';p.write_text(t)
+          p=design/'technical/RELEASE.md';t=p.read_text().replace('The documentation workflow checks local links/anchors, balanced code fences, required sections/invariants/gates and unchanged v1 API bytes, then renders Mermaid diagrams. It uses read-only repository permissions and produces reports/diagram images, not runtime artifacts. Those checks are separate from this release plan\'s Rust and live-persona gates.', 'The tools in the Rust repository at `tools/design_docs` check local links/anchors, balanced code fences, required sections/invariants/gates and unchanged v1 API bytes. They extract/render Mermaid diagrams outside the design checkout. This documentation-only repository carries no executable checker, UI screen or build workflow. These checks remain separate from the Rust and live-persona gates. See [repository ownership](../REPOSITORIES.md).');p.write_text(t)
+          p=design/'STATUS.md';t=p.read_text();after='''## Repository correction
+
+          The `ai-personas-design` branch is now documentation-only. Actual product
+          implementation is the Rust `ai-personas/ai-personas:rewrite/design-first` branch;
+          UI implementation is `ai-personas/ai-personas-ui:rewrite/design-first`.
+          The former executable scripts/tests have moved to the runtime's
+          `tools/design_docs`; the screen fixture and browser tests have moved to the UI
+          repository. See [repository ownership and migration](REPOSITORIES.md).
+
+          This move changes no Rust feature behavior and makes no new runtime acceptance
+          claim. The existing runtime source also contains a
+          [direct HTTP inference increment](https://github.com/ai-personas/ai-personas/blob/c2b7d89a7d05f7f31e35d590ba39a3fcf80439fa/docs/HTTP-INFERENCE-INCREMENT.md),
+          with explicit limitations. The historical ledger below is not a complete audit
+          of that increment, nor proof that the remaining target design is implemented.
+          No private Rust source or execution log is copied into this public repository.
+
+          ''';t=t.replace('## Pinned scope',after+'## Pinned scope',1)
+          if '## Repository correction' not in t:
+              pos=t.index('\n## ');t=t[:pos]+'\n'+after+t[pos:]
+          t=t.replace('No prototype, layout, component, stylesheet, browser fixture, generated API or UI repository file is changed.', 'That earlier core-documentation increment changed no UI files. The later repository correction relocates the standalone fixture into the UI repository without changing production components.')
+          t=t.replace('The new private-checkout runner', 'The private-checkout runner, now in the runtime repository,');p.write_text(t)
+          p=design/'SOURCES.md';t=p.read_text()+'''\n
+          ## Repository-placement correction
+
+          The source for the moved public helpers and UI fixture is design commit
+          `9b1fd0a82ee4c5c6eb6f87aac4f2f9495f14d41d`. Prior manifests and test history remain
+          bound to their original revisions; moving files does not transfer a passing
+          verdict to new runtime features. Current ownership is documented in
+          [REPOSITORIES.md](REPOSITORIES.md). The normative specification and generated v1
+          API remain byte-identical in this correction. No private runtime source is
+          published here.
+          ''';p.write_text(t)
+          PY
+      - name: Validate existing helpers and the documentation candidate
+        run: |
+          python3 -m unittest discover -s tests -v
+          python3 scripts/check_core.py
+          python3 scripts/check_docs.py
+      - name: Remove relocated implementation, verify exact document bytes, and push
+        run: |
+          git rm -r design scripts tests
+          git add .gitignore AGENTS.md REPOSITORIES.md README.md SOURCES.md STATUS.md technical/README.md technical/CORE.md technical/RELEASE.md technical/UI.md
+          git diff --exit-code 9b1fd0a82ee4c5c6eb6f87aac4f2f9495f14d41d -- technical/SPEC.md technical/API.md technical/core-gates.json
+          python3 - <<'PY'
+          import hashlib, json, subprocess
+          from pathlib import Path
+          names = subprocess.check_output(['git', 'ls-files', '-z']).decode().split('\0')
+          names = [name for name in names if name and not name.startswith('.github/')]
+          actual = {name: hashlib.sha256(Path(name).read_bytes()).hexdigest() for name in names}
+          digest = hashlib.sha256(json.dumps(actual, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+          if digest != '9685a01aa44412087ccd36b014a6fc483c8c673e4b85938c39d5e4d4a519ef66':
+              raise SystemExit('Documentation bytes differ from the locally checked migration: ' + digest)
+          Path('.qa/repository-correction.json').write_text(json.dumps({'scope': 'Repository placement only; no Rust feature behavior changed', 'source_commit': '9b1fd0a82ee4c5c6eb6f87aac4f2f9495f14d41d', 'document_manifest_sha256': digest, 'document_files': actual, 'remaining_cleanup': 'Remove the one-time .github workflow via the authorized connector'}, indent=2) + '\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Remove relocated code and screens from design documents'
+          git push origin HEAD:refs/heads/rewrite/design-first
+      - uses: actions/upload-artifact@v4
         if: always()
-        uses: actions/upload-artifact@v4
         with:
-          name: rust-design-documentation-evidence
+          name: repository-correction-documentation-evidence
           path: .qa/
           include-hidden-files: true
-          if-no-files-found: warn
-  visual-reference:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Install pinned browser test tools
-        run: |
-          python3 -m pip install playwright==1.57.0
-          python3 -m playwright install --with-deps chromium
-      - name: Check original fixture interactions
-        run: python3 tests/browser_design.py --screenshots .qa/design-images
-      - name: Check HTTP-hosted references and capture all seven screens
-        run: python3 tests/browser_reference.py
-      - name: Preserve browser results and screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: design-reference-browser-evidence
-          path: .qa/
-          include-hidden-files: true
-          if-no-files-found: warn
