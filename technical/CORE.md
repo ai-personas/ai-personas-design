@@ -181,7 +181,7 @@ python3 /path/to/ai-personas-design/scripts/verify_rust_core.py \
   --trusted-test-host
 ```
 
-The runner verifies the requested exact clean revision, runs the existing fixture/build/barrier/behavior suites, stops at failure, and retains exit codes and logs in a private directory outside both repositories. For a future candidate, explicitly supply its full commit SHA. It does not switch branches, install tools, push, call a live provider, or claim to implement missing v1.2 tests. It is not a sandbox: run no production secrets or live node on the test host.
+The runner verifies the requested exact clean revision, runs the existing fixture/build/barrier/behavior suites, stops at failure, and retains exit codes and logs in a private directory outside both repositories. For a future candidate, explicitly supply its full commit SHA. It does not switch branches, install tools, push, call a live provider, or claim to implement missing v1.2 tests. This runner provides no isolation. Keep production secrets and live nodes off the test host.
 
 A successful runner result means **the selected existing suites passed for that commit**, not M01–M26 or B01–B12 all passed. An unavailable toolchain, failed check or interrupted run must remain visible. Private logs stay local and must not be automatically uploaded to the public design repository.
 
