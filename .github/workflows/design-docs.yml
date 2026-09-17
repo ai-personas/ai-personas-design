@@ -21,11 +21,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Check the authored UI fixture
+      - name: Check the authored UI fixture and reference routes
         run: |
-          node --check design/state.js
-          node --check design/app.js
-          node --test tests/design-state.test.cjs
+          for file in design/*.js; do node --check "$file"; done
+          node --test tests/*.test.cjs
       - name: Install isolated documentation renderer
         run: npm install --no-save --prefix "$RUNNER_TEMP/design-mermaid" @mermaid-js/mermaid-cli@11.4.2
       - name: Render every Mermaid diagram
@@ -35,6 +34,35 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: rust-design-documentation-evidence
+          path: .qa/
+          include-hidden-files: true
+          if-no-files-found: warn
+  visual-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned browser test tools
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Check original fixture interactions
+        run: python3 tests/browser_design.py --screenshots .qa/design-images
+      - name: Check HTTP-hosted references and capture all seven screens
+        run: python3 tests/browser_reference.py
+      - name: Preserve browser results and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-reference-browser-evidence
           path: .qa/
           include-hidden-files: true
           if-no-files-found: warn
