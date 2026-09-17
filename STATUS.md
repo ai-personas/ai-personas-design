@@ -1,49 +1,69 @@
 # Implementation status and evidence
 
-[Start here](README.md) · [Full specification](technical/SPEC.md) · [Source register](SOURCES.md)
+[Start here](README.md) · [Full specification](technical/SPEC.md) · [Core changes](technical/CORE.md) · [Source register](SOURCES.md)
 
-This document separates a design decision, a static source observation and an executed result. None is a substitute for the others.
+This document separates a design decision, a source report and an executed result. None is a substitute for the others. This update changes the **design repository's core contracts, implementation traceability and verification helpers only**. It does not change Rust runtime source or UI source.
 
 ## Pinned scope
 
-| Repository | Branch | Reference used for this documentation |
+| Reference | Repository and branch | Commit |
 |---|---|---|
-| Runtime | `ai-personas/rewrite/design-first` | `d3339d30fa883c21c7935a2d009e3a58f480a256` |
-| UI | `ai-personas-ui/rewrite/design-first` | `fa7cef7b748fb855e53857b1a8a351ddab458dda` |
-| Design before this update | `ai-personas-design/rewrite/design-first` | `07a86a728cb9eae3384f6c717fd3ccccf6b2ae97` |
+| Current core implementation reference | `ai-personas/ai-personas`, `rewrite/design-first` | `c2b7d89a7d05f7f31e35d590ba39a3fcf80439fa` |
+| Historical source inspected for the supplied v1.2 design | `ai-personas/ai-personas`, `rewrite/design-first` | `d3339d30fa883c21c7935a2d009e3a58f480a256` |
+| Design before this core-only update | `ai-personas/ai-personas-design`, `rewrite/design-first` | `52bdbfadc3dc77ce15e3cb376036c7293acad5da` |
+| Unchanged historical UI reference | `ai-personas/ai-personas-ui`, `rewrite/design-first` | `fa7cef7b748fb855e53857b1a8a351ddab458dda` |
 
-Only the Rust runtime and its matching rewrite UI/design are implementation bases. No Python-main capabilities or results are imported. Rust-only does not prohibit TypeScript in the UI or authorized tools written in other languages.
+Only the Rust runtime is the core implementation target. No Python-main code, capabilities or results are imported. The normative v1.2 document retains its historical source observations; the newer source report below does not retrospectively change them. The UI reference is retained for provenance, not claimed to be a freshly verified compatible build.
 
-## What is observed versus required
+## What changed in the runtime reference
 
-| Area | Observed baseline or published UI support | Still required for the proposed design |
+The [implementation report at the current Rust commit](https://github.com/ai-personas/ai-personas/blob/c2b7d89a7d05f7f31e35d590ba39a3fcf80439fa/docs/RUST-V1.2-IMPLEMENTATION.md) reports these source changes:
+
+| Area | Reported increment | Evidence boundary |
 |---|---|---|
-| Identity | Rust creation/update, OCEAN/VAD, retained records | Work-linked bounded birth, initialization authority, consent and accepted responsibility |
-| Organization | Work, runs, messages, artifacts, requests and exact submissions | Individual agendas, agreements, accepted commitments, explicit coverage and feedback dispositions |
-| Learning | Rust document/context actions | First-class fragments, per-work selection and demonstrated useful transfer |
-| Inference | Rust README describes Codex app-server and executable bridges | Direct HTTP adapters, scoped credentials, conformance and bounded usage |
-| Execution | Rust host commands and tracked process groups | Isolation, protected assessment, scoped effects, resource limits and actual-completion barriers |
-| Storage | SQLite records/revisions/actions/events/inbox/FTS | One transaction boundary for new grants, reservations, leases, assembly adoption and release seals |
-| Assessment | Independent identity and exact-submission review primitives | Criterion/input/policy applicability, conditional claims, coverage review and atomic release |
-| UI | Six work views, bounded read-only adapters, retained v1 actions, preview verification and lifecycle improvements | Future Rust-generated authoring controls and authoritative v2 completion/resource projections |
-| Continuity | Existing transfers and paused identity import/handoff routing | No new cross-node exclusivity or automatic v2 active identity export in this release |
+| Saved decisions | Barrier persisted before asynchronous dispatch; old suffix suppressed; non-success receipts stop the batch | Reported source change; Rust regression execution remains to be established |
+| Idle behavior | Empty decisions yield rather than automatically spend another call; newer-input protection retained | Yield is not completion; full authorized self-wake/resource control remains outstanding |
+| Context | Participation-scoped selections, compaction and images; legacy global context not silently promoted | Context separation is not a complete confidentiality or context-budget guarantee |
+| Ownership | Explicit execution directory cannot bypass run ownership; foreign uncertain actions cannot be resolved by another persona | Two guards are not a complete authenticated ACL/admission system |
+| Continuity | Reported inclusion of explicitly selected run records/action receipts in exports | No distributed exclusivity or safe complete v2 active-state transfer is inferred |
 
-The full details of the UI boundary are in the [pinned UI integration note](https://github.com/ai-personas/ai-personas-ui/blob/fa7cef7b748fb855e53857b1a8a351ddab458dda/docs/RUST-V1.2-UI.md). Read-only rendering of a record does not establish backend enforcement, confidentiality or atomic acceptance.
+The report says the Rust build/tests were not executed when that increment was prepared. Its fixture-generator tests are not Rust runtime evidence. This design update did not compile Rust, rerun those tests, call a live provider, run native engineering tools or demonstrate emergence. Do not mark a source increment as a passing acceptance gate.
 
-## Specific static finding to reproduce
+## What remains implementation work
 
-At the pinned runtime revision, `jobs::start` returns after spawning a supervisor. `operate` returns a running receipt and `apply_decision` proceeds unless it sees a failed receipt. Foreground waiting occurs on a later `work_loop` entry. A later same-decision action can therefore publish the previous bytes of a still-being-generated file. This is a static code-path finding, not an executed reproduction in this documentation task. See [runtime protocol](technical/STORAGE.md).
+| Core area | Required implementation and evidence |
+|---|---|
+| Authority and resources | One-store authenticated admission, ExecutionRoot distinct from participation/bootstrap contexts, root-conserved reservations, leases/fences, cancellation and protected closeout |
+| Identity and organization | Typed fragments, individual agendas/relationships, exact agreement endorsements, mandates, continuation acceptance, coverage and accepted commitments |
+| Birth and lifecycle | Atomic capacity/funding/identity/bootstrap, restricted invitation preview, independent membership/commitment consent, bounded initialization, handoff and dormancy |
+| Provider boundary | Direct HTTP adapters and startup defaults, exact capability/model/usage/error/media/cancellation handling; current README still describes process inference |
+| Execution boundary | Enforceable containment, authorized snapshots/paths, resource/network limits, mediated credentials and protected assessor access; current README still describes unsandboxed host execution |
+| Feedback and coordination | Conditional assumptions, durable blocker dispositions, unstarvable current facts, observed-version conflicts, version-ready interfaces and bounded iteration |
+| Evidence and release | Exact input/criterion/policy binding, conservative staleness, coupled assembly CAS, scope review and atomic final release |
+| Acceptance | Real mechanical tests, small peer-feedback-to-edit-to-review evidence, controlled learning/birth/restraint comparisons, house depth and unrelated needs |
 
-The existing `wait` mutation already checks newer inbox items transactionally. Preserve it. `src/delivery.rs` is primarily continuity forwarding, not the entire local actor notification implementation.
+See the dependency-ordered [core implementation contract](technical/CORE.md) and [machine-readable gate plan](technical/core-gates.json). Every core gate in this plan is `not_verified`. M14 remains explicitly deferred to UI integration, not removed from full product acceptance.
 
-## Verification boundaries
+## Historical defect and retained protections
 
-The supplied v1.2 review used authored scenarios and small abstract protocol checks. Those are not live persona traces, Rust regression tests, native CAD output, engineering simulations or security certification.
+At the historical `d3339d30fa883c21c7935a2d009e3a58f480a256` revision, the supplied stress review identified a pending-action sequencing path that could publish previous bytes while a tool was still running. That was a static finding, not an executed reproduction in the design task. The newer implementation report describes a source correction; it must be tested with a delayed writer and a pre-existing old file, including failure and crash replay. Do not rebuild a second barrier or claim the old defect was reproduced on the newer commit.
 
-The [UI CI run for the pinned UI commit](https://github.com/ai-personas/ai-personas-ui/actions/runs/35169941532) reports a production build, 34 unit checks and 36 desktop/mobile browser-fixture checks. Its synthetic HTTP data is not a full Rust integration campaign or proof of emergent capability. The Rust-backed load/live suites have separate prerequisites.
+The baseline `wait` already checks newer inbox items transactionally. Preserve that check. Local notification work belongs in runtime/store; `src/delivery.rs` is primarily continuity forwarding. The [storage guide](technical/STORAGE.md) describes target semantics, not a new verification result.
 
-The checks introduced **in this design repository** validate documentation structure, local links and Mermaid diagrams. A green documentation run proves only those checks. It does not run models, Rust binaries, engineering tools or outside effects. Check the exact documentation commit's workflow before claiming that run passed.
+## UI is unchanged in this increment
+
+The [historical UI integration note](https://github.com/ai-personas/ai-personas-ui/blob/fa7cef7b748fb855e53857b1a8a351ddab458dda/docs/RUST-V1.2-UI.md) remains the source for the previously reported read-only adapters and UI behavior. Those claims are not revalidated here. No prototype, layout, component, stylesheet, browser fixture, generated API or UI repository file is changed.
+
+Backend activity, acceptance, outside evidence and review applicability remain separate facts even while UI work is deferred. A read-only view is not evidence of backend enforcement.
+
+## Verification boundaries and private evidence
+
+The supplied scenarios and abstract protocol checks are not live persona traces, Rust regression tests, native CAD output, engineering simulations or security certification. Design checks validate links, structure, planning IDs and helper behavior. Their success does not satisfy runtime or behavioral gates.
+
+The new private-checkout runner executes only the existing locked Rust build/fixture/barrier/behavior suites, records command exits and stops on failure. Even when it succeeds, its report leaves full v1.2 acceptance `not_evaluated`; it does not invent verdicts for unimplemented tests. Missing tools, dirty or changed revisions, failures and interruption remain visible.
+
+The runtime repository is private. Keep its source, logs, node state, build artifacts and credentials out of this public design repository. The runner stores evidence outside both checkouts; it does not publish or push it. A trusted disposable Linux test host is still required because the legacy process tests are not sandboxed. See [reproduction instructions](technical/CORE.md).
 
 ## Meaning of the word final
 
-Version 1.2 is the agreed design target after the stress review, not a claim that every requirement is implemented or proven. The implementation must pass [mechanical and behavioral acceptance](technical/ACCEPTANCE.md). Later corrections require explicit versioned decisions and preserved old evidence; neither documentation nor an evaluator may silently turn failure into success.
+Version 1.2 is the agreed design target after the stress review, not a claim that every requirement is implemented or proven. [Mechanical and behavioral acceptance](technical/ACCEPTANCE.md) remains mandatory. Preserve old failed outcomes and source versions. A documentation pass, a successful build, an installed tool or a new persona identity cannot substitute for useful, independently checked work.

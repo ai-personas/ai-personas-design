@@ -1,8 +1,10 @@
 # Rust implementation, migration and release plan
 
-[Specification](SPEC.md) · [Acceptance gates](ACCEPTANCE.md) · [Current status](../STATUS.md)
+[Specification](SPEC.md) · [Core implementation](CORE.md) · [Acceptance gates](ACCEPTANCE.md) · [Current status](../STATUS.md)
 
-Only `ai-personas/rewrite/design-first` at `d3339d30fa883c21c7935a2d009e3a58f480a256` is the runtime baseline. Use its existing stack and the matching rewrite UI/design. Do not merge or port another runtime. Requirements here describe work to implement and verify, not patches already applied by this documentation commit.
+The only runtime target is `ai-personas/ai-personas`, branch `rewrite/design-first`. The supplied v1.2 source audit remains pinned at `d3339d30fa883c21c7935a2d009e3a58f480a256`; the current implementation reference for this core increment is `c2b7d89a7d05f7f31e35d590ba39a3fcf80439fa`. Use the existing Rust stack, not another runtime. Requirements here are implementation and verification work, not Rust patches applied by this design commit.
+
+For the current core-only phase, follow [CORE.md](CORE.md) and its [gate manifest](core-gates.json). They distinguish the reported barrier/yield/context source increment from the historical defect and supply an exact-revision private-checkout runner. UI work remains deferred; the broader product-release requirements below are retained, not silently waived.
 
 ## Change the existing boundaries, not the language
 
@@ -29,7 +31,7 @@ Small modules such as work, fragments, birth, authority, context, evidence, sand
 
 Moving to HTTP includes implicit registration and startup configuration. Adding fragments includes work-scoped selection and useful-transfer tests. Adding birth includes atomic capacity/funding/identity/initialization, restricted bootstrap and separate membership/commitment consent. Adding review includes actual agreed checks, conditional inputs, relevant blockers and exact currentness.
 
-Keep stop-on-first-failure and add stop-on-pending with permanent suppression of the old suffix. The original empty-decision continuation must gain explicit yield/quiescence. An accepted subjective result need not run a ceremonial shell command; an executed-analysis claim cannot pass without actual execution.
+Keep stop-on-first-failure, stop-on-pending with permanent suppression of the old suffix, and explicit yield/quiescence. The current runtime report describes source changes for these mechanics; verify the existing increment before integrating roots/fences or adding duplicate implementations. An accepted subjective result need not run a ceremonial shell command; an executed-analysis claim cannot pass without actual execution.
 
 An isolation configuration is not enforcement. Implement containment before autonomous installers or sensitive sessions. Validate filesystem publication against the accessible snapshot, not a user-supplied path/digest alone. Full-record API and search paths need scope guards too, not just writes.
 
@@ -48,7 +50,9 @@ Provider and isolation work may proceed alongside records and UI; they must pass
 
 ## Baseline reproduction commands
 
-These commands are documented by the pinned Rust branch. This design update does not claim to have executed them.
+For core regression work, use the exact-revision runner in [CORE.md](CORE.md); it covers the current staged-receipt and real-process barrier suites as well as the retained behavior tests. Its logs stay outside this public design repository.
+
+The commands below remain the broader baseline build/package reference, including the later UI integration phase. This core-only design update does not claim to have executed them.
 
 ```sh
 # In the Rust runtime checkout

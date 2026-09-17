@@ -1,0 +1,516 @@
+{
+  "schema": "ai-personas/core-implementation-plan/1",
+  "not_backend_schema": true,
+  "normative_design": {
+    "path": "technical/SPEC.md",
+    "version": "1.2"
+  },
+  "scope": {
+    "design_repository": "ai-personas/ai-personas-design",
+    "runtime_repository": "ai-personas/ai-personas",
+    "branch": "rewrite/design-first",
+    "ui_changes": false,
+    "runtime_source_changes_in_this_increment": false,
+    "federation_transport_redesign": false
+  },
+  "baseline": {
+    "design_commit": "52bdbfadc3dc77ce15e3cb376036c7293acad5da",
+    "runtime_commit": "c2b7d89a7d05f7f31e35d590ba39a3fcf80439fa",
+    "historical_runtime_commit": "d3339d30fa883c21c7935a2d009e3a58f480a256",
+    "runtime_contract": "ai-personas/1",
+    "proposed_authoring_contract": "ai-personas/2",
+    "evidence": "source_report_only"
+  },
+  "invariants": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21"
+  ],
+  "workstreams": [
+    {
+      "id": "K0",
+      "title": "Verify retained increment",
+      "requires": [],
+      "spec_sections": [
+        10,
+        17
+      ],
+      "runtime_paths": [
+        "src/runtime.rs",
+        "src/runtime_decision_tests.rs",
+        "tests/completion_barrier.rs",
+        "integtest/behavior.rs"
+      ],
+      "gates": [
+        "M08",
+        "M17",
+        "M26"
+      ],
+      "source_status": "reported_unverified"
+    },
+    {
+      "id": "K1",
+      "title": "Transactional authority and funding",
+      "requires": [
+        "K0"
+      ],
+      "spec_sections": [
+        5,
+        13,
+        17,
+        18,
+        23
+      ],
+      "runtime_paths": [
+        "src/store.rs",
+        "src/runtime.rs",
+        "src/types.rs",
+        "src/contract.rs",
+        "src/api.rs"
+      ],
+      "gates": [
+        "M01",
+        "M03",
+        "M04",
+        "M07",
+        "M11",
+        "M13",
+        "M16",
+        "M25",
+        "M26"
+      ],
+      "source_status": "required"
+    },
+    {
+      "id": "K2",
+      "title": "HTTP providers and isolated tools",
+      "requires": [
+        "K0"
+      ],
+      "spec_sections": [
+        11,
+        12,
+        13
+      ],
+      "runtime_paths": [
+        "src/provider.rs",
+        "src/main.rs",
+        "src/jobs.rs",
+        "src/runtime.rs"
+      ],
+      "gates": [
+        "M10",
+        "M12",
+        "M13",
+        "M15"
+      ],
+      "source_status": "required"
+    },
+    {
+      "id": "K3",
+      "title": "Identity memory and accepted work",
+      "requires": [
+        "K1"
+      ],
+      "spec_sections": [
+        3,
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "runtime_paths": [
+        "src/contract.rs",
+        "src/types.rs",
+        "src/runtime.rs",
+        "src/store.rs"
+      ],
+      "gates": [
+        "M06",
+        "M08",
+        "M11",
+        "M19",
+        "M21"
+      ],
+      "source_status": "required"
+    },
+    {
+      "id": "K4",
+      "title": "Bounded bootstrap and lifecycle",
+      "requires": [
+        "K1",
+        "K3"
+      ],
+      "spec_sections": [
+        8,
+        13,
+        17
+      ],
+      "runtime_paths": [
+        "src/runtime.rs",
+        "src/store.rs",
+        "src/contract.rs",
+        "src/types.rs"
+      ],
+      "gates": [
+        "M05",
+        "M06",
+        "M07",
+        "M18",
+        "M23",
+        "M25"
+      ],
+      "source_status": "required"
+    },
+    {
+      "id": "K5",
+      "title": "Feedback assumptions and iteration",
+      "requires": [
+        "K3"
+      ],
+      "spec_sections": [
+        5,
+        6,
+        9,
+        10,
+        14
+      ],
+      "runtime_paths": [
+        "src/contract.rs",
+        "src/runtime.rs",
+        "src/store.rs",
+        "src/types.rs"
+      ],
+      "gates": [
+        "M19",
+        "M20",
+        "M21",
+        "M22"
+      ],
+      "source_status": "required"
+    },
+    {
+      "id": "K6",
+      "title": "Evidence applicability and release",
+      "requires": [
+        "K1",
+        "K3",
+        "K5"
+      ],
+      "spec_sections": [
+        14,
+        15,
+        17,
+        18
+      ],
+      "runtime_paths": [
+        "src/runtime.rs",
+        "src/store.rs",
+        "src/contract.rs",
+        "src/types.rs",
+        "src/api.rs"
+      ],
+      "gates": [
+        "M02",
+        "M09",
+        "M10",
+        "M20",
+        "M21",
+        "M24"
+      ],
+      "source_status": "required"
+    },
+    {
+      "id": "K7",
+      "title": "Controlled behavioral campaign",
+      "requires": [
+        "K2",
+        "K4",
+        "K6"
+      ],
+      "spec_sections": [
+        20,
+        21,
+        24
+      ],
+      "runtime_paths": [
+        "integtest/behavior.rs",
+        "integtest/live.rs"
+      ],
+      "gates": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B11",
+        "B12"
+      ],
+      "source_status": "required"
+    }
+  ],
+  "mechanical_gates": [
+    {
+      "id": "M01",
+      "title": "Idempotent authorized admission",
+      "required_evidence": "Same authorized operation and digest replays one receipt; changed body conflicts; foreign receipt lookup is denied.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M02",
+      "title": "Concurrent artifact/head adoption",
+      "required_evidence": "One exact CAS succeeds; conflicting alternatives remain inspectable without silent overwrite.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M03",
+      "title": "Actor and writer fencing",
+      "required_evidence": "Expired/lost fences reject late mutations while retaining genuine execution/accounting receipts.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M04",
+      "title": "Durable delivery and restart",
+      "required_evidence": "Crash/restart preserves addressed inbox/outbox delivery and deduplication without new funding.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M05",
+      "title": "Atomic birth resources",
+      "required_evidence": "Concurrent births and retries respect root population/rate/depth/call bounds and fund initialization once.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M06",
+      "title": "Separate birth and consent",
+      "required_evidence": "Birth, membership and commitment acceptance are separate; newborns gain no secrets or extra authority.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M07",
+      "title": "Descendant and uncertain usage",
+      "required_evidence": "Initialization, descendants, retries, compaction and reviews are charged; ambiguous usage is not refunded.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M08",
+      "title": "Context isolation and overflow",
+      "required_evidence": "Per-work selection preserves mandatory constraints and refuses forbidden/superseded context or an unfit mandatory core.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M09",
+      "title": "Current assessment applicability",
+      "required_evidence": "Changed criterion/input/assembly/assumption/policy cannot retain a current pass while invalidation is queued.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M10",
+      "title": "Actual evidence and media",
+      "required_evidence": "Missing inputs, failed execution, unsupported image input and fabricated output references cannot satisfy evidence.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M11",
+      "title": "Read/write privacy",
+      "required_evidence": "Cross-work graph, search, snippets, projections, receipt lookup and revoked-resource access do not leak private data.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M12",
+      "title": "Enforceable isolation",
+      "required_evidence": "Untrusted packages, artifacts and prompts cannot access keys, assessor state, ungranted network/effects or privileged execution.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M13",
+      "title": "Ambiguous external effects",
+      "required_evidence": "Uncertain remote outcomes remain effect_unknown and are reconciled before another dispatch.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M15",
+      "title": "HTTP provider conformance",
+      "required_evidence": "Exact capabilities, malformed/refused/partial output, cancellation, retry bounds, usage and model ceilings are tested.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M16",
+      "title": "Historical data and restore",
+      "required_evidence": "Import/restore preserves original bytes and missing bindings; rollback reconciles outside receipts without fabricated authority.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M17",
+      "title": "Pending-action barrier",
+      "required_evidence": "Delayed successful/failed writers with an existing stale file and crash replay cannot admit the original publication suffix.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M18",
+      "title": "Restricted pre-membership preview",
+      "required_evidence": "Newborn decides using exact permitted seed/preview access; parent/work/private data remains inaccessible, including after revocation.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M19",
+      "title": "Continuation and uncovered outcomes",
+      "required_evidence": "Work without accepted continuation is unowned/awaiting acceptance; missing adopted outcomes cannot borrow another owner's completion.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M20",
+      "title": "Conditional claims",
+      "required_evidence": "Authorizing an assumption does not confirm a fact; conditional evidence cannot qualify an unconditional claim.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M21",
+      "title": "Persistent feedback and critical inputs",
+      "required_evidence": "Applicable blocking findings survive delivery/acknowledgement/compaction; current critical facts are not starved by ordinary history pages.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M22",
+      "title": "Version-ready iteration",
+      "required_evidence": "Final-prerequisite cycles are visible; explicitly permitted provisional exploration proceeds conditionally and unresolved final checks still block acceptance.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M23",
+      "title": "Protected closeout",
+      "required_evidence": "Ordinary exploration/birth cannot spend closeout resources; authorized transfers conserve the root and unknown exposure remains reserved.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M24",
+      "title": "Atomic assembly and release",
+      "required_evidence": "Coupled assembly adoption and both update-versus-seal orderings retain exact current/historical distinctions.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M25",
+      "title": "Bounded metadata and self-wakes",
+      "required_evidence": "Metadata-only activity cannot extend root/self-wake ceilings; useful rejections, negative experiments and questions remain representable.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "M26",
+      "title": "Await completion races",
+      "required_evidence": "Both terminal-result-versus-wait orderings leave satisfied work runnable or durably notified and preserve the existing newer-input wait protection.",
+      "verification": "not_verified"
+    }
+  ],
+  "behavioral_gates": [
+    {
+      "id": "B01",
+      "title": "Different personas, same need",
+      "required_evidence": "Meaningful attention/method/artifact variation is assessed separately from requirement adequacy.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B02",
+      "title": "Different partners",
+      "required_evidence": "Interaction changes behavior without simply erasing a continuing identity.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B03",
+      "title": "Different shared history",
+      "required_evidence": "Relevant relationship/agreement history changes coordination under controlled comparisons.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B04",
+      "title": "Character ablation",
+      "required_evidence": "Character/relationship ablations and names-only substitutions distinguish consequential state from labels or random sampling.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B05",
+      "title": "Feedback to edit to review",
+      "required_evidence": "Peer evidence changes an exact artifact revision and an independent check verifies the change.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B06",
+      "title": "Useful unexpected improvement",
+      "required_evidence": "An unprompted opportunity is tested and improves the agreed result or produces an informative rejection.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B07",
+      "title": "Evidence-driven reprioritization",
+      "required_evidence": "A disturbance changes accepted work rather than continuing a now-inferior branch blindly.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B08",
+      "title": "Useful birth and restraint",
+      "required_evidence": "Expansion yields an inspectable distinct contribution when useful; simple work can finish without population growth.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B09",
+      "title": "Correction and counterevidence",
+      "required_evidence": "Later outcomes improve against matched withheld-memory controls and erroneous fragments are revised.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B10",
+      "title": "Model-switch continuity",
+      "required_evidence": "Identity, retained learning and boundaries survive an authorized provider/model change.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B11",
+      "title": "Coordinated house with disturbance",
+      "required_evidence": "Actual editable architecture/structure/plumbing/HVAC/electrical, appropriate analyses, revalidation and exact review meet frozen scope with outside limits.",
+      "verification": "not_verified"
+    },
+    {
+      "id": "B12",
+      "title": "Unrelated needs",
+      "required_evidence": "Software/data/writing/research/conversation/ongoing cases use the same generic core without new task-routing branches.",
+      "verification": "not_verified"
+    }
+  ],
+  "deferred_gates": [
+    {
+      "id": "M14",
+      "reason": "UI replay, access, viewer disposal and focus remain mandatory for full release but are outside this core-only change."
+    }
+  ],
+  "safety": {
+    "live_tool_campaign_requires": [
+      "K1",
+      "K2"
+    ],
+    "private_runtime_source_must_not_be_published": true,
+    "runner_implies_full_acceptance": false
+  }
+}

@@ -9,6 +9,8 @@ The sole target is the existing Rust `rewrite/design-first` branch. This is a mo
 | Document | Purpose |
 |---|---|
 | [SPEC.md](SPEC.md) | Canonical v1.2 requirements and invariants; complete behavior, records and guards |
+| [CORE.md](CORE.md) | Core-only implementation contract, current source baseline, next batches and private runtime verification |
+| [core-gates.json](core-gates.json) | Source-aligned core planning manifest; not a backend API schema or executed acceptance report |
 | [STORAGE.md](STORAGE.md) | Transactions, exact versions, asynchronous actions, recovery and wait semantics |
 | [PROVIDERS.md](PROVIDERS.md) | Direct inference, model independence, context and tool boundaries |
 | [UI.md](UI.md) | Six workspace views, status semantics, current read-only support and future integration |
@@ -17,6 +19,8 @@ The sole target is the existing Rust `rewrite/design-first` branch. This is a mo
 | [API.md](API.md) | **Unchanged generated v1 interface**, not the proposed v2 authoring contract |
 | [House example](../examples/HOUSE.md) | Illustrative behavior, counterexamples and full multidisciplinary scope |
 | [Source register](../SOURCES.md) | Which attachment or pinned source supports each part |
+
+For core work now, start with [CORE.md](CORE.md). It distinguishes the current reported Rust increment from the historical baseline and leaves UI implementation deferred.
 
 The specification is normative for target behavior. The focused guides are explanatory cross-references. Existing executable functionality is described separately in the status page and generated v1 API. Do not turn proposed Rust names into untyped frontend commands before implementing and generating the backend contract.
 
@@ -40,3 +44,9 @@ flowchart TB
 `python3 scripts/check_docs.py` checks local Markdown paths/anchors, balanced fences, required coverage and preservation of the generated v1 API. It also extracts Mermaid blocks to `.qa/diagrams/`. The documentation workflow renders those blocks and uploads its check report and diagram images. This is documentation validation, not runtime or persona acceptance.
 
 All diagrams have an adjacent prose explanation. The prose remains usable when a reader's Markdown viewer cannot render Mermaid. The house example is deliberately not a universal workflow.
+
+## Core-only checks
+
+`python3 scripts/check_core.py` validates all 21 invariants, the 25 non-UI mechanical gates and 12 behavioral gates in the planning manifest. M14 stays explicitly deferred. `python3 -m unittest discover -s tests -v` also tests the validator and private-checkout runner. These are helper checks, not Rust acceptance.
+
+Use `scripts/verify_rust_core.py` on a trusted disposable Linux host with an exact clean private runtime checkout to execute its existing suites. The [core guide](CORE.md) supplies the command and evidence limits. Logs remain private and are never automatically uploaded to this design repository.
