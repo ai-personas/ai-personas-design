@@ -12,7 +12,7 @@ import subprocess
 import threading
 from urllib.parse import urlsplit
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -56,6 +56,7 @@ def main():
         except Exception as error:
             failures.append(name)
             checks.append({'check': name, 'passed': False, 'error': str(error)})
+            print(f'FAIL: {name}: {error}', flush=True)
 
     def require(value, message):
         if not value:
@@ -78,6 +79,7 @@ def main():
 
         context.route('**/*', guard)
         page = context.new_page()
+        page.set_default_timeout(10000)
         page.on('pageerror', lambda error: errors.append(str(error)))
         page.on('response', lambda response: errors.append(f'{response.status}: {response.url}')
                 if response.status >= 400 and response.request.resource_type in {'document', 'script', 'stylesheet'} else None)
@@ -114,12 +116,22 @@ def main():
         def response_semantics():
             page.set_viewport_size({'width': 390, 'height': 740})
             page.goto(base + 'index.html?preview=request#/work', wait_until='networkidle')
-            page.locator('#answer').fill('Not known yet. <script>window.__injected = true</script>')
+            answer = 'Not known yet. <script>window.__injected = true</script>'
+            page.locator('#answer').fill(answer)
             page.get_by_role('button', name='Record response', exact=True).click()
             page.locator('#dialog[open]').wait_for(state='hidden')
-            require('Answer recorded, not resolved' in page.locator('[aria-labelledby="work-title-home"]').inner_text(),
-                    'Answer was not retained as answered-but-unresolved')
+            # The compact mobile list hides desktop helper text. Inspect the
+            # visible badge, then the retained answer and disposition in detail.
+            row = page.locator('[aria-labelledby="work-title-home"]')
+            expect(row.locator('.badge')).to_have_text('Awaiting assessment')
+            row.get_by_role('link', name='Four-bedroom home', exact=True).click()
+            expect(page.locator('.response-panel')).to_be_visible()
+            expect(page.locator('.answer-copy')).to_have_text(answer)
+            expect(page.locator('.response-panel')).to_contain_text('The request is not resolved.')
+            expect(page.locator('.status-strip')).to_contain_text('Not assessed')
             require(page.evaluate('window.__injected !== true'), 'Literal answer executed as script')
+            page.locator('.back-link').click()
+            expect(page.locator('h1')).to_have_text('Work')
             page.reload(wait_until='networkidle')
             page.locator('#dialog[open]').wait_for()
             require(page.locator('#answer').input_value() == '', 'Fixture state persisted across reload')
@@ -132,10 +144,17 @@ def main():
                 page.set_viewport_size({'width': w, 'height': 900})
                 page.goto(base + 'references.html#work-desktop', wait_until='networkidle')
                 for s in screens:
-                    page.locator(f'[data-screen="{s["id"]}"]').click()
-                    page.wait_for_function("document.getElementById('load-status').textContent.startsWith('Preview ready')")
+                    link = page.locator(f'[data-screen="{s["id"]}"]')
+                    link.click()
+                    # A hash change is asynchronous. An old frame's Ready text
+                    # must not satisfy readiness for the newly selected screen.
+                    expect(link).to_have_attribute('aria-current', 'page')
+                    expect(page.locator('#screen-title')).to_have_text(s['title'])
+                    query = '?preview=request' if s.get('preview') == 'request' else ''
+                    expect(page.locator('iframe')).to_have_attribute('src', 'index.html' + query + s['route'])
+                    expect(page.locator('#stage')).to_have_attribute('aria-busy', 'false')
+                    expect(page.locator('#load-status')).to_have_text('Preview ready · illustrative only')
                     require(page.locator('iframe').count() == 1 and len(page.frames) == 2, 'Old fixture frame was retained')
-                    require(page.locator('#screen-title').inner_text() == s['title'], 'Wrong selected reference')
                     iframe = page.frame_locator('iframe')
                     iframe.locator('#main').wait_for()
                     if s.get('preview') == 'request':
@@ -147,7 +166,8 @@ def main():
                 require(page.url == before, 'Reviewer skip link changed selection')
                 require(page.locator('#review').evaluate('(e) => e === document.activeElement'), 'Reviewer focus missing')
                 page.goto(base + 'references.html#%E0%A4%A', wait_until='networkidle')
-                require(page.locator('#screen-title').inner_text() == screens[0]['title'], 'Malformed fragment did not fall back')
+                expect(page.locator('#screen-title')).to_have_text(screens[0]['title'])
+                expect(page.locator('#stage')).to_have_attribute('aria-busy', 'false')
                 no_overflow()
                 page.screenshot(path=str(args.output / f'reviewer-{w}.png'), full_page=True)
             check(f'Isolated screen reviewer at {width}px', reviewer)
