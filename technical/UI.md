@@ -5,7 +5,7 @@
 The UI answers six questions: what are we trying to accomplish; what does each persona care about; who accepted responsibility; what changed; what evidence applies now; and what needs the person?
 
 ```mermaid
-flowchart TB
+flowchart LR
     W["One work workspace"] --> O["Overview: purpose, commitments, resources and blockers"]
     W --> P["Perspectives: different individual agendas"]
     W --> C["Work and outcomes: ownership, gaps and dependencies"]
