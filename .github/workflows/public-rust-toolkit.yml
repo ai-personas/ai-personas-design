@@ -1,0 +1,85 @@
+# Offline tooling only. Never fetch, checkout, build, or upload private project code.
+name: Public Rust offline toolkit
+on:
+  push:
+    branches: [tools/public-rust-offline]
+permissions:
+  contents: read
+jobs:
+  toolkit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Download official compiler and public crates only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rustup toolchain install 1.90.0 --profile minimal
+          mkdir -p public-kit/src output
+          printf 'fn main() {}\n' > public-kit/src/main.rs
+          cat > public-kit/Cargo.toml <<'EOF'
+          [package]
+          name = "public-rust-offline-toolkit"
+          version = "0.0.0"
+          edition = "2024"
+          rust-version = "1.90"
+          [dependencies]
+          anyhow = "1"
+          axum = "0.8"
+          tokio = { version = "1", features = ["full"] }
+          tokio-util = { version = "0.7", features = ["io", "rt"] }
+          tower-http = { version = "0.6", features = ["fs", "compression-gzip"] }
+          serde = { version = "1", features = ["derive"] }
+          serde_json = { version = "1", features = ["preserve_order"] }
+          schemars = "1"
+          rusqlite = { version = "0.39", features = ["bundled"] }
+          uuid = { version = "1", features = ["v4"] }
+          chrono = { version = "0.4", features = ["serde"] }
+          sha2 = "0.10"
+          hex = "0.4"
+          fs2 = "0.4"
+          libc = "0.2"
+          futures = "0.3"
+          async-stream = "0.3"
+          async-trait = "0.1"
+          libp2p = { version = "0.56", default-features = false, features = ["tokio", "tcp", "noise", "yamux", "request-response", "cbor", "macros"] }
+          clap = { version = "4", features = ["derive"] }
+          tar = "0.4.46"
+          image = { version = "0.25", default-features = false, features = ["png", "jpeg", "webp"] }
+          reqwest = { version = "0.12", default-features = false, features = ["json", "stream", "rustls-tls"] }
+          tempfile = "3"
+          EOF
+          (cd public-kit && cargo +1.90.0 vendor vendor > vendor-config.toml)
+          cp public-kit/Cargo.toml public-kit/Cargo.lock public-kit/vendor-config.toml output/
+          rustc +1.90.0 --version --verbose > output/compiler.txt
+          sysroot=$(rustc +1.90.0 --print sysroot)
+          out="$PWD/output"
+          (cd "$sysroot" && tar -czf "$out/compiler.tar.gz" bin/rustc bin/cargo lib/libLLVM* lib/librustc_driver*)
+          tar -C "$sysroot" -czf output/standard-library.tar.gz lib/rustlib
+          tar -C public-kit -czf output/public-crates.tar.gz vendor
+          sha256sum output/*.tar.gz > output/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-rust-compiler
+          path: |
+            output/compiler.tar.gz
+            output/compiler.txt
+            output/SHA256SUMS
+          compression-level: 0
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-rust-standard-library
+          path: output/standard-library.tar.gz
+          compression-level: 0
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-rust-crates
+          path: |
+            output/public-crates.tar.gz
+            output/Cargo.toml
+            output/Cargo.lock
+            output/vendor-config.toml
+          compression-level: 0
+          retention-days: 3
