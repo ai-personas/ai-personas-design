@@ -21,6 +21,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Check the authored UI fixture
+        run: |
+          node --check design/state.js
+          node --check design/app.js
+          node --test tests/design-state.test.cjs
       - name: Install isolated documentation renderer
         run: npm install --no-save --prefix "$RUNNER_TEMP/design-mermaid" @mermaid-js/mermaid-cli@11.4.2
       - name: Render every Mermaid diagram
