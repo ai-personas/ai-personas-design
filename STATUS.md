@@ -4,6 +4,22 @@
 
 This document separates a design decision, a source report and an executed result. None is a substitute for the others. This update changes the **design repository's core contracts, implementation traceability and verification helpers only**. It does not change Rust runtime source or UI source.
 
+## Repository correction
+
+The `ai-personas-design` branch is now documentation-only. Actual product
+implementation is the Rust `ai-personas/ai-personas:rewrite/design-first` branch;
+UI implementation is `ai-personas/ai-personas-ui:rewrite/design-first`.
+The former executable scripts/tests have moved to the runtime's
+`tools/design_docs`; the screen fixture and browser tests have moved to the UI
+repository. See [repository ownership and migration](REPOSITORIES.md).
+
+This move changes no Rust feature behavior and makes no new runtime acceptance
+claim. The existing runtime source also contains a
+[direct HTTP inference increment](https://github.com/ai-personas/ai-personas/blob/c2b7d89a7d05f7f31e35d590ba39a3fcf80439fa/docs/HTTP-INFERENCE-INCREMENT.md),
+with explicit limitations. The historical ledger below is not a complete audit
+of that increment, nor proof that the remaining target design is implemented.
+No private Rust source or execution log is copied into this public repository.
+
 ## Pinned scope
 
 | Reference | Repository and branch | Commit |
@@ -52,7 +68,7 @@ The baseline `wait` already checks newer inbox items transactionally. Preserve t
 
 ## UI is unchanged in this increment
 
-The [historical UI integration note](https://github.com/ai-personas/ai-personas-ui/blob/fa7cef7b748fb855e53857b1a8a351ddab458dda/docs/RUST-V1.2-UI.md) remains the source for the previously reported read-only adapters and UI behavior. Those claims are not revalidated here. No prototype, layout, component, stylesheet, browser fixture, generated API or UI repository file is changed.
+The [historical UI integration note](https://github.com/ai-personas/ai-personas-ui/blob/fa7cef7b748fb855e53857b1a8a351ddab458dda/docs/RUST-V1.2-UI.md) remains the source for the previously reported read-only adapters and UI behavior. Those claims are not revalidated here. That earlier core-documentation increment changed no UI files. The later repository correction relocates the standalone fixture into the UI repository without changing production components.
 
 Backend activity, acceptance, outside evidence and review applicability remain separate facts even while UI work is deferred. A read-only view is not evidence of backend enforcement.
 
@@ -60,7 +76,7 @@ Backend activity, acceptance, outside evidence and review applicability remain s
 
 The supplied scenarios and abstract protocol checks are not live persona traces, Rust regression tests, native CAD output, engineering simulations or security certification. Design checks validate links, structure, planning IDs and helper behavior. Their success does not satisfy runtime or behavioral gates.
 
-The new private-checkout runner executes only the existing locked Rust build/fixture/barrier/behavior suites, records command exits and stops on failure. Even when it succeeds, its report leaves full v1.2 acceptance `not_evaluated`; it does not invent verdicts for unimplemented tests. Missing tools, dirty or changed revisions, failures and interruption remain visible.
+The private-checkout runner, now in the runtime repository, executes only the existing locked Rust build/fixture/barrier/behavior suites, records command exits and stops on failure. Even when it succeeds, its report leaves full v1.2 acceptance `not_evaluated`; it does not invent verdicts for unimplemented tests. Missing tools, dirty or changed revisions, failures and interruption remain visible.
 
 The runtime repository is private. Keep its source, logs, node state, build artifacts and credentials out of this public design repository. The runner stores evidence outside both checkouts; it does not publish or push it. A trusted disposable Linux test host is still required because the legacy process tests are not sandboxed. See [reproduction instructions](technical/CORE.md).
 

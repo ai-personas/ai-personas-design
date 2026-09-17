@@ -1,12 +1,16 @@
 # AI Personas
 
+> **Documentation repository only.** Actual implementation belongs to the Rust
+> `ai-personas/ai-personas` branch `rewrite/design-first`. UI code and screens
+> belong to `ai-personas/ai-personas-ui`. See [repository ownership](REPOSITORIES.md).
+
 ## Different individuals. Shared commitments. Useful work.
 
 AI Personas is a place where continuing AI individuals learn, develop character and work with people and one another. You bring a need. The personas decide what to investigate, what to make, how to work together and when to ask for help.
 
 **You own the purpose and the boundaries. Each persona owns its perspective. The group owns the commitments its members accept. The Rust runtime makes actions authorized, bounded, durable and inspectable.**
 
-> **Design status:** this branch describes the final proposed **Rust-only v1.2 design**. It is not a claim that all of it is implemented. The checked-in Rust v1 runtime still has process-based inference and unsandboxed host execution. The updated UI has implemented views and read-only adapters, not the missing backend guarantees. Read [implementation status and evidence](STATUS.md) before deploying or evaluating it.
+> **Design status:** this branch describes the final proposed **Rust-only v1.2 design**. It is not a claim that all of it is implemented. The Rust source and its verification status live in the separate runtime repository; its newer HTTP inference increment does not supply the still-required containment and authority guarantees. The updated UI has implemented views and read-only adapters, not the missing backend guarantees. Read [implementation status and evidence](STATUS.md) before deploying or evaluating it.
 
 ### Where to start
 

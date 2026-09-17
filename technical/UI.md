@@ -1,6 +1,6 @@
 # The workspace people should see
 
-[Introduction](../README.md) · [Specification](SPEC.md) · [Status](../STATUS.md) · [Interactive design](../design/index.html) · [Prototype guide](../design/README.md)
+[Introduction](../README.md) · [Specification](SPEC.md) · [Status](../STATUS.md) · [UI fixture source](https://github.com/ai-personas/ai-personas-ui/blob/rewrite/design-first/design/index.html) · [Prototype guide](https://github.com/ai-personas/ai-personas-ui/blob/rewrite/design-first/design/README.md)
 
 The UI answers six questions: what are we trying to accomplish; what does each persona care about; who accepted responsibility; what changed; what evidence applies now; and what needs the person?
 
@@ -18,11 +18,13 @@ flowchart LR
 
 **In words:** these are views over the same work, not mandatory workflow stages. A persona can preserve a different agenda even when the group has a coverage gap. People should see that tension rather than an invented universal priority.
 
+> Screen implementation and browser tests live in `ai-personas-ui`, not this documentation repository.
+
 ## 1. Visual sources and precedence
 
 The FINAL family supplies the calm application shell, Work overview, Personas cards, information-request dialog and initial work detail. The WORKSPACE family supplies the richer work-level presentation of changing priorities, outcome versions, decisions, new membership and stale evidence. They are complementary reference surfaces, not competing backend architectures.
 
-The [source manifest](../design/source-images.json) records original filenames, dimensions and SHA-256 fingerprints. Those entries identify the supplied PNGs; they are not claims that the images are checked-in runtime evidence. The runnable fixture renders new HTML rather than using screenshots as its interface.
+The [source manifest](https://github.com/ai-personas/ai-personas-ui/blob/rewrite/design-first/design/source-images.json) records original filenames, dimensions and SHA-256 fingerprints. Those entries identify the supplied PNGs; they are not claims that the images are checked-in runtime evidence. The runnable fixture renders new HTML rather than using screenshots as its interface.
 
 | Supplied reference | Design use |
 |---|---|
@@ -56,7 +58,7 @@ New production mutation controls must come from the implemented/generated Rust c
 
 Use a quiet warm-white workspace, white content surfaces, dark green primary text/actions, muted secondary text and fine sage borders. Amber identifies an outstanding request or conditional state; blue identifies activity; red identifies stale/inapplicable evidence. Always pair color with text.
 
-The fixture centralizes these implementation choices in [styles.css](../design/styles.css): background `#f5f7f2`, surface `#ffffff`, ink `#263e34`, primary `#24573f`, secondary `#617267`, border `#dbe3d6`, and a visible amber focus ring. These are reference-derived tokens, not a claim of pixel-identical extraction or an accessibility certification. Use system fonts; no font service or generated portrait is required.
+The fixture centralizes these implementation choices in [styles.css](https://github.com/ai-personas/ai-personas-ui/blob/rewrite/design-first/design/styles.css): background `#f5f7f2`, surface `#ffffff`, ink `#263e34`, primary `#24573f`, secondary `#617267`, border `#dbe3d6`, and a visible amber focus ring. These are reference-derived tokens, not a claim of pixel-identical extraction or an accessibility certification. Use system fonts; no font service or generated portrait is required.
 
 Desktop starts with a 224 px sidebar, 72 px topbar and 42 px content gutters. Content cards have approximately 13 px corner radii and 20–24 px padding. Primary actions are at least 44 px high. Work rows present identity and latest activity before activity, latest version and evidence. Borders and spacing separate information without a dashboard of unrelated counters.
 
@@ -131,8 +133,8 @@ On close/unmount, abort reads, release readers, terminate workers, revoke object
 
 ## 9. Acceptance and evidence
 
-Use the [fixture tests](../design/README.md) for responsive layout, filtering, safe text rendering, keyboard tabs, modal focus/cleanup, explicit unknowns, request-answer semantics, unowned drafts, bounded replay and absence of invented approval controls. Preserve test failures and corrections separately from claimed results.
+Use the [fixture tests](https://github.com/ai-personas/ai-personas-ui/blob/rewrite/design-first/design/README.md) for responsive layout, filtering, safe text rendering, keyboard tabs, modal focus/cleanup, explicit unknowns, request-answer semantics, unowned drafts, bounded replay and absence of invented approval controls. Preserve test failures and corrections separately from claimed results.
 
-The recorded [verification manifest](../design/verification.json) concerns this authored HTML fixture only. It does not establish Preact integration, server transport behavior, access enforcement, complete leak freedom, useful persona cooperation or engineering results. The sibling UI's [pinned CI run](https://github.com/ai-personas/ai-personas-ui/actions/runs/35169941532) is separately reported evidence and is not rerun by this design publication.
+The recorded [verification manifest](https://github.com/ai-personas/ai-personas-ui/blob/rewrite/design-first/design/verification.json) concerns this authored HTML fixture only. It does not establish Preact integration, server transport behavior, access enforcement, complete leak freedom, useful persona cooperation or engineering results. The sibling UI's [pinned CI run](https://github.com/ai-personas/ai-personas-ui/actions/runs/35169941532) is separately reported evidence and is not rerun by this design publication.
 
 Production acceptance still requires the Rust-backed public-API, privacy, replay, load and disposal cases in the [acceptance campaign](ACCEPTANCE.md). A rendered screenshot is a visual observation, not a successful autonomous house-design run.

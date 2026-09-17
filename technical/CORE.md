@@ -165,17 +165,18 @@ The machine plan maps every core mechanical gate M01–M26 except UI gate M14, p
 In this design checkout:
 
 ```sh
-python3 scripts/check_core.py
-python3 -m unittest discover -s tests -v
-python3 scripts/check_docs.py
+export AI_PERSONAS_DESIGN_ROOT=/path/to/ai-personas-design
+python3 tools/design_docs/scripts/check_core.py
+python3 -m unittest discover -s tools/design_docs/tests -v
+python3 tools/design_docs/scripts/check_docs.py
 ```
 
-Those commands validate documentation and helper behavior only. The existing documentation CI discovers the added Python tests without modifying UI code or its workflow.
+Run those commands from the Rust repository. They validate documentation and helper behavior only. The tools and their tests no longer live in this documentation-only repository.
 
 On a disposable trusted Linux development host with the private Rust checkout and its toolchain:
 
 ```sh
-python3 /path/to/ai-personas-design/scripts/verify_rust_core.py \
+python3 /path/to/ai-personas/tools/design_docs/scripts/verify_rust_core.py \
   --runtime /path/to/ai-personas \
   --expected-revision c2b7d89a7d05f7f31e35d590ba39a3fcf80439fa \
   --trusted-test-host
@@ -186,3 +187,7 @@ The runner verifies the requested exact clean revision, runs the existing fixtur
 A successful runner result means **the selected existing suites passed for that commit**, not M01–M26 or B01–B12 all passed. An unavailable toolchain, failed check or interrupted run must remain visible. Private logs stay local and must not be automatically uploaded to the public design repository.
 
 Core implementation still belongs in `ai-personas/ai-personas`. This design update changes neither that runtime's source nor its generated authoring contract. It makes the next changes and their evidence gates explicit while leaving the attached UI designs untouched.
+
+
+Repository placement is governed by [REPOSITORIES.md](../REPOSITORIES.md). The
+relocation of helper code and screen fixtures is not a new Rust feature increment.

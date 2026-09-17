@@ -41,12 +41,31 @@ flowchart TB
 
 ## Documentation checks
 
-`python3 scripts/check_docs.py` checks local Markdown paths/anchors, balanced fences, required coverage and preservation of the generated v1 API. It also extracts Mermaid blocks to `.qa/diagrams/`. The documentation workflow renders those blocks and uploads its check report and diagram images. This is documentation validation, not runtime or persona acceptance.
+The executable tools now live in the Rust repository under `tools/design_docs`.
+This repository contains no check scripts, browser fixture or build workflow.
+From the runtime checkout, with a separate design checkout:
 
-All diagrams have an adjacent prose explanation. The prose remains usable when a reader's Markdown viewer cannot render Mermaid. The house example is deliberately not a universal workflow.
+```sh
+export AI_PERSONAS_DESIGN_ROOT=/path/to/ai-personas-design
+python3 tools/design_docs/scripts/check_core.py
+python3 -m unittest discover -s tools/design_docs/tests -v
+python3 tools/design_docs/scripts/check_docs.py
+```
 
-## Core-only checks
+Reports and Mermaid extraction go to the runtime checkout's `.qa/design-docs`,
+not into these design documents. The checks cover repository placement, local
+links/anchors, balanced fences, source IDs and unchanged generated v1 API bytes.
+All diagrams have adjacent prose equivalents. Their rendering is documentation
+validation, never runtime, model or engineering acceptance.
 
-`python3 scripts/check_core.py` validates all 21 invariants, the 25 non-UI mechanical gates and 12 behavioral gates in the planning manifest. M14 stays explicitly deferred. `python3 -m unittest discover -s tests -v` also tests the validator and private-checkout runner. These are helper checks, not Rust acceptance.
+## Core-only implementation checks
 
-Use `scripts/verify_rust_core.py` on a trusted disposable Linux host with an exact clean private runtime checkout to execute its existing suites. The [core guide](CORE.md) supplies the command and evidence limits. Logs remain private and are never automatically uploaded to this design repository.
+The acceptance plan retains 21 invariants, 25 non-UI mechanical gates and 12
+behavioral gates; M14 remains explicitly deferred to UI integration. The
+migrated validator checks plan consistency, not feature implementation.
+
+Use `tools/design_docs/scripts/verify_rust_core.py` in the Rust repository on a
+trusted disposable Linux host and an exact clean Rust checkout to run its
+existing suites. The [core guide](CORE.md) supplies the command and evidence
+limits. Logs remain private, outside the design and runtime repositories.
+See [repository ownership](../REPOSITORIES.md).

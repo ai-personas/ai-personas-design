@@ -93,4 +93,4 @@ Existing peer file/message transfer and continuity routing are retained. Pausing
 
 ## How to evaluate documentation itself
 
-The documentation workflow checks local links/anchors, balanced code fences, required sections/invariants/gates and unchanged v1 API bytes, then renders Mermaid diagrams. It uses read-only repository permissions and produces reports/diagram images, not runtime artifacts. Those checks are separate from this release plan's Rust and live-persona gates.
+The tools in the Rust repository at `tools/design_docs` check local links/anchors, balanced code fences, required sections/invariants/gates and unchanged v1 API bytes. They extract/render Mermaid diagrams outside the design checkout. This documentation-only repository carries no executable checker, UI screen or build workflow. These checks remain separate from the Rust and live-persona gates. See [repository ownership](../REPOSITORIES.md).

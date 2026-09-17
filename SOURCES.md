@@ -59,3 +59,14 @@ The earlier [design tree at 07a86a728cb9eae3384f6c717fd3ccccf6b2ae97](https://gi
 ## Documentation tooling
 
 Mermaid fences express diagrams with adjacent prose equivalents. CI renders them with the pinned [Mermaid CLI 11.4.2 release](https://github.com/mermaid-js/mermaid-cli/releases/tag/11.4.2); this is a documentation-only tool choice, not a runtime dependency or recommendation to change the product stack. Check reports and rendered figures identify the documentation commit. No provider or engineering capability follows from them.
+
+
+## Repository-placement correction
+
+The source for the moved public helpers and UI fixture is design commit
+`9b1fd0a82ee4c5c6eb6f87aac4f2f9495f14d41d`. Prior manifests and test history remain
+bound to their original revisions; moving files does not transfer a passing
+verdict to new runtime features. Current ownership is documented in
+[REPOSITORIES.md](REPOSITORIES.md). The normative specification and generated v1
+API remain byte-identical in this correction. No private runtime source is
+published here.
