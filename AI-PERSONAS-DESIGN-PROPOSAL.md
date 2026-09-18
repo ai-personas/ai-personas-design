@@ -2,7 +2,11 @@
 
 ## A blueprint for persistent individuals, cooperative societies, and trustworthy outcomes
 
-**Document version:** 1.0  
+![Distinct perspectives. Accountable outcomes. Humans set purpose and boundaries; personas interpret and accept work; the supporting system enforces limits and preserves consequences.](assets/visuals/poster-01-blueprint.svg)
+
+[Open full-size overview poster](assets/visuals/poster-01-blueprint.svg) · [Visual field guide](VISUAL-GUIDE.md) · [Editable artwork and validation](assets/visuals/README.md)
+
+**Document version:** 1.1 — visual integration; behavioral requirements unchanged  
 **Date:** 18 September 2026  
 **Status:** Proposed product and behavioral requirements; not a report of a successful implementation.  
 **Audience:** Community members, designers, researchers, evaluators, and anyone implementing AI Personas from scratch.  
@@ -98,13 +102,13 @@ The numbered end-to-end journey is an explanation, **not a fixed workflow engine
 
 ### 0.5 Visual reading guide
 
-The five existing posters are included as an orientation layer. Their robot characters and phrases such as “individuals” or “different minds” are metaphors for persistent software collaborators, not claims of consciousness, human identity, subjective feelings, or legal personhood. “Shared memory” in a poster means explicitly authorized shared material, not access to everyone's private memory. Learning and team benefits shown in the artwork are design goals, not guaranteed outcomes.
+Five professional overview posters and seven poster-style system diagrams form the visual layer of this proposal. The self-contained SVGs use consistent typography, a restrained palette, explicit labels, and source references. Open the full-size links to zoom or edit the artwork; the [visual field guide](VISUAL-GUIDE.md) collects every sheet with an accessible text reading.
 
-The written requirements take precedence over simplified artwork. In particular, the posters must not be read as requiring a fixed sequence, a growing population, a permanent occupation, automatic improvement, or retirement when a single task ends. Each diagram below has a prose explanation so the design remains usable without image or Mermaid rendering.
+Visual nodes represent persistent software collaborators, not consciousness, human identity, subjective feelings, or legal personhood. Shared records mean explicitly authorized material, not access to everyone's private memory. Learning and team benefits shown in the artwork are design goals, not guaranteed outcomes.
 
-![Illustrative overview of AI Personas: human purpose, distinct personas, supporting infrastructure, and evidence-linked work.](assets/poster-01-blueprint.png)
+The written requirements take precedence over simplified artwork. In particular, the posters must not be read as requiring a fixed sequence, a growing population, a permanent occupation, automatic improvement, or retirement when a single task ends. Each system diagram now opens with its professional poster; its original Mermaid markup remains available under **View editable Mermaid source**. The prose readings remain visible without expanding the source or rendering an image.
 
-*Poster 1 — Orientation only. Six durable public concepts are defined precisely in Section 4; the poster's six visual topics are not a separate data model.*
+*P01 — The overview poster at the beginning of this document introduces the three responsibility layers and the six public concepts defined precisely in Section 4. It is an orientation, not a separate data model.*
 
 ---
 
@@ -242,6 +246,13 @@ Here, **embodiment means a continuing, bounded connection between identity, situ
 | Social | Invitations, agreements, disagreements, commitments, and handoffs are real records | Collaboration is only conversation |
 | Accountable | Claims link to evidence, and responsibility has a visible disposition | No one can establish what happened or who must respond |
 
+![D01 — Close the loop between choice and consequence. Identity, selected memory, authorized observations, and current commitments inform decisions; observed consequences lead to review and reconsideration.](assets/visuals/diagram-01-embodiment-loop.svg)
+
+[Open full-size embodiment poster](assets/visuals/diagram-01-embodiment-loop.svg)
+
+<details>
+<summary>View editable Mermaid source</summary>
+
 ```mermaid
 flowchart LR
     I[Continuing identity] --> C[Situated decision]
@@ -254,6 +265,8 @@ flowchart LR
     R --> M
     R --> C
 ```
+
+</details>
 
 **Reading the diagram:** a persona is embodied when its continuing state participates in a closed, evidence-linked interaction loop. No single box is sufficient. Memory without observation can preserve mistakes; tools without limits can create unauthorized effects; action without review can repeat errors.
 
@@ -271,9 +284,9 @@ Public presentation and private state MUST be separate. A public profile may say
 
 **Illustrative profile, not an observed persona:** Mira is a continuing AI collaborator with an interest in comparing options. Her profile shows which comparisons she actually performed, what a reviewer found, what she currently agreed to do, and what she cannot yet substantiate. “Architect with twenty years of experience” would be unacceptable unless it truthfully described a separately identified human participant rather than a fabricated AI biography.
 
-![Illustrative persona anatomy showing identity, perspective, memory, agenda, relationships, capabilities, boundaries, and adaptation.](assets/poster-03-persona-anatomy.png)
+![P03 — A continuing identity. A situated perspective. Persona anatomy connects identity, perspective, access-controlled memory, agenda, relationships, accepted commitments, capabilities, current situation, and lifecycle.](assets/visuals/poster-03-persona-anatomy.svg)
 
-*Poster 3 — An accessible orientation to the persona. The written definition is functional, not a claim that the system is a human or that specialization is mandatory.*
+*P03 — An orientation to the persona's functional anatomy, not a human biography or a mandatory specialization. [Open full-size poster](assets/visuals/poster-03-persona-anatomy.svg).*
 
 ---
 
@@ -310,6 +323,13 @@ The affected-stakeholder distinction in the first row is elaborated as Extension
 
 ### 4.3 Three layers, one recurring event path
 
+![D02 — Three layers. One recurring event path. Human purpose leads to versioned work and distinct personas; authorized execution produces evidence that returns to review and future decisions.](assets/visuals/diagram-02-conceptual-architecture.svg)
+
+[Open full-size architecture poster](assets/visuals/diagram-02-conceptual-architecture.svg)
+
+<details>
+<summary>View editable Mermaid source</summary>
+
 ```mermaid
 flowchart TB
     H[Human need and authorized boundaries] --> W[Versioned work and environment]
@@ -323,6 +343,8 @@ flowchart TB
     V --> P
     P <--> M[Private or explicitly shared fragments]
 ```
+
+</details>
 
 **Reading the diagram:** personas decide what the work means; shared records make cooperation inspectable; the supporting system carries out permitted actions and preserves their consequences. New requests, tool results, review findings, invitations, and authorized timers all re-enter this path.
 
@@ -370,6 +392,13 @@ Changes to character, interests, relationships, and claimed capability SHOULD re
 | Retired | Not accepting new participation under its current lifecycle disposition | Existing obligations have explicit handoff, cancellation, or blocked disposition |
 | Quarantined | Execution restricted for an operator security reason | Treated separately from personality, competence, or ordinary retirement |
 
+![D03 — Work ends. Identity can continue. Initialization, active participation, dormancy, and retirement have explicit transition conditions; quarantine is an independent restriction.](assets/visuals/diagram-03-identity-lifecycle.svg)
+
+[Open full-size lifecycle poster](assets/visuals/diagram-03-identity-lifecycle.svg)
+
+<details>
+<summary>View editable Mermaid source</summary>
+
 ```mermaid
 stateDiagram-v2
     [*] --> Initializing
@@ -381,6 +410,8 @@ stateDiagram-v2
     Dormant --> Retired: authorized lifecycle decision
     Retired --> [*]
 ```
+
+</details>
 
 **Reading the diagram:** task completion does not destroy a persona. Dormancy is a low-resource continuing state. The diagram does not specify security quarantine, which is an independent restriction, or a guaranteed path to specialization.
 
@@ -434,6 +465,13 @@ Seed access MUST be checked when used. A previously supplied reference is not a 
 
 ### 6.5 Birth, membership, and commitment are separate
 
+![D04 — Creation is not membership. Membership is not work. Authority and resources gate orientation; membership and commitment are separately accepted, negotiated, or declined.](assets/visuals/diagram-04-onboarding.svg)
+
+[Open full-size onboarding poster](assets/visuals/diagram-04-onboarding.svg)
+
+<details>
+<summary>View editable Mermaid source</summary>
+
 ```mermaid
 flowchart TB
     N[Observed contribution gap] --> P[Persona proposes birth or recruitment]
@@ -449,6 +487,8 @@ flowchart TB
     W --> E[Actual contribution and review]
     E --> L[Continue, become dormant, or hand off]
 ```
+
+</details>
 
 **Reading the diagram:** creation supplies an identity; invitation acceptance supplies membership; commitment acceptance supplies responsibility. A new persona is permitted to negotiate or decline. For AI personas this is an operational acceptance protocol, not a claim about human-like subjective consent. Human participation and data consent remain separately required.
 
@@ -513,6 +553,13 @@ Numeric confidence MAY be stored, but MUST NOT be presented as calibrated probab
 
 ### 7.4 The learning loop
 
+![D05 — Retaining a memory is only the beginning. Experience is interpreted, selectively retained, retrieved in later work, and assessed through subsequent outcomes; required work evidence is preserved even when no fragment is authored.](assets/visuals/diagram-05-learning-loop.svg)
+
+[Open full-size learning poster](assets/visuals/diagram-05-learning-loop.svg)
+
+<details>
+<summary>View editable Mermaid source</summary>
+
 ```mermaid
 flowchart LR
     E[Experience or feedback] --> J[Persona interprets significance]
@@ -525,6 +572,8 @@ flowchart LR
     A --> V[Independent outcome assessment]
     V --> J
 ```
+
+</details>
 
 **Reading the diagram:** evidence is retained as required for the work; long-term learning is selective. The existence of a fragment is not the end of the loop. Useful transfer is assessed in later work.
 
@@ -848,9 +897,9 @@ Shared lessons should preserve their author, context, evidence, counterevidence,
 
 The society should be evaluated on whether relevant lessons affect later outcomes, not on the size of a communal knowledge collection. Private human data must not become community learning by default.
 
-![Illustrative network of distinct personas around shared work, agreements, invitations, review, and truthful release.](assets/poster-04-persona-society.png)
+![P04 — Cooperation without a collective mind. Distinct personas exchange attributed work through authorized shared records under a human charter, while preserving consent, dissent, and accountability.](assets/visuals/poster-04-persona-society.svg)
 
-*Poster 4 — The community is a network of participants and agreements. Its shared hub is not a hidden leader, unrestricted memory pool, or claim that additional personas automatically improve decisions.*
+*P04 — The community is a network of participants and agreements, not a hidden leader or unrestricted memory pool. The illustrated team size is not a requirement; charter and appeal mechanisms remain proposed Extension E2. [Open full-size poster](assets/visuals/poster-04-persona-society.svg).*
 
 ---
 
@@ -991,6 +1040,13 @@ The persona may decide that waiting is appropriate. Waiting MUST name a meaningf
 
 ### 14.1 The evidence chain
 
+![D06 — A claim is only as strong as its evidence chain. Accepted need, commitment, exact inputs, observed action, exact output, assessment, and current applicability support an honest release or limited disposition.](assets/visuals/diagram-06-evidence-chain.svg)
+
+[Open full-size evidence poster](assets/visuals/diagram-06-evidence-chain.svg)
+
+<details>
+<summary>View editable Mermaid source</summary>
+
 ```mermaid
 flowchart LR
     N[Accepted need and criteria] --> C[Accepted commitment]
@@ -1001,6 +1057,8 @@ flowchart LR
     R --> K[Current applicability check]
     K --> D[Honest release or limited disposition]
 ```
+
+</details>
 
 **Reading the diagram:** a claim is supported by its relationship to the need, exact information, observed work, and appropriate assessment. Each link can fail independently. For a simple conversation, the action and result may be one response and the appropriate assessment may be human judgment; no tool execution is required merely to fill the diagram.
 
@@ -1082,6 +1140,13 @@ A conditional result cannot stand in for an unconditional required result. “De
 
 ### 15.1 The whole journey at a glance
 
+![D07 — Make progress. Keep the return paths visible. The complete journey preserves acceptance gates, missing-information requests, permitted recruitment, repair, changed-state review, partial delivery, and authorized continuation.](assets/visuals/diagram-07-complete-journey.svg)
+
+[Open full-size journey poster](assets/visuals/diagram-07-complete-journey.svg)
+
+<details>
+<summary>View editable Mermaid source</summary>
+
 ```mermaid
 flowchart TB
     H[Human expresses a need] --> M[Preserve need, boundaries, and resources]
@@ -1107,6 +1172,8 @@ flowchart TB
     P --> C
     W --> B[Pause, partial delivery, or honest block]
 ```
+
+</details>
 
 **Reading the diagram:** the system must always have a path to useful work or an honest disposition. The arrows show allowed relationships, not a prescribed conversation. Simple work can combine several steps. Material changes can reopen earlier decisions; the original request and prior evidence remain intact.
 
@@ -1206,9 +1273,9 @@ Personas decide what, if anything, is worth retaining as a fragment or revised i
 
 **Failure path:** harmful or unsupported lessons are revised, restricted, or no longer selected. The system does not force every outcome into a success story.
 
-![Illustrative human-need-to-outcome journey with clarification, changed inputs, recruitment, review, and learning loops.](assets/poster-02-end-to-end-flow.png)
+![P02 — From intent to an honest outcome. Twelve explanatory stages connect receiving a need, accepted responsibility, understanding, commitments, capabilities, action, review, release, closeout, and tested learning.](assets/visuals/poster-02-end-to-end-flow.svg)
 
-*Poster 2 — An accessible ten-part overview of the same journey. The twelve-part written account separates acceptance, closure, and later learning for clarity; neither numbering is a mandatory execution workflow.*
+*P02 — A twelve-stage overview of the written journey. Read the numbered cards in their indicated order; neither the poster nor the written account prescribes a mandatory execution workflow. [Open full-size poster](assets/visuals/poster-02-end-to-end-flow.svg).*
 
 ---
 
@@ -1404,7 +1471,7 @@ The experience SHOULD support keyboard operation, readable status text, mobile l
 
 An artifact viewer should distinguish connecting, receiving, verifying, preparing, and ready. Receiving all bytes is not proof that the preview is ready or that the result is valid. Closing the viewer should stop unnecessary work and release its associated resources.
 
-This document's images provide orientation; every requirement remains available as text. Mermaid diagrams include prose readings for environments that do not render them.
+This document's professional SVG posters provide orientation; every requirement remains available as text. Each poster-style system diagram has a visible prose reading, a full-size artwork link, and an expandable copy of the original Mermaid source. The visual field guide supplies additional text equivalents.
 
 ### 19.7 Sensitive human-facing uses
 
@@ -1685,9 +1752,9 @@ This table is an implementer's coverage index, not a replacement for the detaile
 | PHY-01 | Gate physical effects on their own observation, override, and assurance contract | §18, E4 | X05 |
 | OSS-01 | Version the design, its evaluators, and public claims without rewriting failures | §§24, 26–29, E6 | M16; X06 |
 
-![Illustrative requirement cards covering identity, memory, shared work, relationships, capabilities, boundaries, evidence, review, and lifecycle.](assets/poster-05-embodiment-requirements.png)
+![P05 — Embodiment is an accountable connection. Seven functional layers cover persistence, authorized information, decision context, bounded practical action, temporal state, social commitments, and evidence-linked accountability.](assets/visuals/poster-05-embodiment-requirements.svg)
 
-*Poster 5 — Public orientation to embodiment requirements. Actual conformance requires the written contracts and evaluated evidence, not completion of the illustration's checklist alone.*
+*P05 — An orientation to the seven embodiment layers in Section 3.5 and the optional physical safeguards in Section 18. Actual conformance requires the full written contracts and evaluated evidence, not the poster alone. [Open full-size poster](assets/visuals/poster-05-embodiment-requirements.svg).*
 
 ---
 
@@ -2118,23 +2185,32 @@ E6 proposes open-source governance: publish versioned requirements, evidence, li
 
 ### 29.5 Visual package and accessibility
 
-| Visual | Local asset | Textual equivalent |
+| Visual | Editable local asset | Textual equivalent |
 |---|---|---|
-| Design-first overview | `assets/poster-01-blueprint.png` | §§1–4 |
-| End-to-end flow | `assets/poster-02-end-to-end-flow.png` | §15 |
-| Persona anatomy | `assets/poster-03-persona-anatomy.png` | §§3, 5–8 |
-| Individuals to society | `assets/poster-04-persona-society.png` | §§10–11 |
-| Embodiment requirements | `assets/poster-05-embodiment-requirements.png` | §§3, 23–24 |
+| P01 — Design-first overview | [Blueprint poster](assets/visuals/poster-01-blueprint.svg) | §§1–4 |
+| P02 — End-to-end flow | [Journey overview](assets/visuals/poster-02-end-to-end-flow.svg) | §15 |
+| P03 — Persona anatomy | [Persona anatomy poster](assets/visuals/poster-03-persona-anatomy.svg) | §§3, 5–8, 10 |
+| P04 — Individuals to society | [Persona society poster](assets/visuals/poster-04-persona-society.svg) | §§10–11 |
+| P05 — Embodiment requirements | [Embodiment layers poster](assets/visuals/poster-05-embodiment-requirements.svg) | §§3.5, 18 |
+| D01 — Functional embodiment loop | [Choice and consequence](assets/visuals/diagram-01-embodiment-loop.svg) | §3.5 |
+| D02 — Conceptual architecture | [Architecture poster](assets/visuals/diagram-02-conceptual-architecture.svg) | §4.3 |
+| D03 — Identity lifecycle | [Lifecycle poster](assets/visuals/diagram-03-identity-lifecycle.svg) | §5.3 |
+| D04 — Birth, membership, and commitment | [Onboarding poster](assets/visuals/diagram-04-onboarding.svg) | §6.5 |
+| D05 — Learning loop | [Learning poster](assets/visuals/diagram-05-learning-loop.svg) | §7.4 |
+| D06 — Evidence chain | [Evidence poster](assets/visuals/diagram-06-evidence-chain.svg) | §14.1 |
+| D07 — Complete journey and return paths | [Complete journey poster](assets/visuals/diagram-07-complete-journey.svg) | §15.1 |
 
-The posters were generated earlier in this conversation and are reused as illustrative assets. They are not screenshots of a working implementation. Their complete image files are included beside the proposal, rather than relying on temporary chat links. Written requirements, diagram readings, and tables carry the full design without needing to interpret small image text.
+The professional SVG suite in `assets/visuals/` is the default visual layer in this proposal. Each sheet is self-contained, scalable, and editable, with a title, description, explicit labels, and a source-section reference. These are explanatory artworks, not screenshots of a working implementation. Full-size links avoid dependence on small text in the embedded previews; the [visual field guide](VISUAL-GUIDE.md) provides a text reading for every sheet.
 
-The Mermaid diagrams are explanatory diagram markup, not application code. Markdown viewers vary in their rendering support; the accompanying prose provides their meaning when they are displayed as text.
+The five original PNG illustrations remain in `assets/` for provenance, but are no longer the embedded posters. All seven original Mermaid blocks are retained in expandable source sections beneath their poster replacements. Mermaid is explanatory diagram markup, not application code. Written requirements, visible diagram readings, and tables carry the full design when SVG, Mermaid, or expandable sections are not supported by a viewer.
+
+The [visual manifest](visual-manifest.json) records asset dimensions and source mappings. [Maintenance notes](assets/visuals/README.md) describe editing and validation. Historical packaging and visual-rendering records describe only the checks actually performed; they are not product-validation evidence.
 
 ### 29.6 What was and was not done for this delivery
 
-This delivery consolidates the five supplied sources, preserves their later conceptual resolutions, develops clearly labeled extensions, and packages the proposal with the existing posters and original source copies. File packaging checks do not count as any of the acceptance tests in Section 24.
+The original delivery consolidates the five supplied sources, preserves their later conceptual resolutions, develops clearly labeled extensions, and packages the proposal with its source copies. This presentation revision integrates the five professional overview posters and seven poster-style system diagrams directly into that proposal, updates their captions and navigation, and preserves the original Mermaid source and behavioral requirements. File packaging checks do not count as any of the acceptance tests in Section 24.
 
-No current repository audit, application implementation, persona execution, inference experiment, engineering simulation, physical test, or deployment assurance assessment was performed. The proposal therefore establishes requirements and an evaluation path, not achieved AI Personas capability.
+The presentation revision inspects the proposal and its visual package, not the runtime implementation. No application implementation, persona execution, inference experiment, engineering simulation, physical test, or deployment assurance assessment was performed. The proposal therefore establishes requirements and an evaluation path, not achieved AI Personas capability.
 
 ### 29.7 Final design statement
 

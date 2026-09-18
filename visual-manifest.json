@@ -1,9 +1,13 @@
 {
   "edition": "01",
-  "status": "proposed design; visual packaging only",
-  "source_commit": "675be2bce39ce17f03e113199144e90fa898e9f8",
+  "presentation_revision": "02",
+  "proposal_version": "1.1",
+  "status": "proposed design; visual presentation only; behavioral requirements unchanged",
+  "artwork_source_commit": "675be2bce39ce17f03e113199144e90fa898e9f8",
+  "source_base_commit": "b017dca4e1dbef812a655021870bf1fbeeb62564",
   "source_file": "AI-PERSONAS-DESIGN-PROPOSAL.md",
-  "source_blob_sha": "746b895d4c9cfc2053419d2e510b06c70341b51e",
+  "source_blob_sha": "2c8ca930d78d4375c0949411d7bef0128e500ddd",
+  "original_source_blob_sha": "746b895d4c9cfc2053419d2e510b06c70341b51e",
   "artworks": [
     {
       "id": "P01",

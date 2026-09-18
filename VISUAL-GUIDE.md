@@ -4,7 +4,7 @@
 
 [Repository overview](README.md) · [Complete written proposal](AI-PERSONAS-DESIGN-PROPOSAL.md) · [Edit and validate artwork](assets/visuals/README.md)
 
-The five overview posters communicate the design at a glance. The seven system diagrams explain the same relationships as the proposal's Mermaid diagrams in a consistent poster format. Every image has a text reading and a direct link to its source section. Open a linked SVG to inspect its selectable text at full scale.
+The five overview posters communicate the design at a glance. The seven system diagrams explain the same relationships as the proposal's Mermaid diagrams in a consistent poster format. All twelve sheets are now embedded directly in the complete proposal. This guide collects them with a text reading and a direct link to each source section. Open a linked SVG to inspect its selectable text at full scale.
 
 > **Status:** Proposed design, not implementation evidence. The written requirements govern. Arrows show relationships and allowed transitions, not a mandatory conversation or fixed workflow. Color reinforces labels; it is never the only indicator of meaning. Numbered return cards in D07 replace long crossing feedback lines.
 
@@ -52,7 +52,7 @@ The five overview posters communicate the design at a glance. The seven system d
 
 ## Poster-style system diagrams
 
-The original Mermaid blocks remain editable in the written proposal. These SVGs are presentation companions, not replacements for the source requirements.
+These SVGs are the default diagram presentation in the written proposal. All seven original Mermaid blocks remain editable under **View editable Mermaid source**, with the prose readings outside the expandable sections. The posters replace the default visual presentation, not the source requirements.
 
 ### D01 — Close the loop between choice and consequence.
 
@@ -122,6 +122,6 @@ The original Mermaid blocks remain editable in the written proposal. These SVGs 
 
 ## Provenance and maintenance
 
-This visual edition was prepared against proposal commit `675be2bce39ce17f03e113199144e90fa898e9f8`. [The manifest](visual-manifest.json) maps each artwork to its source section and dimensions. [The validation record](visual-validation.json) describes the checks actually performed and their limits.
+Artwork edition 01 was prepared against proposal commit `675be2bce39ce17f03e113199144e90fa898e9f8`. Presentation revision 02 integrates those unchanged SVGs into proposal version 1.1. [The manifest](visual-manifest.json) maps each artwork to its source section and dimensions and records the current proposal fingerprint separately from the historical artwork source.
 
-The original five PNG illustrations, written proposal, seven Mermaid blocks, source reports, and historical package validation remain intact. This guide and the repository README present the new visual edition. Edit the SVGs directly, keep their text readings synchronized, and run the validator before committing changes.
+[The validation record](visual-validation.json) describes checks performed for artwork edition 01 and their limits; it is not a new validation run of this integration. The five original PNG illustrations remain in `assets/` for provenance, while the professional SVGs replace them in the proposal. Behavioral requirements, all seven original Mermaid blocks, source reports, and historical validation records are preserved. Edit the SVGs directly, keep the proposal captions and these text readings synchronized, and run the validator before committing changes.

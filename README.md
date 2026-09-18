@@ -2,15 +2,15 @@
 
 **Distinct perspectives. Accountable outcomes.**
 
-A design-first proposal for persistent AI collaborators, cooperative societies, and evidence-linked work. The professional visual edition adds five overview posters and seven poster-style system diagrams, all as editable, self-contained SVGs.
+A design-first proposal for persistent AI collaborators, cooperative societies, and evidence-linked work. The complete proposal now presents five professional overview posters and seven poster-style system diagrams inline, all as editable, self-contained SVGs.
 
 ![Three responsibility layers: humans authorize purpose, personas choose and accept work, and the supporting system enforces limits and preserves consequences.](assets/visuals/poster-01-blueprint.svg)
 
 ## Start here
 
-**[Explore the visual field guide](VISUAL-GUIDE.md)** for the redesigned posters, all seven diagram companions, accessible text readings, and links to the relevant requirements.
+**[Read the complete design proposal](AI-PERSONAS-DESIGN-PROPOSAL.md)** for the full 30-section design with professional posters, the invariant catalogue, and acceptance requirements. Each of the seven system diagrams opens with its poster; expand **View editable Mermaid source** to inspect the original diagram markup. Written requirements take precedence over visual summaries.
 
-**[Read the complete design proposal](AI-PERSONAS-DESIGN-PROPOSAL.md)** for the full 30-section design, invariant catalogue, original editable Mermaid diagrams, and acceptance requirements. Written requirements take precedence over visual summaries.
+**[Explore the visual field guide](VISUAL-GUIDE.md)** for a gallery of all twelve sheets, accessible text readings, and links to the relevant requirements.
 
 ## The visual edition
 
@@ -30,13 +30,13 @@ The SVGs use selectable text, a consistent editorial grid, restrained color, exp
 
 | Item | Purpose |
 |---|---|
-| `VISUAL-GUIDE.md` | Primary visual reading experience and text equivalents |
-| `assets/visuals/` | Twelve new editable SVGs and visual maintenance notes |
-| `visual-manifest.json` | Artwork inventory, dimensions, and source-section mapping |
-| `visual-validation.json` | Checks performed for this visual edition only |
+| `AI-PERSONAS-DESIGN-PROPOSAL.md` | Complete requirements with twelve inline SVG posters and expandable Mermaid source |
+| `VISUAL-GUIDE.md` | Poster gallery and full text equivalents |
+| `assets/visuals/` | Twelve editable SVGs and visual maintenance notes |
+| `visual-manifest.json` | Artwork inventory, dimensions, source-section mapping, and current proposal fingerprint |
+| `visual-validation.json` | Historical checks performed when visual edition 01 was created |
 | `scripts/validate_visuals.py` | Dependency-free SVG/package checks; optional raster rendering |
-| `AI-PERSONAS-DESIGN-PROPOSAL.md` | Complete conceptual and behavioral requirements |
-| `assets/*.png` | Five original illustrations retained for provenance |
+| `assets/*.png` | Five original illustrations retained for provenance, no longer embedded in the proposal |
 | `sources/` | Original source reports and source manifest, unchanged |
 | `package-validation.json` | Historical validation record for the original proposal package |
 
@@ -46,14 +46,16 @@ The SVGs use selectable text, a consistent editorial grid, restrained color, exp
 python3 scripts/validate_visuals.py
 # Optional, with CairoSVG installed:
 python3 scripts/validate_visuals.py --render-dir /tmp/ai-personas-visuals
-# On a complete checkout, also verify the original proposal and Mermaid count:
+# On a complete checkout, verify the current proposal fingerprint and Mermaid count:
 python3 scripts/validate_visuals.py --check-source
 ```
 
-See [visual maintenance notes](assets/visuals/README.md) for the palette, layout conventions, and editing checklist.
+See [visual maintenance notes](assets/visuals/README.md) for the palette, layout conventions, and editing checklist. Keep the manifest's `source_blob_sha` synchronized after reviewing changes to the proposal. The artwork edition remains 01; presentation revision 02 integrates that existing artwork into proposal version 1.1.
 
 ## Evidence and provenance
 
-This edition changes the visual presentation, not the behavioral requirements. The original proposal, its embedded PNG illustrations and Mermaid source, all five supplied reports, and the original package-validation record remain unchanged. The new visual guide is the entry point for the redesigned artwork; the original proposal still contains the historical images.
+This revision changes the visual presentation, not the behavioral requirements. It replaces the proposal's embedded PNG illustrations with the professional SVG suite and makes the seven poster-style diagrams the default view. All seven original Mermaid blocks remain editable in expandable sections, with visible prose readings. The twelve SVG files, five original PNG files, supplied source reports, and historical validation records are unchanged.
+
+The existing `visual-validation.json` describes checks performed for the earlier artwork edition, not a fresh validation run of this integration. Review the committed diff to inspect the presentation changes; run the commands above on a full checkout for current package checks.
 
 The design is **proposed, not an implemented or validated product**. The 26 mechanical, 12 behavioral, and six extension acceptance tests remain specifications, not executed results. Visual rendering and structural checks do not establish persona competence, safety, learning, or deployment readiness. The later v1.2 source continues to govern conceptual conflicts; extensions E1–E6 retain their proposed status.
