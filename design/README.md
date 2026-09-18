@@ -14,6 +14,10 @@ These chapters are the detailed design reference. They state intended behavior, 
 | [6. Evidence and completion](06-evidence-and-completion.md) | What counts as a supported result, and how is an exact release kept honest? |
 | [7. Human experience and society](07-experience-and-society.md) | What should people see and control, and what changes for communities or services? |
 
+## Deliverable-production addendum
+
+[Deliverable production across domains](DELIVERABLE-PRODUCTION.md) supplements chapters 3, 4, and 6 with a normative path from agreed outcomes to actual native artifacts, checks, and delivery packages. It adds no fixed domain router or mandatory team ritual. Its [delivery contracts and DLV requirements](../implementation/DELIVERY-CONTRACTS.md) and [D acceptance fixtures](../evaluation/DELIVERY-ACCEPTANCE.md) apply to accepted delivery claims. The original seven chapter paths and existing artwork remain unchanged.
+
 ## How to read a requirement
 
 **Must** describes a necessary condition for the applicable feature. **Should** describes a strong recommendation; an implementation records a reason when it takes a different approach. **May** describes an option. Optional does not mean exempt from safeguards once enabled.

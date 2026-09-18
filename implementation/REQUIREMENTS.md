@@ -89,3 +89,9 @@ The evidence gates refer to [M, B, and X scenarios](../evaluation/ACCEPTANCE.md)
 For each applicable row, an implementation records the responsible component, implementation state, supporting evidence, untested cases, and blocking deployment decision. “Implemented,” “mechanically tested,” “behaviorally demonstrated,” and “approved for a particular deployment” are separate statuses.
 
 The catalogue contains 45 requirement rows. The original identifiers remain stable so a design change can be traced without confusing renamed requirements with new behavior.
+
+## Deliverable-production requirements addendum
+
+[DLV-01–DLV-10](DELIVERY-CONTRACTS.md#additional-requirement-catalogue) add ten requirements for applicable deliverable-producing work, bringing the base and supplemental total to **55 requirements**. The original 45 rows and I01–I21 above remain unchanged. The [production design](../design/DELIVERABLE-PRODUCTION.md) and [delivery contracts](DELIVERY-CONTRACTS.md) are normative supplements, not illustrative alternatives to the core contracts.
+
+The added requirements cover output scope, demonstrated production capabilities, bounded domain guidance, meaningful native artifacts, semantic integration, appropriate checks, repair and revalidation, reproducible delivery, external-effect boundaries, and demonstrated cross-domain limits. They map to the **16 specified D01–D16 fixtures** in [delivery acceptance](../evaluation/DELIVERY-ACCEPTANCE.md), alongside the original M/B/X scenarios. Apply the same implementation-state, evidence, and untested-case reporting above to every applicable DLV row; none is reported as implemented or passed here.

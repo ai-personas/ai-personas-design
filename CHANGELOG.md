@@ -2,6 +2,18 @@
 
 [Home](README.md) · [Source provenance](sources/SOURCE-MANIFEST.md)
 
+## Edition 2.0 delivery addendum — concrete outputs across domains
+
+**Date: 18 September 2026.** The [deliverable-production design](design/DELIVERABLE-PRODUCTION.md) closes under-specified production obligations without introducing fixed professions, a domain router, application code, or mandatory ceremony for small tasks.
+
+The [delivery contracts](implementation/DELIVERY-CONTRACTS.md) add concrete output contracts, versioned method briefs, demonstrated production bindings, semantic dependency checks, explicit check outcomes, bounded repair, and retrievable reproducible manifests. They distinguish digital delivery from authorized external effects and observed physical or business outcomes.
+
+A [hypothetical 5 W inverter walkthrough](examples/5W-INVERTER-AND-CROSS-DOMAIN.md) follows specification, native schematic, actual simulation, PCB layout, fabrication and assembly exports, bill of materials, independent review, and release boundaries. It also applies the same contracts to marketing, sales, simple writing, and unfamiliar domains. Tool references support only documented operation availability, not a completed circuit or working integration.
+
+The addendum preserves I01–I21, all 45 original requirements, and the 44 original M/B/X scenarios. It adds **DLV-01–DLV-10** and **D01–D16**, giving 55 requirements and 60 specified acceptance scenarios across the base and supplement. Indexes link the new normative material and examples. The existing artwork is unchanged.
+
+This is a design correction, not implementation or execution evidence. The added acceptance fixtures are specified, not run. No schematic, PCB, Gerber, bill-of-materials package, simulation result, published campaign, or sales outcome is claimed to have been produced by this revision.
+
 ## Edition 2.0 — self-contained, code-free design handbook
 
 **Date: 18 September 2026.** This edition refactors the linked design-first branch into a reference that can be read without earlier chats, attachments, another repository, or a development environment.

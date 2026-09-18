@@ -16,6 +16,7 @@ People set the purpose and boundaries. Personas interpret the need and accept re
 | How does the whole idea fit together? | [Design overview](AI-PERSONAS-DESIGN-PROPOSAL.md) | [Design chapters](design/README.md) |
 | What should the experience look and feel like? | [Human experience and society](design/07-experience-and-society.md) | [Visual guide](VISUAL-GUIDE.md) |
 | How could I implement it independently? | [Implementation reading path](implementation/README.md) | [Behavioral contracts](implementation/CONTRACTS.md) and [requirements](implementation/REQUIREMENTS.md) |
+| Will it produce real CAD, simulation, marketing, or sales deliverables? | [Deliverable production](design/DELIVERABLE-PRODUCTION.md) | [5 W inverter and cross-domain walkthroughs](examples/5W-INVERTER-AND-CROSS-DOMAIN.md) |
 | How would we know it works? | [Evaluation guide](evaluation/README.md) | [Acceptance scenarios](evaluation/ACCEPTANCE.md) |
 | Why were these design choices made? | [Design decisions](DESIGN-DECISIONS.md) | [Design sources](sources/README.md) |
 | How do I contribute? | [Contribution guide](CONTRIBUTING.md) | [Design worksheets](templates/README.md) |
@@ -50,3 +51,9 @@ The design preserves persistent identity, voluntary commitments, individual agen
 The [requirements catalogue](implementation/REQUIREMENTS.md) retains 21 invariants and 45 requirement identifiers. The [acceptance catalogue](evaluation/ACCEPTANCE.md) specifies 26 mechanical, 12 behavioral, and six extension checks. These are **requirements to demonstrate**, not tests reported as passed by this documentation rewrite.
 
 This is handbook edition 2.0. [What changed](CHANGELOG.md) explains the refactor. [Source provenance](sources/SOURCE-MANIFEST.md) preserves the history of the earlier reports without making their old code examples part of the current reading experience.
+
+## Deliverable-production addendum
+
+The [production design](design/DELIVERABLE-PRODUCTION.md) and [delivery contracts](implementation/DELIVERY-CONTRACTS.md) make concrete output obligations explicit: native artifacts, demonstrated production operations, semantic and cross-artifact checks, bounded repair, reproducible packages, and honest separation of files from external outcomes. They preserve the no-fixed-role and no-hidden-domain-router principles.
+
+The addendum adds **10 requirements, DLV-01–DLV-10**, and **16 acceptance fixtures, D01–D16**, while retaining the original 45 requirements and 44 M/B/X scenarios unchanged. Read the [new fixtures](evaluation/DELIVERY-ACCEPTANCE.md) and [hypothetical inverter, marketing, and sales walkthroughs](examples/5W-INVERTER-AND-CROSS-DOMAIN.md). These are additional design obligations, not executed tests or a claim that CAD adapters, generated circuits, or business integrations already exist.
