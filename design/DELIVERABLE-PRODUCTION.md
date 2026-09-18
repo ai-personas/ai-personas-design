@@ -1,66 +1,29 @@
-# Deliverable production across domains
+# Delivery review: existing rules, not another production architecture
 
-[Design index](README.md) · [Delivery contracts and requirements](../implementation/DELIVERY-CONTRACTS.md) · [Acceptance fixtures](../evaluation/DELIVERY-ACCEPTANCE.md) · [Inverter and business walkthroughs](../examples/5W-INVERTER-AND-CROSS-DOMAIN.md)
+[Design index](README.md) · [Work and cooperation](03-work-and-cooperation.md#how-organization-emerges) · [Requirements](../implementation/REQUIREMENTS.md) · [Compatibility mapping](../implementation/DELIVERY-CONTRACTS.md)
 
-## Purpose and design finding
+## Finding and correction
 
-**Delivery addendum to edition 2.0, 18 September 2026.** This is a behavioral design correction, not a runtime implementation or an executed engineering project. It preserves I01–I21 and adds DLV-01–DLV-10. It applies when an implementation accepts a deliverable-producing need; a small response can satisfy it without extra tools or ceremony.
+**Review revision: 18 September 2026.** This page supersedes the delivery addendum's claim that a separate production-contract layer was needed. The design before that addendum already covered required outcomes, accepted owners, real capability acquisition, native artifacts, analysis mappings, review, integration, revalidation, and honest completion. The existing house fixture already called for reopening, editing, and reproduction. Documentation consolidation was not evidence of an architectural inability to produce artifacts.
 
-The existing design supports real work: mandates, accepted owners, capability acquisition, exact artifacts, source-to-analysis mappings, review, and coherent release already exist. The house example even requires native editability and reproduction. The gap is not the absence of these ideas. Their production obligations need a reusable contract so implementations do not stop at plausible discussion, files that merely parse, or application availability.
+| Question from the delivery review | Existing authoritative home |
+|---|---|
+| What is the actual required result, and who accepted it? | [Work and cooperation](03-work-and-cooperation.md): NED-01–NED-04 and COL-01–COL-05. |
+| Can the selected means actually perform the operation? | [Capabilities and action](04-capabilities-and-action.md): ACT-01–ACT-04 and I10. |
+| Are the sources meaningful, the analyses actually run, and the versions consistent? | [Evidence and completion](06-evidence-and-completion.md): EVD-01–EVD-05, with the native-output illustration in [worked examples](../examples/WORKED-EXAMPLES.md). |
+| Can findings cause repair without infinite effort or stale passes? | [Work](03-work-and-cooperation.md), [resources](05-authority-and-resources.md), and [evidence](06-evidence-and-completion.md): COL-04–COL-05, GOV-02–GOV-04, and EVD-03–EVD-04. |
+| Does the same foundation support unrelated needs? | I03 and [behavioral checks](../evaluation/ACCEPTANCE.md#behavioral-checks), especially B11–B12. |
 
-| Existing foundation | Remaining implementation ambiguity | Added obligation |
-|---|---|---|
-| Required outcomes and scope review | Which concrete outputs and result level constitute delivery? | Adopt a deliverable contract, including native forms, evidence, exclusions, and dependencies. |
-| Capability discovery and operation evidence | Can the chosen means author, edit, inspect, and export this particular artifact family? | Bind required production operations to available capabilities and representative evidence. |
-| Exact artifacts and analysis mappings | Do files contain a meaningful, mutually consistent solution rather than empty or disconnected objects? | Validate semantic content, interfaces, transformations, and the complete delivery package. |
-| Reviews and exact-state release | Which checks gate which claims, and can an unavailable check disappear? | Preserve a criterion-to-check matrix with explicit missing, failed, stale, and inconclusive states. |
-| Generalization and the house fixture | Does a second technical domain and a nontechnical workflow actually succeed? | Add inverter, marketing, sales, and unfamiliar-domain acceptance fixtures. |
-| Honest completion and outside assurance | Does delivery mean files, authorized publication, or achieved real-world performance? | Report these separately, with receipts or measurements only when actually observed. |
+The former DLV-01–DLV-10 identifiers are retired as a separate active requirement family. Their [historical mapping](../implementation/DELIVERY-CONTRACTS.md) preserves traceability; retirement does not waive an applicable original requirement. There are still 21 invariants and 45 active requirement identifiers. The additional D scenarios are evaluation refinements of those rules, not more runtime features.
 
-## What general-purpose can honestly mean
+## What is clarified now
 
-The same coordination, permission, resource, and evidence contracts can support different domains. They cannot manufacture knowledge, suitable tools, source data, professional qualification, consent, or physical measurements. A new persona is not a substitute for a missing production capability or reviewer.
+[Chapter 3](03-work-and-cooperation.md#how-organization-emerges) and the [core contracts](../implementation/CONTRACTS.md#persona-owned-organization-and-capability-choice) make the boundary explicit: personas discover opportunities and capabilities, choose methods, propose divisions of work, accept commitments, revise plans, and form recurring practices. The supporting system supplies usable social and action affordances and enforces authority, privacy, resources, recovery, and evidence integrity. It does not solve tasks through a concealed profession map or domain pipeline.
 
-An implementation must publish demonstrated task families and result levels, exact configurations, limitations, and missing capabilities. Distinguish **demonstrated**, **available but unproven for this scope**, **obtainable with authorization**, and **unavailable**. Do not advertise “any task” on the strength of a general chat interface or a single successful example.
+Plans, method notes, output specifications, and delivery inventories can use the existing mandate, work, artifact, agreement, commitment, and release records. They need not become universally required new record types. Specialist tools and learned procedures are allowed; automatic task-to-role or task-to-workflow selection by the runtime is not. Reuse is compatible with emergence when its applicability and adoption remain attributable.
 
-For an unfamiliar task, preserve the request, identify material unknowns, offer bounded discovery or useful conditional work, and determine which outputs can be produced and checked. Report a scoped block or partial result when necessary. Do not silently substitute prose for requested native artifacts or narrow the user's goal to make completion easier.
+## What has not been established
 
-## Deliverables before success claims
+A missing specification is an intake question. A missing authoring or analysis interface may be an implementation capability gap. An unrun campaign is an evidence gap. A true design gap requires showing that the existing rules omit or contradict necessary behavior; lack of a domain-specific example alone does not establish one.
 
-The accepted mandate must distinguish explanation, concept, editable source, validated digital package, fabrication or publication package, authorized external execution, and observed real-world result as applicable. These are claim dimensions, not a compulsory ladder: a poem need not pass through simulation, and an editable design need not be manufactured.
-
-Each required deliverable binds purpose, form, dependencies, owner or ownership gap, acceptance criteria, verification method, destination, and exclusions. Material unknowns must block only the affected claims; reversible exploration may continue under explicit assumptions. Safety-critical or irreversible effects must not inherit guessed specifications.
-
-A human-readable preview is useful but cannot substitute for native editability when that was requested. Conversely, an answer requested as text need not be placed in an artificial file merely to count as an artifact.
-
-## Domain knowledge without a hidden domain router
-
-Personas may retrieve, compose, and revise a **method brief**: work-scoped guidance containing domain terminology, evidence sources, candidate methods, applicable conditions, artifact relationships, check options, known hazards, and limitations. It can reuse a previous brief after checking applicability.
-
-A brief is ordinary versioned work content. It does not assign professions, automatically select a fixed workflow, grant execution authority, or contain trusted evaluator answers. The core enforces record integrity and accepted dependencies; personas and authorized reviewers choose and justify domain methods. Different domains may legitimately use different tools and quality criteria under the same core contracts.
-
-Imported or generated briefs, models, libraries, and tool descriptions remain untrusted until the relevant checks are performed. A suggested acceptance rule cannot silently replace the user's adopted criteria. Private evaluation material must remain outside producer access.
-
-## Produce, observe, check, and revise
-
-A **production binding** connects an adopted deliverable to actual means of creating, editing, inspecting, analyzing, and exporting it as needed. A general shell or graphical application can supply these operations, but its name alone supplies no evidence that the required operation works. Desktop-only tools require actual interaction and accessible observations; unavailable visual access is a capability gap.
-
-Participants assemble a versioned dependency plan with accepted owners, input and output contracts, integration checks, and bounded repair. This is a plan for the particular work, not a built-in domain pipeline. The runtime may schedule accepted independent work, but must still honor the fresh-decision barrier after a pending action.
-
-Producing an artifact must lead to inspection of its actual contents. Appropriate checks cover required semantic content, faithful transformations, current inputs, numerical units or business definitions, and compatibility across the package. Independent review is chosen according to risk and claim, not inferred from a second persona name.
-
-Failures produce findings linked to exact versions. Repair consumes the same bounded allowance and preserves previous candidates. Changing relevant source, part, model, assumption, or export configuration makes affected evidence stale immediately; uncertain dependencies require wider revalidation. Repeated drafting or file churn is not progress toward delivery.
-
-## Release and handoff
-
-A delivery manifest must identify the exact required outputs, source and derived relationships, actual retrieval locations, checks and limitations, and remaining external obligations. Native sources must be reopenable and editable with documented dependencies when editability is in scope. Representative regeneration must use the delivered inputs, not a producer's undisclosed workspace.
-
-A full release requires all mandatory criteria at the adopted result level to have current qualifying evidence and required acceptance. Partial packages may be released as partial, with missing requirements still visible. Scope changes require authority and remain traceable to the original request. Neither a failed mandatory check nor an unavailable validator becomes a pass through a waiver label.
-
-Generating manufacturing files does not authorize ordering, assembly, energizing equipment, or certification. Producing campaign assets does not authorize publication or spending. Sending an approved sales message does not establish a reply or a sale. External effects retain their own grants, receipts, uncertainty, and assurance requirements.
-
-## Decision and compatibility
-
-The correction makes previously scattered production expectations explicit and adds cross-domain acceptance coverage. It rejects two alternatives: adding more named expert personas as a substitute for capability, and hard-coding a domain workflow into the core. It also rejects a universal automated quality score for subjective work.
-
-Existing invariants, requirement identifiers, and M/B/X acceptance identifiers remain unchanged. The supplemental DLV requirements and D fixtures are additional obligations for applicable delivery claims, not reports of passed tests. Implementation-specific adapters, runtime code, generated circuits, and executable tests belong in the implementation project.
+The [task illustrations](../examples/5W-INVERTER-AND-CROSS-DOMAIN.md) and [delivery stress scenarios](../evaluation/DELIVERY-ACCEPTANCE.md) remain outside the runtime decision policy. They supply possible scopes and failure cases, not mandatory tool choices, team sizes, or execution orders. Assess actual outcomes and [unscripted organization](../evaluation/README.md#evaluating-emergent-organization) separately. This revision is not a circuit design, a running persona society, or evidence of universal task competence.

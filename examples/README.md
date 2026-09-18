@@ -8,9 +8,11 @@ These are authored illustrations, not live persona transcripts, engineering advi
 |---|---|
 | [A simple writing request](WORKED-EXAMPLES.md#a-simple-writing-request) | A useful result need not involve a team, tools, or a memory ritual. |
 | [A coordinated four-bedroom house](WORKED-EXAMPLES.md#a-coordinated-four-bedroom-house) | Scope, conditional assumptions, actual native deliverables, integration, review, and honest limitations. |
-| [A 5 W inverter and cross-domain delivery](5W-INVERTER-AND-CROSS-DOMAIN.md) | Step-by-step output contracts for schematic, PCB, Gerber, bill of materials, and simulations; the same core design applied to marketing, sales, and unfamiliar tasks. |
+| [Circuit and cross-domain task illustrations](5W-INVERTER-AND-CROSS-DOMAIN.md) | Alternative scopes and failure cases, not a prescribed team, toolset, or execution order. |
 | [An uncertain external action](WORKED-EXAMPLES.md#an-external-action-with-an-uncertain-result) | Authorization, receipts, reconciliation, and avoiding duplicate effects. |
 | [A learning comparison](WORKED-EXAMPLES.md#a-learning-transfer-comparison) | Why retained memory is not itself proof of improvement. |
 | [An ongoing community service](WORKED-EXAMPLES.md#an-ongoing-community-service) | Bounded triggers, actual stakeholder authority, and reachable human handoff. |
 
 The examples explain the [requirements](../implementation/REQUIREMENTS.md); they do not weaken them or add a domain-specific workflow to the core design.
+
+Examples are not automatically inserted into persona instructions. A declared learning experiment may make selected examples available as ordinary sourced material, but protected evaluation answers remain separate. Production behavior must be evaluated on varied work, not inferred from following one authored story.

@@ -16,7 +16,7 @@ People set the purpose and boundaries. Personas interpret the need and accept re
 | How does the whole idea fit together? | [Design overview](AI-PERSONAS-DESIGN-PROPOSAL.md) | [Design chapters](design/README.md) |
 | What should the experience look and feel like? | [Human experience and society](design/07-experience-and-society.md) | [Visual guide](VISUAL-GUIDE.md) |
 | How could I implement it independently? | [Implementation reading path](implementation/README.md) | [Behavioral contracts](implementation/CONTRACTS.md) and [requirements](implementation/REQUIREMENTS.md) |
-| Will it produce real CAD, simulation, marketing, or sales deliverables? | [Deliverable production](design/DELIVERABLE-PRODUCTION.md) | [5 W inverter and cross-domain walkthroughs](examples/5W-INVERTER-AND-CROSS-DOMAIN.md) |
+| How can work organize without fixed task workflows? | [Persona-owned organization](design/03-work-and-cooperation.md#how-organization-emerges) | [Evaluation of emergence](evaluation/README.md#evaluating-emergent-organization) |
 | How would we know it works? | [Evaluation guide](evaluation/README.md) | [Acceptance scenarios](evaluation/ACCEPTANCE.md) |
 | Why were these design choices made? | [Design decisions](DESIGN-DECISIONS.md) | [Design sources](sources/README.md) |
 | How do I contribute? | [Contribution guide](CONTRIBUTING.md) | [Design worksheets](templates/README.md) |
@@ -52,8 +52,8 @@ The [requirements catalogue](implementation/REQUIREMENTS.md) retains 21 invarian
 
 This is handbook edition 2.0. [What changed](CHANGELOG.md) explains the refactor. [Source provenance](sources/SOURCE-MANIFEST.md) preserves the history of the earlier reports without making their old code examples part of the current reading experience.
 
-## Deliverable-production addendum
+## Emergent work, concrete evidence
 
-The [production design](design/DELIVERABLE-PRODUCTION.md) and [delivery contracts](implementation/DELIVERY-CONTRACTS.md) make concrete output obligations explicit: native artifacts, demonstrated production operations, semantic and cross-artifact checks, bounded repair, reproducible packages, and honest separation of files from external outcomes. They preserve the no-fixed-role and no-hidden-domain-router principles.
+Personas choose methods, discover capabilities and collaborators, negotiate responsibilities, and revise work from observations. The supporting system supplies shared affordances and enforces permission, privacy, resource, recovery, and evidence boundaries; it does not select a hidden task workflow. Domain tools and reusable learned methods are allowed, without assigning professions or making every request a team exercise.
 
-The addendum adds **10 requirements, DLV-01–DLV-10**, and **16 acceptance fixtures, D01–D16**, while retaining the original 45 requirements and 44 M/B/X scenarios unchanged. Read the [new fixtures](evaluation/DELIVERY-ACCEPTANCE.md) and [hypothetical inverter, marketing, and sales walkthroughs](examples/5W-INVERTER-AND-CROSS-DOMAIN.md). These are additional design obligations, not executed tests or a claim that CAD adapters, generated circuits, or business integrations already exist.
+The [delivery review](design/DELIVERABLE-PRODUCTION.md) corrects a redundant addendum: native artifacts, real analyses, integration, and honest completion were already covered by the original requirements. DLV-01–DLV-10 are [retired and mapped](implementation/DELIVERY-CONTRACTS.md), not ten additional active requirements. The [D01–D16 stress scenarios](evaluation/DELIVERY-ACCEPTANCE.md) remain supplemental tests of existing rules, separate from runtime policy. All product checks remain specified, not reported as passed.

@@ -2,7 +2,21 @@
 
 [Home](README.md) · [Source provenance](sources/SOURCE-MANIFEST.md)
 
+## Edition 2.0 consolidation — persona-owned organization
+
+**Date: 18 September 2026.** A second review found that most obligations presented as new in the delivery addendum already existed in the original work, capability, evidence, and evaluation design. The addendum's description of a missing production architecture was overstated. This revision consolidates rather than adds another layer.
+
+The active requirement catalogue remains **21 invariants and 45 requirements**. DLV-01–DLV-10 are retired as a separate requirement family with explicit [historical mappings](implementation/DELIVERY-CONTRACTS.md). The old identifiers and prior design remain traceable; no old evaluation is promoted to a current pass. The 44 core M/B/X entries remain unchanged. D01–D16 remain 16 supplemental, unexecuted stress scenarios with revised general wording and direct links to existing requirements.
+
+[Work and cooperation](design/03-work-and-cooperation.md#how-organization-emerges) and the [core contracts](implementation/CONTRACTS.md#persona-owned-organization-and-capability-choice) clarify the boundary between participant choices and system enforcement. Discovery, offers, accepted commitments, scoped coordination, specialization, reuse, and changed-evidence decisions are attributable to personas. Permissions, privacy, conserved resources, recovery, and current evidence are not left to emergent agreement. No task classifier, profession registry, hidden prompt pipeline, fixed team size, or mandatory birth is introduced.
+
+The former production chapter is now a [review and reading map](design/DELIVERABLE-PRODUCTION.md), and its contract page is a compatibility record. Circuit and business examples are rewritten as alternative scopes and disturbances, not a compulsory sequence. The [evaluation method](evaluation/README.md#evaluating-emergent-organization) adds comparisons and authorized policy inspection under the existing behavioral gates. Entry points and the decision register reflect the consolidation.
+
+This is a design-only revision. No runtime, live society, native engineering package, simulation, external effect, or product acceptance result is claimed. Artwork and the existing scope of E1–E6 are unchanged.
+
 ## Edition 2.0 delivery addendum — concrete outputs across domains
+
+**Historical entry; its separate normative layer and missing-architecture interpretation are superseded by the consolidation above. Counts and claims below describe that earlier revision, not the active catalogue.**
 
 **Date: 18 September 2026.** The [deliverable-production design](design/DELIVERABLE-PRODUCTION.md) closes under-specified production obligations without introducing fixed professions, a domain router, application code, or mandatory ceremony for small tasks.
 

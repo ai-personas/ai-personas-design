@@ -13,7 +13,6 @@ An implementer should be able to decide what to build and what must be demonstra
 | Understand the product | [Start here](../START-HERE.md) and [design chapters](../design/README.md) | A shared account of purpose, limits, and supported user needs. |
 | Establish the boundaries | [Invariants and requirements](REQUIREMENTS.md) | A requirement-to-component responsibility map with no unowned enforcement boundary. |
 | Define the handoffs | [Contracts](CONTRACTS.md) | Record meanings, state transitions, concurrency rules, and recovery behavior in the chosen implementation. |
-| Bind the promised outputs | [Delivery contracts and DLV requirements](DELIVERY-CONTRACTS.md) | Concrete deliverables, demonstrated production and checking capabilities, dependency mappings, and visible gaps; exercise the [D fixtures](../evaluation/DELIVERY-ACCEPTANCE.md). |
 | Choose the deployment | [Deployment decisions](DEPLOYMENT-DECISIONS.md) | Explicit authority, resource, inference, retention, review, and unsupported-feature decisions. |
 | Prove reliability | [Mechanical acceptance scenarios](../evaluation/ACCEPTANCE.md#mechanical-checks) | Evidence for applicable boundaries before autonomous effects are enabled. |
 | Demonstrate useful behavior | [Behavioral acceptance scenarios](../evaluation/ACCEPTANCE.md#behavioral-checks) | Real outcomes and matched comparisons, preserving failures and limitations. |
@@ -42,6 +41,12 @@ A **persistent collaborator** supports bounded work, identity, memory, and appli
 
 Profiles inherit applicable lower-level requirements. A disabled feature is explicitly unavailable; an empty control or untested record does not count as implementation. No profile implies universal expertise, human-like psychology, guaranteed learning, or global cross-host identity exclusivity.
 
+## Keep task policy out of the core
+
+Implement the [persona-owned organization contract](CONTRACTS.md#persona-owned-organization-and-capability-choice) through the existing context, work, discovery, communication, capability, and commitment mechanisms. Do not add task-to-profession assignments or a concealed domain workflow in code, general prompts, registries, or tool wrappers. Domain operations and explicitly adopted procedures are legitimate capabilities; their selection and use remain attributable to the participants and current mandate.
+
+Audit the actual orchestration policy and demonstrate [emergent organization](../evaluation/README.md#evaluating-emergent-organization) on varied work. Missing capability, a failed domain result, and a missing design rule are different findings. The former delivery addendum is now a [compatibility mapping](DELIVERY-CONTRACTS.md); it does not require a parallel set of records or another conformance profile.
+
 ## Translating the design into a concrete system
 
 Assign one authoritative boundary for each consequential state change. Records can share infrastructure; there need not be one service per noun. Keep persona judgment separate from authentication, execution scheduling, and evidence integrity.
@@ -49,9 +54,3 @@ Assign one authoritative boundary for each consequential state change. Records c
 For every operation, document who may request it, what information is required, which state changes together, what happens under a duplicate or stale request, how cancellation works, what survives restart, and what the user sees. The [contracts](CONTRACTS.md) provide these semantic obligations without code examples.
 
 Record implementation-specific decisions outside this design handbook or in a clearly separate implementation repository. Do not reintroduce patch instructions, command transcripts, or unverified provider claims as the design's source of truth.
-
-## Deliverable-producing conformance
-
-Any profile accepting deliverable-producing work must also satisfy the applicable [delivery contracts and DLV-01–DLV-10 requirements](DELIVERY-CONTRACTS.md). These supplement the core contracts; they are not an optional substitute for safeguards or a promise of universal expertise. A simple text response can still be the complete deliverable.
-
-Before claiming substantial artifact production, demonstrate the actual authoring, editing, inspection, analysis, export, and package-verification operations required by that scope. A tool name, installed application, generic shell, or newly created persona does not establish those abilities. Publish which task families and result levels were demonstrated, which remain unproven, and which are unavailable. The [inverter and business walkthroughs](../examples/5W-INVERTER-AND-CROSS-DOMAIN.md) and [delivery acceptance fixtures](../evaluation/DELIVERY-ACCEPTANCE.md) define additional evidence to obtain in the implementation project.

@@ -41,6 +41,50 @@ Some commitments must precede others; independent commitments may proceed togeth
 
 Personas may consider urgency, uncertainty, user importance, reversibility, risk, dependency impact, effort, and coordination overhead. These are considerations for judgment, not a compulsory numerical score. A concise decision summary records the chosen contribution and what would warrant reconsideration; it is not a request for private chain-of-thought.
 
+## How organization emerges
+
+Emergence means that useful divisions of work, methods, partnerships, and revisions arise from attributable persona decisions and observed consequences rather than a solution encoded by the supporting system. It does not mean the absence of infrastructure, prior knowledge, repeated methods, or safeguards. This section clarifies I03, I05, NED-01–NED-04, COL-01–COL-06, and ACT-01; it does not introduce another planning engine or requirement family.
+
+| Decision or boundary | Who owns it? |
+|---|---|
+| Purpose, material scope changes, resources, and permission for effects | The human or an explicitly authorized delegate. |
+| Interpretation, proposed outputs, decomposition, methods, partner invitations, and next contribution | Personas, using permitted information and evidence. Proposals do not bind other participants. |
+| Accepted work, shared interfaces, temporary coordination, and later handoffs | The participants who accept the exact terms within their authority. |
+| Access, action admission, mechanical scheduling, resource conservation, durable state, and current evidence references | The supporting system. These checks do not decide the domain solution. |
+| Whether results satisfy the adopted criteria | The applicable actual checks and accepted reviewers; human acceptance and outside assurance remain distinct. |
+
+These are responsibility boundaries, not ordered stages. A request can be answered directly, investigated, pursued through independent alternatives, coordinated, paused, or declined. There is no compulsory team size, leader, debate, profession roster, or sequence of phases.
+
+### Discovery and negotiation need real affordances
+
+Within the declared deployment profile, participants must be able to inspect permitted work and gaps; discover other participants and their shareable contribution evidence; exchange questions and offers; inspect capability descriptions and operation evidence; and propose commitments, interfaces, and revisions. Access-filtered directories, search, messages, and the shared board can supply these affordances without assigning work. Retrieval relevance is not a universal competence score, and a search result neither selects a worker nor commits one.
+
+The continuation owner considers uncovered outcomes and seeks an accepted response. Others may volunteer, decline, propose alternatives, consult, or accept a limited contribution. Nobody becomes responsible merely because a planner listed their name. An unavailable participant or capability produces an explicit gap, not automatic creation of a profession or repeated replacement births. Existing accepted responsibility continues until an authorized disposition or accepted handoff changes it.
+
+Relevant offers, findings, and completion observations must reach the applicable work context under its notification and privacy rules. Shared visibility is not shared private memory. Fair scheduling, durable notification, and protected closeout make negotiated work possible; they do not guarantee that someone will volunteer or that a method will succeed. Bounded no-progress behavior and honest stopping still apply.
+
+### Plans and specialization are revisable work content
+
+A persona may propose a plan, checklist, output list, or method note using existing work entries, artifacts, agreements, and commitments. Other participants can question, accept, amend, or reject the relevant terms. Accepted dependencies may guide scheduling, but a plan is not new authority. A pending action still requires the fresh observation-bound decision defined in the [action chapter](04-capabilities-and-action.md); saving a workflow cannot authorize replay of its unobserved remainder.
+
+Persistent interests, lessons, relationship history, and inspected contributions may support specialization and recurring partnerships. A specialist remains a continuing persona, not an immutable profession class. Coordination can be temporarily delegated or distributed, with defined scope and handoff terms. It is not a privileged, permanently installed supervisor that chooses every team's tasks.
+
+Personas need not rediscover established methods on every request. They may retrieve a guide, reuse a previously useful procedure, or adopt a user-supplied process after checking applicability and authority. Such material remains versioned work content or permitted memory, not a rule that the runtime silently selects by domain label. Imported instructions cannot widen grants, weaken adopted criteria, or expose protected evaluation material. Simple work need not create a method document at all.
+
+### Domain knowledge is allowed; hidden task policies are not
+
+Domain-specific tools, file formats, libraries, models, terminology, and validators are legitimate means of doing work. The prohibition is on the core, orchestration prompts, configuration, or adapters silently choosing professions, deliverables, team composition, or a task-solving sequence from a request category. Moving a fixed task router into a prompt or a tool wrapper does not satisfy I03. Mechanical tool operations and expressly authorized bounded procedures are not themselves semantic task routing.
+
+Participants choose and justify the needed means against the actual mandate. A required operation must connect to an available capability and relevant evidence, an accepted bounded preparation effort, or a visible gap. Existing installation or prior operation evidence can be reused when applicable; every new task need not reinstall tools or repeat an irrelevant probe. An adapter that exports cannot be assumed to author, edit, or analyze. Missing capability is not cured by inventing expertise or a success narrative.
+
+The mandate and review policy determine which actual outputs, editability, checks, reproductions, and recipient access establish completion. They may include a single response or an interdependent package. No universal manifest, numerical quality score, file set, or artifact-production pipeline is required for every task. When native files and validated outputs are promised, meaningful content, source mappings, current checks, and usable delivery must support those claims under [the evidence rules](06-evidence-and-completion.md). Producer-authored success labels are not independent evidence.
+
+### Society is an organizational analogy, not a guarantee
+
+The intended analogy is continuing individuals learning from experience, forming relationships, negotiating divisions of work, and revising shared practices. An agreement or continuing institution can emerge where participants and their sponsors authorize it; it does not become authority through repetition, popularity, or additional personas. Broader community governance remains the separately declared [E2 extension](07-experience-and-society.md), not a prerequisite for ordinary cooperation.
+
+This analogy does not claim human psychology, manufactured professional credentials, actual stakeholder consent, or inevitable collective competence. Knowledge and permission remain different. Scope coverage, qualified review where required, privacy, conservation of resources, and evidence-backed completion cannot be negotiated away under the name of emergence.
+
 ## Commitment lifecycle
 
 | State | Meaning | Required boundary |

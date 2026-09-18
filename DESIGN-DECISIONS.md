@@ -40,6 +40,16 @@ This handbook makes the precedence of its documents explicit, supplies code-free
 
 These clarifications are not reports of new measured behavior. The original invariants, requirement identifiers, and acceptance identifiers are retained; future semantic changes must name the affected identifiers and describe compatibility and evaluation consequences.
 
+## Delivery consolidation and emergent organization
+
+**Adopted design clarification, 18 September 2026.** Review of the pre-addendum handbook found that concrete outputs, capability acquisition, native editability, analysis mappings, repair, integration, and exact-state completion already existed. The delivery addendum overstated these as missing architecture. The [review map](design/DELIVERABLE-PRODUCTION.md) and [DLV compatibility record](implementation/DELIVERY-CONTRACTS.md) retire the redundant requirement layer without weakening existing evidence obligations or erasing history.
+
+**Resolution:** keep the original 21 invariants and 45 requirement identifiers. Put the clarification of [persona-owned organization](design/03-work-and-cooperation.md#how-organization-emerges) in the work chapter and [core contracts](implementation/CONTRACTS.md#persona-owned-organization-and-capability-choice). Plans, output lists, method notes, and delivery inventories remain uses of existing records, not compulsory new objects or a fixed pipeline. The runtime supplies social and action affordances and enforces safeguards; personas choose approaches, negotiate, and revise actual work.
+
+**Alternatives rejected:** hard-coding professions or task-specific workflows; hiding those choices in orchestration prompts or wrappers; forcing birth or a permanent supervisor; removing safety and evidence enforcement in the name of emergence; and requiring every task to invent a new method. Domain-specific capabilities and attributable reuse of learned methods remain valid. Continuing societies and institutions still follow the applicable declared extension contracts.
+
+**Compatibility and evaluation:** DLV identifiers remain historical mappings, while D01–D16 remain versioned stress scenarios mapped to existing rules. Their task examples are illustrative rather than runtime policy. The [emergence comparisons](evaluation/README.md#evaluating-emergent-organization) test varied tasks, policy provenance, declined commitments, unavailable capabilities, meaningful repair, and reuse under existing behavioral gates. No live behavior, circuit output, or universal competence is established by this documentation change.
+
 ## Changing a decision
 
 Use the [contribution guide](CONTRIBUTING.md) and [decision worksheet](templates/README.md#design-decision-and-evaluation-record). Identify the need, current rule, evidence or counterexample, proposed change, alternatives, consequences, and affected tests. Do not silently change the definition of success to make an old result appear compliant.

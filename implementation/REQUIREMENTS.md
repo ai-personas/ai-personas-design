@@ -90,8 +90,8 @@ For each applicable row, an implementation records the responsible component, im
 
 The catalogue contains 45 requirement rows. The original identifiers remain stable so a design change can be traced without confusing renamed requirements with new behavior.
 
-## Deliverable-production requirements addendum
+## Consolidation and evaluation links
 
-[DLV-01–DLV-10](DELIVERY-CONTRACTS.md#additional-requirement-catalogue) add ten requirements for applicable deliverable-producing work, bringing the base and supplemental total to **55 requirements**. The original 45 rows and I01–I21 above remain unchanged. The [production design](../design/DELIVERABLE-PRODUCTION.md) and [delivery contracts](DELIVERY-CONTRACTS.md) are normative supplements, not illustrative alternatives to the core contracts.
+The active catalogue remains the 45 rows above, with I01–I21 unchanged. The [organization clarification](../design/03-work-and-cooperation.md#how-organization-emerges) and [core handoff contract](CONTRACTS.md#persona-owned-organization-and-capability-choice) elaborate I03 and the existing NED, COL, ACT, GOV, EVD, and SYS boundaries; they do not add a task-specific workflow.
 
-The added requirements cover output scope, demonstrated production capabilities, bounded domain guidance, meaningful native artifacts, semantic integration, appropriate checks, repair and revalidation, reproducible delivery, external-effect boundaries, and demonstrated cross-domain limits. They map to the **16 specified D01–D16 fixtures** in [delivery acceptance](../evaluation/DELIVERY-ACCEPTANCE.md), alongside the original M/B/X scenarios. Apply the same implementation-state, evidence, and untested-case reporting above to every applicable DLV row; none is reported as implemented or passed here.
+The former DLV-01–DLV-10 layer is retired as redundant; the [historical mapping](DELIVERY-CONTRACTS.md#retired-identifier-mapping) preserves each identifier and its existing coverage. [D01–D16](../evaluation/DELIVERY-ACCEPTANCE.md) are supplemental evaluation refinements, not extra active requirements. [Emergence evaluation](../evaluation/README.md#evaluating-emergent-organization) adds comparisons under the existing behavioral gates. Record the exact design and evaluator revisions; earlier outcomes do not silently inherit revised criteria.

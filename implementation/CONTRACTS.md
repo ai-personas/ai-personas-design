@@ -67,6 +67,16 @@ Material records identify their source or author, scope, version, visibility, an
 
 **Visible evidence:** identity and work context, input-version references, actual included material, inference configuration, concise decision summary, accepted or rejected actions, and usage. Do not require disclosure of private chain-of-thought.
 
+## Persona-owned organization and capability choice
+
+**Inputs:** the current mandate, permitted work and participant discovery, actual capability evidence, individual context, proposals, and existing grants and commitments.
+
+**Accepted result:** participants can discover, communicate, propose, accept or decline, revise, and hand off work through the existing records and transitions. Plans and reusable methods are versioned work content; only accepted commitments bind participants. The [organization rules](../design/03-work-and-cooperation.md#how-organization-emerges) define this boundary under I03, not a new service or domain schema.
+
+**Failure behavior:** unavailable affordances, declined offers, uncovered outputs, and missing capabilities remain explicit. Neither a domain keyword nor an embedded orchestration prompt may silently allocate professions, choose a fixed solution pipeline, or manufacture a replacement. General scheduling may enforce accepted prerequisites, but cannot bypass the pending-action decision barrier. Safeguards and mandatory criteria remain enforceable even when a group proposes an exception.
+
+**Visible evidence:** the permitted information actually used, concise proposal and revision reasons, accepted responsibility, capability choices and actual results, ownership gaps, and subsequent evidence-led changes. An implementation must make relevant routing and orchestration configuration auditable by authorized evaluators without exposing secrets or private reasoning. A polished transcript alone does not establish that organization was unscripted.
+
 ## Actions and observations
 
 **Inputs:** actor, causal work, stable request identity and content, relevant versions, intended effect, capability, current grant, reservation, output expectation, and uncertainty or cancellation rules.

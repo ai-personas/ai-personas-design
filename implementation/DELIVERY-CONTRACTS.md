@@ -1,80 +1,36 @@
-# Deliverable contracts and production requirements
+# Delivery addendum compatibility and requirement mapping
 
-[Implementation guide](README.md) · [Core contracts](CONTRACTS.md) · [Requirement index](REQUIREMENTS.md) · [Design rationale](../design/DELIVERABLE-PRODUCTION.md) · [Acceptance fixtures](../evaluation/DELIVERY-ACCEPTANCE.md)
+[Implementation guide](README.md) · [Active requirements](REQUIREMENTS.md) · [Core contracts](CONTRACTS.md) · [Review finding](../design/DELIVERABLE-PRODUCTION.md)
 
-These normative contracts supplement the core contracts for accepted deliverable-producing work. They specify meanings and failure behavior, not a wire schema, application interface, required provider, or fixed domain workflow. Records may be combined for small work. All applicable authority, privacy, resource, recovery, and evidence rules remain in force.
+## Status and authority
 
-## Required information
+**Superseded as a separate normative contract, 18 September 2026.** The earlier delivery addendum duplicated or specialized obligations already present in the handbook. Its DLV-01–DLV-10 identifiers are retained below for historical traceability, not as ten additional active requirements. Do not reuse these identifiers for unrelated rules or silently relabel an old evaluation as passing the current design.
 
-| Record | Minimum recoverable meaning |
-|---|---|
-| Deliverable contract | Original mandate and revision; result level; required and optional outputs; intended consumer; format and native editability; units and conventions; dependencies; acceptance criteria and tolerances where applicable; exclusions; unknowns; accepted owners or gaps; delivery destination; authority for changes. |
-| Method brief | Author and sources; version; relevant domain concepts; assumptions and applicability; candidate methods and alternatives; artifact relationships; hazard and limitation notes; proposed checks. It is not authority or a trusted verdict. |
-| Production binding | Deliverable and required operation; selected capability and exact version; environment; supported input and output formats; native libraries or models; rights and acquisition conditions; preparation and representative operation evidence; observation limits; estimated and reserved resources; fallback or block. |
-| Dependency plan | Work-scoped operations and commitments; exact consumed and produced versions; provisional versus accepted inputs; units and interface mappings; permitted independence; integration checks; iteration budget; stopping condition; current findings. |
-| Check specification | Criterion and claim; method or reviewer; exact checker version and configuration; inputs; thresholds or human rubric; preconditions; expected coverage; independence and conflict policy; raw evidence required; limitations; accepted check owner. |
-| Check result | Actual run or review identity; input and output versions; diagnostics and observations; measured values and units where relevant; verdict; limitations; findings; historical result and separately derived current applicability. |
-| Delivery manifest | Exact mandate and contract revisions; source and derived artifact identities; sizes and fingerprints where files exist; formats, units, and retrieval locations; necessary libraries and models; actual producing actions; checks and dispositions; reproduction and editability evidence; current acceptance; missing scope; authority; external obligations. |
+The authoritative design remains the 21 invariants, 45 requirement identifiers, detailed chapters, and [core contracts](CONTRACTS.md). The clarified [persona-owned organization boundary](../design/03-work-and-cooperation.md#how-organization-emerges) belongs to those existing rules. Historical wording remains available in Git history; the [changelog](../CHANGELOG.md) records the correction.
 
-A path, filename extension, checksum, or producer's assertion is not proof of semantic content. A dependency link is not proof of a faithful transformation. Personal or proprietary material retains its access and redistribution restrictions in every derivative and package.
+## Retired identifier mapping
 
-## Intake and production feasibility
-
-**Inputs:** original need, requested result level, supplied facts, material unknowns, available authority, resources, and candidate capabilities.
-
-**Accepted result:** an adopted deliverable contract at appropriate depth and a capability coverage assessment. Every required operation and check has a demonstrated binding, a bounded preparation commitment, or a visible gap. An uncertain estimate remains uncertain; accepting discovery is not promising full production.
-
-**Failure behavior:** absent specifications block affected claims, not all useful conversation. Missing tools, source data, libraries, models, access, or reviewers produce a scoped block, approved alternative, or explicit partial delivery. A downgrade from native design to a written suggestion requires an authorized scope change. Discovery and preparation cannot consume protected closeout capacity without authorized reallocation.
-
-**Evidence:** material questions and assumptions; accepted output list; actual capability probe receipts; preparation failures; supported and unproven operations; accepted owners; continuing gap dispositions.
-
-## Production and semantic validation
-
-**Inputs:** adopted contract, current source versions, method brief, accepted commitments, production bindings, and current grants.
-
-**Accepted result:** actual artifacts with typed input/output relationships and observations. For native deliverables, evidence covers meaningful content, reopening, a representative persistent edit on a copy, and regeneration of affected outputs. Source-to-analysis and source-to-export transformations preserve their mapping and limitations.
-
-**Failure behavior:** empty or mislabeled files, unresolved references, stale outputs, unsupported formats, lost units, missing dependencies, or unavailable inspection cannot fulfill the corresponding obligation. A tool that exports cannot be assumed to author or route. A simulation with incomplete models may support a narrower model-based claim, never an unsupported full-system pass.
-
-**Evidence:** operation receipts, exact native sources and exports, dependency identities, parse and semantic checks, actual renders when inspected, warnings, and reproduction observations. Necessary licensed dependencies may be resolved through an authorized reproducible acquisition path; a broken or inaccessible dependency blocks the promised portability claim.
-
-## Checking and bounded repair
-
-**Inputs:** frozen criterion-to-check matrix, exact candidate assembly, accepted reviewers or validators, independence policy, resources, and relevant observations.
-
-**Accepted result:** each applicable criterion records pass, fail, not run, unavailable, or inconclusive; applicability independently records current, stale, pending, or unverifiable. No weighted average or majority vote overrides an unmet mandatory criterion. Subjective work may use an authorized human rubric without invented numerical certainty.
-
-**Failure behavior:** missing checks, a clean file parser, successful process exit, nominal-only simulation, or another persona's approval cannot stand in for the agreed check. Criteria may change only through authorized versioned scope decisions, not producer convenience. Reviewers retain unresolved findings and may identify omissions from the original mandate.
-
-**Evidence:** exact checker and input versions, observations, threshold comparisons or human assessment, warnings and exclusions, repair decisions, actual changed artifacts, and current rechecks. The checker must not trust a producer-written success flag. Material changes invalidate affected descendants and evidence; uncertainty requires conservative coverage.
-
-Repair stops, seeks a permitted alternative, or reports a scoped block when its bounds are reached. It does not fabricate convergence, refresh budgets by creating personas, or promote a best-effort draft into a validated release.
-
-## Package and release
-
-**Inputs:** exact delivery manifest, adopted contract, coherent assembly, current qualifying checks, blocker dispositions, authority, and acceptance where required.
-
-**Accepted result:** the intended authorized recipient can retrieve the actual promised package. All mandatory outcomes at the adopted level have current evidence. The release binds one exact state, not paths that may later change. Reproduction may use a declared semantic or numerical equivalence rule when byte-identical regeneration is inappropriate; raw original outputs remain intact and normalization cannot conceal meaningful differences.
-
-**Failure behavior:** missing artifacts, required libraries, models, drill files, approvals, or failed mandatory checks prevent a full release. An explicitly labeled partial package preserves missing scope and owners. Relevant changes racing release follow I21 and M24. Releasing files does not grant permission for external effects or assert physical, commercial, or regulatory success.
-
-**Evidence:** recipient retrieval, manifest integrity, native round-trip checks, independent reproduction appropriate to the claim, current reviews, exact acceptance, and any separately authorized external receipt or measurement. Public claims must name the task family, scope, configuration, conditions, and untested boundaries actually demonstrated.
-
-## Additional requirement catalogue
-
-These ten identifiers supplement the 45 original requirements without renaming them. All D fixtures below are specified, not executed by this handbook.
-
-| ID | Required behavior | Primary delivery fixtures |
+| Historical identifier | Earlier concern | Existing requirements and interpretation |
 |---|---|---|
-| DLV-01 | Adopt concrete deliverables and result levels; preserve unknowns and authorized scope changes. | D01; D02 |
-| DLV-02 | Bind required production and checking operations to actual capabilities; expose preparation and coverage gaps. | D03; D14 |
-| DLV-03 | Keep domain method briefs versioned, evidence-linked, work-scoped, and separate from authority and protected evaluation. | D04; D14 |
-| DLV-04 | Produce meaningful native artifacts and demonstrate promised reopening, editing, and regeneration. | D05; D08 |
-| DLV-05 | Preserve and check semantic mappings and package consistency across exact source, analysis, and export versions. | D06; D07; D09 |
-| DLV-06 | Use claim-specific checks, explicit negative or missing states, and risk-appropriate independent review. | D07; D10; D11 |
-| DLV-07 | Bound evidence-led repair and revalidate changed dependencies without erasing failures. | D09; D15 |
-| DLV-08 | Deliver a retrievable, coherent manifest and reproduce required outputs under declared equivalence rules. | D08; D10 |
-| DLV-09 | Separate digital delivery, external effects, and observed outcomes; preserve their distinct authority and evidence. | D12; D13; D16 |
-| DLV-10 | Demonstrate scoped cross-domain capability, including unfamiliar-task behavior and proportional simple work. | D11; D12; D13; D14 |
+| DLV-01 | Concrete deliverables, result levels, unknowns, scope changes | NED-01–NED-04: retain the original need and adopted scope, criteria, assumptions, and coverage. |
+| DLV-02 | Production capability and missing operations | ACT-01–ACT-03; I10: require relevant operation evidence or expose the gap. Tool availability is not successful production. |
+| DLV-03 | Method briefs and protected evaluation | MEM-01–MEM-04, ACT-02, GOV-01; I03: methods are ordinary sourced work content or permitted memory, never authority or a hidden domain router. |
+| DLV-04 | Meaningful editable artifacts | EVD-01–EVD-02, NED-04: support promised native content and editability with appropriate checks; B11 already includes native edit and reproduction evidence. |
+| DLV-05 | Mappings and cross-artifact consistency | COL-05, EVD-01, EVD-03–EVD-04: check the particular work's interfaces, transformations, and exact assembly. |
+| DLV-06 | Claim-specific checks and negative states | EVD-02–EVD-05: preserve appropriate review, missing evidence, findings, current applicability, and limits; do not average away a mandatory failure. |
+| DLV-07 | Bounded repair and dependency revalidation | COL-04–COL-05, GOV-02–GOV-04, EVD-03: retain failures, bound iteration, protect finishing, and invalidate affected claims. |
+| DLV-08 | Retrievable delivery and reproduction | EVD-01–EVD-05, NED-01, NED-04: supply the actual promised sources, dependencies, delivery, and reproduction evidence at the adopted scope. |
+| DLV-09 | Digital artifacts versus external effects and outcomes | ACT-03–ACT-04, GOV-01, EVD-05, PHY-01 where enabled: delivery does not establish permission, execution, measurement, or certification of another effect. |
+| DLV-10 | Cross-domain ability and proportional simple work | I03, PER-02, COL-06, EVD-05; B08 and B11–B12: demonstrate the claimed scopes without forcing a roster, birth, or workflow. |
 
-The design rationale is in [deliverable production](../design/DELIVERABLE-PRODUCTION.md). The [inverter and business walkthroughs](../examples/5W-INVERTER-AND-CROSS-DOMAIN.md) illustrate adoption of these contracts; they are not a core task router or proof of runtime success.
+The corresponding meanings remain required when applicable; the redundant layer does not. A migration must check its actual design revision and evidence, not infer that similarly named records guarantee conformance.
+
+## No mandatory new record family
+
+A deliverable specification is part of the mandate and relevant commitments. A method brief is ordinary work content or a sourced fragment. A production binding is a relation between the required operation, its capability, and actual evidence. A dependency plan uses work, interface agreements, and accepted commitments. Check specifications and results use criteria and assessments. A delivery manifest is an inventory within the submission and release when a package needs one.
+
+An implementation may use those names for convenience. It must not require seven extra objects, a universal file bundle, or a fixed sequence for a simple response. Conversely, simplifying record structure does not permit missing promised artifacts, unsupported claims, lost dependencies, or absent recipient access. Reproduction checks should state suitable semantic or numerical equivalence when identical bytes are not the relevant criterion.
+
+## Evaluation compatibility
+
+[D01–D16](../evaluation/DELIVERY-ACCEPTANCE.md) remain separately identified supplemental scenarios, now mapped directly to the original requirements and expressed without a compulsory task pipeline. Their revision and selected concrete inputs must be recorded with any result. Historical scenario results, if any are later supplied, keep their original revision; no results are asserted here. Core M01–M26, B01–B12, and X01–X06 identifiers remain unchanged.
