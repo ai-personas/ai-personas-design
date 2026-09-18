@@ -1,0 +1,78 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1100' viewBox='0 0 1600 1100' role='img' aria-labelledby='title desc'>
+<title id='title'>Creation is not membership. Membership is not work.</title><desc id='desc'>A contribution gap motivates a birth or recruitment proposal. Failed authority/resources lead to a visible refusal or block. Otherwise restricted orientation precedes a membership decision. Declining records the decision and reconciles unused reservation. Accepted scoped membership precedes a separate commitment decision: negotiate/decline leaves a revised or unowned offer; acceptance leads to work, actual contribution and review, then continuing, dormancy, or handoff.</desc>
+<defs><style>.t0{font-size:17px;fill:#526976}.t1{font-size:26px;fill:#173443;font-weight:700}.t2{font-size:19px;fill:#526976}.t3{font-size:23px;fill:#173443;font-weight:700}.t4{font-size:24px;fill:#173443;font-weight:700}.t5{font-size:25px;fill:#173443;font-weight:700}.p0{fill:none;stroke:#CAD6D5;stroke-width:1;stroke-linejoin:round;stroke-linecap:round}.p1{fill:none;stroke:#00786D;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}.r0{fill:#F7F5EF}.r1{fill:#FFFFFF;stroke:#CAD6D5;rx:10}.r2{fill:#FFF0D8;stroke:#D8BA8F;rx:10}</style><marker id='arrow' markerWidth='8' markerHeight='8' refX='7' refY='4' orient='auto-start-reverse' markerUnits='userSpaceOnUse'><path d='M0 0 8 4 0 8Z' fill='#00786D'/></marker></defs>
+<g font-family='Lato, Arial, sans-serif'>
+<rect x='0' y='0' width='1600' height='1100' class='r0'/>
+<text x='72' y='58' font-size='18' fill='#00786D' font-weight='700'>AI PERSONAS / DESIGN FIELD GUIDE</text>
+<text x='1528' y='58' font-size='18' fill='#00786D' font-weight='700' text-anchor='end'>SYSTEM DIAGRAM / D04</text>
+<path d='M72 85H1528' class='p0'/>
+<text x='72' y='164' font-size='61' fill='#102D3C' font-weight='700'>Creation is not membership. Membership is not work.</text>
+<text x='72' y='211' font-size='22' fill='#526976'>Keep authority, scoped invitation acceptance, and accepted responsibility as separate decisions.</text>
+<path d='M72 1038H1528' class='p0'/>
+<text x='72' y='1066' font-size='15' fill='#526976' font-weight='700'>PROPOSED DESIGN / NOT IMPLEMENTATION EVIDENCE</text>
+<text x='1528' y='1066' font-size='15' fill='#526976' text-anchor='end'>§ 6.5  /  VISUAL EDITION 01</text>
+<path d='M392 330H465' marker-end='url(#arrow)' class='p1'/>
+<path d='M825 330H960' marker-end='url(#arrow)' class='p1'/>
+<path d='M1260 330H1320' marker-end='url(#arrow)' class='p1'/>
+<path d='M1110 390V480' marker-end='url(#arrow)' class='p1'/>
+<path d='M960 535H850' marker-end='url(#arrow)' class='p1'/>
+<path d='M550 535H412' marker-end='url(#arrow)' class='p1'/>
+<path d='M700 590V680' marker-end='url(#arrow)' class='p1'/>
+<path d='M850 730H960' marker-end='url(#arrow)' class='p1'/>
+<path d='M1260 730H1320' marker-end='url(#arrow)' class='p1'/>
+<path d='M1110 790V880' marker-end='url(#arrow)' class='p1'/>
+<path d='M960 930H850' marker-end='url(#arrow)' class='p1'/>
+<path d='M550 930H412' marker-end='url(#arrow)' class='p1'/>
+<rect x='1270' y='295' width='50.359375' height='25' class='r0'/>
+<text x='1276' y='314' class='t0'>No</text>
+<rect x='1117' y='421' width='53.078125' height='25' class='r0'/>
+<text x='1123' y='440' class='t0'>Yes</text>
+<rect x='434' y='499' width='50.359375' height='25' class='r0'/>
+<text x='440' y='518' class='t0'>No</text>
+<rect x='706' y='627' width='53.078125' height='25' class='r0'/>
+<text x='712' y='646' class='t0'>Yes</text>
+<rect x='1274' y='688' width='50.359375' height='25' class='r0'/>
+<text x='1280' y='707' class='t0'>No</text>
+<rect x='1117' y='824' width='53.078125' height='25' class='r0'/>
+<text x='1123' y='843' class='t0'>Yes</text>
+<rect x='72' y='280' width='320' height='100' class='r1'/>
+<text x='94' y='311' class='t1'>Contribution gap</text>
+<text x='94' y='349' class='t2'>Observe the need for help.</text>
+<rect x='465' y='280' width='360' height='100' class='r1'/>
+<text x='487' y='311' class='t1'>Propose help</text>
+<text x='487' y='349' class='t2'>Birth or recruit—not automatic.</text>
+<rect x='960' y='280' width='300' height='110' class='r2'/>
+<text x='982' y='311' class='t1'><tspan x='982' dy='0'>Authority +</tspan><tspan x='982' dy='29'>resources?</tspan></text>
+<text x='982' y='378' class='t2'>Admission gate.</text>
+<rect x='1320' y='280' width='208' height='110' class='r1'/>
+<text x='1342' y='311' class='t3'>Refuse / block</text>
+<text x='1342' y='346' class='t2'><tspan x='1342' dy='0'>Make the reason</tspan><tspan x='1342' dy='25'>visible.</tspan></text>
+<rect x='960' y='480' width='300' height='110' class='r1'/>
+<text x='982' y='511' class='t4'>Restricted orientation</text>
+<text x='982' y='547' class='t2'>Preview invitation and terms.</text>
+<rect x='550' y='480' width='300' height='110' class='r2'/>
+<text x='572' y='511' class='t5'>Accept membership?</text>
+<text x='572' y='548' class='t2'>A separate decision.</text>
+<rect x='72' y='480' width='340' height='110' class='r1'/>
+<text x='94' y='511' class='t1'>Decline recorded</text>
+<text x='94' y='549' class='t2'>Reconcile unused reservation.</text>
+<rect x='550' y='680' width='300' height='100' rx='10' fill='#E2F2EA' stroke='#00786D'/>
+<text x='572' y='711' class='t5'>Scoped membership</text>
+<text x='572' y='748' class='t2'>No automatic obligation.</text>
+<rect x='960' y='680' width='300' height='110' class='r2'/>
+<text x='982' y='711' class='t5'>Accept commitment?</text>
+<text x='982' y='748' class='t2'>Specific offered terms.</text>
+<rect x='1320' y='680' width='208' height='110' class='r1'/>
+<text x='1342' y='711' class='t3'>Revise offer</text>
+<text x='1342' y='746' class='t2'><tspan x='1342' dy='0'>Or leave visibly</tspan><tspan x='1342' dy='25'>unowned.</tspan></text>
+<rect x='960' y='880' width='300' height='100' rx='10' fill='#102D3C' stroke='#102D3C'/>
+<text x='982' y='911' font-size='27' fill='#FFFFFF' font-weight='700'>Accepted work</text>
+<text x='982' y='950' font-size='19' fill='#D4E3E7'>Act under responsibility.</text>
+<rect x='550' y='880' width='300' height='100' class='r1'/>
+<text x='572' y='911' class='t4'>Contribution + review</text>
+<text x='572' y='947' class='t2'>Inspect actual usefulness.</text>
+<rect x='72' y='880' width='340' height='100' class='r1'/>
+<text x='94' y='911' class='t1'>Explicit disposition</text>
+<text x='94' y='949' class='t2'>Continue, dormant, or handoff.</text>
+<text x='72' y='1008' class='t2'>AI acceptance is an operational protocol—not a claim of human-like subjective consent. Human consent remains separately required.</text>
+</g></svg>

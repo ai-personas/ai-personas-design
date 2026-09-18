@@ -1,0 +1,107 @@
+{
+  "edition": "01",
+  "date": "2026-09-18",
+  "scope": "New visual assets and their presentation only; not product acceptance.",
+  "source_commit": "675be2bce39ce17f03e113199144e90fa898e9f8",
+  "checks": {
+    "artwork_inventory": "pass: 5 overview posters + 7 diagram posters",
+    "xml_accessibility_and_self_containment": "pass: all 12",
+    "raster_rendering": "pass: all 12, CairoSVG at 1600 pixels wide",
+    "text_layout_at_creation": "pass: 444 measured text runs, no canvas or card overflow with Lato",
+    "visual_review": "Rendered sheets inspected; crowded labels and connector collisions corrected.",
+    "source_integrity_local": "Not run: full source checkout unavailable in the local runtime. Original source blobs are retained unchanged in the Git tree.",
+    "product_acceptance": "not_run",
+    "browser_mermaid_rendering": "not_run; original Mermaid source is unchanged"
+  },
+  "limitations": [
+    "Typography can reflow under font substitution; inspect after edits.",
+    "The structural validator does not detect every overlap or prove semantic equivalence.",
+    "No live persona campaign, deployment assurance, or physical test was performed."
+  ],
+  "artworks": [
+    {
+      "id": "P01",
+      "file": "assets/visuals/poster-01-blueprint.svg",
+      "sha256": "d71c035fe51820f14c69455b797d3185e2863af5c0857d81567076ffc71041a3",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "P02",
+      "file": "assets/visuals/poster-02-end-to-end-flow.svg",
+      "sha256": "3299f39f9756fc1816bf48cd1ab1782e73f7c6402229288cd4032c9ddaf8e915",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "P03",
+      "file": "assets/visuals/poster-03-persona-anatomy.svg",
+      "sha256": "e2102638ba422cdc34ba1d63361733947f2e60272247e377d4d63c6efd4342b7",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "P04",
+      "file": "assets/visuals/poster-04-persona-society.svg",
+      "sha256": "b22b9d1cad5118407c4884a515fc37f42463f86b1768d87e9918c30ce9f4919b",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "P05",
+      "file": "assets/visuals/poster-05-embodiment-requirements.svg",
+      "sha256": "b46a7fb5b0cb39b97cc06a18ca6fb058aee427c4748645c88f1a507e4a049934",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "D01",
+      "file": "assets/visuals/diagram-01-embodiment-loop.svg",
+      "sha256": "cfd525a6a4f1b68b06d9b959afa14e0a7c10ac27d2443e7fc1460127610872a2",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "D02",
+      "file": "assets/visuals/diagram-02-conceptual-architecture.svg",
+      "sha256": "d7b19d48e55cf66e2546863cb4254182914ebb5a1422d37cfb3aaabcf2c5b10b",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "D03",
+      "file": "assets/visuals/diagram-03-identity-lifecycle.svg",
+      "sha256": "a459f764ebe0beb04d851652d484d75a20ad10e4bae123e4e886398b001b38ca",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "D04",
+      "file": "assets/visuals/diagram-04-onboarding.svg",
+      "sha256": "ec2ddd5d270de44173f8c0547afef298780fcecf4458c65763046e8fc898d49c",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "D05",
+      "file": "assets/visuals/diagram-05-learning-loop.svg",
+      "sha256": "f94f533091fcbd9447cbddafe0f612abf3e80fa06bcb009726967f656586b527",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "D06",
+      "file": "assets/visuals/diagram-06-evidence-chain.svg",
+      "sha256": "fd7ed56949e57a59e014708936f0605222e0d7de93c4b971754f1d255a44b428",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    },
+    {
+      "id": "D07",
+      "file": "assets/visuals/diagram-07-complete-journey.svg",
+      "sha256": "165accf11f2c2de0af527f4c3b3f5204d8716d4938b40172d8f0c63ce6cf3d86",
+      "xml_and_structure": "pass",
+      "raster_render": "pass"
+    }
+  ]
+}

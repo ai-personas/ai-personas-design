@@ -1,0 +1,57 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' role='img' aria-labelledby='title desc'>
+<title id='title'>A claim is only as strong as its evidence chain.</title><desc id='desc'>Eight links: accepted need and criteria; accepted commitment; exact inputs and assumptions; actual action or observation; exact output; claim-specific assessment; current applicability check; honest release or limited disposition. Each link can fail independently. Tool execution is not required for every kind of result.</desc>
+<defs><style>.t0{font-size:27px;fill:#173443;font-weight:700}.t1{font-size:19px;fill:#526976}.t2{font-size:15px;fill:#00786D;font-weight:700}.p0{fill:none;stroke:#CAD6D5;stroke-width:1;stroke-linejoin:round;stroke-linecap:round}.p1{fill:none;stroke:#00786D;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}.r0{fill:#FFFFFF;stroke:#CAD6D5;rx:10}</style><marker id='arrow' markerWidth='8' markerHeight='8' refX='7' refY='4' orient='auto-start-reverse' markerUnits='userSpaceOnUse'><path d='M0 0 8 4 0 8Z' fill='#00786D'/></marker></defs>
+<g font-family='Lato, Arial, sans-serif'>
+<rect x='0' y='0' width='1600' height='1000' fill='#F7F5EF'/>
+<text x='72' y='58' font-size='18' fill='#00786D' font-weight='700'>AI PERSONAS / DESIGN FIELD GUIDE</text>
+<text x='1528' y='58' font-size='18' fill='#00786D' font-weight='700' text-anchor='end'>SYSTEM DIAGRAM / D06</text>
+<path d='M72 85H1528' class='p0'/>
+<text x='72' y='164' font-size='64' fill='#102D3C' font-weight='700'>A claim is only as strong as its evidence chain.</text>
+<text x='72' y='211' font-size='22' fill='#526976'>Trace the accepted need to exact work, appropriate assessment, and a currently applicable release.</text>
+<path d='M72 938H1528' class='p0'/>
+<text x='72' y='966' font-size='15' fill='#526976' font-weight='700'>PROPOSED DESIGN / NOT IMPLEMENTATION EVIDENCE</text>
+<text x='1528' y='966' font-size='15' fill='#526976' text-anchor='end'>§ 14.1  /  VISUAL EDITION 01</text>
+<rect x='72' y='305' width='334' height='174' class='r0'/>
+<text x='94' y='336' class='t0'>Accepted need</text>
+<text x='94' y='375' class='t1'><tspan x='94' dy='0'>Preserve the mandate and</tspan><tspan x='94' dy='25'>adopted criteria.</tspan></text>
+<text x='94' y='451' class='t2'>01 / EVIDENCE LINK</text>
+<rect x='446' y='305' width='334' height='174' class='r0'/>
+<text x='468' y='336' class='t0'>Accepted commitment</text>
+<text x='468' y='375' class='t1'><tspan x='468' dy='0'>Name the owner and exact</tspan><tspan x='468' dy='25'>accepted terms.</tspan></text>
+<text x='468' y='451' class='t2'>02 / EVIDENCE LINK</text>
+<rect x='820' y='305' width='334' height='174' class='r0'/>
+<text x='842' y='336' class='t0'>Exact inputs</text>
+<text x='842' y='375' class='t1'><tspan x='842' dy='0'>Bind source versions and explicit</tspan><tspan x='842' dy='25'>assumptions.</tspan></text>
+<text x='842' y='451' class='t2'>03 / EVIDENCE LINK</text>
+<rect x='1194' y='305' width='334' height='174' class='r0'/>
+<text x='1216' y='336' class='t0'>Actual action</text>
+<text x='1216' y='375' class='t1'><tspan x='1216' dy='0'>Retain what ran or what was</tspan><tspan x='1216' dy='25'>observed.</tspan></text>
+<text x='1216' y='451' class='t2'>04 / EVIDENCE LINK</text>
+<rect x='1194' y='635' width='334' height='174' class='r0'/>
+<text x='1216' y='666' class='t0'>Exact output</text>
+<text x='1216' y='705' class='t1'><tspan x='1216' dy='0'>Identify the candidate—not a</tspan><tspan x='1216' dy='25'>mutable latest file.</tspan></text>
+<text x='1216' y='781' class='t2'>05 / EVIDENCE LINK</text>
+<rect x='820' y='635' width='334' height='174' class='r0'/>
+<text x='842' y='666' class='t0'>Claim-specific review</text>
+<text x='842' y='705' class='t1'><tspan x='842' dy='0'>Assess relevant criteria, scope, and</tspan><tspan x='842' dy='25'>limitations.</tspan></text>
+<text x='842' y='781' class='t2'>06 / EVIDENCE LINK</text>
+<rect x='446' y='635' width='334' height='174' rx='10' fill='#FFF0D8' stroke='#D8BA8F'/>
+<text x='468' y='666' class='t0'>Current applicability</text>
+<text x='468' y='705' class='t1'><tspan x='468' dy='0'>Do the checks still apply to this</tspan><tspan x='468' dy='25'>candidate?</tspan></text>
+<text x='468' y='781' class='t2'>07 / EVIDENCE LINK</text>
+<rect x='72' y='635' width='334' height='174' rx='10' fill='#102D3C' stroke='#102D3C'/>
+<text x='94' y='666' font-size='27' fill='#FFFFFF' font-weight='700'>Honest disposition</text>
+<text x='94' y='705' font-size='19' fill='#D4E3E7'><tspan x='94' dy='0'>Release the supported scope—or</tspan><tspan x='94' dy='25'>state the limit.</tspan></text>
+<text x='94' y='781' font-size='15' fill='#7DE4CC' font-weight='700'>08 / EVIDENCE LINK</text>
+<path d='M412 392H439' marker-end='url(#arrow)' class='p1'/>
+<path d='M440 722H413' marker-end='url(#arrow)' class='p1'/>
+<path d='M786 392H813' marker-end='url(#arrow)' class='p1'/>
+<path d='M814 722H787' marker-end='url(#arrow)' class='p1'/>
+<path d='M1160 392H1187' marker-end='url(#arrow)' class='p1'/>
+<path d='M1188 722H1161' marker-end='url(#arrow)' class='p1'/>
+<path d='M1361 485V629' marker-end='url(#arrow)' class='p1'/>
+<rect x='909' y='544' width='439.578125' height='25' fill='#F7F5EF'/>
+<text x='915' y='563' font-size='17' fill='#526976'>Only completed, attributable work supports the output.</text>
+<text x='72' y='553' font-size='22' fill='#00786D' font-weight='700'>VERSION-BOUND. CLAIM-SPECIFIC. CURRENT.</text>
+<text x='72' y='908' class='t1'>Each link can fail independently. A simple response may combine links; no tool run is required merely to fill the diagram.</text>
+</g></svg>

@@ -1,0 +1,55 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' role='img' aria-labelledby='title desc'>
+<title id='title'>A continuing identity. A situated perspective.</title><desc id='desc'>A central continuing identity is related to authored perspective, permitted memory, individual agenda, relationships, accepted commitments, capability evidence, current context, and lifecycle. Lines indicate components, not a command hierarchy.</desc>
+<defs><style>.t0{font-size:22px;fill:#D4E3E7;text-anchor:middle}.t1{font-size:26px;fill:#173443;font-weight:700}.t2{font-size:19px;fill:#526976}.p0{fill:none;stroke:#CAD6D5;stroke-width:1;stroke-linejoin:round;stroke-linecap:round}.p1{fill:none;stroke:#CAD6D5;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}.r0{fill:#FFFFFF;stroke:#CAD6D5;rx:10}</style><marker id='arrow' markerWidth='8' markerHeight='8' refX='7' refY='4' orient='auto-start-reverse' markerUnits='userSpaceOnUse'><path d='M0 0 8 4 0 8Z' fill='#00786D'/></marker></defs>
+<g font-family='Lato, Arial, sans-serif'>
+<rect x='0' y='0' width='1600' height='1000' fill='#F7F5EF'/>
+<text x='72' y='58' font-size='18' fill='#00786D' font-weight='700'>AI PERSONAS / DESIGN FIELD GUIDE</text>
+<text x='1528' y='58' font-size='18' fill='#00786D' font-weight='700' text-anchor='end'>OVERVIEW / P03</text>
+<path d='M72 85H1528' class='p0'/>
+<text x='72' y='164' font-size='64' fill='#102D3C' font-weight='700'>A continuing identity. A situated perspective.</text>
+<text x='72' y='211' font-size='22' fill='#526976'>An inspectable collaborator is more than a name, avatar, model session, or assigned profession.</text>
+<path d='M72 938H1528' class='p0'/>
+<text x='72' y='966' font-size='15' fill='#526976' font-weight='700'>PROPOSED DESIGN / NOT IMPLEMENTATION EVIDENCE</text>
+<text x='1528' y='966' font-size='15' fill='#526976' text-anchor='end'>§§ 3, 5–8, 10  /  VISUAL EDITION 01</text>
+<path d='M506 335H555L635 535' class='p1'/>
+<path d='M1094 335H1045L965 535' class='p1'/>
+<path d='M506 467H555L635 535' class='p1'/>
+<path d='M1094 467H1045L965 535' class='p1'/>
+<path d='M506 599H555L635 535' class='p1'/>
+<path d='M1094 599H1045L965 535' class='p1'/>
+<path d='M506 731H555L635 535' class='p1'/>
+<path d='M1094 731H1045L965 535' class='p1'/>
+<circle cx='800' cy='535' r='190' fill='none' stroke='#CAD6D5' stroke-width='1'/>
+<circle cx='800' cy='535' r='163' fill='#102D3C' stroke-width='1'/>
+<text x='800' y='483' font-size='18' fill='#7DE4CC' font-weight='700' text-anchor='middle'>CONTINUING</text>
+<text x='800' y='526' font-size='49' fill='#FFFFFF' font-weight='700' text-anchor='middle'>Identity</text>
+<text x='800' y='568' class='t0'>Stable attribution.</text>
+<text x='800' y='599' class='t0'>Inspectable history.</text>
+<rect x='72' y='280' width='434' height='112' class='r0'/>
+<text x='94' y='311' class='t1'>Authored perspective</text>
+<text x='94' y='349' class='t2'><tspan x='94' dy='0'>Interests and interpretations—not fixed</tspan><tspan x='94' dy='25'>occupations.</tspan></text>
+<rect x='72' y='412' width='434' height='112' class='r0'/>
+<text x='94' y='443' class='t1'>Access-controlled memory</text>
+<text x='94' y='481' class='t2'>Sources, applicability, revisions, and limits.</text>
+<rect x='72' y='544' width='434' height='112' class='r0'/>
+<text x='94' y='575' class='t1'>Individual agenda</text>
+<text x='94' y='613' class='t2'><tspan x='94' dy='0'>Attention and proposals—not a global priority</tspan><tspan x='94' dy='25'>score.</tspan></text>
+<rect x='72' y='676' width='434' height='112' class='r0'/>
+<text x='94' y='707' class='t1'>Relationships</text>
+<text x='94' y='745' class='t2'><tspan x='94' dy='0'>Directional, contextual, and private where</tspan><tspan x='94' dy='25'>required.</tspan></text>
+<rect x='1094' y='280' width='434' height='112' class='r0'/>
+<text x='1116' y='311' class='t1'>Accepted commitments</text>
+<text x='1116' y='349' class='t2'><tspan x='1116' dy='0'>Specific terms, ownership, and handoff</tspan><tspan x='1116' dy='25'>conditions.</tspan></text>
+<rect x='1094' y='412' width='434' height='112' class='r0'/>
+<text x='1116' y='443' class='t1'>Capability evidence</text>
+<text x='1116' y='481' class='t2'><tspan x='1116' dy='0'>Actual use and reviewed results—not</tspan><tspan x='1116' dy='25'>credentials.</tspan></text>
+<rect x='1094' y='544' width='434' height='112' class='r0'/>
+<text x='1116' y='575' class='t1'>Current situation</text>
+<text x='1116' y='613' class='t2'><tspan x='1116' dy='0'>Authorized observations, boundaries, and</tspan><tspan x='1116' dy='25'>resources.</tspan></text>
+<rect x='1094' y='676' width='434' height='112' class='r0'/>
+<text x='1116' y='707' class='t1'>Lifecycle continuity</text>
+<text x='1116' y='745' class='t2'><tspan x='1116' dy='0'>Active, dormant, or retired; obligations stay</tspan><tspan x='1116' dy='25'>visible.</tspan></text>
+<rect x='72' y='844' width='1456' height='94' rx='10' fill='#102D3C'/>
+<text x='98' y='880' font-size='26' fill='#FFFFFF' font-weight='700'>Continuity without manufactured biography.</text>
+<text x='98' y='911' font-size='19' fill='#D4E3E7'>Traits are descriptive. Memory is not ground truth. A model change does not automatically create a new identity.</text>
+</g></svg>

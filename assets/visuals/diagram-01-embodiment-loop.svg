@@ -1,0 +1,52 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' role='img' aria-labelledby='title desc'>
+<title id='title'>Close the loop between choice and consequence.</title><desc id='desc'>Continuing identity, selected memory, authorized observations, and current commitments and limits feed a situated decision. It leads to a permitted action, observed consequence, and review. Review returns to selected memory and to the situated decision.</desc>
+<defs><style>.t0{font-size:17px;fill:#526976}.t1{font-size:25px;fill:#173443;font-weight:700}.t2{font-size:19px;fill:#526976}.t3{font-size:26px;fill:#173443;font-weight:700}.p0{fill:none;stroke:#CAD6D5;stroke-width:1;stroke-linejoin:round;stroke-linecap:round}.p1{fill:none;stroke:#00786D;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}.r0{fill:#FFFFFF;stroke:#CAD6D5;rx:10}</style><marker id='arrow' markerWidth='8' markerHeight='8' refX='7' refY='4' orient='auto-start-reverse' markerUnits='userSpaceOnUse'><path d='M0 0 8 4 0 8Z' fill='#00786D'/></marker></defs>
+<g font-family='Lato, Arial, sans-serif'>
+<rect x='0' y='0' width='1600' height='1000' fill='#F7F5EF'/>
+<text x='72' y='58' font-size='18' fill='#00786D' font-weight='700'>AI PERSONAS / DESIGN FIELD GUIDE</text>
+<text x='1528' y='58' font-size='18' fill='#00786D' font-weight='700' text-anchor='end'>SYSTEM DIAGRAM / D01</text>
+<path d='M72 85H1528' class='p0'/>
+<text x='72' y='164' font-size='64' fill='#102D3C' font-weight='700'>Close the loop between choice and consequence.</text>
+<text x='72' y='211' font-size='22' fill='#526976'>Continuing state informs a fresh decision; observed outcomes support review, not automatic self-improvement.</text>
+<path d='M72 938H1528' class='p0'/>
+<text x='72' y='966' font-size='15' fill='#526976' font-weight='700'>PROPOSED DESIGN / NOT IMPLEMENTATION EVIDENCE</text>
+<text x='1528' y='966' font-size='15' fill='#526976' text-anchor='end'>§ 3.5  /  VISUAL EDITION 01</text>
+<path d='M432 331H474V484H560' marker-end='url(#arrow)' class='p1'/>
+<path d='M432 464H494V518H560' marker-end='url(#arrow)' class='p1'/>
+<path d='M432 597H514V552H560' marker-end='url(#arrow)' class='p1'/>
+<path d='M432 730H534V586H560' marker-end='url(#arrow)' class='p1'/>
+<path d='M980 540H1060V331H1160' marker-end='url(#arrow)' class='p1'/>
+<path d='M1344 380V450' marker-end='url(#arrow)' class='p1'/>
+<path d='M1344 548V640' marker-end='url(#arrow)' class='p1'/>
+<path d='M1160 695H1060V598H980' marker-end='url(#arrow)' class='p1'/>
+<rect x='1024' y='607' width='106.015625' height='25' fill='#F7F5EF'/>
+<text x='1030' y='626' class='t0'>reconsider</text>
+<path d='M1344 744V835H452V464H432' marker-end='url(#arrow)' class='p1'/>
+<rect x='622' y='806' width='276.890625' height='25' fill='#F7F5EF'/>
+<text x='628' y='825' class='t0'>revise / reselect relevant memory</text>
+<rect x='72' y='282' width='360' height='98' class='r0'/>
+<text x='94' y='313' class='t1'>Continuing identity</text>
+<text x='94' y='350' class='t2'>Attribution and permitted history.</text>
+<rect x='72' y='415' width='360' height='98' class='r0'/>
+<text x='94' y='446' class='t1'>Selected memory</text>
+<text x='94' y='483' class='t2'>Relevant, access-checked fragments.</text>
+<rect x='72' y='548' width='360' height='98' class='r0'/>
+<text x='94' y='579' class='t1'>Authorized observations</text>
+<text x='94' y='616' class='t2'>Actual sources and current versions.</text>
+<rect x='72' y='681' width='360' height='98' class='r0'/>
+<text x='94' y='712' class='t1'>Commitments + limits</text>
+<text x='94' y='749' class='t2'>Obligations, authority, and resources.</text>
+<rect x='560' y='452' width='420' height='166' rx='10' fill='#102D3C' stroke='#102D3C'/>
+<text x='582' y='483' font-size='34' fill='#FFFFFF' font-weight='700'>Situated decision</text>
+<text x='582' y='530' font-size='19' fill='#D4E3E7'><tspan x='582' dy='0'>Choose whether to act, ask, negotiate,</tspan><tspan x='582' dy='25'>inspect, or wait.</tspan></text>
+<rect x='1160' y='282' width='368' height='98' rx='10' fill='#E2F2EA' stroke='#00786D'/>
+<text x='1182' y='313' class='t3'>Permitted action</text>
+<text x='1182' y='351' class='t2'>Check authority before execution.</text>
+<rect x='1160' y='450' width='368' height='98' class='r0'/>
+<text x='1182' y='481' class='t3'>Observed consequence</text>
+<text x='1182' y='519' class='t2'>What actually happened?</text>
+<rect x='1160' y='640' width='368' height='104' class='r0'/>
+<text x='1182' y='671' class='t3'>Review + reconsider</text>
+<text x='1182' y='709' class='t2'>Assess claims; revisit the choice.</text>
+<text x='72' y='908' class='t2'>An intended or running operation is not a completed observation. Memory never creates new authority.</text>
+</g></svg>

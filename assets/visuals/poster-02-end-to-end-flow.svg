@@ -1,0 +1,88 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' role='img' aria-labelledby='title desc'>
+<title id='title'>From intent to an honest outcome.</title><desc id='desc'>A serpentine twelve-stage reading guide: receive, accept, understand, discover, commit, equip, act, integrate, review, release, close, and learn. Numbering follows the written journey, not a mandatory execution engine.</desc>
+<defs><style>.t0{font-size:17px;fill:#00786D;font-weight:700}.t1{font-size:29px;fill:#102D3C;font-weight:700}.t2{font-size:19px;fill:#526976}.p0{fill:none;stroke:#CAD6D5;stroke-width:1;stroke-linejoin:round;stroke-linecap:round}.p1{fill:none;stroke:#00786D;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}.r0{fill:#FFFFFF;stroke:#CAD6D5;rx:10}.r1{fill:#00786D;rx:3}.r2{fill:#102D3C;rx:3}</style><marker id='arrow' markerWidth='8' markerHeight='8' refX='7' refY='4' orient='auto-start-reverse' markerUnits='userSpaceOnUse'><path d='M0 0 8 4 0 8Z' fill='#00786D'/></marker></defs>
+<g font-family='Lato, Arial, sans-serif'>
+<rect x='0' y='0' width='1600' height='1000' fill='#F7F5EF'/>
+<text x='72' y='58' font-size='18' fill='#00786D' font-weight='700'>AI PERSONAS / DESIGN FIELD GUIDE</text>
+<text x='1528' y='58' font-size='18' fill='#00786D' font-weight='700' text-anchor='end'>OVERVIEW / P02</text>
+<path d='M72 85H1528' class='p0'/>
+<text x='72' y='164' font-size='64' fill='#102D3C' font-weight='700'>From intent to an honest outcome.</text>
+<text x='72' y='211' font-size='22' fill='#526976'>Twelve explanatory stages—not a fixed workflow. Combine steps, branch, revisit, or stop honestly.</text>
+<path d='M72 938H1528' class='p0'/>
+<text x='72' y='966' font-size='15' fill='#526976' font-weight='700'>PROPOSED DESIGN / NOT IMPLEMENTATION EVIDENCE</text>
+<text x='1528' y='966' font-size='15' fill='#526976' text-anchor='end'>§ 15  /  VISUAL EDITION 01</text>
+<rect x='72' y='284' width='334' height='145' class='r0'/>
+<rect x='72' y='284' width='6' height='145' class='r1'/>
+<text x='96' y='315' class='t0'>01</text>
+<text x='96' y='350' class='t1'>Receive</text>
+<text x='96' y='381' class='t2'><tspan x='96' dy='0'>Preserve the need and authorized</tspan><tspan x='96' dy='25'>boundaries.</tspan></text>
+<rect x='446' y='284' width='334' height='145' class='r0'/>
+<rect x='446' y='284' width='6' height='145' class='r1'/>
+<text x='470' y='315' class='t0'>02</text>
+<text x='470' y='350' class='t1'>Accept</text>
+<text x='470' y='381' class='t2'>Name who owns continuation.</text>
+<rect x='820' y='284' width='334' height='145' class='r0'/>
+<rect x='820' y='284' width='6' height='145' class='r1'/>
+<text x='844' y='315' class='t0'>03</text>
+<text x='844' y='350' class='t1'>Understand</text>
+<text x='844' y='381' class='t2'><tspan x='844' dy='0'>Clarify outcomes, criteria, and</tspan><tspan x='844' dy='25'>unknowns.</tspan></text>
+<rect x='1194' y='284' width='334' height='145' class='r0'/>
+<rect x='1194' y='284' width='6' height='145' class='r1'/>
+<text x='1218' y='315' class='t0'>04</text>
+<text x='1218' y='350' class='t1'>Discover</text>
+<text x='1218' y='381' class='t2'><tspan x='1218' dy='0'>Surface perspectives and</tspan><tspan x='1218' dy='25'>opportunities.</tspan></text>
+<path d='M412 356H439' marker-end='url(#arrow)' class='p1'/>
+<path d='M786 356H813' marker-end='url(#arrow)' class='p1'/>
+<path d='M1160 356H1187' marker-end='url(#arrow)' class='p1'/>
+<rect x='1194' y='465' width='334' height='145' class='r0'/>
+<rect x='1194' y='465' width='6' height='145' class='r2'/>
+<text x='1218' y='496' class='t0'>05</text>
+<text x='1218' y='531' class='t1'>Commit</text>
+<text x='1218' y='562' class='t2'><tspan x='1218' dy='0'>Accept terms, dependencies, and</tspan><tspan x='1218' dy='25'>resources.</tspan></text>
+<rect x='820' y='465' width='334' height='145' class='r0'/>
+<rect x='820' y='465' width='6' height='145' class='r2'/>
+<text x='844' y='496' class='t0'>06</text>
+<text x='844' y='531' class='t1'>Equip</text>
+<text x='844' y='562' class='t2'><tspan x='844' dy='0'>Verify sufficient, authorized</tspan><tspan x='844' dy='25'>capabilities.</tspan></text>
+<rect x='446' y='465' width='334' height='145' class='r0'/>
+<rect x='446' y='465' width='6' height='145' class='r2'/>
+<text x='470' y='496' class='t0'>07</text>
+<text x='470' y='531' class='t1'>Act</text>
+<text x='470' y='562' class='t2'><tspan x='470' dy='0'>Perform bounded work on</tspan><tspan x='470' dy='25'>declared inputs.</tspan></text>
+<rect x='72' y='465' width='334' height='145' class='r0'/>
+<rect x='72' y='465' width='6' height='145' class='r2'/>
+<text x='96' y='496' class='t0'>08</text>
+<text x='96' y='531' class='t1'>Integrate</text>
+<text x='96' y='562' class='t2'><tspan x='96' dy='0'>Inspect outputs and resolve</tspan><tspan x='96' dy='25'>findings.</tspan></text>
+<path d='M440 537H413' marker-end='url(#arrow)' class='p1'/>
+<path d='M814 537H787' marker-end='url(#arrow)' class='p1'/>
+<path d='M1188 537H1161' marker-end='url(#arrow)' class='p1'/>
+<rect x='72' y='646' width='334' height='145' class='r0'/>
+<rect x='72' y='646' width='6' height='145' class='r1'/>
+<text x='96' y='677' class='t0'>09</text>
+<text x='96' y='712' class='t1'>Review</text>
+<text x='96' y='743' class='t2'><tspan x='96' dy='0'>Check exact candidates and</tspan><tspan x='96' dy='25'>omitted scope.</tspan></text>
+<rect x='446' y='646' width='334' height='145' class='r0'/>
+<rect x='446' y='646' width='6' height='145' class='r1'/>
+<text x='470' y='677' class='t0'>10</text>
+<text x='470' y='712' class='t1'>Release</text>
+<text x='470' y='743' class='t2'><tspan x='470' dy='0'>Check currentness; seal the</tspan><tspan x='470' dy='25'>reviewed state.</tspan></text>
+<rect x='820' y='646' width='334' height='145' class='r0'/>
+<rect x='820' y='646' width='6' height='145' class='r1'/>
+<text x='844' y='677' class='t0'>11</text>
+<text x='844' y='712' class='t1'>Close</text>
+<text x='844' y='743' class='t2'><tspan x='844' dy='0'>Settle costs, handoffs, and</tspan><tspan x='844' dy='25'>obligations.</tspan></text>
+<rect x='1194' y='646' width='334' height='145' class='r0'/>
+<rect x='1194' y='646' width='6' height='145' class='r1'/>
+<text x='1218' y='677' class='t0'>12</text>
+<text x='1218' y='712' class='t1'>Learn</text>
+<text x='1218' y='743' class='t2'><tspan x='1218' dy='0'>Retain selectively; assess later</tspan><tspan x='1218' dy='25'>usefulness.</tspan></text>
+<path d='M412 718H439' marker-end='url(#arrow)' class='p1'/>
+<path d='M786 718H813' marker-end='url(#arrow)' class='p1'/>
+<path d='M1160 718H1187' marker-end='url(#arrow)' class='p1'/>
+<path d='M1361 435V459' marker-end='url(#arrow)' class='p1'/>
+<path d='M239 616V640' marker-end='url(#arrow)' class='p1'/>
+<rect x='72' y='844' width='1456' height='94' rx='10' fill='#102D3C'/>
+<text x='98' y='880' font-size='26' fill='#FFFFFF' font-weight='700'>Useful work—or an explicit, honest disposition.</text>
+<text x='98' y='911' font-size='19' fill='#D4E3E7'>Conditional, partial, blocked, canceled, and declined outcomes remain visible. Identities can continue after the work ends.</text>
+</g></svg>

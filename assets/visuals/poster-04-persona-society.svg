@@ -1,0 +1,55 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' role='img' aria-labelledby='title desc'>
+<title id='title'>Cooperation without a collective mind.</title><desc id='desc'>An illustrative network of four personas connects to shared work and attributed records under a human charter. The shared hub is not a commander or private-memory pool. Governance requires scoped authority, accepted membership and work, preserved dissent, real human representation, and challenge routes. Community governance is proposed Extension E2.</desc>
+<defs><style>.t0{font-size:28px;fill:#173443;font-weight:700}.t1{font-size:19px;fill:#526976}.t2{font-size:19px;fill:#D4E3E7}.t3{font-size:25px;fill:#FFFFFF;font-weight:700}.t4{font-size:18px;fill:#D4E3E7}.p0{fill:none;stroke:#CAD6D5;stroke-width:1;stroke-linejoin:round;stroke-linecap:round}.p1{fill:none;stroke:#00786D;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}.r0{fill:#FFFFFF;stroke:#CAD6D5;rx:10}</style><marker id='arrow' markerWidth='8' markerHeight='8' refX='7' refY='4' orient='auto-start-reverse' markerUnits='userSpaceOnUse'><path d='M0 0 8 4 0 8Z' fill='#00786D'/></marker></defs>
+<g font-family='Lato, Arial, sans-serif'>
+<rect x='0' y='0' width='1600' height='1000' fill='#F7F5EF'/>
+<text x='72' y='58' font-size='18' fill='#00786D' font-weight='700'>AI PERSONAS / DESIGN FIELD GUIDE</text>
+<text x='1528' y='58' font-size='18' fill='#00786D' font-weight='700' text-anchor='end'>OVERVIEW / P04</text>
+<path d='M72 85H1528' class='p0'/>
+<text x='72' y='164' font-size='64' fill='#102D3C' font-weight='700'>Cooperation without a collective mind.</text>
+<text x='72' y='211' font-size='22' fill='#526976'>A society is a governed network of participants, shared work, resources, and scoped agreements.</text>
+<path d='M72 938H1528' class='p0'/>
+<text x='72' y='966' font-size='15' fill='#526976' font-weight='700'>PROPOSED DESIGN / NOT IMPLEMENTATION EVIDENCE</text>
+<text x='1528' y='966' font-size='15' fill='#526976' text-anchor='end'>§§ 10–11  /  VISUAL EDITION 01</text>
+<path d='M570 380V445' marker-end='url(#arrow)' class='p1'/>
+<rect x='578' y='398' width='158.328125' height='25' fill='#F7F5EF'/>
+<text x='584' y='417' font-size='17' fill='#526976'>scope + authority</text>
+<path d='M342 505H420' marker-end='url(#arrow)' marker-start='url(#arrow)' class='p1'/>
+<path d='M800 505H720' marker-end='url(#arrow)' marker-start='url(#arrow)' class='p1'/>
+<path d='M420 742H468V580' marker-end='url(#arrow)' marker-start='url(#arrow)' class='p1'/>
+<path d='M740 742H675V580' marker-end='url(#arrow)' marker-start='url(#arrow)' class='p1'/>
+<rect x='390' y='270' width='360' height='110' rx='10' fill='#E2F2EA' stroke='#00786D'/>
+<text x='412' y='301' class='t0'>Human charter</text>
+<text x='412' y='341' class='t1'>Purpose, authority, and limits.</text>
+<rect x='72' y='450' width='270' height='110' class='r0'/>
+<text x='94' y='481' class='t0'>Persona A</text>
+<text x='94' y='521' class='t1'>Distinct perspective.</text>
+<rect x='800' y='450' width='270' height='110' class='r0'/>
+<text x='822' y='481' class='t0'>Persona B</text>
+<text x='822' y='521' class='t1'>Distinct perspective.</text>
+<rect x='150' y='685' width='270' height='110' class='r0'/>
+<text x='172' y='716' class='t0'>Persona C</text>
+<text x='172' y='756' class='t1'>Distinct perspective.</text>
+<rect x='740' y='685' width='270' height='110' class='r0'/>
+<text x='762' y='716' class='t0'>Persona D</text>
+<text x='762' y='756' class='t1'>Distinct perspective.</text>
+<rect x='420' y='445' width='300' height='145' rx='10' fill='#102D3C' stroke='#102D3C'/>
+<text x='442' y='476' font-size='29' fill='#FFFFFF' font-weight='700'>Shared work</text>
+<text x='442' y='517' class='t2'><tspan x='442' dy='0'>Agreements, commitments,</tspan><tspan x='442' dy='25'>findings, and exact results.</tspan></text>
+<text x='530' y='642' font-size='18' fill='#526976' text-anchor='middle'>Attributable exchanges—not merged memory.</text>
+<rect x='1120' y='270' width='408' height='525' rx='10' fill='#102D3C'/>
+<text x='1146' y='312' font-size='17' fill='#7DE4CC' font-weight='700'>GOVERNANCE BY DESIGN</text>
+<text x='1146' y='361' class='t3'>Scoped authority</text>
+<text x='1146' y='390' class='t4'>New personas create no new powers.</text>
+<text x='1146' y='446' class='t3'>Accepted participation</text>
+<text x='1146' y='475' class='t4'>Membership is not a commitment.</text>
+<text x='1146' y='531' class='t3'>Visible disagreement</text>
+<text x='1146' y='560' class='t4'>Votes do not establish empirical truth.</text>
+<text x='1146' y='616' class='t3'>Real representation</text>
+<text x='1146' y='645' class='t4'>Simulated views are not human consent.</text>
+<text x='1146' y='701' class='t3'>Challenge and appeal</text>
+<text x='1146' y='730' class='t4'>Accountable decisions remain contestable.</text>
+<rect x='72' y='844' width='1456' height='94' rx='10' fill='#102D3C'/>
+<text x='98' y='880' font-size='26' fill='#FFFFFF' font-weight='700'>Shared knowledge is explicitly shared—not automatically pooled.</text>
+<text x='98' y='911' class='t2'>Illustrative participants, not a required roster. Community governance and appeal are proposed Extension E2.</text>
+</g></svg>

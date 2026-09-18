@@ -1,0 +1,120 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1500' viewBox='0 0 1600 1500' role='img' aria-labelledby='title desc'>
+<title id='title'>Make progress. Keep the return paths visible.</title><desc id='desc'>The main path preserves need, accepts continuation, interprets criteria, surfaces agendas, accepts commitments, establishes capabilities, performs work, inspects evidence, reviews, checks currentness, delivers, retains lessons and settles participation, and continues only on a new need or authorized ongoing event. Side branches cover absent acceptance, missing information, justified recruitment, honest stopping, repair, changed state, and returns to interpretation.</desc>
+<defs><style>.t0{font-size:22px;fill:#FFFFFF;font-weight:700}.t1{font-size:22px;fill:#173443;font-weight:700}.t2{font-size:17px;fill:#526976}.t3{font-size:26px;fill:#173443;font-weight:700}.t4{font-size:19px;fill:#526976}.t5{font-size:25px;fill:#173443;font-weight:700}.t6{font-size:15px;fill:#FFFFFF;font-weight:700;text-anchor:middle}.p0{fill:none;stroke:#CAD6D5;stroke-width:1;stroke-linejoin:round;stroke-linecap:round}.p1{fill:none;stroke:#00786D;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}.r0{fill:#102D3C;stroke:#102D3C;rx:10}.r1{fill:#FFFFFF;stroke:#CAD6D5;rx:10}.r2{fill:#FFF0D8;stroke:#D8BA8F;rx:10}.r3{fill:#E2F2EA;stroke:#00786D;rx:10}</style><marker id='arrow' markerWidth='8' markerHeight='8' refX='7' refY='4' orient='auto-start-reverse' markerUnits='userSpaceOnUse'><path d='M0 0 8 4 0 8Z' fill='#00786D'/></marker></defs>
+<g font-family='Lato, Arial, sans-serif'>
+<rect x='0' y='0' width='1600' height='1500' fill='#F7F5EF'/>
+<text x='72' y='58' font-size='18' fill='#00786D' font-weight='700'>AI PERSONAS / DESIGN FIELD GUIDE</text>
+<text x='1528' y='58' font-size='18' fill='#00786D' font-weight='700' text-anchor='end'>SYSTEM DIAGRAM / D07</text>
+<path d='M72 85H1528' class='p0'/>
+<text x='72' y='164' font-size='64' fill='#102D3C' font-weight='700'>Make progress. Keep the return paths visible.</text>
+<text x='72' y='211' font-size='22' fill='#526976'>A complete reading map with explicit gates, exceptions, and numbered returns—not a workflow engine.</text>
+<path d='M72 1438H1528' class='p0'/>
+<text x='72' y='1466' font-size='15' fill='#526976' font-weight='700'>PROPOSED DESIGN / NOT IMPLEMENTATION EVIDENCE</text>
+<text x='1528' y='1466' font-size='15' fill='#526976' text-anchor='end'>§ 15.1  /  VISUAL EDITION 01</text>
+<path d='M744 348V356' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 426V434' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 504V512' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 582V590' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 660V668' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 738V746' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 816V824' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 894V902' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 972V980' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 1050V1058' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 1128V1136' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 1206V1214' marker-end='url(#arrow)' class='p1'/>
+<path d='M744 1284V1292' marker-end='url(#arrow)' class='p1'/>
+<rect x='534' y='280' width='420' height='68' class='r0'/>
+<text x='556' y='311' class='t0'>Human expresses a need</text>
+<rect x='534' y='358' width='420' height='68' class='r1'/>
+<text x='556' y='389' class='t1'>Preserve need, boundaries, resources</text>
+<rect x='534' y='436' width='420' height='68' class='r2'/>
+<text x='556' y='467' class='t1'>Continuation accepted?</text>
+<rect x='534' y='514' width='420' height='68' class='r1'/>
+<text x='556' y='545' class='t1'><tspan x='556' dy='0'>Interpret outcomes, unknowns,</tspan><tspan x='556' dy='25'>criteria</tspan></text>
+<rect x='534' y='592' width='420' height='68' class='r1'/>
+<text x='556' y='623' class='t1'><tspan x='556' dy='0'>Individual agendas + shared</tspan><tspan x='556' dy='25'>opportunities</tspan></text>
+<rect x='534' y='670' width='420' height='68' class='r1'/>
+<text x='556' y='701' class='t1'>Accept commitments + agreements</text>
+<rect x='534' y='748' width='420' height='68' class='r1'/>
+<text x='556' y='779' class='t1'>Use or acquire sufficient capabilities</text>
+<rect x='534' y='826' width='420' height='68' class='r1'/>
+<text x='556' y='857' class='t1'><tspan x='556' dy='0'>Perform bounded work on declared</tspan><tspan x='556' dy='25'>inputs</tspan></text>
+<rect x='534' y='904' width='420' height='68' class='r1'/>
+<text x='556' y='935' class='t1'>Inspect results + preserve evidence</text>
+<rect x='534' y='982' width='420' height='68' class='r1'/>
+<text x='556' y='1013' class='t1'><tspan x='556' dy='0'>Review exact candidate + scope</tspan><tspan x='556' dy='25'>coverage</tspan></text>
+<rect x='534' y='1060' width='420' height='68' class='r2'/>
+<text x='556' y='1091' class='t1'>Check currentness + seal release</text>
+<rect x='534' y='1138' width='420' height='68' class='r0'/>
+<text x='556' y='1169' class='t0'>Deliver result, limits, open obligations</text>
+<rect x='534' y='1216' width='420' height='68' class='r1'/>
+<text x='556' y='1247' class='t1'><tspan x='556' dy='0'>Retain useful lessons + settle</tspan><tspan x='556' dy='25'>participation</tspan></text>
+<rect x='534' y='1294' width='420' height='68' class='r1'/>
+<text x='556' y='1325' class='t1'><tspan x='556' dy='0'>Next need or authorized ongoing</tspan><tspan x='556' dy='25'>event</tspan></text>
+<path d='M954 466H1040' marker-end='url(#arrow)' class='p1'/>
+<rect x='976' y='429' width='50.359375' height='25' fill='#F7F5EF'/>
+<text x='982' y='448' class='t2'>No</text>
+<rect x='1040' y='422' width='488' height='96' class='r1'/>
+<text x='1062' y='453' class='t3'>Await acceptance / decline / handoff</text>
+<text x='1062' y='491' class='t4'>Work is not silently treated as accepted.</text>
+<path d='M534 544H412' marker-end='url(#arrow)' marker-start='url(#arrow)' class='p1'/>
+<rect x='72' y='501' width='340' height='98' class='r1'/>
+<text x='94' y='532' class='t5'>Missing information</text>
+<text x='94' y='569' class='t4'>Ask, receive, and return to 04.</text>
+<path d='M954 700H1040' marker-end='url(#arrow)' marker-start='url(#arrow)' class='p1'/>
+<rect x='1040' y='655' width='488' height='98' class='r1'/>
+<text x='1062' y='686' class='t5'>Recruit or birth only when justified</text>
+<text x='1062' y='723' class='t4'>Permitted help returns to commitments at 06.</text>
+<path d='M534 856H412' marker-end='url(#arrow)' class='p1'/>
+<rect x='72' y='811' width='340' height='106' class='r1'/>
+<text x='94' y='842' class='t5'>Pause / partial / block</text>
+<text x='94' y='879' class='t4'>Preserve limits and ownership.</text>
+<path d='M534 1012H412' marker-end='url(#arrow)' class='p1'/>
+<rect x='72' y='965' width='340' height='106' class='r3'/>
+<text x='94' y='996' class='t3'>Repair or reconsider</text>
+<text x='94' y='1034' class='t4'><tspan x='94' dy='0'>Return to 05: agendas and</tspan><tspan x='94' dy='25'>opportunities.</tspan></text>
+<path d='M954 1090H1040' marker-end='url(#arrow)' class='p1'/>
+<rect x='1040' y='1045' width='488' height='100' class='r3'/>
+<text x='1062' y='1076' class='t3'>Relevant state changed</text>
+<text x='1062' y='1114' class='t4'>Return to 04: interpretation and criteria.</text>
+<path d='M954 1324H1040' marker-end='url(#arrow)' class='p1'/>
+<rect x='1040' y='1279' width='488' height='100' class='r3'/>
+<text x='1062' y='1310' class='t3'>Continue only when authorized</text>
+<text x='1062' y='1348' class='t4'>Return to 04 for the new situation.</text>
+<rect x='965' y='532' width='98.515625' height='25' fill='#F7F5EF'/>
+<text x='971' y='551' class='t2'>Yes → 04</text>
+<rect x='965' y='1004' width='196.203125' height='25' fill='#F7F5EF'/>
+<text x='971' y='1023' class='t2'>Qualifying result → 11</text>
+<rect x='965' y='1165' width='139.796875' height='25' fill='#F7F5EF'/>
+<text x='971' y='1184' class='t2'>Released → 12</text>
+<circle cx='498' cy='310' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='316' class='t6'>01</text>
+<circle cx='498' cy='388' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='394' class='t6'>02</text>
+<circle cx='498' cy='466' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='472' class='t6'>03</text>
+<circle cx='498' cy='544' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='550' class='t6'>04</text>
+<circle cx='498' cy='622' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='628' class='t6'>05</text>
+<circle cx='498' cy='700' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='706' class='t6'>06</text>
+<circle cx='498' cy='778' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='784' class='t6'>07</text>
+<circle cx='498' cy='856' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='862' class='t6'>08</text>
+<circle cx='498' cy='934' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='940' class='t6'>09</text>
+<circle cx='498' cy='1012' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='1018' class='t6'>10</text>
+<circle cx='498' cy='1090' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='1096' class='t6'>11</text>
+<circle cx='498' cy='1168' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='1174' class='t6'>12</text>
+<circle cx='498' cy='1246' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='1252' class='t6'>13</text>
+<circle cx='498' cy='1324' r='20' fill='#00786D' stroke-width='1'/>
+<text x='498' y='1330' class='t6'>14</text>
+<text x='72' y='1408' class='t4'>Numbers identify reading references. Simple work may combine steps; every branch preserves an accountable next state.</text>
+</g></svg>
