@@ -1,61 +1,52 @@
-# AI Personas — Design & Visual Field Guide
+# AI Personas — the design handbook
 
-**Distinct perspectives. Accountable outcomes.**
+**Continuing AI collaborators. Different perspectives. Accountable work.**
 
-A design-first proposal for persistent AI collaborators, cooperative societies, and evidence-linked work. The complete proposal now presents five professional overview posters and seven poster-style system diagrams inline, all as editable, self-contained SVGs.
+AI Personas is a proposed system in which AI collaborators keep their identities across tasks, develop evidence-linked experience, choose how to approach work, and cooperate with people and one another. A persona is more than a name attached to a prompt: its relevant history, commitments, permissions, and observations must participate in its decisions.
 
-![Three responsibility layers: humans authorize purpose, personas choose and accept work, and the supporting system enforces limits and preserves consequences.](assets/visuals/poster-01-blueprint.svg)
+People set the purpose and boundaries. Personas interpret the need and accept responsibilities. The supporting system preserves reliable records, enforces permissions and resource limits, and makes the difference between attempted work and demonstrated results visible.
 
-## Start here
+**This repository explains the design, not a working product.** It contains no application code, command-line tutorials, executable examples, or required development setup. Read it in a browser or any Markdown reader. The editable diagrams are artwork, not screenshots or proof of implementation.
 
-**[Read the complete design proposal](AI-PERSONAS-DESIGN-PROPOSAL.md)** for the full 30-section design with professional posters, the invariant catalogue, and acceptance requirements. Each of the seven system diagrams opens with its poster; expand **View editable Mermaid source** to inspect the original diagram markup. Written requirements take precedence over visual summaries.
+## Start with your question
 
-**[Explore the visual field guide](VISUAL-GUIDE.md)** for a gallery of all twelve sheets, accessible text readings, and links to the relevant requirements.
+| Your question | Start here | Continue with |
+|---|---|---|
+| What is AI Personas, in ordinary language? | [Start here](START-HERE.md) | [A simple request](examples/WORKED-EXAMPLES.md#a-simple-writing-request) |
+| How does the whole idea fit together? | [Design overview](AI-PERSONAS-DESIGN-PROPOSAL.md) | [Design chapters](design/README.md) |
+| What should the experience look and feel like? | [Human experience and society](design/07-experience-and-society.md) | [Visual guide](VISUAL-GUIDE.md) |
+| How could I implement it independently? | [Implementation reading path](implementation/README.md) | [Behavioral contracts](implementation/CONTRACTS.md) and [requirements](implementation/REQUIREMENTS.md) |
+| How would we know it works? | [Evaluation guide](evaluation/README.md) | [Acceptance scenarios](evaluation/ACCEPTANCE.md) |
+| Why were these design choices made? | [Design decisions](DESIGN-DECISIONS.md) | [Design sources](sources/README.md) |
+| How do I contribute? | [Contribution guide](CONTRIBUTING.md) | [Design worksheets](templates/README.md) |
 
-## The visual edition
+No earlier conversation, attachment, sibling repository, proprietary tool, or programming language is needed to follow these paths. Unfamiliar terms are defined in the [glossary](GLOSSARY.md).
 
-| Overview posters | Poster-style system diagrams |
+## The idea in one example
+
+A person asks for help planning a workshop. One persona accepts responsibility for moving the request forward. It distinguishes a suggested venue from a confirmed booking, asks about material unknowns, and may seek another perspective. A peer accepts a specific task rather than being silently assigned one. A booking happens only with permission and an actual receipt. The final result explains what is ready, what remains uncertain, and who accepted the remaining work. The personas can retain permitted lessons without carrying private attendee information into unrelated projects.
+
+For a sentence rewrite, most of that structure can remain small and implicit in one exchange. For a coordinated design, the commitments, versions, reviews, and unresolved conditions need to be explicit. The system does not force every need through the same workflow.
+
+## Six concepts to recognize
+
+| Concept | Meaning |
 |---|---|
-| [Blueprint](assets/visuals/poster-01-blueprint.svg) | [Functional embodiment loop](assets/visuals/diagram-01-embodiment-loop.svg) |
-| [End-to-end journey](assets/visuals/poster-02-end-to-end-flow.svg) | [Conceptual architecture](assets/visuals/diagram-02-conceptual-architecture.svg) |
-| [Persona anatomy](assets/visuals/poster-03-persona-anatomy.svg) | [Identity lifecycle](assets/visuals/diagram-03-identity-lifecycle.svg) |
-| [Persona society](assets/visuals/poster-04-persona-society.svg) | [Birth, membership, and commitment](assets/visuals/diagram-04-onboarding.svg) |
-| [Embodiment requirements](assets/visuals/poster-05-embodiment-requirements.svg) | [Learning loop](assets/visuals/diagram-05-learning-loop.svg) |
-| | [Evidence chain](assets/visuals/diagram-06-evidence-chain.svg) |
-| | [Complete journey with return paths](assets/visuals/diagram-07-complete-journey.svg) |
+| Persona | A continuing AI collaborator with its own attributable perspective and responsibilities. |
+| Environment | A governed workspace with defined information, tools, participants, and limits. |
+| Work | A human need, its agreed scope, and the responsibilities accepted to pursue it. |
+| Fragment | A retained, revisable piece of learning or interpretation with sources and limitations. |
+| Capability | A permitted means of observing or acting, supported by evidence of what it can actually do. |
+| Artifact and evidence | An exact result, together with observations and checks supporting claims about it. |
 
-The SVGs use selectable text, a consistent editorial grid, restrained color, explicit decision labels, and a source reference on every sheet. No external images, scripts, or font downloads are required. Open an individual SVG in a browser or vector editor to zoom, edit, or print it. Font substitution can change text metrics; check the render after editing.
+![People authorize purpose; personas choose and accept work; the supporting system enforces limits and preserves consequences.](assets/visuals/poster-01-blueprint.svg)
 
-## Package layout
+[Open the diagram and its text explanation](VISUAL-GUIDE.md#p01-the-blueprint).
 
-| Item | Purpose |
-|---|---|
-| `AI-PERSONAS-DESIGN-PROPOSAL.md` | Complete requirements with twelve inline SVG posters and expandable Mermaid source |
-| `VISUAL-GUIDE.md` | Poster gallery and full text equivalents |
-| `assets/visuals/` | Twelve editable SVGs and visual maintenance notes |
-| `visual-manifest.json` | Artwork inventory, dimensions, source-section mapping, and current proposal fingerprint |
-| `visual-validation.json` | Historical checks performed when visual edition 01 was created |
-| `scripts/validate_visuals.py` | Dependency-free SVG/package checks; optional raster rendering |
-| `assets/*.png` | Five original illustrations retained for provenance, no longer embedded in the proposal |
-| `sources/` | Original source reports and source manifest, unchanged |
-| `package-validation.json` | Historical validation record for the original proposal package |
+## What is settled, and what is not
 
-## Maintain and check
+The design preserves persistent identity, voluntary commitments, individual agendas, bounded authority, protected finishing resources, and exact-version evidence. It does not claim consciousness, guaranteed learning, universal expertise, or that more personas necessarily improve results. Community governance and physical interaction remain explicitly proposed extensions.
 
-```sh
-python3 scripts/validate_visuals.py
-# Optional, with CairoSVG installed:
-python3 scripts/validate_visuals.py --render-dir /tmp/ai-personas-visuals
-# On a complete checkout, verify the current proposal fingerprint and Mermaid count:
-python3 scripts/validate_visuals.py --check-source
-```
+The [requirements catalogue](implementation/REQUIREMENTS.md) retains 21 invariants and 45 requirement identifiers. The [acceptance catalogue](evaluation/ACCEPTANCE.md) specifies 26 mechanical, 12 behavioral, and six extension checks. These are **requirements to demonstrate**, not tests reported as passed by this documentation rewrite.
 
-See [visual maintenance notes](assets/visuals/README.md) for the palette, layout conventions, and editing checklist. Keep the manifest's `source_blob_sha` synchronized after reviewing changes to the proposal. The artwork edition remains 01; presentation revision 02 integrates that existing artwork into proposal version 1.1.
-
-## Evidence and provenance
-
-This revision changes the visual presentation, not the behavioral requirements. It replaces the proposal's embedded PNG illustrations with the professional SVG suite and makes the seven poster-style diagrams the default view. All seven original Mermaid blocks remain editable in expandable sections, with visible prose readings. The twelve SVG files, five original PNG files, supplied source reports, and historical validation records are unchanged.
-
-The existing `visual-validation.json` describes checks performed for the earlier artwork edition, not a fresh validation run of this integration. Review the committed diff to inspect the presentation changes; run the commands above on a full checkout for current package checks.
-
-The design is **proposed, not an implemented or validated product**. The 26 mechanical, 12 behavioral, and six extension acceptance tests remain specifications, not executed results. Visual rendering and structural checks do not establish persona competence, safety, learning, or deployment readiness. The later v1.2 source continues to govern conceptual conflicts; extensions E1–E6 retain their proposed status.
+This is handbook edition 2.0. [What changed](CHANGELOG.md) explains the refactor. [Source provenance](sources/SOURCE-MANIFEST.md) preserves the history of the earlier reports without making their old code examples part of the current reading experience.

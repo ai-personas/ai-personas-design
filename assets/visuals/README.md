@@ -1,37 +1,25 @@
-# Visual edition 01 — maintenance notes
+# Editable design artwork
 
-[Visual field guide](../../VISUAL-GUIDE.md) · [Written requirements](../../AI-PERSONAS-DESIGN-PROPOSAL.md)
+[Visual guide and inventory](../../VISUAL-GUIDE.md) · [Design overview](../../AI-PERSONAS-DESIGN-PROPOSAL.md) · [Contribution guide](../../CONTRIBUTING.md)
 
-## Editable artwork
+These twelve SVG files are the editable artwork sources. Readers do not need to inspect their markup, run a command, install a renderer, or understand a programming language. Open a sheet directly to enlarge it; use a vector editor when changing its shapes and labels.
 
-These twelve SVG files are the editable sources. They contain native shapes, connectors, and selectable text; no raster illustrations, external dependencies, executable scripts, or embedded font files. Each SVG supplies an accessible title and description. The guide provides full text readings because an image viewer may not expose SVG accessibility metadata.
+## Meaning and accessibility
 
-Most sheets use a `1600 × 1000` viewBox. D04 uses `1600 × 1100`; D07 uses `1600 × 1500` so its complete flow remains readable. Dimensions are logical drawing units, not a claim about print resolution. Vector geometry scales; verify font substitution and printer margins before producing a physical poster.
+The artwork uses named concepts, explicit decision questions, directional arrows, and text labels. Color reinforces meaning rather than carrying it alone. Structural lines in the persona-anatomy poster show relationships, not a required sequence. Numbered return cards in the complete-journey sheet preserve feedback paths without long crossing arrows.
 
-## Design tokens
+Each sheet has a title and description. The visual guide supplies a full prose reading because not every image viewer exposes that metadata. The written requirements remain authoritative when simplified artwork omits detail.
 
-| Role | Value |
-|---|---|
-| Paper | `#F7F5EF` |
-| Primary ink / emphasis panels | `#102D3C` |
-| Body ink | `#173443` |
-| Secondary text | `#526976` |
-| Connectors / accents | `#00786D` |
-| Bounded or adopted state | `#E2F2EA` |
-| Decision gate | `#FFF0D8` |
-| Rules / borders | `#CAD6D5` |
-| Typography | `Lato, Arial, sans-serif` |
+## Editing without changing the design accidentally
 
-The 72-unit page margin, repeated header/footer, concise labels, and restrained palette unify the series. No font binaries are distributed. Teal arrows indicate direction; double-headed arrows indicate exchange. Structural lines in P03 indicate components, not causal direction. Amber gates always carry a question or explicit check. A dark panel is visual emphasis, not a success indicator.
+Preserve the logical canvas, title, description, source-section reference, legible text, and arrow meaning. Reflow long labels rather than shrinking the whole sheet. Keep refusal, negotiation, revalidation, limited delivery, and stopping paths visible.
 
-## Safe editing workflow
+After an edit, update the matching visual-guide explanation and affected design text together. Inspect the actual sheet at full size and at a normal embedded size for clipping, overlap, substituted fonts, and unreadable labels. Check both the successful path and the return paths. A structural file check alone cannot establish readability or semantic accuracy.
 
-Edit an SVG in a text or vector editor. Preserve the root viewBox, `role="img"`, linked title/description IDs, and internal arrow marker. Keep textual labels and source references accurate. Reflow long labels rather than shrinking all text. Use the full text reading for nuance that would make a poster crowded.
+Most sheets use a 1600 by 1000 logical canvas. The onboarding sheet uses 1600 by 1100; the complete-journey sheet uses 1600 by 1500. These are drawing dimensions, not print-resolution or display-size guarantees. Font substitution and print margins can change presentation.
 
-Update `../../visual-manifest.json`, the matching proposal caption, and the text reading in `../../VISUAL-GUIDE.md` after a semantic change. Run `python3 scripts/validate_visuals.py` from the repository root. With CairoSVG installed, add `--render-dir /tmp/ai-personas-visuals` and inspect every output at full size. The validator catches structural regressions; it does not prove semantic equivalence or detect every visual collision. On a full checkout, `--check-source` checks the proposal against the manifest's `source_blob_sha` and confirms that seven Mermaid blocks remain. Review the changes before updating that fingerprint; it is an integrity reference, not an approval of the content.
+## Edition and provenance
 
-Do not change proposal requirements merely to simplify a diagram. Preserve refusal, negotiation, revalidation, and honest-stop paths. Keep source-derived requirements separate from proposed extensions. The professional SVGs are now the default visuals in the proposal; the original Mermaid blocks remain in expandable source sections, and the original raster artwork remains in `assets/` for provenance.
+The files remain artwork edition 01 and are unchanged by handbook edition 2.0. Footer section references correspond to the numbered subjects retained in the design overview. This editorial revision does not claim a fresh rendering or visual-validation campaign.
 
-## Presentation revision 02
-
-Proposal version 1.1 integrates the existing artwork edition 01 without changing these twelve SVG files. Keep the artwork's historical source commit distinct from the current proposal fingerprint in the manifest. The earlier `visual-validation.json` and `package-validation.json` are historical records, not fresh test results for this presentation revision.
+Historical machine-readable manifests and the old validator are available through Git history, not required by the current handbook. The [source manifest](../../sources/SOURCE-MANIFEST.md) identifies the pinned prior package. Keep historical integrity and test records attached to the versions they actually describe.
