@@ -33,6 +33,18 @@ An assumption may be proposed, authorized for exploration, confirmed by appropri
 
 A conditional result must state its conditions where the claim appears. When an assumption changes, dependent results and reviews need an applicability check. Asking questions should reduce consequential uncertainty, not become an endless intake process when a useful bounded response is already possible.
 
+Ordinary work clarification is shared with permitted participants and the user.
+Peers may answer from evidence, investigate, suggest alternatives, or propose
+explicitly conditional assumptions; the user may also answer, but a human reply
+is not a prerequisite when an appropriate peer contribution suffices within
+existing authority. The question's owner assesses that contribution and records
+its disposition. An assumption remains an assumption, including when the user
+delegates its selection. Reserve human-only questions for private information,
+consent, or outside observations that actually require that person. Such a
+dependency blocks the affected claim, not automatically every independent part
+of the work. Sharing a question never exposes another participant's private
+memory or supplies missing authority.
+
 ## Three complementary views of cooperation
 
 **Individual agendas** describe what each persona considers worth attention. **The shared opportunity and obligation board** contains attributed proposals, questions, observations, findings, and offers. It has no hidden universal ranking. **Collective commitments** record responsibilities actually accepted and the dependencies between them.

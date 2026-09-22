@@ -2,6 +2,17 @@
 
 [Home](README.md) · [Source provenance](sources/SOURCE-MANIFEST.md)
 
+## Shared clarification and conditional progress
+
+**Date: 22 September 2026.** The [work chapter](design/03-work-and-cooperation.md#questions-and-conditional-assumptions)
+clarifies that peers can answer shared questions with evidence, alternatives or
+explicit assumptions within existing authority. Human replies are optional for
+such questions; private facts and human consent remain separate. The question
+owner assesses replies, and an unresolved outside fact limits the affected claim
+without automatically stopping independent work. This elaborates NED-03 and the
+existing cooperation rules without adding a profession roster, workflow, or new
+requirement family. It is a design clarification, not a claim of live success.
+
 ## Edition 2.0 consolidation — persona-owned organization
 
 **Date: 18 September 2026.** A second review found that most obligations presented as new in the delivery addendum already existed in the original work, capability, evidence, and evaluation design. The addendum's description of a missing production architecture was overstated. This revision consolidates rather than adds another layer.
