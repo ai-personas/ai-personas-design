@@ -78,6 +78,21 @@ Correction, restriction, and retention rules apply to original content and deriv
 
 If a source is revoked or discredited, affected fragments and future selections need an explicit disposition. Historical provenance is not permission to keep using inaccessible material.
 
+Search-led domain exploration can become learning when a persona connects
+attributed sources to actual trials, observes results and limitations, and authors
+an applicable lesson. A retrieved page, a model explanation, an installed program
+and a retained lesson are distinct facts. Later tasks should be able to discover
+relevant owned lessons across the authorized index, not only the most recent
+records. Bounded previews do not select a lesson or prove that it was used.
+
+Context recovery must retain current obligations, unread inputs and uncertain
+actions independently of an ordinary history-compaction cursor. An implementation
+may offer one funded, same-model maintenance decision per pressure episode with
+a smaller maintenance-only operation contract. This does not summarize on behalf
+of the persona, refund usage or authorize repeating an unchanged blocked request.
+Context selection or compaction ends the saved batch so subsequent action follows
+a fresh observation. A mandatory core that still cannot fit is an explicit block.
+
 ## What would show useful learning?
 
 | Observation | Supported conclusion | Not yet established |

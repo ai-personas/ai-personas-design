@@ -25,6 +25,40 @@ An environment identifies its resources, participants, workspace, information, c
 
 A decorative room or virtual studio is not an access rule. Participants in the same displayed place may have different permissions. Access in one environment must not imply access in another. Tool sharing does not share private experience or every connected account.
 
+## Shared defaults and domain exploration
+
+An environment may start with a runtime-owned catalog of useful tools, such as
+browser search and page reading or a knowledge question to the calling persona's
+assigned model. Environment creation presents these defaults before saving. The
+user may remove any or all of them, including when another creation flow makes
+the environment implicitly. Creation configures bindings; it does not itself
+research, install tools, or spend inference.
+
+Bindings belong to the environment and are independently versioned. Accepted
+participants in its work can use them under current authority and funding.
+Changing one environment must not change another. Removing a default omits that
+initial capability; it is not a permanent prohibition on a persona explicitly
+acquiring it later with existing authority. A later catalog update must not
+silently restore removed choices. Removing a binding does not uninstall host
+software. Private acquired tools require explicit sharing and applicable evidence;
+sharing tools never shares private memory or account credentials automatically.
+
+Configuration is not observed availability. Report unchecked, available,
+unavailable and removed states honestly. Check the current binding at admission
+and before adopting late results. Relevant descriptor, backend or execution
+changes invalidate affected evidence; a display-name edit or unrelated new tool
+does not.
+
+For unfamiliar domains and unclear requirements, available search tools are the
+primary way to investigate what is needed. Personas choose their queries,
+sources, disciplines, comparisons, experiments and collaborators. Supplementary
+questions to their assigned model can expose ideas, assumptions and unknowns;
+those answers remain model knowledge, not external research or practical
+experience. No returned subsidiary-model action acquires execution authority.
+The same model constraints, call/token/cost accounting, cancellation and evidence
+boundaries apply. A missing or unavailable tool remains visible and can prompt
+another authorized method; it must not become fabricated research.
+
 ## Before an action is accepted
 
 The system must establish the actor, causal work, intended effect, exact request identity, relevant input versions, selected capability, current authority, resource reservation, expected observations or outputs, and cancellation or uncertainty behavior.
