@@ -49,8 +49,10 @@ and before adopting late results. Relevant descriptor, backend or execution
 changes invalidate affected evidence; a display-name edit or unrelated new tool
 does not.
 
-For unfamiliar domains and unclear requirements, available search tools are the
-primary way to investigate what is needed. Personas choose their queries,
+When work needs domain-specific ideas or methods, or requirements are unclear,
+available search tools are the primary way to investigate what is needed.
+Familiarity with a topic does not establish current requirements or tool fit.
+Personas choose their queries,
 sources, disciplines, comparisons, experiments and collaborators. Supplementary
 questions to their assigned model can expose ideas, assumptions and unknowns;
 those answers remain model knowledge, not external research or practical
@@ -58,6 +60,13 @@ experience. No returned subsidiary-model action acquires execution authority.
 The same model constraints, call/token/cost accounting, cancellation and evidence
 boundaries apply. A missing or unavailable tool remains visible and can prompt
 another authorized method; it must not become fabricated research.
+
+A short open-ended request leaves discovery of useful outputs and proportionate
+checks to the participants. They can propose these and make progress with clearly
+labeled, reversible assumptions within existing authority. A prose plan or a named
+tool does not establish delivery of a promised result. This is a general expectation
+of useful work, not a domain router, prescribed profession roster, tool preference,
+or compulsory artifact pipeline.
 
 ## Before an action is accepted
 
