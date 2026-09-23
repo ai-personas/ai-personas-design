@@ -57,13 +57,14 @@ substantial empirical work. That need follows the actual claim and the reviewer'
 assessment, not an installed task classifier, fixed rubric, or blanket ban on
 using tools. Explicit task-specific evidence obligations still apply.
 
-An optional cited action identifies the observation actually available to the
-reviewer. A negative test, failed operation, pending job or uncertain receipt can
-be relevant evidence; citation does not change its state to success. A successful
-command may be irrelevant. The reviewer explains relevance, limitations and the
-basis for the verdict. The runtime checks attribution, access and exact receipt
-identity, not the truth of the explanation or the suitability of the method.
-New assessments retain the observed citation snapshots. If a cited receipt changes,
+An optional cited action identifies a receipt offered as support for the
+reviewer's judgment. A negative test, failed operation, pending job or uncertain
+receipt can be relevant evidence; citation does not change its state to success.
+A successful command may be irrelevant. The reviewer explains relevance,
+limitations and the basis for the verdict. The runtime checks attribution,
+access and exact receipt identity, not the truth of the explanation or the
+suitability of the method. New assessments retain their cited snapshots with the
+capture stage identified. If a cited receipt changes after assessment recording,
 its old snapshot cannot support a new current binding without reassessment.
 
 The runtime continues to enforce consent, funding, privacy, current scope and
@@ -80,6 +81,42 @@ competence or external certification. Evaluate reviewer reliability and actual
 outcomes separately from the integrity of the record. The [peer-judgment cases](../evaluation/METHOD-CONTINUITY.md#peer-judgment-across-different-kinds-of-work)
 include disagreement, misleading positive evidence, unneeded tooling and wrong
 verdicts; recording the verdict correctly is not passing the task.
+
+### What a citation snapshot establishes
+
+A snapshot captured in the assessment-recording transaction binds that judgment
+to the retained receipt at that stage. It is not a claim that the entire payload
+was included in an earlier model request, attended to, understood, or correctly
+interpreted. Request inclusion and actual substantive assessment require their
+own evidence. In particular, a receipt can change between request preparation
+and assessment recording; a recording-time fingerprint must not be described as
+proof that the reviewer observed the newer state. Preserve that limitation
+rather than inventing missing observation history.
+
+Freeze citation identity, state and provenance without duplicating sensitive
+payloads merely for convenience. Check the same snapshot both at first binding
+and at later release/applicability checks. A change between assessment and its
+first binding is not exempt. Missing, duplicated, foreign or erased references
+cannot be substituted for another observation, and a hash does not grant access
+to its source. Ordinary permission and retention changes remain effective.
+
+An empty additional-citation list is not an empty assessment. The exact
+submission and scope, actual reviewer, explained judgment and applicable review
+policy remain necessary. An acceptance records the persona's conclusion; it
+does not automatically release the work or discharge another finding. A
+pending or failed receipt may support a limited interpretation without becoming
+successful execution or satisfying an explicitly unperformed technical claim.
+
+### Existing assessment history
+
+Earlier assessments without recorded citation snapshots must not acquire
+fabricated historical fingerprints during an upgrade. Existing bindings retain
+their original freshness and qualification rules. A fresh assessment can use
+the new persona-judgment contract without manufacturing a successful command.
+Unknown, malformed or explicitly null snapshot metadata is not a compatibility
+escape. Changes in applicability do not rewrite historical verdicts or human
+acceptance. An implementation must document downgrade limitations separately;
+dropping new integrity metadata is not a safe migration.
 
 ## Historical verdict versus current applicability
 
@@ -107,8 +144,8 @@ Historical human acceptance stays attached to the result accepted. It does not m
 | Responsibility | Who accepted continuation and each required outcome? |
 | Coverage | Which adopted outcomes have evidence, and has omitted scope been checked? |
 | Submission | Which exact candidate is available? |
-| Validation | Which checks passed, failed, or remain incomplete? |
-| Applicability | Do those checks apply to the current candidate and conditions? |
+| Assessment | What did the reviewers conclude, with which observations and limitations? |
+| Applicability | Do those assessments apply to the current candidate and conditions? |
 | Human acceptance | Did the relevant person accept this exact result where required? |
 | Outside validation | Which professional, site, external, or physical conditions remain unresolved? |
 | Optional improvement | What further work is proposed without blocking the accepted milestone? |

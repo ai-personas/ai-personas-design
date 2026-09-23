@@ -20,7 +20,7 @@ These contracts define what cooperating parts of an implementation must guarante
 | Capability | Provenance, descriptor or version, environment, required access, lifecycle, actual operation evidence, and limits. |
 | Birth and invitation | Motivating work, creation provenance, authorized seed, bounded orientation, invitation preview, membership response, and contribution offer. |
 | Artifact and submission | Exact content, producing action, source versions, assembly membership, criteria, conditions, access, and limitations. |
-| Assessment | Claim, exact criteria and evidence, accepted reviewer, policy, conflicts, checks, verdict, limitations, and separately derived applicability. |
+| Assessment | Claim, exact criteria and evidence, accepted reviewer, policy, conflicts, observations and reasoning, optional citation snapshots with capture stage, verdict, limitations, and separately derived applicability. |
 | Grant and allocation | Principal, actor, permitted scope and effects, expiry or revocation, ceilings, reservations, actual usage, and uncertain exposure. |
 | Action and event | Stable request identity, actor, work, relevant observed versions, accepted intent, status, outputs, causality, and delivery state. |
 | Release | Exact mandate, criteria, assumptions, assembly, reviews, blockers, current authority, delivered scope, and acceptance where required. |
@@ -109,13 +109,13 @@ Material records identify their source or author, scope, version, visibility, an
 
 ## Review and release
 
-**Inputs:** exact submission, mandate and criteria, assumptions, assembly, accepted funded reviewer, independence policy, completed checks, findings, and authority.
+**Inputs:** exact submission, mandate and criteria, assumptions, assembly, accepted funded reviewer, independence policy, observations and reasoning, optional additional citations, findings, and authority. Completed host commands are not a universal prerequisite.
 
-**Accepted result:** an assessment records the exact evidence and limitations. A release binds one coherent current state: qualifying reviews, resolved or legitimately disposed blockers, exact scope, and current permission.
+**Accepted result:** an assessment records the reviewing persona's explained judgment, exact evidence and limitations without using citation kind, count or success as a quality score. A release binds one coherent current state: qualifying reviews, resolved or legitimately disposed blockers, exact scope, and current permission. An empty additional-citation list does not omit the review or authorize automatic release.
 
-**Failure behavior:** missing review, unavailable evidence, changed inputs, unresolved mandatory blockers, or stale authority prevent the corresponding release claim. If a relevant change occurs before release, reconsider; if release occurs first, retain that historical release and create a new candidate. Never transfer acceptance silently.
+**Failure behavior:** missing review, unavailable evidence, changed inputs or cited snapshots, unresolved mandatory blockers, or stale authority prevent the corresponding release claim. Check snapshot identity at the first binding and subsequent use; a pending receipt becoming terminal is a change, not permission to retrofit the old verdict. If a relevant change occurs before release, reconsider; if release occurs first, retain that historical release and create a new candidate. Never transfer acceptance silently. Unknown or malformed snapshot versions fail closed; older bindings retain their documented compatibility rules without fabricated observation history.
 
-**Visible evidence:** technical assessment, current applicability, human acceptance, and outside validation are separate. Limited or partial delivery states identify what the original need still lacks.
+**Visible evidence:** persona assessment, receipt states, snapshot capture stage, current applicability, human acceptance, and outside validation are separate. A recording-time fingerprint is not proof of earlier request inclusion, attention or comprehension. Non-command observations carry the same source restrictions as execution evidence. Limited or partial delivery states identify what the original need still lacks. The [judgment and integrity boundary](../design/06-evidence-and-completion.md#persona-judgment-and-mechanical-integrity) defines the distinction; its [snapshot limits](../design/06-evidence-and-completion.md#what-a-citation-snapshot-establishes) must remain visible in implementation claims.
 
 ## Durable delivery, waiting, and restart
 
