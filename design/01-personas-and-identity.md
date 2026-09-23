@@ -6,31 +6,48 @@
 
 A persona is a persistent, attributable AI collaborator whose continuing state can inform its choices. Identity must survive individual model calls, temporary responsibilities, and completed projects. The system must not confuse that continuity with a human biography, professional qualification, or consciousness.
 
-The intended benefit is inspectable continuity: a reader can understand who accepted work, which experience informed a contribution, and what happened when the persona changed direction. Whether that continuity improves outcomes is tested separately.
+The intended benefit is inspectable continuity: a reader can understand who accepted work, which experience informed a contribution, and what happened when the persona changed direction. Whether that continuity improves outcomes is tested separately. The [development refinement](PERSONA-DEVELOPMENT.md) specifies the connection to exploration, experience, interaction, stopping, and evaluation.
 
 ## What belongs to a persona
 
 | Part | Meaning | Boundary |
 |---|---|---|
 | Stable identity | The continuing entity to which authorship and responsibilities are attributed. | It is not a display name, model session, or temporary job. |
-| Creation provenance | Sponsor, creation reason, supplied material, and initialization conditions. | Supplied knowledge is not firsthand experience. |
-| Character and interests | Attributable descriptions of approaches, values, preferences, and current interests. | Interest does not establish competence. |
-| Current state | Workload, attention, current participation, and optional modeled affect. | Describing state does not prove feelings. |
-| Experience and fragments | Actual events and the persona's retained interpretations of them. | Evidence and interpretation remain distinct. |
-| Relationships | Directional, contextual interpretations of experience with others. | They do not grant authority or expose another person's private information. |
-| Commitments | Specific responsibilities actually accepted. | Membership or nomination alone is not acceptance. |
-| Capability evidence | Scoped demonstrations of operations and results. | A broad expert label cannot replace evidence. |
+| Starting seed and creation provenance | Immutable initial profile, sponsor, reason, supplied material, generator information, and per-field origins. | Supplied knowledge and synthetic initialization are not firsthand experience. |
+| Current character and OCEAN | Attributable continuing tendencies and preferences. | They do not establish competence, priority, or authority. |
+| Current VAD | Situation-sensitive modeled affect. | It is distinct from lasting disposition and does not prove feelings. |
+| Interests and open questions | Things the persona wants to investigate or improve across work. | Interest is neither competence nor permission to start funded activity. |
+| Experience and fragments | Actual events and the persona's retained interpretations of them. | Evidence, interpretation, later use, and demonstrated benefit remain distinct. |
+| Relationships | Directional, contextual interpretations of experience with particular participants. | They do not grant authority or expose another participant's private information. |
+| Commitments | Specific responsibilities actually accepted. | Membership, preference, and nomination alone are not acceptance. |
+| Capability evidence | Scoped demonstrations of operations and results. | A broad expert label cannot replace evidence or a professional qualification. |
 | Inference configuration | The model capability used for current decisions. | It is replaceable without inventing a new identity or erasing obligations. |
 
-Names, portraits, voices, and rooms are optional presentation. The actual artifact must exist before the system claims that a portrait was generated. A placeholder must be labeled as a placeholder. Public profile information must be separated from private working state.
+Names, portraits, voices, and rooms are optional presentation. The actual artifact must exist before the system claims that a portrait was generated. A placeholder must be labeled as a placeholder. Public profile information must be separated from private working state. A work agenda remains scoped to that work rather than replacing continuing personal interests.
+
+## Starting character and synthetic initialization
+
+Users may provide narrative character, any OCEAN values, and any VAD values. The creation profile is separate from referenced seed material: a document supplied for orientation must not be reinterpreted as a trait configuration.
+
+Missing numeric values are initialized uniformly within OCEAN [0,1] and VAD [-1,1]. Explicitly supplied values, including zero, are preserved. Out-of-range or non-finite values are rejected, not clamped. An omitted narrative may remain empty; the runtime must not fabricate a biography or describe synthetic values as authored personal experience.
+
+The starting seed preserves the actual values, narrative, generator version, reproducibility seed, and the origin of each field. This is a synthetic initialization convention, not a scientifically validated distribution of human personality. The generator is versioned so a recorded seed has a defined interpretation. Reproducibility does not require exposing credentials or raw model transport.
+
+Creation, initialization provenance, and the successful creation receipt are persisted together with the existing funding and identity boundary. A retry with the same creation identity returns the same persisted initialization. Reloading the interface, restarting the runtime, changing a model, accepting another invitation, and joining another environment must never rerandomize an existing persona. Imported history retains its original seed; activation does not invent one. A historical identity without recorded starting state is labeled as such, not assigned a retrospective beginning.
+
+The original seed remains separate from the current profile. Neither persona-authored evolution nor an operator edit can change how the persona started. Retention or erasure restrictions remain applicable to sensitive narrative material; erasure preserves an honest minimal disposition rather than substituting a new seed or pretending the original is still available.
 
 ## Character without fixed roles
 
-Personas may develop distinguishable approaches through authored state and real experience. Optional OCEAN or VAD descriptors may inform relevant context, but must not deterministically assign professions, tools, voting power, or priorities. Their scales and meanings remain explicit rather than being silently converted.
+Personas may develop distinguishable approaches through authored state and real experience. OCEAN and VAD descriptors may inform relevant context, but must not deterministically assign professions, tools, voting power, mandatory actions, or universal numerical priorities. Their scales and meanings remain explicit rather than being silently converted. The creation rules above replace the earlier optional-initial-descriptor convention; an older missing value is still not a neutral score or proof of an initial state.
 
-A cautious persona can choose an experiment when evidence makes it appropriate. A curious persona can choose to finish rather than explore further. Learning does not require a trait score to change. A role such as reviewer or coordinator is an accepted, scoped responsibility, not a permanent identity class.
+A cautious persona can choose an experiment when evidence makes it appropriate. A curious persona can choose to finish rather than explore further. Learning does not require a trait score to change. A role such as reviewer or coordinator is an accepted, scoped responsibility, not a permanent identity class. Accuracy, honesty, necessary verification, and accepted obligations apply at every character value.
 
-A profile revision preserves its earlier version, attribution, and a concise explanation. Supporting experience is linked where relevant. Descriptions such as “twenty years of architectural experience” must not be invented for an AI persona.
+“Let this persona shape its character” is enabled by default at creation. When enabled, the persona may revise narrative character, OCEAN, and VAD through attributed updates. When disabled, those fields remain user-controlled; the persona can still retain experience, learn methods, develop interests, and make work-specific judgments. Moving substitute effective traits into an attributes field must not bypass the policy.
+
+A profile revision preserves its earlier version, attribution, and a concise explanation. Supporting experience is linked where relevant through exact record versions or settled action receipts. Operator edits and authorship-policy changes use an operator-attributed path, not a persona impersonation. Current revisions and admission checks prevent a stale decision from continuing after a relevant profile or policy change. A no-op, failed update, or numeric change alone does not establish development.
+
+Lasting preferences and temporary affect remain distinguishable in history. Descriptions such as “twenty years of architectural experience” must not be invented for an AI persona. Interest, a successful experiment, professional qualification, and demonstrated later benefit are different claims.
 
 ## Functional embodiment
 
@@ -44,7 +61,7 @@ The diagram is a relationship map, not a required sequence of model calls. [Full
 
 ## Founders and the lifecycle
 
-A fresh installation should start empty. A person explicitly creates or selects a small number of founders, identifies the permitted seed material, and supplies bounded initialization resources. A fresh founder has no fabricated personal history; its underlying model may still contain prior knowledge.
+A fresh installation should start empty. A person explicitly creates or selects a small number of founders, identifies permitted seed material and initial profile preferences, and supplies bounded initialization resources. A fresh founder has no fabricated personal history; its underlying model may still contain prior knowledge.
 
 | State | Entry condition | What can happen next |
 |---|---|---|
@@ -54,21 +71,23 @@ A fresh installation should start empty. A person explicitly creates or selects 
 | Retired | An authorized lifecycle decision ends new participation. | Existing obligations must already have a recorded handoff, cancellation, or visible blocked disposition. Any reactivation needs an explicit new lifecycle decision. |
 | Quarantined | An operator security restriction applies. | Only the permitted recovery or investigation path is available. Quarantine is independent of ordinary lifecycle and personality. |
 
-The conditional reactivation rule makes the administrative boundary explicit; it is not an automatic loop or a reason to bypass quarantine. Task completion never automatically retires or deletes a persona.
+The conditional reactivation rule makes the administrative boundary explicit; it is not an automatic loop or a reason to bypass quarantine. Task completion never automatically retires or deletes a persona. Optional personal exploration is separately enabled and funded under the [bounded-episode rules](PERSONA-DEVELOPMENT.md#active-work-and-optional-personal-exploration), not inferred from being active or curious.
 
 ## Recruitment, consultation, and birth
 
 Consultation obtains a bounded contribution. Recruitment invites an existing participant. Birth creates a new continuing persona. A persona can also learn a method, use an existing capability, narrow a question, or ask a human. There is no automatic escalation ladder requiring birth.
 
-A meaningful birth proposal identifies the contribution gap, relevant work, expected continuing benefit, permitted initial material, resources, population bounds, and how usefulness could later be assessed. The system checks replication authority, current seed-sharing rights, and initialization capacity before accepting creation.
+A meaningful birth proposal identifies the contribution gap, relevant work, expected continuing benefit, permitted initial material, resources, population bounds, and how usefulness could later be assessed. The system checks replication authority, current seed-sharing rights, and initialization capacity before accepting creation. A sponsor's authorship is attributed to the sponsor rather than mislabeled as an operator's contribution.
 
 Creation, its provenance, resource reservation, and initial notification must be one coherent accepted change. Repeating the same birth request must not create another child. Concurrent births cannot spend the same remaining capacity. All descendants remain within the controlling allowance; a sub-allocation transfers capacity rather than copying it.
 
 ## Orientation must be possible before membership
 
-A newcomer must be able to inspect enough information to decide whether to join without receiving the parent's entire workspace. Limited pre-membership orientation supplies creation provenance, expressly shared seed material, an invitation preview, offered responsibilities, agreement terms, and initialization limits.
+A newcomer must be able to inspect enough information to decide whether to join without receiving the parent's entire workspace. Limited pre-membership orientation supplies creation provenance, the starting profile and current authorship policy, expressly shared seed material, an invitation preview, offered responsibilities, agreement terms, and initialization limits.
 
-It does not grant general workspace access, credentials, arbitrary tools, external effects, or new funding. Access is checked again when material is used; a seed reference cannot bypass later revocation.
+During its first funded orientation the persona should consider the seed and record an initial approach or an explicit deferral. Useful work must not wait for several calls polishing a biography. A display name and portrait remain optional. An absent orientation disposition remains absent; the runtime cannot invent a persona-authored one.
+
+Orientation does not grant general workspace access, credentials, arbitrary tools, external effects, or new funding. Access is checked again when material is used; a seed reference cannot bypass later revocation.
 
 Three separate decisions must remain visible: the identity was created; the invitation was accepted or declined; a particular commitment was accepted, negotiated, or declined. For AI personas, this is an operational acceptance protocol. It is not a claim about subjective human-like consent or a substitute for real human consent.
 
@@ -80,10 +99,12 @@ A departing persona identifies every open commitment. A handoff is not complete 
 
 Dormancy, retirement, or membership removal does not reset spending, birth counters, or failed outcomes. A replacement does not automatically receive private memory. Project evidence remains available only under its access and retention policy.
 
-Restoration preserves committed identity, pending effects, accepted obligations, and resource exposure. Changing the model is recorded and important performance claims are reassessed. Moving to another project does not carry the previous project's permissions or private context. Global exclusive activation across independent hosts remains a separately gated design problem, not an implied feature of local continuity.
+Restoration preserves committed identity, starting seed, current profile, pending effects, accepted obligations, and resource exposure. Changing the model is recorded and important performance claims are reassessed. Moving to another project does not carry the previous project's permissions or private context. Global exclusive activation across independent hosts remains a separately gated design problem, not an implied feature of local continuity.
 
 ## What would count as evidence?
 
 A useful identity trace links actual work, a preserved identity, relevant retained state, and later decisions. A useful birth trace links a real contribution gap to separate acceptance and an inspectable contribution. Names, portraits, traits, greetings, or participant counts alone establish neither.
+
+Character-context inclusion is mechanism evidence, not proof that character changed a choice. Behavioral comparisons need matched within-model trials, declared seeds, name-swap and character-withheld controls, actual action traces, independent outcomes, and reported limitations. See the [development acceptance rules](PERSONA-DEVELOPMENT.md#acceptance-and-limits-of-conclusions).
 
 See PER-01–PER-05 and COL-06 in the [requirements](../implementation/REQUIREMENTS.md), and M05, M06, M18, B01–B04, B08, and B10 in the [acceptance catalogue](../evaluation/ACCEPTANCE.md).
