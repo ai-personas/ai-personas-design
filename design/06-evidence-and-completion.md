@@ -30,13 +30,56 @@ Distinguish simulation, an outside participant's report, and independently obser
 
 ## Review is accepted work, not a request count
 
-A review identifies its exact claim, criteria, submission, reviewer, accepted responsibility, funding, independence policy, conflicts, actual checks, findings, verdict, and limitations. The review should check both listed requirements and material omissions from the original mandate.
+A review identifies its exact claim, criteria, submission, reviewer, accepted responsibility, funding, independence policy, conflicts, observations and reasoning, findings, verdict, and limitations. Reviewing personas judge both listed requirements and material omissions from the original mandate; the runtime does not make that substantive judgment.
 
 Separate identity, separate execution, a different model, and qualified external assessment are different kinds of separation. A newborn is not automatically an independent reviewer of its parent's output. The required separation depends on the claim and must be chosen explicitly.
 
 If no suitable reviewer accepts, the state is review unavailable or incomplete. A file-integrity check does not substitute for an engineering check. A human can accept a subjective creative result without inventing a numerical quality score, but human acceptance does not create missing technical evidence.
 
 A blocking finding stays open until its adopted disposition is supported. Acknowledgment is not repair. Authorized deferral is possible only where the applicable criterion and authority allow it; it cannot convert an unmet mandatory requirement into an unconditional pass.
+
+## Persona judgment and mechanical integrity
+
+**Clarification: 23 September 2026.** A reviewing persona, not an author's
+self-certification or a runtime checklist, judges the adequacy of a method or
+result. Participants can question an interpretation or proposed approach through
+ordinary work discussion before a final submission exists. Formal assessment
+records the actual reviewer's judgment of the exact submitted version. The
+request and accepted agreements establish obligations; reviewers may challenge
+them but do not silently rewrite the user's scope or supply human consent.
+
+The reviewer chooses how to assess the claim: contextual reading, argument,
+visual observation, consultation, tool-assisted analysis, or a combination.
+Neither a mandatory shell command nor a required number of successful checks is
+a universal definition of review. A reasoned judgment of text already received
+needs no extra action merely to satisfy bookkeeping. A technical claim may need
+substantial empirical work. That need follows the actual claim and the reviewer's
+assessment, not an installed task classifier, fixed rubric, or blanket ban on
+using tools. Explicit task-specific evidence obligations still apply.
+
+An optional cited action identifies the observation actually available to the
+reviewer. A negative test, failed operation, pending job or uncertain receipt can
+be relevant evidence; citation does not change its state to success. A successful
+command may be irrelevant. The reviewer explains relevance, limitations and the
+basis for the verdict. The runtime checks attribution, access and exact receipt
+identity, not the truth of the explanation or the suitability of the method.
+New assessments retain the observed citation snapshots. If a cited receipt changes,
+its old snapshot cannot support a new current binding without reassessment.
+
+The runtime continues to enforce consent, funding, privacy, current scope and
+record integrity. Source restrictions follow non-command observations as well as
+execution receipts. A separate identity or a positive verdict never authorizes
+private-source disclosure, automatic release, or deletion of another finding.
+Disagreement stays attributable until its authorized disposition; there is no
+implicit majority vote, averaged quality score or retry-until-accepted loop.
+Unavailable reviewers leave an explicit review gap. Simple work does not acquire
+a compulsory committee, role assignment or persona birth merely through this rule.
+
+A peer verdict remains a fallible assessment, not a guarantee of truth, universal
+competence or external certification. Evaluate reviewer reliability and actual
+outcomes separately from the integrity of the record. The [peer-judgment cases](../evaluation/METHOD-CONTINUITY.md#peer-judgment-across-different-kinds-of-work)
+include disagreement, misleading positive evidence, unneeded tooling and wrong
+verdicts; recording the verdict correctly is not passing the task.
 
 ## Historical verdict versus current applicability
 

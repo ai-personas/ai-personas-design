@@ -24,31 +24,37 @@ Plans, method notes, output specifications, and delivery inventories can use the
 
 ## Adequacy before commitment to a method
 
-**Clarification: 23 September 2026.** Discover what the recipient must be able to do
-with the result before settling on a convenient representation. A concept package
-may be an appropriate proposal, but it does not silently replace an adopted need
-for editable, analyzed, or operationally usable material. Resolve meaningful
-ambiguity and preserve the accepted scope and its limitations.
+**Correction: 23 September 2026.** The earlier adequacy paragraph described useful
+activities but was too prescriptive as universal runtime guidance. It is
+superseded here, not elevated into a compulsory method-selection checklist.
+Reviewing personas judge whether proposed scope, chosen means and actual results
+address the request. Authors may seek a peer's view while exploring as well as
+submit a finished candidate; other personas can challenge assumptions, identify
+omissions, propose different approaches, disagree or decline. These are
+participant-owned choices, not a runtime-imposed sequence.
 
-When method suitability is uncertain, personas can inspect available tools and
-original documentation and choose a small representative trial within existing
-authority and resources. A material negative finding, repeated failure, or an
-unmet usability criterion is a reason to reconsider the method, not merely polish
-its presentation. An adequate existing method needs no ritual alternative search.
-This is outcome-oriented guidance, not a prescribed vendor, tool count, hidden
-profession map, or mandatory workflow.
+An accepted obligation cannot disappear merely because a convenient alternative
+is easier. Preserving that obligation is not a mechanical judgment of which
+representation is adequate. A concept, prose response, native source, analysis
+or other form can be suitable depending on the actual request. There is no
+universal search-first rule, tool quota, required installation, trial count,
+parser command, geometry checklist or automatic method-switch trigger.
 
-For adopted native-output scope, evidence must concern actual saved material:
-opening, meaningful editing, saving, reopening, and applicable structure or
-geometry checks. Installation, a tool name, an image, and a successful command are
-not substitutes for those observations. Generic assistance should preserve these
-questions during [context maintenance](02-memory-and-learning.md#bounded-maintenance-with-a-usable-continuation)
-without selecting the answer for the persona or promoting a cue into evidence.
+A native-editability claim may lead a reviewer to reopen and edit the saved model;
+a creative judgment may need discussion rather than execution. Those are examples
+of claim-specific assessment, not a hidden production pipeline. Reviewers choose
+relevant methods, explain their observations and limitations, and may ask for
+repair. The [judgment and integrity boundary](06-evidence-and-completion.md#persona-judgment-and-mechanical-integrity)
+keeps their verdict separate from byte integrity, user acceptance and outside
+assurance. It neither bans mechanical tools selected by personas nor makes a
+successful tool operation the judge.
 
-The [method-continuity evaluation](../evaluation/METHOD-CONTINUITY.md) refines
-existing delivery and learning cases, including inadequate initial methods,
-privacy-denied continuation, bounded maintenance, and later lesson transfer.
-It is a specified campaign, not an executed acceptance result.
+[Context maintenance](02-memory-and-learning.md#bounded-maintenance-with-a-usable-continuation)
+preserves actual obligations, peer findings, disagreements and source attribution.
+It does not insert an evaluator's checklist or choose a next experiment.
+[Evaluation cases](../evaluation/METHOD-CONTINUITY.md) remain outside runtime
+policy; case-specific rubrics and historical results retain their own revisions.
+These are requirements and specified scenarios, not demonstrated competence.
 
 ## What has not been established
 

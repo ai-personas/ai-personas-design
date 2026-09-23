@@ -118,9 +118,11 @@ as context overflow.
 ### Compact continuity without fabricated learning
 
 When optional discovery or retention previews are removed, retain a short,
-source-independent reminder to preserve the original outcome, chosen method,
-unmet checks, next bounded trial, and any potential reusable lesson. The reminder
-is not a source receipt, a selected fragment, or a claim that learning occurred.
+source-independent reminder to preserve current commitments, attributable peer
+findings, disagreements and source references. It must not prescribe a next trial,
+method switch, tool or quality checklist. Compaction is not a verdict or a
+resolution; the reminder is not a source receipt, a selected fragment, or a claim
+that learning occurred.
 Do not include omitted private identifiers or material merely to make it useful.
 Exact evidence must still be read under current permissions before supporting a
 lesson. Selected lessons and actual feedback remain subject to the ordinary
