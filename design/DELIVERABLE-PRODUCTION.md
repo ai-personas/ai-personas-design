@@ -22,6 +22,34 @@ The former DLV-01–DLV-10 identifiers are retired as a separate active requirem
 
 Plans, method notes, output specifications, and delivery inventories can use the existing mandate, work, artifact, agreement, commitment, and release records. They need not become universally required new record types. Specialist tools and learned procedures are allowed; automatic task-to-role or task-to-workflow selection by the runtime is not. Reuse is compatible with emergence when its applicability and adoption remain attributable.
 
+## Adequacy before commitment to a method
+
+**Clarification: 23 September 2026.** Discover what the recipient must be able to do
+with the result before settling on a convenient representation. A concept package
+may be an appropriate proposal, but it does not silently replace an adopted need
+for editable, analyzed, or operationally usable material. Resolve meaningful
+ambiguity and preserve the accepted scope and its limitations.
+
+When method suitability is uncertain, personas can inspect available tools and
+original documentation and choose a small representative trial within existing
+authority and resources. A material negative finding, repeated failure, or an
+unmet usability criterion is a reason to reconsider the method, not merely polish
+its presentation. An adequate existing method needs no ritual alternative search.
+This is outcome-oriented guidance, not a prescribed vendor, tool count, hidden
+profession map, or mandatory workflow.
+
+For adopted native-output scope, evidence must concern actual saved material:
+opening, meaningful editing, saving, reopening, and applicable structure or
+geometry checks. Installation, a tool name, an image, and a successful command are
+not substitutes for those observations. Generic assistance should preserve these
+questions during [context maintenance](02-memory-and-learning.md#bounded-maintenance-with-a-usable-continuation)
+without selecting the answer for the persona or promoting a cue into evidence.
+
+The [method-continuity evaluation](../evaluation/METHOD-CONTINUITY.md) refines
+existing delivery and learning cases, including inadequate initial methods,
+privacy-denied continuation, bounded maintenance, and later lesson transfer.
+It is a specified campaign, not an executed acceptance result.
+
 ## What has not been established
 
 A missing specification is an intake question. A missing authoring or analysis interface may be an implementation capability gap. An unrun campaign is an evidence gap. A true design gap requires showing that the existing rules omit or contradict necessary behavior; lack of a domain-specific example alone does not establish one.

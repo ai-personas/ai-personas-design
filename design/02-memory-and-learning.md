@@ -85,13 +85,53 @@ and a retained lesson are distinct facts. Later tasks should be able to discover
 relevant owned lessons across the authorized index, not only the most recent
 records. Bounded previews do not select a lesson or prove that it was used.
 
-Context recovery must retain current obligations, unread inputs and uncertain
-actions independently of an ordinary history-compaction cursor. An implementation
-may offer one funded, same-model maintenance decision per pressure episode with
-a smaller maintenance-only operation contract. This does not summarize on behalf
-of the persona, refund usage or authorize repeating an unchanged blocked request.
+### Bounded maintenance with a usable continuation
+
+Context recovery must retain current obligations, unread inputs, selected material,
+character context, failure facts, and uncertain actions independently of an ordinary
+history-compaction cursor. A bounded recovery path may provide at most two normally
+funded, same-model maintenance decisions in one pressure episode, using a smaller
+maintenance-only operation contract. This supersedes the earlier one-decision
+option: a necessary read must not consume the only opportunity to author a handoff.
+Reads, failed selections, and failed or uncertain admitted inference spend an
+attempt under the ordinary accounting rules. Local quotation and pre-admission
+rejection do not.
+
+The first decision should compact when possible; the second can observe an essential
+read or repair an unsuccessful selection. Neither is a free retry or a guarantee
+that the core can fit. After the bound is spent, another hard-overflow request
+blocks with an actionable explanation. An ordinary admissible request may still
+observe failures and continue. Its arrival, a restart, new input, or a changed
+history cursor does not refresh the maintenance allowance while pressure persists.
+Only a known ordinary request below the pressure threshold ends that episode.
+Unknown exposure is not evidence that pressure ended. Previously stored spent state
+counts as already used; migration must not mint extra attempts, and malformed or
+unknown active state must fail conservatively.
+
 Context selection or compaction ends the saved batch so subsequent action follows
-a fresh observation. A mandatory core that still cannot fit is an explicit block.
+a fresh observation. The runtime does not summarize on the persona's behalf,
+refund usage, widen authority, or switch the assigned model to force admission.
+A mandatory core that still cannot fit is an explicit block. Provider authorization,
+model, and transport failures retain their own meaning rather than being relabeled
+as context overflow.
+
+### Compact continuity without fabricated learning
+
+When optional discovery or retention previews are removed, retain a short,
+source-independent reminder to preserve the original outcome, chosen method,
+unmet checks, next bounded trial, and any potential reusable lesson. The reminder
+is not a source receipt, a selected fragment, or a claim that learning occurred.
+Do not include omitted private identifiers or material merely to make it useful.
+Exact evidence must still be read under current permissions before supporting a
+lesson. Selected lessons and actual feedback remain subject to the ordinary
+mandatory-context and source-access rules.
+
+A privacy-denied peer delivery must not be repaired by deleting lineage,
+paraphrasing restricted content, or treating compaction as a fresh permission.
+Use explicit source-owner authorization or independently obtained, appropriately
+shared evidence; otherwise preserve the concrete dependency and wait. Evaluate
+these boundaries together with [method and learning continuity](../evaluation/METHOD-CONTINUITY.md),
+without mistaking a passing preparation test for behavioral improvement.
 
 ## What would show useful learning?
 
