@@ -4,6 +4,8 @@
 
 This is a normative clarification of the personal-exploration rules. It describes required behavior, not an assertion that an implementation or live evaluation has passed.
 
+The [development evidence boundaries](DEVELOPMENT-EVIDENCE-BOUNDARIES.md) additionally specify historical construction privacy, exact review-to-change links, deferred interpretation closeout and foreground priority across personas sharing one allowance.
+
 ## An episode is the funding boundary
 
 An episode's call and time allowances apply to its whole work, not separately to each participation. Orientation, collaborators, later reviewers, nested model invocations, and failed admitted attempts share that allowance. Inviting someone must not multiply the available calls or create another deadline. The original operator-authorized policy remains controlling; a collaborator's consent and ordinary access and resource checks remain necessary.
