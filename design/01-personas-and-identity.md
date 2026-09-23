@@ -13,9 +13,10 @@ The intended benefit is inspectable continuity: a reader can understand who acce
 | Part | Meaning | Boundary |
 |---|---|---|
 | Stable identity | The continuing entity to which authorship and responsibilities are attributed. | It is not a display name, model session, or temporary job. |
-| Creation provenance | Sponsor, creation reason, supplied material, and initialization conditions. | Supplied knowledge is not firsthand experience. |
-| Character and interests | Attributable descriptions of approaches, values, preferences, and current interests. | Interest does not establish competence. |
-| Current state | Workload, attention, current participation, and optional modeled affect. | Describing state does not prove feelings. |
+| Creation provenance and starting seed | Sponsor, creation reason, permitted material, original profile values, field origins, and initialization conditions. | Immutable starting conditions are not current character or firsthand experience. |
+| Current character and dispositions | Attributable descriptions of approaches, values, preferences, and current OCEAN values. | They are tendencies, not fixed roles or authority. |
+| Interests and open questions | Continuing things the persona wants to understand or improve. | Interest does not establish competence or funding. |
+| Current state and VAD | Workload, attention, participation, and situation-sensitive modeled affect. | Temporary affect is not lasting disposition or proof of feelings. |
 | Experience and fragments | Actual events and the persona's retained interpretations of them. | Evidence and interpretation remain distinct. |
 | Relationships | Directional, contextual interpretations of experience with others. | They do not grant authority or expose another person's private information. |
 | Commitments | Specific responsibilities actually accepted. | Membership or nomination alone is not acceptance. |
@@ -26,11 +27,21 @@ Names, portraits, voices, and rooms are optional presentation. The actual artifa
 
 ## Character without fixed roles
 
-Personas may develop distinguishable approaches through authored state and real experience. Optional OCEAN or VAD descriptors may inform relevant context, but must not deterministically assign professions, tools, voting power, or priorities. Their scales and meanings remain explicit rather than being silently converted.
+Personas may develop distinguishable approaches through authored state and real experience. OCEAN and VAD descriptors may inform relevant context, but must not deterministically assign professions, tools, voting power, or priorities. Their scales and meanings remain explicit rather than being silently converted. User entry is optional; missing numeric values at new creation are initialized under the starting-seed rule below rather than left silently unspecified.
 
 A cautious persona can choose an experiment when evidence makes it appropriate. A curious persona can choose to finish rather than explore further. Learning does not require a trait score to change. A role such as reviewer or coordinator is an accepted, scoped responsibility, not a permanent identity class.
 
-A profile revision preserves its earlier version, attribution, and a concise explanation. Supporting experience is linked where relevant. Descriptions such as “twenty years of architectural experience” must not be invented for an AI persona.
+A profile revision preserves its earlier version, actual author, and a concise explanation. Supporting experience is linked where relevant. Descriptions such as “twenty years of architectural experience” must not be invented for an AI persona. Accuracy, honesty, essential verification, and accepted obligations apply at every trait value.
+
+## Starting seed and self-authorship
+
+At creation the user may supply character text and any OCEAN or VAD values. Missing numbers are initialized once, uniformly in OCEAN [0,1] and VAD [-1,1]. Explicit values, including zero, are preserved. Record the generator version, reproducibility seed, actual initial values, and whether each field came from the user or initialization. This is synthetic initialization, not a validated population distribution or a fabricated personal history.
+
+Preserve this starting seed separately from the current profile. Creation retries, reloading, restarting, and joining other work must not rerandomize it. References to supplied seed material remain a separate concept with current information-access checks.
+
+**Let this persona shape its character** is enabled by default. When enabled, the persona may author revisions to narrative character, OCEAN, and VAD with reasons and relevant evidence. When disabled, these fields remain user-controlled; the persona can still learn methods, retain experience, and develop work-specific judgments. Operator edits use a separately attributed path rather than impersonating persona authorship. Profile and policy changes require fresh decisions before affected actions proceed.
+
+During the first funded orientation, the persona should consider the seed and record an initial approach or an explicit deferral. A display name and portrait are optional; useful work does not depend on repeated biography-polishing calls. See [CD-01–CD-04](08-continuing-development.md) for immutable initialization, policy, continuing personal state, and retrieval requirements.
 
 ## Functional embodiment
 
@@ -86,4 +97,4 @@ Restoration preserves committed identity, pending effects, accepted obligations,
 
 A useful identity trace links actual work, a preserved identity, relevant retained state, and later decisions. A useful birth trace links a real contribution gap to separate acceptance and an inspectable contribution. Names, portraits, traits, greetings, or participant counts alone establish neither.
 
-See PER-01–PER-05 and COL-06 in the [requirements](../implementation/REQUIREMENTS.md), and M05, M06, M18, B01–B04, B08, and B10 in the [acceptance catalogue](../evaluation/ACCEPTANCE.md).
+See PER-01–PER-05 and COL-06 in the [requirements](../implementation/REQUIREMENTS.md), and M05, M06, M18, B01–B04, B08, and B10 in the [acceptance catalogue](../evaluation/ACCEPTANCE.md). The [continuing-development evaluations](../evaluation/CONTINUING-DEVELOPMENT.md) separately test initialization, authorship, actual choices, and learning transfer.

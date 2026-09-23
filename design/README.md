@@ -13,14 +13,17 @@ These chapters are the detailed design reference. They state intended behavior, 
 | [5. Authority and resources](05-authority-and-resources.md) | Who may authorize what, and how does the system remain within its limits? |
 | [6. Evidence and completion](06-evidence-and-completion.md) | What counts as a supported result, and how is an exact release kept honest? |
 | [7. Human experience and society](07-experience-and-society.md) | What should people see and control, and what changes for communities or services? |
+| [8. Continuing development](08-continuing-development.md) | How do starting character, experience, interests, and authorized exploration inform later choices? |
 
 The [organization clarification](03-work-and-cooperation.md#how-organization-emerges) explains how decisions and cooperation remain persona-owned. The [delivery review](DELIVERABLE-PRODUCTION.md) is an explanatory correction and reading map, not an additional normative chapter or production engine.
+
+Chapter 8 reconciles creation-time initialization and self-authorship with continuing memory, optional exploration, and accountable stopping. Its CD-01–CD-10 rules and [acceptance matrix](../evaluation/CONTINUING-DEVELOPMENT.md) are requirements, not a declaration of implemented or behaviorally validated capability.
 
 ## How to read a requirement
 
 **Must** describes a necessary condition for the applicable feature. **Should** describes a strong recommendation; an implementation records a reason when it takes a different approach. **May** describes an option. Optional does not mean exempt from safeguards once enabled.
 
-The [invariants and requirement index](../implementation/REQUIREMENTS.md) identify the rules and their evaluation links. The [contracts](../implementation/CONTRACTS.md) make cross-component handoffs explicit. Neither a worksheet nor a diagram introduces additional mandatory workflow stages.
+The [invariants and requirement index](../implementation/REQUIREMENTS.md) identify the foundational rules and their evaluation links. The [contracts](../implementation/CONTRACTS.md) make cross-component handoffs explicit. The CD requirements in chapter 8 extend those rules without weakening authority, consent, evidence, or retention boundaries. Neither a worksheet nor a diagram introduces additional mandatory workflow stages.
 
 ## Authority within this handbook
 
