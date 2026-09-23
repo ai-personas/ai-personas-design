@@ -70,6 +70,18 @@ Repeated reminders, status updates, retries, and persona creation remain inside 
 
 When available capacity cannot meet accepted obligations, expose the conflict. Do not conceal abandonment of one commitment inside a busy history for another.
 
+### Optional exploration is bounded across the whole episode
+
+The [personal-development rules](PERSONA-DEVELOPMENT.md) permit a persona to choose a question, methods and collaborators within an explicitly funded episode. The episode allowance belongs to its work, not separately to each participation. Later invitations, reviews, initialization and nested inference consume the same episode allowance and retain its original expiry. Starting another run, changing participants or removing a copied status field must not create fresh capacity or turn optional exploration into foreground user work. Root accounting and protected finishing capacity remain independent additional limits.
+
+An episode does not authorize creation or resumption of a different work item outside its limits. Separate self-directed work needs a separately permitted exploration opportunity, or a new explicit operator authorization. This restriction does not assign professions, choose tools, prevent collaboration within the episode or restrict ordinary authorized user work.
+
+At execution time, a scheduled question and its supporting sources must still be readable under current authority. Imported or withdrawn history is not a live trigger. The permitted environment must remain available and the funding must not have expired. Work instructions, invitations and other previews derived from the question retain its exact provenance and current access restrictions; executing an authorized schedule on behalf of the user is not permission to drop those restrictions.
+
+A bounded scheduler must eventually consider later eligible opportunities despite an unchanged prefix of future, paused or otherwise ineligible entries, including across restart. This is mechanical queue fairness, not a domain priority score, a new inference trigger or permission to spend while idle. A failed start must leave no partially created work, invitation, participation or consumed episode and must not prevent unrelated opportunities from being considered. Its honest blocked disposition remains visible; repeated polling must not fabricate novelty or repeatedly attempt the same failed start.
+
+Concluding an episode must not abandon a collaborator's accepted responsibility or obscure pending or uncertain actions. Its owner must first obtain the applicable dispositions and preserve unresolved effects honestly. A concluded episode cannot remain executable through a later participant's run. Cancellation, a useful negative finding, partial delivery and successful completion remain distinct; closing participation does not undo effects or establish that the original need was met.
+
 ## Deployment decisions and assurance
 
 An implementation must declare its grant model, enforcement boundary, resource measurements, unknown-usage policy, closeout policy, revocation behavior, and recovery procedure before autonomous effects are enabled. A diagram or a permission label does not establish that these mechanisms work.
