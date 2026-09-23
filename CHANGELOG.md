@@ -2,6 +2,16 @@
 
 [Home](README.md) · [Source provenance](sources/SOURCE-MANIFEST.md)
 
+## Coordination, lifecycle, and formal-evidence clarification
+
+**Date: 23 September 2026.** The [coordination and lifecycle clarification](design/COORDINATION-LIFECYCLE.md) distinguishes a protocol that permits alternative organizations, actual participant-owned choices, and demonstrated useful cooperation. Exact commitment acceptance and already accepted delegation remain distinct from membership, invitations, execution authority, and historical acceptance of changed terms. Handoffs and relevant lifecycle changes require coherent current-state checks.
+
+Retirement may preserve an explicitly blocked obligation without claiming completion. Reactivation does not clear quarantine, replenish resources, or replay stale decisions. Identity continuity preserves honest provenance while respecting erasure. Scheduling guarantees state their progress assumptions; fair opportunities do not manufacture willingness or successful outcomes. [Exploration accounting](design/EXPLORATION-ACCOUNTING.md#failed-starts-and-admitted-attempts) separates pre-admission rollback from charged or uncertain admitted attempts.
+
+The design, implementation, and evaluation reading paths link the clarification and its verification cases. The catalogue remains **21 invariants, 45 requirements, and 44 core M/B/X entries**; these refinements introduce no additional requirement family, mandatory team ritual, application code, or new deployment profile.
+
+The motivating Lean draft for design revision `2a685b8b5a666812960f726df4594aea5ad8d52b` was not successfully compiled. Abstract traces and finite model checks are not promoted to machine-checked proofs, behavioral evidence, or current runtime acceptance. No proof or product gate is reported as passed by this documentation update. The intervening historical-privacy, development-evidence, and shared-root-priority clarification is preserved.
+
 ## Shared clarification and conditional progress
 
 **Date: 22 September 2026.** The [work chapter](design/03-work-and-cooperation.md#questions-and-conditional-assumptions)

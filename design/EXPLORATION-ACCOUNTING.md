@@ -20,7 +20,17 @@ Protected finishing capacity remains unavailable to optional production across e
 
 A page of opportunities is a bounded view, not a fixed eligibility ceiling. Future-dated opportunities must not hide an already due opportunity. Temporarily ineligible owners must not indefinitely prevent another eligible owner from being considered. Scheduling retains user-work priority and the authorized earliest start time without ranking domain solutions.
 
-Imported, historical, erased, or withdrawn opportunities must not acquire local execution authority through queue discovery. A failed optional start must leave an inspectable blocked disposition, without consuming an episode or retaining provisional work as if creation had succeeded. Its failure must not roll back unrelated scheduling activity. Retrying requires an authorized trigger; repeatedly examining the same failed opportunity must not create an inference loop.
+A consideration guarantee declares scheduler progress, recovery, queue mutation, and persistent-eligibility assumptions, as explained in the [coordination and lifecycle clarification](COORDINATION-LIFECYCLE.md#progress-guarantees-need-explicit-assumptions). It does not guarantee a funded start, voluntary acceptance, or a successful outcome. Shared-root foreground priority and current expiry remain controlling.
+
+Imported, historical, erased, or withdrawn opportunities must not acquire local execution authority through queue discovery. Failed starts follow the admission boundary below. Their failure must not roll back unrelated scheduling activity. Retrying requires an authorized trigger; repeatedly examining the same failed opportunity must not create an inference loop.
+
+## Failed starts and admitted attempts
+
+A pre-admission failure leaves an inspectable blocked-start disposition, without consuming a recurrence occurrence or retaining provisional work as if creation had succeeded. Release provisional reservations only where no admitted operation, incurred charge, or uncertain exposure is attached. Admission binds the episode identity, recurrence consumption, authoritative work linkage, and applicable reservations coherently before dispatch; concurrent starts cannot each consume the same remaining opportunity.
+
+After admission, a failure is a failed admitted attempt, not a never-started episode. Preserve its identity, consumed recurrence occurrence, accepted responsibilities, actual charges, and uncertain exposure. Redelivery of the start request resolves to that same admitted episode. Separately authorized retry actions remain charged to the episode and retain their own action identities and receipts; they do not create a fresh episode allowance. Reconcile remaining reservations from actual evidence without refunding spent resources. A later start with a new episode identity needs a separately authorized opportunity.
+
+A timeout or restart that leaves admission or dispatch uncertain requires reconciliation, not an assumption that rollback is safe. Uncertain external effects must be reconciled before repetition. No startup error may erase a paid call, possible external effect, or accepted obligation. Recurrence consumption, episode creation, resource reservation, actual usage, and uncertainty are distinct facts even when committed together. This distinction defines the earlier failure-path wording in the authority and development chapters; it does not weaken their shared-root, expiry, privacy, or closeout rules.
 
 ## Controls preserve the actual permission
 

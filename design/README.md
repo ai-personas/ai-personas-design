@@ -18,6 +18,8 @@ These chapters are the detailed design reference. They state intended behavior, 
 
 The [organization clarification](03-work-and-cooperation.md#how-organization-emerges) explains how decisions and cooperation remain persona-owned. The [delivery review](DELIVERABLE-PRODUCTION.md) is an explanatory correction and reading map, not an additional normative chapter or production engine.
 
+[Emergence, coordination, and lifecycle boundaries](COORDINATION-LIFECYCLE.md) is a normative clarification of exact acceptance, accepted delegation, handoffs, retirement, quarantine, progress assumptions, and proof-to-implementation evidence. It distinguishes permitted organization from observed useful emergence and maps its verification cases to existing identifiers without adding a workflow or claiming a Lean pass.
+
 ## How to read a requirement
 
 **Must** describes a necessary condition for the applicable feature. **Should** describes a strong recommendation; an implementation records a reason when it takes a different approach. **May** describes an option. Optional does not mean exempt from safeguards once enabled.
@@ -26,7 +28,7 @@ The [invariants and requirement index](../implementation/REQUIREMENTS.md) identi
 
 ## Authority within this handbook
 
-The invariants are the protected foundation. These chapters, the explicitly normative development refinement, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
+The invariants are the protected foundation. These chapters, the explicitly normative development and coordination/lifecycle refinements, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
 
 A contradiction between detailed requirements is a design defect to resolve and record, not permission to select the easiest reading. Do not broaden authority or weaken an evidence claim while that conflict is unresolved. Changes follow the [contribution guide](../CONTRIBUTING.md).
 

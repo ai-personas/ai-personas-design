@@ -50,6 +50,12 @@ Record the chain from permitted observation to concise decision summary, proposa
 
 Retain unsuccessful runs and compare end-to-end delivery, appropriate stopping, required coverage, resource use, and uncertainty across varied inputs. Runtime invariants and domain assurance must remain active during every comparison; emergence cannot pass by ignoring permissions or lowering the adopted standard. These comparisons cannot prove universal competence or perfect absence of undiscovered task-specific behavior.
 
+## Formal models and coordination evidence
+
+Use the [coordination and lifecycle verification obligations](../design/COORDINATION-LIFECYCLE.md#verification-obligations) to separate protocol safety, conditional progress, participant-owned choices, and useful outcomes. Its [acceptance refinements](../design/COORDINATION-LIFECYCLE.md#acceptance-refinements-under-existing-identifiers) reuse the existing M/B/X identifiers; the catalogue counts do not change.
+
+A proof claim identifies the exact model and design revisions, theorem assumptions and exclusions, toolchain and dependencies, actual compiler result, trusted axioms or mechanisms, and correspondence to the implementation. Draft proof source and finite synthetic checks are not kernel verification or runtime acceptance. Alternative legal assignments and an all-decline counterexample test a model's boundaries; actual policy inspection and matched persona work are still needed to assess emergence. A fair scheduler does not itself establish voluntary acceptance, sufficient funding, or successful completion.
+
 ## How to run the catalogue
 
 The [acceptance catalogue](ACCEPTANCE.md) contains 26 mechanical checks, 12 behavioral checks, and six proposed extension checks. Each entry identifies a situation, a disturbance or comparison, and an observable result. Turn applicable entries into tests in the implementation repository; no programming language or test runner is required by this handbook.

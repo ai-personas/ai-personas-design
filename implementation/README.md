@@ -53,4 +53,6 @@ Assign one authoritative boundary for each consequential state change. Records c
 
 For every operation, document who may request it, what information is required, which state changes together, what happens under a duplicate or stale request, how cancellation works, what survives restart, and what the user sees. The [contracts](CONTRACTS.md) provide these semantic obligations without code examples.
 
+Apply the [coordination and lifecycle clarification](../design/COORDINATION-LIFECYCLE.md) when specifying exact acceptance, accepted delegation, atomic handoff, retirement dispositions, quarantine, and stale-decision rejection. Its verification obligations distinguish invariant preservation and scheduling assumptions from actual voluntary cooperation. An abstract proof needs an explicit correspondence to the concrete admission and recovery paths; it does not replace behavioral evidence.
+
 Record implementation-specific decisions outside this design handbook or in a clearly separate implementation repository. Do not reintroduce patch instructions, command transcripts, or unverified provider claims as the design's source of truth.
