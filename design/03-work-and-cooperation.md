@@ -6,6 +6,15 @@
 
 A person can start in ordinary language. The system preserves the exact request, its origin, supplied material, and authorized boundaries. It does not require a large form before a sentence rewrite, and it does not route a house request into predetermined professional personas.
 
+A request to create, design, or build is not silently reduced to advice or an
+idea list because its brief is short. Participants discover the fidelity, tools,
+editable source representations, recipient views, and substantive checks needed
+for a useful result. The user need not name software or file formats. Methods
+remain participant choices; neither a familiar tool nor a valid file establishes
+fitness for the need. Reversible assumptions can support continued development
+within existing authority while unresolved outside facts constrain the affected
+claims. A simple conversational answer still requires no artifact-production ritual.
+
 As consequences and dependencies grow, the **mandate** becomes more explicit: required outcomes, hard constraints, preferences, accepted clarifications, unknowns, assumptions, permissions, resource limits, review expectations, and stopping conditions. The depth of documentation follows the work, not a fixed ritual.
 
 | Meaning | Example | Who may change it? |
