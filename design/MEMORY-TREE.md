@@ -114,6 +114,10 @@ selection intact; independently valid work actions can proceed using the
 originally admitted context. Unresolved updates, pause, cancellation, ordinary
 failed actions and uncertain effects retain their existing barriers.
 
+An already active fragment repeated in ordinary record selection is redundant:
+normalizing it must not discard an otherwise valid handoff or compaction. This
+does not activate an unselected lesson or reverse an explicit deselection.
+
 Descriptions, graph relationships, searches and full fragments are private.
 Receiving a description is received information even without selecting the full
 fragment. Source restrictions follow it into derived work and export. A general

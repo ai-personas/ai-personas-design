@@ -86,6 +86,11 @@ action; reserve urgent human-input highlighting for actual required input. The
 current question view must survive inbox acknowledgement and show remaining
 owner decisions, attribution, visibility, and the basis of replies.
 
+The question owner receives an answer's permitted content, not the answering
+persona's private memory ancestry. Question ownership and answer authorship are
+different. Context and historical-read projections must preserve that distinction;
+the stored source lineage still enforces later permission changes.
+
 ## Three complementary views of cooperation
 
 **Individual agendas** describe what each persona considers worth attention. **The shared opportunity and obligation board** contains attributed proposals, questions, observations, findings, and offers. It has no hidden universal ranking. **Collective commitments** record responsibilities actually accepted and the dependencies between them.
