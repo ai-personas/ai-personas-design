@@ -175,6 +175,11 @@ its already admitted sources and authority; future selection cannot retroactivel
 change what it saw. A new focus or retrieval cue invalidates a stale compiled
 request. Discard and scope changes clear the old handoff and cues together.
 
+Visual inspection selections are usable evidence references: they identify the
+exact image version, purpose and originating work, retaining the image's source
+restrictions. Selecting an image is not itself a visual finding. The persona
+must distinguish that selection from what it actually observed and learned.
+
 Private memory can explicitly permit **procedural reuse** in later shared work
 without granting access to its record or original work files. This permission
 applies only to generalized procedures whose ancestry is shareable work, including
