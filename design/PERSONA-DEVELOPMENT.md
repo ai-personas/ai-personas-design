@@ -27,7 +27,7 @@ Interests and relationships can persist across work, but work agendas and accept
 
 ## Creation and authorship
 
-The identity chapter defines synthetic initialization, immutable provenance, explicit-zero preservation, and retry stability. Users can supply narrative character and any subset of OCEAN and VAD values. Missing numeric values are sampled uniformly within the documented ranges. This is an engineering initialization distribution, not a validated model of a human population.
+The identity chapter defines immediate funded character generation when narrative is absent, independently varied characters for identical traits, immutable completed provenance, explicit-zero preservation, and retry stability. Users can supply narrative character and any subset of OCEAN and VAD values. Missing numeric values are sampled uniformly within the documented ranges. This is an engineering initialization distribution, not a validated model of a human population.
 
 “Let this persona shape its character” is enabled by default. When disabled, narrative character, OCEAN, and VAD remain user-controlled; ordinary learning, interests, and work judgments remain available. A persona must not evade this restriction by writing substitute effective traits into a different profile field. The same restriction applies under the enabled host-execution deployment: application-level attribution and permission checks are still required, while the existing shared-host trust limitation must remain explicit.
 
@@ -35,7 +35,7 @@ Operator edits to current profile values or authorship policy use an operator-at
 
 A profile or policy change invalidates affected in-flight decisions before further operations are admitted. Previously suppressed operations do not later reappear as executions or replay automatically. A failed or no-op update must not invent a development event.
 
-During the first funded orientation, the persona considers its starting state and records an initial approach or an explicit deferral. This may accompany useful work or the membership response; neither a display name nor a portrait nor several biography-polishing calls is a prerequisite. An empty decision does not count as an authored approach or a deferral. If orientation ends without one, that remains a visible incomplete disposition rather than invented authorship.
+After character initialization, during the first funded work orientation, the persona considers its starting state and records an initial approach or an explicit deferral. This may accompany useful work or the membership response; neither a display name nor a portrait nor several biography-polishing calls is a prerequisite. An empty decision does not count as an authored approach or a deferral. If orientation ends without one, that remains a visible incomplete disposition rather than invented authorship.
 
 ## Character informs choices; it does not supply authority
 
@@ -97,7 +97,7 @@ A persona may identify needed capabilities, investigate tools, choose a represen
 
 ## Human-readable development history
 
-Creation explains optional narrative character, optional numeric entries, random initialization of missing values, the default-enabled self-authorship choice, and the separate default-disabled personal exploration permission. Exploration controls expose funding, episode and recurrence limits, expiry, pause, and cancellation rather than a vague unlimited background toggle.
+Creation explains supplied narrative versus immediate funded generation, pending and failed initialization with explicit retry/cancel controls, optional numeric entries, random initialization of missing values, the default-enabled self-authorship choice, and the separate default-disabled personal exploration permission. Exploration controls expose funding, episode and recurrence limits, expiry, pause, and cancellation rather than a vague unlimited background toggle.
 
 A persona view separates starting and current state; displays who changed what and why; and shows accessible interests, questions, experiments and observed outcomes, retained lessons, later uses, relationship interpretations, and exploration activity and stopping conditions. Use distinct labels for **tried**, **retained**, **used later**, and **benefit evaluated**. A generic skills-learned count cannot conflate these stages. Missing evidence is labeled missing, not inferred from a record count.
 
@@ -144,3 +144,10 @@ instructions or authoring schemas must not crowd out these cues. Keep operation
 signatures discoverable and full exact help available on demand. Report payload
 bytes separately from provider tokens. Stored fragments, later inclusion and
 measured transfer benefit remain separate evidence claims.
+
+
+## Readable publication and decision context
+
+An artifact's first committed version must already carry its ownership, generated-work provenance and inherited information restrictions. Blob preparation is not publication. Publication and capture return the canonical committed version; no stale revision may enter a lesson or submission source chain. Shared work provenance does not remove genuine private ancestors. Owner/operator delivery diagnostics distinguish readable peers and retained notifications from actual inspection, agreement or acceptance; silence behind a source restriction is not a peer declining to answer.
+
+The ordinary decision brief relates current character, relevant personal state, original need, current agenda and obligations, unresolved shared questions, readable peer contributions and selected full prompt fragments. Bounded contribution previews survive inbox acknowledgement and carry exact references, explicit omissions and current read checks. They neither assign coordination nor prove consent. Prefer concise guidance over repeating the same behavioral instructions across context sections. Same-call learning, organization and next-context retrieval remain persona-authored: a valuable abstraction may be retained before an action succeeds, with its tentative basis clear. Social outcomes can inform relationship interpretations and learning without assigning a numeric personality-to-action rule.
