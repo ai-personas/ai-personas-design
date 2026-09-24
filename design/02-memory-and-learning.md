@@ -192,3 +192,7 @@ authorized procedural learning. Confidential facts, private correspondence,
 restricted supplied material, withdrawal and erasure remain restrictive. Calling
 content a procedure cannot declassify it. New work still checks applicability;
 there is no automatic global publication or selection of a persona's memory.
+
+## Memory navigation contract
+
+[Persona-authored memory navigation](MEMORY-TREE.md) specifies the canonical tree with cross-links, the combined work/learning response, persona-authored short descriptions, exact next-context selection, and first-release storage boundary. It replaces implicit fragment shortlist retrieval with deliberate branch navigation; tool discovery remains separate.
