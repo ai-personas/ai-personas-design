@@ -38,7 +38,12 @@ Preserve an explicit bounded list of deferred opportunities with the persona's
 cue, reason, reconsideration condition and any received sources. Subsequent
 context exposes those entries until the persona replaces or clears them. An
 empty list does not prove there was no opportunity. Failed updates remain
-visible as uncommitted intentions; they do not manufacture lessons.
+visible as uncommitted intentions; they do not manufacture lessons. When the
+persona intended retention or revision but supplied no fragment, its next
+context explicitly reports that nothing was written and preserves the stated
+idea for an authored reconsideration. The explanation field is not a reusable
+prompt fragment. This feedback creates neither an automatic write nor an extra
+reflection call.
 
 ## Nodes and fragments
 
