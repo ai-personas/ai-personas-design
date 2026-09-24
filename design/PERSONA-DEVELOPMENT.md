@@ -37,6 +37,8 @@ A profile or policy change invalidates affected in-flight decisions before furth
 
 After character initialization, during the first funded work orientation, the persona considers its starting state and records an initial approach or an explicit deferral. This may accompany useful work or the membership response; neither a display name nor a portrait nor several biography-polishing calls is a prerequisite. An empty decision does not count as an authored approach or a deferral. If orientation ends without one, that remains a visible incomplete disposition rather than invented authorship.
 
+That initial orientation retains its originating participation. A later work may receive its completed disposition, but must not automatically inherit the earlier task's wording or initial approach as current instructions. Historical orientation remains available through explicit retrieval. Current character and deliberately selected applicable learning continue across work; each work's original need and accepted obligations keep their own scope.
+
 ## Character informs choices; it does not supply authority
 
 Different tendencies may lead a persona to establish a dependable baseline, investigate an unfamiliar method, consult someone, independently test a claim, challenge an assumption, persist after a setback, or stop with an honest limitation. These are observable possibilities, not prescribed roles or an OCEAN-to-tool mapping.
