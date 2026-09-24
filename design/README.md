@@ -14,6 +14,8 @@ These chapters are the detailed design reference. They state intended behavior, 
 | [6. Evidence and completion](06-evidence-and-completion.md) | What counts as a supported result, and how is an exact release kept honest? |
 | [7. Human experience and society](07-experience-and-society.md) | What should people see and control, and what changes for communities or services? |
 
+[Persona-owned process, not assigned roles](PERSONA-OWNED-PROCESS.md) is the normative clarification for optional contribution activities, self/peer assessment, advisory criticism, explicit obligations and the ordinary host-tools experience. It removes universal author/reviewer workflow interpretations without erasing accepted requirements or historical dispositions.
+
 [Character, experience, and self-directed activity](PERSONA-DEVELOPMENT.md) is the normative cross-cutting refinement for starting profiles, self-authorship, continuing interests, exact experience, bounded personal exploration, accountable stopping, and their behavioral evaluations. It refines the corresponding identity, learning, cooperation, activity, resource, evidence, and interface rules without introducing a prescribed domain workflow. Its intended behavior is not a claim of deployed capability. [Episode-wide accounting and fair scheduling](EXPLORATION-ACCOUNTING.md) clarifies the same normative boundaries for collaborators, queue pages, failed starts, and exact permission editing.
 
 The [organization clarification](03-work-and-cooperation.md#how-organization-emerges) explains how decisions and cooperation remain persona-owned. The [delivery review](DELIVERABLE-PRODUCTION.md) is an explanatory correction and reading map, not an additional normative chapter or production engine.
@@ -28,7 +30,7 @@ The [invariants and requirement index](../implementation/REQUIREMENTS.md) identi
 
 ## Authority within this handbook
 
-The invariants are the protected foundation. These chapters, the explicitly normative development and coordination/lifecycle refinements, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
+The invariants are the protected foundation. These chapters, the explicitly normative persona-owned-process, development and coordination/lifecycle refinements, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
 
 A contradiction between detailed requirements is a design defect to resolve and record, not permission to select the easiest reading. Do not broaden authority or weaken an evidence claim while that conflict is unresolved. Changes follow the [contribution guide](../CONTRIBUTING.md).
 

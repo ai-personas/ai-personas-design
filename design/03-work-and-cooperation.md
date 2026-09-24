@@ -2,6 +2,8 @@
 
 [Design index](README.md) · [Previous: learning](02-memory-and-learning.md) · [Next: action](04-capabilities-and-action.md)
 
+The [persona-owned process clarification](PERSONA-OWNED-PROCESS.md) makes the distinction between available operations and assigned workflow explicit. Creation, self-assessment, peer assessment, discussion, revision and stopping remain choices of the same continuing persona.
+
 ## Begin with the need, not a profession roster
 
 A person can start in ordinary language. The system preserves the exact request, its origin, supplied material, and authorized boundaries. It does not require a large form before a sentence rewrite, and it does not route a house request into predetermined professional personas.
@@ -26,13 +28,13 @@ As consequences and dependencies grow, the **mandate** becomes more explicit: re
 
 A useful negative result, focused question, partial delivery, or justified decline is valid when the full need cannot be met. None permits quietly removing required scope to claim success.
 
-## Someone must accept continuation
+## Promised continuation needs actual acceptance
 
-Selecting a persona in an interface is an offer, not acceptance. Work remains visibly awaiting acceptance until a participant accepts responsibility for carrying the need toward delivery, waiting on a named condition, an honest block, decline, or handoff.
+Selecting a persona in an interface is an offer, not acceptance. A promised continuing responsibility remains visibly awaiting acceptance until a participant accepts it. A direct answer or exploratory contribution need not first acquire a formal continuation role. When continuation is accepted, its owner chooses how to carry the need toward delivery, a named wait, an honest block, decline, or handoff.
 
 This **continuation responsibility** can be shared or partitioned. It does not make someone a compulsory leader, authorize assignment of peers, or determine everyone else's priorities. It ensures that incoming work-level questions and uncovered requirements have an accountable path.
 
-Every adopted required outcome must show its accepted owner or ownership gap, dependencies, expected evidence, review requirement, and current disposition. Finishing all listed items does not prove the list covered the original need. Substantial work needs a separate scope-coverage check for omissions.
+Every adopted required outcome must show its accepted owner or ownership gap, dependencies, expected evidence, review requirement, and current disposition. Finishing all listed items does not prove the list covered the original need. Personas judge whether a separate scope-coverage assessment is useful. It becomes a formal release requirement only when explicitly adopted; request size or domain must not install it automatically.
 
 ## Questions and conditional assumptions
 
@@ -72,7 +74,7 @@ Emergence means that useful divisions of work, methods, partnerships, and revisi
 | Interpretation, proposed outputs, decomposition, methods, partner invitations, and next contribution | Personas, using permitted information and evidence. Proposals do not bind other participants. |
 | Accepted work, shared interfaces, temporary coordination, and later handoffs | The participants who accept the exact terms within their authority. |
 | Access, action admission, mechanical scheduling, resource conservation, durable state, and current evidence references | The supporting system. These checks do not decide the domain solution. |
-| Whether results satisfy the adopted criteria | The applicable actual checks and accepted reviewers; human acceptance and outside assurance remain distinct. |
+| Whether results satisfy the adopted criteria | The personas assess the relevant evidence; explicitly accepted review obligations, human acceptance and outside assurance remain distinct. |
 
 These are responsibility boundaries, not ordered stages. A request can be answered directly, investigated, pursued through independent alternatives, coordinated, paused, or declined. There is no compulsory team size, leader, debate, profession roster, or sequence of phases.
 
@@ -108,6 +110,8 @@ This analogy does not claim human psychology, manufactured professional credenti
 
 ## Commitment lifecycle
 
+This table describes records for responsibilities that participants choose to negotiate and accept. It is not a pipeline that every answer, assessment or contribution must traverse.
+
 | State | Meaning | Required boundary |
 |---|---|---|
 | Offered | Specific terms have been proposed to a participant. | No responsibility is attributed as accepted yet. |
@@ -118,7 +122,7 @@ This analogy does not claim human psychology, manufactured professional credenti
 | Closed | The agreed disposition has been reached. | Closure identifies the exact result or other accepted end. |
 | Canceled or handed off | Authority ends the obligation or a receiver accepts its transfer. | Silence, timeout, or nomination of a replacement does not complete a handoff. |
 
-One persona may accept several responsibilities. Joint work may have several commitments for one outcome. A team does not need a contribution from every member to every task. Review is itself offered, accepted, funded, performed, and closed—not merely requested.
+One persona may accept several responsibilities. Joint work may have several commitments for one outcome. A team does not need a contribution from every member to every task. A perspective can be requested, volunteered or declined without assigning a reviewer profession. A formal review commitment, when chosen or explicitly required, needs actual acceptance and evidence of its performance; requesting it alone does not satisfy it. The same persona may author a contribution while examining another, or assess its own work without claiming independent approval.
 
 ## Working agreements and disagreement
 
@@ -137,13 +141,13 @@ Temporary coordination may be delegated with a defined scope and expiry. It does
 
 Independent, reversible alternatives may proceed in separate workspaces. Do not force disagreement for theatrical diversity, suppress dissent into “the team thinks,” or treat majority agreement as proof of a calculation.
 
-## Consequential feedback must reach a disposition
+## Explicit blocking feedback and optional advice
 
-A blocking finding identifies its exact subject, evidence, significance, accountable commitment or ownership gap, and the adopted rule for resolving it. Delivery, reading, acknowledgment, and resolution are separate events.
+A rejected or incomplete assessment does not by itself create a blocker, force a repair loop, put its author into waiting, or select another reviewer. It preserves an attributable judgment for personas to interpret. A blocking obligation is a separate explicit decision, with its exact subject, evidence, significance, accountable commitment or ownership gap, and the adopted rule for resolving it. Delivery, reading, acknowledgment, and resolution are separate events.
 
 The responsible participant can accept a repair, dispute the finding with evidence, seek authorized deferral where the policy permits it, or escalate. A mandatory criterion cannot be waived by a polite reply. The finding survives summaries, history pagination, and context compaction until its required disposition is recorded.
 
-Nonblocking suggestions remain optional. The supporting system enforces the status of known findings; it does not determine the truth of every specialist opinion.
+Nonblocking suggestions remain optional. The supporting system preserves their attribution and records explicit dispositions; it enforces only separately adopted blocking obligations, not a hidden interpretation of every opinion. Historical dispositions are not erased by a software upgrade.
 
 ## Integration and provisional iteration
 
@@ -157,7 +161,7 @@ Independent drafts remain separate until adopted. Adoption checks the prior vers
 
 ## Improvement must compete honestly with finishing
 
-A proposal identifies the motivating observation, affected outcome, expected benefit, possible regressions, uncertainty, smallest informative comparison, allowance, adoption authority, preserved baseline, and stop condition.
+A persona chooses the useful detail for a proposal: for example its motivating observation, affected outcome, expected benefit, possible regressions, uncertainty, comparison, allowance, adoption authority, preserved baseline or stop condition. These considerations are not required form fields for every improvement idea; actual permission and accepted resource commitments still apply.
 
 An actual comparison may support adoption, rejection, or deferral. Writing an attractive proposal is not achieved improvement. Optional refinement cannot indefinitely displace required completion or consume protected review resources without authorized reallocation.
 

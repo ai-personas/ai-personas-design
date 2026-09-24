@@ -2,11 +2,13 @@
 
 [Design index](README.md) · [Previous: authority](05-authority-and-resources.md) · [Next: human experience](07-experience-and-society.md)
 
+The [persona-owned process clarification](PERSONA-OWNED-PROCESS.md) distinguishes optional judgment from a separately accepted review requirement. Evidence integrity is not permission for the runtime to assign reviewers or prescribe a workflow.
+
 ## The central rule
 
 A claim must be no stronger than its evidence. “The tool is installed,” “the operation finished,” “the output is intact,” “the result meets the criterion,” and “the person accepted it” are different claims.
 
-The evidence chain connects an accepted need and commitment to exact inputs and assumptions, an actual action or observation, exact outputs, an appropriate assessment, and a current applicability decision. The final result states its limits.
+The evidence chain connects a claim to the inputs, assumptions, observations, outputs and judgments that actually support it. These are relationships to preserve when applicable, not compulsory stages for every contribution. A formal accepted commitment can specify additional evidence obligations. The final result states its limits.
 
 A simple conversation may have one response as its artifact and human judgment as its assessment. No tool run or numerical score is required merely to fill every box in a diagram.
 
@@ -28,25 +30,27 @@ A successful conversion does not prove that analysis inputs faithfully represent
 
 Distinguish simulation, an outside participant's report, and independently observed measurement. Missing input mappings, unavailable visual access, unrun analysis, and invented artifact references cannot satisfy the corresponding evidence obligations.
 
-## Review is accepted work, not a request count
+## Review is a chosen contribution, not a profession
 
-A review identifies its exact claim, criteria, submission, reviewer, accepted responsibility, funding, independence policy, conflicts, observations and reasoning, findings, verdict, and limitations. Reviewing personas judge both listed requirements and material omissions from the original mandate; the runtime does not make that substantive judgment.
+A persona may assess its own work or another permitted contribution without acquiring a reviewer role. It chooses the relevant observations and explains its judgment and limits. The same persona may create, assess and revise within one participation. When a formal review obligation is explicitly accepted, its record identifies the exact claim, criteria, submission, actual assessor, responsibility, funding, chosen independence policy, conflicts, observations, findings and limitations. Requesting a perspective alone does not satisfy that obligation. Personas judge both listed requirements and material omissions; the runtime does not make that substantive judgment.
 
 Separate identity, separate execution, a different model, and qualified external assessment are different kinds of separation. A newborn is not automatically an independent reviewer of its parent's output. The required separation depends on the claim and must be chosen explicitly.
 
-If no suitable reviewer accepts, the state is review unavailable or incomplete. A file-integrity check does not substitute for an engineering check. A human can accept a subjective creative result without inventing a numerical quality score, but human acceptance does not create missing technical evidence.
+When an accepted obligation requires a suitable independent reviewer and none accepts, that requirement is unavailable or incomplete. An optional perspective request creates no such release requirement by itself. A file-integrity check does not substitute for an engineering check. A human can accept a subjective creative result without inventing a numerical quality score, but human acceptance does not create missing technical evidence.
 
-A blocking finding stays open until its adopted disposition is supported. Acknowledgment is not repair. Authorized deferral is possible only where the applicable criterion and authority allow it; it cannot convert an unmet mandatory requirement into an unconditional pass.
+A negative verdict is an attributable observation, not an automatic blocker or instruction to stop. A separately and explicitly adopted blocking obligation stays open until its adopted disposition is supported. Acknowledgment is not repair. Authorized deferral is possible only where the applicable criterion and authority allow it; it cannot convert an unmet mandatory requirement into an unconditional pass.
 
 ## Persona judgment and mechanical integrity
 
-**Clarification: 23 September 2026.** A reviewing persona, not an author's
-self-certification or a runtime checklist, judges the adequacy of a method or
-result. Participants can question an interpretation or proposed approach through
-ordinary work discussion before a final submission exists. Formal assessment
-records the actual reviewer's judgment of the exact submitted version. The
-request and accepted agreements establish obligations; reviewers may challenge
-them but do not silently rewrite the user's scope or supply human consent.
+**Clarification: 23 September 2026.** Personas, not a runtime checklist, judge
+the adequacy of a method or result. Self-assessment and peer assessment are both
+permitted; a self-assessment must not be represented as independent approval.
+Participants can question an interpretation or proposed approach through ordinary
+work discussion before a final submission exists. An assessment records the
+actual persona's judgment of the exact subject. It neither assigns a profession
+nor places that persona into waiting. The request and accepted agreements
+establish obligations; participants may challenge them but do not silently
+rewrite the user's scope or supply human consent.
 
 The reviewer chooses how to assess the claim: contextual reading, argument,
 visual observation, consultation, tool-assisted analysis, or a combination.
@@ -73,7 +77,7 @@ execution receipts. A separate identity or a positive verdict never authorizes
 private-source disclosure, automatic release, or deletion of another finding.
 Disagreement stays attributable until its authorized disposition; there is no
 implicit majority vote, averaged quality score or retry-until-accepted loop.
-Unavailable reviewers leave an explicit review gap. Simple work does not acquire
+Unavailable reviewers leave an explicit gap only where review is required. Work does not acquire
 a compulsory committee, role assignment or persona birth merely through this rule.
 
 A peer verdict remains a fallible assessment, not a guarantee of truth, universal
@@ -127,14 +131,22 @@ first binding is not exempt. Missing, duplicated, foreign or erased references
 cannot be substituted for another observation, and a hash does not grant access
 to its source. Ordinary permission and retention changes remain effective.
 
-An empty additional-citation list is not an empty assessment. The exact
-submission and scope, actual reviewer, explained judgment and applicable review
-policy remain necessary. An acceptance records the persona's conclusion; it
+An empty additional-citation list is not an empty assessment. Its exact subject,
+actual assessor, explained judgment and limits remain necessary. A current scope
+or independent-review qualification must not be invented when none is attested;
+those qualifications are checked separately when a formal binding claims them. An acceptance records the persona's conclusion; it
 does not automatically release the work or discharge another finding. A
 pending or failed receipt may support a limited interpretation without becoming
 successful execution or satisfying an explicitly unperformed technical claim.
 
 ### Existing assessment history
+
+New persona-owned assessments preserve negative findings as nonblocking advice.
+They do not automatically create a veto, choose a repair or change activity
+status. Existing stored blockers and accepted obligations retain their recorded
+dispositions until explicitly changed; upgrading software is not retrospective
+consent to waive them. Legacy field names may preserve subjects and attribution,
+but must not restrict which activities a persona can choose.
 
 Earlier assessments without recorded citation snapshots must not acquire
 fabricated historical fingerprints during an upgrade. Existing bindings retain
@@ -153,7 +165,7 @@ Changing a relevant input, assumption, criterion, tool or check configuration, a
 
 Affected current claims must show stale or revalidation-pending status immediately, not remain green while background invalidation waits. An old result can remain inspectable and valid for its old conditions without supporting a new claim.
 
-Dependency links may be incomplete. When impact is uncertain, require broader revalidation—up to the whole assembly—until a narrower scope is justified. The absence of a recorded dependency is not proof that no dependency exists.
+Dependency links may be incomplete. Personas judge the necessary scope of revalidation, which may extend to the whole assembly when impact is uncertain. The runtime must expose missing or stale references without prescribing the next experiment. The absence of a recorded dependency is not proof that no dependency exists, and uncertainty cannot support an unconditional claim of current qualification.
 
 ## A release binds one coherent state
 
@@ -169,9 +181,9 @@ Historical human acceptance stays attached to the result accepted. It does not m
 |---|---|
 | Activity | Is work running, waiting, paused, or stopped? |
 | Responsibility | Who accepted continuation and each required outcome? |
-| Coverage | Which adopted outcomes have evidence, and has omitted scope been checked? |
+| Coverage | Which adopted outcomes have evidence, and what is known about omitted scope or any explicitly required scope assessment? |
 | Submission | Which exact candidate is available? |
-| Assessment | What did the reviewers conclude, with which observations and limitations? |
+| Assessment | What did the actual personas conclude, with which observations, limitations and self/peer attribution? |
 | Applicability | Do those assessments apply to the current candidate and conditions? |
 | Human acceptance | Did the relevant person accept this exact result where required? |
 | Outside validation | Which professional, site, external, or physical conditions remain unresolved? |
