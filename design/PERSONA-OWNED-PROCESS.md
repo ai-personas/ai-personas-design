@@ -135,3 +135,12 @@ Related chapters: [work and cooperation](03-work-and-cooperation.md),
 [capabilities and action](04-capabilities-and-action.md),
 [authority and resources](05-authority-and-resources.md), and
 [evidence and completion](06-evidence-and-completion.md).
+
+The required compact learning-and-context handoff describes each persona's choice;
+it does not require a fragment, a reflection call, a research phase or a repair
+loop. No-change, deferral, independent continuation and an explicit partial result
+remain possible. Search is primary when unfamiliar external requirements or tool
+suitability need evidence, not a ritual when current applicable evidence is
+already available. UI views distinguish authored focus, private learning choices,
+optional human contributions and actual requests for human authority. They must
+not infer an agenda or competence from a trait score or retained-fragment count.

@@ -154,3 +154,31 @@ without mistaking a passing preparation test for behavioral improvement.
 Freeze relevant task information, initial state, tools, inference configuration, total resources, and assessment rules. Do not credit stronger tools, extra effort, a changed evaluator, or a leaked successful solution as learning. Include harmful-memory and correction cases, not only successful transfer.
 
 See MEM-01–MEM-05, SYS-04, and UX-02 in the [requirements](../implementation/REQUIREMENTS.md), and the [learning-transfer example](../examples/WORKED-EXAMPLES.md#a-learning-transfer-comparison).
+
+## Same-decision learning and handoff
+
+An ordinary persona decision includes a compact authored continuity object:
+next focus; retain, revise, organize, no-change or defer disposition with a brief
+reason; any fragment changes; and next-context references, retrieval cue and
+handoff. This is a decision contract, not an additional reflection phase or an
+extra inference call. No-change is valid. Fragment counts and character narration
+are not progress measures. Each retained fragment is constructed by the persona's
+LLM in its own voice with its admitted character, actual evidence, applicability,
+limitations and counterevidence. Attribution alone does not verify voice or truth.
+
+The runtime commits these changes and next-context selection atomically before
+admitting the decision's effects. A new or revised fragment can select its own
+resulting identity in that transaction. Replay uses one deterministic operation
+identity. Invalid evidence, ownership or selection rolls back the whole change
+and supplies an actionable receipt for a fresh decision. The current call keeps
+its already admitted sources and authority; future selection cannot retroactively
+change what it saw. A new focus or retrieval cue invalidates a stale compiled
+request. Discard and scope changes clear the old handoff and cues together.
+
+Private memory can explicitly permit **procedural reuse** in later shared work
+without granting access to its record or original work files. This permission
+applies only to generalized procedures whose ancestry is shareable work or other
+authorized procedural learning. Confidential facts, private correspondence,
+restricted supplied material, withdrawal and erasure remain restrictive. Calling
+content a procedure cannot declassify it. New work still checks applicability;
+there is no automatic global publication or selection of a persona's memory.

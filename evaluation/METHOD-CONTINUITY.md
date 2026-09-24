@@ -123,3 +123,31 @@ Use later tasks to distinguish retrieval, actual inclusion, attributed use, and 
 ## Reporting
 
 Keep mechanism regressions, compilation, deterministic integration, and unscripted behavioral runs separate. Record exact implementation and design revisions, scenario revision, configuration, permissions, artifact identities, admission and usage evidence, evaluator observations, and remaining limitations under the existing reporting method. Successful synthetic preparation tests do not establish that real personas independently explore, produce adequate native artifacts, or improve through learning.
+
+## Fresh-start and transfer comparison
+
+Validate atomic continuity, replay, admitted evidence, exact character attribution,
+source-restricted sharing, private procedural reuse, review preflight, permission
+recovery and preserved pauses with runtime tests first. UI checks cover readable
+focus, learning disposition and next-context selection, nearby response controls,
+source-sharing explanations and lazy viewers that unmount when closed.
+
+For behavioral evaluation, preserve the prior run privately, then create fresh
+founders and an environment through the production UI. Record exact commits,
+models, efforts, host tools and funding before dispatch. Use the unchanged brief
+`design 4 bedroom house`; do not add tool lists, roles, CAD requirements or evaluator
+checklists to its prompt, manually resume it or increase funding after dispatch.
+Record actual source search and inspection, tool exploration, native editable
+models, exports, meaningful reopen/edit observations, spatial checks, peer
+contributions, retained lessons and their later admitted inclusion. Assess building
+services and permit scope as researched, developed, or explicitly limited. File
+existence and green mechanism tests do not establish building-design quality.
+
+Compare `design 3 bedroom house` under matched conditions using retained learning,
+the same persona state with learning withheld, and fresh founders. Prevent old
+solution artifacts, handoffs or stronger tools from becoming an uncontrolled
+advantage. Record early lesson use, repeated discovery, result quality, model calls
+and resource use. Distinguish actual learned transfer from merely having fragments;
+a single matched comparison is preliminary evidence, not a general capability
+claim. If a run has no retained lessons, report that limitation instead of claiming
+a mature-persona comparison.

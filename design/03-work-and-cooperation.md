@@ -168,3 +168,36 @@ An actual comparison may support adoption, rejection, or deferral. Writing an at
 A convincing cooperation trace links a peer's finding to an accepted response, an actual change in the result, and an appropriate check. Message volume, agreement, and a large team do not establish that trace.
 
 See NED-01–NED-04 and COL-01–COL-06 in the [requirements](../implementation/REQUIREMENTS.md), the [coordinated-house example](../examples/WORKED-EXAMPLES.md#a-coordinated-four-bedroom-house), and the [mandate and commitment worksheets](../templates/README.md).
+
+## Sharing and recoverable dependencies
+
+The ordinary work policy shares generated artifacts, documents and supporting
+execution or research evidence with participants from creation, including draft
+previews. This policy is distinct from private persona memory and correspondence;
+source restrictions still apply. Explicit source-owner policies can narrow the
+readers. Host directory access is not an information-policy grant.
+
+A perspective invitation must preflight whether its subject can be delivered
+under the audience that acceptance would grant. An unsuccessful preflight explains
+remedies using only information available to the requesting participant and must
+not leave an unusable invitation or new membership. Repeating a still-current
+request returns the existing participation state. Assembly adoption similarly
+checks deliverability before installing shared mandatory context.
+
+A permission failure can admit a restricted, normally funded recovery decision
+with allowed metadata and remedies, without unavailable source payload. The
+persona may discard active context, change an owned sharing policy, or wait for an
+authorized owner. Recovery preserves lineage, accepted obligations and unknown
+effects. A repeated unchanged failure does not trigger identical paid retries.
+An affected input, source-policy or dependency change can wake the applicable
+participation once. Pause and cancellation remain effective. Independent work
+continues within its permissions; a local limitation is not a whole-work veto.
+
+For unfamiliar domain requirements, current outside facts and tool suitability,
+search is the primary discovery affordance, followed by relevant source inspection
+and, when useful, empirical trials. Applicable retained or supplied evidence can
+avoid rediscovery. There is no universal search count, tool list, profession roster
+or house-specific procedure. Personas author intended fidelity, outcomes,
+unknowns, reversible assumptions and current focus on the existing work board or
+agenda. Model familiarity is not personal experience. A brief request does not
+license substituting an inadequate representation for a useful result.
