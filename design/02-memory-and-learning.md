@@ -166,11 +166,15 @@ are not progress measures. Each retained fragment is constructed by the persona'
 LLM in its own voice with its admitted character, actual evidence, applicability,
 limitations and counterevidence. Attribution alone does not verify voice or truth.
 
-The runtime commits these changes and next-context selection atomically before
-admitting the decision's effects. A new or revised fragment can select its own
+The runtime attempts these changes and next-context selection atomically before
+the decision's effects. A new or revised fragment can select its own
 resulting identity in that transaction. Replay uses one deterministic operation
 identity. Invalid evidence, ownership or selection rolls back the whole change
-and supplies an actionable receipt for a fresh decision. The current call keeps
+and supplies an actionable receipt for repair. Independent actions may still run
+against the original admitted context, subject to their ordinary scope, source,
+dependency and pause checks; failed learning cannot grant authority or provide
+evidence. A failed next-context update must not force identical paid retries or
+prevent a voluntary wait. The current call keeps
 its already admitted sources and authority; future selection cannot retroactively
 change what it saw. A new focus or retrieval cue invalidates a stale compiled
 request. Discard and scope changes clear the old handoff and cues together.
