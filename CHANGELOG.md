@@ -2,6 +2,17 @@
 
 [Home](README.md) · [Source provenance](sources/SOURCE-MANIFEST.md)
 
+## Current-context learning and shared questions
+
+**Date: 24 September 2026.** Clarify independent question addressee, visibility,
+and required human input in [work and cooperation](design/03-work-and-cooperation.md#questions-and-conditional-assumptions).
+[Memory navigation](design/MEMORY-TREE.md) now explicitly distinguishes authored
+intent from committed change, preserves deferred opportunities, and defines
+call-scoped typed references and readable learning activity. Current identity,
+temporary affect and historical starting state retain their existing meanings.
+These are first-release clarifications, not compatibility requirements or
+claims of measured character influence, learning benefit, or native CAD quality.
+
 ## Coordination, lifecycle, and formal-evidence clarification
 
 **Date: 23 September 2026.** The [coordination and lifecycle clarification](design/COORDINATION-LIFECYCLE.md) distinguishes a protocol that permits alternative organizations, actual participant-owned choices, and demonstrated useful cooperation. Exact commitment acceptance and already accepted delegation remain distinct from membership, invitations, execution authority, and historical acceptance of changed terms. Handoffs and relevant lifecycle changes require coherent current-state checks.

@@ -63,6 +63,22 @@ dependency blocks the affected claim, not automatically every independent part
 of the work. Sharing a question never exposes another participant's private
 memory or supplies missing authority.
 
+The intended addressee, visibility, and need for human input are independent.
+Addressing a question to the user must not silently make it private or forbid a
+peer's conditional contribution. Ordinary questions default to work visibility;
+private visibility is explicit. A separate required-human marker is reserved for
+facts or authorization only a human can supply. Replies state whether they offer
+an answer, assumption, evidence, or challenge. A peer reply or a human's stated
+assumption cannot resolve a required-human dependency as verified fact or consent.
+The owner may still use it for conditional progress in unaffected work.
+
+Deliver a shared question or reply once to each currently permitted participant;
+wake waiting participants through the ordinary input mechanism without forcing
+an answer or overriding pause. Show optional questions with an available reply
+action; reserve urgent human-input highlighting for actual required input. The
+current question view must survive inbox acknowledgement and show remaining
+owner decisions, attribution, visibility, and the basis of replies.
+
 ## Three complementary views of cooperation
 
 **Individual agendas** describe what each persona considers worth attention. **The shared opportunity and obligation board** contains attributed proposals, questions, observations, findings, and offers. It has no hidden universal ranking. **Collective commitments** record responsibilities actually accepted and the dependencies between them.

@@ -18,7 +18,7 @@ own discovery affordances; tool search does not automatically select learning.
 
 The same response chooses useful work actions and authors continuity: what, if
 anything, to retain or revise; where to place it; what relationships to change;
-which full fragments to supply next; and which branch to show next. A local
+which full fragments to supply next; and which branch or explicit memory query to show next. A local
 handle permits a newly created parent, child, related link and next selection
 in one response, without another paid read/select or reflection call. A
 no-change judgment is valid when nothing valuable is new. Every primary persona
@@ -30,6 +30,15 @@ continue or wait; an empty action list must not silently turn memory navigation
 into waiting. Continuation remains subject to ordinary funding and cancellation.
 Explicit model consultations return attributed results to this same primary loop;
 they are not separate learning authors or compulsory reflection calls.
+
+The recorded outcome follows the actual committed changes, not a redundant
+intention label. A useful write must not be discarded because its author also
+said “no change”; conversely “retain” with no write is not a retained lesson.
+Preserve an explicit bounded list of deferred opportunities with the persona's
+cue, reason, reconsideration condition and any received sources. Subsequent
+context exposes those entries until the persona replaces or clears them. An
+empty list does not prove there was no opportunity. Failed updates remain
+visible as uncommitted intentions; they do not manufacture lessons.
 
 ## Nodes and fragments
 
@@ -79,6 +88,17 @@ changed context preserves earlier committed learning and the previous valid
 selection; an interrupted host effect must not automatically replay. Host access
 is not an application sandbox. Transport bounds do not establish containment.
 
+## References within one decision
+
+Short typed references may stand for exact identities already received in the
+current admitted request. The mapping belongs to that call and actor, preserves
+exact versions and receipt digests, and is rechecked against current permissions.
+It cannot retrieve unseen evidence, authorize foreign records, rewrite prose, or
+survive into a different call. History projection removes references to omitted
+observations. New-node local handles remain separate from received references.
+An unknown, stale, wrong-type or revoked reference fails the atomic update while
+independently valid work retains the existing execution rules.
+
 ## Atomicity and access
 
 Fragment writes, revisions, graph organization and next-context selection commit
@@ -104,12 +124,15 @@ rather than silently migrated or interpreted through a compatibility path.
 
 ## Operator experience and evidence
 
-Learning is shown as readable, paginated branches and short-description cards.
+Learning is shown as readable, paginated branches and short-description cards, with expandable children, breadcrumbs, explicit cross-links and search. Tree structure reflects persona-authored relationships; flat learning must not be decorated with invented categories.
 Show tentative ideas, observed interpretations and attributed reports in plain
 language. Full prose, utility code and their evidence load when opened and are released when closed or
 navigating elsewhere. Retention, deliberate next selection, supplied model
 context, actual application and assessed benefit are distinct facts. Neither a
 stored fragment nor a successful mechanism test proves learning quality.
+A separately loaded activity view distinguishes committed writes, revisions,
+organization, deferrals and failed updates. Say “No fragment written” when no
+write occurred; do not imply the runtime established that no learning was useful.
 
 Validation must include graph creation and navigation, the very next request's
 full payload, stale and foreign references, rollback and independent work,
