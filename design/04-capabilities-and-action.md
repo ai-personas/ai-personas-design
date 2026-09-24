@@ -21,7 +21,7 @@ Keep availability separate from capability evidence. Opening a tool, completing 
 
 ## The environment is an operational boundary
 
-An environment identifies its resources, participants, workspace, information, connected services, artifacts, and limits. It can support document work, research, simulation, community coordination, or another permitted activity.
+An environment identifies its resources, participants, workspace, information, connected services, artifacts, and limits. Participation-specific draft directories can prevent accidental collisions between concurrent alternatives. A default working directory is not an access barrier: explicitly shared paths remain available under existing authority. Relative publication must resolve consistently with the documented default execution directory, and an explicit command directory must not silently change later defaults. It can support document work, research, simulation, community coordination, or another permitted activity.
 
 A decorative room or virtual studio is not an access rule. Participants in the same displayed place may have different permissions. Access in one environment must not imply access in another. Tool sharing does not share private experience or every connected account.
 

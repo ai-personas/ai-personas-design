@@ -17,6 +17,8 @@ The design supports learning through persistent, selected context. It does not a
 | Owner and author | Identifies whose interpretation it is and who can revise or share it. |
 | Content and title | States the actual lesson, procedure, preference, or concern. |
 | Selection trigger | Explains situations in which it may be relevant. |
+| Authored organization | Retrieval cues and relationships to other owned fragments make a useful prompt part discoverable without copying the entire old task. Relationships do not automatically select a fragment. |
+| Character at authorship | Links an LLM-authored fragment to the persona and character revision supplied to that decision. Attribution does not mechanically establish a writing style or correctness. |
 | Sources and source type | Distinguishes direct experience, another participant's report, supplied documents, and inference. |
 | Applicability and assumptions | Limits where the interpretation may be used. |
 | Uncertainty and counterevidence | Prevents a retained mistake from becoming unquestionable truth. |
@@ -44,7 +46,13 @@ This is an authored example, not a memory produced by a live persona. It demonst
 
 A persona observes an event, interprets its significance, and decides whether anything is worth retaining. It may create, revise, combine, restrict, or stop selecting a fragment. Required work evidence remains available even when no fragment is authored.
 
-In a later situation, authorized retrieval and deliberate selection may bring that fragment into the decision context. The persona acts, the outcome is assessed, and new evidence can challenge the lesson. Reflection is optional where it adds no useful information; every action need not trigger a memory-writing ritual.
+The current context is also the cue for the next context. In every decision the persona considers what new observations and active prompt fragments imply for learning, organization and retrieval. It chooses whether to retain, revise, relate or stop using a fragment, and can author a focused retrieval query and concise handoff for its next decision. No change is a valid judgment when nothing useful was learned. This responsibility does not require a database write, separate reflection call or ceremonial checklist after every action.
+
+Fragments are reusable prompt parts written by the persona's current LLM decision. Their sentences should sound like that persona: character, prior experience, perspective and uncertainty inform phrasing and interpretation. The runtime must not substitute a generic background author, append decorative trait labels, rewrite all fragments when character changes, or treat personality as permission to distort facts. Retain the character-at-authorship reference; a later persona revision may choose to reinterpret and revise an earlier lesson. Operator-supplied prose must not be presented as LLM-authored learning.
+
+Authorized retrieval uses the current need, authored handoff and query, active fragments and their authored relationships, alongside consequential feedback. These are bounded cues, not automatic selection or an instruction to follow every linked lesson. The persona assesses applicability and chooses what enters its next context. Current authority and obligations remain independently available. Curation must not import another run's private handoff or lose source restrictions.
+
+In a new task, retained fragments remain organized in the persona's authorized index. A mature persona can discover and select an applicable procedure early, then act without replaying the original investigation. It still checks new conditions and may reject or correct that procedure. Fewer turns and better results are outcomes to measure, not guarantees conferred by age or fragment count. The persona acts, the outcome is assessed, and new evidence can challenge the lesson.
 
 ![Experience may become selected memory; later action and independent assessment determine whether a learning claim is supported.](../assets/visuals/diagram-05-learning-loop.svg)
 
@@ -104,9 +112,7 @@ blocks with an actionable explanation. An ordinary admissible request may still
 observe failures and continue. Its arrival, a restart, new input, or a changed
 history cursor does not refresh the maintenance allowance while pressure persists.
 Only a known ordinary request below the pressure threshold ends that episode.
-Unknown exposure is not evidence that pressure ended. Previously stored spent state
-counts as already used; migration must not mint extra attempts, and malformed or
-unknown active state must fail conservatively.
+Unknown exposure is not evidence that pressure ended. Previously stored spent state in the current contract counts as already used; malformed or unknown active state must fail conservatively. The first release need not maintain earlier experimental storage formats or implement compatibility migrations.
 
 Context selection or compaction ends the saved batch so subsequent action follows
 a fresh observation. The runtime does not summarize on the persona's behalf,
