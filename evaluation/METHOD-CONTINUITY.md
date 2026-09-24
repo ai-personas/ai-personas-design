@@ -64,6 +64,42 @@ preserves the remaining gap and the applicable stopping boundary. Measure wasted
 review effort as well as missed defects so that trivial work is not rewarded for
 unnecessary tooling or committee formation.
 
+## Complete-request method neutrality
+
+Inspect the fully assembled provider-facing request, not only a standalone
+policy file. Exercise a review of supplied text that requires no external facts
+and a technical task whose accepted claims require empirical evidence. Both use
+the same general runtime policy. Capability descriptions elsewhere in the
+request must not impose a blanket search, installation, parser, shell or
+fresh-directory sequence. The independent evaluator judges whether the personas
+chose adequate evidence, including whether unnecessary tooling displaced useful
+review. No fixed workflow or evaluator checklist is injected into their context.
+
+At the actual provider-quotation boundary, verify that active-work guidance is
+already included, without duplicate copies, and that byte accounting describes
+the complete serialized request. Provider token and media exposure remain the
+adapter's responsibility; bytes are not measured tokens. Force older-history
+projection and hard-overflow maintenance separately. Every quoted candidate
+must account for its actual content. Normal projected requests retain the
+method-neutral guidance; maintenance requests retain a bounded continuity
+reminder and cannot perform substantive assessment or execution. A subsequent
+ordinary decision must return to method-neutral guidance, not an older mandatory
+workflow. Local quotation does not spend an admitted inference attempt.
+
+Preserve an attributable negative finding, selected evidence, unread inputs,
+accepted scope and source restrictions through these paths. Neither an empty
+additional-citation list nor an irrelevant successful command produces automatic
+acceptance. A negative observation does not force a method switch, and recovery
+does not resolve it. Verify explained acceptance, rejection and incompleteness
+with omitted, null and empty optional citation lists, then reject duplicated,
+fabricated and foreign observations. Keep exact reviewer identity and ordinary
+assessment-to-release safeguards effective.
+
+Report these mechanism checks separately from unscripted reviewer behavior.
+Correctly assembling guidance or recording a fallible judgment does not prove
+that the reviewer noticed a defect, interpreted the need well or chose suitable
+technical evidence.
+
 ## Recovery that can finish its own maintenance
 
 Exercise a hard-overflow condition in which a first admitted maintenance decision performs an essential read. The next permitted maintenance decision must be able to observe that receipt and compact or repair selection, using the same assigned model and the same controlling resources. Repeat with a failed selection. After two admitted maintenance decisions, another hard-overflow request must block rather than create a third attempt. Ordinary requests that still fit may observe failures and continue without refreshing this allowance.

@@ -82,6 +82,33 @@ outcomes separately from the integrity of the record. The [peer-judgment cases](
 include disagreement, misleading positive evidence, unneeded tooling and wrong
 verdicts; recording the verdict correctly is not passing the task.
 
+### Method-neutral instructions across decision paths
+
+This separation must hold throughout the complete provider-facing request, not
+only in a standalone cue or the assessment command. Tool descriptions explain
+available capabilities and their limits; they must not reintroduce a universal
+search, installation, parser, shell or fresh-directory workflow elsewhere in
+the protocol. Those methods can be valuable for particular claims, but neither
+their presence nor their absence mechanically decides adequacy. Accepted
+task-specific obligations remain visible and binding.
+
+A material failure or negative finding is information for the personas to
+interpret. Authors and reviewers may justify a repair, a different approach,
+retaining an adequate method, a disagreement, a qualified delivery or a stop.
+The runtime must not infer which response is correct from a failure counter,
+file type or tool identity. Preserving the recipient's accepted outcome also
+means not silently relabeling a concept or explanation as the promised result.
+Peer challenge informs that judgment without granting unilateral scope changes.
+
+Active-work guidance is part of the request before the provider quotes its
+exposure; projections must account for the request actually sent. Bounded
+context-maintenance decisions preserve current obligations, attributable
+findings, disagreements, exact references, permissions and unresolved effects.
+They do not authorize substantive acceptance or impose a next experiment.
+Returning to ordinary work must not restore an older compulsory workflow.
+The [complete-request cases](../evaluation/METHOD-CONTINUITY.md#complete-request-method-neutrality)
+separate these transport invariants from actual reviewer competence.
+
 ### What a citation snapshot establishes
 
 A snapshot captured in the assessment-recording transaction binds that judgment
