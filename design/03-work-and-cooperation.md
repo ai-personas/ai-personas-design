@@ -176,6 +176,10 @@ execution or research evidence with participants from creation, including draft
 previews. This policy is distinct from private persona memory and correspondence;
 source restrictions still apply. Explicit source-owner policies can narrow the
 readers. Host directory access is not an information-policy grant.
+Ordinary team coordination should use the work's shared channels. Direct private
+correspondence remains available deliberately; receiving it can restrict later
+derived drafts, so an apparently convenient direct message is not equivalent to
+a work-wide discussion.
 
 A perspective invitation must preflight whether its subject can be delivered
 under the audience that acceptance would grant. An unsuccessful preflight explains
