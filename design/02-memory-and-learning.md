@@ -177,7 +177,8 @@ request. Discard and scope changes clear the old handoff and cues together.
 
 Private memory can explicitly permit **procedural reuse** in later shared work
 without granting access to its record or original work files. This permission
-applies only to generalized procedures whose ancestry is shareable work or other
+applies only to generalized procedures whose ancestry is shareable work, including
+its shared discussions, or other
 authorized procedural learning. Confidential facts, private correspondence,
 restricted supplied material, withdrawal and erasure remain restrictive. Calling
 content a procedure cannot declassify it. New work still checks applicability;
