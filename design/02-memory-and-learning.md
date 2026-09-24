@@ -121,6 +121,16 @@ A mandatory core that still cannot fit is an explicit block. Provider authorizat
 model, and transport failures retain their own meaning rather than being relabeled
 as context overflow.
 
+The current context exposes the existing history boundary and newest own journal
+action separately from older receipts deliberately appended to the selection.
+The persona chooses a newer boundary covered by its handoff; repeating or moving
+backward is a visible no-progress failure, not successful compaction. Selection-only
+changes do not require moving history. A history/record selection action in the same
+response must preserve that response's explicit learned-memory choice, including
+an empty choice. It must not accidentally erase the lessons just selected by the
+persona's combined learning response. None of these mechanics resolve adverse facts,
+uncertain effects or current obligations.
+
 ### Compact continuity without fabricated learning
 
 When optional discovery previews are removed, retain a short,
