@@ -93,7 +93,9 @@ Descriptions, graph relationships, searches and full fragments are private.
 Receiving a description is received information even without selecting the full
 fragment. Source restrictions follow it into derived work and export. A general
 procedure from shareable work may guide another work when its recorded reuse
-policy and entire source ancestry permit it; this never publishes the private
+preference and entire source ancestry permit it. Requesting reuse is not a grant:
+when source restrictions prevent it, retain the valuable private fragment and
+report the restricted reuse separately. Recheck permission at every later use; this never publishes the private
 memory record or declassifies source facts. Admission records exact references
 and hashes, not another archive of model requests and responses.
 
