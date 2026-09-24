@@ -42,6 +42,13 @@ A material unknown records the question, why it matters, affected claims, needed
 
 An assumption may be proposed, authorized for exploration, confirmed by appropriate evidence, contradicted, or withdrawn. These are different states. Approval to try a synthetic scenario never confirms a real-world fact.
 
+Within adopted scope, a named assembly editor may authorize a reversible
+conditional scenario for exploration. That existing authority avoids requiring a
+human answer merely to develop a concept. It does not change the mandate, certify
+an outside fact, grant private-source access, increase resources or authorize an
+otherwise forbidden effect. Other participants can propose scenarios and discuss
+them through the shared work channels.
+
 A conditional result must state its conditions where the claim appears. When an assumption changes, dependent results and reviews need an applicability check. Asking questions should reduce consequential uncertainty, not become an endless intake process when a useful bounded response is already possible.
 
 Ordinary work clarification is shared with permitted participants and the user.
