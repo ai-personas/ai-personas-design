@@ -116,3 +116,31 @@ Learning-transfer comparisons use three related follow-up tasks with three match
 Preserve the existing failing minimal-house case under its original rubric. In three independent fresh environments, submit exactly **design 4 bedroom house** with permission for explicit concept assumptions but no professions, software selection, deliverable checklist, or corrective hints. Keep the rubric outside persona context. Assess editable native modeling source, reopening and a meaningful edit with regenerated outputs, four usable bedrooms with access, coherent geometry and circulation, geometry-derived dimensions and schedules, meaningful tool trials, peer findings and dispositions, relevant engineering and permit questions, and useful retained experience. A concept remains a concept; unnecessary CAM or simulation files do not earn credit. Publish failures and distinguish operator-assisted repair from success on the original brief.
 
 When model revision pinning or reproducible sampling is unavailable, record that limitation and report observational comparisons rather than strict causal isolation. Report exact repository revisions, actual tests performed, unrun gates, successful outputs, and remaining defects. Pushing a commit is not deployment, and deployment is not behavioral acceptance.
+
+
+## Character throughout the combined decision
+
+The current character, OCEAN dispositions, temporary modeled VAD, selected full
+fragments and short memory branch entries inform one combined work/learning/
+organization/retrieval decision. They influence research subject, breadth, depth,
+choice of sources and experiments, stopping, cooperation, challenge and what is
+valuable enough to retain. This is persona judgment, not fixed numerical routing,
+mandatory sociability, compulsory research counts or role assignment. Browser
+search is the primary discovery affordance for unfamiliar domain needs and tool
+suitability; applicable received evidence can avoid redundant research.
+
+Social encounters can inform directional relationship interpretations, temporary
+affect and, when self-authorship is enabled and the persona explains the change,
+continuing narrative or OCEAN. Preserve the immutable starting seed and exact
+received evidence; no runtime trait scorer or automatic peer-character copying.
+Retrieve relevant relationships by current participant, subject and task, with
+recency as a fallback. A short bounded view is not an exhaustive search or a fact
+about another person. Learning and relationship authorship remain available when
+profile self-authorship is disabled.
+
+Under context pressure, retain compact exact learning cues and protect current
+obligations, adverse observations and selected full lessons. Long duplicated
+instructions or authoring schemas must not crowd out these cues. Keep operation
+signatures discoverable and full exact help available on demand. Report payload
+bytes separately from provider tokens. Stored fragments, later inclusion and
+measured transfer benefit remain separate evidence claims.

@@ -1,6 +1,6 @@
 # Persona-authored memory navigation
 
-A persona learns by authoring reusable prompt parts from experience. Its current
+A persona learns by authoring reusable prompt parts from experience and useful tentative abstractions. Its current
 character, active prompt parts, observations and intended next action cue both
 learning and retrieval. This is an extension of the ordinary decision and
 continuity mechanism, not an additional agent, reflection engine or fixed
@@ -21,7 +21,15 @@ anything, to retain or revise; where to place it; what relationships to change;
 which full fragments to supply next; and which branch to show next. A local
 handle permits a newly created parent, child, related link and next selection
 in one response, without another paid read/select or reflection call. A
-no-change judgment is valid. Navigation does not require saving a lesson.
+no-change judgment is valid when nothing valuable is new. Every primary persona
+call, including orientation and context maintenance, considers learning through
+its current character. A useful planning insight or action rationale need not
+wait for task completion or domain certification. There is no fragment quota.
+Navigation does not require saving a lesson. The response explicitly chooses
+continue or wait; an empty action list must not silently turn memory navigation
+into waiting. Continuation remains subject to ordinary funding and cancellation.
+Explicit model consultations return attributed results to this same primary loop;
+they are not separate learning authors or compulsory reflection calls.
 
 ## Nodes and fragments
 
@@ -32,12 +40,17 @@ domain categories, professions or exploration phases. A cross-link does not
 select the linked fragment's content.
 
 A fragment contains a title, short description, actual reusable prompt text,
-applicability, limitations, retrieval cues, and exact source/counterevidence
+applicability, limitations, an authored basis (tentative, observed or reported),
+retrieval cues, and exact source/counterevidence
 references. The persona's LLM authors every sentence in its own natural voice,
 informed by its current character. Character affects expression and judgment,
 never factual integrity, uncertainty, source attribution or permissions.
 Attribution records the character version supplied at authorship; it is not a
-mechanical certificate of stylistic fidelity. Character changes do not rewrite
+mechanical certificate of stylistic fidelity. Tentative fragments may have no
+external source: they must preserve their uncertainty and conditions for revision.
+Observed and reported fragments require received evidence, whose existence does
+not certify the interpretation. Failures support bounded failure lessons, not
+claims of successful execution. Character changes do not rewrite
 old fragments. Human notes remain source documents, not operator-authored
 learned fragments.
 
@@ -46,6 +59,25 @@ fragment identities. Revisions replace a node's fragment pointer while retaining
 prior versions. Consolidation is an authored new or revised fragment with
 explicit reorganization and retirement. Retirement must account for active
 children and incoming links; cycles and foreign references are invalid.
+
+## Optional retrieval utilities
+
+A node may also carry a versioned utility description, its argument schema and
+persona-authored code. The short card presents the description and required
+inputs; full code loads on inspection. The same deciding persona supplies
+arguments to locate existing full fragments or branches. A utility returns owned
+node version references, never new fragment prose. Direct selection and ordinary
+branch navigation remain available; utilities are optional and require no extra
+LLM or reflection inference.
+
+Execution runs outside the learning transaction under existing host execution
+policy. Only current readable owned descriptions are supplied. Validate the exact
+utility version, output shape, ownership, access and target revisions before
+replacing future selection. Do not trust generated references as authority.
+Commit selection with its receipt atomically. Failure, timeout, cancellation or
+changed context preserves earlier committed learning and the previous valid
+selection; an interrupted host effect must not automatically replay. Host access
+is not an application sandbox. Transport bounds do not establish containment.
 
 ## Atomicity and access
 
@@ -71,7 +103,8 @@ rather than silently migrated or interpreted through a compatibility path.
 ## Operator experience and evidence
 
 Learning is shown as readable, paginated branches and short-description cards.
-Full prose and its evidence load when opened and are released when closed or
+Show tentative ideas, observed interpretations and attributed reports in plain
+language. Full prose, utility code and their evidence load when opened and are released when closed or
 navigating elsewhere. Retention, deliberate next selection, supplied model
 context, actual application and assessed benefit are distinct facts. Neither a
 stored fragment nor a successful mechanism test proves learning quality.

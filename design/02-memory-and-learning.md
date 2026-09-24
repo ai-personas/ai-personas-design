@@ -123,15 +123,17 @@ as context overflow.
 
 ### Compact continuity without fabricated learning
 
-When optional discovery or retention previews are removed, retain a short,
+When optional discovery previews are removed, retain a short,
 source-independent reminder to preserve current commitments, attributable peer
 findings, disagreements and source references. It must not prescribe a next trial,
 method switch, tool or quality checklist. Compaction is not a verdict or a
 resolution; the reminder is not a source receipt, a selected fragment, or a claim
 that learning occurred.
-Do not include omitted private identifiers or material merely to make it useful.
-Exact evidence must still be read under current permissions before supporting a
-lesson. Selected lessons and actual feedback remain subject to the ordinary
+Keep bounded exact learning evidence pointers already received under current
+permissions, including adverse observations and relevant replies; compact their
+explanatory prose before dropping learning opportunities. Do not introduce
+unread private identifiers or omitted material merely to make a reminder useful.
+Exact evidence must still satisfy received-source and current-access checks. Selected lessons and actual feedback remain subject to the ordinary
 mandatory-context and source-access rules.
 
 A privacy-denied peer delivery must not be repaired by deleting lineage,
@@ -158,10 +160,13 @@ See MEM-01–MEM-05, SYS-04, and UX-02 in the [requirements](../implementation/R
 ## Same-decision learning and handoff
 
 An ordinary persona decision includes a compact authored continuity object:
-next focus; retain, revise, organize, no-change or defer disposition with a brief
+next focus and explicit continue/wait intent; retain, revise, organize, no-change or defer disposition with a brief
 reason; any fragment changes; and next-context references, retrieval cue and
 handoff. This is a decision contract, not an additional reflection phase or an
-extra inference call. No-change is valid. Fragment counts and character narration
+extra inference call. Orientation and context maintenance share this learning
+contract. Useful untested abstractions can be retained as tentative, with honest
+uncertainty; task completion is not a prerequisite. No-change is valid when no
+new idea is worth retaining through this persona's character. Fragment counts and character narration
 are not progress measures. Each retained fragment is constructed by the persona's
 LLM in its own voice with its admitted character, actual evidence, applicability,
 limitations and counterevidence. Attribution alone does not verify voice or truth.
