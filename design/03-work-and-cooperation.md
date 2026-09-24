@@ -63,6 +63,13 @@ dependency blocks the affected claim, not automatically every independent part
 of the work. Sharing a question never exposes another participant's private
 memory or supplies missing authority.
 
+Before an assumption becomes governing shared context, its exact fully derived
+version must be readable by the current participants. Adoption that would make
+mandatory context unreadable fails atomically, preserving the proposal, prior
+scope and notification state. Explain available source-owner remedies without
+automatically sharing private ancestors. Later permission withdrawal remains a
+real current-state change and must not be hidden by this admission check.
+
 The intended addressee, visibility, and need for human input are independent.
 Addressing a question to the user must not silently make it private or forbid a
 peer's conditional contribution. Ordinary questions default to work visibility;
