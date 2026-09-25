@@ -1,5 +1,7 @@
 # Persona-authored memory navigation
 
+Read this chapter with [the persona as an evolving fragment system](FRAGMENT-PERSONA.md), the governing refinement for the current self-model, same-call fragment development, and anticipatory, event-triggered context selection. Its explicit precedence table permits bounded persona-authored conditional selection plans. References below to no automatic selection prohibit undelegated activation; they do not prohibit fulfillment of an explicitly authored selector. The literal description-search operation defined here is unchanged. See the [supplemental acceptance and requirement mapping](../evaluation/FRAGMENT-PERSONA.md).
+
 A persona learns by authoring reusable prompt parts from experience and useful tentative abstractions. Its current
 character, active prompt parts, observations and intended next action cue both
 learning and retrieval. This is an extension of the ordinary decision and
