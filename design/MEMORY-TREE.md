@@ -1,236 +1,39 @@
-# Persona-authored memory navigation
+# Memory navigation — retained address, current graph contract
 
-Read this chapter with [the persona as an evolving fragment system](FRAGMENT-PERSONA.md), the governing refinement for the current self-model, same-call fragment development, and anticipatory, event-triggered context selection. Its explicit precedence table permits bounded persona-authored conditional selection plans. References below to no automatic selection prohibit undelegated activation; they do not prohibit fulfillment of an explicitly authored selector. The literal description-search operation defined here is unchanged. See the [supplemental acceptance and requirement mapping](../evaluation/FRAGMENT-PERSONA.md).
+[Personal fragment network](FRAGMENT-PERSONA.md) · [Illustrated recall design](FRAGMENT-RECALL.md) · [Handoff contract](../implementation/FRAGMENT-RECALL-CONTRACT.md)
 
-A persona learns by authoring reusable prompt parts from experience and useful tentative abstractions. Its current
-character, active prompt parts, observations and intended next action cue both
-learning and retrieval. This is an extension of the ordinary decision and
-continuity mechanism, not an additional agent, reflection engine or fixed
-profession-specific workflow.
+This path is retained so earlier links still resolve. **The current design is a personal fragment graph, not a canonical tree.** The tree-first contract was replaced by the fragment-network and recall design. There are no required parents, roots, functional groups, or permanent link-weight scores. Earlier document revisions remain in repository history; they are not a second active contract or a storage migration specification.
 
 ## One decision, one handoff
 
-Every ordinary inference receives the current character and work context, the
-full fragments previously selected for this participation, and a bounded view
-of the persona's current memory branch. That view contains short descriptions,
-the path to the root, children, related branches and a next-page cursor. New work
-starts at the virtual root; it does not inherit another work's private handoff.
-The persona can explicitly browse or search beyond this view. Tools have their
-own discovery affordances; tool search does not automatically select learning.
-
-The same response chooses useful work actions and authors continuity: what, if
-anything, to retain or revise; where to place it; what relationships to change;
-which full fragments to supply next; and which branch or explicit memory query to show next. A local
-handle permits a newly created parent, child, related link and next selection
-in one response, without another paid read/select or reflection call. A
-no-change judgment is valid when nothing valuable is new. Every primary persona
-call, including orientation and context maintenance, considers learning through
-its current character. A useful planning insight or action rationale need not
-wait for task completion or domain certification. There is no fragment quota.
-Navigation does not require saving a lesson. The response explicitly chooses
-continue or wait; an empty action list must not silently turn memory navigation
-into waiting. Continuation remains subject to ordinary funding and cancellation.
-Explicit model consultations return attributed results to this same primary loop;
-they are not separate learning authors or compulsory reflection calls.
-
-The recorded outcome follows the actual committed changes, not a redundant
-intention label. A useful write must not be discarded because its author also
-said “no change”; conversely “retain” with no write is not a retained lesson.
-Preserve an explicit bounded list of deferred opportunities with the persona's
-cue, reason, reconsideration condition and any received sources. Subsequent
-context exposes those entries until the persona replaces or clears them. An
-empty list does not prove there was no opportunity. Failed updates remain
-visible as uncommitted intentions; they do not manufacture lessons. When the
-persona intended retention or revision but supplied no fragment, its next
-context explicitly reports that nothing was written and preserves the stated
-idea for an authored reconsideration. The explanation field is not a reusable
-prompt fragment. This feedback creates neither an automatic write nor an extra
-reflection call.
+Ordinary work, fragment authorship, connection revision, and next-context intent share the primary persona's response. No additional generative reflection writer is introduced. An explicitly enabled and separately funded semantic selector may assess candidates before that response. See [the complete cycle](FRAGMENT-RECALL.md#2-what-an-ordinary-response-contributes).
 
 ## Character and learned methods must inform work
 
-Character context must identify the current authored profile unambiguously,
-separately from the historical starting profile. When several appropriate
-approaches remain, a persona can express its tendencies in questions, methods,
-collaboration and stopping choices, not merely in introductions or trait labels.
-Shared facts, required verification, authority and obligations do not vary with
-character. Different personas may reasonably choose the same action. No score
-forces a tool, role, extra call or unnecessary difference.
-
-Full selected lessons are candidate procedures to apply, adapt or reject against
-current conditions. A title, short description or search match is not the full
-lesson. The persona must be able to discover and deliberately select useful
-memory without recreating it. After acting, actual observations can support
-revision or rejection; storing more fragments is not an improvement signal.
-Instructions should refer to the actual supplied fields, not nonexistent aliases.
-These are ordinary decision responsibilities, not an additional reflection stage,
-mandatory explanation or claim that prompt inclusion caused a choice.
+Current character is consistently supplied through designated ordinary fragments and current traits. Selection is not proof of influence. Useful methods remain qualified and revisable; social interpretations do not create expertise or obligations. See [character continuity](FRAGMENT-RECALL.md#8-character-remains-in-the-ordinary-decision).
 
 ## Discoverable descriptions and recoverable navigation
 
-An explicit description search considers all current, readable owned nodes,
-including descendants outside the displayed branch, before visible pagination.
-Its lexical contract is all case-insensitive alphanumeric query words across the
-authored title and short description, in any order. Repeated words are redundant;
-there is no stemming, synonym expansion, substring matching or silent query-term
-truncation. A blank query browses the current branch. A nonempty query containing
-only punctuation matches nothing, rather than accidentally revealing every node.
-The query remains bounded. Search matches actual text, not JSON quoting, nulls,
-opaque identifiers, utility code or unselected full lesson content. Report the
-matching convention so a persona can choose a shorter cue when appropriate.
+Search covers readable owned fragments and connections independently of the displayed neighborhood. Exact whole-word description search remains an explicitly labeled operation; semantic assessment is a separate optional route. Search matches are not full-text inclusion or authority. Missing or retired targets have honest unavailable dispositions. Recovery leaves the durable graph unchanged and does not silently replace explicit selections. Corrupt data, invalid bounds, and storage failures remain errors rather than successful empty search results.
 
-Permission and current-fragment availability precede visible pagination. Search
-must not reveal another owner's descriptions, count inaccessible matches toward
-a page, automatically select lessons, or claim that a matching procedure works.
-No matches is not proof that the persona has no relevant experience.
-
-An automatic decision-context view validates the entire requested navigation
-path, including each node's exact fragment version and every ancestor. If a
-branch path has become missing, retired, withdrawn, inaccessible or stale because
-its exact fragment pointer no longer matches, reset that view to the virtual
-root and reset its navigation cursor. Include a bounded, non-content recovery
-notice without echoing unavailable identifiers, descriptions or source details.
-An explicit failed browse remains a failure rather than a successful visit to
-the requested branch. Invalid cycles, malformed records, invalid bounds and
-storage failures remain errors, not normal navigation recovery.
-
-Recovery changes only the supplied navigation view. It neither edits the durable
-graph nor chooses, replaces, retires or clears active lessons. Active full
-fragments still pass their independent selection and admission checks. A query
-can still discover available nodes after recovery. A valid branch retains its
-cursor and receives no false recovery notice. Admission rechecks the actual
-recovered view under the same current permissions.
+A visible offset must count eligible results, not leak hidden matches. Navigation can reopen a valid neighborhood without requiring an ancestor path. Cycles are valid associations but must not make retrieval loop. See [candidate discovery](FRAGMENT-RECALL.md#4-find-candidates-before-involving-a-model).
 
 ## Nodes and fragments
 
-Each real memory node has one owner, one primary parent (or the virtual root),
-one exact immutable fragment version, and optional cross-links to other owned
-nodes. The virtual root has no fragment. There are no imposed branch names,
-domain categories, professions or exploration phases. A cross-link does not
-select the linked fragment's content.
-
-A fragment contains a title, short description, actual reusable prompt text,
-applicability, limitations, an authored basis (tentative, observed or reported),
-retrieval cues, and exact source/counterevidence
-references. The persona's LLM authors every sentence in its own natural voice,
-informed by its current character. Character affects expression and judgment,
-never factual integrity, uncertainty, source attribution or permissions.
-Attribution records the character version supplied at authorship; it is not a
-mechanical certificate of stylistic fidelity. Tentative fragments may have no
-external source: they must preserve their uncertainty and conditions for revision.
-Observed and reported fragments require received evidence, whose existence does
-not certify the interpretation. Failures support bounded failure lessons, not
-claims of successful execution. Character changes do not rewrite
-old fragments. Human notes remain source documents, not operator-authored
-learned fragments.
-
-Stable node identities permit moves and cross-links without changing immutable
-fragment identities. Revisions replace a node's fragment pointer while retaining
-prior versions. Consolidation is an authored new or revised fragment with
-explicit reorganization and retirement. Retirement must account for active
-children and incoming links; cycles and foreign references are invalid.
+Nodes retain stable identities and exact versions. Connections carry situations, attribution, scope, and validity rather than a primary-parent field. Corrections and important prerequisites remain explicit. See [connections](FRAGMENT-PERSONA.md#4-connections-express-situations).
 
 ## Optional retrieval utilities
 
-A node may also carry a versioned utility description, its argument schema and
-persona-authored code. The short card presents the description and required
-inputs; full code loads on inspection. The same deciding persona supplies
-arguments to locate existing full fragments or branches. A utility returns owned
-node version references, never new fragment prose. Direct selection and ordinary
-branch navigation remain available; utilities are optional and require no extra
-LLM or reflection inference.
-
-Execution runs outside the learning transaction under existing host execution
-policy. Only current readable owned descriptions are supplied. Validate the exact
-utility version, output shape, ownership, access and target revisions before
-replacing future selection. Do not trust generated references as authority.
-Commit selection with its receipt atomically. Failure, timeout, cancellation or
-changed context preserves earlier committed learning and the previous valid
-selection; an interrupted host effect must not automatically replay. Host access
-is not an application sandbox. Transport bounds do not establish containment.
+Optional authored retrieval utilities remain separate, explicitly authorized tools. They are not silently executed as declarative recall conditions, and they do not author new prose. Results still need exact ownership, access, and version checks. Their failure cannot destroy the previous valid selection or replay an uncertain host effect.
 
 ## References within one decision
 
-Short typed references may stand for exact identities already received in the
-current admitted request. The mapping belongs to that call and actor, preserves
-exact versions and receipt digests, and is rechecked against current permissions.
-It cannot retrieve unseen evidence, authorize foreign records, rewrite prose, or
-survive into a different call. History projection removes references to omitted
-observations. New-node local handles remain separate from received references.
-An unknown, stale, wrong-type or revoked reference fails the atomic update while
-independently valid work retains the existing execution rules.
+Short references name exact information supplied to that actor's admitted call. They do not grant access to unseen records, survive into unrelated calls, or make new-node handles equivalent to previously received evidence. A card remains distinguishable from a full fragment.
 
 ## Atomicity and access
 
-Fragment writes, revisions, graph organization and next-context selection commit
-atomically. Standalone fragment operations use this same transaction and require
-placement. They cannot create orphan fragments. Exact node revisions and
-received evidence fence stale decisions. Failure leaves the prior graph and
-selection intact; independently valid work actions can proceed using the
-originally admitted context. Unresolved updates, pause, cancellation, ordinary
-failed actions and uncertain effects retain their existing barriers.
-
-An already active fragment repeated in ordinary record selection is redundant:
-normalizing it must not discard an otherwise valid handoff or compaction. This
-does not activate an unselected lesson or reverse an explicit deselection.
-
-Descriptions, graph relationships, searches and full fragments are private.
-Receiving a description is received information even without selecting the full
-fragment. Source restrictions follow it into derived work and export. A general
-procedure from shareable work may guide another work when its recorded reuse
-preference and entire source ancestry permit it. Requesting reuse is not a grant:
-when source restrictions prevent it, retain the valuable private fragment and
-report the restricted reuse separately. Recheck permission at every later use; this never publishes the private
-memory record or declassifies source facts. Admission records exact references
-and hashes, not another archive of model requests and responses.
-
-An explicit readership for a reusable procedure applies to the actual recipient:
-authorized readers must not be excluded merely because a readership was stated.
-Other source restrictions and private navigation remain in force. A policy edit
-that versions a fragment also refreshes its retained node's exact fragment link
-atomically; it does not rewrite the lesson, reorganize the tree or select it.
-
-This is a first-release contract. Old storage and continuity bundles are rejected
-rather than silently migrated or interpreted through a compatibility path.
+Fragment changes, connection changes, and future-context intent commit atomically under current primary decision authority. Retrying a committed change returns its original receipt. Unavailable qualifiers remain restrictive. Auxiliary selection never grants access or supersedes the primary actor. See [the handoff contract](../implementation/FRAGMENT-RECALL-CONTRACT.md).
 
 ## Operator experience and evidence
 
-Learning is shown as readable, paginated branches and short-description cards, with expandable children, breadcrumbs, explicit cross-links and search. Tree structure reflects persona-authored relationships; flat learning must not be decorated with invented categories.
-Show tentative ideas, observed interpretations and attributed reports in plain
-language. Full prose, utility code and their evidence load when opened and are released when closed or
-navigating elsewhere. Retention, deliberate next selection, supplied model
-context, actual application and assessed benefit are distinct facts. Neither a
-stored fragment nor a successful mechanism test proves learning quality.
-A separately loaded activity view distinguishes committed writes, revisions,
-organization, deferrals and failed updates. Say “No fragment written” when no
-write occurred; do not imply the runtime established that no learning was useful.
-
-Validation must include graph creation and navigation, the very next request's
-full payload, stale and foreign references, rollback and independent work,
-privacy, export/import, provider transport and browser lifecycle. A separate
-controlled live voice exercise can compare persona-authored accounts of the
-same observed event; it must not be presented as spontaneous learning from the
-house task. The unchanged fresh house brief tests emergent method/tool choice
-and useful delivery. Later retained/withheld/fresh comparisons require matching
-and disclosure of other retained context, history and host-file contamination.
-Without that isolation, results are diagnostic observations, not causal benefit.
-
-Navigation acceptance cases include reordered multiword cues spanning title and
-description, non-ASCII case handling, punctuation-only queries, descendant
-search, visible pagination under restricted records, unavailable branch lessons,
-unavailable ancestors, unchanged active selection, and database or malformed-data
-failures that must not masquerade as recovery. Verify the actual provider-bound
-current character and full selected lessons separately from navigation previews.
-
-Behavioral acceptance remains a different gate: matched within-model character
-and character-withheld/name-swap trials assess actual action choices; matched
-retained/withheld trials assess independent task outcomes with equal resources.
-Include inapplicable or harmful memory and correction cases. Passing navigation,
-field-path or transport tests establishes those mechanisms only. Report unrun,
-blocked or inconclusive trials explicitly; do not substitute fragment counts,
-self-descriptions or a required mention of a trait for measured benefit.
-
-When a preview is claimed to represent an editable artifact, verification must
-bind the exact published pair. A corrected workspace source cannot retroactively
-validate an earlier published source. The persona chooses domain-appropriate
-checks; this principle imposes no universal CAD workflow or required software.
+Use graph neighborhoods, search, and a paginated connected-fragment list where a visual network is impractical. Do not invent categories to decorate a flat list. Show direct and delegated selection, preview and full text, proposed and committed changes, and actual supplied versions. The [visual guide](FRAGMENT-RECALL-VISUALS.md) provides image diagrams and complete text readings. The [acceptance scenarios](../evaluation/FRAGMENT-RECALL.md) are specified tests, not reported passes.

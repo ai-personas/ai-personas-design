@@ -14,7 +14,9 @@ These chapters are the detailed design reference. They state intended behavior, 
 | [6. Evidence and completion](06-evidence-and-completion.md) | What counts as a supported result, and how is an exact release kept honest? |
 | [7. Human experience and society](07-experience-and-society.md) | What should people see and control, and what changes for communities or services? |
 
-[The persona as an evolving fragment system](FRAGMENT-PERSONA.md) is the normative design target for persona-authored identity, methods, self-correction, relationships, and context selection. Work and fragment development share each ordinary primary decision; no additional memory-writing, reflection, or retrieval-planning LLM call is introduced. Its explicit precedence table resolves older profile-versus-memory and immediate-selection-only interpretations. Read it together with [memory navigation](MEMORY-TREE.md) and its [acceptance and requirement mapping](../evaluation/FRAGMENT-PERSONA.md). A published design is not a claim that this behavior is implemented or validated.
+[A persona that remembers while it works](FRAGMENT-RECALL.md) is the illustrated entry point for the current memory design. Its [five SVG diagrams and full text readings](FRAGMENT-RECALL-VISUALS.md) explain same-call authorship, a personal fragment network, indexed retrieval, optional Jev selection, and checked context. The [persona graph](FRAGMENT-PERSONA.md) has no canonical tree, required parent, functional grouping, or permanent link-weight score. The [old navigation address](MEMORY-TREE.md) remains a reading bridge only.
+
+Work and fragment development share each ordinary primary decision. A separately authorized and metered semantic selector is now permitted; another generative memory-writing, reflection, or query-planning call is not. These documents and the [recall handoff contract](../implementation/FRAGMENT-RECALL-CONTRACT.md) replace conflicting tree-first and no-auxiliary-selector wording in earlier chapters while preserving the invariants. Read the [fragment-persona acceptance](../evaluation/FRAGMENT-PERSONA.md), [recall acceptance and requirement mapping](../evaluation/FRAGMENT-RECALL.md), and [dated provider source notes](../sources/FRAGMENT-RECALL-SOURCES.md). Publication is not implementation or behavioral validation.
 
 [Persona-owned process, not assigned roles](PERSONA-OWNED-PROCESS.md) is the normative clarification for optional contribution activities, self/peer assessment, advisory criticism, explicit obligations and the ordinary host-tools experience. It removes universal author/reviewer workflow interpretations without erasing accepted requirements or historical dispositions.
 
@@ -34,7 +36,7 @@ The [invariants and requirement index](../implementation/REQUIREMENTS.md) identi
 
 ## Authority within this handbook
 
-The invariants are the protected foundation. These chapters, the explicitly normative persona-owned-process, development, fragment-persona and coordination/lifecycle refinements, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
+The invariants are the protected foundation. These chapters, the explicitly normative persona-owned-process, development, fragment-persona, fragment-recall and coordination/lifecycle refinements, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
 
 A contradiction between detailed requirements is a design defect to resolve and record, not permission to select the easiest reading. Do not broaden authority or weaken an evidence claim while that conflict is unresolved. Changes follow the [contribution guide](../CONTRIBUTING.md).
 

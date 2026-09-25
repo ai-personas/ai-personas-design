@@ -8,6 +8,14 @@ People set the purpose and boundaries. Personas interpret the need and accept re
 
 **This repository explains the design, not a working product.** It contains no application code, command-line tutorials, executable examples, or required development setup. Read it in a browser or any Markdown reader. The editable diagrams are artwork, not screenshots or proof of implementation.
 
+## A persona that remembers while it works
+
+The current [illustrated fragment-recall design](design/FRAGMENT-RECALL.md) explains how the persona's LLM authors its own prompt fragments during ordinary work, while indexed search and an optional fast selector such as Jev prepare its next context. Each persona owns an ungrouped network: no canonical tree, prescribed mental-function folders, or permanent link-weight scores.
+
+![Indexed search and optional Jev selection prepare a checked context; the persona LLM does work and authors fragment updates in one ordinary response.](assets/visuals/fragment-recall-01-overview.svg)
+
+Read the [five diagrams and their text explanations](design/FRAGMENT-RECALL-VISUALS.md), the [personal graph contract](design/FRAGMENT-PERSONA.md), and the [acceptance plan](evaluation/FRAGMENT-RECALL.md). This design explicitly permits separately metered selection without introducing another generative memory writer. It is not a claim of implemented or measured behavior.
+
 ## Start with your question
 
 | Your question | Start here | Continue with |
