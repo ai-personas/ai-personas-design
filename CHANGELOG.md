@@ -1,5 +1,9 @@
 # Design handbook history
 
+## 25 September 2026 — continuity and recovery
+
+Clarified durable learning opportunities, working intentions, audience-safe question conclusions, actual supplied sources, and provider recovery that preserves cancellation, uncertain accounting and effect barriers. Added evidence obligations without prescribing task methods or reporting an unexecuted behavioral pass.
+
 [Home](README.md) · [Source provenance](sources/SOURCE-MANIFEST.md)
 
 ## Current-context learning and shared questions

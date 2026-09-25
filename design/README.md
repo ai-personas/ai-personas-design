@@ -22,6 +22,8 @@ The [organization clarification](03-work-and-cooperation.md#how-organization-eme
 
 [Emergence, coordination, and lifecycle boundaries](COORDINATION-LIFECYCLE.md) is a normative clarification of exact acceptance, accepted delegation, handoffs, retirement, quarantine, progress assumptions, and proof-to-implementation evidence. It distinguishes permitted organization from observed useful emergence and maps its verification cases to existing identifiers without adding a workflow or claiming a Lean pass.
 
+[Continuity and recovery](CONTINUITY-RECOVERY.md) clarifies persistent learning opportunities, persona-owned working intentions, shared-question resolution, actual supplied sources, and automatic infrastructure recovery without replaying effects.
+
 ## How to read a requirement
 
 **Must** describes a necessary condition for the applicable feature. **Should** describes a strong recommendation; an implementation records a reason when it takes a different approach. **May** describes an option. Optional does not mean exempt from safeguards once enabled.
