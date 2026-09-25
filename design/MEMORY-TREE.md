@@ -45,6 +45,60 @@ idea for an authored reconsideration. The explanation field is not a reusable
 prompt fragment. This feedback creates neither an automatic write nor an extra
 reflection call.
 
+## Character and learned methods must inform work
+
+Character context must identify the current authored profile unambiguously,
+separately from the historical starting profile. When several appropriate
+approaches remain, a persona can express its tendencies in questions, methods,
+collaboration and stopping choices, not merely in introductions or trait labels.
+Shared facts, required verification, authority and obligations do not vary with
+character. Different personas may reasonably choose the same action. No score
+forces a tool, role, extra call or unnecessary difference.
+
+Full selected lessons are candidate procedures to apply, adapt or reject against
+current conditions. A title, short description or search match is not the full
+lesson. The persona must be able to discover and deliberately select useful
+memory without recreating it. After acting, actual observations can support
+revision or rejection; storing more fragments is not an improvement signal.
+Instructions should refer to the actual supplied fields, not nonexistent aliases.
+These are ordinary decision responsibilities, not an additional reflection stage,
+mandatory explanation or claim that prompt inclusion caused a choice.
+
+## Discoverable descriptions and recoverable navigation
+
+An explicit description search considers all current, readable owned nodes,
+including descendants outside the displayed branch, before visible pagination.
+Its lexical contract is all case-insensitive alphanumeric query words across the
+authored title and short description, in any order. Repeated words are redundant;
+there is no stemming, synonym expansion, substring matching or silent query-term
+truncation. A blank query browses the current branch. A nonempty query containing
+only punctuation matches nothing, rather than accidentally revealing every node.
+The query remains bounded. Search matches actual text, not JSON quoting, nulls,
+opaque identifiers, utility code or unselected full lesson content. Report the
+matching convention so a persona can choose a shorter cue when appropriate.
+
+Permission and current-fragment availability precede visible pagination. Search
+must not reveal another owner's descriptions, count inaccessible matches toward
+a page, automatically select lessons, or claim that a matching procedure works.
+No matches is not proof that the persona has no relevant experience.
+
+An automatic decision-context view validates the entire requested navigation
+path, including each node's exact fragment version and every ancestor. If a
+branch path has become missing, retired, withdrawn, inaccessible or stale because
+its exact fragment pointer no longer matches, reset that view to the virtual
+root and reset its navigation cursor. Include a bounded, non-content recovery
+notice without echoing unavailable identifiers, descriptions or source details.
+An explicit failed browse remains a failure rather than a successful visit to
+the requested branch. Invalid cycles, malformed records, invalid bounds and
+storage failures remain errors, not normal navigation recovery.
+
+Recovery changes only the supplied navigation view. It neither edits the durable
+graph nor chooses, replaces, retires or clears active lessons. Active full
+fragments still pass their independent selection and admission checks. A query
+can still discover available nodes after recovery. A valid branch retains its
+cursor and receives no false recovery notice. Admission rechecks the actual
+recovered view under the same current permissions.
+
 ## Nodes and fragments
 
 Each real memory node has one owner, one primary parent (or the virtual root),
@@ -158,6 +212,21 @@ house task. The unchanged fresh house brief tests emergent method/tool choice
 and useful delivery. Later retained/withheld/fresh comparisons require matching
 and disclosure of other retained context, history and host-file contamination.
 Without that isolation, results are diagnostic observations, not causal benefit.
+
+Navigation acceptance cases include reordered multiword cues spanning title and
+description, non-ASCII case handling, punctuation-only queries, descendant
+search, visible pagination under restricted records, unavailable branch lessons,
+unavailable ancestors, unchanged active selection, and database or malformed-data
+failures that must not masquerade as recovery. Verify the actual provider-bound
+current character and full selected lessons separately from navigation previews.
+
+Behavioral acceptance remains a different gate: matched within-model character
+and character-withheld/name-swap trials assess actual action choices; matched
+retained/withheld trials assess independent task outcomes with equal resources.
+Include inapplicable or harmful memory and correction cases. Passing navigation,
+field-path or transport tests establishes those mechanisms only. Report unrun,
+blocked or inconclusive trials explicitly; do not substitute fragment counts,
+self-descriptions or a required mention of a trait for measured benefit.
 
 When a preview is claimed to represent an editable artifact, verification must
 bind the exact published pair. A corrected workspace source cannot retroactively
