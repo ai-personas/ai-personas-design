@@ -128,6 +128,12 @@ report the restricted reuse separately. Recheck permission at every later use; t
 memory record or declassifies source facts. Admission records exact references
 and hashes, not another archive of model requests and responses.
 
+An explicit readership for a reusable procedure applies to the actual recipient:
+authorized readers must not be excluded merely because a readership was stated.
+Other source restrictions and private navigation remain in force. A policy edit
+that versions a fragment also refreshes its retained node's exact fragment link
+atomically; it does not rewrite the lesson, reorganize the tree or select it.
+
 This is a first-release contract. Old storage and continuity bundles are rejected
 rather than silently migrated or interpreted through a compatibility path.
 
