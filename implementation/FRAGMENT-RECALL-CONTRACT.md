@@ -25,7 +25,9 @@ Retrieval descriptions, edges, and cached results follow source restrictions. De
 
 ## 2. Authoring handoff
 
-The primary persona response may propose work actions and graph changes together. New fragments and connection targets can use local handles within the transaction; existing edits bind received exact versions. The runtime validates ownership, received evidence, source ancestry, current character policy, bounds, and decision authority before committing changes and future selection together.
+The primary persona response may propose work actions and graph changes together. New fragments and connection targets can use local handles within the transaction (for example, handle `rule` is referenced as `$rule`); existing edits bind received exact versions. The runtime validates ownership, received evidence, source ancestry, current character policy, bounds, and decision authority before committing changes and future selection together.
+
+A conditional association may target its own source fragment: considering its short card can conditionally bring its exact full text. This has the same delegation, scope, qualification, version and traversal bounds as any other connection; it does not require manufacturing a separate cue fragment. Simple unconditioned navigation links point to other nodes.
 
 No fragment is required merely to fill a category. Intentional no-change and deferral remain valid. Retain/revise labels do not prove writes. Invalid changes leave the prior valid graph and plan intact. Independently valid actions retain their original admitted context; no action may use an uncommitted fragment as authority or evidence. Accepted self-model changes preserve the fresh-decision boundary.
 

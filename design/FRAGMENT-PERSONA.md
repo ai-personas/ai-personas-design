@@ -44,7 +44,7 @@ A retrieval description is bound to its fragment version. A later text revision 
 
 [Full text reading](FRAGMENT-RECALL-VISUALS.md#2-connections-with-meaning).
 
-A connection is directed and versioned. Its meaning is: “When considering A in this situation, bring B into consideration.” The reverse connection is a different authored judgment. Mere co-occurrence in a prompt does not establish a connection. New fragments may connect to any relevant fragment actually supplied in the call, not just the last one created.
+A connection is directed and versioned. Its meaning is: “When considering A in this situation, bring B into consideration.” A and B may be the same fragment: its short description can conditionally bring its own full text. Traversal still visits that exact fragment at most once. The reverse connection between distinct fragments is a different authored judgment. Mere co-occurrence in a prompt does not establish a connection. New fragments may connect to any relevant fragment actually supplied in the call, not just the last one created.
 
 A connection preserves its explanation, source and target versions or an explicitly authorized current-version-following policy, activation condition, scope, expiry or reconsideration condition, and intended preview or full-text treatment. Current source permissions are independently enforced. Links cannot discover unreadable targets by guessing identities.
 
