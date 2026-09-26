@@ -37,3 +37,17 @@ Fragment changes, connection changes, and future-context intent commit atomicall
 ## Operator experience and evidence
 
 Use graph neighborhoods, search, and a paginated connected-fragment list where a visual network is impractical. Do not invent categories to decorate a flat list. Show direct and delegated selection, preview and full text, proposed and committed changes, and actual supplied versions. The [visual guide](FRAGMENT-RECALL-VISUALS.md) provides image diagrams and complete text readings. The [acceptance scenarios](../evaluation/FRAGMENT-RECALL.md) are specified tests, not reported passes.
+
+### Connections on a bounded page
+
+Whenever both eligible endpoints are displayed, the page should preserve their existing directed connections. This applies to the all-fragment view, search results, and connections between two neighbors of a focused fragment, not only connections touching the focus. A plain association and a conditional connection may share endpoints without becoming the same connection. Co-occurrence must not invent an association.
+
+An edge must bind the exact displayed endpoint versions. A changed fragment must not silently repair an old conditional binding. Hidden, unavailable, previous-page and look-ahead endpoints must not be disclosed merely to complete the picture. Because the view is partial, an absent page edge is not evidence that the entire personal network is disconnected.
+
+The reader should retain authored applicability, limitations, connection explanations, conditions and scope. A request for full-text recall remains distinguishable from a satisfied condition, a selector assessment, and an actual inclusion receipt. Browsing does not execute conditions or activate prompts.
+
+### Freshness and acceptance
+
+The focused fragment must match the requested view and exact version. While a graph is being revalidated after an access change, or when that read fails, the previous graph and expanded details must not remain presented as current authorized material. Unsupported response shapes and malformed references require an explicit error, not an empty graph or invented fallback structure.
+
+Acceptance should exercise the actual interface contract as well as synthetic examples: focused and unfocused views, search, cycles, page boundaries, coexisting connection forms, withdrawn access, stale versions, missing qualifications and multilingual text at declared size limits. Client and runtime checks must use the same meaning of those limits. A passing client fixture does not establish backend integration, character influence or improved work; those require their own evidence.
