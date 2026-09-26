@@ -11,6 +11,14 @@ Exact code revisions, private execution records and validation commands belong
 in the runtime repository's `reviews/fragment-implementation-2026-09-26.md`.
 Local changes are not a published deployment or a successful hosted workflow.
 
+The 2026-09-26 cleanup follow-up fixes stale incoming-connection pagination,
+separates primary persona model choices from auxiliary Jev choices, and removes
+obsolete description fallback and recursive condition-validation machinery.
+Formatting and strict lint now pass locally. Final coordinated revisions and
+publication/check results are recorded privately in
+`reviews/fragment-cleanup-2026-09-26.md`; the earlier review remains historical
+evidence rather than a claim about the final release.
+
 ## Implemented mechanisms
 
 | Requirement | Implementation boundary |
