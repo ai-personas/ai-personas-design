@@ -1,8 +1,8 @@
-# Memory navigation — retained address, current graph contract
+# Fragment graph navigation
 
 [Personal fragment network](FRAGMENT-PERSONA.md) · [Illustrated recall design](FRAGMENT-RECALL.md) · [Handoff contract](../implementation/FRAGMENT-RECALL-CONTRACT.md)
 
-This path is retained so earlier links still resolve. **The current design is a personal fragment graph, not a canonical tree.** The tree-first contract was replaced by the fragment-network and recall design. There are no required parents, roots, functional groups, or permanent link-weight scores. Earlier document revisions remain in repository history; they are not a second active contract or a storage migration specification.
+The canonical memory is a personal fragment graph. No required parent, root hierarchy, functional group, or permanent link-weight score constrains its organization.
 
 ## One decision, one handoff
 

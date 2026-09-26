@@ -8,7 +8,7 @@ This is a normative design target. A persona's continuing cognitive representati
 
 This revision replaces the canonical tree and functional groupings with a personal graph. No fragment needs a parent, a root, or a category such as social, learning, reflection, or identity. The [recall design](FRAGMENT-RECALL.md) permits an optional, separately metered semantic selector such as Jev. It does not permit another model to author the persona's memory or an extra generative reflection call.
 
-These documents and the [handoff contract](../implementation/FRAGMENT-RECALL-CONTRACT.md) supersede conflicting tree-first and no-auxiliary-selection-model wording in earlier identity, memory, development, and continuity descriptions. The [old memory address](MEMORY-TREE.md) is a compatibility reading path only. Invariants I01–I21, the 45 requirement identifiers, privacy, accepted responsibilities, and existing extension gates remain intact. Publication is not implementation, consciousness, or measured maturity.
+These documents and the [handoff contract](../implementation/FRAGMENT-RECALL-CONTRACT.md) supersede conflicting tree-first and no-auxiliary-selection-model wording in earlier identity, memory, development, and continuity descriptions. The [navigation contract](MEMORY-GRAPH.md) describes the canonical graph. Invariants I01–I21, the 45 requirement identifiers, privacy, accepted responsibilities, and existing extension gates remain intact. Publication is not implementation, consciousness, or measured maturity.
 
 ## 1. What continues
 

@@ -139,7 +139,7 @@ The system can enforce attribution, permission, conserved resources, unchanged b
 
 Map each implementation component to the applicable [requirements](REQUIREMENTS.md), demonstrate the [acceptance scenarios](../evaluation/ACCEPTANCE.md), and publish the particular boundaries actually tested.
 
-The first-release memory graph and combined decision contract are defined in [Persona-authored memory navigation](../design/MEMORY-TREE.md). Every learned fragment belongs to a stable private node; old storage and continuity bundles are not migration inputs.
+The first-release memory graph and combined decision contract are defined in [Persona-authored memory navigation](../design/MEMORY-GRAPH.md). Every learned fragment belongs to a stable private node; old storage and continuity bundles are not migration inputs.
 
 ## Continuity and infrastructure recovery
 

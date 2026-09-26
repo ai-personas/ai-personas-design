@@ -210,4 +210,4 @@ there is no automatic global publication or selection of a persona's memory.
 
 ## Memory navigation contract
 
-[Persona-authored memory navigation](MEMORY-TREE.md) specifies the canonical tree with cross-links, the combined work/learning response, persona-authored short descriptions, exact next-context selection, and first-release storage boundary. It replaces implicit fragment shortlist retrieval with deliberate branch navigation; tool discovery remains separate.
+[Persona-authored memory navigation](MEMORY-GRAPH.md) specifies the owned graph, same-call work and learning, authored connection conditions, exact selection and delegated recall, and the storage boundary. Graph neighborhoods have no required parent, root, or category; tool discovery remains separate.

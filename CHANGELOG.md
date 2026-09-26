@@ -10,7 +10,7 @@ Clarified durable learning opportunities, working intentions, audience-safe ques
 
 **Date: 24 September 2026.** Clarify independent question addressee, visibility,
 and required human input in [work and cooperation](design/03-work-and-cooperation.md#questions-and-conditional-assumptions).
-[Memory navigation](design/MEMORY-TREE.md) now explicitly distinguishes authored
+[Memory navigation](design/MEMORY-GRAPH.md) now explicitly distinguishes authored
 intent from committed change, preserves deferred opportunities, and defines
 call-scoped typed references and readable learning activity. Current identity,
 temporary affect and historical starting state retain their existing meanings.

@@ -1,77 +1,52 @@
 # Fragment recall implementation status
 
-Review date: 2026-09-25.
-Normative baseline: `f8a8566fb8d71469ac7b53da08bee1d491956000`.
-Runtime base reviewed: `ai-personas/ai-personas@8fdcd396b9bd64058c7717b97159125bc2ee9bcb`.
-Corrective follow-up pushed: `33a3bd2dfc078cf1aeaa1c277c899476b8017b8e`
-on `rewrite/design-first`.
+Review date: 2026-09-26. Normative baseline: `a736120a7d440c0603443528221e99f9ce2b298d`.
+Runtime update starts from `ai-personas/ai-personas@9b351fd83f3d13ea24a0f34592a23b5ce7049ff2`.
+Production UI update starts from `ai-personas/ai-personas-ui@23811d6fedffd16fb80d7b191fd23911bf7eeccc`.
 
-This ledger records implementation and validation separately. It does not amend
-or relax the [recall contract](FRAGMENT-RECALL-CONTRACT.md), the
-[fragment-persona design](../design/FRAGMENT-PERSONA.md), or their acceptance gates.
-A pushed patch is not an executed test, and a retrieval hit is not learning benefit.
+This ledger separates implemented mechanisms from behavioral acceptance. The
+[handoff contract](FRAGMENT-RECALL-CONTRACT.md), [fragment-persona design](../design/FRAGMENT-PERSONA.md),
+and [recall acceptance](../evaluation/FRAGMENT-RECALL.md) remain normative.
+Exact code revisions, private execution records and validation commands belong
+in the runtime repository's `reviews/fragment-implementation-2026-09-26.md`.
+Local changes are not a published deployment or a successful hosted workflow.
 
-## Implemented source and accompanying corrective follow-up
+## Implemented mechanisms
 
-The Rust request compiler has an owner-scoped metadata index and bounded
-traversal of existing memory-node `related` links. Candidates are previews, not
-automatically selected full fragments. Current access, exact fragment versions
-and graph-only traversal paths are checked before admission. Character inclusion
-remains mandatory under the existing profile contract.
-
-The follow-up changes rank metadata matches before the database shortlist,
-exclude already-offered/stale/duplicate entries from that shortlist, and use
-query-local scores rather than cross-owner corpus statistics. Matching uses the
-existing FTS5 tokenizer. Database work is not constant-time, permission filtering
-can underfill the bounded list, and search remains nonexhaustive.
-
-Graph cards receive exact `@memory` node aliases. Pressure projection removes
-aliases for omitted optional cards while keeping aliases for still-explicit
-selections. Alias admission rejects stale or unoffered nodes; a historical
-reference does not itself constitute an offered card. The primary response
-still chooses whether to select a preview for a later full-context request.
-No additional selection model is dispatched by these changes.
-
-The code workflow is pinned to the reviewed normative design revision rather
-than the older pre-update design input. It records literal SQL checks and focused
-Rust recall checks separately, without removing the broader build, API or UI gates.
-The source report is `reviews/fragment-recall-followup-2026-09-25.md` in the runtime
-repository; its machine-readable SQL evidence is adjacent to that report.
-
-## Validation evidence
-
-| Layer | Evidence actually available |
+| Requirement | Implementation boundary |
 |---|---|
-| Source integrity | Original runtime/reference/workflow files matched their GitHub blob hashes before editing. |
-| Literal database statements | 35 tests executed successfully against SQL extracted from the Rust source, using SQLite 3.46.1. |
-| Python and workflow syntax | Python syntax compilation and YAML parsing completed. This is not GitHub workflow execution. |
-| New Rust regressions | 17 added and wired into the recall module, including request/alias/explicit-selection round trips. Not compiled or executed. |
-| Existing Rust and integration suite | No local run. Previous workflow `36191987796`, including retried job `108266865992`, failed before steps. |
-| Live provider transport and behavior | No live Jev, character comparison, social-usefulness or work-improvement run. |
+| Canonical graph | Owner-scoped, rootless navigation uses exact nodes and fragments, directed incoming/outgoing connections, cycles, private search and visible pagination. Parent fields and tree controls are removed. The storage/API contract changes without a migration. |
+| Authored connections | The primary continuity transaction authors conditions, explanations, relation, target, scope, expiry and full/preview treatment together. Bounded finite predicates distinguish match, no-match, unknown, invalid and inaccessible states. |
+| Current self-model | An explicit designation binds ordinary self-fragments and the derived profile projection under one attributed revision. The starting seed remains provenance. Self-authorship and fresh-decision checks apply to protected revisions; ordinary learning remains available. Bootstrap character can be explicitly preserved until designated. |
+| Pre-call selector | An optional read-only preparation batch precedes primary admission. Per-work operator processing permission, source export checks, exact model pricing, finite attempts, request limits and transactional reservations are required. The auxiliary result has no primary writer authority. |
+| Accounting and control | Every dispatched attempt is accounted, including cancellation, stale results, invalid output and uncertain transport. Failure follows the declared deterministic/block policy. The saved Jev connection also has an editable node-wide USD ceiling in Funding → Settings; edits and key replacement retain spending. |
+| Exact reuse | Complete typed batches bind owner, work, profile, deployment generation, policy, observations, conditions, source and target versions, delegation, template and model. Permission changes invalidate reuse. Moving aliases and restarts do not reuse prior assessments. |
+| Qualification packing | Direct and delegated full selections carry required correction/prerequisite closure. Missing or excessive bundles are omitted as a whole or block required selection. Explicit selections, self-context and required core remain protected. |
+| Operator inspection | The production UI uses graph cards and directed conditions, shows authoritative self-model projection and selection evidence, and exposes recall processing controls and Jev spending limits. Generated contracts come from the Rust runtime. |
 
-The test round trip covers request compilation and reference/continuity contracts,
-not the full production funding/admission path. A new commit's workflow outcome
-must be checked at that exact commit. The pre-step failures do not establish a
-compiler error or a specific billing/account cause.
+No auxiliary call authors fragments, creates consent, changes character, or
+turns retrieval into proof of usefulness. A configured API key alone grants
+neither processing permission nor work funding.
 
-## Open implementation and release gates
+## Validation and remaining release gates
 
-| Gate | Required work before closure |
-|---|---|
-| Canonical graph, without mandatory hierarchy | Replace legacy tree storage/API/view assumptions; keep stable owner/version identities and existing retention protections. |
-| Conditional connections | Add same-call authored connection revisions, bounded checkable expressions, separate match/no-match/unknown states and inaccessible/invalid dispositions. |
-| Current fragment-based self-model | Designate exact ordinary self-fragments under one authoritative profile revision; preserve seed provenance, self-authorship policy and decision freshness without a competing narrative. |
-| Optional pre-call Jev | Integrate a distinct read-only preparation lane with operator-approved deployment, disclosure permission, bounded episodes, reservation/settlement, cancellation and separation from primary decision authority. |
-| Semantic validation, cache and fallback | Validate complete typed batches; bind reuse to exact owner/situation/policy/candidate/connection/template/model/scope; recheck current permissions and retain uncertain spending. |
-| Delegated packing | Implement explicit recall delegation, exact full-fragment inclusion, correction/prerequisite bundle closure and omission handling under protected-core budgets. |
-| Executed mechanism gates | Compile the complete private checkout; run focused and all-target Rust checks plus contract/browser gates; report formatting/lint separately. |
-| Behavioral and cost gates | Run controlled deterministic-versus-selector, character-continuity, social-learning and retained-versus-withheld-learning comparisons with leakage controls and actual cost/latency evidence. |
+Focused transaction, compiler, selector, cancellation, cache, budget and browser
+checks have executed locally. The complete runtime/API suite and final generated
+contract checks are recorded separately in the private review. SQL helper tests
+remain supplemental evidence, not substitutes for runtime tests. Formatting,
+lint and hosted CI must be reported separately from executed local tests.
 
-**No row in this open-gate table is closed by the ranking/reference follow-up.**
-In particular, a working native TypeSafe adapter is not a completed pre-call recall
-integration, and the existing explicit-selection path is not delegated selection.
+A bounded live pilot has now exercised character, retained/withheld/fresh
+learning, social interpretation and deterministic-versus-Jev selection. Its
+private report preserves failures, uncertain spending, actual model usage,
+selection provenance and limitations. It does not establish general character
+differentiation, social benefit, maturity or broad work/cost improvement.
 
-Use [recall acceptance](../evaluation/FRAGMENT-RECALL.md) and
-[fragment-persona acceptance](../evaluation/FRAGMENT-PERSONA.md) as the release basis.
-Do not enable an auxiliary provider or claim persona maturity merely because
-SQL checks pass or a branch update succeeds.
+Remaining acceptance work is broader, repeated, controlled evaluation: blinded
+character judgments, actual social exchanges and executed useful work, additional
+failure/quality cases, and cost/latency comparisons with adequate sampling.
+Synthetic fixture qualification tests and one live pilot do not close those
+behavioral gates. Coordinated publication/deployment and hosted CI are also
+separate from this local implementation.
+
+The obsolete tree address has been removed. Use [graph navigation](../design/MEMORY-GRAPH.md).

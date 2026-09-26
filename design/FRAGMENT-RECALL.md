@@ -10,7 +10,7 @@ This is a normative design target, not a report of implemented behavior. “Syst
 
 Two earlier restrictions change explicitly. First, each persona owns a network of fragments with no canonical tree, required parent, root hierarchy, or functional grouping. Second, a deployment may enable a separately funded semantic-selection call before an ordinary persona decision. There is still no additional generative reflection, relationship-writing, memory-authoring, or query-planning call.
 
-The current [fragment-persona contract](FRAGMENT-PERSONA.md), this document, and the [handoff contract](../implementation/FRAGMENT-RECALL-CONTRACT.md) supersede conflicting tree-first, function-grouping, and no-auxiliary-model wording in earlier memory and development chapters. Unchanged identity, information, consent, authority, resource, evidence, and stopping rules continue to apply. The 21 invariants and 45 requirement identifiers remain unchanged. The old [memory-navigation address](MEMORY-TREE.md) remains a reading bridge, not an alternative current tree design.
+The current [fragment-persona contract](FRAGMENT-PERSONA.md), this document, and the [handoff contract](../implementation/FRAGMENT-RECALL-CONTRACT.md) supersede conflicting tree-first, function-grouping, and no-auxiliary-model wording in earlier memory and development chapters. Unchanged identity, information, consent, authority, resource, evidence, and stopping rules continue to apply. The 21 invariants and 45 requirement identifiers remain unchanged. The [navigation contract](MEMORY-GRAPH.md) describes the canonical graph.
 
 ## 1. The whole idea
 
