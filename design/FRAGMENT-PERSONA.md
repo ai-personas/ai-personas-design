@@ -60,6 +60,8 @@ Every ordinary deciding call receives current character, the actual situation, a
 
 No-change and explicit deferral are legitimate. A retained intention is not scheduled activity. Repeated retrieval does not prove a lesson. The runtime never supplies replacement persona prose or creates a separate reflection writer. External consultations and optional selectors return attributed evidence or assessments; they are not alternate authors of the internal persona.
 
+An unchanged next-context choice can be preserved explicitly without repeating its full selection or handoff text. Preservation and clearing must have different meanings. Preserved references still undergo the same current version, permission, qualification and self-authorship checks as new choices. A compact response does not permit silent substitution of a fragment or a second writer of its prose.
+
 Fragment writes, connection changes, and future selection commit atomically. Newly created fragments may reference one another in that change set. Failed validation leaves the prior graph and plan intact and supplies a repairable receipt. Independently valid work can continue against its originally admitted context, but not by depending on uncommitted memory changes. An identity change keeps its observation boundary.
 
 One current primary decision authority prevents competing work streams from silently overwriting persona state. Exact retries do not duplicate fragments. Conflicts are surfaced instead of resolved by an unrequested semantic-merge call. Independent personas retain concurrency.

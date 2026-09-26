@@ -57,6 +57,8 @@ The runtime applies the declared selection policy to valid results. Independent 
 
 Full text is fetched at exact versions. The final request protects current character, constraints, obligations, cancellations, and critical observations. Valid explicit full selections cannot silently become titles. Necessary content that cannot fit triggers the existing bounded maintenance or an explicit block. A selector never switches the primary model or grants a larger allowance to force a fit.
 
+Ordinary requests should bound repeated settled history before reaching a model's context ceiling. Any projection identifies omitted details and how to recover their exact receipts. It preserves explicit selections, recent and unread observations, adverse facts and unresolved effects. This is a request projection, not authored learning or evidence that an omitted result was inspected. A later pressure pass preserves earlier omission references. Discovery must not disappear merely because old successful output is verbose.
+
 A lookup is not adoption of a belief. A full-context receipt is not evidence that the LLM applied the fragment. A selected fragment's correctness and later benefit require separate observations and assessment.
 
 ## 6. Freshness and authority between calls

@@ -36,6 +36,34 @@ No auxiliary call authors fragments, creates consent, changes character, or
 turns retrieval into proof of usefulness. A configured API key alone grants
 neither processing permission nor work funding.
 
+## Component-first repair follow-up
+
+The follow-up removes the competing private interest/relationship writer: those
+interpretations are ordinary fragments. Participation focus and intention remain
+operational state. Nullable continuity fields preserve unchanged selections and
+handoffs; explicit empty values clear them. Current-call typed references extend
+to supported action identity fields without rewriting prose or commands.
+
+Ordinary requests project old settled journal details before context pressure,
+preserving exact recovery references, adverse observations, unread inputs,
+explicit selections and mandatory context. Repeated denied artifact/document
+lookups are fenced against their relevant access dependencies. These mechanisms
+do not establish a measured token reduction or useful final output.
+
+Jev's permitted situation packet includes the exact original task and received
+work observations. Processing approval, source export and persona delegation
+remain separate; source-policy revisions participate in exact cache identity.
+The workspace exposes those distinctions, recorded selector results, funding,
+character/avatar state and publication counts. Source grants preserve existing
+explicit readers and expiry; the simple UI cannot overwrite special sharing
+ledgers. Publication diagnostics expose restricted audiences without changing
+the immutable published payload.
+
+Avatars now use committed generated character, asynchronously. Real image API
+validation remains deferred. The component-first campaign and repeated house
+comparisons remain acceptance gates; local mechanism and browser passes do not
+close the character, learning, social-usefulness or work/cost comparisons.
+
 ## Validation and remaining release gates
 
 Focused transaction, compiler, selector, cancellation, cache, budget and browser
