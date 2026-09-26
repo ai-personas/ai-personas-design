@@ -40,9 +40,12 @@ neither processing permission nor work funding.
 
 Focused transaction, compiler, selector, cancellation, cache, budget and browser
 checks have executed locally. The complete runtime/API suite and final generated
-contract checks are recorded separately in the private review. SQL helper tests
-remain supplemental evidence, not substitutes for runtime tests. Formatting,
-lint and hosted CI must be reported separately from executed local tests.
+contract checks are recorded separately in the private review. The subsequent
+test-suite cleanup removes duplicate Python SQL/fixture checks and superseded
+Rust cases. Graph, recall, authority and accounting checks remain in the actual
+Rust suites; current coverage and commands are documented in the runtime's
+`tests/README.md`. Formatting, lint and hosted CI must be reported separately
+from executed local tests.
 
 A bounded live pilot has now exercised character, retained/withheld/fresh
 learning, social interpretation and deterministic-versus-Jev selection. Its
