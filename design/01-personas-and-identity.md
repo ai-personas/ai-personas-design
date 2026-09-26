@@ -25,6 +25,10 @@ The intended benefit is inspectable continuity: a reader can understand who acce
 
 Names, portraits, voices, and rooms are optional presentation. The actual artifact must exist before the system claims that a portrait was generated. A placeholder must be labeled as a placeholder. Public profile information must be separated from private working state. A work agenda remains scoped to that work rather than replacing continuing personal interests.
 
+An optional avatar may be generated alongside the creation-time name and character, using the same synthetic starting characteristics. The image call uses an explicitly enabled image-generation capability; accepting images as input does not establish that capability. Among available, enabled image models with reviewed prices in the persona's allowance, choose the lowest conservative reserved cost for a comparable small avatar. Credentials, processing permission and funding remain separate, and subscription usage or a Jev ceiling does not authorize image API spending.
+
+Reserve the image call, money and retained image storage before dispatch. Missing image access or funding must not delay character readiness or useful work. A timeout, cancellation or restart retains uncertain spending and requires an explicit separately funded retry. Reject malformed images and never replace a portrait changed while the call was in flight. Attach a validated preserved artifact only to the still-current eligible persona, with generation provenance and an honest distinction between the requested model and any observed model receipt. The UI exposes pending, unavailable, cancelled and completed states, call inspection, enabled image models and editable funding limits. An avatar does not alter the current self-model or create experience evidence.
+
 ## Starting character and synthetic initialization
 
 Users may provide narrative character, any OCEAN values, and any VAD values. The creation profile is separate from referenced seed material: a document supplied for orientation must not be reinterpreted as a trait configuration.
