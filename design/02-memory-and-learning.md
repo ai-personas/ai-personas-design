@@ -194,6 +194,15 @@ its already admitted sources and authority; future selection cannot retroactivel
 change what it saw. A new focus or retrieval cue invalidates a stale compiled
 request. Discard and scope changes clear the old handoff and cues together.
 
+A persona's `continue` choice requests another funded decision. Its `wait`
+choice yields after the whole synchronous action batch succeeds, including an
+empty batch. Delivering a document and notice need not spend another decision
+just to stop. A failed action or an execution boundary still requires fresh
+observation; an explicit wait command stops the batch at that position and can
+name a particular condition. The final wait and call disposition commit together,
+rechecking new input and operator pause/cancellation. Yielding does not close
+responsibilities, acknowledge input, establish acceptance or imply completion.
+
 Visual inspection selections are usable evidence references: they identify the
 exact image version, purpose and originating work, retaining the image's source
 restrictions. Selecting an image is not itself a visual finding. The persona
