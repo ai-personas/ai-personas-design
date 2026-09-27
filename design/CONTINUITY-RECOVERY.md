@@ -42,6 +42,14 @@ comparison key. Repeating the exact action returns its retained receipt, not a
 new dispatch. Repairing the source permits a fresh request to be reconsidered
 under the normal permission and retry rules; it does not alter the old failure.
 
+An operation rejected because its model decision is malformed, closed, paused
+or no longer authoritative has not established a source lookup failure. Keep
+that decision diagnostic and its undispatched receipt distinct from the source
+retry allowance. An existing source barrier must not disguise a decision
+rejection. A fresh authorized decision does not, by itself, replenish genuine
+failures against an unchanged source. Resuming work never revives a canceled or
+superseded decision, and replaying an exact action never dispatches it again.
+
 ## Infrastructure recovery preserves agency and effects
 
 Transport timeouts, temporary provider unavailability and recoverable infrastructure faults are scheduling conditions. They must not silently become a voluntary persona wait. Declare a small immediate retry allowance, then continue spaced health checks with backoff and coordination across users of the same provider. Respect server retry timing. A health probe that needs inference is a fresh funded call, not free infrastructure activity.
@@ -67,5 +75,20 @@ Failure-recording checks also cover unavailable creation provenance, bounded
 source traversal, exact-action replay after repair, and restoration of normal
 retry suppression once a valid dependency snapshot exists. Keep absence of a
 usable comparison index separate from absence of a recorded failure.
+
+Decision-admission checks include malformed and closed decisions, paused work,
+exact-action replay after resumption, and an already exhausted source allowance.
+They must show that newly rejected decisions do not consume source retries and
+that genuine source failures remain counted. Preserving history is separate
+from deciding whether a historical failure is eligible for a retry comparison.
+
+Validation infrastructure must distinguish a job that never executed from a
+compiler error, a failed test, and an incomplete evidence collection. Preserve
+the source revision, run attempt, available job and step metadata, service
+annotations, and logs independently. Missing logs do not erase an available
+annotation and do not identify a cause on their own. Account or runner repair
+requires the responsible operator; it must not be replaced by disabling checks,
+changing spending authority, or publishing private source. Tests of diagnostic
+collection establish that helper's behavior, not a passed runtime or user task.
 
 Behavioral evidence remains separate: an unchanged short creation brief should reveal what personas actually investigate, produce, check and learn. Evaluate native editability and substantive quality against declared criteria; attractive previews and passing mechanism tests are insufficient. Reuse comparisons must distinguish retention, retrieval and measured benefit. Character comparisons require repeated observations and controlled conditions before attributing differences to OCEAN or modeled VAD.
