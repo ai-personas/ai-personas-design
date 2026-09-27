@@ -33,6 +33,15 @@ still checks current permissions and does not reveal a private document or
 its source contents. Earlier failed receipts remain historical evidence;
 reopening a lookup is not retroactive success.
 
+Failure recording must not depend on successfully building the optional index
+used to recognize repeated lookups. When source provenance is unavailable or
+its traversal exceeds a bound, admission remains blocked and the failed,
+undispatched request retains its original diagnostic. An unavailable dependency
+snapshot is not evidence of an unchanged source and must not receive a fabricated
+comparison key. Repeating the exact action returns its retained receipt, not a
+new dispatch. Repairing the source permits a fresh request to be reconsidered
+under the normal permission and retry rules; it does not alter the old failure.
+
 ## Infrastructure recovery preserves agency and effects
 
 Transport timeouts, temporary provider unavailability and recoverable infrastructure faults are scheduling conditions. They must not silently become a voluntary persona wait. Declare a small immediate retry allowance, then continue spaced health checks with backoff and coordination across users of the same provider. Respect server retry timing. A health probe that needs inference is a fresh funded call, not free infrastructure activity.
@@ -53,5 +62,10 @@ source restriction on a derived document, equivalent exact and convenience
 references, and unrelated edits that do not reopen the lookup. These checks
 establish reconsideration and confidentiality, not correctness of the content
 subsequently read or successful completion of the user's work.
+
+Failure-recording checks also cover unavailable creation provenance, bounded
+source traversal, exact-action replay after repair, and restoration of normal
+retry suppression once a valid dependency snapshot exists. Keep absence of a
+usable comparison index separate from absence of a recorded failure.
 
 Behavioral evidence remains separate: an unchanged short creation brief should reveal what personas actually investigate, produce, check and learn. Evaluate native editability and substantive quality against declared criteria; attractive previews and passing mechanism tests are insufficient. Reuse comparisons must distinguish retention, retrieval and measured benefit. Character comparisons require repeated observations and controlled conditions before attributing differences to OCEAN or modeled VAD.
