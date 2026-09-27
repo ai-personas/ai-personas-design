@@ -91,4 +91,26 @@ requires the responsible operator; it must not be replaced by disabling checks,
 changing spending authority, or publishing private source. Tests of diagnostic
 collection establish that helper's behavior, not a passed runtime or user task.
 
+A successful evidence request is not sufficient evidence of execution. An empty
+log, absent job inventory, or malformed step record must remain distinguishable
+from a usable log, a recorded job with no steps, and an executed failure. Bind
+summaries to the requested run, its observed attempt, and its source revision;
+reject conflicting job or check identities rather than silently combining them.
+A successful aggregate label must not conceal a recorded failed job or step.
+
+Malformed or repeated evidence records must not erase already collected material
+or prevent independent jobs and logs from being collected. Preserve the original
+responses, identify the unusable parts in the summary, and mark collection
+incomplete. Never overwrite an earlier evidence bundle to make a later attempt
+appear complete. Failure to store evidence is itself a collection failure, not
+an unavailable remote log. These are evidence-integrity clarifications, not new
+authority to retry an action, replenish resources, or infer a product result.
+
+Diagnostic checks cover empty successful log responses, absent inventories,
+malformed jobs, steps and annotations, conflicting revisions, duplicate
+identities, and aggregate success that contradicts a failed step. They must
+show that valid independent evidence survives and that missing or conflicting
+material never produces a passing verdict. Keep those diagnostic checks separate
+from execution and behavioral acceptance evidence.
+
 Behavioral evidence remains separate: an unchanged short creation brief should reveal what personas actually investigate, produce, check and learn. Evaluate native editability and substantive quality against declared criteria; attractive previews and passing mechanism tests are insufficient. Reuse comparisons must distinguish retention, retrieval and measured benefit. Character comparisons require repeated observations and controlled conditions before attributing differences to OCEAN or modeled VAD.
