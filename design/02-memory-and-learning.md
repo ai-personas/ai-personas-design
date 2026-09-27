@@ -72,6 +72,8 @@ The system must account for the full input, required instructions, selected reco
 
 At a soft limit, a persona may compact or reselect history. At a hard limit, the system uses a bounded recovery path, an already authorized compatible inference capability, or an explicit block. It must not silently discard current permissions, obligations, or cancellations just to fit the request.
 
+Successful acknowledgement and no-change continuity bookkeeping may use a bounded receipt index even before a context limit is reached. A no-change entry retains the authored focus, reason, next disposition and exact zero graph-change counts; the original transaction remains readable. Current intent, selections and full fragments are supplied independently. Failed, unread or explicitly selected receipts, recent graph edits and unresolved learning cues retain their details. This request projection does not acknowledge inputs, rewrite memory, resolve findings or establish learning quality. Apply it only when the resulting provider request is smaller, including the index and its instructions.
+
 When the mandatory core cannot fit, the current decision is blocked pending restructuring or an authorized capability change. Historical material remains retrievable within access limits. Selected material is not recorded as included unless it actually reached the decision.
 
 The inference capability's supported inputs must be known or explicitly unknown. A description of an image does not prove that the model received or inspected the image. Model refusal, partial output, and failure are visible states, not occasions to fabricate a completed action.
