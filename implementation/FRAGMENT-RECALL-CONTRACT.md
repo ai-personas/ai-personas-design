@@ -39,6 +39,8 @@ Preparation binds the persona, current work, current recall policy, important ob
 
 The candidate packet states its exact versions, discovery route, authored description, applicable condition, material limitations, and enough permitted content for the question. Node, edge, candidate, traversal, token, and byte bounds are separately enforced. Search reports when those bounds prevent completeness. Disconnected nodes have direct retrieval entry points. No public or foreign fragment is treated as owned memory merely because it is semantically similar.
 
+The persona may bound or suspend automatic navigation and discovery previews in its next-context plan. Suspension is recorded as an authored choice, not an empty or exhaustive search. It does not disable explicit graph browsing, delegated selection, current self-fragments, full selections or mandatory qualification bundles. Restoring previews requires only an ordinary context choice; it creates no additional permission or model call by itself.
+
 Required correction and prerequisite relations are checked independently of ordinary association traversal. Expansion limits cannot turn a method without its essential qualification into a complete usable procedure. Cross-work reuse and destination processing each need their own permission checks.
 
 ## 4. Dispatching the optional selector
