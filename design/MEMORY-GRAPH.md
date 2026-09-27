@@ -18,6 +18,8 @@ Search covers readable owned fragments and connections independently of the disp
 
 A visible offset must count eligible results, not leak hidden matches. Navigation can reopen a valid neighborhood without requiring an ancestor path. Cycles are valid associations but must not make retrieval loop. See [candidate discovery](FRAGMENT-RECALL.md#4-find-candidates-before-involving-a-model).
 
+The end of a query means no later matching title or description remains at the current graph state. Increasing the page size cannot add matches after that point. It does not establish that the persona lacks relevant experience: full fragment text was not searched. The response and interface should make this distinction clear. If more evidence is needed, the persona or reader can change the terms or clear the query to browse available descriptions. Suspended automatic previews and failed reads must not claim an exhausted search.
+
 ## Nodes and fragments
 
 Nodes retain stable identities and exact versions. Connections carry situations, attribution, scope, and validity rather than a primary-parent field. Corrections and important prerequisites remain explicit. See [connections](FRAGMENT-PERSONA.md#4-connections-express-situations).
