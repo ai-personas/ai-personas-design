@@ -96,7 +96,21 @@ log, absent job inventory, or malformed step record must remain distinguishable
 from a usable log, a recorded job with no steps, and an executed failure. Bind
 summaries to the requested run, its observed attempt, and its source revision;
 reject conflicting job or check identities rather than silently combining them.
-A successful aggregate label must not conceal a recorded failed job or step.
+A successful aggregate label must not conceal a failed check, service failure
+annotation, or unsuccessful job or step. Cancellation, timeout, required action,
+unfinished work and unrecognized outcomes must not be silently treated as
+success. Optional skipped steps and warning annotations do not, by themselves,
+make successful work fail. A positive diagnostic verdict needs consistent
+successful outcomes and recorded steps; a job with no recorded steps cannot
+supply execution evidence merely because its aggregate label says success.
+
+Project the check's reported diagnostic only after its identity and source
+revision have been verified. Preserve independently retrieved annotations when
+verification is unavailable, but label their association as unverified rather
+than attributing them to the requested revision. Keep the original responses.
+Explain a non-passing verdict using both collection gaps and observed outcome
+blockers; complete collection can still describe unsuccessful execution.
+Whitespace-only log responses remain saved but are not usable execution logs.
 
 Malformed or repeated evidence records must not erase already collected material
 or prevent independent jobs and logs from being collected. Preserve the original
@@ -108,7 +122,11 @@ authority to retry an action, replenish resources, or infer a product result.
 
 Diagnostic checks cover empty successful log responses, absent inventories,
 malformed jobs, steps and annotations, conflicting revisions, duplicate
-identities, and aggregate success that contradicts a failed step. They must
+identities, and aggregate success that contradicts a check, step or service
+failure annotation. Include canceled, timed-out, unfinished and unknown outcomes,
+missing check metadata, whitespace-only logs, and positive controls for successful
+execution with optional skipped steps or warnings. The displayed diagnostic and
+its exit result must agree about whether these blockers remain. These checks must
 show that valid independent evidence survives and that missing or conflicting
 material never produces a passing verdict. Keep those diagnostic checks separate
 from execution and behavioral acceptance evidence.
