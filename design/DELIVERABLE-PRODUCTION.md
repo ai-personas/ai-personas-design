@@ -56,6 +56,38 @@ It does not insert an evaluator's checklist or choose a next experiment.
 policy; case-specific rubrics and historical results retain their own revisions.
 These are requirements and specified scenarios, not demonstrated competence.
 
+## An activity note is not a delivered answer
+
+**Clarification: 27 September 2026.** A requested answer must reach an authorized
+user-facing surface. A private activity summary, a saved draft without delivery,
+or an operator's view of internal activity does not by itself deliver that
+answer. A request for an in-app response with no outside action does not forbid
+that requested response; it does not authorize unrelated messages or effects.
+The persona may prepare and deliver the result in the same decision when the
+existing capabilities and permissions allow it.
+
+Delivery evidence identifies the successful delivery receipt and the exact
+message or submission for the relevant work and intended audience. Review its
+contents and referenced outputs: a success flag, an empty set of failed actions,
+or a generic notice alone cannot establish that the requested result arrived.
+Delivery, substantive correctness, scope fulfillment, and acceptance remain
+separate judgments under the existing evidence rules.
+
+| Observation | What it establishes |
+|---|---|
+| Correct answer only in private activity, followed by waiting | Computation may be correct; no delivered answer is established. |
+| A delivery was attempted but failed | An attempted action and its failure, not a delivered result. |
+| A successful delivery contains only part of the requested result | Delivery occurred; remaining obligations still require assessment. |
+| A successful delivery contains the requested result | Evidence for delivery, not automatic quality approval or acceptance. |
+
+Waiting can still be an appropriate dependency wait or voluntary yield. Do not
+publish private summaries automatically, force another model call, or treat
+every wait as an error. Preserve unmet obligations and the actual delivery
+state. An evaluation that previously checked only operation success must retain
+its old result and criteria, record the missing delivery evidence, and require
+an explicit delivery audit before claiming task success. A guidance change or
+synthetic regression is not proof of improved live delivery.
+
 ## What has not been established
 
 A missing specification is an intake question. A missing authoring or analysis interface may be an implementation capability gap. An unrun campaign is an evidence gap. A true design gap requires showing that the existing rules omit or contradict necessary behavior; lack of a domain-specific example alone does not establish one.

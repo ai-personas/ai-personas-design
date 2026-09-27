@@ -24,6 +24,15 @@ A persona can prepare a fresh context for a work audience by explicitly clearing
 
 Repeated failed lookups with the same target and policy state should reuse their recorded failure after a declared small bound. A changed source or permission can reopen the lookup. Suppression never grants access or resolves an effect. The persona still chooses an owner request, permitted alternative, independent progress or an honest wait.
 
+For a document lookup, the target is the actual saved document version being
+read. Resolve a current-context convenience reference to that target before
+comparing failures. Changes to its availability, its audience, or the permissions
+of its exact source history can make reconsideration useful. An unrelated
+record or policy edit must not replenish the lookup allowance. Reconsideration
+still checks current permissions and does not reveal a private document or
+its source contents. Earlier failed receipts remain historical evidence;
+reopening a lookup is not retroactive success.
+
 ## Infrastructure recovery preserves agency and effects
 
 Transport timeouts, temporary provider unavailability and recoverable infrastructure faults are scheduling conditions. They must not silently become a voluntary persona wait. Declare a small immediate retry allowance, then continue spaced health checks with backoff and coordination across users of the same provider. Respect server retry timing. A health probe that needs inference is a fresh funded call, not free infrastructure activity.
@@ -37,5 +46,12 @@ Read-only interface activity should use consistent snapshots without holding the
 ## Evidence required
 
 Mechanical checks cover interrupted initialization, timed-out decisions, shared recovery probes, quota and credential dispositions, restart, cancellation races, uncertain accounting, unchanged failed lookups, shared-resolution rollback, source withdrawal and private-input preservation. Learning checks demonstrate durable deferral, explicit disposition, atomic graph edits and actual next-context inclusion.
+
+Document recovery checks include a previously missing version becoming available,
+a direct permission grant, a changed policy that still denies access, a changed
+source restriction on a derived document, equivalent exact and convenience
+references, and unrelated edits that do not reopen the lookup. These checks
+establish reconsideration and confidentiality, not correctness of the content
+subsequently read or successful completion of the user's work.
 
 Behavioral evidence remains separate: an unchanged short creation brief should reveal what personas actually investigate, produce, check and learn. Evaluate native editability and substantive quality against declared criteria; attractive previews and passing mechanism tests are insufficient. Reuse comparisons must distinguish retention, retrieval and measured benefit. Character comparisons require repeated observations and controlled conditions before attributing differences to OCEAN or modeled VAD.
