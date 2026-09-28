@@ -28,6 +28,8 @@ The [organization clarification](03-work-and-cooperation.md#how-organization-eme
 
 [Continuity and recovery](CONTINUITY-RECOVERY.md) clarifies persistent learning opportunities, persona-owned working intentions, shared-question resolution, actual supplied sources, and automatic infrastructure recovery without replaying effects.
 
+[Decision efficiency and bounded working context](DECISION-EFFICIENCY.md) clarifies capability-instruction retention, immediately usable discovery, and whole-task cost evaluation. It distinguishes durable identity and evidence from permanently repeated calling instructions, without adding a workflow or claiming measured savings.
+
 ## How to read a requirement
 
 **Must** describes a necessary condition for the applicable feature. **Should** describes a strong recommendation; an implementation records a reason when it takes a different approach. **May** describes an option. Optional does not mean exempt from safeguards once enabled.
@@ -36,7 +38,7 @@ The [invariants and requirement index](../implementation/REQUIREMENTS.md) identi
 
 ## Authority within this handbook
 
-The invariants are the protected foundation. These chapters, the explicitly normative persona-owned-process, development, fragment-persona, fragment-recall and coordination/lifecycle refinements, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
+The invariants are the protected foundation. These chapters, the explicitly normative persona-owned-process, development, fragment-persona, fragment-recall, coordination/lifecycle and decision-efficiency refinements, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
 
 A contradiction between detailed requirements is a design defect to resolve and record, not permission to select the easiest reading. Do not broaden authority or weaken an evidence claim while that conflict is unresolved. Changes follow the [contribution guide](../CONTRIBUTING.md).
 
