@@ -18,6 +18,8 @@ Read the [five diagrams and their text explanations](design/FRAGMENT-RECALL-VISU
 
 The [decision-reference usability checks](evaluation/DECISION-REFERENCE-USABILITY.md) distinguish structurally usable model responses from exact evidence admission, and assess total resources per useful result rather than smaller prompts alone.
 
+The [recall cache identity clarification](implementation/RECALL-CACHE-IDENTITY.md) separates unchanged selector input from execution bookkeeping, while retaining exact provenance and current permission checks.
+
 ## Start with your question
 
 | Your question | Start here | Continue with |
