@@ -2,9 +2,10 @@
 
 [Recall design](../design/FRAGMENT-RECALL.md) · [Recall handoff](FRAGMENT-RECALL-CONTRACT.md) · [Acceptance](../evaluation/FRAGMENT-RECALL.md)
 
-This clarifies the existing recall design's situation-digest cache rule. It adds
-no model role, work phase, permission, budget, or requirement identifier. These
-are implementation and evaluation expectations, not reported product results.
+This clarifies the existing recall design's situation-digest cache rule and the
+preservation of authored recall choices. It adds no model role, work phase,
+permission, budget, or requirement identifier. These are implementation and
+evaluation expectations, not reported product results.
 
 ## Separate three questions
 
@@ -21,6 +22,37 @@ that receipt to claim a new observation, current authorship, or another model ca
 participation, and admission checks still apply. Matching cached input is never
 an authorization to disclose or act. Recheck the cached assessment's original
 source ancestry as well as the new request's current sources.
+
+## Preservation is not renewed authorization
+
+Keeping an existing prospective recall choice is distinct from authoring a new
+one. The no-change form of a next-context plan preserves the original source
+versions, selection modes, count and byte ceilings, and expiry. It must not
+require rediscovery of the same source cards in every primary decision merely
+because optional previews or old read receipts have left the bounded context.
+Otherwise reducing context creates a recurring evidence-repair cost, and an
+unrelated valid handoff or dependent delivery can fail without new work evidence.
+
+Preservation does not silently follow an edited source to its new version, renew
+an expiry, restore a withdrawn source, or extend processing permission or funding.
+A changed or unavailable optional source remains ineligible at use under its old
+binding. An independent valid graph edit, including an edit to a delegated source,
+need not reauthorize that binding merely to commit. The retained choice may
+remain inactive until the persona explicitly replaces or disables it. Record
+retention and source-disposition rules still govern what may remain stored.
+
+A replacement choice still requires the currently received exact source versions
+and all existing authorship checks. An explicitly authored same-transaction
+handle can bind a committed new version under the existing local-reference
+contract; preservation alone cannot do so. An explicit choice to remove the
+delegation disables it rather than restoring the old one. Invalid stored bounds are not repaired or
+expanded by a no-change choice.
+
+This distinction applies only to the optional prospective delegation. Full
+selected content, current self-fragments, mandatory qualifications, current work
+and authority, source restrictions, and inference admission retain their existing
+validation. Neither an old plan nor a cached result makes absent or revoked
+content newly readable, received evidence, or permission to act.
 
 ## Bounded view identity
 
@@ -67,6 +99,21 @@ withdraw an assessment or source, pause participation, and supply a full record
 instead of its focus-only view. Reuse must not bypass the applicable invalidation
 or authority check. Historical ancestry and unknown future view fields must not
 be silently removed to obtain a hit.
+
+Preservation checks should omit prior source cards from a new bounded request,
+then commit an ordinary no-change handoff without rediscovery or an extra model
+call. Exercise repeated decisions and restored durable state. Edit or retire a
+delegated source and verify that preserving the plan neither blocks an independent
+valid edit nor binds the old choice to the new source version. Expired plans must
+remain expired. Explicit replacement must still reject unreceived or stale
+sources; deliberate local-handle replacement and disabling must remain available.
+Invalid graph edits must still roll back atomically, and selected or mandatory
+source failures must not be ignored as optional-delegation failures.
+
+Delivery verification must exercise the real continuity-dependent reply path,
+not merely the storage mutator. Preserve the dependency: failed changes cannot
+produce a success confirmation. Report avoided rediscovery or repair decisions
+separately from measured total tokens per correctly delivered result.
 
 These checks do not establish persona usefulness. A separately authorized matched
 work trial must still measure correct delivery, primary and auxiliary tokens,
