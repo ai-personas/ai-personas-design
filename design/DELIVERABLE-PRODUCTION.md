@@ -66,6 +66,15 @@ that requested response; it does not authorize unrelated messages or effects.
 The persona may prepare and deliver the result in the same decision when the
 existing capabilities and permissions allow it.
 
+An explicit user-answer field in a provider response may be translated into an
+ordinary message action for the current work. Its text is authored separately
+from the private activity summary. It remains subject to the same action limit,
+permissions, source restrictions, cancellation, freshness, journaled retry and
+decision barriers as a directly authored message. Delivery follows preceding
+synchronous actions and precedes an explicit wait; failure or an asynchronous
+boundary can suppress it. This affordance does not authorize a reply in a mode
+that prohibits user delivery, or establish the outcome of an unobserved action.
+
 Delivery evidence identifies the successful delivery receipt and the exact
 message or submission for the relevant work and intended audience. Review its
 contents and referenced outputs: a success flag, an empty set of failed actions,
