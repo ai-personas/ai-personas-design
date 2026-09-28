@@ -144,6 +144,16 @@ failed learning transaction must not produce a successful retention confirmation
 Do not reopen a closed evaluation, manufacture evidence or replenish its budget
 to make a new implementation appear to have passed the original case.
 
+## Operation contracts must track the current decision
+
+Apply the [current-decision operation working-set obligations](../implementation/OPERATION-WORKING-SET.md)
+to context and provider-encoder checks. Durable terminal history must not pin
+unrelated follow-up contracts indefinitely. Current observations, the latest
+model batch and unresolved jobs must keep their relevant vocabulary available,
+including artifact inspection from already supplied successful receipts.
+Measure both retired overhead and avoided discovery-only decisions without
+weakening authority, deleting evidence or turning metadata into verification.
+
 ## Outcome and economics gate
 
 Report mechanical schema checks, compiled tests, real transport checks and live
