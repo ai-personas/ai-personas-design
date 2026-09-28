@@ -16,6 +16,14 @@ Availability is checked against current authority. Historical use or discovery d
 
 A smaller working set may require later rediscovery. Its bounds are engineering choices to validate, not universal values prescribed by this handbook. A smaller prompt is not an improvement when the extra calls cost more, delay delivery, or reduce the quality of the result.
 
+## Repair must not require immediate rediscovery
+
+Consider a persona that requests several capability instructions together and then attempts one of them. If that attempt fails or conflicts with a newer record, the next decision should still receive that capability's complete current instructions when it remains available. Evicting those instructions precisely because the attempt failed creates a preventable discovery-only round trip before correction. This is a clarification of immediately usable discovery and recovery, not a prescribed retry workflow.
+
+A failed attempt is still a later decision attempt. Recency must not be measured only by successful effects, leaving an older collection of instructions indefinitely marked as newly discovered. Retaining the latest failed command for possible correction and retiring an older discovery collection are separate responsibilities. The temporary correction opportunity should remain bounded and recoverable across restart and unrelated interface polling; it does not make every failed command a permanent prompt resident.
+
+Failed discovery does not establish that the requested capability's instructions were obtained. Another persona's activity must not replace this persona's correction opportunity. Current availability and permission checks still apply, and a removed capability must not be restored through a historical failure. The persona may correct the attempt, choose another method, ask for help, or stop. Keeping instructions available neither retries an action nor establishes that an uncertain effect did not occur.
+
 ## Preserve the information that makes work accountable
 
 This distinction concerns reusable capability instructions, not permission to drop substantive evidence. Current human input, accepted obligations, cancellation, authority and funding limits, selected learning, exact selected sources, adverse observations, and unresolved effects retain their existing protections. Capability-instruction eviction must not become a second, hidden memory-selection policy.
@@ -30,7 +38,7 @@ The evaluation must inspect the delivered result, not only whether the response 
 
 ## Evaluate the whole task
 
-Compare the same requests under matched models, permissions, allowances, and evaluation criteria. Include a fresh short request, sustained work after many different capabilities have been used, a multi-capability discovery batch, a restart, a permission change, and a failed effect needing observation or cancellation.
+Compare the same requests under matched models, permissions, allowances, and evaluation criteria. Include a fresh short request, sustained work after many different capabilities have been used, a multi-capability discovery batch, a restart, a permission change, and a failed effect needing observation or cancellation. Also test a discovery collection larger than the ordinary working set followed by failed or conflicting use, a decision with no successful actions, and failed discovery. Verify immediately available correction, bounded retirement of old instructions, preservation across polling and restart, and rejection after permission removal.
 
 | Question | Evidence needed |
 |---|---|
