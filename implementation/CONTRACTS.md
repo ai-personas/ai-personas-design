@@ -87,6 +87,15 @@ Material records identify their source or author, scope, version, visibility, an
 
 **Visible evidence:** proposed, admitted, running, completed, failed, stop requested, canceled to the observed extent, and effect unknown remain distinguishable. Completed execution does not prove a correct result.
 
+A state-transition receipt can identify the exact affected record version and
+changed outcome without repeating the full record. A wait preserves its
+registration, stopping disposition and participation status; an invitation
+response preserves membership separately from commitment acceptance. Full state
+and prior versions remain available through authorized record reads. Replaying
+the same action returns its recorded outcome, not a new snapshot of later state.
+This reduces repeated history payload without turning an unread record into
+received evidence or rewriting historical receipts.
+
 ## Authority and resource accounting
 
 **Inputs:** controlling grant, current actor and work scope, exact effect or permitted envelope, applicable ceilings, outstanding reservations, and known or uncertain usage.
