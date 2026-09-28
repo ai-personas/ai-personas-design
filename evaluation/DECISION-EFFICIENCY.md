@@ -1,8 +1,7 @@
 # Useful decisions within a bounded context
 
-[Evaluation guide](README.md) · [Acceptance scenarios](ACCEPTANCE.md) ·
-[Fragment recall](FRAGMENT-RECALL.md) ·
-[Behavioral contracts](../implementation/CONTRACTS.md)
+[Design handbook](../README.md) ·
+[Fragment recall](../design/FRAGMENT-RECALL.md)
 
 This is an evaluation clarification of existing usability, resource, evidence,
 and autonomy requirements. It adds no invariant or required task workflow and
