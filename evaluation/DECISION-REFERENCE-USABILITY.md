@@ -43,6 +43,38 @@ other constraints, apply only at recognized schema positions, remain bounded,
 and disclose unsupported representations instead of guessing. Any sharing of
 repeated structures must remain lossless after the deliberate refinement.
 
+## Discovery has one lifecycle across the whole request
+
+A bounded active capability set is not a bounded request when retired contracts
+continue to travel through historical discovery results. Evaluate instructions,
+response contracts, ordinary history, explicitly selected receipts and recovery
+indexes together. A contract leaving the active set must not implicitly impose
+permanent repeated full-help overhead through another context channel.
+
+Keep newly acquired calling instructions usable for the following decision,
+including a batch larger than the ordinary recent-history window. Operator
+inspection and polling are not new persona decisions. Preserve current repair
+instructions and full help for active capabilities. A still-discoverable retired
+contract may instead have a bounded recovery entry with its operation name and
+exact archived receipt reference. Reading that receipt is not repeating an
+outside effect. Historical help never restores withdrawn authority.
+
+Only a recognized, settled discovery result may receive this treatment. An
+arbitrary record resembling a schema, a changed historical contract, an extended
+result carrying an adverse observation, a failed or unfinished action, unread
+input or explicit evidence selection must not be silently discarded. Schema
+argument names such as state, error and verdict are not themselves observations;
+that distinction requires validated provenance and content, not a global
+exception to failure protection. Durable receipts remain intact.
+
+Test the complete fresh-discovery batch, later eviction, operator polling,
+rediscovery, restart, permission changes, selected and unread help, malformed
+results, and exact archive recovery. Compare the real provider-bound views with
+all replacement indexes and instructions included. When both views fit, retain
+the original if projection would increase its quoted input exposure. A smaller
+serialized journal alone is not evidence of a smaller encoded request, measured
+token savings or better task performance.
+
 ## Supplemental checks under existing recall scenarios
 
 Extend the atomic-update, exact-context and bounded-cost scenarios with a valid
@@ -65,6 +97,15 @@ Retain failures, exact retries, rollback and dependent-delivery behavior. A
 failed learning transaction must not produce a successful retention confirmation.
 Do not reopen a closed evaluation, manufacture evidence or replenish its budget
 to make a new implementation appear to have passed the original case.
+
+For disabled or terminally unavailable auxiliary recall, verify useful ordinary
+reads or explicit qualified selection, or an actually delivered limitation when
+progress is blocked. An unchanged delegation is not a pending selector call.
+Successful internal updates followed by silence do not pass a delivery scenario.
+A warning explaining unavailability is necessary but is not behavioral evidence
+that the persona uses the available alternative. Do not manufacture a semantic
+match, force a particular memory choice, silently resume an explicit wait, or
+spend extra inference to make this check pass.
 
 ## Outcome and economics gate
 
