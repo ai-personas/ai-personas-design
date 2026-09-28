@@ -30,6 +30,18 @@ This distinction concerns reusable capability instructions, not permission to dr
 
 The persona continues to choose its methods and collaborators. No task text, profession, personality trait, or hidden workflow should choose an enforced capability sequence. The [fragment-recall design](FRAGMENT-RECALL.md) still places learning authorship in ordinary primary decisions; efficiency does not justify a second generative memory writer or unmetered selection.
 
+## Paid preparation must leave room for the primary decision
+
+An optional assessment is not a useful outcome by itself. Before paying for a new assessment, the runtime should locally verify that the assigned primary decision capability is available, has enforceable exposure bounds, and can still be funded after that assessment's maximum admitted cost. Checking that each call fits separately is insufficient: preparation must not knowingly consume the last production call or the token and monetary headroom needed for the currently quotable primary decision. Protected closeout allowances and existing uncertain charges remain protected and accounted.
+
+This is a sequential feasibility check, not two simultaneous remote calls. A deployment permitting only one concurrent call must still support affordable preparation followed by a primary decision. The check must not dispatch a model, invent a receipt, retain a simulated charge, spend an attempt, grant writer authority, or change the assigned model. A failed local check follows the authorized blocking or deterministic fallback policy; it does not silently change that policy or replenish funding. Existing context that already requires maintenance should be repaired before buying optional semantic recall.
+
+Candidate-free preparation and valid exact-cache reuse need no new paid-assessment headroom check. They remain subject to current access, source freshness, processing authority, and actual primary admission. The runtime must distinguish a locally rejected preparation from a failed remote assessment whose observed or uncertain spending remains chargeable.
+
+A check against the current pre-recall decision is not a reservation for every possible recall-expanded prompt, a lock on other participants' future spending, or proof of task completion. Final prepared context must still pass the assigned adapter's exposure check and current resource admission. Implementations must disclose this boundary rather than label speculative feasibility as guaranteed delivery. Conservative skipping may forgo a beneficial assessment; evaluate that tradeoff against task quality as well as total cost.
+
+Exercise exhausted production calls, combined token and cost bounds, missing primary deployment or pricing, unavailable quotations, a single concurrency slot, unchanged retries, blocking and deterministic fallbacks, and exact cache reuse. Demonstrate that successful and rejected local previews leave no simulated call, receipt, accounting change, or wakeup behind. Fewer paid preparation calls establish an avoided mechanism cost, not a measured improvement in useful task completion.
+
 ## Useful delivery, not successful bookkeeping
 
 A simple request may be satisfied by a direct, attributable answer. A task needing a document, file, tool result, or permission requires the corresponding actual result and evidence. Neither successful internal updates nor a private activity summary substitutes for delivery to the intended recipient. Yielding is distinct from completing the task.
