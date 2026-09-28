@@ -73,6 +73,54 @@ or an explicit useful account of missing information and its blocker. Count the
 cost of idle and unsuccessful decisions in the whole task. Do not replenish or
 reopen a closed evaluation to demonstrate recovery.
 
+## A qualified method must be discoverable as one choice
+
+A graph page is not a complete inventory of a method's prerequisites. Search,
+pagination and a small preview allowance can hide a correction or a transitive
+prerequisite even while the method itself is visible. Do not make the persona
+infer that the qualification does not exist, or reconstruct a complete method
+through a sequence of individual fragment lookups.
+
+A returned graph card must distinguish the memory-node choice that loads the
+whole required bundle from the identity of one fragment record. Give the
+persona a usable, copyable reference and explain the distinction in its ordinary
+decision context, without a separate discovery-only model call. A bounded
+qualification summary should report whether the current exact bundle is
+available and how many full fragments it includes. It must not expose extra
+identities or text merely because those endpoints fall outside the page.
+
+Use the same qualification rules as full-context compilation. Inaccessible,
+stale or excessive requirements make the complete bundle unavailable; a partial
+count must not suggest that a truncated method is complete. Withhold restricted
+endpoint details. Invalid stored data and storage failures remain errors rather
+than invented absence. Qualification checks for a returned page must not expand
+into full-bundle traversal for every filtered row or pagination look-ahead.
+
+An available summary is neither semantic applicability nor admission of the
+whole request. It does not activate memory, authorize a selector, change current
+character, establish observed success, or grant funding. Existing source,
+version, context-size and authority checks still govern the later choice.
+
+Preserve the distinction between discovery and already supplied observations.
+When an explicit fragment read has already caused its required bundle to be
+supplied in the current decision, identify that supplied material clearly.
+Do not require another read or persistent activation merely to receive it again.
+The persona still judges its applicability and chooses any persistent context.
+
+Extend the existing recall checks with a method whose correction has its own
+prerequisite, while only the method matches a one-card search. Verify the
+complete selection, unchanged state before selection, and absence of full text
+or undisplayed endpoint identities in the preview. Include optional associations,
+inaccessible and changed requirements, finite cycles, oversized bundles and
+corrupt bindings. Check ordinary decision guidance and restricted decision modes
+without widening their available operations.
+
+Measure the additional preview and instruction bytes against complete-task
+cost and correct delivery. A mechanism check cannot establish that a model will
+choose the qualified method or use it correctly. Evaluate a fresh authorized
+comparison after installing the exact tested revisions; do not infer behavior
+from an older installed checkpoint or reopen a closed trial.
+
 ## Supplemental checks under existing recall scenarios
 
 Extend the atomic-update, exact-context and bounded-cost scenarios with a valid
