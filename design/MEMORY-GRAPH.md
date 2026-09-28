@@ -16,6 +16,15 @@ Current character is consistently supplied through designated ordinary fragments
 
 Search covers readable owned fragments and connections independently of the displayed neighborhood. Exact whole-word description search remains an explicitly labeled operation; semantic assessment is a separate optional route. Search matches are not full-text inclusion or authority. Missing or retired targets have honest unavailable dispositions. Recovery leaves the durable graph unchanged and does not silently replace explicit selections. Corrupt data, invalid bounds, and storage failures remain errors rather than successful empty search results.
 
+Ordinary decisions use the bounded indexed shortlist for discovery. They do not
+automatically receive the first page of the archive. An explicit focus, query or
+page offset requests one graph page; a query filters that page rather than
+adding a second unfiltered page. With no browse choice, the absence of a graph
+page means navigation was not requested, not that memory is empty or search is
+exhaustive. Owned, permission-checked fragment previews may also inform an
+invitation decision and a future recall plan without granting membership or
+activating full-fragment recall before acceptance.
+
 A visible offset must count eligible results, not leak hidden matches. Navigation can reopen a valid neighborhood without requiring an ancestor path. Cycles are valid associations but must not make retrieval loop. See [candidate discovery](FRAGMENT-RECALL.md#4-find-candidates-before-involving-a-model).
 
 The end of a query means no later matching title or description remains at the current graph state. Increasing the page size cannot add matches after that point. It does not establish that the persona lacks relevant experience: full fragment text was not searched. The response and interface should make this distinction clear. If more evidence is needed, the persona or reader can change the terms or clear the query to browse available descriptions. Suspended automatic previews and failed reads must not claim an exhausted search.
