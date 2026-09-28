@@ -50,6 +50,14 @@ rejection. A fresh authorized decision does not, by itself, replenish genuine
 failures against an unchanged source. Resuming work never revives a canceled or
 superseded decision, and replaying an exact action never dispatches it again.
 
+For a resolved lookup request, assess decision authority before attempting its
+source-dependency comparison. Unavailable creation provenance or an exceeded
+traversal bound must not hide an already invalid decision. Diagnosing a closed
+or paused decision must not require repairing an inaccessible source first.
+An otherwise admissible request still undergoes the same bounded dependency
+inspection and permission checks. Neither error precedence nor source repair
+can revive an old rejected action or rewrite its receipt.
+
 ## Infrastructure recovery preserves agency and effects
 
 Transport timeouts, temporary provider unavailability and recoverable infrastructure faults are scheduling conditions. They must not silently become a voluntary persona wait. Declare a small immediate retry allowance, then continue spaced health checks with backoff and coordination across users of the same provider. Respect server retry timing. A health probe that needs inference is a fresh funded call, not free infrastructure activity.
@@ -81,6 +89,10 @@ exact-action replay after resumption, and an already exhausted source allowance.
 They must show that newly rejected decisions do not consume source retries and
 that genuine source failures remain counted. Preserving history is separate
 from deciding whether a historical failure is eligible for a retry comparison.
+Combine invalid decisions with unavailable provenance and oversized dependency
+histories. Check that the decision diagnostic survives, ordinary requests still
+receive their source rejection, and replay after both resumption and source
+repair returns the original undispatched receipt.
 
 Validation infrastructure must distinguish a job that never executed from a
 compiler error, a failed test, and an incomplete evidence collection. Preserve
@@ -112,6 +124,18 @@ Explain a non-passing verdict using both collection gaps and observed outcome
 blockers; complete collection can still describe unsuccessful execution.
 Whitespace-only log responses remain saved but are not usable execution logs.
 
+When the service reports a job or annotation inventory size, reconcile it with
+all collected pages before declaring the collection complete. A short page alone
+does not prove that an advertised inventory was retrieved. Explicit counts must
+be nonnegative whole numbers within the collector's exact counting range and
+remain consistent across pages; a count that disappears after being reported,
+changes, or disagrees with the collected rows leaves incomplete evidence. Keep
+valid rows, raw responses and independent logs even when counts conflict. Bind
+an annotation count to verified check metadata, not an unrelated check. Display
+reported and collected counts separately. An unreported count stays unknown,
+not an invented zero; zero annotations is valid only as a count of no annotations,
+not as evidence that the associated execution succeeded.
+
 Malformed or repeated evidence records must not erase already collected material
 or prevent independent jobs and logs from being collected. Preserve the original
 responses, identify the unusable parts in the summary, and mark collection
@@ -130,5 +154,10 @@ its exit result must agree about whether these blockers remain. These checks mus
 show that valid independent evidence survives and that missing or conflicting
 material never produces a passing verdict. Keep those diagnostic checks separate
 from execution and behavioral acceptance evidence.
+Include matching zero and multi-page counts as positive controls, truncated or
+excess inventories, invalid counts, and counts that change or disappear between
+pages. Count inconsistencies must remain visible without suppressing otherwise
+available diagnostics. A complete inventory containing a failure still describes
+failed execution.
 
 Behavioral evidence remains separate: an unchanged short creation brief should reveal what personas actually investigate, produce, check and learn. Evaluate native editability and substantive quality against declared criteria; attractive previews and passing mechanism tests are insufficient. Reuse comparisons must distinguish retention, retrieval and measured benefit. Character comparisons require repeated observations and controlled conditions before attributing differences to OCEAN or modeled VAD.
