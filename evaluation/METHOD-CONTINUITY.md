@@ -51,8 +51,9 @@ remain necessary. Non-command citations inherit source restrictions. Foreign,
 fabricated, duplicated, erased or inaccessible references cannot be substituted
 for an observation. New assessments freeze their cited snapshots; a later receipt
 change requires reassessment rather than rebinding the old verdict to new facts.
-A legacy binding remains subject to its existing freshness checks without
-fabricating an assessment-time snapshot that was never recorded.
+A binding missing required current evidence cannot support a new release claim.
+Reject it without fabricating an assessment-time snapshot; a fresh assessment
+must establish the current evidence explicitly.
 
 Exercise a justified reviewer disagreement, a confidently wrong acceptance,
 missing expertise, review refusal and insufficient funding. An author's own

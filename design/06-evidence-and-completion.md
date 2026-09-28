@@ -148,14 +148,13 @@ dispositions until explicitly changed; upgrading software is not retrospective
 consent to waive them. Legacy field names may preserve subjects and attribution,
 but must not restrict which activities a persona can choose.
 
-Earlier assessments without recorded citation snapshots must not acquire
-fabricated historical fingerprints during an upgrade. Existing bindings retain
-their original freshness and qualification rules. A fresh assessment can use
-the new persona-judgment contract without manufacturing a successful command.
-Unknown, malformed or explicitly null snapshot metadata is not a compatibility
-escape. Changes in applicability do not rewrite historical verdicts or human
-acceptance. An implementation must document downgrade limitations separately;
-dropping new integrity metadata is not a safe migration.
+Historical assessments without required citation snapshots cannot support new
+claims under the current binding contract. They must not acquire fabricated
+historical fingerprints during an upgrade. A fresh assessment establishes current
+evidence without manufacturing a successful command. Missing, unsupported,
+malformed or explicitly null required snapshot metadata fails closed. Changes
+in applicability do not rewrite historical verdicts or human acceptance. The
+first release does not support older experimental contracts or downgrade paths.
 
 ## Historical verdict versus current applicability
 
