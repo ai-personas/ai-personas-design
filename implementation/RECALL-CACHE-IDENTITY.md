@@ -101,6 +101,30 @@ A changed focus, new observation, altered candidate or question, revoked source,
 changed relevant processing policy, or unresolved model version prevents an
 unjustified cache hit. An approximate semantic similarity is not exact reuse.
 
+## Preparation output is not its own new evidence
+
+Each bounded preparation evaluates recall conditions against the evidence and
+full selections that preceded that preparation. Fragments added by deterministic
+recall, semantic selection, or their required qualification bundles are output
+for the upcoming ordinary decision, not new received events inside the same
+preparation. Apply this boundary consistently to positive, negated, and compound
+conditions, candidate identity, packing, and admission revalidation.
+
+Otherwise a rule that recalls a missing method can negate itself as soon as the
+method is packed. Another rule can become newly eligible merely because the
+first rule supplied its trigger. Such feedback can reject an unchanged prepared
+request, create unnecessary reassessment, or turn bounded recall into recursive
+selection. Repeating preparation until conditions settle is not a remedy:
+negated conditions need not settle, and repetition grants no additional funding.
+
+This distinction removes no full text from the main decision. Required
+corrections and prerequisites remain complete. Independently supplied evidence
+and explicit selections still count; a later ordinary decision can choose the
+recalled method as part of its next base context. Exact versions, source rights,
+expiry, cancellations, and real changes to the base evidence remain subject to
+all existing checks. Stable preparation must not be obtained by weakening those
+checks or by silently accepting a different selector packet.
+
 ## A cache hit is not progress by itself
 
 A completed unknown assessment remains unknown after reuse. It is not a pending
@@ -144,6 +168,17 @@ with unavailable optional navigation. Explicit replacement without a received
 card and unobserved edits must still fail; explicit clearing and an observed
 valid edit must still work. Test an active selection of the same node separately
 to ensure the navigation exception cannot bypass required full-context checks.
+
+Preparation checks should pack a missing method under a negated receipt
+condition and then run actual admission validation without changing the source
+store. The request must remain valid. Add another rule triggered by the packed
+method or its required correction: it must not cascade within that preparation.
+Exercise positive semantic selections, compound conditions with unknown outcomes,
+repacking, and restored state. Confirm that full qualified text remains present
+and that explicit later selection can satisfy the condition. New base evidence,
+source revision, withdrawal, or expiry must still invalidate affected results.
+Count selector and primary dispatches through the complete path; a condition
+unit test alone does not prove successful delivery or reduced task cost.
 
 Delivery verification must exercise the real continuity-dependent reply path,
 not merely the storage mutator. Preserve the dependency: failed changes cannot
