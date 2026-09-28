@@ -43,6 +43,36 @@ other constraints, apply only at recognized schema positions, remain bounded,
 and disclose unsupported representations instead of guessing. Any sharing of
 repeated structures must remain lossless after the deliberate refinement.
 
+## Unavailable preparation is not a pending dependency
+
+Reflect mechanically known current preparation availability in newly offered
+choices, not only in explanatory prose. When semantic processing is explicitly
+disabled, do not offer a new semantic or indexed-search delegation as an
+executable path under that policy. Keep the constraints coupled: indexed search
+requires semantic processing, and a remaining deterministic delegation needs
+actual sources. Removing one capability must not leave another impossible
+combination available.
+
+Preserve permitted explicit full-fragment selection, deterministic recall and
+null/preserve/clear choices. Do not silently rewrite an existing inactive plan,
+force a next step or wait, fabricate a pending job, perform an unapproved read,
+or broaden permissions or funding. A fresh request after a policy change may
+offer the newly available capability. Missing status, no eligible candidates
+and a transient fallback are not interchangeable with disabled processing.
+
+Test the generated contracts through nullable branches, all applicable decision
+modes and lossless sharing. Include the dependent capability/source-count
+combination matrix, unchanged stored semantic and indexed plans, direct active
+selection, and unrelated schema-shaped literal data. Verify the actual request
+builder for each transport. An embedded inner contract carried as text is not
+provider-enforced validation of that text; report the distinction explicitly.
+
+A successful operation or a well-formed wait is not useful delivery. In a newly
+authorized disabled-preparation comparison, require a useful answer or artifact,
+or an explicit useful account of missing information and its blocker. Count the
+cost of idle and unsuccessful decisions in the whole task. Do not replenish or
+reopen a closed evaluation to demonstrate recovery.
+
 ## Supplemental checks under existing recall scenarios
 
 Extend the atomic-update, exact-context and bounded-cost scenarios with a valid
