@@ -81,17 +81,29 @@ accepted obligation. Replaying advice must not downgrade a later explicit block.
 
 ## Host execution is not a workflow sandbox
 
-The ordinary local CLI experience should permit host tools for a newly created
-workspace without an application sandbox or per-tool execution grant. Tool
-selection, installation, filesystem work, network use and subprocesses then use
-the host account's real permissions. The persona chooses the means within the
-work and authority actually entrusted to it.
+The ordinary local CLI experience should enable host tools for both newly created
+workspaces and existing node data, without an application sandbox or per-tool
+execution grant. Tool selection, installation, filesystem work, network use and
+subprocesses use the host account's real permissions. The persona chooses the
+means within the work and authority actually entrusted to it. A command inventory
+is an observation, not an allowlist: an unlisted package, tool or skill may be
+installed and used. Host access does not promise administrator privileges,
+working package registries or that every installation will succeed.
 
-Existing deployments retain their recorded execution choice unless the operator
-explicitly changes it. A deployment that the operator deliberately isolates must
-identify that choice and its limitations; it must not silently fall back to
-broader access after an isolation failure. A persisted host-tools choice is not
-an unrestricted test profile and does not falsify resource accounting.
+Normal CLI startup selects host execution, including when the previous process
+recorded host tools as disabled. Isolation must be an explicit option on each
+launch that requires it. An operator's UI or API change remains effective for
+subsequent jobs in the current process; the next launch applies its selected mode.
+This startup policy supersedes the earlier rule that a saved disabled setting
+implicitly selected isolation on later normal launches. The interface and launch
+help must disclose this behavior and the explicit isolation option.
+
+A deployment that the operator deliberately isolates must identify that choice
+and its limitations; it must not silently fall back to broader access after an
+isolation failure. Host tools do not require an unrestricted test profile and
+must not falsify resource accounting. Changing execution mode must not resume
+paused or cancelled participation, reopen archived work, erase an uncertain
+charge or treat a failed action as a successful result.
 
 Host access does not provide confidentiality between personas sharing an account.
 Application record permissions cannot protect credentials or files that the same
@@ -119,10 +131,14 @@ activity status or installing a blocker. A separate explicit blocking decision
 must remain effective. Receipt replay, recovery and current permission changes
 must preserve those distinctions.
 
-For host execution, evaluate a new workspace's default, preservation of an
-existing operator choice and an explicit switch. Verify the actual execution
-mode instead of inferring it from prompt text. A normal funding/accounting
-profile must not be replaced by a test profile to obtain host tools.
+For host execution, evaluate the default on new and existing workspaces,
+including existing data with a disabled setting; an explicit isolated launch;
+operator changes during a process; and the next launch's mode. Verify unchanged
+paused work and accounting, and avoid redundant default-setting receipts when
+host access is already enabled. Verify actual execution, including filesystem
+writes, subprocesses and installation, separately from configuration or prompt
+text. A normal funding/accounting profile must not be replaced by a test profile
+to obtain host tools.
 
 These are acceptance cases for the implementation, not a checklist imposed on
 personas doing ordinary work. A written test, passing record-integrity fixture,
