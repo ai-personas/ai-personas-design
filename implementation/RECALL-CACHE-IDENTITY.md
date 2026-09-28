@@ -48,11 +48,38 @@ contract; preservation alone cannot do so. An explicit choice to remove the
 delegation disables it rather than restoring the old one. Invalid stored bounds are not repaired or
 expanded by a no-change choice.
 
-This distinction applies only to the optional prospective delegation. Full
-selected content, current self-fragments, mandatory qualifications, current work
+This distinction covers prospective delegation and the dormant navigation
+described below, not active payload validation. Full selected content, current self-fragments, mandatory qualifications, current work
 and authority, source restrictions, and inference admission retain their existing
 validation. Neither an old plan nor a cached result makes absent or revoked
 content newly readable, received evidence, or permission to act.
+
+## Dormant navigation is not an active read
+
+A retained graph focus is a navigation pointer, not a request to include its
+full fragment in every primary decision. Suspending optional previews may leave
+that pointer without a current card. An unavailable focus may likewise cause
+navigation to recover to discovery without changing the stored choice. Neither
+condition should make an otherwise valid no-change handoff depend on another
+browse call just to reauthorize the unchanged pointer.
+
+Preserve the stored focus identity when the graph selection is unchanged. Do
+not synthesize a received card, revive a retired node, select a fragment, claim
+knowledge of its content, or change current source permissions. Subsequent
+navigation and reads must still validate the current node and its information
+rights. Invalid stored pointer syntax is not a valid historical choice and must
+not be repaired silently.
+
+A newly authored replacement focus still requires a currently received owned
+node or an authorized local handle. Explicitly clearing focus clears it; it must
+not restore the old pointer. Active full-fragment selections, graph edits and
+required qualification bundles retain their own evidence, freshness and access
+checks even when the same node is also a dormant focus. A failed edit must roll
+back the entire handoff and continue to block any reply that depends on it.
+
+This adds no lookup, automatic page, selector attempt, retry, prompt role or
+funding. It separates preservation of optional navigation from authorization to
+read or modify memory, rather than keeping more old cards in every request.
 
 ## Bounded view identity
 
@@ -109,6 +136,14 @@ remain expired. Explicit replacement must still reject unreceived or stale
 sources; deliberate local-handle replacement and disabling must remain available.
 Invalid graph edits must still roll back atomically, and selected or mandatory
 source failures must not be ignored as optional-delegation failures.
+
+Navigation checks should combine a retained non-active focus with suspended
+previews and no previous browse receipt. Repeated no-change decisions must
+preserve the pointer without adding its card, fragment or evidence alias. Repeat
+with unavailable optional navigation. Explicit replacement without a received
+card and unobserved edits must still fail; explicit clearing and an observed
+valid edit must still work. Test an active selection of the same node separately
+to ensure the navigation exception cannot bypass required full-context checks.
 
 Delivery verification must exercise the real continuity-dependent reply path,
 not merely the storage mutator. Preserve the dependency: failed changes cannot
