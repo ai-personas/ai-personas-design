@@ -16,6 +16,8 @@ The current [illustrated fragment-recall design](design/FRAGMENT-RECALL.md) expl
 
 Read the [five diagrams and their text explanations](design/FRAGMENT-RECALL-VISUALS.md), the [personal graph contract](design/FRAGMENT-PERSONA.md), and the [acceptance plan](evaluation/FRAGMENT-RECALL.md). This design explicitly permits separately metered selection without introducing another generative memory writer. It is not a claim of implemented or measured behavior.
 
+The [decision-reference usability checks](evaluation/DECISION-REFERENCE-USABILITY.md) distinguish structurally usable model responses from exact evidence admission, and assess total resources per useful result rather than smaller prompts alone.
+
 ## Start with your question
 
 | Your question | Start here | Continue with |
