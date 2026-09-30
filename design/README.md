@@ -28,6 +28,8 @@ The [organization clarification](03-work-and-cooperation.md#how-organization-eme
 
 [Continuity and recovery](CONTINUITY-RECOVERY.md) clarifies persistent learning opportunities, persona-owned working intentions, shared-question resolution, actual supplied sources, and automatic infrastructure recovery without replaying effects.
 
+[Effort, persistence, and accountable stopping](EFFORT-AND-STOPPING.md) clarifies character-shaped effort, explicit continuation and yielding, faithful stopping records, and comparisons that separate useful outcomes from time and activity counts. It preserves deliberate waits and bounded resources rather than introducing personality-based iteration quotas.
+
 [Decision efficiency and bounded working context](DECISION-EFFICIENCY.md) clarifies capability-instruction retention, immediately usable discovery, and whole-task cost evaluation. It distinguishes durable identity and evidence from permanently repeated calling instructions, without adding a workflow or claiming measured savings.
 
 [Qualified observations](QUALIFIED-OBSERVATIONS.md) clarifies that required corrections and prerequisites accompany full reads as well as selected memory. Reading a method is not a persistent recall choice; neither a card nor optional association activates full text. Its acceptance cases are specified, not reported as passed.
@@ -40,7 +42,7 @@ The [invariants and requirement index](../implementation/REQUIREMENTS.md) identi
 
 ## Authority within this handbook
 
-The invariants are the protected foundation. These chapters, the explicitly normative persona-owned-process, development, fragment-persona, fragment-recall, coordination/lifecycle, decision-efficiency and qualified-observation refinements, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
+The invariants are the protected foundation. These chapters, the explicitly normative persona-owned-process, development, fragment-persona, fragment-recall, coordination/lifecycle, decision-efficiency, effort/stopping and qualified-observation refinements, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
 
 A contradiction between detailed requirements is a design defect to resolve and record, not permission to select the easiest reading. Do not broaden authority or weaken an evidence claim while that conflict is unresolved. Changes follow the [contribution guide](../CONTRIBUTING.md).
 
