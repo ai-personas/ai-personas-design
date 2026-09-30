@@ -54,6 +54,23 @@ When production resources become insufficient, the system should preserve a usef
 
 Mechanical stopped-state reporting, current status, and preservation of existing evidence must remain possible without another successful model call. Review resources must also correspond to an actual accepted review responsibility; a reserved allowance alone does not create a reviewer or expertise.
 
+The principal may preauthorize automatic use of protected funding when ordinary
+call or token capacity is exhausted. This is an allowance policy for any domain,
+not a task workflow. A transition requires an already runnable participant and a
+current responsibility that the same persona accepted under the current mandate.
+Where several qualify, a stable creation-order rule may choose the funding
+reference; this does not assign a profession or prescribe the next activity.
+Record the authority, exact commitment revision, quote and funding pool. Normal
+updates may rebind that same commitment only while it remains eligible.
+
+Each protected decision still passes current authority and full exposure checks.
+Temporary concurrency, unavailable providers and unresolved effects do not trigger
+a funding-pool switch. Paused and cancelled work stays stopped. Eligible runnable
+participants receive a fair opportunity before another consumes a second finishing
+turn; this promises neither a fixed number of funded turns nor successful review.
+Optional exploration remains excluded. The interface distinguishes protected
+capacity from current permission and feasibility to use it.
+
 ## Pause, cancellation, and revocation
 
 A relevant pause, cancellation, expiry, or revocation stops new affected admissions and initiates the applicable stop procedure for running effects. The system records the difference between stop requested, stop acknowledged, effect already occurred, and effect still unknown.

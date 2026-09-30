@@ -103,6 +103,15 @@ Fetch exact full fragment text only after selection. Include material prerequisi
 
 A small, seeded exploration allowance can surface eligible new, underexposed, or weakly connected candidates. Exploration is not random resurrection of discredited advice, and critical corrections never depend on sampling. Exploratory cards remain visibly distinct from full fragments selected under a satisfied rule. Record the sampling seed and candidate exposure so later assessment can distinguish opportunity from preference.
 
+The persona may opt into bounded exploratory previews through its next-context
+selection. They use remaining ordinary preview capacity, never displacing current
+requirements or explicit selections. Rank eligible cards by prior admitted
+exposure within a declared bounded history window, using the saved seed to break
+ties reproducibly. Report node/history limits and byte omissions; an admitted
+preview is not proof of model receipt or use. Recheck current ownership,
+permissions, revisions and correction status at admission. Suspending previews
+also suspends this optional route.
+
 Token and byte budgets apply to the entire request, including instructions, task information, schemas, media, all selected text, and output reserve. Estimates and measured usage remain distinct. The candidate count is only one bound. A required core that cannot fit blocks explicitly; optional selection must not force a main-model switch or erase obligations.
 
 ## 8. Character remains in the ordinary decision

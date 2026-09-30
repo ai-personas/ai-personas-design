@@ -70,6 +70,26 @@ Read-only interface activity should use consistent snapshots without holding the
 
 ## Evidence required
 
+Execution settlement is an observation independent of acceptance. A quiet model
+queue does not establish that jobs, transfers, pending decisions, recovery wakes
+or outside effects have finished. Report the exact blockers and bind observations
+to the work state. Unknown inference usage remains charged; it is distinct from
+an external effect whose outcome is unresolved. A failed result can be settled
+without being useful or accepted.
+
+An explicitly declared research stage may capture an immutable evidence boundary
+after a transactional recheck of its observation. Preserve obligations and prior
+stopping dispositions, prevent new execution in that captured stage, and retain
+reads and reconciliation. A changed state must reject capture without partially
+pausing participants. Later stages use new declared boundaries rather than
+replaying completed work. Ordinary work remains available for authorized review
+and continuation; research capture is not a new product completion verdict.
+
+Captured evidence binds exact versions, action receipts, output digests and the
+required experiment audits. Restart may finish exporting those captured bytes;
+it must not collect a different result under the old identity or repeat paid
+work. Missing audits and unresolved effects stay visible as incomplete evidence.
+
 Mechanical checks cover interrupted initialization, timed-out decisions, shared recovery probes, quota and credential dispositions, restart, cancellation races, uncertain accounting, unchanged failed lookups, shared-resolution rollback, source withdrawal and private-input preservation. Learning checks demonstrate durable deferral, explicit disposition, atomic graph edits and actual next-context inclusion.
 
 Document recovery checks include a previously missing version becoming available,
