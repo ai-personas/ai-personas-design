@@ -71,6 +71,15 @@ turn; this promises neither a fixed number of funded turns nor successful review
 Optional exploration remains excluded. The interface distinguishes protected
 capacity from current permission and feasibility to use it.
 
+A completed local inference can retain unknown billed usage without leaving an
+unresolved execution. Its exact call and accounting bindings must retain the full
+conservative token, cost, call and remote exposure bounds. That accounting
+uncertainty alone does not veto preauthorized finishing; every new quote still
+counts the retained exposure against the same ceilings. Failed or interrupted
+execution, incomplete bindings and unresolved outside effects remain blockers.
+This distinction neither reconciles unknown usage nor refunds resources, retries
+an old call, resumes stopped work or creates an accepted responsibility.
+
 ## Pause, cancellation, and revocation
 
 A relevant pause, cancellation, expiry, or revocation stops new affected admissions and initiates the applicable stop procedure for running effects. The system records the difference between stop requested, stop acknowledged, effect already occurred, and effect still unknown.
