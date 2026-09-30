@@ -84,6 +84,28 @@ an old call, resumes stopped work or creates an accepted responsibility.
 
 A relevant pause, cancellation, expiry, or revocation stops new affected admissions and initiates the applicable stop procedure for running effects. The system records the difference between stop requested, stop acknowledged, effect already occurred, and effect still unknown.
 
+A task-level pause stops new persona decisions for that task and requests stopping
+of its in-flight inference. Already dispatched tool jobs may finish; their
+receipts and spending remain available. This pause survives restart, new input,
+recovery timers and added participants. It does not pause other tasks that share
+a persona or funding allowance. Stopping an existing tool job is a separate
+choice, and neither choice rolls back an effect that already occurred.
+
+An explicit task resume reactivates all eligible paused or waiting participation,
+including individually paused participants. It does not renew cancelled or
+removed participation, revive retired or quarantined personas, reopen sealed
+history, or replace missing funding and authority. The interface distinguishes
+participation queued for a fresh decision from participation that remains
+blocked; a resume request is not proof that inference began.
+
+Saving an operator task amendment also requests this resumption. The new mandate
+and eligible participation transitions are adopted together, preserving the
+original request and earlier versions. Decisions made against superseded scope
+cannot supply new effects after the amendment, including after a rapid pause and
+resume. A valid amendment can be saved while funding prevents execution; the
+saved scope and the blocked resumption must both be visible. Adopting a mandate
+without the task-amendment control does not independently override a pause.
+
 Late receipts remain available for accounting and recovery. They cannot authorize new adoption or publication after the grant ends. A compensating action, such as withdrawing a submission, needs its own permission and evidence; stopping does not automatically undo an external effect.
 
 Mandatory current authority and cancellation information must survive context selection and reach affected decisions. A stale worker cannot act merely because its older context contained permission.

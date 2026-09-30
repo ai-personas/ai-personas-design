@@ -1,5 +1,14 @@
 # Design handbook history
 
+## 30 September 2026 — task pause and amendment resumption
+
+Clarified task-level pause, explicit resume and amendment-driven resumption in
+[authority and resources](design/05-authority-and-resources.md#pause-cancellation-and-revocation).
+A durable pause fences task decisions while existing tool jobs may finish.
+Resume includes eligible individually paused participants without overriding
+membership, lifecycle or funding restrictions. Scope adoption and requested
+resumption remain distinct from actual inference and successful delivery.
+
 ## 25 September 2026 — continuity and recovery
 
 Clarified durable learning opportunities, working intentions, audience-safe question conclusions, actual supplied sources, and provider recovery that preserves cancellation, uncertain accounting and effect barriers. Added evidence obligations without prescribing task methods or reporting an unexecuted behavioral pass.
