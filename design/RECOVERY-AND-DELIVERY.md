@@ -97,3 +97,30 @@ Publication remains directly usable under current authority after execution
 history leaves context. Verify the exact bytes attached to the submission and
 keep that observation separate from adoption, review, acceptance and domain
 fitness. Do not impose artifacts on requests whose appropriate result is text.
+
+## Observable recovery contracts
+
+A finishing-readiness observation is read-only. It reports preauthorization and
+current accepted responsibility independently of closed calls with unknown
+billing, unresolved charge records, and uncertain actions. Paired charge records
+for one closed call must not appear as two billed calls. This prerequisite view
+is not a reservation, permission to resume, or proof that the next quote fits.
+When a diagnostic cannot be read, preserve the original stopping reason and mark
+the diagnostic unavailable; never invent zero exposure or lose the stop receipt.
+Task-control receipts and stopped-participation views retain the observed
+prerequisites, while an explicit admission preview rechecks current request bounds.
+
+Owned-policy previews distinguish persona identifiers from implicit work-membership
+scopes. Work scope identifiers are not reader identifiers. An incomplete audience
+is omitted and labelled incomplete, not rendered as an empty audience safe to
+replace. Human-facing recovery views expose the same distinction without providing
+automatic sharing, acceptance, or retry controls.
+
+Publication reports the resolved file location and preserves the original failure
+when a file cannot be retained. Relative paths refer to the participation workspace,
+not an earlier command's alternate working directory. The persona chooses how to
+locate and verify its output; no domain-specific path or archive layout is assumed.
+A mechanism check reopens the exact bytes attached to a submission and separately
+observes integrity, format interpretation, reproducibility and acceptance. A failed
+generated checker remains evidence to diagnose, not proof that the archive or the
+publication mechanism is defective. Mechanical coverage is not a live quality pass.
