@@ -68,3 +68,32 @@ anything. Then exercise explicit permitted publication and submission of an
 actual file after execution-history compaction. Distinguish mechanism tests
 from live evidence that the artifact can be reopened, inspected, reproduced and
 accepted for its intended use. Passing the former does not establish the latter.
+
+### Boundary cases that must remain distinct
+
+Read-only readiness reports all independent finishing prerequisites, including
+missing current responsibility while ordinary production capacity still exists.
+It is neither a funding quote nor a request to manufacture a commitment. A new
+mandate does not silently transfer consent from superseded terms.
+
+An interrupted status without durable primary-failure evidence remains unsafe.
+A pending plan or any attempted action, including a failed or finished action,
+prevents classifying that failure as unapplied. Auxiliary and native operations
+need their own equivalent closure evidence; a primary-decision exception must
+not accidentally cover them. Retained unknown remote exposure can still exhaust
+a separate ceiling even when local execution is known to have ended.
+
+A pause issued while an amended decision is draining must still request stopping,
+and its late receipt must not resume the work or dispatch old actions. Recovery
+must work across shared participants without rewriting the failed call or its
+accounting records.
+
+Owned-policy diagnostics show explicit and implicit audiences separately. A
+bounded preview that omits an oversized audience marks itself incomplete and
+points to the exact policy; omitted readers must never look like an empty list
+safe to replace. No source content or another owner's private policy is exposed.
+
+Publication remains directly usable under current authority after execution
+history leaves context. Verify the exact bytes attached to the submission and
+keep that observation separate from adoption, review, acceptance and domain
+fitness. Do not impose artifacts on requests whose appropriate result is text.
