@@ -106,6 +106,10 @@ The persona's identity and commitments remain outside provider-specific sessions
 
 The implementation must identify actual model configuration, supported inputs and outputs, usage information, and handling for refusal, malformed or partial responses, timeout, cancellation, and unavailable capabilities. It must not assume support or price from a brand name. A model switch cannot widen authority or spending, and refusal is not permission to bypass an applicable safety boundary.
 
+Before committing a model switch or creating an identity that needs generated character inference, check the exact selection against current deployment permission, capability and explicit pricing in its funding scope. Rejection preserves the prior selection and must not allocate a new identity or consume a birth. Creating an identity with an operator-supplied character need not require an initialization call; later inference still needs ordinary admission. A read-only readiness preview may explain these checks, but reserves nothing and cannot promise capacity for a request that has not yet been compiled. Admission must recheck mutable conditions before committing or dispatching.
+
+Distinguish native capability from operator configuration. For example, image input may be unavailable because the model lacks it, because the operator has not enabled a bounded reservation, or because the configured bound cannot fit. Saved configuration changes govern future requests and invalidate stale decisions without rewriting the provider binding or spending evidence of an already admitted call. These checks apply across domains and do not prescribe tools, workflow or deliverables for a particular task.
+
 This handbook does not prescribe current provider endpoints, credentials, libraries, or model tiers. Those are deployment choices to verify separately.
 
 ## Recovery from interruption and uncertainty

@@ -1,5 +1,15 @@
 # Design handbook history
 
+## 1 October 2026 — model selection and image-input readiness
+
+Clarified [inference readiness](design/04-capabilities-and-action.md#inference-is-also-a-bounded-capability)
+before generated identity creation and model changes: exact deployment permission,
+capability and allowance pricing, rejection without identity allocation, and
+read-only previews that make no capacity promise. Native image support, saved
+operator configuration and reservation fit remain distinct. Configuration changes
+fence future decisions while preserving admitted calls and spending evidence.
+These requirements apply to every domain and prescribe no task workflow.
+
 ## 30 September 2026 — task pause and amendment resumption
 
 Clarified task-level pause, explicit resume and amendment-driven resumption in
