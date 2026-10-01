@@ -63,6 +63,13 @@ reference; this does not assign a profession or prescribe the next activity.
 Record the authority, exact commitment revision, quote and funding pool. Normal
 updates may rebind that same commitment only while it remains eligible.
 
+While ordinary production capacity still remains, each participant must be able
+to see whether protected finishing is preauthorized and whether it has a current
+accepted responsibility. Membership, a written plan and reserved capacity are
+not acceptance. Make the existing offer and acceptance mechanisms usable before
+exhaustion; do not silently assign ownership or preserve consent across changed
+terms. The diagnostic is neither a reservation nor a promise of admission.
+
 Each protected decision still passes current authority and full exposure checks.
 Temporary concurrency, unavailable providers and unresolved effects do not trigger
 a funding-pool switch. Paused and cancelled work stays stopped. Eligible runnable
@@ -75,8 +82,15 @@ A completed local inference can retain unknown billed usage without leaving an
 unresolved execution. Its exact call and accounting bindings must retain the full
 conservative token, cost, call and remote exposure bounds. That accounting
 uncertainty alone does not veto preauthorized finishing; every new quote still
-counts the retained exposure against the same ceilings. Failed or interrupted
-execution, incomplete bindings and unresolved outside effects remain blockers.
+counts the retained exposure against the same ceilings. A failed or interrupted
+primary, response-only decision has the same treatment only when durable local
+failure evidence proves its provider attempt ended without a saved action plan
+or attempted actions, and both accounting ledgers retain their exact bindings
+and complete conservative exposure. A terminal status alone is not evidence.
+Crash-only interruption, incomplete bindings, auxiliary or native operations
+without equivalent closure evidence, and unresolved outside effects remain
+blockers. Local closure does not prove remote cancellation: uncertain remote
+capacity remains occupied and may independently prevent another admission.
 This distinction neither reconciles unknown usage nor refunds resources, retries
 an old call, resumes stopped work or creates an accepted responsibility.
 
@@ -105,6 +119,17 @@ cannot supply new effects after the amendment, including after a rapid pause and
 resume. A valid amendment can be saved while funding prevents execution; the
 saved scope and the blocked resumption must both be visible. Adopting a mandate
 without the task-amendment control does not independently override a pause.
+
+An amendment invalidates the old decision's action authority immediately, but is
+not itself a request to cancel an already admitted bounded inference transport.
+Let that attempt finish its bounded wait so late metering can settle honestly;
+only a fresh decision may act on the amended mandate. Explicit pause,
+cancellation and revocation retain their stop semantics. Draining an old
+response must not dispatch its action plan, restore its obsolete scope, or
+resume otherwise stopped work.
+
+See [recovery and delivery refinements](RECOVERY-AND-DELIVERY.md) for the related
+consent, reader-identity, artifact-delivery and acceptance boundaries.
 
 Late receipts remain available for accounting and recovery. They cannot authorize new adoption or publication after the grant ends. A compensating action, such as withdrawing a submission, needs its own permission and evidence; stopping does not automatically undo an external effect.
 
