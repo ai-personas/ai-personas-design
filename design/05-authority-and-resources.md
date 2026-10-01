@@ -87,6 +87,9 @@ primary, response-only decision has the same treatment only when durable local
 failure evidence proves its provider attempt ended without a saved action plan
 or attempted actions, and both accounting ledgers retain their exact bindings
 and complete conservative exposure. A terminal status alone is not evidence.
+For a cancelled decision, the local transport receipt must establish closure,
+the original decision epoch must be superseded, and no pending plan or attempted
+action may remain. This exception does not apply to an unfenced cancellation.
 Crash-only interruption, incomplete bindings, auxiliary or native operations
 without equivalent closure evidence, and unresolved outside effects remain
 blockers. Local closure does not prove remote cancellation: uncertain remote

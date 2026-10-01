@@ -124,3 +124,34 @@ A mechanism check reopens the exact bytes attached to a submission and separatel
 observes integrity, format interpretation, reproducibility and acceptance. A failed
 generated checker remains evidence to diagnose, not proof that the archive or the
 publication mechanism is defective. Mechanical coverage is not a live quality pass.
+
+## Usable decisions and bounded observations
+
+Ordinary accepted participants with adopted work scope can directly express a
+voluntary responsibility offer. An offered persona can accept or decline exact
+terms in a fresh decision; a current accepted owner can update its responsibility.
+These affordances grant no authority and impose no workflow. Eligibility uses
+the same genuine, current acceptance and handoff checks for both automatic and
+operator-assigned finishing. Pending or obsolete consent remains visible before
+ordinary capacity is exhausted.
+
+Reader fields accept exact persona identities or persona aliases bound to the
+current decision and its authorized audience. Generic record and action aliases
+are not reader identities. Reject all invalid readers before changing a policy,
+with a field-specific explanation that does not disclose record existence or
+kind. Naming a reader neither reads its private profile nor grants such access.
+
+Sharing recovery checks direct restrictions throughout the bounded source graph,
+across the intended work audience, and deduplicates actor-owned readable sources.
+Reports identify current source and policy revisions, existing explicit and
+implicit audiences, and incomplete traversal. Missing or omitted audiences must
+never look like empty replacement lists. Native routing metadata requires durable
+runtime provenance; authored diagnostic lookalikes retain ordinary restrictions.
+
+Publication, capture and inspection remain usable after older execution history
+leaves active context. Bounded delivery observations report actual retained
+publication and submission references, attachment counts and mandate attribution.
+Unknown historical applicability stays unknown. They do not scan local files,
+judge quality or establish completion. Failed checks retain their working
+directory, diagnostic completeness and exact recovery references through
+compaction. Persona-authored judgments and fragments remain in their own voice.
