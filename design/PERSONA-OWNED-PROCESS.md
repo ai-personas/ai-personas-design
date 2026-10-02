@@ -33,7 +33,8 @@ not automatically put it into waiting, close its responsibility, prescribe a
 repair or prohibit further creation.
 
 An assessment has an unambiguous subject and actual attribution. A direct
-assessment can use an explicitly selected submission. Choosing a focus for
+assessment names the exact submission being assessed. It does not require a
+separate context-selection action merely to identify the subject. Choosing a focus for
 self-reflection need not create another persona or another run. A request for a
 peer perspective is an invitation that the peer can accept, decline, discuss or
 answer in a different useful way; it is not an installed reviewer role.

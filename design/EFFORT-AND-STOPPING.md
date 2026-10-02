@@ -34,6 +34,12 @@ Ending a batch to observe an asynchronous result, mutation, failure, or uncertai
 
 An exact-outcome wait identifies the actual action or transfer being observed. When registration also delivers an already-available result and refreshes the participation record, the new wait's reason and classification must survive that refresh. It must not inherit a previous voluntary, blocked, partial, or completion interpretation. The recorded outcome remains success, failure, cancellation, or uncertainty as actually observed; registration cannot change it.
 
+The ordinary decision's authored explanation must remain the visible reason when
+it yields without a separate wait operation. Present current recorded delivery
+gaps, accepted ownership and unresolved findings beside that explanation without
+turning them into an automatic quality verdict. A resume permits a fresh decision;
+it is not new domain evidence or permission to discard an unmet obligation.
+
 Repeated delivery of the same retained outcome is not fresh evidence or a new authorized wake-up. A new input, an explicit resume, or a real authorized trigger may permit later work. A pending learning cue, a sentence promising future investigation, or an unaccepted peer offer does not schedule it. Pausing and cancellation continue to prevent unauthorized resumption. Restarts preserve the actual wait and its ownership implications.
 
 ## Acceptance and requirement mapping

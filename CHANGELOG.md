@@ -1,5 +1,17 @@
 # Design handbook history
 
+## 2 October 2026 — usable autonomous decisions and model-owned modalities
+
+Clarified typed participant and artifact references, compact argument meanings,
+current sharing recovery, direct exact-subject assessment and faithful authored
+stopping reasons. These affordances support persona choices without imposing a
+review pipeline, tool quota or substantive quality verdict. Updated the
+[capability contract](design/04-capabilities-and-action.md#inference-is-also-a-bounded-capability)
+to make supported image input and output part of the selected model, superseding
+the separate operator image-input setting described on 1 October. Accounting
+remains bounded and internal. Added functional acceptance cases; no live quality,
+character influence or learning benefit is claimed by these clarifications.
+
 ## 1 October 2026 — model selection and image-input readiness
 
 Clarified [inference readiness](design/04-capabilities-and-action.md#inference-is-also-a-bounded-capability)

@@ -141,6 +141,16 @@ are not reader identities. Reject all invalid readers before changing a policy,
 with a field-specific explanation that does not disclose record existence or
 kind. Naming a reader neither reads its private profile nor grants such access.
 
+The same identity distinction applies when offering responsibility, proposing a
+handoff, inviting a perspective or naming agreement participants. The proposed
+owner is a persona, not the user who requested the result. An offer to oneself
+still requires explicit acceptance of its exact terms. Capability instructions
+preserve essential argument meanings, including nested recipients, through
+compact decision views. A rejected reference identifies the affected argument
+and required identity type without revealing an inaccessible record. Repeated
+unchanged validation failures remain attributable observations, not evidence of
+new execution or a reason for the runtime to choose a different work method.
+
 Sharing recovery checks direct restrictions throughout the bounded source graph,
 across the intended work audience, and deduplicates actor-owned readable sources.
 Reports identify current source and policy revisions, existing explicit and
@@ -155,3 +165,10 @@ Unknown historical applicability stays unknown. They do not scan local files,
 judge quality or establish completion. Failed checks retain their working
 directory, diagnostic completeness and exact recovery references through
 compaction. Persona-authored judgments and fragments remain in their own voice.
+
+Current delivery context includes access restrictions and bounded source-owner
+remedies alongside retained submissions. Historical notification counts do not
+establish present readability, peer inspection or agreement. Current permission
+checks govern the available remedies; diagnostics neither replace a policy nor
+renew a notification. Relevant repair and assessment capabilities remain directly
+usable without requiring a persona to discover the same failed interface again.
