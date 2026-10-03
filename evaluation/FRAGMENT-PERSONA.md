@@ -44,6 +44,16 @@ The graph has no canonical root, required parent, function grouping, or automati
 
 The [recall suite](FRAGMENT-RECALL.md) adds detailed shortlist, batching, auxiliary-role, cache, privacy, and failure cases. Documentation checks cannot substitute for these runtime tests.
 
+### Compact preservation across the first decision — FP-M05, FP-M10, FP-M12
+
+Exercise the first compact response, not only a response after run-local state is already populated. Give a new participation permitted, explicitly designated identity anchors, ordinary records, selected receipts and a handoff. Separately test an invitation with already-selected owned seed fragments before it has a materialized graph plan. A preserve/null choice must retain the effective selection supplied to that decision, including the owned fragments and their required qualifications; absent run-local fields must not be mistaken for an explicit empty choice.
+
+Test replacement and preservation independently for records, receipts, full memory selection, handoff and retrieval query. Explicit empty arrays or strings clear the corresponding choice. An existing work-local selection, including an empty one, overrides identity defaults. Unscoped historical context and another participation's private focus are not inherited. Preserving full identity anchors must not silently authorize identity-level recall delegation, navigation or a self-model change in the new work. Membership and funding remain unchanged.
+
+Reopen the durable store between the first and second decisions and inspect the actual provider-bound context as well as the committed selection. A preserved but now missing, unreadable, stale or unreceived required reference must fail visibly and atomically under the existing rules; it must not be silently dropped to make the response succeed. An explicit valid replacement can repair the selection. Confirm that preservation creates no new fragment, observation, provider call or automatic acceptance.
+
+For a paired efficiency check, hold the task, model, evidence, permissions and stopping rubric fixed. Compare compact preservation with explicitly restating the same valid choices. Require equivalent supplied evidence and delivered outcomes, and count all primary, repair, rediscovery and authorized selector usage. A smaller prompt caused by accidentally losing an anchor is a correctness failure, not an efficiency gain. Store-transaction tests, compiler tests and live task/token results remain separately reported evidence; this specification reports no executed pass.
+
 ## Behavioral acceptance
 
 ### FP-B01 — Character in fragments and actions
