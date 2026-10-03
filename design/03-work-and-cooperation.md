@@ -216,6 +216,14 @@ correspondence remains available deliberately; receiving it can restrict later
 derived drafts, so an apparently convenient direct message is not equivalent to
 a work-wide discussion.
 
+The persona's reply in a primary decision makes this audience choice explicit:
+private delivery to the user or shared delivery in the exact current work.
+Choosing work visibility does not expose earlier private replies, summaries or
+source ancestry. Existing source restrictions still govern the reply and any
+later derived submission. The [delivery rule](DELIVERABLE-PRODUCTION.md#an-activity-note-is-not-a-delivered-answer)
+keeps this authored reply separate from private activity and from proof that a
+message actually reached its permitted audience.
+
 A perspective invitation must preflight whether its subject can be delivered
 under the audience that acceptance would grant. An unsuccessful preflight explains
 remedies using only information available to the requesting participant and must

@@ -66,14 +66,27 @@ that requested response; it does not authorize unrelated messages or effects.
 The persona may prepare and deliver the result in the same decision when the
 existing capabilities and permissions allow it.
 
-An explicit user-answer field in a provider response may be translated into an
-ordinary message action for the current work. Its text is authored separately
-from the private activity summary. It remains subject to the same action limit,
-permissions, source restrictions, cancellation, freshness, journaled retry and
-decision barriers as a directly authored message. Delivery follows preceding
-synchronous actions and precedes an explicit wait; failure or an asynchronous
-boundary can suppress it. This affordance does not authorize a reply in a mode
-that prohibits user delivery, or establish the outcome of an unobserved action.
+The primary provider decision declares either no reply or a reply with separately
+authored text and explicit visibility: private or work. No reply is represented
+by a null value. A non-null reply must supply both text and visibility; a plain
+text string or an omitted audience is invalid. The private activity summary is
+not a reply and never supplies missing reply text or visibility.
+
+A private reply becomes an ordinary message to the user for the current work.
+A work reply becomes an ordinary message to the current work's shared
+environment, bound to that exact work rather than every task in the environment.
+The persona chooses the audience; participation does not force a work-visible
+reply. Audience selection does not grant access to private sources or make
+earlier private correspondence readable to peers.
+
+Both forms remain subject to the same action limit, permissions, source
+restrictions, continuity-dependent delivery, cancellation, freshness, journaled
+retry and decision barriers as a directly authored message. Delivery follows
+preceding synchronous actions and precedes an explicit wait; failure or an
+asynchronous boundary can suppress it. A work reply derived from unavailable
+private sources remains restricted unless an authorized source owner explicitly
+changes the applicable policy. This affordance does not authorize a reply in a
+mode that prohibits delivery, or establish the outcome of an unobserved action.
 
 Delivery evidence identifies the successful delivery receipt and the exact
 message or submission for the relevant work and intended audience. Review its
