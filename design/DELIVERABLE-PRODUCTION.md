@@ -88,6 +88,16 @@ private sources remains restricted unless an authorized source owner explicitly
 changes the applicable policy. This affordance does not authorize a reply in a
 mode that prohibits delivery, or establish the outcome of an unobserved action.
 
+An optional notice delivered atomically with a submission also carries authored
+text and an explicit private or work audience. A plain string does not choose an
+audience. Work-visible submission content must not silently create private
+correspondence merely because the author attaches a delivery notice. The notice
+and submission either commit together or neither commits. A notice refers to
+its submitted version; the submission does not inherit private notice content.
+Explicitly reading a private notice still brings its source restrictions into
+later work. Choosing a shared notice changes only that new message, never the
+audience of earlier correspondence or private source material.
+
 Delivery evidence identifies the successful delivery receipt and the exact
 message or submission for the relevant work and intended audience. Review its
 contents and referenced outputs: a success flag, an empty set of failed actions,
