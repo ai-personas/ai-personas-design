@@ -48,6 +48,10 @@ The invariants are the protected foundation. These chapters, the explicitly norm
 
 A contradiction between detailed requirements is a design defect to resolve and record, not permission to select the easiest reading. Do not broaden authority or weaken an evidence claim while that conflict is unresolved. Changes follow the [contribution guide](../CONTRIBUTING.md).
 
+## Design proposals under review
+
+[Persona-owned files](PERSONA-OWNED-FILES.md) proposes a file-oriented interface for current identity, retained experience, and reusable methods, with scoped search and attributable edits. It records the compatibility decisions and evidence needed before adoption. It does not replace the current normative fragment graph, recall, or handoff contracts, and reports no implementation or behavioral results.
+
 ## Proposed extensions
 
 E1 organizes functional embodiment and persona profiles. E2 adds community charters, representation, and appeals. E3 adds sensitive human-facing safeguards. E4 expands ongoing services and physical interfaces. E5 packages worksheets, identifiers, and conformance profiles. E6 covers contribution and evidence governance. These preserve the earlier proposal's explicit extension status; they are not silently presented as deployed features. The narrow optional-personal-exploration rules in the development refinement do not enable broader ongoing services or physical interfaces.

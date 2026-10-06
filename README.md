@@ -20,6 +20,8 @@ The [decision-reference usability checks](evaluation/DECISION-REFERENCE-USABILIT
 
 The [recall cache identity clarification](implementation/RECALL-CACHE-IDENTITY.md) separates unchanged selector input from execution bookkeeping, while retaining exact provenance and current permission checks.
 
+A [proposal for persona-owned files](design/PERSONA-OWNED-FILES.md) explores a simpler authoring and retrieval interface for identity, experience, and reusable methods. It is under review and does not replace the current graph and recall contracts or establish measured improvement.
+
 ## Start with your question
 
 | Your question | Start here | Continue with |
