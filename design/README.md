@@ -1,59 +1,40 @@
-# Design chapters
+# Design reference
 
-[Home](../README.md) · [Start here](../START-HERE.md) · [Glossary](../GLOSSARY.md)
+[Home](../README.md) · [Start here](../START-HERE.md) · [Decisions](../DESIGN-DECISIONS.md)
 
-These chapters are the detailed design reference. They state intended behavior, not observed product capabilities. Read them in order for a complete account, or enter through the question that matters to you.
+This branch has one target design: continuing personas expressed in persona-owned first-person fragments, organized in ordinary files, with the primary LLM choosing relevant next context as part of doing work. The older graph-first, auxiliary-selector, and file-proposal manuals are retired from the active reading surface.
 
-| Chapter | Question it answers |
+## Three complementary views
+
+| Document | Its responsibility |
 |---|---|
-| [1. Personas and identity](01-personas-and-identity.md) | What continues over time, and how can a persona join, pause, or leave? |
-| [2. Memory and learning](02-memory-and-learning.md) | What can be retained, how does it reach a decision, and what would show that it helped? |
-| [3. Work and cooperation](03-work-and-cooperation.md) | How do needs become accepted responsibilities without fixed roles or hidden planning? |
-| [4. Capabilities and action](04-capabilities-and-action.md) | How do choices produce real, bounded effects and recover from failures? |
-| [5. Authority and resources](05-authority-and-resources.md) | Who may authorize what, and how does the system remain within its limits? |
-| [6. Evidence and completion](06-evidence-and-completion.md) | What counts as a supported result, and how is an exact release kept honest? |
-| [7. Human experience and society](07-experience-and-society.md) | What should people see and control, and what changes for communities or services? |
+| [Persona core](PERSONA-CORE.md) | Identity, character, fragments, self-organization, learning, and persona-owned next-context choice |
+| [Work and boundaries](WORK-AND-BOUNDARIES.md) | Accepted work, cooperation, real actions, authority, resources, evidence, recovery, and conditional extensions |
+| [System contracts](../implementation/CONTRACTS.md) | The observable guarantees that make those choices and boundaries reliable |
 
-[A persona that remembers while it works](FRAGMENT-RECALL.md) is the illustrated entry point for the current memory design. Its [five SVG diagrams and full text readings](FRAGMENT-RECALL-VISUALS.md) explain same-call authorship, a personal fragment network, indexed retrieval, optional Jev selection, and checked context. The [persona graph](FRAGMENT-PERSONA.md) has no canonical tree, required parent, functional grouping, or permanent link-weight score. The [navigation contract](MEMORY-GRAPH.md) describes graph neighborhoods and exact version bindings.
+These documents specify intended behavior. A document's presence, a diagram, or an acceptance scenario is not implementation evidence. See [status](../implementation/STATUS.md).
 
-Work and fragment development share each ordinary primary decision. A separately authorized and metered semantic selector is now permitted; another generative memory-writing, reflection, or query-planning call is not. These documents and the [recall handoff contract](../implementation/FRAGMENT-RECALL-CONTRACT.md) replace conflicting tree-first and no-auxiliary-selector wording in earlier chapters while preserving the invariants. Read the [fragment-persona acceptance](../evaluation/FRAGMENT-PERSONA.md), [recall acceptance and requirement mapping](../evaluation/FRAGMENT-RECALL.md), and the [dated provider source notes](../sources/FRAGMENT-RECALL-SOURCES.md). Publication is not implementation or behavioral validation.
+## Authority within the repository
 
-[Persona-owned process, not assigned roles](PERSONA-OWNED-PROCESS.md) is the normative clarification for optional contribution activities, self/peer assessment, advisory criticism, explicit obligations and the ordinary host-tools experience. It removes universal author/reviewer workflow interpretations without erasing accepted requirements or historical dispositions.
+1. The protected [I01–I21 invariants](../implementation/REQUIREMENTS.md) govern applicable actions and transitions
+2. The persona core, work and boundaries, and system contracts are complementary normative views of that foundation. They define meaning, constraints, and handoffs together
+3. The remaining requirement catalogue traces those obligations; the [acceptance catalogue](../evaluation/ACCEPTANCE.md) states what must be examined to support them. Neither is an abbreviated override of the detailed rule
+4. Guides, examples, glossary, worksheets, artwork, research summaries, decisions, and historical reports explain the design or its evidence. They do not independently grant permission, prescribe an additional workflow, or establish conformance
 
-[Character, experience, and self-directed activity](PERSONA-DEVELOPMENT.md) is the normative cross-cutting refinement for starting profiles, self-authorship, continuing interests, exact experience, bounded personal exploration, accountable stopping, and their behavioral evaluations. It refines the corresponding identity, learning, cooperation, activity, resource, evidence, and interface rules without introducing a prescribed domain workflow. Its intended behavior is not a claim of deployed capability. [Episode-wide accounting and fair scheduling](EXPLORATION-ACCOUNTING.md) clarifies the same normative boundaries for collaborators, queue pages, failed starts, and exact permission editing.
+There is no last-file-wins rule. A contradiction between normative documents is a defect to resolve through one recorded decision and coherent updates. Until resolved, preserve the conservative authority, privacy, resource, and evidence boundaries. Historical documents and past passes cannot weaken current restrictions or claim compliance with revised criteria.
 
-The [organization clarification](03-work-and-cooperation.md#how-organization-emerges) explains how decisions and cooperation remain persona-owned. The [delivery review](DELIVERABLE-PRODUCTION.md) is an explanatory correction and reading map, not an additional normative chapter or production engine.
+Inside a runtime, authoritative instructions and current accepted obligations remain outside the persona's optional fragment selection. A persona-authored statement, retrieved file, or search result cannot become a new authority source merely because it is included in context.
 
-[Emergence, coordination, and lifecycle boundaries](COORDINATION-LIFECYCLE.md) is a normative clarification of exact acceptance, accepted delegation, handoffs, retirement, quarantine, progress assumptions, and proof-to-implementation evidence. It distinguishes permitted organization from observed useful emergence and maps its verification cases to existing identifiers without adding a workflow or claiming a Lean pass.
+## Reading obligations
 
-[Continuity and recovery](CONTINUITY-RECOVERY.md) clarifies persistent learning opportunities, persona-owned working intentions, shared-question resolution, actual supplied sources, and automatic infrastructure recovery without replaying effects.
+**Must** states a condition required for the applicable feature. **Should** is a strong recommendation whose exception needs a reason. **May** describes an option. Optional features remain subject to their safeguards when enabled.
 
-[Effort, persistence, and accountable stopping](EFFORT-AND-STOPPING.md) clarifies character-shaped effort, explicit continuation and yielding, faithful stopping records, and comparisons that separate useful outcomes from time and activity counts. It preserves deliberate waits and bounded resources rather than introducing personality-based iteration quotas.
+Prose fragments do not require every persona to adopt a fixed set of folders, fields, mental functions, or personality scores. Precise host records for permissions, evidence, ownership, current work, and resource accounting are still necessary where their meanings apply. Simpler cognitive representation does not mean ambiguous operational boundaries.
 
-[Decision efficiency and bounded working context](DECISION-EFFICIENCY.md) clarifies capability-instruction retention, immediately usable discovery, and whole-task cost evaluation. It distinguishes durable identity and evidence from permanently repeated calling instructions, without adding a workflow or claiming measured savings.
+## Scope and extensions
 
-[Qualified observations](QUALIFIED-OBSERVATIONS.md) clarifies that required corrections and prerequisites accompany full reads as well as selected memory. Reading a method is not a persistent recall choice; neither a card nor optional association activates full text. Its acceptance cases are specified, not reported as passed.
+A basic continuing persona does not require multiple-persona society, births, continuous background exploration, an ongoing service, or a physical body. The conditional boundaries for those features remain in [work and boundaries](WORK-AND-BOUNDARIES.md) and [deployment decisions](../implementation/DEPLOYMENT-DECISIONS.md).
 
-[Recovery without fabricated authority or completion](RECOVERY-AND-DELIVERY.md) clarifies amendment drains, retained uncertain spending, current accepted responsibility, permitted sharing, exact publication and honest stopping. Its [independent acceptance gates](../evaluation/RECOVERY-AND-DELIVERY.md) distinguish runtime defects, policy gaps and model mistakes, and keep mechanism validation separate from live result quality. These refine existing requirements; they do not prescribe a domain workflow.
+The historical E1–E6 labels remain attributable in the [decision register](../DESIGN-DECISIONS.md) and [historical evaluation map](../evaluation/HISTORICAL-RESULTS.md). They do not establish that any optional feature is deployed or approved for a specific use.
 
-## How to read a requirement
-
-**Must** describes a necessary condition for the applicable feature. **Should** describes a strong recommendation; an implementation records a reason when it takes a different approach. **May** describes an option. Optional does not mean exempt from safeguards once enabled.
-
-The [invariants and requirement index](../implementation/REQUIREMENTS.md) identify the rules and their evaluation links. The [contracts](../implementation/CONTRACTS.md) make cross-component handoffs explicit. Neither a worksheet nor a diagram introduces additional mandatory workflow stages. The [development acceptance rules](PERSONA-DEVELOPMENT.md#acceptance-and-limits-of-conclusions) additionally identify the checks required for the cross-cutting refinement.
-
-## Authority within this handbook
-
-The invariants are the protected foundation. These chapters, the explicitly normative persona-owned-process, development, fragment-persona, fragment-recall, coordination/lifecycle, decision-efficiency, effort/stopping and qualified-observation refinements, and the implementation contracts define detailed behavior. The requirement index points to them; acceptance scenarios test them. The overview, examples, diagrams, and source briefs explain them rather than override them.
-
-A contradiction between detailed requirements is a design defect to resolve and record, not permission to select the easiest reading. Do not broaden authority or weaken an evidence claim while that conflict is unresolved. Changes follow the [contribution guide](../CONTRIBUTING.md).
-
-## Design proposals under review
-
-[Persona-owned files](PERSONA-OWNED-FILES.md) proposes a file-oriented interface for current identity, retained experience, and reusable methods, with scoped search and attributable edits. It records the compatibility decisions and evidence needed before adoption. It does not replace the current normative fragment graph, recall, or handoff contracts, and reports no implementation or behavioral results.
-
-## Proposed extensions
-
-E1 organizes functional embodiment and persona profiles. E2 adds community charters, representation, and appeals. E3 adds sensitive human-facing safeguards. E4 expands ongoing services and physical interfaces. E5 packages worksheets, identifiers, and conformance profiles. E6 covers contribution and evidence governance. These preserve the earlier proposal's explicit extension status; they are not silently presented as deployed features. The narrow optional-personal-exploration rules in the development refinement do not enable broader ongoing services or physical interfaces.
-
-A basic persistent collaborator does not require a persona society, population growth, or a physical body. A deployment enabling those features must satisfy their applicable contracts and extension checks.
+The [source manifest](../sources/SOURCE-MANIFEST.md) locates retired documents at immutable revisions. [Contributing](../CONTRIBUTING.md) explains how to change the current design without recreating competing manuals.

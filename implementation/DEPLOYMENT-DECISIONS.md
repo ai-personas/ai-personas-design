@@ -1,34 +1,69 @@
-# Decisions to close before a deployment
+# Decisions required for a deployment
 
-[Implementation guide](README.md) · [Contracts](CONTRACTS.md) · [Evaluation](../evaluation/README.md)
+[Implementation guide](README.md) · [Contracts](CONTRACTS.md) · [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) · [Status](STATUS.md)
 
-A self-contained design can state the required decision without inventing its deployment-specific answer. These decisions are not hidden prerequisites from an earlier conversation. Each deployment must record an owner, chosen value or policy, rationale, evidence, effective version, and remaining limitation.
+The adopted target is a continuing persona whose own-voice files supply character and reusable prompt fragments, with the primary LLM choosing relevant next context. A deployment supplies concrete operating limits and evidence for that target. It does not choose among competing graph, selector, numeric-personality, and file-first definitions of a persona.
 
-Until a required decision is resolved and its applicable safeguards are demonstrated, keep the affected feature unavailable or restricted to a clearly described test environment. Do not claim production readiness from this handbook.
+Every decision below records an accountable owner, chosen policy or value, rationale, exact effective version, supporting evidence, remaining limitation, and conditions for reconsideration. Until a required boundary is resolved and demonstrated, restrict the affected capability or keep it in a clearly described test environment. This register is a decision checklist, not a production-readiness claim or a report that the separate runtime implements these choices.
 
-| Decision | Settled design principle | Deployment must supply |
+## Core deployment choices
+
+| Decision | Settled design requirement | Deployment supplies |
 |---|---|---|
-| Supported scope | One domain-neutral foundation does not guarantee every task can be solved. | Intended users and tasks, explicit exclusions, result levels, and domain-specific review requirements. |
-| Inference | Identity is separate from model and provider. | Exact supported configuration, input capabilities, failure handling, usage measurement, and continuity evidence. |
-| Founders | No fabricated biography or automatic profession roster. | Sponsor, permitted seed material, initialization bounds, and lifecycle administration. |
-| Autonomous effects | Every effect has current, scoped authority. | Which actions may occur without a separate approval, who delegates them, and how the boundary is enforced. |
-| Execution isolation | A label is not an access barrier. | Tested threat model, workspace isolation, credential mediation, outside destinations, and protected evaluator access. |
-| Resources | All activity conserves the controlling allowance. | Measurable ceilings, reservation and uncertainty policy, population bounds, fairness, and closeout planning. |
-| Reviews | A different identity is not automatically independent. | Claim-specific qualification, separation, conflict, acceptance, and missing-review rules. |
-| Domain criteria | Claims bind exact agreed outcomes and conditions. | Methods, tolerances or qualitative rubrics, omitted-scope checks, and necessary outside assessment. |
-| Retention | Private content and derivatives follow explicit restrictions. | Retention periods, correction and deletion behavior, backup handling, export limits, and ownership of requests. |
-| Restoration | Restart does not erase obligations or unknown effects. | Recovery procedure, durable notification evidence, rollback boundaries, and unresolved outside bindings. |
-| Community governance, E2 | Actual human or institutional accountability remains identifiable. | Charter, representation gaps, eligibility, allocation, conflict and appeal routes, and dissolution rules. |
-| Ongoing service, E4 | Triggers and episodes remain bounded and renewable only with authority. | Observation freshness, missed-event response, actual escalation recipients, review cadence, renewal, and stop behavior. |
-| Physical interaction, E4 | A specific device and environment need separate assurance. | Operating limits, observation-loss response, override, safe stop, commissioning evidence, and qualified assessment. |
-| Federation | Local identity continuity is not global exclusive activation. | Explicitly disabled remote activation, or a separately specified and tested transfer and revocation contract. |
-| Evaluation | Claims require preserved evidence and fair comparisons. | Fixtures, repeat counts, rubrics, total-resource controls, failure definitions, and publication thresholds. |
-| Distribution and contributions | Documentation editing does not choose project licensing terms. | Owner-approved licensing and contribution terms, attribution requirements, and rights to included material. |
+| Intended use | Domain-neutral choices do not guarantee every task is feasible. | Users, supported task and result scopes, exclusions, and claim-specific outside review. |
+| Continuing identity | Accepted own-voice prose is the persona's current authored account. | Creation and administration authority, truthful starting attribution, self-authorship control, bounded generation if used, and lifecycle recovery. |
+| Primary inference | The primary LLM chooses work, authored learning, and next relevant fragments. | Exact provider/model configuration, supported inputs and outputs, request bounds, refusal and failure behavior, cancellation, metering, and continuity evidence. |
+| File-facing state | Named readable files, persona-chosen organization, scoped search, exact read, and attributable edits are the normal interface. | Current-state ownership, revision binding, path and rename behavior, conflict handling, atomic dependent saves, recovery, retention, and export semantics. |
+| Storage | One accepted current state exists; an export or unsaved edit is not another authority. | A backend that demonstrates the contract. Canonical physical files need the same concurrency, revision, access, and crash guarantees as a transactional store. |
+| Search | Literal search and explicitly supported regex operate over a declared eligible corpus. | Matching semantics, bounds, pagination, error and incomplete-result reporting, current-index recovery, and protection of private titles and counts. |
+| Next context | The primary model's explicit work-scoped selection is faithfully assembled with mandatory state. | Exact selection/version records, preserve/replace/clear behavior, protected current self, qualification handling, fit limits, stale-selection recovery, and actual supplied-context evidence. |
+| Qualification and provenance | Necessary corrections accompany usable full text; source restrictions follow derivatives. | Bounded exact required-accompaniment and ancestry checks, version revalidation, admission-time fit, withdrawal, erasure, and historical-source behavior. |
+| Processing destinations | Read access is not permission to send data to every model or service. | Approved primary and any auxiliary destinations, data-handling terms, retention limits, disclosure controls, and credential mediation. |
+| Autonomous effects | Every effect has current scoped authority independent of authored files. | Delegation, allowed effects and destinations, required approvals, durable intent, effect-unknown reconciliation, revocation, and actual enforcement. |
+| Execution | A sandbox or read-only label is not a proven barrier. | Chosen host or isolated profile, tested trust model, private evaluator separation, installation policy, and external destinations. |
+| Resources | Consumed use, reservations, and uncertainty remain inside one controlling allowance. | Measurable ceilings, conservative unknown usage, exposure quotations, population bounds, fairness, and protected closeout policy. |
+| Acceptance | Authored judgment, independent assessment, human acceptance, and external assurance differ. | Adopted criteria, qualification and separation policy, exact subject and citation evidence, review gaps, and current release checks. |
+| Delivery | Local creation, retained publication, submission, delivery, and acceptance are separate. | Actual recipient surfaces, supported artifacts, explicit audiences, current readability, durable receipts, and useful failure diagnostics. |
+| Retention and recovery | Restart, renaming, retirement, and deletion cannot invent authority or success. | Retention and correction periods, backup and export boundaries, erasure behavior, durable notifications, effect reconciliation, and honest limits on recalling outside copies. |
+| Optional exploration | Between-task activity starts disabled and requires finite explicit permission. | Environment, allowance, episode and recurrence bounds, expiry precision, foreground priority, scheduler assumptions, pause, and cancellation. |
+| Evaluation | Target wording does not establish implementation or behavior. | Frozen fixtures, repeat counts, held-out tasks, rubrics, comparison controls, total costs, stopping rules, and bounded publication claims. |
+| Distribution and contributions | Editing design does not select licensing or contribution terms. | Owner-approved terms, rights to material, attribution requirements, and evidence-governance responsibilities. |
 
-## Decision record in ordinary language
+Backend choice is an implementation choice within the file-facing contract, not a second persona design. A simple interface must not conceal required graph bookkeeping, a separate automatic author, or another model taking ownership of selection. Equally, familiar files do not eliminate the trusted records needed for permissions, exact observations, commitments, accounting, and recovery.
 
-State the decision question, applicable requirements, chosen scope, alternatives considered, accountable owner, evidence supporting the choice, conditions that would reopen it, and the feature that remains restricted while unresolved. Use the [worksheets](../templates/README.md) rather than a configuration example.
+## Host and isolated execution profiles
 
-## What remains deliberately open
+Declare the initial execution default and make its consequences clear before use. A deployment can initially offer host tools or an isolated environment, but the operator's subsequent explicit mode and capability choices remain controlling. Restart must not silently reset a disabled capability or replace chosen isolation with broader host access. Mode changes use actual authorized controls and are visible before affected jobs are admitted. An informed, specifically authorized launch policy can define its scope, but neither restart nor persona prose supplies new authority or bypasses withdrawal.
 
-This edition does not choose model vendors, prices, cloud services, storage technologies, numeric budgets, benchmark thresholds, professional acceptance criteria, retention periods, or a repository license. It also does not declare the separate AI Personas runtime compliant. Those are explicit choices or evidence obligations, not universal design facts.
+The earlier handbook's specific instruction to re-enable host tools on ordinary CLI startup despite saved disabled state is retired as a universal prescription. This is a deliberate target-design change, recorded under [implementation choices](../DESIGN-DECISIONS.md#implementation-choices-no-longer-fixed-by-the-handbook). It is not a claim that an existing launcher has changed; [implementation status](STATUS.md) must report that gap honestly.
+
+This profile supplies host-account tools without an application sandbox or a separate application execution grant for every tool. Installation, filesystem work, network use, and subprocesses remain limited by the host account, actual user delegation, and applicable approval requirements. A discovered command list is not an allowlist and does not itself authorize arbitrary effects. Host access promises neither administrator privileges, working package registries, nor successful installation. No persona file, learned procedure, or generated instruction can change the selected mode, enable a disabled capability, or widen an operator's grant.
+
+The selected host profile provides no confidentiality between personas sharing readable files and credentials. Record-level access controls cannot enforce confidentiality outside their actual mediation boundary. A deployment claiming stronger isolation must enforce it outside persona-editable state and keep evaluator material and secrets inaccessible accordingly. Deliberate isolation cannot silently fall back to host access after failure.
+
+Mode changes do not resume paused or canceled work, reopen archived stages, erase charges, reset uncertain remote exposure, or turn failures into success. Host tools remain subject to real funding and accounting; an unrestricted test profile is not a prerequisite or a substitute for normal accounting. Stop and configuration receipts describe their actual extent without promising rollback of completed effects or containment of every already-started subprocess.
+
+Validation covers the declared initial default, new and existing data, a subsequent explicit disabled state, chosen isolation, authorized mode changes, restart, and actual operations. Check actual filesystem writes, subprocesses, and installation separately from settings or prompt text. A normal startup must preserve the current authorized boundary rather than fabricate a new permission event. This target does not report that its implementation has passed those checks.
+
+## Optional features and their conditional safeguards
+
+| Feature | Required declaration before use |
+|---|---|
+| E1: functional embodiment or enriched profiles | Which relationships the display explains; do not infer human consciousness, feelings, competence, or physical embodiment from profile richness. |
+| E2: community or institution | Accountable sponsor, charter, real representation, membership, delegated powers, resource allocation, information policy, conflict and appeal routes, renewal, and disposition of obligations at exit or dissolution. |
+| E3: sensitive human-facing use | Transparent AI identity, meaningful memory and exit choices, domain-specific policy and evidence, and no invented credentials, diagnoses, relationships, or human endorsements. |
+| E4: ongoing service | Accepted owner, actual triggers, freshness, missed-event and disconnection handling, per-episode and overall bounds, renewal, retention, actual accepting escalation recipients, fallback when unavailable, and stop behavior. |
+| E4: physical interface | Specific device and environment, permitted effects, required observations, operating conditions, override, observation-loss response, conflicting-controller response, safe stop, delayed effects, and independent commissioning or qualified assurance. |
+| E5: conformance aids | Which claims and optional features a profile covers, exact requirement and evaluator versions, explicit omissions, and proportional use of worksheets rather than mandatory task ceremony. |
+| E6: public contribution and evidence | Adoption authority, exact historical results and criteria, source rights, transparent limits, and owner-approved distribution terms. |
+| Cross-host activation | Explicitly disabled activation or a separate tested transfer, exclusivity, revocation, privacy, authority, and failure contract. Read-only exchange is not activation authority. |
+| Auxiliary retrieval experiment | Specific demonstrated retrieval problem, allowed destinations and data, exact file references, measured total cost and quality, bounded fallback, and primary-model ownership of final next-context choice. |
+| Legacy numeric descriptors | Compatibility purpose and actual provenance if retained. They are optional historical or experimental data, not a compulsory parallel identity, task router, effort quota, or criterion for current character. |
+
+Enabling personal exploration does not enable a perpetual service or physical control. A service's simulated stakeholders do not supply human consent; extra personas do not multiply votes or funding. Completing an episode does not renew it. Absence of an essential human escalation recipient requires narrower operation or safe pause under the adopted policy.
+
+## What the design deliberately does not select
+
+This edition selects the persona-facing mechanism and its behavioral responsibilities. It does not choose a vendor, price, cloud service, storage engine, universal numerical budget, professional tolerance, retention period, benchmark success threshold, or repository license. An optional helper or extension must justify its actual burden and evidence within the same authority and resource boundaries. Publication of these decisions cannot make the separate runtime compliant.
+
+Use the [decision worksheet](../templates/README.md#design-decision-and-evaluation-record) for the chosen scope, accountable owner, evidence, and unresolved feature restriction. An unresolved implementation question belongs here or in a scoped implementation gap, not in a competing active persona architecture.

@@ -1,10 +1,10 @@
 # Invariants and requirement traceability
 
-[Implementation guide](README.md) · [Detailed contracts](CONTRACTS.md) · [Acceptance catalogue](../evaluation/ACCEPTANCE.md)
+[Implementation guide](README.md) · [Contracts](CONTRACTS.md) · [Acceptance](../evaluation/ACCEPTANCE.md)
 
-This is the protected design foundation and coverage index for handbook edition 2.0. The 21 invariant identifiers and 45 requirement identifiers are retained from the preceding proposal. Wording is made independent of code and implementation branches. The detailed chapters and contracts supply the full meaning; this table is not permission to omit their failure paths.
+The protected foundation remains I01–I21 and the 45 requirement identifiers below. The current [persona core](../design/PERSONA-CORE.md) defines continuing character through persona-authored first-person fragments, ordinary files and search, and primary-persona choice of next-context fragments. [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) preserves authority, obligations, evidence, resources, and recovery. The index names obligations; it does not replace their failure paths.
 
-Every listed test is specified, not reported as passed. A requirement applies when its corresponding feature or effect is enabled. Proposed extensions E1–E6 retain their declared status in the [design index](../design/README.md).
+This revision changes the representation and selection design, not the meaning of earlier results. The canonical memory graph, typed cognitive taxonomy, and compulsory numeric character descriptors are superseded as conformance obligations. The former optional delegated semantic selector no longer chooses final prompt parts; optional aids offer candidates to the primary persona. Their historical criteria remain identifiable in the [transition mapping](../evaluation/HISTORICAL-RESULTS.md). No scenario in this edition is reported as executed merely because its description exists.
 
 ## Invariants
 
@@ -34,78 +34,82 @@ Every listed test is specified, not reported as passed. A requirement applies wh
 
 ## Requirement catalogue
 
-The evidence gates refer to [M, B, and X scenarios](../evaluation/ACCEPTANCE.md). Gates may support several requirements and are not an exhaustive security or domain assurance claim.
+M, B, and X refer to the [mechanical, behavioral, and extension checks](../evaluation/ACCEPTANCE.md). Applicability depends on the actual enabled effect or feature. Small work does not acquire an artificial team, formal package, or physical deployment merely because those cases exist in the catalogue.
 
 | ID | Required behavior | Detailed design | Primary evidence gates |
 |---|---|---|---|
-| PER-01 | Preserve continuing identity independently of model and work. | [Identity](../design/01-personas-and-identity.md) | B10; restoration evidence |
-| PER-02 | Distinguish character, preference, competence, authority, and responsibility. | [Identity](../design/01-personas-and-identity.md) | B01–B04; capability evidence |
-| PER-03 | Carry relevant individual context into decisions without invented biography. | [Identity](../design/01-personas-and-identity.md) | B01–B04 |
-| PER-04 | Make lifecycle changes and open-obligation dispositions explicit. | [Identity](../design/01-personas-and-identity.md) | M06; X02 |
-| PER-05 | Require truthful creation provenance and bounded initialization. | [Identity](../design/01-personas-and-identity.md) | M05; M18 |
-| MEM-01 | Separate work facts, authored memory, and observed evidence. | [Memory](../design/02-memory-and-learning.md) | M08–M10; B09 |
-| MEM-02 | Preserve fragment sources, scope, counterevidence, revisions, and visibility. | [Memory](../design/02-memory-and-learning.md) | M08; M11; B09 |
-| MEM-03 | Scope selected context to the persona and current work. | [Memory](../design/02-memory-and-learning.md) | M08; M11 |
-| MEM-04 | Preserve mandatory current constraints under context pressure. | [Memory](../design/02-memory-and-learning.md) | M08; M21 |
-| MEM-05 | Measure learning transfer rather than memory volume. | [Memory](../design/02-memory-and-learning.md) | B09 |
-| NED-01 | Preserve original intent and authorized mandate changes. | [Work](../design/03-work-and-cooperation.md) | M20; B11–B12 |
-| NED-02 | Obtain continuation acceptance and expose ownership gaps. | [Work](../design/03-work-and-cooperation.md) | M19 |
-| NED-03 | Distinguish conditional assumptions from confirmed facts. | [Work](../design/03-work-and-cooperation.md) | M20 |
-| NED-04 | Check scope coverage against the original need. | [Work](../design/03-work-and-cooperation.md) | B11–B12; omitted-outcome fixture |
-| COL-01 | Preserve individual agendas, an unranked shared board, and accepted commitments. | [Work](../design/03-work-and-cooperation.md) | B01–B04 |
-| COL-02 | Separate offers, membership, responsibility, and actual contribution. | [Work](../design/03-work-and-cooperation.md) | M06; M18–M19 |
-| COL-03 | Preserve exact agreement endorsements and dissent. | [Work](../design/03-work-and-cooperation.md) | B02–B03; X01 |
-| COL-04 | Resolve consequential feedback through explicit dispositions. | [Work](../design/03-work-and-cooperation.md) | M21; B05 |
-| COL-05 | Support provisional interfaces and bounded iteration. | [Work](../design/03-work-and-cooperation.md) | M22 |
-| COL-06 | Permit useful birth and no-birth restraint under conserved resources. | [Identity](../design/01-personas-and-identity.md) | M05–M07; B08 |
-| ACT-01 | Use or acquire capabilities through actual evidence-backed operations. | [Action](../design/04-capabilities-and-action.md) | M10; B11–B12 |
-| ACT-02 | Enforce execution boundaries rather than merely label them. | [Action](../design/04-capabilities-and-action.md) | M12 |
-| ACT-03 | Require actual results before dependent decisions and publication. | [Action](../design/04-capabilities-and-action.md) | M17; M26 |
-| ACT-04 | Preserve unknown external effects and reconcile before repetition. | [Action](../design/04-capabilities-and-action.md) | M13 |
-| GOV-01 | Keep grants scoped, revocable, and no broader than their parents. | [Authority](../design/05-authority-and-resources.md) | M05–M07; M11–M13 |
-| GOV-02 | Conserve resources across descendants, retries, compaction, and review. | [Authority](../design/05-authority-and-resources.md) | M07; M23 |
-| GOV-03 | Protect agreed closeout capacity. | [Authority](../design/05-authority-and-resources.md) | M23 |
-| GOV-04 | Bound idle cognition, reminders, and no-progress loops. | [Authority](../design/05-authority-and-resources.md) | M25 |
-| EVD-01 | Preserve exact artifacts, input mappings, and actual execution evidence. | [Evidence](../design/06-evidence-and-completion.md) | M09–M10 |
-| EVD-02 | Review exact scope under an explicit independence policy. | [Evidence](../design/06-evidence-and-completion.md) | B05; B11 |
-| EVD-03 | Separate historical verdict from current applicability. | [Evidence](../design/06-evidence-and-completion.md) | M09; M24 |
-| EVD-04 | Seal one coherent reviewed state with no unresolved applicable blockers. | [Evidence](../design/06-evidence-and-completion.md) | M21; M24 |
-| EVD-05 | Expose activity, coverage, evidence, acceptance, and outside validation separately. | [Evidence](../design/06-evidence-and-completion.md) | M14; B11–B12 |
+| PER-01 | Preserve continuing identity independently of model and work. | [Persona core](../design/PERSONA-CORE.md) | B10; restoration evidence |
+| PER-02 | Distinguish character, preference, competence, authority, and responsibility. | [Persona core](../design/PERSONA-CORE.md) | B01–B04; capability evidence |
+| PER-03 | Carry current self and relevant persona-selected fragments into decisions without invented biography. | [Persona core](../design/PERSONA-CORE.md) | B01–B04 |
+| PER-04 | Make lifecycle changes and open-obligation dispositions explicit. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M06; X02 |
+| PER-05 | Require truthful creation provenance and bounded initialization. | [Persona core](../design/PERSONA-CORE.md) | M05; M18 |
+| MEM-01 | Separate work facts, authored memory, and observed evidence. | [Persona core](../design/PERSONA-CORE.md) | M08–M10; B09 |
+| MEM-02 | Preserve authored fragment meaning, source restrictions, scope, counterevidence, revisions, and visibility. | [Persona core](../design/PERSONA-CORE.md) | M08; M11; B09 |
+| MEM-03 | Let the primary persona choose relevant next-context fragments within persona and work scope. | [Persona core](../design/PERSONA-CORE.md) | M08; M11; B09 |
+| MEM-04 | Preserve mandatory current constraints under context pressure. | [Persona core](../design/PERSONA-CORE.md) | M08; M21 |
+| MEM-05 | Measure qualified learning transfer and correction rather than memory volume. | [Persona core](../design/PERSONA-CORE.md) | B09 |
+| NED-01 | Preserve original intent and authorized mandate changes. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M20; B11–B12 |
+| NED-02 | Obtain continuation acceptance and expose ownership gaps. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M19 |
+| NED-03 | Distinguish conditional assumptions from confirmed facts. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M20 |
+| NED-04 | Check scope coverage against the original need. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | B11–B12; omitted-outcome fixture |
+| COL-01 | Preserve individual agendas, an unranked shared board, and accepted commitments. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | B01–B04 |
+| COL-02 | Separate offers, membership, responsibility, and actual contribution. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M06; M18–M19 |
+| COL-03 | Preserve exact agreement endorsements and dissent. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | B02–B03; X01 |
+| COL-04 | Resolve consequential feedback through explicit dispositions. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M21; B05 |
+| COL-05 | Support provisional interfaces and bounded iteration. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M22 |
+| COL-06 | Permit useful birth and no-birth restraint under conserved resources. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M05–M07; B08 |
+| ACT-01 | Use or acquire capabilities through actual evidence-backed operations. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M10; B11–B12 |
+| ACT-02 | Enforce execution boundaries rather than merely label them. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M12 |
+| ACT-03 | Require actual results before dependent decisions and publication. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M17; M26 |
+| ACT-04 | Preserve unknown external effects and reconcile before repetition. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M13 |
+| GOV-01 | Keep grants scoped, revocable, and no broader than their parents. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M05–M07; M11–M13 |
+| GOV-02 | Conserve resources across descendants, retries, compaction, and review. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M07; M23 |
+| GOV-03 | Protect agreed closeout capacity. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M23 |
+| GOV-04 | Bound idle cognition, reminders, and no-progress loops. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M25 |
+| EVD-01 | Preserve exact artifacts, input mappings, and actual execution evidence. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M09–M10 |
+| EVD-02 | Review exact scope under an explicit independence policy. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | B05; B11 |
+| EVD-03 | Separate historical verdict from current applicability. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M09; M24 |
+| EVD-04 | Seal one coherent reviewed state with no unresolved applicable blockers. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M21; M24 |
+| EVD-05 | Expose activity, coverage, evidence, acceptance, and outside validation separately. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M14; B11–B12 |
 | SYS-01 | Make accepted operations retry-safe and attributable. | [Contracts](CONTRACTS.md) | M01–M04; M13 |
 | SYS-02 | Restore pending events, reservations, and effects without new authority. | [Contracts](CONTRACTS.md) | M04; M16; M26 |
 | SYS-03 | Prevent stale decision or write holders from adopting changes. | [Contracts](CONTRACTS.md) | M02–M03 |
-| SYS-04 | Configure inference without silently changing identity, cost, or authority. | [Action](../design/04-capabilities-and-action.md) | M15; B10 |
-| SOC-01 | Establish a charter and actual human or institutional accountability. | [Society, E2](../design/07-experience-and-society.md) | X01–X03 |
-| SOC-02 | Distinguish real stakeholder input from simulated perspectives. | [Society, E2–E3](../design/07-experience-and-society.md) | X01 |
-| SOC-03 | Preserve contextual evidence rather than a universal trust or popularity score. | [Society](../design/07-experience-and-society.md) | B02–B04; X01 |
-| UX-01 | Present clear evidence-linked status and meaningful controls. | [Experience](../design/07-experience-and-society.md) | M14 |
-| UX-02 | Respect access and retention across every view and derivative. | [Memory](../design/02-memory-and-learning.md) and [contracts](CONTRACTS.md) | M11; M16 |
-| SRV-01 | Bound ongoing triggers, renewal, escalation, and stopping. | [Services, E4](../design/07-experience-and-society.md) | B12; X04 |
-| PHY-01 | Gate physical effects on their own observation, override, and assurance contract. | [Physical extension, E4](../design/07-experience-and-society.md) | X05 |
-| OSS-01 | Version design, evaluators, and public claims without rewriting failures. | [Contribution guide, E6](../CONTRIBUTING.md) | M16; X06 |
+| SYS-04 | Configure inference without silently changing identity, cost, or authority. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M15; B10 |
+| SOC-01 | Establish a charter and actual human or institutional accountability. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | X01–X03 |
+| SOC-02 | Distinguish real stakeholder input from simulated perspectives. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | X01 |
+| SOC-03 | Preserve contextual evidence rather than a universal trust or popularity score. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | B02–B04; X01 |
+| UX-01 | Present clear evidence-linked status and meaningful controls. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M14 |
+| UX-02 | Respect access and retention across every view and derivative. | [Persona core](../design/PERSONA-CORE.md) and [contracts](CONTRACTS.md) | M11; M16 |
+| SRV-01 | Bound ongoing triggers, renewal, escalation, and stopping. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | B12; X04 |
+| PHY-01 | Gate physical effects on their own observation, override, and assurance contract. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | X05 |
+| OSS-01 | Version design, evaluators, and public claims without rewriting failures. | [Contribution guide](../CONTRIBUTING.md) | M16; X06 |
 
-## Using this index
 
-For each applicable row, an implementation records the responsible component, implementation state, supporting evidence, untested cases, and blocking deployment decision. “Implemented,” “mechanically tested,” “behaviorally demonstrated,” and “approved for a particular deployment” are separate statuses.
+## What the persona-core refinement requires
 
-The catalogue contains 45 requirement rows. The original identifiers remain stable so a design change can be traced without confusing renamed requirements with new behavior.
+The existing rows now apply to one coherent account rather than parallel identity, graph, and reflection systems:
 
-## Consolidation and evaluation links
+| Concern | Existing requirements | Observable meaning |
+|---|---|---|
+| Character and own voice | PER-01–PER-03, PER-05 | Attributed accepted self-prose is supplied faithfully; later expression and discretionary choices are assessed separately. Supplied ideas do not become invented firsthand experience. |
+| Learning from work and surroundings | MEM-01–MEM-02, MEM-05, ACT-01 | The persona may interpret task results, tools, environment observations, peers, and its own mistakes, retain qualified meaning, or make no lasting edit. Only actual observations support claimed outcomes. |
+| Self-organization and next context | MEM-02–MEM-04, SYS-01–SYS-03, UX-01–UX-02 | Files can be named, searched, read, split, combined, corrected, or retired without a required taxonomy. The primary persona selects exact relevant fragments; the runtime validates access, versions, qualifications, and fit. |
+| Relationships and cooperation | COL-01–COL-04, SOC-03 | Private directional interpretation is distinct from shared evidence, consent, competence, and accepted responsibility. A useful encounter can change later work without a universal reputation score. |
+| Skills and tools | ACT-01–ACT-04, EVD-01, MEM-05 | A reusable method is authored knowledge; a tool note is not an executable capability or proof of correct results. Relevant operations, versions, and outcomes need their own evidence. |
+| Correction and continuity | PER-04, MEM-02–MEM-04, EVD-03, SYS-01–SYS-04 | Exact history remains attributable, harmful guidance stops being current, and restart or model change does not erase obligations or revive withdrawn information. |
+| Useful and bounded work | NED-01–NED-04, GOV-01–GOV-04, EVD-02–EVD-05 | Improvements are judged against the accepted need, checks, total cost, failures, and stopping disposition. More fragments, calls, or personas are not success. |
 
-The active catalogue remains the 45 rows above, with I01–I21 unchanged. The [organization clarification](../design/03-work-and-cooperation.md#how-organization-emerges) and [core handoff contract](CONTRACTS.md#persona-owned-organization-and-capability-choice) elaborate I03 and the existing NED, COL, ACT, GOV, EVD, and SYS boundaries; they do not add a task-specific workflow.
+These refinements add no requirement family. They also do not require a memory edit, an explicit no-change declaration, a new selection, or a learning ceremony in every response. Where no edit or selection change occurs, accepted state stays unchanged; that absence is not an authored claim that learning was considered. Required work and stopping dispositions remain independent.
 
-The former DLV-01–DLV-10 layer is retired as redundant; the [historical mapping](DELIVERY-CONTRACTS.md#retired-identifier-mapping) preserves each identifier and its existing coverage. [D01–D16](../evaluation/DELIVERY-ACCEPTANCE.md) are supplemental evaluation refinements, not extra active requirements. [Emergence evaluation](../evaluation/README.md#evaluating-emergent-organization) adds comparisons under the existing behavioral gates. Record the exact design and evaluator revisions; earlier outcomes do not silently inherit revised criteria.
+## Applying and reporting the requirements
 
-## Fragment-persona refinement
+For each applicable row, record the responsible enforcement boundary, supported scope, implementation state, exact evidence, unrun cases, and unresolved deployment decision. Keep these statuses separate:
 
-[The persona as an evolving fragment system](../design/FRAGMENT-PERSONA.md) refines PER-01–PER-05, MEM-01–MEM-05, COL-01–COL-04, SOC-03, and the applicable GOV, EVD, SYS, ACT, UX, and OSS boundaries without replacing their identifiers or weakening I01–I21. It makes self-understanding, procedural learning, metacognition, relationships, and context intent parts of one authored fragment system. Every ordinary primary persona decision combines useful work with a fragment disposition and next-context intent; no additional reflection, memory-authoring, or retrieval-planning LLM call is required.
+- Design conformance: the documented implementation responsibilities cover the rule without contradiction
+- Mechanism evidence: the actual implementation enforces the boundary under the tested cases
+- Behavioral evidence: observed persona work supports a scoped claim about choices, learning, cooperation, or utility
+- Deployment approval: an accountable authority accepts the demonstrated scope and remaining risks
 
-The design explicitly permits bounded persona-authored conditional selection plans, resolved against actual events before a later call. This is delegated selection, not an inference of consent from a search match. Its current precedence rules resolve earlier immediate-selection-only wording while preserving source restrictions, current authority, and mandatory context.
+A disabled feature is not applicable only when it is genuinely unavailable and its absence does not remove an obligation incurred by other enabled work. Missing evidence is unassessed or not run, never passed. The [status ledger](STATUS.md) states what this documentation revision does and does not establish.
 
-[FP-M01–FP-M16 and FP-B01–FP-B07](../evaluation/FRAGMENT-PERSONA.md) provide the detailed requirement mapping and supplemental acceptance scenarios. They distinguish same-call authorship, exact provider-bound context, event recall, social interpretation, voice, and measured work improvement. These are specified tests, not execution evidence or additional active requirement rows.
-
-## Conditional graph recall and optional semantic selection
-
-The [illustrated recall design](../design/FRAGMENT-RECALL.md) and [handoff contract](FRAGMENT-RECALL-CONTRACT.md) replace tree-first and function-grouped interpretations with a personal network of fragments and authored situations. An optional, separately funded selector such as Jev may assess a bounded candidate set; it is not another generative memory author or a primary action authority. Current character, source restrictions, exact versions, and mandatory context remain protected.
-
-[FR-M01–FR-M20 and FR-B01–FR-B06](../evaluation/FRAGMENT-RECALL.md#existing-requirement-mapping) map this refinement to the existing requirement rows. They cover candidate discovery, unknown conditions, before-provider privacy, independent questions, exact context, snapshot races, index/cache invalidation, bounded costs, diversity, voice, and later work outcomes. Candidate relevance is not truth, and selection is not measured maturity. These are additional scenarios, not additional active requirements or reported test passes.
+Historical DLV identifiers, supplemental D/FP/FR scenario labels, and earlier evaluator revisions remain mapped in [evaluation history](../evaluation/HISTORICAL-RESULTS.md). Changed criteria require a new versioned result; an old outcome never silently inherits this edition's interpretation.

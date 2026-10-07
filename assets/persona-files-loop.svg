@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1160" viewBox="0 0 1600 1160" role="img" aria-labelledby="title description">
+  <title id="title">A persona uses its own files to prepare its next decision</title>
+  <desc id="description">Three panels show persona-owned files, one primary LLM decision, and actual work with the environment and peers. The primary LLM reads exact permitted files, may author or organize them in its own voice, and proposes work. Actual observations return to a fresh decision. The same primary LLM explicitly chooses optional fragments for its next prompt. The host faithfully assembles those exact fragments and required qualifications with current self and mandatory work, authority, resource, and unresolved-effect information. Search matches do not select themselves. Access, source restrictions, version checks, funding, and cancellation apply before use or action. This is a target-design illustration, not a measured execution trace or a fixed multi-call workflow.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#36565f"/></marker>
+    <marker id="teal-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#137769"/></marker>
+  </defs>
+  <rect width="1600" height="1160" fill="#f7f8f4"/>
+  <g font-family="DejaVu Sans, sans-serif" fill="#183039">
+    <text x="72" y="62" font-size="18" font-weight="700" letter-spacing="2">AI PERSONAS / ADOPTED TARGET DESIGN</text>
+    <text x="72" y="120" font-size="43" font-weight="700">Its own words. Its own next choice.</text>
+    <text x="72" y="163" font-size="24">A continuing character learns while working and chooses the context for its next decision.</text>
+
+    <rect x="72" y="212" width="432" height="438" rx="20" fill="#e8eee9" stroke="#a5b9ac" stroke-width="2"/>
+    <rect x="584" y="212" width="432" height="438" rx="20" fill="#ddede9" stroke="#137769" stroke-width="3"/>
+    <rect x="1096" y="212" width="432" height="438" rx="20" fill="#e9edf0" stroke="#a6b8c2" stroke-width="2"/>
+
+    <text x="102" y="258" font-size="19" font-weight="700" letter-spacing="1">PERSONA-OWNED FILES</text>
+    <text x="102" y="304" font-size="29" font-weight="700">Reusable prompt parts</text>
+    <text x="102" y="348" font-size="24">Current self, experiences,</text>
+    <text x="102" y="382" font-size="24">methods, and relationships</text>
+    <rect x="102" y="416" width="372" height="90" rx="10" fill="#f9fbf7"/>
+    <text x="120" y="451" font-size="23" font-style="italic">“I like an early usable version.</text>
+    <text x="120" y="484" font-size="23" font-style="italic">I check before I add polish.”</text>
+    <text x="102" y="545" font-size="22">List · search · grep / regex</text>
+    <text x="102" y="577" font-size="22">Exact read · edit · reorganize</text>
+    <text x="102" y="618" font-size="17" fill="#476059">Illustrative content; no required taxonomy</text>
+
+    <text x="614" y="258" font-size="19" font-weight="700" letter-spacing="1">ONE PRIMARY LLM</text>
+    <text x="614" y="304" font-size="30" font-weight="700">The persona decides</text>
+    <text x="614" y="354" font-size="25">Do useful work</text>
+    <text x="614" y="394" font-size="25">Interpret experience</text>
+    <text x="614" y="426" font-size="25">in its own voice</text>
+    <text x="614" y="471" font-size="24">Keep, revise, or skip a lesson</text>
+    <text x="614" y="512" font-size="25">Organize its own files</text>
+    <text x="614" y="555" font-size="24" font-weight="700" fill="#116d61">Choose relevant fragments</text>
+    <text x="614" y="596" font-size="18">Work and learning in one decision</text>
+    <text x="614" y="625" font-size="18">No extra writer or mandatory edit</text>
+
+    <text x="1126" y="258" font-size="19" font-weight="700" letter-spacing="1">ACTUAL WORK AND WORLD</text>
+    <text x="1126" y="304" font-size="30" font-weight="700">Act and observe</text>
+    <text x="1126" y="354" font-size="24">User need and constraints</text>
+    <text x="1126" y="394" font-size="24">Environment and tool results</text>
+    <text x="1126" y="434" font-size="24">Peer contributions and replies</text>
+    <text x="1126" y="474" font-size="24">Its own earlier choices</text>
+    <line x1="1126" y1="512" x2="1498" y2="512" stroke="#b6c5cd" stroke-width="2"/>
+    <text x="1126" y="550" font-size="22">Action needs current admission</text>
+    <text x="1126" y="584" font-size="22">An intention is not an observation</text>
+    <text x="1126" y="618" font-size="18">Waits, failures, and stops stay visible</text>
+
+    <path d="M 504 348 H 576" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="544" y="321" text-anchor="middle" font-size="15">read</text>
+    <path d="M 584 555 H 512" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="544" y="585" text-anchor="middle" font-size="15">author</text>
+    <path d="M 1016 348 H 1088" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="1056" y="321" text-anchor="middle" font-size="15">propose</text>
+    <path d="M 1096 555 H 1024" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="1056" y="585" text-anchor="middle" font-size="15">observe</text>
+
+    <path d="M 902 650 V 766" fill="none" stroke="#137769" stroke-width="4" marker-end="url(#teal-arrow)"/>
+    <text x="930" y="699" font-size="21" font-weight="700" fill="#116d61">Primary chooses</text>
+    <text x="930" y="730" font-size="19">explicit next-context selection</text>
+    <path d="M 696 774 V 658" fill="none" stroke="#137769" stroke-width="4" marker-end="url(#teal-arrow)"/>
+    <text x="670" y="699" text-anchor="end" font-size="21" font-weight="700" fill="#116d61">Next decision</text>
+    <text x="670" y="730" text-anchor="end" font-size="19">receives checked exact context</text>
+
+    <rect x="240" y="774" width="1120" height="220" rx="20" fill="#fffdf3" stroke="#c6bd91" stroke-width="2"/>
+    <text x="278" y="820" font-size="19" font-weight="700" letter-spacing="1">NEXT PROMPT / FAITHFUL HOST ASSEMBLY</text>
+    <text x="278" y="864" font-size="26" font-weight="700">Current self + mandatory work and boundaries</text>
+    <text x="278" y="905" font-size="26" font-weight="700">+ primary-chosen exact fragments and required qualifications</text>
+    <text x="278" y="946" font-size="22">A search match is discovery, not selection. A read is observation, not endorsement.</text>
+    <text x="278" y="977" font-size="18">Missing, stale, private, or oversized required context: bounded recovery or an explicit block</text>
+
+    <line x1="72" y1="1033" x2="1528" y2="1033" stroke="#bac7c8" stroke-width="2"/>
+    <text x="72" y="1073" font-size="23" font-weight="700">Host checks: access · source restrictions · exact versions · funding · cancellation</text>
+    <text x="72" y="1109" font-size="20">Files never grant authority. Real receipts, commitments, costs, and unresolved effects remain trustworthy.</text>
+    <text x="72" y="1141" font-size="16" fill="#50676c">Target illustration, not a product trace or a fixed multi-call workflow. Full reading: VISUAL-GUIDE.md</text>
+  </g>
+</svg>

@@ -1,118 +1,33 @@
-# Visual guide to AI Personas
+# The persona-files loop
 
-[Home](README.md) · [Overall design](AI-PERSONAS-DESIGN-PROPOSAL.md) · [Artwork editing](assets/visuals/README.md)
+[Home](README.md) · [Persona core](design/PERSONA-CORE.md) · [Work and boundaries](design/WORK-AND-BOUNDARIES.md) · [Artwork provenance](sources/SOURCE-MANIFEST.md#artwork-retirement)
 
-Five overview posters and seven system diagrams explain the design visually. Each sheet below has a direct image link and a text reading, so no reader needs to inspect diagram markup or depend on an image alone. These are proposed-design illustrations, not product screenshots or validation evidence.
+![The primary LLM works and learns in its own voice, uses ordinary persona-owned files, and explicitly chooses exact fragments for its next prompt. The host preserves mandatory context, qualifications, permissions, versions, budgets, and cancellation.](assets/persona-files-loop.svg)
 
-Arrows show relationships and allowed transitions, not a mandatory conversation. Color reinforces explicit labels. Written requirements govern when a simplified visual cannot show every condition. The existing artwork remains edition 01; handbook edition 2.0 preserves its numbered subject references in the overall design.
+[Open the full-size illustration](assets/persona-files-loop.svg)
 
-## P01: The blueprint
+## A complete text reading
 
-![Three responsibility layers and six concepts connect purpose, persona choice, and accountable work.](assets/visuals/poster-01-blueprint.svg)
+The left panel is the persona's ordinary readable files. Its accepted current self defines its authored character. Other fragments can carry experiences, methods, relationship interpretations, uncertainties, and corrections in its own voice. The quoted preference is fictional illustrative prose, not recorded experience. The persona chooses useful names and organization; the pictured subjects are not a compulsory folder taxonomy. It can list, search, use supported grep-like or regular-expression matching, read exact versions, and propose attributable edits.
 
-[Open full-size sheet](assets/visuals/poster-01-blueprint.svg) · [Design subjects 1–4](AI-PERSONAS-DESIGN-PROPOSAL.md#4-the-conceptual-architecture)
+The center is the primary LLM acting as that continuing persona. In the same ordinary decision it can do useful work, interpret experience, maintain its files, and choose the optional fragments relevant to its next decision. It may retain a tentative idea, correct a method, defer, or make no lasting change. No mandatory edit, extra reflection writer, graph engine, numeric personality controller, or delegated selector owns these choices.
 
-Humans set purpose and authorized boundaries. Personas interpret needs, choose methods, and accept commitments. The supporting system enforces access and resources and preserves consequences. The six public concepts are persona, environment, work, fragment, capability, and artifact with evidence. A shared record is not a single team mind; work state, retained interpretation, and observed evidence remain distinct.
+The right panel contains actual work and observations: the user's request, environmental and tool results, peer contributions, and evidence of the persona's own earlier choices. Proposed actions require current admission. Only actual observed consequences count as observations; a plan, pending action, or intended effect cannot be rewritten as success. A peer can decline, a capability can fail, and a persona can wait or stop honestly. Applicable obligations remain visible.
 
-## P02: From intent to an honest outcome
+The two lower arrows make the self-prompting mechanism explicit. The primary LLM chooses exact relevant optional fragments for the next work-scoped context. The host then faithfully assembles that choice with current self, mandatory work and authority, resources, important observations, unresolved effects, and required qualifications. The next ordinary primary decision receives that checked context. These arrows are a continuing relationship, not an instruction to spend two extra calls or complete every activity in a fixed order.
 
-![Twelve explanatory moments connect a human request to a scoped result and possible future learning.](assets/visuals/poster-02-end-to-end-flow.svg)
+Search discovery, a full read, an authored selection, actual inclusion, subsequent application, and measured benefit are distinct. A search match does not select itself. A read is an observation and does not automatically become permanent attention or an endorsed method. Required corrections accompany usable full content; optional associations do not activate a neighborhood. Stale, unavailable, private, or oversized required context leads to bounded recovery or an explicit block rather than silently incomplete guidance.
 
-[Open full-size sheet](assets/visuals/poster-02-end-to-end-flow.svg) · [Journey](AI-PERSONAS-DESIGN-PROPOSAL.md#15-the-complete-end-to-end-journey)
+The bottom boundary applies throughout. Current access, processing destination, source restrictions, exact versions, resource ceilings, and cancellation are checked independently of what a persona's files say. Commitments, receipts, charges, and unresolved effects remain trustworthy records. A first-person fragment cannot confer permission, cancel another participant's obligation, change an actual receipt, or prove its own usefulness.
 
-Read the first row left to right, the second right to left, and the third left to right. The moments are receiving the need, accepting continuation, understanding scope, discovering opportunities, accepting commitments, establishing capabilities, acting, inspecting and integrating, reviewing, sealing release, closing responsibly, and retaining or testing learning. Simple work can combine moments. Their numbering explains the story; it does not require a fixed workflow.
+## Scope and visual status
 
-## P03: Persona anatomy
+This is an illustration of the adopted target design. It is not a product screenshot, live persona trace, multi-call benchmark, or evidence of learning benefit. The detailed normative documents govern simplifications in the image. The one loop does not require a second persona, a tool, a new lesson, a physical body, or between-task exploration for every request.
 
-![Continuing identity connects to perspective, memory, commitments, capabilities, and current situation.](assets/visuals/poster-03-persona-anatomy.svg)
+The current SVG is editable vector artwork with a title, accessible description, explicit labels, and this full text explanation. It contains no scripts, external images, external font requests, or embedded application logic. Its logical canvas is 1600 by 1160; that is not a guarantee about printing or every viewer's font rendering. Color reinforces written meaning rather than being its only carrier.
 
-[Open full-size sheet](assets/visuals/poster-03-persona-anatomy.svg) · [Identity](design/01-personas-and-identity.md)
+This new sheet was rendered and visually inspected at full size and at a 960-pixel embedded width during this documentation revision. That check covered labels, margins, arrows, and alignment with the prose; it establishes presentation only, not implementation correctness or model behavior.
 
-A continuing identity relates to an authored perspective, access-controlled memory, agenda, relationships, accepted commitments, capability evidence, current situation, and lifecycle. The lines indicate structural relationships, not an execution order. A persona is not a fabricated human, guaranteed expert, or fixed profession. Public presentation and private state remain separate.
+This edition replaces the prior poster and fragment-recall collections in active navigation. Their exact historical bytes and original validation scope remain linked from the [source manifest](sources/SOURCE-MANIFEST.md). No retired or untouched figure is claimed as freshly inspected.
 
-## P04: Cooperation without a collective mind
-
-![Distinct participants exchange authorized work while retaining identity, acceptance, dissent, and human accountability.](assets/visuals/poster-04-persona-society.svg)
-
-[Open full-size sheet](assets/visuals/poster-04-persona-society.svg) · [Society](design/07-experience-and-society.md)
-
-Illustrative participants exchange attributed work through authorized shared records. The center is not a leader or unrestricted memory pool. Governance includes bounded authority, separately accepted membership and work, preserved dissent, actual stakeholder input, and a challenge route. The pictured number of personas is not required. Community charter and appeal mechanisms remain proposed Extension E2; simulated viewpoints do not supply human consent.
-
-## P05: Embodiment requirements
-
-![Seven functional layers connect persistent identity to bounded action and evidence-linked accountability.](assets/visuals/poster-05-embodiment-requirements.svg)
-
-[Open full-size sheet](assets/visuals/poster-05-embodiment-requirements.svg) · [Functional embodiment](AI-PERSONAS-DESIGN-PROPOSAL.md#35-functional-embodiment)
-
-The layers are persistent state, authorized information, decision-relevant context, bounded practical capability, temporal state, recorded social commitments, and evidence-linked accountability. No layer alone establishes the complete connection. Digital embodiment does not require a body. Physical effects need separate permission, observation, override, and safe-stop assurance. The layer vocabulary is proposed E1; expanded physical safeguards are E4.
-
-## D01: The embodiment loop
-
-![Identity, memory, observations, and obligations inform decisions; actual consequences return to review and future choices.](assets/visuals/diagram-01-embodiment-loop.svg)
-
-[Open full-size sheet](assets/visuals/diagram-01-embodiment-loop.svg) · [Design subject 3.5](AI-PERSONAS-DESIGN-PROPOSAL.md#35-functional-embodiment)
-
-Continuing identity, selected memory, authorized observations, and current commitments and limits inform a situated decision. A permitted action produces an observed consequence. Review and reconsideration feed both future choices and possible memory revision. An intention or a running operation is not an observed completed result. Memory without correction can retain mistakes; tools without authority can create impermissible effects.
-
-## D02: The conceptual architecture
-
-![Human purpose, persona judgment, and reliable supporting mechanisms form a recurring path through actual work and evidence.](assets/visuals/diagram-02-conceptual-architecture.svg)
-
-[Open full-size sheet](assets/visuals/diagram-02-conceptual-architecture.svg) · [Design subject 4.3](AI-PERSONAS-DESIGN-PROPOSAL.md#43-three-layers-one-recurring-event-path)
-
-Human need and boundaries inform versioned work and environments. Continuing personas exchange proposals, commitments, agreements, and explicitly permitted fragments. Authorized and funded execution reaches tools or outside participants. Artifacts, receipts, and observations inform review, revision, release, and further persona decisions. Shared records make cooperation inspectable; they do not select the meaning of every task.
-
-## D03: The identity lifecycle
-
-![Initialization, activity, dormancy, and retirement have explicit conditions; completing work does not erase identity.](assets/visuals/diagram-03-identity-lifecycle.svg)
-
-[Open full-size sheet](assets/visuals/diagram-03-identity-lifecycle.svg) · [Design subject 5.3](AI-PERSONAS-DESIGN-PROPOSAL.md#53-lifecycle-states)
-
-Initialization leads to activity when bounded orientation completes, or dormancy when it cannot continue. Activity can become dormant when there is no current participation or an explicit pause. Authorized resumption can restore activity. Retirement requires a disposition for outstanding obligations and an authorized lifecycle decision. The illustrated lifecycle ends there; it does not imply automatic destruction of history. Quarantine is an independent security restriction and is not depicted as an ordinary personality or lifecycle outcome.
-
-## D04: Onboarding and acceptance
-
-![Authority and resources gate restricted orientation; membership and work are separately accepted, negotiated, or declined.](assets/visuals/diagram-04-onboarding.svg)
-
-[Open full-size sheet](assets/visuals/diagram-04-onboarding.svg) · [Design subject 6.5](AI-PERSONAS-DESIGN-PROPOSAL.md#65-birth-membership-and-commitment-are-separate)
-
-An observed contribution gap can motivate birth or recruitment. Insufficient authority or resources produces a visible refusal or block. Sufficient authority permits restricted orientation and an invitation preview. A membership decline is recorded and unused reservations are reconciled without erasing spent or uncertain usage. Membership acceptance establishes only scoped membership. The work offer is separately accepted, negotiated, or declined. Actual contribution and review then support continuation, dormancy, or handoff. Creation supplies neither expertise nor additional root funding.
-
-## D05: The learning loop
-
-![An optional retained interpretation is tested through later authorized use and independently assessed outcomes.](assets/visuals/diagram-05-learning-loop.svg)
-
-[Open full-size sheet](assets/visuals/diagram-05-learning-loop.svg) · [Design subject 7.4](AI-PERSONAS-DESIGN-PROPOSAL.md#74-the-learning-loop)
-
-Experience or feedback leads to interpretation. When no long-term lesson is worth retaining, required work evidence still remains. Otherwise a fragment is authored or revised. A later relevant situation permits access-checked retrieval and selection, possible inclusion in a decision, and an action whose outcome can be assessed. Assessment returns to interpretation. Writing or selecting memory does not itself prove benefit; comparable later outcomes support only the learning claim they actually test.
-
-## D06: The evidence chain
-
-![An accepted need connects to exact inputs, actual actions, outputs, review, current applicability, and a truthful release.](assets/visuals/diagram-06-evidence-chain.svg)
-
-[Open full-size sheet](assets/visuals/diagram-06-evidence-chain.svg) · [Design subject 14.1](AI-PERSONAS-DESIGN-PROPOSAL.md#141-the-evidence-chain)
-
-The chain connects accepted need and criteria, accepted commitment, exact inputs and assumptions, actual action or observation, exact output, claim-specific assessment, current applicability, and an honest release or limited disposition. The second row reads right to left. Each link can fail independently. A new candidate never silently inherits an older review. For simple conversation, one response can combine several links and human judgment may be sufficient assessment.
-
-## D07: The complete journey
-
-![The full journey retains acceptance, information requests, repair, changed-state review, limited delivery, and authorized continuation paths.](assets/visuals/diagram-07-complete-journey.svg)
-
-[Open full-size sheet](assets/visuals/diagram-07-complete-journey.svg) · [Design subject 15.1](AI-PERSONAS-DESIGN-PROPOSAL.md#151-the-whole-journey-at-a-glance)
-
-A human need leads to preserved scope, boundaries, and resources. Without accepted continuation, the work awaits acceptance, is declined, or is handed back. With acceptance, participants interpret outcomes and unknowns, form agendas, accept commitments, establish capabilities, perform bounded work, and preserve actual evidence. Review addresses the exact candidate and omitted scope. Repair returns to the relevant work choices; qualifying evidence leads to a currentness check and sealed release.
-
-A relevant change before release reopens interpretation. A release delivers exact results, limitations, and open obligations, then settles participation and possible learning. The next need or authorized ongoing event can begin another bounded episode. Missing information is requested and returned; justified permitted recruitment can change commitments; ongoing work can pause, partially deliver, or report a genuine block. Numbered return cards preserve these paths without long crossing arrows. No number of diagram steps guarantees success.
-
-## Human-readable artwork inventory
-
-| Sheets | Format and logical canvas | Written subject |
-|---|---|---|
-| P01–P05 | Editable SVG, 1600 by 1000 each | Overview, journey, anatomy, society, embodiment. |
-| D01–D03 | Editable SVG, 1600 by 1000 each | Embodiment loop, architecture, lifecycle. |
-| D04 | Editable SVG, 1600 by 1100 | Restricted orientation and separate acceptance. |
-| D05–D06 | Editable SVG, 1600 by 1000 each | Learning and evidence. |
-| D07 | Editable SVG, 1600 by 1500 | Complete journey and return paths. |
-| Five original PNG illustrations | Historical raster artwork retained in the assets folder | Provenance only; not current requirements or default diagrams. |
-
-The exact file links appear beside each sheet above. The SVG and PNG artwork is retained unchanged in this edition; the text guide and navigation are rewritten. Historical packaging or rendering checks apply only to their original versions and are not presented as a new validation run. See [asset notes](assets/README.md), [editing guidance](assets/visuals/README.md), and [source provenance](sources/SOURCE-MANIFEST.md).
+When editing the sheet, preserve both directions of the next-context relationship, primary-model ownership, actual-observation limits, and the lower enforcement boundary. Update this reading with the image, then inspect the rendered result at full and ordinary embedded size for clipping, overlap, font substitution, and arrow clarity. SVG parsing alone cannot establish visual readability.

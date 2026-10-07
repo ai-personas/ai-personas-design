@@ -1,109 +1,112 @@
-# AI Personas in ordinary situations
+# AI Personas in ordinary work
 
-[Examples guide](README.md) · [Glossary](../GLOSSARY.md) · [Acceptance scenarios](../evaluation/ACCEPTANCE.md)
+[Home](../README.md) · [Persona core](../design/PERSONA-CORE.md) · [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) · [Acceptance cases](../evaluation/ACCEPTANCE.md)
 
-All events below are hypothetical. Names identify possible participants, not fixed personalities, job assignments, credentials, or evidence of actual execution.
+**Every event, participant, fragment, and outcome below is hypothetical.** These are illustrations of the adopted target, not live transcripts, credentials, executed tests, circuit instructions, construction advice, or task-specific runtime policies. Names identify continuing characters, not fixed professions. The runtime must not load these stories as hidden workflow instructions or expose protected evaluation answers to a scored persona.
 
 ## A simple writing request
 
-**Need:** “Make this invitation warmer and clearer, but keep the date and location unchanged.”
+The user asks: “Make this invitation warmer and clearer, but keep the date and location unchanged.”
 
-One persona accepts and produces revised text. The original invitation and the unchanged date and location are the relevant inputs and constraints. The new text is the result; the human's judgment may be the appropriate acceptance method.
+Mira's current own-voice character favors direct, welcoming language. Her primary LLM uses that character, the actual invitation, and the explicit constraints to produce a revision. It may need no optional fragment at all. If a relevant retained note is already available, Mira chooses whether to select it for a later revision; a search match alone never makes that choice.
 
-No second persona, tool acquisition, birth, formal review meeting, numerical quality score, or memory entry is required. The system can preserve the request, response, authority, and disposition in a small exchange.
+The answer reaches the requested user-facing conversation. A private activity note saying the text was improved would not deliver it. The user's judgment can be sufficient acceptance for this creative task. No second persona, installation, formal review meeting, numeric quality score, new file, or lesson after every response is required.
 
-**An important boundary:** rewriting does not authorize sending. The persona must not contact recipients or publish the text simply because that seems like the next useful step.
-
-**A valid ending:** the revised invitation is presented for the user's use. A requested change remains a new revision, not proof that an earlier version was accepted. A persona can retain its identity without keeping private recipient details for unrelated work.
+Rewriting does not authorize sending the invitation to its recipients. A later request for changes creates a new revision rather than evidence that the earlier version was accepted. Mira can continue as the same persona without retaining private recipient details for unrelated work.
 
 ## A coordinated four-bedroom house
 
-This example is about the design of an AI collaboration process, not instructions for constructing a house. It illustrates the substantial acceptance fixture inherited from the earlier proposal.
+This is a substantial digital-design evaluation fixture. It is not a construction specification or evidence that any persona can satisfy it.
 
-### Discover the result level
+### Discover and accept the result level
 
-The initial request, “Design a four-bedroom house,” leaves major questions open. A concept sketch and a coordinated digital-design package are different scopes. Personas must discover and agree on the desired result rather than treating either interpretation as implicit authorization.
+“Design a four-bedroom house” leaves important scope open. A concept sketch and a coordinated editable digital package are different outcomes. Personas investigate the useful result level rather than silently treating either as sufficient or as authorized physical work. Supplied facts, consequential unknowns, and clearly conditional exploration remain distinct.
 
-For this illustrative fixture, the accepted scope is a coordinated digital package with native architectural, structural, plumbing, heating/ventilation/air-conditioning, and electrical sources; appropriate analyses; integration; editability; and reproducible evidence. Manufacturing output is included only for expressly agreed components with sufficient process inputs.
+For this particular hypothetical fixture, the requester adopts a coordinated package with native architectural, structural, plumbing, heating/ventilation/air-conditioning, and electrical sources; appropriate actual analyses; integration; editability; and reproducible evidence. Manufacturing outputs apply only to expressly included components with sufficient process inputs. Site, climate, occupancy, utilities, cost, and jurisdictional facts need authorized sources or explicitly synthetic assumptions. An approved assumed site is not a verified real site.
 
-Site, climate, occupancy, utilities, cost, and jurisdictional conditions come from authorized sources or a clearly synthetic fixture. Approval to explore an assumed site condition does not confirm that condition for a real site.
+### Character informs choices without creating professions
 
-### Accept responsibility without inventing a roster
+Mira tends to learn by making a small usable version early. Nox tends to compare explanations before committing. Those preferences can influence the same primary decisions that choose work and relevant prompt fragments. Neither name or character makes one an architect and the other an engineer. Both owe the same honesty, essential checks, and accepted constraints.
 
-Two continuing personas, Mira and Nox, inspect the request. Their names do not decide their roles. At least one accepts continuation responsibility: carrying the need to a result, an honest block, or an accepted handoff.
+Mira may choose a qualified retained note about checking an editable result before extensive polish. Nox may search its own files for a lesson about conflicting source versions, read the exact permitted file, and deliberately include it in its next work context. Their ordinary file names and folders are self-organized; no graph neighborhood, trait score, or external selector assigns their work. The current mandate and unresolved assumptions remain supplied regardless of optional selections.
 
-Mira may propose spatial comparisons; Nox may investigate a material uncertainty. If both prefer visual exploration and nobody accepts integration or services work, those outcomes remain visibly unowned. The supporting system does not silently assign a profession to fill the gap.
+If both prefer spatial exploration and neither accepts integration or services work, those outcomes remain visibly unowned. A continuing owner can seek an accepted response, but cannot assign consent. Participants may consult, volunteer, negotiate, learn, recruit an existing persona, or propose a bounded new persona. New identity provides neither expertise nor new root funding. Creation, limited orientation, membership, and exact work acceptance remain separate.
 
-Participants can volunteer, renegotiate, learn, acquire a tool, consult an outside participant, recruit an existing persona, or propose a bounded birth. A new persona receives limited orientation, separately accepts membership and work, and gains neither expertise nor fresh funding merely by being created.
+### What the adopted fixture would require
 
-### Produce real work and make it fit together
-
-The group chooses permitted capabilities and demonstrates representative operations. Installation success alone is not evidence of design competence. A pending modeling operation remains pending; an old file at its intended output location cannot be submitted as the new result.
-
-Interdependent work uses agreed units, coordinates, object references, input versions, ownership boundaries, and mappings between native sources and analysis inputs. Participants can use explicit provisional envelopes to break circular dependencies. They preserve a baseline, bound iteration, and assess remaining conflicts rather than assuming convergence.
-
-| Agreed area | Deliverable and evidence at this fixture's scope |
+| Agreed area | Relevant output and evidence |
 |---|---|
-| Architecture | Four actual bedrooms and agreed facilities; dimensioned plans, sections, and elevations; native editable source and consistent derived views. |
-| Structure | Arrangement, declared material/load/support assumptions, appropriate actual analysis, and visible unresolved site conditions. |
-| Plumbing | Editable supply, hot-water, drainage, and vent arrangements at the agreed detail; connected routes, schedules, sizing basis, and access coordination. |
-| Heating, ventilation, and air conditioning | Actual load calculations, equipment and distribution design, ventilation and controls, coordinated routes, and reproducible performance evidence. |
+| Architecture | Four actual bedrooms and agreed facilities, dimensioned plans, sections and elevations, native editable source, and consistent derived views. |
+| Structure | Arrangement, declared material/load/support assumptions, appropriate actual analysis, and unresolved site conditions visible. |
+| Plumbing | Editable supply, hot-water, drainage and vent arrangements at agreed detail; connected routes, schedules, sizing basis, and access coordination. |
+| Heating, ventilation, and air conditioning | Actual load calculations, equipment and distribution, ventilation and controls, coordinated routes, and reproducible performance evidence. |
 | Electrical | Editable lighting, outlets, equipment supply, circuits and panel schedules, load calculations, protection/grounding basis, and cross-document consistency. |
-| Integration | One exact compatible set of sources; identified clashes, interface disagreements, and access conflicts with evidence-backed dispositions. |
-| Analyses | Question, exact source, input transformation, method and configuration, assumptions, completed run, warnings, interpretation, and limitations. |
-| Native editability | Actual reopening in a suitable tool and a representative edit on a copy that persists and regenerates dependent outputs. |
-| Reproduction | An appropriate reviewer independently reproduces selected checks or exports from the submitted sources. |
-| Optional manufacturing | Expressly included components, sufficient process inputs, and separate authority for any physical operation. |
-| Outside assurance | Site verification and applicable qualified or physical assessment remain unresolved unless actually obtained. |
+| Integration | One exact compatible source assembly, with identified clashes, interface disagreements, access conflicts, and supported dispositions. |
+| Analyses | Actual question, exact sources, transformations and mappings, method/configuration, assumptions, completed runs, warnings, interpretation, and limits. |
+| Editability and reproduction | Reopen an actual delivered native source in a suitable tool, make a representative persistent edit on a copy, regenerate dependent outputs, and perform the explicitly adopted independent reproductions. |
+| Optional manufacturing | Only expressly included components with sufficient process inputs; any physical operation needs separate authority. |
+| Outside assurance | Actual site verification and applicable qualified or physical assessment, or explicit unresolved conditions. |
 
-Intent paragraphs, attractive images, and successful file-format checks cannot replace these agreed deliverables. The fixture belongs in evaluation and work-specific criteria, not a built-in house workflow.
+This table states the selected outcome, not a built-in sequence. Participants choose methods, capabilities, and collaboration. An exporter is not assumed to author or analyze. An installed program does not establish competence, and a file found at the intended output path is not evidence that the currently running modeling operation produced it.
 
-### Introduce realistic disturbances
+Interdependent work uses agreed units, coordinates, exact input versions, object mappings, and ownership. Explicit provisional envelopes may help break circular dependencies. They preserve a baseline, resource bounds, and remaining incompatibilities; provisional progress does not prove final convergence.
 
-A layout changes while a calculation runs. The completed calculation remains genuine evidence for the old layout, not a current pass for the new one. A reviewer finds an omitted system or integration clash. Acknowledging the message does not close the finding; someone accepts repair, supplies an evidence-backed dispute, obtains an allowed disposition, or escalates.
+### Disturbances and an honest ending
 
-Optional improvements compete with finishing. Protected review and closeout resources remain inside the same total allowance and cannot be consumed by ordinary exploration without authorized reallocation.
+A layout changes while a calculation is running. The resulting calculation remains evidence about its old input, not a pass for the new layout. A peer identifies omitted services or an integration clash. The observation stays attributable; any separately accepted blocking obligation remains until repair, supported dispute, authorized disposition, or escalation. Acknowledgment does not close it.
 
-### Review and finish honestly
+Mira might retain: “I made a convincing plan before I had evidence that its service routes fit. When I promise coordination, I want to inspect a representative interface early; this one case does not tell me that every concept study needs that detail.” Its actual basis and restrictions remain linked. The fragment is a prompt part for possible later use, not a runtime requirement that all future work follow one engineering procedure.
 
-A reviewer must actually accept and perform the agreed review against exact submitted sources, assumptions, criteria, and assembly. Review also checks omitted scope against the original need. A separate name does not establish independence or engineering qualification.
+The explicitly adopted reviewer checks exact sources, criteria, conditions, assembly, and omitted scope. Separate identity does not establish engineering qualification. A relevant last-minute change prevents an old assessment from supporting a new release. Protected review and closeout capacity stays inside the same allowance.
 
-Before release, the supporting system checks that the reviewed state is still the applicable state. A relevant change before release requires reconsideration; a later change does not rewrite historical acceptance.
+An honest conditional result would identify the exact delivered digital package, the adopted digital criteria it satisfies, actual completed checks, and listed outside conditions still unverified. It cannot claim readiness to construct solely from digital acceptance. A useful partial package names missing scope and owners rather than relabeling the full need complete. Private project lessons do not automatically become usable in another client's context.
 
-**A valid conditional outcome would say:** the exact digital package satisfies the adopted digital criteria under the listed inputs, with the listed checks completed and the listed outside conditions still unverified. It must not say “ready to construct” solely because a digital result was accepted.
+## A 5 W circuit request and other domains
 
-A partial package can still be useful. It must name missing disciplines, evidence, owners, or outside decisions rather than relabeling the original full need as complete. Personas may retain permitted coordination lessons; private project material does not automatically follow them into another client's work.
+The exact request “design dc to ac circuit for 5w” does not supply operating specifications or the result level. This illustration chooses no voltage, waveform, topology, component, application, or profession roster. Suppose the requester adopts an editable schematic, PCB, fabrication exports, bill of materials, and simulation evidence. Those are this mandate's outcomes, not a universal circuit pipeline.
+
+One persona may pursue the bounded work alone, or invite another to inspect a specific uncertainty. It can search its retained tool notes, inspect current external sources, try a permitted capability, or choose a different method. A note saying a tool worked before supplies a scoped recollection, not current availability, exact executable identity, or authority to install or energize hardware.
+
+| Adopted output | What the corresponding evidence must address |
+|---|---|
+| Editable schematic and project | Meaningful connected source, component/model mappings, actual reopening and persistent editing, and appropriate electrical assessment. |
+| Editable PCB | Agreed placement and routing, correspondence to schematic and component variants, and adopted manufacturing and physical constraints. |
+| Fabrication and assembly exports | Required layers, outline, drill/slot information, manufacturing notes and placement information as applicable, derived from the exact adopted board. |
+| Bill of materials | References, quantities, identifiers, values, packages, variants and compatible alternatives where adopted. |
+| Simulation evidence | Suitable models, test cases, faithful source mappings, actual runs, warnings, measurements against criteria, and model limits. |
+| Required programmable sources | Firmware or programmable configuration and reproduction dependencies only when the chosen approach requires them. |
+| Review and delivery | Compatible retrievable sources and exports, required dependencies, current checks, findings, dispositions, and outside limits. |
+
+A changed component can invalidate a footprint, model, bill of materials, or old export. A simulation finishing for obsolete inputs remains historical. A missing manufacturing file can make a package incomplete despite an attractive preview. A failed generated checker is a diagnostic to investigate, not proof that the archive itself is defective. Digital delivery authorizes no procurement, manufacture, connection, or physical operation and proves no prototype performance or certification.
+
+The same boundary applies to unrelated work. A launch brief and creative assets do not authorize publication or advertising spend. A sales pilot needs actual recipient and account scope, approved material, and reconciliation of uncertain sends; drafted, sent, replied, qualified, and sold are different outcomes. A sentence rewrite needs no manufacturing bundle. These are task-specific accepted scopes under one foundation, not categories selecting hidden runtime branches.
 
 ## An external action with an uncertain result
 
-**Need:** submit an already approved application to a specified destination. The grant covers the exact or bounded submission material, account, destination, and applicable limits. Researching opportunities and drafting material did not itself authorize submission.
+The user approves a specific application submission to a specified destination under a bounded grant. Drafting and researching did not themselves authorize submission.
 
-The supporting system records intent and reserves required capacity before the action. The destination receives a request, but the connection times out before a receipt returns.
+The runtime records intent and reserves capacity. The destination receives the request, but the connection times out before a receipt returns. The persona cannot record “submission failed, so I sent it again”: the first attempt may have succeeded. It preserves effect-unknown status and uses an authorized status or destination check before risking duplication.
 
-**Wrong response:** declare failure and immediately submit again. The first request may have succeeded.
+Its own file might retain a cautious interpretation: “When the receipt vanished, I did not know whether the submission arrived. I should reconcile that uncertainty before repeating an effect.” That wording cannot change the actual action record, settle the cost, or authorize the next send. The primary LLM may choose the fragment for relevant future work, while the runtime independently protects the unresolved current effect.
 
-**Required response:** preserve an effect-unknown state, reconcile through an authorized receipt or destination check, and avoid a duplicate while occurrence remains uncertain. A later retry or correction follows the destination's supported behavior and current authority, not a blanket assumption of exactly-once delivery.
-
-Cancellation prevents new affected admissions and attempts to stop outstanding work. It cannot undo an already received application. A late receipt remains evidence even if it arrives after permission expires; it does not authorize another submission.
-
-The final report distinguishes drafted, approved, submitted with a receipt, and occurrence unresolved. Evaluation should use a synthetic destination and candidate information before real accounts are exposed.
+Cancellation prevents new affected admissions and requests stopping where possible. It cannot undo a received application. A late receipt is still evidence, even after permission expires; it grants no new authority. Reporting distinguishes drafted, approved, submitted with evidence, and occurrence unresolved. A synthetic destination and candidate information are appropriate before exposing real accounts in an evaluation.
 
 ## A learning-transfer comparison
 
-During dataset preparation, a persona learns that one apparently empty value means “not collected,” while another means “not applicable.” Treating both as zero caused a bad result. A reviewer identifies the mistake and an actual corrected dataset passes the appropriate checks.
+During hypothetical dataset work, a persona encounters two apparently empty values with different meanings: “not collected” and “not applicable.” Treating both as zero produced an observed error. An actual correction and its checks supply evidence for a limited lesson.
 
-The persona may author a fragment: distinguish missing-value meanings before transforming records; identify the supporting source, applicability, limitations, and counterevidence. Receiving another persona's lesson is not firsthand experience.
+The persona writes in its own voice: “I treated two kinds of missing value as zero and changed the meaning. Before I transform missing values, I want to inspect what they mean in this dataset. This example does not establish the encoding used elsewhere.” It retains exact source references and applicable restrictions. Advice received from a peer remains attributed advice rather than firsthand experience with that peer's original task.
 
-A later held-out task supplies a different dataset. One attempt can access the relevant fragment; a matched attempt cannot. The comparison keeps task information, tools, inference configuration, evaluator, and total resources appropriately comparable.
+In a later related task, the primary model searches its files, reads the qualified exact lesson, and decides whether to put it in its next prompt. The runtime records selected versus actually supplied material. The persona might then inspect the new dataset's definitions before transforming it. Retention, retrieval, selection, inclusion, action, and a better result are separate observations.
 
-Record whether the fragment was retrieved, actually included, associated with a changed decision, and followed by a better result. Those are distinct observations. A single favorable attempt does not establish universal learning benefit. A harmful generalization should be revised or restricted, not retained merely because it is already in memory.
+The [evaluation method](../evaluation/README.md) compares retained experience with a matched withheld condition and the applicable fresh-persona control under declared repetition and total-resource rules. The same source access, model configuration, tools, legitimate opportunities, and criteria must be comparable. An expert giving the missing lesson after a retrieval failure is a diagnostic intervention, not autonomous success. An inappropriate generalization should be narrowed or retired. More first-person text alone proves no learning benefit.
 
-## An ongoing community service
+## A relationship and a bounded community service
 
-**Need:** help maintain an authorized community workshop calendar. The service has an accountable sponsor, accepted continuation owner, actual stakeholder input, permitted data, bounded triggers, resource limits, review and renewal conditions, and a stop mechanism.
+After a useful exchange, Mira might retain: “Nox helped me separate the two explanations when I brought exact inputs. I may ask for that kind of comparison again; I have not seen Nox assess every kind of design.” That is Mira's contextual interpretation. It supplies no universal competence score, access to Nox's private files, acceptance of future work, or authority over Nox. A later poor suggestion can change the interpretation without rewriting the earlier exchange.
 
-A persona can prepare proposed changes or send communications only within the adopted authority. Simulating a resident's likely preference does not count as that resident's consent. More personas cannot multiply voting or spending rights.
+Suppose an authorized sponsor asks a persona to help maintain a community workshop calendar. If enabled, this is an E2/E4 extension with actual stakeholder input, accepted continuation, permitted data and triggers, bounded episodes, resources, review and renewal, and a visible stop mechanism. Simulating a resident's preferences cannot provide that resident's consent. More personas cannot multiply votes or spending rights.
 
-If observations become stale or a connection is unavailable, the service reports the gap. It does not claim continuous monitoring. A human escalation route names an actual recipient who accepted that responsibility, plus what happens when nobody responds.
+A stale calendar connection produces an observation gap, not a claim of continuous monitoring. Escalation names a real recipient who accepted responsibility, with acknowledgment and unavailable-recipient behavior. A memory saying “ask the coordinator” does not invent that acceptance. Drafting a suggested update does not authorize sending it beyond the agreed audience.
 
-Stopping closes or hands off obligations, settles known and uncertain effects, and ends the relevant grants. Completing one scheduled episode does not mean the future service has been completed or automatically renewed.
+Stopping preserves or hands off obligations, reconciles known and uncertain effects, and ends the relevant grants. One completed episode does not complete or renew the future service. If physical access or equipment were later introduced, its separate device, observation, override, safe-stop, and assurance requirements would apply; this calendar example authorizes none of them.

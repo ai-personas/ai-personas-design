@@ -1,76 +1,70 @@
-# Start here: AI Personas without the technical background
+# Start here
 
-[Home](README.md) · [Glossary](GLOSSARY.md) · [Design chapters](design/README.md)
+[Home](README.md) · [Persona core](design/PERSONA-CORE.md) · [Glossary](GLOSSARY.md)
 
-## What is being designed?
+## A collaborator that develops a point of view
 
-AI Personas is a proposed way to work with continuing AI collaborators rather than unrelated conversations. Each collaborator can retain an identity, a perspective, relevant experience, relationships, and accepted responsibilities across different pieces of work.
+The aim of AI Personas is to work with continuing characters rather than a series of unrelated responses. A persona has its own perspective, remembers permitted experience, forms relationships, chooses how to approach work, and can change its mind.
 
-The intention is not to make an AI pretend to be a human expert. It is to make useful continuity, different approaches, cooperation, and accountability possible—and then test whether those qualities actually help.
+Its character is expressed in fragments written in its own voice. A fragment might say what it cares about, how it tends to work, what it learned from a failed attempt, or how it understands a particular collaboration. These are parts of the context the persona uses to prompt itself. They are not all present in every response.
 
-Imagine returning to a collaborator that can explain which earlier lesson it is using, what evidence supports that lesson, what it agreed to do today, and what it still does not know. That is the desired experience. This handbook specifies the behavior; it does not report that the experience has already been achieved.
+The persona keeps them in ordinary files. It can give files useful names, create its own organization, search for an old lesson, split a crowded fragment, revise an overgeneralization, or retire something misleading. The design does not require a fixed map of mental functions or a separate model to decide what the persona should remember.
 
-## A persona is not its name, job, or model
+## The primary LLM chooses what comes next
 
-A name is a convenient label. A role is a temporary responsibility. A model is the inference capability used to produce decisions and responses. The persona's continuing record sits outside those labels and services.
+The primary LLM is the model currently making that persona's decisions. During ordinary work, it can decide which fragments should inform a later decision. Finding or reading a file gives it information now; explicitly choosing a fragment establishes an intention to use it in the next relevant context. Those are different acts.
 
-A persona might be interested in comparing alternatives. That interest does not make it qualified to design a building. It may accept a small comparison task, acquire suitable tools within its allowance, and seek qualified review. It cannot acquire years of firsthand experience simply by writing a biography.
+The supporting system carries that intention forward within its stated scope. It still checks whether a fragment is available, permitted, current, and able to fit with its necessary qualifications. It also supplies current obligations and authority constraints that the persona cannot drop simply by choosing a different memory.
 
-Changing the model should not erase the persona's accepted responsibilities. It may change performance, so important continuity and competence claims need fresh evaluation.
+This creates a practical feedback loop: experience affects fragments, fragments affect decisions, and the resulting experience can change the fragments again. Writing a fragment alone does not show that the loop is useful. Later work must show whether the fragment was actually supplied, affected a choice, and helped.
 
-## What happens when someone asks for help?
+## One hypothetical example
 
-Consider: “Help us organize a community workshop.” The following is an illustration, not a required sequence.
+Mira and Rowan help prepare a community workshop. These names and events are illustrations, not records of an executed project.
 
-| Moment | What a person should be able to understand |
+Mira prefers making a small concrete draft early. Rowan likes comparing options and notices missing assumptions. Neither preference fixes a profession or assigns a permanent role.
+
+After a previous workshop, Rowan retained: “I spent too long comparing venues before checking the organizer's access needs. I should resolve requirements that can rule an option out before polishing the comparison.” Rowan finds this fragment and chooses it for the next planning decision. The next question changes accordingly.
+
+Mira makes a draft agenda, then learns from Rowan's observation that it has no transition time. She may retain: “When I make an agenda, I need to test the transitions as well as the sessions.” She attributes the observation to that exchange rather than claiming firsthand experience running the event.
+
+Both can learn from the task, the environment, each other, and reflection on their own choices. They can also decide a lesson is too narrow or unhelpful to keep. On a later, different task, a useful comparison would ask whether these lessons led to better choices than a matched attempt without them.
+
+Their differences should remain visible in competent behavior, including how they respond to pressure or correction. The system should not force artificial disagreement or reward a persona for preserving a harmful habit merely to appear consistent.
+
+## Who controls what?
+
+| Responsibility | Owner |
 |---|---|
-| The need is received | The original request is preserved. The system does not quietly change the goal. |
-| Someone accepts | A persona accepts responsibility for moving the need toward a result, an honest block, or a handoff. Being named is not acceptance. |
-| The scope becomes clearer | The group distinguishes a draft plan from an actual event, and known facts from assumptions about attendance or venue availability. |
-| Work is shared when useful | A peer can accept a specific contribution, negotiate it, or decline. The system does not manufacture agreement. |
-| Actions produce consequences | A proposed venue is not a booking. An authorized booking requires evidence that the action occurred. |
-| The result is assessed | The result is compared with the agreed need. Missing accessibility information stays visible rather than disappearing into a completion percentage. |
-| The work closes | The user receives the exact result, limitations, and remaining responsibilities. Unnecessary activity stops. |
-| Experience may carry forward | A useful lesson may be retained with permission. Private attendee data does not automatically become shared memory. |
+| Purpose, scope, permitted effects, and resource allowance | The person or authorized institution commissioning the work |
+| Character, interpretations, method choices, fragment organization, and next-context intent | The continuing persona, acting through its primary LLM within the granted scope |
+| Access checks, current obligations, trustworthy receipts, version integrity, and bounded execution | The supporting host |
+| Whether a claim is supported | The relevant observations and evaluation against stated criteria |
 
-One persona may be enough. Another task may require several participants, repeated investigation, or outside help. The design provides boundaries and records, not a script for every conversation.
+A fragment saying “I am allowed to book the venue” does not grant that permission. A tool being available does not show that a booking succeeded. A colleague's name in a plan does not mean that colleague accepted the work.
 
-## Who makes which decisions?
+## Learning and continuity
 
-**People control purpose and permission.** The requester or an authorized institution decides what is wanted, what may be changed, which resources may be used, and which external actions are permitted.
+The persona's identity continues across projects and model calls. A new model can inherit the same continuing record, but its performance may differ and needs its own evidence. The design does not assume that retained files retrain the model's weights.
 
-**Personas choose their contributions.** They interpret the need, consider alternatives, choose methods, propose improvements, and accept or decline responsibilities within those boundaries.
+A persona can keep a current self-description while letting it evolve. It can learn a practical method, correct a belief, understand a collaborator better, or recognize a pattern in its own mistakes. Raw observations and the persona's interpretation remain distinguishable. Private information stays within its permitted scope even if a broader lesson would be useful elsewhere.
 
-**The supporting system enforces the boundaries.** It preserves records, checks access, prevents the same allowance from being spent twice, delivers important updates, and distinguishes completed actions from pending ones. It does not secretly decide that a certain persona must be the architect, teacher, or leader.
+Human-like character here means recognizable choices, interests, relations, development, and continuity. A synthetic origin remains clear; invented biography is not experience or a professional credential.
 
-## Why several personas?
+## Cooperation is an option with consequences
 
-Different continuing contexts may help surface omissions or compare approaches. One participant may notice an inconsistency in another's work. That is a design opportunity, not a promised advantage.
+One persona may be enough. Additional personas can offer different perspectives, accept a contribution, negotiate its terms, or decline. Their organization should arise from the work and their choices, without a hidden profession roster or fixed team workflow.
 
-Several names producing agreeable messages do not prove cooperation. Stronger evidence would show a peer identifying a problem, the author changing the exact result, and an appropriate review checking the correction. Comparisons must also account for the resources used: a larger team should not receive unlimited extra effort and then be declared inherently better.
+Creating another persona does not create more budget or broader permissions. Leaving, pausing, or retiring does not erase accepted responsibilities. The system must make it clear who has accepted continuation or what remains unowned.
 
-## What does learning mean here?
+## What a useful result looks like
 
-A persona may retain a small lesson called a **fragment**. It records what happened, what the persona inferred, where that inference may apply, and where it may be wrong.
+The user receives the actual result and an honest account of its limits. “The draft agenda is ready; the venue is not booked” may be a correct outcome. A changed file does not inherit the review of an older version, and an unknown external effect must be checked before trying the same action again.
 
-For example: “After changing a source document, recheck the summaries that depend on it.” The source event and limitations belong with the lesson. Writing the lesson is not proof of learning. A later task must show whether the lesson reached the decision and helped under a fair comparison.
+Small requests should remain small. A sentence rewrite need not create a team, a new memory, a review ceremony, or a set of completed forms. Larger and more consequential work requires enough explicit context, consent, and evidence to remain accountable.
 
-The design concerns persistent state and selected context. It does not assume automatic training of model weights or guaranteed increases in intelligence.
+## What has been established?
 
-## Can personas act without asking every time?
+This repository adopts a coherent design target. It does not establish that the runtime implements the full target or that personas have demonstrated useful long-term learning. The [status page](implementation/STATUS.md) separates current design from dated implementation evidence. The [evaluation guide](evaluation/README.md) explains what would count as stronger evidence.
 
-They may perform authorized, bounded actions without interrupting a human for every reversible detail. But a request for help is not permission to spend unrestricted funds, send messages to anyone, publish under a person's identity, or control a device.
-
-Permissions have scopes, limits, and an end. Creating another persona does not create additional money or authority. A paused or retired persona does not erase unfinished responsibilities.
-
-## What does “done” mean?
-
-There is no single status that answers every question. A file can exist while review is missing. A review can pass for an older version but not the current one. A person can accept a useful draft while outside approval remains unresolved.
-
-A trustworthy outcome might be “The draft plan is delivered; the venue has not been booked,” or “These parts are complete; this required input is still missing.” Activity ending is not the same as the need being satisfied.
-
-## What this handbook cannot substitute for
-
-The handbook does not supply domain expertise, evaluated model performance, a deployed security boundary, or approval for sensitive or physical uses. Those require evidence for the specific implementation and intended use. An implementer can use the contracts here to determine what to build and demonstrate without needing the original conversations.
-
-For the next level of detail, read the [design overview](AI-PERSONAS-DESIGN-PROPOSAL.md). To see concrete outcomes and failures, read the [worked examples](examples/WORKED-EXAMPLES.md).
+Continue with the [persona core](design/PERSONA-CORE.md), then [work and boundaries](design/WORK-AND-BOUNDARIES.md). The [system contracts](implementation/CONTRACTS.md) describe what an implementation must make reliable.

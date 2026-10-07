@@ -1,43 +1,69 @@
-# Source provenance and editorial map
+# Source provenance and consolidation map
 
-[Source guide](README.md) · [Design decisions](../DESIGN-DECISIONS.md) · [Change history](../CHANGELOG.md)
+[Sources](README.md) · [Current design](../design/README.md) · [Decisions](../DESIGN-DECISIONS.md) · [Historical results](../evaluation/HISTORICAL-RESULTS.md)
 
-## What is current
+## Current authority and the complete prior tree
 
-Handbook edition 2.0 rewrites the five source paths as code-free design briefs. **Their current bytes are not the original attachments.** The filenames preserve navigation continuity, not competing specification versions. Current requirements live in the [design chapters](../design/README.md), [contracts](../implementation/CONTRACTS.md), and [invariants and index](../implementation/REQUIREMENTS.md).
+The current normative design is the persona core, work and boundaries, and contracts under the protected invariants. Earlier manuals, proposals, figures, and source briefs are retired from active navigation where they duplicate or conflict with that design. Their removal is not erasure of history or permission to discard implementation evidence.
 
-## Exact historical inputs
+The complete pre-consolidation repository is pinned at **f4549bd594e6a0cf5205ac031ed422ab269def8d**. [Open the complete historical tree](https://github.com/ai-personas/ai-personas-design/tree/f4549bd594e6a0cf5205ac031ed422ab269def8d). Every previous path, including all retired text and artwork, is available there at the exact prior revision. These links are historical evidence, not alternative active specifications. No moving branch is used as a historical reference.
 
-The baseline for this refactor is design-repository commit **0c96694303e344ef976150a4d544f3ca57f77d33**. The links below are pinned to that commit, not a moving branch. They are optional historical references; understanding or implementing this design does not require reading them.
+The adopted target replaces compulsory graph organization, delegated semantic selection, mandatory numeric character controls, and the earlier on-demand-only file proposal with own-voice files and primary-LLM choice of relevant next context. Exact provenance, required qualifications, current permissions, accepted commitments, resource bounds, effects, and evidence remain protected. [Recorded decisions](../DESIGN-DECISIONS.md) distinguish these substantive changes from editorial consolidation.
 
-| Historical input | Original attachment name recorded in the prior manifest | Current code-free destination |
-|---|---|---|
-| [Original S1 report](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/S1-prior-research-report.md) | deep-research-report(2).md | [Foundations](S1-prior-research-report.md) |
-| [Original S2 proposal](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/S2-emergent-design.md) | AI-PERSONAS-EMERGENT-DESIGN(1)(2).md | [Emergence](S2-emergent-design.md) |
-| [Original S3 v1.1](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/S3-specification-v1.1.md) | AI-PERSONAS-RUST-FINAL-SPEC(1)(2).md | [Architecture rationale](S3-specification-v1.1.md) |
-| [Original S4 v1.2](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/S4-specification-v1.2.md) | AI-PERSONAS-RUST-SPEC-v1.2(1)(2).md | [Reliability safeguards](S4-specification-v1.2.md) |
-| [Original S5 review](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/S5-stress-test-report.md) | STRESS-TEST-REPORT(1)(2).md | [Stress scenarios](S5-stress-test-report.md) |
-| [Earlier complete proposal](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/AI-PERSONAS-DESIGN-PROPOSAL.md) | Consolidated design proposal with visual integration | [Current overview](../AI-PERSONAS-DESIGN-PROPOSAL.md) and detailed chapters |
+## Original supplied-source lineage
 
-The original attachments' integrity hashes remain available in the [historical source manifest](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/SOURCE-MANIFEST.md). They must not be presented as fingerprints of the rewritten briefs.
+Before the code-free briefs, the historical package recorded five supplied attachments. Their original repository copies are pinned at **0c96694303e344ef976150a4d544f3ca57f77d33**. Their original names document lineage; they do not establish that later rewritten briefs have identical bytes.
 
-## How material was consolidated
-
-| Inherited material | Treatment in this edition |
+| Original recorded attachment | Exact original repository copy |
 |---|---|
-| Persistent identity, six concepts, fragments, capabilities, context, and a readable interface | Explained in the start guide and design chapters. |
-| Emergent understanding, priorities, organization, population, and learning | Preserved as goals requiring observable evidence, including no-birth restraint. |
-| v1.2 corrections to v1.1 | Preserved conceptually: continuation, assumptions, orientation, completion barriers, findings, iteration, closeout, finite activity, and exact release. |
-| I01–I21, the requirement catalogue, and M/B/X acceptance identifiers | Retained in consolidated, cross-linked indexes. |
-| E1–E6 extensions | Explicitly proposed; not silently represented as implemented or scientifically established. |
-| Runtime stacks, branch patch instructions, providers, prices, and authentication details | Removed from current design prose; future implementations make and verify their own deployment choices. |
-| Code snippets, diagram markup blocks, command tutorials, and session-only links | Removed from the current Markdown reading experience. Rendered SVG artwork and text explanations remain. |
-| Historical packaging and visual-validation records | Retained in Git history, not presented as current product-test results. The current inventory is human-readable in the visual guide. |
+| deep-research-report(2).md | [S1 original research report](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/S1-prior-research-report.md) |
+| AI-PERSONAS-EMERGENT-DESIGN(1)(2).md | [S2 original emergence proposal](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/S2-emergent-design.md) |
+| AI-PERSONAS-RUST-FINAL-SPEC(1)(2).md | [S3 original v1.1 specification](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/S3-specification-v1.1.md) |
+| AI-PERSONAS-RUST-SPEC-v1.2(1)(2).md | [S4 original v1.2 specification](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/S4-specification-v1.2.md) |
+| STRESS-TEST-REPORT(1)(2).md | [S5 original stress-test report](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/S5-stress-test-report.md) |
 
-## Evidence and authority
+The [original manifest and its integrity claims](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/sources/SOURCE-MANIFEST.md) apply only to the bytes it describes. They must not be reused as fingerprints of subsequent briefs, new consolidated chapters, or altered artwork. The [original complete proposal](https://github.com/ai-personas/ai-personas-design/blob/0c96694303e344ef976150a4d544f3ca57f77d33/AI-PERSONAS-DESIGN-PROPOSAL.md) is likewise historical.
 
-S4 historically superseded S3's ambiguous conceptual rules. This edition's requirement hierarchy is explained in [the design guide](../design/README.md). Source summaries, examples, and historical code never override a current permission or evidence boundary.
+The last code-free source briefs are separately preserved at the prior head: [S1 foundations](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/sources/S1-prior-research-report.md), [S2 emergence](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/sources/S2-emergent-design.md), [S3 architecture rationale](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/sources/S3-specification-v1.1.md), [S4 reliability](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/sources/S4-specification-v1.2.md), and [S5 stress scenarios](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/sources/S5-stress-test-report.md). Their useful rationale now appears in the current design and [research brief](PERSONA-FILES-RESEARCH.md); they are no longer parallel active chapters.
 
-The earlier reports included observations about a separate AI Personas runtime. Those observations remain historical and are not refreshed by this documentation refactor. The code-free implementation guide states required behavior without claiming that any existing runtime already provides it.
+## Retired design paths and their current homes
 
-The supplied ideas motivate the design; live implementation evidence must support claims of competence, learning, cooperation, safety, and deployment suitability. Source provenance records where an idea came from, not proof that the idea works.
+The linked titles in the first column open exact historical files. The second column names the current home of retained meaning, not a claim that every old obligation remains unchanged.
+
+| Historical source | Current disposition |
+|---|---|
+| [Complete proposal](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/AI-PERSONAS-DESIGN-PROPOSAL.md) | Consolidated into the [home](../README.md), persona core, and work boundaries. |
+| [Personas and identity](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/01-personas-and-identity.md), [memory and learning](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/02-memory-and-learning.md) | [Persona core](../design/PERSONA-CORE.md); continuity retained, representation and selection revised. |
+| [Fragment persona](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/FRAGMENT-PERSONA.md), [memory graph](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/MEMORY-GRAPH.md), [fragment recall](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/FRAGMENT-RECALL.md) | [Persona core](../design/PERSONA-CORE.md) and [contracts](../implementation/CONTRACTS.md); exact authored text and qualifications retained, mandatory graph and delegated selection superseded. |
+| [Persona-owned files proposal](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/PERSONA-OWNED-FILES.md) | File-facing interface adopted in [persona core](../design/PERSONA-CORE.md); its on-demand-only selection target and pending-adoption status are superseded. |
+| [Persona development](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/PERSONA-DEVELOPMENT.md) | Own-voice development in persona core, exploration and lifecycle in work boundaries; numeric controls are no longer a minimal-persona requirement. |
+| [Work and cooperation](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/03-work-and-cooperation.md), [capabilities and action](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/04-capabilities-and-action.md), [authority and resources](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/05-authority-and-resources.md) | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md); adopted need, actual consent, operations, trust boundaries, and conserved resources. |
+| [Evidence and completion](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/06-evidence-and-completion.md), [experience and society](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/07-experience-and-society.md) | Work boundaries; exact claims, assessments, release, readable controls, and conditional wider deployments. |
+| [Coordination and lifecycle](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/COORDINATION-LIFECYCLE.md), [persona-owned process](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/PERSONA-OWNED-PROCESS.md) | Work boundaries and [deployment decisions](../implementation/DEPLOYMENT-DECISIONS.md); exact acceptance, accountable lifecycle, optional process, and declared execution modes. |
+| [Continuity and recovery](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/CONTINUITY-RECOVERY.md), [recovery and delivery](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/RECOVERY-AND-DELIVERY.md), [effort and stopping](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/EFFORT-AND-STOPPING.md) | Work boundaries; stale-decision fencing, bounded recovery, honest diagnostics, explicit continuation, delivery, and remaining obligations. |
+| [Exploration accounting](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/EXPLORATION-ACCOUNTING.md), [development evidence boundaries](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/DEVELOPMENT-EVIDENCE-BOUNDARIES.md) | Work boundaries and persona core; episode-wide limits, historical-source privacy, exact retained changes, and actual triggers. |
+| [Decision efficiency](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/DECISION-EFFICIENCY.md), [qualified observations](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/QUALIFIED-OBSERVATIONS.md) | Core, work boundaries, and contracts; usable bounded capability instructions, total cost, and full required qualifications without mandatory selector machinery. |
+| [Delivery review](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/DELIVERABLE-PRODUCTION.md) | Work boundaries; existing production and delivery obligations consolidated without another requirement family. |
+| [Circuit and cross-domain illustrations](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/examples/5W-INVERTER-AND-CROSS-DOMAIN.md), [example index](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/examples/README.md) | One [worked-examples](../examples/WORKED-EXAMPLES.md) page; hypothetical outcomes and disturbances, never installed workflows. |
+
+## Implementation and evaluation history
+
+The [complete former implementation directory](https://github.com/ai-personas/ai-personas-design/tree/f4549bd594e6a0cf5205ac031ed422ab269def8d/implementation) preserves DELIVERY-CONTRACTS, FRAGMENT-RECALL-CONTRACT, FRAGMENT-RECALL-STATUS, OPERATION-WORKING-SET, RECALL-CACHE-IDENTITY, RECALL-PACKING, and the previous contract and requirement versions. Their current obligations are consolidated in [contracts](../implementation/CONTRACTS.md), [requirements](../implementation/REQUIREMENTS.md), and [status](../implementation/STATUS.md). Old semantic-selection cache rules apply to historical or explicitly optional experiments, not to every persona.
+
+The [complete former evaluation directory](https://github.com/ai-personas/ai-personas-design/tree/f4549bd594e6a0cf5205ac031ed422ab269def8d/evaluation) preserves DECISION-EFFICIENCY, DECISION-REFERENCE-USABILITY, DELIVERY-ACCEPTANCE, FRAGMENT-PERSONA, FRAGMENT-RECALL, METHOD-CONTINUITY, PERSONA-WORK-COMMUNICATION, RECOVERY-AND-DELIVERY, and the previous acceptance and method versions. The [historical-results ledger](../evaluation/HISTORICAL-RESULTS.md) provides the exact identifier and criteria mapping. The current [acceptance catalogue](../evaluation/ACCEPTANCE.md) defines current observations required; no old result silently passes it.
+
+The [former vendor-source note](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/sources/FRAGMENT-RECALL-SOURCES.md) records dated TypeSafe/Jev documentation consulted for an earlier optional-selector design. It is neither a current vendor audit nor evidence that this design needs that service. Current external research is limited to the claims in [the research brief](PERSONA-FILES-RESEARCH.md).
+
+## Artwork retirement
+
+The old [visual guide](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/VISUAL-GUIDE.md), [fragment-recall atlas](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/FRAGMENT-RECALL-VISUALS.md), [asset directory](https://github.com/ai-personas/ai-personas-design/tree/f4549bd594e6a0cf5205ac031ed422ab269def8d/assets), and [editable-artwork directory](https://github.com/ai-personas/ai-personas-design/tree/f4549bd594e6a0cf5205ac031ed422ab269def8d/assets/visuals) preserve every original image and its notes. This includes five raster posters, five SVG posters, seven general diagrams, five fragment-recall diagrams, and the former asset indexes.
+
+These images are retired as a collection from the active reading path. Several graph/selector sheets conflict with the adopted mechanism; other general sheets duplicate the consolidated explanation. Their historic rendering and integrity records remain attached to those historical versions. No unchanged retired figure is claimed as freshly rendered or visually validated.
+
+The single current [persona-files loop](../assets/persona-files-loop.svg) and its [accessible text guide](../VISUAL-GUIDE.md) replace the active atlas. It illustrates the target, not a product screenshot or executed behavior. Artwork presentation checks establish presentation only.
+
+## Evidence is not inherited by editing
+
+The original sources included implementation observations, abstract checks, and authored scenarios. The historical ledger preserves their stated limits. A documentation rewrite, new link, renamed file, or simplified figure is not a rerun, runtime audit, model evaluation, or demonstration of competence. Missing evidence remains missing; reported failure remains failure under its original criteria.
+
+This consolidation does not choose licensing terms, reproduce private runtime data, publish credentials, or revive old branch instructions. The current public contract and any future measured claim remain reviewable on their own evidence.

@@ -1,128 +1,19 @@
-# Design handbook history
+# Design history
 
-## 2 October 2026 — usable autonomous decisions and model-owned modalities
+[Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
-Clarified typed participant and artifact references, compact argument meanings,
-current sharing recovery, direct exact-subject assessment and faithful authored
-stopping reasons. These affordances support persona choices without imposing a
-review pipeline, tool quota or substantive quality verdict. Updated the
-[capability contract](design/04-capabilities-and-action.md#inference-is-also-a-bounded-capability)
-to make supported image input and output part of the selected model, superseding
-the separate operator image-input setting described on 1 October. Accounting
-remains bounded and internal. Added functional acceptance cases; no live quality,
-character influence or learning benefit is claimed by these clarifications.
+## 6 October 2026 — one persona-owned files target
 
-## 1 October 2026 — model selection and image-input readiness
+Reconciled the active design around distinct continuing characters expressed in persona-owned first-person fragments. Ordinary files and simple search support self-organization. The primary LLM chooses relevant next-context fragments while doing work and can learn from the environment, tasks, peers, and its own choices.
 
-Clarified [inference readiness](design/04-capabilities-and-action.md#inference-is-also-a-bounded-capability)
-before generated identity creation and model changes: exact deployment permission,
-capability and allowance pricing, rejection without identity allocation, and
-read-only previews that make no capacity promise. Native image support, saved
-operator configuration and reservation fit remain distinct. Configuration changes
-fence future decisions while preserving admitted calls and spending evidence.
-These requirements apply to every domain and prescribe no task workflow.
+This revision adopts that target across the active reading surface. It supersedes the previous graph-first recall architecture, auxiliary-selector target, mandatory typed cognitive packages and personality scales, every-response learning forms, and the files proposal's no-persistent-selection target. The [decision register](DESIGN-DECISIONS.md) records the deliberate changes and the operational safeguards carried forward.
 
-## 30 September 2026 — task pause and amendment resumption
+Consolidated the overlapping overview, chapters, refinements, contracts, scenarios, and artwork into a focused reading path. Retired pages remain available at immutable historical revisions rather than as competing active manuals. Requirement identifiers, supplemental-scenario dispositions, and dated results retain traceability in [requirements](implementation/REQUIREMENTS.md), [historical results](evaluation/HISTORICAL-RESULTS.md), and [source provenance](sources/SOURCE-MANIFEST.md).
 
-Clarified task-level pause, explicit resume and amendment-driven resumption in
-[authority and resources](design/05-authority-and-resources.md#pause-cancellation-and-revocation).
-A durable pause fences task decisions while existing tool jobs may finish.
-Resume includes eligible individually paused participants without overriding
-membership, lifecycle or funding restrictions. Scope adoption and requested
-resumption remain distinct from actual inference and successful delivery.
+This is a documentation reconciliation. No runtime changes or new behavioral results are established by it. Current limits are stated in [implementation status](implementation/STATUS.md).
 
-## 25 September 2026 — continuity and recovery
+## Earlier design history
 
-Clarified durable learning opportunities, working intentions, audience-safe question conclusions, actual supplied sources, and provider recovery that preserves cancellation, uncertain accounting and effect barriers. Added evidence obligations without prescribing task methods or reporting an unexecuted behavioral pass.
+The [preceding changelog](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/CHANGELOG.md) preserves the exact earlier record, including the September handbook consolidation and the later continuity, recovery, modality, and decision-usability refinements. Those entries describe the design and evidence available at their own revisions.
 
-[Home](README.md) · [Source provenance](sources/SOURCE-MANIFEST.md)
-
-## Current-context learning and shared questions
-
-**Date: 24 September 2026.** Clarify independent question addressee, visibility,
-and required human input in [work and cooperation](design/03-work-and-cooperation.md#questions-and-conditional-assumptions).
-[Memory navigation](design/MEMORY-GRAPH.md) now explicitly distinguishes authored
-intent from committed change, preserves deferred opportunities, and defines
-call-scoped typed references and readable learning activity. Current identity,
-temporary affect and historical starting state retain their existing meanings.
-These are first-release clarifications, not compatibility requirements or
-claims of measured character influence, learning benefit, or native CAD quality.
-
-## Coordination, lifecycle, and formal-evidence clarification
-
-**Date: 23 September 2026.** The [coordination and lifecycle clarification](design/COORDINATION-LIFECYCLE.md) distinguishes a protocol that permits alternative organizations, actual participant-owned choices, and demonstrated useful cooperation. Exact commitment acceptance and already accepted delegation remain distinct from membership, invitations, execution authority, and historical acceptance of changed terms. Handoffs and relevant lifecycle changes require coherent current-state checks.
-
-Retirement may preserve an explicitly blocked obligation without claiming completion. Reactivation does not clear quarantine, replenish resources, or replay stale decisions. Identity continuity preserves honest provenance while respecting erasure. Scheduling guarantees state their progress assumptions; fair opportunities do not manufacture willingness or successful outcomes. [Exploration accounting](design/EXPLORATION-ACCOUNTING.md#failed-starts-and-admitted-attempts) separates pre-admission rollback from charged or uncertain admitted attempts.
-
-The design, implementation, and evaluation reading paths link the clarification and its verification cases. The catalogue remains **21 invariants, 45 requirements, and 44 core M/B/X entries**; these refinements introduce no additional requirement family, mandatory team ritual, application code, or new deployment profile.
-
-The motivating Lean draft for design revision `2a685b8b5a666812960f726df4594aea5ad8d52b` was not successfully compiled. Abstract traces and finite model checks are not promoted to machine-checked proofs, behavioral evidence, or current runtime acceptance. No proof or product gate is reported as passed by this documentation update. The intervening historical-privacy, development-evidence, and shared-root-priority clarification is preserved.
-
-## Shared clarification and conditional progress
-
-**Date: 22 September 2026.** The [work chapter](design/03-work-and-cooperation.md#questions-and-conditional-assumptions)
-clarifies that peers can answer shared questions with evidence, alternatives or
-explicit assumptions within existing authority. Human replies are optional for
-such questions; private facts and human consent remain separate. The question
-owner assesses replies, and an unresolved outside fact limits the affected claim
-without automatically stopping independent work. This elaborates NED-03 and the
-existing cooperation rules without adding a profession roster, workflow, or new
-requirement family. It is a design clarification, not a claim of live success.
-
-## Edition 2.0 consolidation — persona-owned organization
-
-**Date: 18 September 2026.** A second review found that most obligations presented as new in the delivery addendum already existed in the original work, capability, evidence, and evaluation design. The addendum's description of a missing production architecture was overstated. This revision consolidates rather than adds another layer.
-
-The active requirement catalogue remains **21 invariants and 45 requirements**. DLV-01–DLV-10 are retired as a separate requirement family with explicit [historical mappings](implementation/DELIVERY-CONTRACTS.md). The old identifiers and prior design remain traceable; no old evaluation is promoted to a current pass. The 44 core M/B/X entries remain unchanged. D01–D16 remain 16 supplemental, unexecuted stress scenarios with revised general wording and direct links to existing requirements.
-
-[Work and cooperation](design/03-work-and-cooperation.md#how-organization-emerges) and the [core contracts](implementation/CONTRACTS.md#persona-owned-organization-and-capability-choice) clarify the boundary between participant choices and system enforcement. Discovery, offers, accepted commitments, scoped coordination, specialization, reuse, and changed-evidence decisions are attributable to personas. Permissions, privacy, conserved resources, recovery, and current evidence are not left to emergent agreement. No task classifier, profession registry, hidden prompt pipeline, fixed team size, or mandatory birth is introduced.
-
-The former production chapter is now a [review and reading map](design/DELIVERABLE-PRODUCTION.md), and its contract page is a compatibility record. Circuit and business examples are rewritten as alternative scopes and disturbances, not a compulsory sequence. The [evaluation method](evaluation/README.md#evaluating-emergent-organization) adds comparisons and authorized policy inspection under the existing behavioral gates. Entry points and the decision register reflect the consolidation.
-
-This is a design-only revision. No runtime, live society, native engineering package, simulation, external effect, or product acceptance result is claimed. Artwork and the existing scope of E1–E6 are unchanged.
-
-## Edition 2.0 delivery addendum — concrete outputs across domains
-
-**Historical entry; its separate normative layer and missing-architecture interpretation are superseded by the consolidation above. Counts and claims below describe that earlier revision, not the active catalogue.**
-
-**Date: 18 September 2026.** The [deliverable-production design](design/DELIVERABLE-PRODUCTION.md) closes under-specified production obligations without introducing fixed professions, a domain router, application code, or mandatory ceremony for small tasks.
-
-The [delivery contracts](implementation/DELIVERY-CONTRACTS.md) add concrete output contracts, versioned method briefs, demonstrated production bindings, semantic dependency checks, explicit check outcomes, bounded repair, and retrievable reproducible manifests. They distinguish digital delivery from authorized external effects and observed physical or business outcomes.
-
-A [hypothetical 5 W inverter walkthrough](examples/5W-INVERTER-AND-CROSS-DOMAIN.md) follows specification, native schematic, actual simulation, PCB layout, fabrication and assembly exports, bill of materials, independent review, and release boundaries. It also applies the same contracts to marketing, sales, simple writing, and unfamiliar domains. Tool references support only documented operation availability, not a completed circuit or working integration.
-
-The addendum preserves I01–I21, all 45 original requirements, and the 44 original M/B/X scenarios. It adds **DLV-01–DLV-10** and **D01–D16**, giving 55 requirements and 60 specified acceptance scenarios across the base and supplement. Indexes link the new normative material and examples. The existing artwork is unchanged.
-
-This is a design correction, not implementation or execution evidence. The added acceptance fixtures are specified, not run. No schematic, PCB, Gerber, bill-of-materials package, simulation result, published campaign, or sales outcome is claimed to have been produced by this revision.
-
-## Edition 2.0 — self-contained, code-free design handbook
-
-**Date: 18 September 2026.** This edition refactors the linked design-first branch into a reference that can be read without earlier chats, attachments, another repository, or a development environment.
-
-### Navigation and explanation
-
-The README now introduces AI Personas rather than leading with packaging and validation commands. New audience-specific paths connect a plain-language start guide, glossary, seven detailed design chapters, observable implementation contracts, deployment decisions, worked examples, worksheets, and evaluation guidance.
-
-The original complete-proposal path remains an overall design overview. Its numbered sections preserve the subject references used by the existing artwork. The visual guide collects all twelve editable SVG sheets with text explanations. Five original PNG illustrations remain identified as historical, non-normative assets.
-
-### Design sources
-
-All five current source reports are rewritten as plain-language design briefs: foundations, emergence, architecture rationale, reliability safeguards, and stress scenarios. Old filenames remain for link continuity; the manifest explicitly states that current contents are not unchanged attachment copies and links exact originals in Git history.
-
-Old implementation snippets, command tutorials, diagram-code blocks, branch patch plans, provider advice, session-only downloads, and opaque citation tokens are no longer part of the current Markdown design surface. The validator script and three machine-readable packaging or validation files are removed from the current tree; their historical versions remain in Git history. Human-readable inventory and maintenance notes replace those reader-facing dependencies.
-
-### Behavioral continuity and scope
-
-The 21 invariant identifiers, 45 requirement identifiers, 26 mechanical checks, 12 behavioral checks, and six extension checks are retained. The conceptual v1.2 safeguards remain: accepted continuation, explicit assumptions, limited orientation, completed-action barriers, durable feedback, bounded iteration, protected closeout, finite activity, and exact-state release.
-
-E1–E6 retain their proposed status. Technology independence is an explicit scope choice for this design repository, not a change to a separate runtime's implementation baseline. Document authority and lifecycle administration are clarified in the decision register.
-
-### Evidence boundary
-
-This is a documentation refactor, not an application implementation, live persona campaign, engineering simulation, physical test, or deployment assurance assessment. Acceptance entries are specified, not reported as passed. Historical abstract checks are not relabeled as current product evidence. Existing SVG and PNG artwork is retained without claiming a new render or visual-validation campaign.
-
-## Earlier visual integration
-
-The immediate historical baseline is commit **0c96694303e344ef976150a4d544f3ca57f77d33**, which integrated five overview SVG posters and seven system diagrams into the earlier complete proposal. The [source manifest](sources/SOURCE-MANIFEST.md) provides pinned access to the original sources, proposal, and provenance records.
-
-Git history preserves the earlier files and their differences. This edition replaces their role in the current reading experience rather than rewriting that history.
+The [previous branch snapshot](https://github.com/ai-personas/ai-personas-design/tree/f4549bd594e6a0cf5205ac031ed422ab269def8d) also preserves the files proposal before adoption and the graph-recall manuals it then sat beside. This revision does not rewrite that historical state or reclassify its results.

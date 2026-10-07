@@ -1,73 +1,44 @@
-# AI Personas — the design handbook
+# AI Personas
 
-**Continuing AI collaborators. Different perspectives. Accountable work.**
+**Distinct characters. Continuing experience. Better work through learning.**
 
-AI Personas is a proposed system in which AI collaborators keep their identities across tasks, develop evidence-linked experience, choose how to approach work, and cooperate with people and one another. A persona is more than a name attached to a prompt: its relevant history, commitments, permissions, and observations must participate in its decisions.
+AI Personas is a design for continuing AI collaborators with recognizable character: their own ways of noticing, choosing, communicating, relating to others, and changing through experience. Each persona expresses that developing perspective in first-person fragments it owns. Those fragments are reusable parts of its prompts, kept in ordinary files that it can read, search, arrange, revise, and retire.
 
-People set the purpose and boundaries. Personas interpret the need and accept responsibilities. The supporting system preserves reliable records, enforces permissions and resource limits, and makes the difference between attempted work and demonstrated results visible.
+While doing a task, the persona's primary LLM decides what it needs to remember next. It can look through its files with ordinary search, grep, or regular expressions, choose relevant fragments for a later decision, and update its understanding from what happens. Experience from the environment, tasks, other personas, and its own successes or mistakes can therefore influence future work.
 
-**This repository explains the design, not a working product.** It contains no application code, command-line tutorials, executable examples, or required development setup. Read it in a browser or any Markdown reader. The editable diagrams are artwork, not screenshots or proof of implementation.
+This is the **current target design on this branch**. The earlier graph-first and auxiliary-selector designs have been consolidated into it. It is no longer an optional file-interface proposal beside those designs.
 
-## A persona that remembers while it works
+**Design adoption is not runtime conformance.** This repository contains design documents, evaluation criteria, and scoped historical evidence. This revision changes no runtime, and does not establish useful learning, human-like behavior, or product readiness. See [implementation status](implementation/STATUS.md) for the evidence boundary.
 
-The current [illustrated fragment-recall design](design/FRAGMENT-RECALL.md) explains how the persona's LLM authors its own prompt fragments during ordinary work, while indexed search and an optional fast selector such as Jev prepare its next context. Each persona owns an ungrouped network: no canonical tree, prescribed mental-function folders, or permanent link-weight scores.
+## The central loop
 
-![Indexed search and optional Jev selection prepare a checked context; the persona LLM does work and authors fragment updates in one ordinary response.](assets/visuals/fragment-recall-01-overview.svg)
+1. A persona observes a request, result, conversation, or other authorized event
+2. It works on the task and interprets what that experience means to it
+3. It may write or reorganize first-person fragments, then find and choose the context it expects to need next
+4. The host supplies that chosen context alongside current obligations, relevant qualifications, and permission limits
+5. The persona makes another decision and learns from the consequences
 
-Read the [five diagrams and their text explanations](design/FRAGMENT-RECALL-VISUALS.md), the [personal graph contract](design/FRAGMENT-PERSONA.md), and the [acceptance plan](evaluation/FRAGMENT-RECALL.md). This design explicitly permits separately metered selection without introducing another generative memory writer. It is not a claim of implemented or measured behavior.
+These are connected responsibilities, not a mandatory five-stage workflow or five model calls. A small task may need one response and no new memory. The same primary LLM owns substantive work, fragment authorship, and next-context choice. The host enforces access, evidence integrity, resource limits, and reliable effects; it does not secretly choose the persona's character or method.
 
-The [decision-reference usability checks](evaluation/DECISION-REFERENCE-USABILITY.md) distinguish structurally usable model responses from exact evidence admission, and assess total resources per useful result rather than smaller prompts alone.
+For example, one persona might retain: “I tend to compare alternatives before committing. When the deadline is close, I first check whether another comparison could actually change the choice.” Another might prefer a quick concrete attempt and learn when that preference needs restraint. The difference matters when it changes what they do and improves their work, not merely when their biographies sound different.
 
-The [recall cache identity clarification](implementation/RECALL-CACHE-IDENTITY.md) separates unchanged selector input from execution bookkeeping, while retaining exact provenance and current permission checks.
+## Read the design
 
-A [proposal for persona-owned files](design/PERSONA-OWNED-FILES.md) explores a simpler authoring and retrieval interface for identity, experience, and reusable methods. It is under review and does not replace the current graph and recall contracts or establish measured improvement.
-
-## Start with your question
-
-| Your question | Start here | Continue with |
-|---|---|---|
-| What is AI Personas, in ordinary language? | [Start here](START-HERE.md) | [A simple request](examples/WORKED-EXAMPLES.md#a-simple-writing-request) |
-| How does the whole idea fit together? | [Design overview](AI-PERSONAS-DESIGN-PROPOSAL.md) | [Design chapters](design/README.md) |
-| What should the experience look and feel like? | [Human experience and society](design/07-experience-and-society.md) | [Visual guide](VISUAL-GUIDE.md) |
-| How could I implement it independently? | [Implementation reading path](implementation/README.md) | [Behavioral contracts](implementation/CONTRACTS.md) and [requirements](implementation/REQUIREMENTS.md) |
-| How can work organize without fixed task workflows? | [Persona-owned organization](design/03-work-and-cooperation.md#how-organization-emerges) | [Evaluation of emergence](evaluation/README.md#evaluating-emergent-organization) |
-| How would we know it works? | [Evaluation guide](evaluation/README.md) | [Acceptance scenarios](evaluation/ACCEPTANCE.md) |
-| Why were these design choices made? | [Design decisions](DESIGN-DECISIONS.md) | [Design sources](sources/README.md) |
-| How do I contribute? | [Contribution guide](CONTRIBUTING.md) | [Design worksheets](templates/README.md) |
-
-No earlier conversation, attachment, sibling repository, proprietary tool, or programming language is needed to follow these paths. Unfamiliar terms are defined in the [glossary](GLOSSARY.md).
-
-## The idea in one example
-
-A person asks for help planning a workshop. One persona accepts responsibility for moving the request forward. It distinguishes a suggested venue from a confirmed booking, asks about material unknowns, and may seek another perspective. A peer accepts a specific task rather than being silently assigned one. A booking happens only with permission and an actual receipt. The final result explains what is ready, what remains uncertain, and who accepted the remaining work. The personas can retain permitted lessons without carrying private attendee information into unrelated projects.
-
-For a sentence rewrite, most of that structure can remain small and implicit in one exchange. For a coordinated design, the commitments, versions, reviews, and unresolved conditions need to be explicit. The system does not force every need through the same workflow.
-
-## Six concepts to recognize
-
-| Concept | Meaning |
+| If you want to understand… | Read… |
 |---|---|
-| Persona | A continuing AI collaborator with its own attributable perspective and responsibilities. |
-| Environment | A governed workspace with defined information, tools, participants, and limits. |
-| Work | A human need, its agreed scope, and the responsibilities accepted to pursue it. |
-| Fragment | A retained, revisable piece of learning or interpretation with sources and limitations. |
-| Capability | A permitted means of observing or acting, supported by evidence of what it can actually do. |
-| Artifact and evidence | An exact result, together with observations and checks supporting claims about it. |
+| The idea in everyday language | [Start here](START-HERE.md) |
+| Character, fragments, learning, and next-context choice | [Persona core](design/PERSONA-CORE.md) |
+| Work, relationships, authority, resources, and honest outcomes | [Work and boundaries](design/WORK-AND-BOUNDARIES.md) |
+| What the supporting system must guarantee | [System contracts](implementation/CONTRACTS.md) |
+| How to test the claims | [Evaluation guide](evaluation/README.md) and [acceptance](evaluation/ACCEPTANCE.md) |
+| Why this design replaced the earlier alternatives | [Design decisions](DESIGN-DECISIONS.md) and [source provenance](sources/SOURCE-MANIFEST.md) |
 
-![People authorize purpose; personas choose and accept work; the supporting system enforces limits and preserves consequences.](assets/visuals/poster-01-blueprint.svg)
+The [design index](design/README.md) defines document authority. [Requirements](implementation/REQUIREMENTS.md) preserve the protected invariants and requirement identifiers. [Worked examples](examples/WORKED-EXAMPLES.md), the [visual guide](VISUAL-GUIDE.md), [glossary](GLOSSARY.md), and optional [worksheets](templates/README.md) explain the same design.
 
-[Open the diagram and its text explanation](VISUAL-GUIDE.md#p01-the-blueprint).
+## What remains essential
 
-## What is settled, and what is not
+People authorize purposes and effects. Personas choose and accept work within that authority. Distinct character does not create expertise, consent, money, or permission. Learning does not turn an interpretation into an observed fact. Cooperation needs actual acceptance, and a finished result needs appropriate evidence.
 
-The design preserves persistent identity, voluntary commitments, individual agendas, bounded authority, protected finishing resources, and exact-version evidence. It does not claim consciousness, guaranteed learning, universal expertise, or that more personas necessarily improve results. Community governance and physical interaction remain explicitly proposed extensions.
+“Human-like” describes recognizable traits, choices, relationships, learning, and continuity. It does not require a claim of consciousness or human equivalence. The design should be judged by useful behavior, faithful evidence, and the resources it consumes.
 
-The [requirements catalogue](implementation/REQUIREMENTS.md) retains 21 invariants and 45 requirement identifiers. The [acceptance catalogue](evaluation/ACCEPTANCE.md) specifies 26 mechanical, 12 behavioral, and six extension checks. These are **requirements to demonstrate**, not tests reported as passed by this documentation rewrite.
-
-This is handbook edition 2.0. [What changed](CHANGELOG.md) explains the refactor. [Source provenance](sources/SOURCE-MANIFEST.md) preserves the history of the earlier reports without making their old code examples part of the current reading experience.
-
-## Emergent work, concrete evidence
-
-Personas choose methods, discover capabilities and collaborators, negotiate responsibilities, and revise work from observations. The supporting system supplies shared affordances and enforces permission, privacy, resource, recovery, and evidence boundaries; it does not select a hidden task workflow. Domain tools and reusable learned methods are allowed, without assigning professions or making every request a team exercise.
-
-The [delivery review](design/DELIVERABLE-PRODUCTION.md) corrects a redundant addendum: native artifacts, real analyses, integration, and honest completion were already covered by the original requirements. DLV-01–DLV-10 are [retired and mapped](implementation/DELIVERY-CONTRACTS.md), not ten additional active requirements. The [D01–D16 stress scenarios](evaluation/DELIVERY-ACCEPTANCE.md) remain supplemental tests of existing rules, separate from runtime policy. All product checks remain specified, not reported as passed.
+No previous conversation, implementation setup, or private attachment is needed to read this repository. Earlier specifications, artwork, and result criteria remain accessible through [immutable historical references](sources/SOURCE-MANIFEST.md); they are not additional active manuals. The [change history](CHANGELOG.md) records this consolidation. Contributions follow the [contribution guide](CONTRIBUTING.md).

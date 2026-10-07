@@ -1,60 +1,43 @@
-# Implementing the design without prescribing code
+# Implementing one coherent persona design
 
-[Home](../README.md) · [Design chapters](../design/README.md) · [Glossary](../GLOSSARY.md)
+[Home](../README.md) · [Persona core](../design/PERSONA-CORE.md) · [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) · [Current status](STATUS.md)
 
-This section is a behavioral implementation brief. It specifies responsibilities, required information, handoffs, state transitions, failure behavior, and evidence. It deliberately does not prescribe a programming language, database layout, wire format, provider, or deployment stack.
+The implementation target is a continuing persona whose own accepted first-person fragments describe its character and useful experience. Through a small file interface it can list, search, read, and edit those fragments, organize them for itself, and choose exact relevant prompt parts for its next ordinary decision. The primary LLM makes those semantic choices while doing useful work. The runtime keeps authority, observations, versions, restrictions, resources, and effects trustworthy.
 
-An implementer should be able to decide what to build and what must be demonstrated using this repository alone. Choosing and verifying a concrete technology or a domain method remains implementation work, not a missing conversation to recover.
+A file-facing interface does not require a particular physical filesystem, database, language, provider, fixed taxonomy, association graph, personality score, or separate memory model. Conversely, presenting old records as files does not by itself establish simpler authorship, autonomous maintenance, or primary-owned context selection. Those behaviors need actual evidence.
 
-## Reading and build sequence
+## Read, decide, and demonstrate
 
-| Step | Read | Produce before advancing |
+| Purpose | Read | Evidence or decision needed |
 |---|---|---|
-| Understand the product | [Start here](../START-HERE.md) and [design chapters](../design/README.md) | A shared account of purpose, limits, and supported user needs. |
-| Establish the boundaries | [Invariants and requirements](REQUIREMENTS.md) | A requirement-to-component responsibility map with no unowned enforcement boundary. |
-| Define the handoffs | [Contracts](CONTRACTS.md) | Record meanings, state transitions, concurrency rules, and recovery behavior in the chosen implementation. |
-| Choose the deployment | [Deployment decisions](DEPLOYMENT-DECISIONS.md) | Explicit authority, resource, inference, retention, review, and unsupported-feature decisions. |
-| Prove reliability | [Mechanical acceptance scenarios](../evaluation/ACCEPTANCE.md#mechanical-checks) | Evidence for applicable boundaries before autonomous effects are enabled. |
-| Demonstrate useful behavior | [Behavioral acceptance scenarios](../evaluation/ACCEPTANCE.md#behavioral-checks) | Real outcomes and matched comparisons, preserving failures and limitations. |
-| Make a scoped release | [Evidence reporting](../evaluation/README.md#reporting-a-result) | Exact configuration, demonstrated scope, pending checks, and a truthful public claim. |
+| Understand the persona | [Persona core](../design/PERSONA-CORE.md) | A consistent account of identity, own-voice fragments, learning, files, selection, and correction. |
+| Preserve the foundation | [Invariants and requirements](REQUIREMENTS.md) and [work boundaries](../design/WORK-AND-BOUNDARIES.md) | Every applicable obligation has an identifiable owner; no hidden workflow or omitted safeguard. |
+| Define reliable handoffs | [Contracts](CONTRACTS.md) | Exact meanings, accepted state changes, failure paths, current authority, recovery, and inspectable context. |
+| Choose the actual scope | [Deployment decisions](DEPLOYMENT-DECISIONS.md) | Explicit environment, storage, model, permissions, resource and retention policies, supported effects, and exclusions. |
+| Establish mechanisms | [Mechanical acceptance](../evaluation/ACCEPTANCE.md#mechanical-checks) and its file/context refinements | Actual implementation evidence at exact revisions, including adverse cases and unrun gaps. |
+| Establish useful behavior | [Evaluation method](../evaluation/README.md) and [behavioral acceptance](../evaluation/ACCEPTANCE.md#behavioral-checks) | Real work plus matched character, learning, organization, cooperation and cost comparisons. |
+| Make a scoped claim | [Status](STATUS.md) and [historical mapping](../evaluation/HISTORICAL-RESULTS.md) | Current evidence separated from prior criteria, claims, failures and remaining gates. |
 
-## Start small, but keep the safeguards
+The protected invariants, persona core, work boundaries, and contracts must agree. Acceptance describes what evidence would demonstrate them; it cannot quietly impose an unrelated cognitive architecture. Overview, examples and history explain these rules rather than override them.
 
-The first useful system can be one continuing persona that accepts a bounded request, receives relevant context, produces an authorized result, preserves evidence, reaches an honest disposition, and continues to a second task. It does not need a city of personas, a role engine, or a population optimizer.
+## Start with a useful continuing collaborator
 
-Next demonstrate a genuine peer-finding-to-edit-to-check chain. Then test changed-input adaptation, retained learning, recruitment, and optional birth. Only after those boundaries and behaviors have evidence should a deployment expand to complex community or physical features.
+A small implementation can support one persona accepting a bounded request, using current self and relevant selected fragments, producing an authorized result, making a qualified file edit or no change, and continuing to a later task. It need not create a community, recruit a team, assign professions, or install a fixed domain pipeline.
 
-| Milestone | Exit evidence |
-|---|---|
-| Reliable foundation | Applicable tests of authority, reservations, delivery, versions, recovery, and execution isolation. |
-| One continuing collaborator | A real small outcome, honest status, identity continuity, and no unnecessary idle activity. |
-| Cooperative group | Accepted responsibilities, distinct relevant contexts, and actual evidence-led correction. |
-| Adaptation and learning | Comparable retained-versus-withheld evidence, changed-input response, and useful expansion or restraint. |
-| Complex and unrelated work | Coordinated outputs plus different small and substantial needs using the same contracts. |
-| Publicly claimed capability | A reproducible evidence package with limitations tied to exact versions. |
+Then demonstrate a genuine peer-finding-to-work-change-to-check chain and matched later transfer. Enabled recruitment, birth, ongoing services, governance, physical effects, and cross-host activation need their own applicable contracts and evidence. These are scope choices, not obligatory development ceremonies or a promise that more personas improve work.
 
-These are evidence gates, not a delivery calendar. A failed gate should identify a missing affordance, capability, or unclear requirement rather than automatically adding more personas.
+A persistent-collaborator scope includes identity, files, primary context choice, bounded work, and applicable safeguards. A cooperative scope adds actual accepted shared responsibility and communication. Community, ongoing and physical scopes add the corresponding obligations. Disabled features remain honestly unavailable; no profile excuses an obligation already created by enabled work.
 
-## Conformance profiles
+## Keep semantic work with the persona
 
-A **persistent collaborator** supports bounded work, identity, memory, and applicable safeguards. A **cooperative group** adds accepted shared work and demonstrated correction. An **adaptive community** adds bounded recruitment or birth, governance, and accountable ongoing work. A **physical-enabled deployment** adds a specifically assessed device and environment contract.
+The runtime can enforce exact references, source access, current constraints, accepted responsibility, complete declared qualifications, spending and stale-action rejection. It cannot mechanically certify that free prose is honest, a skill applies, a selected fragment is relevant, a peer is competent, or an output is good.
 
-Profiles inherit applicable lower-level requirements. A disabled feature is explicitly unavailable; an empty control or untested record does not count as implementation. No profile implies universal expertise, human-like psychology, guaranteed learning, or global cross-host identity exclusivity.
+Do not restore removed complexity behind an adapter that invents applicability, summaries, identity changes, or next-context meaning. A discovery aid can offer candidates; final semantic selection remains with the primary persona. No automatic writer or selector is required to make ordinary work function. No edit, empty optional selection, deliberate retirement, and a justified stop are valid outcomes.
 
-## Keep task policy out of the core
+Choose and test storage separately. Exact identity can survive a rename, while a stable filename can point to changed content. Atomicity, revision checks, source ancestry, retention, and recoverable accepted state remain necessary regardless of backend. A shared host account or tools folder is not a confidentiality boundary.
 
-Implement the [persona-owned organization contract](CONTRACTS.md#persona-owned-organization-and-capability-choice) through the existing context, work, discovery, communication, capability, and commitment mechanisms. Do not add task-to-profession assignments or a concealed domain workflow in code, general prompts, registries, or tool wrappers. Domain operations and explicitly adopted procedures are legitimate capabilities; their selection and use remain attributable to the participants and current mandate.
+## What a release needs
 
-Audit the actual orchestration policy and demonstrate [emergent organization](../evaluation/README.md#evaluating-emergent-organization) on varied work. Missing capability, a failed domain result, and a missing design rule are different findings. The former delivery addendum is now a [compatibility mapping](DELIVERY-CONTRACTS.md); it does not require a parallel set of records or another conformance profile.
+Publish only the supported scope and exact evidence: implemented mechanisms, executed checks, actual behavioral demonstrations, comparative outcomes, failures, total cost and remaining deployment decisions. A clean build, a document review, a pushed commit and a deployed process are separate milestones. None can substitute for useful persona behavior or independently checked task quality.
 
-## Translating the design into a concrete system
-
-Assign one authoritative boundary for each consequential state change. Records can share infrastructure; there need not be one service per noun. Keep persona judgment separate from authentication, execution scheduling, and evidence integrity.
-
-For every operation, document who may request it, what information is required, which state changes together, what happens under a duplicate or stale request, how cancellation works, what survives restart, and what the user sees. The [contracts](CONTRACTS.md) provide these semantic obligations without code examples.
-
-Apply the [coordination and lifecycle clarification](../design/COORDINATION-LIFECYCLE.md) when specifying exact acceptance, accepted delegation, atomic handoff, retirement dispositions, quarantine, and stale-decision rejection. Its verification obligations distinguish invariant preservation and scheduling assumptions from actual voluntary cooperation. An abstract proof needs an explicit correspondence to the concrete admission and recovery paths; it does not replace behavioral evidence.
-
-Record implementation-specific decisions outside this design handbook or in a clearly separate implementation repository. Do not reintroduce patch instructions, command transcripts, or unverified provider claims as the design's source of truth.
-
-Apply the [joint recall-packing clarification](RECALL-PACKING.md) when translating candidate-count and byte limits into packet admission. An oversized proposal must not consume a dispatch slot before a later fitting candidate can be considered within the bounded local shortlist. Demonstrate this through the actual caller and retain the distinction between mechanism tests and useful-cost evidence.
+Historical graph and selector mechanisms may be implementation starting points or explicit research comparators. They neither obstruct adoption of the simpler current design nor establish that the new design already works. Preserve their original results and record actual transitions instead of hiding or regrading them.
