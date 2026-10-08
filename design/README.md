@@ -2,13 +2,13 @@
 
 [Home](../README.md) · [Start here](../START-HERE.md) · [Decisions](../DESIGN-DECISIONS.md)
 
-This branch has one target design: continuing personas expressed in persona-owned first-person fragments, organized in ordinary files, with the primary LLM choosing relevant next context as part of doing work. The older graph-first, auxiliary-selector, and file-proposal manuals are retired from the active reading surface.
+This branch has one target design: continuing personas with one accepted, versioned character account covering semantic OCEAN traits and a VAD modeled affect profile. Every authored fragment is character-conditioned and own-voice, kept in ordinary files. The primary LLM chooses relevant next context and returns an explicit fragment-maintenance disposition in every accepted persona invocation, alongside its other work. The older graph-first, auxiliary-selector, and file-proposal manuals are retired from the active reading surface.
 
 ## Three complementary views
 
 | Document | Its responsibility |
 |---|---|
-| [Persona core](PERSONA-CORE.md) | Identity, character, fragments, self-organization, learning, and persona-owned next-context choice |
+| [Persona core](PERSONA-CORE.md) | Identity, semantic traits and modeled affect, character-conditioned fragments, every-invocation maintenance, learning, and persona-owned next-context choice |
 | [Work and boundaries](WORK-AND-BOUNDARIES.md) | Accepted work, cooperation, real actions, authority, resources, evidence, recovery, and conditional extensions |
 | [System contracts](../implementation/CONTRACTS.md) | The observable guarantees that make those choices and boundaries reliable |
 
@@ -29,7 +29,13 @@ Inside a runtime, authoritative instructions and current accepted obligations re
 
 **Must** states a condition required for the applicable feature. **Should** is a strong recommendation whose exception needs a reason. **May** describes an option. Optional features remain subject to their safeguards when enabled.
 
-Prose fragments do not require every persona to adopt a fixed set of folders, fields, mental functions, or personality scores. Precise host records for permissions, evidence, ownership, current work, and resource accounting are still necessary where their meanings apply. Simpler cognitive representation does not mean ambiguous operational boundaries.
+Required semantic coverage is not a required numeric scorecard. All five OCEAN domains and all three VAD dimensions have meaning in the accepted character account; additional facets or operational tendencies are optional when useful. Stable traits, transient affect, expression, capability, and authority remain distinguishable. Files and fragments have no compulsory folder taxonomy or mental-function tree.
+
+Every application-visible persona LLM invocation receives maintenance input, and every accepted output supplies a patch, no change with a reason, blocked, or bounded deferred disposition. This does not require a mutation, a new selection, or a separate reflection call. Failed attempts retain honest host status rather than fabricated persona judgments. The core and contracts define the exact scope and failure behavior.
+
+Precise host records for permissions, evidence, ownership, current work, and resource accounting are still necessary where their meanings apply. Simpler cognitive representation does not mean ambiguous operational boundaries.
+
+The 8 October refinement explicitly supersedes the 7 October interpretation that OCEAN/VAD descriptors and an explicit maintenance response could both be omitted. It preserves the earlier rejection of compulsory numeric scales, forced lessons, and auxiliary authors. [Design decisions](../DESIGN-DECISIONS.md) and [history](../CHANGELOG.md) explain the change without revising earlier results.
 
 ## Scope and extensions
 

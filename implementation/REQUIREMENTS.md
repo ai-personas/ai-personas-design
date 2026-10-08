@@ -2,9 +2,9 @@
 
 [Implementation guide](README.md) · [Contracts](CONTRACTS.md) · [Acceptance](../evaluation/ACCEPTANCE.md)
 
-The protected foundation remains I01–I21 and the 45 requirement identifiers below. The current [persona core](../design/PERSONA-CORE.md) defines continuing character through persona-authored first-person fragments, ordinary files and search, and primary-persona choice of next-context fragments. [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) preserves authority, obligations, evidence, resources, and recovery. The index names obligations; it does not replace their failure paths.
+The protected foundation remains I01–I21 and the 45 requirement identifiers below. The current [persona core](../design/PERSONA-CORE.md) defines one coherent OCEAN- and VAD-grounded character account, characteristic persona-authored fragments, ordinary files and search, and primary-persona choice of next-context fragments. Every persona invocation receives maintenance input and returns an explicit outcome alongside actual work before its response can be adopted. [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) preserves authority, obligations, evidence, resources, and recovery. The index names obligations; it does not replace their failure paths.
 
-This revision changes the representation and selection design, not the meaning of earlier results. The canonical memory graph, typed cognitive taxonomy, and compulsory numeric character descriptors are superseded as conformance obligations. The former optional delegated semantic selector no longer chooses final prompt parts; optional aids offer candidates to the primary persona. Their historical criteria remain identifiable in the [transition mapping](../evaluation/HISTORICAL-RESULTS.md). No scenario in this edition is reported as executed merely because its description exists.
+This revision changes character and invocation obligations, not the meaning of earlier results. The previous optional-OCEAN/VAD and omitted-maintenance norms are superseded: the characteristic basis and explicit maintenance outcome are required, while numeric scores, fixed cognitive forms and actual mutation on every call are not. A canonical memory graph or typed cognitive taxonomy remains unnecessary. The former optional delegated semantic selector no longer chooses final prompt parts; optional aids offer candidates to the primary persona. Their historical criteria remain identifiable in the [transition mapping](../evaluation/HISTORICAL-RESULTS.md). Existing identifiers retain their subject and expanded obligations; earlier passes do not establish these new criteria. No scenario in this edition is reported as executed merely because its description exists.
 
 ## Invariants
 
@@ -39,15 +39,15 @@ M, B, and X refer to the [mechanical, behavioral, and extension checks](../evalu
 | ID | Required behavior | Detailed design | Primary evidence gates |
 |---|---|---|---|
 | PER-01 | Preserve continuing identity independently of model and work. | [Persona core](../design/PERSONA-CORE.md) | B10; restoration evidence |
-| PER-02 | Distinguish character, preference, competence, authority, and responsibility. | [Persona core](../design/PERSONA-CORE.md) | B01–B04; capability evidence |
-| PER-03 | Carry current self and relevant persona-selected fragments into decisions without invented biography. | [Persona core](../design/PERSONA-CORE.md) | B01–B04 |
+| PER-02 | Ground one coherent character account in OCEAN tendencies, VAD modeled affect, and useful additional characteristics; distinguish stable character, transient state, preference, competence, authority, and responsibility. | [Persona core](../design/PERSONA-CORE.md) | B01–B04; capability evidence |
+| PER-03 | Carry the accepted character and relevant persona-selected fragments into decisions; every authored fragment expresses its characteristic own-voice perspective without invented biography or altered evidence. | [Persona core](../design/PERSONA-CORE.md) | B01–B04; B09 |
 | PER-04 | Make lifecycle changes and open-obligation dispositions explicit. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M06; X02 |
 | PER-05 | Require truthful creation provenance and bounded initialization. | [Persona core](../design/PERSONA-CORE.md) | M05; M18 |
-| MEM-01 | Separate work facts, authored memory, and observed evidence. | [Persona core](../design/PERSONA-CORE.md) | M08–M10; B09 |
-| MEM-02 | Preserve authored fragment meaning, source restrictions, scope, counterevidence, revisions, and visibility. | [Persona core](../design/PERSONA-CORE.md) | M08; M11; B09 |
+| MEM-01 | Separate work facts, authored memory, observed evidence, and the explicit maintenance consideration required in every persona invocation. | [Persona core](../design/PERSONA-CORE.md) and [contracts](CONTRACTS.md#every-persona-invocation) | M08–M10; B09 |
+| MEM-02 | Preserve characteristic fragment meaning, source restrictions, scope, counterevidence, revisions, visibility, accepted applicability warnings, and actual edit or bounded no_change, blocked, or deferred maintenance dispositions. | [Persona core](../design/PERSONA-CORE.md) and [contracts](CONTRACTS.md#every-persona-invocation) | M08; M11; M21; B09 |
 | MEM-03 | Let the primary persona choose relevant next-context fragments within persona and work scope. | [Persona core](../design/PERSONA-CORE.md) | M08; M11; B09 |
 | MEM-04 | Preserve mandatory current constraints under context pressure. | [Persona core](../design/PERSONA-CORE.md) | M08; M21 |
-| MEM-05 | Measure qualified learning transfer and correction rather than memory volume. | [Persona core](../design/PERSONA-CORE.md) | B09 |
+| MEM-05 | Measure qualified learning transfer, correction, characteristic behavioral influence, harmful drift and total maintenance cost rather than memory volume or outcome counts. | [Persona core](../design/PERSONA-CORE.md) | B01–B04; B09 |
 | NED-01 | Preserve original intent and authorized mandate changes. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M20; B11–B12 |
 | NED-02 | Obtain continuation acceptance and expose ownership gaps. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M19 |
 | NED-03 | Distinguish conditional assumptions from confirmed facts. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M20 |
@@ -60,20 +60,20 @@ M, B, and X refer to the [mechanical, behavioral, and extension checks](../evalu
 | COL-06 | Permit useful birth and no-birth restraint under conserved resources. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M05–M07; B08 |
 | ACT-01 | Use or acquire capabilities through actual evidence-backed operations. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M10; B11–B12 |
 | ACT-02 | Enforce execution boundaries rather than merely label them. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M12 |
-| ACT-03 | Require actual results before dependent decisions and publication. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M17; M26 |
+| ACT-03 | Require a complete valid persona response before new action adoption, and actual prerequisite results before dependent decisions and publication. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) and [contracts](CONTRACTS.md#every-persona-invocation) | M17; M26 |
 | ACT-04 | Preserve unknown external effects and reconcile before repetition. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M13 |
 | GOV-01 | Keep grants scoped, revocable, and no broader than their parents. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M05–M07; M11–M13 |
-| GOV-02 | Conserve resources across descendants, retries, compaction, and review. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M07; M23 |
+| GOV-02 | Conserve resources across descendants, every-call maintenance, provider attempts, retries, compaction, and review. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M07; M23 |
 | GOV-03 | Protect agreed closeout capacity. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M23 |
-| GOV-04 | Bound idle cognition, reminders, and no-progress loops. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M25 |
+| GOV-04 | Bound idle cognition, reminders, maintenance deferrals, and no-progress loops; an outcome creates no automatic reflection call or self-wake. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M25 |
 | EVD-01 | Preserve exact artifacts, input mappings, and actual execution evidence. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M09–M10 |
 | EVD-02 | Review exact scope under an explicit independence policy. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | B05; B11 |
 | EVD-03 | Separate historical verdict from current applicability. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M09; M24 |
 | EVD-04 | Seal one coherent reviewed state with no unresolved applicable blockers. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M21; M24 |
 | EVD-05 | Expose activity, coverage, evidence, acceptance, and outside validation separately. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M14; B11–B12 |
-| SYS-01 | Make accepted operations retry-safe and attributable. | [Contracts](CONTRACTS.md) | M01–M04; M13 |
-| SYS-02 | Restore pending events, reservations, and effects without new authority. | [Contracts](CONTRACTS.md) | M04; M16; M26 |
-| SYS-03 | Prevent stale decision or write holders from adopting changes. | [Contracts](CONTRACTS.md) | M02–M03 |
+| SYS-01 | Make invocation, maintenance and operation dispositions retry-safe and attributable; never invent persona outcomes for failed, refused or canceled calls. | [Contracts](CONTRACTS.md) | M01–M04; M13 |
+| SYS-02 | Restore pending events, maintenance dispositions, adopted deferrals, continuing accepted applicability warnings, reservations, and effects without new authority. | [Contracts](CONTRACTS.md) | M04; M16; M26 |
+| SYS-03 | Prevent invalid responses and stale decision or write holders from adopting changes; resolve same-response character-adoption requests before other fresh operations and preserve explicit dependency, freshness and accepted-character fences. | [Contracts](CONTRACTS.md) | M02–M03 |
 | SYS-04 | Configure inference without silently changing identity, cost, or authority. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | M15; B10 |
 | SOC-01 | Establish a charter and actual human or institutional accountability. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | X01–X03 |
 | SOC-02 | Distinguish real stakeholder input from simulated perspectives. | [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) | X01 |
@@ -87,19 +87,21 @@ M, B, and X refer to the [mechanical, behavioral, and extension checks](../evalu
 
 ## What the persona-core refinement requires
 
-The existing rows now apply to one coherent account rather than parallel identity, graph, and reflection systems:
+The existing rows apply to one coherent account rather than parallel identity, graph, and reflection systems. The changed criteria require fresh evidence under the current evaluator revision:
 
 | Concern | Existing requirements | Observable meaning |
 |---|---|---|
-| Character and own voice | PER-01–PER-03, PER-05 | Attributed accepted self-prose is supplied faithfully; later expression and discretionary choices are assessed separately. Supplied ideas do not become invented firsthand experience. |
-| Learning from work and surroundings | MEM-01–MEM-02, MEM-05, ACT-01 | The persona may interpret task results, tools, environment observations, peers, and its own mistakes, retain qualified meaning, or make no lasting edit. Only actual observations support claimed outcomes. |
+| Character and own voice | PER-01–PER-03, PER-05 | OCEAN tendencies, baseline VAD, useful additional characteristics and own-voice prose resolve one accepted character revision; transient modeled affect stays distinguishable. Every authored fragment expresses that perspective. Later language and discretionary choices need separate behavioral evidence. Supplied ideas do not become invented firsthand experience. |
+| Every-invocation maintenance | MEM-01–MEM-02, ACT-03, SYS-01–SYS-03, GOV-02–GOV-04 | Initialization, retrieval-only judgment, ordinary work, communication, coordination, reflection, repair and persona-capable subcalls receive maintenance input. Complete valid responses include an explicit outcome. Failed provider attempts keep truthful host status. Restricted selection repair remains mode-limited; no recursive maintenance call or self-wake follows. |
+| Learning from work and surroundings | MEM-01–MEM-02, MEM-05, ACT-01 | The persona interprets task results, tools, environment observations, peers, and its own mistakes, and explicitly chooses useful change, reasoned no_change, or bounded blocked or deferred maintenance. Only actual observations support claimed outcomes; accepted retention and useful transfer require different evidence. |
 | Self-organization and next context | MEM-02–MEM-04, SYS-01–SYS-03, UX-01–UX-02 | Files can be named, searched, read, split, combined, corrected, or retired without a required taxonomy. The primary persona selects exact relevant fragments; the runtime validates access, versions, qualifications, and fit. |
-| Relationships and cooperation | COL-01–COL-04, SOC-03 | Private directional interpretation is distinct from shared evidence, consent, competence, and accepted responsibility. A useful encounter can change later work without a universal reputation score. |
-| Skills and tools | ACT-01–ACT-04, EVD-01, MEM-05 | A reusable method is authored knowledge; a tool note is not an executable capability or proof of correct results. Relevant operations, versions, and outcomes need their own evidence. |
-| Correction and continuity | PER-04, MEM-02–MEM-04, EVD-03, SYS-01–SYS-04 | Exact history remains attributable, harmful guidance stops being current, and restart or model change does not erase obligations or revive withdrawn information. |
+| Relationships and cooperation | COL-01–COL-04, SOC-03 | Characteristic collaboration and coordination choices are assessed without host role routing. Private directional interpretation is distinct from shared evidence, consent, competence, and accepted responsibility. A useful encounter can change later work without a universal reputation score. |
+| Skills and tools | ACT-01–ACT-04, EVD-01, MEM-05 | A characteristic reusable method is authored knowledge; a tool note is not an executable capability or proof of correct results. Traits may influence discretionary choices without changing authority or necessary verification. Relevant operations, versions, and outcomes need their own evidence. |
+| Correction and continuity | PER-04, MEM-02–MEM-04, EVD-03, SYS-01–SYS-04 | Exact history and authoring character remain attributable. Conflicting old character guidance is qualified, revised, retired or not selected. Invalid response and later persistence conflict remain distinct; independent work needs explicit evidence and current guards. Resolve character-adoption requests before other same-response operations: acceptance fences, definite no commit permits only eligible independent work, and unknown commit status holds. Mere investigation is not adoption. Restart or model change does not erase obligations or revive withdrawn information. |
+| Correction effort and applicability | MEM-02–MEM-04, SYS-02, GOV-04, UX-02 | Ending bounded correction work does not resolve a separately accepted primary-authored warning on exact guidance or identified uses. Failed patches do not revive that guidance unqualified. Durable warning acceptance, source policy and justified resolution remain necessary; restricted repair and locked-character authority do not expand. |
 | Useful and bounded work | NED-01–NED-04, GOV-01–GOV-04, EVD-02–EVD-05 | Improvements are judged against the accepted need, checks, total cost, failures, and stopping disposition. More fragments, calls, or personas are not success. |
 
-These refinements add no requirement family. They also do not require a memory edit, an explicit no-change declaration, a new selection, or a learning ceremony in every response. Where no edit or selection change occurs, accepted state stays unchanged; that absence is not an authored claim that learning was considered. Required work and stopping dispositions remain independent.
+These refinements add no requirement family or fixed cognitive taxonomy. They do require explicit maintenance input and an explicit outcome in every complete valid persona response. A reasoned no_change outcome is sufficient when no useful change is warranted; silent omission is invalid. Mutation, a new selection, a separate reflection call, and numeric trait scores are not compulsory. A proposal, accepted save, actual later supply, observed action, and measured benefit remain different claims. Required work and stopping dispositions remain independent, and failed or refused calls cannot be backfilled with invented persona judgments.
 
 ## Applying and reporting the requirements
 

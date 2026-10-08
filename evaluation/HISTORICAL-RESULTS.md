@@ -6,7 +6,7 @@
 
 The prior design baseline is [f4549bd594e6a0cf5205ac031ed422ab269def8d](https://github.com/ai-personas/ai-personas-design/tree/f4549bd594e6a0cf5205ac031ed422ab269def8d). Links on this page pin earlier criteria to that revision unless a different revision is explicitly named. They preserve history, not a second current specification. No historical file must be studied to understand the current design.
 
-The current target adopts persona-authored first-person files, simple discovery and exact reading, and the primary persona's own next-context choices. It supersedes required graph navigation, the former conditional graph-delegation contract and optional independent semantic selection, compulsory structured memory dispositions, and compulsory numeric character descriptors. The previous Jev selector was optional under authorized delegation, not mandatory for every old run. Optional tools may assist discovery without acquiring final semantic selection or authoring authority. The strict on-demand-only, no-persistent-selection target in the earlier file proposal is also superseded: a primary-authored work-scoped selection can persist under the current contract.
+The current target, revised October 8, 2026, adopts persona-authored first-person files, simple discovery and exact reading, and the primary persona's own next-context choices. It requires semantic OCEAN stable-trait dimensions, separate VAD modeled affect, one coherent accepted character, characteristic own voice across every authored fragment, and maintenance input on every persona invocation with a valid explicit outcome on every accepted persona response. It supersedes required graph navigation, the former conditional graph-delegation contract and optional independent semantic selection, graph-specific structured disposition forms, and compulsory numeric character descriptors. Mandatory consideration is restored as an explicit current obligation; a new lesson, edit, separate reflection call or self-rewrite is not. The previous Jev selector was optional under authorized delegation, not mandatory for every old run. Optional tools may assist discovery without acquiring final semantic selection or authoring authority. The strict on-demand-only, no-persistent-selection target in the earlier file proposal is also superseded: a primary-authored work-scoped selection can persist under the current contract.
 
 Three dispositions below must not be confused:
 
@@ -16,21 +16,34 @@ Three dispositions below must not be confused:
 
 The 21 invariants and 45 requirement identifiers remain active. M01–M26, B01–B12, and X01–X06 remain the active catalogue, with explicitly revised file/context refinements. The tables below preserve supplemental identifiers as traceability, not additional active runtime objects or another required catalogue. Similar labels never establish equivalent tested behavior.
 
+## October 8 applicability and the maintenance change
+
+The immediately preceding file-first wording made OCEAN and VAD optional and allowed ordinary no-edit responses without an explicit maintenance disposition. That wording no longer defines the current target. OCEAN and VAD now have required, distinct semantic roles without required scores. Profile and current-self representations resolve the same accepted character; historical numeric values remain what their original campaign actually supplied.
+
+Every dispatched persona-model invocation now receives maintenance input, including initialization, context selection, tool follow-up, peer coordination, retries, repair and final answers. An accepted persona response contains a proposed patch, reasoned no-change, or bounded blocked/deferred outcome alongside its work. Missing or malformed maintenance invalidates the response and blocks substantive dispatch, while independent host safety and accounting continue. A failed or refused generation retains its actual failure status; it is not retroactively filled with a persona-authored no-change.
+
+This change does not reinstate graph machinery or create another reflection author. Restricted selection repair stays edit-free and supplies a mode-limited maintenance outcome. Optional next-context updates remain optional: omission preserves a valid choice rather than silently clearing it. A genuine effective-character change retains the existing fence on all fresh operations, including reads and waits; ordinary method corrections and transient VAD updates do not automatically trigger that fence.
+
+The October 8 evaluation adds explicit invocation coverage, coherent trait/profile/current-self meaning, all-fragment own voice, trait/state separation, action versus coordination versus learning channels, neutralization and ablation controls, harmful transfer, pressure resistance, correction, adaptive convergence and whole-system cost. No historical pass covers these revised claims merely because the identifier is retained. Historical comparisons, failures, original criteria, minimum counts and denominators remain unchanged. New research-proposed numerical thresholds are optional campaign design choices to freeze before execution, not inherited results or universal requirements.
+
 ## Existing identifiers with revised current wording
 
 The [previous requirement rows](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/implementation/REQUIREMENTS.md) and [previous core scenarios](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/evaluation/ACCEPTANCE.md) remain their original criteria. Retaining identifiers does not mean every sentence is unchanged.
 
 | Existing identifiers | Current refinement |
 |---|---|
-| PER-03 | Names current self and relevant primary-persona-selected fragments as the individual context carried into decisions. |
-| MEM-02 | Makes authored meaning and source restrictions explicit alongside scope, counterevidence, revisions and visibility. |
+| PER-02 | Requires coherent semantic OCEAN tendencies and separate VAD modeled affect while distinguishing character, transient state, preference, competence, authority and responsibility; no numeric score is required. |
+| PER-03 | Carries the coherent accepted character and relevant primary-persona-selected fragments into decisions, with characteristic own-voice meaning throughout authored fragments and no invented biography or altered evidence. |
+| MEM-01 | Keeps facts, observations and authored memory distinct while requiring maintenance consideration in every persona invocation. |
+| MEM-02 | Makes characteristic fragment meaning, source restrictions, scope, counterevidence, revisions, visibility and actual edit/no-change/blocked/deferred dispositions explicit. |
 | MEM-03 | Places semantic next-context choice with the primary persona rather than merely requiring scoped selected context. This is a substantive selection-authority change. |
-| MEM-05 | Makes qualified transfer and correction explicit; memory volume remains insufficient. |
-| M08 | Explicitly tests current self, primary-selected exact text and complete qualification under whole-request pressure and work isolation. |
+| MEM-05 | Makes qualified transfer, correction, characteristic behavioral influence, harmful drift and total maintenance cost explicit; memory volume and outcome counts remain insufficient. |
+| M08 | Tests coherent current character, primary-selected exact text and complete qualification under whole-request pressure and work isolation; includes maintenance input and accepted outcomes on every persona invocation, with restricted repair remaining edit-free. |
+| M15 | Tests absent/malformed maintenance, failed/refused attempts and blocked substantive dispatch without suppressing independent host safety or accounting or inventing a persona outcome. |
 | M11 | Uses files, indexes, previews, caches and derivatives for the same source-access concern; graph-specific disclosure paths remain in the historical evaluator. |
-| B01, B04 | Add faithful own-voice authorship and neutral-wording controls to character/state comparisons. |
+| B01, B04 | Add all-fragment own-voice authorship, semantic OCEAN/VAD separation, coherent profile/current self, style-only and trait-neutralized controls, label/name swaps and relevant-context ablations. |
 | B09 | Names the authored-text-to-selection-to-supplied-context-to-action chain and retained/matched-withheld/fresh controls. |
-| B12 | Explicitly covers autonomous file maintenance, skills/tools, and proportionate no-change or retirement without compulsory reflection. |
+| B12 | Covers autonomous file maintenance, actual action/tool and coordination choices, explicit proportionate no-change or retirement without a compulsory edit or separate reflection call, bounded adaptive behavior and full cost. |
 
 Other core identifiers retain their base concerns, with the additional file, context, tool, observation, and delivery disturbances stated in the current acceptance refinements. New results must identify this revised evaluator even where an unchanged base row is reused. No earlier result is upgraded by the wording change.
 
@@ -45,7 +58,7 @@ Other core identifiers retain their base concerns, with the additional file, con
 | Minimal-house and transfer development criteria | The [development acceptance section](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/PERSONA-DEVELOPMENT.md#acceptance-and-limits-of-conclusions) explicitly preserves a failing minimal-house case and sets character, transfer, and three-fresh-environment campaign minima. | The failure remains a failure under its original rubric. This design edit provides no missing execution package, repaired success, or new live result. The applicable minima are retained in the [current method](README.md). |
 | Persona-owned-files proposal | The [October 6 proposal](https://github.com/ai-personas/ai-personas-design/blob/f4549bd594e6a0cf5205ac031ed422ab269def8d/design/PERSONA-OWNED-FILES.md) proposes a file interface, writable simplification, longitudinal comparisons, and separate storage evaluation. | It reports no implemented file-first feature or evaluation pass. Its strict no-selection target is replaced by current primary-authored next-context selection. Its useful controls, autonomous-maintenance questions, and negative-transfer cases survive. |
 
-Current runtime state is unassessed against this revised design. “Unassessed” is not a claim that no old mechanism exists, nor a claim that a current implementation fails. Exact new implementation evidence is required. Documentation validation remains separate from every execution or behavioral result.
+As of this October 8 documentation revision, current runtime state is unassessed against the revised design. No runtime or live-model evaluation, paid API call or publication was performed by this documentation revision. “Unassessed” is not a claim that no old mechanism exists, nor a claim that a current implementation fails. Exact new implementation evidence is required. Documentation validation remains separate from every execution or behavioral result.
 
 ## Former delivery identifiers
 
@@ -85,8 +98,8 @@ The [original FP criteria](https://github.com/ai-personas/ai-personas-design/blo
 
 | Historical identifiers | Current disposition and coverage |
 |---|---|
-| FP-M01–FP-M02 | Bootstrap provenance, self-model and authored/locked identity carry to M03, M05–M06, M08, B01. Compulsory numeric profile and graph designation mechanics are superseded; actual supplied historical values and attribution remain historical facts. |
-| FP-M03 | Same-primary authorship and bounded call accounting carry to M07–M08, M25. A compulsory per-response graph disposition and independently selecting auxiliary role are superseded. Ordinary no edit remains valid without invented deliberation. |
+| FP-M01–FP-M02 | Bootstrap provenance, self-model and authored/locked identity carry to M03, M05–M06, M08, B01. Compulsory numeric profile and graph designation mechanics are superseded; current semantic OCEAN/VAD obligations and coherent representations require new evidence. Actual supplied historical values and attribution remain historical facts. |
+| FP-M03 | Same-primary authorship and bounded call accounting carry to M07–M08, M25. The particular per-response graph disposition and independently selecting auxiliary role are superseded. The October 8 contract separately requires maintenance input and an explicit valid outcome for every accepted persona response; no edit remains valid with a truthful reason, never invented deliberation or a fallback outcome for a failed attempt. |
 | FP-M04 | Actual observation timing carries to M10, M17, B09. |
 | FP-M05–FP-M07 | Atomic dependent edits and selections, coherent correction, one current writer, exact replay and historical attribution carry to M01–M03, M08–M09, M16. Required graph nodes and incoming-edge machinery are superseded. |
 | FP-M08–FP-M09 | Explicit choice, new events and work-scoped context carry to M08, M21, B09. Automatic semantic delegation is superseded by primary choice; a new event is mandatory current observation rather than automatic optional-memory activation. |
@@ -94,7 +107,7 @@ The [original FP criteria](https://github.com/ai-personas/ai-personas-design/blo
 | FP-M13 | Social interpretation is not authority: M06, M19, B02–B05. |
 | FP-M14–FP-M15 | Untrusted content, stale adoption, idle bounds, failed/uncertain costs and stopping: M03, M07–M08, M11–M13, M23, M25. |
 | FP-M16 | Exact authorship, selection origins, provider-bound inclusion and assessed outcomes: M08, M10, M14, B09. Required graph inspection is superseded by readable files and actual context evidence. |
-| FP-B01 | Character in meaning and actions: B01, B04, current character and own-voice comparison. Retained behavioral concern with revised prose-based intervention. |
+| FP-B01 | Character in meaning and actions: B01, B04, current character and own-voice comparison. Retained behavioral concern with revised semantic OCEAN, separate VAD and all-fragment prose interventions; an old outcome does not pass those changed contrasts. |
 | FP-B02 | Procedural transfer: B09, retained/withheld/fresh comparisons and existing minima. Retained campaign obligations. |
 | FP-B03–FP-B04 | Useful peer choice, copied-source limits, wrong advice and harmful-memory correction: B02–B05, B07, B09. Retained behavioral concerns. |
 | FP-B05 | Memory growth, old relevant content, fixed request budget, search and later work: M08, B09, B12. Graph-versus-selector comparator is superseded as a required setup; autonomous file maintenance and primary context choice replace it. |
@@ -106,7 +119,7 @@ The [original FR criteria](https://github.com/ai-personas/ai-personas-design/blo
 
 | Historical identifiers | Current disposition and coverage |
 |---|---|
-| FR-M01–FR-M02 | Freedom from imposed hierarchy and same-primary authorship carry to M08, B09, B12. A canonical rootless graph, authored condition schema, and compulsory per-response continuity/disposition form are superseded. The former criteria already allowed no-change; they did not require actual graph edits on every response. |
+| FR-M01–FR-M02 | Freedom from imposed hierarchy and same-primary authorship carry to M08, B09, B12. A canonical rootless graph, authored condition schema, and the particular graph continuity/disposition form are superseded. The former criteria already allowed no-change; they did not require actual graph edits on every response. The October 8 explicit every-invocation maintenance contract has its own current input, outcome, invalid-response and repair requirements and needs new evidence. |
 | FR-M03 | Discovering old or isolated relevant material carries to M08, B09, B12 under explicit file/search scope. |
 | FR-M04 | The finite condition interpreter and hard/semantic conditional combination are superseded architecture. Unknown facts and unmet prerequisites remain unknown under M08, M10, M20 and complete qualification rules. |
 | FR-M05–FR-M07 | Actual unexpected events, new-work isolation, before-provider privacy and atomic updates carry to M01–M02, M08, M11, M21. No automatic optional selection follows from an event. |
@@ -137,4 +150,4 @@ These documents are consolidated rather than preserved as parallel normative man
 
 ## New evidence must name the new claim
 
-Any future result records exact current design, runtime and evaluator revisions, enabled mechanisms, fixed criteria, source evidence, failures and interventions, total resources, and unrun gates. A compatibility file view over old records demonstrates only what was actually exercised. Hiding graph controls, updating prose, or passing a local document check cannot establish autonomous file organization, primary-owned context selection, faithful own voice, learning transfer, or useful task delivery.
+Any future result records exact current design, runtime and evaluator revisions, enabled mechanisms, fixed criteria, source evidence, failures and interventions, total resources, and unrun gates. A compatibility file view over old records demonstrates only what was actually exercised. Hiding graph controls, updating prose, or passing a local document check cannot establish autonomous file organization, primary-owned context selection, semantic trait/state separation, coherent character representations, characteristic own voice across all authored fragments, universal valid maintenance, learning transfer, bounded adaptation, or useful task delivery.

@@ -2,13 +2,14 @@
 
 [Home](README.md) · [Start here](START-HERE.md) · [Design authority](design/README.md)
 
-These terms describe the current persona-owned files design. They explain the normative documents rather than add obligations. Historical terms remain only where useful to understand compatibility or conditional features.
+These terms describe the current persona-owned files design with semantic traits, modeled affect, and explicit every-invocation maintenance. They explain the normative documents rather than add obligations. Historical terms remain only where useful to understand compatibility or conditional features.
 
 | Term | Meaning |
 |---|---|
 | Acceptance | An attributable agreement to specific terms or a specific result. Acceptance of membership, work, review, and delivery are separate events. |
 | Action | A requested or performed observation, communication, change, or other effect. A request is not proof of execution. |
 | Adoption | An attributable acceptance of text, terms, or a design within the actor's authority. It does not itself prove implementation, correctness, or behavioral benefit. |
+| Affect baseline | The persona's usual modeled affective tendency, distinguished from its current event-linked state and outward expression. It is not a measurement of felt emotion. |
 | Agenda | One persona's revisable view of what deserves its attention. It is not the team's compulsory priority order. |
 | Agreement | Scoped terms actually endorsed by identified participants, with dissent and change rules preserved. |
 | Applicability | Whether an earlier assessment supports the current claim, inputs, conditions, and criteria. |
@@ -23,7 +24,9 @@ These terms describe the current persona-owned files design. They explain the no
 | Blocker | A condition or finding that prevents a particular commitment or completion claim under the agreed rules. |
 | Bootstrap context | The limited information and resources a new persona may use to orient itself before ordinary membership. |
 | Capability | A means of observing or acting in a particular environment, with access conditions and evidence of its limits. |
-| Character | A persona's recognizable interests, values, approaches, and habits, expressed in its current authored account and choices. It can evolve without conferring competence or authority. |
+| Character | A persona's recognizable stable tendencies, interests, approaches, and habits, expressed in one accepted account and in choices. The account includes semantic OCEAN traits and a VAD modeled affect profile; it supplies neither competence nor authority. |
+| Character account | The single accepted, versioned account used by both the persona's profile and its decision context. Natural-language meaning is required; numeric scores and independently authored display summaries are not. |
+| Character-conditioned | Authored under the persona's accepted character so that emphasis, wording, uncertainty, and discretionary preferences can reflect that perspective. It does not permit alteration of facts, exact quotations, or source attribution. |
 | Claim | Something asserted about work, a result, an observation, or a capability. Its supporting evidence and limitations must be inspectable. |
 | Closeout allocation | Protected resources for agreed review, bounded repair, and honest finishing. It remains inside the overall allowance. |
 | Commitment | A responsibility accepted by a participant for a specified outcome and terms. An offer alone is not a commitment. |
@@ -34,7 +37,8 @@ These terms describe the current persona-owned files design. They explain the no
 | Continuation responsibility | Accepted responsibility for carrying a need toward a result, honest block, or handoff. It is not compulsory leadership. |
 | Counterevidence | An observation or argument that challenges a retained interpretation or claim. |
 | Criterion | An agreed basis for judging an outcome. Changing it creates a new version rather than rewriting an earlier failure. |
-| Current self-description | The small designated accepted account of a persona's current character. Its designation and revision are attributable; optional topical selection cannot silently replace it. |
+| Current self-description | The small designated own-voice expression of the accepted character account. Its designation and revision are attributable; it is not a separate identity writer or a substitute for the required trait and affect meaning. |
+| Deferred maintenance | An explicit unresolved maintenance candidate with reason, prerequisite, accepted continuation owner or explicit gap, resumption trigger, and resource/lifecycle bounds. Reaching a bound preserves an honest terminal or blocked disposition rather than inventing no change. |
 | Delegation | A scoped transfer of decision or action permission that cannot exceed the controlling authority. |
 | Dependency | Something a contribution relies on, such as an input version, a completed action, or another accepted result. |
 | Discovery | Finding a candidate file, fragment, reference, or capability. A search match is neither endorsement nor a persistent next-context choice. |
@@ -48,8 +52,10 @@ These terms describe the current persona-owned files design. They explain the no
 | Evidence | Preserved observations, outputs, receipts, and checks that support or contradict a claim. |
 | Fencing | Preventing a former decision or write holder from committing after its authority has moved or expired. |
 | Finding | An attributable review observation with a subject, evidence, and significance. Optional advice is distinct from a separately adopted blocking finding that requires an explicit disposition. |
+| Facet | A narrower trait distinction used when it helps explain the intended character. Facets are optional; no complete facet inventory or extra trait taxonomy is required. |
 | First-person fragment | A reusable prompt part expressed as the persona's own understanding, intention, method, or interpretation. First-person wording alone proves neither self-authorship nor firsthand experience. |
-| Fragment | A retained, revisable prompt part expressed in its owning persona's own voice, in a file or identifiable part of one. Its organization is flexible; its origin, scope, restrictions, and qualifications remain attributable. Raw evidence is a separate observation, not automatically a fragment. |
+| Fragment | A retained, revisable prompt part authored under its owning persona's accepted character and expressed in its own voice, in a file or identifiable part of one. Its organization is flexible; its origin, scope, restrictions, and qualifications remain attributable. Raw evidence is a separate observation, not automatically a fragment. |
+| Fresh-decision fence | The barrier requiring a new primary decision under accepted effective-current-character changes before any further operations from the old response, including reads and waits. A transient state annotation does not automatically constitute such a change; the core defines the boundary. |
 | Funded episode | A bounded period of activity drawing on a shared allowance. It is distinct from a persona's identity or participation in work. |
 | Grant | Explicit permission for specified actors, resources, effects, conditions, and duration. |
 | Grep | A simple way to search text for matching words or patterns. It helps discover material; the primary LLM decides what is relevant to its next decision. |
@@ -62,19 +68,25 @@ These terms describe the current persona-owned files design. They explain the no
 | Inference | Use of a configured model to generate a decision or response. It consumes resources and can fail. |
 | Invariant | A rule that must remain true across applicable actions and state transitions. |
 | Learning | A supported change in retained understanding or method that can affect later behavior. Beneficial learning requires evidence of useful transfer, not merely a saved note or a larger archive. |
+| Maintenance disposition | The persona-authored result returned alongside work in every accepted persona invocation: a proposed patch, no change with a concise reason, blocked, or bounded deferred. It is distinct from whether a patch was accepted, whether work continues, or whether selection changed. |
+| Maintenance input | The explicit maintenance obligation and relevant permitted character, fragments, observations, coverage limits, pending items, and bounds supplied to every persona LLM invocation. It need not include the entire archive. |
 | Mandate | The preserved need and its accepted scope, constraints, permissions, resources, questions, and completion agreement. |
 | Membership | Accepted participation in a scoped environment or group. It does not automatically assign work or expose all private information. |
 | Model | The inference capability a persona currently uses, not its durable identity. |
-| Modeled affect | An explicit description of current state, not evidence of subjective feelings. |
+| Modeled affect | The synthetic affective description expressed through VAD: valence, activation, and perceived control. Baseline, transient state, and expression remain distinguishable; none proves subjective feelings. |
 | Negative transfer | A retained lesson makes a later task worse because it is misleading, stale, overgeneralized, or applied outside its useful scope. |
+| No change | An explicit persona-authored maintenance decision, with a concise reason, to leave fragments unchanged. Missing output, a failed save, a known unresolved candidate, and provider failure are not automatically no change. |
 | Next-context intent | A persona-authored choice of accepted fragments or other permitted source text for a later decision within a stated scope. Preservation, replacement, clearing, expiry, and actual supply have distinct meanings. |
-| OCEAN | Optional descriptors named openness, conscientiousness, extraversion, agreeableness, and neuroticism. Here they are descriptive context, not validated AI psychology or a role-assignment rule. |
+| OCEAN | Required semantic trait domains: openness, conscientiousness, extraversion, agreeableness, and neuroticism or negative emotionality. They describe relatively stable, revisable synthetic tendencies, not validated AI psychology, numeric quotas, diagnoses, or a role-assignment rule. |
+| Operational tendency | An optional contextual preference about initiative, tools, consultation, coordination, reflection, or stopping. It can clarify broad traits without becoming a deterministic policy, additional compulsory axis, or permission grant. |
 | Opportunity | A proposed way to improve an accepted outcome or reduce uncertainty. Expected benefit is not achieved benefit. |
 | Outcome coverage | The visible relationship between required outcomes, accepted owners, evidence, and gaps. A complete local checklist may still omit part of the original need. |
 | Partial order | Dependencies that constrain some commitments while leaving others free to proceed independently. It is not one universal ranked list. |
 | Participation context | One persona's involvement in particular work, with its own current obligations and access. |
 | Persona | A continuing AI collaborator whose own character, interpretations, relationships, and accepted responsibilities can inform its decisions through persona-owned prompt fragments and bounded action. |
+| Persona invocation | An application-visible LLM call that answers, plans, selects, authors, communicates, coordinates, or repairs as the persona, including initialization. A renamed helper is not exempt; deterministic host processing and declared non-persona utilities remain distinct. |
 | Persona-owned files | The persona's ordinary readable and editable authoring surface for fragments. A simple file interface does not remove trusted host records or dictate the physical storage engine. |
+| Patch | A proposed attributable fragment addition, revision, reorganization, correction, or retirement. A proposed patch is not an accepted change, and an accepted change is not proof of learning benefit. |
 | Primary LLM | The language model currently making one persona's substantive decisions, authoring its fragments, and choosing its next context. It is an inference capability, not the continuing identity itself. |
 | Principal | The human or institution controlling a mandate or root delegation. |
 | Prompt part | A piece of text deliberately available to help a model make a decision. Persona-authored parts remain fallible and cannot override higher-authority instructions or current constraints. |
@@ -98,6 +110,6 @@ These terms describe the current persona-owned files design. They explain the no
 | Stale | No longer applicable to a relevant current claim because inputs, criteria, conditions, or policy changed. |
 | Submission | An exact candidate result offered for assessment, not a mutable link to whatever is latest. |
 | Supplied-context record | An inspectable account of which exact text versions and qualifications reached a particular decision, including omissions or blocked material. It does not require private reasoning disclosure. |
-| VAD | Optional descriptors for valence, arousal, and dominance. They represent configured state here, not measured feelings. |
+| VAD | Required semantic modeled affect dimensions: valence, arousal, and dominance or perceived control. The baseline belongs to the accepted character account; current affect is separately accepted contextual state with attribution and limits. Optional numerical coordinates need declared engineering meanings. Dominance grants no authority. |
 | Withheld-context comparison | An evaluation that removes a selected piece of context to examine its contribution while holding relevant conditions comparable. |
 | Work | A human need being pursued, with its original intent, evolving agreement, outcomes, and explicit disposition. |

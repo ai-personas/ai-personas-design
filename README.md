@@ -2,25 +2,27 @@
 
 **Distinct characters. Continuing experience. Better work through learning.**
 
-AI Personas is a design for continuing AI collaborators with recognizable character: their own ways of noticing, choosing, communicating, relating to others, and changing through experience. Each persona expresses that developing perspective in first-person fragments it owns. Those fragments are reusable parts of its prompts, kept in ordinary files that it can read, search, arrange, revise, and retire.
+AI Personas is a design for continuing AI collaborators with recognizable character: their own ways of noticing, choosing, communicating, relating to others, and changing through experience. Each persona has one accepted, versioned character account with stable OCEAN traits and a VAD modeled affect profile, expressed in natural language. It carries that perspective into every first-person fragment it authors. Those fragments are reusable parts of its prompts, kept in ordinary files that it can read, search, arrange, revise, and retire.
 
 While doing a task, the persona's primary LLM decides what it needs to remember next. It can look through its files with ordinary search, grep, or regular expressions, choose relevant fragments for a later decision, and update its understanding from what happens. Experience from the environment, tasks, other personas, and its own successes or mistakes can therefore influence future work.
 
-This is the **current target design on this branch**. The earlier graph-first and auxiliary-selector designs have been consolidated into it. It is no longer an optional file-interface proposal beside those designs.
+This is the **current target design on this branch**, refined on 8 October 2026. Semantic OCEAN and VAD coverage is required; numerical scores are not. The primary persona considers fragment maintenance in every application-visible persona LLM invocation, alongside its other work. This explicitly supersedes the 7 October optional-descriptor and omitted-maintenance norms while retaining the persona-owned files design.
 
 **Design adoption is not runtime conformance.** This repository contains design documents, evaluation criteria, and scoped historical evidence. This revision changes no runtime, and does not establish useful learning, human-like behavior, or product readiness. See [implementation status](implementation/STATUS.md) for the evidence boundary.
 
 ## The central loop
 
 1. A persona observes a request, result, conversation, or other authorized event
-2. It works on the task and interprets what that experience means to it
-3. It may write or reorganize first-person fragments, then find and choose the context it expects to need next
+2. It works under its accepted character and considers what the received experience means for its fragments
+3. Alongside its work, it proposes a fragment patch, explains no change, or records an explicit block or bounded deferral; it can also find and choose the context it expects to need next
 4. The host supplies that chosen context alongside current obligations, relevant qualifications, and permission limits
 5. The persona makes another decision and learns from the consequences
 
-These are connected responsibilities, not a mandatory five-stage workflow or five model calls. A small task may need one response and no new memory. The same primary LLM owns substantive work, fragment authorship, and next-context choice. The host enforces access, evidence integrity, resource limits, and reliable effects; it does not secretly choose the persona's character or method.
+These are connected responsibilities, not a mandatory five-stage workflow or five model calls. A small task may need one response, a concise reason for no change, and no new memory. Every persona invocation receives the maintenance obligation; every accepted response includes its own explicit disposition. Initialization, retrieval choices, peer communication, and repair are covered too. A failed or malformed attempt is recorded as such, never converted into a persona-authored no-change answer. The same primary LLM owns substantive work, character-conditioned fragment authorship, and next-context choice. No separate reflection call or compulsory mutation is required.
 
-For example, one persona might retain: “I tend to compare alternatives before committing. When the deadline is close, I first check whether another comparison could actually change the choice.” Another might prefer a quick concrete attempt and learn when that preference needs restraint. The difference matters when it changes what they do and improves their work, not merely when their biographies sound different.
+The host enforces access, evidence integrity, versioning, resource limits, and reliable effects. An invalid response cannot release its proposed work, and an accepted effective-character change requires a fresh decision before further operations from that response. Host cancellation and accounting do not depend on a successful model reply. The [core](design/PERSONA-CORE.md) and [contracts](implementation/CONTRACTS.md) define these boundaries.
+
+For example, a hypothetical persona might retain: “I tend to compare alternatives before committing. When the deadline is close, I first check whether another comparison could actually change the choice.” Another might prefer a quick concrete attempt and learn when that preference needs restraint. The difference matters when it changes what they do and improves their work, not merely when their biographies sound different.
 
 ## Read the design
 
@@ -36,6 +38,8 @@ For example, one persona might retain: “I tend to compare alternatives before 
 The [design index](design/README.md) defines document authority. [Requirements](implementation/REQUIREMENTS.md) preserve the protected invariants and requirement identifiers. [Worked examples](examples/WORKED-EXAMPLES.md), the [visual guide](VISUAL-GUIDE.md), [glossary](GLOSSARY.md), and optional [worksheets](templates/README.md) explain the same design.
 
 ## What remains essential
+
+OCEAN describes relatively stable dispositions; VAD describes modeled valence, activation, and perceived control. Context can alter modeled affect and outward expression without rewriting stable traits. Neither framework measures actual feelings or supplies a formula for choosing tools, collaborators, or effort. Optional facets and contextual preferences may explain those choices when useful.
 
 People authorize purposes and effects. Personas choose and accept work within that authority. Distinct character does not create expertise, consent, money, or permission. Learning does not turn an interpretation into an observed fact. Cooperation needs actual acceptance, and a finished result needs appropriate evidence.
 

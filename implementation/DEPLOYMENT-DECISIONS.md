@@ -2,7 +2,7 @@
 
 [Implementation guide](README.md) · [Contracts](CONTRACTS.md) · [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) · [Status](STATUS.md)
 
-The adopted target is a continuing persona whose own-voice files supply character and reusable prompt fragments, with the primary LLM choosing relevant next context. A deployment supplies concrete operating limits and evidence for that target. It does not choose among competing graph, selector, numeric-personality, and file-first definitions of a persona.
+The adopted target is a continuing persona with one accepted character account covering semantic OCEAN traits and a VAD modeled affect profile. Its primary LLM authors character-conditioned fragments, chooses next context, and returns explicit maintenance alongside each persona invocation's other work. A deployment supplies concrete operating limits and evidence for that target. It does not make semantic traits, modeled affect, or every-invocation maintenance optional; numeric representations remain optional.
 
 Every decision below records an accountable owner, chosen policy or value, rationale, exact effective version, supporting evidence, remaining limitation, and conditions for reconsideration. Until a required boundary is resolved and demonstrated, restrict the affected capability or keep it in a clearly described test environment. This register is a decision checklist, not a production-readiness claim or a report that the separate runtime implements these choices.
 
@@ -11,8 +11,12 @@ Every decision below records an accountable owner, chosen policy or value, ratio
 | Decision | Settled design requirement | Deployment supplies |
 |---|---|---|
 | Intended use | Domain-neutral choices do not guarantee every task is feasible. | Users, supported task and result scopes, exclusions, and claim-specific outside review. |
-| Continuing identity | Accepted own-voice prose is the persona's current authored account. | Creation and administration authority, truthful starting attribution, self-authorship control, bounded generation if used, and lifecycle recovery. |
+| Continuing identity | One accepted, versioned character account supplies semantic OCEAN and VAD meaning to both profile and prompt. | Creation and administration authority, truthful starting attribution, self-authorship and locked-character controls, baseline/current-state distinction, bounded generation if used, and lifecycle recovery. |
+| Character representation | Natural language is sufficient; every authored fragment is character-conditioned and own-voice. | Optional facets or contextual operational tendencies with a stated purpose; any numeric anchors, provenance, display behavior, and validation. No independent profile author or deterministic trait-to-action policy. |
+| Modeled affect | Baseline, transient state, outward expression, and authority stay distinct. | Event/source attribution, update and recovery rules, state lifetime, uncertainty, expression limits, and consistent version-bound views. Any numeric dynamics are tested engineering choices, not established psychological laws. |
 | Primary inference | The primary LLM chooses work, authored learning, and next relevant fragments. | Exact provider/model configuration, supported inputs and outputs, request bounds, refusal and failure behavior, cancellation, metering, and continuity evidence. |
+| Every-invocation maintenance | Every application-visible persona call has maintenance input; every accepted response has an explicit disposition alongside its work. | Audited call-path coverage, initialized and empty-store inputs, permission-filtered repair inputs, whole-response validation, accepted result records, allowed non-persona utilities, and provider-managed loop visibility. |
+| Maintenance bounds | Mutation is selective; known unresolved candidates do not silently become no change. | Repair attempts, storage and context ceilings, deferral owner or ownership gap, prerequisite, trigger, resource and lifecycle bounds, terminal handling, and independent host stop/accounting behavior. |
 | File-facing state | Named readable files, persona-chosen organization, scoped search, exact read, and attributable edits are the normal interface. | Current-state ownership, revision binding, path and rename behavior, conflict handling, atomic dependent saves, recovery, retention, and export semantics. |
 | Storage | One accepted current state exists; an export or unsaved edit is not another authority. | A backend that demonstrates the contract. Canonical physical files need the same concurrency, revision, access, and crash guarantees as a transactional store. |
 | Search | Literal search and explicitly supported regex operate over a declared eligible corpus. | Matching semantics, bounds, pagination, error and incomplete-result reporting, current-index recovery, and protection of private titles and counts. |
@@ -58,9 +62,11 @@ Validation covers the declared initial default, new and existing data, a subsequ
 | E6: public contribution and evidence | Adoption authority, exact historical results and criteria, source rights, transparent limits, and owner-approved distribution terms. |
 | Cross-host activation | Explicitly disabled activation or a separate tested transfer, exclusivity, revocation, privacy, authority, and failure contract. Read-only exchange is not activation authority. |
 | Auxiliary retrieval experiment | Specific demonstrated retrieval problem, allowed destinations and data, exact file references, measured total cost and quality, bounded fallback, and primary-model ownership of final next-context choice. |
-| Legacy numeric descriptors | Compatibility purpose and actual provenance if retained. They are optional historical or experimental data, not a compulsory parallel identity, task router, effort quota, or criterion for current character. |
+| Numeric trait or affect representation | Optional declared engineering anchors, actual provenance, and a consistent view of the same accepted character account. Required semantic OCEAN/VAD meaning remains even without numbers. Existing values are neither fabricated nor silently erased; scores create no task router, effort quota, authority, or validated psychology claim. |
 
 Enabling personal exploration does not enable a perpetual service or physical control. A service's simulated stakeholders do not supply human consent; extra personas do not multiply votes or funding. Completing an episode does not renew it. Absence of an essential human escalation recipient requires narrower operation or safe pause under the adopted policy.
+
+An optional feature cannot exempt a persona LLM call from maintenance. A narrowly scoped OCR, image, or mechanical transformation service need not author fragments when it is genuinely a non-persona utility; its output remains attributable input for the next governed persona decision. Classify by what the call decides, not by its name. Provider-internal routing or token computation is not an observable persona-call inventory.
 
 ## What the design deliberately does not select
 

@@ -44,11 +44,21 @@ Removing a redundant document is useful when its necessary content has a clear h
 
 ## Review the whole affected reading path
 
-Read the change as someone who has not seen the previous conversation. Define unfamiliar terms or link the glossary. Explain the normal case, refusal or failure, recovery or stopping, and evidence needed. Keep small work proportional; do not require a memory write, team, assessment, or completed worksheet merely because an example shows one.
+Read the change as someone who has not seen the previous conversation. Define unfamiliar terms or link the glossary. Explain the normal case, refusal or failure, recovery or stopping, and evidence needed. Keep small work proportional; do not require a memory write, team, assessment, or completed worksheet merely because an example shows one. Every persona invocation still needs maintenance input and an explicit accepted-response disposition. A concise no-change reason is compatible with small work; silent omission is not.
 
 Check relative links, heading anchors, image paths, tables, mentioned identifiers, and reachability from the indexes. Keep paths portable. Remove session-only links, private local paths, opaque citations, credentials, and private project data. Avoid factual claims that a document edit or test description proves a working product.
 
 When editing artwork, preserve relevant boundaries and a full text explanation. Inspect the actual rendered visual at a useful size. Do not claim that old artwork was newly validated, and do not leave a retired cognitive architecture looking like the current picture.
+
+## Review character and maintenance changes
+
+Keep one accepted, versioned character account with required semantic OCEAN traits and VAD modeled affect. A profile, prompt view, or display must not become another author. Distinguish stable traits, transient affect, outward expression, optional contextual tendencies, skills, and permissions. Do not smuggle in mandatory numeric scores, arbitrary extra axes, deterministic tool-use rules, or an invented psychology claim. All persona-authored fragments carry the owner's character; factual records and exact source quotations keep their own attribution and form.
+
+Check initialization, search and selection calls, task decisions, tool follow-ups, peer communication, coordination, maintenance, and every model-based repair path. Renaming a persona decision as a helper does not exempt it. Keep deterministic host recovery and bounded non-persona utilities distinct from persona inference. Do not claim application control over provider-internal processing that the interface does not expose.
+
+Distinguish a proposed patch, reasoned no change, explicit block, bounded deferral, and a failed attempt that produced no usable decision. Preserve known unresolved candidates rather than disguising them as no change. Validate the whole response before substantive dispatch, while retaining independent host cancellation, receipts, and accounting. Preserve the existing fresh-decision fence after effective-character changes, including reads and waits, without treating every transient affect annotation as a stable-character revision. Use the [core](design/PERSONA-CORE.md) and [contracts](implementation/CONTRACTS.md) for the actual acceptance and independence rules.
+
+The 7 October optional-descriptor and omitted-maintenance norms are explicitly superseded. Preserve those decisions and their evaluator limitations as history; do not restore them through a worksheet, source summary, or an old test pass. A code-free document check cannot demonstrate every-call runtime coverage or psychological realism.
 
 ## Sources and results
 

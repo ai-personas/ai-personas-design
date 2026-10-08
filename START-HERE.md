@@ -6,9 +6,19 @@
 
 The aim of AI Personas is to work with continuing characters rather than a series of unrelated responses. A persona has its own perspective, remembers permitted experience, forms relationships, chooses how to approach work, and can change its mind.
 
-Its character is expressed in fragments written in its own voice. A fragment might say what it cares about, how it tends to work, what it learned from a failed attempt, or how it understands a particular collaboration. These are parts of the context the persona uses to prompt itself. They are not all present in every response.
+Its character has one accepted, versioned account, used consistently by its profile and decision context. The account gives semantic meaning to all five OCEAN trait domains and to its VAD modeled affect profile. Natural prose is sufficient; scores, a fixed biography, and a separate profile writer are not required.
+
+Every fragment the persona authors is conditioned by that account and written in its own voice. A fragment might say what it notices, how it tends to work, what it learned from a failed attempt, or how it understands a collaboration. Character can shape emphasis, uncertainty, and preferred methods without changing raw facts or exact quotations. Older fragments keep their actual authoring character until deliberately revised; they are not automatically restyled. Fragments are reusable prompt parts; they are not all present in every response.
 
 The persona keeps them in ordinary files. It can give files useful names, create its own organization, search for an old lesson, split a crowded fragment, revise an overgeneralization, or retire something misleading. The design does not require a fixed map of mental functions or a separate model to decide what the persona should remember.
+
+## Stable tendencies and changing situations
+
+OCEAN names openness, conscientiousness, extraversion, agreeableness, and neuroticism or negative emotionality. Here these describe a synthetic character's stable but revisable tendencies. A persona can be exploratory and still finish responsibly, quiet and still coordinate clearly, or considerate and still disagree with an unsupported claim. A trait never removes a shared obligation.
+
+VAD describes modeled valence, arousal, and dominance or perceived control. Keep the usual affective baseline, the current situation-linked state, and outward expression distinct. The accepted character account describes the baseline; current affect is separately accepted contextual state with its own source and lifetime. An urgent verified problem may make a usually composed persona more direct without changing its stable character or claiming that it feels human distress. Perceived control supplies no permission to control a tool or another person.
+
+Broad domains need not explain every useful difference. An optional facet or contextual preference can clarify how this persona initiates authorized action, checks a tool result, asks for help, handles a handoff, or revisits a failed assumption. Add these only where they explain the character better. There is no compulsory extra taxonomy, personality-to-action formula, or trait-based budget. The [research brief](sources/PERSONA-FILES-RESEARCH.md) separates useful precedents from unproven AI claims.
 
 ## The primary LLM chooses what comes next
 
@@ -17,6 +27,14 @@ The primary LLM is the model currently making that persona's decisions. During o
 The supporting system carries that intention forward within its stated scope. It still checks whether a fragment is available, permitted, current, and able to fit with its necessary qualifications. It also supplies current obligations and authority constraints that the persona cannot drop simply by choosing a different memory.
 
 This creates a practical feedback loop: experience affects fragments, fragments affect decisions, and the resulting experience can change the fragments again. Writing a fragment alone does not show that the loop is useful. Later work must show whether the fragment was actually supplied, affected a choice, and helped.
+
+## Every call considers maintenance, without forcing a lesson
+
+Every application-visible LLM call acting as the persona receives its accepted character, relevant permitted fragments and observations, and an explicit maintenance obligation. Coverage includes initialization, search or selection decisions, tool follow-ups, communication, coordination, and repair. First initialization identifies its attributed seed and the absence of prior learned experience rather than inventing an already accepted character. The persona returns its work together with a proposed patch, no change with a concise reason, an explicit block, or a bounded deferral. This is a concise result-level account within the model response, not a separate report to the user or a request to reveal private reasoning.
+
+A repeated status check may add nothing worth retaining. A known correction awaiting an exact tool receipt remains deferred with a named prerequisite, accepted owner or ownership gap, trigger, and limits; it is not silently called no change. A patch may add, correct, reorganize, or retire useful text. The model does not have to mutate a file or make a separate reflection call to satisfy the obligation. An omitted next-context selection remains a different matter from omitted maintenance.
+
+A timeout, refusal without a usable maintenance response, or malformed output supplies no authored maintenance judgment. The host records that failure and does not dispatch substantive proposals from an invalid response. It can still honor cancellation and preserve accounting. Exact acceptance, bounded recovery, and independent-work rules live in the [system contracts](implementation/CONTRACTS.md). No design wording can guarantee that every provider attempt will succeed.
 
 ## One hypothetical example
 
@@ -47,7 +65,7 @@ A fragment saying “I am allowed to book the venue” does not grant that permi
 
 The persona's identity continues across projects and model calls. A new model can inherit the same continuing record, but its performance may differ and needs its own evidence. The design does not assume that retained files retrain the model's weights.
 
-A persona can keep a current self-description while letting it evolve. It can learn a practical method, correct a belief, understand a collaborator better, or recognize a pattern in its own mistakes. Raw observations and the persona's interpretation remain distinguishable. Private information stays within its permitted scope even if a broader lesson would be useful elsewhere.
+A persona keeps one current character account while letting authorized self-authorship evolve it. Its profile and prompts resolve the same accepted version; they are not independently rewritten summaries. Transient modeled affect and ordinary lessons are not automatically changes to stable character. When a change does alter effective current character, the [core](design/PERSONA-CORE.md) requires a fresh decision under it before further operations from the old response. Locked character cannot be replaced through another always-supplied file. It can learn a practical method, correct a belief, understand a collaborator better, or recognize a pattern in its own mistakes. Raw observations and the persona's interpretation remain distinguishable. Private information stays within its permitted scope even if a broader lesson would be useful elsewhere.
 
 Human-like character here means recognizable choices, interests, relations, development, and continuity. A synthetic origin remains clear; invented biography is not experience or a professional credential.
 
@@ -61,7 +79,7 @@ Creating another persona does not create more budget or broader permissions. Lea
 
 The user receives the actual result and an honest account of its limits. “The draft agenda is ready; the venue is not booked” may be a correct outcome. A changed file does not inherit the review of an older version, and an unknown external effect must be checked before trying the same action again.
 
-Small requests should remain small. A sentence rewrite need not create a team, a new memory, a review ceremony, or a set of completed forms. Larger and more consequential work requires enough explicit context, consent, and evidence to remain accountable.
+Small requests should remain small. A sentence rewrite can include a short no-change reason without creating a team, a new memory, a review ceremony, or a set of completed forms. Larger and more consequential work requires enough explicit context, consent, and evidence to remain accountable.
 
 ## What has been established?
 

@@ -2,6 +2,22 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 8 October 2026 — required semantic character and every-invocation maintenance
+
+Required semantic OCEAN stable traits and a VAD modeled affect profile within one accepted, versioned character account. Scores remain optional. Stable traits, transient modeled affect, and outward expression stay distinct; optional justified facets or operational tendencies can clarify tool/action, collaboration, coordination, and reflective preferences without a compulsory extra taxonomy or deterministic mappings. All persona-authored fragments are conditioned by the accepted character and expressed in its own voice, while actual facts and exact quotations retain their form and attribution.
+
+Required maintenance input on every application-visible persona LLM invocation and an explicit maintenance disposition alongside every accepted response's other work: a proposed patch, no change with a reason, blocked, or bounded deferred. Initialization, retrieval choices, communication, coordination, and model-based repair are included. Mutation and a separate reflection call are not required. A failed attempt cannot become a fabricated no-change judgment; an invalid combined response cannot dispatch its substantive proposals. Independent host cancellation and accounting remain available.
+
+This explicitly supersedes the 7 October optional-descriptor and omitted-maintenance norms. It preserves source restrictions, conserved resources, locked-character controls, the fresh-decision fence after effective-character changes, primary-owned selection, ordinary files, and honest failure/recovery. The [decision register](DESIGN-DECISIONS.md) explains the changed obligations and tradeoffs. Earlier criteria and failures remain historical, without retrospective passes.
+
+Clarified that an actual character-adoption proposal is resolved before other fresh same-response operations, with unknown commits held for reconciliation. Separated a bounded correction effort from an independently accepted applicability warning, so ending the effort cannot revive unchanged warned guidance. Evaluation now includes identical-event VAD controls and consistent-but-nondiagnostic fragment judgments, without forcing lexical differences or importing historical passes.
+
+This is a design-only refinement. A source-only inspection identifies existing runtime traits, own-voice guidance, and ordinary-decision continuity, alongside uncovered call paths; [status](implementation/STATUS.md) gives exact sources and limits. No runtime was changed or executed, no live-model trial was run, and no guarantee of universal successful behavior or deployment readiness is made.
+
+## 7 October 2026 — interpretation superseded by the next refinement
+
+The preceding files-first edition treated OCEAN/VAD as optional descriptors and allowed ordinary responses to omit an authored maintenance disposition while leaving accepted files unchanged. These two norms are explicitly superseded by the 8 October entry. Its rejection of mandatory numeric scales, forced writes, separate reflection authors, and arbitrary cognitive taxonomies continues. Earlier evaluator results stay attached to that edition's actual criteria and limitations.
+
 ## 6 October 2026 — one persona-owned files target
 
 Reconciled the active design around distinct continuing characters expressed in persona-owned first-person fragments. Ordinary files and simple search support self-organization. The primary LLM chooses relevant next-context fragments while doing work and can learn from the environment, tasks, peers, and its own choices.

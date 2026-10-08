@@ -6,16 +6,27 @@ This register explains the current target adopted in this branch. It replaces th
 
 The [normative documents](design/README.md) contain the actual obligations. This register records why those obligations have their present form.
 
+## 8 October 2026: semantic character and every-invocation maintenance
+
+This refinement deliberately reverses two norms in the 7 October edition: that OCEAN/VAD descriptors could be omitted, and that an ordinary persona response could omit any authored maintenance disposition. Those norms remain part of the design's history; they are not options in the current target. This is not a return to compulsory numeric personality initialization, typed mental-function taxonomies, or forced lessons.
+
+The current target requires semantic coverage of OCEAN's five relatively stable trait domains and a VAD modeled affect profile in one accepted, versioned character account. Stable tendencies, affective baseline, transient situation-linked affect, and outward expression remain distinguishable. Scores are optional engineering representations with declared meanings; the design does not claim psychometric measurement of an AI or a scientific conversion from traits to actions. A profile and the decision prompt resolve the same accepted account, without independent writers.
+
+Every application-visible LLM invocation acting as the persona receives maintenance input and returns an explicit disposition alongside its other work. A proposed patch, no change with a concise reason, an explicit block, or a bounded deferral can satisfy the response obligation. Mutation is selective. Provider failure or missing output cannot satisfy it by having the host invent a no-change judgment. Exact coverage, acceptance, and recovery live in the [core](design/PERSONA-CORE.md) and [contracts](implementation/CONTRACTS.md), not in this register.
+
+The rationale is inspectable continuity: make the intended character explicit and make maintenance omissions detectable while leaving ordinary work, interpretation, file organization, and next-context choice with the persona. This adds prompt and response overhead and possible repair cost. Whether it improves useful behavior requires comparison, including truthful no-change, delayed correction, harmful transfer, and total cost. It is a design choice informed by the [research synthesis](sources/PERSONA-FILES-RESEARCH.md), not a result established by that research or a guarantee of successful output on every attempt.
+
 ## The adopted persona model
 
 | Decision | Reason and consequence |
 |---|---|
 | A persona is a continuing character whose choices can develop through experience | Recognizable interests, approaches, relationships, and continuity should influence actual work. A name, biography, role, or style alone does not demonstrate individuality |
-| First-person fragments are the persona's own reusable prompt parts | The persona can express how it understands itself, a situation, a method, or a relationship in language it can use again. Supplied initialization remains distinguishable from subsequent self-authorship |
+| One accepted character account includes semantic OCEAN and VAD | All five stable trait domains and all three modeled affect dimensions have meaning. Optional facets or operational tendencies may clarify tool/action, collaboration, coordination, and reflective preferences; no extra taxonomy or scores are compulsory |
+| Every authored fragment is character-conditioned and own-voice | The persona expresses how it understands itself, a situation, a method, or a relationship. Exact facts and quotations retain their form and attribution; supplied initialization remains distinguishable from subsequent self-authorship |
 | Ordinary files are the canonical authoring surface | The persona may organize, search, grep, revise, combine, split, and retire its fragments using simple tools. No canonical cognitive graph, fixed mental-function tree, or prescribed folder taxonomy is required |
 | The primary LLM chooses relevant next-context fragments while doing work | Finding or reading material is distinct from choosing it for later context. Explicit next-context intent persists within its scope, can be replaced or cleared, and remains subordinate to current access and obligations |
-| Work, learning, and context choice can share one ordinary decision | There is no mandatory reflection call, separate memory author, or compulsory new fragment on every response. A useful no-change response is valid |
-| Character can evolve without becoming arbitrary | The persona may revise its self-understanding in response to experience. The system preserves attribution and continuity; it does not reward unchanging mistakes as authenticity or silently rewrite the persona for a task |
+| Work and explicit maintenance share every persona invocation | Every admitted persona call has maintenance input; every accepted response includes a patch, reasoned no change, blocked, or bounded deferred disposition. There is no mandatory extra reflection call, separate memory author, or compulsory mutation |
+| Character can evolve without becoming arbitrary | Stable traits change through authorized, attributable self-authorship. Transient affect and ordinary learning do not automatically rewrite those traits. Effective-current-character changes retain the fresh-decision fence for all subsequent operations, including reads and waits; locked character cannot be replaced through another fragment |
 | The host protects operational truth rather than supplying a hidden mind | It enforces ownership, current permissions, evidence, resource limits, qualification, and reliable effects. It does not turn a retrieved sentence into authority or choose a hidden profession, task workflow, or personality quota |
 | Learning requires demonstrated transfer | Retention, reading, selection, prompt inclusion, behavioral influence, and beneficial effect are separate claims. Useful learning must survive appropriate later tasks, comparisons, and cost accounting |
 
@@ -31,13 +42,15 @@ These are deliberate design changes, not accidental losses caused by moving file
 | Stored conditional-recall plans or graph neighborhoods automatically choosing optional context after an event | Replaced by actual events reaching the primary persona, which can reconsider and choose next fragments. Trusted delivery of current obligations remains mandatory; a saved interest is not a wake trigger |
 | A Jev-style or other auxiliary semantic selector as a normal recall component | Removed from the active target. The primary LLM owns next-context choice. Earlier selector mechanisms and results remain historical evidence under their original criteria |
 | A universal typed cognitive package or fixed categories for all persona state | Superseded by flexible first-person fragments. Precise host bookkeeping is retained for safety and accountable work, without prescribing how a persona must think |
-| Mandatory numeric starting traits and current OCEAN or VAD state | Not required. A persona may use descriptive or quantitative aids where useful, but conformance and human-like character are not defined by those scales |
-| A learning disposition and fresh next-context declaration on every ordinary response | Not required. Ordinary work can leave existing state unchanged. Existing context intent follows explicit preserve, replacement, clearing, scope, and expiry meanings; silence is not an invented memory or an unrestricted new selection |
+| Mandatory numeric starting traits or personality-to-affect formulas | Numeric scores remain optional; declared anchors do not make them validated psychological measurements or action rules |
+| The 7 October treatment of OCEAN and VAD as entirely optional descriptors | Superseded on 8 October. Semantic OCEAN stable traits and a VAD modeled affect profile are required within the one accepted character account |
+| The 7 October permission to omit an authored maintenance disposition | Superseded on 8 October. Every accepted persona response includes explicit maintenance alongside its work; a concise reasoned no change is valid, silence is not |
+| A compulsory mutation or fresh next-context declaration on every response | Still rejected. Explicit maintenance need not change files or selection. Existing selection retains the core's preserve, replacement, clearing, scope, and expiry meanings |
 | The previous files proposal's target of no persistent next-context selection | Superseded. The persona can explicitly choose fragments to inform a later relevant decision. A simple read still does not silently establish that choice |
 | Mandatory current repetition of every durable record in every prompt | Rejected. Relevant current constraints remain protected, while optional history and instructions are selected within a bounded context |
 | Retrieved or rewritten memory as self-validating evidence | Rejected. Authored interpretation remains distinguishable from raw observations, sources, and permissions; necessary qualifications accompany its use |
 
-These changes preserve the useful causal idea behind fragments: the persona can carry forward its own relevant understanding and use it to work differently. They remove mechanisms that made the representation more elaborate than that goal requires.
+The 8 October requirements sit within the files architecture adopted in the earlier consolidation. They preserve the useful causal idea behind fragments: the persona can carry forward its own relevant understanding and use it to work differently. They remove mechanisms that made the representation more elaborate than that goal requires.
 
 A future alternative may be evaluated as an explicitly separate experiment. It must not be inserted as another active authority while this target remains unchanged.
 
@@ -74,6 +87,16 @@ A documented initial deployment default is distinct from a later explicit operat
 
 Choosing a different mechanism does not retire source restrictions, necessary qualifications, exact acceptance, conserved resources, or reliable effects. A deployment must document and demonstrate the outcome under its selected mechanism. See [deployment decisions](implementation/DEPLOYMENT-DECISIONS.md) and [system contracts](implementation/CONTRACTS.md).
 
+## Why the contract considers every call but does not force a write
+
+A separate post-task reflector can miss initialization, retrieval-only choices, communications, and repair calls. A compulsory write on each call instead encourages filler, repeated interpretations, and unjustified character drift. The adopted contract makes consideration explicit in the same persona's response, with no-change as a legitimate result. This neither requires an extra call nor grants new permission to make one.
+
+A known unresolved correction requires a bounded deferral or block with an accepted continuation or an explicit ownership gap; expiry is not an invented decision that nothing changed. Ending the repair effort also cannot clear a separately authorized, durably accepted applicability warning on exact affected guidance; the warning remains qualified or ineligible across later work until its own justified resolution. A failed patch creates no warning by itself, and restricted modes gain no new semantic authority. Refusal, timeout, truncation, and malformed output retain their actual attempt outcomes. A malformed combined response releases no substantive task, tool, or communication proposals. Deterministic cancellation, receipt preservation, and resource accounting remain possible without model success. The contracts separately distinguish a well-formed response containing a rejected patch from an invalid response, so genuinely independent work is not blocked by an invented blanket rule.
+
+An actual request to adopt a changed effective character is resolved before any other fresh operation from that response. Otherwise, merely processing an independent read or action first could evade the intended fresh-decision boundary. Acceptance activates the fence; a definite no-commit rejection or deferral leaves only the existing independently valid work path; an unknown commit holds new work for reconciliation. The necessary character-resolution transaction and independent host duties remain possible. Thinking about a possible future change is not itself an adoption request, and ordinary method or scoped affect updates do not automatically invoke this character-specific barrier.
+
+Application-visible call coverage includes initialization, planning, search and selection, tool-result interpretation, communication, coordination, and model-based maintenance or recovery. Restricted repair remains restricted: it does not gain authority to change locked character, disclose inaccessible material, or do substantive work. A narrowly scoped non-persona utility may return attributed observations, but a helper that judges or chooses as the persona is still covered. Provider-internal computation cannot be counted as an inspectable application invocation; an opaque provider-managed agent loop needs equivalent exposed controls before claiming coverage.
+
 ## Organization and methods remain persona-owned
 
 Personas may plan, learn methods, find capabilities, ask peers for assessment, challenge one another, and accept specialized contributions. Those choices arise within the continuing persona and its work. The host does not prescribe a profession roster, permanent supervisor, fixed team size, compulsory reviewer, or universal priority formula.
@@ -88,7 +111,7 @@ The earlier E1–E6 labels remain useful for locating past criteria. They are no
 
 | Label | Current interpretation |
 |---|---|
-| E1 | Functional embodiment and an inspectable profile are explanatory ways to describe continuing observation, choice, and effects. No required numeric psychology or physical body follows |
+| E1 | Functional embodiment and an inspectable profile are explanatory ways to describe continuing observation, choice, and effects. Required semantic character remains part of the core; no numeric psychology, rich profile UI, or physical body follows |
 | E2 | Communities, institutions, and appeals are conditional features. Actual human or institutional accountability and real stakeholder input remain necessary when enabled |
 | E3 | Transparent AI presentation and safeguards for sensitive human-facing use apply to the intended deployment. Character does not establish suitability for those uses |
 | E4 | Ongoing services and physical interfaces remain separately bounded features, with their own triggers, renewal, escalation, stopping, observation, and assurance requirements |
@@ -98,6 +121,8 @@ The earlier E1–E6 labels remain useful for locating past criteria. They are no
 An implementation can omit a feature and state that limitation. Enabling it requires its applicable safeguards and evidence. The unresolved choices live in [deployment decisions](implementation/DEPLOYMENT-DECISIONS.md), not in an implied default approval.
 
 ## Editorial consolidation and historical evidence
+
+Earlier OCEAN/VAD implementation features and ordinary-call continuity mechanisms are not erased by these design changes; the [status ledger](implementation/STATUS.md) separates source-inspected partial mechanisms from unassessed universal coverage. Old results retain their exact evaluator and cannot acquire a new pass through changed wording.
 
 The active structure now consists of one core, one work-and-boundaries account, one system contract, and supporting traceability and evaluation documents. The previous proposal, seven chapters, overlapping refinements, graph-recall atlas, and old source briefs are removed from active navigation and files. Their exact earlier revisions remain linked in [source provenance](sources/SOURCE-MANIFEST.md).
 
