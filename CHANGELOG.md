@@ -2,6 +2,26 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 8 October 2026 — persona-defining context, reasoning, and action
+
+Corrected the architectural framing: fragments are persona-defining, characteristic-bearing prompt parts, not a memory system for remembering facts. Their selected assembly forms context for LLM reasoning; context, reasoning, actual interactions/actions, and evolution of authored prompts together constitute the persona. Fragments may include facts or experience without being defined as episodic memory or RAG.
+
+Recentered the guides and definitions on expressive authored context, primary-owned grep/regex cue navigation, self-organization, and evolving characteristic behavior. Distinguished bounds for the persona-context corpus, each assembled prompt, and the managed persona-state footprint. Supporting records retain provenance, expiry, access, qualifications, and operational accountability. Preserved authority rules, identifiers, links, source-only status, and historical results. This is documentation work only, with no runtime changes, executed model trials, publication, or deployment claim.
+
+The earlier entries below describe their own revisions and terminology; they do not override this correction.
+
+## 8 October 2026 — reciprocal development and compact associative memory
+
+Made the full reciprocal account explicit: accepted traits shape own-voice fragments; current character and selected fragments enter primary LLM context; that perspective informs all discretionary work, communication, collaboration, and context-navigation choices; actual task, human, and peer experience can revise, connect, reorganize, consolidate, or retire fragments. Scoped relationships and, where self-authorship permits, effective current character can evolve through the same received experience. The aging analogy describes continuity shaped by encounters, not elapsed time, call counts, automatic weight training, or guaranteed wisdom. Smaller, more useful memory can be a developmental outcome.
+
+Clarified a persona-authored network of useful search cues navigated through primary-chosen listing, lexical/grep or supported regex searches, simple authored indexes, and exact reads. Optional associations, exact evidence references, and mandatory qualification or accepted-warning dependencies serve different purposes. The target adds no automatic host traversal, separate graph engine, hidden semantic writer/selector, forced outgoing link on every note, or fixed folders. Semantic/vector and graph-driven memory architectures remain separate research comparators; adoption would require an explicit design change, not an optional helper setting.
+
+Extended compactness to cumulative navigation work and the declared managed memory footprint, including archives, old revisions, source copies, supporting metadata, managed exports/backups, external memory, and temporary rewrite duplication. An unmeasured external tier makes the total bound incomplete; arbitrary recipient/provider copies cannot be promised controlled. User-owned delivered artifacts cannot be deleted to satisfy a notebook cap. An unlimited archive is not a compactness solution.
+
+Distinguished retirement, erasure, and policy-permitted survival of qualified lessons after raw evidence expires. Surviving interpretations retain actual source restrictions and honest evidentiary limits. Protected unresolved effects, accepted warnings, current obligations, and important qualifications cannot be erased by compression, low usage, or elapsed time. Capacity and retention conflicts may require an honest admission block or authorized policy decision.
+
+Preserved character controls, proposal-first disposition, the fresh-decision fence, every-call maintenance without forced writes, ordinary method/transient-state distinctions, scoped relationships, actual peer acceptance, and source-only runtime evidence. Updated the reading guides, decision/glossary/deployment explanations, and evidence gaps to agree with the [normative homes](design/README.md). Research and hypothetical journeys motivate evaluation; this documentation-only change supplies no runtime execution, model trial, new behavioral pass, publication, or deployment approval.
+
 ## 8 October 2026 — required semantic character and every-invocation maintenance
 
 Required semantic OCEAN stable traits and a VAD modeled affect profile within one accepted, versioned character account. Scores remain optional. Stable traits, transient modeled affect, and outward expression stay distinct; optional justified facets or operational tendencies can clarify tool/action, collaboration, coordination, and reflective preferences without a compulsory extra taxonomy or deterministic mappings. All persona-authored fragments are conditioned by the accepted character and expressed in its own voice, while actual facts and exact quotations retain their form and attribution.

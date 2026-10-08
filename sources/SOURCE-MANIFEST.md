@@ -27,6 +27,20 @@ The exact historical files below establish the preceding meanings. Their current
 
 The 8 October research is a new explanatory synthesis, not an altered copy of any original supplied report. External sources are cited with bounded claims and dates or versions in the research brief. They support individual constructs or mechanisms, not the complete architecture or a 100% guarantee. Exact original provenance and integrity statements below remain attached only to their original bytes.
 
+## Reciprocal development and compact context refinement
+
+The later 8 October design-only refinement adds [reciprocal development from actual work and interaction](PERSONA-FILES-RESEARCH.md#reciprocal-development-from-actual-work-and-interaction) and [compact associative fragments and selective retention](PERSONA-FILES-RESEARCH.md#compact-associative-fragments-and-selective-retention). The independently checked primary sources include Roberts, Caspi, and Moffitt's human longitudinal study; the original vocabulary-problem article; ReadAgent v1; A-MEM v1; LongMemEval v1; Memora v1; and ANCHOR v1. Exact publication links, inspected versions, supported claims, and transfer limits are in the research brief. The previously cited LongMemEval v2 reference remains available for the earlier benchmark-category account; the added compression analysis explicitly identifies its inspected v1 rather than silently substituting versions.
+
+This synthesis distinguishes human analogy, component experiments, engineering judgment, and the untested combined architecture. It preserves the latest [direct collaboration evidence and limits](PERSONA-FILES-RESEARCH.md#trait-composition-and-collaboration-direct-evidence-and-limits), all earlier research references, and every pinned historical link below. Query cues are discovery suggestions; they do not replace exact evidence references or accepted required qualifications. Whole-store accounting and derivative-retention conditions are design obligations, not empirical guarantees inherited from these publications. No original supplied attachment, historical result, or artwork-validation record acquires a new integrity claim or runtime pass through this prose revision.
+
+## Persona-defining context clarification
+
+The final 8 October clarification centers the whole context, LLM reasoning, action, feedback, and self-revision loop as the persona. Authored fragments are characteristic-bearing prompt parts, not primarily a factual memory system. The [context-adaptation comparison](PERSONA-FILES-RESEARCH.md#context-adaptation-is-the-closer-engineering-comparison) adds GEPA v1 (25 July 2025, inspected abstract) and expands the existing ACE v1 (6 October 2025, inspected full text) account, independently checked on 8 October 2026. Their prompt/context adaptation mechanisms provide a closer engineering comparison, without validating persona identity, continuity, or this design's ownership and selection rules.
+
+The contextual-persona discussion adds the Persona Selection Model author essay (23 February 2026) and The Assistant Axis v1 abstract (15 January 2026), independently inspected on 8 October 2026. They establish the scope of the cited account and reported mechanisms, not proof of a coherent enduring persona or context as the sole source of behavior.
+
+Existing memory and retention references remain available as adjacent evidence about storage, discovery, stale guidance, and provenance. Reframing their role neither alters their results nor drops bounded-retention protections. This clarification adds no runtime finding and does not transfer any original integrity claim to rewritten prose. All pinned historical links and supplied-source lineage below remain unchanged.
+
 ## Original supplied-source lineage
 
 Before the code-free briefs, the historical package recorded five supplied attachments. Their original repository copies are pinned at **0c96694303e344ef976150a4d544f3ca57f77d33**. Their original names document lineage; they do not establish that later rewritten briefs have identical bytes.

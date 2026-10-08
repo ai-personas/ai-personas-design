@@ -25,17 +25,32 @@ Beside that authored account, the system preserves stable identity, effective re
 
 Transient modeled affect and an ordinary first-person method are not automatically revisions to stable character. Declared state-update rules do not grant authority or establish feelings. An effective change to locked current character cannot be hidden in another always-supplied file. The [core authorship rule](../design/PERSONA-CORE.md#character-in-its-own-voice) governs acceptance and fresh-decision boundaries.
 
-## A retained fragment or reusable method
+## Inspecting experience-shaped development
 
-Consider what happened or was proposed, what the persona thinks it means, when it may help, why it may fail elsewhere, and what correction or uncertainty must travel with it. Use prose conditioned by the accepted character and expressed in the persona's own voice. Keep raw factual observations, formulas, and exact quotations faithful rather than stylizing their content. Preserve actual source attribution separately: firsthand observation, peer report, adopted instruction, hypothesis, and tested result are different.
+Use these optional questions to inspect the [core learning loop](../design/PERSONA-CORE.md#one-learning-and-action-loop), rather than as a required diary or a score for maturity:
 
-The persona chooses a useful name and place among its files. It may combine related content, split an overgrown note, make an index, or retire misleading guidance. These are organizational choices, not a mandatory folder taxonomy or graph. Methods and tool notes can include relevant references without becoming credentials or executable authority.
+- What accepted character and exact fragments actually informed the primary decision?
+- How did that perspective bear on discretionary task methods, communication, collaboration, or context navigation? Identical competent choices may be appropriate when constraints are decisive
+- What task result, human response, peer exchange, or other consequence was actually received? Separate reported events, praise, hypotheses, and independent checks
+- Did the persona create, revise, connect, consolidate, retire, or deliberately leave fragments unchanged? Which accepted result establishes that claim?
+- Was a change a method, a local relationship interpretation, transient affect, or an effective-character proposal subject to user control and the proposal-first/fresh-decision rules?
+- What was actually supplied later, what changed in behavior, and what helped or harmed the outcome? Could a smaller, better-organized account preserve the useful distinction?
+
+Calendar age, call counts, note volume, a fluent self-story, or presumed weight training do not answer these questions. No automatic progression toward wisdom or compulsory character change follows. A peer's helpful contribution does not accept future work; a human's preferred message order is not proof of a factual claim.
+
+<a id="a-retained-fragment-or-reusable-method"></a>
+## A characteristic prompt fragment
+
+Start with the characteristic perspective this prompt part contributes: what the persona attends to, how it reasons, how it relates, or how it acts. Ask how its selected assembly with other fragments would shape reasoning and actual interaction, and how consequences might justify revising the authored prompt. Facts, experience, intentions, and methods can help express that perspective; these are examples, not required categories or a compulsory event-to-lesson template. Where the fragment makes an experience claim, ask what happened, how it is interpreted, where it may fail, and which corrections or uncertainties must travel with it. Use prose conditioned by the accepted character and expressed in the persona's own voice. Keep raw factual observations, formulas, and exact quotations faithful rather than stylizing their content. Preserve actual source attribution separately: firsthand observation, peer report, adopted instruction, hypothesis, and tested result are different.
+
+The persona chooses a useful name and place among its files. It may combine related content, split an overgrown note, make an index, author a useful search cue, or retire misleading guidance. These are organizational choices, not a mandatory folder taxonomy, graph engine, or link quota. A note need not link outward. Methods and tool notes can include relevant references without becoming credentials or executable authority.
 
 A reviewer of the mechanism can ask:
 
 - Which accepted exact text changed, and who actually authored or adopted it?
 - What observed source supports any experience claim, with what restrictions?
 - Which qualifications are inside the file or explicitly required alongside it?
+- Which connections are optional search associations, which are exact evidence references, and which are mandatory qualifications or accepted warnings? Do not use one as a substitute for another
 - Was the material later found, read, deliberately selected, actually supplied, used in action, or shown to help? Keep those answers separate
 - Did a correction, restriction, rename, split, merge, retirement, or erasure preserve the applicable history and limits?
 
@@ -62,7 +77,25 @@ The primary LLM considers the next useful contribution and chooses the relevant 
 
 The runtime, rather than the persona's prose, records exact accepted references, actual supplied versions, required qualifications, and admission. Current self, authority, accepted obligations, critical observations, cancellation, resources, and unresolved effects remain protected. If the full necessary context does not fit, record the bounded recovery or block; do not silently shorten a warning or substitute another model's summary.
 
-This worksheet helps a designer inspect the mechanism. The required maintenance response can be concise; neither it nor this worksheet requires a narrative of every memory choice or a private reasoning trace.
+This worksheet helps a designer inspect the mechanism. The required maintenance response can be concise; neither it nor this worksheet requires a narrative of every context choice or a private reasoning trace.
+
+## Inspecting navigation and compact retention
+
+The [core navigation](../design/PERSONA-CORE.md#bounded-navigation-and-revisable-cues) and [retention rules](../design/PERSONA-CORE.md#compact-retention-and-honest-forgetting) are authoritative. These optional questions make their evidence inspectable:
+
+| Question | Useful evidence |
+|---|---|
+| Who chose the connection? | The primary persona's actual lexical/regex query, use of a simple authored index or cue, or exact read; no automatic host traversal or hidden semantic memory engine. |
+| What did the result establish? | Declared eligible corpus, exact matches/revisions, actual inspection or later supply, no-match versus incomplete coverage, source limits, and no candidate-to-selection promotion. |
+| Was navigation bounded overall? | Cumulative searches, fanout, candidate reads, returned text, context, relevant time/cost and maintenance; cycle/revisit handling and the actual stopping reason. |
+| What had to accompany usable guidance? | Complete eligible exact qualifications and accepted warnings; no truncation merely because optional search allowance ended. |
+| What retained state is counted? | Current and archived bodies, revisions, source copies, cues, indexes, aliases, provenance/qualifications/warnings, effect/context receipts, caches, managed exports/backups, externally retained context, and peak rewrite duplication within the declared footprint. |
+| Are corpus and prompt bounded separately? | Actual size and useful characteristic coverage of the authored persona-context corpus and each assembled prompt; selected context is not a license for unlimited corpus growth. Supporting records retain their separate evidentiary and operational roles. |
+| Where is the bound incomplete? | Unmeasured externally retained context and actual control limits over provider/recipient copies; no unlimited archive hidden behind a short prompt. |
+| What may be forgotten? | Actual retention/derivative policy, authorized erasure or retirement, lost exact evidence and truthful claim limits, preserved restrictions and protected obligations. |
+| What cannot be sacrificed for a smaller notebook? | User-owned delivered artifacts, protected unresolved effects, accepted warnings, current commitments, and significant qualifications; any genuine capacity/policy conflict has an explicit disposition. |
+
+An accepted lesson can survive expired raw evidence only where policy permits the derivative and its present use does not require the missing evidence. Generalization is not declassification. A new short file, deleted visible path, or successful save proves neither whole-store reclamation nor faithful consolidation. Measure later usefulness and harmful omission as well as size, and preserve an honest block where the bounds cannot be met.
 
 ## Commitment, agreement, and handoff
 
@@ -108,6 +141,6 @@ For physical interaction, additionally identify device, environment, required ob
 
 ## Design decision and evaluation record
 
-State the problem, existing rule, proposed change, rationale, considered tradeoff, consequences, affected identifiers, compatibility treatment, evidence, and unresolved question. Mark changed obligations separately from editorial cleanup, including the 8 October supersession of optional semantic descriptors and omitted maintenance. Do not retrospectively regrade the earlier edition. Source history preserves superseded text; active navigation has one coherent target.
+State the problem, existing rule, proposed change, rationale, considered tradeoff, consequences, affected identifiers, compatibility treatment, evidence, and unresolved question. Mark changed obligations separately from editorial cleanup, including the 8 October semantic-character/maintenance changes and the reciprocal-development, lexical-navigation, and managed-persona-state clarifications and the persona-defining context correction. Do not retrospectively regrade the earlier edition. Source history preserves superseded text; active navigation has one coherent target.
 
 For evaluation, use the [reporting requirements](../evaluation/README.md), identify exact design, implementation, source, model, fixture, and criteria versions, and preserve interventions, cost, failures, not-run and inconclusive outcomes. Mechanism checks, model behavior, delivered quality, learning benefit, and deployment suitability are distinct. Do not fill this worksheet with imagined execution or transfer an old pass to a changed evaluator.

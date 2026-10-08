@@ -1,105 +1,129 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1600" viewBox="0 0 1800 1600" role="img" aria-labelledby="title description">
-  <title id="title">Character, useful work, and explicit maintenance in one persona loop</title>
-  <desc id="description">One accepted, versioned character account combines an OCEAN trait profile with VAD modeled affect and coherent own-voice prose. Stable tendencies, baseline expression, and current contextual affect remain distinct. Character shapes the persona's reusable authored fragments and appropriate choices, without determining roles or granting authority. Three panels show persona-owned files, each primary persona LLM invocation, and actual work with the world. Every invocation receives maintenance responsibility and limits; every valid response combines useful work with proposed changes, justified unchanged files, or a blocked or bounded deferred maintenance outcome. A hypothetical first-person fragment illustrates the voice. The primary LLM chooses relevant exact fragments for its next work-scoped context. The host validates the whole response before substantive dispatch, commits only exact accepted changes, records outcomes, and faithfully assembles selected fragments with mandatory character, work, maintenance, authority, and required qualifications. Actual observations are distinct from proposed actions. A failed call has no invented persona outcome. The arrows describe relationships, not extra reflection calls, compulsory edits, or a fixed sequence. Access, source restrictions, evidence, versions, budgets, cancellation, and unresolved effects remain independently protected. This is a target-design illustration, not an execution trace or evidence of learning benefit.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1780" viewBox="0 0 1800 1780" role="img" aria-labelledby="title description">
+  <title id="title">Persona as a loop of characteristic context, reasoning, interaction, and self-revision</title>
+  <desc id="description">The whole context, reasoning, interaction, and self-revision loop constitutes the persona. Its fragments are characteristic-bearing prompt parts that define its perspective, not merely memories kept for recall. Selected fragments become faithfully assembled context for LLM reasoning. One accepted, versioned OCEAN character account and VAD modeled affect shape the persona's own-voice fragments and discretionary work, communication, collaboration, and navigation. Ordinary files form a compact evolving collection: persona-authored search, grep, or regular-expression cues suggest connections, while the single primary persona LLM chooses searches, reads, and exact next-context selections. Search matches are candidates, not automatic selections. Every persona invocation combines useful work with an explicit maintenance outcome: proposed changes, justified no change, or a blocked or bounded deferred outcome. Actual task results, human conversations, and peer interaction can support revised methods, relationship interpretations, cues, consolidation, or retirement. The lower host validates the whole response, commits only exact accepted changes, records outcomes, and faithfully assembles mandatory context and selected qualified fragments. A separate dashed return path shows optional primary-proposed current-character revision only when user control permits and the exact change is accepted; further operations require a fresh primary decision. Ordinary learning does not require changing traits. No consciousness, human-equivalence guarantee, calendar-driven maturity, automatic improvement, hidden writer, automatic cue traversal, or extra reflection call is implied. Actual evidence, authority, source restrictions, exact versions, retention, budgets, cancellation, and unresolved effects remain protected. Both retained storage and supplied context are bounded. This is target-design artwork, not a product trace or proof of learning benefit.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#36565f"/></marker>
     <marker id="teal-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#137769"/></marker>
     <marker id="violet-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#786591"/></marker>
   </defs>
-  <rect width="1800" height="1600" fill="#f7f8f4"/>
+  <rect width="1800" height="1780" fill="#f7f8f4"/>
   <g font-family="DejaVu Sans, sans-serif" fill="#183039">
     <text x="72" y="64" font-size="18" font-weight="700" letter-spacing="2">AI PERSONAS / ADOPTED TARGET DESIGN</text>
-    <text x="72" y="123" font-size="43" font-weight="700">Its own character. Its own words. Its next choice.</text>
-    <text x="72" y="169" font-size="24">Every persona invocation combines useful work with an explicit maintenance outcome.</text>
+    <text x="72" y="122" font-size="40" font-weight="700">The whole loop constitutes the persona.</text>
+    <text x="72" y="168" font-size="24">Characteristic fragments → assembled context → reasoning → interaction → self-revision</text>
 
-    <rect x="72" y="216" width="1656" height="210" rx="20" fill="#eeebf2" stroke="#b2a7c2" stroke-width="2"/>
+    <rect x="72" y="214" width="1130" height="242" rx="20" fill="#eeebf2" stroke="#b2a7c2" stroke-width="2"/>
     <text x="102" y="254" font-size="19" font-weight="700" letter-spacing="1">ONE ACCEPTED, VERSIONED CHARACTER ACCOUNT</text>
-    <text x="102" y="299" font-size="27" font-weight="700">OCEAN trait profile</text>
-    <text x="102" y="337" font-size="23">Openness · Conscientiousness · Extraversion</text>
-    <text x="102" y="370" font-size="23">Agreeableness · Neuroticism / Negative Emotionality</text>
-    <line x1="861" y1="283" x2="861" y2="377" stroke="#c9c0d4" stroke-width="2"/>
-    <text x="897" y="299" font-size="27" font-weight="700">VAD modeled affect</text>
-    <text x="897" y="337" font-size="23">Valence · arousal · dominance / perceived control</text>
-    <text x="897" y="370" font-size="23">Baseline expression and current state stay distinct</text>
-    <text x="102" y="406" font-size="19" fill="#514c61">Profile and own-voice prose express the same accepted character. Qualitative descriptions suffice.</text>
+    <text x="102" y="296" font-size="27" font-weight="700">OCEAN trait profile</text>
+    <text x="102" y="331" font-size="21">Openness · Conscientiousness</text>
+    <text x="102" y="363" font-size="21">Extraversion · Agreeableness</text>
+    <text x="102" y="395" font-size="21">Neuroticism / Negative Emotionality</text>
+    <line x1="638" y1="280" x2="638" y2="400" stroke="#c9c0d4" stroke-width="2"/>
+    <text x="670" y="296" font-size="27" font-weight="700">VAD modeled affect</text>
+    <text x="670" y="331" font-size="21">Valence · arousal</text>
+    <text x="670" y="363" font-size="21">Dominance / perceived control</text>
+    <text x="670" y="395" font-size="21">Baseline and current state stay distinct</text>
+    <text x="102" y="435" font-size="18" fill="#514c61">One accepted profile and own-voice account; qualitative descriptions suffice.</text>
 
-    <path d="M 306 426 V 492" fill="none" stroke="#786591" stroke-width="3" marker-end="url(#violet-arrow)"/>
-    <path d="M 900 426 V 492" fill="none" stroke="#786591" stroke-width="3" marker-end="url(#violet-arrow)"/>
-    <text x="339" y="468" font-size="23" fill="#5d4d74">Character shapes voice and choices</text>
-    <text x="936" y="468" font-size="21" fill="#5d4d74">No fixed role routing or guaranteed outcome</text>
+    <rect x="1268" y="214" width="460" height="242" rx="20" fill="#f5f1f7" stroke="#786591" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="1296" y="254" font-size="18" font-weight="700">OPTIONAL CHARACTER REVISION</text>
+    <text x="1296" y="295" font-size="22">Proposed by the primary</text>
+    <text x="1296" y="331" font-size="21">Only if user control permits</text>
+    <text x="1296" y="371" font-size="22" font-weight="700">Exact accepted change</text>
+    <text x="1296" y="407" font-size="21" font-weight="700">Then a fresh primary decision</text>
+    <text x="1296" y="439" font-size="19" fill="#5d4d74">before further operations</text>
+    <path d="M 1268 338 H 1210" fill="none" stroke="#786591" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#violet-arrow)"/>
 
-    <rect x="72" y="500" width="480" height="550" rx="20" fill="#e8eee9" stroke="#a5b9ac" stroke-width="2"/>
-    <rect x="660" y="500" width="480" height="550" rx="20" fill="#ddede9" stroke="#137769" stroke-width="3"/>
-    <rect x="1248" y="500" width="480" height="550" rx="20" fill="#e9edf0" stroke="#a6b8c2" stroke-width="2"/>
+    <path d="M 306 456 V 546" fill="none" stroke="#786591" stroke-width="3" marker-end="url(#violet-arrow)"/>
+    <path d="M 900 456 V 546" fill="none" stroke="#786591" stroke-width="3" marker-end="url(#violet-arrow)"/>
+    <text x="339" y="506" font-size="23" fill="#5d4d74">Shapes own-voice fragments</text>
+    <text x="936" y="492" font-size="23" fill="#5d4d74">Shapes discretionary choices</text>
+    <text x="936" y="526" font-size="20" fill="#5d4d74">Work · communication · cooperation · navigation</text>
 
-    <text x="102" y="546" font-size="19" font-weight="700" letter-spacing="1">PERSONA-OWNED FILES</text>
-    <text x="102" y="591" font-size="30" font-weight="700">Reusable prompt parts</text>
-    <text x="102" y="635" font-size="24">Fragments carry its own voice</text>
-    <rect x="102" y="666" width="420" height="145" rx="10" fill="#f9fbf7"/>
-    <text x="120" y="696" font-size="17" font-weight="700" letter-spacing="0.7" fill="#476059">HYPOTHETICAL FRAGMENT</text>
-    <text x="120" y="733" font-size="23" font-style="italic">“I like an early usable version.</text>
-    <text x="120" y="764" font-size="23" font-style="italic">When editability is promised,</text>
-    <text x="120" y="795" font-size="23" font-style="italic">I check before I add polish.”</text>
-    <text x="102" y="855" font-size="22">Methods, experiences, relationships</text>
-    <text x="102" y="898" font-size="22">List · search · read exact versions</text>
-    <text x="102" y="941" font-size="22">Propose edits and organization</text>
-    <text x="102" y="1009" font-size="19" fill="#476059">Sources and observations keep attribution</text>
+    <rect x="72" y="554" width="480" height="650" rx="20" fill="#e8eee9" stroke="#a5b9ac" stroke-width="2"/>
+    <rect x="660" y="554" width="480" height="650" rx="20" fill="#ddede9" stroke="#137769" stroke-width="3"/>
+    <rect x="1248" y="554" width="480" height="650" rx="20" fill="#e9edf0" stroke="#a6b8c2" stroke-width="2"/>
 
-    <text x="690" y="546" font-size="18" font-weight="700" letter-spacing="0.5">EACH PERSONA LLM INVOCATION</text>
-    <text x="690" y="591" font-size="30" font-weight="700">Work + maintenance</text>
-    <text x="690" y="635" font-size="24">Make the next useful decision</text>
-    <rect x="690" y="666" width="420" height="179" rx="10" fill="#f6fbf8" stroke="#b4cfc4" stroke-width="1.5"/>
-    <text x="708" y="699" font-size="18" font-weight="700" letter-spacing="0.4">EXPLICIT MAINTENANCE OUTCOME</text>
-    <text x="708" y="739" font-size="25">Proposed changes</text>
-    <text x="708" y="780" font-size="25">Justified unchanged</text>
-    <text x="708" y="821" font-size="25">Blocked / bounded deferral</text>
-    <text x="690" y="893" font-size="23" font-weight="700" fill="#116d61">Primary chooses next context</text>
-    <text x="690" y="936" font-size="22">Useful edits remain discretionary</text>
-    <text x="690" y="979" font-size="19">No mandatory edit or extra reflection call</text>
-    <text x="690" y="1010" font-size="19">Failed call: no invented persona outcome</text>
+    <text x="102" y="597" font-size="19" font-weight="700" letter-spacing="1">PERSONA-DEFINING FRAGMENTS</text>
+    <text x="102" y="641" font-size="25" font-weight="700">Characteristic prompt parts</text>
+    <text x="102" y="681" font-size="21">Own perspective, linked by useful cues</text>
+    <rect x="102" y="714" width="420" height="143" rx="10" fill="#f9fbf7"/>
+    <text x="120" y="744" font-size="17" font-weight="700" letter-spacing="0.7" fill="#476059">HYPOTHETICAL FRAGMENT</text>
+    <text x="120" y="782" font-size="23" font-style="italic">“I like an early usable version.</text>
+    <text x="120" y="813" font-size="23" font-style="italic">For editable work, I look for</text>
+    <text x="120" y="844" font-size="23" font-style="italic">my early reopen checks.”</text>
+    <text x="102" y="895" font-size="21">Authored search / grep / regex cues</text>
+    <path d="M 312 907 V 920 H 207 V 935 M 312 920 H 417 V 935" fill="none" stroke="#708d7c" stroke-width="2.5" stroke-dasharray="5 5"/>
+    <rect x="122" y="935" width="170" height="57" rx="9" fill="#f9fbf7" stroke="#a5b9ac"/>
+    <rect x="332" y="935" width="170" height="57" rx="9" fill="#f9fbf7" stroke="#a5b9ac"/>
+    <text x="207" y="970" text-anchor="middle" font-size="21">Early check</text>
+    <text x="417" y="970" text-anchor="middle" font-size="21">File limits</text>
+    <text x="102" y="1032" font-size="20" fill="#476059">Connections suggest where to look</text>
+    <text x="102" y="1080" font-size="21" font-weight="700">Create · revise · consolidate · retire</text>
+    <text x="102" y="1115" font-size="21">Useful refinement, not endless growth</text>
+    <text x="102" y="1170" font-size="19" fill="#476059">Source facts keep their attribution</text>
 
-    <text x="1278" y="546" font-size="19" font-weight="700" letter-spacing="1">ACTUAL WORK AND WORLD</text>
-    <text x="1278" y="591" font-size="29" font-weight="700">Propose, then observe</text>
-    <text x="1278" y="635" font-size="24">User need and constraints</text>
-    <text x="1278" y="680" font-size="24">Tool results and peer replies</text>
-    <text x="1278" y="725" font-size="24">Its own earlier choices</text>
-    <line x1="1278" y1="765" x2="1698" y2="765" stroke="#b6c5cd" stroke-width="2"/>
-    <text x="1278" y="811" font-size="22">Proposals need current admission</text>
-    <text x="1278" y="854" font-size="22">Observed effects stay evidence</text>
-    <text x="1278" y="900" font-size="25" font-weight="700">A plan is not a result</text>
-    <text x="1278" y="976" font-size="22">Failures, waits, and uncertainty</text>
-    <text x="1278" y="1009" font-size="22">remain visible</text>
+    <text x="690" y="597" font-size="18" font-weight="700">PRIMARY LLM / PERSONA REASONING</text>
+    <text x="690" y="641" font-size="29" font-weight="700">Reason + act + maintain</text>
+    <text x="690" y="681" font-size="22">Chooses work, voice, cooperation,</text>
+    <text x="690" y="714" font-size="22">and how to find its next context</text>
+    <rect x="690" y="751" width="420" height="188" rx="10" fill="#f6fbf8" stroke="#b4cfc4" stroke-width="1.5"/>
+    <text x="708" y="785" font-size="18" font-weight="700" letter-spacing="0.4">EVERY CALL: EXPLICIT MAINTENANCE</text>
+    <text x="708" y="829" font-size="25">Proposed changes</text>
+    <text x="708" y="872" font-size="25">Justified no change</text>
+    <text x="708" y="915" font-size="25">Blocked / bounded deferral</text>
+    <text x="690" y="984" font-size="23" font-weight="700" fill="#116d61">Primary chooses next context</text>
+    <text x="690" y="1022" font-size="21">Chooses cues, reads, and selection</text>
+    <text x="690" y="1058" font-size="20">Search matches are only candidates</text>
+    <text x="690" y="1115" font-size="20">Useful edits remain discretionary</text>
+    <text x="690" y="1146" font-size="19">No compulsory edit or extra reflection call</text>
+    <text x="690" y="1177" font-size="19">Failed call: no invented persona outcome</text>
 
-    <path d="M 552 648 H 652" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
-    <text x="606" y="622" text-anchor="middle" font-size="17">exact read</text>
-    <path d="M 1140 648 H 1240" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
-    <text x="1194" y="622" text-anchor="middle" font-size="17">propose</text>
-    <path d="M 1248 898 H 1148" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
-    <text x="1194" y="930" text-anchor="middle" font-size="17">observe</text>
+    <text x="1278" y="597" font-size="18" font-weight="700" letter-spacing="0.5">ACTUAL WORK AND INTERACTION</text>
+    <text x="1278" y="641" font-size="29" font-weight="700">Propose, then observe</text>
+    <text x="1278" y="687" font-size="23">Task needs and constraints</text>
+    <text x="1278" y="735" font-size="23">Human conversations</text>
+    <text x="1278" y="783" font-size="22">Peer cooperation and disagreement</text>
+    <text x="1278" y="831" font-size="23">Tool results and earlier choices</text>
+    <line x1="1278" y1="866" x2="1698" y2="866" stroke="#b6c5cd" stroke-width="2"/>
+    <text x="1278" y="907" font-size="22">Actual consequences return</text>
+    <text x="1278" y="951" font-size="25" font-weight="700">Plans are not observations</text>
+    <text x="1278" y="999" font-size="22">Received evidence can change</text>
+    <text x="1278" y="1033" font-size="22">methods, relationships, or cues</text>
+    <text x="1278" y="1137" font-size="22">Failures, waits, and uncertainty</text>
+    <text x="1278" y="1170" font-size="22">remain visible</text>
 
-    <path d="M 1020 1050 V 1187" fill="none" stroke="#137769" stroke-width="4" marker-end="url(#teal-arrow)"/>
-    <text x="1050" y="1102" font-size="23" font-weight="700" fill="#116d61">Primary response</text>
-    <text x="1050" y="1136" font-size="21">Work + maintenance outcome</text>
-    <text x="1050" y="1168" font-size="21">+ next-context changes, if any</text>
-    <path d="M 800 1195 V 1058" fill="none" stroke="#137769" stroke-width="4" marker-end="url(#teal-arrow)"/>
-    <text x="770" y="1102" text-anchor="end" font-size="23" font-weight="700" fill="#116d61">Next decision</text>
-    <text x="770" y="1136" text-anchor="end" font-size="21">Receives checked exact context</text>
-    <text x="770" y="1168" text-anchor="end" font-size="21">and maintenance responsibility + limits</text>
+    <path d="M 552 724 H 652" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="606" y="698" text-anchor="middle" font-size="17">exact read</text>
+    <path d="M 1140 724 H 1240" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="1194" y="698" text-anchor="middle" font-size="17">propose</text>
+    <path d="M 1248 1010 H 1148" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="1194" y="1042" text-anchor="middle" font-size="17">observe</text>
 
-    <rect x="250" y="1195" width="1300" height="230" rx="20" fill="#fffdf3" stroke="#c6bd91" stroke-width="2"/>
-    <text x="282" y="1237" font-size="19" font-weight="700" letter-spacing="0.6">HOST VALIDATES THE WHOLE RESPONSE BEFORE SUBSTANTIVE DISPATCH</text>
-    <text x="282" y="1282" font-size="25" font-weight="700">Commit exact accepted changes; record every valid maintenance outcome.</text>
-    <text x="282" y="1325" font-size="25">Assemble: current character + work, maintenance, and authority</text>
-    <text x="282" y="1365" font-size="25">+ primary-selected exact fragments and required qualifications</text>
-    <text x="282" y="1402" font-size="21">Relevant selection, not the whole notebook. Missing required context: bounded recovery or block.</text>
+    <path d="M 1020 1204 V 1340" fill="none" stroke="#137769" stroke-width="4" marker-end="url(#teal-arrow)"/>
+    <text x="1050" y="1254" font-size="23" font-weight="700" fill="#116d61">Primary response</text>
+    <text x="1050" y="1288" font-size="21">Work + maintenance outcome</text>
+    <text x="1050" y="1320" font-size="21">+ next-context changes, if any</text>
+    <path d="M 800 1348 V 1212" fill="none" stroke="#137769" stroke-width="4" marker-end="url(#teal-arrow)"/>
+    <text x="770" y="1254" text-anchor="end" font-size="23" font-weight="700" fill="#116d61">Next decision</text>
+    <text x="770" y="1288" text-anchor="end" font-size="21">Reasons from assembled context</text>
+    <text x="770" y="1320" text-anchor="end" font-size="21">and maintenance responsibility + limits</text>
 
-    <path d="M 250 1282 H 132 V 1058" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
-    <text x="160" y="1109" font-size="18">Exact accepted</text>
-    <text x="160" y="1139" font-size="18">changes only</text>
+    <rect x="250" y="1348" width="1300" height="246" rx="20" fill="#fffdf3" stroke="#c6bd91" stroke-width="2"/>
+    <text x="282" y="1390" font-size="19" font-weight="700" letter-spacing="0.6">HOST VALIDATES THE WHOLE RESPONSE BEFORE SUBSTANTIVE DISPATCH</text>
+    <text x="282" y="1435" font-size="25" font-weight="700">Commit exact accepted changes; record every valid maintenance outcome.</text>
+    <text x="282" y="1478" font-size="24">Assemble reasoning context: character + work, maintenance, authority</text>
+    <text x="282" y="1518" font-size="25">+ primary-selected exact fragments and required qualifications</text>
+    <text x="282" y="1558" font-size="21">Bounded corpus and supplied context. Missing required context: bounded recovery or block.</text>
 
-    <line x1="72" y1="1471" x2="1728" y2="1471" stroke="#bac7c8" stroke-width="2"/>
-    <text x="72" y="1511" font-size="24" font-weight="700">Host protects: access · source restrictions · exact versions · budgets · cancellation</text>
-    <text x="72" y="1548" font-size="22">Files grant no authority. Actual evidence, commitments, costs, and unresolved effects remain trustworthy.</text>
-    <text x="72" y="1582" font-size="17" fill="#50676c">Target illustration, not a product trace, fixed call sequence, or proof of benefit. Full reading: VISUAL-GUIDE.md</text>
+    <path d="M 250 1435 H 132 V 1212" fill="none" stroke="#36565f" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="160" y="1261" font-size="18">Exact accepted</text>
+    <text x="160" y="1291" font-size="18">fragment changes</text>
+    <path d="M 1550 1472 H 1760 V 338 H 1736" fill="none" stroke="#786591" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#violet-arrow)"/>
+
+    <line x1="72" y1="1640" x2="1728" y2="1640" stroke="#bac7c8" stroke-width="2"/>
+    <text x="72" y="1680" font-size="23" font-weight="700">Host protects: access · source restrictions · exact versions · retention · budgets · cancellation</text>
+    <text x="72" y="1718" font-size="22">Files grant no authority. Evidence, commitments, costs, and unresolved effects remain trustworthy.</text>
+    <text x="72" y="1756" font-size="17" fill="#50676c">Target design; no claim of consciousness, human equivalence, or proven benefit. Full reading: VISUAL-GUIDE.md</text>
   </g>
 </svg>
