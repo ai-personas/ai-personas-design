@@ -12,6 +12,8 @@ This explicitly supersedes the 7 October optional-descriptor and omitted-mainten
 
 Clarified that an actual character-adoption proposal is resolved before other fresh same-response operations, with unknown commits held for reconciliation. Separated a bounded correction effort from an independently accepted applicability warning, so ending the effort cannot revive unchanged warned guidance. Evaluation now includes identical-event VAD controls and consistent-but-nondiagnostic fragment judgments, without forcing lexical differences or importing historical passes.
 
+Further source review distinguishes trait diversity from profile selection, role or information differences, and extra computation. Collaboration evaluation preserves broad single/fixed/adaptive comparisons and adds claim-specific controls, invitation-to-useful-contribution accounting, harmful-revision cases, and delayed shared-resource consequences. File-discovery cases make corpus exclusions, matching semantics, stale paths, partial errors, and assisted retrieval explicit.
+
 This is a design-only refinement. A source-only inspection identifies existing runtime traits, own-voice guidance, and ordinary-decision continuity, alongside uncovered call paths; [status](implementation/STATUS.md) gives exact sources and limits. No runtime was changed or executed, no live-model trial was run, and no guarantee of universal successful behavior or deployment readiness is made.
 
 ## 7 October 2026 — interpretation superseded by the next refinement

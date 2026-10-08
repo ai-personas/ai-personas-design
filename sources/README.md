@@ -5,6 +5,7 @@
 The current design is defined by the [persona core](../design/PERSONA-CORE.md), [work and boundaries](../design/WORK-AND-BOUNDARIES.md), and [contracts](../implementation/CONTRACTS.md), under the protected invariants. These source pages explain why the design uses its chosen mechanism and where earlier ideas and reports can be inspected. They do not add a competing specification.
 
 - [Research and rationale](PERSONA-FILES-RESEARCH.md) distinguishes established human OCEAN and affect constructs, limited LLM persona evidence, engineering choices, and unrun hypotheses. It explains trait-grounded own-voice fragments, primary-model context choice, and explicit maintenance on every persona invocation, without treating consideration as compulsory mutation
+- [Direct collaboration evidence](PERSONA-FILES-RESEARCH.md#trait-composition-and-collaboration-direct-evidence-and-limits) separates trait composition from diversity, role assignment, affect, and sampling; it includes positive findings, null results, partner-selection limits, and total-resource caveats
 - [The provenance manifest](SOURCE-MANIFEST.md) pins the 7 October predecessor, the earlier pre-consolidation tree, and original supplied-source lineage, including retired manuals, graph/selector figures, numeric-character contracts, and earlier file proposals
 - [The historical-results ledger](../evaluation/HISTORICAL-RESULTS.md) preserves original evaluation identifiers, reported observations, and their criteria without granting a current pass
 
