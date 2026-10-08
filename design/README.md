@@ -2,15 +2,17 @@
 
 [Home](../README.md) · [Start here](../START-HERE.md) · [Decisions](../DESIGN-DECISIONS.md)
 
-This branch has one target design: continuing personas with one accepted, versioned character account covering semantic OCEAN traits and a VAD modeled affect profile. Every authored fragment is a persona-defining, characteristic-bearing prompt part in the persona’s own voice, kept in ordinary files. Their selected assembly is context for LLM reasoning; context, reasoning, actual interaction/actions, and evolving authored prompts together constitute the persona. Experience or facts may inform fragments without defining them as episodic memory or a retrieval cache. Current character and selected fragments inform all discretionary work, communication, collaboration, and context choices; actual task, human, and peer experience can in turn revise fragments, relationships, and permitted character. The primary LLM navigates a compact network of useful authored cues, chooses relevant next context, and returns an explicit fragment-maintenance disposition in every accepted persona invocation alongside its other work. The older graph-first, auxiliary-selector, and file-proposal manuals are retired from the active reading surface.
+This branch has one target design: continuing personas with one accepted, versioned character account covering semantic OCEAN traits and a VAD modeled affect profile. Every authored fragment is a persona-defining, characteristic-bearing prompt part in the persona’s own voice, kept in ordinary files. Their selected assembly is context for LLM reasoning; context, reasoning, actual interaction/actions, and evolving authored prompts together constitute the persona. Experience or facts may inform fragments without defining them as episodic memory or a retrieval cache. Current character and selected fragments inform all discretionary work, communication, collaboration, and context choices; actual task, human, and peer experience can in turn revise fragments, relationships, and permitted character. The primary LLM navigates a compact network of useful authored cues, chooses relevant next context, and returns explicit fragment and supporting-resource maintenance in every accepted persona invocation alongside its work and next-context choice. The older graph-first, auxiliary-selector, and file-proposal manuals are retired from the active reading surface.
+
+The normal beginning is an attributed trait seed expressed by a bounded initial LLM invocation as candidate own-voice fragments, coherently accepted before continuing primary authorship. Self-harmonization preserves useful distinctions and honest conflicts while making usable prompts coherent. The same primary LLM also selects supporting context from separately stored histories, tool-use records, definitions, skills, scripts, code, and data; these resources retain their own meaning and provenance.
 
 ## Three complementary views
 
 | Document | Its responsibility |
 |---|---|
-| [Persona core](PERSONA-CORE.md) | Identity, semantic traits and modeled affect, reciprocal development, compact character-conditioned fragments, associative navigation, every-invocation maintenance, and persona-owned next-context choice |
-| [Work and boundaries](WORK-AND-BOUNDARIES.md) | Accepted work, cooperation, real actions, authority, resources, evidence, recovery, and conditional extensions |
-| [System contracts](../implementation/CONTRACTS.md) | The observable guarantees that make those choices and boundaries reliable |
+| [Persona core](PERSONA-CORE.md) | Seeded initialization, identity, semantic traits and modeled affect, reciprocal development, compact character-conditioned fragments, bounded discovery, every-invocation maintenance, and primary-owned fragment/resource selection |
+| [Work and boundaries](WORK-AND-BOUNDARIES.md) | Accepted work, cooperation, real actions, selective capability context, authority, resources, evidence, recovery, and conditional extensions |
+| [System contracts](../implementation/CONTRACTS.md) | Observable initialization, discovery/read, selection/exposure, execution, and recovery guarantees that make those choices and boundaries reliable |
 
 These documents specify intended behavior. A document's presence, a diagram, or an acceptance scenario is not implementation evidence. See [status](../implementation/STATUS.md).
 
@@ -29,15 +31,13 @@ Inside a runtime, authoritative instructions and current accepted obligations re
 
 **Must** states a condition required for the applicable feature. **Should** is a strong recommendation whose exception needs a reason. **May** describes an option. Optional features remain subject to their safeguards when enabled.
 
-Required semantic coverage is not a required numeric scorecard. All five OCEAN domains and all three VAD dimensions have meaning in the accepted character account; additional facets or operational tendencies are optional when useful. Stable traits, transient affect, expression, capability, and authority remain distinguishable. Files and fragments have no compulsory folder taxonomy or mental-function tree.
+Use the authoritative sections for the detailed rules:
 
-The network of fragments is navigated by primary-persona judgment, not automatic host traversal or a separate graph engine. Optional search associations, exact evidence references, and mandatory qualification dependencies have different meanings in the [core](PERSONA-CORE.md). No outgoing-link quota follows. Its development and compactness rules apply to the whole declared managed persona-state footprint, including history and supporting metadata, as well as bounded navigation and prompt context. The authored persona-context corpus and each assembled prompt have distinct bounds; supporting records retain provenance, expiry, and access safeguards. An unmeasured external context tier makes a whole-store bound incomplete; a notebook cap does not authorize deleting user-owned deliverables.
-
-Persona-context navigation uses primary-chosen lexical/regex searches, listing, simple authored indexes/cues, and exact reads. Semantic/vector or graph-driven memory retrieval is outside the current target, available only as a separately identified research comparator unless an explicit design change adopts it. This does not prescribe the physical storage backend or limit ordinary task tools.
-
-Experience-shaped continuity is an analogy to development, not a calendar-driven aging process, model-weight update, or guarantee of wisdom. Learning can yield smaller, better-organized authored context while preserving current obligations, source restrictions, accepted warnings, and honest evidentiary limits. The existing character-control and fresh-decision rules still govern effective-character changes.
-
-Every application-visible persona LLM invocation receives maintenance input, and every accepted output supplies a patch, no change with a reason, blocked, or bounded deferred disposition. This does not require a mutation, a new selection, or a separate reflection call. Failed attempts retain honest host status rather than fabricated persona judgments. The core and contracts define the exact scope and failure behavior.
+- Character and development: [traits and modeled affect](PERSONA-CORE.md#characteristics-modeled-affect-and-contextual-expression), [own-voice authorship and character controls](PERSONA-CORE.md#character-in-its-own-voice), and [the learning/action loop](PERSONA-CORE.md#one-learning-and-action-loop)
+- Navigation and context choice: [search and exact reading](../implementation/CONTRACTS.md#search-and-exact-reading) and [primary-persona selection](../implementation/CONTRACTS.md#primary-persona-next-context-selection)
+- Bootstrap, exposure, and cost: [bounded working context](WORK-AND-BOUNDARIES.md#inference-and-bounded-working-context) and [faithful assembly](PERSONA-CORE.md#bounded-and-faithful-assembly)
+- Maintenance and retained state: [every-invocation responsibilities](../implementation/CONTRACTS.md#every-persona-invocation) and [compact retention](PERSONA-CORE.md#compact-retention-and-honest-forgetting)
+- Resource availability and authorized execution: [capabilities and actions](../implementation/CONTRACTS.md#capabilities-and-actions)
 
 Precise host records for permissions, evidence, ownership, current work, and resource accounting are still necessary where their meanings apply. Simpler cognitive representation does not mean ambiguous operational boundaries.
 

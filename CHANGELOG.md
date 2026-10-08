@@ -2,6 +2,18 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 8 October 2026 — seeded authorship and selective supporting context
+
+Made the normal beginning explicit: trait seed → bounded initial LLM-authored own-voice characteristic fragments → coherent accepted starting account → primary-LLM self-harmonization and experience-shaped evolution. Preserved truthful alternative origins, seed and generated-detail attribution, productive tensions, no-change, locked-character controls, and fresh decisions after effective-character changes. Fragments define persona perspective rather than a memory system.
+
+Extended the existing primary-owned context choice to separately retained organized histories, tool-use records, tool definitions, reusable skills, scripts, code, and data. Added a small bounded discovery bootstrap, primary-chosen literal/grep or supported-regex queries, and direct exact-reference fast paths. Explicitly rejected loading all tool names/descriptions, schemas, or skill summaries and then asking an LLM to filter them. The bulk catalogue stays outside both provider-facing payload and model-visible context, with those exposure surfaces measured separately.
+
+Made every persona call one integrated opportunity for work, characteristic-fragment maintenance, supporting-resource maintenance, and next fragment/resource choice. Explicit outcomes cover both maintenance scopes; one concise shared no-change reason is valid. Change proposals identify authorized files/paths and useful discovery cues or patterns where appropriate, separately from accepted and actually stored receipts. Factual histories/messages/tool records stay grounded in actual observations, while generated resources keep their true authorship. No forced mutation, extra model call, rigid directory taxonomy, or renewal of an omitted next-context selection follows.
+
+Distinguished discovery, reading, selection, actual loading/exposure, invocation, and observed results without requiring one call per distinction. Preserved current-authority checks: finding a resource grants no execution permission, and storing a script does not install a capability. Clarified attributable supporting-resource lifecycle, freshness and retention, exact executable bindings, and bounded results when code or data stays outside context.
+
+Expanded per-call and whole-episode cost coverage to bootstrap, discovery, scans, reads, schemas, required guidance, dynamic loading, retained provider context, maintenance, retries, unsuccessful branches, and closeout. Integrated deployment choices, evidence gaps, examples, and existing acceptance identifiers in their current homes. Preserved all protected invariants, requirement and acceptance IDs, legacy anchors, historical results, and source-only runtime findings. This is design-only work: no runtime changes, model trials, implementation tests, new behavioral pass, or deployment claim.
+
 ## 8 October 2026 — persona-defining context, reasoning, and action
 
 Corrected the architectural framing: fragments are persona-defining, characteristic-bearing prompt parts, not a memory system for remembering facts. Their selected assembly forms context for LLM reasoning; context, reasoning, actual interactions/actions, and evolution of authored prompts together constitute the persona. Fragments may include facts or experience without being defined as episodic memory or RAG.
