@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — research and correction-comparator precision
+
+Added a separately attributed ACE v3 robustness, reflection and evaluation-cost extension while preserving v1 provenance. Clarified equal outset instructions for same-task self-correction comparisons without leaking later-discovered evidence into earlier developmental checkpoints. These refinements adopt no external architecture or numeric settings and change no protected criteria or campaign minima; no experiment was run.
+
 ## 9 October 2026 — reviewed-snapshot alignment refresh
 
 Rechecked all 42 active human-user requirements against snapshot 95ca46cbf127b3fdef05c99223987d1504a50d7b. Refreshed the existing assessment for enabled stable-character policy, literal retrieval and exact revision lineage, and the printer’s five-versus-three response accounting. All coverage and evidence dispositions remain unchanged. The dated audit distinguishes inspected publication-integrity evidence from a fresh remote check and makes no runtime, maturation or savings claim. Human-source requirements, normative contracts and acceptance minima are unchanged.
