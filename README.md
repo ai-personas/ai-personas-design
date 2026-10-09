@@ -14,6 +14,8 @@ This is the **current target design on this branch**, refined on 8 October 2026.
 
 **Design adoption is not runtime conformance.** This repository contains design documents, evaluation criteria, and scoped historical evidence. This revision changes no runtime, and does not establish useful learning, human-like behavior, or product readiness. See [implementation status](implementation/STATUS.md) for the evidence boundary.
 
+The developmental aim is a later persona that is more useful through experience across work and interaction, with its character recognizably expressed. [Stage-matched evaluation](evaluation/README.md#whole-persona-development-checkpoints) and [three-persona checkpoints](examples/WORKED-EXAMPLES.md#whole-persona-checkpoints-without-forced-trait-drift) distinguish useful maturation from style, forced trait change and regression. [Simple JSON representation](implementation/CONTRACTS.md#json-text-and-matching-surfaces) preserves primary-owned lexical cues and explicit next-context selection while separating stored escapes from decoded prompt text.
+
 ## The central loop
 
 1. An attributed trait seed becomes initial LLM-authored candidate fragments and a coherently accepted starting account

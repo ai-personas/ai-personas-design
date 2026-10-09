@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — whole-persona maturation and JSON matching surfaces
+
+Made the experience-grounded usefulness target explicit across work, judgment, communication, coordination, characteristic expression and modeled-affect recovery. Added falsifiable within-persona stage-matched comparisons and compact hypothetical Mira/Arun/Leena checkpoints, preserving their accepted seeds, stable-character controls and existing house/circuit fixtures. Gains, stability, regression and inconclusive outcomes remain distinct.
+
+Clarified optional simple JSON representation without a fixed schema: raw serialization, decoded prompt text and decoded regex text have declared lexical surfaces, exactly-once JSON decoding, source/version/location bindings and bounded processing. The chosen accepted-fragment profile rejects malformed/duplicate-member text without misattributing that rule to universal JSON syntax. Existing-ID contrasts are proposed and unrun; protected identifiers, core rows, minima and historical results are unchanged. No runtime work, tests or demonstrated improvement is claimed.
+
 ## 9 October 2026 — selective benefit made observable
 
 Added an explicitly hypothetical three-persona concept journey from house intake through a 5 W DC-to-AC scope change to later selective skyscraper benefit. Preserved Mira's character and the existing coordinated-house/full-circuit fixtures. New Arun/Leena seeds, independent approaches, separately counted cooperation, own-voice methods, supporting assets, complete response dispositions and in-story host receipts make the distinctions inspectable without API payloads or a prescribed workflow.

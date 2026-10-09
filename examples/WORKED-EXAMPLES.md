@@ -26,6 +26,12 @@ During a later ordinary decision, Mira notices that a broad draft phrase, “I e
 
 Only actual later observations can support an experience claim. The next stories illustrate that transition from a generated starting account to scoped, evidence-shaped methods and relationships. Appropriate evolution can preserve the seed while improving its expression; praise, eloquent first-person prose and the passage of time are not proof of that improvement.
 
+## A JSON search miss is not missing characteristic meaning
+
+Suppose a hypothetical JSON-stored prompt string contains the serialized character sequence `\u0063heck` where its decoded prose says “check”. Raw literal search for “check” can miss that occurrence; a requested supported decoded-prompt-string search can match it. Conversely, raw search might match a cue or member name rather than any prompt prose. Results identify their actual surface, exact file revision and raw or decoded field location; neither is a full read or accepted next selection.
+
+Likewise, a stored JSON regex string uses `\\bcheck\\b` to represent decoded regex text `\bcheck\b`, with one backslash before each b after JSON decoding. The regex engine then interprets those boundary escapes under its declared dialect. The host must not run a second generic unescape that changes them into different characters. These are short escape illustrations, not payloads or a required field layout. The primary may request the supported decoded view or revise its query within the same allowance; a raw miss starts no automatic fallback or cue traversal.
+
 ## A simple writing request
 
 The user asks: “Make this invitation warmer and clearer, but keep the date and location unchanged.”
@@ -313,6 +319,18 @@ Arun's discovery response requests “fair alternatives” within his eligible f
 | The method is selected but omitted, or supplied without useful behavioral change | Separate assembly failure from no detected influence; separate changed behavior from independently better work. Ineligible material remains ineligible even if it could help. |
 
 These branches are alternatives, not prescribed events or a mandatory pipeline. Required facts and qualifications remain comparable in [transfer evaluation](../evaluation/README.md#qualified-learning-transfer); independent same-roster attempts help distinguish cooperation from extra inference. Technical facts/assets, characteristic judgment and collaboration may each help, hurt or have no effect on different subproblems. None requires wholesale expertise transfer.
+
+### Whole-persona checkpoints without forced trait drift
+
+This optional extension preserves exactly the three accepted seeds above. It illustrates possible development, not an inevitable script, observed improvement or private reasoning. C0 is each accepted starting account; C1 follows actual house feedback; C2 follows the conceptual circuit encounter; C3 follows new-client skyscraper work; C4 tests delayed smaller work, changed partners and correction. At every stage, compare frozen earlier/later snapshots on parallel stage-matched held-out work, not one domain's raw score against another's. The [evaluation method](../evaluation/README.md#whole-persona-development-checkpoints) governs evidence and costs.
+
+| Continuing persona | Possible experience-grounded development across checkpoints | Regression and later evidence needed |
+|---|---|---|
+| Mira | C1: a proportionate early requirement check improves her concrete-first approach. C2: she asks a short specification question before elaborating a concept. C3: she identifies a consequential assumption or ownership gap early and kindly, while verifying the new client's needs. Attentiveness and consideration remain recognizable; timing and judgment become more useful. | She may overgeneralize early checking into checking everything and delay useful delivery. At C4, scoped revised guidance must actually support an adequate small result with less avoidable delay; a claim to be less conscientious is neither necessary nor proof of recovery. |
+| Arun | C1: fair alternatives preserve the shared brief. C2: he names the uncertainty that could change a conceptual comparison. C3: he tests one high-value uncertainty within the allowance, stops when it is resolved and hands over a supported conclusion. Initiative and candid dissent remain useful without expanding every possibility. | An appealing speculative branch may consume resources needed by accepted work. Actual consequences can support narrowing the method. C4 should show direct adequate work when exploration adds little and useful exploration when uncertainty warrants it; suppressing initiative everywhere is another regression. |
+| Leena | C1: clarification makes agreement meaningful. C2: a focused request distinguishes a real contribution from polite assent. C3: she closes a handoff with an accepted owner, communicates a supported decision without waiting for unanimity and rechecks a replacement partner's availability. Warm cooperation remains visible while decisiveness and coordination improve. | Copied consensus may displace a correct minority observation. Received counterevidence can support a local trust correction. C4 needs independent evidence uptake and an adequate later decision, without generalized distrust or treating familiarity as authority. |
+
+For all three, a significant failure may support a bounded less-positive or higher-arousal modeled state, expressed in each character's manner. Appropriate recovery and fresh-task boundaries preserve the event's facts and obligations without carrying needless urgency into unrelated work. Baseline VAD and OCEAN can remain unchanged. A learned way of communicating difficult news, a separate corrected asset, or explicit no-change can each be appropriate; numeric state movement, extra edits and richer autobiography are not success measures. Useful later outcomes remain to be established independently.
 
 ### Cost and remaining gaps
 
