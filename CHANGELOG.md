@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — reviewed-snapshot alignment refresh
+
+Rechecked all 42 active human-user requirements against snapshot 95ca46cbf127b3fdef05c99223987d1504a50d7b. Refreshed the existing assessment for enabled stable-character policy, literal retrieval and exact revision lineage, and the printer’s five-versus-three response accounting. All coverage and evidence dispositions remain unchanged. The dated audit distinguishes inspected publication-integrity evidence from a fresh remote check and makes no runtime, maturation or savings claim. Human-source requirements, normative contracts and acceptance minima are unchanged.
+
 ## 9 October 2026 — staged-check accounting precision
 
 Made the printer comparison’s boundary and counts explicit: after method/template supply through delivery, Mira uses five persona responses versus three for Arun or Leena, adding two responses and one checker execution. All episode costs remain counted; these hypothetical counts establish no measured efficiency. No workflow, normative rule or criterion changed.
