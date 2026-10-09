@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — particular beginnings from broad traits
+
+Clarified how one broad trait profile can support different compatible, attributed starting perspectives without invented biographies or new axes. Separated valid acceptance, particular authorship and observed individual behavior; distinguished independent same-profile births from repeated execution of one accepted account. Added a concise hypothetical birth pair and bounded inadequate-candidate handling through the existing creation mechanism. No runtime result, new controller, protected-criterion change or guaranteed uniqueness is claimed.
+
 ## 9 October 2026 — distinctive choices and individual development
 
 Clarified that correct convergence does not establish behavioral individuality where meaningful discretion remains. Expanded the hypothetical printer with shared-capability staged, batch and claim-focused checking; added independent Mira and Leena skyscraper work before the separately authorized collaboration; and made house communication choices and individual revision origins explicit. Starting tendencies remain distinct from later changes, equal capability does not require identical spend, and faulty-helper histories are not treated as matched clean-input comparisons. Existing evaluation controls now explicitly report discretionary traces separately from wording. Protected identifiers, acceptance criteria and campaign minima remain unchanged; these are unrun illustrations, not demonstrated psychological effects or maturation.
