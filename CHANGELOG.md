@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — enabled stable-character maturation
+
+Clarified that a deployment claiming autonomous stable-character maturation needs an explicitly user-authorized effective enabled policy supplied to ordinary calls; locked mode remains a valid, narrower choice. Added an unrun Arun branch with stipulated observations, a genuine planning-facet revision, coherent atomic acceptance and fresh work within reserved continuation/closeout bounds. Core/contracts, protected criteria and minima are unchanged. The sequence proves neither behavioral benefit nor protection against all revision churn.
+
 ## 9 October 2026 — user-requirement alignment audit
 
 Published a dated assessment of all 42 active human-user requirements against the inspected design, separating documented coverage, hypothetical illustration and empirical evidence. The audit records repaired wording and walkthrough gaps, links the authoritative design, and leaves implementation, benefit, cost and separately scoped historical execution claims unestablished. It adds no user requirements or acceptance criteria.

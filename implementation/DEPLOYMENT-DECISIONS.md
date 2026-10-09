@@ -45,6 +45,12 @@ Backend choice is an implementation choice within the file-facing contract, not 
 
 Discovery, reading, selection, actual exposure, invocation, and observed results are distinct contract meanings, not compulsory separate calls. Already known exact resources and already supplied, still-current operative guidance keep their direct-use paths. Execution dependencies, provenance dependencies, data derivations, and required prompt qualifications are different closures: neither every dependency's documentation nor every data row must enter the model. Required operative conditions must remain complete, and a missing restriction or execution prerequisite can block use. A provider interface that cannot expose a needed capability within the declared boundaries is a deployment limitation, not permission to pretend the tool was loaded or silently send the whole catalogue.
 
+### Effective character-authoring policy
+
+A deployment claiming autonomous stable-character maturation must explicitly admit a user-authorized enabled self-authorship mode, record its effective scope/version and expose that policy to ordinary primary invocations. Within that permission the primary may propose and adopt genuine stable-trait or baseline-affect revisions under the existing coherent-acceptance and fresh-decision contract; initialization alone supplies no such permission. Enabled mode does not itself require a new user approval for every revision, nor override any applicable approval requirement or withdrawal.
+
+User-selected locked mode remains valid and still permits qualified method, relationship and transient-state development. It cannot be advertised as autonomous stable-character self-revision. Declare and test the effective enabled/locked policy, transition enforcement and bounded progress/closeout behavior rather than infer them from a profile setting. No universal numeric default, forced mutation, weaker fence or new controller follows.
+
 <a id="memory-bounds-and-retained-evidence"></a>
 ## Persona-context bounds and supporting evidence
 
