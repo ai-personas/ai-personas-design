@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — finite feasibility and precise transition boundaries
+
+Clarified controlled local executable identity versus observable remote-service identity, without fabricating unavailable server builds or weakening claim-specific assurance. Made necessary account bindings and primary-proposed removal of complete optional selection bundles explicit companions of atomic character acceptance; unrelated repair still cannot bypass its fresh-decision fence.
+
+Added a candid feasibility summary and deployment admission/repair envelope, including mandatory-state saturation, protected closeout and rewrite headroom. Existing-ID acceptance contrasts remain unrun. Preserved protected invariants, requirements, core acceptance rows, campaign minima and historical evidence. These are design clarifications and deployment conditions, not runtime fixes, executed tests or demonstrated benefit.
+
 ## 9 October 2026 — evidence-driven evaluation controls
 
 Refined existing comparisons for untouched versus assessed behavior, description/advice/action, chosen counterevidence, partner/convention changes, held-out source wording, source-to-asset poisoning after cleanup, and durable reuse versus equivalent non-retained helpers. Added selective versioned primary evidence with component limits, including the distinction between personality-expression text and useful actions.

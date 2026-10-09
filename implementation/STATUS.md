@@ -14,6 +14,19 @@ The 9 October 2026 [evaluation refinement](../evaluation/README.md) sharpens ass
 
 “Specified,” “implemented,” “mechanically tested,” “behaviorally demonstrated,” and “approved for a deployment” remain different statuses. Unknown current conformance is not a claim that existing runtime mechanisms are absent or defective. It is a requirement to obtain exact, applicable evidence before claiming they work under the revised contract.
 
+## Feasibility and intended restrictions
+
+The machinery is implementable within a declared finite supported envelope: exact versions, transactions, permission checks, bounded assembly, durable intents, receipts and explicit failure states are concrete host responsibilities. This is a design-level feasibility judgment, not runtime conformance evidence. Reliable character influence, useful evolution, complete discovery and a cost advantage remain empirical questions. The design also intentionally rules out some otherwise familiar behavior:
+
+- [Complete-response validation](CONTRACTS.md#every-persona-invocation) precludes ordinary delivered token-streaming of persona-authored replies and any dispatch of persona-proposed substantive tools before validation. Permitted unvalidated diagnostics and mechanical host status do not establish accepted communication or actions.
+- [Character controls](CONTRACTS.md#persona-authorship-and-files) cannot mechanically guarantee detection of every effective-character substitution in free prose. Honest enforcement claims need the declared boundary and behavioral evidence; no hidden semantic validator is assumed.
+- [Bounded lexical navigation](CONTRACTS.md#search-and-exact-reading) can miss important material through different wording, incomplete cues or exhaustion. This can prevent useful completion even when access and accounting are correct.
+- [Mandatory-context and storage bounds](../design/PERSONA-CORE.md#bounded-and-faithful-assembly) can block otherwise authorized work. Restricted selection repair cannot solve an oversized mandatory core; protected unresolved state cannot simply be discarded. The [deployment envelope](DEPLOYMENT-DECISIONS.md#persona-context-bounds-and-supporting-evidence) must make supported admissions and repair viable without promising unlimited continuation.
+- Repeated valid [character revisions](CONTRACTS.md#complete-response-persistence-and-dependent-work) can fence task actions until the allowance ends. Safe stopping preserves boundaries but does not establish useful completion; deployment progress and stopping policy must address no-progress churn without weakening the fresh-decision fence.
+- [Selective exposure accounting](CONTRACTS.md#authority-resources-and-stopping) includes discovery, reads, reloading, maintenance and failed branches. A smaller action prompt can cost more across the entire task or miss a necessary resource.
+
+The clarified remote-identity and atomic character-transition rules remove wording ambiguities, not demonstrated runtime bugs. Their acceptance contrasts remain unrun. These restrictions are deployment and usability conditions to assess, rather than proof that the generic architecture is contradictory or that a conforming implementation will be useful.
+
 ## Current gaps to close with implementation evidence
 
 | Area | Current evidence status in this revision | Evidence needed for a stronger claim |
