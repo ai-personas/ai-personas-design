@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — everyday social maturation
+
+Added an unrun three-persona listening-and-drafting continuation: attributed feedback, scoped own-voice interpretations, later exact supply, changed needs and optional draft-only peer critique. Arun consults while Leena and Mira finish independently; no recurring role or social score follows. Existing Nox/Mira journeys, normative contracts, criteria and minima are unchanged. Participant feedback is scoped evidence, not proof of causal maturation.
+
 ## 9 October 2026 — particular beginnings from broad traits
 
 Clarified how one broad trait profile can support different compatible, attributed starting perspectives without invented biographies or new axes. Separated valid acceptance, particular authorship and observed individual behavior; distinguished independent same-profile births from repeated execution of one accepted account. Added a concise hypothetical birth pair and bounded inadequate-candidate handling through the existing creation mechanism. No runtime result, new controller, protected-criterion change or guaranteed uniqueness is claimed.

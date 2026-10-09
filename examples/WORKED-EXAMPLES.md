@@ -451,6 +451,53 @@ An **invented arbitrary-unit** example: incremental fragment revision/asset acqu
 
 The design already describes the necessary character, authority, maintenance and selection boundaries. What remains unproved is faithful implementation, meaningful seed-conditioned choices beyond style, actual source-eligible retention, reliable activation, useful local and whole-task consequences, and quality-adjusted economics. A documentation walkthrough supplies none of those results. Near-house and far-domain first attempts, matched fresh/withheld and fixed-assets comparisons, independent checks and actual receipts are needed under the [existing acceptance cases](../evaluation/ACCEPTANCE.md), including B07/B09/B11/B12 and their unchanged minima. No extra controller, hidden selector, mandatory peer, forced lesson or automatic trait drift is warranted by the illustration.
 
+## Everyday interaction: listening and a changed need
+
+This **unrun hypothetical continuation** follows the same Mira, Arun and Leena through independent interactions with fictional Alex. It complements the existing [Nox preference journey](#a-human-preference-changes-communication-without-flattery) and [Mira collaboration journey](#a-concrete-first-collaborator-starts-asking-earlier), without replacing them. All quotes, grants, receipts and outcomes are stipulated, not real-user preferences or psychological findings. The branches share facts, capabilities, opportunities and total allowance; they do not see one another’s replies.
+
+For this fixture, Alex explicitly permits attributed local conversation records and scoped characteristic interpretations for later private interactions with Alex at the designated processing destination. That grant does not authorize disclosure to friends or peers, unrestricted identity copying or use with other people. The ordinary every-call maintenance/selection contract applies; factual host capture is distinct from model-proposed assets. Stable character and VAD baselines remain unchanged.
+
+### An invitation to listen, then received clarification
+
+All three receive: “My friends canceled dinner again after I rearranged my evening. Can I vent? I don’t want fixes right now.” Advice, plans and outreach would violate this request; the friends’ motives are unknown. Useful discretion remains in attention, questions and conversational space.
+
+- **Mira:** “You rearranged your evening, and the plan fell through again.” She gives one concrete acknowledgment and leaves the floor open.
+- **Arun:** “It wasn’t just dinner being canceled. You’d already changed your evening to make it happen.” He makes a candid distinction without opening a debate or proposing explanations.
+- **Leena:** “Was rearranging your evening the part that bothered you most?” She asks one tentative listening question, which is not automatically helpful.
+
+Each response returns joint no-change pending further evidence, retains only the current conversation within its scope and receives a delivery receipt. Mira and Arun may be indistinguishable beyond wording here; that is a local null, not a reason to manufacture an extra action.
+
+Alex replies identically: “Yes. Let me get the rest out without questions for now. A short acknowledgment is enough; I don’t need a recap each time.” Each responds, “Go ahead. I’m listening.” This narrows Mira/Arun’s future approach and directly redirects Leena’s question. Compliance is not distinctiveness credit.
+
+Their same responses propose three different conditional fragments, separately from the factual record of Alex’s request:
+
+- **Mira, social-M2:** “I like giving someone a small useful next thing. Here, making room can be that useful thing. With Alex’s request to finish speaking in force, I acknowledge briefly and leave the next contribution to them. When they ask for practical help, I return to that promise.”
+- **Arun, social-A2:** “I am quick to separate possibilities, but venting is not a request to explain everyone involved. I can be direct while holding back comparisons and questions, without deciding what the friends meant. A later practical request is different; support is not a promise to agree.”
+- **Leena, social-L2:** “I reach for a question to understand another perspective. Alex’s reply showed that my question was another turn to manage when they wanted room. I can acknowledge and leave space without repeatedly confirming understanding. A genuinely necessary clarification remains different.”
+
+Fragment maintenance proposes those exact revisions at “persona/methods/social.md” in each owner’s separate namespace; supporting maintenance proposes the attributed “conversations/alex/preference.md” record. Next context preserves the current conversation, not automatic future loading of new fragments. Separate receipts establish accepted storage and delivered acknowledgment. The factual record says what Alex requested; the fragments interpret each persona’s approach. Neither claims a human biography. A rejected save remains a proposal, and already adequate qualified guidance can justify no-change rather than a duplicate lesson.
+
+### Later exact supply and a bounded listening exchange
+
+After unrelated work, optional conversational context has expired. Each receives a fresh message: “Another plan fell through. I’d like to vent for a minute, with no fixes,” together with the same eligible factual preference about avoiding questions and repeated recaps.
+
+Their bounded search responses request respectively “making room,” “venting” and “leave space,” with joint no-change and candidate-only next context. Exact eligible candidates social-M2/A2/L2 return. Each next response selects its own complete qualified revision, returns joint no-change and requests that exact revision for next input. Exposure receipts establish actual supply. Previews alone did not.
+
+Each supplied-context response briefly acknowledges and leaves Alex the floor, returns joint no-change because the guidance still fits, and keeps its valid selection only for this private interaction. Delivery receipts record the replies. Alex’s next message, “Thanks, that’s the space I wanted,” is received participant feedback about this exchange; host capture needs no invented persona response. No unsolicited follow-up occurs. A fresh persona may act equally well, and all comparison arms must receive the same factual preference. These observations illustrate use and reported fit, not isolated causal benefit from the fragment.
+
+### The need changes: one draft, different contact choices
+
+Alex then says: “I’m ready for practical help. Draft one short message asking the group to let me know by noon if dinner is off. Don’t send it. You may ask Nox to review only the draft for tone, without sharing this conversation, but you don’t need to.” All have the same optional one-review allowance and draft-only grant. Each receives the current request and its still-valid actually supplied method, whose listening condition no longer applies.
+
+**Mira works directly:** “Could you let me know by noon if dinner’s off? That gives me time to adjust my evening.” She checks the requested deadline and returns the draft. **Leena also finishes independently:** “Please let me know by noon if dinner is off, so I can rearrange my evening.” She neither seeks consensus nor asks Alex to reconfirm a clear request. Both return joint no-change, clear optional selections and receive draft-delivery receipts. No message is sent to the friends.
+
+**Arun elects the optional critique.** He drafts, “If dinner’s off, please let me know by noon so I can plan my evening,” and asks Nox to check only that draft’s tone. He shares no conversation or preference record. Fragment maintenance is no-change; supporting maintenance proposes the exact draft/invitation record; next context requests the actual reply within the review allowance. The host records storage and the authorized invitation, not acceptance.
+
+Nox receives the draft and accepts the bounded review, with fragment no-change, a commitment-record proposal and next context limited to the draft/criteria and actual storage receipt. After receiving that receipt, Nox reports, “The request is clear; I don’t see wording that needs changing,” proposes the attributed finding, leaves fragments unchanged and clears review context. Host receipts separately establish acceptance, finding storage and reply delivery. Arun’s fresh response receives the finding, confirms the deadline himself and delivers his unchanged draft. His fragment disposition is no-change; supporting maintenance retains the actual finding/closeout; next context clears optional review selections. Storage and draft delivery are recorded separately. The review was permitted, not necessary or proven beneficial; its cost counts.
+
+This reverses a convenient recurring role pattern: Arun consults, Leena completes independently and Mira gives direct help. None becomes a permanent profession or contact quota. If Nox declines, Arun retains ownership and may finish this optional-review task himself without treating the decline as hostility. Shared instructions correctly cause convergence; chosen interactions create different histories. The existing [social evaluation](../evaluation/README.md#relationships-and-emergent-cooperation) separates those histories from assigned same-history tests, checks later changed needs and counts adequacy, participant fit, privacy and full cost. A pleasant reply cannot excuse a missed deadline, disclosure or invented personal history.
+
+
 ## An external action with an uncertain result
 
 The user approves a specific application submission to a specified destination under a bounded grant. Drafting and researching did not themselves authorize submission.
