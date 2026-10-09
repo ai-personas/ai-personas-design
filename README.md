@@ -47,6 +47,7 @@ Compactness distinguishes the bounded authored persona-context corpus, the actua
 | If you want to understand… | Read… |
 |---|---|
 | The idea in everyday language | [Start here](START-HERE.md) |
+| The user's consolidated requirements and requested research | [User requirements](USER-REQUIREMENTS.md) |
 | Character, fragments, maturation, and next-context choice | [Persona core](design/PERSONA-CORE.md) |
 | Work, relationships, authority, resources, and honest outcomes | [Work and boundaries](design/WORK-AND-BOUNDARIES.md) |
 | What the supporting system must guarantee | [System contracts](implementation/CONTRACTS.md) |

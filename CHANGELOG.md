@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — consolidated user requirements
+
+Added one readable requirements account covering the human-authored design conversation, with stable UR identifiers and links to existing design and evaluation authority. It separates product intent, research and incremental publication instructions, and historical runtime requests; later fragment, asset, and maturation clarifications control earlier terminology. Protected invariants, requirement rows, acceptance criteria, and minima are unchanged. This consolidation adds no implementation or claim of demonstrated benefit.
+
 ## 9 October 2026 — purpose-based fragments, assets, and maturation
 
 Clarified that own-voice characteristic and behavioral prompt fragments define the persona, while plain domain knowledge, generic procedures, tools, skills, code, data and records remain supporting assets regardless of author or wording. Exact assets can guide authorized work without becoming character. Maturation names every primary interaction's work, fragment/asset maintenance consideration and bounded next-context choice, with no forced mutation, separate learner or inevitable improvement. Updated active terminology and heading links; protected invariant, requirement and core acceptance wording, order and minima remain unchanged except necessary link-target updates. Prior source comparisons and scoped historical evidence remain intact. This is a design-only clarification, not an implemented or measured result.
