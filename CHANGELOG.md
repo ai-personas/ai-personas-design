@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — user-requirement alignment audit
+
+Published a dated assessment of all 42 active human-user requirements against the inspected design, separating documented coverage, hypothetical illustration and empirical evidence. The audit records repaired wording and walkthrough gaps, links the authoritative design, and leaves implementation, benefit, cost and separately scoped historical execution claims unestablished. It adds no user requirements or acceptance criteria.
+
 ## 9 October 2026 — everyday social maturation
 
 Added an unrun three-persona listening-and-drafting continuation: attributed feedback, scoped own-voice interpretations, later exact supply, changed needs and optional draft-only peer critique. Arun consults while Leena and Mira finish independently; no recurring role or social score follows. Existing Nox/Mira journeys, normative contracts, criteria and minima are unchanged. Participant feedback is scoped evidence, not proof of causal maturation.
