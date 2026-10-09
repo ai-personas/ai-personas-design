@@ -2,9 +2,15 @@
 
 [Home](README.md) · [Normative reference](design/README.md) · [Source provenance](sources/SOURCE-MANIFEST.md)
 
-This register explains the current target adopted in this branch. It replaces the earlier practice of adding successive normative clarifications beside conflicting manuals. Adoption changes the design reference; it does not establish runtime implementation, useful learning, or deployment approval.
+This register explains the current target adopted in this branch. It replaces the earlier practice of adding successive normative clarifications beside conflicting manuals. Adoption changes the design reference; it does not establish runtime implementation, useful maturation, or deployment approval.
 
 The [normative documents](design/README.md) contain the actual obligations. This register records why those obligations have their present form.
+
+## 9 October 2026: fragments, assets, and maturation
+
+The defining boundary is purpose. Own-voice characteristic and behavioral prompt fragments define the persona; plain domain knowledge, generic technical procedures, tools, skills, code, data and records are supporting assets regardless of who authored them. Assets may supply exact operative task instructions under current authority without becoming character. A characteristic fragment may refer to such an asset or retain a short attributed qualification, but first-person styling neither converts facts into character nor justifies duplicating technical bodies.
+
+Maturation is the continuing primary LLM considering current work, useful creation, revision, deletion or organization across fragments and assets, and bounded next-context choice in every interaction. There is no separately named learning operation, learner or memory mechanism. No edit, extra call, stable-trait change or beneficial outcome is inevitable. Existing acceptance, authority, provenance, retention and character controls remain unchanged. Protected invariant and evaluator wording retains its historical terms and evidence obligations; source studies keep their accurate terminology.
 
 ## 8 October 2026: seeded authorship and selective supporting context
 
@@ -30,9 +36,9 @@ The correction changes the architectural explanation and the evidence needed, no
 
 ## 8 October 2026: reciprocal development and compact associative memory
 
-The following rationale is retained with the corrected persona-context meaning above; its older “memory” heading remains for link continuity. The character-and-maintenance target explicitly closes the reciprocal loop: accepted traits inform own-voice fragments; current character and selected fragments reach the primary LLM; that perspective informs all discretionary task, communication, collaboration, and context-navigation choices; actual task, human, and peer experience returns; and the persona may revise, connect, consolidate, or retire fragments and refine scoped relationships. Where self-authorship is enabled, meaningful received experience may also justify a current-character proposal. Ordinary method learning and transient affect remain distinct from changing effective character. Existing proposal-first disposition and fresh-decision fencing are unchanged.
+The following rationale is retained with the corrected persona-context meaning above; its older “memory” heading remains for link continuity. The character-and-maintenance target explicitly closes the reciprocal loop: accepted traits inform own-voice fragments; current character and selected fragments reach the primary LLM; that perspective informs all discretionary task, communication, collaboration, and context-navigation choices; actual task, human, and peer experience returns; and the persona may revise, connect, consolidate, or retire fragments and refine scoped relationships. Where self-authorship is enabled, meaningful received experience may also justify a current-character proposal. Ordinary method refinement and transient affect remain distinct from changing effective character. Existing proposal-first disposition and fresh-decision fencing are unchanged.
 
-The human-aging analogy explains continuity shaped by encounters, not a time-based mechanism or inevitable improvement. Elapsed time, calls, fragment counts, confident self-narration, and model changes do not establish development. No automatic weight training is implied. A more useful later account may be smaller, less confident, more conditional, or corrected after a regression. The [core loop](design/PERSONA-CORE.md#one-learning-and-action-loop) is authoritative; this clarification creates no separate developmental engine or scheduled reflection duty.
+The human-aging analogy explains continuity shaped by encounters, not a time-based mechanism or inevitable improvement. Elapsed time, calls, fragment counts, confident self-narration, and model changes do not establish development. No automatic weight training is implied. A more useful later account may be smaller, less confident, more conditional, or corrected after a regression. The [core loop](design/PERSONA-CORE.md#maturation-within-every-primary-interaction) is authoritative; this clarification creates no separate developmental engine or scheduled reflection duty.
 
 Persona-authored search cues make connections between fragments useful without reinstating the retired canonical graph architecture. The primary LLM decides what cue to follow, how to search or use a supported regex, what exact result to inspect or select, and when to stop. The network may be partly discovered at use time. A compulsory edge on every note, fixed folders, automatic host expansion, graph-based importance rule, or hidden semantic writer or selector would change the design rather than implement this clarification.
 
@@ -68,11 +74,11 @@ The rationale is inspectable continuity: make the intended character explicit an
 | Compact persona context has corpus and prompt bounds within a managed persona-state footprint | Archives, versions, metadata and externally retained context cannot silently escape accounting. Authorized consolidation may reduce size; unresolved effects, restrictions, warnings, and user-owned deliverables are protected from quota-driven disappearance |
 | The primary LLM chooses relevant fragments and supporting resources while doing work | Bounded discovery or direct exact references precede actual supply where needed. Explicit next-context intent persists within its scope, can be replaced or cleared, and remains subordinate to current access and obligations; no full tool/skill catalogue is loaded to filter it |
 | Work, both maintenance scopes, and next-context choice share every persona invocation | Every accepted response explicitly covers characteristic fragments and supporting resources through proposed changes, reasoned no change, blocked, or bounded deferred. A concise shared disposition is valid; actual storage stays observable. No extra reflection call, separate semantic author, compulsory mutation, or compulsory new selection follows |
-| Character can evolve without becoming arbitrary | Stable traits change through authorized, attributable self-authorship. Transient affect and ordinary learning do not automatically rewrite those traits. Effective-current-character changes retain the fresh-decision fence for all subsequent operations, including reads and waits; locked character cannot be replaced through another fragment |
+| Character can evolve without becoming arbitrary | Stable traits change through authorized, attributable self-authorship. Transient affect and ordinary refinement do not automatically rewrite those traits. Effective-current-character changes retain the fresh-decision fence for all subsequent operations, including reads and waits; locked character cannot be replaced through another fragment |
 | The host protects operational truth rather than supplying a hidden mind | It enforces ownership, current permissions, evidence, resource limits, qualification, and reliable effects. It does not turn a retrieved sentence into authority or choose a hidden profession, task workflow, or personality quota |
-| Learning requires demonstrated transfer | Retention, reading, selection, prompt inclusion, behavioral influence, and beneficial effect are separate claims. Useful learning must survive appropriate later tasks, comparisons, and cost accounting |
+| Benefit from retained revisions requires demonstrated transfer | Retention, reading, selection, prompt inclusion, behavioral influence, and beneficial effect are separate claims. Useful maturation must survive appropriate later tasks, comparisons, and cost accounting |
 
-“Human-like” refers to observable character, relations, choices, learning, and continuity. It does not depend on proving consciousness, claiming a human biography, or asserting human equivalence.
+“Human-like” refers to observable character, relations, choices, maturation, and continuity. It does not depend on proving consciousness, claiming a human biography, or asserting human equivalence.
 
 ## Conflicting cognitive obligations that are superseded
 
@@ -146,7 +152,7 @@ Application-visible call coverage includes initialization, planning, search and 
 
 ## Organization and methods remain persona-owned
 
-Personas may plan, learn methods, find capabilities, ask peers for assessment, challenge one another, and accept specialized contributions. Those choices arise within the continuing persona and its work. The host does not prescribe a profession roster, permanent supervisor, fixed team size, compulsory reviewer, or universal priority formula.
+Personas may plan, refine methods, find capabilities, ask peers for assessment, challenge one another, and accept specialized contributions. Those choices arise within the continuing persona and its work. The host does not prescribe a profession roster, permanent supervisor, fixed team size, compulsory reviewer, or universal priority formula.
 
 A review already required by the accepted mandate remains required. A peer's optional suggestion does not automatically become a blocker. A native editable artifact, an analysis, a rendered view, and an outside approval are distinct results and need distinct evidence where requested. The earlier delivery addendum's separate DLV requirement family remains retired as redundant; its useful coverage and historical identifiers remain mapped in [historical results](evaluation/HISTORICAL-RESULTS.md).
 

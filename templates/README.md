@@ -2,7 +2,7 @@
 
 [Home](../README.md) · [Persona core](../design/PERSONA-CORE.md) · [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) · [Examples](../examples/WORKED-EXAMPLES.md)
 
-These are optional human-readable authoring aids, not persona response schemas, database layouts, prompt templates, or a task workflow. They do not waive the core's required semantic character or every-invocation maintenance contract. Use only the questions that matter. A short request can be handled in a short exchange. Filling a worksheet supplies no consent, execution, correctness, learning, or review evidence by itself.
+These are optional human-readable authoring aids, not persona response schemas, database layouts, prompt templates, or a task workflow. They do not waive the core's required semantic character or every-invocation maintenance contract. Use only the questions that matter. A short request can be handled in a short exchange. Filling a worksheet supplies no consent, execution, correctness, maturation, or review evidence by itself.
 
 ## Need and mandate
 
@@ -29,7 +29,7 @@ Transient modeled affect and an ordinary first-person method are not automatical
 
 ## Inspecting experience-shaped development
 
-Use these optional questions to inspect the [core learning loop](../design/PERSONA-CORE.md#one-learning-and-action-loop), rather than as a required diary or a score for maturity:
+Use these optional questions to inspect the [core maturation loop](../design/PERSONA-CORE.md#maturation-within-every-primary-interaction), rather than as a required diary or a score for maturity:
 
 - What accepted character and exact fragments actually informed the primary decision?
 - How did that perspective bear on discretionary task methods, communication, collaboration, or context navigation? Identical competent choices may be appropriate when constraints are decisive
@@ -76,7 +76,7 @@ A missing maintenance response, timeout, refusal without a usable response, or m
 
 ## Choosing the next context
 
-The primary LLM considers the next useful contribution and chooses relevant fragments and supporting resources: organized history, tool-use records, definitions, skills, scripts, code, or data, for example. Keep those resources' real attribution and restrictions rather than converting them into persona prose. Record the actual preserve, replace, or clear choice and exact work-scoped selection. Omission means no new selection update: only an already-valid selection persists within its original scope/lifetime, without renewal, expansion, or a compulsory follow-up call. It is not implicit clearing or a newly authored endorsement. This selection rule does not permit omission of the invocation's maintenance disposition for both scopes. Do not invent a second reflection author or infer selection from a search match, filename, relevance number, or copied quotation.
+The primary LLM considers the next useful contribution and chooses relevant fragments and supporting assets: plain domain knowledge, generic technical procedures, organized history, tool-use records, definitions, skills, scripts, code, or data, for example, regardless of author. Keep their actual purpose, attribution and restrictions rather than converting them into persona prose through own-voice styling. A characteristic approach can reference an exact technical asset; the procedure remains an asset. Record the actual preserve, replace, or clear choice and exact work-scoped selection. Omission means no new selection update: only an already-valid selection persists within its original scope/lifetime, without renewal, expansion, or a compulsory follow-up call. It is not implicit clearing or a newly authored endorsement. This selection rule does not permit omission of the invocation's maintenance disposition for both scopes. Do not invent a second reflection author or infer selection from a search match, filename, relevance number, or copied quotation.
 
 The runtime, rather than the persona's prose, records exact accepted references, actual supplied versions, required qualifications, and admission. Current self, authority, accepted obligations, critical observations, cancellation, resources, and unresolved effects remain protected. If the full necessary context does not fit, record the bounded recovery or block; do not silently shorten a warning or substitute another model's summary.
 
@@ -155,4 +155,4 @@ For physical interaction, additionally identify device, environment, required ob
 
 State the problem, existing rule, proposed change, rationale, considered tradeoff, consequences, affected identifiers, compatibility treatment, evidence, and unresolved question. Mark changed obligations separately from editorial cleanup, including the 8 October semantic-character/maintenance changes, reciprocal-development and compactness clarifications, persona-defining context correction, and seeded-authorship/selective-resource scope. Do not retrospectively regrade the earlier edition. Source history preserves superseded text; active navigation has one coherent target.
 
-For evaluation, use the [reporting requirements](../evaluation/README.md), identify exact design, implementation, source, model, fixture, and criteria versions, and preserve interventions, cost, failures, not-run and inconclusive outcomes. Mechanism checks, model behavior, delivered quality, learning benefit, and deployment suitability are distinct. Do not fill this worksheet with imagined execution or transfer an old pass to a changed evaluator.
+For evaluation, use the [reporting requirements](../evaluation/README.md), identify exact design, implementation, source, model, fixture, and criteria versions, and preserve interventions, cost, failures, not-run and inconclusive outcomes. Mechanism checks, model behavior, delivered quality, benefit from retained revisions, and deployment suitability are distinct. Do not fill this worksheet with imagined execution or transfer an old pass to a changed evaluator.

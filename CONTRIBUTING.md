@@ -10,7 +10,7 @@ Plain-language requirements, rationale, responsibilities, interface behavior, li
 
 Application code, command tutorials, pseudocode, configuration samples, request or response payloads, embedded diagram-source blocks, executable validation scripts, and branch-specific patch plans do not belong in the active design surface. Put implementation artifacts and their tests in the relevant implementation project. SVG files are editable artwork, not examples of application logic.
 
-Fragments are persona-defining, characteristic-bearing prompt parts. Selected assembly provides context for LLM reasoning; context, reasoning, actual interaction/actions, and evolution of authored prompts together constitute the persona. Review conceptual claims against that account, rather than treating fragments as episodic memory, a fact store, or RAG under a new name. Facts and experience may inform a fragment without defining its purpose. First-person fragment examples may illustrate how a persona understands itself or its experience. Label invented examples as hypothetical. Do not turn a convenient example layout into a compulsory schema.
+Fragments are persona-defining, characteristic-bearing prompt parts. Selected assembly provides context for LLM reasoning; context, reasoning, actual interaction/actions, and evolution of authored prompts together constitute the persona. Review conceptual claims against that account, rather than treating fragments as episodic memory, a fact store, or RAG under a new name. Facts and experience may inform a fragment without defining its purpose. Plain domain knowledge and generic technical procedures are assets whether the persona or another author writes them; tools, skills, code, data and records retain their supporting roles. Classify by purpose, not authorship or first-person styling. Characteristic approaches can refer to exact technical assets without duplicating those assets as character. First-person fragment examples may illustrate how a persona understands itself or its experience. Label invented examples as hypothetical. Do not turn a convenient example layout into a compulsory schema.
 
 Keep the normal beginning clear: attributed trait seed, bounded initial LLM-authored candidate fragments, coherent accepted starting account, and continuing primary-LLM self-harmonization. Preserve genuine alternative origins without calling supplied text generated. Generated starting detail is not user testimony or prior experience. Harmonization can clarify scope and retain useful tensions or no change; it cannot conceal unresolved contradictions, restyle the corpus automatically, or override character controls.
 
@@ -18,7 +18,7 @@ Keep the normal beginning clear: attributed trait seed, bounded initial LLM-auth
 
 | Contribution | Home |
 |---|---|
-| Persona meaning, character, fragment representation, learning, or next-context choice | [Persona core](design/PERSONA-CORE.md) |
+| Persona meaning, character, fragment representation, maturation, or next-context choice | [Persona core](design/PERSONA-CORE.md) |
 | Work, cooperation, action, authority, resources, evidence, recovery, or conditional scope | [Work and boundaries](design/WORK-AND-BOUNDARIES.md) |
 | Observable host responsibilities and handoffs | [System contracts](implementation/CONTRACTS.md) |
 | Requirement traceability | [Requirements](implementation/REQUIREMENTS.md) |
@@ -84,7 +84,7 @@ The [core](design/PERSONA-CORE.md), [contracts](implementation/CONTRACTS.md), an
 
 ## Sources and results
 
-Support external factual claims with an accessible primary source, the specific claim, and its relevant date and limitation. Evidence about another system motivates a hypothesis; it does not demonstrate AI Personas behavior. A source's interface feature is not automatically evidence of learning or lower total cost.
+Support external factual claims with an accessible primary source, the specific claim, and its relevant date and limitation. Evidence about another system motivates a hypothesis; it does not demonstrate AI Personas behavior. A source's interface feature is not automatically evidence of beneficial maturation or lower total cost.
 
 Keep actual results tied to their exact configuration, evaluator, inputs, and scope. Preserve failures and limitations. Separate implemented mechanisms, mechanically tested behavior, demonstrated persona benefit, and approval for a deployment. Source integrity claims belong to exact bytes; rewritten summaries must not inherit them.
 

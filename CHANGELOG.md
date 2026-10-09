@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — purpose-based fragments, assets, and maturation
+
+Clarified that own-voice characteristic and behavioral prompt fragments define the persona, while plain domain knowledge, generic procedures, tools, skills, code, data and records remain supporting assets regardless of author or wording. Exact assets can guide authorized work without becoming character. Maturation names every primary interaction's work, fragment/asset maintenance consideration and bounded next-context choice, with no forced mutation, separate learner or inevitable improvement. Updated active terminology and heading links; protected invariant, requirement and core acceptance wording, order and minima remain unchanged except necessary link-target updates. Prior source comparisons and scoped historical evidence remain intact. This is a design-only clarification, not an implemented or measured result.
+
+## 9 October 2026 — outcome evidence and qualified maintenance
+
+Added compact primary-source comparisons for ReasoningBank and PersonaGym, preserving inspected-version/access limits, positive experience-learning evidence, response-versus-work distinctions and full-token cost caution. Clarified outcome assessment, causal interpretation, prospective maintenance and demonstrated later benefit without adding a required form, call or runtime evaluator. A short B09 outcome/method contrast remains proposed and unrun. Protected identifiers, core acceptance rows, minima and historical evidence are unchanged; no implementation, experiment, maturity or cost benefit is claimed.
+
 ## 9 October 2026 — qualification wording across representations
 
 Aligned the fragment-review worksheet with the JSON matching contract: required qualifications must reach the supplied prompt part or its explicit required accompaniment, rather than merely exist somewhere in the same file. This is a reader-facing clarification, with no runtime or behavioral result claimed.
