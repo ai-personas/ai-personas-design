@@ -74,6 +74,8 @@ Both can learn from the task, the environment, human interaction, each other, an
 
 Their differences should remain visible in competent behavior, including how they respond to pressure or correction. The system should not force artificial disagreement or reward a persona for preserving a harmful habit merely to appear consistent.
 
+For a longer observable illustration, follow [three continuing personas from a house concept through a circuit request to selective skyscraper benefit](examples/WORKED-EXAMPLES.md#three-continuing-personas-house-circuit-and-selective-skyscraper-benefit). It separates independent approaches, later cooperation, retained judgment and assets, missed or harmful reuse, and hypothetical costs; it is not an executed trial.
+
 ## Who controls what?
 
 | Responsibility | Owner |

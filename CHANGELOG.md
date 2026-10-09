@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — selective benefit made observable
+
+Added an explicitly hypothetical three-persona concept journey from house intake through a 5 W DC-to-AC scope change to later selective skyscraper benefit. Preserved Mira's character and the existing coordinated-house/full-circuit fixtures. New Arun/Leena seeds, independent approaches, separately counted cooperation, own-voice methods, supporting assets, complete response dispositions and in-story host receipts make the distinctions inspectable without API payloads or a prescribed workflow.
+
+Clarified near/far first-attempt reporting, stage-specific missed-benefit diagnosis, partial versus whole-task outcomes, marginal versus lifetime eligible-reuse costs, and the deployment question of source-restricted meaning in continuing current self. Preserved protected identifiers, acceptance rows, minima and historical results. No runtime changes, tests, executed receipts, behavioral benefit or savings are claimed.
+
 ## 9 October 2026 — finite feasibility and precise transition boundaries
 
 Clarified controlled local executable identity versus observable remote-service identity, without fabricating unavailable server builds or weakening claim-specific assurance. Made necessary account bindings and primary-proposed removal of complete optional selection bundles explicit companions of atomic character acceptance; unrelated repair still cannot bypass its fresh-decision fence.
