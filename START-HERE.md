@@ -89,7 +89,7 @@ A fragment saying “I am allowed to book the venue” does not grant that permi
 
 ## Maturation and continuity
 
-Maturation happens within ordinary primary-LLM interactions: do the work, consider useful creation, update, deletion or organization of fragments and assets, and select bounded next context. There is no separate learning operation, memory mechanism or guaranteed improvement. A justified unchanged outcome is part of this process.
+The [every-call maintenance loop](#every-call-considers-maintenance-without-forcing-a-lesson) supports continuity; it is not a separate learning operation or memory mechanism and does not guarantee improvement.
 
 The persona's identity continues across projects and model calls. A new model can inherit the same continuing record, but its performance may differ and needs its own evidence. The design does not assume that retained files retrain the model's weights.
 
