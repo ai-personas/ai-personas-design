@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — requirement coverage and reference precision
+
+Reviewed the seeded-character, every-call maintenance, experience-shaped development, supporting-resource, selective-navigation and bounded-cost requirements against their existing normative homes and acceptance criteria. No new requirement family or runtime result follows from that review.
+
+Clarified the retirement paragraph: associative navigation may lead to an accepted scoped successor, but an exact historical reference still identifies its original revision. It yields permitted original bytes or an honest unavailable outcome, never successor text substituted as historical evidence. This restates the existing exact-reference rule locally; qualification and warning dependencies remain unchanged.
+
 ## 8 October 2026 — seeded authorship and selective supporting context
 
 Made the normal beginning explicit: trait seed → bounded initial LLM-authored own-voice characteristic fragments → coherent accepted starting account → primary-LLM self-harmonization and experience-shaped evolution. Preserved truthful alternative origins, seed and generated-detail attribution, productive tensions, no-change, locked-character controls, and fresh decisions after effective-character changes. Fragments define persona perspective rather than a memory system.
