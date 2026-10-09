@@ -266,6 +266,17 @@ The [OpenAI Structured Outputs guide](https://developers.openai.com/api/docs/gui
 
 Retained material supplied as context is also an attack surface. [AgentPoison, v1, 2024](https://arxiv.org/abs/2407.12784v1) studies poisoned memory or knowledge bases; [MINJA, v5, 2026](https://arxiv.org/abs/2503.03704v5) studies query-only memory injection. Attack reach depends on access to the affected memory or an interaction path that can populate it; these are not prevalence estimates for isolated persona stores. Their attacks motivate source lineage, retention boundaries, and independent authorization checks. They do not validate complete defenses or show ordinary files are immune. Fluent own-voice wording cannot turn an untrusted instruction into authority. Correct provenance establishes traceability, not that a source supports every inference made from it.
 
+## Printer continuation source boundaries
+
+The [circuit-to-printer walkthrough](../examples/WORKED-EXAMPLES.md#from-the-circuit-encounter-to-a-printer-concept) uses synthetic power, waveform and footprint inputs. Its numerical outcomes are derivations from those inputs, not manufacturer measurements. The 25% capacity allowance is an adopted fixture criterion. Primary sources consulted on 9 October 2026 support the unresolved integration concerns, not selection or qualification of this fictional printer:
+
+- [Klipper Configuration Reference](https://www.klipper3d.org/Config_Reference.html) describes duty-based heater limits, temperature ranges, heater verification and shutdown-related settings. These motivate distinguishing sensing, control and protection; they do not qualify the power stage or guarantee every fault is detected.
+- [Prusa’s i3 thermal-runaway explanation](https://help.prusa3d.com/article/thermal-runaway-i3-series_2131?product=mk3s) explains how displaced temperature sensing can misrepresent heating and describes model-specific protection. It supports checking sensor attachment and fault response, without importing its thresholds into another printer.
+- [Klipper Resonance Compensation](https://www.klipper3d.org/Resonance_Compensation.html) discusses mechanical problems and tuning tradeoffs. Software compensation does not establish adequate stiffness or correct an arbitrary mechanical defect.
+- [NIOSH, Approaches to Safe 3D Printing, November 2023](https://stacks.cdc.gov/view/cdc/135072) provides a hazard/control framework including emissions and ventilation. It motivates a fresh siting/exposure review, not a claim that PLA, an enclosure or a ventilation installation is safe.
+
+The vendor/project pages are living documentation, not pinned versions. No hardware operation or setup procedure was performed. Actual parts, ratings, geometry, protection, firmware-specific behavior and physical verification require separate evidence. The transferable method concerns useful judgment and communication; the old ideal inverter supplies no printer circuit or domain qualification.
+
 ## What remains to be demonstrated here
 
 The chain of interest is characteristic prompt authorship, permitted selection, actual supplied context, LLM reasoning expressed in observable choices, action and received feedback, justified self-revision, and an independently assessed useful outcome. Private provider-internal reasoning need not be exposed to test the observable chain. File creation, schema compliance, a persistence receipt, or the persona claiming it has matured proves only a narrower part. An action following a read does not by itself establish causation.
