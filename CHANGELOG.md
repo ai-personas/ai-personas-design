@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — staged-check accounting precision
+
+Made the printer comparison’s boundary and counts explicit: after method/template supply through delivery, Mira uses five persona responses versus three for Arun or Leena, adding two responses and one checker execution. All episode costs remain counted; these hypothetical counts establish no measured efficiency. No workflow, normative rule or criterion changed.
+
 ## 9 October 2026 — exact illustrative discovery and lineage
 
 Bound printer/social literal searches to displayed method-body text and kept the template lookup separate. Mapped circuit trace labels to new scoped revision-1 files derived from retained house revision 1; bound later house selection and Mira’s caption edit to exact bases. Clarified first social-file revisions and separated character-account labels from developmental checkpoints. No scenario outcome, contract, protected criterion or empirical claim changed.
