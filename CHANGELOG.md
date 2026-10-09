@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — evidence-driven evaluation controls
+
+Refined existing comparisons for untouched versus assessed behavior, description/advice/action, chosen counterevidence, partner/convention changes, held-out source wording, source-to-asset poisoning after cleanup, and durable reuse versus equivalent non-retained helpers. Added selective versioned primary evidence with component limits, including the distinction between personality-expression text and useful actions.
+
+All new cases remain unrun. Preserved authorities, identifiers, historical results, minima, lexical primary selection, every-call joint maintenance and valid no-change. No extra production call, security experiment, runtime change or demonstrated benefit follows from this design-only revision.
+
 ## 9 October 2026 — requirement coverage and reference precision
 
 Reviewed the seeded-character, every-call maintenance, experience-shaped development, supporting-resource, selective-navigation and bounded-cost requirements against their existing normative homes and acceptance criteria. No new requirement family or runtime result follows from that review.

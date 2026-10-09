@@ -57,6 +57,10 @@ The [direct discovery note](PERSONA-FILES-RESEARCH.md#direct-tool-discovery-evid
 
 The revision extends rationale and unrun comparisons while preserving original source lineage, pinned historical evidence, and failed or limited results. No code, model trial, runtime conformance test, publication, or deployment approval follows from the edits.
 
+## 9 October evidence-driven evaluation refinement
+
+Selective additions to the [research brief](PERSONA-FILES-RESEARCH.md) support assessment isolation, chosen evidence opportunities, scoped coordination conventions, source-style controls, derived-asset poisoning and durable-reuse attribution. Inspected primary versions and component limits are stated beside each claim; Han’s published abstract is not conflated with earlier preprint methods. The Nature endpoint is narrowed to generated status text. These sources motivate unrun comparisons in the existing [method](../evaluation/README.md) and [acceptance catalogue](../evaluation/ACCEPTANCE.md), not architectural changes, independent replication of the persona loop, runtime passes or inherited source-integrity claims.
+
 ## Original supplied-source lineage
 
 Before the code-free briefs, the historical package recorded five supplied attachments. Their original repository copies are pinned at **0c96694303e344ef976150a4d544f3ca57f77d33**. Their original names document lineage; they do not establish that later rewritten briefs have identical bytes.

@@ -10,6 +10,8 @@ The 8 October 2026 design specifies a coherent file-first persona with one accep
 
 The target now explicitly starts with trait seeds becoming initial LLM-authored candidate fragments, coherent acceptance, and continuing primary-LLM self-harmonization. It extends primary-owned context selection to separately retained histories, tool-use records, definitions, skills, scripts, code, and data. A small discovery bootstrap and bounded literal/regex or exact-reference path exclude full-catalogue preload from both provider transport and model context. Resource finding, actual exposure, current executable availability, authority, invocation, and received results remain distinct. These are specified obligations and unverified evidence needs, not new findings about the inspected runtime.
 
+The 9 October 2026 [evaluation refinement](../evaluation/README.md) sharpens assessment isolation, chosen evidence gathering, partner/convention changes, held-out resource wording, derived-asset poisoning and durable-reuse attribution. All added comparisons remain unrun design proposals; neither the source research nor this revision supplies new runtime, behavioral, security or efficiency results.
+
 “Specified,” “implemented,” “mechanically tested,” “behaviorally demonstrated,” and “approved for a deployment” remain different statuses. Unknown current conformance is not a claim that existing runtime mechanisms are absent or defective. It is a requirement to obtain exact, applicable evidence before claiming they work under the revised contract.
 
 ## Current gaps to close with implementation evidence
