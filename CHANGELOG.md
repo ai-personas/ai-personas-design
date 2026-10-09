@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — distinctive choices and individual development
+
+Clarified that correct convergence does not establish behavioral individuality where meaningful discretion remains. Expanded the hypothetical printer with shared-capability staged, batch and claim-focused checking; added independent Mira and Leena skyscraper work before the separately authorized collaboration; and made house communication choices and individual revision origins explicit. Starting tendencies remain distinct from later changes, equal capability does not require identical spend, and faulty-helper histories are not treated as matched clean-input comparisons. Existing evaluation controls now explicitly report discretionary traces separately from wording. Protected identifiers, acceptance criteria and campaign minima remain unchanged; these are unrun illustrations, not demonstrated psychological effects or maturation.
+
 ## 9 October 2026 — human-source requirements correction
 
 Revised USER-REQUIREMENTS to contain only rephrased human-user intent. Removed assistant-added maintenance-disposition, evidence, authority, mapping, and review-gate requirements; retired UR-017 rather than repurposing its identifier. Restored the strong whole-persona maturation and better-performance goals, clarified general-purpose human-like behavior, and added the requested circuit-to-3D-printer transfer case as UR-043. Included the renewed ten-hour audit of published and unpublished documents, revision/deletion and publication instructions, and the clarification that hypothetical walkthroughs exercise rather than limit the design. No normative design safeguards were changed by this two-file correction.
