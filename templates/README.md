@@ -51,7 +51,7 @@ A reviewer of the mechanism can ask:
 
 - Which accepted exact text changed, and who actually authored or adopted it?
 - What observed source supports any experience claim, with what restrictions?
-- Which qualifications are inside the file or explicitly required alongside it?
+- Which qualifications are included in the supplied prompt part or explicitly bound as required accompaniment? A qualification stored elsewhere in the same JSON file is not automatically supplied with a selected decoded field
 - Which connections are optional search associations, which are exact evidence references, and which are mandatory qualifications or accepted warnings? Do not use one as a substitute for another
 - Was the material later found, read, deliberately selected, actually supplied, used in action, or shown to help? Keep those answers separate
 - Did a correction, restriction, rename, split, merge, retirement, or erasure preserve the applicable history and limits?

@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — qualification wording across representations
+
+Aligned the fragment-review worksheet with the JSON matching contract: required qualifications must reach the supplied prompt part or its explicit required accompaniment, rather than merely exist somewhere in the same file. This is a reader-facing clarification, with no runtime or behavioral result claimed.
+
 ## 9 October 2026 — whole-persona maturation and JSON matching surfaces
 
 Made the experience-grounded usefulness target explicit across work, judgment, communication, coordination, characteristic expression and modeled-affect recovery. Added falsifiable within-persona stage-matched comparisons and compact hypothetical Mira/Arun/Leena checkpoints, preserving their accepted seeds, stable-character controls and existing house/circuit fixtures. Gains, stability, regression and inconclusive outcomes remain distinct.
