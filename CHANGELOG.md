@@ -2,6 +2,18 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — human-source requirements correction
+
+Revised USER-REQUIREMENTS to contain only rephrased human-user intent. Removed assistant-added maintenance-disposition, evidence, authority, mapping, and review-gate requirements; retired UR-017 rather than repurposing its identifier. Restored the strong whole-persona maturation and better-performance goals, clarified general-purpose human-like behavior, and added the requested circuit-to-3D-printer transfer case as UR-043. Included the renewed ten-hour audit of published and unpublished documents, revision/deletion and publication instructions, and the clarification that hypothetical walkthroughs exercise rather than limit the design. No normative design safeguards were changed by this two-file correction.
+
+## 9 October 2026 — walkthrough and research audit increment
+
+Published in commit 8709b2a: limited own-voice evaluation to characteristic fragments while preserving neutral supporting assets; expanded hypothetical three-persona decisions, receipts, selective-transfer diagnostics, coordination, and affect recovery; and added bounded ACE and ReasoningBank adverse-context findings. The 44 core acceptance criteria, 45 requirement identifiers, I01–I21 invariants, and campaign minima were preserved. No runtime validation was performed.
+
+## 9 October 2026 — circuit-to-printer transfer walkthrough
+
+Published in commit e448a6d: added a hypothetical circuit-to-3D-printer transfer walkthrough and explained the intended general-purpose benefit, with exact supporting assets and help, no-effect, harm, and missed-benefit branches. Existing engineering and evidence limits remain unchanged; the walkthrough does not establish a runtime result.
+
 ## 9 October 2026 — consolidated user requirements
 
 Added one readable requirements account covering the human-authored design conversation, with stable UR identifiers and links to existing design and evaluation authority. It separates product intent, research and incremental publication instructions, and historical runtime requests; later fragment, asset, and maturation clarifications control earlier terminology. Protected invariants, requirement rows, acceptance criteria, and minima are unchanged. This consolidation adds no implementation or claim of demonstrated benefit.
