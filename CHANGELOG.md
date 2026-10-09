@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 9 October 2026 — exact illustrative discovery and lineage
+
+Bound printer/social literal searches to displayed method-body text and kept the template lookup separate. Mapped circuit trace labels to new scoped revision-1 files derived from retained house revision 1; bound later house selection and Mira’s caption edit to exact bases. Clarified first social-file revisions and separated character-account labels from developmental checkpoints. No scenario outcome, contract, protected criterion or empirical claim changed.
+
 ## 9 October 2026 — enabled stable-character maturation
 
 Clarified that a deployment claiming autonomous stable-character maturation needs an explicitly user-authorized effective enabled policy supplied to ordinary calls; locked mode remains a valid, narrower choice. Added an unrun Arun branch with stipulated observations, a genuine planning-facet revision, coherent atomic acceptance and fresh work within reserved continuation/closeout bounds. Core/contracts, protected criteria and minima are unchanged. The sequence proves neither behavioral benefit nor protection against all revision churn.
