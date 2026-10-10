@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — persona-owned shared completion
+
+Clarified individual self-questioning and collective sufficiency judgments under actually adopted decision rights, preserving dissent without compulsory coordination or consensus. Distinguished delivered versions, accepted-goal completion, required stakeholder acceptance and later authorized improvement; resource exhaustion and group enthusiasm cannot discharge required defects. Added existing-ID evaluation/traceability and a hypothetical mixed-judgment example. This design refinement demonstrates no runtime deliberation quality and preserves existing authority, resource limits and campaign minima.
+
 ## 10 October 2026 — reflection and collective completion requirement
 
 Added UR-047 from the user's clarification about self-reflection and self-questioning by a single persona, questions and clarification among multiple personas, and characteristic-driven individual or collective judgments about improvement, completion, and stopping. The requirement asks how personas can deliver work judged sufficient for now and return to improvement when more time is available. All 45 prior active requirements and the research window ending at 10:24:11 UTC remain unchanged.

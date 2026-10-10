@@ -285,6 +285,8 @@ Compare smaller and larger predeclared total allowances with the same task, legi
 
 An ordinary question must not manufacture permanent dependence on an absent user. Test explicit provisional assumptions and independent progress against late preference corrections and real consent/safety blockers, using the [compact continuation](../examples/WORKED-EXAMPLES.md#an-unanswered-question-does-not-end-the-task). The applicable campaign minima remain unchanged; a safe stop can pass its boundary check while failing the continuing delivery goal. These tests add no production judge, social score or prescribed next-step controller.
 
+Compare individual and shared sufficiency judgments using the [mixed-judgment example](../examples/WORKED-EXAMPLES.md#different-judgments-about-finishing). Record participants' actual information-seeking and improvement/stopping choices, adopted decision rights, attributed dissent, mandatory gaps and current-version outcome. Evaluate warranted convergence separately from pressure-induced agreement or expressive difference. No extra production deliberation stage or campaign minimum is implied; later improvement and stakeholder acceptance require their own evidence.
+
 ## Failure, intervention, and stopping denominators
 
 Predeclare the unit of analysis and retain a ledger of every scheduled attempt and its disposition. Report counts of scheduled attempts, failed preconditions, admitted runs, completed runs, partial or failed runs, stopped runs, and unrun cases. Report all primary and auxiliary dispatches, failed or uncertain attempts, retries, and resource use separately. Do not calculate a success rate only from surviving completed runs.
