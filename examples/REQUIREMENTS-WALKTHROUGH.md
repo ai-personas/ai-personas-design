@@ -4,7 +4,7 @@
 
 ## Verdict and scope
 
-The design supports a coherent hypothetical journey from three different beginnings through house, circuit, skyscraper, printer and everyday interactions. The replay makes useful continuation and justified completion visible, including unanswered questions, rejected improvements and disagreement. It does **not** establish that all 46 requirements have passed. General-purpose capability, whole-persona maturation, better later performance, reliable implementation and cost savings remain unproved; research, publication and historical assignments need their own evidence.
+The design supports a coherent hypothetical journey from three different beginnings through house, circuit, skyscraper, printer and everyday interactions. The replay makes useful continuation and justified completion visible, including unanswered questions, rejected improvements and disagreement. It does **not** establish that all 47 requirements have passed. General-purpose capability, whole-persona maturation, better later performance, reliable implementation and cost savings remain unproved; research, publication and historical assignments need their own evidence.
 
 **Every request, grant, response, receipt, finding and outcome in these scenes is hypothetical and unrun.** They show observable inputs, decisions and records, not private reasoning, live model transcripts or engineering validation. The starting point is documentation snapshot `0e32743e5f7d3fbd531c016834986f20952ba693`. Detailed source scenes remain in [the existing examples](WORKED-EXAMPLES.md); this shorter replay neither replaces their qualifications nor changes normative rules.
 
@@ -118,7 +118,7 @@ Matched frozen-start/retained-revision comparisons must hold facts, eligible ass
 
 This replay repairs an illustration gap: sparse technical intake now visibly continues without an ordinary preference answer. It also brings existing maintenance/social cases into the requirement check. It establishes no new normative contradiction and makes no normative repair by stipulating success. Robust retrieval, character-conditioned usefulness, durable continuation, whole-persona improvement and quality-adjusted economics still require the [specified evaluations](../evaluation/README.md).
 
-## Coverage of all 46 active requirements
+## Coverage of all 47 active requirements
 
 **Illustrated** means an observable fictional mechanism, including explicitly labeled transfer hypotheses. **Partial** identifies limited or abbreviated coverage. **Not demonstrable here** requires actual research, publication, historical or empirical evidence. **Docs verified** applies only to the narrow file/diff fact stated, not fulfillment of the entire goal. Runtime mechanisms and beneficial outcomes remain untested even in illustrated rows. UR-017 is retired; all other IDs appear once below. M1/M2 share their section link.
 
@@ -126,7 +126,7 @@ This replay repairs an illustration gap: sparse technical intake now visibly con
 |---|---|---|
 | UR-001 | Design before implementation | Docs verified: this local diff contains documentation only; no application code |
 | UR-002 | One coherent design | Partial: [existing whole-design audit](../evaluation/USER-REQUIREMENTS-AUDIT.md); coherence exceeds this replay |
-| UR-003 | General-purpose, human-like personas | Partial: [B](#b-three-authored-beginnings)/[H](#h-house-work-and-selective-skyscraper-transfer)/[C](#c-circuit-work-and-selective-printer-transfer)/[M2](#m-maintenance-and-social-reuse-beyond-the-technical-tasks) span technical and social work, not all tasks |
+| UR-003 | General-purpose personas; human or persona requester | Partial: [B](#b-three-authored-beginnings)/[H](#h-house-work-and-selective-skyscraper-transfer)/[C](#c-circuit-work-and-selective-printer-transfer)/[M2](#m-maintenance-and-social-reuse-beyond-the-technical-tasks) span technical and social work; the [later peer request](WORKED-EXAMPLES.md#unassigned-social-life-and-later-persona-originated-work) illustrates persona-originated need, not universal capability |
 | UR-004 | Start with a persona profile | Illustrated: [B](#b-three-authored-beginnings) profiles condition own-voice starting fragments |
 | UR-005 | The initial LLM call authors the initial fragments | Illustrated: [B](#b-three-authored-beginnings) seed→initial authorship→acceptance→first actual supply |
 | UR-006 | Fragments embody character | Partial: [B](#b-three-authored-beginnings)/[H2](#h2-a-shared-brief-and-an-actual-correction)/[C2](#c2-feedback-produces-three-scoped-interpretations)/[M](#m-maintenance-and-social-reuse-beyond-the-technical-tasks) show character-bearing excerpts, not every full fragment |
@@ -160,15 +160,16 @@ This replay repairs an illustration gap: sparse technical intake now visibly con
 | UR-035 | Deliver a robust, reliable blueprint | Not demonstrable here: robust complete implementation reliability needs real tests |
 | UR-036 | Research thoroughly | Not demonstrable here: [research records](../sources/README.md) need separate thoroughness assessment |
 | UR-037 | Follow the latest research window and update cadence | Not demonstrable here: renewed window runs 10 October 02:12:20–12:12:20 UTC; updates/research still ongoing |
-| UR-038 | Audit the whole requirement set and design | Partial: 46-row replay check; whole-document/multiple-agent audit requires separate records |
+| UR-038 | Audit the whole requirement set and design | Partial: 47-row replay check; whole-document/multiple-agent audit requires separate records |
 | UR-039 | Publish completed changes incrementally | Not demonstrable here: prior snapshot publication record inspected; this increment is pending publication |
-| UR-040 | Consolidate human-user requirements in one file and publish it | Docs verified: [consolidated source](../USER-REQUIREMENTS.md) has 46 active IDs; original-message completeness/publication require separate checks |
+| UR-040 | Consolidate human-user requirements in one file and publish it | Docs verified: [consolidated source](../USER-REQUIREMENTS.md) has 47 active IDs; original-message completeness/publication require separate checks |
 | UR-041 | Investigate and fix the reported runtime root causes | Not demonstrable here: historical root-cause/runtime assignment not executed here |
 | UR-042 | Run the earlier model comparison | Not demonstrable here: historical model comparison not executed here |
 | UR-043 | Show circuit-to-3D-printer improvement | Illustrated hypothesis: [C2](#c2-feedback-produces-three-scoped-interpretations)→[C3](#c3-fresh-printer-facts-and-different-useful-choices) transfer; real better-printer performance untested |
-| UR-044 | Examine sustained purposeful work and improvement | Partial: [H4](#h4-sufficient-now-and-a-continuing-obligation)/[C4](#c4-a-rejected-improvement-and-separate-collective-authority) useful continued work; long-run improvement untested |
+| UR-044 | Examine sustained quality artifacts and individual/group improvement | Partial: [H4](#h4-sufficient-now-and-a-continuing-obligation)/[C4](#c4-a-rejected-improvement-and-separate-collective-authority) and [longer group trajectory](WORKED-EXAMPLES.md#a-longer-group-trajectory-can-help-tie-or-reject-harm) distinguish useful/null/rejected harm and incumbents; longer-run quality remains untested |
 | UR-045 | Justify continuation and stopping | Illustrated: [H2](#h2-a-shared-brief-and-an-actual-correction)/[H4](#h4-sufficient-now-and-a-continuing-obligation)/[C4](#c4-a-rejected-improvement-and-separate-collective-authority) preserve responsibility and justify fresh continuation/stopping |
 | UR-046 | Clarify sparse requests and proceed | Illustrated: [H1](#h1-an-unanswered-request-still-permits-progress)–[H2](#h2-a-shared-brief-and-an-actual-correction) unanswered request, volunteer clarification and conditional progress |
 | UR-047 | Let reflection, dialogue, and character shape completion and further improvement | Illustrated: [H4](#h4-sufficient-now-and-a-continuing-obligation) self-questioning, dissent, sufficiency and later revision; [C4](#c4-a-rejected-improvement-and-separate-collective-authority) rejection |
+| UR-048 | Examine task-free societal interaction and later usefulness | Partial: [unassigned social life](WORKED-EXAMPLES.md#unassigned-social-life-and-later-persona-originated-work) shows voluntary conversation, refusal, optional exploration, persona-originated need and qualified later use. Society emergence and improved held-out work remain unproved |
 
 A coherent specification, an illustrative sequence and a demonstrated useful implementation are different results. Every fragment’s unique characteristic meaning, better later performance and whole-persona maturation remain the strong goals; bounded bookkeeping cannot substitute for them.

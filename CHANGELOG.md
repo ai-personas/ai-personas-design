@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — task-free interaction and longer group outcomes
+
+Clarified persona/self-originated needs and enabled voluntary social opportunities without assigned deliverables. Added bounded longitudinal social and group-quality illustrations, including refusal, dormancy, selective revision/use, null outcomes and rejected harm. Extended claim-conditioned duration/exposure/quality/cost reporting within existing minima and refreshed the replay to 47 requirements. These fictional trajectories establish no runtime society, guaranteed maturation or measured saving.
+
 ## 10 October 2026 — societal maturation and requester-origin requirements
 
 Clarified UR-003 so a need may originate from a human or another persona, expanded UR-044’s quality-artifact and continuing group-work intent, and added UR-048 for hypothetical examination of task-free, characteristic-driven societal interaction and later usefulness. This source-only amendment contains 47 active IDs; UR-037’s window and all other requirements remain unchanged. It adds no design mechanism or outcome claim.

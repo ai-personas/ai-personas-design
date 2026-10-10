@@ -12,7 +12,7 @@ The protected [I01–I21 invariants](../implementation/REQUIREMENTS.md), this ch
 
 ## The need and accepted scope
 
-Preserve the person's exact request, its origin, supplied material, and authorized boundaries. A short request to create or build does not silently become an offer of advice because a prose answer is easier. Personas discover the appropriate result level, consequential unknowns, useful representations, and needed checks. The user need not supply tool names or file formats.
+Preserve the exact request or self-originated need, its actual human/persona origin, supplied material, and authorized boundaries. A requester may be a human or another persona; an existing valid opportunity can support a persona's own need or peer request without a fresh human prompt. Requester identity does not confer another party's authority or consent. A short request to create or build does not silently become an offer of advice because a prose answer is easier. Personas discover the appropriate result level, consequential unknowns, useful representations, and needed checks. The user need not supply tool names or file formats.
 
 The mandate records the agreed outcomes, hard constraints, preferences, accepted clarifications, assumptions, permissions, resources, review expectations, and stopping conditions. Detail is proportionate to consequences and dependencies. A request, a proposed interpretation, an adopted scope, an optional improvement, and a completion criterion have different authority. Material changes need the authorized party's decision; a persona's plan cannot rewrite the original need.
 
@@ -341,6 +341,8 @@ Starting-state references survive permitted changes; sensitive payload retention
 ### Between-task exploration is explicitly funded
 
 Active work may investigate unfamiliar methods within its existing purpose, authority, and funding. Between-task personal exploration is disabled until an operator enables a permitted environment, existing allowance, explicit episode bounds, finite recurrence, and expiry. No omitted setting means unlimited activity. The persona chooses its question, experiment, collaborators, and stop condition; it cannot enlarge or renew permission.
+
+Enabled between-task opportunities may also permit low-stakes social or recreational exchange without an assigned deliverable or topic. The persona chooses whether to engage, whom to approach, what to discuss and when to stop within the enabled audience, contact preferences and resource scope. Availability is not acceptance; refusal or silence creates no participation duty. The host supplies eligible opportunities, not conversational content or compulsory partners. A chosen social purpose can end without an artifact, durable revision or later productivity benefit. No assigned task does not mean no operating authority; dormancy remains valid, and the following accounting rules do not require inventing an external task.
 
 An episode is ordinary work with purpose, owner, funding, observations, and disposition. Calls and time apply to the whole episode, including orientation, collaborators, late review, nested inference, and failed admitted attempts. Authoritative work-to-episode lineage determines funding even when a presentation lacks an episode label. New participants or child work do not obtain fresh allowance, another deadline, or foreground status. A distinct episode needs a separately authorized opportunity.
 
