@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — additional Cloud CLI reviewer requirement
+
+Recorded the requested additional Codex CLI reviewer in Codex Cloud, restricted to GPT-6 Astra at xhigh reasoning effort for this review. Preserved all 47 identifiers and the five-hour window; this source amendment claims no installation or completed model execution.
+
 ## 10 October 2026 — explicit next-context judgment on every accepted response
 
 Corrected the prior silent-selection-omission policy to match every-call next-context intent. Each accepted persona response explicitly addresses fragments and supporting resources; concise appropriate preservation remains valid without new search, mutation or continuation. Missing/malformed intent follows existing whole-response rejection and recovery, without fabricated choices or automatic paid repair. Reconciled normative, implementation, evaluation, explanatory and visual surfaces; retained historical evidence with explicit supersession and added a short boundary trace. Identifiers/minima and user requirements remain unchanged; actual coverage and useful choice require fresh evidence.
