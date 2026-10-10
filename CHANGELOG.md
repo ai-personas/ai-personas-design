@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — renewed five-hour search-network audit requirement
+
+Updated UR-037 to the human-requested 09:00:23–14:00:23 UTC window, focused on authored search/regex cues, connected fragments, effective selective context and hypothetical walkthroughs with parallel research. Retained ten-minute updates and prior-window history. All 47 requirement IDs and other requirements remain unchanged; no graph implementation or effectiveness claim is added.
+
 ## 10 October 2026 — scoped file-search assessment
 
 Added a snapshot-specific search-review addendum for b1c84744, recording pagination-completeness and H3 provenance/selection repairs alongside remaining discovery and outcome limits. Preserved the 47-row baseline, all three-axis dispositions, source requirements and evaluation minima; no runtime or performance result is claimed.
