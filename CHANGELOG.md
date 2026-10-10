@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — core intent and separate research execution directions
+
+Removed the Cloud/CLI/model-specific sentence from UR-038 following the user’s clarification. These are research execution directions, not persona design requirements. The core thorough audit and multiple-research-agent intent remain; all other requirements and the research window are unchanged. This correction supersedes the classification in the preceding entry.
+
 ## 10 October 2026 — additional Cloud CLI reviewer requirement
 
 Recorded the requested additional Codex CLI reviewer in Codex Cloud, restricted to GPT-6 Astra at xhigh reasoning effort for this review. Preserved all 47 identifiers and the five-hour window; this source amendment claims no installation or completed model execution.
