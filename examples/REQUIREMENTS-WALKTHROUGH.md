@@ -129,7 +129,7 @@ This replay repairs an illustration gap: sparse technical intake now visibly con
 | ID | Human requirement | Concrete scene coverage and remaining limit |
 |---|---|---|
 | UR-001 | Design before implementation | Docs verified: this local diff contains documentation only; no application code |
-| UR-002 | One coherent design | Partial: [existing whole-design audit](../evaluation/USER-REQUIREMENTS-AUDIT.md); coherence exceeds this replay |
+| UR-002 | One coherent design | Partial: [design authority and complementary normative homes](../design/README.md#authority-within-the-repository); coherence exceeds this replay |
 | UR-003 | General-purpose personas; human or persona requester | Partial: [B](#b-three-authored-beginnings)/[H](#h-house-work-and-selective-skyscraper-transfer)/[C](#c-circuit-work-and-selective-printer-transfer)/[M2](#m-maintenance-and-social-reuse-beyond-the-technical-tasks) span technical and social work; the [later peer request](WORKED-EXAMPLES.md#unassigned-social-life-and-later-persona-originated-work) illustrates persona-originated need, not universal capability |
 | UR-004 | Start with a persona profile | Illustrated: [B](#b-three-authored-beginnings) profiles condition own-voice starting fragments |
 | UR-005 | The initial LLM call authors the initial fragments | Illustrated: [B](#b-three-authored-beginnings) seed→initial authorship→acceptance→first actual supply |

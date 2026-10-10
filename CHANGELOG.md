@@ -2,9 +2,9 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
-## 10 October 2026 — dated complete-design audit coverage
+## 10 October 2026 — keep audit reporting internal
 
-Recorded the exact 27-file, 5,302-line baseline review and separately reviewed source, documentary-repair and scenario increments through 8ef60fa8. Added current evidence mapping for all 47 listed requirements while preserving historical dispositions and open empirical limits. Scoped house/circuit gains remain hypothetical and do not establish physical design improvement or complete the ongoing research window.
+Removed the standalone published user-requirement audit and its current coverage-ledger narration at the user’s request, and repaired incoming references. Internal audits inform reviewed design fixes; this removal changes no design contract or historical execution result.
 
 ## 10 October 2026 — extended-time house and five-persona circuit continuations
 
