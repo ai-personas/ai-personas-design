@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — dated societal alignment assessment
+
+Reassessed exact 0fa28b83 against 47 active requirements, including task-free social life, persona-originated needs and longer group-quality trajectories. Preserved prior dispositions and empirical limits; UR-048 is specified with adequate bounded illustration and open outcomes. Distinguished local inspection from the inspected publication verification, and elapsed opportunity from social or later-work benefit.
+
 ## 10 October 2026 — task-free interaction and longer group outcomes
 
 Clarified persona/self-originated needs and enabled voluntary social opportunities without assigned deliverables. Added bounded longitudinal social and group-quality illustrations, including refusal, dormancy, selective revision/use, null outcomes and rejected harm. Extended claim-conditioned duration/exposure/quality/cost reporting within existing minima and refreshed the replay to 47 requirements. These fictional trajectories establish no runtime society, guaranteed maturation or measured saving.
