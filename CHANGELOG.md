@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — validate model-judged benefit contrasts
+
+Clarified bounded blinded human or independently verifiable-outcome auditing of model-judged benefit contrasts across relevant conditions and consequential task strata. Pooled agreement alone is insufficient; inadequate or discordant evidence limits the claim. Existing campaign minima and production behavior remain unchanged.
+
 ## 10 October 2026 — foreground priority during optional work
 
 Clarified same-persona and same-root foreground priority before new discretionary optional admissions, preserving admitted effects and required closeout. Added deployment latency disclosure and refined the existing acceptance case.
