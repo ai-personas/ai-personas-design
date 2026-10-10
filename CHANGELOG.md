@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — collective example scope
+
+Clarified that the walkthrough’s repeated final-disposition arrangement is task-specific and does not demonstrate shared or leaderless decision performance. Other adopted arrangements remain permitted; no scene, role, rule or coverage disposition changed.
+
 ## 10 October 2026 — integrated hypothetical requirement replay
 
 Added a reader-facing walkthrough of the same three personas through initialization, house and skyscraper work, circuit and printer work, later resource reorganization and everyday interaction. The observable sequences distinguish unanswered clarification, accepted context, maintenance, checks, delivery, dissent and separately authorized continued improvement. A 46-row map separates illustration, partial coverage, documentary checks and requirements a fictional replay cannot demonstrate. Existing detailed examples remain intact. No user requirement, normative contract, acceptance minimum, numerical fixture or historical result changed; no runtime, maturation benefit or cost saving is claimed.

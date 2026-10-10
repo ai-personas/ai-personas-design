@@ -94,6 +94,8 @@ Only a **new explicit grant** permits sharing this synthetic concept among the t
 
 Each call keeps F unchanged, records A findings/candidates/commitments and selects exact current evidence; storage, check and delivery receipts remain separate. No unanimity or client endorsement is invented. Later spare time triggers nothing. A later accepted improvement grant can permit reordering, fresh checks and delivery without retroactively invalidating earlier sufficiency.
 
+These collective closure scenes use one explicitly adopted authority arrangement, with Mira deciding final disposition. Her role is specific to those agreements, not a default leader assignment. Shared or leaderless decision performance is not demonstrated. The [design permits other adopted arrangements](../design/WORK-AND-BOUNDARIES.md#individual-and-shared-sufficiency-judgments); broader behavioral demonstration remains open.
+
 ## M Maintenance and social reuse beyond the technical tasks
 
 These supplementary branches condense [existing reorganization](WORKED-EXAMPLES.md#the-persona-refines-a-smaller-more-useful-way-to-find-context) and [social scenes](WORKED-EXAMPLES.md#everyday-interaction-listening-and-a-changed-need), rather than inventing experience for the house/circuit histories.
