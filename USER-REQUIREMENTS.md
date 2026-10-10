@@ -1,6 +1,6 @@
 # Consolidated user requirements
 
-This file consolidates the user's requirements from the AI Personas design conversation through 9 October 2026. It is a single readable account of the requested outcome, architecture, examples, research, and delivery. Repeated requests are combined, and later clarifications control the meaning of earlier wording.
+This file consolidates the user's requirements from the AI Personas design conversation through 10 October 2026. It is a single readable account of the requested outcome, architecture, examples, research, and delivery. Repeated requests are combined, and later clarifications control the meaning of earlier wording.
 
 Only human-user messages supply the requirements in this file. Rephrase and consolidate those messages without adding assistant interpretations, design decisions, evidence safeguards, or implementation rules as user requirements. Preserve the user's intended outcomes rather than weakening them to fit the existing design. Later user clarifications govern earlier wording.
 
@@ -51,6 +51,15 @@ Only human-user messages supply the requirements in this file. Rephrase and cons
 - **UR-027 Later stages should perform better.** A matured persona should be better than it was at an earlier age. Its improved fragments, assets, characteristic behavior, and ways of prompting and working should help it perform subsequent work better. Show this benefit across the persona's behavior and actions.
 - **UR-028 Examine useful transfer without assuming complete domain transfer.** Earlier work should help later work through relevant fragments, skills, tools, assets, methods, simulations, and developed characteristic behavior. The user does not expect every part of the earlier work, or its entire domain solution, to transfer. Work through the new task on its own and examine which parts of prior development help.
 
+### Sustained work and reasons to continue or stop
+
+- **UR-044 Examine sustained purposeful work and improvement.** Examine what happens when a persona has ample, or hypothetically unlimited, time to keep working on a user's task. Investigate whether continued work produces tangible results, improves the task or its output, improves the persona itself, and involves useful interaction with other personas. Explain how this continued work and improvement should happen.
+- **UR-045 Justify continuation and stopping.** Review whether personas keep working usefully or stop arbitrarily with potentially low-quality work. Explain when and why a persona should continue working or stop, and how those choices are justified in relation to the user's task and the opportunity for further improvement.
+
+### Clarification and progress from sparse requests
+
+- **UR-046 Clarify sparse requests and proceed.** A user may begin with a simple question or a bare description of a task or need. When more clarity is needed, the persona should ask useful clarification questions of the user or relevant stakeholder. The user or task owner may or may not provide answers; the persona should not wait indefinitely for that input. It should be able to seek clarification from other personas, receive input when another persona volunteers it, or form its own reasonable interpretation and proceed with the work. Examine how these social interactions help clarify the task when the original requester is unavailable.
+
 ### Worked examples and design verification
 
 - **UR-029 Compare three unique personas over time.** Use three personas with distinct initial profiles and initial LLM-authored fragments. Hypothetical walkthroughs must examine each persona's uniqueness and its own human-like aging and maturation based on its traits, showing its initial state, interactions, subsequent fragments and assets, and characteristic behavior across its later actions and communication.
@@ -67,7 +76,7 @@ Only human-user messages supply the requirements in this file. Rephrase and cons
 These requirements govern the requested design assignment and its publication. They are not fixed schedules, runtime loops, or mandatory timing rules for the future persona system.
 
 - **UR-036 Research thoroughly.** Conduct deep research on the current design and the user's requirements, including trait choices, fragment and asset organization, retrieval, context efficiency, behavior, maturation, and the gaps exposed by the worked examples.
-- **UR-037 Follow the latest research window and update cadence.** Conduct the renewed ten-hour research assignment requested on 9 October 2026 at 22:09:20 UTC, through 10 October at 08:09:20 UTC. Continue concise progress updates every ten minutes. This follows earlier five-hour and ten-hour assignments and the later clarification that ten-minute updates are suitable.
+- **UR-037 Follow the latest research window and update cadence.** Conduct the renewed ten-hour complete review, audit, and thorough research requested on 10 October 2026 at 00:24:11 UTC, through 10 October at 10:24:11 UTC, against all of the user's requirements, including sustained work, improvement, and justified continuation or stopping. Continue concise progress updates every ten minutes. This renews the preceding assignment requested on 9 October at 22:09:20 UTC through 10 October at 08:09:20 UTC, and follows earlier five-hour and ten-hour assignments and the later clarification that ten-minute updates are suitable.
 - **UR-038 Audit the whole requirement set and design.** Thoroughly research and audit all published and unpublished design documents against all of the user's requirements. Identify issues and determine how the design should work, then make the needed updates, revisions, or deletions to align the whole design with those requirements. Use multiple research agents for this assignment.
 - **UR-039 Publish completed changes incrementally.** Publish the design changes to the GitHub remote research branch in ai-personas-design. The earlier assignment requested a new branch. Push completed changes and continue the remaining work rather than waiting for the entire research period to end.
 - **UR-040 Consolidate human-user requirements in one file and publish it.** Rephrase all relevant human-user messages as requirements in a single design document and push it to the remote branch. Include later clarifications and combine repeated requests. Only the user's messages supply these requirements.

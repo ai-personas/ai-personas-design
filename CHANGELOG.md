@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — sustained-work user requirements and renewed audit
+
+Consolidated the user's questions about purposeful continued work with ample or hypothetically unlimited time, tangible results, task and persona improvement, interaction with other personas, and justified continuation or stopping rather than arbitrary termination with potentially low-quality work. Added UR-044 and UR-045 as matters to investigate and explain, and UR-046 for clarification and progress from sparse requests, preserving all 42 prior active requirements. The later clarification calls for useful questions to the user or stakeholder, requested or volunteered input from other personas, and a persona's own reasonable interpretation so work can proceed without waiting indefinitely for the original requester. Updated UR-037 to the renewed ten-hour review and research window from 10 October 2026 at 00:24:11 UTC through 10:24:11 UTC, with the existing ten-minute update cadence.
+
+This amendment changes only the human-source requirements account and this history. It does not settle the audit's questions, amend design contracts, or establish that continued work guarantees improvement.
+
 ## 9 October 2026 — research and correction-comparator precision
 
 Added a separately attributed ACE v3 robustness, reflection and evaluation-cost extension while preserving v1 provenance. Clarified equal outset instructions for same-task self-correction comparisons without leaking later-discovered evidence into earlier developmental checkpoints. These refinements adopt no external architecture or numeric settings and change no protected criteria or campaign minima; no experiment was run.
