@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — continuing-work requirement alignment
+
+Refreshed the dated user-requirement audit against c3e20ba63533c1790ec6088f1b7f4a10d0207a8c, covering all 46 active entries including sustained work, justified stopping, sparse-request progress and individual/collective sufficiency. Updated the renewed research window and linked the current design, hypothetical traces and unrun evaluations. Prior dispositions remain unchanged; all four new rows retain open empirical status. Source-only requirements, normative contracts and acceptance minima are unchanged by this assessment.
+
 ## 10 October 2026 — collective-judgment evidence and limits
 
 Added three version/date-qualified primary studies on beneficial critique alongside incorrect consensus, variable effects of double-checking on conformity, and task-dependent discussion outcomes and costs. These support existing evaluation questions without importing protocols, numeric thresholds or runtime-benefit claims. Original source provenance and all normative requirements remain unchanged.
