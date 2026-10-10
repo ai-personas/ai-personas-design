@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — selective fragment-network navigation replay
+
+Added a separate unrun navigation replay linking characteristic meaning and supporting assets through primary-chosen queries and exact qualified supply. Distinguished bridge exposure, optional selection and provider history, including self-hits, misses and deliberate nonselection; preserved original fixture histories and made no effectiveness claim.
+
 ## 10 October 2026 — core intent and separate research execution directions
 
 Removed the Cloud/CLI/model-specific sentence from UR-038 following the user’s clarification. These are research execution directions, not persona design requirements. The core thorough audit and multiple-research-agent intent remain; all other requirements and the research window are unchanged. This correction supersedes the classification in the preceding entry.

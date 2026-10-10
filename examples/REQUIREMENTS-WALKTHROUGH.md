@@ -10,6 +10,8 @@ The design supports a coherent hypothetical journey from three different beginni
 
 Every depicted persona call receives its complete accepted character, separate current modeled affect, mandate, permissions, obligations, observations, remaining allowance and both maintenance requests. Every response contains work, fragment maintenance (**F**), separate asset maintenance (**A**) and bounded next-context selection (**Next**). “Both unchanged” explicitly covers F and A. Search previews, accepted storage, actual context supply, checks and delivery are distinct events. Optional selection creates no automatic call. Full qualified fragments, rather than the short excerpts printed here, reach the fictional model.
 
+The separate [navigation replay](WORKED-EXAMPLES.md#following-connections-without-carrying-the-whole-network) expands known references, authored search cues, bridge-only supply, self-hits and missed material. It distinguishes prior exposure from future selection and retained provider history; its extra diagnostic calls are outside the original histories and prove no retrieval or cost benefit.
+
 ## B Three authored beginnings
 
 The initialization request supplies each semantic OCEAN seed and VAD baseline:
