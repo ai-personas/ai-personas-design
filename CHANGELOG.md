@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — exposure, source roles and audience eligibility
+
+Clarified model-visible discovery/read exposure versus selected operative supply, actual rendered roles/order in receipts, source-role preservation during deduplication, and known audience-eligibility consequences of current-self adoption. Existing selection, authority and bounded-context mechanisms remain unchanged.
+
 ## 10 October 2026 — remove residual public audit ledger
 
 Removed the audit-status ledger and audit-process narration from the existing walkthrough. Retained its explanatory design scenes, substantive evidence limits and normative references.
