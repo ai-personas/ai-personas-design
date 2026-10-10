@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — foreground priority during optional work
+
+Clarified same-persona and same-root foreground priority before new discretionary optional admissions, preserving admitted effects and required closeout. Added deployment latency disclosure and refined the existing acceptance case.
+
 ## 10 October 2026 — exposure, source roles and audience eligibility
 
 Clarified model-visible discovery/read exposure versus selected operative supply, actual rendered roles/order in receipts, source-role preservation during deduplication, and known audience-eligibility consequences of current-self adoption. Existing selection, authority and bounded-context mechanisms remain unchanged.
