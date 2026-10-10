@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — reflection and collective completion requirement
+
+Added UR-047 from the user's clarification about self-reflection and self-questioning by a single persona, questions and clarification among multiple personas, and characteristic-driven individual or collective judgments about improvement, completion, and stopping. The requirement asks how personas can deliver work judged sufficient for now and return to improvement when more time is available. All 45 prior active requirements and the research window ending at 10:24:11 UTC remain unchanged.
+
+This source-only amendment changes the requirements account and this history. It does not prescribe a consensus procedure, require endless revision, amend design contracts, or establish an observed improvement.
+
 ## 10 October 2026 — accountable continuing work
 
 Distinguished bounded local stopping from disposition of an accepted continuing goal. Required accountable continuation opportunities or real blockers/endings, declared ordinary-work scheduling assumptions and fresh decisions under conserved resources. Clarified progress from sparse requests despite unanswered ordinary preferences, preserving consent and safety/evidence blockers. Added existing-ID evaluation refinements, traceability, an unrun continuation and narrowly scoped primary research. No new controller, forced mutation, unlimited spend or guaranteed improvement is introduced; protected identifiers/minima and the human-only requirements remain intact. Runtime pursuit and useful outcomes remain unverified.
