@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — collective-judgment evidence and limits
+
+Added three version/date-qualified primary studies on beneficial critique alongside incorrect consensus, variable effects of double-checking on conformity, and task-dependent discussion outcomes and costs. These support existing evaluation questions without importing protocols, numeric thresholds or runtime-benefit claims. Original source provenance and all normative requirements remain unchanged.
+
 ## 10 October 2026 — persona-owned shared completion
 
 Clarified individual self-questioning and collective sufficiency judgments under actually adopted decision rights, preserving dissent without compulsory coordination or consensus. Distinguished delivered versions, accepted-goal completion, required stakeholder acceptance and later authorized improvement; resource exhaustion and group enthusiasm cannot discharge required defects. Added existing-ID evaluation/traceability and a hypothetical mixed-judgment example. This design refinement demonstrates no runtime deliberation quality and preserves existing authority, resource limits and campaign minima.
