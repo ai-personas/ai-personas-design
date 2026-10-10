@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — complete line-by-line audit and extended-time continuation request
+
+Updated UR-037 to the renewed 13:47:48–18:47:48 UTC review window, made the line-by-line whole-design audit explicit in UR-038, and extended UR-030 with hypothetical house work given more time and DC-to-AC work involving five personas given more time. Preserved the original three-persona cases, all 47 extant requirement identifiers, prior-window history and the ten-minute update cadence. This source-only amendment adds no runtime team size, scheduling mechanism, guaranteed improvement or empirical result.
+
 ## 10 October 2026 — selective fragment-network navigation replay
 
 Added a separate unrun navigation replay linking characteristic meaning and supporting assets through primary-chosen queries and exact qualified supply. Distinguished bridge exposure, optional selection and provider history, including self-hits, misses and deliberate nonselection; preserved original fixture histories and made no effectiveness claim.
