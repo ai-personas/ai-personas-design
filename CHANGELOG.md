@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — competing tools and conditional preparation
+
+Clarified orthogonal tool readiness/authority/use facts and added an independent hypothetical waveform extension: equal bounded choices for Mira, Arun and Leena, optional authorized simulator preparation, qualified skill supply, actual in-story results, failure/fallback and restricted later printer reuse. Updated UR-032 walkthrough coverage and its research-window reference; existing ideal circuit/printer fixtures and call counts stay unchanged. Added existing-ID evaluation cases and narrow official documentation support. These are design illustrations, not executed installations, simulation results or evidence of tool competence.
+
 ## 10 October 2026 — tool-use walkthrough clarification and renewed audit
 
 Expanded UR-032 with the user's request to examine tool and skill use, asset management and relevant retained data, suitable and effective tool choices among alternatives, characteristic- and skill-shaped tool preferences, and installation when it is part of the work. The existing circuit and later 3D-printer examples remain the relevant cases. Updated UR-037 to the renewed ten-hour review and research window from 10 October 2026 at 02:12:20 UTC through 12:12:20 UTC, retaining the ten-minute update cadence.
