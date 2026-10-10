@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — remove residual public audit ledger
+
+Removed the audit-status ledger and audit-process narration from the existing walkthrough. Retained its explanatory design scenes, substantive evidence limits and normative references.
+
 ## 10 October 2026 — research window and publication boundary
 
 Updated the research assignment to 14:21:32–19:21:32 UTC and clarified publication of reviewed design fixes while keeping audit reports, internal audit walkthroughs and research process notes internal. Product requirements remain unchanged.
