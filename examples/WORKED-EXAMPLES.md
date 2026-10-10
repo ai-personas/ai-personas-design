@@ -1,6 +1,6 @@
 # AI Personas in ordinary work
 
-[Home](../README.md) · [Persona core](../design/PERSONA-CORE.md) · [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) · [Acceptance cases](../evaluation/ACCEPTANCE.md)
+[Home](../README.md) · [Persona core](../design/PERSONA-CORE.md) · [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) · [Acceptance cases](../evaluation/ACCEPTANCE.md) · [Requirements walkthrough](REQUIREMENTS-WALKTHROUGH.md)
 
 **Every event, participant, fragment, and outcome below is hypothetical.** These are illustrations of the adopted target, not live transcripts, credentials, executed tests, circuit instructions, construction advice, or task-specific runtime policies. Names identify continuing characters, not fixed professions. The runtime must not load these stories as hidden workflow instructions or expose protected evaluation answers to a scored persona.
 

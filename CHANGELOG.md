@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — integrated hypothetical requirement replay
+
+Added a reader-facing walkthrough of the same three personas through initialization, house and skyscraper work, circuit and printer work, later resource reorganization and everyday interaction. The observable sequences distinguish unanswered clarification, accepted context, maintenance, checks, delivery, dissent and separately authorized continued improvement. A 46-row map separates illustration, partial coverage, documentary checks and requirements a fictional replay cannot demonstrate. Existing detailed examples remain intact. No user requirement, normative contract, acceptance minimum, numerical fixture or historical result changed; no runtime, maturation benefit or cost saving is claimed.
+
 ## 10 October 2026 — continuing-work requirement alignment
 
 Refreshed the dated user-requirement audit against c3e20ba63533c1790ec6088f1b7f4a10d0207a8c, covering all 46 active entries including sustained work, justified stopping, sparse-request progress and individual/collective sufficiency. Updated the renewed research window and linked the current design, hypothetical traces and unrun evaluations. Prior dispositions remain unchanged; all four new rows retain open empirical status. Source-only requirements, normative contracts and acceptance minima are unchanged by this assessment.
