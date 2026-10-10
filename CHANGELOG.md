@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — tool-use walkthrough clarification and renewed audit
+
+Expanded UR-032 with the user's request to examine tool and skill use, asset management and relevant retained data, suitable and effective tool choices among alternatives, characteristic- and skill-shaped tool preferences, and installation when it is part of the work. The existing circuit and later 3D-printer examples remain the relevant cases. Updated UR-037 to the renewed ten-hour review and research window from 10 October 2026 at 02:12:20 UTC through 12:12:20 UTC, retaining the ten-minute update cadence.
+
+The clarification refines existing requirements rather than adding a duplicate requirement; all 46 active identifiers remain. Only the human-source requirements account and this history change. No design contract, installation policy, evaluation criterion, or empirical result is introduced by this amendment.
+
 ## 10 October 2026 — collective example scope
 
 Clarified that the walkthrough’s repeated final-disposition arrangement is task-specific and does not demonstrate shared or leaderless decision performance. Other adopted arrangements remain permitted; no scene, role, rule or coverage disposition changed.
