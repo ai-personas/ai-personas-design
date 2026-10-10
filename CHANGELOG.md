@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — accountable continuing work
+
+Distinguished bounded local stopping from disposition of an accepted continuing goal. Required accountable continuation opportunities or real blockers/endings, declared ordinary-work scheduling assumptions and fresh decisions under conserved resources. Clarified progress from sparse requests despite unanswered ordinary preferences, preserving consent and safety/evidence blockers. Added existing-ID evaluation refinements, traceability, an unrun continuation and narrowly scoped primary research. No new controller, forced mutation, unlimited spend or guaranteed improvement is introduced; protected identifiers/minima and the human-only requirements remain intact. Runtime pursuit and useful outcomes remain unverified.
+
 ## 10 October 2026 — sustained-work user requirements and renewed audit
 
 Consolidated the user's questions about purposeful continued work with ample or hypothetically unlimited time, tangible results, task and persona improvement, interaction with other personas, and justified continuation or stopping rather than arbitrary termination with potentially low-quality work. Added UR-044 and UR-045 as matters to investigate and explain, and UR-046 for clarification and progress from sparse requests, preserving all 42 prior active requirements. The later clarification calls for useful questions to the user or stakeholder, requested or volunteered input from other personas, and a persona's own reasonable interpretation so work can proceed without waiting indefinitely for the original requester. Updated UR-037 to the renewed ten-hour review and research window from 10 October 2026 at 00:24:11 UTC through 10:24:11 UTC, with the existing ten-minute update cadence.

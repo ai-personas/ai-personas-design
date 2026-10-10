@@ -14,6 +14,8 @@ The 9 October 2026 [evaluation refinement](../evaluation/README.md) sharpens ass
 
 “Specified,” “implemented,” “mechanically tested,” “behaviorally demonstrated,” and “approved for a deployment” remain different statuses. Unknown current conformance is not a claim that existing runtime mechanisms are absent or defective. It is a requirement to obtain exact, applicable evidence before claiming they work under the revised contract.
 
+The 10 October 2026 refinement requires accountable continuation of accepted unfinished work across local boundaries and useful progress despite unanswered nonblocking clarification. Actual ordinary-work scheduler fairness, durable resumption, appropriate assumptions and justified stopping remain unverified. Safe boundedness alone demonstrates neither continuing pursuit nor useful completion.
+
 ## Feasibility and intended restrictions
 
 The machinery is implementable within a declared finite supported envelope: exact versions, transactions, permission checks, bounded assembly, durable intents, receipts and explicit failure states are concrete host responsibilities. This is a design-level feasibility judgment, not runtime conformance evidence. Reliable character influence, useful evolution, complete discovery and a cost advantage remain empirical questions. The design also intentionally rules out some otherwise familiar behavior:
