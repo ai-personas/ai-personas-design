@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — concrete coordination in the replay
+
+Made shared house-question delivery and replies explicit; bound continuing tower improvement to accepted owners, exact versions and fresh adoption; and clarified printer candidate authorship, actual peer findings, concern closure and delivery. Mira’s initial printer rejection remains independent of later peer confirmation. These hypothetical communication links introduce no mandatory team protocol, new acceptance rule or observed collaboration benefit.
+
 ## 10 October 2026 — dated tool and asset alignment refresh
 
 Reassessed the 46 active human requirements against exact snapshot b38384fb, updating expanded UR-032 evidence, UR-037’s renewed window and the 27-file assessment scope. Included the integrated replay’s role limits, competing-tool lifecycle and neutral-skill rediscovery with its explicit null-added-benefit outcome. Preserved every three-axis disposition, normative requirement and empirical limit; this assessment is not automatic current-head or runtime verification.
