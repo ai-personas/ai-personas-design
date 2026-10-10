@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — procedural-asset refinement and rediscovery
+
+Added a short hypothetical continuation joining primary-authored neutral skill revision, attributed storage/cues, lawful raw-output reclamation with preserved qualifications, and bounded later printer discovery/selection/supply. It preserves the original fixtures/counts and distinguishes procedural assets from characteristic fragments. No new mechanism, installation, runtime result or competence claim is introduced.
+
 ## 10 October 2026 — competing tools and conditional preparation
 
 Clarified orthogonal tool readiness/authority/use facts and added an independent hypothetical waveform extension: equal bounded choices for Mira, Arun and Leena, optional authorized simulator preparation, qualified skill supply, actual in-story results, failure/fallback and restricted later printer reuse. Updated UR-032 walkthrough coverage and its research-window reference; existing ideal circuit/printer fixtures and call counts stay unchanged. Added existing-ID evaluation cases and narrow official documentation support. These are design illustrations, not executed installations, simulation results or evidence of tool competence.
