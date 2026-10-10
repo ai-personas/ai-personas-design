@@ -407,6 +407,14 @@ Arun's first response receives the exact stored waveform output and observes une
 
 Under a fresh printer grant, Arun's second response searches eligible skill titles for “time-weighted”, capped at three previews/250 words, returns joint no-change and requests results. Results identify revision 2 and search completeness. His third response selects that eligible revision, returns joint no-change and requests its full qualified contents. Actual supply precedes his fourth response: he applies fresh printer facts, proposes a new analytic calculation record as asset maintenance, keeps fragments unchanged and requests its storage receipt. The added unequal-sample rule is unused for these analytic printer facts; retrieving it demonstrates no added benefit. Discovery/application establishes neither correctness, simulation authority nor measured benefit.
 
+#### A peer recommends; the recipient decides
+
+In a separately bounded, **hypothetical** continuation, new source/destination grants permit Arun to recommend the qualified quantities guide revision 2 to Mira for her analytic printer check. Original independent branches/counts remain unchanged. Arun sends that exact reference and limits, keeping fragments unchanged, recording the message as asset maintenance and requesting its delivery receipt next.
+
+Mira’s fresh call receives the actual recommendation. She checks her own reading/execution grant and current checker binding/readiness, then selects the guide and complete checker instructions. Fragments remain unchanged; asset maintenance records her choice; next context requests actual qualified supply. No installation grant, credentials, competence or claim validity transfers.
+
+After supply, Mira requests the ready checker on her exact stored printer calculation; both maintenance categories are unchanged pending results, with next context requesting the actual result. She retains responsibility for assessing it. Her following response receives the arithmetic/label confirmation, records its narrow scope through asset maintenance, leaves fragments unchanged and clears optional selections. The new unequal-sample rule remains unused. Peer recommendation and successful checking establish no measured advantage over independent discovery.
+
 ### From the circuit encounter to a printer concept
 
 This continuation is an **unrun hypothetical implementation walkthrough**, not a list of supported task domains. The personas remain general-purpose: useful development can improve task work, communication, collaboration and social interaction. Here the transferable part is attention to a consequential definition, a fair comparison and a clear shared promise. The old 5 W bridge does not become a printer subsystem. All events, grants and outcomes below are stipulated; the full engineering fixtures and evaluation minima remain unchanged.

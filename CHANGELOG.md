@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — peer recommendation and independent tool responsibility
+
+Added a short separately authorized hypothetical bridge from Arun’s exact skill recommendation to Mira’s receipt, own grant/readiness/context choice and assessment of her actual check result. Original independent scenes/counts remain intact; authority, competence and validity do not transfer with advice. No measured benefit or new normative machinery is claimed.
+
 ## 10 October 2026 — concrete coordination in the replay
 
 Made shared house-question delivery and replies explicit; bound continuing tower improvement to accepted owners, exact versions and fresh adoption; and clarified printer candidate authorship, actual peer findings, concern closure and delivery. Mira’s initial printer rejection remains independent of later peer confirmation. These hypothetical communication links introduce no mandatory team protocol, new acceptance rule or observed collaboration benefit.
