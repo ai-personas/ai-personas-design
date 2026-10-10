@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — societal maturation and requester-origin requirements
+
+Clarified UR-003 so a need may originate from a human or another persona, expanded UR-044’s quality-artifact and continuing group-work intent, and added UR-048 for hypothetical examination of task-free, characteristic-driven societal interaction and later usefulness. This source-only amendment contains 47 active IDs; UR-037’s window and all other requirements remain unchanged. It adds no design mechanism or outcome claim.
+
 ## 10 October 2026 — bounded tool-argument drift evidence
 
 Added scoped evidence of generated tool-argument drift, preserving execution and architecture limits. Existing comparisons, legitimate discretionary preferences and evaluation minima remain unchanged.
