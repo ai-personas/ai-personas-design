@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — bounded tool-argument drift evidence
+
+Added scoped evidence of generated tool-argument drift, preserving execution and architecture limits. Existing comparisons, legitimate discretionary preferences and evaluation minima remain unchanged.
+
 ## 10 October 2026 — peer recommendation and independent tool responsibility
 
 Added a short separately authorized hypothetical bridge from Arun’s exact skill recommendation to Mira’s receipt, own grant/readiness/context choice and assessment of her actual check result. Original independent scenes/counts remain intact; authority, competence and validity do not transfer with advice. No measured benefit or new normative machinery is claimed.

@@ -116,6 +116,12 @@ Extended synthetic role-play studies report declining persona fidelity alongside
 
 The ANCHOR preprint separately audits persona enactment and trajectory recall in 2,008 synthetic conversations across 27 personas and four models. Its tested memory conditions did not consistently resolve continuity failures, and questionnaire judgments sometimes disagreed with turn-level assessments. Its English-language, template-generated interactions and evaluator dependence limit transfer to actual companion use or this architecture. These results motivate distinct longitudinal measures; they do not prove that all memory designs fail or justify explaining unsupported drift as development. [Best Friends, Not Forever, v1, July 2026](https://arxiv.org/html/2607.28818v1)
 
+### Structured tool arguments and irrelevant context
+
+[Memory-Induced Tool-Drift in LLM Agents, v1, 24 May 2026](https://arxiv.org/abs/2605.24941v1), §§3.1–3.4, reports generated structured tool-call parameter drift under adversarially selected irrelevant user-memory context. The main condition constrains tool invocation; copied MCP schemas are evaluated without live server execution. This is proposed-call evidence, not observed effects or deployment prevalence. Its memory frameworks differ from this design’s characteristic fragments and neutral assets.
+
+The narrow design inference is to inspect argument-level drift within an otherwise correctly selected tool under the existing facts/authority-versus-discretion comparisons. Schema validity alone does not establish appropriate arguments. Legitimate personality-shaped method and tool preferences remain intended where discretion exists; this study establishes neither beneficial persona choice nor maturation and adds no evaluation minimum.
+
 ## Trait composition and collaboration: direct evidence and limits
 
 Direct studies now connect persona prompting to task outcomes and partner choices, beyond recognizable dialogue. They do not establish a general benefit from increasing trait diversity. A team's average trait level differs from variation among its members. Trait differences also differ from assigned roles, skills, available information, modeled emotions, underlying model differences, and additional stochastic attempts. Changing several together prevents attributing a gain to OCEAN diversity or to VAD.
