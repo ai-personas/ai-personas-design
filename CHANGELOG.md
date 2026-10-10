@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — extended-time house and five-persona circuit continuations
+
+Added separately bounded, unrun continuations showing further house-handoff work and five-persona circuit explanation/review, including useful changes, rejected and unnecessary proposals, explicit context choices, received feedback, accepted duty transfer and justified stopping. Preserved original fixtures and distinguished scoped artifact improvement from hardware validation or closure of broader accepted work. No measured maturation, performance or cost benefit is claimed.
+
 ## 10 October 2026 — line-audit wording and trace precision
 
 Aligned the glossary’s work origins and visual/status next-context wording with current contracts. Calibrated convergence evidence, corrected the research brief’s inspection date, and bound corrected circuit summaries to explicitly new revision-1 files. Refreshed hypothetical regex coverage and the replay’s current audit window. These documentary repairs preserve existing mechanisms, criteria and engineering fixtures; no runtime or behavioral result is claimed.

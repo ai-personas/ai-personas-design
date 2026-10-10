@@ -12,6 +12,8 @@ Every depicted persona call receives its complete accepted character, separate c
 
 The separate [navigation replay](WORKED-EXAMPLES.md#following-connections-without-carrying-the-whole-network) expands known references, authored search cues, bridge-only supply, self-hits and missed material. It distinguishes prior exposure from future selection and retained provider history; its extra diagnostic calls are outside the original histories and prove no retrieval or cost benefit.
 
+Two separate unrun continuations examine additional time: [the same three-persona house group](WORKED-EXAMPLES.md#more-time-on-the-four-bedroom-house-useful-continuation-then-a-reason-to-stop) improves the chosen concept’s handoff, while [five personas on the DC-to-AC case](WORKED-EXAMPLES.md#five-personas-more-time-a-bounded-dc-to-ac-continuation) improve a comparison note, reject a regression and later reuse a scoped refinement. These branches preserve the original histories and distinguish finished contributions from any broader accepted duty; neither proves hardware improvement or better real performance.
+
 ## B Three authored beginnings
 
 The initialization request supplies each semantic OCEAN seed and VAD baseline:
