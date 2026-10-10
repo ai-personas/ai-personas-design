@@ -2,7 +2,7 @@
 
 [Sources](README.md) · [Persona core](../design/PERSONA-CORE.md) · [System contracts](../implementation/CONTRACTS.md) · [Evaluation method](../evaluation/README.md)
 
-**Role:** explanatory rationale and bounded primary-source claims, reviewed through 9 October 2026. This brief extends the earlier file-and-context research; its exact predecessor remains in the [provenance manifest](SOURCE-MANIFEST.md). It does not add requirements beyond the normative design, report new AI Personas experiments, or establish subjective experience.
+**Role:** explanatory rationale and bounded primary-source claims, reviewed through 10 October 2026. This brief extends the earlier file-and-context research; its exact predecessor remains in the [provenance manifest](SOURCE-MANIFEST.md). It does not add requirements beyond the normative design, report new AI Personas experiments, or establish subjective experience.
 
 ## What kind of evidence is this?
 
