@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — explicit next-context judgment on every accepted response
+
+Corrected the prior silent-selection-omission policy to match every-call next-context intent. Each accepted persona response explicitly addresses fragments and supporting resources; concise appropriate preservation remains valid without new search, mutation or continuation. Missing/malformed intent follows existing whole-response rejection and recovery, without fabricated choices or automatic paid repair. Reconciled normative, implementation, evaluation, explanatory and visual surfaces; retained historical evidence with explicit supersession and added a short boundary trace. Identifiers/minima and user requirements remain unchanged; actual coverage and useful choice require fresh evidence.
+
 ## 10 October 2026 — renewed five-hour search-network audit requirement
 
 Updated UR-037 to the human-requested 09:00:23–14:00:23 UTC window, focused on authored search/regex cues, connected fragments, effective selective context and hypothetical walkthroughs with parallel research. Retained ten-minute updates and prior-window history. All 47 requirement IDs and other requirements remain unchanged; no graph implementation or effectiveness claim is added.

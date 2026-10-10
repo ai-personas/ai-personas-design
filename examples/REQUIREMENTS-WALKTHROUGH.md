@@ -159,7 +159,7 @@ This replay repairs an illustration gap: sparse technical intake now visibly con
 | UR-034 | Use the examples to find and repair design gaps | Partial: [diagnostics](#what-helps-and-what-remains-unproved) repair sparse-progress illustration; no new normative defect proven |
 | UR-035 | Deliver a robust, reliable blueprint | Not demonstrable here: robust complete implementation reliability needs real tests |
 | UR-036 | Research thoroughly | Not demonstrable here: [research records](../sources/README.md) need separate thoroughness assessment |
-| UR-037 | Follow the latest research window and update cadence | Not demonstrable here: renewed window runs 10 October 02:12:20–12:12:20 UTC; updates/research still ongoing |
+| UR-037 | Follow the latest research window and update cadence | Not demonstrable here: renewed five-hour window runs 10 October 09:00:23–14:00:23 UTC; updates/research still ongoing |
 | UR-038 | Audit the whole requirement set and design | Partial: 47-row replay check; whole-document/multiple-agent audit requires separate records |
 | UR-039 | Publish completed changes incrementally | Not demonstrable here: prior snapshot publication record inspected; this increment is pending publication |
 | UR-040 | Consolidate human-user requirements in one file and publish it | Docs verified: [consolidated source](../USER-REQUIREMENTS.md) has 47 active IDs; original-message completeness/publication require separate checks |

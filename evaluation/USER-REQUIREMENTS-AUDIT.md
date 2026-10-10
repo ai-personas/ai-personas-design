@@ -2,6 +2,8 @@
 
 10 October 2026 · 47-row baseline snapshot: `0fa28b83fa811c5541b123aa06cf22e36601ef43`
 
+**Current-target qualification:** the [subsequent next-context finding](#subsequently-identified-next-context-mismatch--10-october-2026) supersedes the earlier UR-015/UR-018 documentary alignment conclusion on valid-response omission. The dated table below is not an unconditional pass for the corrected target.
+
 ## Conclusion
 
 This audit assesses all 47 active requirements against the named blueprint. Three-persona examples span technical work, everyday social exchange, voluntary task-free interaction and a later persona-originated request. A separate group trajectory distinguishes first adequate output, null work, rejected harm and a locally useful presentation revision over time. These are hypothetical operation and quality accounts, not runtime, installation, engineering or savings evidence; research/delivery and historical execution assignments remain separately scoped.
@@ -131,6 +133,12 @@ Two concrete documentary issues were addressed. [Search contracts](../implementa
 The abbreviated card checks do not independently demonstrate supporting-tool acquisition, and H1 remains an assumed retained helper rather than demonstrated autonomous discovery. These are limits on stronger claims, not missing production mechanisms. Low-overlap misses, inappropriate selection, incomplete useful resource combinations, harmful application and excessive total cost remain open behavioral risks under the existing evaluations. No hidden selector, memory mechanism, mandatory search sequence or guaranteed recall is introduced.
 
 The inspected publication-verification report dated 10 October 2026, 08:36:21 UTC records 27 files, 1,185,160 bytes, six freshly verified changed files and 21 unchanged files, with no reported CI checks, workflows or statuses. That report was read rather than independently rerun here; the cited experiments were not reproduced. All 47 source requirements, prior three-axis dispositions and existing evaluation minima remain unchanged. This addendum records completed documentary review and repair, not empirical success or completion of the ongoing research window.
+
+## Subsequently identified next-context mismatch — 10 October 2026
+
+A later design-only inspection of `2bef4dd73adb95039898ca9493d6bf52cc4b1e01` identified a mismatch that the baseline and scoped search review above had not resolved: valid responses could silently omit next-context intent despite UR-015/UR-018’s every-call authorship intent. Their earlier documentary alignment conclusions are superseded on this narrow point; the historical rows remain records of their assessments, not unconditional current passes.
+
+The corrected current target requires explicit fragment/resource next-context disposition in each accepted persona response, including concise appropriate preservation or no optional need. Missing intent follows existing whole-response rejection, while recovery-preserved state is not authored consideration. Input coverage, restricted-mode handling and actual response validation need new implementation evidence; earlier omission-allowing results cannot pass automatically. No empirical status is upgraded, no user requirement or identifier is added, and no future publication hash is assumed. The active source research window is now 10 October 09:00:23–14:00:23 UTC; earlier window statements above remain historically scoped.
 
 ## Maintaining this assessment
 
