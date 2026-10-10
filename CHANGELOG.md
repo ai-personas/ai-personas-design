@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — research window and publication boundary
+
+Updated the research assignment to 14:21:32–19:21:32 UTC and clarified publication of reviewed design fixes while keeping audit reports, internal audit walkthroughs and research process notes internal. Product requirements remain unchanged.
+
 ## 10 October 2026 — keep audit reporting internal
 
 Removed the standalone published user-requirement audit and its current coverage-ledger narration at the user’s request, and repaired incoming references. Internal audits inform reviewed design fixes; this removal changes no design contract or historical execution result.
