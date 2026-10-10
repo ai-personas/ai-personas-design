@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — bounded search completeness and replay precision
+
+Clarified pagination consistency and page/scan/corpus completion scope, preserving exact observations without assuming exhaustive mutable traversal. Added an unrun page-mutation case under existing IDs and corrected H3’s distinct known-reference and lexical-selection paths. Added narrowly scoped direct-corpus research, separating constrained lexical ablation from corpus scaling. No automatic restart, full scan or auxiliary selector is introduced.
+
 ## 10 October 2026 — dated societal alignment assessment
 
 Reassessed exact 0fa28b83 against 47 active requirements, including task-free social life, persona-originated needs and longer group-quality trajectories. Preserved prior dispositions and empirical limits; UR-048 is specified with adequate bounded illustration and open outcomes. Distinguished local inspection from the inspected publication verification, and elapsed opportunity from social or later-work benefit.
