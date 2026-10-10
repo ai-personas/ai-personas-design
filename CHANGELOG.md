@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — scoped file-search assessment
+
+Added a snapshot-specific search-review addendum for b1c84744, recording pagination-completeness and H3 provenance/selection repairs alongside remaining discovery and outcome limits. Preserved the 47-row baseline, all three-axis dispositions, source requirements and evaluation minima; no runtime or performance result is claimed.
+
 ## 10 October 2026 — bounded search completeness and replay precision
 
 Clarified pagination consistency and page/scan/corpus completion scope, preserving exact observations without assuming exhaustive mutable traversal. Added an unrun page-mutation case under existing IDs and corrected H3’s distinct known-reference and lexical-selection paths. Added narrowly scoped direct-corpus research, separating constrained lexical ablation from corpus scaling. No automatic restart, full scan or auxiliary selector is introduced.

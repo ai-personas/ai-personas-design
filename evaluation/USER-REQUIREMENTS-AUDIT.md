@@ -1,6 +1,6 @@
 # User-requirement alignment audit
 
-10 October 2026 · Inspected snapshot: `0fa28b83fa811c5541b123aa06cf22e36601ef43`
+10 October 2026 · 47-row baseline snapshot: `0fa28b83fa811c5541b123aa06cf22e36601ef43`
 
 ## Conclusion
 
@@ -12,11 +12,11 @@ The design distinguishes externally enabled opportunities from persona-chosen en
 
 ## Scope, authority and evidence
 
-This dated assessment adds no architecture, user requirement, acceptance minimum or runtime workflow. Dispositions apply only to the named snapshot, even if a later branch changes the linked text; this is not automatic current-head verification.
+This dated assessment adds no architecture, user requirement, acceptance minimum or runtime workflow. The 47-row table’s dispositions apply only to the named baseline snapshot, even if a later branch changes the linked text. The separately dated search-review addendum has its own narrower scope and inspected snapshot; neither is automatic current-head verification.
 
 The active [human-user requirements](../USER-REQUIREMENTS.md) contain **47 entries: UR-001–016 and UR-018–048**; UR-017 remains retired. The latest human-source amendment clarifies UR-003’s human/persona requester, expands UR-044’s quality-artifact and continuing group-work intent, and adds task-free societal examination in UR-048. UR-037 remains 10 October 02:12:20–12:12:20 UTC. Source requirements are unchanged by this assessment. All 46 preceding dispositions are preserved; the new row was inspected against its actual design, example and evaluation homes. Independent reviews informed but did not substitute for direct local inspection. Original conversation completeness was not independently reconstructed.
 
-This assessment directly inspected the named 27-file local snapshot and its relevant changes. Separately, the publication-integrity record dated 10 October 2026, **08:20:13 UTC** reports matching remote paths, modes, sizes and hashes for all 27 files (**1,180,879 bytes**), fresh bytes for the five changed files and unchanged identities for the other 22. That verifier’s report was read, not independently rerun here; it establishes neither a later branch head nor runtime conformance. It reports no CI checks, workflow runs or statuses. This audit assesses 0fa28b83, not the later commit that may publish the audit itself.
+This assessment directly inspected the named 27-file local snapshot and its relevant changes. Separately, the publication-integrity record dated 10 October 2026, **08:20:13 UTC** reports matching remote paths, modes, sizes and hashes for all 27 files (**1,180,879 bytes**), fresh bytes for the five changed files and unchanged identities for the other 22. That verifier’s report was read, not independently rerun here; it establishes neither a later branch head nor runtime conformance. It reports no CI checks, workflow runs or statuses. The 47-row baseline assesses 0fa28b83, not the later commit that may publish the audit itself.
 
 The [design authority statement](../design/README.md#authority-within-the-repository) separates normative design from examples and assessment. Safeguards, comparison methods and engineering decisions can be appropriate design responses without becoming additional human-user requirements. This audit keeps three questions separate:
 
@@ -119,6 +119,18 @@ The prior 42 rows retain their three-axis dispositions; UR-037’s evidence text
 Since the preceding `c3e20ba63533c1790ec6088f1b7f4a10d0207a8c` assessment, the then-inspected `b38384fbf324db38a9ca390ac65fef3db52739d8` snapshot added a 46-row integrated replay, a separately authorized competing-tool extension and the joined neutral-skill refinement/rediscovery continuation. The latter explicitly preserves a null-added-benefit case: supplied new guidance need not help fresh analytic work. The current source-only window is 10 October 02:12:20–12:12:20 UTC. All 46 three-axis dispositions remain unchanged; the additional illustration supports refreshed documentary evidence, not empirical upgrades or complete coverage of collective role arrangements.
 
 The current `0fa28b83fa811c5541b123aa06cf22e36601ef43` assessment adds UR-048 and updates evidence for changed UR-003/044, the peer-tool bridge, explicit coordination chains, task-free life and group quality/cost trajectories. All preceding three-axis dispositions remain unchanged. Empirical labels now comprise 36 Open, 7 Unassessed and 4 documentary — entries; these are scope counts, not a pass rate. The 47-row replay’s Partial labels remain compatible with adequate bounded operation illustrations and open society/lifetime outcomes. Protected contracts, minima, human requirements and original fixtures are unchanged by this assessment.
+
+## Scoped file-search review — 10 October 2026
+
+Inspected search-review snapshot: `b1c84744511c8a6747cde748980786f39de2a70a`. This design-only follow-up considers the file-discovery, resource-selection and next-context path, including the intervening six-file change. It does not reissue the full 47-row assessment or test the runtime, provider or models.
+
+The specified chain remains coherent: the primary persona interprets the need, chooses bounded lexical queries or legitimately known references, selects exact eligible material, and receives its qualified contents before dependent use. Characteristic fragments remain distinct from supporting tools, skills, data and histories. Correct matching, exact supply, useful selection, characteristic influence and adequate outcomes remain different claims.
+
+Two concrete documentary issues were addressed. [Search contracts](../implementation/CONTRACTS.md#search-and-exact-reading) now distinguish pagination consistency and page/scan/corpus completion; coherent individual observations do not establish exhaustive mutable traversal. The [existing-ID page-mutation fixture](ACCEPTANCE.md#file-authorship-and-context-refinements-under-existing-identifiers) preserves a missed item and uncertain coverage without compulsory restart or extra allowance. [Replay H3](../examples/REQUIREMENTS-WALKTHROUGH.md#h3-a-new-client-and-a-faulty-retained-helper) now correctly separates Mira’s known house reference, Leena’s known circuit-derived revision and Arun’s lexical discovery. The [research addition](../sources/PERSONA-FILES-RESEARCH.md#files-and-primary-model-context-choice) keeps constrained read-plus-grep evidence separate from a different corpus-scaling configuration; it supplies no result for this persona architecture.
+
+The abbreviated card checks do not independently demonstrate supporting-tool acquisition, and H1 remains an assumed retained helper rather than demonstrated autonomous discovery. These are limits on stronger claims, not missing production mechanisms. Low-overlap misses, inappropriate selection, incomplete useful resource combinations, harmful application and excessive total cost remain open behavioral risks under the existing evaluations. No hidden selector, memory mechanism, mandatory search sequence or guaranteed recall is introduced.
+
+The inspected publication-verification report dated 10 October 2026, 08:36:21 UTC records 27 files, 1,185,160 bytes, six freshly verified changed files and 21 unchanged files, with no reported CI checks, workflows or statuses. That report was read rather than independently rerun here; the cited experiments were not reproduced. All 47 source requirements, prior three-axis dispositions and existing evaluation minima remain unchanged. This addendum records completed documentary review and repair, not empirical success or completion of the ongoing research window.
 
 ## Maintaining this assessment
 
