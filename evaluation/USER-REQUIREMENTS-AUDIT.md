@@ -2,7 +2,7 @@
 
 10 October 2026 · 47-row baseline snapshot: `0fa28b83fa811c5541b123aa06cf22e36601ef43`
 
-**Current-target qualification:** the [subsequent next-context finding](#subsequently-identified-next-context-mismatch--10-october-2026) supersedes the earlier UR-015/UR-018 documentary alignment conclusion on valid-response omission. The dated table below is not an unconditional pass for the corrected target.
+**Current-target qualification:** the [subsequent next-context finding](#subsequently-identified-next-context-mismatch--10-october-2026) supersedes the earlier UR-015/UR-018 documentary alignment conclusion on valid-response omission. The dated table below is not an unconditional pass for the corrected target. The [complete line-by-line addendum](#complete-line-by-line-review-and-subsequent-repairs--10-october-2026) assesses the later published scenario snapshot separately.
 
 ## Conclusion
 
@@ -139,6 +139,113 @@ The inspected publication-verification report dated 10 October 2026, 08:36:21 UT
 A later design-only inspection of `2bef4dd73adb95039898ca9493d6bf52cc4b1e01` identified a mismatch that the baseline and scoped search review above had not resolved: valid responses could silently omit next-context intent despite UR-015/UR-018’s every-call authorship intent. Their earlier documentary alignment conclusions are superseded on this narrow point; the historical rows remain records of their assessments, not unconditional current passes.
 
 The corrected current target requires explicit fragment/resource next-context disposition in each accepted persona response, including concise appropriate preservation or no optional need. Missing intent follows existing whole-response rejection, while recovery-preserved state is not authored consideration. Input coverage, restricted-mode handling and actual response validation need new implementation evidence; earlier omission-allowing results cannot pass automatically. No empirical status is upgraded, no user requirement or identifier is added, and no future publication hash is assumed. The active source research window is now 10 October 09:00:23–14:00:23 UTC; earlier window statements above remain historically scoped.
+
+## Complete line-by-line review and subsequent repairs — 10 October 2026
+
+**Assessed resulting snapshot:** [8ef60fa854343bdc50affee96381b0b963d1f282](https://github.com/ai-personas/ai-personas-design/tree/8ef60fa854343bdc50affee96381b0b963d1f282). This is an interim documentary assessment within the renewed research window. It covers **47 listed requirements**, including research/delivery directions and the two historical assignments UR-041/042; they are not 47 product-runtime requirements. UR-017 remains retired. The earlier 47-row table and dated findings retain their historical snapshots and dispositions. This addendum supplies current evidence mapping without retroactively upgrading those results or creating a new acceptance minimum.
+
+### What was read, and what changed afterward
+
+Four partitioned reviews read every line of the immutable [a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb](https://github.com/ai-personas/ai-personas-design/tree/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb) baseline. File identities and complete inclusive ranges were reconciled: **27 unique files, 5,302 lines, no uncovered range**. Repeated reading of the requirements file is counted only once. This is reading coverage, not proof that every statement is correct. The SVG source and rendered presentation were inspected; no artwork correction was needed.
+
+| Baseline file at the exact reviewed revision | Inclusive lines read | Count |
+|---|---|---:|
+| [CHANGELOG.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/CHANGELOG.md#L1-L269) | 1–269 | 269 |
+| [CONTRIBUTING.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/CONTRIBUTING.md#L1-L95) | 1–95 | 95 |
+| [DESIGN-DECISIONS.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/DESIGN-DECISIONS.md#L1-L190) | 1–190 | 190 |
+| [GLOSSARY.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/GLOSSARY.md#L1-L153) | 1–153 | 153 |
+| [README.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/README.md#L1-L67) | 1–67 | 67 |
+| [START-HERE.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/START-HERE.md#L1-L127) | 1–127 | 127 |
+| [USER-REQUIREMENTS.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/USER-REQUIREMENTS.md#L1-L94) | 1–94 | 94 |
+| [VISUAL-GUIDE.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/VISUAL-GUIDE.md#L1-L128) | 1–128 | 128 |
+| [assets/persona-files-loop.svg](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/assets/persona-files-loop.svg#L1-L166) | 1–166 | 166 |
+| [design/PERSONA-CORE.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/design/PERSONA-CORE.md#L1-L390) | 1–390 | 390 |
+| [design/README.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/design/README.md#L1-L52) | 1–52 | 52 |
+| [design/WORK-AND-BOUNDARIES.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/design/WORK-AND-BOUNDARIES.md#L1-L421) | 1–421 | 421 |
+| [evaluation/ACCEPTANCE.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/evaluation/ACCEPTANCE.md#L1-L256) | 1–256 | 256 |
+| [evaluation/HISTORICAL-RESULTS.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/evaluation/HISTORICAL-RESULTS.md#L1-L176) | 1–176 | 176 |
+| [evaluation/README.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/evaluation/README.md#L1-L331) | 1–331 | 331 |
+| [evaluation/USER-REQUIREMENTS-AUDIT.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/evaluation/USER-REQUIREMENTS-AUDIT.md#L1-L145) | 1–145 | 145 |
+| [examples/REQUIREMENTS-WALKTHROUGH.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/examples/REQUIREMENTS-WALKTHROUGH.md#L1-L177) | 1–177 | 177 |
+| [examples/WORKED-EXAMPLES.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/examples/WORKED-EXAMPLES.md#L1-L744) | 1–744 | 744 |
+| [implementation/CONTRACTS.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/implementation/CONTRACTS.md#L1-L274) | 1–274 | 274 |
+| [implementation/DEPLOYMENT-DECISIONS.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/implementation/DEPLOYMENT-DECISIONS.md#L1-L107) | 1–107 | 107 |
+| [implementation/README.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/implementation/README.md#L1-L75) | 1–75 | 75 |
+| [implementation/REQUIREMENTS.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/implementation/REQUIREMENTS.md#L1-L119) | 1–119 | 119 |
+| [implementation/STATUS.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/implementation/STATUS.md#L1-L87) | 1–87 | 87 |
+| [sources/PERSONA-FILES-RESEARCH.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/sources/PERSONA-FILES-RESEARCH.md#L1-L348) | 1–348 | 348 |
+| [sources/README.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/sources/README.md#L1-L29) | 1–29 | 29 |
+| [sources/SOURCE-MANIFEST.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/sources/SOURCE-MANIFEST.md#L1-L124) | 1–124 | 124 |
+| [templates/README.md](https://github.com/ai-personas/ai-personas-design/blob/a65ee4ece8f6a77e7d89d3c30266d488ba5ee2bb/templates/README.md#L1-L158) | 1–158 | 158 |
+| **Total** | **27 complete files** | **5,302** |
+
+The baseline did not yet contain the latest five-persona/extended-time request. The later [source amendment](https://github.com/ai-personas/ai-personas-design/commit/322f85dbfa8343c5ab34068494c69e727c198978) separately updated only UR-030/037/038: more-time house work, specifically five-persona DC-to-AC work, a line-by-line audit, and the 13:47:48–18:47:48 UTC window. It retained the original three-persona cases, ten-minute updates and all 47 identifiers. Research execution/setup directions remain outside persona design requirements.
+
+The independently reviewed [documentary repair](https://github.com/ai-personas/ai-personas-design/commit/64e3743784fa7febedd56bcff31f3b64439ff493) aligned work origins and two visual next-context phrases, distinguished invalid omission/recovery from explicit selection in status, calibrated convergence evidence, and corrected the research inspection date. It gave the corrected circuit summary and T1 explicit new owner-scoped revision-1 identities, rather than inventing a summary base, and repaired stale regex-illustration/current-window wording. A suspected JSON-escape defect was rejected after exact-byte checking; those correct examples were unchanged.
+
+The separately reviewed [scenario increment](https://github.com/ai-personas/ai-personas-design/commit/8ef60fa854343bdc50affee96381b0b963d1f282) added extended-time house and five-persona circuit continuations. The house gain is stipulated concept-handoff traceability. The circuit gain is comparison/explanation quality: its ideal topology is unchanged, no physical design improvement is demonstrated, and the original full engineering fixture is not satisfied. Local note completion cannot discharge a broader accepted buildable-circuit duty. Received findings, exact revisions/supply, optional questions, rejection of a worse candidate, unused allowance and scoped duty closure make the proposed operation inspectable. They establish neither real engineering results nor causal maturation, social benefit or cost savings. All original fixture histories, grants and call counts remain intact; the new circuit branch separately counts 22 initial and six later ordinary calls.
+
+Each of these later increments received exact changed-byte review; this is not a claim that all final lines received the original baseline pass. Source, normative contract, hypothetical illustration and empirical outcome remain different evidence classes. Existing 45 implementation requirements, 21 invariants, 44 core acceptance identifiers and campaign minima were preserved.
+
+### Current mapping of all listed requirements
+
+This table names current evidence and limits, not a new pass-rate or three-axis scoring exercise. Earlier empirical labels remain unchanged. In particular, coherent note-review traces do not upgrade overall UR-030/044 adequacy or empirical status, and documentary completeness does not establish stronger uniqueness, whole-persona maturation or better-later outcomes.
+
+| Requirement | Current evidence home | Assessment boundary |
+|---|---|---|
+| UR-001 | [Contribution scope](../CONTRIBUTING.md) | Design-only scope remains explicit; no implementation supplied. |
+| UR-002 | [Authority within the repository](../design/README.md#authority-within-the-repository) | Complementary normative homes remain coherent after the scoped repairs; correctness is not certified. |
+| UR-003 | [The need and accepted scope](../design/WORK-AND-BOUNDARIES.md#the-need-and-accepted-scope) | Glossary now includes human, other-persona and self-originated needs; general capability remains open. |
+| UR-004 | [Characteristics, modeled affect, and contextual expression](../design/PERSONA-CORE.md#characteristics-modeled-affect-and-contextual-expression) | Semantic traits and modeled affect are specified; no measured human-like psychology. |
+| UR-005 | [From supplied traits to own-voice starting fragments](../examples/WORKED-EXAMPLES.md#from-supplied-traits-to-own-voice-starting-fragments) | Rowan/Sera add hypothetical authored beginnings; no actual generation or unique behavior established. |
+| UR-006 | [Character in its own voice](../design/PERSONA-CORE.md#character-in-its-own-voice) | Own-voice meaning remains distinct from generic assets; wording alone does not establish influence. |
+| UR-007 | [Bounded and faithful assembly](../design/PERSONA-CORE.md#bounded-and-faithful-assembly) | Selected and actually supplied context remain separate; causal contribution remains open. |
+| UR-008 | [Task-free interaction](../examples/WORKED-EXAMPLES.md#unassigned-social-life-and-later-persona-originated-work) | Discretionary choices are illustrated without trait-profession assignments; persistent individuality remains untested. |
+| UR-009 | [Fragments are reusable prompt parts](../design/PERSONA-CORE.md#fragments-are-reusable-prompt-parts) | Fragments retain characteristic purpose; facts, knowledge and records remain supporting material. |
+| UR-010 | [Maturation within every primary interaction](../design/PERSONA-CORE.md#maturation-within-every-primary-interaction) | Primary interactions own development; no separate memory/learning mechanism is introduced. |
+| UR-011 | [Fragments are reusable prompt parts](../design/PERSONA-CORE.md#fragments-are-reusable-prompt-parts) | Characteristic methods and neutral templates/checkers remain purpose-distinct. |
+| UR-012 | [Ordinary files and self-organization](../design/PERSONA-CORE.md#ordinary-files-and-self-organization) | Scoped retained methods/assets are reused hypothetically; reliable usefulness remains open. |
+| UR-013 | [Persona authorship and files](../implementation/CONTRACTS.md#persona-authorship-and-files) | Corrected summary and T1 now have exact new revision-1 identities, without invented predecessor files. |
+| UR-014 | [The primary LLM chooses next context](../design/PERSONA-CORE.md#the-primary-llm-chooses-next-context) | Mixed qualified context is selected explicitly; whole-set quality remains untested. |
+| UR-015 | [Every persona invocation](../implementation/CONTRACTS.md#every-persona-invocation) | Explicit accepted-response maintenance and next-context dispositions replace the historical omission allowance; runtime coverage remains open. |
+| UR-016 | [Persona authorship and files](../implementation/CONTRACTS.md#persona-authorship-and-files) | Maintenance includes justified change and no-change; the new scenes do not execute a lifecycle. |
+| UR-018 | [Primary-persona next-context selection](../implementation/CONTRACTS.md#primary-persona-next-context-selection) | Each accepted response authors an explicit next-context disposition; rejection preserves state only for recovery. |
+| UR-019 | [Ordinary files and self-organization](../design/PERSONA-CORE.md#ordinary-files-and-self-organization) | Separate unrun replay now actually illustrates regex cues, self-hits and scope; no reliable recall claim. |
+| UR-020 | [Search and exact reading](../implementation/CONTRACTS.md#search-and-exact-reading) | Same bounded discovery and exact supply apply to tools/assets; discovery grants no execution authority. |
+| UR-021 | [Inference and bounded working context](../design/WORK-AND-BOUNDARIES.md#inference-and-bounded-working-context) | Full-catalogue exclusion and actual exposure accounting remain specified; provider adapters remain untested. |
+| UR-022 | [Resource conservation](../design/WORK-AND-BOUNDARIES.md#resource-conservation-and-protected-closeout) | Total costs include failed/null work and communication; unused time is not measured savings. |
+| UR-023 | [Compact retention and honest forgetting](../design/PERSONA-CORE.md#compact-retention-and-honest-forgetting) | Corpus, prompt and retained-state bounds remain specified; sustained compactness without loss remains unproved. |
+| UR-024 | [Bounded navigation and revisable cues](../design/PERSONA-CORE.md#bounded-navigation-and-revisable-cues) | Authored links/cues can evolve; dynamic connection does not establish relevance or guaranteed discovery. |
+| UR-025 | [Ordinary maturation](../design/PERSONA-CORE.md#maturation-within-every-primary-interaction) | House feedback and Rowan’s exchange ground hypothetical scoped refinements; observed causal maturation remains open. |
+| UR-026 | [Development checkpoints](README.md#whole-persona-development-checkpoints) | Whole-persona development stays the goal; method change and convergence do not alone establish it. |
+| UR-027 | [Qualified later-use comparisons](README.md#qualified-revision-and-later-use-benefit) | Better later performance remains a strong goal requiring matched held-out evidence; no upgrade from fictional gains. |
+| UR-028 | [Later skyscraper](../examples/WORKED-EXAMPLES.md#later-skyscraper-useful-parts-harmful-parts-and-missed-benefit) | Selective transfer is qualified; broader engineering knowledge or competence does not automatically transfer. |
+| UR-029 | [Established beginnings](../examples/WORKED-EXAMPLES.md#beginnings-and-three-independent-approaches) | Original three-persona histories remain intact; repeated-run distinctiveness remains unmeasured. |
+| UR-030 | [Extended-time cases](../examples/REQUIREMENTS-WALKTHROUGH.md#verdict-and-scope) | Extended-time house handoff and five-persona circuit note review are illustrated; improved physical design and full engineering fixtures remain unestablished. |
+| UR-031 | [Later skyscraper](../examples/WORKED-EXAMPLES.md#later-skyscraper-useful-parts-harmful-parts-and-missed-benefit) | Tower transfer remains a program-area concept screen, not complete building engineering or measured improvement. |
+| UR-032 | [integrated replay](../examples/REQUIREMENTS-WALKTHROUGH.md) | Tool/skill readiness, conditional preparation and exact resources remain hypothetical; the new ready checker requires no acquisition. |
+| UR-033 | [Existing diagnostics](../examples/WORKED-EXAMPLES.md#help-null-results-harm-and-a-missed-opportunity) | Null, missed and harmful proposals remain distinguished; rejected harm is not a delivered regression. |
+| UR-034 | [History](../CHANGELOG.md) | Concrete wording, context and exact-lineage gaps were repaired; further defects can still exist. |
+| UR-035 | [Feasibility and intended restrictions](../implementation/STATUS.md#feasibility-and-intended-restrictions) | Robust reliable implementation is still an open goal; complete reading does not establish a perfect blueprint. |
+| UR-036 | [Research rationale](../sources/PERSONA-FILES-RESEARCH.md) | Bounded source claims and limitations were reviewed; literature completeness and reproduced findings are not certified. |
+| UR-037 | [Research and delivery requirements](../USER-REQUIREMENTS.md#research-and-delivery-requirements) | Current assignment runs 13:47:48–18:47:48 UTC on 10 October with ten-minute updates; this interim assessment does not close it. |
+| UR-038 | Coverage ledger above | All baseline lines and all 47 listed requirements were mapped, followed by scoped changed-byte reviews; unpublished work is not universally certified. |
+| UR-039 | [Inspected publication](https://github.com/ai-personas/ai-personas-design/commit/8ef60fa854343bdc50affee96381b0b963d1f282) | The named incremental commits and remote byte checks establish publication integrity, not behavioral success or complete cadence coverage. |
+| UR-040 | [Consolidated requirements](../USER-REQUIREMENTS.md) | Source amendment preserves 47 IDs and human-intent scope; complete original-message reconstruction is not claimed. |
+| UR-041 | [Historical requests](../USER-REQUIREMENTS.md#historical-investigation-and-runtime-requests) | Historical runtime investigation remains unassessed; no new repair/execution package is supplied. |
+| UR-042 | [Historical requests](../USER-REQUIREMENTS.md#historical-investigation-and-runtime-requests) | Historical actual-model comparison remains unassessed; fictional personas are not matching model trials. |
+| UR-043 | [Printer continuation](../examples/WORKED-EXAMPLES.md#from-the-circuit-encounter-to-a-printer-concept) | Printer transfer remains a qualified concept illustration; no buildable printer or causal benefit demonstrated. |
+| UR-044 | [Extended-time cases](../examples/REQUIREMENTS-WALKTHROUGH.md#verdict-and-scope) | Additional time supports fictional house traceability and circuit explanation gains; the topology remains unchanged and broad artifact-quality benefit remains open. |
+| UR-045 | [Accountable stopping](../design/WORK-AND-BOUNDARIES.md#pause-amendment-and-accountable-stopping) | Finished contributions close only their accepted scope; unfinished broader duties retain owners and continuation/blocker dispositions. |
+| UR-046 | [Questions and assumptions](../design/WORK-AND-BOUNDARIES.md#questions-assumptions-and-shared-context) | Both new scenes proceed despite ordinary unanswered presentation questions; silence grants no new authority or critical fact. |
+| UR-047 | [Shared sufficiency](../design/WORK-AND-BOUNDARIES.md#individual-and-shared-sufficiency-judgments) | Adopted decision rights, dissent, received findings and justified stopping are visible; no universal consensus procedure or real deliberation benefit. |
+| UR-048 | [Enabled between-task opportunities](../design/WORK-AND-BOUNDARIES.md#between-task-exploration-is-explicitly-funded) | Existing task-free social/peer-requester scenes remain bounded illustrations, not evidence of an emergent society or lifetime benefit. |
+
+### Publication and remaining evidence limits
+
+The resulting snapshot’s remote verification completed on 10 October 2026 at **14:10:28 UTC**: all **27 files, 1,259,688 bytes** matched the approved local snapshot through fresh content comparison, with matching paths, modes, sizes, identities, parent and tree. That publication check establishes the published bytes, not implementation or model behavior. This assessment names that preceding snapshot rather than its own future publication. The original conversation’s completeness and all historical execution assignments were not independently reconstructed; cited experiments were not reproduced.
+
+The review found and repaired concrete documentary gaps, not evidence of flawless design. Search misses, irrelevant or harmful explicit selections, overbroad exposure, costly interaction, semantic maintenance errors, capacity conflicts, mistaken completion judgments and loss of individuality remain real evaluation risks. Positive development remains the intended outcome across useful work, communication and society; finite hypothetical gains cannot settle whether more time or more personas reliably produces it. The current research window remains open.
 
 ## Maintaining this assessment
 

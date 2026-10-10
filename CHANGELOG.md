@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 10 October 2026 — dated complete-design audit coverage
+
+Recorded the exact 27-file, 5,302-line baseline review and separately reviewed source, documentary-repair and scenario increments through 8ef60fa8. Added current evidence mapping for all 47 listed requirements while preserving historical dispositions and open empirical limits. Scoped house/circuit gains remain hypothetical and do not establish physical design improvement or complete the ongoing research window.
+
 ## 10 October 2026 — extended-time house and five-persona circuit continuations
 
 Added separately bounded, unrun continuations showing further house-handoff work and five-persona circuit explanation/review, including useful changes, rejected and unnecessary proposals, explicit context choices, received feedback, accepted duty transfer and justified stopping. Preserved original fixtures and distinguished scoped artifact improvement from hardware validation or closure of broader accepted work. No measured maturation, performance or cost benefit is claimed.
