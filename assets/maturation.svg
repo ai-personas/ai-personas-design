@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="2258" viewBox="0 0 560 2258" role="img" aria-labelledby="title description">
+  <title id="title">Experience can inform later development</title>
+  <desc id="description">Actual experience informs ordinary primary-LLM revision, followed by controlled adoption and later actual supply. Behavioral improvement requires separate comparative evidence and is never implied by time or editing. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <rect width="560" height="2258" fill="#fffaf0"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Experience can inform later</tspan><tspan x="28" dy="36">development</tspan></text>
+    <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
+    <rect x="20" y="153" width="520" height="330" rx="20" fill="#f8e8ec" stroke="#d0d5cb" stroke-width="1"/>
+    <rect x="34" y="168" width="490" height="87" rx="20" fill="#ffffff" stroke="#00665f" stroke-width="3"/>
+    <path d="M59 253 L62 275 L84 253" stroke="#00665f" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="200" font-size="22" fill="#00665f" font-weight="700"><tspan x="49" dy="0">This experience may change my</tspan><tspan x="49" dy="31">approach.</tspan></text>
+    <g transform="translate(114 380) scale(1)">
+      <ellipse cx="0" cy="74" rx="47" ry="7" fill="#d8dfd5" stroke="none" stroke-width="3"/>
+      <path d="M-30 63 Q-31 15 0 13 Q31 15 30 63 Z" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-13 61 L-16 76 M13 61 L18 76" stroke="#16332f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-24 30 Q-45 41 -54 24 M24 30 Q44 25 50 9" stroke="#16332f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="0" cy="-10" rx="32" ry="35" fill="#f5d9ae" stroke="#16332f" stroke-width="3"/>
+      <path d="M-28 -20 Q-14 -58 0 -35 Q16 -60 28 -20" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="-10" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <ellipse cx="11" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <path d="M-17 -23 L-7 -26 M6 -25 L17 -20" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-7 8 Q1 2 9 8" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <rect x="228" y="322" width="82" height="85" rx="5" fill="#e5f4ed" stroke="#00665f" stroke-width="3"/>
+    <path d="M241 324 V404" stroke="#00665f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M256 351 H293 M256 363 H288" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="219" y="436" font-size="20" fill="#00665f" font-weight="700"><tspan x="219" dy="0">Earlier</tspan></text>
+    <rect x="415" y="322" width="82" height="85" rx="5" fill="#e8effb" stroke="#245599" stroke-width="3"/>
+    <path d="M428 324 V404" stroke="#245599" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M443 351 H480 M443 363 H475" stroke="#245599" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="406" y="436" font-size="20" fill="#245599" font-weight="700"><tspan x="406" dy="0">Revised</tspan></text>
+    <path d="M326 363 Q362.5 345 399 363" stroke="#00665f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M390 353 L399 363 L386 366" stroke="#00665f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="327" y="472" font-size="20" fill="#885000" font-weight="700"><tspan x="327" dy="0">Benefit?</tspan></text>
+    <path d="M29 505 L529 503 L531 722 L27 725 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="513" width="486" height="84" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="537" rx="20" ry="21" fill="#f5d9ae" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="70" cy="534" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="534" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 545 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="545" font-size="23" fill="#245599" font-weight="700"><tspan x="112" dy="0">Actual experience</tspan></text>
+    <text x="50" y="630" font-size="22" fill="#16332f"><tspan x="50" dy="0">A task result, received exchange or</tspan><tspan x="50" dy="31">observed failure provides attributed</tspan><tspan x="50" dy="31">evidence—not an invented biography.</tspan></text>
+    <path d="M260 732 Q292 736 280 755" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 748 L280 757 L288 748" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 769 L529 767 L531 1049 L27 1052 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="777" width="486" height="116" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="801" rx="20" ry="21" fill="#b9dce5" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="480" cy="798" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="798" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 809 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="809" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Ordinary primary-LLM</tspan><tspan x="49" dy="32">judgment</tspan></text>
+    <text x="50" y="926" font-size="22" fill="#16332f"><tspan x="50" dy="0">Consider what helps: revise a</tspan><tspan x="50" dy="31">characteristic fragment, organize an</tspan><tspan x="50" dy="31">asset, update a qualified interpretation,</tspan><tspan x="50" dy="31">or make no change.</tspan></text>
+    <path d="M260 1059 Q292 1063 280 1082" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 1075 L280 1084 L288 1075" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 1096 L529 1094 L531 1376 L27 1379 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1104" width="486" height="116" rx="16" fill="#e8effb" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1128" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="1125" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1125" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1136 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1136" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Accept and store permitted</tspan><tspan x="112" dy="32">changes</tspan></text>
+    <text x="50" y="1253" font-size="22" fill="#16332f"><tspan x="50" dy="0">Accepted and stored changes retain</tspan><tspan x="50" dy="31">character controls, provenance,</tspan><tspan x="50" dy="31">restrictions and retention limits. A</tspan><tspan x="50" dy="31">proposal is not a stored revision.</tspan></text>
+    <path d="M260 1386 Q292 1390 280 1409" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 1402 L280 1411 L288 1402" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 1423 L529 1421 L531 1640 L27 1643 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1431" width="486" height="84" rx="16" fill="#fff0cd" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="1455" rx="20" ry="21" fill="#b9dce5" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="480" cy="1452" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="1452" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 1463 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="1463" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Later supply and behavior</tspan></text>
+    <text x="50" y="1548" font-size="22" fill="#16332f"><tspan x="50" dy="0">Establish which revision actually reached</tspan><tspan x="50" dy="31">a later decision and what the persona</tspan><tspan x="50" dy="31">then did.</tspan></text>
+    <path d="M260 1650 Q292 1654 280 1673" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 1666 L280 1675 L288 1666" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 1687 L529 1685 L531 1967 L27 1970 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1695" width="486" height="116" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1719" rx="20" ry="21" fill="#f5d9ae" stroke="#885000" stroke-width="2"/>
+    <ellipse cx="70" cy="1716" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1716" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1727 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1727" font-size="23" fill="#885000" font-weight="700"><tspan x="112" dy="0">Useful maturation is a</tspan><tspan x="112" dy="32">separate claim</tspan></text>
+    <text x="50" y="1844" font-size="22" fill="#16332f"><tspan x="50" dy="0">Compare later performance under fair</tspan><tspan x="50" dy="31">conditions, including cost, harmful</tspan><tspan x="50" dy="31">transfer and regression. A revision or</tspan><tspan x="50" dy="31">passing time proves no benefit.</tspan></text>
+    <path d="M29 1992 L531 1990 L527 2132 L32 2130 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="46" y="2020" font-size="20" fill="#16332f"><tspan x="46" dy="0">There is no separate learner or automatic</tspan><tspan x="46" dy="29">lesson cycle. Improvement is possible; no</tspan><tspan x="46" dy="29">change, failed revision and regression remain</tspan><tspan x="46" dy="29">possible too.</tspan></text>
+    <text x="30" y="2167" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
+  </g>
+</svg>

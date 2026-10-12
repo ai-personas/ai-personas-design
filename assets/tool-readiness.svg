@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="1910" viewBox="0 0 560 1910" role="img" aria-labelledby="title description">
+  <title id="title">Finding a tool is only one fact</title>
+  <desc id="description">The diagram distinguishes discovery, qualified guidance, executable availability, operation-specific permission and resources, actual invocation and received outcome. It does not prescribe a fixed probe sequence. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <rect width="560" height="1910" fill="#fffaf0"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Finding a tool is only one fact</tspan></text>
+    <text x="28" y="93" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
+    <rect x="20" y="117" width="520" height="330" rx="20" fill="#f8e8ec" stroke="#d0d5cb" stroke-width="1"/>
+    <rect x="34" y="132" width="490" height="56" rx="20" fill="#ffffff" stroke="#00665f" stroke-width="3"/>
+    <path d="M59 186 L62 208 L84 186" stroke="#00665f" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="164" font-size="22" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Saved does not mean ready to run.</tspan></text>
+    <g transform="translate(97 342) scale(1)">
+      <ellipse cx="0" cy="74" rx="47" ry="7" fill="#d8dfd5" stroke="none" stroke-width="3"/>
+      <path d="M-30 63 Q-31 15 0 13 Q31 15 30 63 Z" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-13 61 L-16 76 M13 61 L18 76" stroke="#16332f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-24 30 Q-45 41 -54 24 M24 30 Q44 25 50 9" stroke="#16332f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="0" cy="-10" rx="32" ry="35" fill="#f5d9ae" stroke="#16332f" stroke-width="3"/>
+      <path d="M-30 -20 L-22 -43 L0 -38 L23 -44 L31 -17" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="-10" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <ellipse cx="11" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <path d="M-17 -20 L-7 -22 M7 -22 L17 -20" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-7 9 L9 9" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <path d="M202 277 L260 277 L274 291 L272 361 L198 358 Z" stroke="#245599" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M260 277 V292 H274" stroke="#245599" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M210 302 H262" stroke="#245599" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M210 314 H262" stroke="#245599" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M210 326 H262" stroke="#245599" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="184" y="388" font-size="19" fill="#245599" font-weight="700"><tspan x="184" dy="0">Saved</tspan><tspan x="184" dy="28">tool</tspan></text>
+    <path d="M310 295 h36 v34 h-36 z M319 295 v-17 M337 295 v-17 M328 330 v32" stroke="#245599" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M437 310 V294 Q455 273 473 294 V310" stroke="#885000" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="425" y="307" width="60" height="49" rx="8" fill="#fff0cd" stroke="#885000" stroke-width="3"/>
+    <ellipse cx="455" cy="329" rx="4" ry="6" fill="#885000" stroke="none" stroke-width="3"/>
+    <path d="M455 333 V342" stroke="#885000" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="317" y="403" font-size="20" fill="#885000" font-weight="700"><tspan x="317" dy="0">Current checks</tspan></text>
+    <path d="M28 469 L529 467 L525 522 L32 520 Z" stroke="#00665f" stroke-width="2" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="47" y="499" font-size="22" fill="#ffffff" font-weight="700"><tspan x="47" dy="0">Readiness is for this operation, now</tspan></text>
+    <path d="M29 546 L529 544 L531 763 L27 766 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="554" width="486" height="84" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="578" rx="20" ry="21" fill="#f5d9ae" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="70" cy="575" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="575" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 586 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="586" font-size="23" fill="#245599" font-weight="700"><tspan x="112" dy="0">Found: a candidate resource</tspan></text>
+    <text x="50" y="671" font-size="22" fill="#16332f"><tspan x="50" dy="0">A search hit or stored script says what</tspan><tspan x="50" dy="31">may be useful. It proves neither</tspan><tspan x="50" dy="31">installation nor suitability.</tspan></text>
+    <path d="M260 773 Q292 777 280 796" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 789 L280 798 L288 789" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 810 L529 808 L531 1058 L27 1061 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="818" width="486" height="84" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="842" rx="20" ry="21" fill="#b9dce5" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="480" cy="839" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="839" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 850 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="850" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Understood and available</tspan></text>
+    <text x="50" y="935" font-size="22" fill="#16332f"><tspan x="50" dy="0">Use the exact guidance with all its</tspan><tspan x="50" dy="31">conditions. Check the working tool</tspan><tspan x="50" dy="31">connection, dependencies, current</tspan><tspan x="50" dy="31">availability and version.</tspan></text>
+    <path d="M260 1068 Q292 1072 280 1091" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 1084 L280 1093 L288 1084" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 1105 L529 1103 L531 1353 L27 1356 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1113" width="486" height="84" rx="16" fill="#e8effb" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1137" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="1134" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1134" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1145 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1145" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Permitted and affordable</tspan></text>
+    <text x="50" y="1230" font-size="22" fill="#16332f"><tspan x="50" dy="0">The proposed operation must fit current</tspan><tspan x="50" dy="31">authority, source restrictions and</tspan><tspan x="50" dy="31">remaining resources. A tool description</tspan><tspan x="50" dy="31">grants none of these.</tspan></text>
+    <path d="M260 1363 Q292 1367 280 1386" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 1379 L280 1388 L288 1379" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 1400 L529 1398 L531 1648 L27 1651 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1408" width="486" height="84" rx="16" fill="#fff0cd" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="1432" rx="20" ry="21" fill="#b9dce5" stroke="#885000" stroke-width="2"/>
+    <ellipse cx="480" cy="1429" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="1429" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 1440 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="1440" font-size="23" fill="#885000" font-weight="700"><tspan x="49" dy="0">Used and observed</tspan></text>
+    <text x="50" y="1525" font-size="22" fill="#16332f"><tspan x="50" dy="0">Perform only an action that passed the</tspan><tspan x="50" dy="31">current checks. Keep its real receipt,</tspan><tspan x="50" dy="31">failure or uncertainty distinct from the</tspan><tspan x="50" dy="31">desired outcome.</tspan></text>
+    <path d="M29 1673 L531 1671 L527 1784 L32 1782 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="46" y="1701" font-size="20" fill="#16332f"><tspan x="46" dy="0">These are different facts, not compulsory</tspan><tspan x="46" dy="29">separate calls or probes. A known current</tspan><tspan x="46" dy="29">interface can use the direct path.</tspan></text>
+    <text x="30" y="1819" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
+  </g>
+</svg>

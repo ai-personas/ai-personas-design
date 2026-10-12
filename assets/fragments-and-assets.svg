@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="1980" viewBox="0 0 560 1980" role="img" aria-labelledby="title description">
+  <title id="title">A persona’s approach is not its toolbox</title>
+  <desc id="description">Concrete event-planning examples distinguish characteristic fragments from knowledge, skills, tools, code, data and attributed records. The boundary follows purpose rather than authorship. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <rect width="560" height="1980" fill="#fffaf0"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">A persona’s approach is not its</tspan><tspan x="28" dy="36">toolbox</tspan></text>
+    <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
+    <rect x="20" y="153" width="520" height="330" rx="20" fill="#e8effb" stroke="#d0d5cb" stroke-width="1"/>
+    <rect x="34" y="169" width="243" height="85" rx="20" fill="#ffffff" stroke="#00665f" stroke-width="3"/>
+    <path d="M59 252 L62 274 L84 252" stroke="#00665f" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="200" font-size="21" fill="#00665f" font-weight="700"><tspan x="49" dy="0">How I approach</tspan><tspan x="49" dy="30">work</tspan></text>
+    <rect x="297" y="169" width="226" height="85" rx="20" fill="#ffffff" stroke="#245599" stroke-width="3"/>
+    <path d="M478 252 L481 274 L503 252" stroke="#245599" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="312" y="200" font-size="21" fill="#245599" font-weight="700"><tspan x="312" dy="0">What supports</tspan><tspan x="312" dy="30">it</tspan></text>
+    <g transform="translate(116 375) scale(1)">
+      <ellipse cx="0" cy="74" rx="47" ry="7" fill="#d8dfd5" stroke="none" stroke-width="3"/>
+      <path d="M-30 63 Q-31 15 0 13 Q31 15 30 63 Z" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-13 61 L-16 76 M13 61 L18 76" stroke="#16332f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-24 30 Q-45 41 -54 24 M24 30 Q44 25 50 9" stroke="#16332f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="0" cy="-10" rx="32" ry="35" fill="#f5d9ae" stroke="#16332f" stroke-width="3"/>
+      <path d="M-28 -20 Q-14 -58 0 -35 Q16 -60 28 -20" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="-10" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <ellipse cx="11" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <path d="M-17 -20 L-7 -22 M7 -22 L17 -20" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-7 9 L9 9" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <rect x="197" y="326" width="82" height="85" rx="5" fill="#e5f4ed" stroke="#00665f" stroke-width="3"/>
+    <path d="M210 328 V408" stroke="#00665f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M225 355 H262 M225 367 H257" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="188" y="440" font-size="20" fill="#00665f" font-weight="700"><tspan x="188" dy="0">My voice</tspan></text>
+    <rect x="353" y="346" width="130" height="75" rx="9" fill="#fbe5b6" stroke="#885000" stroke-width="3"/>
+    <path d="M393 346 V331 H443 V346" stroke="#885000" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M353 374 H483" stroke="#885000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="411" y="366" width="14" height="20" rx="3" fill="#ffffff" stroke="#885000" stroke-width="2"/>
+    <text x="365" y="449" font-size="20" fill="#885000" font-weight="700"><tspan x="365" dy="0">Tools +</tspan><tspan x="365" dy="29">facts</tspan></text>
+    <path d="M28 505 L529 503 L525 589 L32 587 Z" stroke="#00665f" stroke-width="2" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="47" y="535" font-size="22" fill="#ffffff" font-weight="700"><tspan x="47" dy="0">Classify by purpose, not author or</tspan><tspan x="47" dy="31">folder</tspan></text>
+    <path d="M29 613 L529 611 L531 893 L27 896 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="621" width="486" height="116" rx="16" fill="#e8effb" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="645" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="642" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="642" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 653 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="653" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Characteristic prompt</tspan><tspan x="112" dy="32">fragment</tspan></text>
+    <text x="50" y="770" font-size="22" fill="#16332f"><tspan x="50" dy="0">“When a plan affects a group, I ask who</tspan><tspan x="50" dy="31">may be left out.”</tspan><tspan x="50" dy="31">This describes a hypothetical persona’s</tspan><tspan x="50" dy="31">approach.</tspan></text>
+    <path d="M29 920 L529 918 L531 1168 L27 1171 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="928" width="486" height="84" rx="16" fill="#fff0cd" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="952" rx="20" ry="21" fill="#b9dce5" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="480" cy="949" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="949" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 960 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="960" font-size="23" fill="#245599" font-weight="700"><tspan x="49" dy="0">Knowledge and skills</tspan></text>
+    <text x="50" y="1045" font-size="22" fill="#16332f"><tspan x="50" dy="0">A venue’s access information is</tspan><tspan x="50" dy="31">knowledge. A procedure for planning an</tspan><tspan x="50" dy="31">accessible event is a skill or supporting</tspan><tspan x="50" dy="31">method.</tspan></text>
+    <path d="M29 1195 L529 1193 L531 1443 L27 1446 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1203" width="486" height="84" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1227" rx="20" ry="21" fill="#f5d9ae" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="70" cy="1224" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1224" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1235 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1235" font-size="23" fill="#245599" font-weight="700"><tspan x="112" dy="0">Tools, code and data</tspan></text>
+    <text x="50" y="1320" font-size="22" fill="#16332f"><tspan x="50" dy="0">A calendar interface enables operations.</tspan><tspan x="50" dy="31">A script and attendance data support</tspan><tspan x="50" dy="31">work. Their existence grants no</tspan><tspan x="50" dy="31">permission to run them.</tspan></text>
+    <path d="M29 1470 L529 1468 L531 1718 L27 1721 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1478" width="486" height="84" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="1502" rx="20" ry="21" fill="#b9dce5" stroke="#885000" stroke-width="2"/>
+    <ellipse cx="480" cy="1499" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="1499" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 1510 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="1510" font-size="23" fill="#885000" font-weight="700"><tspan x="49" dy="0">History and evidence</tspan></text>
+    <text x="50" y="1595" font-size="22" fill="#16332f"><tspan x="50" dy="0">A received reply or booking receipt</tspan><tspan x="50" dy="31">records an attributed observation. A</tspan><tspan x="50" dy="31">model summary cannot invent an event.</tspan></text>
+    <path d="M29 1743 L531 1741 L527 1854 L32 1852 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="46" y="1771" font-size="20" fill="#16332f"><tspan x="46" dy="0">A fragment may refer to an exact asset.</tspan><tspan x="46" dy="29">First-person wording does not convert facts or</tspan><tspan x="46" dy="29">procedures into character.</tspan></text>
+    <text x="30" y="1889" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
+  </g>
+</svg>

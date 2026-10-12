@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="2321" viewBox="0 0 560 2321" role="img" aria-labelledby="title description">
+  <title id="title">Individual and collective completion</title>
+  <desc id="description">Five separate questions distinguish an individual judgment, shared sufficiency, delivery, required acceptance and remaining responsibility. None automatically proves all the others. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <rect width="560" height="2321" fill="#fffaf0"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Individual and collective</tspan><tspan x="28" dy="36">completion</tspan></text>
+    <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
+    <rect x="20" y="153" width="520" height="330" rx="20" fill="#f8e8ec" stroke="#d0d5cb" stroke-width="1"/>
+    <rect x="34" y="171" width="233" height="55" rx="20" fill="#ffffff" stroke="#00665f" stroke-width="3"/>
+    <path d="M59 224 L62 246 L84 224" stroke="#00665f" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="202" font-size="21" fill="#00665f" font-weight="700"><tspan x="49" dy="0">My part is ready.</tspan></text>
+    <rect x="291" y="171" width="233" height="85" rx="20" fill="#ffffff" stroke="#245599" stroke-width="3"/>
+    <path d="M479 254 L482 276 L504 254" stroke="#245599" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="306" y="202" font-size="21" fill="#245599" font-weight="700"><tspan x="306" dy="0">Our shared gap</tspan><tspan x="306" dy="30">remains.</tspan></text>
+    <g transform="translate(108 377) scale(1)">
+      <ellipse cx="0" cy="74" rx="47" ry="7" fill="#d8dfd5" stroke="none" stroke-width="3"/>
+      <path d="M-30 63 Q-31 15 0 13 Q31 15 30 63 Z" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-13 61 L-16 76 M13 61 L18 76" stroke="#16332f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-24 30 Q-45 41 -54 24 M24 30 Q44 25 50 9" stroke="#16332f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="0" cy="-10" rx="32" ry="35" fill="#f5d9ae" stroke="#16332f" stroke-width="3"/>
+      <path d="M-30 -20 L-22 -43 L0 -38 L23 -44 L31 -17" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="-10" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <ellipse cx="11" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <path d="M-10 5 Q0 18 13 4" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <g transform="translate(454 377) scale(1)">
+      <ellipse cx="0" cy="74" rx="47" ry="7" fill="#d8dfd5" stroke="none" stroke-width="3"/>
+      <path d="M-30 63 Q-31 15 0 13 Q31 15 30 63 Z" stroke="#16332f" stroke-width="3" fill="#245599" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-13 61 L-16 76 M13 61 L18 76" stroke="#16332f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-24 30 Q-45 41 -54 24 M24 30 Q44 25 50 9" stroke="#16332f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="0" cy="-10" rx="32" ry="35" fill="#f5d9ae" stroke="#16332f" stroke-width="3"/>
+      <path d="M-28 -20 Q-14 -58 0 -35 Q16 -60 28 -20" stroke="#16332f" stroke-width="3" fill="#245599" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="-10" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <ellipse cx="11" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <path d="M-17 -20 L-7 -22 M7 -22 L17 -20" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-7 9 L9 9" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <rect x="210" y="323" width="133" height="90" rx="5" fill="#ffffff" stroke="#885000" stroke-width="3"/>
+    <path d="M210 369 H343 M277 323 V413" stroke="#885000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="279" y="325" width="62" height="42" rx="2" fill="#fff0cd" stroke="#885000" stroke-width="2"/>
+    <text x="300" y="356" font-size="32" fill="#885000" font-weight="700"><tspan x="300" dy="0">?</tspan></text>
+    <path d="M224 348 l10 12 l22 -28" stroke="#00665f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M224 396 l10 12 l22 -28" stroke="#00665f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M28 505 L529 503 L525 589 L32 587 Z" stroke="#00665f" stroke-width="2" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="47" y="535" font-size="22" fill="#ffffff" font-weight="700"><tspan x="47" dy="0">One “done” label cannot answer all</tspan><tspan x="47" dy="31">five</tspan></text>
+    <path d="M29 613 L529 611 L531 862 L27 865 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="621" width="486" height="116" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="645" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="642" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="642" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 653 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="653" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">1 · Is my contribution</tspan><tspan x="112" dy="32">sufficient?</tspan></text>
+    <text x="50" y="770" font-size="22" fill="#16332f"><tspan x="50" dy="0">An individual explains the exact scope,</tspan><tspan x="50" dy="31">evidence, remaining defects and limits</tspan><tspan x="50" dy="31">of their judgment.</tspan></text>
+    <path d="M29 889 L529 887 L531 1169 L27 1172 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="897" width="486" height="116" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="921" rx="20" ry="21" fill="#b9dce5" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="480" cy="918" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="918" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 929 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="929" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">2 · Is the shared candidate</tspan><tspan x="49" dy="32">sufficient?</tspan></text>
+    <text x="50" y="1046" font-size="22" fill="#16332f"><tspan x="50" dy="0">Apply adopted decision rights and</tspan><tspan x="50" dy="31">criteria. Preserve attributed dissent and</tspan><tspan x="50" dy="31">required gaps; a majority alone is not a</tspan><tspan x="50" dy="31">release rule.</tspan></text>
+    <path d="M29 1196 L529 1194 L531 1445 L27 1448 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1204" width="486" height="116" rx="16" fill="#e8effb" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1228" rx="20" ry="21" fill="#f5d9ae" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="70" cy="1225" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1225" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1236 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1236" font-size="23" fill="#245599" font-weight="700"><tspan x="112" dy="0">3 · Has the result been</tspan><tspan x="112" dy="32">delivered?</tspan></text>
+    <text x="50" y="1353" font-size="22" fill="#16332f"><tspan x="50" dy="0">Check the exact version and recipient</tspan><tspan x="50" dy="31">access. Delivery can be partial and does</tspan><tspan x="50" dy="31">not establish full goal completion.</tspan></text>
+    <path d="M29 1472 L529 1470 L531 1783 L27 1786 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1480" width="486" height="116" rx="16" fill="#fff0cd" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="1504" rx="20" ry="21" fill="#b9dce5" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="480" cy="1501" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="1501" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 1512 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="1512" font-size="23" fill="#245599" font-weight="700"><tspan x="49" dy="0">4 · Is required acceptance</tspan><tspan x="49" dy="32">obtained?</tspan></text>
+    <text x="50" y="1629" font-size="22" fill="#16332f"><tspan x="50" dy="0">Keep stakeholder acceptance,</tspan><tspan x="50" dy="31">independent review and outside</tspan><tspan x="50" dy="31">assurance distinct. Apply each when</tspan><tspan x="50" dy="31">required by the mandate, applicable</tspan><tspan x="50" dy="31">policy or enabled design safeguards.</tspan></text>
+    <path d="M29 1810 L529 1808 L531 2059 L27 2062 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1818" width="486" height="116" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1842" rx="20" ry="21" fill="#f5d9ae" stroke="#885000" stroke-width="2"/>
+    <ellipse cx="70" cy="1839" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1839" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1850 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1850" font-size="23" fill="#885000" font-weight="700"><tspan x="112" dy="0">5 · What responsibility</tspan><tspan x="112" dy="32">remains?</tspan></text>
+    <text x="50" y="1967" font-size="22" fill="#16332f"><tspan x="50" dy="0">Record accepted-goal completion,</tspan><tspan x="50" dy="31">unfinished commitments and legitimate</tspan><tspan x="50" dy="31">continuation or ending separately.</tspan></text>
+    <path d="M29 2084 L531 2082 L527 2195 L32 2193 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="46" y="2112" font-size="20" fill="#16332f"><tspan x="46" dy="0">Resource exhaustion, an editor’s identity or</tspan><tspan x="46" dy="29">everyone stopping cannot close an unresolved</tspan><tspan x="46" dy="29">required defect.</tspan></text>
+    <text x="30" y="2230" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
+  </g>
+</svg>

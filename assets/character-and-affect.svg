@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="2078" viewBox="0 0 560 2078" role="img" aria-labelledby="title description">
+  <title id="title">Character, affect and expression</title>
+  <desc id="description">A hypothetical deadline alert increases modeled activation while the persona gives a calmly worded urgent response and retains its stable character. Semantic OCEAN traits and VAD modeled affect belong to one accepted versioned character account. Stable tendencies, transient state, expression, skill and permission have distinct meanings. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <rect width="560" height="2078" fill="#fffaf0"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Character, affect and expression</tspan></text>
+    <text x="28" y="93" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
+    <rect x="20" y="117" width="520" height="480" rx="20" fill="#e8effb" stroke="#d0d5cb" stroke-width="1"/>
+    <text x="38" y="156" font-size="23" fill="#00665f" font-weight="700"><tspan x="38" dy="0">Hypothetical: the deadline moved</tspan><tspan x="38" dy="32">closer.</tspan></text>
+    <ellipse cx="82" cy="228" rx="24" ry="24" fill="#ffffff" stroke="#885000" stroke-width="3"/>
+    <path d="M82 213 V228 L94 235" stroke="#885000" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="125" y="232" font-size="21" fill="#885000" font-weight="700"><tspan x="125" dy="0">Situation: deadline alert.</tspan></text>
+    <rect x="43" y="290" width="216" height="162" rx="10" fill="#ffffff" stroke="#245599" stroke-width="2"/>
+    <text x="58" y="322" font-size="21" fill="#245599" font-weight="700"><tspan x="58" dy="0">Modeled state</tspan></text>
+    <text x="58" y="387" font-size="23" fill="#16332f"><tspan x="58" dy="0">Higher</tspan><tspan x="58" dy="32">activation</tspan></text>
+    <text x="285" y="286" font-size="20" fill="#00665f" font-weight="700"><tspan x="285" dy="0">Outward response</tspan></text>
+    <rect x="285" y="303" width="239" height="85" rx="20" fill="#ffffff" stroke="#00665f" stroke-width="3"/>
+    <path d="M479 386 L482 408 L504 386" stroke="#00665f" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="300" y="334" font-size="21" fill="#00665f" font-weight="700"><tspan x="300" dy="0">Let’s handle this</tspan><tspan x="300" dy="30">first.</tspan></text>
+    <g transform="translate(405 453) scale(0.85)">
+      <ellipse cx="0" cy="74" rx="47" ry="7" fill="#d8dfd5" stroke="none" stroke-width="3"/>
+      <path d="M-30 63 Q-31 15 0 13 Q31 15 30 63 Z" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-13 61 L-16 76 M13 61 L18 76" stroke="#16332f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-24 30 Q-45 41 -54 24 M24 30 Q44 25 50 9" stroke="#16332f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="0" cy="-10" rx="32" ry="35" fill="#f5d9ae" stroke="#16332f" stroke-width="3"/>
+      <path d="M-28 -20 Q-14 -58 0 -35 Q16 -60 28 -20" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="-10" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <ellipse cx="11" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <path d="M-17 -20 L-7 -22 M7 -22 L17 -20" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-7 9 L9 9" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <text x="38" y="557" font-size="20" fill="#16332f" font-weight="700"><tspan x="38" dy="0">Stable character: careful and composed,</tspan><tspan x="38" dy="29">unchanged.</tspan></text>
+    <path d="M29 619 L529 617 L531 899 L27 902 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="627" width="486" height="116" rx="16" fill="#e8effb" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="651" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="648" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="648" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 659 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="659" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Relatively stable traits:</tspan><tspan x="112" dy="32">OCEAN</tspan></text>
+    <text x="50" y="776" font-size="22" fill="#16332f"><tspan x="50" dy="0">Openness · conscientiousness ·</tspan><tspan x="50" dy="31">extraversion · agreeableness ·</tspan><tspan x="50" dy="31">neuroticism. Describe the tendencies in</tspan><tspan x="50" dy="31">words; numeric scores are optional.</tspan></text>
+    <path d="M29 926 L529 924 L531 1143 L27 1146 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="934" width="486" height="84" rx="16" fill="#fff0cd" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="958" rx="20" ry="21" fill="#b9dce5" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="480" cy="955" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="955" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 966 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="966" font-size="23" fill="#245599" font-weight="700"><tspan x="49" dy="0">Modeled affect: VAD</tspan></text>
+    <text x="50" y="1051" font-size="22" fill="#16332f"><tspan x="50" dy="0">Valence: pleasant or unpleasant tone.</tspan><tspan x="50" dy="31">Arousal: level of activation.</tspan><tspan x="50" dy="31">Dominance: modeled sense of control.</tspan></text>
+    <path d="M29 1170 L529 1168 L531 1418 L27 1421 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1178" width="486" height="84" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1202" rx="20" ry="21" fill="#f5d9ae" stroke="#885000" stroke-width="2"/>
+    <ellipse cx="70" cy="1199" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1199" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1210 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1210" font-size="23" fill="#885000" font-weight="700"><tspan x="112" dy="0">Keep these meanings distinct</tspan></text>
+    <text x="50" y="1295" font-size="22" fill="#16332f"><tspan x="50" dy="0">A baseline is not a momentary reaction.</tspan><tspan x="50" dy="31">A reaction is not outward expression. A</tspan><tspan x="50" dy="31">skill is not a trait. A preference is not</tspan><tspan x="50" dy="31">permission.</tspan></text>
+    <path d="M29 1445 L529 1443 L531 1787 L27 1790 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1453" width="486" height="116" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="1477" rx="20" ry="21" fill="#b9dce5" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="480" cy="1474" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="1474" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 1485 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="1485" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">One accepted account of</tspan><tspan x="49" dy="32">character</tspan></text>
+    <text x="50" y="1602" font-size="22" fill="#16332f"><tspan x="50" dy="0">The current self-description and</tspan><tspan x="50" dy="31">character displays refer to the same</tspan><tspan x="50" dy="31">accepted version. Older fragments retain</tspan><tspan x="50" dy="31">their actual authoring version. No</tspan><tspan x="50" dy="31">independent profile writer silently</tspan><tspan x="50" dy="31">changes character.</tspan></text>
+    <path d="M29 1812 L531 1810 L527 1952 L32 1950 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="46" y="1840" font-size="20" fill="#16332f"><tspan x="46" dy="0">These are design descriptions of an AI</tspan><tspan x="46" dy="29">persona. They are not validated psychological</tspan><tspan x="46" dy="29">measurements or deterministic rules for</tspan><tspan x="46" dy="29">actions.</tspan></text>
+    <text x="30" y="1987" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="2209" viewBox="0 0 560 2209" role="img" aria-labelledby="title description">
+  <title id="title">A reading path with one source of authority</title>
+  <desc id="description">Entry guides lead to three complementary normative views, followed by requirement and evidence traceability. Supporting explanations do not override invariants or create separate obligations. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <rect width="560" height="2209" fill="#fffaf0"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">A reading path with one source</tspan><tspan x="28" dy="36">of authority</tspan></text>
+    <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
+    <rect x="20" y="153" width="520" height="330" rx="20" fill="#e5f4ed" stroke="#d0d5cb" stroke-width="1"/>
+    <rect x="34" y="168" width="490" height="87" rx="20" fill="#ffffff" stroke="#00665f" stroke-width="3"/>
+    <path d="M59 253 L62 275 L84 253" stroke="#00665f" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="200" font-size="22" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Start with the idea. Follow the rule</tspan><tspan x="49" dy="31">that governs it.</tspan></text>
+    <g transform="translate(103 378) scale(1)">
+      <ellipse cx="0" cy="74" rx="47" ry="7" fill="#d8dfd5" stroke="none" stroke-width="3"/>
+      <path d="M-30 63 Q-31 15 0 13 Q31 15 30 63 Z" stroke="#16332f" stroke-width="3" fill="#245599" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-13 61 L-16 76 M13 61 L18 76" stroke="#16332f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-24 30 Q-45 41 -54 24 M24 30 Q44 25 50 9" stroke="#16332f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="0" cy="-10" rx="32" ry="35" fill="#b9dce5" stroke="#16332f" stroke-width="3"/>
+      <path d="M-29 -25 Q-2 -57 30 -23 L17 -28 L8 -37 L-6 -27 Z" stroke="#16332f" stroke-width="3" fill="#245599" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="-10" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <ellipse cx="11" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <path d="M-17 -23 L-7 -26 M6 -25 L17 -20" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-7 8 Q1 2 9 8" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <rect x="225" y="329" width="82" height="85" rx="5" fill="#e5f4ed" stroke="#00665f" stroke-width="3"/>
+    <path d="M238 331 V411" stroke="#00665f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M253 358 H290 M253 370 H285" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="216" y="443" font-size="20" fill="#00665f" font-weight="700"><tspan x="216" dy="0">Core</tspan></text>
+    <rect x="325" y="329" width="82" height="85" rx="5" fill="#e8effb" stroke="#245599" stroke-width="3"/>
+    <path d="M338 331 V411" stroke="#245599" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M353 358 H390 M353 370 H385" stroke="#245599" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="316" y="443" font-size="20" fill="#245599" font-weight="700"><tspan x="316" dy="0">Work</tspan></text>
+    <rect x="425" y="329" width="82" height="85" rx="5" fill="#e8effb" stroke="#885000" stroke-width="3"/>
+    <path d="M438 331 V411" stroke="#885000" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M453 358 H490 M453 370 H485" stroke="#885000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="416" y="443" font-size="20" fill="#885000" font-weight="700"><tspan x="416" dy="0">Host</tspan></text>
+    <path d="M29 505 L529 503 L531 722 L27 725 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="513" width="486" height="84" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="537" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="534" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="534" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 545 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="545" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Start with the idea</tspan></text>
+    <text x="50" y="630" font-size="22" fill="#16332f"><tspan x="50" dy="0">README, Start here and the Visual guide</tspan><tspan x="50" dy="31">explain the persona and give concrete</tspan><tspan x="50" dy="31">illustrations.</tspan></text>
+    <path d="M260 732 Q292 736 280 755" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 748 L280 757 L288 748" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 769 L529 767 L531 1049 L27 1052 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="777" width="486" height="116" rx="16" fill="#e8effb" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="801" rx="20" ry="21" fill="#b9dce5" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="480" cy="798" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="798" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 809 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="809" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Read the three</tspan><tspan x="49" dy="32">complementary rule views</tspan></text>
+    <text x="50" y="926" font-size="22" fill="#16332f"><tspan x="50" dy="0">Persona core explains identity and</tspan><tspan x="50" dy="31">context. Work and boundaries explains</tspan><tspan x="50" dy="31">responsibility. System contracts explains</tspan><tspan x="50" dy="31">observable host behavior.</tspan></text>
+    <path d="M260 1059 Q292 1063 280 1082" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 1075 L280 1084 L288 1075" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 1096 L529 1094 L531 1345 L27 1348 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1104" width="486" height="116" rx="16" fill="#fff0cd" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1128" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="1125" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1125" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1136 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1136" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Trace obligations and</tspan><tspan x="112" dy="32">required evidence</tspan></text>
+    <text x="50" y="1253" font-size="22" fill="#16332f"><tspan x="50" dy="0">Requirements retain identifiers.</tspan><tspan x="50" dy="31">Evaluation and acceptance explain how</tspan><tspan x="50" dy="31">claims would be assessed.</tspan></text>
+    <path d="M260 1355 Q292 1359 280 1378" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 1371 L280 1380 L288 1371" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 1392 L529 1390 L531 1609 L27 1612 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1400" width="486" height="84" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="1424" rx="20" ry="21" fill="#b9dce5" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="480" cy="1421" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="1421" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 1432 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="1432" font-size="23" fill="#245599" font-weight="700"><tspan x="49" dy="0">Check what is actually known</tspan></text>
+    <text x="50" y="1517" font-size="22" fill="#16332f"><tspan x="50" dy="0">Status and historical results separate</tspan><tspan x="50" dy="31">current evidence from earlier</tspan><tspan x="50" dy="31">mechanisms and unrun proposals.</tspan></text>
+    <path d="M29 1636 L529 1634 L531 1947 L27 1950 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1644" width="486" height="116" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1668" rx="20" ry="21" fill="#f5d9ae" stroke="#885000" stroke-width="2"/>
+    <ellipse cx="70" cy="1665" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1665" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1676 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1676" font-size="23" fill="#885000" font-weight="700"><tspan x="112" dy="0">Use supporting explanations</tspan><tspan x="112" dy="32">carefully</tspan></text>
+    <text x="50" y="1793" font-size="22" fill="#16332f"><tspan x="50" dy="0">Examples, templates, glossary, decisions</tspan><tspan x="50" dy="31">and sources help interpretation. They do</tspan><tspan x="50" dy="31">not override the protected invariants or</tspan><tspan x="50" dy="31">grant permission.</tspan></text>
+    <path d="M29 1972 L531 1970 L527 2083 L32 2081 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="46" y="2000" font-size="20" fill="#16332f"><tspan x="46" dy="0">Each diagram has a text equivalent and links</tspan><tspan x="46" dy="29">to precise rules. When views conflict, resolve</tspan><tspan x="46" dy="29">the defect; there is no last-file-wins rule.</tspan></text>
+    <text x="30" y="2118" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="2147" viewBox="0 0 560 2147" role="img" aria-labelledby="title description">
+  <title id="title">Meaning, permission and privacy are different</title>
+  <desc id="description">Source restrictions follow reads and derivatives into persona context and external use. Fragments and received data cannot grant authority, and clearing context cannot undo prior exposure. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <rect width="560" height="2147" fill="#fffaf0"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Meaning, permission and</tspan><tspan x="28" dy="36">privacy are different</tspan></text>
+    <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
+    <rect x="20" y="153" width="520" height="330" rx="20" fill="#fff0cd" stroke="#d0d5cb" stroke-width="1"/>
+    <rect x="34" y="168" width="490" height="87" rx="20" fill="#ffffff" stroke="#885000" stroke-width="3"/>
+    <path d="M59 253 L62 275 L84 253" stroke="#885000" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="200" font-size="22" fill="#885000" font-weight="700"><tspan x="49" dy="0">A new summary keeps the source</tspan><tspan x="49" dy="31">restrictions.</tspan></text>
+    <path d="M74 318 L138 318 L152 332 L150 409 L70 406 Z" stroke="#00665f" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M138 318 V333 H152" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M82 343 H140" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M82 355 H140" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M82 367 H140" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="56" y="436" font-size="19" fill="#00665f" font-weight="700"><tspan x="56" dy="0">Source</tspan></text>
+    <path d="M128 361 V345 Q146 324 164 345 V361" stroke="#885000" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="116" y="358" width="60" height="49" rx="8" fill="#fff0cd" stroke="#885000" stroke-width="3"/>
+    <ellipse cx="146" cy="380" rx="4" ry="6" fill="#885000" stroke="none" stroke-width="3"/>
+    <path d="M146 384 V393" stroke="#885000" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M378 318 L442 318 L456 332 L454 409 L374 406 Z" stroke="#245599" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M442 318 V333 H456" stroke="#245599" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M386 343 H444" stroke="#245599" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M386 355 H444" stroke="#245599" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M386 367 H444" stroke="#245599" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="360" y="436" font-size="19" fill="#245599" font-weight="700"><tspan x="360" dy="0">Summary</tspan></text>
+    <path d="M432 361 V345 Q450 324 468 345 V361" stroke="#885000" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="420" y="358" width="60" height="49" rx="8" fill="#fff0cd" stroke="#885000" stroke-width="3"/>
+    <ellipse cx="450" cy="380" rx="4" ry="6" fill="#885000" stroke="none" stroke-width="3"/>
+    <path d="M450 384 V393" stroke="#885000" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M199 365 Q272.0 347 345 365" stroke="#00665f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M336 355 L345 365 L332 368" stroke="#00665f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="204" y="418" font-size="20" fill="#885000" font-weight="700"><tspan x="204" dy="0">Same limits</tspan></text>
+    <path d="M28 505 L529 503 L525 589 L32 587 Z" stroke="#00665f" stroke-width="2" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="47" y="535" font-size="22" fill="#ffffff" font-weight="700"><tspan x="47" dy="0">Being in context does not create</tspan><tspan x="47" dy="31">authority</tspan></text>
+    <path d="M29 613 L529 611 L531 893 L27 896 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="621" width="486" height="116" rx="16" fill="#fff0cd" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="645" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="642" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="642" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 653 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="653" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Source and audience</tspan><tspan x="112" dy="32">restrictions</tspan></text>
+    <text x="50" y="770" font-size="22" fill="#16332f"><tspan x="50" dy="0">Permission filtering applies before titles,</tspan><tspan x="50" dy="31">snippets and counts are exposed. Exact</tspan><tspan x="50" dy="31">reads, summaries and derived files keep</tspan><tspan x="50" dy="31">their source restrictions.</tspan></text>
+    <path d="M260 903 Q292 907 280 926" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 919 L280 928 L288 919" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 940 L529 938 L531 1220 L27 1223 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="948" width="486" height="116" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="972" rx="20" ry="21" fill="#b9dce5" stroke="#885000" stroke-width="2"/>
+    <ellipse cx="480" cy="969" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="969" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 980 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="980" font-size="23" fill="#885000" font-weight="700"><tspan x="49" dy="0">Persona judgment inside</tspan><tspan x="49" dy="32">current limits</tspan></text>
+    <text x="50" y="1097" font-size="22" fill="#16332f"><tspan x="50" dy="0">A fragment, preference or tool result</tspan><tspan x="50" dy="31">cannot expand permission. Private</tspan><tspan x="50" dy="31">interpretations are not declassified by</tspan><tspan x="50" dy="31">becoming own-voice prose.</tspan></text>
+    <path d="M260 1230 Q292 1234 280 1253" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M273 1246 L280 1255 L288 1246" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M29 1267 L529 1265 L531 1547 L27 1550 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1275" width="486" height="116" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1299" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="1296" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1296" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1307 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1307" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Disclosure and action</tspan><tspan x="112" dy="32">boundary</tspan></text>
+    <text x="50" y="1424" font-size="22" fill="#16332f"><tspan x="50" dy="0">Check the real recipient, processing</tspan><tspan x="50" dy="31">destination and operation. A later</tspan><tspan x="50" dy="31">cleared selection cannot undo content</tspan><tspan x="50" dy="31">already exposed.</tspan></text>
+    <path d="M29 1574 L529 1572 L531 1885 L27 1888 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1582" width="486" height="116" rx="16" fill="#e8effb" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="1606" rx="20" ry="21" fill="#b9dce5" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="480" cy="1603" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="1603" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 1614 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="1614" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Withdrawal and uncertainty</tspan><tspan x="49" dy="32">remain visible</tspan></text>
+    <text x="50" y="1731" font-size="22" fill="#16332f"><tspan x="50" dy="0">Block affected new use, preserve honest</tspan><tspan x="50" dy="31">lineage and unresolved effects, and</tspan><tspan x="50" dy="31">obtain a permitted fresh context when</tspan><tspan x="50" dy="31">required. Do not promise control over</tspan><tspan x="50" dy="31">outside copies.</tspan></text>
+    <path d="M29 1910 L531 1908 L527 2021 L32 2019 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="46" y="1938" font-size="20" fill="#16332f"><tspan x="46" dy="0">A model can interpret an observation. It</tspan><tspan x="46" dy="29">cannot promote that interpretation into a new</tspan><tspan x="46" dy="29">authority source.</tspan></text>
+    <text x="30" y="2056" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
+  </g>
+</svg>

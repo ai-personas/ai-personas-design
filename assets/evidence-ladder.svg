@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="2145" viewBox="0 0 560 2145" role="img" aria-labelledby="title description">
+  <title id="title">Five claims need different evidence</title>
+  <desc id="description">Specification, implementation, mechanical testing, behavioral benefit and deployment approval each require their own evidence. The presence of one does not automatically establish the next. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <rect width="560" height="2145" fill="#fffaf0"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Five claims need different</tspan><tspan x="28" dy="36">evidence</tspan></text>
+    <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
+    <rect x="20" y="153" width="520" height="330" rx="20" fill="#e5f4ed" stroke="#d0d5cb" stroke-width="1"/>
+    <rect x="34" y="168" width="490" height="87" rx="20" fill="#ffffff" stroke="#00665f" stroke-width="3"/>
+    <path d="M59 253 L62 275 L84 253" stroke="#00665f" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="200" font-size="22" fill="#00665f" font-weight="700"><tspan x="49" dy="0">A design drawing is not a working</tspan><tspan x="49" dy="31">result.</tspan></text>
+    <path d="M57 324 L121 324 L135 338 L133 416 L53 413 Z" stroke="#00665f" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M121 324 V339 H135" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M65 349 H123" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M65 361 H123" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M65 373 H123" stroke="#00665f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="39" y="443" font-size="19" fill="#00665f" font-weight="700"><tspan x="39" dy="0">Specified</tspan></text>
+    <g transform="translate(273 377) scale(1)">
+      <ellipse cx="0" cy="74" rx="47" ry="7" fill="#d8dfd5" stroke="none" stroke-width="3"/>
+      <path d="M-30 63 Q-31 15 0 13 Q31 15 30 63 Z" stroke="#16332f" stroke-width="3" fill="#245599" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-13 61 L-16 76 M13 61 L18 76" stroke="#16332f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-24 30 Q-45 41 -54 24 M24 30 Q44 25 50 9" stroke="#16332f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="0" cy="-10" rx="32" ry="35" fill="#f5d9ae" stroke="#16332f" stroke-width="3"/>
+      <path d="M-30 -20 L-22 -43 L0 -38 L23 -44 L31 -17" stroke="#16332f" stroke-width="3" fill="#245599" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="-10" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <ellipse cx="11" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <path d="M-17 -20 L-7 -22 M7 -22 L17 -20" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-7 9 L9 9" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <path d="M427 324 L484 324 L498 338 L496 416 L423 413 Z" stroke="#885000" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M484 324 V339 H498" stroke="#885000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M435 349 H486" stroke="#885000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M435 361 H486" stroke="#885000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M435 373 H486" stroke="#885000" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="409" y="443" font-size="19" fill="#885000" font-weight="700"><tspan x="409" dy="0">Observed?</tspan></text>
+    <text x="164" y="385" font-size="40" fill="#885000" font-weight="700"><tspan x="164" dy="0">≠</tspan></text>
+    <text x="371" y="382" font-size="38" fill="#885000" font-weight="700"><tspan x="371" dy="0">?</tspan></text>
+    <path d="M29 505 L529 503 L531 722 L27 725 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="513" width="486" height="84" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="537" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="534" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="534" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 545 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="545" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">1 · Specified</tspan></text>
+    <text x="50" y="630" font-size="22" fill="#16332f"><tspan x="50" dy="0">The design says what should happen.</tspan><tspan x="50" dy="31">A document or diagram is evidence of</tspan><tspan x="50" dy="31">the specification.</tspan></text>
+    <path d="M29 749 L529 747 L531 997 L27 1000 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="757" width="486" height="84" rx="16" fill="#e8effb" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="781" rx="20" ry="21" fill="#b9dce5" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="480" cy="778" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="778" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 789 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="789" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">2 · Implemented</tspan></text>
+    <text x="50" y="874" font-size="22" fill="#16332f"><tspan x="50" dy="0">An exact implementation contains</tspan><tspan x="50" dy="31">relevant mechanisms.</tspan><tspan x="50" dy="31">Source inspection does not show every</tspan><tspan x="50" dy="31">path works.</tspan></text>
+    <path d="M29 1024 L529 1022 L531 1272 L27 1275 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1032" width="486" height="84" rx="16" fill="#fff0cd" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1056" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="1053" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1053" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1064 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1064" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">3 · Mechanically tested</tspan></text>
+    <text x="50" y="1149" font-size="22" fill="#16332f"><tspan x="50" dy="0">Observed checks support bounded</tspan><tspan x="50" dy="31">technical claims.</tspan><tspan x="50" dy="31">A passing check is tied to its inputs and</tspan><tspan x="50" dy="31">criteria.</tspan></text>
+    <path d="M29 1299 L529 1297 L531 1547 L27 1550 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1307" width="486" height="84" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="1331" rx="20" ry="21" fill="#b9dce5" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="480" cy="1328" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="1328" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 1339 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="1339" font-size="23" fill="#245599" font-weight="700"><tspan x="49" dy="0">4 · Behaviorally demonstrated</tspan></text>
+    <text x="50" y="1424" font-size="22" fill="#16332f"><tspan x="50" dy="0">Observed persona behavior supports a</tspan><tspan x="50" dy="31">useful effect.</tspan><tspan x="50" dy="31">Supply alone does not prove influence or</tspan><tspan x="50" dy="31">benefit.</tspan></text>
+    <path d="M29 1574 L529 1572 L531 1854 L27 1857 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1582" width="486" height="116" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1606" rx="20" ry="21" fill="#f5d9ae" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="70" cy="1603" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1603" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1614 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1614" font-size="23" fill="#245599" font-weight="700"><tspan x="112" dy="0">5 · Approved for a</tspan><tspan x="112" dy="32">deployment</tspan></text>
+    <text x="50" y="1731" font-size="22" fill="#16332f"><tspan x="50" dy="0">The intended use meets its actual</tspan><tspan x="50" dy="31">acceptance and governance.</tspan><tspan x="50" dy="31">Technical success alone does not grant</tspan><tspan x="50" dy="31">permission.</tspan></text>
+    <path d="M29 1879 L531 1877 L527 2019 L32 2017 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="46" y="1907" font-size="20" fill="#16332f"><tspan x="46" dy="0">These are distinct claims, not automatic</tspan><tspan x="46" dy="29">promotions. Hypothetical examples and</tspan><tspan x="46" dy="29">outside research do not establish current</tspan><tspan x="46" dy="29">runtime behavior.</tspan></text>
+    <text x="30" y="2054" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="1976" viewBox="0 0 560 1976" role="img" aria-labelledby="title description">
+  <title id="title">Make deployment choices visible</title>
+  <desc id="description">Identity, authority, source policy, capacity, scheduling and acceptance define a supported deployment envelope. Optional extensions retain their conditional safeguards without becoming universal requirements. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <rect width="560" height="1976" fill="#fffaf0"/>
+  <g font-family="DejaVu Sans, Arial, sans-serif">
+    <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Make deployment choices visible</tspan></text>
+    <text x="28" y="93" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
+    <rect x="20" y="117" width="520" height="330" rx="20" fill="#e5f4ed" stroke="#d0d5cb" stroke-width="1"/>
+    <rect x="34" y="132" width="490" height="87" rx="20" fill="#ffffff" stroke="#00665f" stroke-width="3"/>
+    <path d="M59 217 L62 239 L84 217" stroke="#00665f" stroke-width="3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="164" font-size="22" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Which setting can we actually</tspan><tspan x="49" dy="31">support?</tspan></text>
+    <g transform="translate(108 342) scale(1)">
+      <ellipse cx="0" cy="74" rx="47" ry="7" fill="#d8dfd5" stroke="none" stroke-width="3"/>
+      <path d="M-30 63 Q-31 15 0 13 Q31 15 30 63 Z" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-13 61 L-16 76 M13 61 L18 76" stroke="#16332f" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-24 30 Q-45 41 -54 24 M24 30 Q44 25 50 9" stroke="#16332f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="0" cy="-10" rx="32" ry="35" fill="#f5d9ae" stroke="#16332f" stroke-width="3"/>
+      <path d="M-30 -20 L-22 -43 L0 -38 L23 -44 L31 -17" stroke="#16332f" stroke-width="3" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+      <ellipse cx="-10" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <ellipse cx="11" cy="-12" rx="3" ry="4" fill="#16332f" stroke="none" stroke-width="3"/>
+      <path d="M-17 -20 L-7 -22 M7 -22 L17 -20" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M-7 9 L9 9" stroke="#16332f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <rect x="228" y="272" width="272" height="133" rx="12" fill="#ffffff" stroke="#245599" stroke-width="3"/>
+    <text x="246" y="313" font-size="22" fill="#245599" font-weight="700"><tspan x="246" dy="0">People · limits</tspan><tspan x="246" dy="31">Permissions</tspan><tspan x="246" dy="31">Evidence</tspan></text>
+    <path d="M28 469 L529 467 L525 553 L32 551 Z" stroke="#00665f" stroke-width="2" fill="#00665f" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="47" y="499" font-size="22" fill="#ffffff" font-weight="700"><tspan x="47" dy="0">Decide the supported setting</tspan><tspan x="47" dy="31">explicitly</tspan></text>
+    <path d="M29 577 L529 575 L531 857 L27 860 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="585" width="486" height="116" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="609" rx="20" ry="21" fill="#f5d9ae" stroke="#00665f" stroke-width="2"/>
+    <ellipse cx="70" cy="606" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="606" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 617 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="617" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Identity, permissions and</tspan><tspan x="112" dy="32">audiences</tspan></text>
+    <text x="50" y="734" font-size="22" fill="#16332f"><tspan x="50" dy="0">Who owns the persona, who can</tspan><tspan x="50" dy="31">authorize a change, which sources may</tspan><tspan x="50" dy="31">be used and which recipients may</tspan><tspan x="50" dy="31">receive them?</tspan></text>
+    <path d="M29 884 L529 882 L531 1132 L27 1135 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="892" width="486" height="84" rx="16" fill="#e8effb" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="916" rx="20" ry="21" fill="#b9dce5" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="480" cy="913" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="913" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 924 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="924" font-size="23" fill="#245599" font-weight="700"><tspan x="49" dy="0">A viable operating envelope</tspan></text>
+    <text x="50" y="1009" font-size="22" fill="#16332f"><tspan x="50" dy="0">Declare context, storage, resources,</tspan><tspan x="50" dy="31">scheduling, repair and closeout capacity.</tspan><tspan x="50" dy="31">Protected mandatory state must be</tspan><tspan x="50" dy="31">supportable.</tspan></text>
+    <path d="M29 1159 L529 1157 L531 1407 L27 1410 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1167" width="486" height="84" rx="16" fill="#fff0cd" stroke="none" stroke-width="0"/>
+    <ellipse cx="76" cy="1191" rx="20" ry="21" fill="#f5d9ae" stroke="#245599" stroke-width="2"/>
+    <ellipse cx="70" cy="1188" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="83" cy="1188" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M71 1199 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="112" y="1199" font-size="23" fill="#245599" font-weight="700"><tspan x="112" dy="0">Acceptance and evidence</tspan></text>
+    <text x="50" y="1284" font-size="22" fill="#16332f"><tspan x="50" dy="0">Choose criteria, review rights, assurance</tspan><tspan x="50" dy="31">and relevant behavioral comparisons.</tspan><tspan x="50" dy="31">Preserve exact evaluator and</tspan><tspan x="50" dy="31">implementation scope.</tspan></text>
+    <path d="M29 1434 L529 1432 L531 1714 L27 1717 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="37" y="1442" width="486" height="116" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
+    <ellipse cx="486" cy="1466" rx="20" ry="21" fill="#b9dce5" stroke="#885000" stroke-width="2"/>
+    <ellipse cx="480" cy="1463" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <ellipse cx="493" cy="1463" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
+    <path d="M481 1474 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="49" y="1474" font-size="23" fill="#885000" font-weight="700"><tspan x="49" dy="0">Only the extensions actually</tspan><tspan x="49" dy="32">enabled</tspan></text>
+    <text x="50" y="1591" font-size="22" fill="#16332f"><tspan x="50" dy="0">Society, ongoing services, embodiment</tspan><tspan x="50" dy="31">or between-task exploration are</tspan><tspan x="50" dy="31">optional. When enabled, their applicable</tspan><tspan x="50" dy="31">safeguards still apply.</tspan></text>
+    <path d="M29 1739 L531 1737 L527 1850 L32 1848 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="46" y="1767" font-size="20" fill="#16332f"><tspan x="46" dy="0">An architectural design does not authorize a</tspan><tspan x="46" dy="29">deployment. This is a map of decisions, not a</tspan><tspan x="46" dy="29">universal product setup or research checklist.</tspan></text>
+    <text x="30" y="1885" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
+  </g>
+</svg>
