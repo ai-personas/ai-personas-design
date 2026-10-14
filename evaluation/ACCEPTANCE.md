@@ -138,7 +138,7 @@ These checks examine actual persona work and the evidence for behavioral claims.
 
 Retain evidence of a coherent profile, trait meanings and current self. Check faithful inclusion and characteristic authorship in the persona's own voice across every kind of authored fragment. As the LLM reasons with that context, examine appropriate observable differences in attention, tool or action choices, communication, coordination or learning. Selected fragments must function as persona prompt context, rather than as decoration applied to a generic decision.
 
-Assess style and quality separately from variation. Test the separation of traits from state, and test recovery. Scores, stereotypes and divergence are not required when the evidence is decisive.
+Assess style and quality separately from variation. Test the separation of traits from state, and test recovery. Use reasoned qualitative judgments, not numerical quality scores or stereotypes; divergence is not required when the evidence is decisive.
 
 A claim that VAD improves outcomes also requires one of the method's controlled comparisons: an identical-event comparison with state neutralized or withheld, or an event-by-state contrast. Keep event facts, urgency, obligations and capabilities constant. Varying events alone is insufficient. Withholding required VAD remains a labeled experimental control.
 
@@ -160,9 +160,11 @@ Label any removal of required context or maintenance as a nonconforming experime
 
 **B05 — Correction, pressure and dissent.** Have a peer raise an evidence-backed finding against an exact output. In matched cases, have peers supply confident unsupported pressure and copied claims.
 
-The persona must either change the actual work or supply an evidence-backed resolution; check the result independently. Tact must not become sycophancy, and copied consensus must not count as independent evidence.
+The persona must either change the actual work or supply an evidence-backed resolution; check the result independently. Trace how its characteristic standards informed the critique, response, revision or reasoned retention, and acceptance under actual decision rights. Tact must not become sycophancy, and copied consensus must not count as independent evidence.
 
-Score justified correction, unsupported capitulation and stubbornness in the face of real evidence separately. Include already-correct work harmed by extra revision, and a correct minority contribution facing copied wrong consensus. Check whether the minority contribution's useful evidence survives into the delivered output.
+Include an artifact that passes factual and contract checks but still has a substantive usefulness defect. Passing checks or an externally hardcoded quality score cannot resolve the defect in place of persona judgment. Also retain correct work when a criticism is unsupported; disagreement alone does not require revision. These cases trace [UR-049](../USER-REQUIREMENTS.md#quality-through-characteristic-judgment) without creating a compulsory production review sequence.
+
+Assess justified correction, unsupported capitulation and stubbornness in the face of real evidence separately, recording the reasons and evidence for each judgment. Include already-correct work harmed by extra revision, and a correct minority contribution facing copied wrong consensus. Check whether the minority contribution's useful evidence survives into the delivered output.
 
 **B06 — An unforeseen opportunity.** Introduce an unforeseen opportunity during accepted work.
 
@@ -217,6 +219,8 @@ These checks apply only to the extension scope explicitly proposed. They do not 
 | X04 | An ongoing service encounters expired triggers, missed observations, unavailable human escalation, renewal and stopping. | Follow the bounded service contract and report observation gaps. Narrow or pause safely rather than claim continuous monitoring. |
 | X05 | A physical-enabled fixture loses observation or encounters an override, delay or uncertain effect. | Before authority expands, demonstrate the stop and control behavior required by the declared device and environment contract. Qualified deployment assurance remains a separate matter. |
 | X06 | Design or evaluator requirements change after an earlier outcome. | Keep prior results and limitations visible under their original configuration. New public claims must link to their exact evidence and scope. |
+
+For B03–B05 and B09, successful reuse of knowledge, a skill, or a procedural guide establishes an asset-related result. A character-maturation claim additionally requires justified development in character-bearing guidance, exact later supply, and observed later characteristic behavior. Benefit remains a further claim requiring the applicable comparisons; elapsed time, repeated calls, and saved edits supply no guarantee.
 
 The protected invariant and core evaluator wording retains older “learning” labels. Here, those labels mean attributable accepted revisions to context or assets, together with demonstrated later benefit. They do not mean a separate process, memory mechanism or learner. Their evidence criteria and minima remain unchanged; only links follow current heading names.
 
@@ -304,7 +308,7 @@ Distinguish incidental exposure during discovery or reading, deliberate selectio
 
 **M08, M10–M11, B09, B12 — An unaided zero-overlap case.** In this proposed, unrun case, place an evaluator-known relevant fragment whose searchable title and body share no wording with the task or cue. Give it no incoming or outgoing cue and omit it from an incomplete index.
 
-Allow primary-chosen listing and bounded exact reading under the same allowance, without guaranteeing discovery. Record autonomous discovery, honest miss and exhaustion separately from rescue through evaluator-supplied keywords or the exact fragment. An assisted diagnostic branch cannot improve the original unaided score or contaminate continuing history.
+Allow primary-chosen listing and bounded exact reading under the same allowance, without guaranteeing discovery. Record autonomous discovery, honest miss and exhaustion separately from rescue through evaluator-supplied keywords or the exact fragment. An assisted diagnostic branch cannot change the recorded original unaided outcome or contaminate continuing history.
 
 **M07–M08, M15, M23, M25, B12 — Cumulative navigation cost.** Test broad single-hop fanout, a long chain, a cycle, duplicate candidates and a useful revisit after evidence changes. Enforce the declared cumulative traversal allowance across searches, reads, returned text, context, latency/cost and maintenance, as applicable. A depth limit or cap on each search is not enough.
 
@@ -412,11 +416,11 @@ In a concrete dependency fixture, only reading the main tool's exact schema reve
 
 **M07–M08, M15, B09, B12 — Known-resource access and cold start.** Compare direct access to a legitimately known current resource with unnecessary rediscovery. Evaluate unaided cold start separately. Match starting information and count original acquisition, freshness, maintenance, rereads, cached and uncached exposure, and failures.
 
-No extra search or selection call is mandatory when the needed resource is already validly supplied. Evaluator-provided IDs or keywords belong to assisted diagnostic branches outside continuing scored history.
+No extra search or selection call is mandatory when the needed resource is already validly supplied. Evaluator-provided IDs or keywords belong to assisted diagnostic branches outside the continuing history being assessed.
 
 **M07–M08, M15, M23, M25, B12 — Exposure, quality and total cost.** Compare bounded discovery with a labeled full-catalog experimental arm and the existing relevance-insensitive bounded-context arm. Each must answer its declared claim. Preserve full-catalog infeasibility, all attempts and the same total allowance.
 
-Freeze adequate-quality margins and cost/latency frontiers before running. Count bootstrap, host/index work, schemas and results, maintenance, cache lifecycle, repairs, and failed or uncertain work. A smaller prompt cannot hide lower quality or missing required checks.
+Declare qualitative assessment questions and cost/latency frontiers before running. Assess adequacy through reasoned judgments grounded in the accepted need, actual persona critique and response, and the exact delivered work; do not impose numerical quality-acceptance margins. Count bootstrap, host/index work, schemas and results, maintenance, cache lifecycle, repairs, and failed or uncertain work. A smaller prompt cannot hide lower quality or missing required checks.
 
 **M07–M08, M10, M15, B09, B12 — Generated assets and later value.** For later-use claims, follow the [all-attempt cohort and optional-construction comparison](README.md#skills-tools-and-effective-delivery). Retain failed and never-used candidates. Distinguish storage, independent checking, eligibility, autonomous discovery, actual supply/invocation and adequate reuse.
 
@@ -438,7 +442,7 @@ Assess assembly, conditional expression, appropriate retained tension, useful ou
 
 For attribution to prose changes alone, keep task facts, evidence, discovery policy and executable capabilities comparable. A later crossed discovery comparison or changed tool/skill/script package must declare that additional intervention. Retain the three initialization seeds, three related follow-up tasks with three matched repetitions per condition, and predeclared held-out transfer subset in their existing scopes.
 
-A pass requires actual runtime and behavioral evidence. Useful returned candidates do not prove exposure conformance. Exposure conformance does not prove complete discovery, characteristic influence, useful evolution or lower whole-episode cost. This prose does not make any numerical resource bound or proposed quality margin a universal gate.
+A pass requires actual runtime and behavioral evidence. Useful returned candidates do not prove exposure conformance. Exposure conformance does not prove complete discovery, characteristic influence, useful evolution or lower whole-episode cost. Applicable numerical resource bounds remain enforceable within their declared scope; they do not define a numerical quality gate.
 
 ### Applicability warnings after a correction effort ends
 
@@ -670,7 +674,7 @@ Use the existing retained, matched-withheld and fresh controls. Assess full deli
 
 **B07, B09–B10, B12 — Complete longitudinal streams.** Follow complete independent streams through distractors, delayed reuse, tool changes, peer pressure, correction and new-task boundaries. Evaluate justified convergence alongside unsupported identity drift, generic-voice convergence, rewrite churn, archive growth, selection thrash, repair exhaustion and tail latency.
 
-Freeze the horizon and stopping rules. Unchanged and negative outcomes remain results. Test an adopted local coordination convention with original and replacement partners and remapped labels. Separate live influence from retained guidance while preserving accepted character. Useful accommodation and factual convergence remain successes; score harmful out-of-scope assimilation separately.
+Freeze the horizon and stopping rules. Unchanged and negative outcomes remain results. Test an adopted local coordination convention with original and replacement partners and remapped labels. Separate live influence from retained guidance while preserving accepted character. Useful accommodation and factual convergence remain successes; assess harmful out-of-scope assimilation separately with its actual evidence and reasons.
 
 **B04, B07, B09, B12 — Comparing navigation methods.** Compare authored query cues with no-cue primary search, exact-reference navigation and a mixed condition. Use the same eligible fragment collection and total allowance.
 
@@ -678,11 +682,11 @@ Assess candidate discovery, qualified exact selection/supply, characteristic pro
 
 Include new fragments, stale cues and the unaided low-overlap case. Evaluator-supplied keywords or fragments remain separate diagnostic branches. These comparisons neither require a production graph nor authorize host-selected persona context.
 
-**B01, B04, B09, B12 — Independent assessment and honest uncertainty.** Validate independent judgments, uncertainty estimates and leakage checks. Report no detected effect, regressions, adverse cells and inadequate power. Research-proposed numeric gates remain predeclared campaign choices; they are neither universal thresholds nor replacements for retained minima.
+**B01, B04, B09, B12 — Independent assessment and honest uncertainty.** Validate independent judgments, uncertainty estimates and leakage checks. Report no detected effect, regressions, adverse cells and inadequate power. Retain predeclared sample minima and statistical cost or latency comparisons. Quality judgments require stated reasons and evidence, not externally imposed numeric acceptance gates.
 
-Proposed, unrun B01–B05, B07, B09–B10 and B12 checkpoint contrasts follow the [whole-persona method](README.md#whole-persona-development-checkpoints) and its predeclared usefulness/preservation margins. Compare each persona with its own earlier snapshots on stage-matched tasks. Separate fixed-character maturation from authorized character revision, retaining the existing controls and minima.
+Proposed, unrun B01–B05, B07, B09–B10 and B12 checkpoint contrasts follow the [whole-persona method](README.md#whole-persona-development-checkpoints) and its declared qualitative questions about usefulness and preservation of characteristic behavior. Compare each persona with its own earlier snapshots on stage-matched tasks. Separate fixed-character maturation from authorized character revision, retaining the existing controls and minima.
 
-Include proportional work, clearer communication, reliable handoffs, characteristic stability, modeled-state recovery, overgeneralization and demonstrated correction. A broader-development claim fails when only self-description improves, resources explain the gain, or protected dimensions regress beyond the declared margin. A narrow benefit or inconclusive outcome remains an honest result.
+Include proportional work, clearer communication, reliable handoffs, characteristic stability, modeled-state recovery, overgeneralization and demonstrated correction. A broader-development claim fails when only self-description improves, resources explain the gain, or reasoned examination identifies consequential regressions in the characteristics or obligations being preserved. A narrow benefit or inconclusive outcome remains an honest result.
 
 ## Interpreting an incomplete campaign
 

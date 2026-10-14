@@ -222,7 +222,7 @@ Self-harmonization is neither an automatic restyling of the whole corpus nor a r
 
 ## Fragments are reusable prompt parts
 
-A fragment is an own-voice prompt part that carries this persona's characteristic way of noticing, interpreting, choosing, relating, and acting when supplied. Its purpose is to express character and behavior. Plain domain knowledge, technical procedures, tools, skills, code, data, and factual records are supporting assets, even when the persona authors them. Classify material by purpose—not by author, storage location, presence in a prompt, or first-person wording.
+A fragment is an own-voice prompt part that carries this persona's characteristic way of noticing, interpreting, choosing, relating, and acting when supplied. Its purpose is to express voice, behavioral dispositions, and the persona's standards for its work and conduct. Plain domain knowledge, technical procedures and guides, tools, skills, code, data, and factual records are supporting assets, even when the persona authors them. Classify material by purpose—not by author, storage location, presence in a prompt, or first-person wording.
 
 ![Concrete event-planning examples distinguish characteristic fragments from knowledge, skills, tools, code, data and attributed records. The boundary follows purpose rather than authorship.](../assets/fragments-and-assets.svg)
 
@@ -353,7 +353,7 @@ Aliases and retirement notices consume the same retention budget. After their pe
 
 ## Maturation within every primary interaction
 
-Maturation is the continuing primary LLM's ordinary work of reconsidering and organizing the persona's context. Each interaction considers the current work; useful creation, update, organization, or permitted deletion of characteristic fragments and supporting assets; and bounded selection of next context. Maturation is not a separate learner, learning process, memory mechanism, or controller. It does not guarantee improvement.
+Maturation concerns development of the persona's characteristic ways of working through the continuing primary LLM's ordinary interactions. Each interaction considers the current work; useful creation, update, organization, or permitted deletion of characteristic fragments and supporting assets; and bounded selection of next context. These responsibilities support development without making every maintenance outcome character maturation. Maturation is not a separate learner, learning process, memory mechanism, or controller. It does not guarantee improvement.
 
 ![Actual experience informs ordinary primary-LLM revision, followed by controlled adoption and later actual supply. Behavioral improvement requires separate comparative evidence and is never implied by time or editing.](../assets/maturation.svg)
 
@@ -405,6 +405,8 @@ The continuing relationship is **observe, interpret, organize, find, select, ass
 **Character and experience influence each other.** Accepted traits shape own-voice prompt parts. Selected parts that are actually supplied form the characteristic context in which the LLM reasons and the persona acts. Actual task results, human conversation, peer cooperation, disagreement, correction, and other received consequences can then justify revising, connecting, consolidating, or retiring those parts.
 
 A revision can change how a later invocation approaches its situation, rather than merely adding a fact to a recall store. It may alter methods, communication, relationships, or navigation habits. Meaningful experience may also support a broader current-character proposal when self-authorship is permitted, subject to the existing acceptance and fresh-decision rules. Ordinary refinement does not require stable traits to change on every call.
+
+**Distinguish asset reuse from character maturation.** Creating or reusing a procedural guide may improve the task while leaving characteristic dispositions and standards unchanged. A character-maturation claim needs an attributable, justified development in character-bearing guidance, its actual later supply, and evidence of how the persona subsequently reasons, communicates, critiques, or acts. Stable trait values need not change. A claim that this development is beneficial additionally needs evidence of better later consequences; a saved guide, an accepted fragment edit, or an asserted lesson alone establishes neither claim.
 
 **Improvement is a product aim to test.** The desired benefit is that a later checkpoint is more useful than the same persona's earlier checkpoint on a declared, relevant range of work and interaction. That aim does not define maturation and is not inevitable. Useful maturation may include better delivery, judgment, communication, coordination, characteristic expression, and appropriate modeled-affect response and recovery. Later accepted fragments and separately retained supporting assets should enable more useful prompting and action under comparable constraints.
 

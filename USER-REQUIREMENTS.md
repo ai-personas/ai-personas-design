@@ -1,6 +1,6 @@
 # Consolidated user requirements
 
-This file brings together the user's requirements from the AI Personas design conversation through 10 October 2026. It covers the requested product, architecture, examples, research, and delivery. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
+This file brings together the user's requirements from the AI Personas design conversation through 14 October 2026. It covers the requested product, architecture, examples, research, and delivery. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
 
 Only human-user messages supply these requirements. This account must preserve the user's intended outcomes, rather than weaken them to fit the existing design. Assistant interpretations, design decisions, evidence safeguards, and implementation rules must not be added as user requirements.
 
@@ -26,7 +26,7 @@ Characteristic fragments are prompt parts that express a particular persona's ch
 
 **UR-005 The initial LLM call authors the initial fragments.** Use the starting profile in the initial LLM call to produce the persona's initial characteristic fragments. These prompt parts must express its own voice and character and provide the starting point for subsequent development. Later creation, revision, and self-harmonization of fragments must preserve their persona-specific characteristic meaning.
 
-**UR-006 Fragments embody character.** Every characteristic fragment must reflect its owner's unique traits and voice. It must carry that persona's characteristic and behavioral meaning, rather than attach a persona label to generic instructions. Selected fragments form the character-bearing part of the context supplied to the LLM.
+**UR-006 Fragments embody character.** Every characteristic fragment must reflect its owner's unique traits and voice, behavioral dispositions, and standards for its own work and conduct. It must carry that persona's characteristic and behavioral meaning, rather than attach a persona label to generic instructions. Selected fragments form the character-bearing part of the context supplied to the LLM.
 
 **UR-007 The LLM and selected context constitute the operating persona.** The LLM provides reasoning. Selected characteristic fragments and relevant supporting context shape this persona's responses and decisions. Character must influence how the persona acts, rather than exist only in a separate profile or biography.
 
@@ -42,7 +42,7 @@ Character should influence both what it chooses to do and how much and in what w
 
 A persona also needs useful material that supports its work without defining its character. The design must keep that material identifiable, organized, and available for later use.
 
-**UR-011 Keep assets identifiable separately from characteristic fragments.** Assets or supporting context include plain domain knowledge, data, tools, skills, scripts, code, historical messages, records of actions and tool interactions, and other useful resources.
+**UR-011 Keep assets identifiable separately from characteristic fragments.** Assets or supporting context include plain domain knowledge, data, tools, skills, procedural guides, scripts, code, historical messages, records of actions and tool interactions, and other useful resources.
 
 These remain distinguishable from characteristic fragments even when the persona or LLM creates them. Plain assets need not be rewritten in the persona's voice. Authorship alone does not turn an asset into persona character.
 
@@ -125,6 +125,12 @@ Include groups that continue collaborating over time to improve a shared task, w
 **UR-047 Let reflection, dialogue, and character shape completion and further improvement.** Explain how one persona can use self-reflection and self-questioning, and how multiple personas can question one another and clarify the work as they continue.
 
 Their characteristic behaviors should shape individual or collective judgments about what can be improved, when and where to stop, and when to consider the work complete. These judgments should take account of the time available. Examine how personas can deliver work they judge sufficient for now and return to improve it when more time becomes available.
+
+### Quality through characteristic judgment
+
+**UR-049 Let personas develop quality through reasoned judgment.** Personas should pursue quality through their own characteristic standards, self-critique, and exchanges with other personas. Their character should shape how they identify problems, disagree, respond to criticism, revise work, and judge whether to accept a contribution or result. An externally hardcoded quality score must not replace this reasoning. Objective factual and contract checks provide evidence for these judgments; passing those checks alone does not settle overall quality.
+
+Keep this development distinct from reuse of knowledge, tools, skills, or procedural guides. Those are supporting assets. Characteristic fragments express voice, behavioral dispositions, and standards. A claim of character maturation must be visible in later behavior, not inferred merely from saving or reusing an asset. Better work is the aim, without a guarantee of improvement on every turn or from elapsed time.
 
 ### Clarification and progress from sparse requests
 

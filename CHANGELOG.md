@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 14 October 2026 — character-shaped quality and evidence of maturation
+
+Added UR-049 and its trace through existing persona, maintenance, evidence, and behavioral requirements. Characteristic fragments express voice, behavioral dispositions, and standards; knowledge, tools, skills, and procedural guides remain supporting assets. Reuse of an asset does not establish character maturation, which needs evidence of later characteristic behavior.
+
+Clarified that personas pursue quality through reasoned critique, disagreement, response, revision or retention, and acceptance under actual decision rights. Objective factual and contract checks supply scoped evidence; an externally hardcoded quality score cannot replace substantive judgment. Evaluation summaries remain evidence instruments, not a production quality function. Existing identifiers, campaign minima, and historical results remain under their original criteria. This documentation change demonstrates no runtime behavior or guaranteed improvement.
+
 ## 12 October 2026 — clearer reading paths and explanatory visuals
 
 Rewrote the design reference throughout for technical and everyday readers, keeping the established rule identifiers, authority structure, and substantive obligations. Plain explanations introduce the exact rules; a coordinated set of 19 accessible SVG illustrations explains character, initialization, fragments and assets, actual context supply, readiness, cooperation, completion, continuation, maturation, privacy, resources, recovery, evaluation, and deployment choices. Captions and text equivalents link back to the rules they explain. Invented journeys remain hypothetical.

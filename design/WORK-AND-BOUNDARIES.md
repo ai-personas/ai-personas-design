@@ -678,6 +678,10 @@ Successful conversion does not prove that transformed inputs remain faithful to 
 
 The persona chooses how to assess a permitted, exact subject. It may read, reason through an argument, make a visual observation, consult others, use tools, or combine these methods. Within the same participation, it can create a result, assess its own work, inspect a peer's work, and revise. Its self-assessment does not count as independent approval.
 
+**Pursue quality through characteristic judgment.** The persona's own standards and dispositions inform what it notices, questions, challenges, and considers sufficient for the accepted need. Self-critique and exchanges with peers can expose a defect or justify retaining good work. Preserve the actual criticism or disagreement, the recipient's reasoned response, and any resulting revision, rejection, or acceptance. An exchange need not end in agreement or an edit, and small work requires no compulsory peer-review ritual.
+
+An externally hardcoded quality score must not decide substantive quality in place of these judgments. Objective factual checks, contract checks, and tool results provide evidence about their stated claims; passing them does not by itself establish usefulness or quality. Their failures and all mandatory constraints still bind where applicable. Persona preferences cannot override facts, authority, or the adopted criteria, and neither a peer's approval nor a numeric result invents required stakeholder acceptance.
+
 **Independence depends on the actual separation.** Different identities, executions, models, and qualified outside reviewers provide different forms of separation. A newborn persona is not automatically independent of its parent.
 
 A formal adopted review identifies:

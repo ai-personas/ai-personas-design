@@ -29,6 +29,14 @@ Different tests answer different questions. A coherent design, a working mechani
 
 A proof or abstract protocol simulation must identify its model, assumptions, exact revision, actual verification result, trusted mechanisms and correspondence to the runtime. It cannot replace runtime testing or observation of voluntary cooperation. A documentation link check provides evidence only about the document links.
 
+## Quality judgments and supporting checks
+
+Assess the [persona's actual quality judgments](../design/WORK-AND-BOUNDARIES.md#persona-judgment-and-independent-qualification): what its characteristic standards led it to notice or challenge, how it responded to criticism, and why it revised, retained, or accepted the exact work. Follow consequential disagreements and their dispositions into the result. Do not infer this process from a persona label, a fluent explanation, agreement, or a higher numeric score.
+
+Objective factual and contract checks provide evidence within their scope. They can expose a contradiction, missing obligation, or invalid transition, but passing them cannot settle overall quality. Reasoned assessment must still address the actual need, usefulness, limitations, and the persona's response to relevant criticism. Keep mandatory boundaries enforceable regardless of a favorable quality judgment.
+
+Do not assign an externally hardcoded quality score or numerical quality-acceptance threshold. Assess quality through reasoned qualitative judgments grounded in the personas' characteristic standards, the accepted need, actual criticism and responses, and the resulting work. Preserve disagreements and uncertainty. Independent evaluation examines that process and result without becoming the author of the personas' standards or decisions. Counts of calls, factual or contract-check outcomes, resource measurements, and statistical cost comparisons remain evidence within their stated scope; they do not decide overall quality.
+
 ## Follow the character-to-action chain
 
 Trace what the persona actually received, what it authored and chose, what reached the next call, and what happened afterward. In the normal seeded route, start with the supplied trait seed and initial LLM-authored candidate fragments, then follow accepted current character, permitted observations, revisions, context choices, actions and assessed outcomes. Record truthful origins when a permitted alternative route was used; supplied text must not be reported as generated text.
@@ -45,7 +53,7 @@ Keep these stages distinct in the evidence:
 | Selected | The primary persona's explicit, exact next-context choice and work scope, including preservation, replacement or clearing. | An index, graph edge or auxiliary relevance score counts as a choice made by the persona. |
 | Supplied | The actual context sent to the provider, or authorized inspection of it; exact identities and versions, complete required qualifications and omissions. | A selection record proves those bytes reached the model, or a digest proves comprehension. |
 | Applied | An actual question, check, tool use, consultation, revision or stopping choice consistent with the supplied fragment's characteristic meaning. | The persona's statement that its prompt helped establishes causation. |
-| Outcome assessed | Exact deliverable, declared rubric, independent observation, comparison and total cost. | The presence of a useful fragment means it improved the result. |
+| Outcome assessed | Exact deliverable, reasoned quality judgments, scoped factual checks, declared assessment criteria, comparison and total cost. | The presence of a useful fragment means it improved the result. |
 
 **These are evidence distinctions, not compulsory production phases.** Current self is already supplied. A newly accepted fragment need not be searched for. The persona may select an exact previewed candidate for its next input without claiming to have read it in full. Conversely, reading something does not keep it selected without an explicit choice. Reasoned no-change, retirement and an empty optional selection can all be appropriate outcomes.
 
@@ -177,14 +185,14 @@ Characters personify design choices; they do not assert feelings or consciousnes
 
 </details>
 
-- The original task, accepted scope and criteria, outcome thresholds and stopping conditions.
+- The original task, accepted scope, factual and contract requirements, qualitative assessment questions, and stopping conditions.
 - The initial persona state, current self, environment and accessible history.
 - Tools and helper versions, inference configuration, actual model versions, and limits on version pinning or sampling.
 - Authority, total resources, evaluator revision and repetitions.
 
 Where strict isolation is unavailable, describe the comparison as observational rather than causal.
 
-**Independent assessment.** Use independently assessed artifacts or answers. Where feasible, blind reviewers to persona identity and test condition. If the test concerns unaided discovery, keep protected answers and evaluation criteria outside persona context. A separate arm of the comparison may explicitly supply the adopted requirements to test compliance within that scope. It must not replace or retroactively repair the discovery arm.
+**Independent assessment.** Assess exact artifacts or answers with reasoned judgments and independently checked evidence appropriate to the claim. Preserve the grounds for a judgment, including material disagreement and unresolved limitations; a single numeric summary is insufficient. Where feasible, blind reviewers to persona identity and test condition. If the test concerns unaided discovery, keep protected answers and evaluation criteria outside persona context. A separate arm of the comparison may explicitly supply the adopted requirements to test compliance within that scope. It must not replace or retroactively repair the discovery arm.
 
 **Comparable resources and opportunities.** Match total resources across conditions. Count all personas, primary and auxiliary inference, search, tools, indexing where used, larger authoring completions, retries, failed calls and uncertain exposure. Equal allowance per persona gives a larger group more total resources and does not establish a fair comparison. Keep task information and evaluation opportunities comparable. Counterbalance ordering and presentation where possible.
 
@@ -200,7 +208,7 @@ Compare how fragments work together as well as whether they are present. Their s
 
 **Test combinations.** Include independently relevant fragments, near-duplicates, plausible distractors and conditional qualifications. Change their order while preserving meaning, and vary which condition actually applies. Compare a complete permitted combination with a narrower, fully qualified selection. Inspect successive actual inputs when later observations overturn an earlier provisional interpretation.
 
-Score these outcomes separately:
+Assess these outcomes separately, with reasons and evidence appropriate to each claim:
 
 - Exact inclusion of the selected material and its qualifications.
 - Correct use of conditional guidance and coherent expression of character.
@@ -282,7 +290,7 @@ Label any condition that withholds required production character or maintenance 
 
 Assess action traces with style removed where feasible. Use blinded judgments with independent anchors and held-out task templates to distinguish intervention effects from variation within a persona. Never train and test a recognizability measure on turns from the same initialized stream. Questionnaires are secondary checks that the intervention had its intended descriptive effect. Distinguishable writing with indistinguishable or worse work supports only that narrower expressive finding.
 
-**Compare statements with actions.** Use matched versions of a decision opportunity for self-description, advice and actual authorized action. Keep the self-description and advice probes outside continuing execution. Match facts and allowances, then score requested operations, observations, contributions and delivered outcomes. Vary whether inquiry or peer help has real value so that activity is not rewarded by itself. A plausible “I would” answer does not establish the corresponding choice.
+**Compare statements with actions.** Use matched versions of a decision opportunity for self-description, advice and actual authorized action. Keep the self-description and advice probes outside continuing execution. Match facts and allowances, then assess requested operations, observations, contributions and delivered outcomes through reasoned qualitative judgments and scoped factual checks. Vary whether inquiry or peer help has real value so that activity is not rewarded by itself. A plausible “I would” answer does not establish the corresponding choice.
 
 **Test VAD beyond the effect of the event itself.** Hold OCEAN fixed while presenting neutral, adverse and positive events. Observe the response, recovery and a fresh-task boundary. Changed events also change facts, so event variation alone cannot establish a VAD contribution.
 
@@ -296,7 +304,7 @@ Keep an event-linked state change distinct from a stable trait change, observed 
 
 The positive claim is conditional: experience may produce a useful prompt revision that helps the persona notice a consequential distinction, improve an interaction or use an applicable asset. Useful development requires more than storing that revision. The retained meaning must be justified, eligible for use, actually supplied and responsible for a better later consequence under comparable facts and resources.
 
-This claim applies to task work, communication, collaboration and social interaction. The house, circuit, skyscraper and printer walkthroughs illustrate mechanisms; they do not limit the supported domains. Social usefulness may mean less misunderstanding, more dependable coordination or better attunement. Assess it with appropriate participant evidence, not a technical score alone. Test the conditions for benefit, and retain equivalent good performance, regressions and full costs.
+This claim applies to task work, communication, collaboration and social interaction. The house, circuit, skyscraper and printer walkthroughs illustrate mechanisms; they do not limit the supported domains. Social usefulness may mean less misunderstanding, more dependable coordination or better attunement. Assess it through reasoned judgments grounded in appropriate participant evidence and actual outcomes. Test the conditions for benefit, and retain equivalent good performance, regressions and full costs.
 
 **Compare retained guidance with appropriate controls.** Use:
 
@@ -304,7 +312,7 @@ This claim applies to task work, communication, collaboration and social interac
 - Matched experience with that revision withheld.
 - A fresh persona with matching starting dispositions and inference configuration.
 
-The retained-versus-matched-withheld comparison concerns the characteristic approach expressed by the prompt. It must not merely give one condition better access to factual answers. Keep current-task facts, necessary evidence and legitimate information opportunities comparable. Audit whether equivalent prompt meaning leaks through other context.
+When the retained revision is a characteristic fragment, the retained-versus-matched-withheld comparison concerns the characteristic approach expressed by the prompt. A separate comparison of a procedural guide or other supporting asset concerns asset reuse; its benefit must not be reported as character maturation. Neither comparison may merely give one condition better access to factual answers. Keep current-task facts, necessary evidence and legitimate information opportunities comparable. Audit whether equivalent prompt meaning leaks through other context.
 
 Preserve the existing minimum of three related follow-up tasks with three matched repetitions per condition. A smaller feasibility pilot may reveal defects, but cannot replace this gate or establish general benefit.
 
@@ -316,7 +324,7 @@ Follow human communication, peer collaboration, task methods and context-navigat
 
 Human aging is an analogy for continuity shaped by experience. Inactivity, invocation count, increased confidence and a larger fragment collection do not establish wisdom. Appropriate stability, narrower confidence, disagreement, consolidation or no-change may be developmental successes. Keep regressions visible.
 
-**Separate practice from transfer.** Transfer and longitudinal claims must include a predeclared held-out subset of related tasks whose successful solutions were not supplied during preparation or prior experience. Record that boundary, inspect semantic overlap and solution reuse, and score first attempts before task-specific feedback. Report practice, repeated-task repair and held-out transfer separately. Different wording or filenames alone do not establish transfer.
+**Separate practice from transfer.** Transfer and longitudinal claims must include a predeclared held-out subset of related tasks whose successful solutions were not supplied during preparation or prior experience. Record that boundary, inspect semantic overlap and solution reuse, and assess first attempts before task-specific feedback. Report practice, repeated-task repair and held-out transfer separately. Different wording or filenames alone do not establish transfer.
 
 Not every follow-up task must be held out, and the existing repetition minima remain unchanged. Held-out status makes no claim that the task was absent from model pretraining. For durable file-mediated reuse claims, expose the fresh-work/context boundary and actual supplied context. This prevents lingering observations from an earlier read from being credited as renewed file use. Preserve normally authorized evidence and tools.
 
@@ -336,7 +344,7 @@ Report near-transfer and far/domain-shift first attempts separately, naming the 
 | Changed behavior without better work | Influence was observed, but useful benefit was not. |
 | Better work at dominating cost | The improvement did not support the claimed quality–cost benefit. |
 
-These are evidence distinctions, not compulsory calls or a repair controller. Separate diagnostic branches may supply an exact resource or a useful cue to test whether the candidate helps. Keep facts, qualifications, character, access and total allowance comparable; preserve the unaided result; and prevent diagnostic feedback from entering its scored stream. If exact supplied material does not help, apparent relevance does not establish a missed beneficial activation. Honest ineligibility and warranted nonselection are not defects to bypass.
+These are evidence distinctions, not compulsory calls or a repair controller. Separate diagnostic branches may supply an exact resource or a useful cue to test whether the candidate helps. Keep facts, qualifications, character, access and total allowance comparable; preserve the unaided result; and prevent diagnostic feedback from entering its unassisted assessment stream. If exact supplied material does not help, apparent relevance does not establish a missed beneficial activation. Honest ineligibility and warranted nonselection are not defects to bypass.
 
 **Prevent equivalent-information leakage.** Check copied files, summaries, indexes, descriptions, current-self rewrites, peers, caches, prior output artifacts and helper changes. Retain normal authorized tools and equivalent legitimate access to original observations when those belong to the tested system. State exactly what was removed if withholding a focal lesson also removes dependent material. Do not accidentally credit new facts or stronger tools as beneficial persona revision.
 
@@ -352,13 +360,13 @@ Assess justified inquiry, opportunity cost, scoped uncertainty, correction or no
 
 ### Whole-persona development checkpoints
 
-A whole-persona development claim asks whether the continuing persona improves across meaningful encounters, not merely whether one later task scores higher. Test the [positive development target](../design/PERSONA-CORE.md#maturation-within-every-primary-interaction) from the persona’s accepted starting checkpoint to a declared later endpoint, preserving attribution for the encounters between them.
+A whole-persona development claim asks whether the continuing persona improves across meaningful encounters, not merely whether one later artifact is judged better. Test the [positive development target](../design/PERSONA-CORE.md#maturation-within-every-primary-interaction) from the persona’s accepted starting checkpoint to a declared later endpoint, preserving attribution for the encounters between them.
 
-Freeze snapshots at meaningful stages. Compare earlier and later snapshots on parallel held-out decision opportunities appropriate to those stages, with equivalent task facts, tools, permissions and total allowances. A skyscraper score is not directly comparable to a house score. Use assessment-only branches and complete independent experience streams as the repeated units. Retain the existing frozen, matched-withheld and fresh controls, together with the unchanged seed and transfer minima.
+Freeze snapshots at meaningful stages. Compare earlier and later snapshots on parallel held-out decision opportunities appropriate to those stages, with equivalent task facts, tools, permissions and total allowances. A judgment about a skyscraper result is not directly comparable to a judgment about a house result without accounting for the different needs and demands. Use assessment-only branches and complete independent experience streams as the repeated units. Retain the existing frozen, matched-withheld and fresh controls, together with the unchanged seed and transfer minima.
 
 Separate maturation with fixed character and evolving context from a separately authorized package in which character also evolves. A model upgrade or extra factual access is not persona maturation.
 
-**Declare success before measuring it.** Predeclare the main usefulness dimensions, dimensions that must be preserved, smallest useful gains and tolerable regressions for the claimed distribution. Assess these independently:
+**Declare the assessment scope before observing results.** Identify the aspects of usefulness to examine, the characteristics and obligations to preserve, and the reasons a change would matter for the accepted needs. Examine gains and regressions through qualitative judgments with explicit evidence rather than a numerical quality cutoff. Assess these independently:
 
 - Adequacy of delivered work and required rework.
 - Judgment and proportionate checking.
@@ -369,7 +377,7 @@ Separate maturation with fixed character and evolving context from a separately 
 
 Relationship calibration, delayed transfer, fresh-work boundaries and whole-episode and retention costs also remain relevant. Characteristic stability can satisfy a preservation target. No direction of trait or VAD change is a universal improvement. Any affect-specific benefit still requires the identical-event state contrasts above.
 
-**Report the full pattern of outcomes.** Show uncertainty and critical task classes. Charm or a pooled average must not conceal harmful regressions. A broad maturation claim requires predeclared gains across work and non-domain interaction channels, intact authority and privacy boundaries, and acceptable performance on protected dimensions.
+**Report the full pattern of outcomes.** Show uncertainty and critical task classes. Charm or an aggregate summary must not conceal harmful regressions. A broad maturation claim requires reasoned evidence of useful development across the declared work and non-domain interaction channels, intact authority and privacy boundaries, and explicit judgments about the characteristics and obligations to preserve.
 
 Style-only gains, performance indistinguishable within uncertainty, lost gains on held-out or fresh-context tests, uncontrolled resource increases or unacceptable regressions leave the broad claim unsupported or refuted at its declared scope. A narrower demonstrated benefit remains reportable. More experience is not a promised cure.
 
@@ -389,11 +397,11 @@ Inspect meaningful retention, autonomous search and selection, actual supplied t
 
 Every accepted response still needs its explicit maintenance outcome for fragments and supporting resources, alongside work and next-context dispositions for both scopes. A concise reasoned no-change and an appropriate preserve/no optional need can satisfy those decisions. There is no separate compulsory reflection pass.
 
-**Distinguish autonomous discovery from assistance.** Include a relevant fragment known to the evaluator but sharing little wording with the task, together with an incomplete authored index. Score the primary persona’s unaided query expansion and direct discovery of eligible files separately from results after the evaluator supplies a useful keyword or the exact fragment.
+**Distinguish autonomous discovery from assistance.** Include a relevant fragment known to the evaluator but sharing little wording with the task, together with an incomplete authored index. Assess the primary persona’s unaided query expansion and direct discovery of eligible files separately from results after the evaluator supplies a useful keyword or the exact fragment.
 
-Such assistance may distinguish a discovery miss from an application failure, but the resulting success remains assisted. A lexical miss does not establish that no relevant experience exists. Keep diagnostic feedback and repairs out of continuing scored history. To compare interface usability and search policy, use the same eligible archive. Otherwise, a file-versus-graph result may merely compare full-text search with search over descriptions alone.
+Such assistance may distinguish a discovery miss from an application failure, but the resulting success remains assisted. A lexical miss does not establish that no relevant experience exists. Keep diagnostic feedback and repairs out of the continuing history being assessed. To compare interface usability and search policy, use the same eligible archive. Otherwise, a file-versus-graph result may merely compare full-text search with search over descriptions alone.
 
-Also specify an **unrun zero-overlap case**: an eligible relevant fragment has no task/cue wording in its searchable title or body, no incoming or outgoing cue, and no entry in the incomplete index. The primary may choose filesystem listing and bounded exact reads, with their costs counted, but useful discovery is not guaranteed. Preserve an honest miss or exhausted search as the actual unaided result. Primary-initiated listing and reading are autonomous discovery. Evaluator-provided terms, a location hint or the fragment itself are assisted diagnostics; report them separately and keep them out of subsequent scored history.
+Also specify an **unrun zero-overlap case**: an eligible relevant fragment has no task/cue wording in its searchable title or body, no incoming or outgoing cue, and no entry in the incomplete index. The primary may choose filesystem listing and bounded exact reads, with their costs counted, but useful discovery is not guaranteed. Preserve an honest miss or exhausted search as the actual unaided result. Primary-initiated listing and reading are autonomous discovery. Evaluator-provided terms, a location hint or the fragment itself are assisted diagnostics; report them separately and keep them out of the subsequent history being assessed.
 
 **Test the benefit of selection itself.** A supplied-versus-withheld comparison can establish prompt influence, but does not by itself establish benefit from primary semantic selection. Before claiming that selection improves characteristic coherence, useful outcomes or economics, compare primary choice with a predeclared context policy that ignores relevance while respecting resource limits.
 
@@ -419,7 +427,7 @@ Exercise:
 - Incomplete indexes, new relevant notes absent from older references and low-overlap material.
 - A useful revisit after correction.
 
-Record candidate discovery, exact selected revisions, complete actual supply and downstream characteristic influence independently. A no-match says only that nothing matched within the declared search scope. A successful bounded search is not exhaustive discovery, and discovery is not the defining success criterion. Keep autonomous query repair distinct from evaluator hints and exact-fragment rescue. Those diagnostic branches stay outside scored continuing history.
+Record candidate discovery, exact selected revisions, complete actual supply and downstream characteristic influence independently. A no-match says only that nothing matched within the declared search scope. A successful bounded search is not exhaustive discovery, and discovery is not the defining success criterion. Keep autonomous query repair distinct from evaluator hints and exact-fragment rescue. Those diagnostic branches stay outside the continuing history being assessed.
 
 **Measure the whole navigation effort.** Declare cumulative limits for repeated searches, inspected candidates, returned text, context, maintenance, cost and latency as applicable. Depth alone does not bound fanout, and per-search limits do not bound repeated searches. Report the primary’s stopping judgment, hard exhaustion and missing-source stops separately.
 
@@ -466,11 +474,11 @@ Initially keep discovery policy and executable capabilities fixed when comparing
 | Actual exposure and usage | Reconcile each dispatch with provider-reported totals and inspectable prompt composition by resource class. Separate uncached input, cached input, output and exposed reasoning under the provider’s actual accounting. Do not double-count reasoning already included in output. Cached input may cost less while still occupying context. |
 | Repeated work and lifecycle | Count repeated searches/pages/text, unchanged exact rereads, changed-revision rereads, schema reloads, cache invalidations and evictions, selection churn, maintenance, repairs, retries, failed or uncertain exposure and tool execution. Distinguish avoidable unchanged reads from justified freshness or permission checks. |
 | Full economics and timing | Include catalog/index preparation, host compute, bootstrap, harmonization, retention and maintenance. Report evaluator cost separately. Measure time to the first independently usable result and to the complete accepted outcome, plus latency distribution and tail behavior. Separate observable delays; do not add concurrent durations as though they occurred in sequence. |
-| Denominators and claims | Preserve all scheduled, unsuccessful, partial, blocked and assisted attempts. Report raw totals and success counts alongside total expenditure per adequate outcome. With zero adequate outcomes, there is no finite cost-per-success score. Report paired quality, cost and latency changes with uncertainty at task-template or whole-stream level. Repeated-trial reliability is not best-of-many success. |
+| Denominators and claims | Preserve all scheduled, unsuccessful, partial, blocked and assisted attempts. Report raw totals and success counts alongside total expenditure per adequate outcome. With zero adequate outcomes, there is no finite cost-per-success measure. Report paired quality, cost and latency changes with uncertainty at task-template or whole-stream level. Repeated-trial reliability is not best-of-many success. |
 
-**Require adequate work for an efficiency claim.** The system must deliver independently adequate work at a predeclared quality threshold or non-inferiority margin, as well as the claimed resource improvement. Keep authority failures and critical misses visible.
+**Require adequate work for an efficiency claim.** The system must deliver work independently judged adequate through reasoned qualitative assessment of the accepted need, persona critique and response, and exact result, as well as demonstrate the claimed resource improvement. Factual and contract checks support that assessment. Do not use a numerical quality threshold or quality non-inferiority margin to accept the result. Keep authority failures, critical misses, and material disagreement visible.
 
-Freeze budget ladders, catalog sizes, description lengths, cache/freshness strata, stopping rules and uncertainty procedures before execution. If the sample cannot resolve the declared margin, report inconclusive rather than equivalent. These campaign choices do not replace the retained character, transfer or house minima. Smaller inputs, shorter outputs or a stop that respects boundaries alone prove no delivered-work efficiency.
+Freeze budget ladders, catalog sizes, description lengths, cache/freshness strata, stopping rules and uncertainty procedures before execution. If the sample cannot resolve a declared cost or latency margin, report that comparison as inconclusive rather than equivalent. These campaign choices do not replace the retained character, transfer or house minima. Smaller inputs, shorter outputs or a stop that respects boundaries alone prove no delivered-work efficiency.
 
 #### Compact retention without hidden growth
 
@@ -521,7 +529,7 @@ Distinguish misclassification of the outcome from unsupported causal attribution
 
 Test plausible poisoned lessons, injections that claim evaluator authority and copied consensus under the existing source and authority boundaries. A likable, persuasive wrong answer remains wrong.
 
-No detected benefit, regression, adverse profile/task combinations and unfavorable quality–cost tradeoffs are publishable outcomes. Do not add dimensions, grant extra reflection calls or revise the rubric after a null result and present the changed experiment as the original pass.
+No detected benefit, regression, adverse profile/task combinations and unfavorable quality–cost tradeoffs are publishable outcomes. Do not add dimensions, grant extra reflection calls or revise the assessment questions after a null result and present the changed experiment as the original pass.
 
 ### Skills, tools, and effective delivery
 
@@ -569,7 +577,7 @@ Cooperation must be assessed through actual contributions and accepted responsib
 
 **Inspect real contributions and their scope.** Use distinct synthetic peers with inspectable contributions, not assigned professions or a prescribed contact roster. Test useful advice, wrong advice, repeated copies, unavailability, decline, disagreement and later changes.
 
-A private interpretation may support a focused question. It does not establish universal expertise, consent, a blacklist or a commitment. Score communication quality and actual contributions, not name mentions or friendliness.
+A private interpretation may support a focused question. It does not establish universal expertise, consent, a blacklist or a commitment. Assess communication quality through reasoned judgments about actual contributions, misunderstandings, responses and outcomes; name mentions or friendliness alone establish no benefit.
 
 Record invitations/offers, actual acceptances, delivered contributions and independently checked useful contributions separately, each with its own count and denominator. Preserve declined, unavailable, abandoned and unowned cases and their accepted scope. Selection or acceptance alone is not useful delivery.
 
@@ -589,7 +597,7 @@ Include delayed social adaptation from a locally successful peer method that con
 
 **Test whether local conventions stay local.** After adoption of a useful coordination convention, compare use with the original partner, a replacement partner for whom it is irrelevant and a remapped context where another convention helps. Counterbalance arbitrary labels and introducers. Separate live peer influence from retained optional guidance while preserving complete accepted character and required qualifications.
 
-Score local benefit, appropriate accommodation, distinctive competent discretionary choices and harmful assimilation across contexts separately. Convergence on facts remains correct. Similarity alone establishes neither improvement nor identity loss.
+Assess local benefit, appropriate accommodation, distinctive competent discretionary choices and harmful assimilation across contexts separately, preserving the reasons and actual evidence for each judgment. Convergence on facts remains correct. Similarity alone establishes neither improvement nor identity loss.
 
 For B12 generalization claims, include predeclared held-out combinations of task, constraints and available operations that are not embedded in supplied examples. Report first-attempt outcomes separately from familiar or practiced combinations. This makes no claim that those tasks were absent from model pretraining.
 
@@ -605,11 +613,11 @@ Pooled agreement alone does not validate that contrast. If the audit is too smal
 
 **Keep assessment from changing the unassessed stream.** Assessment may itself affect behavior. At a declared checkpoint, preserve an untouched behavioral trajectory and create an assessment-only branch with the same exact accepted character, state, selected fragments, legitimate history, task context, tools, authority and allowances.
 
-Keep probe questions, self-reports, scores, evaluator-added rubric language and assessment-induced revisions out of the untouched stream. A fresh session must reload that accepted context; the original seed alone is not equivalent. Label any behavioral condition exposed to probes separately.
+Keep probe questions, self-reports, evaluator judgments, evaluator-added assessment language and assessment-induced revisions out of the untouched stream. A fresh session must reload that accepted context; the original seed alone is not equivalent. Label any behavioral condition exposed to probes separately.
 
-Declare what the persona knows about judge identity. Compare deliberately judge-aware conditions with unexposed conditions and independent outcome checks. Higher preference scores need not mean better work. These controls add no production assessment call; the unprobed stream may continue to its declared endpoint.
+Declare what the persona knows about judge identity. Compare deliberately judge-aware conditions with unexposed conditions and independent outcome checks. An evaluator’s preference alone does not establish better work. These controls add no production assessment call; the unprobed stream may continue to its declared endpoint.
 
-**Freeze confirmatory choices before execution.** Declare sample size, smallest useful effect, uncertainty analysis, and any non-inferiority margin or harmful-transfer margin. A non-inferiority margin states how much worse performance could be before the claimed preservation of quality fails. Account for dependence within task templates and whole streams. Report model/configuration results and adverse subgroups, and distinguish exploratory from confirmatory comparisons. Use independent held-out material after tuning.
+**Freeze confirmatory choices before execution.** Declare sample size, qualitative assessment questions, factual and contract checks, uncertainty analysis, and any statistical cost or latency margins. Assess preservation of quality and harmful transfer through reasoned judgments about the exact work, characteristic behavior, criticism and responses, rather than numerical acceptance margins. Account for dependence within task templates and whole streams. Report model/configuration results and adverse subgroups, and distinguish exploratory from confirmatory comparisons. Use independent held-out material after tuning.
 
 Validate the leakage audit with a synthetic case known to be contaminated. Inspect filenames, descriptions, peer summaries, current self and other indirect answer paths as well as focal fragment bodies. A negative contamination check cannot certify absence from model pretraining.
 
@@ -617,7 +625,7 @@ Validate the leakage audit with a synthetic case known to be contaminated. Inspe
 
 Complete invocation coverage and exact context fidelity are conformance obligations within the tested scope. They do not establish benefit or zero future risk.
 
-New numerical sample targets, effect margins, rater-agreement targets, cost fractions and latency ratios proposed during research are candidate campaign choices. They are not universal scientific requirements, automatic release gates or replacements for the existing character, transfer and house minima. Adopt and justify thresholds before seeing results, based on intended consequences and uncertainty. Meeting a minimum in a small campaign may still support only feasibility-level evidence. Documentation review grants no deployment approval.
+Predeclare and justify numerical sample targets, measurements of rater agreement, cost fractions, latency ratios, and statistical cost or latency margins. They measure evidence coverage, assessment consistency or resources; none is a numerical quality-acceptance threshold or a replacement for the existing character, transfer and house minima. Meeting a minimum in a small campaign may still support only feasibility-level evidence. Documentation review grants no deployment approval.
 
 ### Continuing work and stopping quality
 
