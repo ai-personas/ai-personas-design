@@ -1,6 +1,6 @@
 # Consolidated user requirements
 
-This file brings together the user's requirements from the AI Personas design conversation through 14 October 2026. It covers the requested product, architecture, examples, research, and delivery. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
+This file brings together the user's requirements from the AI Personas design conversation through 15 October 2026. It covers the requested product, architecture, examples, research, and delivery. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
 
 Only human-user messages supply these requirements. This account must preserve the user's intended outcomes, rather than weaken them to fit the existing design. Assistant interpretations, design decisions, evidence safeguards, and implementation rules must not be added as user requirements.
 
@@ -17,6 +17,10 @@ The requested outcome is a coherent design that can guide implementation of gene
 **UR-003 General-purpose, human-like personas.** Personas should have human-like characteristics and behavior, respond to whatever a user needs, and work on any kind of task. A requester may be a human or another persona, and a need may originate from either.
 
 Their characteristics should shape how they work on tasks, use tools, communicate, coordinate, collaborate, pursue self-directed activity, and socialize with humans and other personas. They should develop through these activities, become better at socializing, and perform better for the user.
+
+**UR-050 Let personas choose how to work and collaborate.** Personas should choose their approaches, tool use, requests for help, review, coordination, and contributions through their own reasoning. Their character, actual feedback, and the situation should shape those choices. The runtime must not replace them with a predetermined workflow or fixed owner, planner, or reviewer roles. Personas may organize and change their cooperation as the work develops.
+
+**UR-051 Use direct model-provider interfaces.** The persona runtime must call model providers directly for inference. It must not depend on the Codex CLI to run personas or orchestrate their work.
 
 ### Persona identity and characteristic fragments
 
@@ -36,7 +40,7 @@ Character should influence both what it chooses to do and how much and in what w
 
 **UR-009 Fragments are not memories or plain knowledge.** Use “fragment” to mean a characteristic prompt part. Do not use it to mean an episodic memory, a general-purpose fact store, or plain domain knowledge. These character-bearing prompt parts help form the persona; a separate memory mechanism does not define it. Supporting histories and records may still be retained as assets.
 
-**UR-010 Do not introduce a separate learning mechanism.** Explain maturation through ordinary LLM interactions that create, revise, organize, select, and delete fragments and assets. The user describes this as development of fragments and assets, rather than a separate learning or memory mechanism.
+**UR-010 Do not introduce a separate learning mechanism.** Explain persona learning and maturation through ordinary LLM interactions that create, revise, organize, select, and delete character-bearing prompt fragments, with the resulting characteristic changes shaping later behavior. Maintain supporting assets through those interactions too, while distinguishing their development and reuse from persona learning. Knowledge, data, tools, skills, and history remain supporting assets; acquiring or revising them alone does not establish character maturation.
 
 ### Supporting assets and historical context
 
@@ -67,7 +71,7 @@ Work, maintenance, and preparation for the next interaction belong in the same o
 
 This applies to every kind of persona action.
 
-**UR-016 Support the full range of maintenance.** The same interaction must support creating fragments, updating existing fragments, reorganizing them, and deleting them. It must also support maintenance of tools, skills, knowledge, data, history, and other assets. These changes are how the persona and its characteristic behavior are shaped and improved.
+**UR-016 Support the full range of maintenance.** The same interaction must support creating fragments, updating existing fragments, reorganizing them, and deleting them. It must also support maintenance of tools, skills, knowledge, data, history, and other assets. Changes to characteristic prompt parts should shape and improve the persona’s later characteristic behavior. Asset maintenance supports the work and remains separately identifiable; it does not by itself demonstrate persona learning or maturation.
 
 **UR-018 Let the current interaction guide the next one.** The current LLM interaction must say which characteristic fragments, tools, skills, data, and other context are needed next and how to find them. Use that guidance to select relevant material from the files for the next LLM request. Continue this process through the work.
 
@@ -99,7 +103,7 @@ Development should change how the persona behaves and works across experience. T
 
 Their fragments and assets should improve and become better organized so that the right prompts and resources can be used at the right time.
 
-**UR-027 Later stages should perform better.** A matured persona should be better than its earlier self. Show how improved fragments, assets, characteristic behavior, prompting, and ways of working help it perform subsequent work better. Examine this benefit across its behavior and actions.
+**UR-027 Later stages should perform better.** A matured persona should be better than its earlier self. Show how its developed characteristic prompt parts shape later behavior and help it perform subsequent work better. Examine this benefit across its judgment, communication, collaboration, ways of working, and actions. Improvements in supporting assets may also help the work, but keep that benefit separate from character maturation. Do not force fragment edits merely to produce an apparent learning result.
 
 **UR-028 Examine useful transfer without assuming complete domain transfer.** Earlier work should help later work through relevant fragments, skills, tools, assets, methods, simulations, and developed characteristic behavior. The user does not expect every part of earlier work, or its entire domain solution, to transfer. Work through the new task on its own and examine which parts of prior development help.
 
@@ -124,7 +128,7 @@ Include groups that continue collaborating over time to improve a shared task, w
 
 **UR-047 Let reflection, dialogue, and character shape completion and further improvement.** Explain how one persona can use self-reflection and self-questioning, and how multiple personas can question one another and clarify the work as they continue.
 
-Their characteristic behaviors should shape individual or collective judgments about what can be improved, when and where to stop, and when to consider the work complete. These judgments should take account of the time available. Examine how personas can deliver work they judge sufficient for now and return to improve it when more time becomes available.
+Their characteristic behaviors should shape individual or collective judgments about what can be improved, when and where to stop, and when to consider the work complete. These judgments should respond to the actual task, feedback, time, resources, and the persona's developing character and behavior. Personas should be able to deliver a result they judge sufficient for now and later choose to revisit or enhance it. Recording completed delivery must not permanently suppress that choice. Some personas may continue while others stop; they need not make the same choice, and neither stopping nor continuing should be forced by a fixed workflow.
 
 ### Quality through characteristic judgment
 
