@@ -53,7 +53,13 @@ Characters personify design choices; they do not assert feelings or consciousnes
 
 ## Current answer
 
-The documents specify the current target design. They do not establish that the runtime implements it or benefits from it. This revision performed no runtime execution, live-model campaign, or deployment validation.
+The documents specify the current target design. They do not establish complete runtime conformance or general behavioral benefit. The 10 October design revision performed no runtime execution, live-model campaign, or deployment validation.
+
+### 18 October runtime follow-up
+
+The runtime now records a [bounded live maturation walkthrough](https://github.com/ai-personas/ai-personas-runtime/blob/853fd9e7c0fa98274bca3f3e77ea51f01a592369/docs/live-maturation.md) from continuing GPT-5.6 Sol and Luna cohorts using Codex OAuth for authentication and native HTTPS inference. In each cohort, a persona authored an optional characteristic refinement from supplied feedback, explicitly selected it, and received its exact body in a later accepted invocation. Sol's later action included producing a shared synthesis and arranging its release. Sol also subsequently completed and locally delivered the original house concept. The native inspection command checks full fragment text in the retained input and the matching completed-provider receipt, separately from behavioral benefit.
+
+These were supervised foreground sessions with explicit feedback, navigation grants, failure acknowledgments and resumes. No automated tests were added or run for this live work. The full stores remain private; the linked report gives exact source revisions and invocation identities. The observations support those bounded functioning paths, not an unattended recovery claim, stable-trait change, sustained improvement or full design conformance. In particular, the report records a later house call that did not receive the optional reflection fragment, so better output in that call does not establish transfer of that fragment across works. The broader gaps and evidence requirements below remain open.
 
 The target treats fragments as persona-defining prompt parts that carry character. Selected fragments provide context for LLM reasoning. That context, the reasoning, actual interactions and actions, and the evolving authored prompts together constitute the persona. Facts or experience may inform a fragment, but fragments are not defined as episodic memory or retrieval-augmented generation (RAG). This conceptual correction does not turn the source observations or historical tests below into evidence for the new account.
 
