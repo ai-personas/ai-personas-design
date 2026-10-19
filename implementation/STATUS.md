@@ -186,7 +186,7 @@ A digest or a small prompt is not retained exact evidence.
 - Locked-character and fresh-decision checks.
 - Matched controls for names, wording and withheld context, followed by observed choices and independently assessed outcomes.
 
-**Maturation, development and correction.** The 18 October walkthrough demonstrates authored refinements, exact later supply and one prompted cross-work reuse. Longitudinal development, character evolution, maturity and independently assessed benefit remain unestablished. Stronger evidence must trace actual task, human and peer observations through accepted interpretations, exact later context supply, discretionary choices and independently assessed consequences. It must retain:
+**Maturation, development and correction.** This design specification does not establish longitudinal development, character evolution, maturity or independently assessed benefit. Supporting evidence must trace actual task, human and peer observations through accepted interpretations, exact later context supply, discretionary choices and independently assessed consequences. It must retain:
 
 - Comparisons among retained experience, matched withholding and fresh starts, including harmful transfer.
 - Assessment of smaller useful authored context and improved context navigation.
