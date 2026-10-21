@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 21 October 2026 — first-release implementation priorities
+
+Recorded the user's clarification that backward compatibility is not required for the first release. Implementation follows the consolidated user requirements and later clarifications, with working functionality checked through actual persona runs and no automated test cases. Removed a generic deployment instruction that conflicted with the established default of full host access and unrestricted tool installation. This policy update makes no new runtime conformance claim.
+
 ## 21 October 2026 — focus user requirements on the persona design
 
 Following the user's clarification, removed the research and delivery section and the historical investigation and runtime requests, together with their seven illustrations and navigation links. These were assignment instructions, not user requirements for the persona design.

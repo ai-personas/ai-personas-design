@@ -15,7 +15,13 @@ A deployment must retain this design's semantic traits, modeled affect, every-in
 - Supporting evidence and remaining limitations.
 - The conditions that would require reconsideration.
 
-Until a required boundary is resolved and demonstrated, restrict the affected capability or keep it in a clearly described test environment.
+Keep unresolved behavior explicit in implementation status. The default full-host profile below does not add application restrictions or per-tool approval while implementation work continues.
+
+## First release and implementation alignment
+
+The implementation targets its first release. Backward compatibility with earlier development formats and interfaces is not required; obsolete adapters and migration paths need not constrain the current design. Historical run records retain the meaning of the build that produced them, without obligating the current runtime to read every earlier format.
+
+Working functionality must follow the [user requirements](../USER-REQUIREMENTS.md), with later user clarifications taking precedence. Implementation work uses builds and inspection of actual persona runs, including their supplied context, tool and skill choices, installations, execution results and resulting work. The user has requested no automated test cases. Design walkthroughs and requirement criteria describe intended behavior; they are not evidence that runtime functionality works.
 
 ## Core deployment choices
 
