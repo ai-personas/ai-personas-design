@@ -406,12 +406,15 @@ Decline and nonresponse create no substitute acceptance, replacement persona, pu
 
 ## Capabilities and actions
 
+The default runtime gives personas [full host access and tool installation](DEPLOYMENT-DECISIONS.md#default-full-host-access). Ordinary inputs supply that command interface directly. No per-tool approval, installation grant, command allowlist, sandbox, or prior skill-guide selection is required. Personas choose tools and commands using the host account and environment. The distinctions below describe actual preparation, execution and observed results; they do not introduce an additional permission gate for this default host interface.
+
 Stored guidance helps a persona prepare for an operation. It does not establish that the operation is available, permitted, or ready to run. A skill file is reusable procedural guidance with an actual author. A persona-authored characteristic interpretation is persona-defining prose; the underlying procedure retains its supporting purpose. A tool note describes an operation and its observed limits. Neither stored guidance nor scripts, code, or data install a tool, prove competence, grant credentials, or execute a helper. Preparation and current callable exposure remain separate.
 
 **Bind execution to what will actually run.** The required binding depends on the operation:
 
 | Operation | Required binding |
 |---|---|
+| Default full-access host command | The exact command and inputs, host working directory and account, native runner and shell, and actual observed status/output. Transitive program versions are recorded only when actually observed. |
 | Controlled local helper execution | The exact artifact, relevant resolved dependencies, environment, and inputs. |
 | Remote operation | The observable service, interface, and connection identity, together with relevant exact client or runner versions and input versions. Unavailable server-build identity stays explicitly unknown. |
 | Local helper that calls a service | Both the local and remote boundaries. |
@@ -441,11 +444,9 @@ These are observable meanings, not six required calls or a compulsory sequence. 
 
 This case uses the existing [complete-response and persistence boundary](#complete-response-persistence-and-dependent-work). It does not allow continuation through unobserved tool-produced content or results, or through a pending or unknown write. Storage creates no installed capability, grant, or callable exposure. All authority, dependency, effective-character, mode, and fresh-decision requirements still apply. A failed prerequisite or an applicable fence holds dependent work; a later receipt cannot revive suppressed actions. This clarification creates no automatic workflow facility.
 
-**Helpers and writes must follow accepted-state controls.** Runners, primary-authored code, and workspace write access do not bypass those controls. A helper may implement an already-admitted exact change only through the same whole-response, version, authority, character, source-policy, resource, and retention checks. It cannot independently adopt persona or supporting-resource meaning, forge action or maintenance receipts, or alter its own bindings, grants, or admission checks.
+**Native adoption and host writes have different interfaces.** Changes submitted through the native persona API follow the complete-response, version, character and persistence contract. A native helper must record an admitted change and its actual outcome rather than inventing a maintenance or execution receipt.
 
-A direct write to protected backing state outside that acceptance path does not automatically become accepted context or recovery state. Where appropriate, treat permissible content as an unaccepted candidate; otherwise expose an integrity failure. A purported or corrupted receipt needs trustworthy evidence and reconciliation. Its claims cannot simply be adopted as true.
-
-Ordinary admitted data and artifact outputs remain possible. Refuse a write or block affected use when these guarantees cannot be preserved. No particular folder layout or new service is required.
+The default full-access host interface also permits ordinary filesystem writes and persona-authored scripts under the host account. Those commands are not confined to the native asset interface. This profile trusts the host account's access to backing files and does not claim that record-level controls isolate or make those files tamper-proof. Report host writes and their observed outcomes as host effects; do not label a direct file edit as a native API adoption.
 
 **Record an action before dispatch.** An admitted action identifies:
 

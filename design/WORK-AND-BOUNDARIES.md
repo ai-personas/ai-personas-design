@@ -144,6 +144,8 @@ Outputs that depend on one another need compatible agreements. As relevant, agre
 
 ## Capabilities and the execution boundary
 
+The default is [full host command access](../implementation/DEPLOYMENT-DECISIONS.md#default-full-host-access). Personas may install and use tools with the host account's filesystem, network, environment and subprocess access. No application sandbox, command allowlist, per-tool approval, or selected guide is required. The host command definition is supplied directly in ordinary inputs. Tool discovery and procedural guidance remain useful choices, and actual execution records establish what ran.
+
 A capability is an available means to observe or act, such as an application, service, connection, execution facility, procedure, or qualified outside contribution. Finding one is only the beginning of determining whether it can support the proposed operation.
 
 ![The diagram distinguishes discovery, qualified guidance, executable availability, operation-specific permission and resources, actual invocation and received outcome. It does not prescribe a fixed probe sequence.](../assets/tool-readiness.svg)

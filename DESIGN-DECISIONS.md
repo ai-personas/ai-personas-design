@@ -265,7 +265,7 @@ These choices remain subject to the accepted mandate. A review already required 
 
 A native editable artifact, an analysis, a rendered view, and an outside approval are distinct results. Each needs its own evidence where requested. The earlier delivery addendum's separate DLV requirement family remains retired as redundant. Its useful coverage and historical identifiers remain mapped in [historical results](evaluation/HISTORICAL-RESULTS.md).
 
-Execution also depends on the declared deployment boundary. A deployment may deliberately expose ordinary host tools within that trust boundary. This creates no universal entitlement to host access, removes no isolation requirements from a different profile, and does not let a persona fragment enable a disabled capability.
+The current user requirement makes [full host access the default](implementation/DEPLOYMENT-DECISIONS.md#default-full-host-access). Personas may install and use tools directly with the host account, without per-tool application approval, allowlists or sandboxing. The native interface records actual commands and outcomes. This explicit user requirement replaces the earlier default-gating guidance; it does not rewrite what tools were available or used in historical runs.
 
 ## Conditional scope and the historical extension labels
 
