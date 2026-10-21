@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 21 October 2026 — focus user requirements on the persona design
+
+Following the user's clarification, removed the research and delivery section and the historical investigation and runtime requests, together with their seven illustrations and navigation links. These were assignment instructions, not user requirements for the persona design.
+
+UR-036 through UR-042 are retired from the active requirement set; their history remains in earlier revisions. The remaining 43 requirements keep their wording, identifiers, and cartoons. Updated the introduction and reading index to describe the document's design scope.
+
 ## 21 October 2026 — cartoons for every user requirement
 
 Added an individual cartoon beneath each of the 50 points in the consolidated user requirements, with a short caption and descriptive alternative text. A visual reading guide and section links help readers scan the document. The generated illustrations are stored as compact WebP assets in the repository.

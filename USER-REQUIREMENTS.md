@@ -1,12 +1,10 @@
 # Consolidated user requirements
 
-This file brings together the user's requirements from the AI Personas design conversation through 15 October 2026. It covers the requested product, architecture, examples, research, and delivery. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
+This file brings together the user's product and design requirements for AI Personas, including clarifications through 21 October 2026. It covers the requested product, architecture, and worked examples. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
 
 Only human-user messages supply these requirements. This account must preserve the user's intended outcomes, rather than weaken them to fit the existing design. Assistant interpretations, design decisions, evidence safeguards, and implementation rules must not be added as user requirements.
 
-**Read visually:** Each requirement has a cartoon and a short caption beneath it. The pictures explain the main ideas; the requirement text retains the full details and qualifications. Robot characters represent personas, character cards represent fragments, and folders or tools represent supporting assets. LLM means language model. The scenes are explanatory illustrations; dated requests remain historical.
-
-[Product requirements](#product-requirements) · [Research and delivery](#research-and-delivery-requirements) · [Historical requests](#historical-investigation-and-runtime-requests)
+**Read visually:** Each requirement has a cartoon and a short caption beneath it. The pictures explain the main ideas; the requirement text retains the full details and qualifications. Robot characters represent personas, character cards represent fragments, and folders or tools represent supporting assets. LLM means language model. The scenes are explanatory illustrations.
 
 ## Product requirements
 
@@ -356,69 +354,3 @@ Within the examples, examine tool and skill use, asset management, and retention
 ![UR-035: Research and gap repairs produce a coherent blueprint intended to guide reliable future implementation.](assets/user-requirements/ur-035-reliable-blueprint.webp)
 
 *In the picture: Deliver a robust design that explains how the personas should work when implemented.*
-
-## Research and delivery requirements
-
-These requirements govern the requested design assignment and its publication. They are not fixed schedules, runtime loops, or mandatory timing rules for the future persona system.
-
-**UR-036 Research thoroughly.** Conduct deep research on the current design and the user's requirements. Cover trait choices, fragment and asset organization, retrieval, context efficiency, behavior, maturation, and gaps exposed by the worked examples.
-
-![UR-036: Research covers personality traits, organization, retrieval, context efficiency, behavior, development, and gaps revealed by examples.](assets/user-requirements/ur-036-thorough-research.webp)
-
-*In the picture: Research the requirements and the connected design in depth.*
-
-**UR-037 Follow the latest research window and update cadence.** Conduct the renewed five-hour internal audit and research requested on **10 October 2026 at 14:21:32 UTC**, through **10 October at 19:21:32 UTC**. Review the complete design against the user's requirements and make needed design fixes. Continue concise progress updates every ten minutes.
-
-This renewed the preceding audit request and followed the earlier assignments below. All times are UTC in 2026; the table lists the requests from most recent to oldest.
-
-| Request time | Requested end | Scope of that request |
-|---|---|---|
-| 10 October, 13:47:48 | 10 October, 18:47:48 | Five-hour complete line-by-line audit, including the hypothetical house case with more time and the hypothetical DC-to-AC case with five personas given more time to improve the work or justify stopping |
-| 10 October, 09:00:23 | 10 October, 14:00:23 | Five-hour review of file organization and discovery through grep/search and regular-expression cues, with the detailed focus below |
-| 10 October, 02:12:20 | 10 October, 12:12:20 | Ten-hour complete review, including tool and skill use, asset management, relevant retained data, selection of tools shaped by character, and installation where applicable in the examples |
-| 10 October, 00:24:11 | 10 October, 10:24:11 | Assignment concerning sustained work, improvement, and justified continuation or stopping |
-| 9 October, 22:09:20 | 10 October, 08:09:20 | Earlier ten-hour assignment |
-
-The **09:00:23 request** focused on whether file organization and search cues connecting fragments as a navigable network effectively select the right characteristic fragments, prompt parts, and other context for each persona's current need at each LLM call. It called for avoiding unwanted fragments and bloated context, using step-by-step hypothetical examples to identify issues, and making needed design or case updates.
-
-These requests followed earlier five-hour and ten-hour assignments and the clarification that ten-minute updates are suitable.
-
-![UR-037: The recorded 10 October 2026 research assignment runs from 14:21:32 to 19:21:32 UTC with ten-minute updates; it is a historical assignment, not a runtime schedule.](assets/user-requirements/ur-037-historical-research-window.webp)
-
-*In the picture: This records the dated five-hour research assignment and ten-minute updates.*
-
-**UR-038 Audit the whole requirement set and design.** Thoroughly research and audit every published and unpublished design document line by line against all user requirements. Identify issues, determine how the design should work, and make the updates, revisions, or deletions needed to align the whole design with those requirements. Use multiple research agents for this assignment.
-
-![UR-038: Multiple research agents inspect published and unpublished documents line by line against all requirements and repair the design.](assets/user-requirements/ur-038-whole-design-review.webp)
-
-*In the picture: Review the whole requirement set and design, then resolve the gaps and conflicts.*
-
-**UR-039 Publish reviewed design fixes incrementally; keep audit work internal.** Publish completed, reviewed design fixes to the GitHub remote research branch in ai-personas-design. Continue the remaining work instead of waiting for the entire research period to end. The earlier assignment requested a new branch.
-
-Keep audit reports, internal audit walkthroughs, and research process notes internal. Use their findings to repair the design rather than publishing them as audit files.
-
-![UR-039: Reviewed design fixes are published incrementally to the research branch while remaining work continues and internal audit notes stay internal.](assets/user-requirements/ur-039-publish-reviewed-fixes.webp)
-
-*In the picture: Publish completed, reviewed design repairs while keeping audit material internal.*
-
-**UR-040 Consolidate human-user requirements in one file and publish it.** Rephrase all relevant human-user messages as requirements in a single design document and push it to the remote branch. Include later clarifications and combine repeated requests. Only the user's messages supply these requirements.
-
-![UR-040: Human requests, repeated requests, and later clarifications are consolidated into a single user-requirements document and published.](assets/user-requirements/ur-040-one-user-requirements-file.webp)
-
-*In the picture: Consolidate the human user's requirements and clarifications in one published document.*
-
-## Historical investigation and runtime requests
-
-The following requirements record earlier assignments. The later request in UR-001 makes the current repository design-only.
-
-**UR-041 Investigate and fix the reported runtime root causes.** The 1 October assignment requested GPT 6 Pro to examine the linked implementation and design branches and investigate the supplied house-run problem report. It requested finding and fixing the root causes, establishing a GitHub write session before starting, and pushing the changes.
-
-![UR-041: The historical 1 October request asked GPT 6 Pro to investigate the house-run problem using design and implementation branches, establish GitHub write access, fix root causes, and push changes.](assets/user-requirements/ur-041-historical-root-cause-request.webp)
-
-*In the picture: Historical request: investigate the reported runtime problem, fix its causes, and publish the changes.*
-
-**UR-042 Run the earlier model comparison.** The 4 October assignment requested starting AiPersonas and running house-design and DC-to-AC circuit-design tasks with GPT 5.6 Sol and Luna to observe how the system worked and what issues arose.
-
-![UR-042: The historical 4 October assignment requested house and DC-to-AC task runs with GPT 5.6 Sol and Luna to compare behavior and identify issues.](assets/user-requirements/ur-042-historical-model-comparison.webp)
-
-*In the picture: Historical request: run the same house and circuit tasks with Sol and Luna and observe what happens.*

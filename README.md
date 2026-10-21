@@ -147,7 +147,7 @@ Choose a starting point based on the question you want to answer. The linked doc
 | If you want to understand… | Read… |
 |---|---|
 | The idea in everyday language | [Start here](START-HERE.md) |
-| The user's consolidated requirements and requested research | [User requirements](USER-REQUIREMENTS.md) |
+| The user's consolidated product and design requirements | [User requirements](USER-REQUIREMENTS.md) |
 | Character, fragments, maturation, and next-context choice | [Persona core](design/PERSONA-CORE.md) |
 | Work, relationships, authority, resources, and honest outcomes | [Work and boundaries](design/WORK-AND-BOUNDARIES.md) |
 | What the supporting system must guarantee | [System contracts](implementation/CONTRACTS.md), including [JSON text and matching surfaces](implementation/CONTRACTS.md#json-text-and-matching-surfaces) |
