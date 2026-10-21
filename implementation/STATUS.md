@@ -176,7 +176,7 @@ A digest or a small prompt is not retained exact evidence.
 - Transport bytes, model-visible tokens and billed tokens as separate measures, alongside host resources, latency and total cost.
 - Delivered quality and harmful omissions compared under matched total resources.
 
-**Host launch and operator choice.** The target distinguishes a documented initial deployment default from a later explicit operator choice. This documentation work neither changed nor verified current launcher behavior. Evidence must test startup, restart and mode changes to show that the accepted operator choice is preserved. Unsupported choices need honest refusal or diagnostics, not silent override or fallback.
+**Default host access.** The current requirement is [full host access by default](DEPLOYMENT-DECISIONS.md#default-full-host-access), including tool installation without application allowlists, sandboxing or per-tool approval. This replaces the earlier target's approval and isolation prerequisites. Actual runtime support must be established through native persona commands, installation, filesystem operations and observed results on new and existing runtimes. A documentation change alone establishes none of those execution outcomes.
 
 **Runtime boundaries.** Protected obligations are retained, but this revision reruns none of their tests. A stronger claim needs applicable authority, privacy, revision, observation, resource, effect, cancellation, recovery and release tests at the exact target implementation revision.
 
