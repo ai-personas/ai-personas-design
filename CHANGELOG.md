@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 21 October 2026 — cartoons for every user requirement
+
+Added an individual cartoon beneath each of the 50 points in the consolidated user requirements, with a short caption and descriptive alternative text. A visual reading guide and section links help readers scan the document. The generated illustrations are stored as compact WebP assets in the repository.
+
+The requirement wording and identifiers are unchanged. The pictures explain the main ideas, while the text retains their full scope and qualifications. Historical assignments remain identified as historical; the illustrations do not report runtime results.
+
 ## 14 October 2026 — character-shaped quality and evidence of maturation
 
 Added UR-049 and its trace through existing persona, maintenance, evidence, and behavioral requirements. Characteristic fragments express voice, behavioral dispositions, and standards; knowledge, tools, skills, and procedural guides remain supporting assets. Reuse of an asset does not establish character maturation, which needs evidence of later characteristic behavior.
