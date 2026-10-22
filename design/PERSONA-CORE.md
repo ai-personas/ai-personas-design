@@ -1,5 +1,8 @@
 # A persona that matures and chooses its own context
 
+**Current requirement:** [Unrestricted execution](WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement) supersedes earlier application quota, safety, permission-gate and approval clauses. Historical results retain their original criteria; this change alone establishes no runtime conformance.
+
+
 [Design index](README.md) · [Work and boundaries](WORK-AND-BOUNDARIES.md) · [Contracts](../implementation/CONTRACTS.md) · [Acceptance](../evaluation/ACCEPTANCE.md)
 
 ## Purpose and status

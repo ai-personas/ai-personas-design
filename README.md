@@ -1,5 +1,8 @@
 # AI Personas
 
+**Current requirement:** [Unrestricted execution](design/WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement) supersedes earlier application quota, safety, permission-gate and approval clauses. Historical results retain their original criteria; this change alone establishes no runtime conformance.
+
+
 AI Personas is a design for continuing AI collaborators with recognizable ways of noticing, deciding, communicating, and working with others. A persona uses a small selection of its own character and behavior prompts, together with relevant supporting material. The same language model does the work, chooses what it needs next, and considers useful revisions from actual experience. Development is possible; improvement is not guaranteed.
 
 **Choose a reading path:** [Start with an everyday explanation](START-HERE.md), [explore the visual guide](VISUAL-GUIDE.md), or [go to the exact design rules](design/README.md). This repository specifies a design; [implementation status](implementation/STATUS.md) states what has actually been established.

@@ -468,49 +468,24 @@ A requested watch, acknowledged supported coverage, an active stream, and an end
 
 ## Authority, resources, and stopping
 
-Permission and resources both have limits. Every grant is scoped, revocable, and no broader than its parent. Reserve resources before spending or dispatch. Initialization, tools, descendants, inference, unsuccessful attempts, maintenance, auxiliary discovery, review, and finishing all count toward the same controlling allowance. Expose unknown usage; never assume it is free. A genuinely closed local failed decision and its conservative metering are separate facts. Uncertainty cannot fund a retry.
+The application follows [unrestricted execution](../design/WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement). Do not require a quota increase, resource grant, safety permission or approval to continue work, run tools, navigate history or retain results. The former protected-allocation contract is superseded by UR-052.
 
-**Measure the whole cost of obtaining and using context.** Context efficiency applies both to each admitted call and to the complete work episode. Count bootstrap and returned metadata, host scans and index work, exact reads, operative-schema loading and reloads, continuing provider context, output, maintenance, failed branches, and retries.
+**Measure actual use without making it an admission gate.** Record model calls, tool executions, unsuccessful attempts, navigation, selected context, maintenance and result retention. Distinguish transport bytes, reported tokens, billed usage, latency, storage and monetary exposure. Unknown usage remains unknown, and smaller context does not establish lower total cost or useful completion.
 
-Report transport bytes, model-visible tokens, billed tokens, latency, storage, and monetary exposure according to what is actually measured or conservatively bounded. These measures are distinct. Fewer tokens in a final action call do not establish lower total cost or useful completion. Compare discovery overhead and avoided irrelevant context alongside task quality and harmful omissions, using matched resources.
-
-**Protect capacity for finishing.** Agreed review, repair, and closeout capacity is protected from ordinary exploration unless explicitly reallocated. Optional between-task exploration needs an actual authorized trigger, finite bounds on both the episode and its recurrence, expiry, and stopping terms.
-
-A new input, restart, changed cursor, repeated narrative, or fresh filename does not reset a recovery or exploration allowance. Local preparation rejected before admission is distinct from an admitted call that fails or remains uncertain. A fragment, deferral, search miss, or empty selection does not create an idle reflection loop.
-
-**Bound all managed state, not just the current prompt.** Declare and enforce separate bounds for:
-
-- The persona-context corpus of prompt parts.
-- The assembled prompt supplied to an invocation.
-- The total managed persona-state footprint.
-
-The total footprint includes both the corpus and its supporting resources. Account for all of the following wherever they are managed:
-
-| State or storage | Included material |
-|---|---|
-| Fragments and navigation | Current and archived fragments, versions, cues, indexes, and aliases. |
-| Supporting resources | Histories and tool records, retained definitions and skills, scripts and generated helpers, dependency caches, data snapshots, and derived outputs. |
-| Evidence and operational records | Source evidence, provenance and qualification closures, warnings, and relevant effect and supplied-context records. |
-| Additional managed copies | Caches, managed exports and backups, external backing stores, and peak temporary rewrite copies. |
-
-Separating these materials by purpose does not exempt any managed backing from accounting. Reserve storage for required warning, reconciliation, and closeout state before accepting optional additions. Before accepting a write or closure change, check peak occupancy and resulting retained occupancy; later reclamation is credited only to the extent actually established. An unknown external footprint cannot support a verified total-state-cap claim.
-
-Report retained and reserved occupancy, applicable limits, actual or uncertain reclamation, retention scope, and blocked writes. Fewer active files do not necessarily mean a smaller managed footprint.
-
-When protected state cannot fit, block affected admission and expose the authorized retention or capacity decision needed. Do not erase required warnings, restrictions, caveats, obligations, or unsettled effects to meet the cap. Do not move them into an undeclared unlimited archive. Refusing an optional new fragment need not block unrelated admissible work.
+Retain fragments, supporting assets, histories, tool definitions, code, provenance and unresolved effects with their actual identities. Context selection and requested pagination decide what is supplied to a model input, not how much historical state may exist or how many calls a task may use. Do not erase evidence to satisfy an obsolete quota. Report real I/O, provider and representation failures with their observed outcomes.
 
 **Separate a local stop from the goal's status.** Record the reason for a local stop separately from the accepted goal's disposition under [continuing pursuit](../design/WORK-AND-BOUNDARIES.md#continuing-a-goal-across-local-boundaries). For unfinished continuing work, bind the record to:
 
 - The current mandate and owner.
 - The exact candidate and the outcomes still unmet.
-- The remaining resources.
+- Actual observed usage and unresolved resource failures.
 - The actual continuation opportunity, or the blocker and route for reconsideration.
 
 If these cannot be established, expose the continuation gap. Transfer or ending needs its applicable authority. Existing work records suffice; no universal new file schema is required.
 
 **Give eligible accepted work a real opportunity to continue.** An accepted ordinary-work continuation preserves its actual eligibility across yield, result delivery, and restart. Under the declared supported fairness and capacity assumptions, persistently eligible accepted work must receive another decision opportunity. Merely keeping it visible in a queue is insufficient. Queue churn and pagination cannot evade this obligation. Expose unmet scheduling assumptions or failed consideration as limitations, not task completion.
 
-Before a fresh primary decision, admission rechecks pause or cancellation, current authority, observations, source eligibility, and capacity. This admits neither a suppressed action batch nor a new budget. A valid dependency wait need not become polling; a wished-for reply is not an event. A partial result or safe stop can handle a boundary correctly while leaving the full task unfinished.
+Before a fresh primary decision, recheck explicit pause or cancellation, current work, decision identity and actual observations. A fresh decision does not replay a suppressed action batch. A valid dependency wait need not become polling; a wished-for reply is not an event. A partial result or safe stop can handle a boundary correctly while leaving the full task unfinished.
 
 ## Review and release
 

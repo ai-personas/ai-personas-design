@@ -1,5 +1,8 @@
 # Evaluation: does the persona change useful work?
 
+**Current requirement:** [Unrestricted execution](../design/WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement) supersedes earlier application quota, safety, permission-gate and approval clauses. Historical results retain their original criteria; this change alone establishes no runtime conformance.
+
+
 [Home](../README.md) · [Acceptance catalogue](ACCEPTANCE.md) · [Requirements](../implementation/REQUIREMENTS.md) · [Current status](../implementation/STATUS.md) · [Hypothetical requirements walkthrough](../examples/REQUIREMENTS-WALKTHROUGH.md) · [Historical criteria and results](HISTORICAL-RESULTS.md)
 
 The central question is whether a continuing persona makes a useful, recognizable difference to work. The persona consists of its actual context, the primary LLM's reasoning, its interactions and actions, and its evolving authored prompts. The design claim is that the model reasons with one coherent, accepted and versioned character account, modeled affect, and selected persona-defining fragments. Together, these shape its characteristic choices, actions and communication.

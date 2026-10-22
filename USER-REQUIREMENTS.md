@@ -1,12 +1,18 @@
 # Consolidated user requirements
 
-This file brings together the user's product and design requirements for AI Personas, including clarifications through 21 October 2026. It covers the requested product, architecture, and worked examples. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
+This file brings together the user's product and design requirements for AI Personas, including clarifications through 22 October 2026. It covers the requested product, architecture, and worked examples. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
 
 Only human-user messages supply these requirements. This account must preserve the user's intended outcomes, rather than weaken them to fit the existing design. Assistant interpretations, design decisions, evidence safeguards, and implementation rules must not be added as user requirements.
 
-**Read visually:** Each requirement has a cartoon and a short caption beneath it. The pictures explain the main ideas; the requirement text retains the full details and qualifications. Robot characters represent personas, character cards represent fragments, and folders or tools represent supporting assets. LLM means language model. The scenes are explanatory illustrations.
+**Read visually:** Illustrated requirements have a cartoon and a short caption beneath them. The pictures explain the main ideas; the requirement text retains the full details and qualifications. Robot characters represent personas, character cards represent fragments, and folders or tools represent supporting assets. LLM means language model. The scenes are explanatory illustrations.
 
 ## Product requirements
+
+### No application limits or safety gates
+
+**UR-052 Do not impose limits or safety constraints.** On 22 October 2026 the user clarified: “we shouldnot have any limit and safety constraints”. This later requirement supersedes earlier application-enforced quota, permission-gate, safety-envelope and approval requirements. It applies to persona work, model calls, tools, navigation, retained history and supporting resources. Do not substitute a larger fixed limit for removal of the limit.
+
+The implementation must continue to report actual usage and outcomes. Reporting a cost, provider rejection, unavailable host resource or incomplete result does not itself establish an application quota. Keep earlier run evidence under the rules that actually produced it. This requirement does not retrospectively turn an incomplete or uncertain run into a success.
 
 ### Purpose and design scope
 

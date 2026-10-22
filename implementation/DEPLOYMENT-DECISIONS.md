@@ -1,14 +1,17 @@
 # Decisions required for a deployment
 
+**Current requirement:** [Unrestricted execution](../design/WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement) supersedes earlier application quota, safety, permission-gate and approval clauses. Historical results retain their original criteria; this change alone establishes no runtime conformance.
+
+
 [Implementation guide](README.md) · [Contracts](CONTRACTS.md) · [Work and boundaries](../design/WORK-AND-BOUNDARIES.md) · [Status](STATUS.md)
 
-A deployment must turn the adopted persona design into a bounded, accountable operation and provide evidence that its chosen boundaries work. This register identifies the decisions needed to do that. It does not claim production readiness or report that the separate runtime already implements these choices.
+A deployment must implement the adopted persona design and report actual behavior, under the unrestricted-execution requirement. This register identifies the decisions needed to do that. It does not claim production readiness or report that the separate runtime already implements these choices.
 
 The target is a continuing persona with one accepted, versioned character account. That account includes semantic OCEAN traits—openness, conscientiousness, extraversion, agreeableness, and neuroticism—and a VAD modeled affect profile covering valence, arousal, and dominance. These meanings are required; numeric representations are optional.
 
 The primary LLM authors persona-defining prompt fragments that carry the persona's character. It uses bounded lexical and supported regex searches, chooses the next context, and explicitly addresses maintenance in every persona invocation. Current character and selected fragments inform all discretionary task and social choices. Actual experience may lead to revisions of compact retained context, scoped relationships, and permitted character. Tools, skills, domain knowledge, generic procedures, code, data, and histories remain supporting assets, regardless of who authored them.
 
-A deployment must retain this design's semantic traits, modeled affect, every-invocation maintenance, and finite bounds on persona context and managed storage. For every decision below, record:
+A deployment retains semantic traits, modeled affect, every-invocation maintenance, exact records and useful context selection. It must remove application quotas and safety gates under UR-052. For every decision below, record:
 
 - The accountable owner and chosen policy or value.
 - The rationale and exact effective version.

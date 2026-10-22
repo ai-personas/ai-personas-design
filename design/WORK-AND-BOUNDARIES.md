@@ -1,5 +1,16 @@
 # Useful work, cooperation, and trustworthy boundaries
 
+## Unrestricted execution requirement
+
+The latest [UR-052 clarification](../USER-REQUIREMENTS.md#no-application-limits-or-safety-gates) governs this document and the connected implementation contracts. The application must not enforce work, lifetime, session, tool, navigation, storage, cost or population quotas, local execution deadlines, tool allowlists, source-sharing gates, or safety approval workflows. Configured historical ceilings are evidence of earlier operation, not authority to stop new work. Increasing a ceiling is not compliance with this requirement.
+
+Accounting remains observational. Preserve the exact original requests and changes, actor identities, immutable records, actual inputs and outputs, usage measurements and explicit unknowns. Existing provenance does not disappear when enforcement changes. A successful process does not prove task correctness; an absent receipt remains absent. Exact response binding, transactional consistency and prevention of duplicate accepted execution are correctness requirements, not a substitute safety policy.
+
+Personas choose whether useful work remains and may stop, pause, wait or continue. Honor an actual user cancellation or explicit pause. Provider refusals, account authentication, host operating-system behavior and physical availability remain external facts to report, not guarantees that the application can remove them. Do not add application restrictions to compensate for hypothetical risk.
+
+This section changes the earlier obligations below concerning finite resource envelopes, permission inheritance, protected quotas, safe admission and mandatory approval. Their previous restrictive meanings survive only in historical criteria and results. Context selection and pagination remain methods for supplying useful material to a finite model input; they must not create a cumulative work or history quota. The remaining runtime gaps must be listed honestly until all enforcement paths are removed.
+
+
 [Design guide](README.md) · [Persona core](PERSONA-CORE.md) · [Contracts](../implementation/CONTRACTS.md) · [Requirements](../implementation/REQUIREMENTS.md)
 
 ## Purpose and status

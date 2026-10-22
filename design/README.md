@@ -1,5 +1,8 @@
 # Design reference
 
+**Current requirement:** [Unrestricted execution](WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement) supersedes earlier application quota, safety, permission-gate and approval clauses. Historical results retain their original criteria; this change alone establishes no runtime conformance.
+
+
 [Home](../README.md) · [Start here](../START-HERE.md) · [Decisions](../DESIGN-DECISIONS.md)
 
 This branch describes one target design for continuing personas. Each persona has one accepted, versioned character account covering semantic OCEAN traits and a VAD modeled affect profile. OCEAN describes openness, conscientiousness, extraversion, agreeableness, and neuroticism. VAD describes valence (pleasant or unpleasant), arousal (level of activation), and dominance (sense of control). These descriptions are required; numeric scores are not compulsory.

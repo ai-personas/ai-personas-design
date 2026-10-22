@@ -1,5 +1,8 @@
 # Design decisions
 
+**Current requirement:** [Unrestricted execution](design/WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement) supersedes earlier application quota, safety, permission-gate and approval clauses. Historical results retain their original criteria; this change alone establishes no runtime conformance.
+
+
 [Home](README.md) · [Normative reference](design/README.md) · [Source provenance](sources/SOURCE-MANIFEST.md)
 
 This register explains the target design adopted in this branch and why its rules took their present form. It replaces the earlier practice of adding new normative clarifications alongside manuals that still conflicted with them.
@@ -295,3 +298,10 @@ Historical reports preserve their original evaluator definitions, configuration,
 A design change must explain the problem it solves and reconcile every affected active view. Follow [Contributing](CONTRIBUTING.md): identify the actual problem, the rule being changed, affected identifiers, alternatives, consequences, and evidence needed.
 
 Preserve old criteria and results. State the implementation gap separately from the decision to change the design.
+
+
+## Remove application limits and safety gates — 22 October 2026
+
+The user explicitly requested no limits or safety constraints (UR-052). The former finite-resource and default-gating architecture obstructed continuing work and is no longer the target. Raising fixed ceilings or adding a permissive opt-in mode would retain that obstruction; the new contract removes enforcement and keeps accounting observational.
+
+The authoritative rule is in [work and boundaries](design/WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement). I06, I13, I16 and I20 now reflect that rule. The change also governs earlier cap and gate clauses elsewhere, including evaluation scenarios; no old pass transfers to the new contract. The runtime must remove all affected paths and show actual continuing work. Source checks, builds and documentation edits alone do not establish that outcome. Historical uncertain operations remain uncertain and must not be replayed as a way of demonstrating progress.

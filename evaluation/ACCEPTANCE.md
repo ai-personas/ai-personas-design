@@ -1,5 +1,8 @@
 # Acceptance catalogue
 
+**Current requirement:** [Unrestricted execution](../design/WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement) supersedes earlier application quota, safety, permission-gate and approval clauses. Historical results retain their original criteria; this change alone establishes no runtime conformance.
+
+
 [Evaluation method](README.md) · [Requirements and invariants](../implementation/REQUIREMENTS.md) · [Persona core](../design/PERSONA-CORE.md)
 
 **Status of every entry: specified, not executed by this documentation revision.** This catalogue describes what to examine and what evidence a pass requires. It contains neither code examples nor a record of passing tests.

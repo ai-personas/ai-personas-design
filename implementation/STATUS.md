@@ -1,5 +1,8 @@
 # Design and implementation evidence status
 
+**Current requirement:** [Unrestricted execution](../design/WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement) supersedes earlier application quota, safety, permission-gate and approval clauses. Historical results retain their original criteria; this change alone establishes no runtime conformance.
+
+
 [Implementation guide](README.md) · [Requirements](REQUIREMENTS.md) · [Evaluation method](../evaluation/README.md) · [Historical results](../evaluation/HISTORICAL-RESULTS.md)
 
 The 10 October next-context correction supersedes the earlier allowance for silent omission. Every accepted persona response must explicitly state its next-context decision for both fragments and supporting resources. Actual input/output coverage, suppression of invalid responses, and the usefulness of those choices remain unverified. Historical tests have not been rerun against this changed criterion.

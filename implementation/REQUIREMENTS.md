@@ -2,7 +2,7 @@
 
 [Implementation guide](README.md) · [Contracts](CONTRACTS.md) · [Acceptance](../evaluation/ACCEPTANCE.md)
 
-The protected foundation consists of I01–I21 and the 45 requirement identifiers below. This catalogue preserves their identifiers, order, and obligations. It shows what must hold, where the detailed rule lives, and which evidence checks apply. It does not replace the detailed failure and recovery rules or provide implementation code.
+The protected foundation consists of I01–I21 and the 45 requirement identifiers below. This catalogue preserves identifiers and order; UR-052 changes the earlier resource and safety obligations as recorded below. It shows what must hold, where the detailed rule lives, and which evidence checks apply. It does not replace the detailed failure and recovery rules or provide implementation code.
 
 The [persona core](../design/PERSONA-CORE.md) defines a persona as a continuing whole: characteristic context, LLM reasoning and invocation, actual behavior, and controlled self-revision. Its characteristic context combines one coherent, accepted, versioned character account with selected prompt parts in the persona’s own voice. These fragments help define the persona; they are not a memory store attached to the LLM. The LLM supplies reasoning, learned capabilities, and prior tendencies that also affect behavior. Actual human, peer, and task experience can change fragments, later choices, relationships, and permitted character development.
 
@@ -16,7 +16,7 @@ The primary persona chooses its next characteristic context through bounded file
 
 ## Invariants
 
-These 21 rules are the protected foundation. Apply each wherever its subject is relevant; a more detailed requirement cannot weaken it. Here, *birth* means creating a new persona.
+These 21 rules are the current foundation. Apply the latest user requirement when earlier quota or safety language conflicts; no earlier invariant can override UR-052. Here, *birth* means creating a new persona.
 
 | ID | Rule that must remain true |
 |---|---|
@@ -25,21 +25,21 @@ These 21 rules are the protected foundation. Apply each wherever its subject is 
 | I03 | No hidden profession registry, semantic task router, universal priority formula, fixed domain workflow, or population optimizer chooses the solution. |
 | I04 | Preference, relationship interpretation, group agreement, observed fact, and permission remain distinct. |
 | I05 | Responsibility exists only after acceptance or an already accepted delegation; mentioning a peer does not commit it. |
-| I06 | Birth creates neither money nor broader permission, and supplied knowledge is not invented firsthand experience. |
+| I06 | Birth records actual identity and origin; supplied knowledge is not invented firsthand experience. Resource accounting is observational under UR-052. |
 | I07 | Every admitted action is attributable to its actor, causal work, authority, exact request, and relevant information versions. |
 | I08 | One persona has one current decision authority at a time; independent personas and isolated jobs may work concurrently. |
 | I09 | Relevant mandatory constraints, cancellations, current obligations, and blockers survive context selection and summarization. |
 | I10 | Tool availability, execution, artifact integrity, and result correctness require different evidence. |
 | I11 | Review applies to exact criteria and inputs under an explicit policy; changed inputs do not silently inherit a pass. |
 | I12 | Local retries do not duplicate accepted transitions; uncertain outside effects are reconciled before repetition. |
-| I13 | Retrieval, summaries, birth, exports, and interfaces cannot widen access to private information. |
+| I13 | Retrieval, summaries, birth, exports and interfaces preserve exact source attribution; application access and sharing gates are removed under UR-052. |
 | I14 | Unseen images, unrun analyses, unperformed edits, and unobserved measurements are never reported as completed. |
 | I15 | Individuality, learning, cooperation, and useful birth require behavioral evidence rather than biographies or counts. |
-| I16 | Idle personas consume no model calls without an authorized stimulus, self-wake, or bounded exploration allowance. |
+| I16 | Persona continuation follows actual work, interaction or self-directed activity and honors explicit stops and pauses; no exploration quota is imposed. |
 | I17 | Running tools do not satisfy completed dependencies; deferred actions from an old decision require a fresh observation-bound decision. |
 | I18 | Accepted work has accepted continuation responsibility or an explicit unowned or handoff-needed disposition; required outcomes expose gaps. |
 | I19 | Evidence based on an assumption cannot silently establish an unconditional real-world claim. |
-| I20 | Agreed review, repair, and safe closeout capacity is protected from ordinary exploration unless explicitly reallocated. |
+| I20 | Review, repair and result closeout remain usable without application resource quotas; actual usage and unresolved failures are retained. |
 | I21 | Final release binds exact reviewed state and current authority coherently; historical acceptance never silently moves to a newer result. |
 
 ## Requirement catalogue
