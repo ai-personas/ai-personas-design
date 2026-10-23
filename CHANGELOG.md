@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — unrestricted work boundaries and feedback records
+
+Reconciled the detailed work chapter and its five illustrations with the full human requirements and unrestricted execution. Removed residual permission and source-sharing gates, funded or restricted recovery, fixed retry allowances, protected resources and deployment approval rules. Preserved the accepted need, voluntary responsibility, exact character-adoption ordering, actual effects, full delivery, substantive quality judgment and accountable continuation. The former headings and immutable earlier chapter remain linked; earlier evidence keeps its original criteria.
+
+Distinguished pending feedback bookkeeping from actual obligations and completion. Pending requester or peer records alone do not impose closure or retirement prerequisites. Feedback bodies and dispositions remain attributable; actual mandate outcomes, adopted blockers, required acceptance, delivery and unresolved execution retain their meaning. The companion runtime removes the blanket pending-queue checks without clearing records or manufacturing successful work.
+
+These changes establish source and design changes, not full runtime conformance, useful maturation or repository-wide consistency. Other requirement refinements and topic guidance remain to be reconciled. No tests, generated scenarios or private live records are added.
+
 ## 23 October 2026 — unrestricted observable contracts and execution accounts
 
 Reconciled the observable system contracts with persona-chosen work and unrestricted execution. Removed residual repair allowances, mode restrictions, source-policy and authoring gates, parsing quotas and mandatory resource reserves. Preserved initial own-voice authorship, all ordinary work/maintenance/context responsibilities, exact persistence and character-adoption ordering, attributable feedback, accepted commitments and full delivery semantics. Earlier contracts retain their immutable historical reference; no prior pass transfers to changed criteria.

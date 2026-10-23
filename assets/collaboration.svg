@@ -2,7 +2,7 @@
   <title id="title">Cooperate without inventing commitment</title>
   <desc id="description">Human and persona needs can lead to direct contributions or accepted continuing roles. Disagreement, decision rights and actual handoff acceptance remain explicit, without compulsory teams or leaders. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
   <rect width="560" height="2123" fill="#fffaf0"/>
-  <g font-family="DejaVu Sans, Arial, sans-serif">
+  <g font-family="Liberation Sans, Arial, sans-serif">
     <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Cooperate without inventing</tspan><tspan x="28" dy="36">commitment</tspan></text>
     <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
     <rect x="20" y="153" width="520" height="330" rx="20" fill="#fff0cd" stroke="#d0d5cb" stroke-width="1"/>
@@ -64,7 +64,7 @@
     <ellipse cx="83" cy="999" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M71 1010 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="112" y="1010" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Work together when useful</tspan></text>
-    <text x="50" y="1095" font-size="22" fill="#16332f"><tspan x="50" dy="0">Participants may share a task, explore</tspan><tspan x="50" dy="31">an authorized question or develop a</tspan><tspan x="50" dy="31">relationship. A team or leader is not</tspan><tspan x="50" dy="31">required for every need.</tspan></text>
+    <text x="50" y="1095" font-size="22" fill="#16332f"><tspan x="50" dy="0">Participants may share a task, explore</tspan><tspan x="50" dy="31">a chosen question or develop a</tspan><tspan x="50" dy="31">relationship. A team or leader is not</tspan><tspan x="50" dy="31">required for every need.</tspan></text>
     <path d="M29 1245 L529 1243 L531 1525 L27 1528 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
     <rect x="37" y="1253" width="486" height="116" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
     <ellipse cx="486" cy="1277" rx="20" ry="21" fill="#b9dce5" stroke="#885000" stroke-width="2"/>
@@ -82,7 +82,7 @@
     <text x="112" y="1592" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">A handoff needs a real</tspan><tspan x="112" dy="32">receiver</tspan></text>
     <text x="50" y="1709" font-size="22" fill="#16332f"><tspan x="50" dy="0">An accepted transfer preserves</tspan><tspan x="50" dy="31">obligations, resources and unresolved</tspan><tspan x="50" dy="31">issues. Naming another persona cannot</tspan><tspan x="50" dy="31">discharge responsibility.</tspan></text>
     <path d="M29 1857 L531 1855 L527 1997 L32 1995 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
-    <text x="46" y="1885" font-size="20" fill="#16332f"><tspan x="46" dy="0">Task-free exploration still needs its actual</tspan><tspan x="46" dy="29">authority and finite bounds. Conversation</tspan><tspan x="46" dy="29">does not create an unfunded background</tspan><tspan x="46" dy="29">loop.</tspan></text>
+    <text x="46" y="1885" font-size="20" fill="#16332f"><tspan x="46" dy="0">Exploration follows actual opportunities and</tspan><tspan x="46" dy="29">persona choices. Conversation alone</tspan><tspan x="46" dy="29">establishes no acceptance or future call.</tspan></text>
     <text x="30" y="2032" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
   </g>
 </svg>

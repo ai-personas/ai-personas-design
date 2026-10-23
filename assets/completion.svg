@@ -2,7 +2,7 @@
   <title id="title">Individual and collective completion</title>
   <desc id="description">Five separate questions distinguish an individual judgment, shared sufficiency, delivery, required acceptance and remaining responsibility. None automatically proves all the others. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
   <rect width="560" height="2321" fill="#fffaf0"/>
-  <g font-family="DejaVu Sans, Arial, sans-serif">
+  <g font-family="Liberation Sans, Arial, sans-serif">
     <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Individual and collective</tspan><tspan x="28" dy="36">completion</tspan></text>
     <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
     <rect x="20" y="153" width="520" height="330" rx="20" fill="#f8e8ec" stroke="#d0d5cb" stroke-width="1"/>
@@ -74,7 +74,7 @@
     <ellipse cx="493" cy="1501" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M481 1512 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="49" y="1512" font-size="23" fill="#245599" font-weight="700"><tspan x="49" dy="0">4 · Is required acceptance</tspan><tspan x="49" dy="32">obtained?</tspan></text>
-    <text x="50" y="1629" font-size="22" fill="#16332f"><tspan x="50" dy="0">Keep stakeholder acceptance,</tspan><tspan x="50" dy="31">independent review and outside</tspan><tspan x="50" dy="31">assurance distinct. Apply each when</tspan><tspan x="50" dy="31">required by the mandate, applicable</tspan><tspan x="50" dy="31">policy or enabled design safeguards.</tspan></text>
+    <text x="50" y="1629" font-size="22" fill="#16332f"><tspan x="50" dy="0">Keep stakeholder acceptance,</tspan><tspan x="50" dy="31">independent review and outside</tspan><tspan x="50" dy="31">assurance distinct. Preserve actual</tspan><tspan x="50" dy="31">mandate requirements without an</tspan><tspan x="50" dy="31">application approval gate.</tspan></text>
     <path d="M29 1810 L529 1808 L531 2059 L27 2062 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
     <rect x="37" y="1818" width="486" height="116" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
     <ellipse cx="76" cy="1842" rx="20" ry="21" fill="#f5d9ae" stroke="#885000" stroke-width="2"/>
