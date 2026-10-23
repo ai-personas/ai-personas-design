@@ -2,6 +2,17 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — current setup choices without obsolete controls
+
+Clarified that fresh setup collects provider and creation choices without
+historical quota, owner-position or permission switches. Initial identities are
+not a population ceiling or an assignment of responsibility. The companion
+runtime removes these inputs from the setup API, CLI and interactive bootstrap,
+including the redundant bootstrap approval flag. Existing saved declarations
+remain attributable; neutral new bookkeeping is neither a quota nor an invented
+user approval. The first-release interface does not silently rewrite old
+requests. These changes do not establish full runtime conformance.
+
 ## 23 October 2026 — exact response-envelope guidance
 
 Clarified that each supplied decision schema states the exact invocation identity and response epoch for its admission, separately from task revisions. The companion runtime adds those constants to its prepared schemas while retaining complete parsing, current-state validation and the original response bytes. Dynamic envelope values count toward actual input size without becoming fixed-contract growth. This improves the guidance supplied to the model; it does not guarantee compliant responses or establish full conformance.

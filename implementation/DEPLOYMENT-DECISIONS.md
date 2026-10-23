@@ -24,6 +24,14 @@ Keep unresolved behavior explicit in implementation status. The default full-hos
 
 The implementation targets its first release. Backward compatibility with earlier development formats and interfaces is not required; obsolete adapters and migration paths need not constrain the current design. Historical run records retain the meaning of the build that produced them, without obligating the current runtime to read every earlier format.
 
+Fresh setup presents meaningful creation and provider choices. Remove obsolete
+quota, owner-position and permission switches from its current interface rather
+than carrying them forward as mandatory metadata. Creating a cohort does not
+assign responsibilities or reserve a finite population. Existing saved records
+can retain their original declarations; neutral bookkeeping for a new setup
+must neither impose a limit nor claim that the user made a separate approval.
+An old request is not silently rewritten and replayed under a new interface.
+
 Working functionality must follow the [user requirements](../USER-REQUIREMENTS.md), with later user clarifications taking precedence. Implementation work uses builds and inspection of actual persona runs, including their supplied context, tool and skill choices, installations, execution results and resulting work. The user has requested no automated test cases. Design walkthroughs and requirement criteria describe intended behavior; they are not evidence that runtime functionality works.
 
 ## Core deployment choices

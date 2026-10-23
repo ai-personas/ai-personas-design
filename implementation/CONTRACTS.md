@@ -424,6 +424,15 @@ A requested watch, acknowledged supported coverage, an active stream, and an end
 
 The application follows [unrestricted execution](../design/WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement). Do not require a quota increase, resource grant, safety permission or approval to continue work, run tools, navigate history or retain results. The former protected-allocation contract is superseded by UR-052.
 
+**Keep fresh setup about current choices.** Collect the actual provider binding,
+working location, destination, initial identities and attributed starting
+profiles. Do not require obsolete quota or permission declarations because old
+records contain them. The initial cohort is a creation choice, not a population
+ceiling, reservation of future slots or assignment of work and review roles.
+Any neutral internal bookkeeping defaults are not user-declared ceilings or
+separate permission decisions. Retain earlier declarations and actual usage
+without rewriting history or treating them as present execution gates.
+
 **Measure actual use without making it an admission gate.** Record model calls, tool executions, unsuccessful attempts, navigation, selected context, maintenance and result retention. Distinguish transport bytes, reported tokens, billed usage, latency, storage and monetary exposure. Unknown usage remains unknown, and smaller context does not establish lower total cost or useful completion.
 
 Retain fragments, supporting assets, histories, tool definitions, code, provenance and unresolved effects with their actual identities. Context selection and requested pagination decide what is supplied to a model input, not how much historical state may exist or how many calls a task may use. Do not erase evidence to satisfy an obsolete quota. Report real I/O, provider and representation failures with their observed outcomes.
