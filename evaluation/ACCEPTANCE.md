@@ -627,15 +627,15 @@ Finish when the accepted need is met and no further change is justified. Report 
 
 ### Competing tools and conditional preparation under existing identifiers
 
-A tool choice is adequate only for the proposed operation and its conditions. Finding or installing a tool does not establish readiness. Preparation remains conditional on need and authority.
+A tool choice must be assessed against the actual operation, inputs and observed outcomes. Finding or installing a tool does not establish that the intended operation works. Personas choose whether preparation is useful; UR-052 supplies unrestricted host execution and installation without an application permission or resource gate.
 
-**M10, M17, B07, B09, B12 — Suitable, ready and unprepared candidates.** Compare bounded exact candidates that are ready and suitable, installed but unsuitable, and suitable but unprepared. Observe primary-owned choice, success without installation, missing versus granted preparation authority, preparation failure, installation without a usable binding, and stale dependencies.
+**M10, M17, B07, B09, B12 — Tool choice and observed readiness.** These identifiers retain their earlier evidence history. In current work, distinguish the candidates actually considered, the persona's reasons for choosing, actual preparation and operation results, failures and changed dependencies. A ready tool may be unsuitable for the claim; a suitable tool may still need installation. Do not manufacture a scenario or impose a particular sequence to fill an evidence category.
 
-Use the same task facts, capabilities, permissions and total allowance across persona branches. Preferences supply neither competence nor a requirement to choose different tool brands.
+Preferences establish neither competence nor a requirement to choose different tool brands. A comparison must state the actual task facts, resources, model inputs and conditions of each contribution. Report differences that limit the conclusion; a common application allowance is not required.
 
-**Under those identifiers — Readiness, execution and assessment.** Distinguish full qualified skill/interface supply, representative readiness evidence, actual project execution and assessment appropriate to the claim. Include a successful operation with the wrong model or input, unknown readiness, an authorized fallback, and eligible later reuse contrasted with prohibited project data.
+**Under those identifiers — Readiness, execution and assessment.** Distinguish supplied guidance and interfaces, installation, observed operation, actual project execution and assessment appropriate to the claim. A successful operation on the wrong inputs cannot establish the intended result. A failed preparation can inform another chosen route. Later reuse must identify what was actually supplied and used; a reference or retained asset alone establishes neither use nor benefit.
 
-Count discovery, permission delay, acquisition, diagnostics, failures, checks and maintenance. The [waveform extension](../examples/WORKED-EXAMPLES.md#competing-tools-for-a-separately-authorized-waveform-study) illustrates these boundaries; it reports no executed tests.
+Record actual discovery, acquisition, diagnostics, failures, checks and maintenance as usage and outcomes, not quotas. The [current tool-choice example](../examples/WORKED-EXAMPLES.md#competing-tools-for-a-waveform-study) illustrates these distinctions and reports no executed results. The [earlier criteria](https://github.com/ai-personas/ai-personas-design/blob/db66411f2a80ac6b07720d37fe54bb53d7982a37/evaluation/ACCEPTANCE.md#competing-tools-and-conditional-preparation-under-existing-identifiers) and [waveform illustration](https://github.com/ai-personas/ai-personas-design/blob/db66411f2a80ac6b07720d37fe54bb53d7982a37/examples/WORKED-EXAMPLES.md#competing-tools-for-a-separately-authorized-waveform-study) keep their historical assumptions; their finite allowances and permission rules do not govern current work. This clarification adds no test case or mandatory evaluation gate.
 
 ### Individual and collective completion under existing identifiers
 

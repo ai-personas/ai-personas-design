@@ -440,7 +440,7 @@ Optional navigation limits cannot truncate required qualifications or their depe
 
 Supporting resources help the persona work, but have different purposes from persona-defining fragments. Evaluate historical and evidentiary records, tool definitions, skill instructions, executable helpers/scripts and task data separately. They may use the same primary-requested discovery and exact-access facilities while retaining distinct purposes, ownership, freshness, retention and authority.
 
-A tool definition describes an operation; a skill supplies procedural guidance; a script is executable; data and history supply inputs or evidence. Entering context makes none of them character or permission. The [hypothetical cross-call journey](../examples/WORKED-EXAMPLES.md#bounded-resource-context-across-calls) illustrates these distinctions.
+A tool definition describes an operation; a skill supplies procedural guidance; a script is executable; data and history supply inputs or evidence. Entering context establishes neither character nor a successful operation. The [current selective-context examples](../examples/WORKED-EXAMPLES.md#following-connections-without-carrying-the-whole-network) illustrate these distinctions without application navigation or context quotas.
 
 **Inspect actual exposure on every invocation.** Hold task needs fixed while increasing the distractor catalog into the hundreds and varying description lengths. Audit actual provider-bound input, not only a proposed selection or the first prompt. Count names, descriptions, schemas, indexes, prior search results, repeated reads and other retained exposure.
 
@@ -714,7 +714,7 @@ Report evaluator costs separately. Show the tradeoffs between quality, cost, and
 
 **Separate next-task cost from lifetime cost.** For marginal next-task economics, prior acquisition may be treated as a sunk cost, but it must be disclosed. Lifetime economics must cover the declared workload. Count acquisition/validation, failed and never-reused candidates, retention, discovery, revalidation, withdrawals, and all actual eligible uses. Do not spread costs across every arriving task or an imagined unlimited lifetime.
 
-Report how the break-even point changes under different assumptions, comparing outcomes of comparable adequate quality. Include changes that erase an apparent saving. The [hypothetical journey](../examples/WORKED-EXAMPLES.md#cost-and-remaining-gaps) uses arbitrary units only.
+Report how the break-even point changes under different assumptions, comparing outcomes of comparable adequate quality. Include changes that erase an apparent saving. The [historical hypothetical accounting example](https://github.com/ai-personas/ai-personas-design/blob/db66411f2a80ac6b07720d37fe54bb53d7982a37/examples/WORKED-EXAMPLES.md#cost-and-remaining-gaps) uses arbitrary units only. Its old allowances are not current application rules or measured costs.
 
 Bytes, token estimates, reserved exposure, billed usage, and measured latency are different quantities; report each accurately. A smaller prompt, more cache hits, or fewer calls does not establish an efficiency gain when equivalent useful work was never delivered.
 

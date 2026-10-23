@@ -165,7 +165,7 @@ Mira may decide to share a narrow, uncertain assumption with Rowan earlier. She 
 
 Their differences should remain visible in competent behavior, including their responses to pressure or correction. The system should not force artificial disagreement or reward a harmful habit merely because it makes a persona appear consistent.
 
-For a longer observable illustration, follow [three continuing personas from a house concept through a circuit request to selective skyscraper benefit](examples/WORKED-EXAMPLES.md#three-continuing-personas-house-circuit-and-selective-skyscraper-benefit). It separates independent approaches, later cooperation, retained judgment and assets, missed or harmful reuse, and hypothetical costs. It is not an executed trial.
+Follow [three continuing personas through ordinary work](examples/WORKED-EXAMPLES.md#one-character-across-every-fragment-and-decision), including the house, circuit, skyscraper and printer stories. The current illustrations separate chosen approaches, cooperation, characteristic development, supporting assets and missed or harmful reuse without application quotas or approval gates. They are not executed trials.
 
 ## Who controls what?
 

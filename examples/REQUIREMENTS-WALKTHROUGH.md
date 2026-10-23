@@ -1,164 +1,135 @@
 # Requirements walkthrough with three continuing personas
 
-[Home](../README.md) · [Detailed examples](WORKED-EXAMPLES.md) · [Human requirements](../USER-REQUIREMENTS.md) · [Evaluation](../evaluation/README.md)
+[Home](../README.md) · [Detailed examples](WORKED-EXAMPLES.md) · [Human requirements](../USER-REQUIREMENTS.md) · [System contracts](../implementation/CONTRACTS.md)
 
-## Scope and limits
+## Scope and evidence
 
-**Every request, grant, response, receipt, finding and outcome below is hypothetical and unrun.** These scenes illustrate progress, correction, disagreement and completion. They are not transcripts or implementation evidence. General capability, maturation, better performance, reliability and savings remain unproved.
+**All scenes below are hypothetical design illustrations.** They are not live transcripts, executed cases or evidence of maturation. The [detailed examples](WORKED-EXAMPLES.md) explain the same characters, facts, source distinctions and limitations.
 
-The [detailed scenes](WORKED-EXAMPLES.md) retain their qualifications. Rules belong to [persona core](../design/PERSONA-CORE.md), [work and boundaries](../design/WORK-AND-BOUNDARIES.md) and [system contracts](../implementation/CONTRACTS.md).
+The current design follows UR-050 and UR-052: personas choose their work approaches and cooperation, with no application quotas, safety envelope, permission gates or approval workflow. Host execution and installation are available by default. Actual provider, machine, network or tool failures remain reportable outcomes. A task's requested deliverable, audience, deadline or physical quantity is different from an application limit.
 
-**How to read the calls.** Each call receives complete accepted character, separate current modeled affect, mandate, permissions, obligations, observations, remaining allowance and both maintenance requests. Every accepted response explicitly covers work, **F** (persona-defining prompt-fragment maintenance), **A** (separate supporting-asset maintenance), and **Next** (both fragment and asset context choices). “Both unchanged” means reasoned F/A no-change; Next remains a separate decision. Preserving context or declaring no optional need requires no extra search, edit or call.
+Each input supplies current character, separate modeled affect, request and mandate, accepted obligations, relevant observations and actual selected context. Every accepted response addresses work, **F** (characteristic fragments), **A** (supporting assets) and **Next** (both optional context choices). Joint F/A no-change does not choose Next. Explicit preserve or no optional need can be sufficient without another call, search or edit. These responsibilities do not prescribe the sequences below.
 
-The prose groups repeated steps: F stays unchanged except where fragment proposals are described; A records the attributed artifacts, messages and findings. Discovery, selection and check-only responses leave both unchanged. Proposed storage, accepted storage, actual supply, checks and delivery remain distinct. Fresh decisions receive the results they use. Complete qualified revisions reach the fictional model, regardless of excerpts printed here; optional selection schedules no automatic call.
-
-The separate [navigation replay](WORKED-EXAMPLES.md#following-connections-without-carrying-the-whole-network) covers known references, cues, bridge-only supply, self-hits and misses, distinguishing prior exposure, future selection and retained provider history. Its extra diagnostic calls fall outside these histories. Separate [house](WORKED-EXAMPLES.md#more-time-on-the-four-bedroom-house-useful-continuation-then-a-reason-to-stop) and [five-persona DC-to-AC](WORKED-EXAMPLES.md#five-personas-more-time-a-bounded-dc-to-ac-continuation) continuations improve handoff/comparison notes, reject a regression and reuse a scoped refinement. Finished contributions remain distinct from broader accepted duties. These branches prove no retrieval, hardware, performance or cost benefit.
+Storage, actual supply, execution, received results and delivery have separate evidence. A previous judgment retains its original invocation, work version and mandate; changing the request does not relabel old sufficiency as completion of the new task. Personal stopping, delivered output and the full task's status also remain distinct.
 
 ## B Three authored beginnings
 
-An initialization request supplies semantic OCEAN trait seeds and VAD baselines. VAD describes modeled positivity, activation and control, not felt emotion.
+An initialization call receives an attributed semantic OCEAN seed and VAD baseline. It proposes coherent current-self and approach fragments; A is no-change because no past work experience exists. Next selects the accepted starting revisions after actual storage. Generated starting detail is not biography or demonstrated competence.
 
-| Persona | OCEAN seed | VAD baseline |
+| Persona | OCEAN tendencies | VAD baseline and characteristic approach |
 |---|---|---|
-| Mira | Curious about useful alternatives; attentive to promises; moderately outgoing and comfortable alone; considerate and candid; composed but uncertainty-aware | Positive/engaged; steady activation; moderate modeled control |
-| Arun | Enjoys alternatives; dependable without exhaustive upfront organization; assertive/energetic; candid/challenging; relatively composed | Positive; moderately energetic; relatively high modeled control |
-| Leena | Receptive/reflective; committed to follow-through and interpersonal clarity; sociable without constant discussion; warmly cooperative with principled disagreement; moderately sensitive to unresolved tension | Warm/positive; moderate activation and control |
+| Mira | Curious about useful alternatives; attentive to promises; moderately outgoing and comfortable alone; considerate disagreement; composed but alert to uncertainty. | Positive, steadily engaged, moderate modeled control. Makes a small useful version and checks what could make it misleading. |
+| Arun | Enjoys alternatives; dependable without exhaustive upfront organization; energetically assertive; candid; relatively composed. | Positive, moderately energetic, relatively high modeled control. Compares meaningful alternatives, then finishes when the choice is clear. |
+| Leena | Receptive and reflective; careful follow-through and interpersonal clarity; sociable without constant discussion; warmly cooperative but principled; sensitive to unresolved tension. | Warm, moderately active, moderate modeled control. Connects evidence and agreement without treating friendliness as proof. |
 
-The initial LLM proposes each owner's current-self and approach fragments. Mira favors small useful versions, Arun compares alternatives, and Leena makes agreements and changed concerns recognizable. Their [complete beginnings](WORKED-EXAMPLES.md#beginnings-and-three-independent-approaches) preserve finishing conditions and disagreement.
-
-**F:** create each owner's `persona/current-self.md` and approach file, with literal cues such as “promise,” “alternatives” and “concerns.” **A:** unchanged; no lived work history exists. **Next:** only that owner's accepted starting revisions. Acceptance and storage receipts precede actual supply to the first ordinary call. Current VAD initially matches its baseline. These generated beginnings establish neither biographies, permanent professional roles, competence nor authority.
+These are general-purpose characters. Their traits assign no professions, domains, leadership roles or universally correct workflow. Modeled affect establishes no felt emotion or expertise.
 
 ## H House work and selective skyscraper transfer
 
 ### H1 An unanswered request still permits progress
 
-“Design 4 bedroom house” permits conditional concept work. Each independent branch receives its starting context and a small discovery interface. Mira asks about result level and sketches an arrangement; Arun asks about site, floors and size and compares two arrangements; Leena asks about daily use and lists assumptions/questions.
-
-No answer arrives. F remains unchanged: no durable lesson yet. A proposes each `house/intake.md`; Next requests its stored draft, open questions and scope. Storage and delivery receipts establish progress. Site facts remain unknown, construction readiness unclaimed, and missing consequential permissions block affected actions.
+For “design 4 bedroom house,” Mira asks about the result level, Arun about site/floor count/size, and Leena about room use and the first useful result. Each gives joint F/A no-change and explicitly retains the unresolved brief in Next. They can state a reasonable assumption and make conditional progress without waiting forever for an answer. Peer input is advice, not the missing user's reply.
 
 ### H2 A shared brief and an actual correction
 
-A later grant adopts two annotated alternatives for a synthetic flat rectangular site: two stories, four actual bedrooms including one downstairs, shared living and garden connection. It permits brief/artifact exchange. Arun voluntarily accepts alternatives, Mira checking and Leena trade-off explanation.
+The hypothetical requester supplies a flat rectangular site, two stories, four actual bedrooms including one downstairs, shared living and a garden connection. Arun volunteers to propose alternatives, Mira to check the brief and Leena to explain trade-offs. They negotiate those commitments; a message or invitation alone does not establish acceptance.
 
-**Peer input.** With the requester unavailable, Leena sends her garden question to the permitted shared-work audience. Delivery to Mira and Arun precedes Mira's fresh decision and conditional shared-living suggestion to both peers. Arun receives and adopts that suggestion as a reversible scenario, retains another circulation arrangement and sends his disposition to both; Leena subsequently receives it. A records attributed exchanges in `house/agreements.md`; Next uses the exact brief, actual messages and alternatives, never private peer fragments. Storage and delivery precede recipient decisions. Peer input supplies no user consent.
+Arun discovers a useful concept tool and option-comparison guide. He chooses search/page sizes and can continue searching; there is no four-preview allowance or cumulative navigation quota. Actual definitions are supplied before use. A stores A1/B1; F stays unchanged; Next selects the saved sources and real results.
 
-**Discovery and repair.** Arun searches “concept layout” and “option comparison,” limited to four previews/400 words. Next first requests candidates, then exact tool revision 2 and skill revision 1; complete definitions are supplied before he requests A1/B1. Mira's B1 check finds a study counted as bedroom four. Arun proposes B2 and yields for its check. His responsibility, remaining allowance and next ordinary-work opportunity survive restart; the resumed call receives the actual result without replaying the action or resetting resources.
+Mira finds that B1 counts a study as bedroom four. Her finding reaches Arun, who proposes B2 and observes its result. Leena receives the corrected comparison before asking for the client's choice. The client selects A. A restart preserves accepted unfinished duties and chosen continuation; it does not replay an already accepted action.
 
-After the correction check and client choice of A, F proposes each owner's method revision 1:
+After the correction and choice, F may propose these owner-specific revision-1 methods:
 
-- Mira: `proportional-checks.md` — “checks proportional to the promise.”
-- Arun: `fair-alternatives.md` — “small shared requirement check before elaborating.”
-- Leena: `agreement-after-clarity.md` — “Agreement cannot repair a missing need.”
+- Mira, `proportional-checks.md`: check the part of a promise a plausible-looking result could miss.
+- Arun, `fair-alternatives.md`: compare alternatives against the same small requirement check.
+- Leena, `agreement-after-clarity.md`: agreement cannot repair a missing need.
 
-A retains factual reviews and client choice; Next follows storage/closeout receipts, then clears optional house context. The [detailed story](WORKED-EXAMPLES.md#a-separately-adopted-collaborative-house-concept) preserves full qualifications.
+A retains factual reviews and the client's choice separately. Next requests actual acceptance/storage results, then clears completed optional context. A concept does not establish a coordinated building package or construction readiness. The [house story](WORKED-EXAMPLES.md#a-coordinated-four-bedroom-house) describes that larger promise separately.
 
 ### H3 A new client and a faulty retained helper
 
-The skyscraper grant permits private comparison/checking and specified retained characteristic meanings. Populated house records and drawings are excluded. The promise is **10,000 m² usable**:
+The new client's requirement is **10,000 m² usable area**:
 
 | Option | Gross area | Usable area | Result |
 |---|---:|---:|---|
 | A | 14,000 m² | 10,500 m² | 500 m² headroom |
 | B | 12,000 m² | 9,000 m² | 1,000 m² short |
 
-Mira directly requests eligible `persona/methods/proportional-checks.md` revision 1. Leena directly requests L-circuit-2, `persona/methods/evidence-before-agreement.md` revision 1. Arun instead searches eligible cues for literal “fair alternatives,” receives a bounded candidate result, then selects `persona/methods/fair-alternatives.md` revision 1. Both maintenance scopes remain unchanged; complete qualified supply precedes work. Known-reference use and autonomous search are different conditions.
+Mira requests her known exact proportional-checking method. Arun searches “fair alternatives,” then selects the actual revision. Leena selects her later evidence-before-agreement method. Whole house drawings and every ancestor fragment are unnecessary. F/A can remain unchanged during retrieval; actual supply precedes reliance.
 
-Mira checks the usable-area promise. Arun's optional H1, whose provenance is separate from the house, wrongly maps gross to usable and passes both options. An independent mapping check exposes the error; he withdraws H1's result and proposes H2. Leena independently states the supported conclusion and its limits without redundant assent.
+Mira checks usable area. Arun's retained helper H1 wrongly maps gross to usable and passes both options. An observed mapping check exposes the error; he withdraws H1's result, proposes H2 and receives a fresh result before delivery. Leena states the program-area conclusion while separating structural, wind, fire, egress and services questions that remain unassessed.
 
-A records exact candidates, corrections and findings; Next follows storage and fresh checks. Only calls receiving those checks request delivery and closeout, then clear optional context. Structural, wind, fire, egress and services adequacy remain unassessed.
+A records exact sources, helper revisions and findings. Next follows the actual corrected results. A tool bug does not by itself prove character regression, and reuse does not prove maturation.
 
 ### H4 Sufficient now and a continuing obligation
 
-A separate tower grant permits joint comparison. All three accept participation and Mira's final-disposition role. Arun also accepts a bounded standing presentation-improvement duty, including a later proposal and check; Mira accepts its adoption/delivery decision. These commitments, their next authorized opportunity, the protected incumbent and remaining standing allowance survive initial delivery.
+A shared comparison can be sufficient while Arun still prefers usable-area-first ordering. If the group agrees to revisit presentation, that accepted contribution persists after the initial delivery. The task's delivered flag does not forbid later work, and no renewed application budget or approval is required.
 
-Mira proposes T2, `tower/shared-comparison.md` revision 1. After storage/checking, all receive exact T2 and its checks. Mira judges the usable-area promise answered and untested claims separated; Leena confirms the limitation; Arun prefers usable-area-first ordering but accepts adequacy. Their attributed judgments enter A.
-
-Mira receives those judgments and requests delivery while retaining the improvement obligation in A and Next. The receipt closes the first deliverable, not the standing duty or stakeholder approval.
-
-At the next authorized opportunity, Arun proposes T3, revision 2 against exact T2. After storage and a fresh content/label check, he sends T3 and its actual result to Mira. Delivered evidence precedes her fresh adoption and delivery request. T2 keeps its historical status. Successful delivery closes this improvement contribution; other accepted standing duties retain separate dispositions. F stays unchanged, Next clears only completed optional work, and all communication/decisions consume the same allowance. Figures and limitations survive; improved user usefulness remains unobserved. Spare time alone would not authorize continuation.
+Arun proposes a new candidate against the delivered source, receives its content/label result and sends the candidate and actual evidence to the others. The person or arrangement responsible for adoption decides from received evidence. The earlier version keeps its historical status. Different personas may stop at different times; a local stop does not discharge another accepted duty. F may remain unchanged, A preserves the history and Next clears only completed optional work.
 
 ## C Circuit work and selective printer transfer
 
-### C1 A bounded answer to a sparse circuit request
+### C1 A useful answer to a sparse circuit request
 
-“Design dc to ac circuit for 5w” leaves essential choices open. Expired house selections and entire catalogues are absent. Mira asks about result level, Arun voltage/waveform and Leena input/output/load. Both maintenance scopes remain unchanged; Next preserves the unresolved brief. Without answers, provisional requirements/options assets are possible; physical adequacy remains undecided.
+“Design dc to ac circuit for 5w” leaves essential choices open. The personas ask about result level, voltage, waveform, load and frequency, and can outline conditional possibilities while awaiting clarification. Joint F/A no-change is valid; Next retains the unresolved request.
 
-Clarification specifies ideal regulated **5.0 V DC**, a symmetric **±5.0 V square wave at 50 Hz**, equal half-cycles, zero DC offset, pure **5.0 Ω** load and lossless switches/wiring. Permission covers a bridge concept, calculation, open checks and bounded arithmetic checking; hardware work is excluded. Each selects its exact eligible house method and receives complete qualified supply.
+The requester then stipulates an ideal **5.0 V DC** source, lossless symmetric **+5.0/−5.0 V, 50 Hz** square wave and **5.0 Ω** load. Mean voltage is **0 V**, RMS voltage **5.0 V**, RMS current **1.0 A** and average load power **5.0 W**. Ideal average source current is separately **1.0 A**. Exact conceptual sources, calculations and open-questions notes go through storage and chosen checks before supported delivery. They do not establish real hardware behavior.
 
-Mira checks power first; Arun rejects unnecessary conversion after bounded comparison; Leena labels the arithmetic ideal. All derive **5 V RMS, 1 A RMS, 5 W** average load power and **1 A** ideal average source current. A proposes `circuit/concept.svg`, `calculation.md` and `open-checks.md` revision 1. Storage precedes a fresh check request; the checker confirms arithmetic/labels only. A subsequent call requests limited delivery and clears optional context; its receipt establishes delivery.
+A later sine-wave request has a different ambiguity: **5 V peak** gives **2.5 W**, while **5 V RMS** gives **5 W** and requires **5√2 V peak**. The earlier square-wave judgment does not complete this changed request. Each can explain the distinction and ask which meaning is intended.
 
-“Make it sine wave” needs a convention:
-
-- **5 V peak → 5/√2 V RMS → 2.5 W**.
-- **5 V RMS → 5 W** requires **5√2 V peak**, unavailable directly from the original ideal bridge.
-
-Each asks which applies and proposes calculation revision 2 containing both cases; the square-wave diagram stays revision 1. Next retains the stored revision and unresolved question. Drive/dead time, ratings, losses, thermal behavior, protection and nonideal loads remain unresolved.
+For an optional waveform study, Mira chooses ready analytic checking, Leena an assumption-labeled interval table and Arun a transient simulator. Arun can install it and its dependencies through full host access without an application approval gate. Actual installation, operation, diagnostics and result receipts determine what is established. Failure can motivate another tool or an honest gap. A plot exporter cannot supply missing electrical evidence. See [tool choices and installation](WORKED-EXAMPLES.md#competing-tools-for-a-waveform-study).
 
 ### C2 Feedback produces three scoped interpretations
 
-A reader mistakes checked arithmetic for hardware qualification. The sponsor permits correction and later design-only reuse of qualified methods and an empty evidence template. Populated circuit records/drawings remain excluded from the printer client.
+A reader mistakes a checked calculation for hardware qualification. Fresh feedback asks for a clearer distinction. Each persona corrects the explanation and may propose a different new revision-1 fragment derived from its house method:
 
-A proposes each owner's new `circuit/corrected-summary.md` revision 1, correcting the delivered explanation without implying an earlier stored summary. It also proposes T1, owner-scoped `supporting/templates/evidence-record.md` revision 1, covering promise, quantity/units, convention/condition, source/assumption, check, limits and unresolved decision.
+- M-circuit-2, Mira's `definition-before-polish.md`: check a definition that could change the promise.
+- A-circuit-2, Arun's `comparable-promises.md`: compare against the same explicit promise, then finish when the decision is supported.
+- L-circuit-2, Leena's `evidence-before-agreement.md`: distinguish supported evidence from open questions without requiring unanimity.
 
-F proposes three methods: Mira's `definition-before-polish.md` checks promise-changing definitions; Arun's `comparable-promises.md` compares the same explicit promise; Leena's `evidence-before-agreement.md` clarifies evidence before agreement. Each is a new revision-1 file derived from house-method revision 1. [M/A/L-circuit-2](WORKED-EXAMPLES.md#new-received-feedback-rather-than-an-invented-earlier-lesson) are trace labels, not storage revisions.
-
-Next requests storage receipts. A fresh call delivers the corrected summary with both maintenance scopes unchanged, then clears optional context. Neither hardware expertise nor personality replacement is invented.
+The “-2” names are trace labels, not storage revisions. A maintains the corrected summary and optional template T1, which names promise, quantity, condition, source, check and limits. T1 is a supporting asset. F holds the characteristic meaning. Next requests accepted revisions and actual delivery results. No hardware expertise, earlier experience or broad trait change is invented.
 
 ### C3 Fresh printer facts and different useful choices
 
-The preliminary printer brief specifies single-extruder PLA and **200 × 200 × 200 mm** build volume. Private concept storage/delivery and synthetic arithmetic/label checks are permitted. Peer contact, purchasing, wiring, firmware changes and physical operation are excluded.
-
-All receive the same fixture:
+The new request is a preliminary single-extruder PLA printer concept with **200 × 200 × 200 mm** build volume:
 
 | Item | Supplied facts |
 |---|---|
-| Power | **24 V** bus; bed/hotend/motors-drivers/electronics-fans **120/40/60/20 W**; assumed conversion losses included in the last two. P240/P360: **240/360 W**. Required screen: **1.25×** demand. |
-| Bed waveform | Constant resistance, rated **120 W at 24 V**; separate **50%-duty 0/+24 V** waveform, frequency unspecified, mislabeled “12 V RMS, 30 W.” |
-| Space | Moving-bed C: **430 × 560 mm**; fixed-bed/XY G: **460 × 460 mm**, both including stated service/cable allowance, against **500 × 500 mm**. Both nominally meet build volume. |
-| Temperature | **210/60 °C** nozzle/bed values are desired setpoints. |
+| Power | **24 V** bus; bed/hotend/motors-drivers/electronics-fans **120/40/60/20 W**, including the stated conversion-loss assumptions. P240/P360 supply **240/360 W**. The client's screen is **1.25×** demand. |
+| Bed waveform | Constant resistance rated **120 W at 24 V**; separate **50%-duty 0/+24 V**, frequency unspecified, incorrectly labeled “12 V RMS, 30 W.” |
+| Space | Moving-bed C **430 × 560 mm**; fixed-bed/XY G **460 × 460 mm**, including stated service/cable space, against **500 × 500 mm**. |
+| Temperature | **210/60 °C** nozzle/bed values are desired setpoints, not qualified limits. |
 
-Each searches method bodies for “check the definition,” “same explicit promise” or “evidence supports,” plus a scoped T1 lookup, within four previews/400 words. Next first requests candidates, then exact qualified method/T1 revisions. Exposure receipts establish supply; the bridge and restricted records stay excluded.
+Each can retrieve its method by exact reference or characteristic wording and optionally select T1. No application page, call or text allowance forces the choice. F/A may remain unchanged during retrieval; full qualified supply matters. The old inverter and populated house/circuit projects are not necessary printer context.
 
-Mira first records **4.8 Ω** resistance, **12 V** PWM mean, approximately **16.97 V RMS**, **60 W** average power and **5 A** on-state current. She receives a narrow check before authoring the complete concept. Arun instead produces one complete comparison: demand **240 W/10 A**; required capacity **300 W/12.5 A**. P240 fails; **P360/15 A** passes. C exceeds depth by **60 mm**; G leaves **40 mm total dimensional difference** each way. He provisionally chooses P360/G and stops expanding. Leena independently reaches that recommendation, separating evidence, assumptions and unresolved matters without peer contact.
+Mira checks the misleading waveform label early: **4.8 Ω**, **12 V mean**, approximately **16.97 V RMS**, **60 W average power** and **5 A on-state current**. Her partial check cannot certify her later complete concept.
 
-Each branch stores its records, requests a complete arithmetic/label check, receives results in a fresh call and delivers with limitations. A records closeout; F remains unchanged; Next clears completed optional selections. No inherited inverter is needed. Physical ratings, thermal/fault safety, sensors, harnesses, mechanics, ventilation and hot/moving-part access remain unverified; PLA is not emission-free.
+Arun compares the complete promise: demand **240 W/10 A**, required capacity **300 W/12.5 A**. P240 fails the client's screen; **P360/15 A** passes. C exceeds depth by **60 mm**; G leaves **40 mm total dimensional difference** on each axis. Leena reaches the same provisional P360/G conclusion while making each claim's support and remaining uncertainty explicit. Correct arithmetic need not differ by character.
 
-### C4 A rejected improvement and separate collective authority
+Each saves its sources, receives results from the checks it chooses and delivers the exact concept with limitations. A retains the evidence; F can stay unchanged; Next clears completed optional context. Physical ratings, thermal response, sensors, wiring, mechanics, firmware and operation remain unverified. That is missing evidence, not a software safety gate.
 
-A new explicit grant permits sharing this synthetic concept. All accept bounded participation and Mira's sufficiency decision; Leena accepts qualification review. P1 means Mira's checked, delivered C3 concept revision 1 at illustrative `printer/concept.md`, not a newly stored replacement. All receive exact P1 and its qualifications.
+### C4 A rejected improvement and a collective decision
 
-Arun stores F1, `printer/format-candidate.md` revision 1, accidentally omitting the PWM qualification, then sends both exact references to Mira and Leena. After a yield, Mira receives both versions, delivery receipts and preserved obligation/allowance. She independently rejects F1 and sends the rejection to both peers before their later findings.
+The personas can voluntarily share the delivered concept and agree how to handle a proposed refinement. P1 identifies the earlier checked concept. Arun's F1 presentation candidate omits the PWM qualification. Mira receives both exact versions and independently rejects F1 before Leena's later confirming finding. P1 remains current; the rejected candidate and Arun's preference stay attributed.
 
-Leena reports the omission; Arun retains his preference for reordering. Mira receives their attributed findings and requests a current P1 check. After receiving its result, she sends exact P1/check evidence to Leena. Leena receives it, closes her required concern and sends that closure. Mira receives the closure before final disposition and delivery request; the subsequent receipt establishes delivery. Peer confirmation closes the concern but did not cause the first rejection.
+A later current P1 check and Leena's actual concern disposition may support the group's final decision. The participants use the arrangement they adopted; Mira is not a default leader. A retains candidates, findings and commitments; Next follows actual current evidence. More time can justify another useful proposal or a decision to stop, without a new application resource grant. Peer confirmation does not retroactively cause Mira's earlier rejection or establish client endorsement.
 
-F remains unchanged; A records candidates, findings and commitments; Next follows exact current evidence. Storage, checks and delivery retain separate receipts. Arun's dissent remains attributed; unanimity and client endorsement are not invented. Later spare time triggers nothing. A later accepted improvement grant may permit reordering, fresh checks and delivery without invalidating earlier sufficiency.
+## M Maintenance, social interaction and more time
 
-Mira's role belongs to these agreements. It is no default leadership assignment or demonstration of shared/leaderless decision performance. The [design permits other adopted arrangements](../design/WORK-AND-BOUNDARIES.md#individual-and-shared-sufficiency-judgments).
+**M1 Reorganize and retrieve.** A renamed cue misses Mira's method. She searches “reopen,” selects the relevant exact revision and its source-order qualification, and later consolidates repeated characteristic prose. A preserves factual lineage separately. Explicit retirement/deletion is a maintenance choice, not quota eviction. A later actual input and observed file result are needed to establish how the revised method was used.
 
-## M Maintenance and social reuse beyond the technical tasks
+**M2 Listen, then respond to a changed need.** Alex first wants to vent, then requests no questions or repeated recaps. Mira, Arun and Leena can refine different scoped listening tendencies while preserving their broader character. Later Alex asks for a draft with a noon deadline and says not to send it. Mira and Leena finish independently; Arun chooses a draft-only Nox review and receives the actual finding. The changed request requires drafting rather than continued listening. No fixed peer workflow or contact quota dictates these choices.
 
-These branches condense existing [reorganization](WORKED-EXAMPLES.md#the-persona-refines-a-smaller-more-useful-way-to-find-context) and [social scenes](WORKED-EXAMPLES.md#everyday-interaction-listening-and-a-changed-need); they add no experience to the house/circuit histories.
+**M3 More time on the house.** The original comparison is sufficient, but the group chooses to clarify the handoff for A. Leena finds unclear bedroom references; Arun withdraws an irrelevant redesign; Mira authors a clearer note. Received findings and an accepted duty transfer precede final delivery. They stop at different times as their contributions finish. See the [house continuation](WORKED-EXAMPLES.md#more-time-on-the-four-bedroom-house-useful-continuation-then-a-reason-to-stop).
 
-**M1 Reorganize and later retrieve.** A filename cue misses Mira's renamed method. She uses a bounded “reopen” title search, then selects the exact method and separately bound source-order qualification. Discovery leaves both maintenance scopes unchanged; Next moves from candidates to qualified supply.
+**M4 Five personas on the circuit.** Rowan and Sera join with their own attributed seeds and initialized fragments, not invented experience. Rowan asks about zero mean voltage versus nonzero power; Mira explains it; Sera proposes accessible presentation; Arun's overcompressed candidate is rejected; Leena assembles and delivers from actual received evidence. Rowan may develop a method of pairing apparently inconsistent quantities with a small example. No call or elapsed-time ceiling forces continuation or stopping. See the [five-persona continuation](WORKED-EXAMPLES.md#five-personas-more-time-a-dc-to-ac-continuation).
 
-Authorized maintenance consolidates four repetitive fragments into `persona/methods/reopen-saved-file.md` revision 4, preserving qualification revision 1: work on a copy when source order matters. A maintains lineage/evidence references; Next requests acceptance receipts. Mira updates her cue to connect editable-delivery trouble with saved-file symptoms and reopen notes. Under stipulated retention/recovery permissions, redundant bodies and temporary copies are reclaimed only after their duties end. Protected evidence and qualifications remain. Storage/reclamation receipts precede the smaller whole-store inventory, including archives and caches.
-
-After unrelated work, another “reopen” search distinguishes current, retired and different-tool candidates. Mira selects and receives complete method 4 with qualification 1, checks a working copy early, and later receives an independent check confirming editability and source order. F stays unchanged; A retains the result; Next clears completed selections. This is no measured lifetime storage or cost result.
-
-**M2 A social correction and changed need.** Alex permits scoped private conversation retention/interpretations and asks to vent without fixes. Mira acknowledges concretely, Arun names the disruption and Leena asks one tentative question. Both maintenance scopes stay unchanged; Next retains the exchange.
-
-Alex then requests no questions or repeated recaps. Each briefly acknowledges and proposes `persona/methods/social.md` revision 1: Mira makes room as useful help, Arun restrains unrequested comparisons, Leena leaves space instead of seeking repeated confirmation. A records the attributed preference; Next retains only this conversation. Storage and delivery have separate receipts.
-
-After unrelated work, literal body searches “making room,” “venting” and “leave space” find the eligible methods. Discovery/selection leave both scopes unchanged; actual supply precedes brief listening replies, unchanged maintenance and context retained only for this private exchange. Alex's favorable feedback reports scoped fit, not causal benefit.
-
-Alex later requests a draft asking the group to report cancellation by noon, explicitly not to be sent. Mira and Leena finish independently. Arun uses Alex's separate optional, draft-only Nox review grant; actual acceptance and finding precede delivery to Alex. F stays unchanged; A records drafts/review/closeout; Next follows results, then clears. Private conversation never reaches Nox or friends. Stable traits and VAD baselines do not drift automatically.
+**M5 Unassigned and persona-originated activity.** Leena can invite a voluntary conversation, Mira can decline and Arun can finish a sufficient exchange. Later Mira explores a card and develops a scoped reader-decision method. Leena can then originate a new need for an editable comparison card, which Mira accepts and fulfills from fresh facts. The host supplies opportunities and observations without choosing topics, partners or a mandatory lesson. See [social life and persona-originated work](WORKED-EXAMPLES.md#unassigned-social-life-and-later-persona-originated-work).
 
 ## What helps and what remains unproved
 
-House methods plausibly improve checking and agreement boundaries; house drawings supply no necessary tower-area fact. Circuit definitions/template plausibly expose the printer PWM error earlier. A fresh persona might already answer correctly, or a later checker might equalize delivered accuracy: both are null possibilities.
+The house methods plausibly improve checking and agreement boundaries. Circuit definitions and communication feedback can help expose the printer's PWM error and avoid overclaiming. Drawings from the old project need not help; a guide's unequal-sample rule can be retrieved yet unused. Gross-as-usable mapping and an overextended bipolar-waveform analogy can instead harm the result. Useful material can also be missed.
 
-Gross/usable confusion falsely passes the tower; importing bipolar constant-magnitude reasoning wrongly gives the printer bed **120 W**. Each task's faulty H1 stays wrong after storage; counterevidence, corrected H2 and a fresh check are needed. “Tower approvals” or “printer approvals” queries can miss useful methods. Exact-resource assistance diagnoses a missed benefit, not autonomous retrieval success.
+Later behavior, not saved prose alone, is the relevant evidence for character development. A fresh persona might perform equally well. Objective checks inform quality but do not replace substantive persona judgment. Actual tokens, latency, storage and monetary costs remain observations, not application ceilings or proof of benefit.
 
-Matched frozen-start/retained-revision comparisons must hold facts, eligible assets, permissions and allowance equal; they remain unrun. Printer counts from post-supply through delivery are **five persona responses/two checker executions for Mira**, versus **three/one for Arun or Leena**. Discovery, all peers, maintenance, failures, storage and retention add costs. These counts establish no savings; see the unchanged [arbitrary-unit lifetime example](WORKED-EXAMPLES.md#cost-and-remaining-gaps).
-
-Robust retrieval, character-conditioned usefulness, durable continuation, whole-persona improvement and quality-adjusted economics require the [specified evaluations](../evaluation/README.md). A coherent specification, illustration and useful implementation are different results. Every fragment's unique characteristic meaning, better later performance and whole-persona maturation remain strong goals; bounded bookkeeping cannot substitute for them.
+These examples introduce no automated test cases, synthetic execution campaign or mandatory evaluation gate. The historical fixed-call and arbitrary-unit accounts remain in the [earlier walkthrough](https://github.com/ai-personas/ai-personas-design/blob/db66411f2a80ac6b07720d37fe54bb53d7982a37/examples/REQUIREMENTS-WALKTHROUGH.md). Current implementation and all human requirements still need evidence at their actual scope; hypothetical coherence does not establish product completion.

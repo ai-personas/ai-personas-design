@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — bring worked examples into the unrestricted design
+
+Rewrote the detailed examples and requirements walkthrough around UR-050 and UR-052. Removed application call, search, context and storage allowances, protected finishing budgets, safety and permission gates, and the restricted repair path. Search sizes and work approaches belong to persona choices; actual provider, host and tool failures retain their observed meaning. Preserved the three continuing characters, house and circuit work, later skyscraper and printer transfer, tool installation, social development, more-time house work and five-persona circuit continuation. Personal stopping, ongoing duties and completion of the full need remain separate.
+
+The earlier fixed-call and arbitrary-unit illustrations remain linked at their historical revision. Updated references distinguish those accounts from the current examples. These are design illustrations, not new test cases, executed results or evidence that the runtime meets every requirement.
+
 ## 23 October 2026 — retain the scope of earlier work judgments
 
 Clarified that a previous persona work judgment keeps its invocation, admitted work version and mandate when supplied to a fresh decision. Current task amendments and later feedback do not inherit completion from that judgment. Missing attribution stays unknown. This records a provenance requirement, not a prescribed reasoning workflow or a guarantee that a model will judge completion correctly.
