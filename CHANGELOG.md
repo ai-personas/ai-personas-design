@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — complete transport and private response evidence
+
+Specified transport chunks without a caller-supplied size bound or rejection,
+while retaining cancellation, complete stream validation and exact accounting.
+Separated private onboarding response retention from successful proof: content
+checks and invalid proof must not erase an observed completed response. Earlier
+failures and unavailable bodies retain their original meaning. These rules do
+not establish optional-path execution, full conformance or characteristic growth.
+
 ## 23 October 2026 — affect context follows actual supplied bodies
 
 Clarified that required accompaniment for a new affect update follows the exact

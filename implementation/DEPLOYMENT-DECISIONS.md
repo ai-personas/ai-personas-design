@@ -47,6 +47,21 @@ attributable. Consuming a request identity once prevents duplicate dispatch;
 it does not limit the number of distinct requests the user may choose. Earlier
 records retain their original meaning without automatic migration or replay.
 
+Transport consumers accept each available chunk through clean EOF without a
+caller-supplied byte maximum or a chunk-size rejection. Buffering does not impose
+a response quota. Preserve cancellation, complete stream validation and exact
+observed counts; an unrepresentable count is an accounting failure, not a
+configured resource allowance.
+
+An installed catalogue retains its complete returned body in the private
+onboarding journal. Completed probe carriers remain private evidence even when
+they do not establish proof. A content filter or failed proof check must not
+erase an observed completed response. Keep retention separate from validation:
+malformed, mismatched or incomplete evidence does not become successful proof.
+Credential configuration and ordinary status output need not expose response
+bodies. Earlier withheld bodies remain unavailable as recorded; do not invent
+their contents or silently replace their historical outcome.
+
 Working functionality must follow the [user requirements](../USER-REQUIREMENTS.md), with later user clarifications taking precedence. Implementation work uses builds and inspection of actual persona runs, including their supplied context, tool and skill choices, installations, execution results and resulting work. The user has requested no automated test cases. Design walkthroughs and requirement criteria describe intended behavior; they are not evidence that runtime functionality works.
 
 ## Core deployment choices
