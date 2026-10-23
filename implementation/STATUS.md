@@ -5,9 +5,9 @@
 
 [Implementation guide](README.md) · [Requirements](REQUIREMENTS.md) · [Evaluation method](../evaluation/README.md) · [Historical results](../evaluation/HISTORICAL-RESULTS.md)
 
-The 10 October next-context correction supersedes the earlier allowance for silent omission. Every accepted persona response must explicitly state its next-context decision for both fragments and supporting resources. Actual input/output coverage, suppression of invalid responses, and the usefulness of those choices remain unverified. Historical tests have not been rerun against this changed criterion.
+The 10 October next-context correction supersedes the earlier allowance for silent omission. Every accepted persona response must explicitly state its next-context decision for both fragments and supporting resources. This design-status page does not establish complete input/output coverage, rejection of invalid responses or the usefulness of those choices. Historical tests have not been rerun against this changed criterion.
 
-![Specification, implementation, mechanical testing, behavioral benefit and deployment approval each require their own evidence. The presence of one does not automatically establish the next.](../assets/evidence-ladder.svg)
+![Specification, implementation, observed mechanisms, behavioral benefit and actual deployment each require their own evidence. The presence of one does not automatically establish the next.](../assets/evidence-ladder.svg)
 
 **Figure: Five claims need different evidence.** This is a conceptual explanation of the design. [Read the exact rules](../evaluation/README.md#separate-four-kinds-of-evidence); the explanation below retains their qualifications. [Open the illustration](../assets/evidence-ladder.svg).
 
@@ -36,17 +36,17 @@ The design says what should happen. A document or diagram is evidence of the spe
 
 An exact implementation contains relevant mechanisms. Source inspection does not show every path works.
 
-3 · Mechanically tested
+3 · Mechanism observed
 
-Observed checks support bounded technical claims. A passing check is tied to its inputs and criteria.
+Actual operations support specific technical claims. Keep their exact inputs, results and remaining uncertainty.
 
 4 · Behaviorally demonstrated
 
 Observed persona behavior supports a useful effect. Supply alone does not prove influence or benefit.
 
-5 · Approved for a deployment
+5 · Deployment observed
 
-The intended use meets its actual acceptance and governance. Technical success alone does not grant permission.
+Record the actual environment, configuration and observed outcomes. These records do not impose an approval gate.
 
 These are distinct claims, not automatic promotions. Hypothetical examples and outside research do not establish current runtime behavior.
 
@@ -62,42 +62,44 @@ Current runtime commands and implementation contracts are documented in the [run
 
 The target treats fragments as persona-defining prompt parts that carry character. Selected fragments provide context for LLM reasoning. That context, the reasoning, actual interactions and actions, and the evolving authored prompts together constitute the persona. Facts or experience may inform a fragment, but fragments are not defined as episodic memory or retrieval-augmented generation (RAG). This conceptual correction does not turn the source observations or historical tests below into evidence for the new account.
 
-The 8 October 2026 design specifies these connected parts:
+The current design retains these connected parts:
 
 - **One accepted character account.** The account is versioned and describes semantic OCEAN traits—openness, conscientiousness, extraversion, agreeableness and neuroticism—and VAD modeled affect—valence, arousal and dominance. These are semantic requirements, not a mandate for numeric scores.
 - **Character-bearing fragments in ordinary files.** The persona authors fragments in its own voice, informed by its accepted character.
-- **Primary-owned navigation and selection.** The primary persona LLM chooses bounded lexical searches, which match words, or regular-expression searches, which match text patterns. It also chooses the exact next context.
+- **Primary-owned navigation and selection.** The primary persona LLM chooses selective lexical searches, which match words, or regular-expression searches, which match text patterns. It also chooses the exact next context.
 - **Maintenance on every application-visible persona LLM invocation.** Each invocation combines work with explicit decisions about maintaining characteristic fragments and supporting resources, alongside next-context decisions for both scopes.
-- **Reciprocal development.** Character informs fragments and all discretionary task and social choices. Actual experience can then support changes to fragments, relationships and, where permitted, character. This loop does not guarantee improvement.
+- **Reciprocal development.** Character informs fragments and all discretionary task and social choices. Actual experience can then support changes to fragments, relationships and coherently adopted character. This loop does not guarantee improvement.
 
 Compactness applies both to navigation and to the full declared footprint of managed persona state. A small final prompt alone does not establish that the design is compact.
 
-The normal beginning is now explicit: an attributed trait seed informs a bounded initial LLM invocation; that invocation authors candidate fragments; a coherent starting revision is accepted before continuing primary-LLM authorship and self-harmonization. Alternative origins must retain truthful attribution. Generated starting detail is not user testimony or prior experience.
+The normal beginning is now explicit: an attributed trait seed informs an initial LLM invocation; that invocation authors candidate fragments; a coherent starting revision is accepted before continuing primary-LLM authorship and self-harmonization. Alternative origins must retain truthful attribution. Generated starting detail is not user testimony or prior experience.
 
-The same primary LLM selects supporting context from separately retained domain knowledge, generic procedures, histories, tool-use records, tool definitions, skills, scripts, code and data. These remain supporting assets regardless of who authored them. Discovery starts with a small bootstrap and follows bounded literal/regex searches or exact references. The full catalogue must not be preloaded into either the provider-facing request or the model-visible context. Finding a resource, exposing it, establishing current executable availability, having authority, invoking it and receiving results are distinct facts. These are specified obligations and evidence needs, not new findings about the inspected runtime.
+The same primary LLM selects supporting context from separately retained domain knowledge, generic procedures, histories, tool-use records, tool definitions, skills, scripts, code and data. These remain supporting assets regardless of who authored them. Discovery starts with a small bootstrap and follows persona-chosen literal/regex searches or exact references. The full catalogue must not be preloaded into either the provider-facing request or the model-visible context. Finding a resource, exposing it, establishing current executable availability, binding an actual decision, invoking it and receiving results are distinct facts. These are specified obligations and evidence needs, not new findings about the inspected runtime.
 
 Every accepted response must cover work, both maintenance scopes and both next-context scopes. One concise, reasoned no-change decision may cover both maintenance scopes. Explicit preservation of context or a statement that no optional context is needed can also be valid. Maintenance and next-context choice remain separate judgments; silent omission does not satisfy either requirement.
 
 The 9 October 2026 [evaluation refinement](../evaluation/README.md) sharpens assessment isolation, chosen evidence gathering, partner and convention changes, held-out resource wording, derived-asset poisoning and attribution of durable reuse. All added comparisons remain unrun design proposals. Neither the source research nor this revision supplies new runtime, behavioral, security or efficiency results.
 
-The 10 October 2026 refinement requires accountable continuation of accepted unfinished work across local boundaries. It also requires useful progress when unanswered clarification does not block the work. Fair scheduling of ordinary work, durable resumption, appropriate assumptions and justified stopping remain unverified. Staying safely within bounds does not by itself demonstrate continued pursuit or useful completion.
+The 10 October 2026 refinement requires accountable continuation of accepted unfinished work across local boundaries. It also requires useful progress when unanswered clarification does not block the work. Fair scheduling of ordinary work, durable resumption, appropriate assumptions and justified stopping remain unverified. Accounting records and valid transitions alone do not demonstrate continued pursuit or useful completion.
 
-“Specified,” “implemented,” “mechanically tested,” “behaviorally demonstrated,” and “approved for a deployment” are different statuses. Unknown current conformance does not mean that existing runtime mechanisms are absent or defective. It means that claims under the revised contract need exact, applicable evidence.
+“Specified,” “implemented,” “mechanism observed,” “behaviorally demonstrated” and “deployment observed” are different claims. They do not impose an approval sequence. Unknown current conformance does not mean that existing runtime mechanisms are absent or defective. It means that claims under the revised contract need exact, applicable evidence.
 
-## Feasibility and intended restrictions
+<a id="feasibility-and-intended-restrictions"></a>
 
-The host machinery is implementable within a declared finite operating envelope: the conditions and limits an implementation supports. Exact versions, transactions, permission checks, bounded context assembly, durable intents, receipts and explicit failure states are concrete host responsibilities. This is a design-level feasibility judgment, not evidence of runtime conformance. Reliable character influence, useful evolution, complete discovery and a cost advantage remain empirical questions.
+## Feasibility and actual operation
 
-The design also imposes restrictions that affect deployment and usability:
+Exact versions, coherent transactions, faithful context assembly, durable intents, receipts and explicit failure states are concrete host responsibilities. Actual provider and host conditions must be reported without adding application quotas or safety gates. This is a design-level feasibility judgment, not evidence of complete runtime conformance. Reliable character influence, useful evolution, useful discovery and a cost advantage remain empirical questions.
 
-- **Validate before delivery or substantive dispatch.** [Complete-response validation](CONTRACTS.md#every-persona-invocation) precludes ordinary delivered token-streaming of persona-authored replies. It also precludes dispatching persona-proposed substantive tools before validation. Permitted unvalidated diagnostics and mechanical host status do not count as accepted persona communication or actions.
+The current design retains these distinctions in actual operation:
+
+- **Validate before delivery or substantive dispatch.** [Complete-response validation](CONTRACTS.md#every-persona-invocation) precludes ordinary delivered token-streaming of persona-authored replies. It also precludes dispatching persona-proposed substantive tools before validation. Explicitly unvalidated diagnostics and mechanical host status do not count as accepted persona communication or actions.
 - **State the limits of character enforcement.** [Character controls](CONTRACTS.md#persona-authorship-and-files) cannot mechanically guarantee detection of every effective-character substitution in free prose. Enforcement claims need a declared boundary and behavioral evidence. The design assumes no hidden semantic validator.
-- **Allow for discovery failure.** [Bounded lexical navigation](CONTRACTS.md#search-and-exact-reading) can miss important material because wording differs, cues are incomplete or the search allowance runs out. Correct access checks and accounting do not prevent these misses from blocking useful completion.
-- **Treat capacity as a real limit.** [Mandatory-context and storage bounds](../design/PERSONA-CORE.md#bounded-and-faithful-assembly) can block otherwise authorized work. Restricted selection repair cannot fix an oversized mandatory core, and protected unresolved state cannot simply be discarded. The [deployment envelope](DEPLOYMENT-DECISIONS.md#persona-context-bounds-and-supporting-evidence) must make supported admissions and repair viable without promising unlimited continuation.
-- **Preserve fresh decisions after character changes.** Repeated valid [character revisions](CONTRACTS.md#complete-response-persistence-and-dependent-work) can keep task actions behind the fresh-decision fence until the allowance runs out. Safe stopping preserves boundaries but does not establish useful completion. Deployment progress and stopping policy must address repeated revisions that make no task progress without weakening that fence.
+- **Allow for discovery failure.** [Lexical navigation](CONTRACTS.md#search-and-exact-reading) can miss material because wording differs or cues are incomplete. The persona can reformulate or continue without an application search allowance. Accurate accounting alone does not establish useful retrieval.
+- **Report actual capacity failures.** [Faithful assembly](../design/PERSONA-CORE.md#bounded-and-faithful-assembly) preserves selected material and required qualifications without a fitting quota. Provider rejection, exhausted physical storage or an unavailable facility is an actual failure, not an application allowance. Preserve accepted state and unresolved outcomes; ordinary persona repair can choose useful context or another approach.
+- **Preserve fresh decisions after character changes.** An accepted [effective-character revision](CONTRACTS.md#complete-response-persistence-and-dependent-work) requires later fresh operations to use that state. Repeated revision alone does not establish useful work or maturation. There is no application revision or continuation allowance; the persona judges useful progress and stopping while preserving the actual mandate and acceptance boundary.
 - **Count the whole cost of selective exposure.** [Selective exposure accounting](CONTRACTS.md#authority-resources-and-stopping) includes discovery, reads, reloading, maintenance and failed branches. A smaller action prompt can still cost more across the whole task or omit a necessary resource.
 
-The clarified remote-identity and atomic character-transition rules resolve wording ambiguities; they do not establish that runtime bugs were found. Their acceptance contrasts remain unrun. These restrictions need deployment and usability assessment. They neither prove that the generic architecture is contradictory nor guarantee that a conforming implementation will be useful.
+The remote-identity and atomic character-transition distinctions clarify attributable state. Their specification does not establish executed behavior, a discovered runtime defect or useful outcomes. Current claims need evidence from actual operations; no test or generated scenario is prescribed by this status page.
 
 ## Current gaps to close with implementation evidence
 
@@ -113,7 +115,7 @@ Each item below separates what this revision establishes from the evidence neede
 
 **Seeded initialization and handover.** The normal generated beginning and truthful alternative origins are specified. This revision supplies no new initialization or self-harmonization result. Evidence must cover:
 
-- The attributed seed, bounded initial-model attempts and configuration, generated candidates, and coherent accepted revision.
+- The attributed seed, actual initial-model attempts and configuration, generated candidates, and coherent accepted revision.
 - Retry identity and the first ordinary primary context.
 - Sparse or conflicting seeds, without inventing user preferences or experience.
 
@@ -122,9 +124,9 @@ Later composition and useful development require behavioral evidence beyond succ
 **Universal maintenance.** Ordinary-decision continuity exists in source. It does not establish that every persona-call path combines work, fragment maintenance, supporting-resource maintenance and explicit next-context judgments. No runtime coverage check was executed. Evidence must include:
 
 - An audited call inventory showing required inputs and explicit next-context outcomes for both fragments and resources. Omitted outcomes must invalidate the response and suppress substantive dispatch; recovery from stored state must remain distinct from an authored preservation decision.
-- Explicit outcomes for both maintenance scopes, including valid concise joint no-change decisions. Proposals must identify authorized files or paths and useful discovery cues. Receipts must distinguish accepted changes from actually stored changes.
+- Explicit outcomes for both maintenance scopes, including valid concise joint no-change decisions. Proposals must identify exact files or paths and useful discovery cues. Receipts must distinguish accepted changes from actually stored changes.
 - Grounded histories and truthful asset authorship.
-- Provider/model/schema compatibility and whole-response validation, with bounded failure, deferral and repair. Invalid-response suppression must preserve independent host cancellation and accounting.
+- Provider/model/schema compatibility and whole-response validation, with actual failure, deferral and repair outcomes. Invalid-response suppression must preserve independent host cancellation and accounting.
 
 **Search and organization.** Required behavior is specified, but autonomous compact organization and the benefit of authored cues are unestablished here. Evidence must show:
 
@@ -134,7 +136,7 @@ Later composition and useful development require behavioral evidence beyond succ
 
 Compare authored cues with ordinary search and exact links under matched resources. The comparison must not introduce automatic host traversal or a hidden semantic memory engine.
 
-**Bounded associative navigation.** The design boundary is specified. This revision makes no claim about cumulative navigation implementation or benefit. Evidence must account for total queries, fanout, candidate reads, returned text, context, latency, cost and maintenance. It must also cover cycles, sparse notes, changed wording, stale references and withdrawn access. Stopping must be honest: finding a candidate cannot silently promote it to accepted context, and stopping discovery cannot truncate required qualifications.
+**Selective associative navigation.** The design boundary is specified. This revision makes no claim about cumulative navigation implementation or benefit. Evidence must account for total queries, fanout, candidate reads, returned text, context, latency, cost and maintenance. It must also cover cycles, sparse notes, changed wording, stale references and unavailable sources. Stopping must be honest: finding a candidate cannot silently promote it to accepted context, and stopping discovery cannot truncate required qualifications.
 
 **Whole managed persona-state footprint.** The compactness target is specified. There is no measured retention plateau, reclamation result or complete accounting of externally retained context. Evidence must cover the whole declared footprint:
 
@@ -199,15 +201,18 @@ Elapsed time, call counts and saved notes are not developmental evidence.
 
 **Skills, tools and relationships.** This revision adds no capability or social-benefit result. Evidence must show actual operations and useful outputs, with fixed-helper controls. Social claims need real human and peer interactions, contributions, declines, disagreements and evidence-led changes, without invented acceptance or reputation. Praise and local communication preferences must remain separate from independent evidence of correctness.
 
-**Delivery and economics.** There is no new end-to-end quality or efficiency result. Evidence must include exact delivered answers or artifacts, adopted-scope checks, all failures and interventions, matched total resources, costs, latency and honest stopping. Tests must also distinguish explicitly unvalidated operator diagnostics from accepted delivery. They must verify:
+**Delivery and economics.** There is no new end-to-end quality or efficiency result. Evidence must include exact delivered answers or artifacts, adopted-scope checks, all failures and interventions, matched total resources, costs, latency and honest stopping. Evidence must also distinguish explicitly unvalidated operator diagnostics from accepted delivery, including:
 
-- Diagnostic labels, access and retention.
+- Diagnostic labels, actual exposure and retention.
 - No promotion of previews into messages, peer input, accepted evidence or actions.
 - Handling of valid responses whose maintenance persistence later fails.
 
-**Deployment.** There is no current approval or readiness claim. A stronger claim needs accountable decisions and evidence for the actual users, environment, enabled effects, retained risks and outside assurance.
+**Deployment.** This page establishes no full readiness claim or approval prerequisite. Stronger claims need attributable evidence for actual users, environment, configuration, effects and outcomes, with remaining uncertainty explicit.
 
 ## Source-only runtime mapping, 8 October 2026
+
+This section preserves the 8 October mapping and its then-current criteria. References below to a new design, restrictions or limited repair belong to that historical edition; they do not reinstate constraints superseded by UR-052.
+
 
 Read-only inspection of the separate runtime at [2a199e8a7f787040f04cddf62165b7734e1e7144](https://github.com/ai-personas/ai-personas/commit/2a199e8a7f787040f04cddf62165b7734e1e7144) identified related mechanisms and specific gaps. The findings below describe source code. They are not executed tests, a deployed-state audit, an exhaustive proof or live-model results. No runtime files were changed.
 

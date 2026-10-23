@@ -9,6 +9,8 @@ Reconciled the implementation catalogue and glossary with UR-052. Navigation, st
 
 Clarified failed whole-response adoption versus separately accepted work, pending feedback versus actual obligations, and characteristic maturation versus supporting-asset development. The companion runtime clarifies localized edits versus complete native file replacement and reports useful missing-match context without changing exact matching or atomic adoption.
 
+Reconciled the connected design and implementation guides, active status explanations and evidence illustration with the same requirement. Preserved the dated 8 October source mapping under its historical criteria.
+
 These changes are source and documentation alignment. They do not establish full runtime conformance, useful maturation or repository-wide consistency. Historical evidence keeps its original criteria; no tests, generated scenarios or private live records are added.
 
 ## 23 October 2026 — unrestricted work boundaries and feedback records

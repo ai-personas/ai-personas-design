@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="2145" viewBox="0 0 560 2145" role="img" aria-labelledby="title description">
   <title id="title">Five claims need different evidence</title>
-  <desc id="description">Specification, implementation, mechanical testing, behavioral benefit and deployment approval each require their own evidence. The presence of one does not automatically establish the next. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <desc id="description">Specification, implementation, observed mechanisms, behavioral benefit and actual deployment each require their own evidence. The presence of one does not automatically establish the next. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
   <rect width="560" height="2145" fill="#fffaf0"/>
-  <g font-family="DejaVu Sans, Arial, sans-serif">
+  <g font-family="Liberation Sans, Arial, sans-serif">
     <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Five claims need different</tspan><tspan x="28" dy="36">evidence</tspan></text>
     <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
     <rect x="20" y="153" width="520" height="330" rx="20" fill="#e5f4ed" stroke="#d0d5cb" stroke-width="1"/>
@@ -57,8 +57,8 @@
     <ellipse cx="70" cy="1053" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <ellipse cx="83" cy="1053" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M71 1064 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-    <text x="112" y="1064" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">3 · Mechanically tested</tspan></text>
-    <text x="50" y="1149" font-size="22" fill="#16332f"><tspan x="50" dy="0">Observed checks support bounded</tspan><tspan x="50" dy="31">technical claims.</tspan><tspan x="50" dy="31">A passing check is tied to its inputs and</tspan><tspan x="50" dy="31">criteria.</tspan></text>
+    <text x="112" y="1064" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">3 · Mechanism observed</tspan></text>
+    <text x="50" y="1149" font-size="22" fill="#16332f"><tspan x="50" dy="0">Actual operations support specific</tspan><tspan x="50" dy="31">technical claims.</tspan><tspan x="50" dy="31">Keep their exact inputs, results and</tspan><tspan x="50" dy="31">remaining uncertainty.</tspan></text>
     <path d="M29 1299 L529 1297 L531 1547 L27 1550 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
     <rect x="37" y="1307" width="486" height="84" rx="16" fill="#f8e8ec" stroke="none" stroke-width="0"/>
     <ellipse cx="486" cy="1331" rx="20" ry="21" fill="#b9dce5" stroke="#245599" stroke-width="2"/>
@@ -73,8 +73,8 @@
     <ellipse cx="70" cy="1603" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <ellipse cx="83" cy="1603" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M71 1614 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-    <text x="112" y="1614" font-size="23" fill="#245599" font-weight="700"><tspan x="112" dy="0">5 · Approved for a</tspan><tspan x="112" dy="32">deployment</tspan></text>
-    <text x="50" y="1731" font-size="22" fill="#16332f"><tspan x="50" dy="0">The intended use meets its actual</tspan><tspan x="50" dy="31">acceptance and governance.</tspan><tspan x="50" dy="31">Technical success alone does not grant</tspan><tspan x="50" dy="31">permission.</tspan></text>
+    <text x="112" y="1614" font-size="23" fill="#245599" font-weight="700"><tspan x="112" dy="0">5 · Deployment observed</tspan></text>
+    <text x="50" y="1731" font-size="22" fill="#16332f"><tspan x="50" dy="0">Record the actual environment,</tspan><tspan x="50" dy="31">configuration and observed outcomes.</tspan><tspan x="50" dy="31">These records do not impose an</tspan><tspan x="50" dy="31">approval gate.</tspan></text>
     <path d="M29 1879 L531 1877 L527 2019 L32 2017 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
     <text x="46" y="1907" font-size="20" fill="#16332f"><tspan x="46" dy="0">These are distinct claims, not automatic</tspan><tspan x="46" dy="29">promotions. Hypothetical examples and</tspan><tspan x="46" dy="29">outside research do not establish current</tspan><tspan x="46" dy="29">runtime behavior.</tspan></text>
     <text x="30" y="2054" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
