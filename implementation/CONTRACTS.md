@@ -360,6 +360,8 @@ Decline and nonresponse create no substitute acceptance, replacement persona, pu
 
 The default runtime gives personas [full host access and tool installation](DEPLOYMENT-DECISIONS.md#default-full-host-access). Ordinary inputs supply that command interface directly. No per-tool approval, installation grant, command allowlist, sandbox, or prior skill-guide selection is required. Personas choose tools and commands using the host account and environment. The distinctions below describe actual preparation, execution and observed results; they do not introduce an additional permission gate for this default host interface.
 
+Working directories and retained-state locations may coincide or contain one another. Setup and continuing execution must not reject their placement or relationship as an application access rule. Resolve supplied paths to their actual directories, retain the identities needed for continuity, and report unavailable paths or host filesystem errors as observed outcomes. A changed saved path binding is distinct from an application directory-separation requirement.
+
 Stored guidance helps a persona prepare for an operation. It does not establish that the operation is installed, callable or ready to run. A skill file is reusable procedural guidance with an actual author. A persona-authored characteristic interpretation is persona-defining prose; the underlying procedure retains its supporting purpose. A tool note describes an operation and its observed limits. Neither stored guidance nor scripts, code, or data install a tool, prove competence, grant credentials, or execute a helper. Preparation and current callable exposure remain separate.
 
 **Bind execution to what will actually run.** The required binding depends on the operation:

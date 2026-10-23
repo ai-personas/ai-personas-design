@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — unrestricted working-directory placement
+
+Clarified that working and state directories may coincide or contain one another under UR-052. Setup and continuing native execution resolve and retain actual path identities without application ancestry exclusions. Actual directory availability, filesystem errors and changed saved bindings retain their meanings. The companion runtime removes the remaining overlap rejections and updates its CLI and setup guidance.
+
 ## 23 October 2026 — current-record validation reuse
 
 Clarified deterministic host reuse of a successful decode only after a fresh transaction rechecks the complete current logical record bytes, lookup identity, physical encoding, metadata and expected configuration. The identity covers decoded logical bytes, before object interpretation; physical representations are independently validated. Changed logical bytes require validation again, and failed checks do not become cached success. Logical read accounting, actual physical cost and provider usage remain distinct. The companion runtime avoids repeated JSON decoding in unchanged configuration binding checks; this does not change persona context, ownership or adoption requirements.
