@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="2156" viewBox="0 0 560 2156" role="img" aria-labelledby="title description">
   <title id="title">From a file choice to actual context</title>
-  <desc id="description">Known exact references and bounded primary-chosen discovery lead to explicit next-context selection. Mandatory state and eligible selected bodies form the actual provider attempt, with separate exposure evidence. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <desc id="description">Known exact references and primary-chosen discovery lead to explicit next-context selection. Mandatory state and exact selected bodies form the actual provider attempt, with separate exposure evidence. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
   <rect width="560" height="2156" fill="#fffaf0"/>
-  <g font-family="DejaVu Sans, Arial, sans-serif">
+  <g font-family="Liberation Sans, Arial, sans-serif">
     <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">From a file choice to actual</tspan><tspan x="28" dy="36">context</tspan></text>
     <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
     <rect x="20" y="153" width="520" height="330" rx="20" fill="#fff0cd" stroke="#d0d5cb" stroke-width="1"/>
@@ -57,14 +57,14 @@
     <ellipse cx="154" cy="645" rx="2.5" ry="3.5" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M137 657 q10 8 20 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="43" y="710" font-size="22" fill="#00665f" font-weight="700"><tspan x="43" dy="0">Known exact</tspan><tspan x="43" dy="31">item</tspan></text>
-    <text x="43" y="784" font-size="21" fill="#16332f"><tspan x="43" dy="0">Use a currently</tspan><tspan x="43" dy="30">eligible exact</tspan><tspan x="43" dy="30">reference without a</tspan><tspan x="43" dy="30">new search.</tspan></text>
+    <text x="43" y="784" font-size="21" fill="#16332f"><tspan x="43" dy="0">Use a known exact</tspan><tspan x="43" dy="30">reference without a</tspan><tspan x="43" dy="30">new search.</tspan></text>
     <path d="M291 611 l239 2 l1 302 l-241 1 Z" stroke="#245599" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
     <ellipse cx="409" cy="648" rx="25" ry="26" fill="#b9dce5" stroke="#245599" stroke-width="2"/>
     <ellipse cx="401" cy="645" rx="2.5" ry="3.5" fill="#16332f" stroke="none" stroke-width="3"/>
     <ellipse cx="417" cy="645" rx="2.5" ry="3.5" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M400 657 q10 8 20 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="306" y="710" font-size="22" fill="#245599" font-weight="700"><tspan x="306" dy="0">Unknown item</tspan></text>
-    <text x="306" y="753" font-size="21" fill="#16332f"><tspan x="306" dy="0">The primary LLM</tspan><tspan x="306" dy="30">requests bounded</tspan><tspan x="306" dy="30">listing, search,</tspan><tspan x="306" dy="30">preview or reading.</tspan></text>
+    <text x="306" y="753" font-size="21" fill="#16332f"><tspan x="306" dy="0">The primary LLM</tspan><tspan x="306" dy="30">chooses listing,</tspan><tspan x="306" dy="30">search, preview or</tspan><tspan x="306" dy="30">reading.</tspan></text>
     <path d="M260 923 Q292 927 280 946" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M273 939 L280 948 L288 939" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M29 960 L529 958 L531 1240 L27 1243 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
@@ -74,7 +74,7 @@
     <ellipse cx="83" cy="989" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M71 1000 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="112" y="1000" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Choose context for the next</tspan><tspan x="112" dy="32">call</tspan></text>
-    <text x="50" y="1117" font-size="22" fill="#16332f"><tspan x="50" dy="0">Choose fragments and supporting</tspan><tspan x="50" dy="31">resources. Preserve, replace, clear or</tspan><tspan x="50" dy="31">state an allowed blocked outcome;</tspan><tspan x="50" dy="31">omission is invalid.</tspan></text>
+    <text x="50" y="1117" font-size="22" fill="#16332f"><tspan x="50" dy="0">Choose fragments and supporting</tspan><tspan x="50" dy="31">resources. Preserve, replace, clear or</tspan><tspan x="50" dy="31">explain an actual obstacle; omission</tspan><tspan x="50" dy="31">is invalid.</tspan></text>
     <path d="M260 1250 Q292 1254 280 1273" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M273 1266 L280 1275 L288 1266" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M29 1287 L529 1285 L531 1567 L27 1570 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
@@ -84,7 +84,7 @@
     <ellipse cx="493" cy="1316" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M481 1327 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="49" y="1327" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Required state + selected</tspan><tspan x="49" dy="32">text</tspan></text>
-    <text x="50" y="1444" font-size="22" fill="#16332f"><tspan x="50" dy="0">Supply current character, authority and</tspan><tspan x="50" dy="31">relevant work state, plus exact selected</tspan><tspan x="50" dy="31">text and complete qualifications.</tspan><tspan x="50" dy="31">Exposed tools need usable definitions.</tspan></text>
+    <text x="50" y="1444" font-size="22" fill="#16332f"><tspan x="50" dy="0">Supply current character and work facts,</tspan><tspan x="50" dy="31">exact chosen text and complete</tspan><tspan x="50" dy="31">qualifications. Tool definitions</tspan><tspan x="50" dy="31">describe usable interfaces.</tspan></text>
     <path d="M260 1577 Q292 1581 280 1600" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M273 1593 L280 1602 L288 1593" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M29 1614 L529 1612 L531 1894 L27 1897 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />

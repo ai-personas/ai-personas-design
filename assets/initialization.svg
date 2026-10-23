@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="1952" viewBox="0 0 560 1952" role="img" aria-labelledby="title description">
   <title id="title">From an origin to a continuing persona</title>
-  <desc id="description">Generated and supplied origins keep their distinct attribution. Candidate fragments require coherent acceptance before ordinary persona decisions. Later character changes retain their controls. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <desc id="description">Generated and supplied origins keep their distinct attribution. Candidate fragments require coherent acceptance before later work uses that character. Later changes retain their actual authorship and adoption order. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
   <rect width="560" height="1952" fill="#fffaf0"/>
-  <g font-family="DejaVu Sans, Arial, sans-serif">
+  <g font-family="Liberation Sans, Arial, sans-serif">
     <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">From an origin to a continuing</tspan><tspan x="28" dy="36">persona</tspan></text>
     <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
     <rect x="20" y="153" width="520" height="330" rx="20" fill="#f8e8ec" stroke="#d0d5cb" stroke-width="1"/>
@@ -38,7 +38,7 @@
     <ellipse cx="154" cy="537" rx="2.5" ry="3.5" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M137 549 q10 8 20 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="43" y="602" font-size="22" fill="#00665f" font-weight="700"><tspan x="43" dy="0">Generated</tspan><tspan x="43" dy="31">beginning</tspan></text>
-    <text x="43" y="676" font-size="21" fill="#16332f"><tspan x="43" dy="0">An attributed trait</tspan><tspan x="43" dy="30">seed guides a</tspan><tspan x="43" dy="30">bounded initial LLM</tspan><tspan x="43" dy="30">call.</tspan></text>
+    <text x="43" y="676" font-size="21" fill="#16332f"><tspan x="43" dy="0">An attributed trait</tspan><tspan x="43" dy="30">seed guides the</tspan><tspan x="43" dy="30">initial LLM call.</tspan></text>
     <path d="M291 503 l239 2 l1 302 l-241 1 Z" stroke="#245599" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
     <ellipse cx="409" cy="540" rx="25" ry="26" fill="#b9dce5" stroke="#245599" stroke-width="2"/>
     <ellipse cx="401" cy="537" rx="2.5" ry="3.5" fill="#16332f" stroke="none" stroke-width="3"/>
@@ -65,7 +65,7 @@
     <ellipse cx="493" cy="1145" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M481 1156 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="49" y="1156" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Coherent acceptance</tspan></text>
-    <text x="50" y="1241" font-size="22" fill="#16332f"><tspan x="50" dy="0">Accept a usable starting account and</tspan><tspan x="50" dy="31">fragments together under the actual</tspan><tspan x="50" dy="31">controls. Preserve unresolved</tspan><tspan x="50" dy="31">contradictions honestly.</tspan></text>
+    <text x="50" y="1241" font-size="22" fill="#16332f"><tspan x="50" dy="0">Accept the starting account and</tspan><tspan x="50" dy="31">fragments together. Preserve actual</tspan><tspan x="50" dy="31">authorship and unresolved</tspan><tspan x="50" dy="31">contradictions.</tspan></text>
     <path d="M260 1374 Q292 1378 280 1397" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M273 1390 L280 1399 L288 1390" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M29 1411 L529 1409 L531 1690 L27 1693 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
@@ -75,9 +75,9 @@
     <ellipse cx="83" cy="1440" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M71 1451 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="112" y="1451" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Ordinary continuing persona</tspan></text>
-    <text x="50" y="1536" font-size="22" fill="#16332f"><tspan x="50" dy="0">The primary LLM works, chooses context</tspan><tspan x="50" dy="31">and considers authorized revision. Useful</tspan><tspan x="50" dy="31">tension can remain; harmonization is not</tspan><tspan x="50" dy="31">automatic uniformity.</tspan></text>
+    <text x="50" y="1536" font-size="22" fill="#16332f"><tspan x="50" dy="0">The primary LLM works, chooses context</tspan><tspan x="50" dy="31">and authors useful revisions. Useful</tspan><tspan x="50" dy="31">tension can remain; harmonization is not</tspan><tspan x="50" dy="31">automatic uniformity.</tspan></text>
     <path d="M29 1715 L531 1713 L527 1826 L32 1824 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
-    <text x="46" y="1743" font-size="20" fill="#16332f"><tspan x="46" dy="0">An effective-character change later needs the</tspan><tspan x="46" dy="29">existing character controls and a fresh</tspan><tspan x="46" dy="29">decision before further operations.</tspan></text>
+    <text x="46" y="1743" font-size="20" fill="#16332f"><tspan x="46" dy="0">An effective-character adoption needs a fresh</tspan><tspan x="46" dy="29">decision before further operations.</tspan></text>
     <text x="30" y="1861" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
   </g>
 </svg>

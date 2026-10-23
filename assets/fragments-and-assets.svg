@@ -2,7 +2,7 @@
   <title id="title">A persona’s approach is not its toolbox</title>
   <desc id="description">Concrete event-planning examples distinguish characteristic fragments from knowledge, skills, tools, code, data and attributed records. The boundary follows purpose rather than authorship. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
   <rect width="560" height="1980" fill="#fffaf0"/>
-  <g font-family="DejaVu Sans, Arial, sans-serif">
+  <g font-family="Liberation Sans, Arial, sans-serif">
     <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">A persona’s approach is not its</tspan><tspan x="28" dy="36">toolbox</tspan></text>
     <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
     <rect x="20" y="153" width="520" height="330" rx="20" fill="#e8effb" stroke="#d0d5cb" stroke-width="1"/>
@@ -58,7 +58,7 @@
     <ellipse cx="83" cy="1224" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M71 1235 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="112" y="1235" font-size="23" fill="#245599" font-weight="700"><tspan x="112" dy="0">Tools, code and data</tspan></text>
-    <text x="50" y="1320" font-size="22" fill="#16332f"><tspan x="50" dy="0">A calendar interface enables operations.</tspan><tspan x="50" dy="31">A script and attendance data support</tspan><tspan x="50" dy="31">work. Their existence grants no</tspan><tspan x="50" dy="31">permission to run them.</tspan></text>
+    <text x="50" y="1320" font-size="22" fill="#16332f"><tspan x="50" dy="0">A calendar interface enables operations.</tspan><tspan x="50" dy="31">A script and attendance data support</tspan><tspan x="50" dy="31">work. Their existence does not establish</tspan><tspan x="50" dy="31">successful use.</tspan></text>
     <path d="M29 1470 L529 1468 L531 1718 L27 1721 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
     <rect x="37" y="1478" width="486" height="84" rx="16" fill="#e5f4ed" stroke="none" stroke-width="0"/>
     <ellipse cx="486" cy="1502" rx="20" ry="21" fill="#b9dce5" stroke="#885000" stroke-width="2"/>

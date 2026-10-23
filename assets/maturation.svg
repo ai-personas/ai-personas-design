@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="2258" viewBox="0 0 560 2258" role="img" aria-labelledby="title description">
   <title id="title">Experience can inform later development</title>
-  <desc id="description">Actual experience informs ordinary primary-LLM revision, followed by controlled adoption and later actual supply. Behavioral improvement requires separate comparative evidence and is never implied by time or editing. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <desc id="description">Actual experience informs ordinary primary-LLM revision, followed by attributable adoption and later actual supply. Behavioral improvement requires separate comparative evidence and is never implied by time or editing. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
   <rect width="560" height="2258" fill="#fffaf0"/>
-  <g font-family="DejaVu Sans, Arial, sans-serif">
+  <g font-family="Liberation Sans, Arial, sans-serif">
     <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Experience can inform later</tspan><tspan x="28" dy="36">development</tspan></text>
     <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
     <rect x="20" y="153" width="520" height="330" rx="20" fill="#f8e8ec" stroke="#d0d5cb" stroke-width="1"/>
@@ -58,8 +58,8 @@
     <ellipse cx="70" cy="1125" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <ellipse cx="83" cy="1125" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M71 1136 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-    <text x="112" y="1136" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Accept and store permitted</tspan><tspan x="112" dy="32">changes</tspan></text>
-    <text x="50" y="1253" font-size="22" fill="#16332f"><tspan x="50" dy="0">Accepted and stored changes retain</tspan><tspan x="50" dy="31">character controls, provenance,</tspan><tspan x="50" dy="31">restrictions and retention limits. A</tspan><tspan x="50" dy="31">proposal is not a stored revision.</tspan></text>
+    <text x="112" y="1136" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Accept and store chosen</tspan><tspan x="112" dy="32">changes</tspan></text>
+    <text x="50" y="1253" font-size="22" fill="#16332f"><tspan x="50" dy="0">Accepted changes retain exact</tspan><tspan x="50" dy="31">authorship, revisions and</tspan><tspan x="50" dy="31">qualifications. A proposal is not a</tspan><tspan x="50" dy="31">stored revision.</tspan></text>
     <path d="M260 1386 Q292 1390 280 1409" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M273 1402 L280 1411 L288 1402" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M29 1423 L529 1421 L531 1640 L27 1643 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />

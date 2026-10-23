@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — unrestricted persona core and ordinary recovery
+
+Reconciled the detailed persona core and its five illustrations with persona-chosen work and unrestricted execution. Initial authorship, character adoption, file discovery, context supply, maintenance, warning annotations and retention no longer prescribe application quotas, source-policy gates, a self-authorship lock or restricted selection repair. Exact authorship, coherent adoption, fresh decisions after character change, actual failures and the full accepted need remain substantive responsibilities.
+
+Replaced the chapter's prescribed evaluation campaign and inherited minima with evidence criteria for actual work. Preserved OCEAN and separate VAD, characteristic fragments distinct from supporting assets, ordinary-call maintenance and context choices, self-harmonization, individuality, useful transfer and social development. Updated accessible diagram descriptions and text equivalents. Existing anchor links remain usable; earlier constraints and outcomes retain immutable historical references.
+
+The corresponding runtime change removes fresh restricted-repair entry points and the automatic mode switch. Historical receipts retain their original meaning. These source changes and design explanations do not establish complete runtime conformance, useful maturation or repository-wide reconciliation; the remaining detailed work/contracts and other guidance still need review.
+
 ## 23 October 2026 — current entry and evidence guidance
 
 Reconciled the main introduction, onboarding, contribution and visual guides with persona-chosen work under UR-050 and unrestricted execution under UR-052. Updated the whole-loop and different-approach illustrations and their text equivalents. Compactness remains useful organization and selective context without application corpus, prompt, history or navigation caps. Replaced the introduction's stale refinement date with a link to dated change history.
