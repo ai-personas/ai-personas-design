@@ -40,7 +40,7 @@ Resolve a conflict by integrating the rule into its proper home and updating eve
 
 ## Authority and consistency
 
-Use the [design index](design/README.md#authority-within-the-repository) to determine authority. I01–I21 protect the foundation. Persona core, work and boundaries, and system contracts provide complementary normative views: together, they state the governing requirements. The requirement catalogue traces those requirements, and acceptance scenarios test them. Explanatory and historical material cannot override them.
+Use the [design index](design/README.md#authority-within-the-repository) to determine authority. The consolidated human-user requirements govern I01–I21, the detailed design and the requirement catalogue. Persona core, work and boundaries, and system contracts provide complementary normative views of those requirements. Acceptance criteria identify relevant evidence; explanatory and historical material cannot override the user's requirements or reinstate a superseded application constraint.
 
 Treat a conflict as a design defect to resolve. It does not permit choosing the easiest reading. Apply the latest human requirement, including UR-052. Preserve record integrity and evidence while removing application quota, safety and permission gates; do not reinstate them as a purported conservative default.
 

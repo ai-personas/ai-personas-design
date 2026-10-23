@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — reconcile active unrestricted-execution rules
+
+Put the human-user requirements first in the document authority order and removed the conflicting conservative-gate fallback. Rewrote the affected navigation, context repair, retained-state, resource accounting, host-access, source-sharing, authorship and deployment clauses to apply UR-052 directly. Preserved selective context, exact provenance, actual outcomes, explicit stopping and historical evidence without application quota or approval requirements. The earlier restricted selection-repair procedure remains linked at its immutable historical revision.
+
+This documentation change reports no new runtime conformance or product-completion claim. Earlier results keep their original criteria and outcomes.
+
 ## 21 October 2026 — first-release implementation priorities
 
 Recorded the user's clarification that backward compatibility is not required for the first release. Implementation follows the consolidated user requirements and later clarifications, with working functionality checked through actual persona runs and no automated test cases. Removed a generic deployment instruction that conflicted with the established default of full host access and unrestricted tool installation. This policy update makes no new runtime conformance claim.

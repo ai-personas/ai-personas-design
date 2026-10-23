@@ -9,6 +9,14 @@ This register explains the target design adopted in this branch and why its rule
 
 The [normative documents](design/README.md) contain the actual obligations. Adopting a decision changes that design reference; it does not establish that the design has been implemented, produces useful maturation, or is approved for deployment.
 
+## 23 October 2026: reconcile active resource and access rules with UR-052
+
+The 22 October supersession notice established the intended policy, but detailed chapters still instructed implementers to impose finite navigation and repair allowances, retained-state ceilings, source-sharing permissions and approval workflows. The authority order also placed derived invariants ahead of the human-user requirements and suggested retaining conservative restrictions when documents conflicted. Those instructions could reintroduce the constraints the user removed.
+
+Human-user requirements now lead the authority order explicitly. The affected persona, work, contract and deployment sections describe selective context, observational accounting, exact provenance, actual host and provider outcomes, and persona-chosen maintenance and continuation without application quotas or safety approvals. The earlier finite selection-repair procedure is identified as historical rather than a current mandatory workflow. Immutable earlier revisions retain its original meaning.
+
+This changes the design reference, not historical execution outcomes. It does not establish complete runtime conformance, beneficial maturation or completion of the wider requirements. Current character, exact input and output records, explicit pauses and stops, accepted responsibilities and prevention of duplicate accepted effects retain their distinct meanings.
+
 ## 10 October: explicit next-context judgment in every accepted response
 
 Every accepted persona response must explicitly say what context should support the next relevant decision. Silence cannot stand in for that judgment. This supersedes the earlier allowance for omitting next-context intent, which conflicted with the user's repeated requirement for selection on every call.

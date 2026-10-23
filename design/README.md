@@ -84,12 +84,12 @@ These documents specify intended behavior. A document, diagram, or acceptance sc
 
 Use the following authority order to understand which documents establish requirements and which explain them:
 
-1. The protected [I01–I21 invariants](../implementation/REQUIREMENTS.md) govern applicable actions and transitions.
-2. Persona core, work and boundaries, and system contracts are complementary normative views of that foundation. Together, they define meaning, constraints, and handoffs.
-3. The remaining requirement catalogue traces those obligations. The [acceptance catalogue](../evaluation/ACCEPTANCE.md) states what must be examined to support them. Neither catalogue replaces or weakens a detailed rule through abbreviation.
-4. Guides, examples, glossary, worksheets, artwork, research summaries, decisions, and historical reports explain the design or its evidence. They do not independently grant permission, prescribe an additional workflow, or establish conformance.
+1. The [consolidated human-user requirements](../USER-REQUIREMENTS.md) govern the design. Later user clarifications supersede earlier conflicting requirements. In particular, UR-052 removes application limits and safety gates, and UR-050 leaves approaches and cooperation to persona reasoning.
+2. The [I01–I21 invariants and requirement catalogue](../implementation/REQUIREMENTS.md) trace those requirements into operational responsibilities. They cannot override the user's requirements or turn an assistant-authored rule into a user requirement.
+3. Persona core, work and boundaries, and system contracts are complementary normative views of that foundation. Together, they define meaning and handoffs. The [acceptance catalogue](../evaluation/ACCEPTANCE.md) identifies evidence relevant to those obligations; an earlier evidence criterion cannot reinstate a superseded application constraint.
+4. Guides, examples, glossary, worksheets, artwork, research summaries, decisions, and historical reports explain the design or its evidence. They do not independently prescribe an additional workflow or establish conformance.
 
-**When documents conflict.** There is no last-file-wins rule. A contradiction between normative documents is a design defect. Resolve it through one recorded decision and consistent updates to the affected documents. Until then, preserve conservative authority, privacy, resource, and evidence boundaries. Historical documents and past test passes cannot weaken current restrictions or establish compliance with revised criteria.
+**When documents conflict.** Apply the human-user requirement first. A contradiction between detailed documents is a design defect to resolve through a recorded decision and consistent updates; it is not a reason to restore an obsolete quota, permission gate, safety envelope or approval step. Preserve exact attribution, actual outcomes, accepted state, explicit stops and unresolved effects while correcting the conflict. Historical documents and earlier results retain their original criteria and do not establish compliance with the revised design.
 
 **While a persona is running.** Authoritative instructions and current accepted obligations remain outside optional fragment selection. Including a persona-authored statement, retrieved file, or search result in context does not give it authority.
 

@@ -4,7 +4,7 @@
 
 These contracts describe behavior that people and connected components must be able to observe. They are design requirements, not implementation code, a database layout, a programming interface, a required file tree, or a prescribed sequence for solving tasks.
 
-The protected foundation is I01–I21. The persona core explains what the persona means; the work-and-boundaries chapter explains its constraints; these contracts explain what must cross a reliable handoff. These are complementary normative views. None silently overrides another. A conflict requires an explicit recorded resolution. Until then, preserve the conservative authority and evidence boundary. The requirement index traces these rules; it is not a shorter substitute for them.
+The [human-user requirements](../USER-REQUIREMENTS.md) govern these contracts and the I01–I21 foundation. Later clarifications take precedence: UR-052 removes application limits and safety gates, including conflicting requirements in older contract text. The persona core explains what the persona means; the work-and-boundaries chapter explains work and its actual outcomes; these contracts explain what must cross a reliable handoff. Resolve contradictions in those complementary views under the [document authority order](../design/README.md#authority-within-the-repository), preserving evidence without reinstating superseded restrictions. The requirement index traces the rules; it is not a substitute for their detailed meaning.
 
 The persona includes its characteristic context, LLM invocation and reasoning, actual behavior, and controlled self-revision. The LLM provides the capacity to reason. Persona-defining fragments provide authored prompt parts that express character; they are not a memory product attached to an otherwise complete agent.
 
@@ -27,7 +27,7 @@ The system must preserve enough information to establish who chose or did someth
 | Need and responsibility | Original request, accepted scope and changes, criteria, assumptions, actual offers and acceptances, owners, dependencies, findings, and remaining gaps. |
 | Capability and effect | Available operation and limits; current observable interface or connection identity; actor; authority; admitted intent; reservation; relevant exact client/runner and input bindings; actual status and output; genuinely recorded executable/environment versions or explicit unknowns; and uncertain effects. |
 | Evidence and release | Exact artifacts and assemblies, criteria, actual reviewer and policy, observed checks, judgments, limitations, current applicability, delivered scope, and any required human acceptance. |
-| Resources and recovery | Root allowance, cumulative navigation limits, declared persona-context corpus, assembled-prompt and managed persona-state bounds, retention scope, reservations including peak rewrite copies, consumed and uncertain exposure, protected finishing capacity, pending events, cancellation, and stopping or continuation disposition. |
+| Resources and recovery | Actual calls, navigation, supplied context, managed storage including temporary copies, retention decisions, known and unknown usage, pending events and effects, cancellation, and authored stopping or continuation. Historical allocations remain records, with no application quota or reserved-capacity prerequisite. |
 
 **What records establish.** Attribution and integrity are mechanical meanings: they establish origins and exact recorded content. The runtime does not invent what a fragment contributes to the persona, which experience informed it, why a peer is useful, or whether a result is good. An exact receipt proves the observation it records, not every interpretation written about it. Persistent records support accountability; persistence does not make them persona-defining fragments or demonstrate characteristic behavior.
 
@@ -85,7 +85,7 @@ Naming a target does not authorize writing there, overwriting a concurrent versi
 
 **Blocked or deferred maintenance.** Preserve the reason, affected fragment, supporting resource or concern, and missing prerequisite at the permitted level of detail. Also preserve the consequences for dependent work, the accepted owner or ownership gap, and the existing event or authorized opportunity for reconsideration. The outcome stays within an explicit existing resource and work-lifecycle bound. It requires no invented deadline or compulsory form.
 
-If no continuation has been accepted, expose that gap. Missing observations, an authoring prohibition, a persistence outage, or exhausted allowance must not become a promise of automatic retry. An adopted deferral remains visible until it is addressed, explicitly dismissed, transferred with acceptance, or closed with an honest unresolved or expired disposition when its bound or relevant work ends. Expiry does not mean evaluation or repair. Host closeout does not fabricate a persona judgment. Deferral creates no new wake, funding, or authority. A mode-limited outcome need not create a new obligation when no useful change has been identified.
+If no continuation has been accepted, expose that gap. Missing observations or a persistence outage must not become a promise of automatic retry. Historical allowance exhaustion is not a current application gate. An adopted deferral remains visible until it is addressed, explicitly dismissed, transferred with acceptance, or closed with an honest unresolved or expired disposition when its bound or relevant work ends. Expiry does not mean evaluation or repair. Host closeout does not fabricate a persona judgment. Deferral creates no new wake, funding, or authority. A mode-limited outcome need not create a new obligation when no useful change has been identified.
 
 **Continuing applicability.** Ending a correction effort does not remove a separately accepted warning. A primary-authored warning on exact affected fragment revisions or explicitly identified dependent uses remains effective after the effort is closed, dismissed, or expired. Preserve its permitted basis and required qualification, or a safe ineligible disposition, across later work and restart until an attributable, justified resolution is accepted.
 
@@ -99,7 +99,7 @@ Provider refusal, transport failure, timeout, and cancellation retain their actu
 
 After rejection, prior accepted selection remains stored only under its existing validity and recovery rules. This is not an authored preserve or successful consideration. Already admitted effects remain real. Missing intent creates no automatic paid repair, retry, or new allowance. Host status reporting may disclose the actual failure without presenting rejected output as an accepted persona response.
 
-An earlier accepted continuation can remain usable under the same live mandate and remaining resources. Within an already authorized bounded session, the host may retire a definitively rejected, complete local invocation and supply its actual failure to a fresh primary decision. This preserves the existing continuation rather than deriving permission from invalid output. Keep the rejected response and its charges; do not replay its proposed actions, repair its bytes, replenish allowances, revive an authored stop, reuse a consumed timed opportunity, or treat cancellation or an uncertain transport as a completed rejection. Recheck current work, actor, context, scheduling and resource conditions before the fresh admission.
+An earlier accepted continuation can remain usable under the same live mandate. Within the continuing session, the host may retire a definitively rejected, complete local invocation and supply its actual failure to a fresh primary decision. This preserves the existing continuation rather than deriving permission from invalid output. Keep the rejected response and its charges; do not replay its proposed actions, repair its bytes, erase recorded usage, revive an authored stop, reuse a consumed timed opportunity, or treat cancellation or an uncertain transport as a completed rejection. Recheck current work, actor, context, scheduling and resource conditions before the fresh admission.
 
 **Communication and diagnostic inspection.** Ordinary chat and work delivery withhold the call's persona-authored preview, commentary, and reply until the complete work, maintenance, and next-context response has been validated. While the call is pending, those channels may show truthful mechanical host status.
 
@@ -189,13 +189,13 @@ Deletion or retirement requires the governing authority and retention policy. Re
 
 An exact repetition returns the original disposition while its authoritative history remains retained and accessible. Otherwise, return an honest unavailable or unresolved disposition under the retention rules. Do not reconstruct missing history or replay the operation. A failed save cannot support a delivered claim that a prompt part was accepted, or remove a warning from unchanged bytes.
 
-Before accepting a change, check that the resulting mandatory state remains admissible. This includes current character, maintenance input, exact required qualifications, source ancestry, and other protected context. Both the peak rewrite footprint and the resulting retained footprint must fit. Repeated small revisions must not create an unusable state merely because the visible prose is short.
+Preserve current character, maintenance input, required qualifications and actual source ancestry when adopting a change. Record the resulting state and actual persistence outcome without an application footprint ceiling. Repeated small revisions can still increase cost or impair usefulness; the persona can choose consolidation through ordinary maintenance, and real storage or provider failures remain visible.
 
 Independent work is eligible only under the complete-response and dependency rules above. Uncommitted prose supplies neither authority nor received evidence.
 
 **Visible evidence.** Preserve the actual author, adopted source where relevant, prior and accepted revisions, committed changes, conflict or failure, and origin of any outside edit. A peer's suggested wording is not already the owner's account. An operator override follows an explicitly authorized and attributed path.
 
-**Initialization and later harmonization.** Initial generation uses the same coherent acceptance boundary, with an attributed seed instead of a nonexistent prior character. Bounded retries preserve creation identity and the actual accepted outcome. Sparse generated detail is candidate authorship, not an invented user preference or lived history.
+**Initialization and later harmonization.** Initial generation uses the same coherent acceptance boundary, with an attributed seed instead of a nonexistent prior character. Retries preserve creation identity and the actual accepted outcome without an application attempt quota. Sparse generated detail is candidate authorship, not an invented user preference or lived history.
 
 Later self-harmonization is ordinary primary-authored maintenance. It preserves compatible conditional tensions, exposes unresolved contradictions, and revises only within existing authoring and character controls. It creates no second writer, mandatory corpus-wide rewrite, or automatic trait drift.
 
@@ -203,53 +203,29 @@ No extra reflection writer, relationship writer, semantic merger, or generic pro
 
 **Honest authorship and experience.** First-person wording does not turn supplied advice into firsthand experience. A tentative intention may be retained before an operation completes; a later observed result cannot be backdated. Evidence that an operation failed supports an interpretation of that failure. An uncertain effect establishes uncertainty.
 
-Authorship controls apply to effective current identity, including redesignation or an always-loaded substitute. They do not forbid ordinary qualified methods and relationship refinement. Mechanical controls cannot promise complete detection of semantic bypass in free prose; that limitation also needs behavioral evaluation.
-
-A persona-defining contextual fragment need not revise relatively stable character. A scoped method or relationship interpretation can shape the next invocation while accepted character remains locked. An effective substitution of that character still requires its existing authority, proposal ordering, and fresh-decision fence. Calling the substitution context assembly does not bypass those controls.
+Effective current identity includes redesignation or an always-loaded substitute. Record its actual author and coherent adopted revision without a self-authorship permission or approval gate. A contextual fragment, scoped method or relationship interpretation can shape later behavior without changing stable character. When an effective-character change is adopted, the fresh-decision rule still preserves which character informed subsequent operations. Neither a stored trait nor a mechanical check proves useful maturation.
 
 ## Search and exact reading
 
-Search helps the primary persona find candidate fragments and supporting resources. It does not decide what is relevant, select context, or grant permission to use what it finds. The primary chooses bounded searches and exact reads within the authorized scope.
+Search helps the primary persona find candidate fragments and supporting resources. The persona chooses the query, scope, requested page or exact read and decides what is relevant. The host does not choose context on its behalf or impose a cumulative navigation allowance.
 
-**Input.** A primary-persona-chosen bounded listing, literal or grep-like query, supported regular expression, or exact reference, within the authorized fragment or supporting-resource scope and remaining cumulative navigation allowance. Supporting resources include history, tool records, definitions, skills, scripts, code, and data without merging their roles. An authored associative cue may motivate a request, but it is data—not executable shell content, an access grant, or a trigger.
+**Input.** A persona-chosen listing, literal or grep-like query, supported regular expression or exact reference identifies the material sought. Supporting resources include history, tool records, definitions, skills, scripts, code and data, with their roles kept distinct. An authored cue is data; searching it does not execute it as a shell command or automatically follow its connections.
 
-**Accepted result.** Bounded results identify the searched corpus, matching mode, exact source-qualified candidate revisions, and how to request permitted text or operative definitions. Where available, a concise descriptor or matched excerpt provides purpose and compatibility information for the next choice. It must not pretend to supply the body.
+**Result.** Describe the searched corpus, matching mode, exact source-qualified revisions and how to obtain their text or operative definitions. A descriptor or excerpt is not the full body. Declare filename, body and metadata matching, case semantics, regex dialect, ordering, pagination and treatment of hidden or ignored files. Return the requested material without application pattern, scan, text or count ceilings.
 
-Declare the search's relevant filename/body/metadata scope, case and text semantics, pattern dialect, ordering, pagination, and treatment of hidden or ignored files. Bound result size as well as result count.
+Literal and regex search, authored indexes and cues, listing and exact reading form one navigation interface. The primary chooses further navigation and context. Physical indexes may support the interface without adding a hidden semantic selector, universal relevance score or fixed taxonomy. A changed corpus can change current candidates; it cannot change a prior exact observation.
 
-Bounded listing, literal or regex search, simple owner-authored indexes and cues, and exact reading form one navigation interface. The primary uses it to choose characteristic context and separately needed supporting material. The primary also chooses query expansion and further navigation. There is no fixed taxonomy, graph or vector retrieval engine, auxiliary semantic retriever, or universal relevance scorer. Physical storage and indexes may support the interface only while preserving its declared matching and boundary guarantees. Corpus changes may change current candidates; they do not alter a prior exact observation or selection.
+**Pagination and completion.** State whether pages refer to a snapshot, exact revision or live view, and whether completion describes a page, scan or whole identified corpus. A requested page size controls that result, not the number of later requests or total work. Return the actual continuation cursor when more material remains. A live cursor alone cannot prove exhaustive coverage of an earlier corpus.
 
-**Pagination and completion.** Declare whether pagination is snapshot-bound, revision-bound, live, or otherwise consistent, and whether a completion indication covers a page, scan, or identified corpus view. Exhausting a live page or cursor does not prove that the traversal exposed every item that matched earlier.
+Record cursor invalidation and incomplete coverage honestly. Further queries, reformulation and stopping are persona choices. No automatic traversal, fixed probe sequence or mandatory search call follows from the interface.
 
-Preserve exact observations and disclose known cursor invalidation or coverage uncertainty. Claim coherent or exhaustive traversal only with supporting evidence. Continuation or restart is primary-chosen within the same cumulative allowance. These rules do not require a snapshot service, universal scan, automatic restart, or semantic ranker.
+**Failures and evidence.** Distinguish no match, a missing scope, a stale reference, an unsupported or invalid pattern, an incomplete search, and an actual storage or provider error. Do not silently replace an exact old revision with newer bytes. Application permission filtering and cumulative exhaustion gates are removed under UR-052. Host and service access errors remain actual outcomes.
 
-**Failure behavior.** Keep no match, unavailable scope, stale reference, unsupported or invalid pattern, incomplete search, exhausted bound, and storage failure distinct. A stale result must not silently open newer bytes as though they were the earlier observation. Search must not leak inaccessible titles, snippets, relations, or counts. Index lag needs either a bounded discovery path to the current store or a visible limitation, never an invented exhaustive result.
+Record candidate identities and revisions, full or partial body supply, observation time and provenance. A snippet is not a full read; a full read is neither endorsement nor persistent context selection. Raw host command output does not manufacture a native accepted-file receipt.
 
-**Visible evidence.** Record search scope and completion, returned candidate identities and revisions, actual full or partial reads, observation time, and provenance. Model-visible descriptors, excerpts, and reads may influence the receiving decision even without persistent selection. A snippet is not a full read. A full read is neither endorsement nor persistent selection. Raw host command output is that command's observation; it does not manufacture a trusted accepted-file receipt.
+**Initial discovery.** Supply a useful discovery and exact-read interface and necessary current work and character. Keep the bulk catalogue outside the choosing model and its provider request. Loading every tool name, description or schema for the model to filter is not selective discovery. The primary can request useful scope metadata or use an already known exact reference without a preliminary search.
 
-**Small initial bootstrap.** Initial discovery supplies only bounded usable discovery, exact-read, and exposure affordances; permitted scope information and limits; the mandatory persona/work core; and any legitimately known bounded references. It must not require loading all resource names, descriptions, namespaces, or manifests before choosing among them. Discover scope metadata in bounded portions when needed.
-
-Keep the bulk registry outside every choosing LLM and outside its provider request. Preloading a catalogue and asking an LLM to filter it is not selective discovery. An external service's paginated listing is not itself lexical search. An adapter that fetches or indexes pages must enforce the declared host-work budget and return only the primary-requested bounded subset. Permission-filter all metadata before exposure, including titles, counts, and source associations.
-
-**Host and primary responsibilities.** The host evaluates only requested searches, under declared pattern-language, processing, and returned-text limits. It does not execute cue or query text as commands, follow associations recursively, expand neighborhoods on its own, enumerate all pages for model filtering, or select matches automatically. Only the primary persona judges relevance. Authored associations, exact historical references, and mandatory qualifications keep the [distinct meanings in the core](../design/PERSONA-CORE.md#ordinary-files-and-self-organization).
-
-**Cumulative navigation limits.** Bound fanout, branch expansion, cumulative calls and reformulations, inspected revisions and revisits, returned text, context, time, and cost within the current purpose. A bounded current-work account exposes prior queries, exact visited revisions, and mechanically reused results; it is not an unlimited lifetime traversal log.
-
-Cycles and new query wording do not reset the allowance. A useful revisit after changed evidence is permitted within it. Deduplication never claims that a new read occurred. During authorized maintenance, the primary may revise stale or overbroad cues. The host invents no semantic redirect or replacement link. Alias and successor retention is bounded, and an expired exact reference cannot resolve to different bytes.
-
-**Complete guidance and its qualifications.** The runtime faithfully preserves accepted text. It does not substitute a hidden summary or infer required caveats from semantic similarity. Essential qualifications should normally sit beside the method. If they are authored separately, an explicit required-accompaniment binding preserves the exact complete bundle, including transitive prerequisites and corrections.
-
-Deduplicate exact identities, including cycles, without dropping distinct conditions. An optional navigation cutoff cannot truncate the bundle and leave the method presented as usable. Ordinary hyperlinks and associative cues support navigation; they do not automatically create authority or mandatory accompaniment.
-
-If a required part is missing, revoked, stale, or too large, the affected method cannot be represented as a complete usable bundle. The primary may repair it under current authority. The runtime may not silently drop the qualification to fit.
-
-**Different kinds of dependency.** Operative guidance closure means the complete guidance and required caveats needed by the affected decision. It is distinct from executable dependencies, provenance/restriction closure, and data-derivation lineage. Required caveats must reach the decision; every code dependency, ancestor document, or data row need not.
-
-Where supported, resolve and enforce non-prompt dependencies outside model context while retaining enough evidence for the actual claim. Missing required dependency, integrity, or source-policy evidence blocks affected use. An exact requested range or data slice is a partial read. It cannot stand in for a complete operative contract or a dataset-wide observation.
-
-**Previously accepted warnings.** A version-bound applicability warning remains effective when an unchanged index, preview, or exact read rediscovers the same guidance in new work. Do not falsify retained bytes or historical attribution. Retain or erase payloads under the declared policy while preserving the permitted accepted warning or a safe ineligible disposition. This is not a promise to retain payloads forever.
-
-Do not present a warned revision or explicitly covered dependent use as unqualified current instruction. Supply its permitted accepted qualification or a safe ineligible disposition. An inaccessible mandatory warning blocks affected admission. Ending a repair attempt does not remove this accepted binding.
+**Observational accounting.** Record actual queries, scans, returned material, context, elapsed time and known cost. These measurements have no application allowance, fanout cap or renewal requirement. Complete required qualifications retain their meaning; they are not silently truncated to fit a quota. The primary decides whether another read or comparison is useful.
 
 ### JSON text and matching surfaces
 
@@ -297,7 +273,7 @@ The resulting decision receives the selected exact full text or declared range a
 | Mandatory self or work source is missing | Block affected admission. |
 | Failed edit on which a new selection depends | Leave the new selection unaccepted. |
 
-Withholding an ineligible optional bundle does not permit discarding valid selected text merely to fit an ordinary task decision. Later size pressure on a previously valid selection uses only the restricted repair decision below. New work begins with its own mandatory brief and observations. Another work's private focus or persistent optional selections do not transfer automatically.
+Withholding an ineligible optional bundle does not permit discarding valid selected text merely to fit an ordinary task decision. Actual provider or host failure follows the recovery rules below without an application fitting or repair quota. New work begins with its own mandatory brief and observations. Another work's private focus or persistent optional selections do not transfer automatically.
 
 **Explicit disposition in every accepted response.** Every accepted persona response authors its next-context disposition for both characteristic fragments and supporting resources. A concise, unambiguous preserve of a still-appropriate accepted choice is sufficient. Other valid dispositions are replacement, clear, no further optional need, bounded discovery/read intent with explicit retained or cleared optional state, or an honest mode-permitted blocked/stop outcome.
 
@@ -317,15 +293,9 @@ The declared file-search interface and primary-navigated authored cues or indexe
 
 **New observations.** An unexpected reply or failure enters relevant current observations even when the prior choice did not anticipate it. In an ordinary decision, the persona can then search, read, and choose prompt parts for an appropriate next approach. A search hit does not automatically add a fragment to context, and an old selection must not suppress a new adverse fact. A permitted same-call authored change applies to subsequent context; it cannot rewrite what the current decision received.
 
-**Complete request admission.** Validate the whole request for every provider attempt. The total includes:
+**Complete request and actual supply.** Record the whole request for each provider attempt: bootstrap and instructions; current character, work and modeled state; maintenance and next-context input; observations, requested metadata and operative definitions; selected fragments and assets with their qualifications; protocol history and media. Preserve exact references, current decision identity and complete response validation without application byte, item, output or attempt ceilings.
 
-- Bounded bootstrap and instructions; current character and modeled state; maintenance/next-context input and outcome allowance.
-- Observations and results; requested metadata; complete operative schemas and provider expansions.
-- Selected fragments and supporting material with their qualifications; continuing history and protocol bindings; media where applicable; and output reserve.
-
-Per-item limits, count limits, or a small latest message do not bound the aggregate. Do not silently shorten selected prose to a title, remove an exception, or choose a different semantic substitute.
-
-Reject a proposed selection that is already inadmissible when committed, preserving prior accepted state. A different case arises when new mandatory observations make a previously valid accepted selection too large for an ordinary decision. Ordinary admission then remains blocked; the restricted selection-repair decision below may be available. Optional discovery previews may be omitted with an honest scope limit, but that omission does not prove that no relevant resource exists.
+Do not silently shorten selected prose to a title, omit a required exception or choose a semantic substitute. An actual provider or host failure retains the attempted request and observed outcome. The persona can choose useful context or method changes where another decision can be supplied; the host does not impose a mandatory restricted repair workflow or invent a choice from failed output.
 
 **Actual exposure and retained context.** The [bounded capability working set](../design/WORK-AND-BOUNDARIES.md#inference-and-bounded-working-context) applies to actual exposure, not merely the host's intended list. Reassemble successive contexts within accepted scope and retirement rules instead of retaining every past tool, skill, and result. Preserve active-operation controls, critical results, current authority, character, and other mandatory state.
 
@@ -333,39 +303,13 @@ Cached prefixes, previous-response links, and hidden provider history neither pr
 
 ### Restricted selection repair after later context growth
 
-A previously valid optional selection can stop fitting when mandatory context grows. Restricted repair lets the primary narrow or clear that optional selection without pretending that an ordinary task decision still fits. It is a limited persona decision, not an auxiliary selector or permission to resume the task.
+The former application overflow mode and finite repair allowance are historical under UR-052. The current design follows [faithful assembly and actual failure handling](../design/PERSONA-CORE.md#selection-overflow-repair): no configured context ceiling, repair quota or separate safety approval prevents an ordinary decision.
 
-**Admission and required input.** Label the repair explicitly. It uses the same current identity, assigned inference configuration, authority, and controlling resources. Declare its finite attempt allowance before admission; repair creates no extra funding.
+Preserve exact selected material, mandatory persona and work context, and required qualifications. Report real provider, model-context or host failures without silent truncation, fabricated maintenance, invented next-context choices or replay of rejected actions. A preview or inventory does not establish that its underlying text reached the model.
 
-The repair context must contain current character, relevant modeled state, mandatory work and policy state, accepted obligations, cancellations, blockers, consequential observations and evidence, resource facts, maintenance and next-context responsibilities, and restricted repair instructions. It may also contain a bounded, access-filtered inventory of the exact stored selection and mechanical fit diagnostics.
+Where another decision can actually be supplied, the persona chooses useful context changes, maintenance, methods and continuation. Every such decision retains the ordinary work, fragment maintenance, asset maintenance and next-context responsibilities. The application does not prescribe a separate repair workflow or infer that a smaller selection makes the work complete.
 
-**Transparent withholding.** Selected optional bodies and their qualification bundles may be withheld from the repair request. Text or qualifications independently required by the mandatory core must still be supplied, even if optional selection also references them. The receipt records actual supply; it must not call those supplied bodies withheld.
-
-The supplied-context receipt records the eligible exact bodies withheld, the inventory or previews supplied instead, why ordinary admission failed, and a safe disposition for any incomplete inventory or unavailable entry. It must not reveal inaccessible identities or content, or present a preview as a supplied body or complete method.
-
-Withholding changes no stored choice, source restriction, observation history, or accepted responsibility. Only an accepted primary repair changes selection.
-
-**Permitted activity.** Repair may only narrow or clear optional selection, request the necessary bounded repair reads described here, or honestly stop. It cannot rewrite current self, edit the meaning of fragments or supporting records, change mandatory state or required qualifications, switch models, publish a deliverable, or perform any substantive task action. This prohibition also covers task actions based on mandatory observations rather than previews. Inventory and previews do not establish the underlying task evidence.
-
-A read for repair must be permitted, exact, fully qualified, and able to fit the repair context. If it would overflow or omit a required part, it is unavailable; it must not be silently shortened. A later authorized repair decision must observe the actual read result before making a dependent choice, within the same remaining allowance and ordinary observation boundary. Narrowing or clearing must remain possible without reading every withheld body.
-
-If the mandatory repair core cannot fit, or current authority, funding, or remaining repair allowance cannot support it, block without dispatch.
-
-**Required response.** Repair includes an explicit mode-limited maintenance outcome and a next-context disposition covering fragments and supporting resources. For an allowed repair read or honest stop, the response may explicitly retain stored selection while awaiting evidence or leaving ordinary admission blocked. It cannot claim that preserving an oversized set repaired its fit. Missing intent invalidates the response without clearing stored state.
-
-No_change is valid when available evidence identifies no justified maintenance change. It does not claim inspection of withheld files. If a useful candidate change is known but prohibited in this mode, report it as bounded blocked or deferred. Unchanged files alone do not prove that no useful change exists.
-
-The mode permits no asset creation, semantic edits of fragments or supporting resources, hidden broad rewrite, or additional mandatory reflection call. Missing or malformed maintenance invalidates repair just as it invalidates an ordinary response.
-
-**Warnings remain subject to mode.** When the mode forbids semantic changes, repair cannot adopt a new applicability warning or required qualification through its maintenance receipt. It may report the candidate as blocked or deferred, preserve received mandatory observations, and narrow or clear optional selection. Existing accepted warnings retain their force. A new warning requires a later ordinary decision with the necessary authority. Neither warning adoption nor resolution may bypass locked-character controls.
-
-**Adoption and return to ordinary work.** At adoption, recheck source versions, qualifications, permissions, current self, mandatory state, and authority. A change during repair does not justify following newer bytes, reviving an unavailable source, or overlooking a new blocker.
-
-After accepted repair, require fresh normal admission. That request supplies the remaining exact selected full text and complete qualifications alongside the then-current mandatory state. The repair response cannot itself perform resumed task actions. A successful selection change does not guarantee that normal admission will fit or be authorized.
-
-**Failure and remaining allowance.** An admitted failed, uncertain, or no-op repair retains its resource and attempt charges. Restart, repeated diagnostics, a new event, or an unchanged choice does not reset the allowance. A later restricted repair may observe its predecessor's actual receipt only within the remaining bound.
-
-If repair cannot produce an admissible normal context, preserve the exact disposition and stop or block. Do not invent progress, supplied text, or additional authority.
+Historical restricted-repair attempts retain their original inputs, mode, charges and outcomes. They are not retroactively reclassified as ordinary work or successful repairs.
 
 ## Decision authority and freshness
 
@@ -404,7 +348,7 @@ Decline and nonresponse create no substitute acceptance, replacement persona, pu
 
 **Organization.** Persona-owned organization uses discovery, proposals, communication, accepted commitments, and evidence-led revision. No task keyword, fixed profession roster, compulsory coordinator, birth rule, or hidden domain pipeline chooses the solution. A human-imposed constraint or explicitly adopted reusable method may legitimately guide work. Authorized evaluators need evidence of the actual orchestration policy; a convincing unscripted transcript is insufficient.
 
-**Birth, where enabled.** Each creation preserves truthful provenance, a restricted seed and invitation preview, population and initialization limits, and bounded orientation. Creation grants no money, permissions, experience, membership, expertise, or commitment. Duplicate and concurrent requests must conserve the controlling limits. Declined participation does not erase spent resources. Existing personas and simple work need no creation ritual.
+**Birth.** Each actual creation preserves its requested identity, seed provenance, initial model authorship and invitation. No application population or initialization quota applies. Creating a persona does not establish experience, expertise, membership or accepted responsibility. Duplicate requests preserve the actual creation outcome without inventing another identity; actual usage remains recorded even if participation is declined. Existing personas and simple work need no creation ritual.
 
 ## Capabilities and actions
 
@@ -423,7 +367,7 @@ Stored guidance helps a persona prepare for an operation. It does not establish 
 
 An executable-version claim requires the claimed version to be genuinely bound to the observed operation. A filename, schema version, subsequently edited helper, or past success is insufficient. Missing server identity blocks a use only when the required assurance depends on that identity; otherwise, it narrows the claims that can be supported. All other admission and evidence safeguards in the [execution boundary](../design/WORK-AND-BOUNDARIES.md#capabilities-and-the-execution-boundary) still apply.
 
-Exact code and bulk data may remain outside model context when an authorized runner consumes their references. The persona must still receive complete relevant usage guidance and bounded actual results.
+Exact code and bulk data may remain outside model context when an authorized runner consumes their references. The persona still receives relevant usage guidance and actual results under its chosen context; no application result quota is imposed.
 
 **Keep each stage's meaning clear.** Finding an operation, supplying it to the model, and carrying it out establish different facts:
 
@@ -512,37 +456,21 @@ An empty optional citation list creates neither automatic review nor release. An
 
 ## Recovery, privacy, and retention
 
-Recovery must preserve the accepted state and unfinished responsibilities needed for honest continuation. It must also respect current source restrictions and retention rules. A restart cannot create permission, evidence, or a successful outcome that did not exist before it.
+Recovery preserves accepted state and unfinished work without inventing success or replaying accepted effects. UR-052 removes application access, source-sharing and retention quotas; actual provenance, exact identities, explicit stops and truthful outcomes remain necessary.
 
-**Recover state and its required notifications together.** Restart preserves:
+**Recover related state together.** Preserve current character and fragments, modeled state, selected context, adopted maintenance dispositions, unresolved corrections and warnings, accepted responsibilities, pending effects, unknown usage, cancellations and undelivered events. Notifications retain their actual identities and repeated delivery is recognizable. Restart, import and rollback do not manufacture a new persona origin, acceptance, provider result or observed effect.
 
-- Accepted character and fragments, separately scoped modeled state, selections, and invocation and maintenance dispositions.
-- Unresolved adopted deferrals, independently accepted applicability warnings even after their correction effort ends, obligations, and unresolved findings.
-- Pending effects, reservations, unknown exposure, cancellation, and undelivered events.
+**Preserve actual information use.** Record source relationships, supplied content and destinations. A summary or new filename does not change which source informed an earlier decision. Clearing later selections does not undo earlier exposure. Application metadata is not a claim of isolation from the host account or control over provider and recipient copies.
 
-Accepted state and its required notification recover together, subject to current source restrictions and retention. Repeated delivery must be recognizable. Waiting must be safe whether the awaited event arrives before or after registration. Import or rollback creates neither a new founder, new money, a successful effect, nor cross-host activation authority.
+**Retire stale guidance honestly.** Persona-authored retirement and explicit deletion decisions retain their actual scope. Filename reuse, old links and indexes must not silently turn retired material into current guidance. If a record or body is unavailable, report that fact; do not reconstruct its bytes, rewrite the original or claim a read that never occurred.
 
-**Carry source restrictions through every use and derivative.** Restrictions apply to reads and to search, indexes, snippets, summaries, self-prose, methods, relationships, selections, caches, exports, errors, and backups. Shortening or generalizing a private interpretation does not declassify it, even when it becomes persona-defining prose.
+**Missing receipts do not make old requests new.** An old action or invocation identity cannot become fresh unsent work merely because its receipt is missing. Keep an unavailable or uncertain outcome explicit and preserve any evidence needed to avoid duplicating an accepted transition. A new identifier does not establish that a previous effect never occurred. Fresh work uses current decisions and actual dependencies; an unknown bill alone is not a quota gate.
 
-Withdrawal prevents new affected use and disclosure. A call already exposed to content cannot erase that lineage by clearing context. Preserve actual or uncertain effects, and use a fresh permitted context or an honest block where needed. Do not promise to retrieve bytes already disclosed or undo an unobservable outside effect.
+**Retention and meaning are different.** A fragment can retain a fallible interpretation after its original supporting evidence becomes unavailable, but it cannot provide the missing observation or establish a historical claim that requires it. A digest does not restore source text. Losing a body does not resolve a warning, commitment or uncertain effect.
 
-**Retire stale guidance without losing required accountability.** Correction and retirement preserve minimal historical accountability under the deployment's retention rules while making stale guidance ineligible as current instruction. Filename reuse, links, old selections, and index entries must not resurrect retired or erased material. Keep deletion limits for outside copies explicit.
+Semantic consolidation and retirement remain primary-authored. Mechanical cleanup follows a real accepted retention or deletion choice. Do not erase records or modify user-owned delivered artifacts to satisfy an obsolete application ceiling. Record actual storage failures and incomplete saves. A small active corpus does not establish a small managed footprint, indefinite storage or control of arbitrary outside copies.
 
-**Missing receipts do not make old requests new.** An expired, reclaimed, or unknown old action or invocation identity cannot be admitted as a fresh request, treated as an unsent effect, reopened, or replayed because its receipt is unavailable. Return an honest unavailable or unresolved disposition. Require the current authority and reconciliation appropriate to the intended effect. A new identifier alone cannot bypass uncertainty about a prior effect.
-
-The retention design must preserve this boundary without requiring a particular tombstone or epoch mechanism. If it cannot preserve the boundary, block affected admission. Do not reclaim necessary protection or promise unlimited hidden history.
-
-**Distinguish evidence expiry from withdrawal of permission.** Permitted raw-evidence expiry is not revocation. An accepted experience-informed fragment may continue to shape the persona only when the governing retention and derivative-use policy allows it. Its interpretation remains fallible, with allowed attribution, surviving restrictions and caveats, and an honest unavailable-evidence limit. Continuing to express a method does not establish recollection or inspection of the expired event.
-
-If exact evidence is required for present use, withhold that use or block it. A hash or retained summary cannot replace the missing observation. If policy withdraws derivative use or requires derivative erasure, generalization does not exempt the fragment.
-
-Expiry cannot resolve a warning, commitment, or unknown effect. Conflicting retention and protected-state duties require an authorized disposition or blocked admission. They never justify prohibited payload retention disguised as accountability.
-
-**Separate mechanical cleanup from authored decisions.** Mechanical reclamation follows already accepted policy and eligibility. Semantic selection, consolidation, cue revision, and retirement remain primary-authored.
-
-This contract covers managed copies of prompt parts and supporting records. It does not establish control over arbitrary recipient copies or provider retention. Do not delete, modify, or revoke user-owned delivered artifacts to meet a persona-state cap. If such artifacts deliberately serve as backing for persona context or supporting records, disclose and account for that reliance and its limits. State which exact historical questions remain answerable within the retention window, rather than promising indefinite historical evidence as a condition of persona continuity.
-
-**Enforce isolation outside editable prose where it is needed.** A file interface or shared host account is not an isolation boundary. A deployment needing cross-persona confidentiality, protected evaluator data, or executable integrity must provide and demonstrate the relevant enforcement outside persona-editable prose. Profile limitations do not waive incurred authority or evidence obligations.
+**State the actual environment.** A shared host account and native record metadata do not provide filesystem isolation. Claims of confidentiality, evaluator independence or immutable execution must identify what actually establishes them. This requirement concerns truthful claims; it does not add an application sandbox, safety approval or source-access gate.
 
 ## Evidence boundary
 

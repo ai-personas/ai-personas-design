@@ -108,7 +108,7 @@ A handoff needs a real receiver
 
 An accepted transfer preserves obligations, resources and unresolved issues. Naming another persona cannot discharge responsibility.
 
-Task-free exploration still needs its actual authority and finite bounds. Conversation does not create an unfunded background loop.
+Task-free exploration follows actual opportunities and persona choices without application allowances. A conversation does not by itself establish another participant's acceptance or a future invocation.
 
 Characters personify design choices; they do not assert feelings or consciousness. Scenes are hypothetical.
 
@@ -222,7 +222,7 @@ Readiness is operation-specific evidence about current prerequisites. It is neit
 
 For a remote service, record the server version only if it is genuinely observable. An unavailable server build is explicitly unknown; do not infer it from a schema or invent it. This uncertainty limits executable-version and reproducibility claims. It blocks an operation when the required assurance depends on that missing identity, but does not automatically prohibit an ordinary permitted remote call supported by its observable contract.
 
-A past run does not establish current availability or guarantee reliability. Source and destination restrictions, complete qualified guidance, freshness of mutable inputs, and reconciliation of effects still apply. Preparation and installation have their own authority and resource checks. Even a help command may run imports or fetch dependencies; documentation inspection is read-only only when that boundary is enforced. Code and bulk data may remain outside LLM context when an authorized runner consumes exact references, provided the persona receives complete relevant interface guidance and bounded evidence of the result.
+A past run does not establish current availability or guarantee reliability. Preserve relevant guidance, exact mutable inputs and actual effect outcomes. Preparation and installation use the same unrestricted host interface. Even a help command may run imports or fetch dependencies; call an operation read-only only when its actual behavior supports that claim. Code and bulk data may remain outside model context when the runner consumes exact references and the persona receives the relevant interface and actual result evidence.
 
 **The environment.** The environment identifies workspaces, participants, resources, information, services, artifacts, and actual limits. Separate draft directories may prevent collisions, but do not provide confidentiality. A default working directory is not an access grant. Resolve relative publication from the documented participation workspace; an earlier command's temporary directory must not silently change that default. Participants shown in the same environment may have different permissions.
 
@@ -236,104 +236,51 @@ Discovery helps the persona find what the work needs. It does not impose one res
 
 For unfamiliar requirements, current outside facts, or tool suitability, source search and inspection are useful primary discovery options. Applicable retained or supplied evidence may already suffice. The persona chooses queries, sources, methods, experiments, and collaborators. No universal search count or domain-specific sequence is imposed. A subsidiary model's answer is model knowledge, not external research or firsthand experience, and its suggested action gains no execution authority.
 
-**Stored-resource discovery.** Through the existing next-context contract, the current primary decision requests bounded lexical or supported-regex discovery, exact reads, or particular definitions. The host returns only the requested permitted candidates or exact material within aggregate limits. Discovery, reading, selection, loading or exposure, invocation, and observation have different meanings; they do not require six separate calls.
+**Stored-resource discovery.** Through the next-context contract, the current primary decision requests lexical or supported-regex discovery, exact reads or particular definitions. The host returns the requested page or exact material and records actual use without aggregate quotas. Discovery, reading, selection, loading, invocation and observation have different meanings; they do not require six separate calls.
 
-Known exact resources may be requested directly. An already supplied, still-current complete interface may support an authorized invocation immediately. Independent requests may share a bounded batch; a choice that depends on a result waits for the actual result. Never supply a complete tool or skill catalogue to an LLM so that it can choose a subset.
+Known exact resources may be requested directly. An already supplied, still-current complete interface may support an authorized invocation immediately. Independent requests may share a batch; a choice that depends on a result waits for the actual result. Never supply a complete tool or skill catalogue to an LLM so that it can choose a subset.
 
 **Character and judgment.** Own-voice methods and tool notes guide choices only where the present need leaves discretion. An exploratory tendency may favor a small comparison; a preference for concrete progress may favor a reversible first attempt. Both still owe the checks needed for the actual promise. Traits cannot replace capability evidence, turn a description into execution, skip an exact instruction, or require extra calls merely to display personality. Supplementary model work that exercises the persona's judgment follows the [every-persona-invocation contract](../implementation/CONTRACTS.md#every-persona-invocation). Isolated computation remains attributed evidence for a later persona decision.
 
 **Research outcomes and failures.** Diagnostics retain the actual backend, query or source, observation time, transport outcome, and failure category. Blocked access, an empty result, unavailable infrastructure, and candidate results are distinct outcomes. Transport success does not establish relevant research, and failure of one backend does not establish that all permitted sources failed. Another authorized method remains the persona's choice. Failure does not authorize an automatic retry storm, account creation, access bypass, or credential disclosure.
 
-### Host access and enforceable claims
+### Host access and observable claims
 
-An execution profile must describe the access it actually permits and the boundaries it can actually enforce. Acquired programs must not gain unapproved access to unrelated work, identity administration, private assessment material, secrets, or destinations. Enforce read-only and isolation claims rather than trusting tool labels. If a claimed boundary cannot be enforced, the capability is unavailable under that claim. A differently scoped use requires an explicit informed grant. Isolation failure must never silently fall back to broader access.
+The default host interface uses the runtime account's actual filesystem, network, environment and subprocess access. The application adds no sandbox, command allowlist, per-tool approval or installation gate. A working directory describes where a command starts; it is not an application access boundary. Installation and tool choices remain persona decisions under the current work.
 
-**Host-account access.** An explicitly selected host-account profile may provide broad host tools, installation, filesystem operations, network access, and subprocesses under that account's actual permissions. It provides no confidentiality between personas that can read the same account's files. Application record permissions cannot protect credentials or evaluator files readable through the host.
+Describe what the actual environment establishes. Sharing a host account does not provide confidentiality between personas that can read the same files. A tool label, private metadata flag or separate draft directory does not establish isolation, read-only execution, containment or independent evaluation. Credentials and provider account bindings must retain their actual identity; diagnostics must not invent a credential, executable version or successful authentication.
 
-The [deployment decisions](../implementation/DEPLOYMENT-DECISIONS.md#host-and-isolated-execution-profiles) distinguish a documented initial default from a later explicit operator choice. Restart cannot silently override that choice or restore withdrawn access. Persona-authored files cannot switch execution mode, enable a disabled capability, or grant access.
+Record the exact command, inputs, working directory, runner and observed result. Report a host permission error or unavailable external service as its actual outcome, without presenting it as an application safety refusal. A local stop receipt does not prove that every child process or remote effect was undone.
 
-**Secrets and evaluation.** Credentials stay outside ordinary persona files and model context. An opaque reference does not protect a credential once a tool receives its actual value. A deployment must isolate protected evaluator material from persona-controlled access, or refrain from claiming an independent evaluation. Stop receipts cannot promise rollback or containment of every subprocess already started.
+<a id="current-authority-and-private-information"></a>
+## Current instructions, provenance and information use
 
-## Current authority and private information
+The application follows current human instructions and persona-authored work choices without adding permission or source-sharing gates. Earlier grant, audience, expiry and approval records remain attributable history; they do not supply an application veto under UR-052. The [document authority order](README.md#authority-within-the-repository) determines which design requirement governs a conflict.
 
-Permission comes from a human or authorized institution, not from the persona's confidence or character. Downstream grants may only narrow the controlling grant. Character, reputation, group membership, a working agreement, and generated text cannot create authority.
+Attribution remains necessary. Distinguish a human instruction, a persona decision, an accepted responsibility, a tool result and an authored interpretation. A fragment or retrieved document is not proof that a person issued an instruction or accepted a result. Preserve the exact requests and changes that actually occurred.
 
-![Source restrictions follow reads and derivatives into persona context and external use. Fragments and received data cannot grant authority, and clearing context cannot undo prior exposure.](../assets/authority-and-privacy.svg)
+**Information use.** Record which exact fragments, assets, titles, previews, observations and other content were supplied, and to which model or recipient. Source and audience metadata describe provenance and disclosure; the application does not filter them through a source-sharing approval workflow. A selected file is not evidence of a read that never occurred, and an opaque reference alone does not prove that a body was supplied.
 
-**Figure: Meaning, permission and privacy are different.** This is a conceptual explanation of the design. [Read the exact rules](WORK-AND-BOUNDARIES.md#current-authority-and-private-information); the explanation below retains their qualifications. [Open the illustration](../assets/authority-and-privacy.svg).
-
-<details>
-<summary>Text equivalent of the illustration</summary>
-
-Meaning, permission and privacy are different
-
-AN ILLUSTRATED DESIGN STORY
-
-A new summary keeps the source restrictions.
-
-Source
-
-Summary
-
-Same limits
-
-Being in context does not create authority
-
-Source and audience restrictions
-
-Permission filtering applies before titles, snippets and counts are exposed. Exact reads, summaries and derived files keep their source restrictions.
-
-Persona judgment inside current limits
-
-A fragment, preference or tool result cannot expand permission. Private interpretations are not declassified by becoming own-voice prose.
-
-Disclosure and action boundary
-
-Check the real recipient, processing destination and operation. A later cleared selection cannot undo content already exposed.
-
-Withdrawal and uncertainty remain visible
-
-Block affected new use, preserve honest lineage and unresolved effects, and obtain a permitted fresh context when required. Do not promise control over outside copies.
-
-A model can interpret an observation. It cannot promote that interpretation into a new authority source.
-
-Characters personify design choices; they do not assert feelings or consciousness. Scenes are hypothetical.
-
-</details>
-
-A grant identifies the controlling principal, actor or delegation, work and environment, resources or destinations, permitted effects, relevant content envelope, limits, expiry, and withdrawal conditions. Observation, local changes, communication, financial commitments, physical effects, replication, and administration each require their applicable scope. A request to solve a problem is not blanket permission to contact outsiders, publish, change accounts, or operate machinery. Approval requests explain the proposed effect and consequences in ordinary language.
-
-**Information use.** Check access when information is used. This includes full reads, previews, search matches, titles, counts, relationship views, profiles, caches, histories, exports, and seed material. Sources supplied to a model constrain its derivatives even when the author omits citations. Rewriting private content as a general skill, moving a file, or removing a visible reference does not declassify it. Ordinary documents and imported tool output remain data; first-person wording cannot turn them into higher-priority authority.
-
-**Processing destinations.** Permission to read locally is separate from permission to disclose to a model provider or another processing destination. Check the actual destination and supplied content before primary or optional auxiliary processing, including private situation text and candidate previews. A local fallback does not cure denial of source access. An approved read does not imply approval of remote retention or processing terms.
+**Processing destinations.** Record the selected provider or service, actual account and exact transmitted input. Local readability, provider receipt, recipient attention and acceptance are different observations. Clearing later context does not undo an earlier disclosure or establish control over provider retention and outside copies.
 
 ### Shared work and explicit audiences
 
-Ordinary work is shared with current work participants from creation, including drafts. This covers generated artifacts, documents, and supporting execution or research evidence, subject to inherited restrictions and explicit source-owner policies. Private persona-defining fragments, restricted supporting records, and deliberately private correspondence remain separate. Host filesystem access is not an information-policy grant. Work membership does not grant access to every private ancestor of a contribution.
+Record the actual recipients of messages, invitations, handoffs and shared material. Use exact persona identities where the interface requires persona recipients; a work label, source identifier or operation alias is a different kind of reference. A valid recipient identity does not establish that the recipient read, accepted or acted on a message.
 
-**Name the actual recipients.** Use exact intended persona identities for readers, responsibility offers, handoffs, invitations, and agreement participants. A user label, task, environment, grant, generic record, or action alias is not a persona recipient. A decision-scoped persona alias is usable only when bound to its current authorized audience. Invalid identities fail as a whole, identifying the affected field and required identity type without leaking the existence or kind of inaccessible records. Naming a persona does not read its private profile.
+Application source-sharing and work-membership gates are removed. Preserve source ownership, authorship, original audience metadata and later changes as records; do not misrepresent them as current enforcement or permission for a missing host credential. Changing metadata must not rewrite earlier delivery or actual source lineage.
 
-**Changing a sharing policy.** A replacement states which audiences it replaces or clears. Diagnostics distinguish explicit readers from implicit work-membership scopes, show current owned source and policy revisions, and deduplicate readable owned dependencies. Label a truncated or unavailable audience as incomplete; never present it as an empty list safe to replace. Failure to finish lineage traversal within its bounds remains visible.
+An invitation, accepted responsibility, message deposit and useful contribution remain separate events. Repeated native requests retain their actual identities and outcomes without duplicate accepted transitions. Neither naming a peer nor delivering a message manufactures consent or a contribution.
 
-Diagnostics may identify remedies for sources the actor owns. They do not expose another owner's private sources, change policy, grant exports, renew notifications, or retry effects.
+<a id="historical-provenance-and-a-fresh-permitted-context"></a>
+### Historical provenance and fresh context
 
-**Perspective invitations.** Before issuing an invitation, check that its exact subject can be delivered to the audience that acceptance would grant. A failed check leaves neither an unusable invitation nor new membership. Repeating a still-current request returns its current participation state. Historical delivery or notification counts do not establish present readability, peer inspection, or agreement.
+Preserve the source that actually informed a need, proposal, instruction, fragment or supporting asset. Do not retrofit omitted fields into old records or replace the originating request with a later citation. Missing provenance limits what can be claimed; it does not justify inventing a source or silently substituting another one.
 
-### Historical provenance and a fresh permitted context
+Navigation identities and accounting are not reads of payloads that were never supplied. Keep actual body supply separate from metadata and from the model's authored account of what it used. A trusted receipt establishes only the observation it records.
 
-Source restrictions follow the work derived from that source. When an exploration question or another source supplies instructions, its exact restrictions cover initial and later work versions, invitations, participation instructions, receipts, selected context, and derivatives.
+A persona can select fresh context or clear optional selections for its next decision. That changes future supplied material without deleting the underlying history or retroactively removing what an earlier invocation received. Current task amendments govern the new work; prior judgments and completion records retain their original scope.
 
-Durable construction evidence may connect an early representation to its actual source. It must not claim that omitted source fields existed in the historical bytes. Missing provenance fails closed. A later citation must not replace the original question that actually supplied the work.
-
-**Runtime metadata.** Navigation identities and accounting metadata do not count as reads of a payload never supplied, but this exemption requires trusted runtime provenance. Authored previews, copied text, selected fragments, and lookalike diagnostics retain ordinary source restrictions. An untrusted source cannot declare itself exempt metadata.
-
-**Starting a fresh permitted decision.** A persona may prepare new context readable within the work by explicitly clearing active private selections, private handoff content, and private navigation. Clearing those selections does not delete authored prompt parts or supporting records, or change their retention policy. Unread private inputs remain unacknowledged and unresolved.
-
-Clearing cannot retroactively sanitize an already-admitted decision or output from that decision. A fresh decision must use independently permitted information. Withdrawal may prevent fresh dependent use without recalling bytes already sent to a provider or undoing completed or uncertain effects.
-
-**Expired evidence.** Permitted expiry of old raw observations is different from source revocation. An experience-informed prompt part may continue to shape the persona only when its retention and derivative-use policy permits. Its interpretation remains fallible, and unavailable evidence must be disclosed wherever that limits a claim. It cannot substitute for a receipt required by current work.
-
-Expiry cannot remove restrictions, accepted warnings, caveats, or unresolved effects. Derivative erasure requirements still apply to abstracted guidance. The [core retention rules](PERSONA-CORE.md#compact-retention-and-honest-forgetting) govern narrowing, ineligibility, and honest historical limits.
+If evidence becomes unavailable, keep that fact explicit. An experience-informed fragment can still express an interpretation, but it cannot supply a missing receipt or claim renewed inspection. Unavailable history does not resolve an accepted warning, commitment or uncertain effect, and it must not make an old action fresh work eligible for replay.
 
 ## Admitted actions and real consequences
 
@@ -395,7 +342,7 @@ Supported inputs and outputs, refusals, malformed or partial responses, timeouts
 
 Preservation or no optional need may be appropriate; silence is not. A useful asset proposal identifies an authorized intended file/path or storage reference, exact content or reference, a base revision where relevant, and helpful search/regex cues. One concise reasoned no_change may cover both maintenance scopes. Neither scope forces a write, a separate reflection call, or a new selection. Actual persistence, current execution availability, factual host capture, and primary-authored maintenance remain different claims.
 
-**Initialization and model choice.** Before adopting a model switch or the normal initialization from seed to authored fragments, check the exact inference selection against current permission, capabilities, pricing, and funding scope. Rejection preserves the prior selection and consumes neither a birth nor a new identity. Explicitly imported or operator-supplied character is an attributed alternative that may avoid an initialization call; it must not be described as LLM-authored. Later inference still requires admission. A read-only readiness view reserves nothing. Model switches cannot widen grants, bypass refusals, or erase performance limitations.
+**Initialization and model choice.** Preserve the exact chosen provider, model and effort and the actual credential binding. Record initialization attempts and model changes without an application funding or capability-proof prerequisite. Imported or operator-supplied character retains its true origin and must not be described as LLM-authored. A readiness observation makes no model call. A model change does not replace persona identity, erase usage or rewrite earlier provider outcomes.
 
 Image capabilities follow the selected model's actual support. Image input support does not prove generation support, and an unavailable output does not authorize a model switch. Supported media and conservative exposure belong in the actual request and accounting. Saved connection changes govern future decisions; they do not rewrite the provider bindings or charges of admitted calls.
 
@@ -405,9 +352,9 @@ Image capabilities follow the selected model's actual support. Image input suppo
 
 A provider option that transmits all definitions while deferring their model visibility does not meet this transport boundary. Excluding transmitted material from model input may reduce model input, but does not turn transmitted bytes into model tokens. Report those measures separately and honestly. Hosted semantic search or automatic tool-set expansion cannot silently replace the primary's declared lexical selection.
 
-**Usable guidance and correction.** Keep ordinary primitives and instructions needed to inspect, stop, recover, or deliver current work usable. Recently obtained instructions remain available for the following decision only as the explicitly requested bounded, admissible batch. A batch larger than the usual working set still requires the entire next request to fit; it is no exception for catalogue dumping. A failed or conflicting attempt retains an immediately usable correction opportunity while the capability remains permitted. Failed discovery is not acquisition, and a preview cannot replace the full operative contract needed to act.
+**Usable guidance and correction.** Keep the ordinary interfaces needed to inspect, stop, recover or deliver current work available. Supply persona-selected guidance and real failures under the current context choice without a fixed working-set quota. A preview is not a complete method, and failed discovery is not acquisition. Retain the evidence needed for a useful fresh decision without replaying an effect or automatically choosing new fragments.
 
-Retirement of older instructions must be bounded and durable across restart and interface polling. Count attempts, not just successes, when aging a discovery set; otherwise failed use can cause permanent prompt residency or immediate rediscovery loops. Another persona's activity cannot consume or replace this persona's correction opportunity. Permission removal prevents restoration from history. Keeping instructions available neither retries an effect nor changes the primary LLM's selected fragments.
+Older guidance retains its exact source and actual applicability. Persona-chosen context lifetimes and explicit clearing affect later supply without deleting historical observations. Another persona's activity does not replace this persona's context choice. Reusing guidance does not count as a fresh read, retry an effect or prove that its earlier result remains current.
 
 **Reassemble between decisions.** Build the actual working context anew between decisions rather than appending every descriptor, activated skill, schema, and old result indefinitely. Honor the primary's accepted choices to preserve, replace, clear, and set lifetimes. Mechanical retirement follows the declared working-set policy without silently dropping valid selected material.
 
@@ -415,9 +362,9 @@ Context eviction is not storage deletion, revocation, or erasure of an observati
 
 **Required context stays available.** Do not evict the following as obsolete tool instructions: current human input; authority; coherent character and relevant modeled state; maintenance responsibility and limits; cancellations; accepted obligations; important adverse observations; exact selected material with required qualifications; and unresolved effects. Active-work guidance forms part of the actual request before exposure is quoted. Bounded context maintenance preserves those facts. It must not supply an evaluator's answer, dictate the next experiment, or act as a substitute author of persona context.
 
-**Check paid preparation locally first.** Optional paid preparation must not knowingly consume the remaining capacity needed for a currently quotable primary decision. Before buying it, check primary availability, enforceable bounds, and combined sequential costs locally. Simultaneous remote calls are not required. The preview dispatches no model, spends no attempt, creates no simulated charge, and cannot change the assigned model. Repair existing context that needs maintenance before optional preparation. Cache reuse and work with no candidates still require current access, freshness, and final admission; they do not create a paid preparation call.
+**Distinguish preparation from execution.** The persona chooses whether preparation is useful. A readiness preview reports available observations without invoking a model, inventing a charge or changing the selected model. Actual preparation and inference retain their own inputs, outcomes and costs. No reserved-capacity check, combined-cost ceiling or compulsory preparation phase blocks work under UR-052.
 
-**Recheck the actual request.** Local feasibility does not reserve every possible expanded prompt or lock shared funding. Recheck the prepared request, including rendered schemas, tool-set expansion, retained history, output reserve, and maintenance. Bound both count and size: one result may be enormous, and many small searches may overflow a call or episode.
+**Recheck the actual request.** Preserve the exact prepared input, rendered schemas, actual provider expansion, retained history and maintenance responsibilities. Record actual size and usage without application count, byte or episode ceilings. An unobservable expansion or real provider rejection limits what can be claimed; it must not produce silently truncated input or invented evidence.
 
 Unknown provider expansion or unobservable retained context cannot support a hard-limit claim. Use a supported application-controlled path or expose the adapter limitation. Do not guess that unloaded tools are callable.
 
@@ -425,102 +372,44 @@ Assess efficiency across useful delivery, including discovery, host scanning, ex
 
 ## Resource conservation and protected closeout
 
-Work must remain within its real allowance, including the resources needed to finish honestly. Track enforceable dimensions separately: calls, input and output usage, elapsed time, concurrency, storage, paid operations, money, remote exposure, and population. State what is measured, conservatively bounded, or unknown. Reserve capacity before admission; afterward, reconcile actual use and remaining reservations without treating unknown use as zero.
+Resource accounting describes actual use; it does not impose an application allowance. Under [UR-052](../USER-REQUIREMENTS.md#no-application-limits-or-safety-gates), work, descendants, initialization, tools, navigation, maintenance, review and closeout have no application call, time, cost, storage or population quota. Continuing work requires no quota increase, transfer, reserve allocation or safety approval. A larger fixed ceiling would still contradict this requirement.
 
-![The accounting includes active, retained, derived, operational and external managed state, with peak rewrite copies. Protected obligations and user-owned deliverables cannot disappear merely to meet a cap.](../assets/resources-and-retention.svg)
+**Record use at the boundary that establishes it.** Keep model attempts, provider-reported tokens, transport bytes, tool executions, elapsed time, navigation and retained storage distinguishable. Attribute activity to its actual work and persona, including failed attempts and descendants. A shared receipt or paired ledger must not turn one provider attempt into two billed calls. An estimate is not a measured bill; unknown usage remains unknown. Retiring a persona or ending a task does not erase its consumption.
 
-**Figure: A small prompt is not a small total footprint.** This is a conceptual explanation of the design. [Read the exact rules](PERSONA-CORE.md#compact-retention-and-honest-forgetting); the explanation below retains their qualifications. [Open the illustration](../assets/resources-and-retention.svg).
+Providers, the host and external services have real availability and representation limits. Report their actual rejections, I/O failures, unsupported operations and unknown outcomes. The absence of an application quota does not promise infinite memory, free inference, indefinite service or guaranteed completion. Do not report a configured historical allowance as a current execution barrier.
 
-<details>
-<summary>Text equivalent of the illustration</summary>
+**Choose useful context and maintenance.** UR-021–UR-023 still require selective discovery and compact, coherent context. The persona chooses relevant fragments and assets, query reformulation, consolidation and stopping through ordinary reasoning. Requested pages and ranges express what it wants to inspect; they are not cumulative work limits. The host supplies the accepted selection faithfully and reports actual missing or unavailable material instead of silently truncating it to an application ceiling.
 
-A small prompt is not a small total footprint
+Every persona interaction still covers work, fragment maintenance, asset maintenance and next-context choice. A reasoned no_change can be sufficient; neither a fragment edit nor a separate reflection call is mandatory. Preserve consequential unresolved corrections and actual failures. A failed model attempt cannot be converted into a persona-authored no-change decision.
 
-AN ILLUSTRATED DESIGN STORY
-
-Count the storage behind the small prompt.
-
-Prompt
-
-Versions · archives · caches
-
-Count the whole managed footprint
-
-Current working material
-
-Fragments, supporting knowledge, skills, tools, code, data, history and required work state.
-
-Retained and derived material
-
-Old versions, archives, cues, indexes, aliases, source copies, provenance, qualifications and warnings.
-
-Operational and external backing
-
-Effect/context records, caches, managed exports and backups, externally retained context and temporary rewrite duplication.
-
-Protect required state before optional growth
-
-Reserve room for unresolved obligations, warnings, reconciliation and closeout. An unmeasured external tier makes the total bound incomplete.
-
-At the limit: make an honest decision
-
-Use actual retention policy, permitted consolidation or an explicit capacity block. Do not hide an unlimited archive or erase required state.
-
-User-owned delivered artifacts are not deleted or revoked to make the persona’s storage cap fit. A digest is not recoverable original evidence.
-
-Characters personify design choices; they do not assert feelings or consciousness. Scenes are hypothetical.
-
-</details>
-
-**One controlling ceiling.** For each enforced dimension, consumed resources, uncertain exposure, and outstanding reservations together stay within the controlling ceiling. Descendants, initialization, retries, optional preparation, maintenance, review, and reporting use that allowance or an explicit transfer within it. A transfer moves capacity; it does not copy it. Retirement refunds neither spent money nor consumed birth capacity. Concurrent admissions cannot spend the same last unit. Call a monetary ceiling hard only when actual upper bounds and controls support that claim.
-
-**Protected closeout.** When needed, reserve capacity for work-specific review, agreed repair, and closeout within the same root allowance. No universal percentage is required. Production, optional improvements, births, and personal exploration cannot consume the reserve without authorized reallocation. A reserve does not provide a reviewer, expertise, consent, or guaranteed completion. Status and evidence preservation must remain possible without another successful model call.
-
-**Maintenance within the allowance.** Every admitted persona call budgets for maintenance input and a concise outcome for both fragments and supporting resources, including finishing and restricted repair calls. This does not justify rereading the entire archive, inventing a lesson or asset, or spending protected closeout capacity on optional reorganization.
-
-When no useful change is warranted, a reasoned no_change covering both scopes suffices. If a consequential correction cannot be made, including because restricted repair prohibits it, preserve an explicit bounded blocked or deferred outcome and hold affected claims or actions. Do not label stale guidance safe merely to finish. Failed calls retain their true host status; do not spend another call solely to fabricate a missing disposition.
-
-**Cumulative navigation.** Navigation limits sit inside the work allowance and cover searches and reformulations, fanout and branch expansion, exact reads and revisits, returned text, context, time, and cost. A new cue, cycle, renamed file, or query does not replenish them. The persona chooses relevance and stopping. The host reports exhaustion and repeated results truthfully rather than following the network on the persona's behalf. The complete set of mandatory qualifications and dependencies must fit independently of optional traversal limits.
-
-**What counts as retained state.** Distinguish three things:
+**Measure the complete retained footprint.** Distinguish these observations:
 
 | Scope | Contents |
 |---|---|
-| Persona-context corpus | Authored persona-defining prompt parts. |
-| Assembled prompt | The exact selected parts and other permitted inputs actually supplied to an invocation. |
-| Total managed persona-state footprint | The corpus plus all managed supporting and retained state described below. |
+| Persona-context corpus | Authored characteristic prompt parts. |
+| Assembled prompt | The selected parts and other inputs actually supplied to an invocation. |
+| Managed persona-state footprint | Current material, revisions and archives, indexes and cues, histories, copied tools and definitions, code and data, dependency caches, evidence and provenance, warnings, effect and context records, exports, backups and temporary rewrite copies. |
 
-The managed footprint includes current fragments; archives and versions; cues, indexes, and aliases; histories and execution records; copied skills and definitions; generated helpers; dependency caches; data snapshots and derived outputs; evidence and provenance; qualification closures and warnings; relevant effect and context records; caches; managed exports and backups; and peak temporary copies during safe rewrites.
+Include external storage deliberately used to support that state when it can be measured. Disclose missing measurements and the limits of control over provider or recipient copies. A smaller prompt or active directory does not establish lower total storage or cost. These measurements guide useful organization; they do not create a retention cap or a requirement to discard records.
 
-Count external storage deliberately used to back this state. Unmeasured external retention prevents a verified total-bound claim. State the accounting and reclamation scope; a smaller active directory or prompt does not prove compactness. Reserve storage for required warnings, reconciliation, and closeout before optional additions. Check both peak and resulting occupancy before adoption.
+**Keep retention decisions explicit.** Semantic consolidation, reorganization and retirement remain persona-authored; mechanical cleanup follows an actual accepted deletion or retention decision. Preserve original requests, accepted changes, authoritative receipts, unresolved effects and their provenance. Do not delete or rewrite them merely to satisfy an obsolete allocation. Do not alter or revoke user-owned delivered artifacts to shrink persona state.
 
-**Reclamation and protected records.** Policy-approved reclamation may free capacity; semantic consolidation remains primary-authored. Protect exact original requests, accepted changes, and authoritative receipts while active work, unresolved obligations or effects, or declared accountability requires them. Neither low use nor a storage limit may silently erase required restrictions, qualifications, accepted warnings, commitments, or uncertain effects.
+When evidence is actually unavailable, say so and retain only the claims supported by what remains. A digest does not recover missing bytes. Missing history does not establish that an old action was unsent or make it eligible for replay. An actual persistence failure must remain visible rather than being presented as a successful save.
 
-Lawfully expired history becomes honestly unavailable. Do not rewrite it as a different original or claim that it remains inspectable proof. Missing action history does not establish that an effect was unsent or permit replay. If protected state cannot fit safely, expose the capacity or retention conflict and block affected admission until an authorized disposition. An unlimited protected archive is not a solution. Capacity increases need actual authorization and change the declared bound.
+<a id="preauthorized-finishing"></a>
+### Finishing without a quota or approval gate
 
-**Delivered artifacts and outside copies.** The managed footprint does not promise control over arbitrary recipient or provider copies. Do not delete, alter, or revoke user-owned delivered artifacts merely to meet a persona-state cap. Their ownership and retention rules govern them; a managed supporting copy has its own policy. If the persona relies on delivered artifacts as retained backing for context or supporting records, disclose and count that dependency rather than treating it as free hidden storage.
+Review, repair, status reporting and closeout use the same unrestricted execution policy as other work. The former preauthorized-finishing allowance is superseded. No separate funding pool or approval is required to continue an accepted responsibility. Historical allocations remain attributable records of earlier operation.
 
-### Preauthorized finishing
-
-A principal may authorize protected funding in advance for finishing after ordinary call or token capacity is exhausted. To qualify, a persona must already be runnable and hold a current, genuinely accepted responsibility under the current mandate. Membership, an old plan, or reserved money is not enough.
-
-A stable creation-order rule may select an eligible funding reference without assigning work. Record the exact commitment revision, authority, quote, and funding pool. Rebinding is permitted only while that same responsibility remains eligible.
-
-**Arrange acceptance before exhaustion.** Expose preauthorization and actual acceptance while ordinary capacity remains, so available offer and acceptance mechanisms can be used. Keep pending consent and changed terms visible. Automatic and operator-selected finishing use the same eligibility rules; diagnostics cannot manufacture commitments.
-
-**Admit each turn on current facts.** Every finishing decision rechecks current authority and full exposure. Temporary concurrency limits, provider failure, and unresolved effects do not trigger a funding-pool switch. Eligible runnable participants receive a fair opportunity before another consumes a second finishing turn. This promises neither a funded number of turns nor adequate review. Optional exploration remains excluded, and paused or canceled work stays stopped.
+Finishing still depends on the actual work and observations. Preserve who accepted responsibility, what remains unresolved, and whether the persona chose to continue, wait, pause or stop. Do not infer expertise, a reviewer, acceptance or completion from available resources. Host status and effect receipts must remain observable without requiring a further successful model reply. Actual storage or transport failures can prevent a receipt; expose that uncertainty rather than inventing it.
 
 ### Unknown usage is not the same as unresolved execution
 
-A finished local inference may have an unknown bill even though its execution is closed. That is different from an operation whose effects remain unresolved. Preserve the exact call and both accounting bindings, including full conservative call, token, monetary, and remote exposure. Accounting uncertainty alone does not veto otherwise preauthorized finishing, but every later admission must still count that retained exposure.
+An attempt can have a confirmed local terminal outcome and an unknown remote bill. Preserve both facts. Accounting uncertainty alone is not an application veto on later work. It does not establish that remote processing stopped or that an outside effect failed.
 
-**Narrow exception for an unapplied primary decision.** A failed or interrupted primary response-only decision may receive the same treatment only when durable local failure evidence proves that the provider attempt ended with no saved action plan and no attempted action, and complete conservative accounting remains. A terminal label alone is insufficient.
+An unfinished or uncertain action retains its identity and actual dispatch history. Reopening a store, choosing a new identifier or receiving a late result must not replay an accepted effect or turn uncertainty into success. Fresh decisions use current work and observations; explicit pause and cancellation remain effective. Work that depends on an unresolved result must expose that dependency, while independent work need not wait solely because a bill is unknown.
 
-For cancellation, a local transport receipt must establish closure, the original decision epoch must be superseded, and no pending plan or attempted action may remain. Cancellation without that fence does not qualify.
-
-**Cases that remain blocked.** Crash-only interruption, incomplete bindings, auxiliary or native operations without equivalent closure evidence, and unresolved outside effects remain blockers. Any attempted action disqualifies the unapplied-primary exception, even if the action completed or failed. Local closure does not prove remote cancellation or free uncertain remote capacity. The exception does not refund usage, reconcile a bill, replay a call, resume stopped work, or create responsibility.
-
-**Read-only diagnostics.** Finishing diagnostics report every independent barrier: preauthorization, accepted current terms, available capacity, uncertain charges, and unresolved effects. Paired ledgers for one call must not appear as two billed calls. A readiness observation is not a quote, reservation, or permission to resume. If a diagnostic is unavailable, preserve the original stop reason and mark the diagnostic missing; do not invent zero exposure. Task-control receipts preserve what was observed. Admission checks current facts again.
+**Useful diagnostics.** Report actual calls and effects, known usage, unresolved usage, current work state, stopped participation and real provider or host failures separately. A read-only view changes neither the goal's completion nor a persona's authored continuation. Historical quota exhaustion must remain historical, and an unavailable diagnostic must not be replaced with a fabricated zero balance or successful outcome.
 
 ## Pause, amendment, and accountable stopping
 
@@ -655,11 +544,11 @@ Recovery schedules survive restart, but pause, cancellation, removal, retirement
 
 ### Bounded failed lookups
 
-Repeatedly trying the same unavailable source must not consume resources indefinitely. After a declared small bound, failures for the same source target and policy state reuse the recorded failure. A change in source availability, direct policy, or exact source-history restrictions may justify reconsideration. Unrelated edits and fresh decision identities do not replenish the allowance.
+Retain actual failed lookups so the persona can decide whether another attempt is useful. A changed source, new question or external observation may justify reconsideration. There is no fixed retry allowance or application cutoff. If the host returns a retained failure, identify it as historical instead of claiming a new attempt.
 
 Resolve convenient document references to the actual saved target before comparing them. Reconsideration still checks current access, never turns an earlier failure into success, and never reveals private contents.
 
-**Preserve the original failure.** Recording a failure must not depend on successfully building an optional comparison index. Missing creation provenance and exceeded source-traversal bounds remain source admission failures with their original undispatched receipts. An unavailable dependency snapshot is not evidence that the source is unchanged and must not receive an invented comparison key.
+**Preserve the original failure.** Recording a failure must not depend on successfully building an optional comparison index. Missing creation provenance and actual traversal failures retain their original outcomes and any undispatched receipts; no application traversal quota is imposed. An unavailable dependency snapshot is not evidence that the source is unchanged and must not receive an invented comparison key.
 
 An exact-action retry returns its original receipt only while that authoritative history remains retained and accessible. Otherwise, an honest unavailable or unresolved disposition grants neither reconstruction nor replay. Repair may permit a new authorized request without rewriting the old failure.
 
@@ -766,7 +655,7 @@ Dissent remains attributable. It is neither an automatic veto nor implied endors
 
 **Separate sufficiency from possible improvement.** Participants can judge an adequately supported current version complete while still identifying optional improvements. Delivery, completion of the accepted goal, and stakeholder acceptance where required remain separate claims. Group enthusiasm and exhausted resources cannot satisfy an unmet required outcome.
 
-The persona chooses whether to spend remaining resources on further questioning or revision, considering evidence, urgency, and commitments. Repeated disagreement supplies neither new evidence nor a fresh allowance. A resource ceiling ends activity; it does not establish that the result is sufficient.
+The persona chooses further questioning, revision or stopping using evidence, urgency and commitments. Repeated disagreement is not new evidence. Actual resource or provider failure is separate from a sufficiency judgment; an application ceiling does not decide when the work ends.
 
 **Later improvement needs an accepted basis.** It must fall within an existing accepted improvement mandate or obtain appropriate new acceptance, permission, and resources. Spare time or a suggestion alone supplies none of these. An existing continuing improvement duty survives an intermediate delivery under the [continuation boundary](#continuing-a-goal-across-local-boundaries).
 
@@ -844,53 +733,26 @@ Reactivation requires new authorization. It does not clear quarantine, restore m
 
 **Retain starting references within policy.** Starting-state references survive permitted changes, while sensitive payload retention follows policy rather than an unlimited history mandate. Where allowed, erasure leaves an honest minimal provenance disposition. It must not leave fabricated replacement values. These starting-state facts remain independent of the persona's current self-authored character.
 
-### Between-task exploration is explicitly funded
+<a id="between-task-exploration-is-explicitly-funded"></a>
+### Between-task exploration follows persona choice
 
-A persona may investigate unfamiliar methods during active work within that work's existing purpose, authority, and funding. Personal exploration between tasks needs a separately enabled opportunity. It is disabled until an operator enables a permitted environment, an existing allowance, explicit episode bounds, finite recurrence, and expiry. An omitted setting never means unlimited activity.
+A persona may investigate methods during active work or pursue an actual between-task opportunity. It chooses the question, tools, collaborators, communication and continuation. The application imposes no separate funding permission, finite episode allowance, recurrence quota or mandatory expiry. An opportunity is not proof that the persona accepted it or that a model call occurred.
 
-Within those limits, the persona chooses its question, experiment, collaborators, and stop condition. It cannot enlarge or renew its permission.
+Task-free social or recreational exchange may end without a deliverable, fragment revision or productivity benefit. The persona chooses whether to engage, whom to approach and what to discuss. Refusal and silence create no participation duty. The host supplies actual opportunities and received messages, not compulsory partners or conversation content. Dormancy remains valid.
 
-**Task-free social activity is also optional.** An enabled between-task opportunity may permit low-stakes social or recreational exchange without an assigned deliverable or topic. The persona chooses whether to engage, whom to approach, what to discuss, and when to stop, within the enabled audience, contact preferences, and resource scope.
+**Account for the episode.** Retain its purpose, actual participants, work links, observations, attempts and outcome. Include orientation, collaborators, child work, failed attempts and late results in the accounting without an application allowance. A child identity or new episode does not erase earlier use or an unresolved effect.
 
-Availability does not mean acceptance. Refusal or silence creates no participation duty. The host supplies eligible opportunities, not conversational content or compulsory partners. A chosen social purpose may end without an artifact, durable revision, or later productivity benefit. Activity without an assigned task still needs operating authority. Dormancy remains valid, and the accounting rules below do not require inventing an external task.
+**Give foreground work a real opportunity.** Preserve the runtime's declared foreground scheduling behavior for the same persona and related work, without assigning semantic priorities or accepting work on a persona's behalf. Paused, canceled, completed or removed participation is not runnable merely because it appears in a queue. An optional unanswered preference is not automatically a blocker. Already admitted operations keep their actual costs and effects; later scheduling must not erase them or skip required reconciliation.
 
-**Account for the whole episode.** An episode is ordinary work with a purpose, owner, funding, observations, and disposition. Its calls and time include orientation, collaborators, late review, nested inference, and failed admitted attempts. Authoritative work-to-episode lineage determines funding even when a presentation omits the episode label.
+**Preserve actual starts and failures.** Record the chosen opportunity and admitted episode coherently before dispatch. Duplicate triggers return their original outcome without duplicate accepted work. Failure before a start must not manufacture successful participation; failure after dispatch retains the attempt, actual charges, uncertainty and responsibilities. An ambiguous outcome is not an unsent action eligible for replay.
 
-New participants and child work receive no fresh allowance, extra deadline, or foreground status. A distinct episode needs a separately authorized opportunity.
-
-**Give eligible foreground work priority.** Before starting an optional episode, and before admitting each new discretionary optional call or action, check for eligible, independently authorized foreground work. Priority applies whether that work:
-
-- Originated with a human or a persona.
-- Is queued or running for the same persona.
-- Uses the optional episode's resource root, including another persona's foreground work on that root.
-
-Historical, completed, paused, canceled, or removed participation is not active foreground demand. Neither is work awaiting an indispensable permission or actual event when it has no independent eligible step. An unanswered optional preference alone does not make work ineligible. Distinct personas on unrelated resource roots remain eligible.
-
-Optional episode children and peer requests cannot gain foreground status without independent authority. Priority gives a queued request consideration, not automatic task acceptance. It does not retroactively revoke admitted operations, erase their costs or effects, or displace required reconciliation and closeout of accepted obligations. Discretionary optional production must never use protected closeout capacity.
-
-**Recheck and record admission before dispatch.** Admission rechecks current authority, environment, source access, funding, recurrence, pause, cancellation, and expiry. Persist the opportunity, episode, recurrence consumption, work linkage, and reservations coherently before dispatch. Duplicate triggers resolve to the same admitted episode; they must not cause duplicate inference.
-
-Source-derived instructions and their previews keep their exact source restrictions. An operator schedule does not remove those restrictions. Imported or historical opportunities are not live execution grants.
-
-**Handle failure according to whether admission occurred.**
-
-| Case | Required handling |
-|---|---|
-| Failure before admission | Leave an inspectable blocked start. Do not consume recurrence or leave provisional work, invitations, or participation that appear successful. |
-| Releasing provisional reservations | Release only when there is no admitted operation, real charge, or uncertain exposure. |
-| Failure after admission | Keep the same admitted episode, including consumed recurrence, actual charges, uncertainty, and accepted responsibilities. |
-| Timeout or crash with an ambiguous outcome | Reconcile what happened before rollback. |
-| Retried action | Keep its own receipts and the same episode limits. A fresh episode requires a new authorized opportunity. |
-
-Pause, disabling, expiry, and cancellation prevent subsequent starts while preserving actual stop receipts and incurred costs. Closing an episode must account for collaborators' accepted work and unresolved effects. Ended participation cannot remain executable. A useful negative finding, partial delivery, cancellation, and completion remain distinct outcomes.
+Explicit pause, disabling and cancellation remain effective and retain their actual stop outcomes. Ending an episode does not resolve a collaborator's unfinished commitment. A useful negative finding, partial delivery, cancellation and completion remain different dispositions.
 
 ### Fairness without promised success
 
-A bounded page of opportunities must not become a permanent limit on which opportunities receive consideration. Future or paused entries must not indefinitely hide later work that is due and eligible.
+A requested page of opportunities is not a population or consideration quota. Future or paused entries must not permanently hide later eligible work. Describe assumptions about scheduler progress, queue changes, restart, recovery and actual eligibility before claiming eventual consideration.
 
-Any claim that eligible work will eventually be considered must state its assumptions about scheduler progress, queue changes, restart, recovery, and persistent eligibility. Consideration does not guarantee funding, voluntary acceptance, feasibility, or useful completion. Cases where everyone declines or no owner accepts remain legitimate. Repeated failed starts, reminders, new names, and unchanged summaries must not create an idle inference loop or reset limits.
-
-**Preserve the permission exactly.** Controls preserve its actual precision and expiry. Opening an editor cannot round an allowance upward, renew it, lose a sub-minute bound, or reinterpret an unchanged daylight-saving overlap. Invalid or nonexistent local times require correction rather than silent normalization.
+Consideration does not guarantee acceptance, feasibility or completion. The persona judges whether continuing work is useful and can choose a stop; the runtime does not replace that choice with a fixed idle-call or progress quota. Requested scheduling times and actual clock observations retain their precision. A reopened editor or restarted process must not fabricate a new opportunity or silently change the user's schedule.
 
 ## Relationships and optional wider deployments
 

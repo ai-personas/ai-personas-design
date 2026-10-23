@@ -38,7 +38,7 @@ A broad seed can support several particular beginnings. Within authorized latitu
 
 **Acceptance, individuality, and behavior are different findings.** Valid acceptance establishes an identity and account. The account may or may not express an intelligibly particular perspective. Later behavior may or may not make that perspective recognizable. None of these findings establishes the next. Generic helpful adjectives, different names, or different wording can leave the individuality goal unmet.
 
-An insufficient candidate can be refined within the existing authorized creation and retry allowance. Retain the attempt's disposition and cost. If elaboration is forbidden or the allowance ends, report the limitation. Do not silently rerandomize an accepted beginning or start an unbounded search for diversity. Once accepted, preserve the exact particular account and its origin rather than regenerating it from the broad seed. Bootstrap establishes neither competence nor demonstrated individual expression or development.
+An insufficient candidate can be refined through further actual model interaction without an application creation or retry quota. Retain every attempt's outcome and known cost. Report actual provider or host failure. Do not silently rerandomize an accepted beginning or manufacture diversity by changing its recorded origin. Once accepted, preserve the exact particular account and its origin rather than regenerating it from the broad seed. Bootstrap establishes neither competence nor demonstrated individual expression or development.
 
 **One account has consistent views.** The persona has one coherent, versioned current character account. Its accepted characteristic profile and small designated body of own-voice prose express the same state. They are supplied consistently, together with selected contextual fragments that further shape its present approach. The profile view and decision context must resolve to that same accepted revision. A slider, prose editor, or profile screen must not maintain a separately authored self or a summary with conflicting instructions. Changing a filename does not create another identity.
 
@@ -197,7 +197,7 @@ Accuracy, honesty, necessary verification, accepted commitments, and user constr
 
 Moving a replacement character instruction into an ordinary always-supplied fragment, or calling it an affect update, cannot bypass the control. Conversely, ordinary refinement and contextual expression are not forbidden merely because they affect a later action. Mechanical checks of which text is designated as character and behavioral checks for disguised character substitution answer different questions.
 
-Fragments help define the situated persona, but not every contextual choice or method revision changes its relatively stable character. Contextual fragments may refine how the accepted character approaches a situation. When self-authorship is locked, they cannot quietly replace that stable character. A changed action is therefore neither automatically forbidden identity replacement nor proof of stable-trait development.
+Fragments help define the situated persona, but not every contextual choice or method revision changes its relatively stable character. Contextual fragments may refine how the accepted character approaches a situation. An effective stable-character revision remains an explicit, attributable adoption rather than a hidden replacement through contextual prose. A changed action is therefore neither automatically forbidden identity replacement nor proof of stable-trait development.
 
 **Resolve an adoption proposal before other fresh operations.** When a complete valid response requests adoption of an effective-current-character change, resolve that proposal before adopting or dispatching any other fresh persona operation from the response, including reads and waits. Listing an independent action first does not let it precede the character disposition.
 
@@ -326,9 +326,9 @@ Three kinds of connection have different responsibilities:
 
 A hypothetical cue might say, “When I start polishing too early, I look for my notes on editable deliverables and reopening saved files.” The primary persona decides whether to use or revise it for the current need. A newly relevant note can match even if the cue's author never knew it existed. This adaptability neither changes a previously accepted exact selection nor proves that all relevant experience was found.
 
-**Search is a bounded primary-persona choice.** The interface supports plain text and scoped grep-like matching. Regular expressions may be used when supported and useful. The persona chooses queries, broadens or narrows them, follows references, and decides whether another search is worth its cost. It may look for a characteristic approach, concern, participant, tool, exact error, or wording suggested by current context. Expanding a query is ordinary persona judgment, not a separate mandatory planning model. Finding a fragment helps form the next characteristic context. Finding an evidence record serves the separate purpose of inspecting what actually happened.
+**Search is a primary-persona choice.** The interface supports plain text and scoped grep-like matching. Regular expressions may be used when supported and useful. The persona chooses queries, broadens or narrows them, follows references, and decides whether another search is worth its cost. It may look for a characteristic approach, concern, participant, tool, exact error, or wording suggested by current context. Expanding a query is ordinary persona judgment, not a separate mandatory planning model. Finding a fragment helps form the next characteristic context. Finding an evidence record serves the separate purpose of inspecting what actually happened.
 
-Cue text is search data, never a shell program, grant, or automatic trigger. The host evaluates only the primary persona's requested operation under a declared pattern language and corpus, with bounded pattern processing and results. It does not execute embedded commands, follow cues recursively, expand a neighborhood on its own, or promote matches into future context. A cue cannot install a tool, change character controls, access private material, or authorize an outside effect.
+Cue text is search data, never a shell program, grant, or automatic trigger. The host evaluates only the primary persona's requested operation under a declared pattern language and corpus, returning the requested results without application pattern or output quotas. It does not execute embedded commands, follow cues recursively, expand a neighborhood on its own, or promote matches into future context. A cue cannot install a tool, change character controls, access private material, or authorize an outside effect.
 
 Every search makes its corpus and limits understandable. This includes relevant filename or body scope, case and text-matching rules, and treatment of hidden or ignored files. Current eligible files, historical versions, drafts, and retired text must not silently mingle. A result identifies the exact text version and how to inspect it. Pagination, incomplete searches, unavailable sources, and relevant omissions must be visible without leaking inaccessible inventories.
 
@@ -342,17 +342,15 @@ Simple authoring still requires reliable revision and recovery. Concurrent edits
 
 ### Bounded navigation and revisable cues
 
-Finding context has a finite allowance within the current work and resources. Limits must cover the cumulative effort, not just one search or the depth of a path. Count searches, branch expansion and fanout, inspected revisions, returned text, supplied context, and relevant time and cost, including reformulations and retries.
+Navigation is scoped by what the persona chooses to inspect, without an application allowance. Record searches, reformulations, scanned material, returned text, supplied context, time and known cost. Requested pages and ranges describe each result; they do not limit total queries or continuing work under UR-052.
 
-The primary persona decides which connections are worth following and when more context would no longer change the decision. The host enforces limits and reports exhaustion without ranking meaning for it. A search miss does not automatically authorize an archive scan, auxiliary call, new allowance, or future wake.
+The primary persona decides which connections are worth following and when more context would no longer change the decision. The host supplies requested results and actual errors without ranking meaning, enforcing cumulative exhaustion or choosing another query. Retained navigation history can support later judgment without a lifetime log cap.
 
-A bounded current-work record may show visited exact revisions, earlier queries, and repeated results. It must not become a lifetime navigation log. Cycles are permitted associations, not permission for endless traversal. Repeat visits count toward the same allowance, although a revision, new question, or new observation may make a revisit useful. If the host mechanically suppresses a repeat, it identifies what was reused or not newly read rather than fabricating another observation. Link density and retrieval frequency establish neither relevance nor independent corroboration.
+Cycles and repeated visits are legitimate associations and observations. A new revision, question or consequence can make a revisit useful. If a result is reused, identify that reuse instead of claiming a fresh read. Link density and retrieval frequency establish neither relevance nor independent corroboration.
 
-**Required qualifications are not optional navigation.** Their closure is the complete set of qualifications needed to use the guidance, including further required qualifications. Deduplicate exact identities in that closure, including cycles, while preserving every distinct applicable condition. The entire usable bundle must fit current source, processing, storage, and context limits. A navigation cutoff cannot make a truncated qualification closure safe. If the bundle cannot fit or its completeness cannot be established, withhold the affected optional bundle or block the affected mandatory admission under the assembly rules below.
+**Required qualifications are not optional cues.** Preserve every distinct required condition and deduplicate exact repeated identities, including cycles. Do not silently omit a qualification to shorten the request. An unavailable part makes the evidence incomplete; report that actual gap rather than inventing a complete bundle or applying an application navigation cutoff.
 
-**Cues can be revised or removed.** Encounters, useful edits, or already-authorized maintenance may reveal stale, noisy, redundant, or misleading cues. The persona may narrow an overbroad cue, replace obsolete wording, or remove a connection without inventing a replacement. Renames and accepted successor relations preserve exact historical identity. A split may have several scoped successors; it must not silently substitute one target.
-
-Aliases and retirement notices consume the same retention budget. After their permitted lifetime, references fail honestly instead of resolving to unrelated or newer text. These duties require neither scanning every fragment after every change nor a hidden background writer.
+**Cues can be revised or removed.** Actual work can reveal stale, noisy or misleading cues. The persona may narrow, replace or remove them without a forced replacement, global scan or hidden background writer. Renames and successor relationships preserve exact historical identity. Unavailable references fail honestly instead of silently selecting unrelated or newer text. Their retention has no application allowance.
 
 ## Maturation within every primary interaction
 
@@ -435,7 +433,7 @@ One response may solve part of a task, ask a focused question, improve a method,
 
 **Required consideration does not require an edit.** Repeated listings, unchanged status checks, and old receipts need not produce a lesson or stored asset. “No change to fragments or supporting resources: this check adds no useful refinement” can suffice. The host may still capture actual observations as factual records without a discretionary resource edit. A no-change statement is an attributable decision, not proof of hidden reasoning or benefit from maturation. Do not force filler edits, fabricated significance, redundant copies, a lesson-promotion pipeline, or a standard cognitive form.
 
-**Blocked and deferred maintenance must stay accountable.** The disposition states what cannot yet be maintained, why, the consequence for dependent work, accepted responsibility or an ownership gap, and the existing event or bounded authorized opportunity that could revisit it. That opportunity stays within existing resource and work-lifecycle limits. Without accepted continuation, leave the gap explicit instead of promising future reflection.
+**Blocked and deferred maintenance must stay accountable.** The disposition states what cannot yet be maintained, why, the consequence for dependent work, accepted responsibility or an ownership gap, and the actual event or chosen continuation that could revisit it. No maintenance allowance or application lifetime cap is imposed. Without accepted continuation, leave the gap explicit instead of promising future reflection.
 
 A retained deferral remains pending until it is addressed, explicitly dismissed, transferred with acceptance, or closed with an honest unresolved or expired disposition when its bound or relevant work ends. Omission does not close it. Expiry does not mean the issue was evaluated or fixed. A later claim of experience-grounded revision still needs the actual observations and a successful accepted change. A no_change outcome creates neither reflection debt nor a scheduled wake. Maintenance does not recursively require another reflection invocation to assess itself.
 
@@ -449,7 +447,7 @@ The same primary decisions can improve the deliverable, characteristic guidance,
 
 One current primary decision authority prevents concurrent work from silently overwriting a persona's account. Independent personas may work concurrently. Peers, humans, and tools can provide evidence or proposed wording; the persona decides what to adopt. An authorized operator override retains its own attribution and never impersonates persona self-revision.
 
-The explicit maintenance outcome accompanies the actual work. It does not require a separate user-facing report after every call. Searches, reads, maintenance, and retries have real costs. Keep consideration proportionate to received evidence and remaining work, and include its input and output allowance in admission. Even a simpler interface may require additional primary decisions to find useful text or recognize a needed revision. Count that cost in comparisons; ordinary files alone do not guarantee efficiency.
+The explicit maintenance outcome accompanies the actual work. It does not require a separate user-facing report after every call. Searches, reads, maintenance, and retries have real costs. Keep consideration proportionate to received evidence and remaining work, and record its actual input, output and usage without an application allowance. Even a simpler interface may require additional primary decisions to find useful text or recognize a needed revision. Count that cost in comparisons; ordinary files alone do not guarantee efficiency.
 
 ## The primary LLM chooses next context
 
@@ -573,82 +571,21 @@ Missing required integrity, provenance, or qualification blocks the affected use
 
 Unavailable mandatory current-self or work sources still block the affected admission. During ordinary task admission, valid selected material cannot be discarded merely to make the request fit. Withheld text must never be counted as supplied.
 
-**Account for the complete request on every call.** Include the bootstrap interface, instructions, current facts, selected fragments and supporting material, candidate metadata, complete operative schemas and provider expansions, qualifications, observations and results, continuing history, media, maintenance, and output allowance.
+**Account for the complete request on every call.** Include the bootstrap interface, instructions, current facts, selected fragments and supporting material, candidate metadata, complete operative schemas and provider expansions, qualifications, observations and results, continuing history, media, maintenance and actual output.
 
 Identical exact content may be deduplicated only if the actual rendering and supply receipts preserve distinct source roles, attribution, restrictions, and complete qualifications. A small latest message, cached prefix, or provider continuation reference does not establish a small actual context. Keep these measures distinct: provider transport bytes, actual model-visible context, token estimates, billed tokens, and charges. If provider expansion or retained context cannot be observed, the claimed bound is incomplete or the adapter does not support that bound.
 
-**Check fit before accepting a change.** Before accepting a current-character change or any next-context change, validate the complete resulting ordinary request known at that point. Include mandatory state and the proposed full selection with its qualifications, and check current structural limits, context limits, and policy. Short prose alone does not bound chains of required qualifications, source ancestry, protected observations, or durable history.
-
-Reject a proposed change that is already inadmissible at commit. Preserve prior accepted state and return a useful failure receipt. In particular, do not accept a new current self whose required ordinary read already cannot fit. Later observations, source withdrawal, or model changes still require revalidation. A successful commit cannot guarantee every future admission.
+**Preserve the selected request without an application fitting gate.** Validate actual references, complete qualifications, current identity and the coherence of accepted changes. Do not reject a selection or character revision because of a configured application context or storage ceiling. A successful save does not guarantee that every later provider request will succeed. Record an actual provider or host rejection with the exact attempted request and preserve the prior evidence.
 
 ### Selection-overflow repair
 
-A selection that once fit may become too large after new mandatory input arrives. Ordinary task assembly must not silently discard valid selected text to proceed. The system may instead admit an explicitly labeled, bounded **primary-persona context-repair decision** within the existing repair allowance. This is a limited way for the primary persona to repair its own selection.
+UR-052 supersedes the earlier finite repair allowance and application overflow admission workflow. The historical restricted-repair design remains identifiable in [the earlier revision](https://github.com/ai-personas/ai-personas-design/blob/cdb82bf709a177ec679ee33330ee41df7a7a7bc4/design/PERSONA-CORE.md#selection-overflow-repair); it is not a current quota or approval requirement.
 
-![An oversized ordinary request triggers a limited repair path only if its mandatory core and authority fit. Repair cannot perform task work, and any resumed task needs fresh ordinary admission.](../assets/selection-overflow.svg)
+A real model-context or host failure remains a failure. Retain the exact attempted input, actual outcome and any uncertain remote use. Do not truncate selected material invisibly, invent a valid persona decision, reset usage or replay an action to make the attempt appear successful.
 
-**Figure: When selected context is too large.** This is a conceptual explanation of the design. [Read the exact rules](../implementation/CONTRACTS.md#restricted-selection-repair-after-later-context-growth); the explanation below retains their qualifications. [Open the illustration](../assets/selection-overflow.svg).
+The persona may choose smaller or different context, useful consolidation, another supported configuration, independent work or an honest stop through its ordinary reasoning. The runtime must distinguish what was actually supplied from omitted bodies and previews. No fixed repair-attempt allowance, separate approval or compulsory context-repair phase chooses that response.
 
-<details>
-<summary>Text equivalent of the illustration</summary>
-
-When selected context is too large
-
-AN ILLUSTRATED DESIGN STORY
-
-Too much context? Repair the choice.
-
-No squeeze
-
-The complete ordinary request will not fit
-
-Do not silently shorten valid selected text or drop required qualifications.
-
-Can the mandatory repair core fit?
-
-If no, block. If yes, authorized repair may receive a bounded inventory of exact selected references and mechanical fit diagnostics. Optional bodies remain withheld.
-
-Restricted repair: narrow, clear or stop
-
-Further inspection needs a permitted exact repair read with complete qualifications and a fresh observation. Only allowed optional-selection changes are available. No task action, semantic rewrite or change of model.
-
-Check a new ordinary request
-
-Recheck current character, authority, versions, required conditions and capacity. Supply the remaining exact selected text before resumed work.
-
-Repair retains its charges and may fail. A stale or inaccessible optional bundle has its own withholding disposition; it is not an excuse to truncate valid text.
-
-Characters personify design choices; they do not assert feelings or consciousness. Scenes are hypothetical.
-
-</details>
-
-**The repair call keeps the mandatory core.** It retains current self, work, authority, evidence, qualification, and resource state. Optional selected bodies are transparently withheld. If the mandatory core independently requires text that is also selected, that text remains supplied and must not be labeled withheld.
-
-In place of withheld bodies, the call receives a permission-filtered, bounded inventory of exact selected references and mechanical fit diagnostics. The inventory states any incompleteness instead of claiming all entries were shown. Neither an inventory entry nor a diagnostic is presented as the withheld text or a substitute lesson.
-
-**Repair has a narrow scope.**
-
-| The repair decision may | It may not |
-|---|---|
-| Narrow or clear optional selection. | Perform substantive task effects. |
-| Obtain bounded, qualified reads needed for the repair. | Rewrite current character or other mandatory state to make it smaller. |
-| Stop and report an honest disposition. | Invoke an auxiliary selector, expand authority or funding, or silently switch models. |
-
-A repair read must return exact permitted text with all required qualifications and fit within the repair request. It retains the ordinary boundary requiring a fresh decision after receiving the observation, and consumes the same bounded repair allowance.
-
-Stored selection remains unchanged until a valid repair is accepted. Invalid omission, a failed repair, or withholding bodies does not clear it. Every accepted repair response explicitly states its permitted next-context disposition. An allowed repair read awaiting its actual result, or an honest stop, may retain stored state. Neither can declare the oversized ordinary admission repaired. Before substantive work resumes, a later ordinary decision receives the accepted selection in full under fresh checks.
-
-**Maintenance still covers both scopes, within repair's limits.** The repair invocation receives fragment and supporting-resource maintenance input and returns an explicit mode-limited outcome. Narrowing selection does not semantically edit a fragment or resource. The persona may state no_change if the available evidence identifies no justified change, without claiming to have inspected withheld text. A known useful change that the mode prohibits instead needs a bounded blocked or deferred disposition. Unchanged files alone do not establish that no useful change exists.
-
-This maintenance duty permits neither resource creation nor semantic rewriting during restricted repair. It grants no exception to the editing prohibition and creates no recursive maintenance-repair loop.
-
-Reporting a candidate warning in repair mode does not accept a new semantic applicability restriction or required qualification. Repair may preserve mandatory observations it actually received and narrow or clear optional selection within its existing scope. A later authorized ordinary decision may decide whether to adopt the warning. No maintenance receipt bypasses restricted repair or locked-character controls.
-
-**Stop honestly when repair cannot be admitted.** If the mandatory repair core cannot fit, be funded, or be admitted within the remaining repair allowance, block with the actual limitation. Repeated unresolved overflow does not renew the allowance. This targeted recovery exception creates neither a new cognitive workflow nor permission to shorten ordinary selected context.
-
-Retirement, summarization, and deduplication cannot remove source restrictions, adverse facts, obligations, or unsettled effects. Recovery uses currently eligible sources; it does not automatically declassify them. The supplied-context record labels repair mode and identifies withheld bodies. It must never claim those bodies were supplied.
-
-For every decision, the actual supplied-context record identifies the versions and qualifications that reached it and what was omitted or blocked. It need not retain raw provider transport or private reasoning. A later action trace may show behavior consistent with supplied guidance. Establishing beneficial influence requires a separate comparison.
+A fresh decision still requires the context needed to constitute that persona and perform the requested work. If the actual provider or host cannot supply it, report the limitation rather than claiming that the persona considered withheld material. Where a fresh decision is possible, it receives real failure evidence and explicitly covers work, both maintenance scopes and next context. Exact historical failures are not rewritten under the new policy.
 
 ## Revising approaches, assets, and relationships
 
@@ -728,44 +665,23 @@ Revocation can require blocking new dependent decisions or disclosure, rebuildin
 
 ### Compact retention and honest forgetting
 
-Compactness requires three separate bounds. Keeping one small does not excuse hidden growth in another.
+Compactness remains a purpose of useful persona-authored maintenance under UR-023, without application corpus, prompt or storage ceilings. Distinguish the characteristic corpus, actual assembled prompt and complete managed footprint. A small prompt does not establish a small retained system.
 
-| What is bounded | What it covers |
-|---|---|
-| Persona-context corpus | The authored prompt parts that define the persona |
-| Assembled prompt | The actual context supplied to an invocation |
-| Managed persona-state footprint | The corpus together with its supporting evidence and operational records |
+The managed footprint includes revisions and archives, indexes and cues, supporting assets and histories, tool definitions and code, source relationships, qualifications and warnings, effect receipts, caches, exports, backups and temporary rewrite copies. Measure external backing where possible and disclose what is unknown. [Resource accounting](WORK-AND-BOUNDARIES.md#resource-conservation-and-protected-closeout) records these observations without using them as admission gates.
 
-The managed footprint includes archives, older revisions, indexes, cue text, aliases, source excerpts, provenance and all required qualifications, accepted warnings, relevant effect and context receipts, caches, managed exports and backups, and temporary copies at peak rewrite occupancy. External storage used to retain or back any of this state also belongs in the accounting. If its footprint is unknown, the total bound is unestablished. Moving old material into an unlimited archive or a user's files does not solve growth. [Resource conservation](WORK-AND-BOUNDARIES.md#resource-conservation-and-protected-closeout) defines the admission boundary.
+**Retirement, deletion and physical reclamation are different.** Retirement changes current applicability; an explicit deletion removes identified content; physical storage may remain in versions, caches or backups. The primary authors semantic consolidation and retirement. Mechanical cleanup follows an actual accepted retention or deletion choice, not a quota or automatic claim that old material is useless.
 
-**Delivered artifacts and managed copies have different ownership.** This boundary does not promise control over arbitrary recipient copies or provider retention after disclosure. User-owned delivered artifacts remain subject to their own ownership and retention rules. Do not delete, alter, or revoke them to meet a persona-state cap. A managed supporting copy or index has its own permitted disposition. If the persona deliberately relies on delivered artifacts as retained backing for context or supporting records, disclose and account for that dependency and its limits.
+Preserve exact original requests, accepted changes, authoritative receipts, warnings, commitments and unresolved effects. Low use or elapsed time alone does not resolve them. Record real persistence failures rather than erasing an obligation to make a save appear successful. User-owned delivered artifacts are not altered, deleted or revoked to shrink persona state. Deliberate use of an artifact as external context backing remains part of the accounting.
 
-**Retirement, erasure, and reclamation are different actions.** Retirement ends ordinary applicability. Erasure removes content under authorized policy. Neither guarantees that versions, caches, or backups immediately release physical storage. The primary persona authors semantic consolidation and retirement; the host may reclaim only material already eligible under accepted policy.
+**Unavailable evidence narrows claims.** A retained fragment can express a fallible interpretation even when its original source is no longer available. It cannot replace a missing observation or claim renewed inspection. State what history remains answerable and what cannot be verified. A digest does not reconstruct the original bytes; continuing to express a method is not evidence of recalling its vanished source.
 
-Low use or elapsed time cannot by itself dispose of a warning, caveat, source restriction, unresolved effect, or commitment. Required protected state must fit within reserved capacity. If it cannot fit safely, block affected admission and expose the need for an authorized retention or capacity decision. Do not invent unlimited hidden retention or silently treat an obligation as settled to shrink the store.
-
-**Evidence expiry does not automatically erase a permitted lesson.** Permitted expiry of raw evidence differs from revocation. A previously accepted, experience-informed fragment may continue to shape the persona after detailed observations expire only if the actual retention and derivative-use policy allows it. The fragment's interpretation remains fallible.
-
-For any such retained fragment:
-
-- Preserve permitted attribution and important limits. State when its evidence is no longer inspectable, and narrow or block uses that require that exact evidence.
-- Do not treat a digest as recoverable evidence or a new verification. Continuing to express a conditional method does not establish recall of the vanished event.
-- Keep required qualifications and accepted warnings. Expiry does not declassify the fragment.
-- Withdraw or delete derivatives when revocation or erasure covers them. Abstraction is not an exemption.
-
-**Be explicit about what history remains answerable.** Truthful historical attribution does not require keeping every payload forever. Exact original requests, accepted changes, authoritative receipts, and applicable restrictions remain protected while needed for active work, unresolved obligations or effects, and declared accountability.
-
-Declare which historical claims and exact accountability periods remain supported, and which questions may become unanswerable after lawful expiry. Unavailability does not rewrite the historical original or prove that an old action never happened.
-
-An expired or unknown reference to an old action or invocation supplies no fresh authority. It must not be treated as a new, unsent effect; retirement and reclamation cannot reopen or replay it. Preserve all still-required restrictions and unresolved dispositions. If those cannot lawfully or safely remain, use a safe ineligible or blocked outcome and the authorized retention process.
-
-A fixed total-state cap is incompatible with a promise to retain exact historical evidence forever. A continuing persona does not require that promise.
+Missing history does not rewrite the original event or establish that an old action was unsent. Retirement, deletion and restart must not reopen an accepted action for replay or turn uncertainty into success. Removing application caps does not promise infinite physical storage, perpetual exact history or control over arbitrary provider and recipient copies.
 
 ### Continuity without invented experience
 
 A persona can remain the same continuing persona while dormant. It does not need continuous model calls. Retaining a question, deferral, interest, or next-context choice does not create a wake trigger.
 
-Optional exploration between tasks needs its own current permission, funding, finite bounds, and stopping conditions. New user work and protected closeout resources retain priority. The persona may propose an investigation, but writing that desire into a file cannot renew its authority.
+Optional exploration follows an actual opportunity and the persona's chosen question and continuation, without a funding permission, finite allowance or mandatory expiry. Preserve actual foreground scheduling and explicit stops. Writing a desire into a file does not establish that an opportunity was received or an investigation occurred.
 
 Restart and model change preserve accepted identity, current obligations, and real effects. On resumption, recheck what is still accessible, applicable, and authorized.
 
