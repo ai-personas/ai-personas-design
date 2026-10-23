@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — exact response-envelope guidance
+
+Clarified that each supplied decision schema states the exact invocation identity and response epoch for its admission, separately from task revisions. The companion runtime adds those constants to its prepared schemas while retaining complete parsing, current-state validation and the original response bytes. Dynamic envelope values count toward actual input size without becoming fixed-contract growth. This improves the guidance supplied to the model; it does not guarantee compliant responses or establish full conformance.
+
 ## 23 October 2026 — unrestricted working-directory placement
 
 Clarified that working and state directories may coincide or contain one another under UR-052. Setup and continuing native execution resolve and retain actual path identities without application ancestry exclusions. Actual directory availability, filesystem errors and changed saved bindings retain their meanings. The companion runtime removes the remaining overlap rejections and updates its CLI and setup guidance.
