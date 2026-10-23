@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+
+## 23 October 2026 — unrestricted requirement catalogue and terminology
+
+Reconciled the implementation catalogue and glossary with UR-052. Navigation, storage, initialization, ongoing activity, closeout and execution no longer carry application quotas, permission gates or approval prerequisites. Existing identifiers and historical resource terms remain traceable without preserving them as current constraints. Actual usage, current decision identity, complete ordinary responses, exact revisions, voluntary responsibility, qualifications, delivery and persona-owned judgment keep their distinct meanings.
+
+Clarified failed whole-response adoption versus separately accepted work, pending feedback versus actual obligations, and characteristic maturation versus supporting-asset development. The companion runtime clarifies localized edits versus complete native file replacement and reports useful missing-match context without changing exact matching or atomic adoption.
+
+These changes are source and documentation alignment. They do not establish full runtime conformance, useful maturation or repository-wide consistency. Historical evidence keeps its original criteria; no tests, generated scenarios or private live records are added.
+
 ## 23 October 2026 — unrestricted work boundaries and feedback records
 
 Reconciled the detailed work chapter and its five illustrations with the full human requirements and unrestricted execution. Removed residual permission and source-sharing gates, funded or restricted recovery, fixed retry allowances, protected resources and deployment approval rules. Preserved the accepted need, voluntary responsibility, exact character-adoption ordering, actual effects, full delivery, substantive quality judgment and accountable continuation. The former headings and immutable earlier chapter remain linked; earlier evidence keeps its original criteria.
