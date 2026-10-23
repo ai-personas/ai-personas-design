@@ -147,6 +147,8 @@ External effects are not atomic with local edits. Durable accepted intent must p
 
 Missing dependency evidence is not evidence of independence. Hold uncertain cases for a fresh decision based on actual observations. Keep the actual disposition visible, and never deliver an account saying that an uncommitted save succeeded.
 
+**Respect the actual atomic unit.** Independence does not authorize partial commit of a failed coherent adoption. An implementation that adopts the whole response as one unit commits none of its proposed operations when that adoption fails; subsequent persona work requires a fresh decision. An implementation supporting separate independent acceptance must establish each unit's complete validity, exact dependencies and coherent disposition. Previously accepted work and dispatched effects retain their own outcomes when a later operation fails. Neither path may silently turn a rejected proposal into accepted work.
+
 **Character changes are resolved first.** If a response requests adoption of an effective-character change, resolve that request before adopting or dispatching any other fresh persona operation from the same response. Action-list order and claimed independence cannot bypass this rule.
 
 The necessary character-proposal validation and disposition or commit may proceed as one coherent atomic unit. That unit may include the primary's exact necessary current-character account bindings and expressly proposed reductions or clearing of already accepted optional selections needed for the transition. Before acceptance, validate the proposed state's remaining mandatory and selected context, full qualification closure and exact source availability without a context-fitting quota.

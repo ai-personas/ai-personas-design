@@ -310,6 +310,8 @@ Independent work may proceed in a later decision while a background operation co
 
 **A valid response whose save fails.** A later file conflict or failed save is different from invalid or missing maintenance. It does not by itself invalidate otherwise valid work from the same complete valid response, but that work's independence must be explicit and evidenced. The work must require neither the failed edit nor unavailable observations. Relevant supplied state, exact inputs and current work must remain valid.
 
+This independence allowance does not permit partial commit of a failed atomic adoption. If an implementation adopts the complete response as one unit, a failed adoption commits none of its proposed operations; further persona work needs a fresh decision. Separately accepted independent work, or effects already dispatched before a later failure, retain their actual outcomes. The [persistence contract](../implementation/CONTRACTS.md#complete-response-persistence-and-dependent-work) distinguishes these acceptance boundaries without requiring a new call merely because a separately adopted operation failed.
+
 Missing dependency evidence does not establish independence. Hold dependent or uncertain work for a fresh decision based on observations. This allowance does not bypass a pending-action or fresh-decision barrier. A reply that depends on an unaccepted save cannot claim that the file was retained.
 
 **Effective-character changes.** A same-response request to adopt an effective-character change must receive a coherent disposition before any other fresh persona operation from that response is adopted or dispatched. This applies regardless of listed order or claimed independence.
@@ -768,6 +770,8 @@ Relationship fragments describe how a persona approaches particular collaborator
 Trust can narrow after counterevidence. Affinity supplies no commitment, credential, or human consent. A persona with a human-like character remains transparently AI. A distinctive voice does not justify fabricated life events or subjective claims.
 
 The extensions below apply only when enabled. They describe additional applications and the evidence relevant to them; a basic persona needs no society, continuous service, physical body, or institutional ceremony.
+
+E4 groups two facets: ongoing services and physical interfaces. Name the facet when referring to its specific observations or responsibilities; the shared E4 identifier does not make their evidence interchangeable.
 
 | Extension | Scope and actual evidence when used |
 |---|---|

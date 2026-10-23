@@ -8,6 +8,8 @@ Reconciled the detailed work chapter and its five illustrations with the full hu
 
 Distinguished pending feedback bookkeeping from actual obligations and completion. Pending requester or peer records alone do not impose closure or retirement prerequisites. Feedback bodies and dispositions remain attributable; actual mandate outcomes, adopted blockers, required acceptance, delivery and unresolved execution retain their meaning. The companion runtime removes the blanket pending-queue checks without clearing records or manufacturing successful work.
 
+Clarified save-failure semantics in the work chapter and persistence contract: independent work does not permit partial commit of a failed atomic adoption. A whole-response adoption failure needs a fresh decision; separately accepted work and earlier effects keep their actual outcomes. Clarified that E4 groups service and physical-interface facets with distinct evidence.
+
 These changes establish source and design changes, not full runtime conformance, useful maturation or repository-wide consistency. Other requirement refinements and topic guidance remain to be reconciled. No tests, generated scenarios or private live records are added.
 
 ## 23 October 2026 — unrestricted observable contracts and execution accounts
