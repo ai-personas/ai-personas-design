@@ -319,6 +319,8 @@ Historical restricted-repair attempts retain their original inputs, mode, charge
 
 A decision may use valid information when it is made and still be too stale to act on later. The host must therefore recheck consequential current state when adopting the response, not only when assembling its request.
 
+Deterministic host validation may reuse a successful decode when a fresh transaction establishes that the complete current record bytes and lookup identity are unchanged. Recheck current record metadata and the expected configuration as well; a remembered revision or earlier success alone is insufficient. Any changed bytes require fresh validation, including changes outside configuration. Failed validation must not become a reusable success. Account for the actual work and retain the declared logical read charges separately from physical I/O or provider usage. This host optimization neither selects persona context nor changes decision ownership, adoption or freshness requirements.
+
 One persona has one current primary decision authority at a time. Independent personas and isolated jobs may proceed concurrently. An admitted decision binds actual identity, work, relevant versions, observations, inference configuration and actual resource exposure. A model change does not change identity or accepted commitments.
 
 **Character and current guards.** Apply the character-proposal ordering rule before any other fresh operation from the response. A request to adopt a stable-profile or baseline-affect revision must be resolved first.

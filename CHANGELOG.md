@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — current-record validation reuse
+
+Clarified deterministic host reuse of a successful decode only after a fresh transaction rechecks the complete current record bytes, lookup identity, metadata and expected configuration. Changed bytes require validation again, and failed checks do not become cached success. Logical read accounting, actual physical cost and provider usage remain distinct. The companion runtime avoids repeated JSON decoding in unchanged configuration binding checks; this does not change persona context, ownership or adoption requirements.
+
 ## 23 October 2026 — feedback mandate provenance
 
 Requester feedback records the exact mandate observed at receipt and distinguishes it from the current task when supplied or inspected. Deferred delivery, replay and amendments preserve that origin; missing historical attribution remains unknown. The persona still judges applicability from the actual direction and current work, and replacement remains explicit. Receipt context does not establish completion or require repeating earlier work. The companion runtime exposes this attribution in native inputs and operator results.
