@@ -65,6 +65,8 @@ A records exact sources, helper revisions and findings. Next follows the actual 
 
 A shared comparison can be sufficient while Arun still prefers usable-area-first ordering. If the group agrees to revisit presentation, that accepted contribution persists after the initial delivery. The task's delivered flag does not forbid later work, and no renewed application budget or approval is required.
 
+Self-reflection can change the stopping decision: Mira asks whether the comparison answers the actual usable-area promise or only looks plausible, and whether an unresolved question could change that assessment. She continues when needed evidence is still missing and can stop when only an optional preference remains. Peers can question which evidence supports completion or whether another comparison would help. These are persona-chosen forms of critique, not required question templates or extra reflection calls; see [different judgments about finishing](WORKED-EXAMPLES.md#different-judgments-about-finishing) for another concrete example.
+
 Arun proposes a new candidate against the delivered source, receives its content/label result and sends the candidate and actual evidence to the others. The person or arrangement responsible for adoption decides from received evidence. The earlier version keeps its historical status. Different personas may stop at different times; a local stop does not discharge another accepted duty. F may remain unchanged, A preserves the history and Next clears only completed optional work.
 
 ## C Circuit work and selective printer transfer

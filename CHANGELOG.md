@@ -6,6 +6,8 @@
 
 Rewrote the detailed examples and requirements walkthrough around UR-050 and UR-052. Removed application call, search, context and storage allowances, protected finishing budgets, safety and permission gates, and the restricted repair path. Search sizes and work approaches belong to persona choices; actual provider, host and tool failures retain their observed meaning. Preserved the three continuing characters, house and circuit work, later skyscraper and printer transfer, tool installation, social development, more-time house work and five-persona circuit continuation. Personal stopping, ongoing duties and completion of the full need remain separate.
 
+Made individual self-questioning and peer questioning explicit in completion judgments under UR-047. The examples show a substantive choice to continue or retain sufficient work without prescribing a reflection checklist, extra call or saved lesson.
+
 The earlier fixed-call and arbitrary-unit illustrations remain linked at their historical revision. Updated references distinguish those accounts from the current examples. These are design illustrations, not new test cases, executed results or evidence that the runtime meets every requirement.
 
 ## 23 October 2026 — retain the scope of earlier work judgments
