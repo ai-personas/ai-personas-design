@@ -386,6 +386,16 @@ Resource accounting describes actual use; it does not impose an application allo
 
 **Record use at the boundary that establishes it.** Keep model attempts, provider-reported tokens, transport bytes, tool executions, elapsed time, navigation and retained storage distinguishable. Attribute activity to its actual work and persona, including failed attempts and descendants. A shared receipt or paired ledger must not turn one provider attempt into two billed calls. An estimate is not a measured bill; unknown usage remains unknown. Retiring a persona or ending a task does not erase its consumption.
 
+Mechanical scheduling should reuse a coherent current snapshot for empty
+maintenance checks. Candidate metadata selects what requires closer inspection;
+actual creation, admission and failure retirement still validate current records
+and exact transaction bindings. Release the inspection copy before entering those
+helpers and refresh it afterward, including when no change was committed. Reuse
+must not cross a later scheduling round, omit delivered feedback or turn an old
+failure into a new continuation. Reduce redundant reads and temporary history
+copies while preserving retained evidence. Report actual timing scope, including
+overlapping phases, without inferring a speedup from source changes alone.
+
 Providers, the host and external services have real availability and representation limits. Report their actual rejections, I/O failures, unsupported operations and unknown outcomes. The absence of an application quota does not promise infinite memory, free inference, indefinite service or guaranteed completion. Do not report a configured historical allowance as a current execution barrier.
 
 **Choose useful context and maintenance.** UR-021–UR-023 still require selective discovery and compact, coherent context. The persona chooses relevant fragments and assets, query reformulation, consolidation and stopping through ordinary reasoning. Requested pages and ranges express what it wants to inspect; they are not cumulative work limits. The host supplies the accepted selection faithfully and reports actual missing or unavailable material instead of silently truncating it to an application ceiling.

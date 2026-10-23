@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — reuse current state for foreground maintenance
+
+Specified shared current snapshots for empty maintenance checks, with fresh
+record validation for actual actions and a new snapshot after every invoked
+helper. Inspection copies are released before state-changing work. This reduces
+redundant history reads without introducing quotas or changing retained failures,
+feedback, continuation or proposal identity. Timing claims require actual
+observations and must account for overlapping phases.
+
 ## 23 October 2026 — complete transport and private response evidence
 
 Specified transport chunks without a caller-supplied size bound or rejection,
