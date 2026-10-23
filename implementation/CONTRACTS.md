@@ -433,6 +433,17 @@ Any neutral internal bookkeeping defaults are not user-declared ceilings or
 separate permission decisions. Retain earlier declarations and actual usage
 without rewriting history or treating them as present execution gates.
 
+**Keep provider configuration free of quota declarations.** Current provider
+input identifies the selected route, model, effort, credential source and actual
+account binding. Do not require historical transport estimates, fabricate them
+during onboarding or expose an extension command to change an unenforced quota.
+Retained declarations and receipts remain attributable to their original state.
+A continuing runtime may project the fields needed for current inference without
+rewriting those records; new preparation identifies the exact current
+configuration. Complete JSON parsing and streamed-response assembly need no
+application quota arguments. They still distinguish valid complete data from
+duplicate keys, invalid encoding, partial responses and inconsistent identities.
+
 **Measure actual use without making it an admission gate.** Record model calls, tool executions, unsuccessful attempts, navigation, selected context, maintenance and result retention. Distinguish transport bytes, reported tokens, billed usage, latency, storage and monetary exposure. Unknown usage remains unknown, and smaller context does not establish lower total cost or useful completion.
 
 Retain fragments, supporting assets, histories, tool definitions, code, provenance and unresolved effects with their actual identities. Context selection and requested pagination decide what is supplied to a model input, not how much historical state may exist or how many calls a task may use. Do not erase evidence to satisfy an obsolete quota. Report real I/O, provider and representation failures with their observed outcomes.

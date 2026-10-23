@@ -2,6 +2,16 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — provider configuration without obsolete limits
+
+Specified current provider configuration without historical quota declarations
+or transport-extension controls. The companion runtime removes the provider
+limit object, generated onboarding estimates, unused transport quota arguments
+and the shared JSON parser's quota parameter. Existing declarations and receipts
+remain intact; continuing execution projects current settings and new preparation
+binds their actual configuration. Parsing and response identity checks remain.
+These interface changes do not establish full conformance or fresh-setup coverage.
+
 ## 23 October 2026 — current setup choices without obsolete controls
 
 Clarified that fresh setup collects provider and creation choices without

@@ -32,6 +32,13 @@ can retain their original declarations; neutral bookkeeping for a new setup
 must neither impose a limit nor claim that the user made a separate approval.
 An old request is not silently rewritten and replayed under a new interface.
 
+Provider configuration likewise collects actual route, account, model, effort
+and credential choices without a historical quota object. Remove obsolete
+transport extension controls and unused parser/collector quota arguments. Keep
+the original declarations, exact earlier request bindings and actual usage in
+retained history; current inference identifies its current configuration. This
+does not require old public configuration documents to remain valid inputs.
+
 Working functionality must follow the [user requirements](../USER-REQUIREMENTS.md), with later user clarifications taking precedence. Implementation work uses builds and inspection of actual persona runs, including their supplied context, tool and skill choices, installations, execution results and resulting work. The user has requested no automated test cases. Design walkthroughs and requirement criteria describe intended behavior; they are not evidence that runtime functionality works.
 
 ## Core deployment choices
