@@ -9,7 +9,7 @@ A deployment must implement the adopted persona design and report actual behavio
 
 The target is a continuing persona with one accepted, versioned character account. That account includes semantic OCEAN traits—openness, conscientiousness, extraversion, agreeableness, and neuroticism—and a VAD modeled affect profile covering valence, arousal, and dominance. These meanings are required; numeric representations are optional.
 
-The primary LLM authors persona-defining prompt fragments that carry the persona's character. It uses bounded lexical and supported regex searches, chooses the next context, and explicitly addresses maintenance in every persona invocation. Current character and selected fragments inform all discretionary task and social choices. Actual experience may lead to revisions of compact retained context, scoped relationships, and permitted character. Tools, skills, domain knowledge, generic procedures, code, data, and histories remain supporting assets, regardless of who authored them.
+The primary LLM authors persona-defining prompt fragments that carry the persona's character. It uses lexical and supported regex searches, chooses the next context, and explicitly addresses maintenance in every persona invocation. Current character and selected fragments inform all discretionary task and social choices. Actual experience may lead to revisions of compact retained context, scoped relationships, and current character. Tools, skills, domain knowledge, generic procedures, code, data, and histories remain supporting assets, regardless of who authored them.
 
 A deployment retains semantic traits, modeled affect, every-invocation maintenance, exact records and useful context selection. It must remove application quotas and safety gates under UR-052. For every decision below, record:
 
@@ -39,13 +39,21 @@ the original declarations, exact earlier request bindings and actual usage in
 retained history; current inference identifies its current configuration. This
 does not require old public configuration documents to remain valid inputs.
 
+Optional catalogue and capability checks follow the same rule. Their current
+interfaces carry actual model, effort, catalogue and request identities without
+ignored timeout/token controls, requested hard bounds, authorization flags or
+evidence-retention switches. A plan's actual account and credential expiry remain
+attributable. Consuming a request identity once prevents duplicate dispatch;
+it does not limit the number of distinct requests the user may choose. Earlier
+records retain their original meaning without automatic migration or replay.
+
 Working functionality must follow the [user requirements](../USER-REQUIREMENTS.md), with later user clarifications taking precedence. Implementation work uses builds and inspection of actual persona runs, including their supplied context, tool and skill choices, installations, execution results and resulting work. The user has requested no automated test cases. Design walkthroughs and requirement criteria describe intended behavior; they are not evidence that runtime functionality works.
 
 ## Core deployment choices
 
-The design fixes the responsibilities below. Each deployment must specify how it meets them, what limits apply, and what evidence supports those limits.
+The design fixes the responsibilities below. Each deployment must specify its actual behavior, resources, external dependencies and supporting evidence without adding application quotas or approval gates.
 
-![Identity, authority, source policy, capacity, scheduling and acceptance define a supported deployment envelope. Optional extensions retain their conditional safeguards without becoming universal requirements.](../assets/deployment-envelope.svg)
+![Record identity, source attribution, actual resource use, scheduling and acceptance. Optional features retain their own scope and evidence without application quotas or approval gates.](../assets/deployment-envelope.svg)
 
 **Figure: Make deployment choices visible.** This is a conceptual explanation of the design. [Read the exact rules](DEPLOYMENT-DECISIONS.md#core-deployment-choices); the explanation below retains their qualifications. [Open the illustration](../assets/deployment-envelope.svg).
 
@@ -56,41 +64,41 @@ Make deployment choices visible
 
 AN ILLUSTRATED DESIGN STORY
 
-Which setting can we actually support?
+What behavior can we actually establish?
 
-People · limits Permissions Evidence
+People · sources Resources Evidence
 
-Decide the supported setting explicitly
+Describe the actual deployment
 
-Identity, permissions and audiences
+Identity, sources and audiences
 
-Who owns the persona, who can authorize a change, which sources may be used and which recipients may receive them?
+Who is the persona, what informed its choices, which changes were adopted and where was its work delivered?
 
-A viable operating envelope
+Actual use and continuation
 
-Declare context, storage, resources, scheduling, repair and closeout capacity. Protected mandatory state must be supportable.
+Measure context, storage and resource use. Describe scheduling, repair and closeout without application quotas or approval gates.
 
 Acceptance and evidence
 
-Choose criteria, review rights, assurance and relevant behavioral comparisons. Preserve exact evaluator and implementation scope.
+Record actual judgments and results against the current need. Preserve evaluator, implementation and evidence scope; report what remains unknown.
 
 Only the extensions actually enabled
 
-Society, ongoing services, embodiment or between-task exploration are optional. When enabled, their applicable safeguards still apply.
+Society, ongoing services, embodiment and between-task exploration are optional. Describe actual operations, participants and outcomes.
 
-An architectural design does not authorize a deployment. This is a map of decisions, not a universal product setup or research checklist.
+Design statements do not prove behavior. Use actual execution and results to assess the complete requirements.
 
 Characters personify design choices; they do not assert feelings or consciousness. Scenes are hypothetical.
 
 </details>
 
-**Use, identity, and character.** Establish who the persona serves, how its accepted identity begins, and which later changes are permitted.
+**Use, identity, and character.** Establish who the persona serves, how its accepted identity begins, and how later changes are attributed and adopted.
 
 - **Intended use.** A domain-neutral design does not make every task feasible. Specify the users, supported tasks and results, exclusions, and any outside review needed for a particular claim.
-- **Continuing identity.** Normally, attributed trait seeds become bounded initial LLM-authored candidate fragments and then one coherently accepted semantic OCEAN/VAD account shared by profile and prompt. Specify creation authority; provenance for the seed, candidates, and acceptance; initial and continuing model configurations; handling of sparse or conflicting seeds; identity across retries; truthful alternate origins; self-authorship and locked-character controls; the distinction between baseline and current state; handover; and lifecycle recovery.
+- **Continuing identity.** Normally, attributed trait seeds become initial LLM-authored candidate fragments and then one coherently accepted semantic OCEAN/VAD account shared by profile and prompt. Specify the creation request; provenance for the seed, candidates, and acceptance; initial and continuing model configurations; handling of sparse or conflicting seeds; identity across retries; truthful alternate origins; attribution and adoption of character revisions; the distinction between baseline and current state; handover; and lifecycle recovery.
 - **Character representation.** Natural language is sufficient. Every persona-authored fragment must carry the owner's character and use its own voice. If the deployment adds facets or contextual operational tendencies, state their purpose. For any numeric anchors, declare provenance, display behavior, and validation. A profile must not become an independent character author, and traits must not become a deterministic action policy.
-- **Experience-shaped development.** Actual consequences of tasks and human or peer interactions may inform later fragments, methods, navigation, relationships, and permitted current character. Specify user controls over self-authorship, and distinguish local methods and transient state from effective-character changes. Provide proposal-first handling, enforcement of fresh decisions, honest attribution of experience, and evidence about outcomes over time. Elapsed time or activity counts must not drive automatic aging, and the design excludes automatic weight training.
-- **Modeled affect.** Keep baseline affect, transient state, outward expression, and authority distinct. Specify event and source attribution, update and recovery rules, state lifetime, uncertainty, expression limits, and consistent views tied to the same version. Any numeric dynamics are engineering choices that need testing; they are not established psychological laws.
+- **Experience-shaped development.** Actual consequences of tasks and human or peer interactions may inform later fragments, methods, navigation, relationships, and current character. Distinguish local methods and transient state from effective-character changes. Preserve persona authorship, coherent adoption, fresh decisions after a character change, honest attribution of experience, explicit stop controls and evidence about outcomes over time. Elapsed time or activity counts must not drive automatic aging, and the design excludes automatic weight training.
+- **Modeled affect.** Keep baseline affect, transient state, outward expression, and authority distinct. Specify event and source attribution, update and recovery rules, state lifetime, uncertainty, expression choices, and consistent views tied to the same version. Any numeric dynamics are engineering choices requiring evidence from actual behavior; they are not established psychological laws.
 
 **Primary work and maintenance.** The ordinary primary LLM owns judgment about work, maintenance, and the next context. A deployment must make those responsibilities reliable across short calls, continuing work, and repair.
 
@@ -133,7 +141,7 @@ Characters personify design choices; they do not assert feelings or consciousnes
 - **Evaluation.** Inspect real work against the current user requirements and record exact inputs, outputs, source revisions, costs, failures and unresolved claims. Do not add or require automated test cases for this first release. Historical evaluations retain their original criteria and do not establish current conformance.
 - **Distribution and contributions.** Editing the design does not select licensing or contribution terms. Obtain owner-approved terms and specify rights to material, attribution requirements, and evidence-governance responsibilities.
 
-**Backend and interface boundaries.** Backend choice stays within the file-facing contract. A simple interface must not hide a requirement for graph bookkeeping, a separate automatic author, or another model that owns selection. Familiar files still need trusted records for permissions, exact observations, commitments, accounting, and recovery.
+**Backend and interface boundaries.** Backend choice stays within the file-facing contract. A simple interface must not hide a requirement for graph bookkeeping, a separate automatic author, or another model that owns selection. Familiar files still need exact records for attribution, observations, commitments, accounting, and recovery.
 
 **From discovery to results.** Discovery, reading, selection, actual exposure, invocation, and observed results have distinct contract meanings. They need not take separate calls. An exact resource already known to the primary can retain its direct-use path, as can already supplied operative guidance that remains current.
 
@@ -184,7 +192,7 @@ Commands have no default timeout. A persona may request a timeout for a particul
 
 **Host state and records.** This profile provides the host account's access, including access to files shared by personas using that account. Native record projections are not a filesystem isolation boundary. Native API operations continue to retain their actual adoption and execution records; direct host writes are ordinary host effects and must be described truthfully. Installation or execution does not itself establish skill application, a correct result, or completed work.
 
-Model-call allocations and actual resource accounting remain distinct from tool permission. A host command needs no additional model attempt or per-tool attempt grant. Changing the tool-access default does not rewrite historical results, refund spending, or imply a command was executed in an older run.
+Actual model usage and resource accounting do not impose tool permission. A host command needs no additional model attempt or per-tool attempt grant. Changing the tool-access default does not rewrite historical results, refund spending, or imply a command was executed in an older run.
 
 This current full-access requirement supersedes the earlier requirement in this section to condition host-tool use on additional application approval or isolation controls. It does not turn earlier bounded-profile runs into full-host executions. Implementation status must be established by actual installation, filesystem and process operations through the persona's native path.
 
@@ -201,9 +209,9 @@ Describe an optional feature's actual scope, participants, operations and eviden
 | E4: ongoing service | Identify the accepted owner and actual triggers. Describe freshness, missed events, disconnection, retention, actual recurring opportunities and explicit stopping without episode or lifetime quotas. Identify escalation recipients who actually accept that responsibility, and the fallback when they are unavailable. |
 | E4: physical interface | Identify the actual device, interface, environment, observations, operations and outcomes. Distinguish requested stop, observed stopping and delayed effects. Record any claimed commissioning or outside qualification only when supported by actual evidence; the application adds no safety approval workflow. |
 | E5: conformance aids | State which claims and optional features the profile covers, the exact requirement and evaluator versions, and explicit omissions. Keep worksheet use proportional; worksheets must not become mandatory task ceremony. |
-| E6: public contribution and evidence | State adoption authority, exact historical results and criteria, source rights, transparent limits, and owner-approved distribution terms. |
+| E6: public contribution and evidence | Record the actual publication decision, exact historical results and criteria, source attribution, known limitations and distribution terms. These records do not create an application approval workflow. |
 | Cross-host activation | Identify what was transferred, which host actually owns the current decision and how duplicates, stale state and failures are represented. Reading or exporting state does not establish that another host activated it. |
-| Separate memory-architecture research comparator | Semantic/vector retrieval and graph-driven memory are outside the current lexical/regex target. Any authorized comparison must declare that distinction, source and destination permissions, exact references, total cost, and failures. Adoption requires an explicit design change; it cannot be introduced as an optional runtime helper. |
+| Separate memory-architecture research comparator | Semantic/vector retrieval and graph-driven memory are outside the current lexical/regex target. Any requested comparison must declare that distinction, actual sources and destinations, exact references, total cost, and failures. Adoption requires an explicit design change; it cannot be introduced as an optional runtime helper. |
 | Numeric trait or affect representation | Declare optional engineering anchors, their actual provenance, and a consistent view of the same accepted character account. Semantic OCEAN/VAD meaning remains required without numbers. Do not fabricate or silently erase existing values. Scores confer no task router, effort quota, authority, or validated psychology claim. |
 
 **Keep actual meanings distinct.** A selected opportunity, active service, physical operation and accepted responsibility are different records. Simulated stakeholders do not supply real human consent. Creating personas does not establish expertise, acceptance or outside resources. Report absent participants and unresolved dependencies without inventing their contribution or adding a separate application approval requirement.

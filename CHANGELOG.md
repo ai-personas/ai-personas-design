@@ -2,6 +2,22 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — current onboarding choices and deployment guidance
+
+Specified optional provider checks without ignored quota inputs, redundant
+authorization or evidence-retention flags, or a separate application deadline.
+Actual account/credential bindings, exact request identities, consumed requests
+and uncertain outcomes retain their meanings. The companion runtime removes
+these inputs and the dialogue's inert second-consent method. Earlier development
+formats are not silently migrated or replayed under the current interface.
+
+Reconciled the deployment guide and its illustration with unrestricted execution:
+describe actual identity, sources, resource use, continuation and evidence without
+finite admission envelopes, character-lock controls or application approval
+requirements. The guide still requires persona authorship, coherent adoption,
+fresh decisions and evidence of useful development. These source and design
+changes do not establish full conformance, optional SIWC execution or maturation.
+
 ## 23 October 2026 — provider configuration without obsolete limits
 
 Specified current provider configuration without historical quota declarations
