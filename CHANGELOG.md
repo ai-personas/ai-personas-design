@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — current entry and evidence guidance
+
+Reconciled the main introduction, onboarding, contribution and visual guides with persona-chosen work under UR-050 and unrestricted execution under UR-052. Updated the whole-loop and different-approach illustrations and their text equivalents. Compactness remains useful organization and selective context without application corpus, prompt, history or navigation caps.
+
+Rewrote the evaluation method and its 44 catalogue identifiers as evidence criteria for actual source and work. Retired prescribed test scenarios, fixed campaign minima, quota-based admission, protected reserves, application permission gates and restricted selection repair from this guidance. Exact response validation, character-adoption provenance, actual effects, useful deliverables and the distinction between characteristic maturation and asset reuse remain substantive requirements. Earlier criteria and results retain their immutable historical references; no pass transfers to changed criteria.
+
+This is a documentation change, not a claim of runtime conformance or completed repository-wide reconciliation. No test cases or live run records are added. Other detailed prose and topic artwork still need review against the current human requirements.
+
 ## 23 October 2026 — bring worked examples into the unrestricted design
 
 Rewrote the detailed examples and requirements walkthrough around UR-050 and UR-052. Removed application call, search, context and storage allowances, protected finishing budgets, safety and permission gates, and the restricted repair path. Search sizes and work approaches belong to persona choices; actual provider, host and tool failures retain their observed meaning. Preserved the three continuing characters, house and circuit work, later skyscraper and printer transfer, tool installation, social development, more-time house work and five-persona circuit continuation. Personal stopping, ongoing duties and completion of the full need remain separate.

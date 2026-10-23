@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="1860" viewBox="0 0 560 1860" role="img" aria-labelledby="title description">
   <title id="title">Same need, different approaches</title>
-  <desc id="description">Two hypothetical personas show different characteristic attention and planning choices for a workshop while sharing factual, authority and resource constraints. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <desc id="description">Two hypothetical personas choose different approaches to a workshop while keeping the actual task and factual evidence clear. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
   <rect width="560" height="1860" fill="#fffaf0"/>
-  <g font-family="DejaVu Sans, Arial, sans-serif">
+  <g font-family="Liberation Sans, Arial, sans-serif">
     <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">Same need, different</tspan><tspan x="28" dy="36">approaches</tspan></text>
     <text x="28" y="129" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
     <rect x="20" y="153" width="520" height="330" rx="20" fill="#e5f4ed" stroke="#d0d5cb" stroke-width="1"/>
@@ -65,8 +65,8 @@
     <ellipse cx="70" cy="1318" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <ellipse cx="83" cy="1318" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M71 1329 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-    <text x="112" y="1329" font-size="23" fill="#885000" font-weight="700"><tspan x="112" dy="0">The same non-negotiable</tspan><tspan x="112" dy="32">boundaries</tspan></text>
-    <text x="50" y="1446" font-size="22" fill="#16332f"><tspan x="50" dy="0">Both need accurate facts, current</tspan><tspan x="50" dy="31">permission and an affordable plan.</tspan><tspan x="50" dy="31">Neither invents a booking, expertise or a</tspan><tspan x="50" dy="31">participant’s agreement.</tspan></text>
+    <text x="112" y="1329" font-size="23" fill="#885000" font-weight="700"><tspan x="112" dy="0">The same task and facts</tspan></text>
+    <text x="50" y="1446" font-size="22" fill="#16332f"><tspan x="50" dy="0">Both need accurate facts and a</tspan><tspan x="50" dy="31">workable plan.</tspan><tspan x="50" dy="31">Neither invents a booking, expertise or a</tspan><tspan x="50" dy="31">participant’s agreement.</tspan></text>
     <path d="M29 1594 L531 1592 L527 1734 L32 1732 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
     <text x="46" y="1622" font-size="20" fill="#16332f"><tspan x="46" dy="0">Meaningful difference appears in attention,</tspan><tspan x="46" dy="29">choices and collaboration—not just a rewritten</tspan><tspan x="46" dy="29">tone. Neither approach is guaranteed better.</tspan></text>
     <text x="30" y="1769" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>

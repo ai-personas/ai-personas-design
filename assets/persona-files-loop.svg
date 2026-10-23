@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="2258" viewBox="0 0 560 2258" role="img" aria-labelledby="title description">
   <title id="title">How a continuing persona works</title>
-  <desc id="description">Two separately purposed stores supply bounded context to the primary LLM. Actual decisions and consequences inform later authorized revision. Every call also has maintenance and next-context duties. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
+  <desc id="description">Two separately purposed stores supply chosen context to the primary LLM. Actual decisions and consequences inform later revision. Every call also has maintenance and next-context duties. Expressive cartoon characters and concrete artifacts illustrate the mechanism; this is a hypothetical teaching scene.</desc>
   <rect width="560" height="2258" fill="#fffaf0"/>
-  <g font-family="DejaVu Sans, Arial, sans-serif">
+  <g font-family="Liberation Sans, Arial, sans-serif">
     <text x="28" y="55" font-size="27" fill="#16332f" font-weight="700"><tspan x="28" dy="0">How a continuing persona works</tspan></text>
     <text x="28" y="93" font-size="17" fill="#00665f" font-weight="700"><tspan x="28" dy="0">AN ILLUSTRATED DESIGN STORY</tspan></text>
     <rect x="20" y="117" width="520" height="330" rx="20" fill="#f8e8ec" stroke="#d0d5cb" stroke-width="1"/>
@@ -73,8 +73,8 @@
     <ellipse cx="70" cy="953" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <ellipse cx="83" cy="953" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M71 964 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-    <text x="112" y="964" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Choose bounded next context</tspan></text>
-    <text x="50" y="1049" font-size="22" fill="#16332f"><tspan x="50" dy="0">Use known exact references or bounded</tspan><tspan x="50" dy="31">file search. Explicit preserve or no</tspan><tspan x="50" dy="31">optional need can be enough.</tspan></text>
+    <text x="112" y="964" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Choose useful next context</tspan></text>
+    <text x="50" y="1049" font-size="22" fill="#16332f"><tspan x="50" dy="0">Use known exact references or chosen</tspan><tspan x="50" dy="31">file search. Explicit preserve or no</tspan><tspan x="50" dy="31">optional need can be enough.</tspan></text>
     <path d="M260 1151 Q292 1155 280 1174" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M273 1167 L280 1176 L288 1167" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M29 1188 L529 1186 L531 1437 L27 1440 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
@@ -94,7 +94,7 @@
     <ellipse cx="83" cy="1513" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M71 1524 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="112" y="1524" font-size="23" fill="#00665f" font-weight="700"><tspan x="112" dy="0">Reason, interact and act</tspan></text>
-    <text x="50" y="1609" font-size="22" fill="#16332f"><tspan x="50" dy="0">The persona’s perspective informs</tspan><tspan x="50" dy="31">discretionary choices within facts,</tspan><tspan x="50" dy="31">permissions and resources.</tspan></text>
+    <text x="50" y="1609" font-size="22" fill="#16332f"><tspan x="50" dy="0">The persona’s perspective informs</tspan><tspan x="50" dy="31">choices about the task, tools and</tspan><tspan x="50" dy="31">cooperation.</tspan></text>
     <path d="M260 1711 Q292 1715 280 1734" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M273 1727 L280 1736 L288 1727" stroke="#405d58" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M29 1748 L529 1746 L531 1996 L27 1999 Z" stroke="#16332f" stroke-width="2.3" fill="#ffffff" stroke-linecap="round" stroke-linejoin="round" />
@@ -104,7 +104,7 @@
     <ellipse cx="493" cy="1777" rx="2" ry="3" fill="#16332f" stroke="none" stroke-width="3"/>
     <path d="M481 1788 q7 5 13 -2" stroke="#16332f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
     <text x="49" y="1788" font-size="23" fill="#00665f" font-weight="700"><tspan x="49" dy="0">Observe and consider revision</tspan></text>
-    <text x="50" y="1873" font-size="22" fill="#16332f"><tspan x="50" dy="0">Record actual consequences. The</tspan><tspan x="50" dy="31">primary LLM proposes useful authorized</tspan><tspan x="50" dy="31">changes, or states no change, a block or</tspan><tspan x="50" dy="31">a deferral.</tspan></text>
+    <text x="50" y="1873" font-size="22" fill="#16332f"><tspan x="50" dy="0">Record actual consequences. The</tspan><tspan x="50" dy="31">primary LLM proposes useful</tspan><tspan x="50" dy="31">changes, or states no change, a block or</tspan><tspan x="50" dy="31">a deferral.</tspan></text>
     <path d="M29 2021 L531 2019 L527 2132 L32 2130 Z" stroke="#885000" stroke-width="1.5" fill="#fff0cd" stroke-linecap="round" stroke-linejoin="round" />
     <text x="46" y="2049" font-size="20" fill="#16332f"><tspan x="46" dy="0">The next call uses the accepted selection and</tspan><tspan x="46" dy="29">current state. The loop is a design</tspan><tspan x="46" dy="29">responsibility, not proof of beneficial behavior.</tspan></text>
     <text x="30" y="2167" font-size="19" fill="#405d58"><tspan x="30" dy="0">Characters personify design choices; they do not</tspan><tspan x="30" dy="28">assert feelings or consciousness. Scenes are</tspan><tspan x="30" dy="28">hypothetical.</tspan></text>
