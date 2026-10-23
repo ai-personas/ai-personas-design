@@ -2,6 +2,16 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — affect context follows actual supplied bodies
+
+Clarified that required accompaniment for a new affect update follows the exact
+file bodies supplied to its authoring decision. Retained provenance and discovery
+metadata do not independently request historical bodies. The companion runtime
+uses the supplied-body qualification basis already used by tool results, while
+preserving full input provenance, applicable later warnings, persona-authored
+observation references and immutable earlier receipts. This does not establish
+felt emotion, characteristic maturation or full product conformance.
+
 ## 23 October 2026 — current onboarding choices and deployment guidance
 
 Specified optional provider checks without ignored quota inputs, redundant
