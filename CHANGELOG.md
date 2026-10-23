@@ -8,7 +8,7 @@ Reconciled the detailed persona core and its five illustrations with persona-cho
 
 Replaced the chapter's prescribed evaluation campaign and inherited minima with evidence criteria for actual work. Preserved OCEAN and separate VAD, characteristic fragments distinct from supporting assets, ordinary-call maintenance and context choices, self-harmonization, individuality, useful transfer and social development. Updated accessible diagram descriptions and text equivalents. Existing anchor links remain usable; earlier constraints and outcomes retain immutable historical references.
 
-The corresponding runtime change removes fresh restricted-repair entry points and the automatic mode switch. Historical receipts retain their original meaning. These source changes and design explanations do not establish complete runtime conformance, useful maturation or repository-wide reconciliation; the remaining detailed work/contracts and other guidance still need review.
+The corresponding runtime change removes fresh restricted-repair entry points, the automatic mode switch and unreachable repair branches in fresh preparation. Readiness reporting now describes ordinary admission and concurrent Direct calls. Historical receipts retain their original meaning. These source changes and design explanations do not establish complete runtime conformance, useful maturation or repository-wide reconciliation; the remaining detailed work/contracts and other guidance still need review.
 
 ## 23 October 2026 — current entry and evidence guidance
 
