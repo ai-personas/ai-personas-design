@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — unrestricted observable contracts and execution accounts
+
+Reconciled the observable system contracts with persona-chosen work and unrestricted execution. Removed residual repair allowances, mode restrictions, source-policy and authoring gates, parsing quotas and mandatory resource reserves. Preserved initial own-voice authorship, all ordinary work/maintenance/context responsibilities, exact persistence and character-adoption ordering, attributable feedback, accepted commitments and full delivery semantics. Earlier contracts retain their immutable historical reference; no prior pass transfers to changed criteria.
+
+Clarified that provider invocation, a host command inspecting source and execution of the inspected feature establish different facts. Source inspection is real command execution, while process success does not prove every subcommand succeeded or the product behavior was exercised. Companion runtime guidance carries these distinctions and removes stale restricted-repair eligibility wording. These changes do not prove model compliance, complete runtime conformance or useful maturation. The broader work chapter and other detailed guidance still need reconciliation.
+
 ## 23 October 2026 — unrestricted persona core and ordinary recovery
 
 Reconciled the detailed persona core and its five illustrations with persona-chosen work and unrestricted execution. Initial authorship, character adoption, file discovery, context supply, maintenance, warning annotations and retention no longer prescribe application quotas, source-policy gates, a self-authorship lock or restricted selection repair. Exact authorship, coherent adoption, fresh decisions after character change, actual failures and the full accepted need remain substantive responsibilities.
