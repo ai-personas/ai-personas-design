@@ -4,7 +4,7 @@
 
 ## 23 October 2026 — current-record validation reuse
 
-Clarified deterministic host reuse of a successful decode only after a fresh transaction rechecks the complete current record bytes, lookup identity, metadata and expected configuration. Changed bytes require validation again, and failed checks do not become cached success. Logical read accounting, actual physical cost and provider usage remain distinct. The companion runtime avoids repeated JSON decoding in unchanged configuration binding checks; this does not change persona context, ownership or adoption requirements.
+Clarified deterministic host reuse of a successful decode only after a fresh transaction rechecks the complete current logical record bytes, lookup identity, physical encoding, metadata and expected configuration. The identity covers decoded logical bytes, before object interpretation; physical representations are independently validated. Changed logical bytes require validation again, and failed checks do not become cached success. Logical read accounting, actual physical cost and provider usage remain distinct. The companion runtime avoids repeated JSON decoding in unchanged configuration binding checks; this does not change persona context, ownership or adoption requirements.
 
 ## 23 October 2026 — feedback mandate provenance
 
