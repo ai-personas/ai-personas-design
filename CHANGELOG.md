@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — completed model-call evidence in ordinary context
+
+Specified ordinary host receipts for completed model calls, keeping exact
+invocation and terminal identity, available provider reports and unknown charges
+separate from navigation accounting, tool effects and source-inspection claims.
+Receipt supply does not resume stopped work, require a confirmation call or
+rewrite historical evidence.
+
 ## 23 October 2026 — reuse current state for foreground maintenance
 
 Specified shared current snapshots for empty maintenance checks, with fresh

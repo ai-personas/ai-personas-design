@@ -386,6 +386,16 @@ Resource accounting describes actual use; it does not impose an application allo
 
 **Record use at the boundary that establishes it.** Keep model attempts, provider-reported tokens, transport bytes, tool executions, elapsed time, navigation and retained storage distinguishable. Attribute activity to its actual work and persona, including failed attempts and descendants. A shared receipt or paired ledger must not turn one provider attempt into two billed calls. An estimate is not a measured bill; unknown usage remains unknown. Retiring a persona or ending a task does not erase its consumption.
 
+Supply actual completed model-call evidence to later eligible persona decisions,
+with its invocation, exact terminal reference, execution profile and available
+model, effort and usage reports. A navigation account alone cannot establish
+whether provider inference occurred. Keep synthetic submissions, missing fields,
+reported identity, unknown charges and application adoption distinguishable.
+Completed inference does not establish tool execution, source-inspection coverage
+or the truth of an authored result. These receipts are ordinary retained host
+observations, not a reason to resume stopped work or require a confirmation call.
+Preserve original historical records instead of backfilling evidence into them.
+
 Mechanical scheduling should reuse a coherent current snapshot for empty
 maintenance checks. Candidate metadata selects what requires closer inspection;
 actual creation, admission and failure retirement still validate current records
