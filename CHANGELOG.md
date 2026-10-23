@@ -4,7 +4,7 @@
 
 ## 23 October 2026 — current entry and evidence guidance
 
-Reconciled the main introduction, onboarding, contribution and visual guides with persona-chosen work under UR-050 and unrestricted execution under UR-052. Updated the whole-loop and different-approach illustrations and their text equivalents. Compactness remains useful organization and selective context without application corpus, prompt, history or navigation caps.
+Reconciled the main introduction, onboarding, contribution and visual guides with persona-chosen work under UR-050 and unrestricted execution under UR-052. Updated the whole-loop and different-approach illustrations and their text equivalents. Compactness remains useful organization and selective context without application corpus, prompt, history or navigation caps. Replaced the introduction's stale refinement date with a link to dated change history.
 
 Rewrote the evaluation method and its 44 catalogue identifiers as evidence criteria for actual source and work. Retired prescribed test scenarios, fixed campaign minima, quota-based admission, protected reserves, application permission gates and restricted selection repair from this guidance. Exact response validation, character-adoption provenance, actual effects, useful deliverables and the distinction between characteristic maturation and asset reuse remain substantive requirements. Earlier criteria and results retain their immutable historical references; no pass transfers to changed criteria.
 
