@@ -34,10 +34,14 @@ Clarified that fresh setup collects provider and creation choices without
 historical quota, owner-position or permission switches. Initial identities are
 not a population ceiling or an assignment of responsibility. The companion
 runtime removes these inputs from the setup API, CLI and interactive bootstrap,
-including the redundant bootstrap approval flag. Existing saved declarations
-remain attributable; neutral new bookkeeping is neither a quota nor an invented
-user approval. The first-release interface does not silently rewrite old
-requests. These changes do not establish full runtime conformance.
+including the bootstrap request's `allow_direct_provider` input. The dialogue's
+retained `setup_authorized` progress marker identifies the selected saved
+bootstrap submission. It is set without a second approval and does not establish
+completion; the actual runtime receipt does that. This marker is distinct from
+the removed request input. Existing saved declarations remain attributable;
+neutral bookkeeping is neither a quota nor an invented user approval. The
+first-release interface does not silently rewrite old requests. These changes
+do not establish full runtime conformance.
 
 ## 23 October 2026 — exact response-envelope guidance
 
