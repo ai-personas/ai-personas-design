@@ -2,6 +2,10 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 23 October 2026 — retain the scope of earlier work judgments
+
+Clarified that a previous persona work judgment keeps its invocation, admitted work version and mandate when supplied to a fresh decision. Current task amendments and later feedback do not inherit completion from that judgment. Missing attribution stays unknown. This records a provenance requirement, not a prescribed reasoning workflow or a guarantee that a model will judge completion correctly.
+
 ## 23 October 2026 — reconcile active unrestricted-execution rules
 
 Put the human-user requirements first in the document authority order and removed the conflicting conservative-gate fallback. Rewrote the affected navigation, context repair, retained-state, resource accounting, host-access, source-sharing, authorship and deployment clauses to apply UR-052 directly. Preserved selective context, exact provenance, actual outcomes, explicit stopping and historical evidence without application quota or approval requirements. The earlier restricted selection-repair procedure remains linked at its immutable historical revision.
