@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — preserve scope through provisional results
+
+Clarified that a persona's concept label or qualifications do not narrow the
+user's request. Relevant inspection, correction and integration belong to the
+existing work without another user prompt. Sufficiency still comes from persona
+judgment about the actual need, with partial results, real blockers and optional
+extensions distinguished. Added no fixed workflow or domain-specific checker.
+
 ## 24 October 2026 — persona work without required external coaching
 
 Recorded the user's clarification to UR-050: personas themselves perform,

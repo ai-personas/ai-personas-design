@@ -33,6 +33,15 @@ Start from the actual need and preserve who expressed it. Keep the exact request
 
 A request to create or build must not quietly become an offer of advice because a prose answer is easier. The persona determines the appropriate result, consequential unknowns, useful representations, and necessary checks. The user need not know tool names or file formats.
 
+A provisional interpretation remains the persona's assumption. Calling an output
+a concept, prototype or preliminary version, or listing its limitations, does not
+make that reduced scope the user's request. Judge whether the result supports its
+intended use and which gaps still prevent that use. Inspection, correction and
+integration needed to fulfill the existing request need no new user prompt or
+separate need. Real missing information and outside evidence remain explicit
+dependencies; optional extensions need not become compulsory work. A useful
+partial result remains partial until the actual requested scope is satisfied.
+
 Ordinary progress and completion must not depend on an external agent or user
 diagnosing defects, choosing the next repair, assigning each contribution, or
 finishing the artifacts. Personas use their own reasoning, observations,
