@@ -2,6 +2,16 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — worksheets follow unrestricted execution
+
+Removed superseded quota, funding, permission and safety-approval instructions
+from the optional design worksheets. Their questions now inspect actual usage,
+availability, voluntary participation, authored continuation and observed results.
+Compactness remains a useful behavior to examine without a corpus or prompt cap.
+Identity, whole-response validation, complete qualifications and honest unknowns
+retain their meanings. The worksheets remain optional and establish no new run
+evidence or runtime conformance.
+
 ## 24 October 2026 — complete failure provenance without quota plumbing
 
 Specified complete failure provenance retained atomically with rejection, with
