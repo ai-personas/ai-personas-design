@@ -406,6 +406,14 @@ failure into a new continuation. Reduce redundant reads and temporary history
 copies while preserving retained evidence. Report actual timing scope, including
 overlapping phases, without inferring a speedup from source changes alone.
 
+When preparation retains a new runtime head after an episode checkpoint, reuse
+the exact stored object committed by that checkpoint. Avoid independently
+serializing and packing the same immutable state merely to reconstruct that
+head. Current authority, owned-invocation checks, dependencies, atomic runtime
+and launch updates, and the caller's epoch check still apply. Return the new
+head only after a successful commit. A construction timing event does not prove
+that the checkpoint committed or that provider inference began.
+
 Providers, the host and external services have real availability and representation limits. Report their actual rejections, I/O failures, unsupported operations and unknown outcomes. The absence of an application quota does not promise infinite memory, free inference, indefinite service or guaranteed completion. Do not report a configured historical allowance as a current execution barrier.
 
 **Choose useful context and maintenance.** UR-021–UR-023 still require selective discovery and compact, coherent context. The persona chooses relevant fragments and assets, query reformulation, consolidation and stopping through ordinary reasoning. Requested pages and ranges express what it wants to inspect; they are not cumulative work limits. The host supplies the accepted selection faithfully and reports actual missing or unavailable material instead of silently truncating it to an application ceiling.

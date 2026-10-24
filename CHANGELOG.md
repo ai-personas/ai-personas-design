@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — reuse the committed preparation state
+
+Specified reuse of the exact stored runtime object returned by a successful
+episode checkpoint, avoiding duplicate serialization and exposure packing.
+Current authority, transaction and epoch checks remain distinct from construction
+timings and actual provider execution.
+
 ## 23 October 2026 — completed model-call evidence in ordinary context
 
 Specified ordinary host receipts for completed model calls, keeping exact
