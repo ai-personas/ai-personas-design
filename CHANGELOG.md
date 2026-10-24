@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — recovery guidance distinguishes historical limits
+
+Specified that old quota measurements remain historical evidence without
+limiting a fresh decision. New diagnostics distinguish source-lineage checks
+from disabled access-policy gates, preserve old observation bodies, and do not
+invent continuation, replay or completed work.
+
 ## 24 October 2026 — borrow transaction candidates for validation
 
 Specified validation and dependency fingerprinting from immutable candidate

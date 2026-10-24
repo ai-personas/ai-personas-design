@@ -110,6 +110,14 @@ complete retained record when persisting it; avoid redundant size probes.
 Persistence failure rolls back rejection and its receipt together. Historical
 unknown provenance is not reconstructed or reclassified by this change.
 
+When recovery explains a rejection under an earlier application quota, identify
+the recorded limit and measurements as historical. They do not require a smaller
+current context, a replenished allowance or renewed access permission. New
+diagnostics distinguish exact source-lineage checks from access-policy gates,
+which are disabled under unrestricted execution. Preserve earlier observation
+bodies and actual provider or host failures without rewriting their outcomes.
+Diagnostic supply does not resume a stopped persona or establish work completion.
+
 An earlier accepted continuation can remain usable under the same live mandate. Within the continuing session, the host may retire a definitively rejected, complete local invocation and supply its actual failure to a fresh primary decision. This preserves the existing continuation rather than deriving permission from invalid output. Keep the rejected response and its charges; do not replay its proposed actions, repair its bytes, erase recorded usage, revive an authored stop, reuse a consumed timed opportunity, or treat cancellation or an uncertain transport as a completed rejection. Recheck current work, actor, context, scheduling and actual execution state before the fresh admission; no resource allowance is replenished or required.
 
 **Communication and diagnostic inspection.** Ordinary chat and work delivery withhold the call's persona-authored preview, commentary, and reply until the complete work, maintenance, and next-context response has been validated. While the call is pending, those channels may show truthful mechanical host status.
