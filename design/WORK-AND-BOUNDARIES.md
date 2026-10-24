@@ -493,6 +493,15 @@ ancestry projection. This local allocation change must preserve the complete
 returned evidence and cannot cache validation across calls. Enclosing corpus,
 rendering and planning timings remain distinct from an isolated cost attribution.
 
+A caller that only needs lineage validity may use the same exact traversal
+without collecting the returned source list or policy records. Policies remain
+attributed history, not access gates. This mode must still resolve every source
+and revision, reject unknown lineage, follow qualifications and freshly validate
+warning ancestry with the same warning-binding exclusions. Callers that retain
+provenance still receive the complete ordered policy records and source set.
+Within one immutable snapshot, successful full expansion already establishes
+lineage validity; neither mode permits reusing that result across changed state.
+
 Providers, the host and external services have real availability and representation limits. Report their actual rejections, I/O failures, unsupported operations and unknown outcomes. The absence of an application quota does not promise infinite memory, free inference, indefinite service or guaranteed completion. Do not report a configured historical allowance as a current execution barrier.
 
 **Choose useful context and maintenance.** UR-021–UR-023 still require selective discovery and compact, coherent context. The persona chooses relevant fragments and assets, query reformulation, consolidation and stopping through ordinary reasoning. Requested pages and ranges express what it wants to inspect; they are not cumulative work limits. The host supplies the accepted selection faithfully and reports actual missing or unavailable material instead of silently truncating it to an application ceiling.

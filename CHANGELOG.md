@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — validate lineage without discarded output
+
+Clarified that validation-only callers may share the complete lineage traversal
+without collecting policy records or a returned source list. Exact lookups,
+qualifications, warning ancestry and missing-lineage errors remain mandatory.
+Full expansion still returns complete provenance, and its successful traversal
+already establishes validity for that immutable snapshot.
+
 ## 24 October 2026 — aggregate exact lineage sources once
 
 Specified deriving the final source list from the completed lineage traversal,
