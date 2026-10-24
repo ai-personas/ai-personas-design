@@ -453,6 +453,17 @@ transactions. Report encoding and hashing timings separately from byte copies,
 accounting and persistence. Successful encoding alone establishes neither a
 commit nor a measured whole-session speedup.
 
+Invocation, atomic-admission and decision fingerprints may stream canonical JSON
+over borrowed transaction values instead of copying complete request, intent or
+object bodies solely to hash them. Preserve every field, the admission domain
+marker, ordered arrays, explicit nulls, scalar encoding and recursively sorted
+object keys. The same complete arguments must produce the same digest. Retain
+current-state, revision, dependency, duplicate, reservation and terminal checks
+inside their actual transactions; a prior digest does not replace them. Measure
+hashing separately from the enclosing commit and distinguish overlapping phase
+times from total elapsed time. Removing allocations alone establishes no measured
+session improvement.
+
 Immutable file revisions may be shared in memory across a state snapshot, its
 copies and derived corpus views. New revisions remain separate records; current
 heads, retirement, accepted bindings and exposure keep their own state. Sharing

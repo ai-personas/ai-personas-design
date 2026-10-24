@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — stream complete transaction fingerprints
+
+Specified borrowed canonical hashing of invocation, admission and adoption
+arguments. Complete fields, array order, nulls, scalar encoding and nested key
+ordering retain the same digest; transaction validation and accounting remain
+separate. Hash and commit timings are distinct observations, not an automatic
+performance claim.
+
 ## 24 October 2026 — complete character transitions after one-shot admission
 
 Clarified that every successfully accepted ordinary character transition provides
