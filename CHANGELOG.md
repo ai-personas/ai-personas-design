@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — complete character transitions after one-shot admission
+
+Clarified that every successfully accepted ordinary character transition provides
+one fresh decision under the accepted character and current work controls. This
+also covers an admission from elapsed reconsideration without rearming its timer,
+accepting the fenced continuation or inferring a resume for stopped work.
+
 ## 24 October 2026 — retain explicit resume through character adoption
 
 Specified that an ordinary character-only adoption carries the explicit resume
