@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — complete failure provenance without quota plumbing
+
+Specified complete failure provenance retained atomically with rejection, with
+exact request and terminal bindings, no byte quota and no redundant size probes.
+Missing lineage and persistence failure retain their distinct outcomes. Also
+clarified release of temporary typed initialization state before persistence.
+
 ## 24 October 2026 — direct construction of packed runtime state
 
 Specified using the complete packed state value directly for initial and later

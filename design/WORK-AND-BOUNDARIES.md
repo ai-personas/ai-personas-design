@@ -419,7 +419,8 @@ that value directly for initialization and subsequent stored objects. A second
 serialization merely to reconstruct the same value adds temporary copies without
 adding evidence. Share the representation builder with general serialization;
 preserve all fields, exact exposure identities, reference locations and retained
-history. This does not remove distinct state transitions or their transaction
+history. Release temporary typed initialization state after constructing the
+owned storage value, before the Store transaction. This does not remove distinct state transitions or their transaction
 checks. Report construction timings separately from commits and actual memory
 measurements; removing a source-level copy alone does not establish a speedup.
 

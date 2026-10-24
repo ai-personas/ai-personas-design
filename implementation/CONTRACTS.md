@@ -101,6 +101,15 @@ Provider refusal, transport failure, timeout, and cancellation retain their actu
 
 After rejection, prior accepted selection remains stored only under its existing validity and recovery rules. This is not an authored preserve or successful consideration. Already admitted effects remain real. Missing intent creates no automatic paid repair, retry, or new allowance. Host status reporting may disclose the actual failure without presenting rejected output as an accepted persona response.
 
+Retain complete failure provenance with the rejection and its receipt in one
+transaction. Reference the exact admitted request and terminal; retain newly
+consulted sources and policies without duplicate components or a byte quota.
+Unavailable lineage remains explicitly unknown because evidence is missing,
+never because an old allowance was exceeded. Serialize and account for the
+complete retained record when persisting it; avoid redundant size probes.
+Persistence failure rolls back rejection and its receipt together. Historical
+unknown provenance is not reconstructed or reclassified by this change.
+
 An earlier accepted continuation can remain usable under the same live mandate. Within the continuing session, the host may retire a definitively rejected, complete local invocation and supply its actual failure to a fresh primary decision. This preserves the existing continuation rather than deriving permission from invalid output. Keep the rejected response and its charges; do not replay its proposed actions, repair its bytes, erase recorded usage, revive an authored stop, reuse a consumed timed opportunity, or treat cancellation or an uncertain transport as a completed rejection. Recheck current work, actor, context, scheduling and actual execution state before the fresh admission; no resource allowance is replenished or required.
 
 **Communication and diagnostic inspection.** Ordinary chat and work delivery withhold the call's persona-authored preview, commentary, and reply until the complete work, maintenance, and next-context response has been validated. While the call is pending, those channels may show truthful mechanical host status.
