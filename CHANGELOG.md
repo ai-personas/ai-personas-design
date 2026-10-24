@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — retain explicit resume through character adoption
+
+Specified that an ordinary character-only adoption carries the explicit resume
+that actually admitted its decision to the required fresh decision. Already
+resumed work does not require a second operator resume solely because character
+changed. The carryover remains bound to the actual invocation and current work;
+it neither accepts the fenced continuation nor creates a new resume event or
+rearms an elapsed timer.
+
 ## 24 October 2026 — retain creation-proposal authorship through native edits
 
 Specified that accepted full writes and exact native edits can both supply a
