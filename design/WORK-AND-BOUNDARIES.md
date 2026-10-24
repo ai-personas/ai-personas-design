@@ -440,6 +440,17 @@ authentication and duplicate checks, canonical records and measured allocation.
 Removing redundant serialization does not remove content checks performed by the
 owning runtime or establish a measured latency or memory improvement.
 
+When a transaction writes an immutable object revision and its current head,
+encode the complete canonical object once and reuse those bytes for both
+logical records and the returned exact-reference digest. Preserve separate
+record identity, namespace checks, duplicate checks, head updates, allocation
+accounting and physical storage treatment in the same atomic commit. Borrowing
+the body during encoding must preserve every field and canonical key ordering;
+it does not replace current dependency validation or retain a cache across
+transactions. Report encoding and hashing timings separately from byte copies,
+accounting and persistence. Successful encoding alone establishes neither a
+commit nor a measured whole-session speedup.
+
 Immutable file revisions may be shared in memory across a state snapshot, its
 copies and derived corpus views. New revisions remain separate records; current
 heads, retirement, accepted bindings and exposure keep their own state. Sharing

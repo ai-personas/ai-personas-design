@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — reuse complete canonical bytes within an object write
+
+Specified one canonical encoding for a changed object's immutable revision,
+current head and returned exact-reference digest. The logical records keep
+separate checks, allocation accounting and physical encoding within the atomic
+commit. Borrowed encoding preserves complete content without cached validation;
+encoding and hashing timings remain distinct from persistence and performance
+claims.
+
 ## 24 October 2026 — share immutable file revisions within runtime snapshots
 
 Specified in-memory sharing of complete immutable file revisions across
