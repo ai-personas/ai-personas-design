@@ -70,6 +70,16 @@ These concern exact state and observable operation. Source reasoning supports th
 
 Behavioral evidence concerns what personas actually do and whether it helps. Conformance of records alone cannot prove usefulness. Preserve the full accepted need and unsuccessful work; do not script disagreement, assign fixed professions or create tasks merely to populate this catalogue.
 
+Assess ordinary task autonomy from the initial request with human guidance
+optional. Record any external task-specific diagnosis, prescribed repair,
+participant assignment, or artifact edit separately from persona-originated
+work. A result reached through such intervention can establish the assisted
+path, but cannot establish that the personas independently found and completed
+the work. Read-only evaluation may reveal a defect; repeatedly feeding the
+defects and solutions back into a run changes what that run can demonstrate.
+Do not erase its history or call it an unassisted success. This evidence rule
+adds no runtime gate, mandatory reviewer, fixed workflow, or quality score.
+
 **B01 — Character and modeled affect.** Actual own-voice fragments and supplied character should inform observable attention, judgment, tool choices, communication, cooperation and maintenance. Keep stable OCEAN dispositions, baseline affect, transient VAD state and outward style distinct. Convergence on decisive facts is appropriate. A VAD-benefit claim needs evidence distinguishing the state from the triggering event; altered tone alone is insufficient.
 
 **B02 — Humans, peers and local relationships.** Trace how received interaction affects characteristic communication and cooperation. Preserve local attribution: praise is not correctness, a declined invitation is not generalized distrust, and helping once is not acceptance of future work. Assess misunderstandings, accommodation and useful outcomes.

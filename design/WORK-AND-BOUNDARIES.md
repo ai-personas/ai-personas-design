@@ -33,6 +33,15 @@ Start from the actual need and preserve who expressed it. Keep the exact request
 
 A request to create or build must not quietly become an offer of advice because a prose answer is easier. The persona determines the appropriate result, consequential unknowns, useful representations, and necessary checks. The user need not know tool names or file formats.
 
+Ordinary progress and completion must not depend on an external agent or user
+diagnosing defects, choosing the next repair, assigning each contribution, or
+finishing the artifacts. Personas use their own reasoning, observations,
+self-critique and chosen peer exchanges to identify and correct problems.
+Human guidance is welcome when offered, and genuine missing information can
+justify a question, but neither is an assumed task-management service. A runtime
+must support these persona choices without imposing a fixed review pipeline,
+domain-specific checker, or external quality supervisor.
+
 Preserve the full human-requested scope: useful individual and collective work, self-questioning and peer questioning, tool acquisition, retained learning, and later transfer such as house-to-skyscraper or circuit-to-printer work. More time and additional willing participants can support continued work without guaranteeing a better result. These are substantive needs, not scripted scenarios, compulsory teams or evidence that development has already occurred.
 
 **The mandate.** The agreed scope records outcomes, hard constraints, preferences, accepted clarifications, assumptions, available resources, review expectations, and stopping conditions. Its detail should match the work's consequences and dependencies. Keep these distinct:

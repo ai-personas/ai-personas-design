@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — persona work without required external coaching
+
+Recorded the user's clarification to UR-050: personas themselves perform,
+critique, correct and complete ordinary work. Human guidance may help but is
+not an expected task-management dependency. Distinguished assisted outcomes
+from evidence of task autonomy, while preserving useful clarification,
+persona-chosen cooperation and the absence of a fixed review pipeline.
+
 ## 24 October 2026 — request discovery cues during authoring
 
 Made UR-013's location and discovery explanation explicit in the authoring

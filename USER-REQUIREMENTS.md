@@ -1,6 +1,6 @@
 # Consolidated user requirements
 
-This file brings together the user's product and design requirements for AI Personas, including clarifications through 22 October 2026. It covers the requested product, architecture, and worked examples. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
+This file brings together the user's product and design requirements for AI Personas, including clarifications through 24 October 2026. It covers the requested product, architecture, and worked examples. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
 
 Only human-user messages supply these requirements. This account must preserve the user's intended outcomes, rather than weaken them to fit the existing design. Assistant interpretations, design decisions, evidence safeguards, and implementation rules must not be added as user requirements.
 
@@ -39,6 +39,8 @@ Their characteristics should shape how they work on tasks, use tools, communicat
 *In the picture: A persona brings its own character to many tasks, for people and other personas.*
 
 **UR-050 Let personas choose how to work and collaborate.** Personas should choose their approaches, tool use, requests for help, review, coordination, and contributions through their own reasoning. Their character, actual feedback, and the situation should shape those choices. The runtime must not replace them with a predetermined workflow or fixed owner, planner, or reviewer roles. Personas may organize and change their cooperation as the work develops.
+
+The personas themselves must carry out the task, identify and correct problems, and judge their work. A human user may offer guidance, but continuing external coaching or fixes must not be expected or necessary for ordinary task progress and completion. An external agent must not supply the missing task reasoning, diagnose each defect, prescribe each correction, or finish the deliverable on their behalf. This clarification does not remove useful questions about actual user preferences or indispensable information.
 
 ![UR-050: Personas reason about the situation, choose tools and collaboration, and adapt contributions as the work and feedback develop.](assets/user-requirements/ur-050-choose-how-to-collaborate.webp)
 
