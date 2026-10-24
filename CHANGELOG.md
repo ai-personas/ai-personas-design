@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — share immutable file revisions within runtime snapshots
+
+Specified in-memory sharing of complete immutable file revisions across
+snapshots and corpus views while preserving separate mutable heads and bindings.
+Each corpus still validates full records against its actual snapshot and counts
+the same logical bytes. Storage, identity and retained evidence stay complete;
+shared ownership supplies no cached authority or measured performance claim.
+
 ## 24 October 2026 — remove discarded Store size probes
 
 Specified that typed JSON bodies need no separate serialization solely for a

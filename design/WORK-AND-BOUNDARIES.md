@@ -440,6 +440,15 @@ authentication and duplicate checks, canonical records and measured allocation.
 Removing redundant serialization does not remove content checks performed by the
 owning runtime or establish a measured latency or memory improvement.
 
+Immutable file revisions may be shared in memory across a state snapshot, its
+copies and derived corpus views. New revisions remain separate records; current
+heads, retirement, accepted bindings and exposure keep their own state. Sharing
+must preserve complete content, canonical revision identities, storage encoding
+and measured logical bytes. Rebuild and validate each corpus against its actual
+snapshot, including record digests, paths, qualifications, policy consistency and
+current bindings. Shared ownership provides no cached authority or permission to
+omit retained evidence, and alone proves no memory or latency improvement.
+
 Providers, the host and external services have real availability and representation limits. Report their actual rejections, I/O failures, unsupported operations and unknown outcomes. The absence of an application quota does not promise infinite memory, free inference, indefinite service or guaranteed completion. Do not report a configured historical allowance as a current execution barrier.
 
 **Choose useful context and maintenance.** UR-021–UR-023 still require selective discovery and compact, coherent context. The persona chooses relevant fragments and assets, query reformulation, consolidation and stopping through ordinary reasoning. Requested pages and ranges express what it wants to inspect; they are not cumulative work limits. The host supplies the accepted selection faithfully and reports actual missing or unavailable material instead of silently truncating it to an application ceiling.
