@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — aggregate exact lineage sources once
+
+Specified deriving the final source list from the completed lineage traversal,
+while preserving policy order, exact lookups, warning-specific ancestry and
+qualification edges. Ordinary inherited exposure can be borrowed; each warning
+projection remains freshly computed. This removes redundant local work without
+changing retained evidence or introducing a validation cache.
+
 ## 24 October 2026 — reuse one render's validated context
 
 Clarified local reuse of the validated corpus and complete selected assembly

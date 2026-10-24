@@ -483,6 +483,16 @@ and validation; local reuse is not a persistent cache or a current-authority
 shortcut. Measure corpus construction separately while retaining its enclosing
 render and planning costs.
 
+Lineage walkers may collect their final exact source list directly from the
+completed traversal's visited set instead of repeatedly merging an intermediate
+list that is later replaced. Preserve input policy records and the ordering of
+first-seen additions, exact revision lookups, inherited references, qualification
+edges, warning-specific traversal and missing-lineage errors. Ordinary unchanged
+inheritance may be borrowed; warning markers still require their freshly computed
+ancestry projection. This local allocation change must preserve the complete
+returned evidence and cannot cache validation across calls. Enclosing corpus,
+rendering and planning timings remain distinct from an isolated cost attribution.
+
 Providers, the host and external services have real availability and representation limits. Report their actual rejections, I/O failures, unsupported operations and unknown outcomes. The absence of an application quota does not promise infinite memory, free inference, indefinite service or guaranteed completion. Do not report a configured historical allowance as a current execution barrier.
 
 **Choose useful context and maintenance.** UR-021–UR-023 still require selective discovery and compact, coherent context. The persona chooses relevant fragments and assets, query reformulation, consolidation and stopping through ordinary reasoning. Requested pages and ranges express what it wants to inspect; they are not cumulative work limits. The host supplies the accepted selection faithfully and reports actual missing or unavailable material instead of silently truncating it to an application ceiling.
