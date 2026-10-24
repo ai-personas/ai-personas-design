@@ -120,6 +120,18 @@ Diagnostic supply does not resume a stopped persona or establish work completion
 
 An earlier accepted continuation can remain usable under the same live mandate. Within the continuing session, the host may retire a definitively rejected, complete local invocation and supply its actual failure to a fresh primary decision. This preserves the existing continuation rather than deriving permission from invalid output. Keep the rejected response and its charges; do not replay its proposed actions, repair its bytes, erase recorded usage, revive an authored stop, reuse a consumed timed opportunity, or treat cancellation or an uncertain transport as a completed rejection. Recheck current work, actor, context, scheduling and actual execution state before the fresh admission; no resource allowance is replenished or required.
 
+An explicit operator resume can separately permit a fresh decision after a
+definite rejection. The ordinary participant controls should expose a complete
+response rejected before adoption and a recorded rejection before provider
+launch, while keeping unknown remote outcomes unresolved. Bind the choice to
+the inspected work state, failed invocation and exact terminal evidence. Commit
+the resumption, retained failure for the next decision and keyed receipt
+together; preserve prior usage and keep unsettled usage unknown. Repeating that
+request returns its historical receipt without resuming again, even if a later
+call has failed or the persona has since stopped. The resume itself starts no
+inference, adopts no rejected action or continuation, and lifts no separate
+work-wide or identity pause.
+
 **Communication and diagnostic inspection.** Ordinary chat and work delivery withhold the call's persona-authored preview, commentary, and reply until the complete work, maintenance, and next-context response has been validated. While the call is pending, those channels may show truthful mechanical host status.
 
 Label any operator-visible authored draft text, including commentary, as unvalidated. A draft is not delivered persona communication, an accepted decision, completion or proof of its claims. Its exposure retains its actual audience and provenance. Concise reasoning summaries and source/result evidence suffice; this contract does not require publishing raw private reasoning or adding a live-preview feature.
