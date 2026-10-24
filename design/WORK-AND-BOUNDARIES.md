@@ -414,6 +414,15 @@ and launch updates, and the caller's epoch check still apply. Return the new
 head only after a successful commit. A construction timing event does not prove
 that the checkpoint committed or that provider inference began.
 
+When a state builder already produces the complete packed storage value, use
+that value directly for initialization and subsequent stored objects. A second
+serialization merely to reconstruct the same value adds temporary copies without
+adding evidence. Share the representation builder with general serialization;
+preserve all fields, exact exposure identities, reference locations and retained
+history. This does not remove distinct state transitions or their transaction
+checks. Report construction timings separately from commits and actual memory
+measurements; removing a source-level copy alone does not establish a speedup.
+
 Providers, the host and external services have real availability and representation limits. Report their actual rejections, I/O failures, unsupported operations and unknown outcomes. The absence of an application quota does not promise infinite memory, free inference, indefinite service or guaranteed completion. Do not report a configured historical allowance as a current execution barrier.
 
 **Choose useful context and maintenance.** UR-021–UR-023 still require selective discovery and compact, coherent context. The persona chooses relevant fragments and assets, query reformulation, consolidation and stopping through ordinary reasoning. Requested pages and ranges express what it wants to inspect; they are not cumulative work limits. The host supplies the accepted selection faithfully and reports actual missing or unavailable material instead of silently truncating it to an application ceiling.

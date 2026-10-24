@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — direct construction of packed runtime state
+
+Specified using the complete packed state value directly for initial and later
+stored objects, sharing its representation builder with general serialization.
+Avoid reconstructing the same value while preserving full content, exact
+exposure identities, historical evidence and distinct transaction checks.
+
 ## 24 October 2026 — reuse the committed preparation state
 
 Specified reuse of the exact stored runtime object returned by a successful
