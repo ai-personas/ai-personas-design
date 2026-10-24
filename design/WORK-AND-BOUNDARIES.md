@@ -473,6 +473,16 @@ snapshot, including record digests, paths, qualifications, policy consistency an
 current bindings. Shared ownership provides no cached authority or permission to
 omit retained evidence, and alone proves no memory or latency improvement.
 
+Within one render borrowing an immutable state and admission, reuse its validated
+corpus for observation projection, selected-file metadata and final context.
+When metadata already used the complete assembly for the same mandatory roots,
+optional selections and admission, that assembly may supply the final selected
+context without rebuilding it. Preserve order, complete bodies and required
+qualifications. A different render or changed state requires its own construction
+and validation; local reuse is not a persistent cache or a current-authority
+shortcut. Measure corpus construction separately while retaining its enclosing
+render and planning costs.
+
 Providers, the host and external services have real availability and representation limits. Report their actual rejections, I/O failures, unsupported operations and unknown outcomes. The absence of an application quota does not promise infinite memory, free inference, indefinite service or guaranteed completion. Do not report a configured historical allowance as a current execution barrier.
 
 **Choose useful context and maintenance.** UR-021–UR-023 still require selective discovery and compact, coherent context. The persona chooses relevant fragments and assets, query reformulation, consolidation and stopping through ordinary reasoning. Requested pages and ranges express what it wants to inspect; they are not cumulative work limits. The host supplies the accepted selection faithfully and reports actual missing or unavailable material instead of silently truncating it to an application ceiling.

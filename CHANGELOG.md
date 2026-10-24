@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — reuse one render's validated context
+
+Clarified local reuse of the validated corpus and complete selected assembly
+within a render's immutable state and admission. Later renders still reconstruct
+and validate their actual snapshot. Selected bodies, order and qualifications
+remain complete; corpus timing is distinct from enclosing rendering and planning.
+
 ## 24 October 2026 — stream complete transaction fingerprints
 
 Specified borrowed canonical hashing of invocation, admission and adoption
