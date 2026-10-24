@@ -427,10 +427,18 @@ measurements; removing a source-level copy alone does not establish a speedup.
 Within a Store transaction, validation and dependency checks can borrow the
 caller's immutable candidate objects rather than copying their complete bodies.
 Keep the complete exact-reference checks, current stored dependencies, current
-heads, body validation and revision checks. The borrowed view belongs to that
+heads and revision checks. The borrowed view belongs to that
 batch, not a cache of authority across transactions. It changes neither retained
 history nor committed bytes and does not itself establish a measured memory or
 latency improvement.
+
+Already typed JSON bodies need no separate serialization solely to check a
+removed size quota and discard the bytes. Required fingerprints and durable
+record encoding still cover complete content and propagate actual errors within
+the same atomic transaction. Preserve identity, revision, dependency, terminal
+authentication and duplicate checks, canonical records and measured allocation.
+Removing redundant serialization does not remove content checks performed by the
+owning runtime or establish a measured latency or memory improvement.
 
 Providers, the host and external services have real availability and representation limits. Report their actual rejections, I/O failures, unsupported operations and unknown outcomes. The absence of an application quota does not promise infinite memory, free inference, indefinite service or guaranteed completion. Do not report a configured historical allowance as a current execution barrier.
 

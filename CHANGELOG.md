@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — remove discarded Store size probes
+
+Specified that typed JSON bodies need no separate serialization solely for a
+removed size quota. Complete fingerprinting, durable encoding, atomic commits,
+identity and dependency checks, terminal authentication and measured allocation
+remain required. Avoiding discarded bytes makes no measured performance claim.
+
 ## 24 October 2026 — recovery guidance distinguishes historical limits
 
 Specified that old quota measurements remain historical evidence without
