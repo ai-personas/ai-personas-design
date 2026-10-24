@@ -290,7 +290,9 @@ If evidence becomes unavailable, keep that fact explicit. An experience-informed
 
 ## Admitted actions and real consequences
 
-A model proposes an action; the runtime admits it only after current checks. Before admission, establish the actor, causal work, intended effect, exact request identity, relevant input versions, selected capability, current work and how observation, cancellation and uncertainty will work. Durable intent and accepted action state prevent an interruption between recording and dispatch from silently losing an action or duplicating its effect.
+A model proposes an action; the runtime admits it only after current checks. Before admission, establish the actor, causal work, intended effect, exact request identity, relevant input versions, selected capability, current work and how observation, cancellation and uncertainty will work.
+
+A callable capability ID selects the unique exact interface retained for that invocation. The model need not repeat an opaque binding digest. Keep the complete admitted interface as runtime evidence, reject missing or ambiguous selections, and compare it with the current implementation before accepting the action. Accepted jobs retain their original exact bindings for dispatch checks; looking up a capability in the current tool catalog must not silently replace the admitted version. Input-shape errors, an unavailable admission and an actual implementation change are distinct causes. Durable intent and accepted action state prevent an interruption between recording and dispatch from silently losing an action or duplicating its effect.
 
 **Validate the whole response first.** Before adopting any proposed action, establish that the complete persona response contains valid work, explicit valid maintenance for both fragments and supporting resources, and explicit next-context dispositions for both. A plausible action, urgent-looking prose, or useful reply does not excuse missing or malformed maintenance or next-context intent.
 

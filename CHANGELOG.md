@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — select effects through their admitted capability IDs
+
+Specified capability IDs as selectors for unique interfaces retained by the
+current invocation, without requiring a model-authored revision digest. The
+runtime still checks the complete admitted binding against the implementation
+and retains it in accepted jobs. Missing or ambiguous admissions and actual
+interface changes remain distinct failures; current catalog lookup cannot
+silently rebind an earlier request.
+
 ## 24 October 2026 — reuse complete canonical bytes within an object write
 
 Specified one canonical encoding for a changed object's immutable revision,
