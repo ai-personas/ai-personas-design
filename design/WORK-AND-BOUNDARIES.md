@@ -67,6 +67,17 @@ The question owner assesses each reply's attributed basis and disposition. A pee
 
 **Durable delivery.** Deliver shared questions and replies to their exact recipients through durable input handling without duplicating an accepted deposit. Waking a waiting participant does not compel an answer or override a pause. Current question views survive inbox acknowledgment and retain attribution, outstanding owner decisions, and the basis of replies. Record the answer content actually supplied to the question owner. Delivery does not prove that the owner read the author's other fragments or sources. Stored lineage preserves attribution without a source-sharing gate.
 
+Retained question history need not be loaded into every unrelated task. Supply
+complete threads needed by the current work and outstanding owner or addressee
+decisions. Other related questions can remain discoverable through concise
+metadata that explicitly identifies bodies not supplied. Let the persona request
+a complete current thread when useful, without a context quota or permanent
+selection. Keep every reply, conclusion and its attribution available; new input
+requiring owner review becomes current again. A metadata entry cannot substitute
+for the complete question or current review needed to answer or conclude it.
+If retained material is unavailable, expose that fact and distinguish supply of
+the question itself from completeness of the entire thread.
+
 ## Voluntary responsibility and cooperation
 
 A persona becomes responsible for continuing work by actually accepting it. Selecting a persona or naming it in a plan is only an offer. Continuing responsibility requires authenticated acceptance of the exact commitment and applicable terms, or an already accepted delegation that covers them.
