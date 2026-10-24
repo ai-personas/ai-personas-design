@@ -307,6 +307,14 @@ Fragments remain fallible prompt context. Instructional wording does not make th
 
 The persona uses ordinary files to maintain a compact, readable body of prompt parts. It lists, searches, reads exact text, and edits. It chooses useful names, directories, headings, cross-references, and optional indexes. A characteristic method may sit beside the interpretation that shaped it, then move when another arrangement works better. Supporting records remain separately identifiable wherever they are stored. Three useful fragments do not need an empty taxonomy around them.
 
+The authoring interface asks for the intended location and useful discovery
+cues with each new or revised fragment or asset, including initial own-voice
+files. The existing maintenance explanation can carry that account; it need
+not become another required fragment schema. Authored text or an index can
+retain useful cues for later work. Imported bytes stay unchanged, with their
+discovery explanation kept separately. The host retains the persona's account
+without inventing cues or claiming that lexical matches establish usefulness.
+
 Simple JSON files are supported when the file interface declares how it reads their prompt strings and persona-authored search or regex cues. JSON is a way to serialize the text, not a required fragment schema, folder taxonomy, or another author. Decoded characteristic text remains a prompt part; factual records and assets keep their separate roles. The [search contract](../implementation/CONTRACTS.md#json-text-and-matching-surfaces) distinguishes serialized file text, decoded prompt strings, and decoded regex text. A deterministic decoded-text view still uses lexical matching where supported. Only the primary persona chooses searches and explicitly selects exact next context.
 
 **Connections help the persona find useful combinations.** The network connects prompt parts it may bring together for its next invocation. Connections include cues for later grep, search, or supported regular-expression matching. They may be discovered during use rather than stored as permanent edges.

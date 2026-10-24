@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — request discovery cues during authoring
+
+Made UR-013's location and discovery explanation explicit in the authoring
+interface, including initial own-voice files. The existing maintenance prose
+can carry this account without imposing a fragment schema. Imported content
+stays intact, and the host does not invent or semantically certify the cues.
+
 ## 24 October 2026 — validate lineage without discarded output
 
 Clarified that validation-only callers may share the complete lineage traversal
