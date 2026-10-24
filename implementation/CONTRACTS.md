@@ -375,6 +375,16 @@ Decline and nonresponse create no substitute acceptance, replacement persona, pu
 
 **Birth.** Each actual creation preserves its requested identity, seed provenance, initial model authorship and invitation. No application population or initialization quota applies. Creating a persona does not establish experience, expertise, membership or accepted responsibility. Duplicate requests preserve the actual creation outcome without inventing another identity; actual usage remains recorded even if participation is declined. Existing personas and simple work need no creation ritual.
 
+Ordinary asset maintenance must preserve a proposal's usable authorship. An
+accepted native edit can supply starting material just as an accepted full
+write can, either from an earlier invocation or as an exact dependency in the
+creation response. Check the saved bytes against the accepted authoring
+operation. For an edit, also retain and resolve its immutable base and exact
+replacements; unchanged bytes retain their earlier provenance. Importing bytes
+alone establishes no primary authorship, and a rejected or fenced operation
+establishes no accepted proposal. Neither maintenance form creates an identity
+without an actual creation request.
+
 ## Capabilities and actions
 
 The default runtime gives personas [full host access and tool installation](DEPLOYMENT-DECISIONS.md#default-full-host-access). Ordinary inputs supply that command interface directly. No per-tool approval, installation grant, command allowlist, sandbox, or prior skill-guide selection is required. Personas choose tools and commands using the host account and environment. The distinctions below describe actual preparation, execution and observed results; they do not introduce an additional permission gate for this default host interface.

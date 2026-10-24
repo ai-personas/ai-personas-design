@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — retain creation-proposal authorship through native edits
+
+Specified that accepted full writes and exact native edits can both supply a
+persona's starting proposal, including a same-response creation dependency.
+Creation verifies the accepted operation and saved bytes; edited proposals
+retain their immutable base and the provenance of unchanged content. An import
+alone, a rejected operation or ordinary maintenance without a creation request
+does not establish an accepted creation.
+
 ## 24 October 2026 — select effects through their admitted capability IDs
 
 Specified capability IDs as selectors for unique interfaces retained by the
