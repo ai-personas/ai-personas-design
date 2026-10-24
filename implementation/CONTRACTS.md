@@ -110,6 +110,18 @@ complete retained record when persisting it; avoid redundant size probes.
 Persistence failure rolls back rejection and its receipt together. Historical
 unknown provenance is not reconstructed or reclassified by this change.
 
+Validate request-only tool inputs against the exact admitted definition before
+consulting mutable work or asset state. An input-shape error or invalid local save
+dependency should retain the admitted request's lineage when that is all the
+check used. Apply this distinction to host commands, HTTP retrieval, computation
+and native work commands. Current implementation bindings, host environment and
+asset materialization remain separate checks with their actual provenance.
+Do not imply that preflight resolves the availability or every semantic property
+of a retained asset reference; those checks may require staging.
+Establish the character-adoption fence before checking unrelated inputs that
+the fence excludes. Early validation accepts no action and performs no tool
+execution.
+
 When recovery explains a rejection under an earlier application quota, identify
 the recorded limit and measurements as historical. They do not require a smaller
 current context, a replenished allowance or renewed access permission. New
