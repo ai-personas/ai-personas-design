@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — current resource context and useful tool preparation
+
+Separated current model-input instructions from obsolete quota and grant
+metadata while preserving original records and actual usage. Clarified that a
+missing local executable alone does not establish an external blocker: personas
+consider useful preparation or alternative methods through available host access.
+Neither change prescribes a tool workflow or establishes task success.
+
 ## 24 October 2026 — preserve scope through provisional results
 
 Clarified that a persona's concept label or qualifications do not narrow the

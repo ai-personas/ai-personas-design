@@ -263,6 +263,13 @@ A past run does not establish current availability or guarantee reliability. Pre
 
 Domain tools and specialist methods are legitimate. An export facility does not establish authoring, editing, analysis, or qualification capability. Existing current operation evidence may be reused; each task need not reinstall a tool or run an irrelevant probe. If the chosen operation lacks a usable capability, expose the gap, prepare it, choose another method, or stop. Neither a new persona nor a confident model description creates practical competence.
 
+A missing local executable or library is an installation observation, not by
+itself an external blocker or a new task for the requester. When it prevents
+necessary work or verification, the persona considers preparation through its
+available host access or another suitable method. Actual installation, network,
+permission and tool outcomes support the choice to proceed or stop. This does
+not require installing every tool or following a fixed preparation sequence.
+
 ### Discovery without a compulsory tool sequence
 
 Discovery helps the persona find what the work needs. It does not impose one research method or sequence on every task.
@@ -534,6 +541,14 @@ lineage validity; neither mode permits reusing that result across changed state.
 Providers, the host and external services have real availability and representation limits. Report their actual rejections, I/O failures, unsupported operations and unknown outcomes. The absence of an application quota does not promise infinite memory, free inference, indefinite service or guaranteed completion. Do not report a configured historical allowance as a current execution barrier.
 
 **Choose useful context and maintenance.** UR-021–UR-023 still require selective discovery and compact, coherent context. The persona chooses relevant fragments and assets, query reformulation, consolidation and stopping through ordinary reasoning. Requested pages and ranges express what it wants to inspect; they are not cumulative work limits. The host supplies the accepted selection faithfully and reports actual missing or unavailable material instead of silently truncating it to an application ceiling.
+
+Current interface instructions should explain current behavior without repeatedly
+supplying obsolete quotas, remaining allowances or superseded grant flags. Retain
+their original records for attributable inspection. Actual usage, relevant
+failures, exact references and working-context information remain available;
+historical bookkeeping does not become a mandatory part of every model input.
+Measure the resulting input size without treating fewer bytes as proof of better
+task performance or lower cost per useful outcome.
 
 Every persona interaction still covers work, fragment maintenance, asset maintenance and next-context choice. A reasoned no_change can be sufficient; neither a fragment edit nor a separate reflection call is mandatory. Preserve consequential unresolved corrections and actual failures. A failed model attempt cannot be converted into a persona-authored no-change decision.
 
