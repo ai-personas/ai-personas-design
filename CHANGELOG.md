@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — borrow transaction candidates for validation
+
+Specified validation and dependency fingerprinting from immutable candidate
+objects within the current transaction, avoiding full-body copies. Current
+stored dependencies, exact references, revision and body checks remain required;
+the borrowed view supplies no cached authority or measured performance claim.
+
 ## 24 October 2026 — worksheets follow unrestricted execution
 
 Removed superseded quota, funding, permission and safety-approval instructions
