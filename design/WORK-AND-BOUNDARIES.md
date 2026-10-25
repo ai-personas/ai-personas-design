@@ -1045,6 +1045,12 @@ Cross-host continuation preserves exact identity, exclusive execution ownership,
 
 The interface helps people understand what is wanted, what is happening, who accepted what, what changed, what evidence exists, and what needs their decision. Work, Personas, Environments, Fragments and Assets, and Tools provide understandable navigation. Advanced governance should not obstruct a small request.
 
+An automatic completion view need not repeat exact messages already displayed
+during the same foreground session. Omit only those recorded identities, retain
+unseen replies, and keep the permitted full history available on explicit
+inspection or reopening. Presentation deduplication does not merge distinct
+messages, choose a preferred result, or establish task completion.
+
 **Label draft inspection honestly.** Where operator diagnostics may display authored drafts, both summaries and commentary are explicitly labeled unvalidated. That inspection is separate from ordinary chat or work delivery. It does not establish a completed result, accepted decision, or truth of the draft's claims, and it grants no action authority. The displayed content retains its exact provenance and actual audience. Raw private reasoning is excluded.
 
 Distinguish model-call status, complete-response validation, actual persistence, action receipts, and delivery. A terminal provider event alone establishes none of the later stages. Even a save-success claim in a validated response needs its actual acceptance receipt.

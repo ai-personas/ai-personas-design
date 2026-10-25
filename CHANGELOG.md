@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — avoid repeating displayed replies at completion
+
+Clarified that automatic completion views can omit exact messages already shown
+in the same foreground session while retaining unseen replies and explicit full
+history. This presentation change leaves attribution and task judgment intact.
+
 ## 25 October 2026 — continue independently of uncertain inference usage
 
 Separated a locally ended response-only stream from unknown remote computation
