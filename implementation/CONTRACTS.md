@@ -206,6 +206,14 @@ Label any operator-visible authored draft text, including commentary, as unvalid
 
 Whole-response validation does not establish successful persistence. A claim that a save succeeded still depends on actual acceptance, and delivery retains its other authority and dependency checks.
 
+When a rejected response has a known structural mismatch, diagnostic hints
+should identify the affected schema-owned path, including nested objects and
+array positions. A closed nested object with unknown members should identify
+its own allowed fields, rather than implying that only the enclosing response
+section is malformed. Keep authored unknown names, dynamic map keys and opaque
+payloads out of these hints. Diagnostics explain the rejection; they do not
+repair, adopt or execute any part of the response.
+
 **Independent host duties.** Recording observed receipts, enforcing cancellation, fencing stale authority, accounting, and shutdown need neither another persona call nor a valid maintenance outcome. Already admitted effects remain real and must be reconciled. These duties cannot introduce a new substantive persona action, infer a new lesson, or make missing output valid.
 
 **Visible evidence.** Identify the logical invocation and provider attempts, actual maintenance and next-context input, complete response or failure status, any persona-authored outcome, validation disposition and later save or conflict receipts. A provider invocation, a host command that inspects source and execution of the inspected feature are distinct facts. Successful source inspection is real execution but does not establish product behavior. Process exit zero does not prove that every subcommand succeeded, so preserve stderr, partial results and uncertainty. No raw private-reasoning archive or fixed reporting form is required.

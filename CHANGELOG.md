@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — locate nested structural failures
+
+Clarified that rejection diagnostics identify known nested object paths and
+their allowed fields, including when the decoder reports only an enclosing
+section. Preserve rejected responses without echoing authored unknown names
+or treating the diagnostic as a repair or accepted action.
+
 ## 25 October 2026 — ordinary launcher work controls
 
 Specified active-work pause and cancellation, separate work-wide resumption,
