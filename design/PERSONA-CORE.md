@@ -613,6 +613,20 @@ UR-052 supersedes the earlier finite repair allowance and application overflow a
 
 A real model-context or host failure remains a failure. Retain the exact attempted input, actual outcome and any uncertain remote use. Do not truncate selected material invisibly, invent a valid persona decision, reset usage or replay an action to make the attempt appear successful.
 
+When an actual provider context rejection concerns an input containing complete
+pending tool-result text, a fresh ordinary decision may receive those results by
+exact reference. Preserve the full failed input and result bytes, current
+character and work facts, selected fragments and assets, and complete required
+qualifications. Identify the provider rejection and the change in result-body
+delivery explicitly, with execution status, exact field references, byte counts
+and hashes. The earlier complete-delivery choice remains attributable; it does
+not establish that a successful model decision considered that text. This is
+neither a size quota nor a restricted repair workflow. The persona can choose
+ordinary reads, useful ranges, context, maintenance and further work. End this
+temporary projection when those pending observations are consumed, without
+changing the delivery choices for future tool results or promising that the
+remaining context will fit the provider.
+
 The persona may choose smaller or different context, useful consolidation, another supported configuration, independent work or an honest stop through its ordinary reasoning. The runtime must distinguish what was actually supplied from omitted bodies and previews. No fixed repair-attempt allowance, separate approval or compulsory context-repair phase chooses that response.
 
 A fresh decision still requires the context needed to constitute that persona and perform the requested work. If the actual provider or host cannot supply it, report the limitation rather than claiming that the persona considered withheld material. Where a fresh decision is possible, it receives real failure evidence and explicitly covers work, both maintenance scopes and next context. Exact historical failures are not rewritten under the new policy.

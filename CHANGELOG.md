@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — recover oversized pending tool context
+
+Specified exact-reference delivery of pending tool text after an actual provider
+context rejection. The full request and result remain retained, while a fresh
+ordinary decision receives the failure and chooses useful reads and next context.
+Current character, work facts, selected resources and required qualifications
+remain supplied; no application size threshold or restricted repair mode is added.
+
 ## 25 October 2026 — preserve continuation through temporary service errors
 
 Clarified recovery for a completed temporary HTTP error from response-only
