@@ -2,6 +2,16 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — persona-created skills of any kind
+
+Added UR-053 from the user's clarification: personas can dynamically develop
+skills, share them in a common discoverable place, and choose, adapt and reuse
+one another's skills as assets. Characteristic fragments can guide finding
+and using those skills. Applied the requirement to the persona core,
+publication and execution contracts, traceability and later-use evidence.
+Image selection is one example of this general capability. This design
+clarification establishes no runtime conformance or observed benefit.
+
 ## 25 October 2026 — select captured images for later context
 
 Specified explicit image selection alongside supporting text, with exact capture

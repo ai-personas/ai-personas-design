@@ -50,6 +50,13 @@ Applicability depends on the actual enabled effect or feature. Small work does n
 
 **Persona and context.** These requirements cover continuing identity, character, prompt parts, maintenance, and selection of the next working context.
 
+[UR-053](../USER-REQUIREMENTS.md#dynamically-created-and-shared-skills) extends
+MEM-01–MEM-04 and ACT-01–ACT-02 to dynamically created skills of any kind:
+persona-authored publication in a shared discoverable location, selective
+reuse and adaptation by other personas, and characteristic guidance for
+finding and applying those assets. The [shared-skill contract](CONTRACTS.md#dynamically-created-and-shared-skills)
+defines the mechanism; B09 and B12 cover observed later use and benefit.
+
 | ID | Required behavior | Detailed design | Evidence references |
 |---|---|---|---|
 | PER-01 | Preserve continuing identity across changes of model and work. Treat context, invocation, behavior, and self-revision together as the operating persona. Continuing identity does not guarantee unchanged behavior or competence on a different reasoning substrate. | [Persona core](../design/PERSONA-CORE.md) | B10; restoration evidence |

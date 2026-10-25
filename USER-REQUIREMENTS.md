@@ -1,6 +1,6 @@
 # Consolidated user requirements
 
-This file brings together the user's product and design requirements for AI Personas, including clarifications through 24 October 2026. It covers the requested product, architecture, and worked examples. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
+This file brings together the user's product and design requirements for AI Personas, including clarifications through 25 October 2026. It covers the requested product, architecture, and worked examples. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
 
 Only human-user messages supply these requirements. This account must preserve the user's intended outcomes, rather than weaken them to fit the existing design. Assistant interpretations, design decisions, evidence safeguards, and implementation rules must not be added as user requirements.
 
@@ -129,6 +129,12 @@ These remain distinguishable from characteristic fragments even when the persona
 ![UR-014: A persona combines selected character fragments with relevant tools, data, knowledge, and history for the current LLM request.](assets/user-requirements/ur-014-compose-context.webp)
 
 *In the picture: Assemble relevant character and supporting material while keeping their roles clear.*
+
+### Dynamically created and shared skills
+
+**UR-053 Let personas create, share, choose and adapt skills of any kind.** Personas should be able to develop skills dynamically through their work and interactions. A persona that develops a useful skill can place it in a common, discoverable location. Other personas can choose it, adapt it to their needs, and refer to or retain it as part of their supporting assets. This applies to any kind of skill, including image selection; the available skills must not be limited to a predefined collection supplied by application developers.
+
+Characteristic fragments should help the persona know how to find, choose, use and adapt relevant skills in its own way. They can retain useful references, discovery cues and characteristic habits for using those assets. The reusable skill's instructions, procedures, code and other supporting material remain identifiable as assets, consistent with UR-009–UR-011. Skills and their organization can develop through ordinary persona activity, with shared contributions available for other personas' later work.
 
 ### The ordinary LLM interaction
 

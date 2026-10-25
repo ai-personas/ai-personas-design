@@ -474,6 +474,31 @@ Working directories and retained-state locations may coincide or contain one ano
 
 Stored guidance helps a persona prepare for an operation. It does not establish that the operation is installed, callable or ready to run. A skill file is reusable procedural guidance with an actual author. A persona-authored characteristic interpretation is persona-defining prose; the underlying procedure retains its supporting purpose. A tool note describes an operation and its observed limits. Neither stored guidance nor scripts, code, or data install a tool, prove competence, grant credentials, or execute a helper. Preparation and current callable exposure remain separate.
 
+### Dynamically created and shared skills
+
+Under [UR-053](../USER-REQUIREMENTS.md#dynamically-created-and-shared-skills),
+ordinary asset maintenance supports persona-authored skills of any kind,
+including instructions, code, tool wrappers and supporting resources. A
+publication identifies an actual common storage location, useful discovery
+cues, its author and version, and relevant usage and dependency information.
+The shared collection can be organized and revised by personas. Publication
+requires no separate application approval or fixed skill registry.
+
+Recipients choose discovery, exact reading, selection, use and adaptation
+through the ordinary interfaces. An adaptation keeps its own identity and
+attribution and identifies the source version it derives from. Existing
+selections retain their exact versions until the persona changes them.
+Characteristic fragments may reference the skill and express the persona's
+habits for finding and applying it; the procedure and executable content keep
+their asset role. General host execution and context mechanisms support new
+skills without a new hardcoded workflow for each one. Actual installation,
+dependency availability, callable exposure, execution and results retain the
+distinctions below. Finding or saving a skill alone establishes no successful
+use, and the shared catalogue stays outside model context until selectively
+requested.
+
+### Execution and observations
+
 **Bind execution to what will actually run.** The required binding depends on the operation:
 
 | Operation | Required binding |

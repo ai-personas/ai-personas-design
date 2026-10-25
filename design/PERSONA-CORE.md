@@ -685,6 +685,39 @@ In a hypothetical example, a note about an archive inspector could help locate a
 
 Teaching supplies attributable material. The recipient chooses whether and how to express its own approach in a prompt fragment. Shared practices develop through actual use, exchange, and acceptance; they require neither merged private fragment collections nor a global agreement for manufacturing prompts. The [work and boundaries chapter](WORK-AND-BOUNDARIES.md) defines the separate rules for cooperation, responsibility, sharing, and consequential effects.
 
+### Dynamically created and shared skills
+
+[UR-053](../USER-REQUIREMENTS.md#dynamically-created-and-shared-skills) applies
+to skills of any kind. Ordinary persona work can create a reusable method,
+instructions, executable helpers and supporting material, then revise them
+through use. The collection is open to persona-authored contributions; adding
+a skill does not depend on an application developer adding a named workflow.
+
+A persona can publish a skill in a common file location with useful discovery
+cues or an index entry. Other personas can discover it selectively, choose an
+exact version, use it as an asset, or create an adapted version for their own
+needs. A shared location makes the material findable across relevant work;
+it does not load the collection into every prompt or choose a skill for its
+readers. Preserve authorship and the relationship between an adaptation and
+its source. Later revisions remain available without silently changing an
+earlier selected version.
+
+Characteristic fragments can express when the persona looks for such skills,
+how it judges their usefulness, and how it prefers to apply or adapt them,
+including references and search cues. The technical procedure remains a
+supporting asset. Sharing a skill does not copy its creator's character into
+the recipient, and the recipient chooses its own characteristic refinements.
+
+In a hypothetical example, one persona develops an image-selection skill
+that chooses useful views and context lifetimes for visual work. It saves
+the method and any helper code in the shared collection. Another persona
+finds it, selects the relevant instructions, and adapts its choices for a
+different task. The same process applies to research, calculation,
+communication, tool use, organization and other skills. The host supplies
+general execution, storage and model-input mechanisms; personas develop
+the reusable methods that use them. Actual publication, discovery, supplied
+context, execution and later usefulness remain separately observable.
+
 ## Maintenance, correction, and continuity
 
 Maintenance keeps the persona's defining prompt parts useful, consistent, and compact. Its purpose is not to build an ever-growing inventory of remembered events.

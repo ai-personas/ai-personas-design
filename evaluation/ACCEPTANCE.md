@@ -104,6 +104,16 @@ to fulfill it; the latter must not depend on another user prompt by default.
 
 **B09 — Later value of a revision.** A claim of useful development follows received experience, primary-authored meaning, actual persistence, later discovery/selection/supply, changed behavior and assessed consequence. Separate retained characteristic guidance from procedural asset reuse, practice, new facts, stronger tools and assistance. Report partial benefit, missed use, harmful transfer and uncertainty. The [method](README.md#qualified-revision-and-later-use-benefit) explains the scope of these claims.
 
+For [UR-053](../USER-REQUIREMENTS.md#dynamically-created-and-shared-skills),
+trace a persona-created skill from its actual shared publication to another
+persona's chosen discovery, selection, use or adaptation. Identify the source
+and adapted versions, any characteristic fragments that guide their use, and
+the observed consequences. A file in a common directory alone does not prove
+sharing led to use or improvement. Image selection is one possible skill;
+the mechanism must also admit other kinds without a fixed skill catalogue.
+These are evidence questions for ordinary work, not required skill writes,
+fragment edits, extra model calls or an assigned teaching workflow.
+
 **B10 — Inference configuration and continuity.** An actual model change retains the persona's attributed character, fragments, supporting records, duties and history. Record requested and reported provider/model/configuration and exact actual context. Direct provider inference is distinct from using a CLI to acquire OAuth credentials. File continuity establishes neither unchanged competence nor maturation.
 
 **B11 — Coordinated house work.** Evidence must cover the actual requested house deliverable, including coordinated native discipline outputs, analyses, integration, editability and appropriate assessment where promised. A sketch, parseable file or one successful subtask cannot substitute for the larger accepted need. Keep digital evidence and unobserved physical assurance distinct. The [historical house rubric](https://github.com/ai-personas/ai-personas-design/blob/8b8ea2ecc40d59c876a44a4ce024cd9fa8ba40cf/evaluation/README.md#skills-tools-and-effective-delivery) retains its original scenario and counts.
