@@ -1013,6 +1013,22 @@ A requested page of opportunities is not a population or consideration quota. Fu
 
 Consideration does not guarantee acceptance, feasibility or completion. The persona judges whether continuing work is useful and can choose a stop; the runtime does not replace that choice with a fixed idle-call or progress quota. Requested scheduling times and actual clock observations retain their precision. A reopened editor or restarted process must not fabricate a new opportunity or silently change the user's schedule.
 
+**Honor authored times within a live foreground session.** When no participant is
+ready now, an accepted future reconsideration or wait deadline can keep the
+session open. Wait for the actual time, operation completion or input/control
+change, then reconsider current eligibility. Waiting is not a model call, a new
+continuation or a recurring schedule. Preserve Stop, Pause, revocation and
+one-shot consumption. Process exit does not establish an unattended timer
+service; reopening uses the retained deadline without rearming it.
+
+**Keep requester input available while waiting.** Shared-question answers and
+feedback can be retained while the session owns execution. Record exact input
+identity and receipt time without changing an already admitted model request.
+The owner delivers queued input at a settled boundary, rechecking its actual
+binding. Preserve delivery failures and distinguish retention, delivery, later
+model supply and consideration. An answer can satisfy an authored matching wait;
+it cannot resume Stop or Pause or settle a question on the persona's behalf.
+
 ## Relationships and optional wider deployments
 
 Relationship fragments describe how a persona approaches particular collaborators. They express the persona's own directional, contextual interpretations of real, attributed exchanges. They can influence invitations and working methods, but they do not become universal competence rankings, reputation-based authority, or evidence that another participant's fragments and records were read.

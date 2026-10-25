@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — honor authored times in a live session
+
+Specified foreground waiting for accepted reconsideration and wait deadlines,
+with current eligibility rechecked after actual time or input changes. Kept
+one-shot consumption and explicit stops distinct from recurring service. Shared
+question answers can be retained during execution and delivered at a settled
+boundary with separate receipt, delivery and consideration evidence.
+
 ## 25 October 2026 — allow an explicit first preserve choice
 
 Defined preserve over the current optional context, including an empty set
