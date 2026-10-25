@@ -419,6 +419,13 @@ correct the decision. Retain the failure and actual usage without adopting or
 replaying rejected operations. Accepted Stop/Pause, consumed explicit resumption
 and uncertain transport outcomes keep their separate meanings.
 
+Optional activity needs the same separation between an invocation's relevant
+state and unrelated peer progress as ordinary work. Seal its admission evidence
+before capturing those dependencies. A peer tool result must not invalidate an
+otherwise current response solely by changing the shared store epoch. Bind the
+actual opportunity, admission and relevant lifecycle state; preserve explicit
+revocation and ending behavior without binding a decision to peers' accounting.
+
 **Three different exposure surfaces.** Keep the host-owned registry, provider-facing transport, and actual model-visible context distinct. The bulk catalogue remains in the host registry, outside both the provider request and any LLM used to filter it. Expose the requested descriptors, exact guidance, operative schemas, and their necessary qualifications.
 
 A provider option that transmits all definitions while deferring their model visibility does not meet this transport boundary. Excluding transmitted material from model input may reduce model input, but does not turn transmitted bytes into model tokens. Report those measures separately and honestly. Hosted semantic search or automatic tool-set expansion cannot silently replace the primary's declared lexical selection.

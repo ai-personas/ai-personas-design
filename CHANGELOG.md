@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — isolate optional decisions from unrelated peer progress
+
+Specified admission sealing and relevant state dependencies for optional activity
+so independent peer tool results do not invalidate a pending response through a
+global epoch change. Opportunity and lifecycle bindings remain explicit.
+
 ## 25 October 2026 — retain an invitation through a rejected first decision
 
 Clarified that a definite local rejection of a completed first response does not
