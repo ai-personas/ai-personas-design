@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — distinguish intended refinement from demonstrated change
+
+Clarified that actual experience can motivate characteristic guidance before a
+lasting behavioral change or benefit has been demonstrated. Accepted revision,
+later supply and observed consequences remain separate; no edit or stable-trait
+change is required on every turn.
+
 ## 25 October 2026 — clarify independent optional engagement
 
 Clarified that a persona can pursue an interest or conversation across decisions
