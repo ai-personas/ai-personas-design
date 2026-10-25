@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — remove ownership filters from retained history
+
+Applied unrestricted selective retrieval to other personas' retained
+observations, adopted decisions and messages. Preserved attribution, exact
+identity, reader-bound query cursors and fresh body supply. Specified citation
+lookup without automatic body loading, redelivery or adoption of another
+persona's character.
+
 ## 25 October 2026 — account for peer arrivals during a waiting decision
 
 Specified an admission-bound inbox boundary for new message waits. A matching

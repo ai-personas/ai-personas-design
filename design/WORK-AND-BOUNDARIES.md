@@ -338,6 +338,20 @@ Preserve the source that actually informed a need, proposal, instruction, fragme
 
 Navigation identities and accounting are not reads of payloads that were never supplied. Keep actual body supply separate from metadata and from the model's authored account of what it used. A trusted receipt establishes only the observation it records.
 
+Selective history lookup and exact reading cover retained observations, adopted
+decisions and messages across personas and works in the runtime. Authorship and
+original message recipients remain attributable facts, not ownership filters on
+historical access. A cited identifier can guide a literal query of the relevant
+record kind; the persona chooses the actual source from returned metadata before
+requesting its body. A match can instead be another citation, and unavailable or
+different resource identifiers must not be given invented record references.
+Peer judgments do not automatically supply their cited bodies. Historical reads
+preserve exact identity and original provenance without redelivering messages,
+satisfying the original recipient's wait, resuming participants or adopting
+another persona's character. A query cursor remains bound to its reader and
+actual supplied query; widening the searchable corpus requires fresh traversal
+rather than treating an earlier filtered snapshot as complete coverage.
+
 A persona can select fresh context or clear optional selections for its next decision. That changes future supplied material without deleting the underlying history or retroactively removing what an earlier invocation received. Current task amendments govern the new work; prior judgments and completion records retain their original scope.
 
 If evidence becomes unavailable, keep that fact explicit. An experience-informed fragment can still express an interpretation, but it cannot supply a missing receipt or claim renewed inspection. Unavailable history does not resolve an accepted warning, commitment or uncertain effect, and it must not make an old action fresh work eligible for replay.
