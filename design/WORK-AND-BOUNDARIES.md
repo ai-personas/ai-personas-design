@@ -426,6 +426,12 @@ otherwise current response solely by changing the shared store epoch. Bind the
 actual opportunity, admission and relevant lifecycle state; preserve explicit
 revocation and ending behavior without binding a decision to peers' accounting.
 
+Optional interests and conversations may develop across multiple decisions and
+exchanges. A persona's continued engagement creates no obligation for a peer to
+respond. Make this independence clear without prescribing a topic, exchange
+count or continued participation. Each persona still chooses whether to engage
+and when to stop; neither duration nor message count establishes maturation.
+
 **Three different exposure surfaces.** Keep the host-owned registry, provider-facing transport, and actual model-visible context distinct. The bulk catalogue remains in the host registry, outside both the provider request and any LLM used to filter it. Expose the requested descriptors, exact guidance, operative schemas, and their necessary qualifications.
 
 A provider option that transmits all definitions while deferring their model visibility does not meet this transport boundary. Excluding transmitted material from model input may reduce model input, but does not turn transmitted bytes into model tokens. Report those measures separately and honestly. Hosted semantic search or automatic tool-set expansion cannot silently replace the primary's declared lexical selection.

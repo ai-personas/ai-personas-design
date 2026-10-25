@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — clarify independent optional engagement
+
+Clarified that a persona can pursue an interest or conversation across decisions
+without creating an obligation for peers. Participation, topic and stopping stay
+persona choices; no exchange count or development result is prescribed.
+
 ## 25 October 2026 — continue after a reported terminal provider failure
 
 Specified retaining existing participation routes after a verified terminal
