@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — keep work context ahead of interface details
+
+Clarified input presentation: persona character and the current request, mandate
+and amendments precede detailed capability metadata. Reordering preserves the
+complete context and its qualifications without supplying task reasoning.
+
 ## 25 October 2026 — distinguish host instructions from current input
 
 Specified the provider role for the host-authored operating contract, separate

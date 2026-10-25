@@ -404,6 +404,13 @@ Image capabilities follow the selected model's actual support. Image input suppo
 
 **A small starting interface.** Capability instructions have a persona-selected working set separate from stored histories and persona-defining fragments, governed by the same primary next-context choice. The bootstrap provides a small usable discovery/read/exposure interface, current work information and ordinary controls. It may include actual known references or relevant seed cues, but not a tool list selected to supply the expected answer. It must never enumerate every tool, skill, namespace, or manifest as startup metadata. If the scope inventory is large, let the persona choose pages and queries for it too.
 
+Present the persona and current work before detailed capability metadata. Keep
+current amendments, the original request and accepted participation distinguishable;
+later observations and peer accounts do not silently replace that request. A change
+in presentation order must preserve all supplied fields, exact text, qualifications
+and reference resolution. It must not introduce a host-authored task interpretation,
+plan or quality criterion. Bind the actual rendered order in the admitted input.
+
 **Three different exposure surfaces.** Keep the host-owned registry, provider-facing transport, and actual model-visible context distinct. The bulk catalogue remains in the host registry, outside both the provider request and any LLM used to filter it. Expose the requested descriptors, exact guidance, operative schemas, and their necessary qualifications.
 
 A provider option that transmits all definitions while deferring their model visibility does not meet this transport boundary. Excluding transmitted material from model input may reduce model input, but does not turn transmitted bytes into model tokens. Report those measures separately and honestly. Hosted semantic search or automatic tool-set expansion cannot silently replace the primary's declared lexical selection.
