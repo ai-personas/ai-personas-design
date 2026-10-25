@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 24 October 2026 — attributable provider caching
+
+Specified preserving complete selected context while identifying a reusable
+instruction prefix for provider caching. The admitted layout and current response
+identity remain bound, and cache reads, writes and retention breakdowns retain
+their reported status. Configuration alone establishes neither a cache hit nor
+cost per successful outcome.
+
 ## 24 October 2026 — current resource context and useful tool preparation
 
 Separated current model-input instructions from obsolete quota and grant

@@ -407,6 +407,20 @@ Older guidance retains its exact source and actual applicability. Persona-chosen
 
 Context eviction is not storage deletion, revocation, or erasure of an observation. Preserve required tool-call/result bindings and usable controls for unresolved jobs. Provider caches, continuation references, and retained sessions do not prove that older material is absent, current, or free. An adapter must support the chosen context with honest observation continuity. If it cannot remove or replace selected material, report that limitation. No fixed application context ceiling or silent truncation substitutes for the persona's choice.
 
+An adapter may mark a complete reusable instruction/schema prefix for provider
+caching while still transmitting every selected byte. Keep changing admission
+identities and current context outside that prefix, preserve message roles and
+image order, and bind the complete layout and boundary in the admitted request.
+Response identity remains checked against the current admission. Provider cache
+reads and writes are measured outcomes, not assumptions or permission to reuse
+an earlier decision. Preserve reported write counts and retention breakdowns
+alongside cached input; unknown counters and monetary charges remain unknown.
+The current [OpenAI caching contract](https://developers.openai.com/api/docs/guides/prompt-caching)
+distinguishes explicit prefix boundaries from automatic caching behavior across
+model families. Support must be established for the actual route and model;
+model naming alone cannot authorize a new provider parameter. A cache
+optimization does not establish better task performance.
+
 **Required context stays available.** Do not evict the following as obsolete tool instructions: current human input; current work and decision rights; coherent character and relevant modeled state; maintenance responsibility; cancellations; accepted obligations; important adverse observations; exact selected material with required qualifications; and unresolved effects. Active-work guidance forms part of the actual request before exposure is quoted. Context maintenance preserves those facts. It must not supply an evaluator's answer, dictate the next experiment, or act as a substitute author of persona context.
 
 **Distinguish preparation from execution.** The persona chooses whether preparation is useful. A readiness preview reports available observations without invoking a model, inventing a charge or changing the selected model. Actual preparation and inference retain their own inputs, outcomes and costs. No reserved-capacity check, combined-cost ceiling or compulsory preparation phase blocks work under UR-052.
