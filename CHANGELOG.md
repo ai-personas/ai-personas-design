@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — shared work visibility and substantive judgment
+
+Distinguished pending accepted host commands from authored intentions and actual
+execution, allowing personas to account for concurrent shared-file work without
+assigned coordination roles. Clarified that useful checks distinguish the
+requested outcome from a plausible result that fails its central purpose.
+
 ## 24 October 2026 — attributable provider caching
 
 Specified preserving complete selected context while identifying a reusable
