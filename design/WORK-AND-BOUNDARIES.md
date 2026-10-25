@@ -792,6 +792,14 @@ cancellation, binding failures, missing local failure evidence and accepted
 actions keep their distinct dispositions. A still-live incomplete stream is
 not an ended local attempt.
 
+A completed temporary HTTP service error can preserve the same response-only
+route. Establish the exact request, finished error response and absence of a
+received decision or action intent. Supply the original status and failure to
+the fresh decision without claiming a successful remote stop, known usage or
+completed work. This recovery creates no continuation after an authored stop;
+authentication, configuration and provider quota failures remain separately
+observable conditions.
+
 Recovery schedules survive restart, but pause, cancellation, removal, retirement, and fences against adopting late results prevail. Apply these distinctions to initialization, model discovery, ordinary decisions, and context maintenance. Each provider attempt preserves its required maintenance input and individual accounting. Adopt at most one complete response for a logical invocation. Transport failure is not a completed maintenance decision or an authored no_change outcome.
 
 **Read-only views.** Read-only interface activity provides coherent individual observations without holding the writer reservation. A changing multi-page traversal is still not a single snapshot; [search consistency and completion scope](../implementation/CONTRACTS.md#search-and-exact-reading) must remain explicit. Shared reads may coalesce while running, but closing one reader must not cancel another's request. Expensive file, history, evidence, and persona-context views load on demand and release subscriptions and payloads when closed.

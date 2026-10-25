@@ -2,6 +2,23 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — preserve continuation through temporary service errors
+
+Clarified recovery for a completed temporary HTTP error from response-only
+inference. The existing invitation or continuation remains usable when the
+request yielded no decision or action intent. Recovery preserves the actual
+failure and unknown remote outcome or usage without inventing persona intent.
+Participant controls distinguish provider and transport failures from rejection
+before dispatch and retain their corresponding recovery receipts.
+
+## 25 October 2026 — make earlier activity discoverable
+
+Specified compact chronological locators for a persona's own earlier work,
+with recorded invocation attribution and usable history search cues. These
+locators supply metadata while leaving reading, context selection and maintenance
+to the persona. Aligned the next-context contract with the existing rule that
+an explicit first preserve records an empty optional selection.
+
 ## 25 October 2026 — identify nested response-shape errors
 
 Specified schema-derived rejection hints for missing required members and known

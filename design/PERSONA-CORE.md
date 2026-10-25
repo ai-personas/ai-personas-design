@@ -339,6 +339,15 @@ Every search makes its actual corpus and matching scope understandable. This inc
 
 A no-match result means only that no matching text was found under those rules. Different wording, stale cues, or excluded scope can hide useful experience. No match does not prove that useful experience is absent.
 
+A new work context may supply a compact chronological locator for the persona's
+own earlier activity. Identify the recorded work, invocation and chronology and
+provide a usable history search cue. This is discovery metadata, not a selected
+earlier body, transferred private focus, relevance ranking or claim of learning.
+Choose from recorded chronology without inferring missing dates or ordering;
+an absent or incomplete locator does not establish absence of history. The
+persona decides whether to inspect the record, select useful supporting context
+or revise its characteristic guidance through the ordinary interaction.
+
 **Discovery, reading, and acceptance are different facts.** A search snippet is a discovery. An exact read observes text without endorsing its claims. It returns the requested exact bytes or an explicit stale or unavailable disposition. A newer file at the same path is a new observation, not the version previously found. A historical read remains historical.
 
 **Current body supply and later context are separate choices.** A result present in one invocation is not an automatically continuing conversation. Make its context lifetime explicit, and let the primary select useful exact output fields or ranges for later work without rewriting them or loading the complete command record. A hash, diagnostic, or other observation may be needed alongside a later image or result. Receiving that observation does not select it; preserving an empty selection keeps it empty. The persona can retain an exact excerpt, write and select a useful supporting note, retrieve it later, or omit it when no longer useful. These are ordinary asset and context decisions, not a second learning store, automatic failure memory, compulsory fragment edit or command restriction. Selection and later supply must remain separately attributable.
