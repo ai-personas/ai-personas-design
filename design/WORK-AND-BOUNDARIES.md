@@ -778,6 +778,16 @@ Keep the attempt and usage, preserve uncertainty about charges, and adopt none
 of its partial output. This grants no new participation after Stop or Pause and
 does not equate a connection loss with a reported terminal failure.
 
+A locally ended response-only stream can likewise retain an existing route
+without resolving the remote outcome. Establish the exact admitted request,
+actual local failure receipt and absence of received or adopted decisions and
+action intents. A fresh decision observes that failure; it cannot adopt late
+partial output or replay an action. Unknown remote computation or charges stay
+unknown, but need not prevent independent fresh inference. Explicit
+cancellation, binding failures, missing local failure evidence and accepted
+actions keep their distinct dispositions. A still-live incomplete stream is
+not an ended local attempt.
+
 Recovery schedules survive restart, but pause, cancellation, removal, retirement, and fences against adopting late results prevail. Apply these distinctions to initialization, model discovery, ordinary decisions, and context maintenance. Each provider attempt preserves its required maintenance input and individual accounting. Adopt at most one complete response for a logical invocation. Transport failure is not a completed maintenance decision or an authored no_change outcome.
 
 **Read-only views.** Read-only interface activity provides coherent individual observations without holding the writer reservation. A changing multi-page traversal is still not a single snapshot; [search consistency and completion scope](../implementation/CONTRACTS.md#search-and-exact-reading) must remain explicit. Shared reads may coalesce while running, but closing one reader must not cancel another's request. Expensive file, history, evidence, and persona-context views load on demand and release subscriptions and payloads when closed.

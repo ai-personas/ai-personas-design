@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — continue independently of uncertain inference usage
+
+Separated a locally ended response-only stream from unknown remote computation
+and charges. An exact failed request with no accepted decision or action may
+retain its existing continuation, while the original uncertainty stays recorded.
+Cancellation and unresolved external actions remain distinct.
+
 ## 25 October 2026 — distinguish intended refinement from demonstrated change
 
 Clarified that actual experience can motivate characteristic guidance before a
