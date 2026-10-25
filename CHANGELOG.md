@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — align current evidence gaps with unrestricted execution
+
+Corrected the implementation-status criteria that still described corpus and
+prompt bounds, capacity admission blocks and matched limits as current targets.
+The evidence gaps now concern persona-chosen compactness, complete context,
+actual resource use and truthful physical failures under UR-052. Historical
+results and their original criteria remain unchanged; no new conformance or
+behavioral result is claimed.
+
 ## 25 October 2026 — preserve exact text projections in host input
 
 Specified command stdin from exact supporting-asset text references, including

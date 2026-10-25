@@ -146,32 +146,32 @@ Compare authored cues with ordinary search and exact links under matched resourc
 
 Verify actual reclamation. Expose unmeasured tiers and the limits of control over provider or recipient copies. Preserve user-owned delivered artifacts.
 
-**Retention and useful forgetting.** Policy-dependent distinctions are specified, but lawful survival of derived material, erasure and capacity behavior have not been demonstrated. Evidence must show:
+**Retention and useful forgetting.** Retirement, erasure and compact retained state are specified, but their current behavior has not been demonstrated here. Evidence must show:
 
-- The actual policy for raw and derived material, truthful source expiry, and narrower claims when their evidence no longer survives.
+- The actual disposition of raw and derived material, truthful source expiry, and narrower claims when their evidence no longer survives.
 - Non-revival of retired guidance and protection of rare exceptions, accepted warnings and unresolved effects.
-- Honest admission blocks when protected state fills the available capacity.
+- Honest reporting of physical storage failures while preserving accepted state and unresolved work, without application storage quotas or quota-driven eviction.
 
 A digest or a small prompt is not retained exact evidence.
 
-**Bounded persona-context corpus and prompt.** The design sets separate bounds for the authored corpus and each assembled prompt. Sustained compactness and characteristic behavioral benefit have not been demonstrated. Evidence must measure both sizes, expressive coverage, primary-authored reorganization, exact later supply and assessed behavior under matched limits. Supporting evidence and operational records must retain provenance, expiry and access controls without being conflated with fragments.
+**Compact persona-context corpus and prompt.** The design seeks useful compactness of both the authored collection and each assembled prompt without application byte, token or corpus quotas. Sustained compactness and characteristic behavioral benefit have not been demonstrated. Evidence must measure both sizes, expressive coverage, primary-authored reorganization, exact later supply and assessed behavior alongside actual resource use. Selected material and required qualifications remain complete; a provider capacity failure must be reported rather than hidden by truncation. Supporting evidence and operational records retain provenance, expiry and actual availability without being conflated with fragments.
 
 **Primary next-context choice.** Required behavior is specified; the revised mechanism is unassessed. Evidence must show:
 
 - Actual explicit primary decisions to preserve, replace or clear context, with omission rejected.
 - Recovery of stored state that remains distinct from an authored choice.
-- Work isolation, handling of stale sources and permissions, complete qualifications, and inspection of the exact context actually supplied.
+- Work attribution, handling of stale or unavailable sources, complete qualifications, and inspection of the exact context actually supplied.
 
 **Selective supporting-resource exposure.** The small-bootstrap and no-full-catalogue boundaries are specified. No provider-request or dynamic-tool-exposure audit was executed. Evidence must use a large stored inventory with few relevant items and inspect:
 
-- The first choosing request and every later choosing request, including bounded primary queries and previews.
+- The first choosing request and every later choosing request, including persona-chosen queries and requested previews.
 - Direct paths for exact references and known current guidance.
 - The exact resources and schemas selected and actually exposed.
 - The absence of all-tool or all-skill loading in both provider-facing payloads and model-visible context.
 
 **Supporting-resource lifecycle and execution.** The design distinguishes storage, selection and executable binding. This revision provides no new resource-lifecycle or runnable-helper evidence. Evidence must cover:
 
-- Real sources and revisions, mutable-data snapshots, changed dependencies, and current permissions and executable bindings.
+- Real sources and revisions, mutable-data snapshots, changed dependencies, observed host availability and current executable bindings.
 - Stale, revoked or shadowed resources, and preparation actions kept distinct from inert reads.
 - Actual effects and returned results, truthful claims about cache and watch coverage, and retirement or erasure of derived assets.
 
@@ -183,7 +183,7 @@ A digest or a small prompt is not retained exact evidence.
 
 **Default host access.** The current requirement is [full host access by default](DEPLOYMENT-DECISIONS.md#default-full-host-access), including tool installation without application allowlists, sandboxing or per-tool approval. This replaces the earlier target's approval and isolation prerequisites. Actual runtime support must be established through native persona commands, installation, filesystem operations and observed results on new and existing runtimes. A documentation change alone establishes none of those execution outcomes.
 
-**Runtime boundaries.** Protected obligations are retained, but this revision reruns none of their tests. A stronger claim needs applicable authority, privacy, revision, observation, resource, effect, cancellation, recovery and release tests at the exact target implementation revision.
+**Runtime boundaries.** Accepted obligations and exact state remain accountable without application permission or safety gates. This status page establishes no new execution results. Stronger claims need attributed observations of current mandate and responsibility, source lineage, revisions, actual usage, effects, cancellation, recovery and release behavior at the exact target implementation revision. Actual work supplies that evidence; this page prescribes no fixed test campaign or generated scenarios.
 
 **Character and own voice.** OCEAN/VAD and own-voice guidance exist in the inspected source. There is no new behavioral result or complete finding of conformance with the single-account contract. Evidence must show:
 
