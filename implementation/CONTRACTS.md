@@ -97,6 +97,14 @@ Unavailable warning text or evidence remains unavailable. Do not invent its byte
 
 **Response identity.** Make the current admission's exact invocation identity and response epoch explicit in its supplied schema as well as its control context. Keep them distinct from work and mandate revisions. Apply the binding to initialization and later decisions, including a fresh ordinary decision after rejection and any historical repair rendering. Preserve the original received bytes and independently check parsing, response identity and current state before adoption; constants guide authorship without proving validity or repairing a mismatch. Count their complete representation in actual input size, without treating changing admission identifiers as fixed-contract growth. A generic public wire schema has no particular admission to bind.
 
+**Profile wire shape.** Describe the named OCEAN and VAD dimensions required by
+the active parser in the supplied response schema, including each required field,
+its value type and whether additional keys are accepted. An internal map must not
+make the offered schema appear open when validation requires exact names. Keep
+baseline and current-affect VAD shapes consistent. This describes the existing
+wire contract; it neither fixes the authored descriptions nor limits characteristic
+nuance or text length.
+
 Provider refusal, transport failure, timeout, and cancellation retain their actual status and exposure. They are not persona-authored no_change outcomes. A valid persona-authored refusal still includes maintenance and next-context dispositions for ordinary work; the host fabricates neither for a provider refusal.
 
 After rejection, prior accepted selection remains stored only under its existing validity and recovery rules. This is not an authored preserve or successful consideration. Already admitted effects remain real. Missing intent creates no automatic paid repair, retry, or new allowance. Host status reporting may disclose the actual failure without presenting rejected output as an accepted persona response.

@@ -2,6 +2,19 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — expose the required profile shape
+
+Required the supplied Decision schema to describe the exact named OCEAN and VAD
+fields already checked by the parser, including baseline and current-affect VAD.
+Internal map storage must not imply that arbitrary dimension names are accepted.
+
+## 25 October 2026 — distinguish work accounts from host activity
+
+Clarified the scope of collaborator accounts and accepted host-command metadata.
+Recorded launch directories help attribute pending work without treating global
+process listings, matching labels or similarly named files as peer activity.
+Host access and the personas' collaboration choices remain unrestricted.
+
 ## 25 October 2026 — recover oversized pending tool context
 
 Specified exact-reference delivery of pending tool text after an actual provider

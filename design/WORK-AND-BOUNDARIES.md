@@ -411,6 +411,15 @@ in presentation order must preserve all supplied fields, exact text, qualificati
 and reference resolution. It must not introduce a host-authored task interpretation,
 plan or quality criterion. Bind the actual rendered order in the admitted input.
 
+Peer accounts and pending command identities are scoped to the current runtime
+and work. Persona labels and local IDs can recur elsewhere. When supplying a
+pending host command's recorded launch directory, distinguish that fact from
+its affected paths, a live process identity, file ownership and successful
+output. Host-wide process listings or similarly named artifacts do not establish
+that they belong to a current collaborator. Preserve unknown attribution rather
+than inferring a connection from a matching name. This adds neither filesystem
+restrictions nor a prescribed collaboration workflow.
+
 An initial invitation needs an accepted participation decision. Consuming its
 first model admission must not strand the invitation when a complete response
 is rejected locally. Preserve that pending route while the invocation owns its
