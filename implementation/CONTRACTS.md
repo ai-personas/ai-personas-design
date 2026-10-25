@@ -149,6 +149,12 @@ Diagnostic supply does not resume a stopped persona or establish work completion
 
 An earlier accepted continuation can remain usable under the same live mandate. Within the continuing session, the host may retire a definitively rejected, complete local invocation and supply its actual failure to a fresh primary decision. This preserves the existing continuation rather than deriving permission from invalid output. Keep the rejected response and its charges; do not replay its proposed actions, repair its bytes, erase recorded usage, revive an authored stop, reuse a consumed timed opportunity, or treat cancellation or an uncertain transport as a completed rejection. Recheck current work, actor, context, scheduling and actual execution state before the fresh admission; no resource allowance is replenished or required.
 
+Report a session's final stop separately from driver failures recorded during it.
+A failed attempt followed by continued work remains a real historical failure;
+its presence does not replace the final scheduling outcome or establish a current
+participant hold. Preserve both facts in live and saved-session displays. Current
+participant state and the quality of the task result remain separate questions.
+
 An explicit operator resume can separately permit a fresh decision after a
 definite rejection. The ordinary participant controls should expose a complete
 response rejected before adoption and a recorded rejection before provider

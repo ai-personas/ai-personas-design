@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — distinguish session stops from earlier failures
+
+Clarified that a session's final scheduling outcome and its recorded driver
+failures must remain separately visible, including when saved work is reopened.
+An earlier failed attempt does not by itself establish a current participant hold.
+
 ## 25 October 2026 — expose the required profile shape
 
 Required the supplied Decision schema to describe the exact named OCEAN and VAD
