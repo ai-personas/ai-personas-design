@@ -101,6 +101,15 @@ Provider refusal, transport failure, timeout, and cancellation retain their actu
 
 After rejection, prior accepted selection remains stored only under its existing validity and recovery rules. This is not an authored preserve or successful consideration. Already admitted effects remain real. Missing intent creates no automatic paid repair, retry, or new allowance. Host status reporting may disclose the actual failure without presenting rejected output as an accepted persona response.
 
+Explain structural rejection using the current schema and the actual affected
+section. Identify missing required members and definite nested type or enum
+mismatches when known, including when a tagged decoder reports only its enclosing
+operation. Known field paths and array positions can locate the problem without
+repeating arbitrary authored text or dynamic map keys. Leave opaque payloads
+opaque and unknown variants unresolved. Diagnostic hints describe the rejected
+shape; they do not infer intent, fill omitted fields, alter the original bytes,
+relax validation or supply a replacement persona decision.
+
 Retain complete failure provenance with the rejection and its receipt in one
 transaction. Reference the exact admitted request and terminal; retain newly
 consulted sources and policies without duplicate components or a byte quota.

@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — identify nested response-shape errors
+
+Specified schema-derived rejection hints for missing required members and known
+nested type or enum mismatches. Diagnostics locate the defect without repairing
+authored bytes, interpreting opaque payloads or adopting rejected actions.
+
 ## 25 October 2026 — honor authored times in a live session
 
 Specified foreground waiting for accepted reconsideration and wait deadlines,
