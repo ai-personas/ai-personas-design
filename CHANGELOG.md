@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — allow an explicit first preserve choice
+
+Defined preserve over the current optional context, including an empty set
+before any prior choice. The persona's explicit reason records that first
+selection; it does not load observed bodies, renew lifetimes, or remove mandatory
+character context.
+
 ## 25 October 2026 — avoid repeating displayed replies at completion
 
 Clarified that automatic completion views can omit exact messages already shown
