@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — release locally canceled calls without resuming work
+
+Clarified local invocation cleanup after an observed runtime stop cancels a
+response-only model call. Exact terminal evidence and the absence of adopted
+actions permit releasing that local call while preserving current controls and
+continuation choices. Remote outcomes and charges retain their actual status;
+cleanup establishes neither resumption, replay nor task completion.
+
 ## 25 October 2026 — accept explicit empty context replacements
 
 Clarified that replacing an optional context set with an explicitly empty set

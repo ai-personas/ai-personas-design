@@ -605,6 +605,8 @@ If these cannot be established, expose the continuation gap. Transfer or ending 
 
 Before a fresh primary decision, recheck explicit pause or cancellation, current work, decision identity and actual observations. A fresh decision does not replay a suppressed action batch. A valid dependency wait need not become polling; a wished-for reply is not an event. A partial result or explicit stop can handle a boundary correctly while leaving the full task unfinished.
 
+**Release an ended local call after an observed stop.** When a recorded runtime stop cancels a response-only model call, retain its exact local terminal outcome and release the matching local invocation once no adoption or action intent can remain. This includes a complete response canceled before adoption. Preserve current work and persona controls and authored continuation choices; local cleanup grants neither resumption nor replay. A later explicit resumption remains a separate fact. Do not infer remote termination, reconcile unknown charges, or treat missing terminal evidence or an unavailable control monitor as a completed cancellation.
+
 ## Review and release
 
 A review must support the claim being made about the work. An ordinary self-check or peer comment can be an attributable assessment without becoming a formal review commitment. When the adopted acceptance policy requires a review, an informal assessment does not silently satisfy that requirement.
