@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — expose work-evidence uniqueness
+
+Required the Decision schema to express the parser's existing unique, nonempty
+work-evidence identifier rule. Empty evidence remains valid, authored order stays
+intact, and neither collection quotas nor automatic response repair are added.
+
 ## 25 October 2026 — distinguish session stops from earlier failures
 
 Clarified that a session's final scheduling outcome and its recorded driver

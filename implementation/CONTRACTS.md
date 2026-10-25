@@ -105,6 +105,12 @@ baseline and current-affect VAD shapes consistent. This describes the existing
 wire contract; it neither fixes the authored descriptions nor limits characteristic
 nuance or text length.
 
+**Work evidence wire shape.** Each work disposition's evidence array describes
+the parser's unique, nonempty identifier rule in its supplied schema. An empty
+array is valid. Do not introduce item-count or text-size ceilings, reorder the
+authored list, or silently deduplicate rejected output. Structural validity does
+not establish evidence availability, relevance or support for the work judgment.
+
 Provider refusal, transport failure, timeout, and cancellation retain their actual status and exposure. They are not persona-authored no_change outcomes. A valid persona-authored refusal still includes maintenance and next-context dispositions for ordinary work; the host fabricates neither for a provider refusal.
 
 After rejection, prior accepted selection remains stored only under its existing validity and recovery rules. This is not an authored preserve or successful consideration. Already admitted effects remain real. Missing intent creates no automatic paid repair, retry, or new allowance. Host status reporting may disclose the actual failure without presenting rejected output as an accepted persona response.
