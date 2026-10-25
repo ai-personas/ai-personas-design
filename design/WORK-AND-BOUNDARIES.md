@@ -419,6 +419,24 @@ If a service may have acted before a timeout, preserve destination, payload, eff
 
 The persona's identity and obligations persist independently of provider sessions. The primary model remains its decision and generative authorship mechanism; an opaque autonomous harness must not silently take ownership of the persona.
 
+**Provider continuation state.** A provider may return opaque reasoning items
+alongside its visible response. Exact completed output items, including assistant
+phase and encrypted content when returned, can be retained as private host
+records. Keep completed item events and the terminal response distinct; an item
+snapshot does not establish stream completion, local adoption or useful work.
+Ordinary receipts need only relevant metadata, and recovery diagnostics must not
+silently insert those item bodies into the persona's next context.
+
+Any later reuse is an explicit supporting-context choice with its actual
+provider/model compatibility, originating persona and work, source lineage and
+complete rendered input accounted for. Retention alone grants no replay and
+establishes no continuity benefit. Do not substitute an automatically accumulated
+provider conversation for persona-selected fragments and assets. Current
+character, work state and actual operation outcomes remain authoritative.
+[OpenAI's reasoning documentation](https://developers.openai.com/api/docs/guides/reasoning)
+describes opaque-item continuity for supported models; compatibility and actual
+reuse still require evidence from the configured deployment.
+
 Supported inputs and outputs, refusals, malformed or partial responses, timeouts, cancellation, usage, and unavailable capabilities are explicit deployment choices within the [every-invocation contract](../implementation/CONTRACTS.md#every-persona-invocation). That contract covers initialization, request preparation and retrieval-only judgment, communication, coordinated work, repair, reflection, persona-capable subcalls, and provider attempts. Calling a persona decision a helper does not remove its maintenance responsibility.
 
 **What every request and accepted response covers.** Every request combines:

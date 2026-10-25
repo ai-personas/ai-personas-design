@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — retain provider output separately from selected context
+
+Clarified that exact completed provider output items can be retained privately,
+including opaque reasoning and assistant phase, without automatically replaying
+them. Future reuse remains an explicit supporting-context choice with actual
+compatibility, lineage and full-context accounting. Kept provider retention,
+stream completion, local adoption, useful continuity and character maturation
+separate; this clarification establishes no runtime reuse or behavioral benefit.
+
 ## 25 October 2026 — persona-created skills of any kind
 
 Added UR-053 from the user's clarification: personas can dynamically develop
