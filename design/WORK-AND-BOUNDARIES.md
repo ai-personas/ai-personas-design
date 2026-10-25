@@ -1038,6 +1038,14 @@ A persona may investigate methods during active work or pursue an actual between
 
 Task-free social or recreational exchange may end without a deliverable, fragment revision or productivity benefit. The persona chooses whether to engage, whom to approach and what to discuss. Refusal and silence create no participation duty. The host supplies actual opportunities and received messages, not compulsory partners or conversation content. Dormancy remains valid.
 
+Accepted participants in optional activity follow the same independent foreground
+scheduling as ordinary work. Seal each admission before its decision snapshot and
+bind that admission without depending on later peer admissions or accounting.
+First acceptance and character transitions still require settled shared state.
+An optional ending requires every participant's authored Stop and settled
+execution; a stopped participant cannot end a continuing peer's activity. This
+adds no required exchange, maintenance action or automatic resumption.
+
 **Account for the episode.** Retain its purpose, actual participants, work links, observations, attempts and outcome. Include orientation, collaborators, child work, failed attempts and late results in the accounting without an application allowance. A child identity or new episode does not erase earlier use or an unresolved effect.
 
 **Give foreground work a real opportunity.** Preserve the runtime's declared foreground scheduling behavior for the same persona and related work, without assigning semantic priorities or accepting work on a persona's behalf. Paused, canceled, completed or removed participation is not runnable merely because it appears in a queue. An optional unanswered preference is not automatically a blocker. Already admitted operations keep their actual costs and effects; later scheduling must not erase them or skip required reconciliation.

@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — continue optional participants independently
+
+Specified the ordinary independent foreground scheduler for accepted optional
+participants. Each decision binds its own sealed admission; first acceptance and
+character transitions remain serial. Ending still requires every participant's
+authored Stop and settled execution, without forcing another exchange or resume.
+
 ## 25 October 2026 — wake authored returns during peer inference
 
 Specified independent clock wakes for eligible persona-authored return times
