@@ -115,6 +115,13 @@ Provider refusal, transport failure, timeout, and cancellation retain their actu
 
 After rejection, prior accepted selection remains stored only under its existing validity and recovery rules. This is not an authored preserve or successful consideration. Already admitted effects remain real. Missing intent creates no automatic paid repair, retry, or new allowance. Host status reporting may disclose the actual failure without presenting rejected output as an accepted persona response.
 
+The ordinary launcher should explain a retained provider rejection using its
+actual status and available credential-redacted provider explanation. Bind that
+display to the exact failed attempt and distinguish it from accepted persona
+output. Equivalent explanations may be grouped without hiding which calls they
+describe. Viewing a failure changes neither configuration nor retry permission;
+raw response bodies and private continuation material remain separate.
+
 Explain structural rejection using the current schema and the actual affected
 section. Identify missing required members and definite nested type or enum
 mismatches when known, including when a tagged decoder reports only its enclosing
@@ -631,6 +638,13 @@ If these cannot be established, expose the continuation gap. Transfer or ending 
 Before a fresh primary decision, recheck explicit pause or cancellation, current work, decision identity and actual observations. A fresh decision does not replay a suppressed action batch. A valid dependency wait need not become polling; a wished-for reply is not an event. A partial result or explicit stop can handle a boundary correctly while leaving the full task unfinished.
 
 **Release an ended local call after an observed stop.** When a recorded runtime stop cancels a response-only model call, retain its exact local terminal outcome and release the matching local invocation once no adoption or action intent can remain. This includes a complete response canceled before adoption. Preserve current work and persona controls and authored continuation choices; local cleanup grants neither resumption nor replay. A later explicit resumption remains a separate fact. Do not infer remote termination, reconcile unknown charges, or treat missing terminal evidence or an unavailable control monitor as a completed cancellation.
+
+This also covers a stop between admission and provider dispatch. Retain the
+admission's control-history boundary and the exact no-launch rejection. A
+recorded intervening stop or a currently effective stop can justify retiring that
+failed local call without lifting the stop. A subsequent explicit resumption
+does not revive the old call. An unrelated configuration failure does not acquire
+an automatic retry through this cleanup rule.
 
 ## Review and release
 

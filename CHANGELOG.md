@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — settle prelaunch stops and explain provider rejections
+
+Extended local-call cleanup to stops that arrive before provider dispatch,
+preserving the no-launch receipt, current controls and authored choices. Clarified
+that ordinary launcher status explains actual provider rejections without
+exposing private response material or silently retrying a changed request.
+
 ## 25 October 2026 — locate nested structural failures
 
 Clarified that rejection diagnostics identify known nested object paths and
