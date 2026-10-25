@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — retain response-level terminal evidence
+
+Distinguished an incomplete output item from a provider's terminal response.
+Collection preserves the actual final status, available usage and reason without
+adopting partial text or inventing an unobserved completion.
+
 ## 25 October 2026 — isolate optional decisions from unrelated peer progress
 
 Specified admission sealing and relevant state dependencies for optional activity
