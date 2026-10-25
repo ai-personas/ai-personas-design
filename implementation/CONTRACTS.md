@@ -171,6 +171,23 @@ its presence does not replace the final scheduling outcome or establish a curren
 participant hold. Preserve both facts in live and saved-session displays. Current
 participant state and the quality of the task result remain separate questions.
 
+**Ordinary work controls.** The end-user launcher exposes pause and cancellation
+during active work, and a separate work-wide resume after execution settles.
+Record a stop atomically against the current work without waiting for the active
+execution owner to finish. Preserve actual terminal observations, earlier output
+and usage; a stop request is neither completed work nor proof of remote termination.
+Persist each user control's exact identity and contents before submission. A
+repeated identity returns its historical result without stopping or resuming a
+later state again. Retain an unapplied stop when the current phase no longer
+allows it, so a delayed retry cannot stop later resumed work. Work resumption
+binds the inspected state and commits its
+receipt with the phase change; it starts no inference, recovers no unknown effect
+and preserves each participant's continuation choice. Pending feedback or question
+input must not prevent the requester from stopping active work.
+An invitee whose initial opportunity ended before an ordinary response must
+remain explicitly resumable. Such resumption permits consideration of the
+invitation and does not record acceptance on the invitee's behalf.
+
 An explicit operator resume can separately permit a fresh decision after a
 definite rejection. The ordinary participant controls should expose a complete
 response rejected before adoption and a recorded rejection before provider

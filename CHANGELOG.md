@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — ordinary launcher work controls
+
+Specified active-work pause and cancellation, separate work-wide resumption,
+and durable user-control identities. Repeating an earlier request returns its
+historical result without affecting later work again. Retained outputs, actual
+execution outcomes, usage and individual continuation choices remain distinct.
+
 ## 25 October 2026 — release locally canceled calls without resuming work
 
 Clarified local invocation cleanup after an observed runtime stop cancels a
