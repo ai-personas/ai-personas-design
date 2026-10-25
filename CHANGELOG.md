@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — recover locally ended streamed service errors
+
+Extended response-only recovery to structured server failures or overloads
+reported within an HTTP 200 stream. Preserved exact failed-attempt binding,
+unchanged invitation or authored continuation, and unknown remote outcome and
+usage. No partial response or action is replayed.
+Specified normal continuation for an eligible retained recovery route even when
+no other participant is ready, without requiring a new operator resume.
+
 ## 25 October 2026 — distinguish cited records from unresolved identifiers
 
 Specified factual history lookup beside prior persona judgments. Exact matches
