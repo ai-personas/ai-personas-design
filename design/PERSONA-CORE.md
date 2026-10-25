@@ -547,7 +547,7 @@ A useful discovery and exact-read interface explains scopes, matching, requested
 | Disposition | Meaning |
 |---|---|
 | Preserve | Keep a still-appropriate accepted choice. A concise, unambiguous statement suffices. |
-| Replace or clear | Explicitly change the optional choice. |
+| Replace or clear | Explicitly change the optional choice. An explicitly empty replacement clears that optional set. |
 | No further optional need | Choose an empty future optional set: clear an existing set or preserve an already empty one. |
 | Discovery or read intent | Request discovery or reading and explicitly state whether existing optional state is retained or cleared. |
 | Blocked or stop | Give an honest disposition for an actual missing prerequisite or chosen stopping point. A stored choice can remain recorded while its exact source is unavailable; recording it does not establish supply. |

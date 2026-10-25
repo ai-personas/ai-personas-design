@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — accept explicit empty context replacements
+
+Clarified that replacing an optional context set with an explicitly empty set
+clears it. This is a complete authored next-context choice, with the same
+meaning as clearing that set. Combined text, image and provider-history choices
+retain their separate declared parts; mandatory character context is unchanged.
+Omitting the disposition remains invalid.
+
 ## 25 October 2026 — explicitly select provider continuation
 
 Specified current-turn, preserve and clear choices for provider history within

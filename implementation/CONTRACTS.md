@@ -381,6 +381,13 @@ Withholding an ineligible optional bundle does not permit discarding valid selec
 
 No new search, mutation, repeated list, full-body dump, extra model call, or fixed field schema is required. “No further optional need” explicitly chooses an empty future optional set: it clears an existing set or keeps an already empty one empty. This affects neither mandatory context nor already exposed observations or retained history.
 
+An explicit replacement may select an empty set. Its emptiness is an authored
+choice to clear the replaced optional material, not an omitted disposition or a
+request to preserve earlier selections. When a replacement combines text, images
+and provider continuation, each supplied part keeps its declared meaning; an
+empty text list alone does not erase another explicitly selected part. Required
+character context remains independent of these optional choices.
+
 Before any accepted optional-context choice, including during initialization, the current optional set is empty. An explicit preserve records that empty set as the persona's first reasoned choice; clear also chooses an empty set. Neither invents an earlier selection, loads observed bodies, removes mandatory character context, nor bypasses the character-transition rules. Final, short, social, refusal, and tool-follow-up responses are covered without requiring continuation. A blocked/deferred choice may retain stored ineligible selections as ineligible; it never makes them usable exposure.
 
 Explicit selection can still be poor judgment. For example, preserving irrelevant but eligible material is a selection-quality failure to evaluate, not evidence that the response contract prevents all semantic mistakes.
