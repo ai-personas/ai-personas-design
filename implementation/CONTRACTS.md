@@ -351,6 +351,20 @@ The primary may select a currently readable exact candidate from a preview witho
 
 The resulting decision receives the selected exact full text or declared range and complete applicable qualifications. Operative tool exposure includes the usable definition, not merely a stored reference to it. A metadata request supplies only the requested preview. This assembled context contributes to the operating persona; it does not establish consistent or useful behavior.
 
+Captured images can be selected as supporting context alongside text. Bind each
+choice to its exact immutable capture, original observation, detail and work
+lifetime; a known exact reference or an admission-bound handle can identify it.
+Preservation, replacement, clearing and expiry apply to the whole chosen asset
+set, including images. Receiving pixels once does not select them for later
+inputs, and preservation does not renew an expiring choice. Later supply reuses
+the captured bytes with their attribution and current required qualifications,
+without reopening the host path or manufacturing another read. A pending and
+selected copy of the same capture needs only one provider image part. No image
+catalogue, automatic selection or quota is required. Selected historical pixels
+do not establish current host-file contents or the correctness of a visual
+judgment. Image choices follow the same character-transition and unavailable
+optional-bundle rules as other supporting context.
+
 **Failure and recovery.** An unavailable or changed selected revision gets an explicit disposition. It cannot silently follow a path to different bytes. The following distinctions apply:
 
 | Situation | Required treatment |

@@ -352,6 +352,14 @@ or revise its characteristic guidance through the ordinary interaction.
 
 **Current body supply and later context are separate choices.** A result present in one invocation is not an automatically continuing conversation. Make its context lifetime explicit, and let the primary select useful exact output fields or ranges for later work without rewriting them or loading the complete command record. A hash, diagnostic, or other observation may be needed alongside a later image or result. Receiving that observation does not select it; preserving an empty selection keeps it empty. The persona can retain an exact excerpt, write and select a useful supporting note, retrieve it later, or omit it when no longer useful. These are ordinary asset and context decisions, not a second learning store, automatic failure memory, compulsory fragment edit or command restriction. Selection and later supply must remain separately attributable.
 
+The same choice applies to captured images. A persona can retain an exact
+historical capture alongside selected text for later decisions, then replace or
+clear it when it stops being useful. The host supplies the chosen pixels and
+their original attribution without recapturing a possibly changed path. An
+image is supporting context, not a characteristic fragment; retaining it does
+not prove that it depicts the current artifact or that the persona assessed it
+correctly.
+
 An explicit choice to preserve optional context retains its current entries and
 their remaining lifetimes. Before a first optional-context choice, that current
 set is empty: preserve records the persona's reasoned empty selection. It does

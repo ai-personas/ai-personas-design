@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — select captured images for later context
+
+Specified explicit image selection alongside supporting text, with exact capture
+identity, work scope, chosen lifetime and ordinary preserve, replace and clear
+semantics. Later inputs reuse the selected bytes and original attribution
+without another host read. Preserved qualification, unavailable-bundle and
+character-transition rules; image supply establishes neither current artifact
+state, correct visual judgment nor behavioral benefit.
+
 ## 25 October 2026 — recover locally ended streamed service errors
 
 Extended response-only recovery to structured server failures or overloads
