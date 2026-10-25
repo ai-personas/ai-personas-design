@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — preserve exact text projections in host input
+
+Specified command stdin from exact supporting-asset text references, including
+decoded JSON strings and measured UTF-8 ranges. The ordinary qualification
+resolver supplies the chosen text; source bindings and the actual stdin digest
+remain checked before dispatch without copying the body through model output.
+
 ## 25 October 2026 — continue optional participants independently
 
 Specified the ordinary independent foreground scheduler for accepted optional

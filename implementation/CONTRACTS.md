@@ -145,6 +145,16 @@ Establish the character-adoption fence before checking unrelated inputs that
 the fence excludes. Early validation accepts no action and performs no tool
 execution.
 
+When a host command consumes an exact supporting-asset reference as standard
+input, resolve its actual representation and range. Use the ordinary qualified
+file resolver for complete UTF-8 text, once-decoded JSON strings and measured
+UTF-8 byte ranges. A retained command-field reference must not require copying
+the script through a new model response or substituting the whole result
+document. Bind the source revision, representation, range and qualification
+closure, and retain the byte count and digest of the actual stdin text. Recheck
+those bytes and bindings before dispatch. This materialization neither supplies
+model context nor proves that the process consumed the input or succeeded.
+
 When recovery explains a rejection under an earlier application quota, identify
 the recorded limit and measurements as historical. They do not require a smaller
 current context, a replenished allowance or renewed access permission. New
