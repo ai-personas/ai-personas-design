@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — retain unfinished authored returns through failed attempts
+
+Defined a timed return as one consideration settled by an accepted ordinary work
+decision. A rejected response or recoverable response-only provider failure can
+retire its exact lease without consuming that unfinished opportunity. Preserved
+single invocation ownership, original time and purpose, explicit stops and
+terminal attribution without periodic polling or replay.
+
 ## 25 October 2026 — remove ownership filters from retained history
 
 Applied unrestricted selective retrieval to other personas' retained

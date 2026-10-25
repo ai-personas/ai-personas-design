@@ -366,6 +366,16 @@ A callable capability ID selects the unique exact interface retained for that in
 
 From an invalid response, dispatch or adopt no proposed action, communication, resource write, discovery/read request, or next-context change. Independent host duties continue: cancellation enforcement, factual receipt and history recording, accounting and actual shutdown. Those duties must not manufacture a persona outcome.
 
+An authored timed return remains an unfinished consideration until an accepted
+ordinary work decision supplies its next continuation. Its active invocation
+owns the sole admission slot; a rejected response or a recoverable response-only
+provider failure does not settle the consideration. Exact terminal recovery may
+retire that failed lease while retaining the unchanged authored route, time and
+purpose. A character-only transition likewise leaves the work decision for the
+fresh accepted character. This does not create periodic polling, replay actions,
+revive a consumed explicit resume permit or override Stop, Pause or changed work
+controls. Preserve earlier consumed opportunities under their recorded contract.
+
 | Action state | Honest meaning |
 |---|---|
 | Proposed | An action was requested; execution is not established. |
