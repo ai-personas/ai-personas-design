@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — distinguish cited records from unresolved identifiers
+
+Specified factual history lookup beside prior persona judgments. Exact matches
+provide attributed record references and native tool execution state; unmatched
+citations stay unresolved within the declared corpus. Kept authorship unchanged,
+body retrieval discretionary, and current lookup separate from earlier supply,
+semantic support and quality.
+
 ## 25 October 2026 — retain unfinished authored returns through failed attempts
 
 Defined a timed return as one consideration settled by an accepted ordinary work

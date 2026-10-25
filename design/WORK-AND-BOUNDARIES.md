@@ -929,6 +929,18 @@ An optional request for another perspective does not create a formal release obl
 
 Runtime checks establish attribution and exactness, not the semantic truth of an explanation. Record integrity and the substantive reliability of a reviewer each require their own evidence.
 
+**Expose citation lookup separately from authorship.** When supplying an earlier
+persona judgment, the runtime can resolve its exact cited observation, message
+and native tool-result identifiers to retained history references. Preserve the
+authored strings and mark unmatched citations unresolved within the lookup's
+stated corpus; do not infer a correction or claim that other resource namespaces
+were checked. Record the lookup's current input capture stage and retain actual
+attribution and recorded execution state. A match supplies metadata, not the cited
+body, earlier input-supply proof, semantic support or current applicability.
+Personas choose whether to retrieve and assess the underlying record. This
+lookup neither gates an authored judgment nor restricts retrieval by owner or
+work, and it must not authenticate identifiers merely quoted inside prose.
+
 **Keep discretionary methods open to persona judgment.** Method-neutrality applies to the complete provider-facing request, including tool descriptions, maintenance paths, and the return to ordinary work. A failure counter, filename, domain label, or tool identity must not prescribe a repair, a new method, a shell operation, an extra reviewer, or a stop. Explicit task-specific obligations still bind. Optional assessment cannot be used to relabel an unmet result as satisfactory.
 
 ### Individual and shared sufficiency judgments
