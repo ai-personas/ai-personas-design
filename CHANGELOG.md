@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — continue ready peers during independent inference
+
+Specified reconsideration of ready participants after actual model or tool
+completion without a whole-round transport barrier. Preserved settled transaction
+boundaries for structural changes, requester input and rejected-call retirement,
+alongside exclusive transitions and fair consideration order.
+
 ## 25 October 2026 — expose work-evidence uniqueness
 
 Required the Decision schema to express the parser's existing unique, nonempty

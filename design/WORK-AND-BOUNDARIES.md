@@ -514,6 +514,16 @@ failure into a new continuation. Reduce redundant reads and temporary history
 copies while preserving retained evidence. Report actual timing scope, including
 overlapping phases, without inferring a speedup from source changes alone.
 
+Independent ready participants should be reconsidered after actual model or tool
+completion without waiting for every transport in an earlier scheduling pass.
+Preserve one current primary invocation per persona, circular consideration order,
+the exact owned leases and fresh admission checks. Before refilling, inspect
+pending requester input, persona creation, child admission and completed leases
+that need retirement. Let current calls settle for those transactions and for an
+exclusive character or responsibility transition, so repeated ordinary work cannot
+starve them. Settling does not cancel a slow call, impose a timeout, or manufacture
+a continuation. Scheduling independence does not prove better task quality.
+
 When preparation retains a new runtime head after an episode checkpoint, reuse
 the exact stored object committed by that checkpoint. Avoid independently
 serializing and packing the same immutable state merely to reconstruct that
