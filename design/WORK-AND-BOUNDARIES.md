@@ -420,6 +420,12 @@ An adapter may mark a complete reusable instruction/schema prefix for provider
 caching while still transmitting every selected byte. Keep changing admission
 identities and current context outside that prefix, preserve message roles and
 image order, and bind the complete layout and boundary in the admitted request.
+Host-authored operating instructions and application schemas use the provider's
+application-instruction role where supported. Persona character, requests,
+retrieved bodies and observations remain current input with their actual
+attribution; including them in context does not promote them to host instructions.
+Bind this role distinction as part of the wire contract, and preserve the original
+roles when inspecting older evidence.
 Response identity remains checked against the current admission. Provider cache
 reads and writes are measured outcomes, not assumptions or permission to reuse
 an earlier decision. Preserve reported write counts and retention breakdowns

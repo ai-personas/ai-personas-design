@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — distinguish host instructions from current input
+
+Specified the provider role for the host-authored operating contract, separate
+from persona character, task material and observations. The admitted wire contract
+binds that distinction without changing retained sources or historical roles.
+
 ## 25 October 2026 — shared work visibility and substantive judgment
 
 Distinguished pending accepted host commands from authored intentions and actual
