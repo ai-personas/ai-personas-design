@@ -411,6 +411,14 @@ in presentation order must preserve all supplied fields, exact text, qualificati
 and reference resolution. It must not introduce a host-authored task interpretation,
 plan or quality criterion. Bind the actual rendered order in the admitted input.
 
+An initial invitation needs an accepted participation decision. Consuming its
+first model admission must not strand the invitation when a complete response
+is rejected locally. Preserve that pending route while the invocation owns its
+execution slot; after exact completed-rejection retirement, the persona can
+correct the decision. Retain the failure and actual usage without adopting or
+replaying rejected operations. Accepted Stop/Pause, consumed explicit resumption
+and uncertain transport outcomes keep their separate meanings.
+
 **Three different exposure surfaces.** Keep the host-owned registry, provider-facing transport, and actual model-visible context distinct. The bulk catalogue remains in the host registry, outside both the provider request and any LLM used to filter it. Expose the requested descriptors, exact guidance, operative schemas, and their necessary qualifications.
 
 A provider option that transmits all definitions while deferring their model visibility does not meet this transport boundary. Excluding transmitted material from model input may reduce model input, but does not turn transmitted bytes into model tokens. Report those measures separately and honestly. Hosted semantic search or automatic tool-set expansion cannot silently replace the primary's declared lexical selection.

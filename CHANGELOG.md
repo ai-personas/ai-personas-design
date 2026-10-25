@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — retain an invitation through a rejected first decision
+
+Clarified that a definite local rejection of a completed first response does not
+consume the pending invitation. Correction uses that same route while preserving
+accepted stopping decisions and unresolved provider outcomes.
+
 ## 25 October 2026 — keep work context ahead of interface details
 
 Clarified input presentation: persona character and the current request, mandate
