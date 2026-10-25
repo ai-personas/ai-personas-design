@@ -765,6 +765,13 @@ and reason. Distinguish that provider report from a validated complete response,
 EOF and confirmed cancellation. Never adopt partial text, infer an unobserved
 terminal event or convert unknown charges into zero.
 
+A verified terminal failure of response-only inference need not consume an
+existing invitation or accepted continuation. The host can retire that local
+invocation and supply its failure to a fresh decision through the same route.
+Keep the attempt and usage, preserve uncertainty about charges, and adopt none
+of its partial output. This grants no new participation after Stop or Pause and
+does not equate a connection loss with a reported terminal failure.
+
 Recovery schedules survive restart, but pause, cancellation, removal, retirement, and fences against adopting late results prevail. Apply these distinctions to initialization, model discovery, ordinary decisions, and context maintenance. Each provider attempt preserves its required maintenance input and individual accounting. Adopt at most one complete response for a logical invocation. Transport failure is not a completed maintenance decision or an authored no_change outcome.
 
 **Read-only views.** Read-only interface activity provides coherent individual observations without holding the writer reservation. A changing multi-page traversal is still not a single snapshot; [search consistency and completion scope](../implementation/CONTRACTS.md#search-and-exact-reading) must remain explicit. Shared reads may coalesce while running, but closing one reader must not cancel another's request. Expensive file, history, evidence, and persona-context views load on demand and release subscriptions and payloads when closed.

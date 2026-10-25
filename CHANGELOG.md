@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — continue after a reported terminal provider failure
+
+Specified retaining existing participation routes after a verified terminal
+failure of response-only inference. A fresh decision observes the failed attempt;
+partial output, stopped participation and uncertain disconnects stay distinct.
+
 ## 25 October 2026 — retain response-level terminal evidence
 
 Distinguished an incomplete output item from a provider's terminal response.
