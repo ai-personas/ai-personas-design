@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — account for peer arrivals during a waiting decision
+
+Specified an admission-bound inbox boundary for new message waits. A matching
+peer reply deferred while the decision runs can become the accepted wait's
+actual event, closing the gap before registration commits. Earlier inbox
+messages remain distinct, and message delivery does not imply reading or
+override Stop or Pause.
+
 ## 25 October 2026 — align current evidence gaps with unrestricted execution
 
 Corrected the implementation-status criteria that still described corpus and

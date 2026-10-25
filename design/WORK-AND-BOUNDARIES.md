@@ -85,6 +85,15 @@ The question owner assesses each reply's attributed basis and disposition. A pee
 
 **Durable delivery.** Deliver shared questions and replies to their exact recipients through durable input handling without duplicating an accepted deposit. Waking a waiting participant does not compel an answer or override a pause. Current question views survive inbox acknowledgment and retain attribution, outstanding owner decisions, and the basis of replies. Record the answer content actually supplied to the question owner. Delivery does not prove that the owner read the author's other fragments or sources. Stored lineage preserves attribution without a source-sharing gate.
 
+When an ordinary peer message can arrive while the recipient's decision is in
+flight, preserve the inbox boundary at admission. If that decision accepts a new
+wait for the sender, account for matching arrivals after that boundary in the
+same atomic transition. A reply must not remain stranded solely because it
+arrived before the wait was committed. Bind the actual message as the event and
+supply its body in the next eligible input; recording the event does not claim
+that the persona has read it. Earlier queued messages do not satisfy a new wait,
+and this reconciliation does not change Stop, Pause or another sender's wait.
+
 Retained question history need not be loaded into every unrelated task. Supply
 complete threads needed by the current work and outstanding owner or addressee
 decisions. Other related questions can remain discoverable through concise
