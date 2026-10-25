@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — wake authored returns during peer inference
+
+Specified independent clock wakes for eligible persona-authored return times
+and wait deadlines while unrelated transports remain active. Current admission
+checks and settled transaction boundaries still govern the resulting opportunity.
+The wake adds neither a model-call timeout nor a synthetic continuation.
+
 ## 25 October 2026 — continue ready peers during independent inference
 
 Specified reconsideration of ready participants after actual model or tool

@@ -524,6 +524,14 @@ exclusive character or responsibility transition, so repeated ordinary work cann
 starve them. Settling does not cancel a slow call, impose a timeout, or manufacture
 a continuation. Scheduling independence does not prove better task quality.
 
+An eligible persona-authored return time or wait deadline must also be able to
+wake consideration while unrelated model calls remain pending. Derive the next
+time from the current admission snapshot, observe the actual clock, and recheck
+the retained continuation before admitting work. Preserve settled transaction
+and exclusive-transition boundaries without repeatedly waking a blocked timer.
+This is an opportunity to reconsider, not a timeout on another persona's call,
+a synthetic continuation, or a guaranteed dispatch latency.
+
 When preparation retains a new runtime head after an episode checkpoint, reuse
 the exact stored object committed by that checkpoint. Avoid independently
 serializing and packing the same immutable state merely to reconstruct that
