@@ -425,6 +425,10 @@ before capturing those dependencies. A peer tool result must not invalidate an
 otherwise current response solely by changing the shared store epoch. Bind the
 actual opportunity, admission and relevant lifecycle state; preserve explicit
 revocation and ending behavior without binding a decision to peers' accounting.
+Opening an opportunity must accept the participants' individual configured
+models and efforts. A default inference binding recorded at registration does
+not require all participants to use that default; bind each actual call to its
+persona's current selection.
 
 Optional interests and conversations may develop across multiple decisions and
 exchanges. A persona's continued engagement creates no obligation for a peer to
