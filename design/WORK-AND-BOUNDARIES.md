@@ -433,6 +433,24 @@ complete rendered input accounted for. Retention alone grants no replay and
 establishes no continuity benefit. Do not substitute an automatically accumulated
 provider conversation for persona-selected fragments and assets. Current
 character, work state and actual operation outcomes remain authoritative.
+
+Offer continuation as a choice within next supporting assets, independent of
+selected files and images. A persona can select its current completed turn,
+preserve an existing selected turn without appending or renewing it, or clear it.
+Selecting the current turn includes the complete earlier history actually supplied
+to that turn, its full input and every completed output item in order. Retain the
+exact terminal and originating persona, work, model and transport binding. Chosen
+lifetimes still expire normally; a character-adoption fence cannot add the fenced
+turn. Earlier assistant proposals never stand in for actual effect receipts.
+
+Keep opaque items in private host records and the provider payload. Ordinary
+context reports selection, availability and actual supply with exact serialized
+bytes and provenance. Serialized bytes are not rendered token counts. Missing,
+incomplete or incompatible history remains explicitly unavailable. After an actual
+provider rejection of an input containing selected history, a fresh decision may receive its reference
+and the rejection instead of resending the rejected items; retain the authored
+selection and let the persona clear, preserve or rebase it on the fresh current
+turn. This supplies no new continuation after a persona has stopped.
 [OpenAI's reasoning documentation](https://developers.openai.com/api/docs/guides/reasoning)
 describes opaque-item continuity for supported models; compatibility and actual
 reuse still require evidence from the configured deployment.

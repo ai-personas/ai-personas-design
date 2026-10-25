@@ -2,6 +2,16 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 25 October 2026 — explicitly select provider continuation
+
+Specified current-turn, preserve and clear choices for provider history within
+next supporting assets. Carry complete actual input/output history with exact
+provenance, chosen lifetimes and serialized input accounting, while keeping
+opaque items private and current character and observed effects authoritative.
+An actual provider rejection can make the selected history explicitly unavailable
+without altering the authored choice or creating a new continuation route.
+This contract makes no claim of improved work or character maturation.
+
 ## 25 October 2026 — retain provider output separately from selected context
 
 Clarified that exact completed provider output items can be retained privately,
