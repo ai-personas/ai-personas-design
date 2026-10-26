@@ -613,6 +613,15 @@ exclusive character or responsibility transition, so repeated ordinary work cann
 starve them. Settling does not cancel a slow call, impose a timeout, or manufacture
 a continuation. Scheduling independence does not prove better task quality.
 
+Initial character authorship can overlap for a fresh cohort before anyone has
+accepted responsibility for the work. Each initial response can adopt only its
+own character and necessary file unit, so these transports need not wait for one
+another. Commit responses separately against their actual persona, file and work
+dependencies, then perform each exact initial handover after the calls settle.
+Work with already accepted participants retains the shared-state transition
+boundary. Overlapping inference does not combine identities, accept work for a
+persona, adopt fenced actions or establish any task-quality benefit.
+
 An eligible persona-authored return time or wait deadline must also be able to
 wake consideration while unrelated model calls remain pending. Derive the next
 time from the current admission snapshot, observe the actual clock, and recheck

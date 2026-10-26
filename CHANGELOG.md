@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — overlap independent initial authorship
+
+Clarified that a fresh cohort's initial character-authoring calls may overlap
+before anyone has accepted shared-work responsibility. Keep each character unit,
+sequential current-state adoption and exact handover distinct. Shared authority
+transitions still require their current-state boundary; parallel inference alone
+does not establish improved task quality.
+
 ## 26 October 2026 — discoverable voluntary message waits
 
 Clarified that a persona may register a future local-message wait in its current
