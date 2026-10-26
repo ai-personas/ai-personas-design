@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — recover failed calls without stalling peers
+
+Separated local failed-lease retirement from structural coordination. Exact
+ownership lets the coordinator preserve other pending calls while retaining
+the failure, existing continuation and unknown remote usage. Unresolved failures
+hold their actors without blocking ready peers. Pure peer cleanup does not
+invalidate newly accepted actions; real controls and prerequisites remain checked.
+
 ## 26 October 2026 — compact generated response contracts
 
 Clarified how a deployment can reduce repeated schema syntax while preserving
