@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — distinguish chosen assumptions from external facts
+
+Clarified that selecting an approach cannot establish how an existing tool,
+component, service or format behaves. Personas obtain consequential definitions
+and check their actual use against available evidence. A deferred check remains
+unfinished when the persona can perform it through current access; genuinely
+unavailable evidence retains its dependent scope.
+
 ## 26 October 2026 — develop chosen interpretations of sparse needs
 
 Distinguished unspecified choices a persona can make from indispensable outside
