@@ -1198,6 +1198,18 @@ The primary decision explicitly chooses either no reply or separately authored r
 
 Current delivery observations report retained references, attachment counts, mandate attribution, actual delivery failures and available remedies. They do not search local files, judge quality, or infer unknown historical applicability. Failed checks retain their working directory, diagnostic completeness, and exact recovery references through compaction.
 
+Foreground execution surfaces available local deliveries while peers continue,
+even when no authored reply announces them. Show the permitted file list and a
+route to complete contents, qualifications and export; retain unseen deliveries
+for the completion view. Deduplicate only the same exact displayed record within
+that foreground run, using the native deposit identity rather than content
+similarity. Result and export records preserve that identity beside the original
+bound payload. Explicit inspection remains repeatable. An accepted work
+account identifies when its call input was supplied, or states that this time is
+unavailable. Concurrent calls can finish out of order, so display order does not
+establish a newer view of shared work. Neither an account nor a delivery notice
+establishes task quality, stakeholder acceptance or a peer's continuation choice.
+
 ### Honest outcome vocabulary
 
 Use outcome terms that tell the recipient both what arrived and what remains unresolved.

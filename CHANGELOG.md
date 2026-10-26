@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — surface delivered results during ongoing work
+
+Specified foreground delivery notices with file lists and access to full
+qualifications, including deliveries without an authored reply. Automatic
+display retains unseen results through session completion and leaves explicit
+inspection repeatable. Native deposit identity stays beside the bound payload
+in result and export records. Work accounts show their recorded input time so
+out-of-order completion does not imply newer information about shared work.
+
 ## 26 October 2026 — identify freshness comparison failures
 
 Specified component names in retained decision and action freshness errors.
