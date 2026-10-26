@@ -9,6 +9,21 @@ This register explains the target design adopted in this branch and why its rule
 
 The [normative documents](design/README.md) contain the actual obligations. Adopting a decision changes that design reference; it does not establish that the design has been implemented, produces useful maturation, or is approved for deployment.
 
+## 26 October 2026: reconcile research interpretations with unrestricted execution
+
+The research rationale still described cumulative discovery allowances, a hard
+next-call bound, source-policy gates and a character-authoring lock as current
+design choices. The adopted-model summary repeated resource enforcement even
+after the normative chapters had removed it under UR-052.
+
+Those interpretations now describe persona-chosen selection and maintenance,
+complete context and usage accounting, actual host/provider failures, and
+attributable character revision without application quotas or approval gates.
+Research findings keep their original versions, inspection dates and experimental
+conditions. Historical records are unchanged. Selective context, useful discovery,
+quality, cost savings and maturation still require separate evidence; removing
+the superseded rules establishes none of those outcomes by itself.
+
 ## 26 October 2026: distinguish result records from independent tool authority
 
 Recording a candidate or evaluation can change a shared task without changing a
@@ -198,11 +213,11 @@ The adopted model keeps character, work, context choice, and revision connected.
 | Every authored fragment is character-conditioned and own-voice | A fragment expresses how the persona understands itself, a situation, a method, or a relationship. Exact facts and quotations retain their form and attribution. Supplied initialization remains distinguishable from later self-authorship |
 | Ordinary files are the canonical authoring surface | The persona may organize, search, grep, revise, combine, split, and retire fragments using simple tools. No canonical cognitive graph, fixed mental-function tree, or prescribed folder taxonomy is required |
 | Authored cues support an evolving associative network | The primary LLM chooses which search intentions to pursue. Optional associations cannot replace exact evidence or weaken mandatory qualifications. They imply neither compulsory links nor automatic host traversal |
-| Compact persona context has corpus and prompt bounds within a managed persona-state footprint | Archives, versions, metadata, and externally retained context cannot silently escape accounting. Authorized consolidation may reduce size. Unresolved effects, restrictions, warnings, and user-owned deliverables are protected from quota-driven disappearance |
-| The primary LLM chooses relevant fragments and supporting resources while doing work | Bounded discovery or direct exact references precede actual supply where needed. Explicit next-context intent persists within its scope and may be replaced or cleared, subject to current access and obligations. The LLM is never loaded with the full tool/skill catalogue to filter it |
-| Work, both maintenance scopes, and next-context choice share every persona invocation | Each accepted response addresses work, maintenance of fragments and supporting resources, and next context for both. Maintenance may propose changes, give reasoned no change, state a block, or give a bounded deferral; one concise shared maintenance disposition is valid. Actual storage remains observable. No extra reflection call, separate semantic author, compulsory mutation, or compulsory new selection follows |
-| Character can evolve without becoming arbitrary | Stable traits change through authorized, attributable self-authorship. Transient affect and ordinary refinement do not automatically rewrite them. An effective-current-character change retains the fresh-decision fence for all subsequent operations, including reads and waits. Another fragment cannot replace locked character |
-| The host protects operational truth rather than supplying a hidden mind | The host enforces ownership, current permissions, evidence, resource limits, qualifications, and reliable effects. It cannot turn a retrieved sentence into authority or choose a hidden profession, task workflow, or personality quota |
+| Compactness comes from persona-chosen maintenance and context selection | Archives, versions, metadata, and externally retained context remain part of actual usage accounting. Useful consolidation may reduce size; no application corpus, prompt or storage quota forces it. Unresolved effects, qualifications and obligations do not disappear through hidden eviction |
+| The primary LLM chooses relevant fragments and supporting resources while doing work | Persona-chosen discovery or direct exact references precede actual supply where needed. Explicit next-context intent persists within its scope and may be replaced or cleared while relevant obligations and qualifications remain visible. The LLM is never loaded with the full tool/skill catalogue to filter it |
+| Work, both maintenance scopes, and next-context choice share every persona invocation | Each accepted response addresses work, maintenance of fragments and supporting resources, and next context for both. Maintenance may propose changes, give reasoned no change, state an actual block, or explain deferral; one concise shared maintenance disposition is valid. Actual storage remains observable. No extra reflection call, separate semantic author, compulsory mutation, or compulsory new selection follows |
+| Character can evolve without becoming arbitrary | Stable traits change through attributable, coherent self-authorship without a separate authoring lock or approval. Transient affect and ordinary refinement do not automatically rewrite them. An effective-current-character change retains the fresh-decision fence for subsequent operations, including reads and waits; an unrelated fragment cannot silently replace the accepted account |
+| The host preserves operational truth rather than supplying a hidden mind | The host preserves exact identity, accepted commitments, current state, evidence, qualifications and actual execution outcomes. Resource accounting is observational; source policies impose no access or sharing gate. The host cannot turn a retrieved sentence into authority or choose a hidden profession, task workflow, or personality quota |
 | Benefit from retained revisions requires demonstrated transfer | Retention, reading, selection, prompt inclusion, behavioral influence, and beneficial effect are separate claims. Useful maturation must hold up in appropriate later tasks, comparisons, and cost accounting |
 
 “Human-like” refers to observable character, relations, choices, maturation, and continuity. It does not depend on proving consciousness, claiming a human biography, or asserting human equivalence.
@@ -217,37 +232,39 @@ The changes below deliberately replace earlier obligations or interpretations. T
 | Stored conditional-recall plans or graph neighborhoods automatically choosing optional context after an event | Actual events reach the primary persona, which may reconsider and choose next fragments. Trusted delivery of current obligations remains mandatory. A saved interest is not a wake trigger |
 | A Jev-style or other auxiliary semantic selector as a normal recall component | Removed from the active target. The primary LLM owns next-context choice. Earlier selector mechanisms and results remain historical evidence under their original criteria |
 | Semantic/vector discovery as an optional memory helper while the primary model keeps final selection | Removed from the current lexical/regex persona-context-navigation target. Such architectures may be separate research comparators. A deployment toggle cannot silently adopt them |
-| A universal typed cognitive package or fixed categories for all persona state | Superseded by flexible first-person fragments. Precise host bookkeeping remains necessary for safety and accountable work, without prescribing how a persona must think |
+| A universal typed cognitive package or fixed categories for all persona state | Superseded by flexible first-person fragments. Precise host bookkeeping preserves attribution and accountable work without prescribing how a persona must think |
 | Mandatory numeric starting traits or personality-to-affect formulas | Scores remain optional. Declared anchors do not make them validated psychological measurements or action rules |
 | The 7 October treatment of OCEAN and VAD as entirely optional descriptors | Superseded on 8 October. Semantic OCEAN stable traits and a VAD modeled affect profile are required within the one accepted character account |
 | The 7 October permission to omit an authored maintenance disposition | Superseded on 8 October. Every accepted persona response includes explicit maintenance alongside its work. Concise, reasoned no change is valid; silence is not |
 | Compulsory mutation, fresh search or changed selection on every response | Still rejected. Every accepted response explicitly states next-context intent, but appropriate preserve/no optional need is sufficient. Scope, expiry, and recovery remain separate from authored choice |
 | The previous files proposal's target of no persistent next-context selection | Superseded. The persona may explicitly choose fragments for a later relevant decision. Reading a fragment does not silently establish that choice |
-| Mandatory current repetition of every durable record in every prompt | Rejected. Relevant current constraints remain protected. Optional history and instructions are selected within a bounded context |
-| Loading all tool names/descriptions or all skill metadata before primary filtering | Rejected. The bulk catalogue stays outside provider transport and model context. Bounded primary-requested discovery and exact exposure apply from the first choosing call |
-| Treating a stored script, loaded schema, or retrieved skill as execution authority | Rejected. Storage, actual exposure, executable availability, current grants, invocation, and observed results remain separate facts |
+| Mandatory current repetition of every durable record in every prompt | Rejected. Relevant current obligations and qualifications remain supplied. The persona selects useful optional history and instructions without an application context quota |
+| Loading all tool names/descriptions or all skill metadata before primary filtering | Rejected. The bulk catalogue stays outside provider transport and model context. Primary-requested discovery and exact supply apply from the first choosing call |
+| Treating a stored script, loaded schema, or retrieved skill as execution authority | Rejected. Storage, actual supply, executable availability, invocation, and observed results remain separate facts; no separate application tool grant is required |
 | Retrieved or rewritten memory as self-validating evidence | Rejected. Authored interpretation remains distinguishable from raw observations, sources, and permissions. Necessary qualifications accompany its use |
-| A bounded prompt or active directory with unlimited archival backing | Rejected as a whole-state compactness claim. Managed retained history and supporting records must be declared and bounded. Externally retained context must be counted, or the incomplete boundary disclosed |
+| A small prompt or active directory used to claim a small whole store | Rejected as a whole-state compactness claim. Count managed retained history, supporting records and externally retained context, or disclose incomplete accounting. No application storage ceiling follows |
 | Development measured by calendar time, note accumulation, or automatic trait drift | Rejected. Attributable experience and later consequences may support specific developmental claims. The design promises no monotonic wisdom, universal forgetting curve, or automatic character rewrite |
 
 The 8 October requirements sit within the files architecture adopted in the earlier consolidation. They preserve the useful causal idea behind fragments: a persona can carry forward its own relevant understanding and use it to work differently. They remove mechanisms that made the representation more elaborate than that goal requires.
 
 A future alternative may be evaluated as an explicitly separate experiment. It must not become another active authority while this target remains unchanged.
 
-## Safeguards carried into the consolidated design
+<a id="safeguards-carried-into-the-consolidated-design"></a>
 
-Simplifying how a persona authors and selects context does not remove its obligations to people, work, evidence, or resources. The [requirement catalogue](implementation/REQUIREMENTS.md) preserves the protected I01–I21 invariants and traces the continuing requirement families. The [system contracts](implementation/CONTRACTS.md) define the corresponding handoffs.
+## Continuing obligations in the consolidated design
+
+Simplifying how a persona authors and selects context does not erase accepted obligations, evidence or actual resource use. The [requirement catalogue](implementation/REQUIREMENTS.md) interprets I01–I21 and the continuing requirement families under the human-user requirements, including UR-052. The [system contracts](implementation/CONTRACTS.md) define the corresponding handoffs.
 
 | Protected meaning | Current home |
 |---|---|
 | Preserve the original need, accepted changes, conditional assumptions, outcome coverage, and accepted responsibility for continuation | [Work and boundaries](design/WORK-AND-BOUNDARIES.md), NED and COL requirements |
-| Preserve distinct identity, truthful creation, bounded orientation, voluntary membership, exact acceptance, withdrawal, retirement, and accountable handoff | [Persona core](design/PERSONA-CORE.md), [work and boundaries](design/WORK-AND-BOUNDARIES.md), PER and COL requirements |
-| Preserve source scope, the distinction between interpretation and observation, ownership, revision, correction, necessary qualifications, and private-context limits | [Persona core](design/PERSONA-CORE.md), [system contracts](implementation/CONTRACTS.md), MEM and UX requirements |
-| Enforce current authority, descendant grants, revocation, information restrictions, and actual execution boundaries | [Work and boundaries](design/WORK-AND-BOUNDARIES.md), [system contracts](implementation/CONTRACTS.md), GOV and ACT requirements |
-| Conserve the root budget and preserve reservations, uncertain exposure, shared exploration allowances, protected review and closeout, and fair bounded continuation | [Work and boundaries](design/WORK-AND-BOUNDARIES.md), [system contracts](implementation/CONTRACTS.md), GOV requirements |
+| Preserve distinct identity, truthful creation and initialization, voluntary membership, exact acceptance, withdrawal, retirement, and accountable handoff | [Persona core](design/PERSONA-CORE.md), [work and boundaries](design/WORK-AND-BOUNDARIES.md), PER and COL requirements |
+| Preserve source scope, the distinction between interpretation and observation, ownership, revision, correction, necessary qualifications, and actual supplied context | [Persona core](design/PERSONA-CORE.md), [system contracts](implementation/CONTRACTS.md), MEM and UX requirements |
+| Preserve current decision authority, actual commitments, explicit controls and observed execution; historical grant and source-policy flags impose no access gate | [Work and boundaries](design/WORK-AND-BOUNDARIES.md), [system contracts](implementation/CONTRACTS.md), GOV and ACT requirements |
+| Record actual and uncertain resource use, including retained reservation history, without root, work, session, exploration, repair or closeout quotas | [Work and boundaries](design/WORK-AND-BOUNDARIES.md), [system contracts](implementation/CONTRACTS.md), GOV requirements |
 | Maintain one current decision authority, exclude stale writers, and preserve attributable admission, retry-safe local transitions, handling of unknown external effects, and restart recovery | [System contracts](implementation/CONTRACTS.md), SYS and ACT requirements |
 | Require actual observation before dependent action, usable capabilities and references, exact artifacts, applicable review, and coherent release | [Work and boundaries](design/WORK-AND-BOUNDARIES.md), [system contracts](implementation/CONTRACTS.md), ACT and EVD requirements |
-| Preserve human control, faithful status and stopping reasons, privacy across derivatives, real stakeholder participation, and feature-specific safeguards | [Work and boundaries](design/WORK-AND-BOUNDARIES.md), [deployment decisions](implementation/DEPLOYMENT-DECISIONS.md), SOC, UX, SRV, and PHY requirements |
+| Preserve explicit human controls, faithful status and stopping reasons, source attribution across derivatives, actual stakeholder decisions, and observed feature behavior | [Work and boundaries](design/WORK-AND-BOUNDARIES.md), [deployment decisions](implementation/DEPLOYMENT-DECISIONS.md), SOC, UX, SRV, and PHY requirements |
 | Preserve versioned criteria, negative results, comparison scope, and the separation of evidence for mechanisms, behavior, benefit, and deployment | [Evaluation guide](evaluation/README.md), [historical results](evaluation/HISTORICAL-RESULTS.md), OSS requirements |
 
 These current homes carry the rules forward. Merely linking to an old document would not do so. Retired manuals provide historical provenance, not additional active obligations or exceptions.
@@ -258,24 +275,24 @@ The design requires reliable outcomes while leaving several concrete launch and 
 
 | Earlier concrete choice | Required outcome and current disposition |
 |---|---|
-| Resetting host-tool availability on ordinary CLI launch | The deployment declares its actual execution boundary and enabled capabilities. Restart cannot silently expand access or describe disabled operations as usable |
-| Coupling automatic avatar generation to particular model availability | Creation remains attributable, bounded, and truthful about actual image generation. Optional presentation neither blocks a useful persona nor proves its character |
-| An exact two-call maintenance allowance | Maintenance remains bounded and accountable and can return control or report a truthful blocker. The implementation chooses and evaluates the concrete allowance; it is not a universal cognitive law |
-| Fixed selector packets, candidate counts, or cache constants | These belong to the historical selector architecture. Current file discovery and assembly expose their actual bounds, freshness, omissions, and costs without inheriting those constants |
+| Resetting host-tool availability on ordinary CLI launch | Describe actual host capabilities and unavailable operations. The default host interface has no application sandbox, allowlist, installation grant or tool-approval gate; old grant flags do not restore one |
+| Coupling automatic avatar generation to particular model availability | Creation remains attributable and truthful about actual image generation. Optional presentation neither blocks a useful persona nor proves its character |
+| An exact two-call maintenance allowance | Removed with all application maintenance allowances under UR-052. Maintenance remains attributable and can report actual failures or a persona-chosen stop; a larger fixed allowance is not the replacement |
+| Fixed selector packets, candidate counts, or cache constants | These belong to the historical selector architecture. Current file discovery and assembly expose requested scope, freshness, actual supply and costs without inheriting those quotas |
 
 A documented initial deployment default is distinct from a later explicit operator choice. Ordinary restart cannot silently override that later choice. This documentation revision neither changes nor verifies the existing launcher; the [implementation gap](implementation/STATUS.md) remains explicit.
 
-A different mechanism must still preserve source restrictions, necessary qualifications, exact acceptance, conserved resources, and reliable effects. Each deployment must document and demonstrate those outcomes under its chosen mechanism. See [deployment decisions](implementation/DEPLOYMENT-DECISIONS.md) and [system contracts](implementation/CONTRACTS.md).
+A different mechanism must still preserve source attribution, necessary qualifications, exact acceptance, actual resource use and reliable effects. Each deployment must document and demonstrate those outcomes under its chosen mechanism. See [deployment decisions](implementation/DEPLOYMENT-DECISIONS.md) and [system contracts](implementation/CONTRACTS.md).
 
 ## Why the contract considers every call but does not force a write
 
 Every persona call is an opportunity to consider maintenance, but useful maintenance may be a reasoned decision to leave things unchanged. A separate post-task reflector can miss initialization, retrieval-only choices, communications, and repair calls. Requiring a write on every call would encourage filler, repeated interpretations, and unjustified character drift.
 
-The adopted contract therefore places fragment and supporting-resource maintenance in the same persona response as work and next-context choice. A concise joint no-change account is legitimate. This neither requires an extra call nor grants new permission to make one.
+The adopted contract therefore places fragment and supporting-resource maintenance in the same persona response as work and next-context choice. A concise joint no-change account is legitimate. This requires no extra call; actual work, continuation choices and explicit controls govern further activity.
 
-**Known unresolved corrections.** When a correction is known but unresolved, the response requires a bounded deferral or block, with an accepted continuation or an explicit ownership gap. Expiry cannot be treated as an invented decision that nothing changed.
+**Known unresolved corrections.** When a correction is known but unresolved, the response identifies its actual status and consequences, with accepted continuation responsibility or an explicit ownership gap. No finite repair allowance or invented deadline follows. Elapsed time cannot stand in for a decision that nothing changed.
 
-Ending a repair effort also cannot clear a separately authorized, durably accepted applicability warning on exact affected guidance. Until that warning receives its own justified resolution, the affected guidance remains qualified by it or ineligible for use across later work. A failed patch creates no warning by itself. Restricted modes gain no new semantic authority.
+Ending a repair effort also cannot clear a separately authored, durably accepted applicability warning on exact affected guidance. Until that warning receives its own justified resolution, the affected guidance retains the qualification or its actual unavailable status across later work. A failed patch creates no warning by itself; the warning is not an access gate.
 
 **Failed attempts and rejected proposals.** Refusal, timeout, truncation, and malformed output retain their actual attempt outcomes. A malformed combined response releases no substantive task, tool, or communication proposals. Independent host duties—deterministic cancellation, preservation of receipts, and resource accounting—remain possible without model success.
 
@@ -291,7 +308,7 @@ A well-formed response containing a rejected patch is different from an invalid 
 
 The transaction needed to resolve the character request and independent host duties remain possible. Thinking about a possible future change is not an adoption request. Ordinary method updates and scoped affect updates do not automatically invoke this character-specific barrier.
 
-**Which calls are covered.** Application-visible coverage includes initialization, planning, search and selection, tool-result interpretation, communication, coordination, and model-based maintenance or recovery. Restricted repair remains restricted: it cannot change locked character, disclose inaccessible material, or perform substantive work.
+**Which calls are covered.** Application-visible coverage includes initialization, planning, search and selection, tool-result interpretation, communication, coordination, and model-based maintenance or recovery. Recovery is an ordinary persona decision, without a restricted repair mode, character-authoring lock or application attempt quota. Unavailable data and unresolved effects retain their actual status.
 
 A narrowly scoped non-persona utility may return attributed observations. A helper that judges or chooses as the persona is still covered, whatever it is called. Provider-internal computation cannot be counted as an inspectable application invocation. An opaque provider-managed agent loop needs equivalent exposed controls before it can claim coverage.
 
@@ -325,18 +342,18 @@ The current user requirement makes [full host access the default](implementation
 
 ## Conditional scope and the historical extension labels
 
-The earlier E1–E6 labels help readers locate past criteria. They do not require six additional engines. The safeguards below apply according to the feature and deployment in use.
+The earlier E1–E6 labels help readers locate past criteria. They do not require six additional engines or restore application safety gates. The distinctions below apply according to the feature and deployment in use.
 
 | Label | Current interpretation |
 |---|---|
 | E1 | Functional embodiment and an inspectable profile are explanatory ways to describe continuing observation, choice, and effects. Required semantic character remains part of the core. This does not require numeric psychology, a rich profile UI, or a physical body |
 | E2 | Communities, institutions, and appeals are conditional features. When enabled, they require actual human or institutional accountability and real stakeholder input |
-| E3 | Transparent AI presentation and safeguards for sensitive human-facing use apply to the intended deployment. Character alone does not establish suitability for those uses |
-| E4 | Ongoing services and physical interfaces remain separately bounded features. Each has its own triggers, renewal, escalation, stopping, observation, and assurance requirements |
+| E3 | Transparent AI presentation and claims about suitability for human-facing use require accurate attribution and evidence. Character alone establishes neither suitability nor an application approval requirement |
+| E4 | Ongoing services and physical interfaces need actual triggers, continuation, escalation, stopping controls and observations. Availability or an accepted command does not establish physical execution or assurance; no application duration or renewal quota follows |
 | E5 | Worksheets, identifiers, and conformance descriptions organize evidence. They do not require a small task to complete a large administrative process |
 | E6 | Contributions, versioning, and public evidence claims preserve provenance and prior failures. Licensing and contribution terms require the owner's actual decision |
 
-An implementation may omit a feature and state that limitation. Enabling the feature requires its applicable safeguards and evidence. Unresolved choices belong in [deployment decisions](implementation/DEPLOYMENT-DECISIONS.md); they do not carry implied default approval.
+An implementation may omit a feature and state that limitation. Claims about an enabled feature require its actual interfaces and observed outcomes. Unresolved choices belong in [deployment decisions](implementation/DEPLOYMENT-DECISIONS.md); describing a feature does not establish that it operates.
 
 ## Editorial consolidation and historical evidence
 

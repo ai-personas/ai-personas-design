@@ -2,7 +2,7 @@
 
 [Sources](README.md) · [Persona core](../design/PERSONA-CORE.md) · [System contracts](../implementation/CONTRACTS.md) · [Evaluation method](../evaluation/README.md)
 
-**Role:** explanatory rationale and bounded primary-source claims, reviewed through 10 October 2026. This brief extends the earlier file-and-context research; the [provenance manifest](SOURCE-MANIFEST.md) preserves its exact predecessor. It adds no requirements beyond the normative design, reports no new AI Personas experiments, and does not establish subjective experience.
+**Role:** explanatory rationale and scoped primary-source claims. Primary-source inspections are dated through 10 October 2026; the design interpretations were reconciled with [UR-052](../USER-REQUIREMENTS.md#no-application-limits-or-safety-gates) on 26 October. Experimental limits reported by a source remain that source's conditions, not application quotas or approval requirements. This brief extends the earlier file-and-context research; the [provenance manifest](SOURCE-MANIFEST.md) preserves its exact predecessor. It adds no requirements beyond the human-user requirements and normative design, reports no new AI Personas experiments, and does not establish subjective experience.
 
 ## What kind of evidence is this?
 
@@ -23,13 +23,13 @@ This is an architectural description. It makes no claim of consciousness, human 
 
 **The accepted character account.** The [persona core](../design/PERSONA-CORE.md) adopts one accepted, versioned account with meaningful semantic OCEAN traits and distinct VAD modeled affect, expressed in the persona's own voice. Additional facets and operational preferences may make that account more precise when they explain useful differences. The research supplies neither a mandatory numeric scale nor a universal formula mapping traits to actions.
 
-**Authorship and attribution.** New persona-authored fragments use the accepted character actually supplied when they are written. During bounded initialization, they instead use the attributed seed and candidate profile. Older fragments retain their actual authoring-character attribution until deliberately revised; that attribution does not override the current accepted account.
+**Authorship and attribution.** New persona-authored fragments use the accepted character actually supplied when they are written. During initial character authorship, they instead use the attributed seed and candidate profile. Older fragments retain their actual authoring-character attribution until deliberately revised; that attribution does not override the current accepted account. Initialization has no application attempt or resource quota.
 
 A fragment can express a characteristic method, approach to a tool, relationship interpretation, or correction. Generic procedures, tool instructions, and factual records remain supporting assets, whoever wrote them. Character appears in what the persona notices, how it interprets evidence, what it tries, and how it communicates. Repeated trait labels or a name added to generic instructions do not establish that connection. Exact quotations, observations, permissions, and mechanical metadata retain their own meanings. Character provides no license to rewrite a source or invent experience.
 
 **Files, discovery, and actual context.** Ordinary named files provide an inspectable interface for authored prompt parts. Stored fragments are available material. Selected fragments become operative prompt parts when actually supplied. Discovery, reads, and continuing history can also expose unselected text; that exposure remains separately accounted for. A fragment may express a characteristic interpretation, method, stance, or relationship without adding a new factual record.
 
-Supporting histories, tool descriptions, skills, scripts, and data have their own purposes, authorship, and authority. Using or organizing them does not turn them into persona-defining fragments. The persona may search, read, organize, revise, split, merge, and retire permitted material.
+Supporting histories, tool descriptions, skills, scripts, and data have their own purposes, authorship, and authority. Using or organizing them does not turn them into persona-defining fragments. The persona may search, read, organize, revise, split, merge, and retire material through the available interfaces. Exact revisions and actual outcomes preserve what changed; source-policy metadata imposes no application access gate.
 
 Literal search and supported regular-expression search find candidates. The primary persona LLM makes the semantic next-context choice. Optional associations help it navigate; they require neither a canonical cognitive graph nor another model's ranking. The runtime preserves exact revisions, required qualifications, and truthful records of what was actually supplied. It must not silently paraphrase the persona into a generic profile.
 
@@ -41,7 +41,7 @@ Literal search and supported regular-expression search find candidates. The prim
 
 One concise, justified no-change disposition can cover both maintenance scopes. An appropriate preserve or no-optional-need disposition can cover next-context choice. Maintenance and context choice remain distinct decisions; neither requires a file write, a new search, or another model call merely to produce a change.
 
-These explicit inputs and outcomes make coverage observable. They cannot prove an internal mental process. A justified unchanged decision, a bounded unresolved or mode-limited disposition, an accepted change, and a failed attempt remain different outcomes. A timeout or refusal cannot truthfully be recorded as a persona-authored no-change decision.
+These explicit inputs and outcomes make coverage observable. They cannot prove an internal mental process. A justified unchanged decision, an explicit unresolved disposition, an accepted change, and a failed attempt remain different outcomes. An actual provider or host failure or refusal cannot truthfully be recorded as a persona-authored no-change decision. Recovery uses ordinary persona decisions, without a restricted repair mode or application attempt quota.
 
 The [contracts](../implementation/CONTRACTS.md) define coverage, response acceptance, failure containment, and the fresh-decision boundary after effective character changes. This brief explains their rationale without creating a second protocol.
 
@@ -242,7 +242,7 @@ A human longitudinal study found that personality at 18 predicted work experienc
 - Current character shapes discretionary attention, context searches, methods, human communication, and peer cooperation.
 - Actual results, correction, disagreement, and received responses can justify primary-persona revisions to its own fragments.
 - Relevant accepted fragments, when actually supplied again, can affect later choices, including how the persona searches and organizes its context.
-- Meaningful experience may support a permitted current-character proposal under the existing acceptance and fresh-decision boundaries.
+- Meaningful experience may support an attributable current-character proposal under the existing coherent-adoption and fresh-decision boundaries.
 
 These are intended relationships among existing parts. They require neither a compulsory sequence nor another decision engine.
 
@@ -250,7 +250,7 @@ These are intended relationships among existing parts. They require neither a co
 
 An appropriate outcome may be consolidation, a narrower lesson, retirement, reversal, or no durable change. Dormancy supplies no unseen experience. Accepted text changes provide adaptation through context; they do not automatically train weights or prove beneficial maturation.
 
-**Continuing controls.** A locked character still permits compatible method refinement. It does not permit effective character replacement through changes scattered across fragments. Existing permission, commitment, and accepted-warning obligations remain in force.
+**Character continuity.** Ordinary method refinement and a change to the accepted character account remain distinguishable. A character change is coherently authored and adopted; scattered fragment edits cannot silently establish a different accepted account. Actual commitments, qualifications and the fresh-decision boundary remain meaningful. No application character-authoring lock or separate approval is required.
 
 ## Files and primary-model context choice
 
@@ -285,17 +285,17 @@ An adapter may deterministically expose decoded fields for lexical search. That 
 
 ### Need-directed supporting context
 
-The primary persona can use the same bounded search-and-read interface for characteristic fragments and supporting resources. Their purposes remain separate: fragments help define the persona; resources supply such things as knowledge, procedures, tools, and records.
+The primary persona can use the same search-and-read interface for characteristic fragments and supporting resources. Their purposes remain separate: fragments help define the persona; resources supply such things as knowledge, procedures, tools, and records.
 
 **Normal selection.** The chosen design begins with necessary character, work, and policy state plus a small discovery surface. It does not begin by giving the LLM hundreds of tool or skill names and descriptions to filter. The bulk registry stays outside both the request sent to the provider and the context visible to the model.
 
-The primary persona requests either a lexical search directed at a need or an exact known resource. It receives bounded candidates and chooses what to load or retain for its next decision. Host-side indexing and matching enforce scope and limits; they do not add a hidden semantic selector.
+The primary persona requests either a lexical search directed at a need or an exact known resource. It chooses the query scope, pages and exact material to read or retain for its next decision. Host-side indexing and matching follow those choices without a cumulative navigation, result-byte or model-input quota; they do not add a hidden semantic selector.
 
 **What each step establishes.** Discovery, description, exact loading, accepted selection, authorized execution, and observation are distinct events. They need not require separate round trips. A known exact reference can bypass rediscovery, and a current, fully qualified callable interface can support direct authorized use. The following distinctions still apply:
 
 | Available information | What it establishes—and what remains unresolved |
 |---|---|
-| A search match | A candidate was found. Applicability and permission remain to be established. |
+| A search match | A candidate was found. Its applicability, actual availability and substantive support remain to be established. |
 | No match | Nothing matched within the declared search scope and rules. |
 | A preview | Some descriptive content was supplied; this is not a full read. |
 | A stored script | A file exists; installation and current executability remain separate questions. |
@@ -303,13 +303,13 @@ The primary persona requests either a lexical search directed at a need or an ex
 
 These distinctions extend the [work boundaries](../design/WORK-AND-BOUNDARIES.md) and [contracts](../implementation/CONTRACTS.md). They do not create another resource protocol.
 
-**The next-call bound.** One allowance covers everything needed for the next call: candidate metadata, selected fragments, evidence, operative guidance, callable schemas, provider expansions, results, continuing history, and required qualifications. A limit on result count cannot contain an enormous individual definition or the accumulation from repeated searches. Reassembly must also prevent provider history or caches from accumulating every previously loaded resource.
+**Faithful next-call selection and accounting.** Account for everything actually supplied: candidate metadata, selected fragments, evidence, operative guidance, callable schemas, provider expansions, results, continuing history, and required qualifications. Compactness comes from persona-chosen selection and maintenance, not a configured allowance. The adapter must identify any provider expansion or continuing history instead of silently accumulating every previously loaded resource.
 
-Request bytes, actual model-visible context, billed tokens, host scans, storage, elapsed time, and monetary exposure are different measurements. Required meaning and qualifications must fit faithfully. If they do not, admission of the affected material or operation blocks; a smaller preview cannot substitute for complete operative guidance.
+Request bytes, actual model-visible context, billed tokens, host scans, storage, elapsed time, and monetary exposure are different measurements. Supply valid selected material and its qualifications completely, without an application fitting gate or silent truncation. An actual provider context rejection or unavailable source remains an observed failure; a fresh ordinary decision can choose different useful context when execution permits. A smaller preview cannot be described as the complete body or operative guidance.
 
 #### Direct tool-discovery evidence
 
-Tool-discovery studies help distinguish finding relevant candidates from finding everything needed for an authorized solution. They do not yet test this design’s bounded, primary-owned discovery loop.
+Tool-discovery studies help distinguish finding relevant candidates from finding everything needed for a supported solution. They do not yet test this design’s primary-owned discovery loop without application quotas.
 
 [ToolRet, Findings of ACL 2025](https://aclanthology.org/2025.findings-acl.1258.pdf) distinguishes fractional target recall—finding some annotated targets—from completeness, which requires finding every annotated target. This supports the existing complete-valid-path measure: many relevant hits can still omit a prerequisite, while an alternative authorized solution path remains valid.
 
@@ -334,19 +334,19 @@ The following mutable primary documentation was independently inspected on 8 Oct
 
 | Primary source | Behavior verified in that inspection | Fit with the chosen design |
 |---|---|---|
-| [OpenAI tool-search guide](https://developers.openai.com/api/docs/guides/tools-tool-search), current undated page | Individually deferred functions still expose names and descriptions initially; namespaces can hide individual details. Client-executed search permits application-controlled loading. Loaded tools can remain callable in later turns, and changing that set affects caching. | Client control offers a useful integration point. It does not prove lexical discovery, bounded previews, or primary-owned selection. Hundreds of deferred individual descriptions still violate the chosen exposure boundary. The actual loaded set and later continuation must be bounded. |
-| [Anthropic tool-search guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool), regex/BM25 identifiers dated 20251119 | The deferred catalog is still supplied in the API request. Returned references automatically expand into full definitions, including with custom reference-based search. History can retain those expansions. | Deferred model-input tokens and transmitted request bytes are different measures. Native references are not inert previews, and a full-catalog request does not meet this design’s stronger transport boundary. Use bounded ordinary search results and explicit application-controlled loading instead of assuming native conformance. |
-| [Agent Skills specification](https://agentskills.io/specification) and [client integration guide](https://agentskills.io/client-implementation/adding-skills-support), current undated pages | Instructions and optional scripts, references, and assets support progressive loading. The described startup approach nevertheless includes metadata for all skills. The optional allowed-tools field is experimental and implementation-dependent. | Readable packages and resources loaded as needed are useful precedents; global catalog loading must be replaced with bounded discovery. Imported guidance retains its author and restrictions. Package metadata cannot grant execution authority or prove runtime availability. |
+| [OpenAI tool-search guide](https://developers.openai.com/api/docs/guides/tools-tool-search), current undated page | Individually deferred functions still expose names and descriptions initially; namespaces can hide individual details. Client-executed search permits application-controlled loading. Loaded tools can remain callable in later turns, and changing that set affects caching. | Client control offers a useful integration point. It does not prove lexical discovery or primary-owned selection. Hundreds of deferred individual descriptions still violate selective context. Account for the actual loaded set and later continuation without imposing an application byte or count quota. |
+| [Anthropic tool-search guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool), regex/BM25 identifiers dated 20251119 | The deferred catalog is still supplied in the API request. Returned references automatically expand into full definitions, including with custom reference-based search. History can retain those expansions. | Deferred model-input tokens and transmitted request bytes are different measures. Native references are not inert previews, and a full-catalog request does not meet this design’s stronger selection boundary. Use persona-chosen search and explicit loading instead of assuming native conformance. |
+| [Agent Skills specification](https://agentskills.io/specification) and [client integration guide](https://agentskills.io/client-implementation/adding-skills-support), current undated pages | Instructions and optional scripts, references, and assets support progressive loading. The described startup approach nevertheless includes metadata for all skills. The optional allowed-tools field is experimental and implementation-dependent. | Readable packages and resources loaded as needed are useful precedents; global catalog loading must be replaced with selective discovery. Imported guidance retains its author and qualifications. Package metadata neither proves runtime availability nor creates an application tool-approval requirement. |
 
-Provider-native deferred loading can be an evaluation comparison. It does not guarantee the required boundary or lower total cost. An adapter that cannot bound automatic expansion and continuing context before admission cannot claim the hard next-call bound. None of these interfaces justifies adding a hidden reflector, vector engine, automatic resource traversal, or alternate semantic author.
+Provider-native deferred loading can be an evaluation comparison. It does not guarantee faithful selection or lower total cost. An adapter must disclose actual expansion and continuing context; it cannot claim selective loading from a small visible preview alone. This is an evidence requirement, not a hard next-call quota. None of these interfaces justifies adding a hidden reflector, vector engine, automatic resource traversal, or alternate semantic author.
 
 ### Supporting-resource lifecycle evidence
 
-Track a resource’s identity, availability, restrictions, and lifecycle state through discovery, reading, execution, change, and retirement. Establish readiness for the particular proposed operation; a resource may legitimately be unavailable, uninstalled, revoked, retired, or erased. Protocol features support parts of that lifecycle; the application still has to enforce this design’s bounds and authority rules.
+Track a resource’s identity, actual availability, qualifications, and lifecycle state through discovery, reading, execution, change, and retirement. A resource may be unavailable, uninstalled, retired or erased; an outside provider may reject access. Protocol features support parts of that lifecycle. They do not justify local resource quotas, source-policy gates or separate installation approvals. The runtime preserves actual identities, dependencies, accepted commitments and observed outcomes.
 
 **Listing, reading, and availability.** In the independent check on 8 October 2026, the current MCP version resolved to **2026-07-28**. Its [resources](https://modelcontextprotocol.io/specification/2026-07-28/server/resources) and [tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools) define paginated listing, resource reads, and tool interfaces. They do not define this design’s lexical-search contract.
 
-One resource read can return multiple contents, so one URI does not establish a size bound. Tool availability can vary with authorization, names can collide across servers, and untrusted annotations remain untrusted. A bounded lexical adapter and an independent execution gate remain design obligations; the protocol does not provide those guarantees automatically.
+One resource read can return multiple contents, so one URI does not establish the number of bytes supplied. External tool availability can vary with authorization, names can collide across servers, and annotations alone do not establish execution. A lexical adapter must report its actual matching scope, complete selected content and results. It imposes no separate application execution gate.
 
 **Change notifications and caches.** The version’s [subscription mechanism](https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/subscriptions) acknowledges which subset of requested notifications it supports. Delivery depends on a live subscription, which ends when the transport closes. Requesting a watch, or losing one, cannot establish current coverage or unchanged state.
 
@@ -354,9 +354,9 @@ Its [caching rules](https://modelcontextprotocol.io/specification/2026-07-28/ser
 
 **Execution identity and dependencies.** [SLSA build provenance v1.2](https://slsa.dev/spec/v1.2/build-provenance), inspected on the same date, distinguishes build inputs, resolved dependencies, execution platform, and outputs. It also qualifies how complete the dependency account is. This motivates identifying the actual script, environment, dependencies, data revision, and execution result instead of relying on a filename or hash alone. Borrowing that distinction makes no claim of SLSA conformance, reproducibility, or safety.
 
-Required guidance, executable dependencies, source restrictions, and data derivation involve different dependency sets. None automatically requires putting every ancestor into model context. Code and bulk data can remain outside context when an authorized runner bound to the relevant versions consumes them and returns adequate, bounded evidence.
+Required guidance, executable dependencies, qualifications, and data derivation involve different dependency sets. None automatically requires putting every ancestor into model context. Code and bulk data can remain outside context when the actual runner consumes the relevant versions and returns observed results. A reference or available interface does not prove that execution occurred.
 
-**Retention and authorship.** Resource copies, dependency caches, snapshots, indexes, and execution records remain within declared retention and accounting boundaries. Deselecting, retiring, and erasing material mean different things. Organizing an imported resource does not change its authorship; summarizing restricted evidence does not remove its restrictions. The whole-store and derivative-retention account below also applies to these supporting resources.
+**Retention and authorship.** Account for resource copies, dependency caches, snapshots, indexes, and execution records without an application retention or capacity quota. Deselecting, retiring, and erasing material mean different things. Organizing or summarizing an imported resource does not change its authorship or erase qualifications. Source-policy terms remain attributable metadata, not access or sharing gates. The whole-store accounting and evidence-availability distinctions below also apply to these supporting resources.
 
 #### Generated reusable assets: empirical limits
 
@@ -395,35 +395,27 @@ The primary LLM decides which associations to pursue and what meaning to retain.
 |---|---|
 | Authored query cue | Suggests where to look. It does not assert that a match exists or endorse every result. |
 | Exact citation | Identifies the evidence or revision supporting a claim, so the claim can be traced. |
-| Mandatory qualification | Determines whether guidance may be supplied as usable at all, preserving its applicability and restrictions. |
+| Mandatory qualification | Accompanies the relevant guidance with its conditions, warnings and attribution; it is not an access gate. |
 
 One cannot substitute for another. An accepted warning cannot become optional by being phrased as a search suggestion. A changed query result does not change an already accepted exact selection.
 
-The primary persona may revise an unhelpful cue, follow a useful connection, or stop within the declared cumulative allowance. Search results remain candidates, distinct from exact inspection, accepted selection, and actual supplied context. A no-match result reports the searched scope and matching rules; it cannot establish that no relevant experience exists.
+The primary persona may revise an unhelpful cue, follow a useful connection, or stop through its own judgment, without a cumulative navigation allowance. Search results remain candidates, distinct from exact inspection, accepted selection, and actual supplied context. A no-match result reports the searched scope and matching rules; it cannot establish that no relevant experience exists.
 
-Evaluation must still consider synonyms, stale wording, broad fanout, cycles, missed isolated fragments, and incomplete indexes. Optional traversal limits do not authorize omitting required qualifications. Source ancestry matters too: several linked descendants of one claim do not provide independent corroboration.
+Evaluation must still consider synonyms, stale wording, broad fanout, cycles, missed isolated fragments, and incomplete indexes. Choosing less optional context does not remove the qualifications required by what remains selected. Source ancestry matters too: several linked descendants of one claim do not provide independent corroboration.
 
-**What compactness must preserve.** Shorter text alone does not establish useful consolidation. Consolidation should retain characterful interpretation, conditions, uncertainty, rare exceptions, unresolved contradictions, and applicable restrictions. Declining a duplicate, merging equivalent guidance, retiring obsolete applicability, and erasing content under policy have different effects. An archive or retirement label does not erase content. Low use or elapsed time cannot silently dispose of an accepted warning, unresolved effect, or current obligation.
+**What compactness must preserve.** Shorter text alone does not establish useful consolidation. Consolidation should retain characteristic meaning, conditions, uncertainty, rare exceptions, unresolved contradictions, and applicable qualifications. Declining a duplicate, merging equivalent guidance, retiring obsolete applicability, and deliberately erasing content have different effects. An archive or retirement label does not erase content. Low use or elapsed time cannot silently dispose of an accepted warning, unresolved effect, or current obligation.
 
-**What the storage bound includes.** A whole-store claim covers the declared managed storage that supports persona context and its evidence. This includes fragment bodies and cues; indexes and aliases; archives and versions; provenance and qualification metadata; receipts and caches; managed backups and exports; and the peak temporary copies created during revision.
+**What storage accounting includes.** A whole-store usage claim covers the actual managed storage that supports persona context and its evidence. This includes fragment bodies and cues; indexes and aliases; archives and versions; provenance and qualification metadata; receipts and caches; managed backups and exports; and the peak temporary copies created during revision. These are measurements, not a storage ceiling.
 
-External storage deliberately used to retain persona context or supporting history remains accountable. If an external tier cannot be measured, the claimed bound is incomplete. Arbitrary recipient copies and a provider’s independent retention after disclosure remain outside promised control and need an honest disclosure boundary.
+External storage deliberately used to retain persona context or supporting history remains accountable. If an external tier cannot be measured, the usage account is incomplete. Arbitrary recipient copies and a provider’s independent retention after disclosure remain outside promised control and need an honest disclosure boundary.
 
 User-owned deliverables are not expendable fragment storage. Capacity pressure does not authorize changing, deleting, or revoking them. Any deliberate reliance on those artifacts as a supporting storage tier must be disclosed and counted without changing their ownership or authority.
 
-**When a lesson may survive its evidence.** A qualified lesson can outlive raw evidence only when the actual derivative-use and retention policy permits it. The surviving account must distinguish a fallible retained interpretation from proof that can still be inspected. A digest cannot reconstruct lost evidence.
+**When a lesson outlives its evidence.** A surviving account must distinguish a fallible retained interpretation from proof that can still be inspected. A digest cannot reconstruct lost evidence. If an exact source is actually unavailable, report that fact and its consequences for the claim; do not invent a successful read, independent corroboration or completed repair. Deleting a record cannot settle an unresolved commitment or effect.
 
-The following limits continue to apply:
+Source-policy expiry, derivative-use and disclosure terms retain their attribution but impose no application gate under UR-052. Earlier source-restriction and finite-storage designs remain historical. Removing those rules does not turn unavailable evidence into available content or verify a retained interpretation.
 
-- Source expiry does not declassify the source or its restricted derivatives.
-- A derivative-deletion requirement also applies to the lesson.
-- A surviving disclosure restriction still binds the lesson.
-- A use requiring exact evidence becomes ineligible when that evidence is unavailable.
-- Deleting a record cannot settle an unresolved commitment or effect.
-
-These are policy and engineering boundaries, not capabilities demonstrated by the cited memory studies.
-
-Strictly bounded total storage cannot promise unlimited exact recollection of an indefinitely growing history. Capacity pressure therefore needs an honest retention, capacity, or admission decision. Hidden archival growth and discarded obligations do not resolve it.
+Unrestricted retention does not promise infinite physical storage or perfect recollection. Report actual host failures, measured growth and unknown outcomes. The persona chooses useful consolidation or retention; the runtime must not silently evict history or discard obligations to satisfy an application quota.
 
 The comparison remains unrun: can selective retention and primary-authored cues preserve useful continuity at acceptable total cost? No reviewed source validates a human-like forgetting mechanism, universal aging rule, or 100% behavioral guarantee for that combination.
 
@@ -492,7 +484,7 @@ The vendor and project pages are living documentation, not pinned versions. No h
 
 ## What remains to be demonstrated here
 
-The design needs evidence connecting authored persona context to useful behavior over time. The chain to examine is characteristic prompt authorship, permitted selection, actual supplied context, LLM reasoning expressed in observable choices, action and received feedback, justified self-revision, and an independently assessed useful outcome.
+The design needs evidence connecting authored persona context to useful behavior over time. The chain to examine is characteristic prompt authorship, persona-chosen selection, actual supplied context, LLM reasoning expressed in observable choices, action and received feedback, justified self-revision, and an independently assessed useful outcome.
 
 Testing this observable chain does not require exposing private provider-internal reasoning. File creation, schema compliance, a persistence receipt, or a persona’s claim that it has matured each proves only a narrower part. An action occurring after a read does not by itself establish that the read caused the action.
 
@@ -500,7 +492,7 @@ Testing this observable chain does not require exposing private provider-interna
 
 Both sources were independently inspected on 8 October 2026. They motivate varying order, distracting material, conditional scope, and successive decisions. Their model and task limits—including ComplexBench’s primarily Chinese source instructions—prevent treating the results as universal placement rules or persona-validation measures. Exact inclusion does not prove effective use, and more calls do not inherently improve quality.
 
-The following AI Personas hypotheses remain unrun. Their precise cases belong in the [evaluation method](../evaluation/README.md) and [acceptance catalogue](../evaluation/ACCEPTANCE.md).
+The following AI Personas hypotheses remain unrun here. Their interpretation belongs in the [evaluation method](../evaluation/README.md) and [acceptance catalogue](../evaluation/ACCEPTANCE.md). These research comparisons prescribe no automated test campaign, application quota or persona workflow.
 
 | Hypothesis | Relevant comparison and failure evidence |
 |---|---|
@@ -512,13 +504,13 @@ The following AI Personas hypotheses remain unrun. Their precise cases belong in
 | Reuse preserves the distinction between inference and corroboration | Compare exact replay, repeated reads, new interpretation, and split/merged descendants with genuinely independent evidence and explicit correction. Observe certainty, claim scope, ancestry, and action proposals without assuming every changed inference is wrong. |
 | Continuing character remains adaptable | Vary partners, urgency, failures, successes, long histories, source withdrawal, and model versions. Distinguish unsupported drift from justified revision and appropriate convergence. |
 | Actual work and interaction support reciprocal development | Compare matched starting characters after different legitimate histories, and different characters after matched experience. Trace received observations, accepted interpretation, exact later supply, changed choices, and assessed outcomes. Distinguish methods, relationships, context-navigation habits, and permitted character revision. |
-| Compact associations improve useful continuity within the whole-store bound | Compare ordinary primary search, exact links, authored query cues, and mixed navigation with matched total resources. Include vocabulary mismatch, growth, stale cues, rare warnings, source expiry, peak copies, and harmful revival. Shorter prompts or fewer retained bytes alone do not establish success. |
-| Bounded resource discovery preserves adequate work as catalogs grow | Keep task needs fixed while adding hundreds of distractors. Inspect provider-bound payloads and model-visible context on every call. Compare feasible full-catalog controls with bounded discovery, and legitimately known exact-resource access with unaided cold start. Count critical-capability misses, ambiguous or stale identities, accumulated metadata, failed reads, and actual outcomes. Supplied answer IDs remain assisted diagnostics. |
+| Compact associations improve useful continuity with complete storage accounting | Compare ordinary primary search, exact links, authored query cues, and mixed navigation while reporting total resource use. Include vocabulary mismatch, growth, stale cues, rare warnings, unavailable sources, peak copies, and harmful revival. Shorter prompts or fewer retained bytes alone do not establish success. |
+| Selective resource discovery preserves adequate work as catalogs grow | Keep task needs fixed while adding hundreds of distractors. Inspect provider-bound payloads and model-visible context on every call. Compare feasible full-catalog controls with persona-chosen discovery, and legitimately known exact-resource access with unaided cold start. Count critical-capability misses, ambiguous or stale identities, accumulated metadata, failed reads, and actual outcomes. Supplied answer IDs remain assisted diagnostics. |
 | The integration survives operational failure | Audit persona call sites and inject invalid output, interruption, concurrency, and ambiguous effects. Check actual revisions and release boundaries instead of relying on prompt promises. |
 
 **Cost must cover the complete episode.** Anthropic’s [advanced-tool-use report, 24 November 2025](https://www.anthropic.com/engineering/advanced-tool-use) describes token savings and internal evaluation gains for its deferred-loading conditions. Its [context-engineering guidance, 29 September 2025](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) also identifies slower runtime exploration and dead ends. These vendor observations, inspected on 8 October 2026, support measuring the whole episode. Neither provides an AI Personas result or a transferable numerical gate.
 
-Count bootstrap and harmonization, queries, scans, repeated input and reads, schema loading, caches, output, retries, maintenance, and failed attempts. Compare independently adequate work and the time to first usable and complete outcomes at declared total budgets. A smaller first prompt or discounted cached input alone does not establish savings. Bound compliance, discovery usefulness, task quality, and characteristic influence remain separate claims.
+Count bootstrap and harmonization, queries, scans, repeated input and reads, schema loading, caches, output, retries, maintenance, and failed attempts. Compare independently adequate work, time to first usable and complete outcomes, and observed whole-episode use. Any resource-matched experimental condition describes that comparison; it does not become an application quota. A smaller first prompt or discounted cached input alone does not establish savings. Faithful context supply, discovery usefulness, task quality, and characteristic influence remain separate claims.
 
 **Factual memory covers only part of evaluation.** [LongMemEval, v2, 2025](https://arxiv.org/abs/2410.10813v2) provides relevant categories: extraction, cross-session reasoning, temporal reasoning, knowledge updates, and abstention. These inform part of evaluation. They do not measure characteristic authorship, privacy enforcement, crash recovery, or useful personality.
 
@@ -540,4 +532,4 @@ The [decision register](../DESIGN-DECISIONS.md) records current choices. The [ma
 
 That refinement consists only of design prose, comparative criteria, and citations. No implementation, prototype, executable test, publication, runtime experiment, or live-model trial was performed for it.
 
-**Bootstrap and supporting resources.** The subsequent refinement makes the handover from seed to authorship, self-harmonization, bounded provider transport and context, and whole-episode cost explicit. It borrows inspected component mechanisms without adopting their hidden authors, retrieval engines, global catalogs, or performance claims. Deeper source inspection and revised unrun comparisons create no implementation evidence, model-test result, publication, or deployment approval.
+**Bootstrap and supporting resources.** The earlier refinement made the handover from seed to authorship, self-harmonization, bounded provider transport and context, and whole-episode cost explicit. Its finite-resource and source-access rules are superseded by UR-052; exact accounting and attribution remain. It borrowed inspected component mechanisms without adopting their hidden authors, retrieval engines, global catalogs, or performance claims. Deeper source inspection and revised unrun comparisons create no implementation evidence, model-test result, publication, or deployment approval.
