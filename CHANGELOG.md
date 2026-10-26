@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — identify freshness comparison failures
+
+Specified component names in retained decision and action freshness errors.
+Diagnostics follow the actual admitted comparison, including independent-record
+exclusions, without exposing state bodies or changing acceptance and recovery.
+A differing component does not identify a particular intervening event or author.
+
 ## 26 October 2026 — attribute network failure diagnostics
 
 Distinguished transport stages and observed error categories within each attempt.

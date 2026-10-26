@@ -796,6 +796,14 @@ An unfinished or uncertain action retains its identity and actual dispatch histo
 
 **Useful diagnostics.** Report actual calls and effects, known usage, unresolved usage, current work state, stopped participation and real provider or host failures separately. A read-only view changes neither the goal's completion nor a persona's authored continuation. Historical quota exhaustion must remain historical, and an unavailable diagnostic must not be replaced with a fabricated zero balance or successful outcome.
 
+When an admitted decision or accepted action fails a freshness comparison, retain
+which sealed components actually differed under that comparison's scope. Omit
+state bodies, source identities and fingerprint values from this diagnostic.
+Independent changes excluded by the comparison must not be listed as rejection
+causes. A component mismatch identifies neither the exact intervening event nor
+its author; it does not change adoption, recovery or continuation. Earlier coarse
+errors remain coarse unless their original evidence establishes more.
+
 Where a transport exposes error categories, retain the actual stage and available
 connection, timeout, body or I/O information with the corresponding attempt.
 Concurrent calls must not share mutable diagnostic capture. Keep credentials,
