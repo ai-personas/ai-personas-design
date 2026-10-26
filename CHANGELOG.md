@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — requirement intent as concept flows
+
+Rebuilt all 45 requirement illustrations as cartoon concept flows grounded in
+the intent of the complete requirements. Labeled connections explain selection,
+reasoning, decisions, consequences and feedback, with character development kept
+distinct from supporting-resource reuse. Removed task-example scenes and persona
+names from the diagrams. Updated accessible descriptions, takeaways and the
+generation prompts. The requirement wording and design authority are unchanged.
+
 ## 26 October 2026 — identifiable immutable-record conflicts
 
 Clarified that a rejected work-record creation should identify its record type
