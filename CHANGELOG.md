@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — register independent personal waits concurrently
+
+Extended independent personal coordination to decisions that register their own
+voluntary message waits. Distinct registrations preserve peer records while
+current sender, responsibility, identity, visibility and continuation checks
+remain in adoption. Duplicate identities and mixed shared commands retain their
+actual conflicts; registration imposes no sender duty or formal shared decision.
+
 ## 26 October 2026 — keep transports progressing during coordination
 
 Specified independent progress of admitted provider I/O and stop observation
