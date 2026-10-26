@@ -9,6 +9,23 @@ This register explains the target design adopted in this branch and why its rule
 
 The [normative documents](design/README.md) contain the actual obligations. Adopting a decision changes that design reference; it does not establish that the design has been implemented, produces useful maturation, or is approved for deployment.
 
+## 26 October 2026: distinguish result records from independent tool authority
+
+Recording a candidate or evaluation can change a shared task without changing a
+peer's authority to inspect files or run an already available tool. Treating every
+such record as a dependency discards useful concurrent work. Ignoring shared
+state for all responses would instead permit stale arrangements and releases.
+
+The [freshness contract](implementation/CONTRACTS.md#decision-authority-and-freshness)
+now distinguishes these cases through dependencies recorded at admission.
+Independent navigation and tool work can retain its authority across new peer
+result records while identity, task, commitments, arrangements, pending
+dependencies and exact supplied sources remain current. Shared work commands and
+mixed responses keep their complete shared-record checks. Adoption preserves the
+peer's current records without claiming that they were supplied to the earlier
+call. This clarifies dependency scope; it creates no permission gate, prescribed
+workflow or retrospective change to an earlier admission.
+
 ## 26 October 2026: show accepted persona work accounts
 
 A persona can make useful progress while choosing not to send a reply. Showing

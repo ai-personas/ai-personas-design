@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — independent tools retain their actual dependencies
+
+Distinguished new peer result records from the unchanged authority needed for
+navigation and tool work. Preserve separately admitted dependencies, exact
+supplied lineage, current shared-work checks and accepted command identity
+without discarding unrelated work solely because another candidate was recorded.
+
 ## 26 October 2026 — visible accepted work accounts
 
 Specified ordinary launcher access to accepted persona work accounts, including

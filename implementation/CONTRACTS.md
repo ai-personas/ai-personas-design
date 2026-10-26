@@ -485,6 +485,17 @@ Deterministic host validation may reuse a successful decode when a fresh transac
 
 One persona has one current primary decision authority at a time. Independent personas and isolated jobs may proceed concurrently. An admitted decision binds actual identity, work, relevant versions, observations, inference configuration and actual resource exposure. A model change does not change identity or accepted commitments.
 
+Distinguish shared result records from the authority needed for independent
+navigation and tool work. A new peer candidate, evaluation, release or delivery
+record alone should not discard such a response when its separately recorded
+identity, task, responsibilities, arrangements, pending dependencies and supplied
+source lineage remain unchanged. Apply the response to current state, retaining
+the peer's records and the original information on which the persona reasoned.
+Shared work commands and responses combining them with other operations retain
+their complete current-record checks. Accepted tool intents retain the dependency
+scope established by their own adoption; a later record does not imply that it
+was seen or used. An older admission gains no narrower scope retrospectively.
+
 **Character and current guards.** Apply the character-proposal ordering rule before any other fresh operation from the response. A request to adopt a stable-profile or baseline-affect revision must be resolved first.
 
 | Current-state event | Consequence |
