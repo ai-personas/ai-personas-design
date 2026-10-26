@@ -205,6 +205,17 @@ The runtime supplies the current host command definition in ordinary persona inp
 
 Commands have no default timeout. A persona may request a timeout for a particular command. Bounded excerpts keep model context usable while full output remains available as host files. A command's live files and background processes remain distinct from an immutable recorded observation of its parent process.
 
+**Explicit stopping.** Observe an applicable work or persona stop before dispatch
+and while an owned command is running. A foreground process interruption stops
+new admissions and requests cancellation of that session's transports and owned
+command groups, including its delegated work. Drain their observed outcomes
+before releasing the execution owner; terminating only the coordinator can
+leave commands running. Distinguish this session interruption from a durable
+work pause or participant Stop. Retain actual exits, output, local cancellation
+and unresolved remote effects without assuming rollback or repeating commands.
+Detached processes and an uncatchable host failure may still leave outcomes
+unknown.
+
 **Host state and records.** This profile provides the host account's access, including access to files shared by personas using that account. Native record projections are not a filesystem isolation boundary. Native API operations continue to retain their actual adoption and execution records; direct host writes are ordinary host effects and must be described truthfully. Installation or execution does not itself establish skill application, a correct result, or completed work.
 
 Actual model usage and resource accounting do not impose tool permission. A host command needs no additional model attempt or per-tool attempt grant. Changing the tool-access default does not rewrite historical results, refund spending, or imply a command was executed in an older run.

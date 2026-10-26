@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — drain owned execution on foreground interruption
+
+Distinguished a foreground session interruption from durable work and persona
+controls. Stop new admissions, cancel owned operations and retain their actual
+outcomes before releasing execution ownership. Killing only the coordinator
+does not establish that its commands stopped, nor does local cancellation
+establish remote termination or rollback.
+
 ## 26 October 2026 — attribute activity to its actual work
 
 Inspection keeps each work's calls and recovery holds separate from a persona's
