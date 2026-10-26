@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — compact generated response contracts
+
+Clarified how a deployment can reduce repeated schema syntax while preserving
+all fields, definitions, descriptions and constraints. Compact presentation
+retains complete native validation and falls back to the full schema when
+needed. Actual input size, billed usage and useful results remain separate
+measurements.
+
 ## 26 October 2026 — isolate personal message coordination
 
 Distinguished one participant's voluntary inbox wait from shared obligations.
