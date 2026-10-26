@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — identify responsibility binding mismatches
+
+Distinguished an explicit terms-revision mismatch from an offer addressed to a
+different persona. Diagnostics name the affected field and existing binding
+options while retaining the exact checks and whole-response rejection.
+
 ## 26 October 2026 — reuse unchanged decoded runtime state
 
 Extended byte-verified host decode reuse to ordinary state loads. Each Runtime

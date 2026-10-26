@@ -239,6 +239,11 @@ section is malformed. Keep authored unknown names, dynamic map keys and opaque
 payloads out of these hints. Diagnostics explain the rejection; they do not
 repair, adopt or execute any part of the response.
 
+For responsibility bindings, distinguish an explicit supplied-terms revision
+mismatch from an offer addressed to a different persona. Identify the affected
+field and its existing binding options without echoing authored values or
+repairing the response. The same current-offer and exact-terms checks still apply.
+
 **Independent host duties.** Recording observed receipts, enforcing cancellation, fencing stale authority, accounting, and shutdown need neither another persona call nor a valid maintenance outcome. Already admitted effects remain real and must be reconciled. These duties cannot introduce a new substantive persona action, infer a new lesson, or make missing output valid.
 
 **Visible evidence.** Identify the logical invocation and provider attempts, actual maintenance and next-context input, complete response or failure status, any persona-authored outcome, validation disposition and later save or conflict receipts. A provider invocation, a host command that inspects source and execution of the inspected feature are distinct facts. Successful source inspection is real execution but does not establish product behavior. Process exit zero does not prove that every subcommand succeeded, so preserve stderr, partial results and uncertainty. No raw private-reasoning archive or fixed reporting form is required.
