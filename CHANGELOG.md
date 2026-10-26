@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — visible accepted work accounts
+
+Specified ordinary launcher access to accepted persona work accounts, including
+when a persona sends no reply. Preserve original authorship, invocation, task
+version and reason while keeping authored status distinct from actual execution,
+delivery and completion.
+
 ## 26 October 2026 — self-contained requirement diagrams
 
 Replaced the 43 requirement cartoons with labeled concept diagrams that explain

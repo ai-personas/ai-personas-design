@@ -217,6 +217,14 @@ Label any operator-visible authored draft text, including commentary, as unvalid
 
 Whole-response validation does not establish successful persistence. A claim that a save succeeded still depends on actual acceptance, and delivery retains its other authority and dependency checks.
 
+After adoption, the ordinary launcher should show the persona's latest accepted
+work account even when it chose not to send a reply. Preserve its authored reason,
+persona and producing invocation, and identify an earlier or unavailable task
+version. Present this as the persona's account based on its supplied information;
+execution receipts, current task state and recorded delivery remain separately
+identifiable. Displaying the account creates no message, endorsement or completion
+record and requires no additional model call.
+
 When a rejected response has a known structural mismatch, diagnostic hints
 should identify the affected schema-owned path, including nested objects and
 array positions. A closed nested object with unknown members should identify

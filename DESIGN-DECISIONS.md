@@ -9,6 +9,16 @@ This register explains the target design adopted in this branch and why its rule
 
 The [normative documents](design/README.md) contain the actual obligations. Adopting a decision changes that design reference; it does not establish that the design has been implemented, produces useful maturation, or is approved for deployment.
 
+## 26 October 2026: show accepted persona work accounts
+
+A persona can make useful progress while choosing not to send a reply. Showing
+only pending calls and tool status leaves the requester without that persona's
+account of the work. The [communication contract](implementation/CONTRACTS.md#every-persona-invocation)
+now calls for displaying the latest accepted account with its original reason,
+author, invocation and task version. This clarification uses an existing authored
+decision; it adds no compulsory communication or model invocation. The display
+must distinguish the account from execution evidence, delivery and completion.
+
 ## 23 October 2026: reconcile active resource and access rules with UR-052
 
 The 22 October supersession notice established the intended policy, but detailed chapters still instructed implementers to impose finite navigation and repair allowances, retained-state ceilings, source-sharing permissions and approval workflows. The authority order also placed derived invariants ahead of the human-user requirements and suggested retaining conservative restrictions when documents conflicted. Those instructions could reintroduce the constraints the user removed.
