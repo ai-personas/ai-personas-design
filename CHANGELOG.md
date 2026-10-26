@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — present operation tags before payloads
+
+Placed fixed variant tags first in compact response-contract objects and clarified
+outer operation tags versus nested command tags. The canonical schema and validation
+are unchanged, JSON member order remains unrestricted, and missing tags remain
+explicit response errors.
+
 ## 26 October 2026 — identify missing tags without guessing a variant
 
 Extended structural rejection hints to absent members required by every schema
