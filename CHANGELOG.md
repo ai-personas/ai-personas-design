@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — keep published peer results discoverable
+
+Added exact result cues for commands from a peer's latest accepted work decision.
+Completion can be discovered before that peer's next account, with native identity
+and lineage preserved. Locators support chosen history reads without copying
+bodies, inventing peer awareness or treating command completion as useful quality.
+Partial publication stays pending; unrelated decisions retain their existing scope.
+
 ## 26 October 2026 — retain interrupted session outcomes
 
 Aligned terminal validation with the foreground driver's interruption outcome.

@@ -223,6 +223,18 @@ entries do not establish that shared files are unchanged. Personas choose useful
 communication, precondition checks and separate revisions for the actual shared
 file situation. The runtime does not impose a coordinator or serialize all work.
 
+When a peer command's complete result is published, its disappearance from pending
+work should not leave only the peer's earlier intention as a cue. Current-work
+context can supply exact retained result references for commands from that peer's
+latest accepted work decision, with their recorded execution states. Bind native
+job, observation and terminal identities and preserve result lineage. Include all
+such commands from that decision; earlier results remain available through chosen
+history discovery. Supply these locators for selective reading without loading
+their bodies or manufacturing an authored citation, quality verdict or claim that
+the peer has received them. Partial publication remains pending. Result publication
+does not itself invalidate another participant's unrelated decision or impose a
+follow-up workflow.
+
 **Character in cooperation.** Characteristic preferences may influence when a persona seeks another perspective, how directly it disagrees, what makes a handoff useful, or how it balances progress and consultation. Those preferences belong in its own fragments and actual decisions. OCEAN traits do not assign a host-selected role, and modeled dominance does not confer leadership. A quiet persona still owes accepted coordination duties; a sociable persona cannot turn every task into unnecessary messages or commitments. Coordination calls carry the same explicit maintenance responsibility as individual work, without merging participants' private accounts.
 
 Actual human and peer exchanges belong to the [same reciprocal maturation loop](PERSONA-CORE.md#maturation-within-every-primary-interaction). Interpret each exchange according to what it establishes. A preference, factual report, praise, disagreement, and authentic acceptance are different kinds of evidence. Praise does not verify a conclusion, a decline does not prove hostility, and familiarity does not bind future help. Supported refinements to relationships or methods may change later characteristic choices without requiring stable-trait revision or a separate authority for social revision.
@@ -517,7 +529,7 @@ in presentation order must preserve all supplied fields, exact text, qualificati
 and reference resolution. It must not introduce a host-authored task interpretation,
 plan or quality criterion. Bind the actual rendered order in the admitted input.
 
-Peer accounts and pending command identities are scoped to the current runtime
+Peer accounts and command-result cues are scoped to the current runtime
 and work. Persona labels and local IDs can recur elsewhere. When supplying a
 pending host command's recorded launch directory, distinguish that fact from
 its affected paths, a live process identity, file ownership and successful
