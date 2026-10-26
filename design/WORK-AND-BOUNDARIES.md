@@ -642,6 +642,14 @@ exclusive character or responsibility transition, so repeated ordinary work cann
 starve them. Settling does not cancel a slow call, impose a timeout, or manufacture
 a continuation. Scheduling independence does not prove better task quality.
 
+Admitted provider I/O and stop observation must also progress independently of
+synchronous context preparation, persistence and response adoption by that
+coordinator. Transport tasks keep their exact owner and return actual outcomes
+for sequential recording and adoption; they receive no mutable runtime state.
+Dropping an owned waiter cancels its local task even if the waiter was never
+polled. A failed task does not manufacture provider completion, remote
+cancellation or known usage. Normal shutdown still drains owned outcomes.
+
 Initial character authorship can overlap for a fresh cohort before anyone has
 accepted responsibility for the work. Each initial response can adopt only its
 own character and necessary file unit, so these transports need not wait for one

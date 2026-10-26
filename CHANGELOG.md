@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — keep transports progressing during coordination
+
+Specified independent progress of admitted provider I/O and stop observation
+while the foreground coordinator prepares or adopts another decision. Owned
+tasks return actual outcomes for sequential adoption and are canceled when
+their waiters are dropped. Abnormal task termination establishes no provider
+receipt, remote cancellation or known usage.
+
 ## 26 October 2026 — surface delivered results during ongoing work
 
 Specified foreground delivery notices with file lists and access to full
