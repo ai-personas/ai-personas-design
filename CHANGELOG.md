@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — distinguish image-read failures from decision rejection
+
+Clarified that an unavailable image capture is an operation outcome within an
+accepted decision. Its error must not claim whole-decision rejection. Malformed
+expected digests and mismatching complete digests receive distinct diagnostics;
+neither supplies pixels or automatically changes the requested revision.
+
 ## 26 October 2026 — present operation tags before payloads
 
 Placed fixed variant tags first in compact response-contract objects and clarified

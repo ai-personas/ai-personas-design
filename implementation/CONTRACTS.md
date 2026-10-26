@@ -443,6 +443,12 @@ do not establish current host-file contents or the correctness of a visual
 judgment. Image choices follow the same character-transition and unavailable
 optional-bundle rules as other supporting context.
 
+A failed host-image capture records an unavailable observation without pixels;
+it does not mean that its enclosing decision or other operations were rejected.
+An optional expected SHA-256 must be a complete lowercase hexadecimal digest.
+Distinguish malformed expected digests from valid digests that do not match the
+captured bytes, without repairing a pin or silently supplying a different image.
+
 **Failure and recovery.** An unavailable or changed selected revision gets an explicit disposition. It cannot silently follow a path to different bytes. The following distinctions apply:
 
 | Situation | Required treatment |
