@@ -53,6 +53,13 @@ a response quota. Preserve cancellation, complete stream validation and exact
 observed counts; an unrepresentable count is an accounting failure, not a
 configured resource allowance.
 
+Stream validation distinguishes content representation from received text.
+An in-progress assistant message with one empty text part has the same empty
+text as a message whose content list is empty. Accept either representation
+while checking subsequent text, identity and actual terminal completion.
+Shape failures identify the offending field without copying response text;
+a coarse historical diagnostic cannot establish a more specific cause.
+
 An installed catalogue retains its complete returned body in the private
 onboarding journal. Completed probe carriers remain private evidence even when
 they do not establish proof. A content filter or failed proof check must not

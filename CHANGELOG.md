@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — distinguish empty stream content representations
+
+Clarified that allocating an empty assistant text part does not supply text or
+complete a response. Stream consumers accept that representation alongside an
+empty content list and retain their subsequent identity, text and terminal
+checks. Shape diagnostics identify the failed field; older coarse diagnostics
+do not establish a specific cause.
+
 ## 26 October 2026 — recover failed calls without stalling peers
 
 Separated local failed-lease retirement from structural coordination. Exact
