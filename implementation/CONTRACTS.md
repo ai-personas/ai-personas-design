@@ -706,6 +706,11 @@ duplicate keys, invalid encoding, partial responses and inconsistent identities.
 
 **Measure actual use without making it an admission gate.** Record model calls, tool executions, unsuccessful attempts, navigation, selected context, maintenance and result retention. Distinguish transport bytes, reported tokens, billed usage, latency, storage and monetary exposure. Unknown usage remains unknown, and smaller context does not establish lower total cost or useful completion.
 
+A recovery observation carries the terminal receipt's actual usage fields. A
+local response rejection does not make reported token counters unknown, and
+available counters do not establish unreported charges. Avoid a blanket usage
+label that contradicts the attached receipt; preserve missing fields as unknown.
+
 Retain fragments, supporting assets, histories, tool definitions, code, provenance and unresolved effects with their actual identities. Context selection and requested pagination decide what is supplied to a model input, not how much historical state may exist or how many calls a task may use. Do not erase evidence to satisfy an obsolete quota. Report real I/O, provider and representation failures with their observed outcomes.
 
 **Separate a local stop from the goal's status.** Record the reason for a local stop separately from the accepted goal's disposition under [continuing pursuit](../design/WORK-AND-BOUNDARIES.md#continuing-a-goal-across-local-boundaries). For unfinished continuing work, bind the record to:

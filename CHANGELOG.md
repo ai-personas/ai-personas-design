@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — preserve reported usage in recovery notices
+
+Removed the blanket unknown-usage label from recovery observations that already
+carry a terminal receipt. Reported counters remain available after local response
+rejection; unreported fields and actual charges retain their original uncertainty.
+
 ## 26 October 2026 — identify responsibility binding mismatches
 
 Distinguished an explicit terms-revision mismatch from an offer addressed to a
