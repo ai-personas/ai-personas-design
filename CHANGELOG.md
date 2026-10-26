@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — identifiable immutable-record conflicts
+
+Clarified that a rejected work-record creation should identify its record type
+and conflicting supplied identity. Preserve the existing record and atomic
+rejection without selecting a replacement identity or rewriting prior judgment.
+
 ## 26 October 2026 — independent tools retain their actual dependencies
 
 Distinguished new peer result records from the unchanged authority needed for

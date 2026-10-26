@@ -131,6 +131,12 @@ opaque and unknown variants unresolved. Diagnostic hints describe the rejected
 shape; they do not infer intent, fill omitted fields, alter the original bytes,
 relax validation or supply a replacement persona decision.
 
+When a proposed creation conflicts with an existing immutable work record,
+identify the record type and the supplied identity that caused the conflict.
+Preserve the existing record and whole-response rejection. The diagnostic does
+not choose a new identity, replace the record or make a historical judgment
+current under a later arrangement.
+
 Retain complete failure provenance with the rejection and its receipt in one
 transaction. Reference the exact admitted request and terminal; retain newly
 consulted sources and policies without duplicate components or a byte quota.
