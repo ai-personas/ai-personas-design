@@ -1,0 +1,377 @@
+{
+  "generation_method": "Built-in image_gen tool",
+  "use_case": "infographic-diagram",
+  "purpose": "Cartoon concept explainers for USER-REQUIREMENTS.md. These illustrate requirements without changing their authority or claiming runtime evidence.",
+  "shared_prompt": "Use case: infographic-diagram.\nAsset type: self-contained cartoon concept explainer in a GitHub user-requirements document.\nAudience: a new reader who sees ONLY this image, with no surrounding paragraph.\nPrimary request: Teach the requirement through explicit relationships and a concrete illustrative example. Draw a thoughtfully composed educational diagram with cartoonist charm, not a decorative scene.\nStyle: crisp navy ink outlines, expressive small robot personas, warm white background, restrained teal, amber, coral and lilac accents, flat editorial illustration. Colored labeled cards and bold arrows carry the explanation. Characters occupy at most one fifth of the canvas and actively point to the actual decision or change. No desks, plants, mugs, bookshelves or decorative filler.\nComposition: landscape 3:2, preferably 1536 by 1024 or larger. Large readable typography at GitHub document width; generous whitespace, 60px outer margin. Use a clear heading with the requirement ID, a single main reading direction, explicit arrowheads, short explanatory labels and one bottom takeaway. Every pictured object must have a meaningful label. Never substitute fake text lines or unexplained icons for the supplied words.\nContent: render all quoted labels below accurately. Text must remain short, readable and complete. Mark invented behavior as an illustrative example. Distinguish teal character fragments (how I behave) from amber supporting assets (what helps the work); do not make knowledge or history into personality. Diagrams explain requested behavior, not demonstrated runtime evidence. Do not add arbitrary limits, numeric personality scores, hidden automated decisions, or new requirements.\n",
+  "images": [
+    {
+      "requirement": "UR-001",
+      "file": "ur-001-design-first.webp",
+      "title": "Design here, implement from the blueprint",
+      "prompt": "Heading: \"UR-001 · Design before implementation\"\nThree numbered panels joined by large arrows: \"1 · Define the requirements\" (human gives needs to small robot); \"2 · Refine the blueprint\" (robot annotates a large plan with three readable tabs: \"Behavior\", \"Responsibilities\", \"Failure + recovery\"); \"3 · Guide future implementation\" (builder receives the finished plan).\nEnclose panels 1 and 2 in a frame labeled \"THIS REPOSITORY: DESIGN ONLY\". Panel 3 is clearly outside that frame, labeled \"IMPLEMENTATION PROJECT\".\nA caption on the handoff arrow: \"Implementation-ready explanation\".\nBottom takeaway: \"Explain how personas should operate before building the application.\"",
+      "alt": "UR-001: Human requirements lead to a blueprint describing behavior, responsibilities, and failure and recovery. Those design steps belong in this repository; the blueprint then guides a separate implementation project.",
+      "caption": "This repository turns requirements into an implementation-ready explanation of how personas should operate."
+    },
+    {
+      "requirement": "UR-002",
+      "file": "ur-002-coherent-design.webp",
+      "title": "Make every document agree",
+      "prompt": "Heading: \"UR-002 · One coherent design\"\nTwo source stacks labeled \"Published GitHub documents\" and \"Unpublished drafts\" feed a central cartoon review station labeled \"Compare with user requirements\". Above the station a large reference card: \"User requirements\".\nAt the station show two contradictory cards \"Rule A\" and \"Conflicting rule\" being resolved by a thoughtful robot. Four clear editing choices around the station: \"Revise\", \"Combine\", \"Add missing detail\", \"Remove contradictions\".\nOne arrow exits to a unified blueprint with linked tabs \"Persona\", \"Work\", \"Contracts\". Label it \"One consistent design\".\nBottom takeaway: \"Every document must describe the same implementable system.\"",
+      "alt": "UR-002: Published GitHub documents and unpublished drafts are compared with user requirements. Revision, consolidation, missing details, and removal of contradictions produce one consistent design across persona, work, and contracts.",
+      "caption": "Review published and unpublished material together until all documents describe one coherent system."
+    },
+    {
+      "requirement": "UR-003",
+      "file": "ur-003-general-purpose.webp",
+      "title": "One persona, many kinds of work",
+      "prompt": "Heading: \"UR-003 · General-purpose personas\"\nLeft: two requesters, a human labeled \"Human request\" and a different robot labeled \"Persona request\", both point to the same central robot.\nCenter: robot holds a teal card \"My character shapes my choices\". From this center four clearly labeled branches lead to small concrete scenes: \"Solve a task\" (compare design alternatives), \"Use tools\" (measure a drawing), \"Communicate + socialize\" (two speech bubbles), \"Coordinate + collaborate\" (two robots share a plan).\nA curved return arrow from these activities to the central character card is labeled \"Experience can shape later behavior\".\nBottom takeaway: \"A persona brings its own character to different needs, people and tasks.\"",
+      "alt": "UR-003: Humans and other personas can bring needs to a general-purpose persona. Its character shapes task work, tool use, communication, socializing, coordination, and collaboration; experience from those activities can shape later behavior.",
+      "caption": "The same persona applies its own character across many tasks and develops through work and interaction."
+    },
+    {
+      "requirement": "UR-004",
+      "file": "ur-004-starting-profile.webp",
+      "title": "Turn the starting profile into a characteristic voice",
+      "prompt": "Heading: \"UR-004 · Start with a persona profile\"\nTwo large clearly separated profile cards on left. Teal card: \"OCEAN · personality traits\" followed by five readable words on separate lines: \"Openness\", \"Conscientiousness\", \"Extraversion\", \"Agreeableness\", \"Neuroticism\". Lilac card: \"VAD · modeled affect\" with \"Valence · pleasantness\", \"Arousal · activation\", \"Dominance · sense of control\".\nBoth arrows point to a small robot labeled \"Express traits in my own voice\", which writes two large teal fragment cards: \"I explore alternatives.\" and \"I check details before I commit.\"\nPlace \"Illustrative fragments\" over the examples.\nBottom takeaway: \"The starting profile must be expressed throughout character fragments.\"\nUse semantic words, no numeric scales or invented additional axes.",
+      "alt": "UR-004: OCEAN personality traits and VAD modeled affect form a starting profile. The persona expresses that profile in its own voice throughout characteristic fragments, illustrated by exploring alternatives and checking details before committing.",
+      "caption": "Profile traits become characteristic prompt parts in the persona’s own voice."
+    },
+    {
+      "requirement": "UR-005",
+      "file": "ur-005-first-fragments.webp",
+      "title": "The first model call writes the first fragments",
+      "prompt": "Heading: \"UR-005 · The first LLM call authors the fragments\"\nA clear four-step left-to-right flow. Step 1 \"Starting profile\" with example \"Curious + careful\". Step 2 \"Initial LLM call\" with a robot visibly writing. Step 3 \"Initial characteristic fragments\" with two readable teal cards \"I explore alternatives.\" and \"I check before deciding.\" Step 4 \"Later interactions\" with a smaller loop labeled \"Create · revise · harmonize\".\nAbove the example cards write \"Illustrative example\". A line under the first three steps reads \"The first model call turns the profile into prompt parts.\"\nA return arrow from later interactions to fragments labeled \"Preserve this persona's character\".\nBottom takeaway: \"Begin with authored character, then develop it through continuing interaction.\"",
+      "alt": "UR-005: A starting profile enters the initial LLM call, which authors characteristic fragments in the persona’s own voice. Later interactions create, revise, and harmonize these prompt parts while preserving their persona-specific meaning.",
+      "caption": "The initial model call authors the starting fragments; continuing interactions develop their characteristic meaning."
+    },
+    {
+      "requirement": "UR-006",
+      "file": "ur-006-character-in-fragments.webp",
+      "title": "Fragments explain how this persona behaves",
+      "prompt": "Heading: \"UR-006 · Fragments embody character\"\nUse two parallel horizontal example lanes, clearly labeled \"Illustrative examples\". Top lane small teal robot \"Careful persona\" leads to teal prompt card \"I verify assumptions before choosing.\" then arrow \"shapes behavior\" to a robot checking two assumptions on a design. Label output \"Checks before committing\".\nBottom lane lilac-accent robot \"Exploratory persona\" leads to teal prompt card \"I seek alternatives before settling.\" then arrow \"shapes behavior\" to three clearly different design sketches. Label output \"Explores alternatives\".\nA common final bracket beneath both lanes: \"Voice + dispositions + standards → decisions\".\nBottom takeaway: \"A fragment carries characteristic meaning, not just a persona's name.\"",
+      "alt": "UR-006: Two illustrative fragments connect characteristic voice and standards to behavior: a careful persona verifies assumptions before choosing, while an exploratory persona seeks alternatives. Each fragment shapes decisions rather than merely naming its owner.",
+      "caption": "A characteristic fragment connects the persona’s voice, dispositions, and standards to what it chooses to do."
+    },
+    {
+      "requirement": "UR-007",
+      "file": "ur-007-operating-persona.webp",
+      "title": "What makes the operating persona?",
+      "prompt": "Heading: \"UR-007 · What makes the operating persona?\"\nBuild a left-to-right causal diagram, not a collage.\nThree labeled input cards on left converge into ONE middle box labeled \"LLM reasoning\". Card 1: \"Current task\" / \"Choose a design\". Card 2, teal: \"Selected character fragments\" / \"I compare alternatives carefully.\" Card 3, amber: \"Relevant supporting assets\" / \"Requirements + measurements\".\nInside reasoning box a small thoughtful robot compares two labeled drawings \"Option A\" and \"Option B\". Three outgoing arrows to clear right-side cards: \"Decision\" / \"Compare before choosing\"; \"Action\" / \"Check the measurements\"; \"Response\" / \"Explain the trade-off\".\nPlace a bracket around input context, reasoning and resulting behavior labeled \"The operating persona\". Add small label \"Illustrative example\".\nBottom takeaway: \"Character shapes decisions and actions, not just wording.\"",
+      "alt": "UR-007: A task, selected character fragments such as “I compare alternatives carefully,” and supporting requirements and measurements feed LLM reasoning. The operating persona compares options, checks measurements, and explains its choice; character shapes decisions and actions, not just wording.",
+      "caption": "Selected character and supporting context shape the model’s reasoning, decisions, actions, and response."
+    },
+    {
+      "requirement": "UR-008",
+      "file": "ur-008-character-throughout-life.webp",
+      "title": "Character stays active throughout development",
+      "prompt": "Heading: \"UR-008 · Character shapes behavior throughout life\"\nTwo parallel timelines with three columns \"Beginning\", \"Experience\", \"Later behavior\". Small teal robot remains recognizably the same in its own row; a lilac robot remains recognizable in the other row.\nTeal row: \"Careful + concise\" → \"Peer feedback\" → \"Checks key details and explains briefly\".\nLilac row: \"Curious + talkative\" → \"Shared task\" → \"Explores options and invites discussion\".\nShow short teal fragment cards traveling along each row and changing deliberately after experience. Label both rows \"Illustrative trajectories\".\nBelow timeline, four labels with tiny icons: \"Actions\", \"Tool choices\", \"Communication\", \"Collaboration\".\nBottom takeaway: \"Experience can change behavior while each persona remains distinctive.\"",
+      "alt": "UR-008: Two illustrative personas retain distinct characters from initialization through later experience. Their developed character continues to influence actions, tool choices, communication, and collaboration, without forcing them into one uniform style.",
+      "caption": "Character influences choices throughout development while each persona retains its own recognizable behavior."
+    },
+    {
+      "requirement": "UR-009",
+      "file": "ur-009-fragments-and-memories.webp",
+      "title": "Character fragments and supporting records have different jobs",
+      "prompt": "Heading: \"UR-009 · A fragment is a character prompt\"\nLarge side-by-side cards with a small cartoon robot sorting by purpose. Left teal card heading \"CHARACTER FRAGMENT\" and question \"How do I behave?\" with example \"I question assumptions before I decide.\" Under it: \"Shapes reasoning and conduct\".\nRight amber card heading \"SUPPORTING ASSETS\" and question \"What helps the work?\" Two examples: \"Fact: the part weighs 2 kg.\" and \"History: the user asked for a lighter design.\" Under it: \"Supplies knowledge and past events\".\nAbove examples write \"Illustrative content\". The two cards remain visibly separate, both with arrows into a small bottom box \"Relevant context for work\".\nBottom takeaway: \"Facts and memories can support a persona without becoming its character.\"",
+      "alt": "UR-009: A character fragment expresses how a persona behaves, such as questioning assumptions before deciding. Facts and records of past requests are separately identifiable supporting assets. Both can contribute relevant context while keeping their different roles.",
+      "caption": "Fragments shape behavior; facts, memories, and history support the work."
+    },
+    {
+      "requirement": "UR-010",
+      "file": "ur-010-learning-through-interactions.webp",
+      "title": "Development happens through ordinary interactions",
+      "prompt": "Heading: \"UR-010 · Learn through ordinary interactions\"\nDraw a clear clockwise loop of four labeled cards around one modest cartoon persona: \"1 · Work and interact\", \"2 · Consider the experience\", \"3 · Maintain character fragments\", \"4 · Use the developed fragments\".\nThe third teal card lists \"Create · revise · organize · select · delete\". The fourth points to a concrete example labeled \"Later behavior\" / \"I check the assumption I once missed.\" Mark example \"Illustrative\".\nA separate amber side branch from the ordinary interaction reads \"Maintain supporting assets\" / \"Tools · skills · data · history\".\nBottom takeaway in two short lines: \"Changed character should shape later behavior.\" / \"Saving an asset alone does not show maturation.\"\nNo separate learning engine, model training, automatic improvement meter or weight-update diagram.",
+      "alt": "UR-010: Ordinary work and interaction can lead to maintenance of characteristic fragments, whose later use shapes behavior. Supporting tools, skills, data, and history are maintained through the same interactions, but saving or improving an asset alone does not demonstrate character maturation.",
+      "caption": "Persona development comes through ordinary interactions and characteristic prompt changes that affect later behavior."
+    },
+    {
+      "requirement": "UR-011",
+      "file": "ur-011-separate-supporting-assets.webp",
+      "title": "Classify by purpose, even when the persona wrote it",
+      "prompt": "Heading: \"UR-011 · Keep supporting assets identifiable\"\nLeft small robot labeled \"The persona creates two things\" points to two distinct outputs.\nTop teal branch: \"Character fragment\" / \"I compare alternatives carefully.\" → \"Defines how I behave\".\nBottom amber branch: \"Reusable design checklist\" / \"Steps, measurements and procedures\" → \"Supports the task\".\nBelow the amber branch show four small labeled categories \"Tools + skills\", \"Knowledge + data\", \"Scripts + code\", \"Messages + action records\".\nLabel example area \"Illustrative example\". A large centered annotation: \"Same author. Different purposes.\"\nBottom takeaway: \"Authorship does not turn a tool, record or procedure into character.\"",
+      "alt": "UR-011: A persona can create both a characteristic prompt and a reusable procedural checklist. Their purpose determines their role: the prompt shapes character, while tools, skills, knowledge, data, code, and history remain supporting assets regardless of authorship.",
+      "caption": "Keep character fragments and supporting assets distinguishable by their purpose and use."
+    },
+    {
+      "requirement": "UR-012",
+      "file": "ur-012-save-and-reuse.webp",
+      "title": "Save useful work so the next task can find it",
+      "prompt": "Heading: \"UR-012 · Retain useful resources for later work\"\nFour numbered steps in an easy left-to-right flow: \"1 · Finish current work\" (small robot with an amber asset labeled \"Useful skill + data\"); \"2 · Save and organize\" (labeled folder \"Supporting assets\"); \"3 · Find what fits\" (robot follows a search cue to the same labeled asset); \"4 · Reuse in a later task\" (same robot applies the selected asset to a different drawing).\nUnder storage show \"Tools · skills · knowledge · data · code · history\".\nHighlight one amber asset traveling through all four steps so the causal relationship is obvious.\nBottom takeaway: \"Later work retrieves relevant resources instead of reconstructing everything.\"",
+      "alt": "UR-012: Useful skills, tools, knowledge, data, code, and history from current work are stored and organized. Later work discovers and retrieves relevant assets for reuse instead of reconstructing everything from the beginning.",
+      "caption": "Retained assets need useful organization so a later task can find and reuse the relevant material."
+    },
+    {
+      "requirement": "UR-013",
+      "file": "ur-013-location-and-search-cues.webp",
+      "title": "Every proposed file needs a home and a way back",
+      "prompt": "Heading: \"UR-013 · Say where to save it and how to find it\"\nA small cartoon persona proposes an amber card \"New or revised material\". Two arrows branch from it to equally large cards: \"Intended location\" / \"skills/compare-layouts.md\" and \"Discovery cues\" / \"layout, alternatives, comparison\".\nThose cards join a folder labeled \"Stored material\", followed by a labeled arrow \"later search\" to a robot retrieving exactly that same card. Tiny note under path \"Illustrative path\".\nInclude readable note \"Use relevant search words or regex patterns.\"\nBottom takeaway: \"Storage and rediscovery are part of the proposal.\"\nDo not depict the location being automatically chosen by a host or imply that search guarantees correct selection.",
+      "alt": "UR-013: A proposal for new or revised material includes an intended file location and relevant discovery cues or regular-expression patterns. An illustrative skills path and search terms show how the same material can be found again later.",
+      "caption": "Specify both the intended location and useful discovery cues when proposing material."
+    },
+    {
+      "requirement": "UR-014",
+      "file": "ur-014-compose-context.webp",
+      "title": "Assemble the context this decision needs",
+      "prompt": "Heading: \"UR-014 · Compose relevant context\"\nTop a task card: \"Current decision: choose a layout\" labeled \"Illustrative example\".\nBelow, two input trays converge into one large envelope labeled \"THIS LLM REQUEST\". Teal tray \"Selected character fragments\" with card \"I compare alternatives carefully.\" Amber tray \"Selected supporting assets\" with three cards \"Task requirements\", \"Measurement tool\", \"Relevant past feedback\".\nInside the request envelope preserve visibly separated teal and amber sections labeled \"Character\" and \"Supporting material\". Arrow exits to a small thinking robot labeled \"Reason about this decision\".\nA separate small gray folder off to the side labeled \"Unrelated material stays out\".\nBottom takeaway: \"Combine what is relevant while keeping each material's role clear.\"",
+      "alt": "UR-014: For an illustrative layout decision, selected character fragments and relevant requirements, tools, and feedback enter the same LLM request. The assembled context keeps character and supporting material identifiable, while unrelated material remains outside.",
+      "caption": "Assemble relevant character fragments and supporting material for the current decision, preserving their different roles."
+    },
+    {
+      "requirement": "UR-015",
+      "file": "ur-015-every-interaction.webp",
+      "title": "Every interaction does work and prepares what follows",
+      "prompt": "Heading: \"UR-015 · Every interaction has four responsibilities\"\nDraw one large central rounded rectangle labeled \"ONE LLM REQUEST + RESPONSE\" containing four equally clear numbered cards in a 2 by 2 grid. A small robot points across the four cards; no giant mascot.\nCard 1: \"1 · Current work\" / \"Do the task, act or communicate.\"\nCard 2, teal: \"2 · Fragment maintenance\" / \"Create, revise, organize, delete\" / \"or explain no change.\"\nCard 3, amber: \"3 · Asset maintenance\" / \"Maintain tools, skills, data and history\" / \"or explain no change.\"\nCard 4, divided teal and amber: \"4 · Choose next context\" / \"Which fragments and assets next?\" / \"Where can they be found?\"\nA short labeled arrow \"selected context\" exits card 4 to a smaller box outside on the right marked \"NEXT INTERACTION\".\nBottom strip: \"Applies to task work, tool use, conversation and collaboration.\"\nBottom takeaway: \"Work, maintenance and next-context choices belong together.\"\nMake it clear all four occur inside the same interaction, not four separate calls.",
+      "alt": "UR-015: One LLM request and response covers current work, characteristic-fragment maintenance, supporting-asset maintenance, and selection of the next context. Maintenance can explicitly conclude no change. Selected fragments and assets prepare the next interaction. This applies to task work, tool use, conversation, and collaboration.",
+      "caption": "Every request and response combines current work, maintenance of both kinds of material, and next-context choices."
+    },
+    {
+      "requirement": "UR-016",
+      "file": "ur-016-full-maintenance.webp",
+      "title": "Maintain fragments and assets through the same interaction",
+      "prompt": "Heading: \"UR-016 · Support the full range of maintenance\"\nTwo rows, teal \"Character fragments\" and amber \"Supporting assets\", each passes through four labeled actions across the page: \"Create\", \"Revise\", \"Reorganize\", \"Delete\". Draw simple cartoon hands actually adding a card, marking an edit, moving a card into a folder, and retiring a card. These are possible choices, not mandatory sequential steps; title the action area \"Available maintenance choices\".\nAt the right of the teal row: \"Shapes later characteristic behavior\". At the right of the amber row: \"Keeps useful resources ready\".\nA single encompassing frame: \"Part of the ordinary LLM interaction\". Small persona says \"Choose what needs maintenance.\"\nBottom takeaway: \"Maintain both kinds of material and keep their different purposes clear.\"",
+      "alt": "UR-016: The ordinary interaction supports creating, revising, reorganizing, and deleting both characteristic fragments and supporting assets. These are available choices rather than a required sequence. Fragment changes shape later characteristic behavior; asset maintenance supports the work.",
+      "caption": "The full range of maintenance applies to both characteristic fragments and supporting assets.",
+      "revision_prompt": "Edit the supplied UR-016 diagram. Preserve its title, two rows, all four available maintenance choices, small cartoon style, colors and existing wording. Correct ONLY the relationship between maintenance choices: remove all horizontal arrows between Create, Revise, Reorganize and Delete, in both rows. These operations are independent choices, not a required sequence. Retain the branching arrows from \"Available maintenance choices\" above. Add a clearly readable short note \"Choose needed operations; there is no fixed order.\" within the existing frame. Keep the two output-purpose labels on the right but connect from the overall row with a bracket, not specifically from Delete. Preserve all other meaningful text and do not add new requirements."
+    },
+    {
+      "requirement": "UR-018",
+      "file": "ur-018-prepare-next-context.webp",
+      "title": "This interaction prepares the next one",
+      "prompt": "Heading: \"UR-018 · This interaction guides the next context\"\nFour connected stages: \"Current LLM response\" → \"Find the requested material\" → \"Select relevant context\" → \"Next LLM request\".\nMake the first stage a readable note with three lines: \"Next task: compare layouts\", \"Need: my comparison fragment + room data\", \"Find: comparison, room dimensions\". Mark it \"Illustrative example\".\nIn the second stage a cartoon persona follows the note to ordinary files, labeled \"Files and discovery cues\". Third stage holds one teal \"Fragment\" card and one amber \"Data\" card. Fourth stage shows those same two selected cards entering the request.\nA broad looping arrow from fourth stage back to first reads \"Repeat as work develops\".\nBottom takeaway: \"Say what comes next, what it needs and how to find it.\"",
+      "alt": "UR-018: The current LLM response identifies the next task, the required fragments and resources, and discovery cues. That guidance leads to retrieval and selection from files for the next LLM request, continuing as work develops.",
+      "caption": "Each interaction identifies what the next one needs and gives useful guidance for finding it."
+    },
+    {
+      "requirement": "UR-019",
+      "file": "ur-019-files-and-searchable-links.webp",
+      "title": "Navigate files through useful search cues",
+      "prompt": "Heading: \"UR-019 · Ordinary files form a navigable network\"\nLeft cartoon persona has a task note \"Need a comparison method\". It uses a large magnifying glass labeled \"Filesystem search · grep · regex\".\nIn the middle, three labeled ordinary file cards connected by dashed arrows labeled \"search cue\": teal \"Character fragment\" with snippet \"I compare alternatives\" leads to amber \"Comparison skill\"; that leads to amber \"Relevant example\". Use actual words, no code.\nOn the right, only the selected character fragment and skill enter a tray labeled \"Relevant context\".\nA faint background cluster of files stays clearly outside the tray, label \"Other files stay stored\".\nBottom takeaway: \"Follow useful cues without loading the whole collection.\"\nMake the persona visibly choose which cue to follow; do not imply automatic traversal of every link.",
+      "alt": "UR-019: A persona uses filesystem search, grep, or regular-expression cues to find ordinary files and follow useful associations between fragments and assets. It selects relevant material while leaving the rest of the collection stored.",
+      "caption": "Ordinary files and searchable cues support selective navigation through related material."
+    },
+    {
+      "requirement": "UR-020",
+      "file": "ur-020-discover-all-resource-types.webp",
+      "title": "Use selective discovery for every kind of resource",
+      "prompt": "Heading: \"UR-020 · One discovery process, many resource types\"\nA clear top-down diagram. Top task card: \"What does the next decision need?\" beside a small thinking robot.\nArrow to a central step \"Use relevant search cues\". Beneath it fan out to six compact labeled cards arranged in one row or two tidy rows: teal \"Fragments\"; amber \"Tools\", \"Skills\", \"Data\", \"Knowledge\", \"History\".\nOnly a few cards are highlighted as selected and point to a bottom tray \"Chosen material for the next context\"; others remain in place.\nText above fan-out: \"A fragment or LLM response can guide the search\".\nBottom takeaway: \"Discover supporting assets selectively, just as you discover fragments.\"",
+      "alt": "UR-020: A fragment or current LLM response identifies what the next decision needs and supplies useful search cues. The same selective discovery process covers characteristic fragments, tools, skills, data, knowledge, and history.",
+      "caption": "Selective discovery applies to supporting resources as well as characteristic fragments."
+    },
+    {
+      "requirement": "UR-021",
+      "file": "ur-021-select-before-loading.webp",
+      "title": "Select first, then send the next context",
+      "prompt": "Heading: \"UR-021 · Select before loading\"\nLeft large file collection with distinct labels \"Hundreds of tools\", \"Fragments\", \"Skills + history\". Under it: \"Stored outside the model request\".\nMiddle a small persona uses a note \"Current need + selection instructions\" to pick one teal fragment and two amber resources. Label this step \"Retrieve what is relevant\".\nRight a clearly bounded envelope \"NEXT MODEL REQUEST\" contains only those same three selected cards with readable labels \"Character fragment\", \"Needed tool\", \"Relevant data\".\nUse bold arrows collection → selection → request. A small crossed-out alternative arrow goes directly from whole collection to request, labeled \"Do not send the full catalogue to filter\".\nBottom takeaway: \"Selection happens before the next context reaches the model.\"",
+      "alt": "UR-021: Current needs and selection instructions guide retrieval from a large external collection. Only selected fragments and resources enter the next model request; sending the entire catalogue for the model to filter does not satisfy the requirement.",
+      "caption": "Retrieve relevant material before loading it into the next model request.",
+      "revision_prompt": "Edit the supplied UR-021 diagram. Correct ONLY the typo in the top-left group title: replace \"Hundreds to tools\" with exactly \"Hundreds of tools\". Preserve the rest of the image, all labels, arrows, colors, composition, and dimensions."
+    },
+    {
+      "requirement": "UR-022",
+      "file": "ur-022-context-and-cost.webp",
+      "title": "Reduce waste and measure the result",
+      "prompt": "Heading: \"UR-022 · Avoid unnecessary context and measure savings\"\nTwo comparison lanes labeled \"Compare approaches for the same task\". Upper lane \"Unfiltered context\" shows many cards entering a request; lower lane \"Relevant selected context\" shows a small deliberate set entering a request. No fabricated numbers or result claims.\nBoth lanes feed a central measurement board, held by a cartoon researcher, labeled \"Measure the whole effort\". Four readable rows: \"Discovery + retrieval\", \"Context + model calls\", \"Actual token cost\", \"Quality of the result\".\nA magnifying glass points to an open question \"Does selection reduce cost and preserve usefulness?\"\nBottom takeaway: \"Smaller context is the approach; measured cost and quality show the benefit.\"",
+      "alt": "UR-022: Compare unfiltered context with relevant selected context for the same task, measuring discovery, retrieval, model calls, token cost, and output quality. The diagram poses the research question rather than asserting unmeasured savings.",
+      "caption": "Avoid unnecessary context, then examine actual cost and effectiveness across the whole effort."
+    },
+    {
+      "requirement": "UR-023",
+      "file": "ur-023-compact-collection-and-prompt.webp",
+      "title": "Keep the stored collection and the prompt useful",
+      "prompt": "Heading: \"UR-023 · Keep both collection and prompt compact\"\nLeft an overlapping stack of teal fragment cards labeled \"Duplicate + conflicting fragments\". A thoughtful cartoon robot points to a middle workshop labeled \"Revise · combine · reorganize\", with smaller note \"Preserve needed character\".\nFrom the workshop two distinct outcomes: top \"Coherent stored collection\" (a tidy group of labeled fragments); bottom \"Compact current prompt\" (a selected subset).\nUse an arrow from the coherent collection to the prompt labeled \"Choose what this task needs\".\nAn explicit small note \"Compactness through useful organization, not fixed quotas\".\nBottom takeaway: \"Manage the collection and select a coherent context for each decision.\"",
+      "alt": "UR-023: Revise, combine, and reorganize duplicate or conflicting fragments while retaining needed characteristic material. A coherent stored collection supports selection of compact context for the current task. Useful organization provides compactness without fixed quotas.",
+      "caption": "Maintain a coherent collection and select the relevant parts for a compact prompt.",
+      "revision_prompt": "Edit the supplied UR-023 diagram. Preserve the overall composition, title, main arrows, workshop, compactness note and bottom takeaway. Correct the content to focus on character fragments.\nOn the left duplicate stack, replace the style-only snippets with clearly readable first-person behavioral examples: \"I verify assumptions.\", \"I check assumptions.\", \"I explore alternatives.\", \"I commit to my first idea.\", \"I invite other perspectives.\", \"I decide without asking.\" Small note near stack: \"Illustrative fragments\". No extra snippets.\nIn the upper-right coherent collection, replace all six existing cards including Domain knowledge, Constraints and Useful examples with six teal character cards containing exactly: \"Careful judgment\", \"Curiosity\", \"Communication\", \"Collaboration\", \"Standards\", \"Self-reflection\". These are characteristic prompt categories, not facts or technical procedures.\nIn the lower-right compact prompt, show only three teal cards \"Careful judgment\", \"Curiosity\", \"Standards\". Keep all other wording. No domain knowledge, generic technical instructions, facts or asset categories may appear inside the character-fragment collection."
+    },
+    {
+      "requirement": "UR-024",
+      "file": "ur-024-organization-keeps-working.webp",
+      "title": "Update the map when files change",
+      "prompt": "Heading: \"UR-024 · Keep useful material findable after changes\"\nThree numbered panels in a clear left-to-right sequence. First \"1 · Before\" shows a cartoon persona following cue \"layout notes\" to a file labeled \"Original notes\".\nSecond \"2 · Reorganize\" shows that file split into two labeled files \"Comparison method\" and \"Example layouts\". A robot updates a small card labeled \"Locations + search cues\".\nThird \"3 · Find it again\" shows a later task \"Compare a new layout\" following the updated cue to \"Comparison method\", marked \"Useful earlier material\".\nMark sequence \"Illustrative reorganization\".\nBottom takeaway: \"Change the files and their discovery cues together.\"\nDo not show aliases or automatic redirects as a mandatory mechanism.",
+      "alt": "UR-024: An illustrative reorganization splits earlier notes into a comparison method and example layouts. Updating locations and discovery cues alongside the files lets a later task find useful earlier material again.",
+      "caption": "When fragments or assets change, update organization and discovery cues so useful earlier material remains findable."
+    },
+    {
+      "requirement": "UR-025",
+      "file": "ur-025-experience-shapes-development.webp",
+      "title": "Experience can reshape later behavior",
+      "prompt": "Heading: \"UR-025 · Development arises through interaction\"\nFour small labeled input scenes on left: \"Task work\", \"Human + peer exchanges\", \"Environmental feedback\", \"Self-directed activity\".\nArrows converge into a center card beside a thoughtful robot: \"Ordinary LLM interaction\" / \"Consider what the experience changes\".\nTwo clearly distinct output branches: teal \"Revise characteristic fragments\" → \"Later choices and behavior\"; amber \"Maintain supporting assets\" → \"Later resources and methods\".\nUse a small example along teal branch: \"I now ask about the missing assumption.\" labeled \"Illustrative change\".\nBottom takeaway: \"Explain how actual interactions affect what the persona does next.\"\nDo not show an independent training or learning subsystem or imply every interaction must force an edit.",
+      "alt": "UR-025: Task work, human and peer exchanges, environmental feedback, and self-directed activity inform ordinary interactions. Those interactions can reshape characteristic fragments and later behavior while separately maintaining supporting assets for later work.",
+      "caption": "Show how ordinary experience can change characteristic behavior and supporting material."
+    },
+    {
+      "requirement": "UR-026",
+      "file": "ur-026-whole-persona-maturation.webp",
+      "title": "Maturation should be visible across the whole persona",
+      "prompt": "Heading: \"UR-026 · Maturation affects the whole persona\"\nCenter a small recognizable robot with two connected foundations beneath it: teal \"Developed character fragments\" and amber \"Better-organized assets\".\nSix spokes radiate to clearly labeled paired examples: \"Judgment\" / \"Weighs alternatives\"; \"Modeled affect\" / \"Responds with composure\"; \"Communication\" / \"Explains more clearly\"; \"Coordination\" / \"Resolves dependencies\"; \"Collaboration\" / \"Uses feedback\"; \"Ways of working\" / \"Chooses useful methods\".\nLabel the entire wheel \"Illustrative signs to examine over time\".\nA directional caption above foundations: \"Experience informs development\".\nBottom takeaway: \"Look for changed behavior across work and relationships.\"\nSmall qualifier: \"Elapsed time alone does not establish improvement.\"",
+      "alt": "UR-026: Developed character fragments and better-organized assets should support maturation visible across judgment, modeled affect, communication, coordination, collaboration, and ways of working. The illustrated behaviors are examples to examine over time, not guaranteed improvements.",
+      "caption": "Examine maturation across the persona’s behavior, communication, cooperation, and ways of working."
+    },
+    {
+      "requirement": "UR-027",
+      "file": "ur-027-later-performance.webp",
+      "title": "Compare the persona with its earlier self",
+      "prompt": "Heading: \"UR-027 · Does development improve later work?\"\nTwo balanced panels show the SAME cartoon robot at \"Earlier stage\" and \"Later stage\", each doing a comparable task. Top note \"Compare actual behavior, not just elapsed time\".\nEarlier teal fragment \"I check my first idea.\" → behavior \"Checks one approach\".\nLater teal fragment \"I compare assumptions and alternatives.\" → behavior \"Explains trade-offs between approaches\".\nMark these \"Illustrative comparison\".\nA comparison board between them lists \"Judgment\", \"Communication\", \"Collaboration\", \"Actions\".\nBelow a separate amber line \"Account separately for better tools and assets\".\nBottom takeaway: \"Show how developed character contributes to better later performance.\"\nSmall qualifier: \"Do not force edits or assume improvement.\"",
+      "alt": "UR-027: Compare the same persona’s earlier and later behavior on comparable work to examine whether developed characteristic prompts improve judgment, communication, collaboration, and actions. Account separately for improved supporting assets, without forcing edits or assuming progress from time alone.",
+      "caption": "Examine the contribution of developed character to later performance separately from better tools or assets."
+    },
+    {
+      "requirement": "UR-028",
+      "file": "ur-028-selective-transfer.webp",
+      "title": "Carry forward what applies, then solve the new task",
+      "prompt": "Heading: \"UR-028 · Transfer what is relevant\"\nLeft a completed prior-task folder \"Earlier work\" contains teal \"Developed character\" and amber \"Methods\", \"Skills + tools\", \"Data + simulations\".\nMiddle a thoughtful cartoon persona at a branching question \"What applies to the new task?\" Selected cards cross a bridge labeled \"Relevant transfer\". One unrelated card remains with label \"Does not fit\".\nRight a new distinct task drawing and a prominent card \"New requirements\" enter a thinking box \"Reason through the new problem\".\nSelected cards also enter that box; it outputs \"New solution\".\nBottom takeaway: \"Reuse useful development without copying the whole prior solution.\"",
+      "alt": "UR-028: A persona assesses which developed character, methods, skills, tools, data, and simulations from earlier work fit a new task. Relevant material supports fresh reasoning about new requirements, while unrelated material is left out.",
+      "caption": "Select useful prior development and work through the new problem on its own terms.",
+      "revision_prompt": "Edit the supplied UR-028 diagram. Preserve the entire layout, main wording, character/asset distinction, reading direction and cartoon style. Correct ONLY the rejected card and clarify the example: replace the red card label \"Data + simulations\" with \"Irrelevant prior data\". Keep \"Data + simulations\" in the original left-side Earlier work collection. Add a modest but readable label above the selected/rejected branches: \"Illustrative selection\". Keep \"Does not fit\" below the rejected card. The image must not imply that data or simulations as an entire category cannot transfer. Do not change other labels or add new rules."
+    },
+    {
+      "requirement": "UR-029",
+      "file": "ur-029-three-personas-over-time.webp",
+      "title": "Follow three distinct personas through experience",
+      "prompt": "Heading: \"UR-029 · Compare three personas over time\"\nA landscape 3-row by 4-column story matrix, with large labels and a tiny robot per row. Columns: \"Initial profile\", \"First LLM fragments\", \"Interactions\", \"Later behavior + assets\". Each row reads left to right with arrows.\nTeal robot row: \"Careful\" → \"I verify assumptions.\" → \"Finds a mismatch\" → \"Checks earlier; saves evidence\".\nLilac robot row: \"Exploratory\" → \"I seek alternatives.\" → \"Compares designs\" → \"Weighs options; saves methods\".\nCoral robot row: \"Sociable\" → \"I invite perspectives.\" → \"Resolves disagreement\" → \"Clarifies needs; saves dialogue\".\nAbove matrix: \"Hypothetical trajectories\". In final cells separate teal character-behavior note from amber supporting-asset card.\nBottom takeaway: \"Trace each persona's own beginning, experiences and later changes.\"\nDo not imply fixed roles, guaranteed improvement, or that the three profiles must be these examples.",
+      "alt": "UR-029: Three hypothetical personas with careful, exploratory, and sociable profiles are traced from initial LLM-authored fragments through different interactions to later behavior and separately identifiable assets. Each trajectory preserves the persona’s distinct starting point and development.",
+      "caption": "Follow each of three distinct personas from its profile and initial fragments through experience to later behavior and assets."
+    },
+    {
+      "requirement": "UR-030",
+      "file": "ur-030-house-and-circuit-cases.webp",
+      "title": "Cover all four requested work scenarios",
+      "prompt": "Heading: \"UR-030 · Walk through the house and circuit cases\"\nA very clear 2 by 2 scenario board. Top left \"Four-bedroom house\" / \"3 personas\" with house drawing and exactly three small robots. Top right \"5-watt DC-to-AC circuit\" / \"3 personas\" with a conceptual DC → AC block diagram and exactly three small robots. Bottom left \"House with more time\" / \"Examine continued improvement or stopping\" with house and clock. Bottom right \"Circuit with more time\" / \"5 personas\" with conceptual circuit and exactly five small robots.\nLabel overall board \"Hypothetical walkthroughs\".\nBelow, shared questions in three readable connected cards: \"How does character shape choices?\" → \"How do personas collaborate?\" → \"What fragments, assets and behavior change?\"\nBottom takeaway: \"Show the work, development and reasons to continue or stop.\"\nDo not draw an operational electrical schematic or claim an engineering design works.",
+      "alt": "UR-030: Four hypothetical scenarios cover a four-bedroom house with three personas, a five-watt DC-to-AC circuit with three personas, extended house work, and extended circuit work with five personas. Each examines character, choices, collaboration, development, and reasons to continue or stop.",
+      "caption": "Cover both requested domains, their extended-work versions, and the five-persona circuit group.",
+      "revision_prompt": "Edit the supplied UR-030 diagram. Keep the 2 by 2 four-scenario layout, exact titles, house and conceptual circuit drawings, correct counts of three personas and five personas, shared questions and bottom takeaway. Remove ALL job-role badges and their descriptions under every robot. Specifically remove Planner, Organizer, Reviewer, Explorer, Analyst, Skeptic, Implementer and Summarizer and the small role-description text below them. Do not replace them with other job titles. Instead place one simple group caption per scenario: \"Distinct personas choose their contributions\". Persona colors and body poses can remain distinctive. This requirement does not assign fixed roles. Retain the \"Hypothetical walkthroughs\" label and keep all scenario counts readable. Make no other changes."
+    },
+    {
+      "requirement": "UR-031",
+      "file": "ur-031-house-to-skyscraper.webp",
+      "title": "Use house experience to improve later skyscraper work",
+      "prompt": "Heading: \"UR-031 · From house experience to skyscraper work\"\nLeft a modest four-bedroom house drawing with three small personas labeled \"Earlier house task\". Under it two distinct retained cards: teal \"Developed characteristic behavior\"; amber \"Relevant methods, tools and simulations\".\nBoth cross a middle filter \"What applies here?\" into the right stage \"New skyscraper task\", with a large tall-building drawing and a new user brief labeled \"New requirements\".\nAt the right a persona says \"Solve this new design on its own terms.\"\nBelow a comparison question: \"How does earlier development improve the later work?\"\nOverall small label \"Hypothetical transfer example\".\nBottom takeaway: \"Transfer relevant development, not the entire house design.\"",
+      "alt": "UR-031: Personas from the house task assess which developed behavior, methods, tools, simulations, and assets help a later skyscraper task. Those resources support reasoning about new requirements; the example examines improvement without copying the house design.",
+      "caption": "Examine how relevant house experience and characteristic development help the new skyscraper task."
+    },
+    {
+      "requirement": "UR-032",
+      "file": "ur-032-step-by-step-walkthrough.webp",
+      "title": "Make each hypothetical interaction concrete",
+      "prompt": "Heading: \"UR-032 · Show how the design operates step by step\"\nA readable numbered flow in two rows, with unambiguous arrows. Top row: \"1 · Select context\" (teal fragments + amber assets) → \"2 · LLM request + response\" (small reasoning robot) → \"3 · Act and observe\" (tool returns a labeled result).\nBottom row continues left-to-right with labels \"4 · Maintain fragments + assets\" → \"5 · Choose next context\" → \"6 · Show later behavior\".\nArrow from step 3 down to step 4; curved arrow from step 5 back toward next step 1 labeled \"Continue the work\". Step 6 is an observation of development, not a mandatory extra call.\nShort callout near step 3: \"Explain tool choice, effective use and installation when needed.\"\nMark entire diagram \"Hypothetical walkthrough\".\nBottom takeaway: \"Show inputs, decisions, actions, changes and what comes next.\"",
+      "alt": "UR-032: A hypothetical walkthrough makes selected context, LLM requests and responses, actions and observations, maintenance, next-context choices, and later behavior visible. It explains tool choice, effective use, and installation when relevant.",
+      "caption": "Walk through concrete interactions, actions, maintenance, context choices, and development.",
+      "revision_prompt": "Redesign the supplied UR-032 cartoon diagram to correct its conceptual content. Keep its crisp cartoonist style and landscape 3:2 canvas, but replace the dense six-panel layout entirely with four large panels in a clockwise 2 by 2 loop. Use large text and short labels; add no content beyond the text specified here.\nHeading exactly \"UR-032 · Show a complete interaction walkthrough\".\nTop subheading \"Hypothetical example\".\nTOP LEFT panel \"1 · Selected inputs\". Teal card \"Character fragment\" with first-person example \"I compare alternatives carefully.\" Amber card \"Supporting assets\" with \"Requirements + measurement tool\". Include a tiny thoughtful robot.\nTOP RIGHT panel \"2 · One LLM interaction\". Show a single clearly bordered request/response sheet with three readable entries \"Choose the work\", \"Decide fragment + asset maintenance\", \"Choose next fragments + assets\". A modest robot authors the sheet.\nBOTTOM RIGHT panel \"3 · Action and observed result\". Show a measurement tool being used on a design and result card \"Record what actually happened\". Smaller note \"Explain tool choice and installation when needed\".\nBOTTOM LEFT panel \"4 · Next interaction\". Show selected teal and amber cards plus a result card entering a new request. Label \"Use selected context + relevant results\". Below \"Show any changes and later behavior\".\nExactly four large arrows around the loop: top-left → top-right → bottom-right → bottom-left → top-left. No arrows crossing the middle. At bottom outside loop \"Make inputs, decisions, actions and development visible.\"\nNever label task facts, goals, user requests, events or current status as character fragments. No guaranteed upward progress graph. Maintenance and next-context decisions occur within the same LLM interaction. No extra text, job roles, technical code, or small-font paragraphs."
+    },
+    {
+      "requirement": "UR-033",
+      "file": "ur-033-help-no-help-missed-help.webp",
+      "title": "Look for benefit, no benefit and missed benefit",
+      "prompt": "Heading: \"UR-033 · Examine what helps and what is missed\"\nThree equal panels with a small cartoon evaluator moving between them. First teal panel \"HELPED\" / \"Used a relevant method\" / \"Asked a better question\". Second lilac panel \"DID NOT HELP\" / \"Prior method did not fit\" / \"Behavior added no value\". Third coral panel \"MISSED BENEFIT\" / \"Useful resource was not found\" / \"Needed behavior was absent\".\nAt top: \"Examine later work using earlier development\". Below panels two labeled lanes span all three: teal \"Character · affect · judgment · communication · coordination\" and amber \"Domain knowledge · tools · skills · methods\".\nSmall label \"Illustrative findings to investigate\".\nBottom takeaway: \"Assess benefits and gaps in both characteristic behavior and supporting resources.\"",
+      "alt": "UR-033: Examine three possibilities in later work: prior development helped, it did not help, or a useful resource or behavior was missing or unused. Assess characteristic behavior, affect, judgment, communication, and coordination alongside domain resources.",
+      "caption": "Investigate useful development, lack of benefit, and missed opportunities in both behavior and resources.",
+      "revision_prompt": "Edit the supplied UR-033 diagram. Preserve all text, three column contents, drawings, colors, title and bottom takeaway. Remove the two horizontal arrows between the HELPED, DID NOT HELP, and MISSED BENEFIT panels. These are three comparison categories, not a process or sequence. Replace the long arrow-shaped teal and amber strips below with rounded label strips without arrowheads; retain their text exactly. Add a short unobtrusive heading over the three panels \"Three possibilities to examine\". Do not change anything else."
+    },
+    {
+      "requirement": "UR-034",
+      "file": "ur-034-repair-design-gaps.webp",
+      "title": "Turn walkthrough findings into design repairs",
+      "prompt": "Heading: \"UR-034 · Use examples to find and repair design gaps\"\nA clear clockwise four-stage loop around a small cartoon design reviewer. \"1 · Walk through the design\" → \"2 · Identify gaps\" → \"3 · Research and resolve\" → \"4 · Revise affected design\".\nSecond stage has readable tags \"Missing behavior\", \"Contradictions\", \"Unresolved questions\".\nA reference card \"All user requirements\" has an arrow into the review loop.\nStage 4 visibly changes a blueprint page; arrow returns to stage 1 labeled \"Review the consequences\".\nBottom takeaway: \"Repair the design itself; adding examples or assurances is not enough.\"\nNo claim that a diagram or document audit proves running software.",
+      "alt": "UR-034: Walkthroughs and all user requirements guide an audit for missing behavior, contradictions, and unresolved questions. Research and resolution lead to revisions in the affected design, followed by review of the consequences.",
+      "caption": "Use findings from walkthroughs to research and repair the affected design."
+    },
+    {
+      "requirement": "UR-035",
+      "file": "ur-035-reliable-blueprint.webp",
+      "title": "Deliver a blueprint that can guide reliable implementation",
+      "prompt": "Heading: \"UR-035 · Deliver a robust, reliable blueprint\"\nA three-stage handoff: \"User requirements\" → \"Research + repair gaps\" → \"Implementation-ready blueprint\".\nIn middle, small cartoon reviewers resolve a missing connection between two design pages.\nThe final blueprint is the largest object, with four large readable sections \"How personas operate\", \"How parts work together\", \"What happens when work fails\", \"How work continues or completes\".\nA builder receives the blueprint at far right under the label \"Future implementation\".\nBottom takeaway: \"Make the design complete and coherent enough to build from.\"\nA modest qualifier: \"A blueprint explains intended behavior; implementation still needs evidence.\"",
+      "alt": "UR-035: User requirements and research into design gaps produce an implementation-ready blueprint explaining operation, relationships between parts, failure behavior, continuation, and completion. The blueprint guides future implementation without itself proving runtime behavior.",
+      "caption": "Deliver a coherent and robust explanation of how the personas should work when implemented."
+    },
+    {
+      "requirement": "UR-043",
+      "file": "ur-043-circuit-to-printer.webp",
+      "title": "Use circuit experience to improve later printer design",
+      "prompt": "Heading: \"UR-043 · From circuit work to 3D-printer design\"\nLeft conceptual circuit project labeled \"Earlier DC-to-AC task\" with three small robot collaborators and simple blocks \"DC → AC\".\nTwo arrows carry different cards toward a later 3D-printer drawing: teal \"Developed judgment + collaboration\"; amber \"Relevant circuit methods + tools\".\nMiddle a thoughtful robot selects cards at \"Check relevance\".\nRight printer project has new brief \"New mechanical, electrical and control needs\". Clearly show a fresh reasoning step \"Work through the printer design\".\nBelow a magnifying-glass comparison: \"Which prior development helps the new work?\"\nSmall label \"Hypothetical transfer example\".\nBottom takeaway: \"Show how maturation and relevant prior work help later printer design.\"\nNo executable circuit schematics or invented measured performance.",
+      "alt": "UR-043: Personas from the DC-to-AC example assess which developed judgment, collaboration, methods, tools, and other resources help a new 3D-printer design. Fresh reasoning addresses the printer’s distinct needs and examines the value of earlier development.",
+      "caption": "Show how circuit experience and characteristic maturation contribute to the later 3D-printer design."
+    },
+    {
+      "requirement": "UR-044",
+      "file": "ur-044-sustained-purposeful-work.webp",
+      "title": "Make continued effort serve a purpose",
+      "prompt": "Heading: \"UR-044 · Examine sustained purposeful work\"\nA broad timeline labeled \"More time available\" with three cycles \"Create\" → \"Critique + collaborate\" → \"Improve + reflect\", each with small robot collaborators working on the same evolving artifact. Use a loop arrow to show further work is possible, not mandatory.\nAbove the timeline a fixed card \"User's need\" points to every cycle.\nBelow show four questions in clear cards: \"Better artifact?\", \"Better fit to the need?\", \"Useful collaboration?\", \"Persona development?\"\nAdd \"Hypothetical extended-work example\" as a visible label.\nBottom takeaway: \"Investigate what continued effort improves and why.\"\nDo not depict automatic improvement with time, an imposed time quota, or guaranteed upward scores.",
+      "alt": "UR-044: A hypothetical extended-work timeline examines repeated creation, critique, collaboration, improvement, and reflection against the user’s need. It asks whether sustained effort improves the artifact, usefulness, cooperation, and the persona rather than assuming time guarantees progress.",
+      "caption": "Examine the contribution of sustained individual and group effort to useful work and development."
+    },
+    {
+      "requirement": "UR-045",
+      "file": "ur-045-reasons-to-continue-or-stop.webp",
+      "title": "Explain why to continue or stop",
+      "prompt": "Heading: \"UR-045 · Justify continuing or stopping\"\nA cartoon persona compares two input cards \"User's task\" and \"Current result\". Both feed a central question diamond \"Is there worthwhile improvement to pursue?\"\nTwo clearly labeled branches. \"Continue\" leads to \"Name the useful next improvement\" then loops to \"Work and reassess\". \"Stop\" leads to \"Explain why the result is sufficient now\" and \"Report remaining limitations\".\nAbove the choice write \"Use task-relevant reasoning\". A small example bubble at continue: \"One assumption still needs checking.\" A small example bubble at stop: \"The requested comparison is complete.\" Mark examples \"Illustrative reasons\".\nBottom takeaway: \"Tie the choice to the user's need and the value of further work.\"\nDo not use a fixed score threshold, timer, quota, or mandatory automated decision.",
+      "alt": "UR-045: A persona compares the user’s task with the current result and considers worthwhile improvement. It can continue with a named useful next step or stop with a reason the result is sufficient for now, reporting remaining limitations.",
+      "caption": "Explain continuation or stopping in terms of the task, current result, and value of further improvement."
+    },
+    {
+      "requirement": "UR-046",
+      "file": "ur-046-clarify-and-proceed.webp",
+      "title": "Clarify sparse requests and keep making progress",
+      "prompt": "Heading: \"UR-046 · Clarify a sparse request and proceed\"\nLeft human bubble \"Help me design this.\" → small persona bubble \"What matters most?\" labeled \"Ask useful questions\".\nThen a clear branching diagram. Upper path \"Requester answers\" → \"Use the clarification\". Lower path \"Requester unavailable\" splits into \"Ask peers / receive input\" and \"State a reasonable interpretation\"; these rejoin.\nAll branches end at the same large right-hand box \"Make useful progress\". A lower arrow from progress to clarification says \"Revise when new information arrives\".\nSmall visible note \"Do not wait indefinitely\".\nBottom takeaway: \"Use questions, social input and reasonable interpretation to clarify the work.\"\nNo automatic permission grants or invented user consent; this is ordinary task clarification.",
+      "alt": "UR-046: A persona asks useful questions about a sparse request. It uses the requester’s answer when available; otherwise it can seek or receive peer input or state a reasonable interpretation and proceed, revising as new information arrives.",
+      "caption": "Seek useful clarification and make reasonable progress when the original requester is unavailable."
+    },
+    {
+      "requirement": "UR-047",
+      "file": "ur-047-reflect-deliver-revisit.webp",
+      "title": "Delivery can be followed by later improvement",
+      "prompt": "Heading: \"UR-047 · Reflect, deliver and revisit\"\nLeft two sources \"Self-reflection\" (small robot asks \"What can improve?\") and \"Peer dialogue\" (two robots ask \"Is this sufficient?\") feed a middle decision \"Judge the work in context\". Beneath it: \"Task · feedback · time · resources · character\".\nTwo independent output branches with different small robot personas. Teal robot: \"Deliver sufficient work now\". Lilac robot: \"Continue a useful improvement\".\nFrom delivered result a clearly visible later loop \"Revisit when worthwhile\" returns to reflection. The delivered artifact remains visibly labeled \"Delivered\".\nBottom takeaway: \"Personas may make different choices; completion does not forbid later improvement.\"\nDo not force every persona to continue or stop together.",
+      "alt": "UR-047: Self-reflection and peer dialogue inform characteristic judgments about completion using the task, feedback, time, and resources. One persona can deliver work sufficient for now while another continues; a delivered result can later be revisited.",
+      "caption": "Reflection and dialogue guide completion, independent continuation choices, and later revisiting."
+    },
+    {
+      "requirement": "UR-048",
+      "file": "ur-048-developing-persona-society.webp",
+      "title": "Development also happens outside assigned tasks",
+      "prompt": "Heading: \"UR-048 · A developing society of personas\"\nTwo equally prominent parallel lanes over a timeline labeled \"Ongoing interactions over time\".\nTop lane \"Without an assigned task\": three distinct small personas \"Converse\" → \"Share perspectives\" → \"Develop relationships\".\nBottom lane \"Working on a shared need\": same three distinctive personas \"Coordinate\" → \"Question + collaborate\" → \"Reflect on outcomes\".\nBoth lanes feed a teal card \"Developed characteristic behavior\" then a final question \"Does this help later work and cooperation?\"\nLabel scene \"Hypothetical society-like development\".\nBottom takeaway: \"Examine social and task interactions, and their later value.\"\nNo claim that mere time guarantees maturation or that saved social history is itself character.",
+      "alt": "UR-048: Hypothetical personas interact over time both without assigned tasks and while working on shared needs. Conversation, perspectives, relationships, coordination, and reflection can inform characteristic development whose value is then examined in later work and cooperation.",
+      "caption": "Examine ongoing social and task interactions and whether their development helps later cooperation."
+    },
+    {
+      "requirement": "UR-049",
+      "file": "ur-049-reasoned-quality-judgment.webp",
+      "title": "Quality comes from reasoned characteristic judgment",
+      "prompt": "Heading: \"UR-049 · Judge quality through reasons and critique\"\nA large readable loop: \"Characteristic standards\" → \"Self-critique + peer disagreement\" → \"Examine evidence\" → \"Revise or accept with reasons\".\nAt standards a teal card \"I challenge weak assumptions.\" At critique two cartoon personas exchange \"Does this meet the need?\" and \"This assumption is unclear.\" At evidence show amber cards \"Factual checks\" and \"Contract checks\". At final show a revised artifact and a reason note.\nA separate small note beside evidence: \"Passing checks informs judgment; it does not settle overall quality.\"\nBelow loop: \"Look for better later behavior, not just a saved procedure.\"\nBottom takeaway: \"Persona reasoning decides quality; a hardcoded score must not replace it.\"\nNo numerical scores or guaranteed improvement graph.",
+      "alt": "UR-049: Characteristic standards, self-critique, peer disagreement, and factual and contract evidence inform reasoned revision or acceptance. Passing checks alone does not settle overall quality, and saving a procedure alone does not establish character maturation.",
+      "caption": "Use characteristic standards, critique, and evidence to reason about quality and later improvement."
+    },
+    {
+      "requirement": "UR-050",
+      "file": "ur-050-choose-how-to-collaborate.webp",
+      "title": "Personas choose and adapt how they work together",
+      "prompt": "Heading: \"UR-050 · Personas choose how to work and collaborate\"\nTop inputs \"Character\", \"Situation\", \"Actual feedback\" converge into three small distinct thinking personas at a shared decision bubble \"What approach will help?\"\nFive compact choice cards connected to their reasoning: \"Choose tools\", \"Ask for help\", \"Review work\", \"Coordinate contributions\", \"Change approach\".\nArrow to a result loop \"Do the work → Find problems → Correct them → Judge the result\". Feedback loops back to the personas' reasoning.\nVisible notes: \"Contributions can change as work develops.\" and \"Useful user questions remain possible.\"\nBottom takeaway: \"Personas carry the task through using their own reasoning.\"\nSmall qualification: \"No fixed runtime roles or dependence on continual external coaching.\"",
+      "alt": "UR-050: Character, the situation, and actual feedback inform persona choices about tools, help, review, coordination, and changing approaches. Personas perform, diagnose, correct, and judge the work themselves, with useful user questions still possible and without fixed runtime roles or continual outside coaching.",
+      "caption": "Let personas reason about their approach and cooperation, adapting contributions as work develops."
+    },
+    {
+      "requirement": "UR-051",
+      "file": "ur-051-direct-provider-interfaces.webp",
+      "title": "The runtime calls model providers directly",
+      "prompt": "Heading: \"UR-051 · Use direct model-provider interfaces\"\nA simple large system diagram with three boxes. Left \"Persona runtime\" with a small cartoon persona and task context. Middle small connector label \"Direct API calls\". Right \"Model provider\" / \"Inference\".\nTwo separate bold arrows connect runtime directly to provider: outgoing \"Request: selected context\" and returning \"Response: model reasoning output\". Use clear arrowheads in opposite directions, with separate vertical positions.\nBelow, a detached gray terminal box \"Codex CLI\" with a crossed-out connector labeled \"Not a required runtime dependency\". Keep it off the active path.\nBottom takeaway: \"Run persona inference through provider APIs directly.\"\nNo provider logos, specific API method names, or application-code snippets.",
+      "alt": "UR-051: The persona runtime sends selected context directly to a model provider through its API and receives the inference response directly. The Codex CLI is not a required runtime or orchestration dependency.",
+      "caption": "The runtime exchanges inference requests and responses directly with model providers."
+    },
+    {
+      "requirement": "UR-052",
+      "file": "ur-052-no-application-limits.webp",
+      "title": "Remove application gates while reporting what happens",
+      "prompt": "Heading: \"UR-052 · No application limits or safety gates\"\nA top action path: \"Persona work\" → \"Model calls + tools + resources\" → \"Actual outcome\", with a small cartoon persona actively proceeding. There is no barrier on that path.\nBelow left, a clearly separate box \"Remove application-enforced gates\" contains three crossed-out labels \"Quotas\", \"Permission / approval gates\", \"Safety envelopes\".\nBelow right a reporting board \"Keep honest reporting\" with four labels \"Usage + cost\", \"Provider rejections\", \"Unavailable resources\", \"Incomplete results\".\nA small clear note \"Earlier evidence keeps its original meaning.\"\nBottom takeaway: \"Removing application gates does not guarantee success.\"\nThis is the product requirement, not a claim that provider or host limitations vanish. Do not show infinite compute, zero cost, automatic success, or instructions for bypassing external policies.",
+      "alt": "UR-052: Persona work proceeds without application-enforced quotas, permission or approval gates, or safety envelopes. Actual usage, cost, provider rejections, unavailable resources, and incomplete outcomes remain honestly reported, and earlier evidence retains its original meaning.",
+      "caption": "Remove application-enforced gates while preserving accurate usage, outcome, and historical reporting."
+    },
+    {
+      "requirement": "UR-053",
+      "file": "ur-053-create-share-adapt-skills.webp",
+      "title": "Skills can be created, shared, chosen and adapted",
+      "prompt": "Heading: \"UR-053 · Create, share, choose and adapt skills\"\nFour connected stages. \"1 · Develop a useful skill\" with teal-accent persona creating amber card \"Image selection skill\"; \"2 · Share in a discoverable place\" with common folder \"Shared skills + search cues\"; \"3 · Another persona chooses it\" with lilac-accent persona thinking \"Does this fit my task?\"; \"4 · Adapt and use it\" with that persona tailoring the amber skill card to \"My task\".\nSmall label \"Illustrative skill; any kind is allowed\".\nA teal fragment card below the choosing persona says \"My character guides how I find and use skills.\" Draw an arrow from it to the choice, not into the skill's content.\nBottom takeaway: \"Skills remain supporting assets and can grow through ordinary activity.\"\nSmall note: \"The collection is not limited to developer-supplied skills.\"",
+      "alt": "UR-053: One persona develops a useful skill and places it in a common discoverable location. Another persona chooses, adapts, and uses it for its task. Characteristic fragments guide discovery and use, while the skill’s instructions and procedures remain supporting assets. The image-selection example does not limit the kinds of skills available.",
+      "caption": "Personas can develop and share skills of any kind, then choose and adapt them as supporting assets."
+    }
+  ],
+  "prompt_composition": "For each image, concatenate shared_prompt, a newline, and that image's prompt.",
+  "revision_process": "Where revision_prompt is present, the built-in image tool edited the initially generated image using that prompt. The final selected output was encoded as lossless WebP without changing decoded pixels."
+}

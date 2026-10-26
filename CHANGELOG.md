@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — self-contained requirement diagrams
+
+Replaced the 43 requirement cartoons with labeled concept diagrams that explain
+inputs, choices, relationships and outcomes inside each image. Added diagrams for
+UR-052 and UR-053, so all 45 current requirements have an illustration. Updated
+accessible descriptions and captions, and retained the generation prompts with
+the artwork. This is an editorial illustration change; the requirement wording
+and design authority remain unchanged.
+
 ## 26 October 2026 — arrangement assent follows changed duties and authority
 
 Removed the default requirement for unchanged contributors to approve a new
