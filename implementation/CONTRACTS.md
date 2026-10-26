@@ -355,6 +355,13 @@ Literal and regex search, authored indexes and cues, listing and exact reading f
 
 **Pagination and completion.** State whether pages refer to a snapshot, exact revision or live view, and whether completion describes a page, scan or whole identified corpus. A requested page size controls that result, not the number of later requests or total work. Return the actual continuation cursor when more material remains. A live cursor alone cannot prove exhaustive coverage of an earlier corpus.
 
+When messages, authored decisions, tool observations and files have distinct
+query interfaces, identify the requested record kind and matching surface in
+each result, including unsuccessful queries. A complete message search cannot
+establish that a correction is absent from decisions or tool results. Keep that
+scope next to completeness and no-match claims; provide the appropriate
+discovery or exact-read route without silently searching another corpus.
+
 Record cursor invalidation and incomplete coverage honestly. Further queries, reformulation and stopping are persona choices. No automatic traversal, fixed probe sequence or mandatory search call follows from the interface.
 
 **Failures and evidence.** Distinguish no match, a missing scope, a stale reference, an unsupported or invalid pattern, an incomplete search, and an actual storage or provider error. Do not silently replace an exact old revision with newer bytes. Application permission filtering and cumulative exhaustion gates are removed under UR-052. Host and service access errors remain actual outcomes.

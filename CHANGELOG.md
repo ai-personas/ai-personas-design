@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — qualify history-search coverage by record kind
+
+Query results identify the requested record kind and matching surface beside
+their coverage claims. A complete message search does not establish absence
+from authored decisions, tool observations or files. Navigation exposes the
+appropriate routes while preserving persona-chosen queries and exact reads.
+
 ## 26 October 2026 — distinguish chosen assumptions from external facts
 
 Clarified that selecting an approach cannot establish how an existing tool,
