@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — transparent requirement diagrams
+
+Removed the opaque canvas backgrounds from all 45 requirement concept flows so
+the page theme shows through. Retained the colored diagram panels and added thin
+light outlines around exposed text and connectors for contrast on dark and light
+backgrounds. Saved the images as lossless WebP with transparency and recorded the
+edit prompt. The requirement wording, diagram meanings and image links are
+unchanged.
+
 ## 26 October 2026 — requirement intent as concept flows
 
 Rebuilt all 45 requirement illustrations as cartoon concept flows grounded in

@@ -471,5 +471,14 @@
       "requirement": "UR-053"
     }
   ],
-  "format": "Lossless WebP; original generated dimensions and decoded RGB pixels preserved."
+  "format": "Lossless WebP with preserved alpha and visible pixels; transparent canvas with local pastel node fills.",
+  "transparency_edit": {
+    "edited_on": "2026-10-26",
+    "generator": "OpenAI built-in image_gen",
+    "source_commit": "31bc68ee3a8f741c3504f372014bf759a252e5c7",
+    "scope": "All 45 images listed above; preserve concept flows, wording, identifiers, icons and connections.",
+    "transparent_background": true,
+    "prompt": "Use case: background-extraction.\nAsset: existing cartoon concept-flow diagram for a GitHub requirements document, displayed on dark, black, light and colored page themes.\nThe supplied image is the EDIT TARGET. Make its outer page/canvas background genuinely transparent (alpha), replacing all the white or cream paper field and its faint background texture. The page theme must show through the margins and spaces between diagram elements. No solid replacement background, white rectangle, checkerboard pattern baked into the artwork, backdrop, shadow slab or new frame.\nPreserve the existing diagram exactly: same requirement ID, title, every word, text spelling, node positions, groups, connectors, arrowheads, flow direction, icons and hand-drawn ink/watercolor style. Do not redesign, simplify, paraphrase, omit or invent content. No task examples or persona names.\nKeep the original pastel fills INSIDE diagram nodes and the drawn document/icon interiors so their existing dark text stays readable. Those local content fills are foreground artwork, not the page background. Remove only the outer canvas and empty gaps.\nFor dark-theme readability, give the title, any dark text outside colored nodes, and any dark freestanding connector or line a very thin soft-ivory edge/keyline, closely tracing the ink. Keep the dark ink itself. This small outline must make the existing content readable on both black and white themes without adding light text boxes or a page-sized pale area. Keep colored connectors and node fills intact and edges crisp.\nOutput an actual transparent image with an alpha channel; preserve the entire composition and canvas aspect ratio without clipping.",
+    "review": "Viewed all 45 transparent diagrams on black, white and warm backgrounds; preserved colored node interiors and added thin light outlines to exposed labels and connectors for contrast."
+  }
 }
