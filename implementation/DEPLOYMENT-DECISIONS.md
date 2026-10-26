@@ -60,6 +60,12 @@ while checking subsequent text, identity and actual terminal completion.
 Shape failures identify the offending field without copying response text;
 a coarse historical diagnostic cannot establish a more specific cause.
 
+A foreground interruption must be a valid retained session outcome. After
+owned execution drains, record the interrupted session's actual counters and
+identity before releasing its owner. Session validation must accept the stop
+labels its driver emits. A session interruption neither completes the task nor
+changes a persona's continuation; a missing historical terminal stays unknown.
+
 An installed catalogue retains its complete returned body in the private
 onboarding journal. Completed probe carriers remain private evidence even when
 they do not establish proof. A content filter or failed proof check must not

@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — retain interrupted session outcomes
+
+Aligned terminal validation with the foreground driver's interruption outcome.
+Draining owned execution is followed by a recorded session end with actual
+counters and identity. It does not complete the task, change persona choices or
+reconstruct an earlier missing terminal.
+
 ## 26 October 2026 — distinguish empty stream content representations
 
 Clarified that allocating an empty assistant text part does not supply text or
