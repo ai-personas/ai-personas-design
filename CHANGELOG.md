@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — retire superseded execution diagrams
+
+Removed three unlinked illustrations that still prescribed restricted context
+repair, source-permission gates and storage quotas. These mechanisms were
+superseded by UR-052. Current context, provenance and resource-accounting rules
+remain in the linked design documents; the earlier illustrations remain in Git
+history.
+
 ## 26 October 2026 — transparent requirement diagrams
 
 Removed the opaque canvas backgrounds from all 45 requirement concept flows so
