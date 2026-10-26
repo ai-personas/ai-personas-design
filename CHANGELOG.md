@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — attribute network failure diagnostics
+
+Distinguished transport stages and observed error categories within each attempt.
+Concurrent calls retain separate diagnostics, with fingerprints in place of
+free-form transport text. Missing details, remote outcomes and usage remain
+unknown; diagnostic capture does not change dispatch or recovery conditions.
+
 ## 26 October 2026 — keep published peer results discoverable
 
 Added exact result cues for commands from a peer's latest accepted work decision.

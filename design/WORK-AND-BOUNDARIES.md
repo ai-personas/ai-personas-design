@@ -796,6 +796,15 @@ An unfinished or uncertain action retains its identity and actual dispatch histo
 
 **Useful diagnostics.** Report actual calls and effects, known usage, unresolved usage, current work state, stopped participation and real provider or host failures separately. A read-only view changes neither the goal's completion nor a persona's authored continuation. Historical quota exhaustion must remain historical, and an unavailable diagnostic must not be replaced with a fabricated zero balance or successful outcome.
 
+Where a transport exposes error categories, retain the actual stage and available
+connection, timeout, body or I/O information with the corresponding attempt.
+Concurrent calls must not share mutable diagnostic capture. Keep credentials,
+request bodies and free-form transport text out of ordinary receipts; a
+fingerprint can distinguish recurring unknown causes without copying their text.
+An absent diagnostic remains unknown. These observations establish neither a
+remote root cause nor permission to replay, confirmed remote stopping or known
+charges, and do not change an existing continuation's recovery conditions.
+
 ## Pause, amendment, and accountable stopping
 
 Stopping prevents new affected work and addresses work already underway; it does not erase what happened. An actual pause, cancellation or explicit withdrawal of participation stops new affected admissions and initiates its applicable stop procedure. Historical allowance expiry does not create an application deadline. Show stop requested, stop acknowledged, already occurred, and still unknown separately. Late receipts remain evidence and accounting, not renewed authority. A compensating action is a new attributed action with its own actual outcome. Stopping does not undo publication or physical effects.
