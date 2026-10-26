@@ -504,6 +504,14 @@ An unanswered ordinary question follows the [clarification boundary](../design/W
 
 **Commitments and handoffs.** Keep membership, a contribution offer, commitment acceptance, and actual contribution distinct. Only real endorsements bind the named participant and terms. A handoff transfers responsibility only after the receiver accepts, or an authorized disposition explicitly replaces it.
 
+Compute an arrangement's required assent from its actual changed commitments,
+artifact transfers and old and new decision holders. Recheck the exact
+delegation, current arrangement, affected acceptances and preserved duties at
+adoption. Unchanged contributors do not form a compulsory approval quorum.
+Adoption supplies no endorsement of the result beyond the actual attributed
+judgments, and it never resumes a stopped participant. Earlier records retain
+the policy and build meaning that produced them.
+
 Decline and nonresponse create no substitute acceptance, replacement persona, punitive reputation, or dependency on someone who never agreed.
 
 **Organization.** Persona-owned organization uses discovery, proposals, communication, accepted commitments, and evidence-led revision. No task keyword, fixed profession roster, compulsory coordinator, birth rule, or hidden domain pipeline chooses the solution. A human-imposed constraint or explicitly adopted reusable method may legitimately guide work. Evaluation needs evidence of the actual orchestration policy; a convincing unscripted transcript is insufficient.

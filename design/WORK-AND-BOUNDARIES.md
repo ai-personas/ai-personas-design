@@ -169,6 +169,18 @@ A direct answer or exploratory contribution need not first establish a formal co
 
 **Changed terms.** Material amendments outside accepted terms or delegation require fresh acceptance. An amendment genuinely within an accepted envelope records that basis without renegotiating every detail. Earlier acceptance remains historical; it does not automatically attach to new terms. Acceptance of responsibility establishes a commitment, not execution or successful delivery.
 
+**Assent follows the changed scope.** Within a requester delegation that allows
+personas to organize the result, require personal assent from changed commitment
+owners, both parties to an artifact transfer, and the old and new decision
+holders when their result rule changes. An unchanged contributor gains no veto
+or approval duty merely from participating. A persona may volunteer for an
+unowned outcome and its initially unassigned decision role through its own exact
+proposal and assent when no other party is affected. This does not claim that
+peers endorsed its candidate or discharge their separate commitments. A result
+decider cannot use that role to enlarge the delegation or change others' duties.
+Keep the original terms, actual assent and dissent attributable; changing the
+implementation does not reinterpret an earlier agreement.
+
 **Handoffs.** Offering a handoff leaves the existing responsibility intact. Transfer must check the exact current terms, current owner, exact receiver, authentic acceptance, adopted decision rights and relevant lifecycle state in one coherent transition. Competing transfers, cancellation, and revocation cannot all succeed from an outdated view. A declined, inaccessible, or obsolete offer leaves an accountable owner or an explicit authorized ownership gap. Silence is not a successor's consent.
 
 ### Discovery, disagreement, and revisable organization

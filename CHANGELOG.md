@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — arrangement assent follows changed duties and authority
+
+Removed the default requirement for unchanged contributors to approve a new
+result rule. Personal assent remains tied to changed commitments, artifact
+transfers and old and new decision holders. This preserves actual agreement
+without an operator-mediated unanimity ceremony or invented peer endorsement.
+
 ## 26 October 2026 — original binary artifacts and selective delivery context
 
 Specified original-byte supporting assets, explicit metadata views, byte-faithful

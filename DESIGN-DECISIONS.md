@@ -272,6 +272,24 @@ A narrowly scoped non-persona utility may return attributed observations. A help
 
 The continuing persona decides how to organize its permitted work. It may plan, refine methods, find capabilities, ask peers for assessment, challenge other personas, and accept specialized contributions. The host does not prescribe a profession roster, permanent supervisor, fixed team size, compulsory reviewer, or universal priority formula.
 
+**Scope arrangement assent to affected duties and authority.** Requiring every
+accepted contributor to approve any result-rule change creates a universal
+approval ceremony, including for peers whose commitments remain unchanged and
+who have finished their contribution. It can make ordinary completion depend on
+an operator reviving unrelated participation. UR-050 and UR-052 instead call for
+persona-owned cooperation without that application gate. The default organizing
+delegation therefore requires assent from changed commitment owners, artifact
+transfer parties and old and new decision holders. This preserves real personal
+commitments while allowing a volunteer to take an unowned outcome and initially
+unassigned decision role. Giving the new decider unilateral power over existing
+duties would lose actual consent; requiring the whole cohort would retain the
+unnecessary gate. Neither alternative is adopted. The
+[work contract](design/WORK-AND-BOUNDARIES.md#discovery-disagreement-and-revisable-organization)
+keeps actual agreement and dissent distinct from quality. Working evidence must
+show adoption by the affected parties without invented peer assent, preservation
+of existing rights and duties, and subsequent persona-chosen work and delivery.
+Source changes or a successful build alone do not prove that behavior.
+
 These choices remain subject to the accepted mandate. A review already required by that mandate remains required; an optional peer suggestion does not automatically become a blocker.
 
 A native editable artifact, an analysis, a rendered view, and an outside approval are distinct results. Each needs its own evidence where requested. The earlier delivery addendum's separate DLV requirement family remains retired as redundant. Its useful coverage and historical identifiers remain mapped in [historical results](evaluation/HISTORICAL-RESULTS.md).
