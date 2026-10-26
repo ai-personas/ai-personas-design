@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — develop chosen interpretations of sparse needs
+
+Distinguished unspecified choices a persona can make from indispensable outside
+facts it must obtain. A request need not determine a unique solution; personas
+can carry their disclosed interpretation through concrete details while asking
+useful questions. Unanswered preferences do not by themselves stop that work,
+and authored assumptions do not become user requirements or verified outside facts.
+
 ## 26 October 2026 — overlap independent initial authorship
 
 Clarified that a fresh cohort's initial character-authoring calls may overlap
