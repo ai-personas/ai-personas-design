@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — attribute activity to its actual work
+
+Inspection keeps each work's calls and recovery holds separate from a persona's
+activity elsewhere. A later task does not make a stopped earlier contribution
+appear active; cross-work execution dependencies remain explicitly identified.
+
 ## 26 October 2026 — qualify history-search coverage by record kind
 
 Query results identify the requested record kind and matching surface beside
