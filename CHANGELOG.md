@@ -2,6 +2,12 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — identify missing tags without guessing a variant
+
+Extended structural rejection hints to absent members required by every schema
+alternative. An omitted operation tag can be named while its intended variant
+remains unresolved. Original bytes and whole-response rejection are preserved.
+
 ## 26 October 2026 — preserve reported usage in recovery notices
 
 Removed the blanket unknown-usage label from recovery observations that already

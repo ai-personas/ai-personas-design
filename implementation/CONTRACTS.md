@@ -131,6 +131,10 @@ opaque and unknown variants unresolved. Diagnostic hints describe the rejected
 shape; they do not infer intent, fill omitted fields, alter the original bytes,
 relax validation or supply a replacement persona decision.
 
+If an absent tag leaves the variant unresolved, identify missing schema-owned
+members required by every alternative. Do not guess a variant or present its
+particular fields as universally required. Preserve whole-response rejection.
+
 When a proposed creation conflicts with an existing immutable work record,
 identify the record type and the supplied identity that caused the conflict.
 Preserve the existing record and whole-response rejection. The diagnostic does
