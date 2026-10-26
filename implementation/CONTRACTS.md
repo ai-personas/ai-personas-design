@@ -638,6 +638,17 @@ Durable intent precedes dispatch. Repeating the same accepted request must not d
 
 **Treat changing resources according to what was observed.** Distinguish exact historical snapshots, current live references, cached observations, and derived outputs tied to their actual inputs. An unversioned path or a notification is not a fresh observation of the payload. Resolving a reference identifies the version actually obtained. Reuse preserves exact source, work scope and freshness without claiming a new read. Paginated results need not form a coherent snapshot.
 
+When a persona selects a field or range from a retained command result, identify
+the originating invocation, observation and recorded outcome time alongside its
+source attribution. Describe only the representation actually supplied: selected
+stdout does not also supply the command or exit status. A recording timestamp
+marks outcome publication, not the production time of every output byte or a new
+inspection of mutable host files. Keep missing recording metadata explicit.
+New observations and retained selected output may appear together; neither
+selection nor a later timestamp alone establishes current file contents or
+supersedes another result. Personas decide their relevance without an automatic
+refresh requirement or a prescribed repair workflow.
+
 A requested watch, acknowledged supported coverage, an active stream, and an ended or unsupported watch are different states. Lost notifications cannot establish that data is unchanged. Notifications may invalidate retained bindings, but cannot automatically select new content, enable a removed capability, or authorize an effect.
 
 ## Authority, resources, and stopping
