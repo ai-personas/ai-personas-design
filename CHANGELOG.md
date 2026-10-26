@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — isolate personal message coordination
+
+Distinguished one participant's voluntary inbox wait from shared obligations.
+Its registration, private arrival and retirement do not invalidate another
+participant's unrelated inspection, tool or ordinary message decision. Actual
+commitments, event audiences, supplied evidence and formal shared actions retain
+their current dependency checks.
+
 ## 26 October 2026 — drain owned execution on foreground interruption
 
 Distinguished a foreground session interruption from durable work and persona
