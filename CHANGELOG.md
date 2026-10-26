@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — reuse unchanged decoded runtime state
+
+Extended byte-verified host decode reuse to ordinary state loads. Each Runtime
+may retain its current immutable head and decoded state while returning separate
+working state to callers. Fresh reads, configuration comparisons, logical read
+charges, Closeout handling and mutation checks remain required. Session waits
+release the cached tree. Extra retained memory and repeated-read savings are
+distinct from live task latency and quality.
+
 ## 26 October 2026 — register independent personal waits concurrently
 
 Extended independent personal coordination to decisions that register their own
