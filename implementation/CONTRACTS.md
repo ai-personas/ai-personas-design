@@ -155,10 +155,14 @@ execution.
 When a host command consumes an exact supporting-asset reference as standard
 input, resolve its actual representation and range. Use the ordinary qualified
 file resolver for complete UTF-8 text, once-decoded JSON strings and measured
-UTF-8 byte ranges. A retained command-field reference must not require copying
+UTF-8 byte ranges. Supporting assets may also retain arbitrary original bytes.
+Their explicit byte-metadata representation supplies exact length and SHA-256
+without decoding or exposing the body. When used as command stdin, that reference
+materializes the complete original bytes rather than the metadata descriptor.
+A retained command-field reference must not require copying
 the script through a new model response or substituting the whole result
 document. Bind the source revision, representation, range and qualification
-closure, and retain the byte count and digest of the actual stdin text. Recheck
+closure, and retain the byte count and digest of the actual stdin bytes. Recheck
 those bytes and bindings before dispatch. This materialization neither supplies
 model context nor proves that the process consumed the input or succeeded.
 
@@ -449,6 +453,17 @@ Cached prefixes, previous-response links and hidden provider history neither pro
 The former application overflow mode and finite repair allowance are historical under UR-052. The current design follows [faithful assembly and actual failure handling](../design/PERSONA-CORE.md#selection-overflow-repair): no configured context ceiling, repair quota or separate safety approval prevents an ordinary decision.
 
 Preserve exact selected material, mandatory persona and work context, and required qualifications. Report real provider, model-context or host failures without silent truncation, fabricated maintenance, invented next-context choices or replay of rejected actions. A preview or inventory does not establish that its underlying text reached the model.
+
+After an exact provider `context_length_exceeded` rejection, complete pending
+host results and supporting-file reads present in that failed input may be
+delivered as explicitly labeled exact references or byte metadata. Preserve the
+original request, read/result, source identity and current qualifications. This
+is delivery recovery for an unconsumed observation, not a change to authored
+optional selections or mandatory character. The fresh input states that the
+requested body was not supplied successfully. Use the actual provider rejection,
+not a guessed size threshold; a second rejection of metadata supplies no new
+projection through this route. The ordinary primary chooses subsequent reads,
+tool use, context and continuation, and acceptance consumes the pending override.
 
 Where another decision can actually be supplied, the persona chooses useful context changes, maintenance, methods and continuation. Every such decision retains the ordinary work, fragment maintenance, asset maintenance and next-context responsibilities. The application does not prescribe a separate repair workflow or infer that a smaller selection makes the work complete.
 

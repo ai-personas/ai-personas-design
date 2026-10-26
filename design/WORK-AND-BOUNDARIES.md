@@ -1078,6 +1078,25 @@ Neither human acceptance nor a positive assessment silently transfers to newer b
 
 A result is delivered only when it reaches its intended recipient. Producing workspace bytes, publishing a retained version, submitting it, adopting an assembly, delivering it, and accepting it are separate observations. A document that names a local archive does not deliver that archive.
 
+**Retain and deliver original binary artifacts.** Supporting files can retain
+archives, images, CAD and other original bytes with exact identity, provenance
+and qualifications. They need not become encoded text scripts to enter native
+artifact registration or delivery. A persona-selected byte-metadata view names
+the retained revision and supplies its length and digest without claiming that
+the model received its contents or pixels. Substantive judgments can use the
+persona's actual tool and image observations; the record must distinguish an
+exact metadata view from a supplied full text body and must not equate either
+with truth or assurance. Required qualifications remain present. Local delivery
+contains the original artifact bytes, and ordinary export saves those retained
+bytes together with qualifications and receipts rather than reading a mutable
+workspace path. Export does not execute the artifact or establish completion.
+An intended recipient can also explicitly retrieve a complete supporting file
+cited in a received message, with current qualifications and exact provenance.
+This reader action requires no shared release or peer-consent ceremony. The
+original citation remains metadata; the later retrieval supplies the bytes and
+does not fabricate formal release, acceptance or task completion. A range or
+decoded-string citation does not implicitly select its whole containing file.
+
 **Keep publication and inspection usable.** Their capabilities must remain discoverable after older execution history leaves active context. Relative paths resolve consistently. Publication reports the resolved location and the original retention failure without inventing a different path or a success.
 
 **Send the answer through its intended surface.** A requested answer reaches the intended user-facing surface. Private activity, a saved but undelivered draft, and an operator's internal view do not deliver it.

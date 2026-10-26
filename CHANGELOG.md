@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — original binary artifacts and selective delivery context
+
+Specified original-byte supporting assets, explicit metadata views, byte-faithful
+command input and local export. Distinguished a model judgment based on an exact
+metadata view from full-body supply. Extended actual provider-context rejection
+recovery to unconsumed supporting-file reads while preserving authored selections,
+original evidence, current qualifications and primary-owned continuation.
+
 ## 26 October 2026 — settle prelaunch stops and explain provider rejections
 
 Extended local-call cleanup to stops that arrive before provider dispatch,
