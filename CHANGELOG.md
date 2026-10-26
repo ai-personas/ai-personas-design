@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 26 October 2026 — discoverable voluntary message waits
+
+Clarified that a persona may register a future local-message wait in its current
+decision and choose to await it. Continuation instructions should expose a
+selectively readable exact guide, without requiring catalogue discovery or
+implying that an existing dependency is the only route. Waiting obliges no sender
+and does not resume stopped participation.
+
 ## 26 October 2026 — retire superseded execution diagrams
 
 Removed three unlinked illustrations that still prescribed restricted context

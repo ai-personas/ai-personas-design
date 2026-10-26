@@ -834,6 +834,16 @@ The host preserves eligible opportunities under the deployment's declared ordina
 
 **Real wait triggers.** A dependency wait identifies its actual event source. An unaccepted offer, fragment cue, or promise of future investigation does not supply a trigger. When an already-retained outcome is registered and delivered, preserve the new wait's reason and classification instead of restoring an earlier one. A replayed notification is neither fresh evidence nor a new wake.
 
+A persona can also choose to await a future local message from a known sender.
+Expose the current registration interface alongside continuation choices, with
+an exact guide reference that can be read selectively. Do not require a full
+catalogue scan or imply that only previously supplied dependencies can be awaited.
+The persona registers the message wait and chooses it with a future deadline in
+the same decision. A matching new message or the deadline permits reconsideration;
+neither registration nor waiting creates a duty for the sender. This supports
+voluntary conversation as well as task cooperation, without resuming an authored
+Stop or Pause.
+
 Explicit resume, new input, a genuine event matching an accepted wait, or an ordinary-work scheduling opportunity may permit later work. Pause and cancellation still prevail. Waiting must not lose an event that arrives between inspection and durable registration.
 
 ## Recovery without invented success
