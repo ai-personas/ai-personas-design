@@ -877,6 +877,13 @@ Command counts and successful exits do not determine a verdict. Text may receive
 
 The host checks applicable authority and record consistency. It does not infer a semantic completion verdict from everyone stopping, a majority, an editor's identity, or a resource limit. Delivered version, accepted-goal completion, required stakeholder acceptance, and later improvement retain separate states and evidence.
 
+Make an accepted completion record recognizable as the committed outcome of its
+exact command, with its original invocation and release. Explain this meaning in
+the supplied metadata and command definition. An open operational phase permits
+further work without undoing that record. Historical scope limits the claim to
+the recorded release; it does not make the command unaccepted, assert current
+support or choose any participant's continuation.
+
 **Keep review evidence tied to when it was captured.** A citation snapshot records the exact stage and content genuinely captured. Identity established at recording time does not prove earlier inclusion, attention, or understanding. A changed receipt, artifact, assumption, criterion, or relevant dependency changes the verdict's current applicability without rewriting the original verdict. Missing snapshot evidence stays missing. Never retrofit an old assessment with a newly observed result.
 
 **Release the state that was actually reviewed.** Release binds one coherent reviewed state, legitimate blocker dispositions, exact delivered scope, and current authority. The order of an update and release matters:
