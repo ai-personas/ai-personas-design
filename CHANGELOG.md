@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 27 October 2026 — make printer tool preparation concrete
+
+Extended the hypothetical printer walkthrough to cover tool choice, installation,
+an interpreter mismatch, model inspection, correction, parametric-source delivery
+and a shared skill adaptation. The sequence keeps work, fragment maintenance,
+asset maintenance and next-context choices visible. It addresses the printer
+installation portion of UR-032 without claiming live execution or prescribing a
+runtime workflow.
+
 ## 26 October 2026 — distinguish image-read failures from decision rejection
 
 Clarified that an unavailable image capture is an operation outcome within an

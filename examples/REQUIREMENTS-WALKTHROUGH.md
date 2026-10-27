@@ -110,6 +110,10 @@ Arun compares the complete promise: demand **240 W/10 A**, required capacity **3
 
 Each saves its sources, receives results from the checks it chooses and delivers the exact concept with limitations. A retains the evidence; F can stay unchanged; Next clears completed optional context. Physical ratings, thermal response, sensors, wiring, mechanics, firmware and operation remain unverified. That is missing evidence, not a software safety gate.
 
+If the client next requests an editable three-dimensional arrangement study, Arun compares the available viewer, drawing tool and parametric CAD route and chooses CadQuery. In this hypothetical sequence he installs it in a chosen environment, diagnoses a failed model command that used the wrong interpreter, and receives actual geometry output before relying on it. Mira finds that a drawn 200 mm build-volume box conceals only 190 mm usable travel; Arun corrects the layout and receives a fresh inspection. Leena preserves unresolved interface findings. The delivered parametric source, environment instructions and matching exchange files remain distinct from an editability check performed on a copy. F may remain unchanged while A records attempts, revisions and findings and Next selects their actual results.
+
+Arun can publish the working method as a discoverable supporting skill; Leena may adapt its exact revision with attribution. The [printer tool-preparation walkthrough](WORKED-EXAMPLES.md#preparing-a-cad-tool-for-an-editable-printer-layout) traces these choices and their limits. It demonstrates the intended design sequence, not a live installation, successful physical printer or measured maturation.
+
 ### C4 A rejected improvement and a collective decision
 
 The personas can voluntarily share the delivered concept and agree how to handle a proposed refinement. P1 identifies the earlier checked concept. Arun's F1 presentation candidate omits the PWM qualification. Mira receives both exact versions and independently rejects F1 before Leena's later confirming finding. P1 remains current; the rejected candidate and Arun's preference stay attributed.
