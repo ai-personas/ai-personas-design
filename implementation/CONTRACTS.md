@@ -621,11 +621,16 @@ resumes. A Closeout read keeps its separate accounting and validation path.
 One persona has one current primary decision authority at a time. Independent personas and isolated jobs may proceed concurrently. An admitted decision binds actual identity, work, relevant versions, observations, inference configuration and actual resource exposure. A model change does not change identity or accepted commitments.
 
 Distinguish shared result records from the authority needed for independent
-navigation and tool work. A new peer candidate, evaluation, release or delivery
-record alone should not discard such a response when its separately recorded
+navigation, tool work and native supporting-file saves. A new peer candidate,
+evaluation, release or delivery record alone should not discard such a response
+when its separately recorded
 identity, task, responsibilities, arrangements, pending dependencies and supplied
-source lineage remain unchanged. Apply the response to current state, retaining
-the peer's records and the original information on which the persona reasoned.
+source lineage remain unchanged. Supporting-file writes, exact edits and host
+imports still validate the actual current source/base, purpose scope, path,
+qualifications, supplied lineage and any authored import-byte precondition.
+This independence neither adopts character nor registers a shared work result.
+Apply the response to current state, retaining the peer's records and the original
+information on which the persona reasoned.
 Shared work commands and responses combining them with other operations retain
 their complete current-record checks. Accepted tool intents retain the dependency
 scope established by their own adoption; a later record does not imply that it
