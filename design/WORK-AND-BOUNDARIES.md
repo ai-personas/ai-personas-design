@@ -42,6 +42,15 @@ separate need. Real missing information and outside evidence remain explicit
 dependencies; optional extensions need not become compulsory work. A useful
 partial result remains partial until the actual requested scope is satisfied.
 
+Finishing an accepted individual contribution does not necessarily finish the
+request. Identify the remaining result and who actually accepted follow-through,
+or expose its ownership gap. A recommendation that someone else complete necessary
+work is not an accepted handoff. Missing physical observation, certification or
+stakeholder acceptance does not establish that available reasoning, research,
+analysis or artifact correction must also wait. Personas judge these distinctions
+before choosing whether to continue, stop or seek help; the runtime supplies no
+automatic quality verdict or compulsory division of work.
+
 A correction can change a premise used elsewhere in the result. Personas
 reconsider those dependencies and whether the combined revision still serves the
 original need. Fixing all defects discovered so far does not prove that the
