@@ -803,7 +803,9 @@ If a selected opportunity must wait for active calls to settle, advancing the
 scheduler cursor must not spend that opportunity without admission. Retain the
 candidate's identity and reconsider it first after required maintenance, checking
 current eligibility and authority. If it is no longer eligible, continue ordinary
-selection. This preference adds no persona responsibility, fixed role or call.
+selection in the retained order for other opportunities; the failed preference
+must not promote its whole work or consume another cursor position. This
+preference adds no persona responsibility, fixed role or call.
 
 Before a fresh primary decision, recheck explicit pause or cancellation, current work, decision identity and actual observations. A fresh decision does not replay a suppressed action batch. A valid dependency wait need not become polling; a wished-for reply is not an event. A partial result or explicit stop can handle a boundary correctly while leaving the full task unfinished.
 
