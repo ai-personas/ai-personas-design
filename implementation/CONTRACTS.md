@@ -799,6 +799,12 @@ If these cannot be established, expose the continuation gap. Transfer or ending 
 
 **Give eligible accepted work a real opportunity to continue.** An accepted ordinary-work continuation preserves its actual eligibility across yield, result delivery, and restart. Under the declared supported fairness and capacity assumptions, persistently eligible accepted work must receive another decision opportunity. Merely keeping it visible in a queue is insufficient. Queue churn and pagination cannot evade this obligation. Expose unmet scheduling assumptions or failed consideration as limitations, not task completion.
 
+If a selected opportunity must wait for active calls to settle, advancing the
+scheduler cursor must not spend that opportunity without admission. Retain the
+candidate's identity and reconsider it first after required maintenance, checking
+current eligibility and authority. If it is no longer eligible, continue ordinary
+selection. This preference adds no persona responsibility, fixed role or call.
+
 Before a fresh primary decision, recheck explicit pause or cancellation, current work, decision identity and actual observations. A fresh decision does not replay a suppressed action batch. A valid dependency wait need not become polling; a wished-for reply is not an event. A partial result or explicit stop can handle a boundary correctly while leaving the full task unfinished.
 
 **Release an ended local call after an observed stop.** When a recorded runtime stop cancels a response-only model call, retain its exact local terminal outcome and release the matching local invocation once no adoption or action intent can remain. This includes a complete response canceled before adoption. Preserve current work and persona controls and authored continuation choices; local cleanup grants neither resumption nor replay. A later explicit resumption remains a separate fact. Do not infer remote termination, reconcile unknown charges, or treat missing terminal evidence or an unavailable control monitor as a completed cancellation.
