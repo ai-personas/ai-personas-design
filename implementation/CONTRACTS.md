@@ -314,6 +314,12 @@ Participation status belongs to the work being inspected: a stopped contribution
 does not acquire pending calls because the same persona starts another task.
 Show a persona-wide execution dependency on other work separately, preserving
 its effect on availability without implying resumption or failure in this work.
+Keep a participant's pending host commands visible when they belong to another
+work, separately from this work's commands. Preserve the originating work,
+invocation, operation and actual retained dispatch state until the complete
+result is published. That state is not proof of a live process; showing a
+command in another work does not change this participation's continuation or
+eligibility. Display their metadata without exposing command or result bodies.
 When showing a call's age, anchor it to its retained admission time rather than
 the current observer's start. Keep missing or future timestamps explicit; elapsed
 age establishes neither provider execution duration, progress nor a timeout.
