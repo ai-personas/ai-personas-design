@@ -438,6 +438,14 @@ Search helps the primary persona find candidate fragments and supporting resourc
 
 Literal and regex search, authored indexes and cues, listing and exact reading form one navigation interface. The primary chooses further navigation and context. Physical indexes may support the interface without adding a hidden semantic selector, universal relevance score or fixed taxonomy. A changed corpus can change current candidates; it cannot change a prior exact observation.
 
+Within one catalogue construction over an immutable runtime snapshot, reuse
+successful validation of exact source ancestry. Add traversed references to the
+reusable set only after their entire traversal succeeds; a failed traversal must
+not make a partly checked source available. Preserve warning-receipt ancestry,
+qualification edges, missing-reference failures and cycle handling. This reuse
+ends with that construction and does not replace file digest checks, current
+bindings, selected context or a fresh inspection of changed state.
+
 **Pagination and completion.** State whether pages refer to a snapshot, exact revision or live view, and whether completion describes a page, scan or whole identified corpus. A requested page size controls that result, not the number of later requests or total work. Return the actual continuation cursor when more material remains. A live cursor alone cannot prove exhaustive coverage of an earlier corpus.
 
 When messages, authored decisions, tool observations and files have distinct

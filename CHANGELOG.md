@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 27 October 2026 — reuse completed ancestry validation within a catalogue
+
+Specified reuse of successful exact-source ancestry checks during one catalogue
+construction over immutable state. Failed traversals cannot make partially
+checked sources available. Warning ancestry, qualifications, cycle handling,
+file digests and fresh validation of changed state retain their existing meaning.
+
 ## 27 October 2026 — make printer tool preparation concrete
 
 Extended the hypothetical printer walkthrough to cover tool choice, installation,
