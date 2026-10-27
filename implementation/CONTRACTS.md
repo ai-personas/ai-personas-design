@@ -58,6 +58,15 @@ independent eligible calls from progressing while the original pending calls
 remain. Once those calls settle, drain successors and perform the handover;
 continuous refilling must not starve it.
 
+Ordinary decisions may use non-strict provider structure derived from the same
+applicable native contract. Preserve optional fields, tagged alternatives,
+constraints and arbitrary capability-input values. Presentation annotations may
+be omitted from the transport copy when the complete supplied contract retains
+them. This assistance does not authorize actions, repair malformed responses or
+replace complete native validation. Account for the actual selected output
+schema in every request, including initialization; encoded byte counts do not
+establish billed token usage or task quality.
+
 One current primary decision identifies the persona across adapters and nested calls. Concurrent stale decisions cannot both become its accepted current state. Proposals and adoption retain exact identity, version and persistence checks. This establishes coherent authorship and ordering, not an access or self-authorship lock.
 
 **Input.** Each request supplies the information needed for the current decision:
@@ -104,7 +113,17 @@ Unavailable warning text or evidence remains unavailable. Do not invent its byte
 
 **Invalid or absent response.** Missing or malformed maintenance or next-context intent, an incomplete stream, structurally uninterpretable maintenance operations, or any other invalid response prevents new adoption and dispatch of all proposed substantive actions from that response. This includes communications, reads, and selection changes. Do not salvage a plausible tool call or reply from an invalid prefix.
 
-**Response identity.** Make the current admission's exact invocation identity and response epoch explicit in its supplied schema as well as its control context. Keep them distinct from work and mandate revisions. Apply the binding to initialization and later decisions, including a fresh ordinary decision after rejection and any historical repair rendering. Preserve the original received bytes and independently check parsing, response identity and current state before adoption; constants guide authorship without proving validity or repairing a mismatch. Count their complete representation in actual input size, without treating changing admission identifiers as fixed-contract growth. A generic public wire schema has no particular admission to bind.
+**Response identity.** Make the current admission's exact invocation identity and
+response epoch explicit in its supplied control context, with their wire types
+in the response schema. Keep them distinct from work and mandate revisions.
+Apply the exact binding to initialization and later decisions, including a fresh
+ordinary decision after rejection and any historical repair rendering. Preserve
+the original received bytes and independently check parsing, response identity
+and current state before adoption; supplied identity guides authorship without
+proving validity or repairing a mismatch. Count its complete representation in
+actual input size, without treating changing admission identifiers as
+fixed-contract growth. A generic public wire schema has no particular admission
+to bind.
 
 **Profile wire shape.** Describe the named OCEAN and VAD dimensions required by
 the active parser in the supplied response schema, including each required field,
