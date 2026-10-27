@@ -733,6 +733,10 @@ New observations and retained selected output may appear together; neither
 selection nor a later timestamp alone establishes current file contents or
 supersedes another result. Personas decide their relevance without an automatic
 refresh requirement or a prescribed repair workflow.
+Likewise, a new admission, elapsed time or activity on unrelated files does not
+by itself invalidate captured evidence. Rechecking relevant preconditions and
+performing a proposed host change may share one command; the interface must not
+imply a compulsory inspection-only call before every action or judgment.
 
 A requested watch, acknowledged supported coverage, an active stream, and an ended or unsupported watch are different states. Lost notifications cannot establish that data is unchanged. Notifications may invalidate retained bindings, but cannot automatically select new content, enable a removed capability, or authorize an effect.
 
