@@ -67,6 +67,12 @@ replace complete native validation. Account for the actual selected output
 schema in every request, including initialization; encoded byte counts do not
 establish billed token usage or task quality.
 
+A compact presentation may express a constraint once when its syntax already
+entails it: an exact string literal or a union of string literals needs no
+additional string-type annotation. Preserve descriptions, defaults and every
+independent constraint at their original scope. Unknown constructs must retain
+the full schema rather than silently weakening the supplied contract.
+
 One current primary decision identifies the persona across adapters and nested calls. Concurrent stale decisions cannot both become its accepted current state. Proposals and adoption retain exact identity, version and persistence checks. This establishes coherent authorship and ordering, not an access or self-authorship lock.
 
 **Input.** Each request supplies the information needed for the current decision:
