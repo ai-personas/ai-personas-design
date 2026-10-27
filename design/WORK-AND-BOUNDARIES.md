@@ -128,6 +128,14 @@ supply its body in the next eligible input; recording the event does not claim
 that the persona has read it. Earlier queued messages do not satisfy a new wait,
 and this reconciliation does not change Stop, Pause or another sender's wait.
 
+An ordinary child reply routed to its requester's immediate parent follows the
+same inbox rule. Its unsupplied arrival alone must not discard an independent
+parent decision or an accepted command. Preserve its exact child origin and
+requester/parent relationship, and supply it in a later eligible input. It grants
+no parent participation or acceptance. An event for an already active wait,
+changed authority, requester feedback or changed supplied lineage remains a
+decision dependency; ordinary inbox deferral does not suppress these changes.
+
 Retained question history need not be loaded into every unrelated task. Supply
 complete threads needed by the current work and outstanding owner or addressee
 decisions. Other related questions can remain discoverable through concise
