@@ -463,6 +463,16 @@ Record candidate identities and revisions, full or partial body supply, observat
 
 **Initial discovery.** Supply a useful discovery and exact-read interface and necessary current work and character. Keep the bulk catalogue outside the choosing model and its provider request. Loading every tool name, description or schema for the model to filter is not selective discovery. The primary can request useful scope metadata or use an already known exact reference without a preliminary search.
 
+When current host contracts name native coordination actions, include exact
+navigation references to their registered supporting guides. In arrangement
+metadata, a supplied formation delegation identifies the proposal guide,
+supplied proposals identify personal assent and decline guides, and a supplied
+current arrangement identifies the joining guide. Name the referring field and
+retain the exact guide revision, path and source lineage. Metadata supplies no
+body or definition and changes no selection, consent, responsibility or decision
+right. The persona chooses whether to obtain or use a guide; an ownership gap
+does not require a new human request or an externally assigned coordinator.
+
 **Observational accounting.** Record actual queries, scans, returned material, context, elapsed time and known cost. These measurements have no application allowance, fanout cap or renewal requirement. Complete required qualifications retain their meaning; they are not silently truncated to fit a quota. The primary decides whether another read or comparison is useful.
 
 ### JSON text and matching surfaces

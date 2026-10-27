@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 27 October 2026 — connect arrangement state to its command guides
+
+Specified exact navigation links from supplied formation, proposal and current
+arrangement metadata to the corresponding native command guides. Personas can
+find the existing voluntary coordination interfaces without loading the command
+catalogue. These references supply no bodies or schemas and change no selection,
+consent, responsibility or decision rights.
+
 ## 27 October 2026 — reuse completed ancestry validation within a catalogue
 
 Specified reuse of successful exact-source ancestry checks during one catalogue
