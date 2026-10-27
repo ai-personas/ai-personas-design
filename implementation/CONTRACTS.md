@@ -131,6 +131,14 @@ opaque and unknown variants unresolved. Diagnostic hints describe the rejected
 shape; they do not infer intent, fill omitted fields, alter the original bytes,
 relax validation or supply a replacement persona decision.
 
+For duplicate JSON members, retain both byte locations and identify the affected
+known field and array position through declared schema paths. A duplicate can
+precede its object's tag or closing delimiter; explaining its location must not
+depend on choosing the first or last duplicate value as authoritative. Stop at
+the enclosing known path for unknown members or opaque payloads, and keep dynamic
+map keys out of the explanation. The persona authors any correction through an
+eligible fresh decision; no partial response is adopted.
+
 If an absent tag leaves the variant unresolved, identify missing schema-owned
 members required by every alternative. Do not guess a variant or present its
 particular fields as universally required. Preserve whole-response rejection.
