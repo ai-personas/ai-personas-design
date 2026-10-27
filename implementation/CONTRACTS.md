@@ -167,6 +167,11 @@ the enclosing known path for unknown members or opaque payloads, and keep dynami
 map keys out of the explanation. The persona authors any correction through an
 eligible fresh decision; no partial response is adopted.
 
+For a repeated operation identifier, identify the first and conflicting
+operation positions and their `id` fields. Keep authored identifier values and
+operation payloads out of the diagnostic. Reject the complete response without
+renaming operations or rewriting dependent references on the persona's behalf.
+
 If an absent tag leaves the variant unresolved, identify missing schema-owned
 members required by every alternative. Do not guess a variant or present its
 particular fields as universally required. Preserve whole-response rejection.
