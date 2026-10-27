@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 27 October 2026 — explain exportable file attachments
+
+Specified delivery-route guidance in the persona's communication interface:
+observed host files can be imported and explicitly attached as complete retained
+text or binary files. Same-response save references need no extra receipt-only
+call. Workspace paths, command identifiers and projected tool output retain their
+own meanings; they do not implicitly select or attach generated deliverables.
+
 ## 27 October 2026 — report structural errors across the complete Decision
 
 Extended schema-derived rejection diagnostics to include missing response-level

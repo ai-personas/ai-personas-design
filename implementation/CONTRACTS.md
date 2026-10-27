@@ -944,6 +944,16 @@ match. Render labels as text and paths as local links, without embedding artifac
 bodies, selecting a preferred result or turning a cited-file copy into release,
 acceptance or task completion.
 
+Explain that route in the persona's supplied communication interface. An existing
+host file can become an exportable attachment through an observed native import
+and an explicit citation of its complete retained revision. A same-response save
+can be attached by its save-operation ID, with full UTF-8 or binary metadata
+references derived from the actual import format. A host-command ID, workspace
+path in prose, history citation or projected output string does not attach the
+generated file. Import and citation remain persona choices; the host must not
+guess deliverables from prose, collect workspace files automatically, require
+an extra receipt-only invocation or imply content inspection from byte metadata.
+
 Read export inputs from one fresh consistent snapshot. Within that view,
 repeated file citations for the same sender and recipient may share catalogue
 construction while preserving each exact file's lineage and qualification
