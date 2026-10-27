@@ -512,6 +512,18 @@ captured bytes, without repairing a pin or silently supplying a different image.
 
 Withholding an ineligible optional bundle does not permit discarding valid selected text merely to fit an ordinary task decision. Actual provider or host failure follows the recovery rules below without an application fitting or repair quota. New work begins with its own mandatory brief and observations. Another work's private focus or persistent optional selections do not transfer automatically.
 
+Keep the persona's own unresolved accepted host commands visible across work.
+Supply their exact invocation, operation, work and recorded launch location,
+distinguishing the current work and incomplete result publication from an
+uncertain outcome. A retained command marker does not establish a live process;
+a launch location neither restricts accessed paths nor assigns file ownership.
+Switching focus does not settle an earlier command or prevent its effects on
+shared files. This current operational metadata supplies no command or result
+body, transfers no optional context and creates no work lock, reservation or
+replay authority. Preserve its lineage and identify unavailable metadata as an
+omission rather than absence of activity. It remains an admission snapshot;
+later settlement need not invalidate an otherwise independent decision.
+
 **Explicit disposition in every accepted response.** Every accepted persona response authors its next-context disposition for both characteristic fragments and supporting resources. A concise, unambiguous preserve of a still-appropriate accepted choice is sufficient. Other valid dispositions are replacement, clear, no further optional need, chosen discovery/read intent with explicit retained or cleared optional state, or an honest blocked/stop outcome.
 
 No new search, mutation, repeated list, full-body dump, extra model call, or fixed field schema is required. “No further optional need” explicitly chooses an empty future optional set: it clears an existing set or keeps an already empty one empty. This affects neither mandatory context nor already exposed observations or retained history.
