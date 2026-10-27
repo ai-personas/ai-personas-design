@@ -879,6 +879,13 @@ The host checks applicable authority and record consistency. It does not infer a
 
 An empty optional citation list creates neither automatic review nor release. An unresolved mandatory finding, missing required output, or unavailable recipient access prevents the affected full-delivery claim. Partial results retain their gaps. Digital delivery does not authorize construction, publication, spending, or another outside effect.
 
+**Make exported files findable.** A requester-facing file index links the exact
+exported content, source and qualification records with their actual reply or
+delivery attribution. Different versions remain distinguishable when filenames
+match. Render labels as text and paths as local links, without embedding artifact
+bodies, selecting a preferred result or turning a cited-file copy into release,
+acceptance or task completion.
+
 ## Recovery, privacy, and retention
 
 Recovery preserves accepted state and unfinished work without inventing success or replaying accepted effects. UR-052 removes application access, source-sharing and retention quotas; actual provenance, exact identities, explicit stops and truthful outcomes remain necessary.
