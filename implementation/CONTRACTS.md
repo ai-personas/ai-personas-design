@@ -527,6 +527,18 @@ replay authority. Preserve its lineage and identify unavailable metadata as an
 omission rather than absence of activity. It remains an admission snapshot;
 later settlement need not invalidate an otherwise independent decision.
 
+Keep metadata for the persona's own admitted requests available in their exact
+originating work. Bind each child to its actual requester, immediate parent,
+proposal and admission; sharing an episode does not establish that relationship.
+Expose recorded participation, acceptance and continuation status with exact
+decision lookup cues, preserving lineage and explicit omissions. These cues
+supply no child brief, judgment, result, artifact or private selected context
+body. A continuation kind alone omits its purpose, conditions and timing; the
+persona can choose the complete record. Pending proposals remain distinct from
+admitted children. Status and Stop/Pause establish neither completion nor
+quality. This snapshot creates no wait, assignment, lock or resumption, and
+ordinary child progress need not invalidate an independent parent decision.
+
 **Explicit disposition in every accepted response.** Every accepted persona response authors its next-context disposition for both characteristic fragments and supporting resources. A concise, unambiguous preserve of a still-appropriate accepted choice is sufficient. Other valid dispositions are replacement, clear, no further optional need, chosen discovery/read intent with explicit retained or cleared optional state, or an honest blocked/stop outcome.
 
 No new search, mutation, repeated list, full-body dump, extra model call, or fixed field schema is required. “No further optional need” explicitly chooses an empty future optional set: it clears an existing set or keeps an already empty one empty. This affects neither mandatory context nor already exposed observations or retained history.
