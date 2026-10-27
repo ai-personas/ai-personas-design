@@ -49,6 +49,15 @@ This is a behavioral contract, not a required serialized envelope or metadata fo
 
 Initialization starts from the attributed seed and accepts coherent initial character before later work uses it. That ordering identifies which character informed a decision; it imposes no initialization allowance or separate repair workflow. Historical mode declarations retain their actual meaning without restricting a new ordinary decision.
 
+Provider structure can assist decoding of the closed initial-character contract.
+It must preserve persona authorship, complete native validation, exact references
+and the fresh-decision handover. Requiring explicit nulls or empty defaulted
+collections changes transport spelling, not accepted character or task behavior.
+A completed character unit waiting for a quiescent handover must not prevent
+independent eligible calls from progressing while the original pending calls
+remain. Once those calls settle, drain successors and perform the handover;
+continuous refilling must not starve it.
+
 One current primary decision identifies the persona across adapters and nested calls. Concurrent stale decisions cannot both become its accepted current state. Proposals and adoption retain exact identity, version and persistence checks. This establishes coherent authorship and ordering, not an access or self-authorship lock.
 
 **Input.** Each request supplies the information needed for the current decision:
