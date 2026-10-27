@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 27 October 2026 — recover from reported input-text length rejection
+
+Extended ordinary provider-context recovery to a complete structured HTTP error
+that identifies an input text field and reports its actual length above the
+provider's stated maximum. Exact failed requests and diagnostics remain retained;
+eligible pending bodies can use the existing explicit reference projection.
+This adds no application limit, authored context change or retry of an action.
+
 ## 27 October 2026 — connect arrangement state to its command guides
 
 Specified exact navigation links from supplied formation, proposal and current

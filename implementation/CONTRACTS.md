@@ -619,6 +619,14 @@ not a guessed size threshold; a second rejection of metadata supplies no new
 projection through this route. The ordinary primary chooses subsequent reads,
 tool use, context and continuation, and acceptance consumes the pending override.
 
+The same recovery applies to a complete HTTP 400 input-text length rejection
+when its structured `invalid_request_error` explanation identifies an indexed
+input text field and reports an actual length above its stated maximum. Keep
+the original diagnostic and bind it to the exact admitted response-only request.
+Recognize the complete error form rather than a loose phrase or an inferred
+provider allowance. Other request errors remain distinct, and the reported
+maximum does not establish a configured application limit.
+
 Where another decision can actually be supplied, the persona chooses useful context changes, maintenance, methods and continuation. Every such decision retains the ordinary work, fragment maintenance, asset maintenance and next-context responsibilities. The application does not prescribe a separate repair workflow or infer that a smaller selection makes the work complete.
 
 Historical restricted-repair attempts retain their original inputs, mode, charges and outcomes. They are not retroactively reclassified as ordinary work or successful repairs.
