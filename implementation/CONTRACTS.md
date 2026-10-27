@@ -151,6 +151,10 @@ eligible fresh decision; no partial response is adopted.
 If an absent tag leaves the variant unresolved, identify missing schema-owned
 members required by every alternative. Do not guess a variant or present its
 particular fields as universally required. Preserve whole-response rejection.
+For an unrecognized tag, list the schema-declared values at its known field
+when every applicable alternative has an explicit tag. Do not claim an
+exhaustive list when an alternative is broad or opaque, echo the rejected value,
+or choose a replacement on the persona's behalf.
 
 When a proposed creation conflicts with an existing immutable work record,
 identify the record type and the supplied identity that caused the conflict.
