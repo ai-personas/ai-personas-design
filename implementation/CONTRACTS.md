@@ -891,6 +891,11 @@ match. Render labels as text and paths as local links, without embedding artifac
 bodies, selecting a preferred result or turning a cited-file copy into release,
 acceptance or task completion.
 
+Read export inputs from one fresh consistent snapshot. Within that view,
+repeated file citations for the same sender and recipient may share catalogue
+construction while preserving each exact file's lineage and qualification
+checks. Reuse must not cross snapshots or replace a fresh reader request.
+
 ## Recovery, privacy, and retention
 
 Recovery preserves accepted state and unfinished work without inventing success or replaying accepted effects. UR-052 removes application access, source-sharing and retention quotas; actual provenance, exact identities, explicit stops and truthful outcomes remain necessary.
