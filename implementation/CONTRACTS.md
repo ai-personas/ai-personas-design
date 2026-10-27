@@ -165,6 +165,13 @@ opaque and unknown variants unresolved. Diagnostic hints describe the rejected
 shape; they do not infer intent, fill omitted fields, alter the original bytes,
 relax validation or supply a replacement persona decision.
 
+For a complete, duplicate-free rejected Decision, include definite structural
+mismatches throughout its known schema, even when decoding stops in an earlier
+member. A malformed operation must not hide missing response-level fields or
+sibling errors. Keep the decoder's affected section and its known allowed fields
+alongside these complete-response hints. This inspection chooses no operation,
+variant, field value or correction on the persona's behalf.
+
 For duplicate JSON members, retain both byte locations and identify the affected
 known field and array position through declared schema paths. A duplicate can
 precede its object's tag or closing delimiter; explaining its location must not

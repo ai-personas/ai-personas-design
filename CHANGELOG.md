@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 27 October 2026 — report structural errors across the complete Decision
+
+Extended schema-derived rejection diagnostics to include missing response-level
+members and other definite known-shape errors when decoding stops inside an
+operation. The exact local error remains identified. Opaque authored content,
+whole-response validation and persona-authored correction retain their existing
+boundaries; the runtime neither repairs nor adopts rejected output.
+
 ## 27 October 2026 — distinguish JSON escaping from interpreter source
 
 Specified a concrete general command-encoding example in ordinary model guidance,
