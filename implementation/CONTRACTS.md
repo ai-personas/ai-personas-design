@@ -314,6 +314,9 @@ Participation status belongs to the work being inspected: a stopped contribution
 does not acquire pending calls because the same persona starts another task.
 Show a persona-wide execution dependency on other work separately, preserving
 its effect on availability without implying resumption or failure in this work.
+When showing a call's age, anchor it to its retained admission time rather than
+the current observer's start. Keep missing or future timestamps explicit; elapsed
+age establishes neither provider execution duration, progress nor a timeout.
 
 ### Coverage and call boundaries
 
