@@ -213,6 +213,15 @@ Establish the character-adoption fence before checking unrelated inputs that
 the fence excludes. Early validation accepts no action and performs no tool
 execution.
 
+Ordinary command guidance must distinguish outer JSON serialization from the
+decoded interpreter source. Include a concrete general example whose JSON input,
+decoded script and stated output agree, including backslashes in a language raw
+string. The example explains the callable interface rather than prescribing a
+task method or requiring an extra tool call. Preserve the persona-authored
+decoded source literally; another decoding pass or guessed program correction
+would change the intended command. Actual script errors remain observed results
+for the persona to diagnose and correct.
+
 When a host command consumes an exact supporting-asset reference as standard
 input, resolve its actual representation and range. Use the ordinary qualified
 file resolver for complete UTF-8 text, once-decoded JSON strings and measured

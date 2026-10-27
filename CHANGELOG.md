@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 27 October 2026 — distinguish JSON escaping from interpreter source
+
+Specified a concrete general command-encoding example in ordinary model guidance,
+with matching JSON input, decoded Python source and expected output. The example
+clarifies raw-string backslash handling without rewriting authored programs,
+prescribing task methods or requiring additional calls. Actual command bytes,
+failures and persona-chosen corrections retain their existing meaning.
+
 ## 27 October 2026 — recover from reported input-text length rejection
 
 Extended ordinary provider-context recovery to a complete structured HTTP error
