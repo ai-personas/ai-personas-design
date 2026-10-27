@@ -309,6 +309,10 @@ and does not permit the host to infer or insert a missing operation tag.
 
 **Visible evidence.** Identify the logical invocation and provider attempts, actual maintenance and next-context input, complete response or failure status, any persona-authored outcome, validation disposition and later save or conflict receipts. A provider invocation, a host command that inspects source and execution of the inspected feature are distinct facts. Successful source inspection is real execution but does not establish product behavior. Process exit zero does not prove that every subcommand succeeded, so preserve stderr, partial results and uncertainty. No raw private-reasoning archive or fixed reporting form is required.
 
+Display a persona's work judgment separately from its continuation choice.
+An ongoing work judgment does not establish that its author chose to continue;
+the persona may stop its own contribution while work remains for others.
+
 Bind displayed calls and recovery holds to their actual persona and work.
 Participation status belongs to the work being inspected: a stopped contribution
 does not acquire pending calls because the same persona starts another task.
