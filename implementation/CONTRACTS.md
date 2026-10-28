@@ -178,6 +178,13 @@ opaque and unknown variants unresolved. Diagnostic hints describe the rejected
 shape; they do not infer intent, fill omitted fields, alter the original bytes,
 relax validation or supply a replacement persona decision.
 
+For embedded native command inputs, retain the enclosing operation's array
+position in the diagnostic path. A missing or unknown command tag still permits
+an explanation of the declared tag field and alternatives; it must not hide the
+affected input location or cause the host to choose an intended command. Keep
+the decoder's structural failure category and the complete original response
+separate from schema-derived hints.
+
 Capability arguments belong inside the operation's `inputs` object. When a
 known host-command argument appears on the enclosing effect instead, identify
 its declared nested location using the current capability schema. This includes

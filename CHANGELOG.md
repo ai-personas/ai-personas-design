@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — locate rejected native command inputs
+
+Specified operation-position diagnostics for embedded native commands, including
+missing and unknown command tags. Schema hints preserve the structural failure
+category without choosing a replacement command or copying arbitrary authored
+values into the explanation. Original responses and adoption outcomes remain
+separate.
+
 ## 28 October 2026 — preserve work context in exported files
 
 Specified source work, participant labels and exact snapshot attribution for
