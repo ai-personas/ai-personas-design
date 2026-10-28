@@ -672,6 +672,12 @@ accepted responsibility for the work. Each initial response can adopt only its
 own character and necessary file unit, so these transports need not wait for one
 another. Commit responses separately against their actual persona, file and work
 dependencies, then perform each exact initial handover after the calls settle.
+Until a character handover has occurred, its actor cannot enter another work
+merely because adoption released the model-call lease. Ordinary calls on the
+handover's work must also wait if they could change its authority. Other
+uninitialized peers can still author their fenced units, and unrelated eligible
+work can progress. Record the pending actor/work pairs in scheduling diagnostics;
+do not relax exact handover checks to accommodate intervening admissions.
 Work with already accepted participants retains the shared-state transition
 boundary. Overlapping inference does not combine identities, accept work for a
 persona, adopt fenced actions or establish any task-quality benefit.
