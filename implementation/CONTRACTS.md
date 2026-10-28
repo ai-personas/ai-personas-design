@@ -1096,6 +1096,17 @@ distinct files or available bodies. Detailed and machine-readable views retain
 complete citations, qualifications and delivery records; presentation grouping
 does not merge underlying messages or infer task completion.
 
+**Make peer conversation inspectable.** Offer a separate operator view of the
+selected work's retained persona messages, including peer exchanges. Read one
+consistent snapshot, preserve original senders, recipients, subjects, citations
+and adoption order, and derive display names from that snapshot. Matching
+deposits in one decision may share a displayed body only while retaining every
+recipient and distinguishing different provenance. Keep the complete messages
+available in structured output. Inspection starts no inference, redelivers or
+acknowledges no message, and changes no continuation. Original recipients remain
+attribution; a conversation view neither makes the operator their intended
+recipient nor changes requester results, delivery or recipient-attention claims.
+
 **Make exported files findable.** A requester-facing file index links the exact
 exported content, source and qualification records with their actual reply or
 delivery attribution. Different versions remain distinguishable when filenames
