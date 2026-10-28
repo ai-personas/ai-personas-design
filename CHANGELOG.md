@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — expose exact native asset saves to collaborators
+
+Specified compact discovery cues for supporting files saved in a peer's latest
+accepted work decision, including drafts without message attachments. The cues
+bind immutable file revisions and accepted-save receipts, offer selective reads,
+and distinguish native paths from host copies and saved drafts from delivery.
+Binary import receipts identify byte metadata. No file body, assignment or
+quality judgment is supplied by these cues.
+
 ## 28 October 2026 — scope first acceptance to its affected work
 
 Specified work-local scheduling isolation for first responsibility acceptance,

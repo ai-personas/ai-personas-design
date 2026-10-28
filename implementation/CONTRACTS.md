@@ -638,6 +638,18 @@ shared candidate, assign review, or infer attention, quality or completion. This
 is latest-invocation metadata, not a full file catalogue; earlier messages remain
 discoverable and unavailable provenance remains explicit.
 
+Expose native supporting-file saves from that same latest work-judgment
+invocation even when no message cites them. Bind each file write, edit or import
+to its atomic accepted-save receipt and immutable revision origin. Supply its
+native path, exact file reference and receipt lookup, with current-head and
+retirement status explicitly scoped to the admission snapshot. Binary import
+receipts identify byte metadata rather than promising UTF-8 contents. Offer
+selective file and history handles without loading bodies or scanning a whole
+catalogue into model context. A saved draft establishes neither delivery nor a
+shared candidate; an import does not establish content authorship. Exclude
+characteristic fragments and unadopted proposals. Preserve exact lineage and
+report unavailable provenance as an omission.
+
 Keep metadata for the persona's own admitted requests available in their exact
 originating work. Bind each child to its actual requester, immediate parent,
 proposal and admission; sharing an episode does not establish that relationship.
