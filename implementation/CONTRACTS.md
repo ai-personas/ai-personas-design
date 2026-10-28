@@ -681,6 +681,16 @@ shared candidate; an import does not establish content authorship. Exclude
 characteristic fragments and unadopted proposals. Preserve exact lineage and
 report unavailable provenance as an omission.
 
+When offering the persona a chronological locator for its own latest accepted
+judgment in another work, include supporting-file saves from that same
+invocation under these same provenance rules. Expose the native paths and exact
+file and receipt references for selective reads and context choices, so a persona
+returning to work can discover its recent output without first loading a whole
+earlier decision. This cue covers one chronologically identified invocation,
+not the persona's entire file collection. It neither transfers another work's
+optional selections nor resumes that participation, selects files, infers their
+relevance or establishes learning. Earlier files remain selectively discoverable.
+
 Keep metadata for the persona's own admitted requests available in their exact
 originating work. Bind each child to its actual requester, immediate parent,
 proposal and admission; sharing an episode does not establish that relationship.
