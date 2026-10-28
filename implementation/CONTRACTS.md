@@ -1067,6 +1067,26 @@ match. Render labels as text and paths as local links, without embedding artifac
 bodies, selecting a preferred result or turning a cited-file copy into release,
 acceptance or task completion.
 
+Export an explicitly cited decoded string or UTF-8 range as the exact selected
+text, with its representation, range, source-file identity and current required
+qualifications. Its exported length and digest describe the projection, not the
+whole containing file. Keep complete-file exports as original retained bytes.
+Do not silently skip an attached excerpt or substitute its surrounding document.
+
+Explicit history citations have a separate historical-record export. Resolve
+them through the same exact-identity and current-qualification projection used
+by native history reads in the export's consistent snapshot. Preserve original
+attribution and historical-only status; distinguish the exported projection's
+digest from the original record identity. Retained authored Decisions do not
+establish execution of every proposal or include opaque provider reasoning.
+Report an unavailable body with its exact citation rather than reconstructing it
+or silently omitting it. This reader action creates no pending persona event,
+resumes no work and executes no effect.
+
+When multiple replies cite the same exact content, retain each reply's citation
+and attribution. An index may group identical exported contents, but must not
+discard later citations or merge their provenance.
+
 Keep the source work and participant identities beside exported files. Identify
 the request at intake, current mandate revision, recorded task directory,
 participant labels and local IDs, and the exact runtime and launch snapshots

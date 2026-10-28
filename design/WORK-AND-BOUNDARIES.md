@@ -1209,12 +1209,17 @@ with truth or assurance. Required qualifications remain present. Local delivery
 contains the original artifact bytes, and ordinary export saves those retained
 bytes together with qualifications and receipts rather than reading a mutable
 workspace path. Export does not execute the artifact or establish completion.
-An intended recipient can also explicitly retrieve a complete supporting file
-cited in a received message, with current qualifications and exact provenance.
+An intended recipient can also explicitly retrieve a supporting file, exact text
+projection or historical record cited in a received message, with current
+qualifications and exact provenance.
 This reader action requires no shared release or peer-consent ceremony. The
 original citation remains metadata; the later retrieval supplies the bytes and
 does not fabricate formal release, acceptance or task completion. A range or
-decoded-string citation does not implicitly select its whole containing file.
+decoded-string citation selects only that exact text, not its whole containing
+file. Historical retrieval retains the original actor, work, invocation and
+record identity; it does not replay an operation or make an earlier event current.
+Unavailable history remains explicitly unavailable. Exporting a command record
+or its output does not collect generated host files that were not attached.
 
 **Keep publication and inspection usable.** Their capabilities must remain discoverable after older execution history leaves active context. Relative paths resolve consistently. Publication reports the resolved location and the original retention failure without inventing a different path or a success.
 
