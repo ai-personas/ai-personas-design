@@ -58,6 +58,16 @@ independent eligible calls from progressing while the original pending calls
 remain. Once those calls settle, drain successors and perform the handover;
 continuous refilling must not starve it.
 
+First responsibility acceptance changes the current work's shared authority.
+Serialize that transition against pending decisions in the same work, while
+allowing decisions in other work to progress under their own exact actor, work
+and supplied-lineage checks. Retain a deferred candidate's identity and block
+refilling its affected work until the necessary calls settle; reconsider current
+eligibility before admission. Separate runtime-wide recovery, structural
+maintenance and character handover retain their actual broader dependencies.
+Scheduling receipts should distinguish those scopes without adding a call quota
+or weakening response validation.
+
 Ordinary decisions may use provider structure or a grammar derived from the same
 applicable native contract. Preserve optional fields, tagged alternatives,
 constraints and arbitrary capability-input values. A custom-tool carrier may

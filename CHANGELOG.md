@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — scope first acceptance to its affected work
+
+Specified work-local scheduling isolation for first responsibility acceptance,
+allowing independent work to progress while preserving complete native decision
+checks. Deferred candidates keep their identities and prevent refilling their
+affected work; recovery and structural maintenance retain their wider boundaries.
+Scheduling receipts distinguish work and runtime scope without reclassifying
+earlier observations.
+
 ## 28 October 2026 — identify failed host-file imports
 
 Specified original operation positions and affected fields for import failures,
