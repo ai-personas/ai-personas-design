@@ -865,6 +865,15 @@ Any neutral internal bookkeeping defaults are not user-declared ceilings or
 separate permission decisions. Retain earlier declarations and actual usage
 without rewriting history or treating them as present execution gates.
 
+**Keep persona requests free of quota declarations.** A persona requesting help
+authors the purpose, request, outcomes and voluntary invitations under an exact
+source binding. Do not require attempt, repair or navigation allocations in that
+proposal. Supply source identity and attribution without obsolete ceilings,
+remaining balances, participant allowlists or funding declarations. The complete
+issued source remains retained; its historical wording does not replace the
+current task mandate. Neutral internal accounting values neither reserve nor
+restrict child execution, and actual use remains separately recorded.
+
 **Keep provider configuration free of quota declarations.** Current provider
 input identifies the selected route, model, effort, credential source and actual
 account binding. Do not require historical transport estimates, fabricate them

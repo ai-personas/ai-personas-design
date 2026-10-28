@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — remove quota declarations from persona requests
+
+Specified child-request interfaces without attempt, repair or navigation
+allocations. Ordinary inputs retain exact source identity and attribution while
+omitting obsolete resource and participant declarations. Full issued sources and
+actual use remain attributable; neutral internal accounting creates no quota,
+reservation or new permission requirement.
+
 ## 28 October 2026 — identify fields from another response variant
 
 Specified exact diagnostics for a field declared at the same schema position in
