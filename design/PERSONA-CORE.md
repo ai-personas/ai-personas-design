@@ -196,6 +196,15 @@ Not every contextual choice, method refinement, relationship interpretation or t
 
 A changed action is neither automatically a character replacement nor proof of maturation. The actual accepted account, authorship, supplied context and later behavior determine what the evidence supports.
 
+Revising the designated required own-voice guidance can preserve the same broad
+OCEAN/VAD descriptions. Its new accepted designation binds the changed prompt
+parts coherently; it does not assert changed stable traits or demonstrated
+maturation. The persona may instead maintain a contextual fragment outside that
+designation and select it when useful. Unchanged broad traits alone do not decide
+whether either kind of characteristic guidance would benefit from refinement.
+The ordinary response interface must make these choices clear while leaving the
+maintenance judgment and its intended content to the persona.
+
 **Resolve an adoption proposal before other fresh operations.** When a complete valid response requests adoption of an effective-current-character change, resolve that proposal before adopting or dispatching any other fresh persona operation from the response, including reads and waits. Listing an independent action first does not let it precede the character disposition.
 
 | Proposal outcome | Consequence for other fresh operations from that response |
