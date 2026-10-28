@@ -216,6 +216,12 @@ This section preserves the 8 October mapping and its then-current criteria. Refe
 
 Read-only inspection of the separate runtime at [2a199e8a7f787040f04cddf62165b7734e1e7144](https://github.com/ai-personas/ai-personas/commit/2a199e8a7f787040f04cddf62165b7734e1e7144) identified related mechanisms and specific gaps. The findings below describe source code. They are not executed tests, a deployed-state audit, an exhaustive proof or live-model results. No runtime files were changed.
 
+This is a historical source snapshot, not an inventory of the current
+`ai-personas-runtime` implementation. Its graph storage, separate response paths
+and restrictions must not be attributed to later code without inspecting that
+code. The current implementation's interfaces are documented in its
+[runtime reference](https://github.com/ai-personas/ai-personas-runtime/blob/main/RUNTIME-REFERENCE.md).
+
 **Access limitation.** The ai-personas/ai-personas runtime repository was verified as private through the connected account on 8 October 2026. Its pinned source links require repository access; they are not universally accessible public evidence.
 
 | Inspected source | Bounded finding |
@@ -226,7 +232,7 @@ Read-only inspection of the separate runtime at [2a199e8a7f787040f04cddf62165b77
 | [Profile guidance and admission fencing](https://github.com/ai-personas/ai-personas/blob/2a199e8a7f787040f04cddf62165b7734e1e7144/src/runtime/character_context.rs#L42-L241) and [self-model designation](https://github.com/ai-personas/ai-personas/blob/2a199e8a7f787040f04cddf62165b7734e1e7144/src/memory/self_model.rs#L1-L104) | Source includes OCEAN/VAD, guidance for own-voice fragments, designation of the current self-fragment, and character-context fencing. Their presence does not demonstrate semantic influence or complete conformance with the revised single-account contract. |
 | [Character initialization](https://github.com/ai-personas/ai-personas/blob/2a199e8a7f787040f04cddf62165b7734e1e7144/src/provider/character.rs#L1-L57) | The separate name-and-character response does not provide the complete new maintenance response contract. The revised design includes generated initialization without invented prior experience or fake work. |
 | [Assigned-model knowledge](https://github.com/ai-personas/ai-personas/blob/2a199e8a7f787040f04cddf62165b7734e1e7144/src/provider/knowledge.rs#L8-L78) and [request preparation](https://github.com/ai-personas/ai-personas/blob/2a199e8a7f787040f04cddf62165b7734e1e7144/src/provider/invocation.rs#L109-L146) | These paths restrict or discard continuity. They do not establish accepted maintenance for every persona call. Reusing a response type alone does not prove that maintenance is recorded or applied. |
-| [Information-permission recovery](https://github.com/ai-personas/ai-personas/blob/2a199e8a7f787040f04cddf62165b7734e1e7144/src/runtime/information_recovery.rs#L1-L56) | The inspected restricted path requires no change and does not apply continuity. The new design requires an honest disposition while retaining restrictions on inaccessible sources and the limited authority of recovery. |
+| [Information-permission recovery](https://github.com/ai-personas/ai-personas/blob/2a199e8a7f787040f04cddf62165b7734e1e7144/src/runtime/information_recovery.rs#L1-L56) | The inspected historical restricted path requires no change and does not apply continuity. The current design requires honest maintenance dispositions in ordinary recovery without application source-access gates or restricted repair quotas. Missing data and actual provider or host failures remain factual outcomes. |
 
 Useful fragment mechanisms do not make the runtime's graph storage or historical delegated semantic recall conform to the current design. The target remains primary-owned lexical/regex navigation of persona context and exact selection. Semantic/vector or graph-driven memory retrieval belongs only to separately identified research comparators unless an explicit design change adopts it. Ordinary external task tools and compliant physical storage remain separate choices.
 
@@ -248,12 +254,19 @@ The 7 October optional-descriptor and omitted-maintenance rules are explicitly s
 
 ## When the status may change
 
-Strengthen a claim only when an attributable evidence package supports it. Add that package to the implementation's appropriate public reporting surface. It must identify:
+Strengthen a claim only when attributable evidence supports it. Keep live
+transcripts, task artifacts and operational run records outside these
+repositories. Public changes should explain implemented behavior, contracts and
+limitations. Retained evidence for a stronger claim must identify:
 
 - Exact design, runtime and evaluator revisions, together with the enabled scope.
 - Actual observations, predeclared criteria and applicable repetitions.
 - Every failure and intervention, total resources and limitations.
 
-Then update this ledger with a link to that exact evidence, naming only the gates it closes.
+Update this ledger only at the scope that evidence establishes. Link suitable
+public source or documentation without publishing private run records or local
+paths. A source link establishes which implementation is discussed; it does not
+establish execution, behavioral benefit or complete conformance. If a stronger
+public claim lacks adequate supporting evidence, leave it unassessed.
 
 Do not copy sensitive execution data or raw model reasoning into the design repository. Redaction must not manufacture a pass or erase a material failure. Disclose when necessary evidence is unavailable for inspection. The [reporting method](../evaluation/README.md#reporting-a-result) governs the claim.
