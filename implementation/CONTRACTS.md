@@ -165,6 +165,14 @@ opaque and unknown variants unresolved. Diagnostic hints describe the rejected
 shape; they do not infer intent, fill omitted fields, alter the original bytes,
 relax validation or supply a replacement persona decision.
 
+Capability arguments belong inside the operation's `inputs` object. When a
+known host-command argument appears on the enclosing effect instead, identify
+its declared nested location using the current capability schema. This includes
+optional arguments such as the working directory and timeout. Report only
+schema-owned names, without copying argument values or arbitrary rejected keys.
+The hint neither moves the argument nor establishes capability admission; the
+persona must author a new complete response through ordinary recovery.
+
 For a complete, duplicate-free rejected Decision, include definite structural
 mismatches throughout its known schema, even when decoding stops in an earlier
 member. A malformed operation must not hide missing response-level fields or

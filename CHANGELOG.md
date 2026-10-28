@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — locate misplaced host-command arguments
+
+Clarified that capability arguments belong inside the effect's `inputs` object.
+Rejection hints identify misplaced host-command arguments and their declared
+nested paths using the current schema, without copying values, moving fields,
+executing a partial response or establishing capability admission.
+
 ## 27 October 2026 — explain exportable file attachments
 
 Specified delivery-route guidance in the persona's communication interface:
