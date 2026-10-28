@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — preserve work context in exported files
+
+Specified source work, participant labels and exact snapshot attribution for
+exports, with cited-file records bound to that context. Distinguished native
+work ancestry from filesystem ancestry and runtime-local identifiers from
+identities in another runtime. Original artifacts, receipts and qualifications
+remain unchanged; host access remains unrestricted.
+
 ## 28 October 2026 — preserve authored times that elapse during inference
 
 Specified continuation-time validation against the clock supplied to the

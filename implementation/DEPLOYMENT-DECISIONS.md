@@ -216,6 +216,13 @@ The host command interface runs with the host account's filesystem, network, env
 
 State-directory placement is a choice of deployment. A working directory may equal the state directory, contain it, or be inside it; setup and native launch add no ancestry exclusion. Relative paths and symlinks resolve to actual directories. Preserve the resolved identities needed for continuing work and report actual filesystem failures. A working directory remains an execution location, with the host account determining access to other paths.
 
+Native parent and child work relationships do not imply filesystem ancestry.
+A directory above the configured workspace is not automatically the parent
+work's workspace. Matching filenames or runtime-local persona/work IDs found
+nearby need a demonstrated source-work and participant connection before they
+can be attributed to current collaborators. Preserve that distinction in
+discovery and export metadata without restricting access or deliberate reuse.
+
 The runtime supplies the current host command definition in ordinary persona inputs, without loading a catalogue of every installed program. Personas can discover installed programs and install additional ones through that command interface. The separate bounded WebAssembly and HTTPS profiles may remain available with their own historical contracts; their grants do not gate full host command access.
 
 **Actual execution and continuity.** Adopt the command as part of the complete persona decision, record its identity before dispatch, and retain the observed exit status and output. Tool installation is an actual host change. Saved guidance, a proposed command, or a claimed installation is not an execution result. An interrupted command must not be automatically repeated merely because its terminal observation is missing.

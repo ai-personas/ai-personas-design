@@ -986,6 +986,15 @@ match. Render labels as text and paths as local links, without embedding artifac
 bodies, selecting a preferred result or turning a cited-file copy into release,
 acceptance or task completion.
 
+Keep the source work and participant identities beside exported files. Identify
+the request at intake, current mandate revision, recorded task directory,
+participant labels and local IDs, and the exact runtime and launch snapshots
+used by the export. Bind cited-file source records to that context and include
+their recorded author and sender labels. Preserve original delivery receipts,
+artifact bytes and qualification bundles. A snapshot identifies captured state,
+not a permanent runtime namespace; matching local IDs, request text or nearby
+host paths in another export do not establish the same work or participants.
+
 Explain that route in the persona's supplied communication interface. An existing
 host file can become an exportable attachment through an observed native import
 and an explicit citation of its complete retained revision. A same-response save
