@@ -2,6 +2,16 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — recover rejected historical host-result reads
+
+Extended reference delivery after actual provider context rejection to pending
+historical host-result reads. The reader's exact failed input binds recovery;
+the original producer, observation, bytes and qualifications remain intact.
+Field references permit selective subsequent reads without replaying commands,
+changing authored context or claiming that a full historical body was supplied.
+Recovered fields receive ordinary file handles. Consecutive rejections retain
+each pending override with its original failure provenance until consumption.
+
 ## 28 October 2026 — keep next-call context within its work
 
 Specified that a one-call selection expires only on the same persona's next

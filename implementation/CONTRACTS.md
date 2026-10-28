@@ -735,6 +735,20 @@ not a guessed size threshold; a second rejection of metadata supplies no new
 projection through this route. The ordinary primary chooses subsequent reads,
 tool use, context and continuation, and acceptance consumes the pending override.
 
+Include complete host-result bodies supplied by pending exact historical reads
+in this recovery. Bind the current reader's failed input and pending read to the
+original immutable observation, even when the producer is another persona or
+work. Preserve historical attribution, execution metadata and current required
+qualifications, and expose exact retained command, stdin and output-field
+references with their byte counts and hashes. Clearly mark full body supply as
+false. Do not change the producer's observation, its pending delivery or either
+persona's selections, and do not turn historical metadata into an operative
+event. Ordinary historical reads remain complete; only the actual rejection
+permits this pending override. Acceptance consumes the current reader's override.
+Retain each unconsumed override with its own exact rejection provenance when
+another body is rejected. Later recovery must not restore earlier rejected text
+or attribute its omission to a different failed input.
+
 The same recovery applies to a complete HTTP 400 input-text length rejection
 when its structured `invalid_request_error` explanation identifies an indexed
 input text field and reports an actual length above its stated maximum. Keep
