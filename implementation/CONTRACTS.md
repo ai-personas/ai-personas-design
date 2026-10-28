@@ -584,6 +584,18 @@ The primary may select a currently readable exact candidate from a preview witho
 
 The resulting decision receives the selected exact full text or declared range and complete applicable qualifications. Operative tool exposure includes the usable definition, not merely a stored reference to it. A metadata request supplies only the requested preview. This assembled context contributes to the operating persona; it does not establish consistent or useful behavior.
 
+Share repeated qualified text losslessly within an input when its exact file
+reference and complete text match. This can include host-rendered qualifications
+and read results inside supplied historical observations, and the current
+qualification accompaniment of a retrieved adopted Decision. Preserve each
+entry, reference, role, attribution and historical wrapper; decoding restores
+the complete original bundles. Authored JSON, messages and arbitrary tool
+payloads do not become encoding targets because they contain similar fields.
+Historical text sharing must remain separate from current operative file supply:
+it exposes no additional callable definition, reactivates no event and supplies
+no new accepted evidence. Report actual representation bytes saved separately
+from measured token cost or behavioral benefit.
+
 Captured images can be selected as supporting context alongside text. Bind each
 choice to its exact immutable capture, original observation, detail and work
 lifetime; a known exact reference or an admission-bound handle can identify it.

@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — share repeated historical qualification text
+
+Extended lossless request encoding to exact qualified bodies inside supplied
+historical observations and adopted-Decision accompaniment. Historical identity
+and attribution remain intact, and encoding does not promote those bodies into
+current operative file supply. Representation savings remain distinct from
+token, cost and behavioral claims.
+
 ## 28 October 2026 — expose exact native asset saves to collaborators
 
 Specified compact discovery cues for supporting files saved in a peer's latest
