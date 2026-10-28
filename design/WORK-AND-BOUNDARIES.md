@@ -684,6 +684,15 @@ and exclusive-transition boundaries without repeatedly waking a blocked timer.
 This is an opportunity to reconsider, not a timeout on another persona's call,
 a synthetic continuation, or a guaranteed dispatch latency.
 
+Judge whether an authored return or wait deadline is future relative to the
+clock actually supplied in that decision's input. Inference and adoption can
+outlast that interval. Preserve the exact authored time and accept an otherwise
+valid complete decision when it has already become due; current scheduling then
+provides the due opportunity. Do not discard its work, extend its deadline or
+invent a reply arrival. All current work, participant and dependency checks still
+apply. This creates neither a recurring schedule nor permission to replay a
+historically rejected decision.
+
 When preparation retains a new runtime head after an episode checkpoint, reuse
 the exact stored object committed by that checkpoint. Avoid independently
 serializing and packing the same immutable state merely to reconstruct that

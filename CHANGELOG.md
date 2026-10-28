@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — preserve authored times that elapse during inference
+
+Specified continuation-time validation against the clock supplied to the
+decision, so model latency does not invalidate a complete response whose
+reconsideration time or wait deadline has become due. Adoption preserves the
+exact time; current eligibility governs the next opportunity without extending
+the wait, assuming a reply, recurring automatically or replaying old failures.
+
 ## 28 October 2026 — retain actual reply delivery order
 
 Specified adoption-receipt ordering for result, session and export views so
