@@ -1060,6 +1060,15 @@ support or choose any participant's continuation.
 
 An empty optional citation list creates neither automatic review nor release. An unresolved mandatory finding, missing required output, or unavailable recipient access prevents the affected full-delivery claim. Partial results retain their gaps. Digital delivery does not authorize construction, publication, spending, or another outside effect.
 
+**Keep result views readable.** Show persona display names with their stable
+sender identities. Derive names from the same current snapshot as the visible
+messages, without changing their retained authorship or text. Ordinary terminal
+views can summarize file and history citations, with direct routes to the exact
+references and available exported content. Count references rather than claiming
+distinct files or available bodies. Detailed and machine-readable views retain
+complete citations, qualifications and delivery records; presentation grouping
+does not merge underlying messages or infer task completion.
+
 **Make exported files findable.** A requester-facing file index links the exact
 exported content, source and qualification records with their actual reply or
 delivery attribution. Different versions remain distinguishable when filenames
