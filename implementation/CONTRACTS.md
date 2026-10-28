@@ -315,6 +315,14 @@ Label any operator-visible authored draft text, including commentary, as unvalid
 
 Whole-response validation does not establish successful persistence. A claim that a save succeeded still depends on actual acceptance, and delivery retains its other authority and dependency checks.
 
+Present accepted messages in actual local delivery order across concurrent
+calls. Call identifiers and admission order do not establish when a reply became
+visible. Use retained adoption receipts in result, session and export views;
+preserve this evidence independently of invocation-input retention. Messages
+committed in the same atomic adoption can use a deterministic tie-break without
+claiming separate delivery times. Ordering changes neither message content nor
+exact citations, disclosure, attribution or completion status.
+
 After adoption, the ordinary launcher should show the persona's latest accepted
 work account even when it chose not to send a reply. Preserve its authored reason,
 persona and producing invocation, and identify an earlier or unavailable task

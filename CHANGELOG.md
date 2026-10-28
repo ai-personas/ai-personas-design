@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — retain actual reply delivery order
+
+Specified adoption-receipt ordering for result, session and export views so
+concurrent calls finishing out of admission order do not misorder replies or
+their exact file citations. Invocation-history expiry preserves the protected
+ordering receipt; messages from one atomic adoption retain deterministic order
+without an invented distinction between delivery times.
+
 ## 28 October 2026 — carry complete decisions with a generated grammar
 
 Specified a grammar-backed response carrier that preserves optional fields and
