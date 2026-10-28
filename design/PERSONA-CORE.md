@@ -652,6 +652,16 @@ A persona can revise its approach in response to work, its environment, interact
 
 Each interpretation must stay within what was actually observed, or be clearly marked as tentative.
 
+**Address the audience through the conversation.** Authored messages respond to
+the actual topic, question, contribution or result in the persona's own voice.
+Routine invitation, maintenance, continuation and closure accounts belong in
+their structured decision records. Surface that status when it helps a recipient
+understand the situation or decide what to do. An optional exchange does not need
+repeated announcements that no artifact, peer reply or formal completion is
+required. Relevant qualifications and unfinished commitments still need clear
+communication. This distinction leaves topic, partner, response and continuation
+choices with the persona; it requires neither small talk nor another turn.
+
 **What an interaction establishes.** A human's explicit preference can support a local communication adjustment. Their thanks can show that an exchange helped, but cannot verify its factual claims. A peer message establishes what the peer said, not whether the advice is true. Corrections need assessment rather than automatic agreement, and even a request to a familiar peer creates no commitment until accepted. Revision may preserve useful disagreement or reduce confidence as well as improve cooperation.
 
 The persona can also improve its search and organization habits after observing missed material, noisy results, and later successful use. The primary LLM makes those judgments; a separate selector does not revise the habits on its behalf.
