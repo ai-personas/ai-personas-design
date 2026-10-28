@@ -315,7 +315,11 @@ should identify the affected schema-owned path, including nested objects and
 array positions. A closed nested object with unknown members should identify
 its own allowed fields, rather than implying that only the enclosing response
 section is malformed. Keep authored unknown names, dynamic map keys and opaque
-payloads out of these hints. Diagnostics explain the rejection; they do not
+payloads out of these hints. When an extra member is declared at that same
+schema position in another alternative, identify its exact path as disallowed
+for the selected variant. For example, `file_import` always creates an asset
+and has no `scope` member, although other file operations declare that field.
+Do not infer a replacement variant or change the response. Diagnostics explain the rejection; they do not
 repair, adopt or execute any part of the response.
 
 For responsibility bindings, distinguish an explicit supplied-terms revision

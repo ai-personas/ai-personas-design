@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — identify fields from another response variant
+
+Specified exact diagnostics for a field declared at the same schema position in
+another alternative but disallowed in the selected variant. This makes errors
+such as `scope` on an asset-only `file_import` explicit while keeping arbitrary
+authored names and values out of diagnostics. The persona still authors the
+correction; complete-response validation and adoption remain unchanged.
+
 ## 28 October 2026 — locate misplaced host-command arguments
 
 Clarified that capability arguments belong inside the effect's `inputs` object.
