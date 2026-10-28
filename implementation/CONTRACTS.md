@@ -58,14 +58,27 @@ independent eligible calls from progressing while the original pending calls
 remain. Once those calls settle, drain successors and perform the handover;
 continuous refilling must not starve it.
 
-Ordinary decisions may use non-strict provider structure derived from the same
+Ordinary decisions may use provider structure or a grammar derived from the same
 applicable native contract. Preserve optional fields, tagged alternatives,
-constraints and arbitrary capability-input values. Presentation annotations may
-be omitted from the transport copy when the complete supplied contract retains
-them. This assistance does not authorize actions, repair malformed responses or
-replace complete native validation. Account for the actual selected output
-schema in every request, including initialization; encoded byte counts do not
-establish billed token usage or task quality.
+constraints and arbitrary capability-input values. A custom-tool carrier may
+carry one complete Decision as raw JSON without providing a provider-executed
+capability. Its deterministic key order changes spelling, not native field
+meaning. Do not impose operation or array-count quotas. Unsupported grammar
+constructs retain the complete native schema rather than narrowing open inputs.
+Presentation annotations may be omitted from the transport copy when the
+complete supplied contract retains them. This assistance does not authorize
+actions, repair malformed responses or replace complete native validation.
+Account for the actual selected schema and serialized carrier in every request,
+including initialization; encoded byte counts do not establish billed token
+usage or task quality.
+
+Bind the carrier's name, call identity, complete input, deltas and terminal
+snapshot before adopting any native action. Response-only recovery must prove
+the exact request offers no provider-executed capability; a response carrier
+alone does not create an external effect. Explicitly selected custom-call
+history may add a receipt acknowledgment to complete that conversation. It must
+not claim native adoption or execution: current control and observations supply
+those outcomes. Retaining or selecting a prior carrier never replays its actions.
 
 A compact presentation may express a constraint once when its syntax already
 entails it: an exact string literal or a union of string literals needs no

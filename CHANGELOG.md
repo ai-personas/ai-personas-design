@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — carry complete decisions with a generated grammar
+
+Specified a grammar-backed response carrier that preserves optional fields and
+open JSON inputs while enforcing the decision structure. All actions still
+require complete native validation and adoption. Stream identity, exact
+response-only recovery and explicitly selected conversation history distinguish
+receipt of a Decision from execution of its operations. No operation quotas or
+provider-executed capabilities are introduced.
+
 ## 28 October 2026 — remove quota declarations from persona requests
 
 Specified child-request interfaces without attempt, repair or navigation
