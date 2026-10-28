@@ -2,6 +2,15 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — keep next-call context within its work
+
+Specified that a one-call selection expires only on the same persona's next
+admission to the selected work. Calls on other work cannot consume fragments,
+files, captured images or selected provider history. Selection deadlines and
+expiry-fit evidence use a work-specific counter, while global call identity
+remains separate. Rejected responses consume an admitted lifetime; failed
+preparation and explicit preservation do not renew or advance it.
+
 ## 28 October 2026 — share repeated historical qualification text
 
 Extended lossless request encoding to exact qualified bodies inside supplied

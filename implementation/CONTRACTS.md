@@ -580,6 +580,15 @@ The primary persona decides which characteristic fragments and supporting resour
 
 **Accepted result.** The primary LLM, acting within the current persona, chooses the prompt parts that should shape its next characteristic context and the supporting material that decision needs. An explicit choice may retain exact optional fragments or supporting resources for that work until replacement, clearing, expiry where a lifetime was specified, or invalidation.
 
+A one-call lifetime means the next admission of the same persona on the same
+work. Intervening admissions on other work neither inherit the choice nor consume
+its lifetime. Apply this consistently to optional characteristic fragments,
+supporting files, captured images and selected provider history. Preserve does
+not renew the deadline. An admitted call consumes it even if the response is
+later rejected; a failed preparation does not. Measure expiry with a sealed
+persona/work admission sequence, separate from global persona call identity,
+and identify that scope in selection metadata and expiry-fit evidence.
+
 The primary may select a currently readable exact candidate from a preview without claiming to have read its full text. It may also select newly authored accepted text without a search ritual. Evidence, histories, skill instructions, code or data ranges, tool guidance, and actual callable definitions retain their supporting roles and real authorship.
 
 The resulting decision receives the selected exact full text or declared range and complete applicable qualifications. Operative tool exposure includes the usable definition, not merely a stored reference to it. A metadata request supplies only the requested preview. This assembled context contributes to the operating persona; it does not establish consistent or useful behavior.
