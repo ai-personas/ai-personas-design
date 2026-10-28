@@ -233,6 +233,13 @@ operation positions and their `id` fields. Keep authored identifier values and
 operation payloads out of the diagnostic. Reject the complete response without
 renaming operations or rewriting dependent references on the persona's behalf.
 
+For repeated file mutations of one source or saves to one scoped path, identify
+both operation positions and their `source` or `path` fields without copying the
+authored values. A source identifies one native file across its revisions;
+separate files require distinct identities even when they share a filename stem.
+Explain that identity in the file interface. Preserve whole-response rejection
+without renaming sources, merging files or choosing a correction for the persona.
+
 If an absent tag leaves the variant unresolved, identify missing schema-owned
 members required by every alternative. Do not guess a variant or present its
 particular fields as universally required. Preserve whole-response rejection.
