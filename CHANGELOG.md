@@ -2,6 +2,13 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — identify failed host-file imports
+
+Specified original operation positions and affected fields for import failures,
+with observed byte length and digest when an expected hash does not match.
+These facts locate the rejected import without claiming a retained revision,
+unchanged host file, corrected proposal or partial save-plan adoption.
+
 ## 28 October 2026 — make peer file citations directly discoverable
 
 Specified exact message-bound file references beside each current-work peer's

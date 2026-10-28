@@ -350,6 +350,13 @@ and has no `scope` member, although other file operations declare that field.
 Do not infer a replacement variant or change the response. Diagnostics explain the rejection; they do not
 repair, adopt or execute any part of the response.
 
+Host-file import failures should identify the original operation position and
+affected field so a response containing several imports can locate the failure.
+A digest mismatch can report the byte length and SHA-256 actually observed by
+that read, without retaining a native asset or claiming the host file is still
+unchanged. Preserve rejection of the complete save plan. Do not substitute the
+observed digest, retry, or accept a different file on the persona's behalf.
+
 For responsibility bindings, distinguish an explicit supplied-terms revision
 mismatch from an offer addressed to a different persona. Identify the affected
 field and its existing binding options without echoing authored values or
