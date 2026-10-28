@@ -128,6 +128,16 @@ Maintenance no_change does not by itself choose next context. Shared prose may c
 
 Naming a target is a proposal, not an accepted write, installation or observed effect. Before native adoption, check the actual target and base revision, coherent dependencies and persistence outcome. Default host access and tool installation require no separate grant; a host filesystem write retains its observed effect rather than becoming a native asset-adoption receipt.
 
+Supporting-resource maintenance can also be proposed through an ordinary tool
+effect: writing or revising host files, organizing a reusable script, installing
+a useful tool, or removing an obsolete resource. The asset-maintenance account
+may identify that exact proposed operation, its intended target and discovery
+cues without requiring an additional native copy. Preserve its actual execution
+receipt separately; acceptance of the proposal does not establish success,
+native persistence, later selection or usefulness. Read-only tool use and factual
+receipt recording do not require a maintenance change. Native mutations retain
+their exact-once accounting, and a host effect cannot adopt character fragments.
+
 **Factual host recording.** Deterministic capture of actual received messages, history, tool outputs and receipts remains host work. The model may propose attributed extraction, summary or organization of records. It cannot fabricate an event, alter an authoritative original or turn old instructions into a current request. A discretionary resource-maintenance no_change does not suppress factual recording. Imported tools and skills retain their actual author; storing their bytes is separate from installing or executing them.
 
 **Blocked or deferred maintenance.** Preserve the reason, affected fragment, supporting resource or concern, missing prerequisite and consequences for dependent work. Identify an accepted owner or ownership gap and any actual event or continuation opportunity. The persona chooses how to revisit it; no finite episode allowance, invented deadline or compulsory form follows.
