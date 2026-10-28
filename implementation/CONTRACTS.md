@@ -611,6 +611,16 @@ replay authority. Preserve its lineage and identify unavailable metadata as an
 omission rather than absence of activity. It remains an admission snapshot;
 later settlement need not invalidate an otherwise independent decision.
 
+Alongside a current-work peer's latest accepted judgment, expose exact file
+citations from actual messages deposited by that same invocation. Preserve the
+original message identity, authoring work, sender and recipient, including a
+reply to the requester. Offer those exact native references for selective reads,
+context choice and citation without loading their bodies or assuming host copies
+exist. Do not extract attachments from unadopted proposals or prose, select a
+shared candidate, assign review, or infer attention, quality or completion. This
+is latest-invocation metadata, not a full file catalogue; earlier messages remain
+discoverable and unavailable provenance remains explicit.
+
 Keep metadata for the persona's own admitted requests available in their exact
 originating work. Bind each child to its actual requester, immediate parent,
 proposal and admission; sharing an episode does not establish that relationship.

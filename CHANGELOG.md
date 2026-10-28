@@ -2,6 +2,14 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 28 October 2026 — make peer file citations directly discoverable
+
+Specified exact message-bound file references beside each current-work peer's
+latest accepted judgment. Peers can choose the cited native versions without
+assuming host copies exist or reading an entire decision to find them. Original
+recipients and message identity remain attributed; no bodies, shared selection,
+review assignment or quality judgment are inferred.
+
 ## 28 October 2026 — locate rejected native command inputs
 
 Specified operation-position diagnostics for embedded native commands, including
