@@ -361,6 +361,18 @@ or revise its characteristic guidance through the ordinary interaction.
 
 **Current body supply and later context are separate choices.** A result present in one invocation is not an automatically continuing conversation. Make its context lifetime explicit, and let the primary select useful exact output fields or ranges for later work without rewriting them or loading the complete command record. A hash, diagnostic, or other observation may be needed alongside a later image or result. Receiving that observation does not select it; preserving an empty selection keeps it empty. The persona can retain an exact excerpt, write and select a useful supporting note, retrieve it later, or omit it when no longer useful. These are ordinary asset and context decisions, not a second learning store, automatic failure memory, compulsory fragment edit or command restriction. Selection and later supply must remain separately attributable.
 
+The primary can also choose the first delivery of a pending command result:
+complete command and output text, captured output without repeating the command
+or literal input script, or execution metadata with exact readable references.
+An output-only choice must preserve stdout and stderr, observed execution facts,
+capture qualifications and references to the omitted inputs. It must identify
+which individual bodies are supplied. Reading those omitted inputs later must
+not execute the command again. Keep the complete observation retained under
+every choice; this is selective context, not an output cap or an automatic
+truncation rule. The primary decides whether the command body is needed to
+interpret its result. Do not infer token savings or better judgment from the
+availability of a smaller projection alone.
+
 The same choice applies to captured images. A persona can retain an exact
 historical capture alongside selected text for later decisions, then replace or
 clear it when it stops being useful. The host supplies the chosen pixels and
