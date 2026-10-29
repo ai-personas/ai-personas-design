@@ -1040,6 +1040,21 @@ Recovery schedules survive restart, but pause, cancellation, removal, retirement
 
 **Read-only views.** Read-only interface activity provides coherent individual observations without holding the writer reservation. A changing multi-page traversal is still not a single snapshot; [search consistency and completion scope](../implementation/CONTRACTS.md#search-and-exact-reading) must remain explicit. Shared reads may coalesce while running, but closing one reader must not cancel another's request. Expensive file, history, evidence, and persona-context views load on demand and release subscriptions and payloads when closed.
 
+A desktop may observe work controlled by another window or terminal. Keep the
+controlling launcher's journal ownership separate from read-only runtime views:
+the observing window refreshes saved progress without writing the journal,
+replaying requests, resuming participants or pausing the other launcher on close.
+Show which window can control work. Before replacing a saved helper installation,
+establish that the candidate can inspect the existing runtime; a failed open must
+not overwrite the working installation binding.
+
+File previews include exact files cited in replies as well as formal delivery
+artifacts. Preserve each cited revision, its author, qualifications, and the
+distinction between a complete file and a selected text projection. A file stored
+by the runtime need not exist in the host working directory to be viewable.
+Materializing a preview does not execute its content or establish release,
+acceptance or task completion.
+
 <a id="bounded-failed-lookups"></a>
 ### Actual failed lookups
 
