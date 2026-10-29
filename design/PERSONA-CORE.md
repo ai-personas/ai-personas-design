@@ -346,6 +346,12 @@ Cue text is search data, never a shell program, grant, or automatic trigger. The
 
 Every search makes its actual corpus and matching scope understandable. This includes relevant filename or body scope, case and text-matching rules, and treatment of hidden or ignored files. Current files, historical versions, drafts and retired text must keep their actual status visible. A result identifies the exact text version and how to inspect it. Pagination, incomplete searches, unavailable sources, and relevant omissions must be visible. A search result is not an automatic catalogue load into later context.
 
+Current-head references supplied for maintenance must name a representation
+supported by that revision's bytes: text where it decodes correctly, otherwise
+byte metadata. An earlier revision's format does not determine the current
+one. Offering the current head preserves exact historical references and does
+not itself supply or select either body.
+
 A no-match result means only that no matching text was found under those rules. Different wording, stale cues, or excluded scope can hide useful experience. No match does not prove that useful experience is absent.
 
 A new work context may supply a compact chronological locator for the persona's
