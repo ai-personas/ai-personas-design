@@ -1048,6 +1048,12 @@ Show which window can control work. Before replacing a saved helper installation
 establish that the candidate can inspect the existing runtime; a failed open must
 not overwrite the working installation binding.
 
+Workspace discovery and desktop decoding follow the same unrestricted resource
+contract as runtime execution. Read the complete saved progress journal without
+a preview-size cutoff or a separate JSON nesting limit. Reject malformed JSON
+and duplicate decoded keys without rewriting progress. A workspace with a large
+valid history must not appear unavailable merely because of an interface quota.
+
 File previews include exact files cited in replies as well as formal delivery
 artifacts. Preserve each cited revision, its author, qualifications, and the
 distinction between a complete file and a selected text projection. A file stored
