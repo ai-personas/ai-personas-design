@@ -2,6 +2,65 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 2 November 2026 — keep operator inspection responsive
+
+Clarified that history reads must not block task selection or queue controls,
+and stale replies cannot replace a newer view. Display projections retain complete
+text, attribution, ordering and citations while full internal provenance remains
+in history. Distinguished loading, unchanged views, read cost and provider latency
+without adding quotas, pruning or a claim of autonomous task completion.
+
+## 2 November 2026 — separate historical input sources from ancestry
+
+Clarified that a historical authored-decision read derives current required
+qualifications from its actual admitted input sources. Full provenance remains
+validated independently. Preserved exact history, later applicable caveats and
+explicit unavailability when original input cannot be established; excluded
+automatic reintroduction of separately omitted provider turns. Actually supplied
+earlier decision bodies retain their input dependencies and later warnings.
+
+## 1 November 2026 — distinguish maintenance judgment from mutation accounting
+
+Clarified that supporting-resource maintenance reviews received evidence for
+usefulness, correctness and discoverability. Read-only investigation can reveal
+a useful correction or procedure; the absence of proposed writes alone is not
+that judgment. Preserved reasoned no-change outcomes and persona choice, without
+requiring new files or inferring maturation from resource maintenance.
+
+## 1 November 2026 — select one complete provider turn
+
+Added a persona-owned choice to retain the current turn's complete input and
+output without accumulating the earlier provider history supplied alongside it.
+Preserved the full-history choice, exact output items, attribution, lifetimes and
+historical-selection meaning. This removes an all-or-nothing continuity constraint;
+it does not establish beneficial reasoning reuse or autonomous task completion.
+
+## 1 November 2026 — separate command dependencies from incidental context
+
+Distinguished complete call provenance from the required accompaniment of a raw
+host-command result. Exact native inputs and persona-declared supporting sources
+retain their qualifications and accepted warnings; unrelated context does not
+automatically propagate through every later observation. Historical records and
+the obligations on derived claims remain unchanged. Actual token savings and
+useful autonomous work still require run evidence.
+
+## 1 November 2026 — isolate independent work from peer arrangements
+
+Refined freshness requirements so a peer's voluntary arrangement does not discard
+independent tool work, reads, supporting-file saves or informal communication
+under unchanged personal commitments. Mandate, control, dependency, source and own
+acceptance checks remain; shared work commands retain complete record checks.
+Historical admissions preserve their original scope. This supports autonomous
+cooperation without supplying the personas' task reasoning or proving completion.
+
+## 1 November 2026 — keep resumed judgments pending through response rejection
+
+Clarified that explicit resumption remains pending until an ordinary persona
+decision is accepted. Exact recovery of a completed rejected response preserves
+the current route and supplies its diagnostic, without replaying actions or
+overriding a pause. Accepted Stop remains effective. This repairs a continuation
+contract; it does not establish autonomous completion or improved work quality.
+
 ## 28 October 2026 — recover rejected historical host-result reads
 
 Extended reference delivery after actual provider context rejection to pending

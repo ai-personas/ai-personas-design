@@ -302,6 +302,8 @@ A fragment about the persona's approach to a method serves a different purpose f
 
 **Maintenance covers assets as well as fragments.** The same primary maintenance decision may propose creating, retaining, refining, organizing, or retiring supporting resources, including domain knowledge, technical procedures, tools, skills, histories, messages, data, scripts, and code. A proposal identifies its intended file, path, or supported storage reference and any applicable base revision. It supplies useful search or regex cues when they would improve later discovery. This requires neither a fixed folder tree nor a cue on every item. Exact large assets may be referenced instead of copied into a response or next prompt.
 
+The maintenance judgment considers what received evidence means for the continued usefulness, correctness and discoverability of these resources. Classifying already chosen operations as reads or writes does not by itself perform that review. A read-only investigation can reveal a useful correction or a missing reusable procedure. The persona decides whether retaining or revising material would help later work. Existing resources may suffice, or no useful update may be warranted; neither a read nor the maintenance field requires a new asset.
+
 A storage proposal is not accepted persistence or executable installation. Changing an asset does not make its new text the original factual record. Exact received messages, tool outputs, and authoritative receipts retain their real content, attribution and actual dispositions. A derived extraction or summary is a separately attributable asset, not replacement history.
 
 **Match claims to evidence.** The persona explains meaning, basis, scope, uncertainty, and important exceptions in readable prose appropriate to the note. It need not fill identical fields for every sentence. A tentative idea needs honest uncertainty; a claim of observed success needs actual evidence. A failed operation may support a limited failure lesson. An uncertain effect supports a finding of uncertainty, not an invented success or failure.
@@ -315,6 +317,14 @@ Fragments remain fallible prompt context. Instructional wording does not make th
 ## Ordinary files and self-organization
 
 The persona uses ordinary files to maintain a compact, readable body of prompt parts. It lists, searches, reads exact text, and edits. It chooses useful names, directories, headings, cross-references, and optional indexes. A characteristic method may sit beside the interpretation that shaped it, then move when another arrangement works better. Supporting records remain separately identifiable wherever they are stored. Three useful fragments do not need an empty taxonomy around them.
+
+There is no separate task-memory or learning interface alongside these files.
+Characteristic development uses authored fragments; useful task conclusions,
+procedures and working notes use identifiable supporting files and the same
+primary-model selection process as other assets. Saving such a note does not
+make it automatically supplied context. Current needs, accepted commitments and
+actual observations retain their operational roles without becoming another
+persona-authored store of understanding.
 
 The authoring interface asks for the intended location and useful discovery
 cues with each new or revised fragment or asset, including initial own-voice

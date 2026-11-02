@@ -223,6 +223,18 @@ decider cannot use that role to enlarge the delegation or change others' duties.
 Keep the original terms, actual assent and dissent attributable; changing the
 implementation does not reinterpret an earlier agreement.
 
+**Independent work during reorganization.** A peer's voluntary arrangement must
+not discard another persona's independent inspection, tool work, supporting-file
+save or informal communication when its own accepted commitment and relevant
+dependencies remain unchanged. A new result owner does not revoke others' tool
+access. Preserve current membership, the actor's exact acceptance, the mandate,
+controls and supplied source lineage. Apply a valid response to current state,
+retaining the new arrangement and the earlier input's actual scope. Shared work
+commands still require the complete current work records; an independent action
+cannot supply assent, change another commitment or release a shared result.
+This distinction applies at admission and to the accepted intent's own recorded
+scope; it does not retroactively widen earlier admissions.
+
 **Handoffs.** Offering a handoff leaves the existing responsibility intact. Transfer must check the exact current terms, current owner, exact receiver, authentic acceptance, adopted decision rights and relevant lifecycle state in one coherent transition. Competing transfers, cancellation, and revocation cannot all succeed from an outdated view. A declined, inaccessible, or obsolete offer leaves an accountable owner or an explicit authorized ownership gap. Silence is not a successor's consent.
 
 ### Discovery, disagreement, and revisable organization
@@ -339,6 +351,17 @@ Readiness is operation-specific evidence about current prerequisites. It is neit
 
 **What an operation must bind.** Each operation binds its current observable capability, interface and connection identity, relevant exact client or runner artifacts and inputs, current work and actual outcome. Controlled local helper execution also binds the actual artifact, resolved relevant dependencies, configuration, and environment. A local helper that calls a remote service must satisfy both boundaries. Limits on observable remote identity do not waive local integrity checks.
 
+The requesting persona's full context remains part of an operation's provenance.
+For raw host-command observations, incidental context is distinct from operative
+dependencies. Native inputs and the persona's declared supporting sources for
+derived code, parameters or interpretation carry their complete relevant
+qualifications into the result. An unrelated report need not accompany every
+later observation merely because it was once read. Preserve exact dependency
+bindings, accepted warnings and historical records; this is not permission to
+discard a caveat that still applies to an authored conclusion. The
+[execution contract](../implementation/CONTRACTS.md#execution-and-observations)
+defines the observable binding and result obligations.
+
 For a remote service, record the server version only if it is genuinely observable. An unavailable server build is explicitly unknown; do not infer it from a schema or invent it. This uncertainty limits executable-version and reproducibility claims. A claim requiring that identity remains unestablished while it is unknown. The uncertainty does not impose an application approval step before an ordinary remote call.
 
 A past run does not establish current availability or guarantee reliability. Preserve relevant guidance, exact mutable inputs and actual effect outcomes. Preparation and installation use the same unrestricted host interface. Even a help command may run imports or fetch dependencies; call an operation read-only only when its actual behavior supports that claim. Code and bulk data may remain outside model context when the runner consumes exact references and the persona receives the relevant interface and actual result evidence.
@@ -386,6 +409,23 @@ The application follows current human instructions and persona-authored work cho
 Attribution remains necessary. Distinguish a human instruction, a persona decision, an accepted responsibility, a tool result and an authored interpretation. A fragment or retrieved document is not proof that a person issued an instruction or accepted a result. Preserve the exact requests and changes that actually occurred.
 
 **Information use.** Record which exact fragments, assets, titles, previews, observations and other content were supplied, and to which model or recipient. Source and audience metadata describe provenance and disclosure; the application does not filter them through a source-sharing approval workflow. A selected file is not evidence of a read that never occurred, and an opaque reference alone does not prove that a body was supplied.
+
+When supplying an exact historical authored decision, derive its accompanying
+qualifications from the sources actually supplied in that decision's admitted
+input. Preserve qualified historical bodies, native result identities and any
+provider turns actually included. Actually supplied execution metadata retains
+its result's qualifications even when command and output bodies were omitted.
+A selected turn does not also select earlier
+turns omitted from that input. An earlier decision body actually supplied in
+the input retains its own actual-input dependencies, including later applicable
+warnings on those sources. A metadata-only reference does not select that body
+or its dependencies. Full source ancestry remains integrity evidence;
+an ancestor or lookup-only reference does not independently require its caveat
+bodies in this read. Required qualifications of the actual input sources retain
+their complete current closure, including later applicable warnings. If the
+original input cannot be established, report full-body unavailability rather
+than guessing the source set or silently removing qualifications. The original
+authored text, input record and provenance remain unchanged.
 
 **Processing destinations.** Record the selected provider or service, actual account and exact transmitted input. Local readability, provider receipt, recipient attention and acceptance are different observations. Clearing later context does not undo an earlier disclosure or establish control over provider retention and outside copies.
 
@@ -439,8 +479,18 @@ provider failure does not settle the consideration. Exact terminal recovery may
 retire that failed lease while retaining the unchanged authored route, time and
 purpose. A character-only transition likewise leaves the work decision for the
 fresh accepted character. This does not create periodic polling, replay actions,
-revive a consumed explicit resume permit or override Stop, Pause or changed work
+revive an earlier consumed opportunity or override Stop, Pause or changed work
 controls. Preserve earlier consumed opportunities under their recorded contract.
+
+Explicitly resumed participation likewise remains an unfinished reconsideration
+until an ordinary work decision is accepted. A locally rejected complete response
+has supplied neither a new judgment nor a continuation. Preserve the current
+resume route through exact failure retirement so the persona can inspect the
+error and correct its decision. The active invocation prevents overlapping calls;
+recovery adopts no rejected operations and changes no authored Stop. An accepted
+ordinary decision consumes the resume opportunity and supplies its own next
+continuation, including Stop. Current pause, cancellation and changed work controls
+still apply. A historical resume event cannot recreate an already spent route.
 
 | Action state | Honest meaning |
 |---|---|
@@ -501,12 +551,40 @@ provider conversation for persona-selected fragments and assets. Current
 character, work state and actual operation outcomes remain authoritative.
 
 Offer continuation as a choice within next supporting assets, independent of
-selected files and images. A persona can select its current completed turn,
-preserve an existing selected turn without appending or renewing it, or clear it.
-Selecting the current turn includes the complete earlier history actually supplied
-to that turn, its full input and every completed output item in order. Retain the
-exact terminal and originating persona, work, model and transport binding. Chosen
-lifetimes still expire normally; a character-adoption fence cannot add the fenced
+selected files and images. Where the actual provider transport supports it, a
+persona can select all completed output items alone, including returned opaque
+reasoning, while choosing needed task facts and resources separately. This omits
+the original prompt, input images and earlier separate provider history without
+editing or summarizing any completed output item. Keep necessary carrier
+acknowledgments, current native context and required qualifications. Report the
+omitted inputs explicitly; retaining original input and source provenance in the
+audit does not mean supplying those input bodies again. Offer only supported
+scopes and do not fabricate messages to satisfy a different provider's format.
+Derive the omitted turn's current qualifications from its actual supplied input,
+including supplied tool-result metadata and nested authored decisions, using the
+same basis as historical Decision reads. Supply the complete required closure
+separately in native context. Do not substitute full provenance ancestry for this
+basis, erase qualifications to reduce replay bytes, or claim a small replay means
+a small total request. Missing input evidence leaves the selected output
+unavailable.
+
+A persona can also select its current completed turn alone, include the earlier
+provider history actually supplied to that turn, preserve an existing selection
+without appending or renewing it, or clear it. The choice of
+the current turn alone retains that turn's complete own input, images and every
+completed output item in order, while excluding its separate earlier provider
+history. Historical material already present inside the current input remains
+included. This is an authored scope choice, not summarization, a context quota or
+automatic history pruning. Useful procedures and conclusions remain separately
+maintainable supporting resources. Bind the chosen scope without changing the
+meaning of older selections, and retain complete source lineage. Retain the
+exact terminal and originating persona, work, model and transport binding.
+Output-only turns retain their scope when included in a later larger selection.
+Changing provider routes makes incompatible history explicitly unavailable; it
+does not erase the authored selection or prevent a fresh-context decision.
+Verify retained wire requests against their own recorded schemas and exact body
+hashes rather than comparing those schemas with the latest generated interface.
+Chosen lifetimes still expire normally; a character-adoption fence cannot add the fenced
 turn. Earlier assistant proposals never stand in for actual effect receipts.
 
 Keep opaque items in private host records and the provider payload. Ordinary
@@ -560,7 +638,7 @@ first model admission must not strand the invitation when a complete response
 is rejected locally. Preserve that pending route while the invocation owns its
 execution slot; after exact completed-rejection retirement, the persona can
 correct the decision. Retain the failure and actual usage without adopting or
-replaying rejected operations. Accepted Stop/Pause, consumed explicit resumption
+replaying rejected operations. Accepted Stop/Pause, completed explicit reconsideration
 and uncertain transport outcomes keep their separate meanings.
 
 Optional activity needs the same separation between an invocation's relevant
@@ -658,6 +736,15 @@ that need retirement. Let current calls settle for those transactions and for an
 exclusive character or responsibility transition, so repeated ordinary work cannot
 starve them. Settling does not cancel a slow call, impose a timeout, or manufacture
 a continuation. Scheduling independence does not prove better task quality.
+
+Circular consideration includes each persona's eligible works. Work-level and
+participant-level cursors alone can repeatedly skip an actor busy elsewhere and
+then give it another turn in the same other work. Preserve its selected-work
+rotation across calls and restarts, checking actual eligibility afresh. A paused,
+stopped, not-yet-due or temporarily blocked route does not prevent another eligible
+route from proceeding. Existing selected exclusive candidates retain their
+freshly checked preference. This is scheduling fairness under declared progress
+and work-set assumptions, not a semantic choice of what the persona should do.
 
 Admitted provider I/O and stop observation must also progress independently of
 synchronous context preparation, persistence and response adoption by that
