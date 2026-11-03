@@ -476,6 +476,29 @@ A design change must explain the problem it solves and reconcile every affected 
 Preserve old criteria and results. State the implementation gap separately from the decision to change the design.
 
 
+## Recover a proven response-only orphan — 3 November 2026
+
+A local worker can disappear after dispatch but before retaining a terminal.
+Requiring remote reconciliation for every such call can permanently hold a
+persona even when the exact request could only produce an unaccepted response.
+Blind replay would instead hide uncertainty and risk duplicating effects.
+
+The changed recovery obligation distinguishes that case from an unresolved
+effectful operation. Reacquire exclusive local execution ownership, verify the
+admitted response-only request and absence of any retained decision or action,
+then release only the matching local invocation. Retain the uncertain attempt,
+missing terminal, available usage and unknown charges. Preserve current persona
+choices and work controls; later work requires fresh ordinary admission. This
+refines execution and recovery under I08, I12, I16 and I20 without changing their
+identities or granting an earlier result a new pass. The authoritative rule is
+in [work and boundaries](design/WORK-AND-BOUNDARIES.md), with the atomic host
+obligation in [system contracts](implementation/CONTRACTS.md).
+
+The motivating run lost a local worker and retained dispatched calls without
+terminal outcomes. Their cause and remote results were not established. Runtime
+implementation and observed recovery must be assessed separately from this
+design decision; local release does not establish task completion or efficiency.
+
 ## Remove application limits and safety gates — 22 October 2026
 
 The user explicitly requested no limits or safety constraints (UR-052). The former finite-resource and default-gating architecture obstructed continuing work and is no longer the target. Raising fixed ceilings or adding a permissive opt-in mode would retain that obstruction; the new contract removes enforcement and keeps accounting observational.

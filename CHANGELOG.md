@@ -2,6 +2,16 @@
 
 [Home](README.md) · [Decisions](DESIGN-DECISIONS.md) · [Provenance](sources/SOURCE-MANIFEST.md)
 
+## 3 November 2026 — recover a proven response-only orphan
+
+Changed the recovery obligation for an execution worker that disappears without
+a terminal receipt. Exclusive local ownership, the exact admitted response-only
+request and absence of any decision or action can justify releasing its local
+hold. The attempt, missing response and unknown remote outcome remain retained;
+current continuation choices and controls are unchanged. This creates no replay,
+inference or claim that the interrupted task succeeded. Other uncertain effects
+retain their reconciliation requirements.
+
 ## 2 November 2026 — keep operator inspection responsive
 
 Clarified that history reads must not block task selection or queue controls,

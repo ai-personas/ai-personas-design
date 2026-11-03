@@ -1146,6 +1146,18 @@ failed local call without lifting the stop. A subsequent explicit resumption
 does not revive the old call. An unrelated configuration failure does not acquire
 an automatic retry through this cleanup rule.
 
+**Release a proven response-only orphan.** When the local execution worker has
+ended without a terminal, reacquire exclusive execution ownership before local
+recovery. Verify the exact admitted response-only request, retained uncertainty,
+empty terminal and absence of a retained decision, adoption or action intent.
+Recheck those facts with the current local invocation in the same commit that
+releases it and retains the recovery observation. Preserve the original attempt,
+missing terminal, measured usage and unknown charges. This is local lease
+cleanup, not an inferred remote result or a completed cancellation. Current
+continuations, individual stops and work pauses remain unchanged. Read-only
+inspection performs no recovery. An explicit recovery control may also publish
+already-retained command results, but must not dispatch a command or inference.
+
 ## Review and release
 
 A review must support the claim being made about the work. An ordinary self-check or peer comment can be an attributable assessment without becoming a formal review commitment. When the adopted acceptance policy requires a review, an informal assessment does not silently satisfy that requirement.

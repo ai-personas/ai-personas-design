@@ -1100,6 +1100,18 @@ cancellation, binding failures, missing local failure evidence and accepted
 actions keep their distinct dispositions. A still-live incomplete stream is
 not an ended local attempt.
 
+Loss of the local execution worker can leave no terminal receipt. This has a
+separate, narrow recovery path: establish that the previous local execution
+owner has ended, verify the exact admitted response-only request, and establish
+that no complete response, accepted decision or action intent was retained. The host may then
+release the matching local invocation while retaining the attempt as uncertain.
+Record the missing response and uncertainty for the next eligible decision;
+never invent a transport terminal, remote cancellation, known charge or recovered
+response. Preserve current invitation and continuation choices, stops and pauses.
+Any later reasoning uses fresh admission and current context. This changes the
+earlier requirement to retain a local hold whenever terminal evidence is missing;
+it does not permit replay or release of an unresolved effectful operation.
+
 A completed temporary HTTP service error can preserve the same response-only
 route. Establish the exact request, finished error response and absence of a
 received decision or action intent. Supply the original status and failure to
