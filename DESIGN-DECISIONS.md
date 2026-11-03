@@ -9,6 +9,112 @@ This register explains the target design adopted in this branch and why its rule
 
 The [normative documents](design/README.md) contain the actual obligations. Adopting a decision changes that design reference; it does not establish that the design has been implemented, produces useful maturation, or is approved for deployment.
 
+## 2 November 2026: keep growing work observable without blocking controls
+
+The requested desktop performance correction applies to observation as well as
+persona execution. A growing history must not make task selection wait behind
+an inspection or let an obsolete response replace the selected task. The
+communication contract now distinguishes coherent display projections from full
+retained evidence and requires truthful loading state. Complete text, attribution,
+order and citations remain visible; internal provenance remains retained without
+being copied through each display refresh. Current execution checks still govern
+controls. This introduces no application history quota or automatic pruning.
+Responsive observation establishes neither faster provider responses nor
+autonomous completion of the user's work.
+
+## 2 November 2026: bind historical decision qualifications to actual input
+
+UR-021 and UR-022 require selective context without losing genuine conditions.
+Taking required qualifications from every provenance ancestor can add unrelated
+documents to a small historical decision, even when those documents were never
+supplied to its author. The work boundaries and contracts now distinguish the
+actual admitted input sources from their complete ancestry. Historical reads
+retain current qualification closure for actual sources and keep full provenance
+checks separately. The retained input must support this distinction; missing
+input is explicit unavailability, not permission to omit conditions. Replaying
+all ancestry and guessing semantic relevance were rejected. Actually supplied
+earlier decision bodies retain their own input dependencies and later warnings;
+lookup references and omitted provider turns do not add those dependencies.
+This clarifies the source boundary without rewriting archives, selecting a task method or claiming
+that smaller context establishes better work.
+
+## 1 November 2026: assess resource usefulness before accounting for mutations
+
+UR-015, UR-016 and UR-053 require a maintenance judgment informed by experience.
+Listing writes accurately is necessary accounting, but choosing read-only work
+does not establish that existing resources need no improvement. The persona core
+now makes that distinction explicit: received evidence can reveal a correction,
+useful procedure or discovery problem even when the current investigation only
+reads. A reasoned no-change outcome remains valid. This clarifies the existing
+obligation without mandatory asset creation, a prescribed workflow or a claim
+that procedural reuse establishes character maturation. Useful later reuse must
+still be demonstrated in actual work.
+
+## 1 November 2026: choose one complete provider turn without accumulating history
+
+Requiring a persona to carry all previously supplied provider history whenever
+it keeps the current turn couples useful continuity to transcript growth. The
+continuation contract now offers a separate choice of the current turn alone.
+Its own input, images and complete output remain exact; earlier provider history
+is excluded only by that explicit choice. Current-prompt historical material,
+source lineage, terminal binding, selection lifetimes and character fences retain
+their meanings. The full-history choice remains available.
+
+This supports UR-018, UR-021 and UR-022 without automatic relevance selection or
+another model authoring a summary. It neither guarantees lower input size for
+every turn nor demonstrates better work, rendered reasoning reuse or maturation.
+Those claims require actual supplied-context and behavioral evidence.
+
+## 1 November 2026: distinguish raw command inputs from incidental context
+
+Copying the qualifications of every supplied document into every host-command
+result causes research history to accompany unrelated later observations.
+Clearing optional context then cannot stop that propagation. This defeats
+selective context under UR-022 and obscures the new evidence needed for sustained
+work. Keeping all provenance as mandatory text is not the same as preserving
+the conditions relevant to an operation.
+
+The execution contract now separates complete call provenance from the raw
+receipt's operative dependencies: native runner inputs and additional exact
+supporting sources declared by the persona. Their qualifications and later
+accepted warnings remain attached, with exact current checks before dispatch.
+Historical dependencies remain intact. Dropping all qualifications would lose
+necessary conditions; automatically retaining every contextual file defeats
+selection. The persona remains responsible for identifying dependencies of
+derived code and claims. This change establishes neither engineering quality
+nor a measured saving in a live run.
+
+## 1 November 2026: preserve independent work across peer arrangements
+
+A persona volunteering to integrate a result can change shared arrangement
+records while another participant is inspecting a source or preparing a tool.
+Requiring the entire arrangement history to remain unchanged discards useful
+independent responses despite unchanged personal commitments. This undermines
+persona-chosen cooperation and sustained work under UR-050 and UR-044.
+
+The freshness contract now distinguishes the actor's accepted responsibility
+from peers' arrangements. Independent navigation, tool work, supporting-file saves
+and informal communication retain exact personal, task, control, dependency and
+source checks. Shared work commands and mixed responses retain complete current
+record checks. Adoption preserves the current arrangement and the actual earlier
+input; it does not imply that the persona saw the later agreement. Earlier
+admissions retain their recorded scope. Serializing all cooperation or accepting
+all stale responses would each defeat a different part of this contract. This
+change establishes no engineering quality or autonomous task completion.
+
+## 1 November 2026: let resumed personas correct rejected decisions
+
+Explicit resumption requests a new persona judgment. Consuming that opportunity
+when inference starts can leave an older Stop in force after a malformed response,
+requiring another human intervention before the persona can correct its error.
+This defeats autonomous correction and purposeful continuation under UR-050 and
+UR-045. A current explicit reconsideration therefore remains pending until an
+ordinary decision is accepted. Exact failure recovery preserves that route and
+supplies the diagnostic; it does not adopt rejected actions, override a pause,
+or recreate an earlier consumed permission. A valid decision supplies the persona's
+chosen continuation, which may be Stop. This contract does not establish useful
+task progress, quality or maturation; those still require observed results.
+
 ## 26 October 2026: reconcile research interpretations with unrestricted execution
 
 The research rationale still described cumulative discovery allowances, a hard
@@ -369,6 +475,29 @@ A design change must explain the problem it solves and reconcile every affected 
 
 Preserve old criteria and results. State the implementation gap separately from the decision to change the design.
 
+
+## Recover a proven response-only orphan — 3 November 2026
+
+A local worker can disappear after dispatch but before retaining a terminal.
+Requiring remote reconciliation for every such call can permanently hold a
+persona even when the exact request could only produce an unaccepted response.
+Blind replay would instead hide uncertainty and risk duplicating effects.
+
+The changed recovery obligation distinguishes that case from an unresolved
+effectful operation. Reacquire exclusive local execution ownership, verify the
+admitted response-only request and absence of any retained decision or action,
+then release only the matching local invocation. Retain the uncertain attempt,
+missing terminal, available usage and unknown charges. Preserve current persona
+choices and work controls; later work requires fresh ordinary admission. This
+refines execution and recovery under I08, I12, I16 and I20 without changing their
+identities or granting an earlier result a new pass. The authoritative rule is
+in [work and boundaries](design/WORK-AND-BOUNDARIES.md), with the atomic host
+obligation in [system contracts](implementation/CONTRACTS.md).
+
+The motivating run lost a local worker and retained dispatched calls without
+terminal outcomes. Their cause and remote results were not established. Runtime
+implementation and observed recovery must be assessed separately from this
+design decision; local release does not establish task completion or efficiency.
 
 ## Remove application limits and safety gates — 22 October 2026
 

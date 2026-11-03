@@ -308,6 +308,22 @@ Diagnostic supply does not resume a stopped persona or establish work completion
 
 An earlier accepted continuation can remain usable under the same live mandate. Within the continuing session, the host may retire a definitively rejected, complete local invocation and supply its actual failure to a fresh primary decision. This preserves the existing continuation rather than deriving permission from invalid output. Keep the rejected response and its charges; do not replay its proposed actions, repair its bytes, erase recorded usage, revive an authored stop, reuse a consumed timed opportunity, or treat cancellation or an uncertain transport as a completed rejection. Recheck current work, actor, context, scheduling and actual execution state before the fresh admission; no resource allowance is replenished or required.
 
+Before scheduling fresh work in a foreground session, reconcile already recorded
+host-command terminal results in that work subtree whose observations were not
+published by an earlier coordinator. Verify the original intent and evidence,
+publish each result once, and preserve its outcome and any recorded execution
+timing. A new publication timestamp is not a new execution or inspection time.
+This publication step executes no command, infers no missing outcome and does
+not resume a stopped participant. Otherwise a successfully executed command can
+leave its persona permanently waiting for a result that the runtime already has.
+
+Reconcile again after draining foreground workers on exit, including an error
+after adoption. If an accepted command never dispatched and its runner, input
+or authority was invalidated, cancel it and publish the actual cancellation.
+Use the same dispatch prerequisites; a rapid pause/resume must not revive the
+old intent. Settlement alone does not launch a still-valid admission or infer
+an outcome for a dispatched command with missing evidence.
+
 Report a session's final stop separately from driver failures recorded during it.
 A failed attempt followed by continued work remains a real historical failure;
 its presence does not replace the final scheduling outcome or establish a current
@@ -344,6 +360,21 @@ inference, adopts no rejected action or continuation, and lifts no separate
 work-wide or identity pause.
 
 **Communication and diagnostic inspection.** Ordinary chat and work delivery withhold the call's persona-authored preview, commentary, and reply until the complete work, maintenance, and next-context response has been validated. While the call is pending, those channels may show truthful mechanical host status.
+
+Operator inspection must remain responsive as retained work grows. Loading a
+conversation must not hold up task selection or queue controls behind that read,
+and an older read must not replace a later selection or control result. Present
+related panels from a coherent view and distinguish loading from an empty
+workspace. Opening or refreshing a view must not start persona work. Execution
+still checks current state when a control is performed.
+
+The displayed conversation needs complete message text, attribution, ordering
+and exact citations. Internal provenance that is not rendered can remain in the
+retained records without being copied through every display refresh. This is a
+presentation projection, not permission to truncate authored text, alter history
+or omit required evidence from persona context. Unchanged observations need no
+repeated redraw. UI response time, history-read cost and provider latency remain
+separate measurements; improvements to one do not establish improvements to all.
 
 Label any operator-visible authored draft text, including commentary, as unvalidated. A draft is not delivered persona communication, an accepted decision, completion or proof of its claims. Its exposure retains its actual audience and provenance. Concise reasoning summaries and source/result evidence suffice; this contract does not require publishing raw private reasoning or adding a live-preview feature.
 
@@ -468,6 +499,14 @@ The character acceptance unit cannot include new optional selection or exposure,
 
 If an explicit participant resume admitted an ordinary decision that accepts a changed character, retain that admission's actual resume permission for the required fresh decision. Character-only adoption must not strand already resumed work by consuming its permission before a decision under the new character can address it. Bind this carryover to the accepted invocation and current work; a historical resume event alone grants nothing. It creates no new operator instruction and does not adopt the fenced response's proposed continuation. Existing ordinary continuations and initial character handover keep their own conditions. Do not rearm an elapsed reconsideration timer or override current cancellation, pause, ownership or failure state.
 
+The same resumed judgment remains pending when a complete response is rejected
+locally. Keep its current resume route while the active invocation owns the
+execution slot. Exact completed-failure retirement supplies the actual diagnostic
+to a fresh decision without adopting or replaying rejected operations. Consume
+the resume on an accepted ordinary work decision, including an accepted Stop,
+rather than on an unsuccessful provider attempt. Current work controls continue
+to apply; do not reconstruct an older consumed route from history.
+
 The same fresh-decision requirement applies when a legitimate ordinary admission consumed an elapsed reconsideration opportunity. A successfully accepted ordinary character transition supplies one admission under the new character, subject to current work controls. Consume that handoff permission when preparing the fresh request; preserve the timer as consumed and keep the prior authored continuation distinct. This completes the actual character transition rather than firing the timer again. A further effective character change needs its own fresh decision. Unresumed Stop or Pause supplies no initial admission, and initialization keeps its separate handover.
 
 An idea about possible character change, without an adoption request, does not trigger this scheduling barrier. Ordinary reads may investigate it. A proposal lacking necessary evidence may be explicitly rejected or deferred with no commit. Its candidate remains unadopted; any later character change needs a fresh attributable proposal. It must not commit automatically after independent work resumes.
@@ -497,6 +536,15 @@ The characteristic profile and own-voice current account have one coherent accep
 **Supporting assets.** In the same response, the primary may propose useful supporting assets or their storage, refinement and organization, with intended targets and useful search cues as described above. This includes tools, skills, history or message resources, data, scripts, and code, while preserving their source roles.
 
 Deletion and retirement keep their actual author, scope and observed outcome. They do not satisfy an obligation, resolve a warning or establish that an uncertain effect never happened. Missing originals remain unavailable; exact imported bytes and authoritative receipts cannot be rewritten as persona-authored prose. Deterministic factual capture remains separate from discretionary maintenance.
+
+Supporting-asset metadata can need maintenance while its file bytes remain
+unchanged. Bind a native save's complete authored attachments and actual admitted
+provenance into its immutable revision identity, so a citation or qualification
+change does not collide with an earlier save of the same text. Preserve earlier
+revisions, their attachments and independently accepted warnings. An exact retry
+of the same accepted save retains that original outcome; a newly authored save
+is a separate proposal. The host must not choose which qualifications to remove
+or require a cosmetic text edit merely to record an intended metadata change.
 
 **Failure behavior.** Stale edits conflict; they do not overwrite accepted changes. Dependent multi-file edits, qualification changes, and next-context references must commit coherently or leave the previous valid state intact, including any separately accepted applicability warning.
 
@@ -741,6 +789,18 @@ Do not silently shorten selected prose to a title, omit a required exception or 
 
 **Actual exposure and retained context.** The [chosen capability working set](../design/WORK-AND-BOUNDARIES.md#inference-and-bounded-working-context) concerns actual provider transmission and model context, not merely the host’s intended list. Assemble exact chosen context instead of retaining every past tool, skill and result in each input. Preserve active-operation controls, critical results, current work, character and other mandatory state. Retained history remains discoverable without an application corpus or input quota.
 
+For historical authored-decision reads, establish actual input sources from the
+retained admission before expanding their current required qualifications.
+Bind that admission to the accepted decision's actor, work, response and epoch.
+Keep full provenance validation separate from this source set. Include only
+provider turns actually present in the recorded input, without recursively
+restoring separately omitted history. Follow the input dependencies of an
+earlier decision only when its actual authored body was supplied, with its
+identity bound to the retained original admission. Later applicable warnings
+on those dependencies remain attached. Missing or conflicting input evidence
+makes the full projection unavailable; an intact archive can still have a
+metadata descriptor. Preserve the exact authored body and retained records.
+
 Cached prefixes, previous-response links and hidden provider history neither prove absence nor eliminate exposure. Describe known schema expansion and retained context honestly; unknown expansion stays unverified. Choose supported provider context or reset mechanisms when useful, without claiming a hard bound the adapter cannot establish. Sending the bulk catalogue for the model to filter fails selective discovery even if provider-native deferral is used. Remembering an old tool name does not establish its current definition or an accepted invocation.
 
 <a id="restricted-selection-repair-after-later-context-growth"></a>
@@ -812,8 +872,13 @@ navigation, tool work, native supporting-file saves and informal source
 interpretations. A new peer candidate,
 evaluation, release or delivery record alone should not discard such a response
 when its separately recorded
-identity, task, responsibilities, arrangements, pending dependencies and supplied
-source lineage remain unchanged. Supporting-file writes, exact edits and host
+identity, task, own accepted responsibilities, pending dependencies and supplied
+source lineage remain unchanged. A peer's voluntary arrangement does not itself
+revoke independent tool use or change another persona's accepted commitment.
+Retain membership and the actor's exact acceptance, but do not require unchanged
+peer acceptance records or arrangement history for these independent operations.
+Changed own commitments, mandates, controls and relevant dependencies remain
+freshness failures. Supporting-file writes, exact edits and host
 imports still validate the actual current source/base, purpose scope, path,
 qualifications, supplied lineage and any authored import-byte precondition.
 This independence neither adopts character nor registers a shared work result.
@@ -924,6 +989,19 @@ requested.
 An executable-version claim requires the claimed version to be genuinely bound to the observed operation. A filename, schema version, subsequently edited helper, or past success is insufficient. Missing server identity blocks a use only when the required assurance depends on that identity; otherwise, it narrows the claims that can be supported. The actual identity, dependency and outcome distinctions in the [execution boundary](../design/WORK-AND-BOUNDARIES.md#capabilities-and-the-execution-boundary) still apply.
 
 Exact code and bulk data may remain outside model context when the selected runner consumes their references. The persona still receives relevant usage guidance and actual results under its chosen context; no application result quota is imposed.
+
+**Separate call provenance from command dependencies.** A raw host-command
+receipt retains the context from which its request was authored as provenance.
+Files merely present in that context do not automatically become operative
+inputs to every later command. Its required accompaniment follows the exact
+native inputs consumed by the runner and additional exact supporting sources
+the persona declares for derived code, parameters or interpretation. Those
+sources retain their qualifications and later accepted warnings. Bind their
+actual revisions and current conditions before dispatch; a missing source or
+changed binding cannot be silently ignored. A source reference alone supplies
+no body to the model. Earlier accepted intents and observations retain their
+recorded dependencies. This distinction cannot turn a raw outcome into a verified
+derived claim or remove qualifications from separately authored material.
 
 **Keep each stage's meaning clear.** Finding an operation, supplying it to the model, and carrying it out establish different facts:
 
@@ -1038,6 +1116,17 @@ If these cannot be established, expose the continuation gap. Transfer or ending 
 
 **Give eligible accepted work a real opportunity to continue.** An accepted ordinary-work continuation preserves its actual eligibility across yield, result delivery, and restart. Under the declared supported fairness and capacity assumptions, persistently eligible accepted work must receive another decision opportunity. Merely keeping it visible in a queue is insufficient. Queue churn and pagination cannot evade this obligation. Expose unmet scheduling assumptions or failed consideration as limitations, not task completion.
 
+Concurrent work needs fairness across each persona's eligible routes as well as
+across works and participants. A busy persona can repeatedly be skipped in one
+work and reclaimed by another immediately after completion. Keep an attributable
+per-persona rotation of selected work identities, and reconsider its other
+currently eligible work when the actor becomes free. Recheck membership, current
+controls, authored continuation, pending effects and handover boundaries; an
+ineligible route must not hold an eligible one. This mechanical preference assigns
+no task priority or responsibility and creates no call or continuation. State the
+assumptions behind eventual consideration, including successful persistence,
+settling calls and the stability of the eligible work set.
+
 If a selected opportunity must wait for active calls to settle, advancing the
 scheduler cursor must not spend that opportunity without admission. Retain the
 candidate's identity and reconsider it first after required maintenance, checking
@@ -1056,6 +1145,18 @@ recorded intervening stop or a currently effective stop can justify retiring tha
 failed local call without lifting the stop. A subsequent explicit resumption
 does not revive the old call. An unrelated configuration failure does not acquire
 an automatic retry through this cleanup rule.
+
+**Release a proven response-only orphan.** When the local execution worker has
+ended without a terminal, reacquire exclusive execution ownership before local
+recovery. Verify the exact admitted response-only request, retained uncertainty,
+empty terminal and absence of a retained decision, adoption or action intent.
+Recheck those facts with the current local invocation in the same commit that
+releases it and retains the recovery observation. Preserve the original attempt,
+missing terminal, measured usage and unknown charges. This is local lease
+cleanup, not an inferred remote result or a completed cancellation. Current
+continuations, individual stops and work pauses remain unchanged. Read-only
+inspection performs no recovery. An explicit recovery control may also publish
+already-retained command results, but must not dispatch a command or inference.
 
 ## Review and release
 
