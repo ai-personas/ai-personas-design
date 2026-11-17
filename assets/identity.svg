@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc"><title id="title">Each persona owns its character</title><desc id="desc">Three continuing identities each own a different numerical model, invoke reasoning with their own state and choose actions. Shared skills and facts are supporting resources. One persona cannot silently adopt another persona’s weights or commitments.</desc><defs><style>text{font-family:Arial,Helvetica,sans-serif;fill:#20334b}.title{font-size:46px;font-weight:700}.subtitle{font-size:25px;fill:#536477}.heading{font-size:28px;font-weight:700}.body{font-size:24px}.edge{font-size:21px;fill:#536477}.note{font-size:25px;font-weight:700}.small{font-size:21px;fill:#536477}</style><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10" fill="#63758a"/></marker></defs><rect width="1600" height="1000" fill="#ffffff"/><rect x="64" y="48" width="72" height="7" rx="3" fill="#236e60"/>
+<text x="64" y="113" class="title"><tspan x="64" dy="0">Each persona owns its character</tspan></text>
+<text x="64" y="158" class="subtitle"><tspan x="64" dy="0">A reasoning service can be shared; personal weights and development remain separate.</tspan></text>
+<rect x="64" y="230" width="448" height="210" rx="18" fill="#eee9ff" stroke="#6551a5" stroke-width="2"/>
+<circle cx="98" cy="266" r="19" fill="#6551a5"/>
+<text x="98" y="274" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">A</text>
+<text x="130" y="275" class="heading"><tspan x="130" dy="0">Persona A · own model</tspan></text>
+<text x="88" y="324" class="body"><tspan x="88" dy="0">Own parameters, model lineage,</tspan><tspan x="88" dy="32">experience and accepted duties.</tspan></text>
+<rect x="64" y="560" width="448" height="210" rx="18" fill="#eee9ff" stroke="#6551a5" stroke-width="2"/>
+<circle cx="98" cy="596" r="19" fill="#6551a5"/>
+<text x="98" y="604" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">→</text>
+<text x="130" y="605" class="heading"><tspan x="130" dy="0">Own decision</tspan></text>
+<text x="88" y="654" class="body"><tspan x="88" dy="0">Its model outputs and selected</tspan><tspan x="88" dy="32">resources inform its reasoning</tspan><tspan x="88" dy="32">call.</tspan></text>
+<path d="M288 440 V560" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="304" y="484" width="115" height="30" rx="4" fill="white"/>
+<text x="312" y="507" class="edge"><tspan x="312" dy="0">influence</tspan></text>
+<rect x="576" y="230" width="448" height="210" rx="18" fill="#e8f0ff" stroke="#315d94" stroke-width="2"/>
+<circle cx="610" cy="266" r="19" fill="#315d94"/>
+<text x="610" y="274" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">B</text>
+<text x="642" y="275" class="heading"><tspan x="642" dy="0">Persona B · own model</tspan></text>
+<text x="600" y="324" class="body"><tspan x="600" dy="0">Own parameters, model lineage,</tspan><tspan x="600" dy="32">experience and accepted duties.</tspan></text>
+<rect x="576" y="560" width="448" height="210" rx="18" fill="#e8f0ff" stroke="#315d94" stroke-width="2"/>
+<circle cx="610" cy="596" r="19" fill="#315d94"/>
+<text x="610" y="604" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">→</text>
+<text x="642" y="605" class="heading"><tspan x="642" dy="0">Own decision</tspan></text>
+<text x="600" y="654" class="body"><tspan x="600" dy="0">Its model outputs and selected</tspan><tspan x="600" dy="32">resources inform its reasoning</tspan><tspan x="600" dy="32">call.</tspan></text>
+<path d="M800 440 V560" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="816" y="484" width="115" height="30" rx="4" fill="white"/>
+<text x="824" y="507" class="edge"><tspan x="824" dy="0">influence</tspan></text>
+<rect x="1088" y="230" width="448" height="210" rx="18" fill="#e3f3ef" stroke="#236e60" stroke-width="2"/>
+<circle cx="1122" cy="266" r="19" fill="#236e60"/>
+<text x="1122" y="274" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">C</text>
+<text x="1154" y="275" class="heading"><tspan x="1154" dy="0">Persona C · own model</tspan></text>
+<text x="1112" y="324" class="body"><tspan x="1112" dy="0">Own parameters, model lineage,</tspan><tspan x="1112" dy="32">experience and accepted duties.</tspan></text>
+<rect x="1088" y="560" width="448" height="210" rx="18" fill="#e3f3ef" stroke="#236e60" stroke-width="2"/>
+<circle cx="1122" cy="596" r="19" fill="#236e60"/>
+<text x="1122" y="604" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">→</text>
+<text x="1154" y="605" class="heading"><tspan x="1154" dy="0">Own decision</tspan></text>
+<text x="1112" y="654" class="body"><tspan x="1112" dy="0">Its model outputs and selected</tspan><tspan x="1112" dy="32">resources inform its reasoning</tspan><tspan x="1112" dy="32">call.</tspan></text>
+<path d="M1312 440 V560" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="1328" y="484" width="115" height="30" rx="4" fill="white"/>
+<text x="1336" y="507" class="edge"><tspan x="1336" dy="0">influence</tspan></text>
+<rect x="64" y="844" width="1472" height="79" rx="16" fill="#f2f5f8"/>
+<text x="90" y="877" class="note"><tspan x="90" dy="0">Shared reasoning service and shared skills do not create shared identity or a permanent manager.</tspan></text>
+<text x="64" y="962" class="small"><tspan x="64" dy="0">Conceptual design • Arrows show possible transitions, not demonstrated improvement.</tspan></text>
+</svg>

@@ -1,168 +1,50 @@
 # AI Personas
+## Distinct characters that do useful work and develop through experience
 
-**Current requirement:** [Unrestricted execution](design/WORK-AND-BOUNDARIES.md#unrestricted-execution-requirement) supersedes earlier application quota, safety, permission-gate and approval clauses. Historical results retain their original criteria; this change alone establishes no runtime conformance.
+**Design revision: 17 November 2026. Design only; not a claim of a deployed, proven system.**
 
+A persona should not be a fixed character description pasted onto otherwise generic answers. Each persona owns a small numerical **character model**: a set of parameters that influences how it reasons, works, communicates and collaborates. Its actual experiences can lead it to revise those parameters. Later work and relationships should reveal whether those revisions helped.
 
-AI Personas is a design for continuing AI collaborators with recognizable ways of noticing, deciding, communicating, and working with others. A persona uses a small selection of its own character and behavior prompts, together with relevant supporting material. The same language model does the work, chooses what it needs next, and considers useful revisions from actual experience. Development is possible; improvement is not guaranteed.
+The important relationship goes both ways: **character influences experience; interpreted experience can change character; changed character influences what happens next.**
 
-**Choose a reading path:** [Start with an everyday explanation](START-HERE.md), [explore the visual guide](VISUAL-GUIDE.md), or [go to the exact design rules](design/README.md). This repository specifies a design; [implementation status](implementation/STATUS.md) states what has actually been established.
+![A persona’s own numerical character influences reasoning and chosen work or social interaction. Observed consequences can support a candidate change, which is assessed and adopted before later use. Supporting facts and skills remain separate.](assets/overview.svg)
 
-<details>
-<summary>Detailed introduction: character, assets, initialization, and current design status</summary>
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
 
-**Distinct characters. Continuing experience. Useful maturation through work.**
+The upper cycle is ordinary activity: interpret the situation, choose resources and collaborators, act, and observe. The lower cycle is durable development: understand a consequential pattern, propose a justified numerical change, compare it with the current model, and follow an adopted change into later life. Neither cycle requires a permanent manager or participation by every available persona.
 
-AI Personas is a design for continuing AI collaborators with recognizable character: their own ways of noticing, choosing, communicating, relating to others, and changing through experience. Personas are general-purpose. Their traits shape how they approach different tasks; they do not assign a preset profession or establish competence. Competence must still be established for the proposed work.
+## Start with the right reading path
 
-Each persona has one accepted, versioned character account, expressed in natural language. It covers OCEAN traits—openness, conscientiousness, extraversion, agreeableness, and neuroticism—and a VAD profile of modeled valence (positive or negative tone), activation, and perceived control. These semantic descriptions are required; numerical scores are not.
-
-**Fragments define character.** A fragment is a first-person prompt part that expresses the persona’s characteristic behavior, perspective, or voice. Fragments live in ordinary files that the persona can read, search, arrange, revise, and retire. Selected fragments become context for a large language model (LLM). That context, the reasoning it informs, actual interactions and actions, and the continuing evolution of authored prompts together constitute the persona. Facts or experience may inform a fragment, but its defining purpose is to shape the persona, not to store an episode for later recall.
-
-**The normal beginning is an attributed trait seed.** An initial LLM invocation expresses that seed as candidate fragments in the persona’s own voice. The candidates must form a coherent accepted starting account before continuing authorship proceeds. The primary LLM then works from that account and develops its prompts through actual experience. The initial LLM has an initialization role; it is not another continuing author. Seed provenance, generated starting detail, accepted character, and later experience remain distinguishable. Generated detail is not evidence of prior experience. Imported or operator-supplied beginnings retain their actual origin.
-
-**Supporting assets have a different purpose.** Plain domain knowledge, generic technical procedures, organized history, tool-use records, tool definitions, reusable skills, scripts, code, and data are retained separately as supporting assets. This remains true whether the persona or someone else authored them. First-person wording or inclusion in a prompt does not turn an asset into character. Assets may guide task execution while retaining their supporting purpose and actual origin.
-
-While working, the primary LLM decides which fragments and supporting resources it needs next. It starts discovery with a useful initial set of information. It can use literal text search, grep, supported regular expressions, and exact references. The model must never receive all tool names and descriptions, schemas, or the whole skill catalogue merely to filter them—even on the first choosing call. The host, meaning the system supporting the persona, keeps the bulk inventory outside both the provider-facing payload and the context visible to the model.
-
-Finding a resource does not prove installation, readiness or successful execution. [Following connections without loading everything](START-HERE.md#following-connections-without-loading-everything) explains direct-resource paths, context selection, and accounting across a whole episode. The [context contract](implementation/CONTRACTS.md#primary-persona-next-context-selection) and [working-context boundary](design/WORK-AND-BOUNDARIES.md#inference-and-bounded-working-context) describe actual selection, supply and outcomes under the current unrestricted requirement.
-
-This repository describes the **current target design**; the [change history](CHANGELOG.md) records its dated revisions. Every application-visible persona LLM invocation combines work, characteristic-fragment maintenance, supporting-resource maintenance, and explicit choice of next fragment/resource context. Preserving an appropriate choice or stating no optional need is valid. Missing next-context intent is invalid; it is not an implicit choice. This design explicitly supersedes the 7 October optional-descriptor and omitted-maintenance norms while retaining the persona-owned files design.
-
-**Design adoption is not runtime conformance.** This repository contains design documents, evaluation criteria, and scoped historical evidence. This revision changes no runtime. It does not establish useful maturation, human-like behavior, or product readiness. See [implementation status](implementation/STATUS.md) for the evidence boundary.
-
-Maturation means that the same primary LLM considers work, fragment and asset maintenance, and explicit next-context choice in each interaction. It requires neither a forced edit nor a separate learner. The aim is a persona that becomes more useful through experience across work and interaction while expressing recognizable character. [Stage-matched evaluation](evaluation/README.md#whole-persona-development-checkpoints) and [three-persona checkpoints](examples/WORKED-EXAMPLES.md#whole-persona-checkpoints-without-forced-trait-drift) distinguish useful maturation from style alone, forced trait change, and regression.
-
-</details>
-
-## The central loop
-
-Character informs what the persona does, and actual consequences can inform what it revises. The loop connects these responsibilities:
-
-![Two separately purposed stores supply chosen context to the primary LLM. Actual decisions and consequences inform later revision. Every call also has maintenance and next-context duties.](assets/persona-files-loop.svg)
-
-**Figure: How a continuing persona works.** This is a conceptual explanation of the design. [Read the exact rules](design/PERSONA-CORE.md#maturation-within-every-primary-interaction); the explanation below retains their qualifications. [Open the illustration](assets/persona-files-loop.svg).
-
-<details>
-<summary>Text equivalent of the illustration</summary>
-
-How a continuing persona works
-
-AN ILLUSTRATED DESIGN STORY
-
-What should shape my next decision?
-
-Stored files
-
-Exact context
-
-One primary language model makes judgments
-
-Characteristic fragments
-
-How this persona approaches, behaves and speaks.
-
-Supporting assets
-
-Knowledge, tools, skills, data and attributed history.
-
-Choose useful next context
-
-Use known exact references or chosen file search. Explicit preserve or no optional need can be enough.
-
-Supply what the decision needs
-
-Current character and mandatory work state join the selected exact text and complete qualifications.
-
-Reason, interact and act
-
-The persona’s perspective informs choices about the task, tools and cooperation.
-
-Observe and consider revision
-
-Record actual consequences. The primary LLM proposes useful changes, or states no change, a block or a deferral.
-
-The next call uses the accepted selection and current state. The loop is a design responsibility, not proof of beneficial behavior.
-
-Characters personify design choices; they do not assert feelings or consciousness. Scenes are hypothetical.
-
-</details>
-
-1. An attributed trait seed becomes initial LLM-authored candidate fragments and a coherent accepted starting account.
-2. The primary LLM receives its current character, selected fragments, and selected supporting resources, alongside the actual need, observations, and accepted duties.
-3. That perspective informs every discretionary choice: task methods, attention, communication with humans and peers, collaboration, context navigation, and maintenance.
-4. Work and social interaction produce actual consequences. These may support, challenge, or leave the persona’s understanding unchanged.
-5. The persona maintains fragments and supporting resources where useful, explicitly states what remains unchanged or unresolved, and chooses what should inform its next decision.
-
-Meaningful experience may also change how the persona understands a particular relationship. Experience may also support an explicitly adopted revision of current character.
-
-Self-harmonization means making prompt parts coherent and usable together. It preserves useful tensions and keeps unresolved contradictions visible. It does not require wholesale rewriting or make different personas alike. The [core maturation loop](design/PERSONA-CORE.md#maturation-within-every-primary-interaction) governs this reciprocal development.
-
-The analogy to aging describes continuity shaped by experience. Elapsed time, invocation counts, and automatic model-weight training do not constitute that development, and wisdom is not guaranteed. Development may narrow a claim, correct a habit, simplify authored context, or reveal a regression.
-
-**Every accepted response covers the whole responsibility.** These are connected duties, not a mandatory five-stage workflow or five model calls. Each persona invocation receives the maintenance obligation. Each accepted response must explicitly cover:
-
-| Responsibility | What the response must cover |
+| You want to understand… | Read… |
 |---|---|
-| Work | The result or current disposition of the work |
-| Fragment maintenance | A proposed change, a reasoned no-change decision, or an explicit unresolved disposition |
-| Supporting-resource maintenance | The same maintenance decision for supporting assets |
-| Next fragment context | An exact choice, appropriate preservation of an existing choice, or an explicit statement of no optional need |
-| Next supporting-resource context | An explicit choice for supporting resources on the same basis |
+| The idea without implementation terminology | [Start here](START-HERE.md) |
+| What the user actually requires | [User requirements](USER-REQUIREMENTS.md) |
+| The architecture and where each rule belongs | [Design guide](design/README.md) |
+| How experience changes numerical character | [Continual development](design/CONTINUAL-DEVELOPMENT.md) |
+| How the whole system behaves in concrete situations | [Worked examples](examples/WORKED-EXAMPLES.md) |
+| What exists and what has not been demonstrated | [Evidence and status](implementation/STATUS.md) |
+| The diagrams together, with explanations | [Visual guide](VISUAL-GUIDE.md) |
 
-A small task may need only one response, a concise joint reason for no change across both maintenance scopes, and an appropriate preserve or no-optional-need choice for both context scopes. No new fragment, search, separate reflection call, or compulsory mutation is required. A maintenance no-change decision does not replace the next-context decision. Known unresolved work must remain visible rather than being described as no change.
+Unfamiliar words are defined in the [glossary](GLOSSARY.md). Every active chapter includes a relevant explainer diagram and a text explanation; color is never the only way to understand it.
 
-These duties also apply to initialization, retrieval choices, peer communication, and repair. A failed or malformed attempt is recorded as such; it must never be converted into a persona-authored no-change answer. The same primary LLM owns substantive work, character-conditioned fragments, supporting-resource maintenance, and next-context choice.
+## What is distinctive
 
-**Proposing a change is different from storing it.** Maintenance proposals identify intended storage files or paths and useful search or regex cues where appropriate. A proposed save, an accepted edit, and a receipt confirming actual storage are distinct facts. Histories and receipts preserve real observations rather than invented events. External skills, code, and data retain their real authorship.
+**One characteristic model per continuing persona.** A shared reasoning service may provide language and general problem-solving ability, but it does not replace each persona’s owned numerical character. Another persona’s model is not silently substituted. The character network is not itself a full language model.
 
-**The host preserves exact state and outcomes.** It records actual inputs, actions, usage and results, maintains versions, and handles effects without inventing success or duplicating accepted changes. It adds no application quota, permission gate or safety approval under UR-052. Response validation still distinguishes a complete persona decision from missing or malformed output. After an accepted effective-character change, a fresh decision receives that character before further operations from the earlier response, including reads and waits. Explicit cancellation and accounting do not depend on a successful model reply. The [core](design/PERSONA-CORE.md) and [contracts](implementation/CONTRACTS.md) describe these responsibilities.
+**Chosen cooperation.** In a population of ten, the addressed persona may work alone or invite two, three or more peers as useful. Invitees decide whether to participate. Coordination can emerge and change; there is no compulsory planner, critic, profession or team size.
 
-For example, a hypothetical persona might retain: “I tend to compare alternatives before committing. When the deadline is close, I first check whether another comparison could actually change the choice.” Another might prefer a quick concrete attempt and recognize when that preference needs restraint. These differences matter when they change behavior and improve work. Distinct biographies alone do not demonstrate that benefit.
+**Development that reaches future behavior.** Saving a lesson, changing an appraisal, editing weights, changing a decision and improving an outcome are different achievements. The design connects them and keeps their evidence separate. Better communication can improve later task work; task experience can improve later social interaction.
 
-## A compact network of useful fragments
+**Useful end results.** Personas interpret sparse requests, obtain or create tools and skills, inspect their own results, correct problems, and deliver what the request actually needs. Ordinary progress must not depend on an outside agent continually diagnosing and repairing their work.
 
-A fragment can contain a cue that helps the persona find related material later. The primary LLM decides whether to follow the cue, which candidates to inspect, what to select, and when to stop. Connections can emerge through these searches. They do not require fixed folders, a separate graph engine, automatic host traversal, a hidden semantic writer or selector, or an outgoing link on every note.
+## What changed from the older design
 
-The current persona-context navigation target uses searches chosen by the primary LLM: lexical searches that match text, supported regular expressions, simple authored cues and indexes, listing, and exact reads. Semantic/vector or graph-driven memory retrieval belongs to separate research comparisons. Adopting it would require an explicit design change. This restriction does not change the role of ordinary external task tools or compliant physical storage choices.
+The earlier repository made character-bearing prompt fragments the editable representation. An earlier assistant-produced PDF then proposed fine-tuning. The user’s later clarification instead requires **direct, persona-authored numerical parameter edits**. This revision integrates that choice throughout the active design. Prompt fragments are no longer the operative character store; a compulsory optimizer or fine-tuning service is not introduced.
 
-**A cue, a source reference, and a required warning do different jobs.**
+Facts, history, code, tools, shared skills and explanations remain supporting resources. Their usefulness does not make them model parameters. See the [decision record](DESIGN-DECISIONS.md), [requirement reconciliation](examples/REQUIREMENTS-WALKTHROUGH.md), and [source lineage](sources/SOURCE-MANIFEST.md).
 
-| Relationship | Purpose | Limit |
-|---|---|---|
-| Associative search cue | Suggests where to look | A match supplies a candidate, not evidence or an accepted selection |
-| Exact evidence reference | Identifies what a claim rests on | A search match cannot replace the exact evidence |
-| Mandatory qualification or accepted warning | Constrains whether guidance can be supplied as usable | Optional navigation cannot omit the required qualification or warning |
+## What the evidence currently says
 
-The [file and context rules](design/PERSONA-CORE.md#ordinary-files-and-self-organization) preserve these distinctions.
+The inspected runtime feature revision contains parameter proposals, forward evaluation, comparative assessment, activation and rollback. Its published reports also describe main-task runs without organic post-initialization parameter updates. That supports a need to complete the development process; it does not prove that this revised design already works. Exact code references and report limitations are in the [runtime audit](sources/RUNTIME-AUDIT.md).
 
-**Compactness has several distinct measurements.** The authored fragment collection, actual prompt and full retained footprint are different quantities. Good organization avoids unnecessary context and duplication without hard corpus, prompt, archive or history limits. A small prompt does not establish a small retained system.
-
-Supporting records retain their actual provenance, qualifications and outcomes. Include relevant archives, versions, metadata and external storage when claiming a total saving, or state what could not be measured. The system cannot promise control over arbitrary copies held by recipients or providers.
-
-Actual deletion, unavailable evidence and uncertain effects retain their distinct meanings. A digest does not restore source text. Do not silently alter user deliverables, impose quota eviction or report an unresolved duty as completed to make a footprint smaller. The [evaluation guide](evaluation/README.md#compact-retention-without-hidden-growth) connects maintenance, measured size and useful later work.
-
-## Read the design
-
-Choose a starting point based on the question you want to answer. The linked documents provide the detailed rules and evidence boundaries.
-
-| If you want to understand… | Read… |
-|---|---|
-| The idea in everyday language | [Start here](START-HERE.md) |
-| The user's consolidated product and design requirements | [User requirements](USER-REQUIREMENTS.md) |
-| Character, fragments, maturation, and next-context choice | [Persona core](design/PERSONA-CORE.md) |
-| Work, relationships, authority, resources, and honest outcomes | [Work and boundaries](design/WORK-AND-BOUNDARIES.md) |
-| What the supporting system must guarantee | [System contracts](implementation/CONTRACTS.md), including [JSON text and matching surfaces](implementation/CONTRACTS.md#json-text-and-matching-surfaces) |
-| How to assess claims from evidence | [Evaluation guide](evaluation/README.md) and [acceptance](evaluation/ACCEPTANCE.md) |
-| Why this design replaced the earlier alternatives | [Design decisions](DESIGN-DECISIONS.md) and [source provenance](sources/SOURCE-MANIFEST.md) |
-
-The [design index](design/README.md) defines document authority. [Requirements](implementation/REQUIREMENTS.md) trace the invariants and requirement identifiers under the current human requirements. [Worked examples](examples/WORKED-EXAMPLES.md), the [visual guide](VISUAL-GUIDE.md), [glossary](GLOSSARY.md), and optional [worksheets](templates/README.md) explain the same design.
-
-## What remains essential
-
-Character shapes choices; competence and factual claims need their own evidence. OCEAN describes relatively stable dispositions. VAD describes modeled valence, activation, and perceived control. Context can change modeled affect and outward expression without rewriting stable traits. Neither framework measures actual feelings or supplies a formula for choosing tools, collaborators, or effort. Optional facets and contextual preferences may help explain those choices when useful.
-
-Humans and personas can originate needs. Personas choose approaches and voluntarily accept contributions. The application adds no tool or cooperation approval gate. Distinct character does not create expertise, stakeholder agreement or a completed effect. Revising an interpretation does not turn it into an observed fact. Cooperation requires actual acceptance of responsibility, and a finished result requires appropriate evidence.
-
-“Human-like” describes recognizable traits, choices, relationships, maturation, and continuity. It does not require a claim of consciousness or human equivalence. The design should be judged by useful behavior, faithful evidence, and the resources it consumes.
-
-You do not need a previous conversation, implementation setup, or private attachment to read this repository. Earlier specifications, artwork, and result criteria remain accessible through [immutable historical references](sources/SOURCE-MANIFEST.md). They are historical material, not additional active manuals. The [change history](CHANGELOG.md) records this consolidation. Contributions follow the [contribution guide](CONTRIBUTING.md).
+This publication changes documentation and artwork, not runtime code, provider weights, live persona state or historical results. There is no guarantee of improvement on every interaction, human equivalence or superiority on every task. The target is observable, useful, persistent development under the [acceptance criteria](evaluation/ACCEPTANCE.md).

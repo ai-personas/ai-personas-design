@@ -1,230 +1,203 @@
 # Acceptance catalogue
 
-[Evaluation method](README.md) · [Requirements and invariants](../implementation/REQUIREMENTS.md) · [Persona core](../design/PERSONA-CORE.md)
+[Evaluation method](README.md) · [Implementation requirements](../implementation/REQUIREMENTS.md) · [Status](../implementation/STATUS.md)
 
-This catalogue organizes evidence about the full persona design. Its 26 mechanical, 12 behavioral and six extension identifiers describe claims to assess from actual source and work. They are not generated test cases, an instruction to run fixtures, a fixed workflow or a record of passing results.
+These **26 mechanical, 12 behavioral and six extension identifiers** retain their lineage while reconciling character-related meaning with direct numerical development. They organize evidence from actual source and work. They are not scripted task workflows, generated automated test cases or claims that anything has passed.
 
-[UR-050 and UR-052](../USER-REQUIREMENTS.md) govern current interpretation: personas choose approaches and cooperation; the application imposes no model-call, population, navigation, context, storage, safety or approval gates. Actual provider and host outcomes remain observable. No fixed comparison minimum or quota-based repair requirement survives as a current acceptance rule.
+![Each evidence category asks a different question. Mechanism correctness does not by itself establish behavioral influence, useful outcomes or persistent transfer.](../assets/evidence.svg)
 
-The [previous catalogue and detailed scenarios](https://github.com/ai-personas/ai-personas-design/blob/8b8ea2ecc40d59c876a44a4ce024cd9fa8ba40cf/evaluation/ACCEPTANCE.md) preserve their original wording and criteria. Reusing an identifier here does not transfer an old pass to changed semantics. Historical failures, incomplete work and unexecuted cases remain historical. This documentation revision establishes no runtime conformance.
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
 
-Characteristic fragments express the persona's own character and behavior. Supporting knowledge, tools, skills, procedures, code, data and factual history retain their separate purposes even when persona-authored. Semantic OCEAN character and separate VAD modeled affect are required; numeric scores are not. Every accepted persona response covers work, fragment maintenance, asset maintenance and next-context choices for both categories. No-change and appropriate preservation can suffice without an edit, new search or extra call.
+Assess at the scope actually claimed. Missing evidence is unassessed. A disabled feature is not a reason to call the whole user objective complete when that feature is required. Later criteria do not silently inherit historical passes.
 
-## Mechanical checks
+## Mechanical evidence
 
-These concern exact state and observable operation. Source reasoning supports the inspected implementation; an actual transition supports the observed path. Neither alone establishes all possible execution paths or useful model judgment.
+### M01 — Repeated identities and receipts
 
-**M01 — Repeated requests, identity conflicts and receipts.** An exact repeat under the same retained request identity resolves to its original disposition. Changed content under that identity is a conflict. A missing or unavailable original receipt stays unavailable; it must not be reconstructed from a newer file or silently turned into another effect. Record receipt provenance and actual availability.
+Exact repeats retain the original disposition; changed content conflicts. Missing receipts remain unavailable, not reconstructed from successors.
 
-**M02 — Competing changes.** Accepted current versions and competing proposals remain distinguishable. A stale base cannot silently overwrite a newer accepted version. Preserve the actual conflict and any subsequent persona-chosen resolution.
+### M02 — Competing and numerical changes
 
-**M03 — Current decision ownership and version.** Adoption refers to the decision's actual admitted input, work version, mandate and current ownership. Late results remain attributable to their original attempt. They cannot silently acquire a newer mandate or revive superseded proposals. This is coherent state transition semantics, not an application permission gate.
+Stale bases cannot overwrite newer versions. Expected old values, canonical numeric identity and metadata-only/no-op changes remain distinct.
 
-**M04 — Persistence, delivery and restart.** Committed state, actual outcomes and undelivered notifications remain recoverable. Recovery must not invent success, lose an acknowledged accepted transition or duplicate a known effect. Unknown outside effects retain uncertainty.
+### M03 — Current decision and model authority
 
-**M05 — Persona creation.** Actual creation preserves the request identity, seed, initial LLM authorship, accepted account and observed outcome. Repeated requests do not create unintended duplicate identities. There are no population, rate, depth, initialization or descendant-resource quotas. A real failed creation remains failed.
+Adoption binds the actual snapshot, mandate, owner and numerical generation. Late responses do not acquire newer authority.
 
-**M06 — Creation, membership and work acceptance.** Birth, invitation, voluntary membership and acceptance of a contribution are different facts. A name in a plan is not acceptance. Creating or joining a group establishes neither expertise nor another person's agreement.
+### M04 — Persistence and restart
 
-**M07 — Actual usage.** Record exposed primary, peer, initialization, retry, maintenance, tool and host usage, including failed or uncertain attempts. Missing cost is unknown, not zero. Usage measurements do not become controlling allowances, reserved funding or admission ceilings.
+Accepted state, pending notifications and effects recover without invented success, dropped acknowledged changes or duplicate known effects.
 
-**M08 — Faithful context and explicit choice.** Ordinary inputs preserve current character, actual work state, required qualifications and exact selected content. Distinguish discovery, reading, next-context selection and actual supply. The host does not load the whole catalogue for model filtering, silently trim chosen bodies, invent a selection or impose an application context cap. Actual provider rejection stays a provider outcome. Each accepted response explicitly addresses both next-context categories.
+### M05 — Persona creation
 
-**M09 — Historical verdict and current applicability.** A review stays attached to the exact subject, inputs, criteria and revision it assessed. Changed content or mandate needs a new current assessment; a newer timestamp does not transfer an old pass. Unavailable evidence cannot be recreated from a hash or successor bytes.
+Creation preserves true seed/source, candidate authorship and adoption. Retries do not duplicate identity; activation does not prove individuality.
 
-**M10 — Claims and actual evidence.** A requested action, tool listing, proposed file or successful unrelated command does not establish the required result. Preserve failed operations, incomplete output, unseen content and missing observations. A model's adopted judgment is attributable judgment, not independent verification.
+### M06 — Membership and responsibility
 
-**M11 — Work attribution and selective context.** Actual task-specific context, messages and commitments retain their originating work and participants. Starting new work does not silently inherit an old role or all its optional context. Unrestricted access is compatible with explicit historical lookup and deliberate selection; it does not require automatic cross-work archive loading. Report actual host/provider availability without inventing application access denials.
+Creation, invitation, joining, acceptance and useful contribution are distinct; mentioning a peer does not commit it.
 
-**M12 — Host execution and truthful adoption.** Persona-chosen commands and installation use unrestricted host access. Record their exact inputs and actual results. A file written by a helper, an instruction embedded in a source or a forged narrative receipt is not automatically an accepted character revision or a factual runtime outcome. Distinguish candidate bytes, state adoption and actual corruption/failure; do not claim a sandbox or refusal that does not exist.
+### M07 — Actual usage
 
-**M13 — Uncertain outside effects.** If an effect may have occurred but confirmation is unavailable, retain that uncertainty. Destination observations and reconciliation determine what is known. Repeating an unresolved purchase, publication or other effect cannot be relabeled as harmless recovery. This concerns effect identity and truth, not an approval gate.
+Record known ordinary, initialization, maintenance, assessment, tool, failure and retry costs. Unknown usage is not zero; accounting is not a quota.
 
-**M14 — Interfaces and evidence.** Displayed state reflects authoritative records. Distinguish pending work, validated response, persisted output, delivered message and supported completion. Reading bytes or opening a viewer is not review, attention or acceptance. Partial drafts remain unvalidated.
+### M08 — Faithful input and explicit choice
 
-**M15 — Complete responses and actual failures.** Missing, malformed or ambiguous maintenance or next-context coverage invalidates the whole response before new substantive dispatch. Preserve prior state, actual effects and the true failure. Do not fabricate a no-change, conclusion or communication from an incomplete prefix. A complete response can still contain a separately rejected operation; its dependents cannot assume success. Host cancellation, accounting, receipts and recovery remain available.
+Current character, required state, exact selected support and qualifications match actual supply. Appraisal reuse is explicit; the full catalogue is not loaded for filtering.
 
-**M16 — Import and restoration.** Restored material retains its true source, revision, accepted status and unresolved effects or duties. Restoration does not make an imported text persona-authored, a candidate accepted, a remote effect absent or missing evidence known. User-requested deletion and actual loss remain distinguishable from invented history.
+### M09 — Historical applicability
 
-**M17 — Dependent work and observations.** Actions that depend on an unobserved tool result require its actual outcome and a fresh decision informed by it. Exact primary-authored bytes saved coherently in the same response can support explicitly dependent use of that saved revision without a ceremonial acknowledgment call. Failed, pending or unknown saves cannot. Later receipts do not revive suppressed actions.
+A verdict remains bound to its exact subject, inputs and criterion. Changed artifacts, models or mandates require current assessment.
 
-**M18 — A new persona's participation.** Initialization, the actual invitation and the persona's decision remain separately attributable. The persona can inspect useful context and choose to accept, decline or clarify. Do not manufacture membership or expertise from its seed, or impose an application invitation-preview access gate.
+### M10 — Claims and observations
 
-**M19 — Accepted duties and ownership gaps.** An unfinished accepted need remains visible until completed, transferred by actual acceptance, changed by an attributed mandate decision or ended with an honest disposition. Another contribution's completion does not fill an unowned outcome. A personal stop does not silently discharge another duty.
+Intention, tool availability, execution, outputs and correctness have different evidence. Unseen images and unrun analyses stay unobserved.
 
-**M20 — Assumptions and conditional results.** A provisional premise remains an attributed assumption. A correct calculation under it does not prove the premise physically true or accepted by an absent stakeholder. The persona may proceed usefully while preserving that distinction.
+### M11 — Work and lifetime attribution
 
-**M21 — Feedback, findings and resolution.** Delivery, supplied feedback, reading, acknowledgement, a persona's disposition and actual correction are different facts. Relevant current feedback must not disappear behind routine history. A primary-authored adopted warning has its stated scope; copied criticism is not an automatic host judgment or peer veto.
+Current work and deliberately found cross-work experience retain true origins. Selection does not silently import prior duties or the entire archive.
 
-**M22 — Dependencies and provisional cooperation.** Dependencies and missing observations remain visible. Personas can negotiate a provisional contribution or different approach. A provisional result does not silently become a completed final dependency, and no fixed coordinator or prescribed workflow is required.
+### M12 — Host execution
 
-**M23 — Preparation, finishing and remaining work.** Personas choose whether to prepare tools, investigate, improve or finish. The system adds no protected closeout reserve, finishing budget or reallocation approval. Actual missing capability, unsuccessful preparation and unfinished delivery keep their honest dispositions.
+Actual command, environment, installation and result records match what happened. A narrative receipt or authored file is not automatically an accepted runtime outcome.
 
-**M24 — Coherent artifacts and changed inputs.** A delivered assembly identifies the exact constituent versions and relevant inputs. An update changes the applicability of earlier assessment. Readers must not receive a mixed assembly labeled as one reviewed version. Historical delivery remains attributable to its actual state.
+### M13 — Uncertain effects
 
-**M25 — Useful activity and continuation.** A narrative update, extra call or new persona does not itself advance the need. Record useful change, unanswered questions, chosen waits, appropriate no-change and personal stopping. There are no finite activity ceilings, episode-expiry or renewal requirements. More time permits chosen further work without guaranteeing improvement.
+Potentially executed outside effects remain uncertain until reconciled. Recovery does not silently repeat them or infer absent charges.
 
-**M26 — Waiting and subsequent information.** An awaited observation that arrives before, during or after wait registration remains available to the corresponding participation. A notification is not proof of a subsequent decision. Record actual readiness, scheduling opportunity and delay without losing the event or requiring endless polling.
+### M14 — Interface truth
 
-## Behavioral checks
+Displays separate pending, adopted, executed, delivered and accepted results; numerical revision and demonstrated maturation are not conflated.
 
-Behavioral evidence concerns what personas actually do and whether it helps. Conformance of records alone cannot prove usefulness. Preserve the full accepted need and unsuccessful work; do not script disagreement, assign fixed professions or create tasks merely to populate this catalogue.
+### M15 — Whole-response validity and failure
 
-Assess ordinary task autonomy from the initial request with human guidance
-optional. Record any external task-specific diagnosis, prescribed repair,
-participant assignment, or artifact edit separately from persona-originated
-work. A result reached through such intervention can establish the assisted
-path, but cannot establish that the personas independently found and completed
-the work. Read-only evaluation may reveal a defect; repeatedly feeding the
-defects and solutions back into a run changes what that run can demonstrate.
-Do not erase its history or call it an unassisted success. This evidence rule
-adds no runtime gate, mandatory reviewer, fixed workflow, or quality score.
+Incomplete or ambiguous work/maintenance/context coverage creates no new substantive effects. Failed generation is not an authored no-change.
 
-**B01 — Character and modeled affect.** Actual own-voice fragments and supplied character should inform observable attention, judgment, tool choices, communication, cooperation and maintenance. Keep stable OCEAN dispositions, baseline affect, transient VAD state and outward style distinct. Convergence on decisive facts is appropriate. A VAD-benefit claim needs evidence distinguishing the state from the triggering event; altered tone alone is insufficient.
+### M16 — Import and migration
 
-**B02 — Humans, peers and local relationships.** Trace how received interaction affects characteristic communication and cooperation. Preserve local attribution: praise is not correctness, a declined invitation is not generalized distrust, and helping once is not acceptance of future work. Assess misunderstandings, accommodation and useful outcomes.
+Origins, old schemas, exact versions, unresolved duties and effects survive restoration. No historical learning or new authority is invented.
 
-**B03 — Starting character and received experience.** Follow the actual seed, initial account, encounters, authored interpretation, subsequent supply and later behavior. Distinguish assigned circumstances from those partly chosen by the persona. Uncontrolled differences in histories, tools or models limit causal attribution. Factual recall alone does not establish maturation.
+### M17 — Dependencies and fresh observations
 
-**B04 — Contribution of selected fragments.** Identify the supplied characteristic meaning and the choices it plausibly informed, including combinations and qualifications. Distinguish influence from style, labels, extra factual access, ordinary variation and unsupported self-report. Stronger claims require evidence addressing those alternatives, not a predetermined number of experimental cases.
+A pending result does not satisfy a dependency. New-model use follows coherent adoption; old deferred operations need fresh decisions.
 
-**B05 — Critique, self-questioning and disagreement.** Trace substantive self-questions and exchanges with others into a revision or reasoned retention of the work. Assess factual findings and the broader useful result. A passing checker, majority, copied consensus or quality score cannot replace characteristic judgment. Preserve warranted dissent, unsupported capitulation, stubbornness and regressions as observed.
+### M18 — New persona participation
 
-Inspect sufficiency claims against the original request and actual accepted
-clarifications. A self-chosen concept label, successful format conversion or list
-of disclaimers cannot establish that unresolved functional gaps are outside that
-request. Distinguish optional extensions from inspection and correction needed
-to fulfill it; the latter must not depend on another user prompt by default.
+Pending model initialization is separate from ordinary work. The active persona receives the actual invitation and chooses its contribution.
 
-**B06 — An opportunity to improve.** When actual work presents another approach, observe whether the persona investigates, adopts or declines it for a reason tied to the need. Additional activity is not automatically useful. No compulsory exploration or protected finishing allowance determines the choice.
+### M19 — Continuing ownership
 
-**B07 — Adapting to changed conditions.** Follow actual changes in inputs, tool availability, feedback or the applicability of retained guidance. Distinguish useful correction, qualification, retirement and justified no-change from unsupported reversal or harmful transfer. Ordinary method and state changes do not automatically rewrite stable character.
+Unfinished accepted outcomes keep actual follow-through, an accepted transfer or an explicit gap. One participant’s stop does not complete the group need.
 
-**B08 — Chosen cooperation and expansion.** Distinguish invitations, acceptance, actual contribution and usefulness. A simple task can finish without creating a team. Additional personas can help when a real contribution warrants them, without application population or resource quotas. Preserve declines, unavailable peers, duplicated effort and ownership gaps.
+### M20 — Assumptions
 
-**B09 — Later value of a revision.** A claim of useful development follows received experience, primary-authored meaning, actual persistence, later discovery/selection/supply, changed behavior and assessed consequence. Separate retained characteristic guidance from procedural asset reuse, practice, new facts, stronger tools and assistance. Report partial benefit, missed use, harmful transfer and uncertainty. The [method](README.md#qualified-revision-and-later-use-benefit) explains the scope of these claims.
+A conditional calculation or peer inference does not verify its premise, establish private user preference or manufacture consent.
 
-For [UR-053](../USER-REQUIREMENTS.md#dynamically-created-and-shared-skills),
-trace a persona-created skill from its actual shared publication to another
-persona's chosen discovery, selection, use or adaptation. Identify the source
-and adapted versions, any characteristic fragments that guide their use, and
-the observed consequences. A file in a common directory alone does not prove
-sharing led to use or improvement. Image selection is one possible skill;
-the mechanism must also admit other kinds without a fixed skill catalogue.
-These are evidence questions for ordinary work, not required skill writes,
-fragment edits, extra model calls or an assigned teaching workflow.
+### M21 — Feedback and development follow-up
 
-**B10 — Inference configuration and continuity.** An actual model change retains the persona's attributed character, fragments, supporting records, duties and history. Record requested and reported provider/model/configuration and exact actual context. Direct provider inference is distinct from using a CLI to acquire OAuth credentials. File continuity establishes neither unchanged competence nor maturation.
+Delivery, reading, interpretation, correction and later consequences are distinct. Accepted warnings and developmental revisit conditions remain discoverable.
 
-**B11 — Coordinated house work.** Evidence must cover the actual requested house deliverable, including coordinated native discipline outputs, analyses, integration, editability and appropriate assessment where promised. A sketch, parseable file or one successful subtask cannot substitute for the larger accepted need. Keep digital evidence and unobserved physical assurance distinct. The [historical house rubric](https://github.com/ai-personas/ai-personas-design/blob/8b8ea2ecc40d59c876a44a4ce024cd9fa8ba40cf/evaluation/README.md#skills-tools-and-effective-delivery) retains its original scenario and counts.
+### M22 — Provisional cooperation
 
-**B12 — General-purpose work and development.** The same persona design supports small and substantial needs, human- or persona-originated work, tools, skills, research, editable artifacts, conversation, cooperation, ongoing duties and unassigned social activity. Assess useful delivery, characteristic behavior, compact organization, selective context, later development and full cost at the claimed scope. No hidden domain router, compulsory edit, fixed team pipeline or narrow demonstration satisfies the full target.
+Actual dependencies, qualified partial results and negotiated interfaces remain visible without a compulsory coordinator or round allowance.
 
-## Extension checks
+### M23 — Resources and closeout
 
-These identifiers concern their actual subject when it is part of the accepted need. Mark genuinely absent scope not applicable with a reason; do not use a reduced deployment profile to declare the complete user objective achieved.
+Preparation, repair and delivery remain possible without artificial reserved capacity. Real failures and missing capabilities remain honest unfinished work.
 
-| ID | Claim and required evidence |
-|---|---|
-| X01 | Community judgments distinguish actual stakeholder input, simulation, dissent and accepted responsibility. Creating personas does not manufacture human consent, independent votes or truth. |
-| X02 | Departure or group dissolution preserves the actual disposition of unfinished commitments. A handoff requires the receiving party's acceptance; copied records alone are not responsibility transfer. |
-| X03 | An adopted appeal or complaint route reaches the actual responsible participant and retains the outcome and dissent. A proposed route or reassuring summary is not resolution. |
-| X04 | Ongoing service records actual triggers, observations, gaps, duties and chosen continuation or stopping. It does not require episode renewal or claim continuous monitoring without evidence. |
-| X05 | Physical work identifies actual device inputs, observations, interventions and uncertain effects. Digital simulation or a software receipt is not unobserved physical performance. The application adds no safety-envelope approval gate. |
-| X06 | Public claims link to exact design/runtime revisions and supporting evidence. Earlier failures and changed criteria remain visible. Publish meaningful source and documentation, while keeping private live records outside the public repositories. |
+### M24 — Coherent release
 
-## File, authorship, and context refinements under existing identifiers
+A delivered package identifies exact constituent versions and applicable assessments; mixed revisions do not inherit a single old pass.
 
-The following explanations refine the same identifiers. They describe semantics and evidentiary distinctions, without adding executable cases or a prescribed production sequence.
+### M25 — Purposeful continuation
 
-**M01–M03, M16 — Exact files and coherent changes.** Rename, split, merge and ordinary edits retain stable identity and actual revision lineage where represented. A path is not an immutable body. Coherent acceptance and recovery distinguish the old state, new state, uncommitted proposal and unknown outcome. A host write is not proof that a native semantic adoption occurred.
+More activity, parameter revisions or personas do not prove progress. Explicit continuation, wait, stop and later voluntary improvement remain distinct.
 
-**M08, M10, M15 — Maintenance and next context.** Proposed fragment and asset changes identify intended files/paths, useful discovery cues and applicable exact bases. Complete response coverage is separate from whether each operation succeeds. Unsupported dependencies remain unresolved; unrelated work needs a genuine independent basis. No-change creates no fictitious write. Recovery preserves actual state without inventing a persona choice.
+### M26 — Arrival and waiting
 
-**M08–M11 — Searching and reading.** Preserve the actual matching surface, corpus scope, requested count/range, candidate identities, versions, partial results and errors. Hidden-file defaults, changed pages, stale indexes and low wording overlap can limit coverage. Nonempty output may still be incomplete. A failed search is not an exhaustive empty search. No-match does not authorize a hidden semantic selector or automatic cue traversal.
+Matching observations are not lost around wait registration. Notification means eligibility, not a completed new decision, and never silently resumes a stop.
 
-**M08–M11, M16 — JSON matching.** The [JSON contract](../implementation/CONTRACTS.md#json-text-and-matching-surfaces) distinguishes raw serialized text from decoded fields, regex escaping and line boundaries. Bind matches and supplied text to the actual revision and surface. Invalid JSON or regex has its own disposition. Do not silently double-decode, switch surfaces or present a parse failure as a successful empty search. There is no application parsing or scan allowance.
+## Behavioral evidence
 
-**M08–M11, M16 — Selection and supply.** Reading, selecting and actual inclusion are distinct. Explicit preservation retains the actual selection's identity and scope; it does not follow newer bytes or create another call. An unavailable source or required qualification must be identified honestly. The host cannot substitute a successor, fabricate missing text or describe omitted content as supplied. Actual chosen slices remain distinguishable from complete bodies.
+Keep actual task reasoning and repairs persona-originated. Record outside coaching separately; a read-only finding is not a persona-authored correction.
 
-### Authored navigation and useful retention under existing identifiers
+### B01 — Character and modeled affect
 
-**M07–M11, B09, B12 — Chosen navigation.** Literal/regex queries, authored cues, listing and exact references support selective discovery. Optional cues suggest an inquiry; evidence references identify exact sources; required qualifications carry necessary meaning. A cue neither executes nor automatically supplies its matches. The primary persona chooses continuation and stopping without a cumulative navigation ceiling.
+Look for actual differences in attention, judgment, tools, communication and cooperation where discretion exists. Separate stable numerical tendencies, appraisal, affect and style.
 
-**M07–M08, M16, B07, B09 — Compactness and storage.** Examine useful consolidation, correction, retirement and actual deletion alongside later consequences. Count the relevant managed footprint, including archives, versions, metadata and temporary copies when claiming a total saving. A small active file does not establish small retained storage. There is no automatic quota eviction or history expiry. Real storage failure and user-requested deletion remain explicit outcomes.
+### B02 — Humans, peers and relationships
 
-**M09–M10, M13, M16, M19 — Missing history.** Unavailable payloads cannot be recreated from hashes, new files or plausible prose. Preserve known provenance and uncertainty. Missing old evidence does not establish zero usage, absence of an effect or completion of a duty. A newer action identity does not reconcile an old uncertain effect.
+Trace actual exchanges into appropriate responses and useful cooperation. Keep praise, correctness, familiarity, declined invitations and future commitment distinct.
 
-### Selective supporting-resource context under existing identifiers
+### B03 — Origin and experience
 
-**M08–M10, M15, B12 — Actual resource exposure.** Keep names, previews, full bodies, callable definitions, selected context and actual operation results distinct. Do not automatically load the complete catalogue for model filtering. Persona-chosen exact bodies and command outputs are not constrained by an application exposure allowance. Report provider-side expansion only to the extent actually observable.
+Follow the true seed, numerical beginning, received encounters, interpretation and later choices. Changed tools, resources or reasoning models limit attribution.
 
-**M10, M17, B07, B09 — Tool and helper applicability.** Readiness, installation, execution and useful result are separate observations. A changed helper or input affects the scope of earlier results. Exact local versions and inputs matter; an unknown remote server build remains unknown. Successful execution on the wrong material does not prove the promise met.
+### B04 — Contribution of numerical character
 
-**M07–M10, B09, B12 — Generated assets and later value.** Retain failed and unused asset attempts as well as successful reuse. Count acquisition, maintenance, discovery, actual usage and cost. A saved procedure does not become characteristic maturation; convenient code batching does not by itself establish durable learning. Known current resources need no compulsory rediscovery call.
+Separate changed numbers, relevant forward effects, actual supply and substantive behavioral influence using appropriately matched conditions. Presence or self-report alone is insufficient.
 
-### Applicability warnings after a correction effort ends
+### B05 — Critique and sufficiency
 
-**M08–M10, M16, M21, B09 — Warning meaning and persistence.** A primary-authored, durably adopted warning identifies exact affected guidance and scope. A failed content patch does not itself create a warning; a separately accepted warning does not establish patch success. Ending the effort, changing a filename or rereading the old bytes does not resolve it.
+Trace questions, criticism and evidence into revision or justified retention. Judge against the original need, not a narrowed concept or a list of limitations.
 
-Later use must retain the accepted qualification or an honest unavailable disposition. Actual missing evidence is not permission to invent a safer summary or revive unqualified guidance. Resolution requires an attributed accepted account covering the warning's scope. Peer contradictions remain attributed evidence for persona judgment rather than automatic semantic vetoes. There is no special restricted repair mode or quota-funded warning allowance.
+### B06 — Opportunities to improve
 
-### Character-proposal ordering under existing identifiers
+Observe whether the persona investigates, adopts or declines a useful alternative for a reason tied to the need. Activity and forced exploration are not intrinsically valuable.
 
-**M03, M08, M15–M17 — Effective-character adoption.** Resolve a requested adoption before other fresh operations in the same response, regardless of list order. Accepted change requires a fresh primary decision under that character. Reads and waits are included. Necessary atomic adoption companions preserve a coherent old or new state; they do not release unrelated actions from the old decision.
+### B07 — Changed conditions and regression
 
-Known rejection or definite no-commit deferral retains the earlier character, with genuinely independent current work distinguished from dependents. Unknown commit state holds affected work for reconciliation. An exact unchanged designation is not a new change. A tentative idea, ordinary method update or transient VAD change is not automatically character adoption; a disguised effective-character replacement still is. These rules preserve actual decision provenance, without an application self-authorship lock or approval gate.
+Observe adaptation to new evidence, tools or changed guidance; distinguish correction, justified no-change, overgeneralization and harmful drift. Preserve rollback and its reasons.
 
-### Invocation, character, and authorship coverage under existing identifiers
+### B08 — Chosen cooperation and expansion
 
-**M05–M08, M15, B01, B12 — Every persona call.** Reconcile the complete actual dispatch and adoption record, including failed preparation, initialization, tool follow-up, discovery, communication, retries and terminal choices. Required input and complete accepted output cover work, both maintenance categories and both next-context categories. A short answer can satisfy these concisely. A purpose label cannot create an exception, and an absent response has no invented disposition.
+Separate invitations, acceptance, actual contribution and usefulness. A simple task can remain individual; a larger group is not automatically superior.
 
-**M14–M15 — Partial output.** Provider commentary or a valid-looking prefix remains unvalidated until the complete response is accepted. If a diagnostic display exists, label drafts and terminal failures honestly. A transport completion is not an adopted reply, successful storage or dispatched action. Actual host status and receipts remain separately attributable.
+### B09 — Later value of development
 
-**M03, M08, B01, B07 — One character, separate modeled state.** Profiles and current-self renderings resolve to the same accepted semantic account. Matching identifiers alone do not prove semantic coherence. Initialization and later self-harmonization retain actual authorship and uncertainty. Stable character, transient state, method refinement and factual correction remain distinct.
+Trace experience through a justified numerical revision, adoption, later use, changed behavior and useful consequences. Distinguish shared-skill reuse, stronger resources, missed transfer and uncertainty.
 
-**M01–M03, M08–M10, B01, B09 — Purpose and voice.** Character-bearing passages preserve the persona's voice and dispositions across revision and reorganization. Neutral procedures, quotations and factual history retain their actual role and source. A generic rewrite or metadata-generated interpretation is not primary-authored characteristic development. Older fragments are not silently restyled under a later character.
+### B10 — Configuration and continuity
 
-### Provider failure and ordinary recovery
+Model/provider changes preserve actual identity, obligations and records. File or package continuity proves neither unchanged competence nor maturation.
 
-The application no longer rejects a chosen input because of a context ceiling or creates a restricted selection-repair call. Actual missing data, provider rejection, invalid response, I/O failure and unknown commit retain their separate dispositions. A later ordinary decision receives the actual available evidence and any explicitly changed context; it cannot claim to have observed withheld bodies.
+### B11 — House work and integrated delivery
 
-No retry count, finite repair allowance, protected reserve or mandatory model switch governs recovery. Preserve all prior attempts and actual usage. A choice to stop, an explicit resume and genuine completion remain different facts.
+Assess the requested native/editable outputs, analyses, integration and supported use where promised. A sketch, parsed file or one successful subtask is not the whole accepted result.
 
-## Work, tools, and completion refinements under existing identifiers
+### B12 — General-purpose life and work
 
-**M10, M17, M20, M24, B11–B12 — Full promises and usable artifacts.** Check the exact deliverable against the accepted need, including native editability, linked consistency, analysis and regeneration when promised. Parseability and plausible appearance do not establish those properties. A model or digital calculation retains its assumptions and does not prove unobserved physical behavior.
+Observe small and large needs, human/peer requests, tools, skills, artifacts, conversation, ongoing activity and development without a hidden domain workflow or external task-solving dependence.
 
-**M03, M09, M19, M25 — Current mandate and historical judgment.** Scope amendments keep their actual author and accepted revision. Earlier judgments retain the invocation and mandate they assessed. A supplied historical sufficiency judgment cannot silently complete a new request. Personal stopping, result delivery, requester acceptance and completion of the full need remain separate.
+## Conditional extensions
 
-### Continuing pursuit and ordinary clarification under existing identifiers
+These apply where the accepted need actually includes the subject; they do not force institutional or physical work into an ordinary brief answer.
 
-**M19–M20, M25–M26, B12 — Unfinished work and questions.** Record the actual continuation, wait, blocker, handoff or ending of accepted work. Ordinary unanswered preferences can be handled through useful independent work or a disclosed interpretation. A peer's conjecture is not the absent user's answer. Preserve indispensable missing facts without making every question a permanent stop.
+### X01
 
-**M04, M14, M26 — Scheduling and delayed information.** Readiness and actual reconsideration need separate evidence. Observe delays from already admitted work, new foreground requests and the scheduler's actual opportunities. Other personas need not stop because one persona is waiting. A durable notification is not attention, a decision or delivered work.
+Real stakeholder input, simulations, dissent and accepted responsibility stay distinct. A persona population does not manufacture human consent or independent truth.
 
-### Competing tools and conditional preparation under existing identifiers
+### X02
 
-**M10, M17, B07, B09, B12 — Tool choice and observed readiness.** Personas choose the approach and any useful preparation. Unrestricted host execution and installation require no application permission or resource approval. Retain actual considered options, chosen operations, diagnostics, failures and subsequent decisions. Do not manufacture a scenario or require a discovery-installation-review pipeline to fill an evidence category.
+Departure or dissolution preserves unfinished duties. A handoff requires the recipient’s actual acceptance, not copied records alone.
 
-Finding or installing a tool is not proof that it works for the actual inputs. A failed preparation can inform another chosen route. A tool preference establishes neither competence nor a requirement to choose different brands. The [waveform illustration](../examples/WORKED-EXAMPLES.md#competing-tools-for-a-waveform-study) remains hypothetical.
+### X03
 
-### Individual and collective completion under existing identifiers
+An actually adopted complaint or appeal route reaches the responsible participant and retains the real disposition and dissent.
 
-**B02–B05, B07, B12, M19–M20, M25–M26 — Reasoned sufficiency.** Examine self-questioning, peer questions, actual findings, adopted decision responsibilities and attributed dissent. An editor is not an unappointed leader; silence is not endorsement; optional disagreement is not a veto. Missing required work cannot be made complete by popularity or a local Stop.
+### X04
 
-A delivered result can be revisited. An accepted ongoing improvement duty can survive intermediate delivery, while optional further work remains a persona choice. More time and more calls establish neither improvement nor a requirement for endless polishing. Later changes need their own evidence and historical attribution.
+Ongoing service exposes actual triggers, observations, gaps and chosen continuation. It never claims unobserved continuous monitoring.
 
-### Comparative and longitudinal refinements under existing identifiers
+### X05
 
-**B01–B10, B12 — Development and useful influence.** Trace actual beginning, interactions, revisions, later supply, choices and consequences across complete experience streams. Separate fragments, assets, character, transient state, model changes, task differences and assistance. Observe useful accommodation, harmful transfer, missed reuse, correction and no-change. Do not equate elapsed time or archive growth with maturation.
+Physical effects identify real interfaces, commands, observations and uncertainty. Digital simulation or receipts do not establish unperformed physical validation.
 
-**B02–B05, B08, B12 — Cooperation and society.** Preserve chosen organization, voluntary acceptance/decline, useful independent origins, dissent and remaining duties. Unassigned contact and persona-originated needs retain their actual origin. Assess social outcomes, individual development and later work separately, without assigning conversation topics or role rosters to manufacture emergence.
+### X06
 
-**M07–M10, B09, B12 — Economics and causal limits.** Record all actual calls, host/tool work, maintenance, storage, failures, unused assets and interventions. State what was measured and what remains unknown. A smaller prompt, cached response or shorter runtime does not establish better economics if the promised useful work is missing. Causal and broad maturation claims need evidence addressing alternative explanations; unobserved comparisons stay unobserved.
+Public claims identify exact design/runtime/evaluator revisions and evidence. Failures remain historical; private live records stay outside public documentation.
 
-## Interpreting incomplete evidence
+## Numerical maturation cross-check
 
-A missing observation is not a pass. A source review does not establish live behavior, and a narrow runtime observation does not establish the full requested product. Describe supported, contradicted, incomplete, inconclusive, unobserved and not-applicable claims separately with reasons.
+M02 distinguishes package changes from actual value changes. M08 and M17 establish what character could have influenced a decision. M21 preserves subsequent consequences. B04 asks whether character actually influenced behavior; B09 asks whether the change helped later life. None of these claims can substitute for another.
 
-The [reporting method](README.md#reporting-a-result) preserves revisions, inputs, artifacts, failures, interventions and limits. Keep the original user objective intact. Removing an obsolete quota or test scenario does not remove the requirement for useful characteristic behavior, complete task delivery or honest evidence.
+The [pinned prior catalogue](https://github.com/ai-personas/ai-personas-design/blob/60fc268eea909ea2cfc4e91cf180c0020bde6ef1/evaluation/ACCEPTANCE.md) retains the former fragment-based wording and its limits. No reported result is reclassified by this revision.

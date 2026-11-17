@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc"><title id="title">Character and experience change one another</title><desc id="desc">Own numerical character shapes reasoning and work. Actual consequences inform an interpretation. A warranted directly authored parameter change is compared and adopted. Future work uses that model; supporting resources remain separate.</desc><defs><style>text{font-family:Arial,Helvetica,sans-serif;fill:#20334b}.title{font-size:46px;font-weight:700}.subtitle{font-size:25px;fill:#536477}.heading{font-size:28px;font-weight:700}.body{font-size:24px}.edge{font-size:21px;fill:#536477}.note{font-size:25px;font-weight:700}.small{font-size:21px;fill:#536477}</style><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10" fill="#63758a"/></marker></defs><rect width="1600" height="1000" fill="#ffffff"/><rect x="64" y="48" width="72" height="7" rx="3" fill="#236e60"/>
+<text x="64" y="113" class="title"><tspan x="64" dy="0">Character and experience change one another</tspan></text>
+<text x="64" y="158" class="subtitle"><tspan x="64" dy="0">One continuing persona; two connected cycles; no automatic promise of growth.</tspan></text>
+<rect x="64" y="230" width="416" height="208" rx="18" fill="#eee9ff" stroke="#6551a5" stroke-width="2"/>
+<circle cx="98" cy="266" r="19" fill="#6551a5"/>
+<text x="98" y="274" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">1</text>
+<text x="130" y="275" class="heading"><tspan x="130" dy="0">Own character model</tspan></text>
+<text x="88" y="324" class="body"><tspan x="88" dy="0">This persona’s current</tspan><tspan x="88" dy="32">weights and contextual</tspan><tspan x="88" dy="32">inclinations.</tspan></text>
+<rect x="592" y="230" width="416" height="208" rx="18" fill="#e8f0ff" stroke="#315d94" stroke-width="2"/>
+<circle cx="626" cy="266" r="19" fill="#315d94"/>
+<text x="626" y="274" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">2</text>
+<text x="658" y="275" class="heading"><tspan x="658" dy="0">Reason and choose</tspan></text>
+<text x="616" y="324" class="body"><tspan x="616" dy="0">Use relevant facts and tools.</tspan><tspan x="616" dy="32">Choose work, words and peers.</tspan></text>
+<rect x="1120" y="230" width="416" height="208" rx="18" fill="#e3f3ef" stroke="#236e60" stroke-width="2"/>
+<circle cx="1154" cy="266" r="19" fill="#236e60"/>
+<text x="1154" y="274" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">3</text>
+<text x="1186" y="275" class="heading"><tspan x="1186" dy="0">Act and interact</tspan></text>
+<text x="1144" y="324" class="body"><tspan x="1144" dy="0">Do useful work. Communicate.</tspan><tspan x="1144" dy="32">Observe actual consequences.</tspan></text>
+<rect x="1120" y="560" width="416" height="208" rx="18" fill="#e3f3ef" stroke="#236e60" stroke-width="2"/>
+<circle cx="1154" cy="596" r="19" fill="#236e60"/>
+<text x="1154" y="604" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">4</text>
+<text x="1186" y="605" class="heading"><tspan x="1186" dy="0">Interpret experience</tspan></text>
+<text x="1144" y="654" class="body"><tspan x="1144" dy="0">What was learned? Was</tspan><tspan x="1144" dy="32">behavior, context or a tool</tspan><tspan x="1144" dy="32">the cause?</tspan></text>
+<rect x="592" y="560" width="416" height="208" rx="18" fill="#fff2d8" stroke="#8b6018" stroke-width="2"/>
+<circle cx="626" cy="596" r="19" fill="#8b6018"/>
+<text x="626" y="604" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">5</text>
+<text x="658" y="605" class="heading"><tspan x="658" dy="0">Compare a revision</tspan></text>
+<text x="616" y="654" class="body"><tspan x="616" dy="0">Author exact numbers. Examine</tspan><tspan x="616" dy="32">intended and adverse effects.</tspan></text>
+<rect x="64" y="560" width="416" height="208" rx="18" fill="#eee9ff" stroke="#6551a5" stroke-width="2"/>
+<circle cx="98" cy="596" r="19" fill="#6551a5"/>
+<text x="98" y="604" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">6</text>
+<text x="130" y="605" class="heading"><tspan x="130" dy="0">Use the next model</tspan></text>
+<text x="88" y="654" class="body"><tspan x="88" dy="0">Adopt, retain or roll back.</tspan><tspan x="88" dy="32">Observe later behavior and</tspan><tspan x="88" dy="32">results.</tspan></text>
+<path d="M480 334 H592" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="480" y="284" width="49" height="30" rx="4" fill="white"/>
+<text x="488" y="307" class="edge"><tspan x="488" dy="0">use</tspan></text>
+<path d="M1008 334 H1120" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="1008" y="284" width="49" height="30" rx="4" fill="white"/>
+<text x="1016" y="307" class="edge"><tspan x="1016" dy="0">act</tspan></text>
+<path d="M1328 438 V560" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="1346" y="483" width="93" height="30" rx="4" fill="white"/>
+<text x="1354" y="506" class="edge"><tspan x="1354" dy="0">reflect</tspan></text>
+<path d="M1120 664 H1008" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="1008" y="615" width="93" height="30" rx="4" fill="white"/>
+<text x="1016" y="638" class="edge"><tspan x="1016" dy="0">propose</tspan></text>
+<path d="M592 664 H480" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="480" y="615" width="71" height="30" rx="4" fill="white"/>
+<text x="488" y="638" class="edge"><tspan x="488" dy="0">adopt</tspan></text>
+<path d="M64 664 H32 V334 H64" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="56" y="477" width="181" height="30" rx="4" fill="white"/>
+<text x="64" y="500" class="edge"><tspan x="64" dy="0">later decisions</tspan></text>
+<rect x="64" y="844" width="1472" height="79" rx="16" fill="#f2f5f8"/>
+<text x="90" y="877" class="note"><tspan x="90" dy="0">No change or more evidence can be right. Saved facts and skills are not character weights.</tspan></text>
+<text x="64" y="962" class="small"><tspan x="64" dy="0">Conceptual design • Arrows show possible transitions, not demonstrated improvement.</tspan></text>
+</svg>

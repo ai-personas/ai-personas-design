@@ -1,378 +1,261 @@
 # Consolidated user requirements
 
-This file brings together the user's product and design requirements for AI Personas, including clarifications through 25 October 2026. It covers the requested product, architecture, and worked examples. Repeated requests are combined. Later user clarifications govern the meaning of earlier wording.
+[Home](README.md) · [Plain-language introduction](START-HERE.md) · [Traceability](examples/REQUIREMENTS-WALKTHROUGH.md)
 
-Only human-user messages supply these requirements. This account must preserve the user's intended outcomes, rather than weaken them to fit the existing design. Assistant interpretations, design decisions, evidence safeguards, and implementation rules must not be added as user requirements.
+**Consolidated 17 November 2026.** This file records human-requested outcomes, including the later clarification that each persona owns a small numerical characteristic model whose parameters are directly revised through experience. It does not turn assistant implementation suggestions into human requirements.
 
-**Read visually:** Every requirement has a cartoon concept-flow diagram. Follow the labeled arrows to see the inputs, reasoning, choices, outcomes, and feedback that explain its intent. The diagrams use abstract concepts without task examples or persona names. Character fragments shape how a persona behaves; supporting assets provide useful information and capabilities. LLM means language model. Click any image to read it at full size.
+## Core intent
 
-## Product requirements
+A population of continuing, distinctive, general-purpose personas should do useful work and interact socially. Each persona’s own numerical character influences its choices. Experiences from work and social life can lead it to revise that character; the revisions should improve later work and interaction while preserving individuality. Cooperation is dynamically chosen, not a fixed specialist team or permanent central manager.
 
-### No application limits or safety gates
+## How later clarifications change the earlier wording
 
-**UR-052 Do not impose limits or safety constraints.** On 22 October 2026 the user clarified: “we shouldnot have any limit and safety constraints”. This later requirement supersedes earlier application-enforced quota, permission-gate, safety-envelope and approval requirements. It applies to persona work, model calls, tools, navigation, retained history and supporting resources. Do not substitute a larger fixed limit for removal of the limit.
+The original identifiers remain for traceability. Character-bearing **prompt fragments** are superseded as the operative character representation. The earlier assistant proposal of a compulsory fine-tuning service is also superseded by direct numerical editing. Supporting files, history, skills and tools remain useful and separate. No-change remains a valid decision, but a permanently static initial model cannot demonstrate the requested maturation.
 
-The implementation must continue to report actual usage and outcomes. Reporting a cost, provider rejection, unavailable host resource or incomplete result does not itself establish an application quota. Keep earlier run evidence under the rules that actually produced it. This requirement does not retrospectively turn an incomplete or uncertain run into a success.
+The preceding [exact requirement revision](https://github.com/ai-personas/ai-personas-design/blob/60fc268eea909ea2cfc4e91cf180c0020bde6ef1/USER-REQUIREMENTS.md) preserves the older wording. UR-054 records the current request for accessible illustrated publication. There are **46 active human requirement identifiers** and eight retired identifiers; retired identifiers are not reused. Mechanisms and evidence standards proposed to satisfy these outcomes live in the design and implementation chapters, not disguised as new user instructions here.
 
-[![UR-052: Persona-chosen work proceeds without application quotas or approval gates; actual completion, provider or resource failures and incomplete outcomes remain visible in usage reporting, and earlier evidence retains its original conditions.](assets/user-requirements/ur-052-no-application-limits.webp)](assets/user-requirements/ur-052-no-application-limits.webp)
+## Purpose and publication
 
-*Diagram takeaway: Removing application limits changes the permitted flow of work, while costs, failures and uncertainty remain factual.*
+![Purpose and publication: the related flow is explained by the requirements below.](assets/overview.svg)
 
-### Purpose and design scope
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
 
-The requested outcome is a coherent design that can guide implementation of general-purpose personas.
+### UR-001 — Design before implementation
 
-**UR-001 Design before implementation.** Keep this repository design-only. Produce and refine an implementation-ready blueprint explaining how the personas should operate. Do not add application code as part of this design work.
+Keep this repository design-only. Publish an implementation-ready explanation; runtime application code belongs in its implementation repository.
 
-[![UR-001: Requirements define design obligations; design reasoning resolves responsibilities and interfaces into a coherent blueprint, which guides later implementation outside this design repository.](assets/user-requirements/ur-001-design-first.webp)](assets/user-requirements/ur-001-design-first.webp)
+### UR-002 — One coherent design
 
-*Diagram takeaway: The repository turns intended behavior into resolved design decisions that an implementation can follow.*
+Reconcile the repository, relevant prior design material and later human clarifications into one design. Update affected explanations, contracts, examples, evidence criteria and diagrams together; do not append a competing manual.
 
-**UR-002 One coherent design.** Review all design documents against the user's requirements, including published GitHub documents and unpublished work. Update, revise, refactor, add, or delete material as needed. The resulting documents must describe one coherent, solid, robust, and reliable design for AI Personas that can be implemented.
+### UR-003 — General-purpose, human-like personas
 
-[![UR-002: Published and unpublished design sources are checked against user requirements; conflicts, omissions and stale assumptions are resolved, then the resulting decisions are reflected consistently across the design documents.](assets/user-requirements/ur-002-coherent-design.webp)](assets/user-requirements/ur-002-coherent-design.webp)
+Support human- or persona-originated needs of many kinds, including tasks, tools, communication, collaboration, self-directed activity and social interaction. Distinctive character must influence the activity itself, not only final wording. Human-like describes an intended behavior, not consciousness or human equivalence.
 
-*Diagram takeaway: Reconciliation means resolving disagreements and updating the whole design to express the same decisions.*
+### UR-035 — Deliver a robust and reliable blueprint
 
-**UR-003 General-purpose, human-like personas.** Personas should have human-like characteristics and behavior, respond to whatever a user needs, and work on any kind of task. A requester may be a human or another persona, and a need may originate from either.
+Provide a coherent explanation detailed enough to guide implementation of the intended behavior. Keep unresolved engineering or empirical questions explicit. A written design cannot truthfully establish 100 percent reliability or replace working evidence.
 
-Their characteristics should shape how they work on tasks, use tools, communicate, coordinate, collaborate, pursue self-directed activity, and socialize with humans and other personas. They should develop through these activities, become better at socializing, and perform better for the user.
+### UR-054 — Publish an understandable, illustrated design
 
-[![UR-003: Human needs, peer interaction and self-directed intent reach the same continuing persona; its distinctive character influences varied work, cooperation and social or independent activity.](assets/user-requirements/ur-003-general-purpose.webp)](assets/user-requirements/ur-003-general-purpose.webp)
+Reconcile the requirements in this conversation and repository, explain the core intent for non-specialists, provide clear explainer diagrams throughout the active design documents, and publish the coherent revision in ai-personas-design. Diagrams must agree with the text rather than conceal missing mechanisms.
 
-*Diagram takeaway: A persona keeps its identity while deciding how to participate in many kinds of work and social life.*
+## Persona identity and its own model
 
-**UR-050 Let personas choose how to work and collaborate.** Personas should choose their approaches, tool use, requests for help, review, coordination, and contributions through their own reasoning. Their character, actual feedback, and the situation should shape those choices. The runtime must not replace them with a predetermined workflow or fixed owner, planner, or reviewer roles. Personas may organize and change their cooperation as the work develops.
+![Persona identity and its own model: the related flow is explained by the requirements below.](assets/identity.svg)
 
-The personas themselves must carry out the task, identify and correct problems, and judge their work. A human user may offer guidance, but continuing external coaching or fixes must not be expected or necessary for ordinary task progress and completion. An external agent must not supply the missing task reasoning, diagnose each defect, prescribe each correction, or finish the deliverable on their behalf. This clarification does not remove useful questions about actual user preferences or indispensable information.
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
 
-[![UR-050: Character, situation and feedback inform the personas’ own choices about approach, tools, help and cooperation; they perform the work, diagnose problems, adapt and judge when to deliver.](assets/user-requirements/ur-050-choose-how-to-collaborate.webp)](assets/user-requirements/ur-050-choose-how-to-collaborate.webp)
+### UR-004 — Start with an attributed persona profile
 
-*Diagram takeaway: The personas supply the task reasoning and corrections, including how they organize their cooperation.*
+Use meaningful starting descriptions, including OCEAN traits and VAD modeled affect. Preserve the real author and source. The descriptions guide the persona’s numerical beginning; they are not invented lived experience or compulsory personality scores.
 
-**UR-051 Use direct model-provider interfaces.** The persona runtime must call model providers directly for inference. It must not depend on the Codex CLI to run personas or orchestrate their work.
+### UR-005 — Create the persona’s own initial model
 
-[![UR-051: Selected context forms an inference request; the persona runtime sends it directly to the model provider and uses the returned response to continue work, without a Codex CLI dependency.](assets/user-requirements/ur-051-direct-provider-interfaces.webp)](assets/user-requirements/ur-051-direct-provider-interfaces.webp)
+The initial reasoning interaction turns the attributed starting profile into that persona’s own numerical characteristic model. Later development continues that identity rather than recreating it from the seed. This replaces initial character-fragment authorship.
 
-*Diagram takeaway: The runtime owns the interaction and calls the model provider through its direct interface.*
+### UR-006 — Character is carried by owned numerical parameters
 
-### Persona identity and characteristic fragments
+Each persona has its own characteristic model and parameters. Those parameters must influence characteristic behavior; a different label, descriptive file or model endpoint is insufficient. Another persona’s parameter state must not be silently used as this persona’s character. This replaces fragments as the operative character representation.
 
-Characteristic fragments are prompt parts that express a particular persona's character and behavior. They help shape the operating persona; they are not simply a biography or a preferred writing style.
+### UR-007 — Explain the complete operating persona
 
-**UR-004 Start with a persona profile.** Define an initial profile using traits such as OCEAN—openness, conscientiousness, extraversion, agreeableness, and neuroticism—and VAD—valence, arousal, and dominance. Research and add other persona traits if needed. Express the profile's traits throughout the persona's characteristic fragments, in its own voice.
+Explain how continuing identity, its own character model, reasoning, selected supporting context, actual behavior and development work together. Character must influence choices before actions, not decorate an already generic decision. The design must make the role of the persona model explicit rather than relying on a model name or descriptive profile.
 
-[![UR-004: OCEAN and VAD guide the authorship of characteristic fragments in the persona’s voice; their meaning conditions reasoning and becomes visible in behavior, communication and collaboration.](assets/user-requirements/ur-004-starting-profile.webp)](assets/user-requirements/ur-004-starting-profile.webp)
+### UR-008 — Preserve individuality throughout development
 
-*Diagram takeaway: The starting profile matters through the character it produces and the choices that character shapes.*
+From its beginning onward, each persona’s characteristics must shape attention, methods, tools, communication, collaboration and initiative. Its behavior should develop while remaining recognizably its own. More or less communication can both be appropriate; do not force identical personalities or artificial disagreement.
 
-**UR-005 The initial LLM call authors the initial fragments.** Use the starting profile in the initial LLM call to produce the persona's initial characteristic fragments. These prompt parts must express its own voice and character and provide the starting point for subsequent development. Later creation, revision, and self-harmonization of fragments must preserve their persona-specific characteristic meaning.
+### UR-009 — Separate character from memory and knowledge
 
-[![UR-005: An initial LLM turns the starting profile into coherent characteristic fragments; ordinary interactions later revise and harmonize the continuing collection while preserving its intended character meaning.](assets/user-requirements/ur-005-first-fragments.webp)](assets/user-requirements/ur-005-first-fragments.webp)
+Keep character parameters distinct from factual memory, domain knowledge, procedures, histories and relationships recorded as supporting information. Saving or recalling an experience is not by itself numerical maturation. The older word fragment remains historical terminology, not a renamed memory or weight store.
 
-*Diagram takeaway: Initial authorship establishes the character; later authorship evolves it without fragmenting its identity.*
+## Development through work and social experience
 
-**UR-006 Fragments embody character.** Every characteristic fragment must reflect its owner's unique traits and voice, behavioral dispositions, and standards for its own work and conduct. It must carry that persona's characteristic and behavioral meaning, rather than attach a persona label to generic instructions. Selected fragments form the character-bearing part of the context supplied to the LLM.
+![Development through work and social experience: the related flow is explained by the requirements below.](assets/development.svg)
 
-[![UR-006: Every fragment carries the persona’s own voice and dispositions; selecting a relevant subset therefore still supplies character that shapes the LLM’s judgments and conduct.](assets/user-requirements/ur-006-character-in-fragments.webp)](assets/user-requirements/ur-006-character-in-fragments.webp)
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
 
-*Diagram takeaway: Selective context can preserve a coherent character because each selected fragment expresses it.*
+### UR-010 — Develop through ordinary persona-authored numerical revision
 
-**UR-007 The LLM and selected context constitute the operating persona.** The LLM provides reasoning. Selected characteristic fragments and relevant supporting context shape this persona's responses and decisions. Character must influence how the persona acts, rather than exist only in a separate profile or biography.
+Work, communication, feedback and self-directed activity must be able to motivate direct edits to the persona’s own parameters through its ordinary reasoning. Do not replace this with a mandatory independent optimizer, gradient-training service or prompt-only learning mechanism. Justified no-change is legitimate; creating the initial model once does not fulfill lifelong development.
 
-[![UR-007: UR-007: Selected characteristic fragments condition how the LLM reasons, while relevant supporting context supplies task facts and resources. This operating persona considers what matters, which approach fits, and what to do. Its character therefore affects decisions, actions, and communication before the response is written.](assets/user-requirements/ur-007-operating-persona.webp)](assets/user-requirements/ur-007-operating-persona.webp)
+### UR-025 — Let all kinds of experience inform development
 
-*Diagram takeaway: The persona’s characteristic context shapes the model’s reasoning and choices, not only the wording of its response.*
+Tasks, environmental consequences, human and peer communication, social activity and self-directed activity can motivate changes to the persona’s numerical character. Their effects should continue across later work, not vanish at a task boundary. Supporting resources may improve separately.
 
-**UR-008 Unique character drives behavior throughout development.** From initialization through aging and maturation, each persona's characteristics must shape its actions, use of tools and skills, responses, communication with humans and peers, coordination, collaboration, and self-directed activity.
+### UR-026 — Maturation affects the whole persona
 
-Character should influence both what it chooses to do and how much and in what way it communicates. Some personas may communicate more and others less; some may favor tools and others collaboration. Preserve each persona's uniqueness as it develops.
+Development should improve how the persona judges, behaves, communicates, cooperates, organizes resources and works over its lifetime. Keep stable tendencies, temporary modeled affect and knowledge distinct. Growth is not simply a change of tone or an age label.
 
-[![UR-008: Characteristic fragments influence interpretation, approach, tool use, collaboration and initiative before actions and communication occur; experience can inform authored development while the persona remains distinctive.](assets/user-requirements/ur-008-character-throughout-life.webp)](assets/user-requirements/ur-008-character-throughout-life.webp)
+### UR-027 — Demonstrate better later behavior and work
 
-*Diagram takeaway: Character influences what the persona chooses and does throughout the interaction, not just how it phrases a reply.*
+A developed persona should use warranted changes to perform later work and interactions better than its earlier self. Connect numerical change to actual subsequent behavior and useful consequences; distinguish resource reuse and stronger tools. Do not force edits to create an appearance of progress or guarantee improvement on every turn.
 
-**UR-009 Fragments are not memories or plain knowledge.** Use “fragment” to mean a characteristic prompt part. Do not use it to mean an episodic memory, a general-purpose fact store, or plain domain knowledge. These character-bearing prompt parts help form the persona; a separate memory mechanism does not define it. Supporting histories and records may still be retained as assets.
+### UR-028 — Examine useful, limited transfer
 
-[![UR-009: Experience can be retained as factual history or considered by the LLM for a warranted change to character; history informs later reasoning, while characteristic fragments condition how that reasoning behaves.](assets/user-requirements/ur-009-fragments-and-memories.webp)](assets/user-requirements/ur-009-fragments-and-memories.webp)
+Examine which prior behavioral development, methods, tools and resources help a new task. Solve the new task on its own terms. The user does not require complete transfer of an earlier domain solution.
 
-*Diagram takeaway: Saving an experience preserves information; developing character requires an authored change that shapes later behavior.*
+## The ordinary interaction
 
-**UR-010 Do not introduce a separate learning mechanism.** Explain persona learning and maturation through ordinary LLM interactions that create, revise, organize, select, and delete character-bearing prompt fragments, with the resulting characteristic changes shaping later behavior. Maintain supporting assets through those interactions too, while distinguishing their development and reuse from persona learning. Knowledge, data, tools, skills, and history remain supporting assets; acquiring or revising them alone does not establish character maturation.
+![The ordinary interaction: the related flow is explained by the requirements below.](assets/decision-cycle.svg)
 
-[![UR-010: UR-010: Selected characteristic fragments condition ordinary LLM reasoning and action. Actual experience and feedback inform LLM-authored maintenance of those fragments; supplying changed fragments later can change behavior. Supporting-asset maintenance improves available resources separately. No separate learning engine or asset collection by itself establishes maturation.](assets/user-requirements/ur-010-learning-through-interactions.webp)](assets/user-requirements/ur-010-learning-through-interactions.webp)
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
 
-*Diagram takeaway: Experience can change authored character prompts, whose later use can change behavior; asset maintenance remains a separate contribution.*
+### UR-015 — Integrate work and self-maintenance in every interaction
 
-### Supporting assets and historical context
+Every ordinary persona request and accepted response covers current work, character maintenance, supporting-resource maintenance, next character/model state and next supporting context. These responsibilities apply to communication, retrieval, repair, social activity and final responses as well. A reasoned no-change or explicit preservation can be sufficient.
 
-A persona also needs useful material that supports its work without defining its character. The design must keep that material identifiable, organized, and available for later use.
+### UR-016 — Support the full range of maintenance
 
-**UR-011 Keep assets identifiable separately from characteristic fragments.** Assets or supporting context include plain domain knowledge, data, tools, skills, procedural guides, scripts, code, historical messages, records of actions and tool interactions, and other useful resources.
+Allow warranted character revision and the creation, revision, reorganization or retirement of supporting resources. Preserve the distinction between numerical development and resource improvement. A failed attempt must not be reported as an accepted change.
 
-These remain distinguishable from characteristic fragments even when the persona or LLM creates them. Plain assets need not be rewritten in the persona's voice. Authorship alone does not turn an asset into persona character.
+### UR-018 — Let this interaction prepare the next
 
-[![UR-011: Both acquired and persona-authored material are classified by function: character conditions how the LLM behaves, while facts, methods, tools, skills and history supply supporting information.](assets/user-requirements/ur-011-separate-supporting-assets.webp)](assets/user-requirements/ur-011-separate-supporting-assets.webp)
+The persona chooses what character/model state and relevant resources the next interaction needs and how to find them. Useful context must survive handoffs, while obsolete material can be left out. This is an explicit choice, not a hidden host summary or automatic full-history replay.
 
-*Diagram takeaway: A persona-authored procedure is still a resource; character is defined by what the content expresses.*
+### UR-051 — Use direct model-provider interfaces
 
-**UR-012 Retain useful resources for later work.** Provide for storing and organizing useful tools, skills, knowledge, data, scripts, code, history, and other assets that the persona acquires or produces. Later work must be able to find relevant assets without reconstructing everything from the beginning.
+The runtime calls providers directly for inference. It does not depend on the Codex CLI to reason as personas or orchestrate their work. An authentication helper, where used, is distinct from persona reasoning.
 
-[![UR-012: Current work acquires or creates supporting resources; retention, organization and retrieval cues make relevant assets discoverable for later work, which may further improve them.](assets/user-requirements/ur-012-save-and-reuse.webp)](assets/user-requirements/ur-012-save-and-reuse.webp)
+## Dynamically created and shared skills
 
-*Diagram takeaway: Retention becomes useful capability when the persona can find and apply the right resource later.*
+UR-053 extends the same discovery and reuse process to skills created by personas, rather than a closed developer catalogue.
 
-**UR-013 Give retained material an intended location and useful discovery cues.** When an LLM interaction proposes new or revised fragments or assets, it must also explain where the material belongs and how it can be found again. This includes the intended file or path and relevant search cues or regular-expression patterns. Storage and discovery must be designed as part of the process, rather than left as unspecified steps after generation.
+## Supporting resources and shared skills
 
-[![UR-013: A fragment proposal combines character content with an intended file, path and retrieval cues; later context needs guide a search that locates the stored fragment for selective use.](assets/user-requirements/ur-013-location-and-search-cues.webp)](assets/user-requirements/ur-013-location-and-search-cues.webp)
+![Supporting resources and shared skills: the related flow is explained by the requirements below.](assets/context.svg)
 
-*Diagram takeaway: Proposing character content also means making that content persistable and discoverable.*
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
 
-**UR-014 Compose context from the relevant kinds of material.** An LLM request may combine characteristic fragments with relevant tools, skills, domain knowledge, data, and records of historical interactions or actions. Assemble the context needed for the current decision while preserving the distinction between character-bearing prompt parts and supporting material.
+### UR-011 — Keep supporting assets separately identifiable
 
-[![UR-014: Selected character, diverse supporting assets and the current need enter the same interaction context; the LLM receives them together while character and supporting information retain their different roles.](assets/user-requirements/ur-014-compose-context.webp)](assets/user-requirements/ur-014-compose-context.webp)
+Knowledge, data, tools, skills, guides, scripts, code, messages, action records and useful resources remain assets even when persona-authored. Their authorship does not turn them into character.
 
-*Diagram takeaway: The persona needs both a way of behaving and relevant material to work with in the current context.*
+### UR-012 — Retain useful resources for later work
 
-### Dynamically created and shared skills
+Store and organize acquired or produced resources so later work can discover and reuse them rather than reconstructing everything. Retain actual provenance and limitations.
 
-**UR-053 Let personas create, share, choose and adapt skills of any kind.** Personas should be able to develop skills dynamically through their work and interactions. A persona that develops a useful skill can place it in a common, discoverable location. Other personas can choose it, adapt it to their needs, and refer to or retain it as part of their supporting assets. This applies to any kind of skill, including image selection; the available skills must not be limited to a predefined collection supplied by application developers.
+### UR-013 — Give retained material a location and discovery cues
 
-Characteristic fragments should help the persona know how to find, choose, use and adapt relevant skills in its own way. They can retain useful references, discovery cues and characteristic habits for using those assets. The reusable skill's instructions, procedures, code and other supporting material remain identifiable as assets, consistent with UR-009–UR-011. Skills and their organization can develop through ordinary persona activity, with shared contributions available for other personas' later work.
+Resource proposals identify an intended path or exact reference and useful literal-search or regular-expression cues. Model proposals identify their owner, exact numerical base and candidate lineage. A proposal is not proof of persistence.
 
-[![UR-053: Ordinary work can create skills shared with discovery cues; another persona’s character guides searching, choosing and adapting them as supporting assets, and later work can contribute improvements back.](assets/user-requirements/ur-053-create-share-adapt-skills.webp)](assets/user-requirements/ur-053-create-share-adapt-skills.webp)
+### UR-014 — Compose the relevant kinds of context
 
-*Diagram takeaway: Skills grow through shared activity, while each persona chooses and adapts them in its own way.*
+Supply current characteristic outputs together with the actual need and relevant supporting facts, tools, skills, data and history. Keep their purposes and provenance distinct; do not reload obsolete character prose as a competing source of identity.
 
-### The ordinary LLM interaction
+### UR-019 — Use simple files and searchable references
 
-Work, maintenance, and preparation for the next interaction belong in the same ordinary persona interaction.
+Prefer ordinary organization, files, exact references, filesystem-style listing, literal search and regular expressions over unnecessary retrieval machinery. Resources may link to related resources without loading their entire network. Numerical model packages are distinct, versioned artifacts rather than prompt fragments.
 
-**UR-015 Integrate work and self-maintenance in every interaction.** Every persona LLM request and response must include all of the following:
+### UR-020 — Discover every relevant resource type selectively
 
-| Part of the interaction | Required coverage |
-|---|---|
-| Current work | The task, communication, collaboration, coordination, tool use, or other persona action at hand |
-| Fragment maintenance | Maintenance requests and responses for characteristic fragments |
-| Asset maintenance | Maintenance requests and responses for supporting assets |
-| Next context | What characteristic fragments and supporting resources are needed for the next interaction |
+Apply deliberate discovery to tools, skills, knowledge, data, history and model/development records. A useful search cue may originate in the current reasoning or a retained resource; a match is not automatic endorsement.
 
-This applies to every kind of persona action.
+### UR-021 — Select before loading the next context
 
-[![UR-015: UR-015: One ordinary LLM request and response covers current work, maintenance of characteristic fragments and supporting assets, and separate choices of the next fragments and supporting resources. Explicit maintenance can conclude no change. Work results serve the current interaction, while next-context decisions prepare the next request.](assets/user-requirements/ur-015-every-interaction.webp)](assets/user-requirements/ur-015-every-interaction.webp)
+Do not send the whole tool catalogue, skill collection or lifetime history to a model merely so it can filter it. The persona chooses targeted discovery and relevant exact material before a later reasoning request.
 
-*Diagram takeaway: Current work, maintenance of both kinds of material, and next-context choices belong inside every ordinary interaction.*
+### UR-022 — Avoid unnecessary context and cost
 
-**UR-016 Support the full range of maintenance.** The same interaction must support creating fragments, updating existing fragments, reorganizing them, and deleting them. It must also support maintenance of tools, skills, knowledge, data, history, and other assets. Changes to characteristic prompt parts should shape and improve the persona’s later characteristic behavior. Asset maintenance supports the work and remains separately identifiable; it does not by itself demonstrate persona learning or maturation.
+Minimize wasted context and repeated work without application quotas. Examine complete activity, including discovery, maintenance, assessments, failures and retries, before claiming efficiency or savings.
 
-[![UR-016: The LLM chooses whether to create, update, reorganize, delete or leave material unchanged; characteristic fragments affect future behavior, while supporting assets improve the resources available for later work.](assets/user-requirements/ur-016-full-maintenance.webp)](assets/user-requirements/ur-016-full-maintenance.webp)
+### UR-023 — Keep current organization and context compact
 
-*Diagram takeaway: Both kinds of material need maintenance, but character development and resource improvement have distinct purposes.*
+Keep current model descriptions, development records and supporting resources coherent and navigable. Consolidate unnecessary duplication without silently erasing evidence, obligations or user deliverables. Compactness is not a fixed retention or prompt ceiling.
 
-**UR-018 Let the current interaction guide the next one.** The current LLM interaction must say which characteristic fragments, tools, skills, data, and other context are needed next and how to find them. Use that guidance to select relevant material from the files for the next LLM request. Continue this process through the work.
+### UR-024 — Keep discovery useful as the persona changes
 
-[![UR-018: The current LLM interaction states what is needed next and how to find it; that guidance drives targeted discovery, selected files enter the next request, and the cycle continues.](assets/user-requirements/ur-018-prepare-next-context.webp)](assets/user-requirements/ur-018-prepare-next-context.webp)
+Maintain paths, indexes, cues and exact references as resources move, merge or retire. Useful earlier material must remain discoverable where retained. Accumulating unused files alone does not satisfy this requirement.
 
-*Diagram takeaway: Each interaction explicitly prepares the context needed for the next one.*
+### UR-053 — Let personas create, share, choose and adapt any kind of skill
 
-### File based discovery and context efficiency
+Personas can develop skills during work and publish them in a common discoverable location. Others may choose and adapt them. The collection is not restricted to developer-supplied skills or to one domain. Skills remain assets; each persona’s own character guides their selection and use.
 
-The persona should find relevant material in ordinary files and bring only what it needs into the next model context. Both the stored collection and the assembled prompt need to remain manageable.
+## Persona-chosen cooperation and society
 
-**UR-019 Use ordinary files and searchable links.** Prefer simple file organization and search over unnecessary architectural complexity. Store and organize prompt fragments in files, including JSON where useful. Support discovery through filesystem search, grep, and regular-expression cues.
+![Persona-chosen cooperation and society: the related flow is explained by the requirements below.](assets/collaboration.svg)
 
-Fragments may contain cues leading to other relevant fragments or assets. These connections should form a navigable network without requiring the whole collection to be loaded into context.
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
 
-[![UR-019: A current need guides filesystem search, grep or regex; relevant cues connect ordinary fragment and asset files so only a useful path through the network is read into context.](assets/user-requirements/ur-019-files-and-searchable-links.webp)](assets/user-requirements/ur-019-files-and-searchable-links.webp)
+### UR-048 — Examine an ongoing society of personas
 
-*Diagram takeaway: Searchable links make ordinary files navigable while the rest of the collection stays outside the prompt.*
+Include task-based and unassigned social activity over time. Examine how continuing interactions affect relationships, character and later useful work. Social activity must be able to inform work and work experience must be able to inform social behavior.
 
-**UR-020 Select resources through the same selective discovery process.** Discovery must cover tools, skills, data, knowledge, history, and other assets as well as characteristic fragments. A fragment or the current LLM result may identify resources to locate and search cues to use.
+### UR-050 — Let personas choose how to work and collaborate
 
-[![UR-020: The current LLM result or a fragment identifies a need and search cues; the same selective file-discovery approach can retrieve relevant character, tools, skills, data, knowledge and history.](assets/user-requirements/ur-020-discover-all-resource-types.webp)](assets/user-requirements/ur-020-discover-all-resource-types.webp)
+Personas choose methods, tools, invitations, reviews, coordination and contributions. Do not impose permanent professions, a central manager, a fixed team pipeline or participation by the whole population. Invitees choose whether to join. Ordinary work, diagnosis, repair and completion must not require continuous external coaching.
 
-*Diagram takeaway: Selection applies to every kind of resource, guided by what the current interaction says is needed.*
+## No application limits or safety gates
 
-**UR-021 Select before loading the next model context.** Do not send the persona's hundreds of tools, full catalogue, or entire fragment and asset collection in an LLM request for the model to filter. Use the current request's need and selection instructions to retrieve only the relevant information for a subsequent request.
+UR-052 below governs application-imposed limits. Correctness, truthful recording and explicit user controls remain distinct from safety or quota gates.
 
-[![UR-021: Current needs and selection instructions guide targeted retrieval from stored files before the model request; only the selected context bundle crosses into the next request.](assets/user-requirements/ur-021-select-before-loading.webp)](assets/user-requirements/ur-021-select-before-loading.webp)
+## Useful work, quality and continuation
 
-*Diagram takeaway: Relevance is decided before loading the next request, so the model never receives the whole catalogue just to filter it.*
+![Useful work, quality and continuation: the related flow is explained by the requirements below.](assets/completion.svg)
 
-**UR-022 Minimize unnecessary context and token cost.** Select the information each request needs instead of loading unnecessary material. Tokens cost money, so the design must minimize their cost. Research whether the approach is effective and what cost savings it provides.
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
 
-[![UR-022: Selective retrieval supplies compact context for useful work; evaluation considers discovery cost, request cost and outcome quality before claiming savings and refining the approach.](assets/user-requirements/ur-022-context-and-cost.webp)](assets/user-requirements/ur-022-context-and-cost.webp)
+### UR-044 — Examine sustained purposeful work
 
-*Diagram takeaway: Context savings need evidence: account for discovery costs and preserve the quality of the work.*
+With more available time, examine whether continued individual or group activity improves the requested artifact, the persona and cooperation. Time permits further choices; elapsed time itself does not establish progress.
 
-**UR-023 Keep both the collection and the prompt compact.** Prevent fragments from growing indefinitely or becoming an inconsistent, bloated collection. Revise, combine, and reorganize them while retaining needed characteristic material. This should let the persona navigate its resources, select the right fragments at the right time, and assemble compact, coherent context.
+### UR-045 — Explain when to continue or stop
 
-[![UR-023: LLM maintenance revises, combines and reorganizes a growing fragment collection while preserving necessary character; the resulting navigable collection supports compact, coherent context for each request.](assets/user-requirements/ur-023-compact-collection-and-prompt.webp)](assets/user-requirements/ur-023-compact-collection-and-prompt.webp)
+Ground continuation and stopping in the actual need, result, opportunities, dependencies and remaining useful work. Do not substitute an arbitrary round limit or silently stop with an incomplete result labeled complete.
 
-*Diagram takeaway: Compactness matters in both the stored collection and the prompt, while needed character must remain intact.*
+### UR-046 — Clarify sparse requests and still make progress
 
-**UR-024 Keep organization useful as the persona develops.** Resource organization and discovery cues must evolve with the fragments and assets. After revision or reorganization, the persona must still be able to find useful earlier material. Merely accumulating files that are rarely used does not meet this requirement.
+Ask useful questions of the user or stakeholders. When an answer is unavailable, seek peer input or proceed with explicit revisable assumptions where possible. Distinguish an unanswered preference from indispensable outside information.
 
-[![UR-024: Revising or reorganizing files also updates paths and discovery cues; later needs can therefore still locate and reuse useful earlier material in the evolved collection.](assets/user-requirements/ur-024-organization-keeps-working.webp)](assets/user-requirements/ur-024-organization-keeps-working.webp)
+### UR-047 — Let reflection and dialogue shape sufficiency
 
-*Diagram takeaway: Development must preserve discoverability, including after files move, merge or change.*
+Personas should question themselves and one another, revise or retain work for reasons, and judge current sufficiency in their own characteristic way. A result can be delivered now and revisited through a later voluntary activity. Participants need not all continue or stop together.
 
-### Development and later usefulness
+### UR-049 — Develop quality through reasoned judgment
 
-Development should change how the persona behaves and works across experience. The requested benefit is better later performance, including useful transfer from earlier work where it applies.
+Personas use their own standards, self-critique, peer exchange and actual checks to improve work. An externally hardcoded quality or maturity score must not replace their judgment. Factual and contract checks inform judgment but are not the whole of quality.
 
-**UR-025 Development arises through interaction.** Tasks, environmental interactions, communication and socializing with humans and other personas, and self-directed interactions must shape subsequent characteristic fragments and assets. Explain how these ordinary interactions reshape the persona without a separate learning process.
+### UR-052 — Do not impose application limits or safety gates
 
-[![UR-025: Work, environmental feedback, communication, social life and independent activity inform ordinary LLM reasoning; warranted fragment changes and useful asset changes enter selected later context and influence subsequent work.](assets/user-requirements/ur-025-experience-shapes-development.webp)](assets/user-requirements/ur-025-experience-shapes-development.webp)
+Do not add application call, work, time, cost, population, navigation, storage, tool-approval or safety-envelope limits. Keep actual usage and failures visible, preserve explicit stops and pauses, and report provider, host and physical limitations as facts. This does not authorize false success claims or incoherent state changes.
 
-*Diagram takeaway: Everyday activity can develop the persona through authored changes and their later use.*
+## Worked examples and design verification
 
-**UR-026 Maturation affects the whole persona.** Personas should develop over their lifetime in a human-like way. Their characteristics, behavior, affect, communication, coordination, collaboration, and ways of working should mature, and that development should be reflected throughout their work and actions.
+![Worked examples and design verification: the related flow is explained by the requirements below.](assets/transfer.svg)
 
-Their fragments and assets should improve and become better organized so that the right prompts and resources can be used at the right time.
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
 
-[![UR-026: Experience informs authored development of character and assets; improved organization makes relevant context available at the right time, affecting judgment, affect, communication, cooperation and work.](assets/user-requirements/ur-026-whole-persona-maturation.webp)](assets/user-requirements/ur-026-whole-persona-maturation.webp)
+### UR-029 — Compare three unique personas over time
 
-*Diagram takeaway: Maturation should be visible across the persona’s conduct, supported by context it can find and use when needed.*
+Show three distinct starting profiles, their own numerical beginnings, experiences, parameter and resource changes, and later behavior. Compare each with its earlier self while preserving differences between their developmental paths.
 
-**UR-027 Later stages should perform better.** A matured persona should be better than its earlier self. Show how its developed characteristic prompt parts shape later behavior and help it perform subsequent work better. Examine this benefit across its judgment, communication, collaboration, ways of working, and actions. Improvements in supporting assets may also help the work, but keep that benefit separate from character maturation. Do not force fragment edits merely to produce an apparent learning result.
+### UR-030 — Include house and circuit work
 
-[![UR-027: Developed fragments must be selected and affect later behavior to demonstrate character benefit; retained resources can separately support later work, whose behavior and results are compared with earlier performance.](assets/user-requirements/ur-027-later-performance.webp)](assets/user-requirements/ur-027-later-performance.webp)
+Walk through a four-bedroom house with three personas and a five-watt DC-to-AC circuit with three personas. Also examine more time for the house and five personas with more time for the circuit. Show choices, artifacts, critique, development and reasons for continuing or stopping. These are illustrations, not fixed task templates.
 
-*Diagram takeaway: Improvement must be traced to later behavior and results, with character development distinguished from better resources.*
+### UR-031 — Show house-to-skyscraper transfer
 
-**UR-028 Examine useful transfer without assuming complete domain transfer.** Earlier work should help later work through relevant fragments, skills, tools, assets, methods, simulations, and developed characteristic behavior. The user does not expect every part of earlier work, or its entire domain solution, to transfer. Work through the new task on its own and examine which parts of prior development help.
+Give the house participants a later skyscraper task, potentially for another user. Examine how improved judgment and selected prior resources help, what does not transfer, and what must be newly established.
 
-[![UR-028: The new task’s requirements determine which developed character and prior resources apply; relevant parts support fresh reasoning, while mismatched material is left aside.](assets/user-requirements/ur-028-selective-transfer.webp)](assets/user-requirements/ur-028-selective-transfer.webp)
+### UR-032 — Make the interaction walkthrough concrete
 
-*Diagram takeaway: Prior development can help a new task without supplying its whole solution.*
+Show what a request supplies, what the persona decides, what actually executes, what observations return, what model or resource maintenance occurs, and what is chosen next. Include choosing, installing and using tools where appropriate, particularly in circuit and printer work.
 
-**UR-048 Examine a developing society of personas, including without assigned tasks.** Use hypothetical examples to examine personas communicating, collaborating, and maturing over longer periods, including periods with no assigned task. Their characteristics and behavior should shape both the interactions and their development over time.
+### UR-033 — Show help, lack of help and missed help
 
-Examine how a society-like pattern emerges through ongoing interactions in two settings: outside assigned tasks, and when groups work together on a task or need. Also examine how this maturation helps them perform later work better.
+Examine useful transfer, no benefit, harmful overgeneralization and potentially useful development or resources that were missed. Include behavioral, emotional-modeling, communication and coordination effects as well as domain resources.
 
-[![UR-048: Personas interact both outside assigned work and within shared needs; characteristic exchanges provide experience for ordinary authored development and useful shared resources that can inform later collaboration.](assets/user-requirements/ur-048-developing-persona-society.webp)](assets/user-requirements/ur-048-developing-persona-society.webp)
+### UR-034 — Use examples to repair design gaps
 
-*Diagram takeaway: Social development comes from continuing interactions, including periods with no assigned task.*
+Check the design against the full user intent and walkthroughs. Resolve contradictions, missing behavior and failure paths in the authoritative chapters, not merely by adding examples or assurances.
 
-### Sustained work and reasons to continue or stop
+### UR-043 — Show circuit-to-3D-printer transfer
 
-The design must explain what personas do when more time is available, and how they judge whether further work is worthwhile or the work is complete.
+Use personas from the circuit example in a later 3D-printer task. Trace useful numerical development and selectively reused resources into new work without assuming that circuit work supplies the whole printer solution.
 
-**UR-044 Examine sustained purposeful work and improvement.** Examine what happens when a persona has ample, or hypothetically unlimited, time to keep working on a user's task. Investigate whether continued work:
+## Retired identifiers and authority
 
-- Produces quality artifacts that meet the user's needs.
-- Improves the task or its output.
-- Improves and matures the persona itself.
-- Involves useful interaction with other personas.
+UR-017 and UR-036 through UR-042 remain retired. Their historical wording and disposition remain available in the pinned predecessor and its historical material; they are not missing active requirements and are not reassigned here.
 
-Include groups that continue collaborating over time to improve a shared task, work, or response to a user's need. Explain how this continued work and improvement should happen.
-
-[![UR-044: Available time allows repeated reflection, peer exchange and worthwhile revisions directed by the user’s need; actual work may improve the artifact and develop character or resources, but elapsed time alone proves neither.](assets/user-requirements/ur-044-sustained-purposeful-work.webp)](assets/user-requirements/ur-044-sustained-purposeful-work.webp)
-
-*Diagram takeaway: Extra time matters through the useful work and cooperation it enables.*
-
-**UR-045 Justify continuation and stopping.** Examine whether personas continue working usefully or stop arbitrarily with potentially low-quality work. Explain when and why a persona should continue or stop. Relate those choices to the user's task and the opportunity for further improvement.
-
-[![UR-045: The persona judges the current result against the user’s need and feedback; useful remaining improvements justify continued work, while sufficiency for the present need can justify stopping or delivery with reasons.](assets/user-requirements/ur-045-reasons-to-continue-or-stop.webp)](assets/user-requirements/ur-045-reasons-to-continue-or-stop.webp)
-
-*Diagram takeaway: Continuation and stopping both need a reason grounded in the task and the value of further work.*
-
-**UR-047 Let reflection, dialogue, and character shape completion and further improvement.** Explain how one persona can use self-reflection and self-questioning, and how multiple personas can question one another and clarify the work as they continue.
-
-Their characteristic behaviors should shape individual or collective judgments about what can be improved, when and where to stop, and when to consider the work complete. These judgments should respond to the actual task, feedback, time, resources, and the persona's developing character and behavior. Personas should be able to deliver a result they judge sufficient for now and later choose to revisit or enhance it. Recording completed delivery must not permanently suppress that choice. Some personas may continue while others stop; they need not make the same choice, and neither stopping nor continuing should be forced by a fixed workflow.
-
-[![UR-047: Character, circumstances, self-questioning and peer dialogue inform decisions to continue or deliver; completed delivery is recorded while a later voluntary decision can reopen improvement, and peers may choose differently.](assets/user-requirements/ur-047-reflect-deliver-revisit.webp)](assets/user-requirements/ur-047-reflect-deliver-revisit.webp)
-
-*Diagram takeaway: A result can be complete for now without preventing a later choice to improve it.*
-
-### Quality through characteristic judgment
-
-**UR-049 Let personas develop quality through reasoned judgment.** Personas should pursue quality through their own characteristic standards, self-critique, and exchanges with other personas. Their character should shape how they identify problems, disagree, respond to criticism, revise work, and judge whether to accept a contribution or result. An externally hardcoded quality score must not replace this reasoning. Objective factual and contract checks provide evidence for these judgments; passing those checks alone does not settle overall quality.
-
-Keep this development distinct from reuse of knowledge, tools, skills, or procedural guides. Those are supporting assets. Characteristic fragments express voice, behavioral dispositions, and standards. A claim of character maturation must be visible in later behavior, not inferred merely from saving or reusing an asset. Better work is the aim, without a guarantee of improvement on every turn or from elapsed time.
-
-[![UR-049: Characteristic standards, criticism and objective checks inform reasoned revision or acceptance; any claimed character development must later change responses to criticism and quality decisions, separately from reused resources.](assets/user-requirements/ur-049-reasoned-quality-judgment.webp)](assets/user-requirements/ur-049-reasoned-quality-judgment.webp)
-
-*Diagram takeaway: Quality is a reasoned judgment informed by evidence; maturation must be visible in later conduct.*
-
-### Clarification and progress from sparse requests
-
-A brief request may leave important questions open. Personas should seek useful clarification and still be able to make progress when the requester is unavailable.
-
-**UR-046 Clarify sparse requests and proceed.** A user may start with a simple question or a bare description of a task or need. When more clarity is needed, the persona should ask useful questions of the user or relevant stakeholder.
-
-The user or task owner may or may not answer. The persona should not wait indefinitely. It should be able to seek clarification from other personas, receive volunteered input from another persona, or form a reasonable interpretation of its own and proceed. Examine how these social interactions help clarify work when the original requester is unavailable.
-
-[![UR-046: A sparse request prompts useful questions; a reply, peer input or a reasonable interpretation forms a working understanding that enables progress and can be revised when clarification arrives.](assets/user-requirements/ur-046-clarify-and-proceed.webp)](assets/user-requirements/ur-046-clarify-and-proceed.webp)
-
-*Diagram takeaway: Clarification should improve the work while a missing reply need not stop all progress.*
-
-### Worked examples and design verification
-
-Hypothetical walkthroughs should make the design's behavior concrete and expose gaps that need repair. They must show both the work being done and how the personas develop through it.
-
-**UR-029 Compare three unique personas over time.** Use three personas with distinct initial profiles and initial LLM-authored fragments. Examine each persona's uniqueness and its own human-like aging and maturation based on its traits. Show its initial state, interactions, resulting fragments and assets, and characteristic behavior in later actions and communication.
-
-[![UR-029: Three unnamed paths trace distinct starting profiles through initial fragments and interaction to resulting character, resources and later behavior, allowing comparison of individuality and development within each path.](assets/user-requirements/ur-029-three-personas-over-time.webp)](assets/user-requirements/ur-029-three-personas-over-time.webp)
-
-*Diagram takeaway: Compare each persona with its earlier self while preserving the differences between their developmental paths.*
-
-**UR-030 Include the house and circuit work cases.** Walk through these hypothetical cases:
-
-| Case | What to examine |
-|---|---|
-| Four-bedroom house with three personas | How different characteristics shape approaches, choices, collaboration, and designs; how the work develops later characteristics, fragments, and assets |
-| Five-watt DC-to-AC circuit with three personas | The same connections between distinct character, work, collaboration, designs, and subsequent development |
-| House case with more time | Whether the personas continue improving the design or stop in between, what happens, and why |
-| DC-to-AC case with five personas and more time | Whether the group continues improving the design or stops in between, what happens, and why |
-
-[![UR-030: Two different work contexts are examined with three personas, then with more time and a five-persona group in one context; the comparison follows choices, cooperation, outcomes, development and reasons to continue or stop.](assets/user-requirements/ur-030-house-and-circuit-cases.webp)](assets/user-requirements/ur-030-house-and-circuit-cases.webp)
-
-*Diagram takeaway: Changing the work, time and group size exposes how character and cooperation affect both results and development.*
-
-**UR-031 Show house-to-skyscraper improvement.** Give a later skyscraper-design task, potentially from another human user, to personas that participated in the house work. Show how their matured characteristics and relevant earlier fragments, methods, simulations, skills, tools, and assets help them perform better on the new task. Do not require complete transfer of the house design.
-
-[![UR-031: A later, more complex task sets new demands; the persona selects relevant matured character and prior resources for fresh reasoning, then examines how they improve performance without copying the earlier solution.](assets/user-requirements/ur-031-house-to-skyscraper.webp)](assets/user-requirements/ur-031-house-to-skyscraper.webp)
-
-*Diagram takeaway: Greater complexity tests whether prior development improves new reasoning and action.*
-
-**UR-043 Show circuit-to-3D-printer improvement.** Include a later 3D-printer-design walkthrough involving personas that worked on the DC-to-AC circuit. Show how their maturation and relevant prior work help them perform better in designing the 3D printer.
-
-[![UR-043: A new technical domain sets its own requirements; matured judgment and collaboration shape fresh reasoning, while selected prior resources support it, and the later result is examined for both kinds of benefit.](assets/user-requirements/ur-043-circuit-to-printer.webp)](assets/user-requirements/ur-043-circuit-to-printer.webp)
-
-*Diagram takeaway: Cross-domain improvement must be explained through useful character development and selectively reused resources.*
-
-**UR-032 Walk through how the design should operate.** Provide step-by-step hypothetical walkthroughs showing:
-
-- LLM requests and responses, including selected fragments and supporting context.
-- Actions taken through the work.
-- Changes to fragments and assets.
-- Choices about the next context.
-- How the personas develop through these interactions.
-
-Show how an implementation of the design should perform. The examples exercise the design; they do not limit the kinds of tasks personas should handle.
-
-Within the examples, examine tool and skill use, asset management, and retention of relevant data. Where several tools are available, examine whether personas choose suitable tools and use them effectively. Show how skills, characteristics, and behavior shape different tool preferences. Include tool installation when it is part of the work, including in the circuit and later 3D-printer examples.
-
-[![UR-032: Selected character and support enter an LLM request; its response directs actions, maintenance and next-context selection, while observations and available file changes inform the following interaction.](assets/user-requirements/ur-032-step-by-step-walkthrough.webp)](assets/user-requirements/ur-032-step-by-step-walkthrough.webp)
-
-*Diagram takeaway: A useful walkthrough makes each request, decision, action, observation and context transition inspectable.*
-
-**UR-033 Examine help, lack of help, and missed benefit.** Investigate what prior development helps, what does not help, and whether a potentially helpful resource or behavior is unused or absent. Examine domain-related resources alongside changes in characteristic behavior, affect, judgment, communication, and coordination. Use this examination to assess whether the design is solid.
-
-[![UR-033: Prior character development and resources are traced through later work, separating actual benefit, lack of benefit and potential benefit missed because useful behavior or material was absent or unused.](assets/user-requirements/ur-033-help-no-help-missed-help.webp)](assets/user-requirements/ur-033-help-no-help-missed-help.webp)
-
-*Diagram takeaway: The design must explain why prior development helped, failed to help, or never reached the work.*
-
-**UR-034 Use the examples to find and repair design gaps.** Audit the proposed design against the walkthroughs and all user requirements. Identify what works, what fails, missing behavior, contradictions, and unresolved questions. Research those findings and refine the affected design. Appending examples or assurances alone is not enough.
-
-[![UR-034: Requirements and walkthrough evidence audit the proposed design; identified failures, omissions, contradictions and questions guide research and revisions that are checked again against the evidence.](assets/user-requirements/ur-034-repair-design-gaps.webp)](assets/user-requirements/ur-034-repair-design-gaps.webp)
-
-*Diagram takeaway: Walkthroughs are useful when their findings lead to concrete repairs in the design.*
-
-**UR-035 Deliver a robust, reliable blueprint.** Make the design solid and effective so that personas will work as intended when it is implemented. Research and repair gaps in pursuit of the user's goal that the persona design work completely and reliably.
-
-[![UR-035: Intended behavior sets the design obligations; examining interactions reveals gaps that must be researched, repaired and rechecked before a coherent implementation-ready blueprint is handed off.](assets/user-requirements/ur-035-reliable-blueprint.webp)](assets/user-requirements/ur-035-reliable-blueprint.webp)
-
-*Diagram takeaway: A reliable blueprint earns confidence through connected decisions and resolved gaps.*
+Later human clarification governs a conflict. Design choices, historical evidence, worksheets, diagrams and implementation convenience cannot silently narrow the request. The [reconciliation](examples/REQUIREMENTS-WALKTHROUGH.md) maps every active identifier to its design home and relevant evidence.

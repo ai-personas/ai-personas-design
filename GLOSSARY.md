@@ -1,303 +1,52 @@
-# Glossary
-
-[Home](README.md) · [Start here](START-HERE.md) · [Design authority](design/README.md)
-
-This glossary explains how a continuing persona keeps its character, chooses context, does work, and maintains its files. The current design connects seeded authorship, semantic traits, modeled affect, and development through actual experience. The primary large language model (LLM) selects characteristic fragments and separately stored supporting resources through its own relevant choices, and explicitly addresses maintenance on every invocation.
-
-These definitions explain the [persona core](design/PERSONA-CORE.md) and [contracts](implementation/CONTRACTS.md); they do not add obligations. Historical terms remain where they identify older records. [UR-052](USER-REQUIREMENTS.md#no-application-limits-or-safety-gates) removes application quotas, permission gates, safety envelopes and approval requirements. A scope, exact revision, causal dependency or observed host/provider failure is not an application quota. Earlier bounded-allowance terms below describe historical rules, not current prerequisites.
-
-**Acceptance:** An agreement to specific terms or a specific result that can be attributed to the actor accepting it. Accepting membership, work, review, and delivery are separate events.
-
-**Action:** A requested or performed observation, communication, change, or other effect. Requesting an action does not prove that it happened.
-
-**Adoption:** An actor's attributable acceptance of text, terms, or a design within that actor's authority. Adoption alone does not prove implementation, correctness, or beneficial behavior.
-
-**Affect baseline:** The persona's usual modeled affective tendency. It is distinct from its current response to an event and from its outward expression. It does not measure felt emotion.
-
-**Aging analogy:** A limited comparison between a persona being shaped by actual experience and a person developing through life. Calendar time, call counts, corpus size, automatic weight training, and guaranteed wisdom are neither the mechanism nor evidence of this development.
-
-**Agenda:** One persona's revisable view of what deserves its attention. It does not impose a priority order on the team.
-
-**Agreement:** Terms with a defined scope that identified participants have actually endorsed. The agreement preserves dissent and the rules for changing those terms.
-
-**Applicability:** Whether an earlier assessment supports the current claim, given the current inputs, conditions, and criteria.
-
-**Artifact:** An exact version of produced content, such as a document, dataset, native design, or exported view.
-
-**Archive:** Historical or retired material with identifiable provenance, retained content and actual availability. Moving text out of active files does not erase it or remove it from managed persona-state accounting. There is no application archive quota.
-
-**Assembly:** This term has two uses. [Context assembly](design/PERSONA-CORE.md#bounded-and-faithful-assembly) combines selected fragments, supporting resources, and mandatory state for a model invocation. [Result assembly](design/WORK-AND-BOUNDARIES.md#evidence-assessment-and-exact-release) identifies the exact result versions intended to work together for assessment or delivery.
-
-**Associative search cue:** Wording authored by the persona to suggest other material that may be useful to find through literal search, grep, or supported patterns. The primary LLM decides whether and how to follow it. A cue is not exact evidence, a mandatory qualification, executable code, or permission to access material.
-
-**Associative network:** Useful connections among fragments. Some connections are recorded; others are found through authored cues and lexical or regular-expression searches chosen by the primary LLM. The current design excludes a separate graph or semantic memory engine and automatic host traversal. It requires neither fixed folders nor an outgoing link on every note.
-
-**Assessment:** A recorded check of a claim against specified criteria and exact evidence.
-
-**Assumption:** A stated premise used conditionally. Permission to explore an assumption does not confirm that it is true.
-
-**Authority:** Attributable standing to make a particular decision: for example, who authored a request, accepted responsibility or holds the current persona decision. Knowledge, preference, popularity and membership do not establish those facts. Under UR-052 this does not require a separate application access or execution grant.
-
-**Authorship:** Who actually produced text or made a decision. Deliberately adopting supplied material does not change its original author or turn it into firsthand experience.
-
-**Baseline:** A preserved starting point for comparison, or a preserved last useful result.
-
-**Birth:** Creation of a continuing persona with recorded identity, origin and actual initialization. There is no application population or initialization quota. Birth does not confer expertise, membership or accepted work.
-
-**Blocker:** A condition or finding that prevents a particular commitment or completion claim under the agreed rules.
-
-**Bootstrap context:** The relevant starting context for a persona call. At creation, it includes the attributed trait seed and authoring instructions. Later, it includes accepted character and the necessary current work, observations, constraints, maintenance input, and means of discovery. It contains no universal catalogue of individual tools or skills.
-
-**Capability:** An actual means of observing or acting in an environment, with its supported interface, account and observed availability. External facility conditions remain observable; the application adds no permission gate.
-
-**Character:** A persona's recognizable stable tendencies, interests, approaches, and habits, expressed through one accepted account and through its choices. The account includes semantic OCEAN traits and a VAD modeled affect profile. Character supplies neither competence nor authority.
-
-**Character account:** The single accepted, versioned account used in both the persona's profile and its decision context. It must convey meaning in natural language. Numeric scores are not required, and a display summary does not become an independent author of character.
-
-**Character-conditioned:** Authored from the perspective of the persona's accepted character. During initialization, the attributed seed and candidate profile provide that perspective. It can shape emphasis, wording, expressions of uncertainty, and discretionary preferences. It does not change facts, exact quotations, or the actual authorship of supplied material.
-
-**Claim:** An assertion about work, a result, an observation, or a capability. Its supporting evidence and limitations must be available for inspection.
-
-**Closeout allocation:** Historical capacity reserved for review, repair and finishing. Current closeout has no reserved-capacity prerequisite; actual resource use and remaining work stay visible.
-
-**Commitment:** Responsibility that a participant has accepted for a specified outcome under specified terms. An offer alone is not a commitment.
-
-**Community:** Continuing participants, agreements, resources, and work that span multiple temporary teams.
-
-**Compact persona context:** A useful, coherent collection of characteristic prompt parts and relevant assemblies for individual decisions. The persona can revise, combine and select material to avoid unnecessary context without a corpus or prompt quota. Small prompts alone do not establish useful behavior or lower total cost.
-
-**Compact memory:** Earlier design wording. Use compact persona context for the current representation, and managed persona-state footprint for full storage accounting. Fragments are not defined by fact retention or episodic recall.
-
-**Conformance:** Demonstrated satisfaction of the applicable requirements for a stated implementation, configuration, and scope.
-
-**Consolidation:** The primary LLM's combination or simplification of retained interpretations. It preserves decision-relevant scope, voice, uncertainty, exceptions, provenance and unresolved conflicts. Using fewer bytes does not by itself establish faithful revision or beneficial maturation.
-
-**Context:** The assembled input actually supplied for LLM reasoning. It includes selected characteristic prompt parts and supporting resources, current character, task observations and accepted obligations. Together with reasoning and action, it helps constitute the persona. Intended selection does not prove actual supply. Model-visible context, the provider-facing payload, and host storage are distinct.
-
-**Context compaction:** Reducing or reorganizing historical material while preserving relevant obligations, exact provenance, qualifications and cancellations. The persona chooses useful context; compaction must not silently drop valid selections to meet an application quota.
-
-**Continuation responsibility:** Accepted responsibility for carrying a need toward a result, an honest blocked outcome, or a handoff. It does not require the participant to become a leader.
-
-**Counterevidence:** An observation or argument that challenges a retained interpretation or claim.
-
-**Criterion:** An agreed basis for judging an outcome. Changing a criterion creates a new version; it does not rewrite an earlier failure.
-
-**Current self-description:** The small, designated expression of the accepted character account in the persona's own voice. Who designated or revised it must be attributable. It is neither a separate writer of identity nor a substitute for the required trait and affect meanings.
-
-**Deferred maintenance:** A maintenance candidate explicitly left unresolved, with its reason, actual prerequisites and intended continuation. Record an accepted continuation owner or an explicit ownership gap where needed. No application deferral allowance converts unresolved work into no change.
-
-**Delegation:** An attributable arrangement for another actor to decide or contribute within stated work. It needs that actor's acceptance and does not invent endorsement by the original requester. It is not an application tool or source-access grant.
-
-**Dependency:** Something a contribution relies on, such as a particular input version, a completed action, or another accepted result.
-
-**Descriptor:** Discovery information about an exact resource, such as its identity, revision, purpose, matched excerpt and route to reading or exposure. It need not contain the full operative definition. Metadata is actual context with measurable cost; it is neither a supplied body nor a permission grant.
-
-**Development:** Attributable change shaped by actual experience in a continuing persona's understanding, methods, context-navigation habits, scoped relationships, and sometimes current character. Development can involve correction, simplification, or regression. It does not necessarily increase storage, confidence, traits, or competence.
-
-**Discovery:** A search or lookup requested by the primary LLM through literal matching, grep, supported regular expressions, listing or exact references. Persona-chosen scope, pages and ranges impose no application navigation quota. A candidate is not a full read, accepted selection, actual callable exposure or execution. Known exact references need no rediscovery.
-
-**Discovery bootstrap:** The usable navigation interface and current scope that let the primary LLM request candidates or exact resources without receiving the whole inventory. It supplies infrastructure without choosing semantic relevance for the persona or imposing an application allowance.
-
-**Disposition:** The recorded outcome of an obligation or issue, such as resolved, blocked, declined, canceled, or handed off.
-
-**Dormant:** A continuing persona with no current activity requiring inference. Its identity is retained.
-
-**Effect unknown:** An external action may have occurred, but the available evidence does not establish its outcome.
-
-**Embodiment:** A continuing connection between identity, observations, choices, actual actions, and consequences. A physical body is optional.
-
-**Emergence:** Useful differences, organization, priorities, or maturation that arise through actual work rather than a prescribed role script. Claims of emergence require behavioral evidence.
-
-**Environment:** The actual workspace, participants, resources, information and available facilities in which work occurs. Record host and provider conditions without adding application quotas or safety gates.
-
-**Erasure:** Actual removal of identified retained material, with its observed scope and consequences. Retirement, archiving, deleting a visible path or losing a reference does not alone establish erasure of underlying or outside copies.
-
-**Event:** A durable record of something relevant happening, such as a request, an accepted change, a tool result, or a revocation.
-
-**Evidence:** Preserved observations, outputs, receipts, and checks that support or contradict a claim.
-
-**Exact evidence reference:** An identified source or accepted revision that supports a particular claim. A search cue, a similar match, newer contents at the same path, or a surviving digest cannot replace the actual evidence or imply that it remains available.
-
-**Executable binding:** The actual means of invoking an identified capability or code artifact, including dependencies, configuration and the account or credentials used. A stored script, matching name, guide or past successful run does not establish current availability or execution. No additional application grant is required.
-
-**Experience:** Actual observations received from tasks, environments, human and peer interaction, and the persona's observable choices and consequences. Anticipated results, invented biography, and events not received while dormant are not experience.
-
-**External memory:** A legacy term for externally retained persona context. It does not define fragments as episodic memory.
-
-**Externally retained context:** A service, store or artifact used to retain persona context outside its immediate files. Include measured storage and known copies in accounting; disclose unmeasured scope. This creates no application storage quota or control over arbitrary recipient or provider copies.
-
-**Fencing:** Preventing a former decision holder or writer from committing after its authority has moved or expired.
-
-**Finding:** An attributable review observation that identifies its subject, evidence, and significance. Optional advice is distinct from a separately adopted blocking finding, which requires an explicit disposition.
-
-**Facet:** A narrower trait distinction used when it helps explain the intended character. Facets are optional. No complete facet inventory or additional trait taxonomy is required.
-
-**First-person fragment:** A reusable prompt part expressed as the persona's own understanding, intention, method, or interpretation. First-person wording alone proves neither characteristic purpose, self-authorship, nor firsthand experience. Plain knowledge and generic procedures remain supporting assets.
-
-**Fragment:** A persona-defining prompt part that carries character, behavior, or voice. It is expressed in the persona's own voice and kept in a file or an identifiable part of one. When the persona authors fragments, it uses its accepted character, or its attributed seed and candidate profile during initialization. Imported or adopted material keeps its actual authorship.
-
-Selected fragments form context for LLM reasoning. Facts or experience may inform them, but do not define them as episodic memory or retrieval records. Organization remains flexible; origin, scope and qualifications remain attributable. Plain domain knowledge, generic procedures, and raw evidence remain supporting assets regardless of author or first-person wording. A characteristic fragment may refer to exact assets without treating their technical content as character.
-
-**Fresh-decision fence:** A barrier that requires a new primary decision after accepted changes to effective current character. Until that decision, no further operations may proceed from the old response, including reads and waits. A transient state annotation does not automatically count as such a change; the core defines the boundary.
-
-**Funded episode:** Historical activity under a shared resource allowance. Current episodes retain causal attribution and usage without funding, duration or attempt quotas; they remain distinct from persona identity and work participation.
-
-**Grant:** An attributable permission record, including historical application declarations or actual external account capabilities. Historical grants do not restrict current application access, sharing or tools under UR-052. A declaration does not prove that external credentials or facilities work.
-
-**Grep:** A simple way to search text for matching words or patterns. It helps find material; the primary LLM decides what is relevant to its next decision.
-
-**Handoff:** A transfer of responsibility that has been both offered and accepted. Naming a replacement does not complete a handoff.
-
-**Held-out task:** An evaluation task whose successful solution was not supplied during preparation or prior experience.
-
-**Host:** The supporting system that retains coherent state, current decision identity, selected context, exact effects and evidence. It reports actual resource use and failures without application quotas or approval gates. It does not choose the persona’s semantic work or relevance judgments.
-
-**Host-owned registry:** Stored resource identities, definitions, descriptors and availability records used for lookup. The bulk inventory stays outside provider requests and model context. Storing or indexing a resource neither selects it nor proves current availability or execution.
-
-**Human-like:** Recognizable traits, choices, relationships, maturation, and continuity in an AI persona. The term does not claim human equivalence, subjective experience, or consciousness.
-
-**Idempotent admission:** Repeating the same accepted request does not repeat its local state change. This does not guarantee exactly-once effects at an outside service.
-
-**Independence policy:** The separation, qualifications, and conflict disclosures required for a particular assessment. Giving an assessor a different persona name is not enough to establish independence.
-
-**Inference:** Using a configured model to generate a decision or response. Inference consumes resources and can fail.
-
-**Initial LLM:** The initialization role that expresses attributed seed traits as candidate characteristic fragments in the persona’s own voice. Its actual model configuration may match or differ from the continuing primary. Coherent acceptance precedes handover; it does not remain a second ongoing author or impose an initialization quota.
-
-**Invariant:** A rule that must remain true across the actions and state transitions to which it applies.
-
-**Invocation:** An actual admitted request to a model, tool, or runner, identified by its context. Exposing a callable definition or selecting a script does not invoke it. Dispatching an invocation does not prove that its effect was successful or correct.
-
-**Loading or exposure:** Actual supply of content to a particular admitted model call, including a callable schema where applicable. A host fetch or intended selection alone does not establish exposure. A model-visible preview proves exposure to that preview, not supply of the full operative body or persistent selection. Textual guidance and native callable definitions are separately observable forms of exposure.
-
-**Next-context disposition:** The persona's explicit decision about both next fragment context and next supporting-resource context. Every accepted response includes it. Appropriate choices include preserving context, replacing or clearing it, declaring no optional need, requesting selective discovery or reading while stating what happens to optional context, or recording an actual block or choosing to stop.
-
-Omission is invalid. State preserved by recovery does not supply a persona-authored choice. The decision requires no fixed field, new search, or future call.
-
-**Maintenance disposition:** The persona-authored result that explicitly addresses both characteristic-fragment maintenance and supporting-resource maintenance. It accompanies work and next-context choice in every accepted invocation. Proposed changes, reasoned no change, a block, or explicit deferral may share one concise, unambiguous account. Acceptance, actual storage, continuation, and selection remain separate facts.
-
-**Maintenance input:** The obligation in every persona invocation to consider maintenance of both fragments and supporting resources. Supply relevant character, resources, observations, gaps and pending items alongside work and next-context choice, without loading the entire archive or catalogue.
-
-**Managed memory footprint:** A legacy accounting term for managed persona-state footprint. It does not define the purpose of fragments.
-
-**Managed persona-state footprint:** The declared scope of retained state measured for the persona: active text, cues, histories, archives, source copies, assets, caches, managed exports and backups, and externally retained context. Include peak temporary copies where relevant. Disclose unmeasured external tiers; accounting creates no storage cap or control over arbitrary outside copies.
-
-**Mandate:** The preserved need together with its accepted scope, constraints, permissions, resources, questions, and completion agreement.
-
-**Maturation:** Characteristic development through ordinary LLM interactions that maintain and select own-voice fragments, with changes shaping later behavior. Every interaction considers work, fragment and asset maintenance, and next context. Asset development alone, elapsed time, saved edits or praise do not establish maturation. No separate learner, forced mutation or extra call is required; useful benefit needs actual later evidence.
-
-**Membership:** Accepted participation in an environment or group with a defined scope. Membership does not automatically assign work or select material for the persona's context.
-
-**Model:** The inference capability a persona currently uses. It is distinct from the persona's durable identity.
-
-**Modeled affect:** A synthetic affective description expressed through VAD: valence, activation, and perceived control. Baseline, transient state, and outward expression remain distinguishable. None proves subjective feelings.
-
-**Negative transfer:** A retained lesson makes a later task worse because it is misleading, stale, overgeneralized, or used outside its useful scope.
-
-**Navigation allowance:** Historical cumulative limits on finding and inspecting context. Current navigation follows persona-chosen queries, pages and exact reads without application fanout, byte or episode quotas. Actual scanning, exposure and cost remain measurable; required qualifications retain their meaning.
-
-**No change:** An explicit persona-authored maintenance decision to leave an identified fragment or resource scope unchanged, with a concise reason. One clear joint account may cover both scopes. Missing output, failed storage, a known unresolved candidate, and provider failure do not automatically count as no change.
-
-**Next-context intent:** The primary persona's choice of exact fragments, supporting resources, or requested observations for a later decision within a stated scope. Preservation, replacement, clearing, expiry, and actual supply have distinct meanings.
-
-**OCEAN:** The required semantic trait domains: openness, conscientiousness, extraversion, agreeableness, and neuroticism or negative emotionality. They describe relatively stable but revisable synthetic tendencies. They are not validated AI psychology, numeric quotas, diagnoses, or a rule for assigning roles.
-
-**Operational tendency:** An optional contextual preference about initiative, tools, consultation, coordination, reflection, or stopping. It may clarify broad traits. It does not become a deterministic policy, an additional compulsory axis, or a permission grant.
-
-**Opportunity:** A proposed way to improve an accepted outcome or reduce uncertainty. Expected benefit is not achieved benefit.
-
-**Outcome coverage:** The visible relationship between required outcomes, accepted owners, evidence, and gaps. Completing a local checklist can still leave part of the original need uncovered.
-
-**Partial order:** Dependencies that constrain some commitments while allowing others to proceed independently. It does not impose one universal ranked list.
-
-**Participation context:** One persona's involvement in particular work, including its own current obligations and access.
-
-**Persona:** A continuing AI collaborator constituted by authored characteristic context, LLM reasoning under that context, actual interactions and actions, and the evolution of its authored prompts. Its continuing identity and accepted character govern this loop. Files alone, a style label, or a fact-retrieval store do not constitute a persona. This definition makes no claim of human identity or consciousness.
-
-**Persona-context corpus:** The retained body of characteristic prompt parts available for persona-owned selection and self-organization. Keep it useful and compact through maintenance without a fixed size quota. It is distinct from supplied context and supporting evidence records.
-
-**Persona invocation:** An application-visible LLM call that answers, plans, selects, authors, communicates, coordinates, or repairs as the persona. Initialization is included. Renaming a call as a helper does not exempt it. Deterministic host processing and declared non-persona utilities remain distinct.
-
-**Persona-owned files:** The ordinary readable and editable surface in which the persona authors fragments. A simple file interface does not remove the need for trusted host records or dictate the physical storage engine.
-
-**Patch:** An attributable proposal to create, revise, reorganize, correct, retire or delete fragments or supporting resources. It identifies the exact target, applicable base revision and useful discovery cues. A proposal is not acceptance, actual storage, executable installation or evidence of beneficial revision.
-
-**Primary LLM:** The language model currently making one persona's substantive decisions, authoring its fragments, and choosing its next context. It is an inference capability, not the continuing identity itself.
-
-**Principal:** The human, persona or institution attributable as the requester or decision holder for particular work. The term does not create an application access gate or replace another actor's voluntary acceptance.
-
-**Prompt part:** Text available for assembly into an LLM input. Persona-authored fragments carry a characteristic perspective rather than merely filling a gap in factual information. They remain fallible and cannot override higher-authority instructions or current constraints.
-
-**Provider-facing payload:** What the application sends for a model attempt, including text, schemas, references, and protocol material. Payload bytes are not automatically model-visible tokens or billed tokens. The bulk resource catalogue is excluded even if a provider would defer it from model attention.
-
-**Provenance:** Where something came from, who produced it, and which sources or actions it depends on.
-
-**Provisional input:** An explicitly temporary input that may support conditional work. It cannot justify an unsupported final claim.
-
-**Qualification:** A necessary correction, prerequisite, limitation, or exception that must accompany affected material for its use to remain honest. An explicitly required relation can be enforced mechanically. It is distinct from an optional search association and from an exact evidence reference supporting a claim.
-
-**Quarantine:** A historical application security restriction. UR-052 removes that gate from the current design. Actual host or provider failures, unavailable facilities and explicit persona stopping remain separately observable.
-
-**Read:** An observation of exact content or of an explicitly identified range or result. A snippet is not a full-file read. Reading may inform the current decision, but does not by itself request persistent inclusion, expose a native callable schema, or execute code.
-
-**Receipt:** Evidence of an action's admission, progress, or observed outcome. Its status determines what it establishes.
-
-**Reciprocal loop:** Accepted traits inform own-voice fragments and primary context. The same primary LLM, reasoning from that characteristic perspective, makes discretionary work, communication, collaboration, and context choices. Actual consequences can then support revisions to fragments, scoped relationships, and character. These are connected influences, not compulsory stages or extra calls.
-
-**Regular expression:** A pattern for matching text. It is an optional search tool, not a cognitive schema or proof that a search is complete.
-
-**Release:** An immutable delivery with a defined scope, tied to exact result versions, conditions, review state, and authority.
-
-**Reservation:** A durable accounting record associating an admitted attempt with expected, actual or uncertain resource use. Historical reservations could reserve a finite allowance; current records impose no funding or capacity gate.
-
-**Retained lesson after source expiry:** An attributed, fallible interpretation retained after its underlying evidence becomes unavailable. It does not restore observations or support claims that require the missing source. Preserve relevant warnings and actual retention consequences without an application source-sharing gate.
-
-**Retirement of guidance:** Removing an interpretation from ordinary current use with an honest, accepted disposition. Retained bodies and history still count toward the managed persona-state footprint. Retirement is not erasure and cannot by itself resolve a separate accepted warning.
-
-**Retired:** A persona that no longer accepts new participation under its current lifecycle decision. Every existing obligation has an explicit disposition. Where applicable, that disposition may still be unresolved blocked work or work needing a handoff.
-
-**Review:** Assessment of exact work against exact criteria under an adopted policy. Requesting a review does not complete it.
-
-**Root allowance:** Historical resource ceilings shared by work, descendants, retries and finishing. Current activity retains its causal root and actual usage without a root quota.
-
-**Runtime:** The supporting system that maintains coherent state, persona-chosen context, attributable decisions, delivery and actual execution records. It does not impose application quotas, safety gates, fixed workflows or permission and approval prerequisites.
-
-**Scope:** What a need, permission, claim, review, or result actually covers.
-
-**Script artifact:** Retained executable source or bytes with their real origin and version. A script may remain stored while it cannot be run. Installation, dependency preparation, executable binding, authority, execution, and observation are separate facts.
-
-**Selection:** An explicit primary-persona choice of fragments and supporting resources for later context, with exact revisions, qualifications and intended scope. Selection is neither actual supply nor newly authored character. Report unavailable material honestly without silently substituting or dropping a valid choice to meet a quota.
-
-**Self-harmonization:** Maintenance authored by the primary LLM to make currently usable fragments understandable together, in light of accepted character, actual circumstances, and evidence. It may preserve productive tensions, expose contradictions, narrow scope, revise or retire text, or leave it unchanged. It does not require wholesale restyling or convergence between personas.
-
-**Self-organization:** The persona's revision of its authored prompt parts, names, grouping, cues, references, and indexes to improve how it assembles characteristic context and acts under it. This may simplify both corpus and prompt. It imposes no fixed taxonomy, and rearrangement or compression alone does not establish improved behavior.
-
-**Skill:** Reusable procedural guidance with attributable authorship and conditions for its use. It may be packaged with scripts, references, or assets. A skill is a supporting asset regardless of author. A persona's characteristic approach to choosing or using it may be a fragment, but generic procedures remain assets even when written in the first person. Neither the skill nor that fragment grants tools, expertise, or permission.
-
-**Society:** A continuing governed network of people, personas, environments, agreements, resources, and work. It is not a single collective mind.
-
-**Stale:** No longer applicable to a relevant current claim because inputs, criteria, conditions, or policy have changed.
-
-**Submission:** An exact candidate result offered for assessment. It is not a mutable link to whatever version happens to be latest.
-
-**Supporting record:** An attributable observation, source, receipt, revision, qualification, historical permission or other operational record. Preserve its actual provenance, availability and qualifications without application access or sharing gates. It does not automatically become persona-authored characteristic context.
-
-**Supporting resource:** Also called a supporting asset. Separately retained material available for selection by the primary LLM. Examples include plain domain knowledge, generic technical procedures, organized histories, tool-use records, definitions, skills, scripts, code, and data, regardless of author.
-
-A resource keeps its real authorship, scope and qualifications. Storing, organizing, using, or styling it in the persona's own voice does not make it a characteristic fragment or a source of current authority. It may provide exact operative instructions for selected work. These roles require no fixed folders.
-
-**Supplied-context record:** An inspectable account of what was actually exposed for a particular decision: exact fragments, resource versions or ranges, required qualifications, observations, and callable definitions. It also records omissions, blocked material, and the limits of the exposure surfaces. It does not require disclosure of private reasoning.
-
-**Tool definition:** The exact description, callable schema, and operative usage conditions for an identified tool version. A descriptor or old tool-use receipt is not a current complete definition. The definition itself grants no execution authority.
-
-**Tool exposure:** Supplying an identified callable definition to a model attempt through its actual interface. Reading documentation or keeping a host registry entry does not establish native callable exposure. Exposure is not invocation.
-
-**Trait seed:** Attributed starting meanings for OCEAN tendencies, the VAD baseline, and any other intended characteristics. The seed precedes generated candidate fragments and the accepted account. Generated detail that the seed did not specify is not attributed back to the seed's author.
-
-**VAD:** The required semantic dimensions of modeled affect: valence, arousal, and dominance or perceived control. The baseline belongs to the accepted character account. Current affect is separately accepted contextual state, with attribution and an intended lifetime. Numerical coordinates are optional and need declared engineering meanings. Dominance grants no authority.
-
-**Withheld-context comparison:** An evaluation that removes a selected piece of context to examine its contribution while keeping relevant conditions comparable.
-
-**Whole-episode cost:** All resources spent on the actual continuing activity: initialization, discovery, scanning, descriptors, exact reads, loading, model calls, execution, maintenance, failures, retries and finishing. Report scope and unknowns. A smaller final prompt alone does not prove lower total cost or better delivered quality; accounting imposes no episode quota.
-
-**Work:** A need originating from a human, another persona, or the persona itself, pursued within an accepted scope. Work preserves the original intent, evolving agreement, outcomes, and explicit disposition.
+# Glossary: the design in everyday language
+
+[Home](README.md) · [Start here](START-HERE.md)
+
+![Changing the current situation changes the inputs to the same model. Durable development changes the owned parameters and can change how a later situation is handled.](assets/numerical.svg)
+
+*Read the arrows as possible, recorded transitions—not promises that a result will improve.*
+
+The top path changes the appraisal while retaining the same parameters. The lower path changes the parameters through an attributed proposal and adoption. Only the latter is a numerical character revision; neither establishes improvement without later evidence.
+
+| Term | Meaning here |
+|---|---|
+| Persona | A continuing identity operating through its own numerical character, reasoning, selected context, behavior and development. |
+| Character model | The persona-owned numerical network that produces characteristic inclinations. It is not a complete language model. |
+| Parameter or weight | A number in that network that affects how an input contributes to an output. |
+| Reasoning model / LLM | The language model used for interpretation, planning, communication and other reasoning. Its provider weights are not edited by changing the small character model. |
+| Appraisal | The persona’s interpretation of the present situation, tied to evidence and qualifications. |
+| Known mask | A flag distinguishing a known input value from an unknown input. Unknown is not the same as known neutral. |
+| Inclination | A characteristic tendency, such as seeking verification or collaboration. It is neither a mandatory action nor demonstrated competence. |
+| OCEAN | Openness, conscientiousness, extraversion, agreeableness and neuroticism: vocabulary for describing the starting tendencies. |
+| VAD | Valence, arousal and dominance: modeled pleasantness, activation and sense of control, not proof of felt emotion. |
+| Seed | Attributed starting material used to form a numerical beginning. It is not a fabricated personal past. |
+| Candidate | A proposed model package that is not yet the active model. |
+| Activation | A coherent change of the persona’s active model binding. Further decisions use the new state; old pending actions do not silently gain new authority. |
+| Epoch | A model-activation generation used to distinguish decision authority. It is not maturity or human age. |
+| Package digest | A content fingerprint of a complete immutable model package, including its metadata. |
+| Numerical digest | A separate fingerprint of the numerical function’s declared structure, feature meanings and canonical parameter values. |
+| Forward evaluation | Computing outputs from specified inputs and parameters without fitting or automatically changing the parameters. |
+| Development item | A durable, persona-owned question or hypothesis about a behavior worth reconsidering, with evidence and follow-up. |
+| Maturation | Useful, persistent development evidenced in later behavior and consequences—not merely time, reflection, edits or storage growth. |
+| Experience | What the persona actually did, received or observed, with its real origin. A peer’s story is received information, not the recipient’s firsthand event. |
+| Supporting asset | A fact, document, skill, code file, tool guide, image, exact history or other useful resource outside the character parameters. |
+| Skill | A reusable procedure or capability resource that a persona can create, share, choose and adapt. |
+| Exact reference | A reference to a particular retained version or byte sequence, rather than whatever currently occupies a path. |
+| Discovery cue | A useful name, phrase, index or search pattern for finding something. It does not certify the result. |
+| Supply receipt | Evidence of what actually entered a provider request or execution input, not merely what was selected. |
+| Character-use receipt | The binding of an invocation to the numerical model, appraisal, outputs and provider input actually used. It proves supply, not psychological influence. |
+| Invitation | An offer to participate. It creates no duty until accepted. |
+| Commitment | A responsibility the persona actually accepted. A proposal or another persona’s plan is not acceptance. |
+| Mandate | The actual request, accepted changes and constraints governing work. A persona’s provisional interpretation is not a new user instruction. |
+| Outbox | Durable records of effects awaiting dispatch or confirmation. It helps avoid losing or repeating actions after interruptions. |
+| Unknown effect | An action may have occurred, but the available evidence does not settle its result. |
+| Atomic transition | A group of state changes that is accepted together or not accepted; an incomplete prefix cannot become a partial success. |
+| Freshness fence | A check that the model, authority and input versions still match the decision being adopted. |
+| Wait | A chosen suspension that can become eligible again on its specified event. |
+| Stop | An explicit end of that participation’s continuation. A receipt or model update does not silently resume it. |
+| Rollback | Selecting an explicitly retained earlier model while preserving history and obligations. It does not erase what happened under the newer model. |
+| Transfer | A useful effect of prior development in a different later context. It is not copying a whole old solution. |
+| Counterfactual comparison | Comparing alternatives while holding relevant other conditions alike; it supports a scoped causal claim, not certainty about every future interaction. |
+| Historical fragment | In the earlier design, a character-bearing prompt part. It is no longer the active numerical character representation. |
+
+Definitions explain design concepts, not claims that every mechanism exists or that human psychological constructs have been scientifically measured in this system.

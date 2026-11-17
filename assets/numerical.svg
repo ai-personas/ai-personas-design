@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc"><title id="title">A numerical model is not a mood or a memory</title><desc id="desc">The upper lane changes a situational appraisal while keeping weights fixed. The lower lane changes a parameter under the same appraisal, creating a candidate function. An unchanged all-unknown baseline does not rule out a useful conditional change.</desc><defs><style>text{font-family:Arial,Helvetica,sans-serif;fill:#20334b}.title{font-size:46px;font-weight:700}.subtitle{font-size:25px;fill:#536477}.heading{font-size:28px;font-weight:700}.body{font-size:24px}.edge{font-size:21px;fill:#536477}.note{font-size:25px;font-weight:700}.small{font-size:21px;fill:#536477}</style><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10" fill="#63758a"/></marker></defs><rect width="1600" height="1000" fill="#ffffff"/><rect x="64" y="48" width="72" height="7" rx="3" fill="#236e60"/>
+<text x="64" y="113" class="title"><tspan x="64" dy="0">A numerical model is not a mood or a memory</tspan></text>
+<text x="64" y="158" class="subtitle"><tspan x="64" dy="0">Different changes have different meanings—and require different evidence.</tspan></text>
+<rect x="64" y="230" width="448" height="210" rx="18" fill="#eee9ff" stroke="#6551a5" stroke-width="2"/>
+<circle cx="98" cy="266" r="19" fill="#6551a5"/>
+<text x="98" y="274" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">A</text>
+<text x="130" y="275" class="heading"><tspan x="130" dy="0">Same weights</tspan></text>
+<text x="88" y="324" class="body"><tspan x="88" dy="0">The persona’s current numerical</tspan><tspan x="88" dy="32">characteristic function.</tspan></text>
+<rect x="576" y="230" width="448" height="210" rx="18" fill="#e3f3ef" stroke="#236e60" stroke-width="2"/>
+<circle cx="610" cy="266" r="19" fill="#236e60"/>
+<text x="610" y="274" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">B</text>
+<text x="642" y="275" class="heading"><tspan x="642" dy="0">New appraisal</tspan></text>
+<text x="600" y="324" class="body"><tspan x="600" dy="0">The situation changes; evaluate</tspan><tspan x="600" dy="32">the current function on new</tspan><tspan x="600" dy="32">inputs.</tspan></text>
+<rect x="1088" y="230" width="448" height="210" rx="18" fill="#e8f0ff" stroke="#315d94" stroke-width="2"/>
+<circle cx="1122" cy="266" r="19" fill="#315d94"/>
+<text x="1122" y="274" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">C</text>
+<text x="1154" y="275" class="heading"><tspan x="1154" dy="0">Different output</tspan></text>
+<text x="1112" y="324" class="body"><tspan x="1112" dy="0">A contextual reaction—not</tspan><tspan x="1112" dy="32">durable parameter development.</tspan></text>
+<rect x="64" y="560" width="448" height="210" rx="18" fill="#e3f3ef" stroke="#236e60" stroke-width="2"/>
+<circle cx="98" cy="596" r="19" fill="#236e60"/>
+<text x="98" y="604" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">D</text>
+<text x="130" y="605" class="heading"><tspan x="130" dy="0">Same appraisal</tspan></text>
+<text x="88" y="654" class="body"><tspan x="88" dy="0">Hold the compared situation and</tspan><tspan x="88" dy="32">supporting evidence fixed.</tspan></text>
+<rect x="576" y="560" width="448" height="210" rx="18" fill="#eee9ff" stroke="#6551a5" stroke-width="2"/>
+<circle cx="610" cy="596" r="19" fill="#6551a5"/>
+<text x="610" y="604" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">E</text>
+<text x="642" y="605" class="heading"><tspan x="642" dy="0">New literal weights</tspan></text>
+<text x="600" y="654" class="body"><tspan x="600" dy="0">A persona-authored candidate</tspan><tspan x="600" dy="32">changes a conditional response.</tspan></text>
+<rect x="1088" y="560" width="448" height="210" rx="18" fill="#fff2d8" stroke="#8b6018" stroke-width="2"/>
+<circle cx="1122" cy="596" r="19" fill="#8b6018"/>
+<text x="1122" y="604" text-anchor="middle" style="font-size:23px;font-weight:700;fill:white">F</text>
+<text x="1154" y="605" class="heading"><tspan x="1154" dy="0">Compare consequences</tspan></text>
+<text x="1112" y="654" class="body"><tspan x="1112" dy="0">Changed numbers, changed</tspan><tspan x="1112" dy="32">function and useful behavior</tspan><tspan x="1112" dy="32">differ.</tspan></text>
+<path d="M512 335 H576" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M1024 335 H1088" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M512 665 H576" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M1024 665 H1088" fill="none" stroke="#63758a" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="64" y="844" width="1472" height="79" rx="16" fill="#f2f5f8"/>
+<text x="90" y="877" class="note"><tspan x="90" dy="0">A new package name, saved reflection or refreshed chart is not automatically numerical maturation.</tspan></text>
+<text x="64" y="962" class="small"><tspan x="64" dy="0">Conceptual design • Arrows show possible transitions, not demonstrated improvement.</tspan></text>
+</svg>
